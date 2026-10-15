@@ -184,7 +184,10 @@ internal class TransferRuntime(context: Context) {
             val network = NetworkRequest.Builder()
                 .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
                 .addTransportType(NetworkCapabilities.TRANSPORT_ETHERNET)
-                .build() // Default NOT_VPN; no Internet, metering or validation requirement.
+                // A VPN can also carry WIFI/ETHERNET. Permit the scheduler's
+                // app-selected VPN route; never bind to underlying Wi-Fi to bypass it.
+                .removeCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)
+                .build() // No Internet, metering or validation requirement.
             val extras = PersistableBundle().apply { putString(ATTEMPT_EXTRA, attempt.id) }
             val job = JobInfo.Builder(JOB_ID, ComponentName(app, TransferJobService::class.java))
                 .setUserInitiated(true).setRequiredNetwork(network)

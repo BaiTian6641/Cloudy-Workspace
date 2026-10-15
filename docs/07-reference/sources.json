@@ -252,7 +252,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": "2026-10-01",
-      "note": "NetworkRequest defaults include NOT_RESTRICTED, TRUSTED and NOT_VPN; INTERNET/VALIDATED describe internet needs, not ordinary LAN reachability. Callback availability is not usable-route or tailnet evidence. Direct LAN and VPN remain separately qualified.",
+      "note": "NetworkRequest defaults include NOT_RESTRICTED, TRUSTED and NOT_VPN. A VPN can advertise WIFI and VPN together, or multiple underlying transport labels; labels do not establish the packet route. Reviewed 0.4.1 removes NOT_VPN only while retaining WIFI/ETHERNET alternatives and uses the assigned JobParameters network. INTERNET/VALIDATED are not ordinary LAN reachability requirements. Matching is not endpoint or general VPN qualification.",
       "refresh": "Before implementation against this surface; weekly during active platform qualification."
     },
     {
@@ -1757,7 +1757,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": "2026-08-03",
-      "note": "addTransportType/addCapability/removeCapability API21; requested transports are alternatives and requested capabilities must all match. Direct-LAN fixture can require Wi-Fi or Ethernet without INTERNET/VALIDATED. clearCapabilities API30 also removes defaults; do not clear them blindly.",
+      "note": "addTransportType/addCapability/removeCapability API21; requested transports are alternatives and requested capabilities must all match. Reviewed 0.4.1 removes NOT_VPN while retaining WIFI/ETHERNET and other defaults so a matching existing VPN is eligible. No INTERNET/VALIDATED requirement or all-transport widening. clearCapabilities API30 removes defaults and is not used. Advertised transport matching does not prove a Wi-Fi-only physical route.",
       "refresh": "Before transfer-probe implementation, target SDK changes or recovery-policy changes."
     },
     {
@@ -1769,7 +1769,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": "2026-08-03",
-      "note": "NET_CAPABILITY_LOCAL_NETWORK API35/U extension12 describes a network where the device advertises addresses, such as tethering; it is not a generic requirement for connecting to an ordinary LAN server. Default NOT_VPN excludes VPN scope.",
+      "note": "NET_CAPABILITY_LOCAL_NETWORK API35/U extension12 describes a network where the device advertises addresses, such as tethering; it is not a generic requirement for connecting to an ordinary LAN server. NOT_VPN excludes VPN networks even when they also advertise WIFI. Reviewed 0.4.1 drops that requirement without bypassing the user VPN; actual route reachability remains untested.",
       "refresh": "Before transfer-probe implementation, target SDK changes or recovery-policy changes."
     },
     {
@@ -1855,6 +1855,42 @@
       "sourceUpdatedOn": "2026-10-08",
       "note": "Explicit nonexported own-app receiver handles notification Cancel without exporting control. onReceive is short-lived; goAsync permits bounded off-main completion but not a long worker lifetime. Finish the pending result promptly; the guide recommends under ten seconds.",
       "refresh": "Before transfer-probe implementation, target SDK changes or recovery-policy changes."
+    },
+    {
+      "id": "G95",
+      "title": "AOSP JobScheduler per-UID default-network matching",
+      "url": "https://android.googlesource.com/platform/frameworks/base/+/1cdfff555f4a21f71ccc978290e2e212e2f8b168/apex/jobscheduler/service/java/com/android/server/job/controllers/ConnectivityController.java",
+      "publisher": "Android Open Source Project",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Pinned commit 1cdfff555f4a21f71ccc978290e2e212e2f8b168 (commit date 2025-03-27 UTC); source SHA-256 9c0e99ebfa8a9c302048329d09a2c9c96a270095e3f4118ede2336107cede5c7. registerDefaultNetworkCallbackForUid/getNetworkLocked selects the UID default network subject to blocking; isStrictSatisfied compares requiredNetwork.canBeSatisfiedBy. updateConstraintsSatisfied notes non-default matching as TODO. Diagnostic mechanism only, not an application API or the exact HP vendor build source. Read official source directly after browser retrieval failed.",
+      "refresh": "Before changing transfer route policy or interpreting vendor scheduler evidence."
+    },
+    {
+      "id": "G96",
+      "title": "NetworkRequest capability matching",
+      "url": "https://developer.android.com/reference/android/net/NetworkRequest",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-08-03",
+      "note": "canBeSatisfiedBy(NetworkCapabilities) API30 compares requested capabilities and transports; null never satisfies. A matching snapshot does not prove JobScheduler readiness, permission or endpoint reachability. Public diagnostic API; no new callback or route selection is required by the proposed correction.",
+      "refresh": "Before changing transfer route policy or interpreting vendor scheduler evidence."
+    },
+    {
+      "id": "G97",
+      "title": "VPN ownership and bypass boundary",
+      "url": "https://developer.android.com/reference/android/net/VpnService.Builder",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-08-03",
+      "note": "allowBypass API21 belongs to the VPN provider and permits apps to select other networks; default VPN behavior disallows such bypass. The probe does not call it, create a VPN, select underlying networks or alter provider configuration. Removing a NOT_VPN request constraint permits use of an existing matching VPN; it does not bypass it. setUnderlyingNetworks API22 belongs to the VPN provider, not this transfer client.",
+      "refresh": "Before changing transfer route policy or interpreting vendor scheduler evidence."
     }
   ]
 }

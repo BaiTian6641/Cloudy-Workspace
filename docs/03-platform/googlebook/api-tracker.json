@@ -957,7 +957,11 @@
         "BroadcastReceiver.goAsync",
         "Manifest.permission.RUN_USER_INITIATED_JOBS",
         "Manifest.permission.ACCESS_NETWORK_STATE",
-        "Manifest.permission.POST_NOTIFICATIONS"
+        "Manifest.permission.POST_NOTIFICATIONS",
+        "NetworkRequest.Builder.addTransportType",
+        "NetworkRequest.Builder.removeCapability",
+        "NetworkCapabilities.NET_CAPABILITY_NOT_VPN",
+        "NetworkRequest.canBeSatisfiedBy"
       ],
       "sourceIds": [
         "G59",
@@ -973,7 +977,10 @@
         "G87",
         "G90",
         "G91",
-        "G94"
+        "G94",
+        "G95",
+        "G96",
+        "G97"
       ],
       "minimumApi": 34,
       "libraryVersion": null,
@@ -983,10 +990,10 @@
       "owner": "Android/platform developer",
       "stage": "P0-S2",
       "fallback": "Expose pending/denied/schedule-failed/interrupted states; preserve private staged bytes and durable attempt state. This probe never retries automatically, including repeated scheduler starts after process loss. Below API34 use a separately reviewed route; continuous SSH/desktop service classification remains unresolved.",
-      "experiment": "P0-S2 finite generated HTTPS download: explicit visible-user schedule, assigned LAN network, timely notification, byte/disk-hash validation, in-app/notification cancellation, stop/recreation/process-loss recovery and permission denial. 0.4.0 source compiles and passes lint/JVM tests; device cases pending. SFTP/publication semantics remain later P1-S3/P2-S7 work.",
+      "experiment": "P0-S2 finite generated HTTPS download: explicit visible-user schedule, assigned network, timely notification, byte/disk-hash validation, in-app/notification cancellation, stop/recreation/process-loss recovery and permission denial. 0.4.0 compiles and passes lint/JVM tests; its first actual attempt remained queued with CONNECTIVITY unsatisfied under a WIFI|VPN application network, then was cancelled at revision3, claimed=false, zero bytes and no host HTTP request. Reviewed 0.4.1 removes only NOT_VPN while retaining WIFI/ETHERNET; compilation/lint/61 JVM tests passed, payload cases untested. SFTP/publication semantics remain later P1-S3/P2-S7 work.",
       "researchEvidence": "docs/03-platform/googlebook/p0-s2-transfer-probe-contract.md",
-      "versionNotes": "UIDT/setNotification/onNetworkChanged/canRunUserInitiatedJobs API34; setRequiredNetwork/getNetwork API28; getStopReason API31; older scheduler/service callbacks API21. API34+ network scheduling requires ACCESS_NETWORK_STATE. Notification permission API33, package notification query API24, channel APIs26, immutable PendingIntent API23. BIND_JOB_SERVICE protects an exported=false service. canRunUserInitiatedJobs does not establish visibility eligibility.",
-      "runtimeGuard": "Probe min35 covers UIDT APIs. Request actual LAN permission under API41 on runtime37/target37. Notification denial is displayed and requested separately; it does not block scheduling in this probe. Always supply required job notification; keep native-screen Cancel available and qualify actual notification-action visibility. Null or changed assigned network interrupts without default-route fallback. Task Manager can kill the process without onStopJob; durable claimed-attempt checks prevent automatic replay.",
+      "versionNotes": "UIDT/setNotification/onNetworkChanged/canRunUserInitiatedJobs API34; setRequiredNetwork/getNetwork API28; getStopReason API31; older scheduler/service callbacks API21. API34+ network scheduling requires ACCESS_NETWORK_STATE. Notification permission API33, package notification query API24, channel APIs26, immutable PendingIntent API23. BIND_JOB_SERVICE protects an exported=false service. canRunUserInitiatedJobs does not establish visibility eligibility. NetworkRequest.Builder.addTransportType/removeCapability API21; canBeSatisfiedBy API30 is a diagnostic capability comparison, not scheduler-readiness or endpoint proof. G95 is pinned upstream diagnostic source, not an application API or the HP vendor implementation.",
+      "runtimeGuard": "Probe min35 covers UIDT APIs. Request actual LAN permission under API41 on runtime37/target37. Notification denial is displayed and requested separately; it does not block scheduling in this probe. Always supply required job notification; keep native-screen Cancel available and qualify actual notification-action visibility. Null or changed assigned network interrupts without default-route fallback. Task Manager can kill the process without onStopJob; durable claimed-attempt checks prevent automatic replay. Reviewed 0.4.1 permits a matching existing VPN by removing NOT_VPN only; retain WIFI/ETHERNET alternatives and other defaults. Never change VPN settings or select its underlying network. VPN transport labels may include Wi-Fi and cellular together and do not prove a physical Wi-Fi-only route. Actual assigned-network reachability remains untested.",
       "compileEvidence": "docs/06-validation/2026-10-15-transfer-probe-review.md"
     },
     {

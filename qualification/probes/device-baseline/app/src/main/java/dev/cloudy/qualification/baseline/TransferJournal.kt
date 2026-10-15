@@ -33,7 +33,7 @@ internal class TransferJournal(directory: File) {
     }
 
     fun encode(processId: String, processStartedAt: String, revision: Long, attempts: List<TransferAttempt>): JSONObject = JSONObject()
-        .put("schemaVersion", 1).put("probeVersion", "0.4.0")
+        .put("schemaVersion", 1).put("probeVersion", BuildConfig.VERSION_NAME)
         .put("recordingProcessInstanceId", processId).put("processStartedAtDeviceUtc", processStartedAt)
         .put("snapshotAtDeviceUtc", Instant.now().toString()).put("revision", revision)
         .put("fixtureId", TransferConfigSpec.FIXTURE_ID).put("jobId", TransferRuntime.JOB_ID)

@@ -160,7 +160,7 @@ internal class ProbeRecorder(context: Context) {
 
     private fun snapshotLocked(): JSONObject = JSONObject()
         .put("schemaVersion", 3)
-        .put("probeVersion", "0.3.0")
+        .put("probeVersion", BuildConfig.VERSION_NAME)
         .put("scope", "P0 diagnostic metadata and task/window observations; no product or performance qualification")
         .put("processStartedAtDeviceUtc", processStartedAt)
         .put("snapshotAtDeviceUtc", Instant.now().toString())
