@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Stage the real pinned Moonlight Java closure with an owned local ABI diagnostic."""
+"""Stage the pinned Moonlight Java closure with an owned local native/identity probe."""
 
 import argparse
 import hashlib
@@ -17,6 +17,9 @@ REQUIRED_OVERLAYS = {
     "build.gradle", "settings.gradle", "gradle.properties", "gradle-wrapper.properties",
     "app/build.gradle", "app/lint-baseline.xml", "app/src/main/AndroidManifest.xml",
     "app/src/main/java/dev/cloudy/qualification/stream/StreamProbeActivity.java",
+    "app/src/main/java/dev/cloudy/qualification/stream/StreamProbeViewModel.java",
+    "app/src/main/java/dev/cloudy/qualification/stream/identity/StreamIdentityStore.java",
+    "app/src/main/java/dev/cloudy/qualification/stream/identity/IdentityAuthorization.java",
     "app/src/main/res/values/cloudy_strings.xml",
     "app/src/main/res/drawable/cloudy_stream_icon.xml",
     "app/src/main/res/xml/cloudy_backup.xml", "app/src/main/res/xml/cloudy_extraction.xml",
@@ -92,7 +95,7 @@ def prepare(stage, native_run, sdk):
             raise ValueError("Authored Android inputs changed during preparation")
         receipt = {
             "schemaVersion": 1,
-            "scope": "real upstream Java/resource closure and local native ABI diagnostic; not a stream",
+            "scope": "real upstream Java/resource closure and local native/identity diagnostic; not a stream",
             "nativeRun": native_run.name,
             "nativeReceipt": file_record(native.read(native_run / "receipt.json")),
             "nativeBuildRef": native_receipt["buildRef"],

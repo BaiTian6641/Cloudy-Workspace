@@ -1434,7 +1434,13 @@
         "KeyInfo.getSecurityLevel",
         "JcaContentSignerBuilder.build",
         "MoonBridge.init",
-        "MoonBridge.getLaunchUrlQueryParameters"
+        "MoonBridge.getLaunchUrlQueryParameters",
+        "KeyInfo.isUnlockedDeviceRequired",
+        "BiometricPrompt.authenticate",
+        "BiometricPrompt.cancelAuthentication",
+        "BiometricManager.canAuthenticate",
+        "KeyStoreException.getNumericErrorCode",
+        "BiometricPrompt.AuthenticationResult.getAuthenticationType"
       ],
       "sourceIds": [
         "R203",
@@ -1457,21 +1463,30 @@
         "R214",
         "R215",
         "R216",
-        "R217"
+        "R217",
+        "G135",
+        "G145",
+        "G146",
+        "G147",
+        "G148",
+        "R223",
+        "R224",
+        "R225",
+        "R226"
       ],
       "minimumApi": null,
       "libraryVersion": "Moonlight Androidv12.2/b48494cb96bff23d8886c4775cc4f39a1075495d; common-C874ac9548f1bd6f095ef2b435c42cdde460e7821",
       "interfaceKind": "pinned-upstream-source-integration-not-embedding-sdk",
-      "availability": "Pinned nonRoot arm64 core and isolated Android APK build/Lint passed; actual HP Googlebook native initialization and metadata JNI call passed; key provider/TLS/pairing/streaming pending",
+      "availability": "Pinned native core, Android build/Lint and actual JNI loading pass; real identity diagnostic generates pending TEE key but plain-JCA initSign fails after biometric success; signing/TLS/pairing/streaming unqualified",
       "qualification": "partial",
       "checkedOn": "2026-10-15",
       "owner": "Desktop/media maintainer",
       "stage": "P0-S4",
       "fallback": "Explicit separately installed Moonlight enrolled-host handoff/manual selection, independently useful RDP/VNC lanes; external handoff does not complete native scope",
-      "experiment": "Carry forward accepted native core and isolated dev.cloudy.qualification.stream0.1.0/code1 APK: actual HP Googlebook14/API37 CL3B.260622.276.R2 MoonBridge initialization and getLaunchUrlQueryParameters returned &corever=1. Sole Activity, zero permissions and no keys/network/decoder operation. Private record qualification/results/private/native-stream/2026-10-15-load-01/c90e90d1-01c8-4b9c-bf09-97f549a10e83.json. Next implement source-compatible opaque AndroidKeyStore RSA SIGN provider with stable verified public certificate, provider-neutral signing and finite HTTP cancellation; qualify actual authorization/signing/client TLS/pairing/trust, Surface/MediaCodec lifecycle and real host/input/decode. Authentication-bound generated certificate self-signature and raw TLS digest/padding authorizations remain unqualified. ADR0010 selects open-source direction; exact delivered closure/source/notices/build review remains release gate. No streaming, latency or CAP-STREAM pass.",
+      "experiment": "Carry forward0.1.0 actual MoonBridge initialization/metadata. The0.1.2/code3 actual HP Googlebook14/API37 CL3B.260622.276.R2 control on the same pending TEE key records biometric result2 then AUTH_REQUIRED/UserNotAuthenticatedException at precertificate-sign-init6ms later, public numeric code null. Six identity records preserved; no certificate or qualification result, zero host connections/decoded frames. Next compare explicit credential-only authentication on this same key under unchanged30second policy, then actual signing/certificate, client TLS/pairing and finite HTTP cancellation. No automatic retry, key regeneration, software fallback or forced provider. Real Surface/MediaCodec and host/input/decode remain pending. D16 exact source/notices/build closure remains a release gate.",
       "researchEvidence": "docs/03-platform/googlebook/native-stream-adoption-entry.md",
-      "versionNotes": "Upstream min21,target36,compile37; owned diagnostic min35,target36,compile37; target37 migration separate. Public API26+ pointer capture for Googlebook, no root/evdev/private route. One process-global native attempt; external shortcut uses Moonlight-owned enrolled host state. Keystore builder23, unlocked restriction28, timed auth parameters30, actual security level31; source candidate uses Googlebook37. Conscrypt/AOSP/BC moving source explains compatibility, not installed provider pin.",
-      "compileEvidence": "qualification/results/P0-S4/2026-10-15-native-stream-apk-load.md"
+      "versionNotes": "Upstream min21,target36,compile37; owned diagnostic min35,target36,compile37; target37 migration separate. Public API26+ pointer capture for Googlebook, no root/evdev/private route. One process-global native attempt; external shortcut uses Moonlight-owned enrolled host state. Keystore builder23, unlocked restriction28, timed auth parameters30, actual security level31; source candidate uses Googlebook37. Conscrypt/AOSP/BC moving source explains compatibility, not installed provider pin. Identity inspector isUnlockedDeviceRequired added36.1; new identity diagnostic deliberately requiresAPI37 before creating or inspecting keys. Stable AndroidXBiometric1.1.0 time-based strong/devicecredential prompt has no CryptoObject; actual integration result recorded separately.",
+      "compileEvidence": "qualification/results/P0-S4/2026-10-15-stream-identity.md"
     }
   ],
   "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."

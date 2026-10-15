@@ -1,0 +1,532 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-15",
+  "stage": "P0-S4",
+  "scope": "native-adapter-build-only-no-runtime",
+  "buildRef": "vnc-adapter-x509plain-2026-10-15",
+  "status": "actual-native-java-build-and-host-policy-checks-passed",
+  "base": {
+    "receiptSha256": "f0b959764d666569e76bc11feaeb27d4167c6c19d94d0b9c94df20f1929574c9",
+    "receipt": {
+      "path": ".cache/native-vnc/entry-03/receipt.json",
+      "bytes": 140731,
+      "sha256": "f0b959764d666569e76bc11feaeb27d4167c6c19d94d0b9c94df20f1929574c9"
+    },
+    "result": "qualification/results/P0-S4/2026-10-15-vnc-native-build.json",
+    "modified": false
+  },
+  "adapterLock": {
+    "path": "qualification/probes/native-vnc/adapter/build.lock.json",
+    "bytes": 1002,
+    "sha256": "81cd8cd8bf3871f952927454b326375d1f5592b411eaff546d403d9b46d2b574"
+  },
+  "inputs": {
+    "tools/prepare_vnc_adapter.py": "fcdf5810a3aa444d3d40a3612a7af3c72ffd5c126f9dec625492d12614954d98",
+    "tools/prepare_vnc_native.py": "1ef998d18e9f008b99491bbfe0d662c1ce4bd0c085c6e26dd46a36e8d59925e0",
+    "tools/build_rdp_native.py": "07ed0db14c8f68d5eaebd810c812631baedcabc59998f5d596046bb486fd3fd1",
+    "tools/prepare_rdp_native.py": "63105726cac73f8c6fd7519962a67bf1bac789666846fc73355f3b842e63d1ed",
+    "qualification/probes/native-vnc/adapter/CMakeLists.txt": "185716cafd6ef3db57655c5707d0ec35885280f5bd82df363866e375503e4154",
+    "qualification/probes/native-vnc/adapter/VncBridge.java": "4addfe369e1595ed8dffceb8260fbe8a8f2e59dd023ae9664d0c0a272f27b95a",
+    "qualification/probes/native-vnc/adapter/adapter.c": "52aedcc482a0caa466fd9be86a8b743d5d5fc16721dfea350329f00b1ca25a53",
+    "qualification/probes/native-vnc/adapter/build.lock.json": "81cd8cd8bf3871f952927454b326375d1f5592b411eaff546d403d9b46d2b574",
+    "qualification/probes/native-vnc/adapter/policy.c": "16df29ac9c2d1661966774def6b4f61194e3ded83c8a408b8942d6e3c49d6b64",
+    "qualification/probes/native-vnc/adapter/policy.h": "d9cf71ddad97f60202a5d507d82011c9215deb305a001a6dec9c23c0753037bb",
+    "qualification/probes/native-vnc/adapter/security-and-cancel.patch": "e110e84f0c093375ac01f1b421afa6d5131fb9fdbdb7a5cf9348a24c40f476ff"
+  },
+  "sourceInputs": [
+    {
+      "path": "tools/prepare_vnc_adapter.py",
+      "bytes": 12768,
+      "sha256": "fcdf5810a3aa444d3d40a3612a7af3c72ffd5c126f9dec625492d12614954d98"
+    },
+    {
+      "path": "tools/prepare_vnc_native.py",
+      "bytes": 20679,
+      "sha256": "1ef998d18e9f008b99491bbfe0d662c1ce4bd0c085c6e26dd46a36e8d59925e0"
+    },
+    {
+      "path": "tools/build_rdp_native.py",
+      "bytes": 4742,
+      "sha256": "07ed0db14c8f68d5eaebd810c812631baedcabc59998f5d596046bb486fd3fd1"
+    },
+    {
+      "path": "tools/prepare_rdp_native.py",
+      "bytes": 25825,
+      "sha256": "63105726cac73f8c6fd7519962a67bf1bac789666846fc73355f3b842e63d1ed"
+    },
+    {
+      "path": "qualification/probes/native-vnc/adapter/CMakeLists.txt",
+      "bytes": 839,
+      "sha256": "185716cafd6ef3db57655c5707d0ec35885280f5bd82df363866e375503e4154"
+    },
+    {
+      "path": "qualification/probes/native-vnc/adapter/VncBridge.java",
+      "bytes": 2911,
+      "sha256": "4addfe369e1595ed8dffceb8260fbe8a8f2e59dd023ae9664d0c0a272f27b95a"
+    },
+    {
+      "path": "qualification/probes/native-vnc/adapter/adapter.c",
+      "bytes": 21572,
+      "sha256": "52aedcc482a0caa466fd9be86a8b743d5d5fc16721dfea350329f00b1ca25a53"
+    },
+    {
+      "path": "qualification/probes/native-vnc/adapter/build.lock.json",
+      "bytes": 1002,
+      "sha256": "81cd8cd8bf3871f952927454b326375d1f5592b411eaff546d403d9b46d2b574"
+    },
+    {
+      "path": "qualification/probes/native-vnc/adapter/policy.c",
+      "bytes": 2805,
+      "sha256": "16df29ac9c2d1661966774def6b4f61194e3ded83c8a408b8942d6e3c49d6b64"
+    },
+    {
+      "path": "qualification/probes/native-vnc/adapter/policy.h",
+      "bytes": 395,
+      "sha256": "d9cf71ddad97f60202a5d507d82011c9215deb305a001a6dec9c23c0753037bb"
+    },
+    {
+      "path": "qualification/probes/native-vnc/adapter/security-and-cancel.patch",
+      "bytes": 7376,
+      "sha256": "e110e84f0c093375ac01f1b421afa6d5131fb9fdbdb7a5cf9348a24c40f476ff"
+    },
+    {
+      "path": "tests/test_prepare_vnc_adapter.py",
+      "bytes": 6093,
+      "sha256": "e5a7fc4224947565be40e29ed485b3829d137def57b5920dcbe1761eea712189"
+    },
+    {
+      "path": "qualification/probes/native-vnc/adapter/README.md",
+      "bytes": 11566,
+      "sha256": "a5ae7570c1222b72889aefbb507bb9303d44fd305402d2219b24189a2b35246f"
+    },
+    {
+      "path": "qualification/results/P0-S4/2026-10-15-vnc-adapter-build.md",
+      "bytes": 5397,
+      "sha256": "2dad92d90db72a8009b16116a24a989375e4dabb7ce62168b02fbe8359dfed45"
+    },
+    {
+      "path": "docs/06-validation/2026-10-15-vnc-adapter-review.md",
+      "bytes": 7153,
+      "sha256": "8f3e1cc942aa09713bdcd1aa2a83a505773e9ad66a6cf3b3909891e68bbed754"
+    }
+  ],
+  "patch": {
+    "path": "security-and-cancel.patch",
+    "bytes": 7376,
+    "sha256": "e110e84f0c093375ac01f1b421afa6d5131fb9fdbdb7a5cf9348a24c40f476ff"
+  },
+  "securityPolicy": {
+    "outer": 19,
+    "subtype": 262,
+    "minimumTls": "1.2",
+    "serverIdentity": "Exact configured leaf SHA256 plus validity, immutable numeric-endpoint/port/profile binding",
+    "renegotiation": false
+  },
+  "bounds": {
+    "maxWidth": 4096,
+    "maxHeight": 4096,
+    "maxPixels": 8388608,
+    "maxQueue": 256,
+    "maxHeldKeys": 64,
+    "maxCertificateBytes": 131072,
+    "maxSessionSeconds": 600,
+    "connectTimeoutSeconds": 3,
+    "readIdleTimeoutSeconds": 2,
+    "joinTimeoutMillis": 5000
+  },
+  "libraries": {
+    "libcloudy-vnc-jni.so": {
+      "bytes": 3522024,
+      "sha256": "199d99a527305209c8e540c0a137958a51550c90ed523a4f970ed6d0ea941594",
+      "elf": {
+        "needed": [
+          "libc.so",
+          "libcrypto.so",
+          "libdl.so",
+          "libm.so",
+          "libssl.so",
+          "libz.so"
+        ],
+        "soname": "libcloudy-vnc-jni.so",
+        "machine": "AArch64",
+        "minimumLoadAlignment": 16384
+      }
+    },
+    "libssl.so": {
+      "bytes": 1205848,
+      "sha256": "66288be31a05675f6a319632d6abb137eb38b07f10eea302a8b128bd6ed7d5c0",
+      "elf": {
+        "needed": [
+          "libc.so",
+          "libcrypto.so",
+          "libdl.so"
+        ],
+        "soname": "libssl.so",
+        "machine": "AArch64",
+        "minimumLoadAlignment": 16384
+      }
+    },
+    "libcrypto.so": {
+      "bytes": 6020992,
+      "sha256": "46c0eb8c3c601f3c9d8746e051aefe61e7a324bf152a535feac3f97472deb2d8",
+      "elf": {
+        "needed": [
+          "libc.so",
+          "libdl.so"
+        ],
+        "soname": "libcrypto.so",
+        "machine": "AArch64",
+        "minimumLoadAlignment": 16384
+      }
+    }
+  },
+  "requiredJniExports": [
+    "Java_dev_cloudy_qualification_vnc_VncBridge_cancel",
+    "Java_dev_cloudy_qualification_vnc_VncBridge_create",
+    "Java_dev_cloudy_qualification_vnc_VncBridge_free",
+    "Java_dev_cloudy_qualification_vnc_VncBridge_join",
+    "Java_dev_cloudy_qualification_vnc_VncBridge_key",
+    "Java_dev_cloudy_qualification_vnc_VncBridge_pointer",
+    "Java_dev_cloudy_qualification_vnc_VncBridge_releaseInputs",
+    "Java_dev_cloudy_qualification_vnc_VncBridge_start",
+    "Java_dev_cloudy_qualification_vnc_VncBridge_status"
+  ],
+  "nativeLayout": "Patched PIC LibVNCClient and accepted PIC JPEG statically embedded into authored JNI; no original libvncclient.so dependency or runtime packaging",
+  "sourceFileCount": 174,
+  "preparedFileCount": 632,
+  "toolchain": {
+    "ndk": "29.0.14206865",
+    "clang": "21.0.0",
+    "cmake": "4.1.2",
+    "abi": "arm64-v8a",
+    "androidPlatform": 29,
+    "buildType": "RelWithDebInfo",
+    "baseToolFiles": {
+      "ndk.properties": "716f3518a923198cfab037abb32dc3f1b1f7e9a9dcdcda6b66be5906215d2658",
+      "cmake": "7f9c6c6df5774621b6dbd749402f27d5404bc47ad6eb4fdc855aceb66f1d05ef",
+      "ninja": "f5d6ae74f53c3714734d0bde7f6ede82c926c84bec06120677bad0c9c331952a",
+      "clang": "d326ed4fc4f71e5315b9ce388fc23ec792f81652ca7b29e66294de6ed2520844",
+      "zlib.h": "9fddc625028f43db3b278cf3af562b29c00fadd91cb893b2223120a330d5bb8f",
+      "zconf.h": "acaaecda655cb34fc24100f5b55a75c8b3e4d684a45d110c0776106124ab05e5",
+      "libz.so": "2a67eb70731e0f7ba11ed3ec8d34adce5e77de6b88ff330357d2d586b2b39e57"
+    }
+  },
+  "checks": {
+    "ownedC": "C11 -Wall -Wextra -Wpedantic -Werror passed; --no-undefined link",
+    "javaAbi": "--release17 -Xlint:all -Werror passed",
+    "actualJniExports": 9,
+    "focusedPythonTests": {
+      "count": 3,
+      "failures": 0,
+      "policyChecks": 32,
+      "policyImplementation": "actual authored policy.c compiled/executed with strict host C and ASan/UBSan plus real host OpenSSL/in-memory generated certificates",
+      "helperCases": [
+        "changed source blocks publication",
+        "changed prepared bytes fail offline check"
+      ]
+    },
+    "offlineVerify": "passed with nonexistent SDK path; no network/compiler/Android execution",
+    "targetedRuff": "passed",
+    "authoredAst": {
+      "passed": true,
+      "checkedFiles": 26
+    },
+    "sourceReviews": "parent integration leader and independent direct Codex reviewer accepted bounded source/security/lifetime/build checkpoint; no blockers",
+    "sharedIntegrationGates": "parent-owned"
+  },
+  "evidence": [
+    {
+      "path": ".cache/native-vnc/adapter/entry-02/receipt.json",
+      "bytes": 108609,
+      "sha256": "e65a0a5de7ed1636f47f57b901985507d8c82be1cb5a4feba90f8d45e1fbebd2"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/entry-02/exports.txt",
+      "bytes": 840,
+      "sha256": "08db866565eae01b7a28137fb3a8d402b6c796cdb20fec3d85e698a8c8b7a512"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/entry-02/inputs.json",
+      "bytes": 1297,
+      "sha256": "92c7fe8fe847c86bb0858a09031131c8149ff2777248fa67bc4bcf16b6549803"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/entry-02/java-compile.json",
+      "bytes": 350,
+      "sha256": "85bb14328bed69f739921b1b11b08c5942355aaa2359b44ef3e6e87247f30244"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/entry-02/java-compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/entry-02/jni-build.json",
+      "bytes": 310,
+      "sha256": "a95c376aeca156a9712448eec54457e9fc5305d01566b70622bfd921d13fda4c"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/entry-02/jni-build.log",
+      "bytes": 183,
+      "sha256": "008fd052544bfbb0f42340ba64dc9256f4f6059566809322ee092e8ddefb3ee2"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/entry-02/jni-configure.json",
+      "bytes": 951,
+      "sha256": "6c1b41bbde0a99399a836c904628a48d1863a4e0a93f991b391d0e42e021f34c"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/entry-02/jni-configure.log",
+      "bytes": 505,
+      "sha256": "4418804cbc9daf091b3d06504fa09ee8271401327a4e0a89b95b31c75639ec78"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/entry-02/jpeg-configure.json",
+      "bytes": 878,
+      "sha256": "dd4accab9edc929c26593d51b57cdb1dcbb3100812d167cf313c94e3218e5239"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/entry-02/jpeg-configure.log",
+      "bytes": 3380,
+      "sha256": "d67ea0c8812aa4c827524719a24a771def2296afa0979e0ae127bea2c187e9de"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/entry-02/vnc-build.json",
+      "bytes": 299,
+      "sha256": "bd05fcee194da31e1e9e40a8eaf1dfc057d134141d544f4b4ec0f9cd91038005"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/entry-02/vnc-build.log",
+      "bytes": 12157,
+      "sha256": "94fcbdd16e4c2d97000a67cecfec6c9282710f3b085364b9e7e53e5ba150df2e"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/entry-02/vnc-configure.json",
+      "bytes": 1840,
+      "sha256": "4435dd1fb2223ed8b3d8ab610c9933e423d4b9781c3dc18be21083c1acd4ae5a"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/entry-02/vnc-configure.log",
+      "bytes": 3955,
+      "sha256": "8cacfe26e673f1b144587c6556f64139d018a52fba9e76ac1ce445fc50420976"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/checks/ast.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/checks/ast.stdout",
+      "bytes": 1155,
+      "sha256": "849160798c4c4ebe249a376725d2def6f2be78b198cfc1bbd4c24098bc98cc78"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/checks/checks.json",
+      "bytes": 1413,
+      "sha256": "ed3d42819633f8588fe65153d95fab241f632c3778ec8679e0bffbf2a5bf66e5"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/checks/offline.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/checks/offline.stdout",
+      "bytes": 1340,
+      "sha256": "8fec14561c6cbad148ecd20032ab32b02dc4cce494637a7c57225815962d7864"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/checks/policy-tests.stderr",
+      "bytes": 532,
+      "sha256": "055d6b884750c2832ef484f733d8b07303b1030813ab104bd932af8c10d137ea"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/checks/policy-tests.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/checks/ruff.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/checks/ruff.stdout",
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    }
+  ],
+  "preparedEvidence": [
+    {
+      "path": ".cache/native-vnc/adapter/entry-02/prepared/nativeIncludes/rfb/rfbclient.h",
+      "bytes": 38626,
+      "sha256": "869645490ced1af0d958fa79ee814a904f96bb878b0e519a794222cc6c73627a"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/entry-02/prepared/nativeIncludes/rfb/rfbconfig.h",
+      "bytes": 6099,
+      "sha256": "9b6d6072e13ce10a87305d3cb4d57e5a0509a4ad06b54eff29301401c9da5d25"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/entry-02/prepared/nativeLibraries/arm64-v8a/libcloudy-vnc-jni.so",
+      "bytes": 3522024,
+      "sha256": "199d99a527305209c8e540c0a137958a51550c90ed523a4f970ed6d0ea941594"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/entry-02/prepared/nativeLibraries/arm64-v8a/libcrypto.so",
+      "bytes": 6020992,
+      "sha256": "46c0eb8c3c601f3c9d8746e051aefe61e7a324bf152a535feac3f97472deb2d8"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/entry-02/prepared/nativeLibraries/arm64-v8a/libssl.so",
+      "bytes": 1205848,
+      "sha256": "66288be31a05675f6a319632d6abb137eb38b07f10eea302a8b128bd6ed7d5c0"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/entry-02/prepared/nativeNotices/NOTICE.txt",
+      "bytes": 503,
+      "sha256": "a3b0edc389375c8362702923a9e9aa1badcf9df36519e7d40778f6eb696092b8"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/entry-02/prepared/nativeNotices/patched-libvncclient.a",
+      "bytes": 1098446,
+      "sha256": "e42cc1198db21163ff7e63d8c0311980312127d47b9983d6ce8c115c90637511"
+    }
+  ],
+  "earlierAttempt": {
+    "run": "entry-01",
+    "status": "patched-static-client-built-owned-JNI-compile-failed",
+    "reason": "OpenSSL4 deprecates X509_cmp_current_time; strict authored compiler rejected it. Final uses supported ASN1_TIME_cmp_time_t and rejects error code, without suppression.",
+    "evidence": [
+      {
+        "path": ".cache/native-vnc/adapter/entry-01/failure.json",
+        "bytes": 342,
+        "sha256": "8da22af4935a888526eec38e46055cc4cacf48cc9cc1910cfad6ab634aadcda8"
+      },
+      {
+        "path": ".cache/native-vnc/adapter/entry-01/input-snapshot/qualification/probes/native-vnc/adapter/CMakeLists.txt",
+        "bytes": 839,
+        "sha256": "185716cafd6ef3db57655c5707d0ec35885280f5bd82df363866e375503e4154"
+      },
+      {
+        "path": ".cache/native-vnc/adapter/entry-01/input-snapshot/qualification/probes/native-vnc/adapter/VncBridge.java",
+        "bytes": 2667,
+        "sha256": "4f031058a5848247010f7295f9b70a1ab07d5f559fd9697b7c18ccaed04a2d4e"
+      },
+      {
+        "path": ".cache/native-vnc/adapter/entry-01/input-snapshot/qualification/probes/native-vnc/adapter/adapter.c",
+        "bytes": 21572,
+        "sha256": "52aedcc482a0caa466fd9be86a8b743d5d5fc16721dfea350329f00b1ca25a53"
+      },
+      {
+        "path": ".cache/native-vnc/adapter/entry-01/input-snapshot/qualification/probes/native-vnc/adapter/build.lock.json",
+        "bytes": 1002,
+        "sha256": "e1b2427680bc028e50b90d82a9b29bcef66e28b04379dfe619696140ee9f1295"
+      },
+      {
+        "path": ".cache/native-vnc/adapter/entry-01/input-snapshot/qualification/probes/native-vnc/adapter/policy.c",
+        "bytes": 2672,
+        "sha256": "d175b644b4526692aa9f8eb3b3065ea0416cdb081e67340b9df56e53816fe81d"
+      },
+      {
+        "path": ".cache/native-vnc/adapter/entry-01/input-snapshot/qualification/probes/native-vnc/adapter/policy.h",
+        "bytes": 395,
+        "sha256": "d9cf71ddad97f60202a5d507d82011c9215deb305a001a6dec9c23c0753037bb"
+      },
+      {
+        "path": ".cache/native-vnc/adapter/entry-01/input-snapshot/qualification/probes/native-vnc/adapter/security-and-cancel.patch",
+        "bytes": 7374,
+        "sha256": "417cb319d49e215cb2f037db4cd6d07b1acc670e379f2970cfded46ec0415763"
+      },
+      {
+        "path": ".cache/native-vnc/adapter/entry-01/input-snapshot/tools/build_rdp_native.py",
+        "bytes": 4742,
+        "sha256": "07ed0db14c8f68d5eaebd810c812631baedcabc59998f5d596046bb486fd3fd1"
+      },
+      {
+        "path": ".cache/native-vnc/adapter/entry-01/input-snapshot/tools/prepare_rdp_native.py",
+        "bytes": 25825,
+        "sha256": "63105726cac73f8c6fd7519962a67bf1bac789666846fc73355f3b842e63d1ed"
+      },
+      {
+        "path": ".cache/native-vnc/adapter/entry-01/input-snapshot/tools/prepare_vnc_adapter.py",
+        "bytes": 12768,
+        "sha256": "fcdf5810a3aa444d3d40a3612a7af3c72ffd5c126f9dec625492d12614954d98"
+      },
+      {
+        "path": ".cache/native-vnc/adapter/entry-01/input-snapshot/tools/prepare_vnc_native.py",
+        "bytes": 20679,
+        "sha256": "1ef998d18e9f008b99491bbfe0d662c1ce4bd0c085c6e26dd46a36e8d59925e0"
+      },
+      {
+        "path": ".cache/native-vnc/adapter/entry-01/inputs.json",
+        "bytes": 1297,
+        "sha256": "74bab0f383255020aec3b43a6f7d466068e72a999a9194e290c7bc7174048eed"
+      },
+      {
+        "path": ".cache/native-vnc/adapter/entry-01/jni-build.json",
+        "bytes": 290,
+        "sha256": "d02d5f6df831ad54dd7623e4f549128c7734197149a098627503b4062ffc0eaf"
+      },
+      {
+        "path": ".cache/native-vnc/adapter/entry-01/jni-build.log",
+        "bytes": 2991,
+        "sha256": "19b7c6bd0f7439bf014a1ec395b4f6ec7b7a173888e04fabb1ddb45868eb655d"
+      },
+      {
+        "path": ".cache/native-vnc/adapter/entry-01/jni-configure.json",
+        "bytes": 951,
+        "sha256": "b510ba2586721d57b33596258f36ab1f92eaab13d97f0c54f3fe3c2cb696f579"
+      },
+      {
+        "path": ".cache/native-vnc/adapter/entry-01/jni-configure.log",
+        "bytes": 505,
+        "sha256": "95fefe9b803cae7204ec3ce9e032e751a91d0bc21f637e32c2ea7ef57109fd67"
+      },
+      {
+        "path": ".cache/native-vnc/adapter/entry-01/jpeg-configure.json",
+        "bytes": 878,
+        "sha256": "3ce3c966703d618c1c3b999fe5cecbdeee42e19bf9264d4a4436cd1fc2a4ed1d"
+      },
+      {
+        "path": ".cache/native-vnc/adapter/entry-01/jpeg-configure.log",
+        "bytes": 3380,
+        "sha256": "ebd653c47e7e1d1ec34c7f203dff4c80c397d03db76a9544d1ff216b5ed98ea5"
+      },
+      {
+        "path": ".cache/native-vnc/adapter/entry-01/vnc-build.json",
+        "bytes": 300,
+        "sha256": "48864d8dc5497e23943f32e154c585f0b020112e3884d3e3f8febf722fc5d314"
+      },
+      {
+        "path": ".cache/native-vnc/adapter/entry-01/vnc-build.log",
+        "bytes": 12157,
+        "sha256": "902334336a2e569208880fd507d026d25c9cdfef420f0705c259612f0c723cea"
+      },
+      {
+        "path": ".cache/native-vnc/adapter/entry-01/vnc-configure.json",
+        "bytes": 1841,
+        "sha256": "45c5d514e4ae2e922903d834b03a66d6bf337b513c6b8bddfb250d5360f84c5b"
+      },
+      {
+        "path": ".cache/native-vnc/adapter/entry-01/vnc-configure.log",
+        "bytes": 3955,
+        "sha256": "9553148e8acdaf19649df3053e04a556543e7bf32c409878833d05e5e5df204b"
+      }
+    ]
+  },
+  "limitations": [
+    "No APK, Android loading or native JNI execution",
+    "No actual TLS handshake, security-negotiation rejection or certificate/CA-chain integration case",
+    "No Android queue/callback/lifetime/frame/input/server/device result",
+    "Cooperative cancellation at I/O/poll boundaries cannot forcibly preempt decoder CPU work or nonreturning Java Sink",
+    "Numeric endpoints only; no DNS/Unix/listen/repeater route",
+    "No clipboard/drive/USB/vault/relative-emulation API",
+    "Per-frame32MiB bound is not process RSS or Java retention bound",
+    "ELF16KiB load alignment is not APK zip alignment/runtime proof",
+    "No measured performance, general security certification or product capability promotion",
+    "Source/notices preparation is not final GPL/dependency distribution approval"
+  ],
+  "capVnc": "pending",
+  "hostAdvisoryRegressions": "prior accepted27 cases carried forward without rerun"
+}

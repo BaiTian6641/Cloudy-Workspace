@@ -1,37 +1,47 @@
 package dev.cloudy.qualification.stream;
 
-import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.util.AtomicFile;
+import android.view.View;
 import android.view.WindowInsets;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import com.limelight.BuildConfig;
+import androidx.biometric.BiometricManager;
+import androidx.biometric.BiometricPrompt;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProvider;
 import com.limelight.R;
-import com.limelight.nvstream.jni.MoonBridge;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.util.Arrays;
-import java.util.UUID;
-import org.json.JSONObject;
 
-/** Finite local ABI observation. No network, private key or upstream component entry. */
-public final class StreamProbeActivity extends Activity {
+/** Native diagnostic controls; local identity approval stays in the system prompt. */
+public final class StreamProbeActivity extends FragmentActivity {
+    private static final int AUTHENTICATORS = BiometricManager.Authenticators.BIOMETRIC_STRONG
+            | BiometricManager.Authenticators.DEVICE_CREDENTIAL;
+    private StreamProbeViewModel model;
+    private BiometricPrompt prompt;
     private TextView status;
+    private TextView identity;
+    private TextView nativeStatus;
+    private Button create;
+    private Button authorize;
+    private Button refresh;
+    private Button cancel;
+    private Button delete;
     private Button load;
-    private boolean destroyed;
-    private static final Object EVIDENCE_LOCK = new Object();
+    private long cancelledPromptToken;
 
     @Override public void onCreate(Bundle state) {
         super.onCreate(state);
+        model = new ViewModelProvider(this).get(StreamProbeViewModel.class);
+        // Reconstruct on every creation to replace AndroidX's callback for an
+        // existing prompt. Never call authenticate() just to reattach it.
+        prompt = newPrompt(model.promptTokenForReattach());
         LinearLayout content = new LinearLayout(this);
         content.setOrientation(LinearLayout.VERTICAL);
-        int padding = (int) (20 * getResources().getDisplayMetrics().density);
+        int padding = dp(20);
         content.setPadding(padding, padding, padding, padding);
         content.setOnApplyWindowInsetsListener((view, insets) -> {
             android.graphics.Insets safe = insets.getInsets(WindowInsets.Type.systemBars()
@@ -40,100 +50,106 @@ public final class StreamProbeActivity extends Activity {
                     padding + safe.right, padding + safe.bottom);
             return insets;
         });
-        TextView title = label(content, R.string.cloudy_stream_title);
-        title.setTextSize(22);
+        label(content, R.string.cloudy_stream_title).setTextSize(22);
         label(content, R.string.cloudy_stream_scope);
-        status = label(content, R.string.cloudy_stream_ready);
-        status.setAccessibilityLiveRegion(android.view.View.ACCESSIBILITY_LIVE_REGION_POLITE);
-        load = new Button(this);
-        load.setText(R.string.cloudy_stream_load);
-        load.setOnClickListener(view -> checkNative());
-        content.addView(load);
-        Button close = new Button(this);
-        close.setText(R.string.cloudy_stream_close);
-        close.setOnClickListener(view -> finish());
-        content.addView(close);
+        nativeStatus = label(content, R.string.cloudy_stream_ready);
+        load = button(content, R.string.cloudy_stream_load, view -> model.loadNative());
+        label(content, R.string.cloudy_identity_title).setTextSize(20);
+        label(content, R.string.cloudy_identity_help);
+        identity = label(content, R.string.cloudy_identity_ready);
+        status = label(content, R.string.cloudy_identity_ready);
+        status.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);
+        create = button(content, R.string.cloudy_identity_create, view -> model.createIdentity());
+        authorize = button(content, R.string.cloudy_identity_authorize, view -> model.authorizeIdentity());
+        refresh = button(content, R.string.cloudy_identity_refresh, view -> model.refreshIdentity());
+        cancel = button(content, R.string.cloudy_identity_cancel, view -> {
+            model.cancel(); // Revoke the owner before cancelling framework authentication.
+            prompt.cancelAuthentication();
+        });
+        delete = button(content, R.string.cloudy_identity_delete, view -> new AlertDialog.Builder(this)
+                .setTitle(R.string.cloudy_identity_delete)
+                .setMessage(R.string.cloudy_identity_delete_warning)
+                .setNegativeButton(android.R.string.cancel, null)
+                .setPositiveButton(R.string.cloudy_identity_delete_confirm, (dialog, which) -> model.deleteIdentity())
+                .show());
+        button(content, R.string.cloudy_stream_close, view -> {
+            model.cancel(); prompt.cancelAuthentication(); finish();
+        });
         ScrollView scroll = new ScrollView(this);
         scroll.addView(content);
         setContentView(scroll);
         content.requestApplyInsets();
+        model.state().observe(this, this::render);
     }
 
+    private BiometricPrompt newPrompt(long token) {
+        return new BiometricPrompt(this, ContextCompat.getMainExecutor(this),
+                new BiometricPrompt.AuthenticationCallback() {
+                    @Override public void onAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
+                        long authenticatedAt = SystemClock.elapsedRealtime();
+                        model.authenticationSucceeded(token, authenticatedAt, result.getAuthenticationType());
+                    }
+                    @Override public void onAuthenticationError(int errorCode, CharSequence ignoredMessage) {
+                        model.authenticationError(token, errorCode);
+                    }
+                    @Override public void onAuthenticationFailed() { model.authenticationFailed(token); }
+                });
+    }
+    private void render(StreamProbeViewModel.UiState state) {
+        identity.setText(getString(R.string.cloudy_identity_state, state.identityState, state.securityLevel));
+        status.setText(getString(R.string.cloudy_identity_outcome, getString(state.message), state.detail));
+        nativeStatus.setText(state.nativeMessage == R.string.cloudy_stream_failed
+                ? getString(state.nativeMessage, state.detail) : getString(state.nativeMessage));
+        create.setEnabled(!state.busy && state.identityState.equals("ABSENT"));
+        authorize.setEnabled(!state.busy && (state.identityState.equals("READY") || state.identityState.equals("ENROLLMENT_PENDING")));
+        refresh.setEnabled(!state.busy);
+        delete.setEnabled(!state.busy);
+        cancel.setEnabled(state.busy);
+        load.setEnabled(!state.busy && !state.nativeTried);
+        if (state.cancelPrompt && cancelledPromptToken != state.promptToken) {
+            cancelledPromptToken = state.promptToken;
+            prompt.cancelAuthentication();
+        } else if (state.promptRequested && model.claimPrompt(state.promptToken)) {
+            long token = state.promptToken;
+            if (BiometricManager.from(this).canAuthenticate(AUTHENTICATORS) != BiometricManager.BIOMETRIC_SUCCESS) {
+                model.promptLaunchFailed(token);
+                return;
+            }
+            prompt = newPrompt(token);
+            try {
+                prompt.authenticate(new BiometricPrompt.PromptInfo.Builder()
+                        .setTitle(getString(R.string.cloudy_identity_prompt_title))
+                        .setSubtitle(getString(R.string.cloudy_identity_prompt_subtitle))
+                        .setAllowedAuthenticators(AUTHENTICATORS).build());
+            } catch (IllegalArgumentException | IllegalStateException unavailable) {
+                model.promptLaunchFailed(token);
+            }
+        }
+    }
     private TextView label(LinearLayout parent, int resource) {
         TextView view = new TextView(this);
         view.setText(resource);
         view.setTextSize(16);
-        view.setPadding(0, 12, 0, 12);
+        view.setPadding(0, dp(12), 0, dp(12));
         parent.addView(view);
         return view;
     }
-
-    private void checkNative() {
-        load.setEnabled(false);
-        status.setText(R.string.cloudy_stream_running);
-        File directory = new File(getFilesDir(), "native-load");
-        // Native class initialization is JVM-once. Do not call MoonBridge.init a
-        // second time: the upstream initializer owns its process-global references.
-        new Thread(() -> {
-            String failure = null;
-            try {
-                synchronized (EVIDENCE_LOCK) {
-                    if (!directory.isDirectory() && !directory.mkdirs()) throw new IllegalStateException("evidence-directory");
-                    String[] existing = directory.list();
-                    if (existing == null || existing.length >= 16) throw new IllegalStateException("evidence-capacity");
-                    long start = SystemClock.elapsedRealtimeNanos();
-                    String metadata = null;
-                    try {
-                        metadata = MoonBridge.getLaunchUrlQueryParameters();
-                        if (metadata == null || metadata.length() > 4096) throw new IllegalStateException("native-metadata-bounds");
-                    } catch (Exception | LinkageError error) {
-                        failure = error.getClass().getSimpleName();
-                    }
-                    JSONObject result = new JSONObject();
-                    result.put("schemaVersion", 1);
-                    result.put("buildRef", BuildConfig.QUALIFICATION_BUILD_REF);
-                    result.put("nativeBuildRef", BuildConfig.NATIVE_BUILD_REF);
-                    result.put("version", BuildConfig.VERSION_NAME);
-                    result.put("status", failure == null ? "native-load-and-metadata-passed" : "native-load-failed");
-                    result.put("failureClass", failure == null ? JSONObject.NULL : failure);
-                    result.put("durationNanos", SystemClock.elapsedRealtimeNanos() - start);
-                    result.put("nativeMetadata", failure == null ? metadata : JSONObject.NULL);
-                    result.put("hostConnections", 0);
-                    result.put("decodedFrames", 0);
-                    File target = new File(directory, UUID.randomUUID() + ".json");
-                    if (target.exists()) throw new IllegalStateException("evidence-collision");
-                    // Atomic publication preserves both native success and failure.
-                    // A storage failure never becomes a native-success UI result.
-                    AtomicFile record = new AtomicFile(target);
-                    FileOutputStream stream = null;
-                    try {
-                        stream = record.startWrite();
-                        byte[] encoded = (result.toString(2) + "\n").getBytes(StandardCharsets.UTF_8);
-                        stream.write(encoded);
-                        record.finishWrite(stream);
-                        if (!Arrays.equals(Files.readAllBytes(target.toPath()), encoded)) {
-                            throw new IllegalStateException("evidence-publication");
-                        }
-                    } catch (Exception writeFailure) {
-                        record.failWrite(stream);
-                        throw writeFailure;
-                    }
-                }
-            } catch (Exception | LinkageError error) {
-                // No remote content or endpoint is involved; display only the class.
-                failure = error.getClass().getSimpleName();
-            }
-            String outcome = failure;
-            runOnUiThread(() -> {
-                if (destroyed) return;
-                if (outcome == null) status.setText(R.string.cloudy_stream_success);
-                else status.setText(getString(R.string.cloudy_stream_failed, outcome));
-            });
-        }, "stream-native-load").start();
+    private Button button(LinearLayout parent, int resource, View.OnClickListener listener) {
+        Button view = new Button(this);
+        view.setText(resource);
+        view.setOnClickListener(listener);
+        parent.addView(view);
+        return view;
     }
-
-    @Override public void onDestroy() {
-        destroyed = true;
-        super.onDestroy();
+    private int dp(int value) { return Math.round(value * getResources().getDisplayMetrics().density); }
+    @Override protected void onStart() { super.onStart(); model.onVisible(); }
+    @Override protected void onStop() {
+        // The native prompt may take window focus. Focus alone never revokes it.
+        // A real background stop does; configuration recreation only reattaches.
+        if (!isChangingConfigurations()) {
+            model.onHidden();
+            prompt.cancelAuthentication();
+        }
+        super.onStop();
     }
 }

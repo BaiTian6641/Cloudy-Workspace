@@ -1,0 +1,209 @@
+--- a/include/rfb/rfbclient.h
++++ b/include/rfb/rfbclient.h
+@@ -506,6 +506,16 @@
+         rfbBool isUpdateRectManagedByLib;
+ 
+         GetX509CertFingerprintMismatchDecisionProc GetX509CertFingerprintMismatchDecision;
++
++        /* Cloudy adapter ABI: borrowed zero-terminated VeNCrypt subtype allowlist.
++         * Owner keeps it alive until cleanup. NULL preserves upstream selection. */
++        const uint32_t *cloudyVeNCryptSubtypes;
++        /* Unconditional leaf DER validation after TLS handshake and before auth.
++         * DER is borrowed for this synchronous call, at most 128 KiB. With this
++         * hook, chain errors are deferred to this explicit pinned-leaf policy. */
++        rfbBool (*cloudyVerifyLeaf)(struct _rfbClient*, const uint8_t*, unsigned int);
++        /* Owner cancellation/deadline check in I/O retries; NULL preserves upstream. */
++        rfbBool (*cloudyContinue)(struct _rfbClient*);
+ } rfbClient;
+ 
+ /* cursor.c */
+--- a/src/libvncclient/tls_openssl.c
++++ b/src/libvncclient/tls_openssl.c
+@@ -293,6 +293,14 @@
+ }
+ 
+ static int cert_verify_callback(int preverify_ok, X509_STORE_CTX *ctx) {
++    SSL *policy_ssl = X509_STORE_CTX_get_ex_data(ctx, SSL_get_ex_data_X509_STORE_CTX_idx());
++    rfbClient *policy_client = SSL_get_ex_data(policy_ssl, rfbTLSClientIndex);
++    if (policy_client && policy_client->cloudyVerifyLeaf) {
++        /* Explicit pin trust is evaluated once on the actual peer leaf below,
++         * including CA-valid chains and certificates with validity errors. */
++        X509_STORE_CTX_set_error(ctx, X509_V_OK);
++        return 1;
++    }
+     if (preverify_ok) {
+         rfbClientLog("Server cert trusted\n");
+         return 1; // Accept
+@@ -347,6 +355,13 @@
+   }
+ 
+   param = X509_VERIFY_PARAM_new();
++  if (!param) goto error_free_ctx;
++  if (client->cloudyVerifyLeaf) {
++    if (!SSL_CTX_set_min_proto_version(ssl_ctx, TLS1_2_VERSION)) goto error_free_ctx;
++    /* The unconditional leaf decision precedes credentials once; do not let
++     * TLS1.2 renegotiation install an unchecked replacement certificate. */
++    SSL_CTX_set_options(ssl_ctx, SSL_OP_NO_RENEGOTIATION);
++  }
+ 
+   /* Setup verification if not anonymous */
+   if (!anonTLS)
+@@ -444,6 +459,7 @@
+ 
+   do
+   {
++    if (client->cloudyContinue && !client->cloudyContinue(client)) goto error_free_ssl;
+     n = SSL_connect(ssl);
+ 		
+     if (n != 1) 
+@@ -479,7 +495,30 @@
+     }
+   } while( n != 1 );
+ 
++  if (client->cloudyVerifyLeaf) {
++    X509 *leaf;
++    unsigned char *der, *cursor;
++    int length, accepted;
++    if (anonTLS) goto error_free_ssl;
++    leaf = SSL_get1_peer_certificate(ssl);
++    if (!leaf) goto error_free_ssl;
++    length = i2d_X509(leaf, NULL);
++    if (length <= 0 || length > 128 * 1024) {
++      X509_free(leaf);
++      goto error_free_ssl;
++    }
++    der = malloc((size_t)length);
++    if (!der) { X509_free(leaf); goto error_free_ssl; }
++    cursor = der;
++    accepted = i2d_X509(leaf, &cursor) == length &&
++      client->cloudyVerifyLeaf(client, der, (unsigned int)length);
++    free(der);
++    X509_free(leaf);
++    if (!accepted) goto error_free_ssl;
++  }
+   X509_VERIFY_PARAM_free(param);
++  /* SSL_new retained the context; release the constructor's reference. */
++  SSL_CTX_free(ssl_ctx);
+   return ssl;
+ 
+ error_free_ssl:
+@@ -573,6 +612,11 @@
+     {
+         if (!ReadFromRFBServer(client, (char *)&tAuth[loop], 4)) return FALSE;
+         t=rfbClientSwap32IfLE(tAuth[loop]);
++        if (client->cloudyVeNCryptSubtypes) {
++            const uint32_t *allowed = client->cloudyVeNCryptSubtypes;
++            while (*allowed && *allowed != t) allowed++;
++            if (!*allowed) { tAuth[loop] = t; continue; }
++        }
+         rfbClientLog("%d) Received security type %d\n", loop, t);
+         if (t==rfbNoAuth ||
+             t==rfbVncAuth ||
+@@ -780,6 +824,7 @@
+ 
+   while (offset < n)
+   {
++    if (client->cloudyContinue && !client->cloudyContinue(client)) return -1;
+     LOCK(client->tlsRwMutex);
+     ret = SSL_write (client->tlsSession, buf + offset, (size_t)(n-offset));
+ 
+@@ -787,11 +832,14 @@
+       ssl_error = SSL_get_error (client->tlsSession, ret);
+     UNLOCK(client->tlsRwMutex);
+ 
+-    if (ret == 0) continue;
++    if (ret == 0) return -1;
+     if (ret < 0)
+     {
+       errno = ssl_error_to_errno(ssl_error);
+-      if (errno == EAGAIN || errno == EWOULDBLOCK) continue;
++      if (errno == EAGAIN || errno == EWOULDBLOCK) {
++        WaitForMessage(client, 10000);
++        continue;
++      }
+       rfbClientLog("Error writing to TLS: -\n");
+       return -1;
+     }
+--- a/src/libvncclient/rfbclient.c
++++ b/src/libvncclient/rfbclient.c
+@@ -605,6 +605,13 @@
+ static void
+ FreeUserCredential(rfbCredential *cred)
+ {
++  /* Adapter-owned memory-only credentials must not remain in freed copies. */
++  char *values[2] = { cred->userCredential.username, cred->userCredential.password };
++  int index;
++  for (index = 0; index < 2; index++) {
++    volatile unsigned char *cursor = (volatile unsigned char *)values[index];
++    if (cursor) while (*cursor) *cursor++ = 0;
++  }
+   free(cred->userCredential.username);
+   free(cred->userCredential.password);
+   free(cred);
+@@ -1046,6 +1053,12 @@
+   
+   rfbClientLog("Selected Security Scheme %d\n", authScheme);
+   client->authScheme = authScheme;
++  /* Apply an explicit allowlist on the RFB3.3 server-selected path as well. */
++  if (client->clientAuthSchemes) {
++    const uint32_t *allowed = client->clientAuthSchemes;
++    while (*allowed && *allowed != authScheme) allowed++;
++    if (!*allowed) return FALSE;
++  }
+   
+   switch (authScheme) {
+ 
+--- a/src/libvncclient/sockets.c
++++ b/src/libvncclient/sockets.c
+@@ -74,6 +74,7 @@
+   /* Handle attempts to write to NULL out buffer that might occur
+      when an outside malloc() fails. For instance, memcpy() to NULL
+      results in undefined behaviour and probably memory corruption.*/
++  if (client->cloudyContinue && !client->cloudyContinue(client)) return FALSE;
+   if(!out)
+     return FALSE;
+ 
+@@ -133,6 +134,7 @@
+   if (n <= RFB_BUF_SIZE) {
+ 
+     while (client->buffered < n) {
++      if (client->cloudyContinue && !client->cloudyContinue(client)) return FALSE;
+       int i;
+       if (client->tlsSession)
+         i = ReadFromTLS(client, client->buf + client->buffered, RFB_BUF_SIZE - client->buffered);
+@@ -185,6 +187,7 @@
+   } else {
+ 
+     while (n > 0) {
++      if (client->cloudyContinue && !client->cloudyContinue(client)) return FALSE;
+       int i;
+       if (client->tlsSession)
+         i = ReadFromTLS(client, out, n);
+@@ -259,6 +262,7 @@
+   int err;
+ #endif /* LIBVNCSERVER_HAVE_SASL */
+ 
++  if (client->cloudyContinue && !client->cloudyContinue(client)) return FALSE;
+   if (client->serverPort==-1)
+     return TRUE; /* vncrec playing */
+ 
+@@ -285,6 +289,7 @@
+ #endif /* LIBVNCSERVER_HAVE_SASL */
+ 
+   while (i < n) {
++    if (client->cloudyContinue && !client->cloudyContinue(client)) return FALSE;
+     j = write(client->sock, obuf + i, (n - i));
+     if (j <= 0) {
+       if (j < 0) {
+@@ -305,7 +310,10 @@
+ 	  FD_ZERO(&fds);
+ 	  FD_SET(client->sock,&fds);
+ 
+-	  if (select(client->sock+1, NULL, &fds, NULL, NULL) <= 0) {
++          struct timeval wait = { 0, 100000 };
++          int ready = select(client->sock+1, NULL, &fds, NULL, &wait);
++          if (ready == 0) continue;
++	  if (ready < 0) {
+ 	    rfbClientErr("select\n");
+ 	    return FALSE;
+ 	  }

@@ -36,3 +36,8 @@ The [desktop workflow design](04-design/desktop-workflows.md) expands the visual
 - [RDP0.1.5 cursor repair review](06-validation/2026-10-15-rdp-cursor-repair-review.md) and [physical follow-up](../qualification/results/P0-S4/2026-10-15-rdp-cursor-repair.md): user-confirmed captured host-trail/cursor movement and local release; exact evidence and remaining latency/3D/input-device limits.
 
 - [VNC Android TLS/JPEG native build](../qualification/results/P0-S4/2026-10-15-vnc-native-build.md), [stream Android package/native-load result](../qualification/results/P0-S4/2026-10-15-native-stream-apk-load.md), and [opaque streaming client identity entry](03-platform/googlebook/native-stream-key-provider-entry.md): real engine integration evidence and the next security/session boundaries.
+
+
+- [Streaming identity device result](../qualification/results/P0-S4/2026-10-15-stream-identity.md) and [implementation review](06-validation/2026-10-15-stream-identity-review.md): real pending TEE key, actual prompt success and failed plain-JCA signing boundary.
+- [VNC adapter build](../qualification/results/P0-S4/2026-10-15-vnc-adapter-build.md) and [review](06-validation/2026-10-15-vnc-adapter-review.md): exact trust, bounded native lifetime and next Android/server gate.
+- [Sunshine host preflight](03-platform/googlebook/native-stream-host-entry.md): pinned distribution/dependency and KWin permission route, with host launch still pending.

@@ -20,3 +20,7 @@ qualification/probes/native-rdp/patches/*.patch whitespace=-space-before-tab
 # Its added source lines were checked separately for trailing whitespace.
 qualification/probes/native-rdp/patches/android-relative-input.patch whitespace=-space-before-tab,-blank-at-eol
 qualification/probes/native-rdp/patches/android-pointer-position.patch whitespace=-space-before-tab,-blank-at-eol
+
+# This exact VNC diff preserves upstream blank/tab/trailing context bytes.
+# Its added source lines are reviewed independently and have no trailing spaces.
+qualification/probes/native-vnc/adapter/security-and-cancel.patch whitespace=-space-before-tab,-blank-at-eol

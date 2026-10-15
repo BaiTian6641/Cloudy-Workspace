@@ -1,0 +1,1362 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUtc": "2026-10-15T22:12:56.607737+00:00",
+  "scope": "P0-S4 local streaming identity implementation; actual authentication-bound signing failure, no TLS/pairing/stream",
+  "device": {
+    "model": "HP Googlebook 14",
+    "manufacturer": "HP",
+    "release": "17",
+    "api": "37",
+    "build": "CL3B.260622.276.R2",
+    "incremental": "16560795",
+    "patch": "2026-09-01",
+    "abi": "arm64-v8a"
+  },
+  "nativeBuildRef": "f336e245-805d-4aad-bc1a-9208df8db318",
+  "builds": [
+    {
+      "versionName": "0.1.1",
+      "versionCode": 2,
+      "buildRef": "c61b9f1b-e1f8-4c6a-bb61-382c64743ef0",
+      "applicationId": "dev.cloudy.qualification.stream",
+      "minSdk": 35,
+      "compileSdk": 37,
+      "targetSdk": 36,
+      "identityMinimumApi": 37,
+      "apk": {
+        "path": "qualification/results/private/native-stream/2026-10-15-identity-01/cloudy-stream-0.1.1.apk",
+        "bytes": 24656602,
+        "sha256": "a475a1d7fc1dd4bce80914ce3c41337de9e861bd136581d0454b46fca3aebe2b"
+      },
+      "native": {
+        "bytes": 5110376,
+        "sha256": "95640675b34cd4d1a7908ff4e22949af7d214b8771e1c3bc954dbc21eea99a98",
+        "zipOffset": 16777216,
+        "alignment": 16384,
+        "stored": true
+      },
+      "stagedFileCount": 637,
+      "preparationReceipt": {
+        "path": ".cache/native-stream-android/identity-02/cloudy-preparation.json",
+        "bytes": 118333,
+        "sha256": "8a369565e9c09e612fe2fdf6b5873a30468d5158b159b747ede544a456a0aca7"
+      },
+      "audit": {
+        "path": ".cache/native-stream-android/identity-audit-01/apk-audit.json",
+        "bytes": 10895,
+        "sha256": "f3ef5dd7248ab84bcfbca8b6030847f662fed94d50bddf9c3a58362f698dd894"
+      },
+      "compilerLog": {
+        "path": ".cache/native-stream-android/identity-02-gradle.log",
+        "bytes": 4402,
+        "sha256": "766b48e0922139bdc9e11aa369a50817243439c9f1a97c69b30d71d984eb0c75"
+      },
+      "testReport": {
+        "path": ".cache/native-stream-android/identity-02/app/build/test-results/testDebugUnitTest/TEST-dev.cloudy.qualification.stream.identity.IdentityAuthorizationTest.xml",
+        "bytes": 876,
+        "sha256": "6c2788e1b6f918767f7151ce9b9949b65d70469c20498df887fec3b483594ba9"
+      },
+      "tests": 3,
+      "lint": {
+        "report": {
+          "path": ".cache/native-stream-android/identity-02/app/build/reports/lint-results-debug.xml",
+          "bytes": 398998,
+          "sha256": "b2700cdf46a1785402227fd598fba52bacb20583079143d6810ba9533046b161"
+        },
+        "errors": 0,
+        "counts": {
+          "Hint": 1,
+          "Warning": 339
+        },
+        "baseline": {
+          "path": ".cache/native-stream-android/identity-02/app/lint-baseline.xml",
+          "bytes": 11299,
+          "sha256": "8b7b1ae58e2ca3719515263eb7c8712ed61dbde84a25551e55b32c5c1817b9c0"
+        },
+        "baselinedInactiveUpstreamErrors": 27,
+        "ownedFindings": 0
+      },
+      "permissions": [
+        "android.permission.USE_BIOMETRIC",
+        "android.permission.USE_FINGERPRINT"
+      ],
+      "components": [
+        "dev.cloudy.qualification.stream.StreamProbeActivity"
+      ],
+      "runtimeArtifacts": [
+        {
+          "component": "androidx.activity:activity:1.1.0",
+          "file": "activity-1.1.0.aar",
+          "bytes": 13506,
+          "sha256": "4f2b35916768032f7d0c20e250e28b29037ed4ce9ebf3da4fcd51bcb0c6067ef"
+        },
+        {
+          "component": "androidx.annotation:annotation-jvm:1.10.0",
+          "file": "annotation-jvm-1.10.0.jar",
+          "bytes": 62171,
+          "sha256": "ddd072ddbb553178e205517ce777b2f05aa9e412982d9ecb4eedc74f1212f697"
+        },
+        {
+          "component": "androidx.appcompat:appcompat-resources:1.2.0",
+          "file": "appcompat-resources-1.2.0.aar",
+          "bytes": 62834,
+          "sha256": "c470297c03ff3de1c3d15dacf0be0cae63abc10b52f021dd07ae28daa3100fe5"
+        },
+        {
+          "component": "androidx.appcompat:appcompat:1.2.0",
+          "file": "appcompat-1.2.0.aar",
+          "bytes": 1109871,
+          "sha256": "3d2131a55a61a777322e2126e0018011efa6339e53b44153eb651b16020cca70"
+        },
+        {
+          "component": "androidx.arch.core:core-common:2.1.0",
+          "file": "core-common-2.1.0.jar",
+          "bytes": 11257,
+          "sha256": "fe1237bf029d063e7f29fe39aeaf73ef74c8b0a3658486fc29d3c54326653889"
+        },
+        {
+          "component": "androidx.arch.core:core-runtime:2.1.0",
+          "file": "core-runtime-2.1.0.aar",
+          "bytes": 6059,
+          "sha256": "dd77615bd3dd275afb11b62df25bae46b10b4a117cd37943af45bdcbf8755852"
+        },
+        {
+          "component": "androidx.biometric:biometric:1.1.0",
+          "file": "biometric-1.1.0.aar",
+          "bytes": 194748,
+          "sha256": "270c7b7d99942d5ec1dd88594e4648feb33d8e31d8c3c2ab2321d49d9abdfc1f"
+        },
+        {
+          "component": "androidx.collection:collection:1.1.0",
+          "file": "collection-1.1.0.jar",
+          "bytes": 42953,
+          "sha256": "632a0e5407461de774409352940e292a291037724207a787820c77daf7d33b72"
+        },
+        {
+          "component": "androidx.core:core:1.3.2",
+          "file": "core-1.3.2.aar",
+          "bytes": 728081,
+          "sha256": "94de196cd67950cff6ef3e1ac59015f8eaaf61840bdc238f2cf54ddef8dd0be9"
+        },
+        {
+          "component": "androidx.cursoradapter:cursoradapter:1.0.0",
+          "file": "cursoradapter-1.0.0.aar",
+          "bytes": 10591,
+          "sha256": "a81c8fe78815fa47df5b749deb52727ad11f9397da58b16017f4eb2c11e28564"
+        },
+        {
+          "component": "androidx.customview:customview:1.0.0",
+          "file": "customview-1.0.0.aar",
+          "bytes": 33238,
+          "sha256": "20e5b8f6526a34595a604f56718da81167c0b40a7a94a57daa355663f2594df2"
+        },
+        {
+          "component": "androidx.drawerlayout:drawerlayout:1.0.0",
+          "file": "drawerlayout-1.0.0.aar",
+          "bytes": 32470,
+          "sha256": "9402442cdc5a43cf62fb14f8cf98c63342d4d9d9b805c8033c6cf7e802749ac1"
+        },
+        {
+          "component": "androidx.fragment:fragment:1.2.5",
+          "file": "fragment-1.2.5.aar",
+          "bytes": 226983,
+          "sha256": "d19e82d142def6c4e136da70bf92f194c0ecc61d14ab4e84567b2ced0920fa93"
+        },
+        {
+          "component": "androidx.interpolator:interpolator:1.0.0",
+          "file": "interpolator-1.0.0.aar",
+          "bytes": 7669,
+          "sha256": "33193135a64fe21fa2c35eec6688f1a76e512606c0fc83dc1b689e37add7732a"
+        },
+        {
+          "component": "androidx.lifecycle:lifecycle-common:2.2.0",
+          "file": "lifecycle-common-2.2.0.jar",
+          "bytes": 22003,
+          "sha256": "63898dabf7cfe5ec5d7ed8b8c2564c1427be876e1496ead95c2703cf59d3734b"
+        },
+        {
+          "component": "androidx.lifecycle:lifecycle-livedata-core:2.2.0",
+          "file": "lifecycle-livedata-core-2.2.0.aar",
+          "bytes": 8375,
+          "sha256": "556c1f3af90aa9d7d0d330565adbf6da71b2429148bac91e07c485f4f9abf614"
+        },
+        {
+          "component": "androidx.lifecycle:lifecycle-livedata:2.0.0",
+          "file": "lifecycle-livedata-2.0.0.aar",
+          "bytes": 9431,
+          "sha256": "c82609ced8c498f0a701a30fb6771bb7480860daee84d82e0a81ee86edf7ba39"
+        },
+        {
+          "component": "androidx.lifecycle:lifecycle-runtime:2.2.0",
+          "file": "lifecycle-runtime-2.2.0.aar",
+          "bytes": 10370,
+          "sha256": "2f866c07a1f33a8c9bb69a9545d4f20b4f0628cd0a155432386d7cb081e1e0bc"
+        },
+        {
+          "component": "androidx.lifecycle:lifecycle-viewmodel-savedstate:2.2.0",
+          "file": "lifecycle-viewmodel-savedstate-2.2.0.aar",
+          "bytes": 14326,
+          "sha256": "3ce866fb822b20fe2f188f974992869a0a6233fe40acbefcff090d6def5e7f33"
+        },
+        {
+          "component": "androidx.lifecycle:lifecycle-viewmodel:2.2.0",
+          "file": "lifecycle-viewmodel-2.2.0.aar",
+          "bytes": 9624,
+          "sha256": "967efab24d6c49dd414a8c0ac4a1cd09b018f0b8bb43b739ad360c4158ebde27"
+        },
+        {
+          "component": "androidx.loader:loader:1.0.0",
+          "file": "loader-1.0.0.aar",
+          "bytes": 33445,
+          "sha256": "11f735cb3b55c458d470bed9e25254375b518b4b1bad6926783a7026db0f5025"
+        },
+        {
+          "component": "androidx.savedstate:savedstate:1.0.0",
+          "file": "savedstate-1.0.0.aar",
+          "bytes": 9768,
+          "sha256": "2510a5619c37579c9ce1a04574faaf323cd0ffe2fc4e20fa8f8f01e5bb402e83"
+        },
+        {
+          "component": "androidx.startup:startup-runtime:1.2.0",
+          "file": "startup-runtime-1.2.0.aar",
+          "bytes": 24073,
+          "sha256": "f51d361d17b30b09cfb9e2aebf301d113f99437cbf462a066092795fb60eddd2"
+        },
+        {
+          "component": "androidx.tracing:tracing:1.0.0",
+          "file": "tracing-1.0.0.aar",
+          "bytes": 4444,
+          "sha256": "07b8b6139665b884a162eccf97891ca50f7f56831233bf25168ae04f7b568612"
+        },
+        {
+          "component": "androidx.vectordrawable:vectordrawable-animated:1.1.0",
+          "file": "vectordrawable-animated-1.1.0.aar",
+          "bytes": 34496,
+          "sha256": "76da2c502371d9c38054df5e2b248d00da87809ed058f3363eae87ce5e2403f8"
+        },
+        {
+          "component": "androidx.vectordrawable:vectordrawable:1.1.0",
+          "file": "vectordrawable-1.1.0.aar",
+          "bytes": 33236,
+          "sha256": "46fd633ac01b49b7fcabc263bf098c5a8b9e9a69774d234edcca04fb02df8e26"
+        },
+        {
+          "component": "androidx.versionedparcelable:versionedparcelable:1.1.0",
+          "file": "versionedparcelable-1.1.0.aar",
+          "bytes": 31062,
+          "sha256": "9a1d77140ac222b7866b5054ee7d159bc1800987ed2d46dd6afdd145abb710c1"
+        },
+        {
+          "component": "androidx.viewpager:viewpager:1.0.0",
+          "file": "viewpager-1.0.0.aar",
+          "bytes": 53513,
+          "sha256": "147af4e14a1984010d8f155e5e19d781f03c1d70dfed02a8e0d18428b8fc8682"
+        },
+        {
+          "component": "com.github.cgutman:ShieldControllerExtensions:1.0.1",
+          "file": "ShieldControllerExtensions-1.0.1.aar",
+          "bytes": 15302,
+          "sha256": "f53ddeedfa584db60d66e11ba675d322813b60706f9b213976bf95994fcb7384"
+        },
+        {
+          "component": "com.squareup.okhttp3:okhttp-android:5.5.0",
+          "file": "okhttp.aar",
+          "bytes": 947165,
+          "sha256": "6c7fd12f092e64ca2eae0b8a8023900c0d7ffec57888cf8abc8085c6f42e1dcc"
+        },
+        {
+          "component": "com.squareup.okio:okio-jvm:3.18.1",
+          "file": "okio-jvm-3.18.1.jar",
+          "bytes": 392463,
+          "sha256": "b97b640557a650d15411f2be29aef558c4e422a83653cb18ba494311dbed18be"
+        },
+        {
+          "component": "org.bouncycastle:bcpkix-jdk18on:1.85",
+          "file": "bcpkix-jdk18on-1.85.jar",
+          "bytes": 1315409,
+          "sha256": "c9f82b2d4e99c4bbdfccf684e52cc06ea06a0b567bfd0d08f9c5a3f417055996"
+        },
+        {
+          "component": "org.bouncycastle:bcprov-jdk18on:1.85.2",
+          "file": "bcprov-jdk18on-1.85.2.jar",
+          "bytes": 10280518,
+          "sha256": "986b0fb92ec10e0c66b43e036ce0077e6150cfaecd1db9fb92b56672e157afe5"
+        },
+        {
+          "component": "org.bouncycastle:bcutil-jdk18on:1.85",
+          "file": "bcutil-jdk18on-1.85.jar",
+          "bytes": 718812,
+          "sha256": "590f55ed5d68529239898a4a5c4f730b6e37f45d1cfa3fbe51f8485abe32c42d"
+        },
+        {
+          "component": "org.jcodec:jcodec:0.2.5",
+          "file": "jcodec-0.2.5.jar",
+          "bytes": 2068570,
+          "sha256": "890329dad124e8b739c1d6602a59a53c8a474daddff265c2561e21c498496c81"
+        },
+        {
+          "component": "org.jetbrains.kotlin:kotlin-stdlib:2.2.21",
+          "file": "kotlin-stdlib-2.2.21.jar",
+          "bytes": 1761445,
+          "sha256": "6558a3d233da56a20934b32159f9db5f86ed5816ef098f78a2c223dc6abb79dd"
+        },
+        {
+          "component": "org.jetbrains:annotations:13.0",
+          "file": "annotations-13.0.jar",
+          "bytes": 17536,
+          "sha256": "ace2a10dc8e2d5fd34925ecac03e4988b2c0f851650c94b8cef49ba1bd111478"
+        },
+        {
+          "component": "org.jmdns:jmdns:3.6.3",
+          "file": "jmdns-3.6.3.jar",
+          "bytes": 217935,
+          "sha256": "6b6eb1623cb1d9e51467312ea62c567da005c2aa5a95347f566a11b8703c0ef1"
+        },
+        {
+          "component": "org.slf4j:slf4j-api:2.0.7",
+          "file": "slf4j-api-2.0.7.jar",
+          "bytes": 63635,
+          "sha256": "5d6298b93a1905c32cda6478808ac14c2d4a47e91535e53c41f7feeb85d946f4"
+        }
+      ],
+      "runtimeReport": {
+        "path": ".cache/native-stream-android/identity-02/app/build/reports/cloudy-runtime-dependencies.json",
+        "bytes": 8888,
+        "sha256": "2c6c2b0831ee15fb4fee89762f7438aa533e8ef0f12ae5a271693e1e30d41d62"
+      }
+    },
+    {
+      "versionName": "0.1.2",
+      "versionCode": 3,
+      "buildRef": "6b7ee157-b28b-4a3c-936d-bf91c94f6a5a",
+      "applicationId": "dev.cloudy.qualification.stream",
+      "minSdk": 35,
+      "compileSdk": 37,
+      "targetSdk": 36,
+      "identityMinimumApi": 37,
+      "apk": {
+        "path": "qualification/results/private/native-stream/2026-10-15-identity-02/cloudy-stream-0.1.2.apk",
+        "bytes": 24672986,
+        "sha256": "1f660391888e0e19ac11eeeedb37506663ae96951ab905ae8472091c4b915881"
+      },
+      "native": {
+        "bytes": 5110376,
+        "sha256": "95640675b34cd4d1a7908ff4e22949af7d214b8771e1c3bc954dbc21eea99a98",
+        "zipOffset": 16793600,
+        "alignment": 16384,
+        "stored": true
+      },
+      "stagedFileCount": 637,
+      "preparationReceipt": {
+        "path": ".cache/native-stream-android/identity-04/cloudy-preparation.json",
+        "bytes": 118333,
+        "sha256": "e5c18f559a4a2da0f9cd7fcdb77489113007cd3c1908e6c7e13def04da36110a"
+      },
+      "audit": {
+        "path": ".cache/native-stream-android/identity-audit-03/apk-audit.json",
+        "bytes": 10895,
+        "sha256": "31c97de07a8b88ed0b9fdfeb9042758e923ead4bc3cc21b62985c7662528d48d"
+      },
+      "compilerLog": {
+        "path": ".cache/native-stream-android/identity-04-gradle.log",
+        "bytes": 4402,
+        "sha256": "640c83fa896ebbbc8667a5d77d81b4716cbb07c16a4150a94162f25ad99f477a"
+      },
+      "testReport": {
+        "path": ".cache/native-stream-android/identity-04/app/build/test-results/testDebugUnitTest/TEST-dev.cloudy.qualification.stream.identity.IdentityAuthorizationTest.xml",
+        "bytes": 876,
+        "sha256": "145472be13ced60e7fc52765651069f0ab87bce39640cfb8986e02a2f8be0c0f"
+      },
+      "tests": 3,
+      "lint": {
+        "report": {
+          "path": ".cache/native-stream-android/identity-04/app/build/reports/lint-results-debug.xml",
+          "bytes": 398998,
+          "sha256": "4baa8de0ca49ac405edf0052d4627378e59e52f7e9d9a43be3503c44e1da379a"
+        },
+        "errors": 0,
+        "counts": {
+          "Hint": 1,
+          "Warning": 339
+        },
+        "baseline": {
+          "path": ".cache/native-stream-android/identity-04/app/lint-baseline.xml",
+          "bytes": 11299,
+          "sha256": "8b7b1ae58e2ca3719515263eb7c8712ed61dbde84a25551e55b32c5c1817b9c0"
+        },
+        "baselinedInactiveUpstreamErrors": 27,
+        "ownedFindings": 0
+      },
+      "permissions": [
+        "android.permission.USE_BIOMETRIC",
+        "android.permission.USE_FINGERPRINT"
+      ],
+      "components": [
+        "dev.cloudy.qualification.stream.StreamProbeActivity"
+      ],
+      "runtimeArtifacts": [
+        {
+          "component": "androidx.activity:activity:1.1.0",
+          "file": "activity-1.1.0.aar",
+          "bytes": 13506,
+          "sha256": "4f2b35916768032f7d0c20e250e28b29037ed4ce9ebf3da4fcd51bcb0c6067ef"
+        },
+        {
+          "component": "androidx.annotation:annotation-jvm:1.10.0",
+          "file": "annotation-jvm-1.10.0.jar",
+          "bytes": 62171,
+          "sha256": "ddd072ddbb553178e205517ce777b2f05aa9e412982d9ecb4eedc74f1212f697"
+        },
+        {
+          "component": "androidx.appcompat:appcompat-resources:1.2.0",
+          "file": "appcompat-resources-1.2.0.aar",
+          "bytes": 62834,
+          "sha256": "c470297c03ff3de1c3d15dacf0be0cae63abc10b52f021dd07ae28daa3100fe5"
+        },
+        {
+          "component": "androidx.appcompat:appcompat:1.2.0",
+          "file": "appcompat-1.2.0.aar",
+          "bytes": 1109871,
+          "sha256": "3d2131a55a61a777322e2126e0018011efa6339e53b44153eb651b16020cca70"
+        },
+        {
+          "component": "androidx.arch.core:core-common:2.1.0",
+          "file": "core-common-2.1.0.jar",
+          "bytes": 11257,
+          "sha256": "fe1237bf029d063e7f29fe39aeaf73ef74c8b0a3658486fc29d3c54326653889"
+        },
+        {
+          "component": "androidx.arch.core:core-runtime:2.1.0",
+          "file": "core-runtime-2.1.0.aar",
+          "bytes": 6059,
+          "sha256": "dd77615bd3dd275afb11b62df25bae46b10b4a117cd37943af45bdcbf8755852"
+        },
+        {
+          "component": "androidx.biometric:biometric:1.1.0",
+          "file": "biometric-1.1.0.aar",
+          "bytes": 194748,
+          "sha256": "270c7b7d99942d5ec1dd88594e4648feb33d8e31d8c3c2ab2321d49d9abdfc1f"
+        },
+        {
+          "component": "androidx.collection:collection:1.1.0",
+          "file": "collection-1.1.0.jar",
+          "bytes": 42953,
+          "sha256": "632a0e5407461de774409352940e292a291037724207a787820c77daf7d33b72"
+        },
+        {
+          "component": "androidx.core:core:1.3.2",
+          "file": "core-1.3.2.aar",
+          "bytes": 728081,
+          "sha256": "94de196cd67950cff6ef3e1ac59015f8eaaf61840bdc238f2cf54ddef8dd0be9"
+        },
+        {
+          "component": "androidx.cursoradapter:cursoradapter:1.0.0",
+          "file": "cursoradapter-1.0.0.aar",
+          "bytes": 10591,
+          "sha256": "a81c8fe78815fa47df5b749deb52727ad11f9397da58b16017f4eb2c11e28564"
+        },
+        {
+          "component": "androidx.customview:customview:1.0.0",
+          "file": "customview-1.0.0.aar",
+          "bytes": 33238,
+          "sha256": "20e5b8f6526a34595a604f56718da81167c0b40a7a94a57daa355663f2594df2"
+        },
+        {
+          "component": "androidx.drawerlayout:drawerlayout:1.0.0",
+          "file": "drawerlayout-1.0.0.aar",
+          "bytes": 32470,
+          "sha256": "9402442cdc5a43cf62fb14f8cf98c63342d4d9d9b805c8033c6cf7e802749ac1"
+        },
+        {
+          "component": "androidx.fragment:fragment:1.2.5",
+          "file": "fragment-1.2.5.aar",
+          "bytes": 226983,
+          "sha256": "d19e82d142def6c4e136da70bf92f194c0ecc61d14ab4e84567b2ced0920fa93"
+        },
+        {
+          "component": "androidx.interpolator:interpolator:1.0.0",
+          "file": "interpolator-1.0.0.aar",
+          "bytes": 7669,
+          "sha256": "33193135a64fe21fa2c35eec6688f1a76e512606c0fc83dc1b689e37add7732a"
+        },
+        {
+          "component": "androidx.lifecycle:lifecycle-common:2.2.0",
+          "file": "lifecycle-common-2.2.0.jar",
+          "bytes": 22003,
+          "sha256": "63898dabf7cfe5ec5d7ed8b8c2564c1427be876e1496ead95c2703cf59d3734b"
+        },
+        {
+          "component": "androidx.lifecycle:lifecycle-livedata-core:2.2.0",
+          "file": "lifecycle-livedata-core-2.2.0.aar",
+          "bytes": 8375,
+          "sha256": "556c1f3af90aa9d7d0d330565adbf6da71b2429148bac91e07c485f4f9abf614"
+        },
+        {
+          "component": "androidx.lifecycle:lifecycle-livedata:2.0.0",
+          "file": "lifecycle-livedata-2.0.0.aar",
+          "bytes": 9431,
+          "sha256": "c82609ced8c498f0a701a30fb6771bb7480860daee84d82e0a81ee86edf7ba39"
+        },
+        {
+          "component": "androidx.lifecycle:lifecycle-runtime:2.2.0",
+          "file": "lifecycle-runtime-2.2.0.aar",
+          "bytes": 10370,
+          "sha256": "2f866c07a1f33a8c9bb69a9545d4f20b4f0628cd0a155432386d7cb081e1e0bc"
+        },
+        {
+          "component": "androidx.lifecycle:lifecycle-viewmodel-savedstate:2.2.0",
+          "file": "lifecycle-viewmodel-savedstate-2.2.0.aar",
+          "bytes": 14326,
+          "sha256": "3ce866fb822b20fe2f188f974992869a0a6233fe40acbefcff090d6def5e7f33"
+        },
+        {
+          "component": "androidx.lifecycle:lifecycle-viewmodel:2.2.0",
+          "file": "lifecycle-viewmodel-2.2.0.aar",
+          "bytes": 9624,
+          "sha256": "967efab24d6c49dd414a8c0ac4a1cd09b018f0b8bb43b739ad360c4158ebde27"
+        },
+        {
+          "component": "androidx.loader:loader:1.0.0",
+          "file": "loader-1.0.0.aar",
+          "bytes": 33445,
+          "sha256": "11f735cb3b55c458d470bed9e25254375b518b4b1bad6926783a7026db0f5025"
+        },
+        {
+          "component": "androidx.savedstate:savedstate:1.0.0",
+          "file": "savedstate-1.0.0.aar",
+          "bytes": 9768,
+          "sha256": "2510a5619c37579c9ce1a04574faaf323cd0ffe2fc4e20fa8f8f01e5bb402e83"
+        },
+        {
+          "component": "androidx.startup:startup-runtime:1.2.0",
+          "file": "startup-runtime-1.2.0.aar",
+          "bytes": 24073,
+          "sha256": "f51d361d17b30b09cfb9e2aebf301d113f99437cbf462a066092795fb60eddd2"
+        },
+        {
+          "component": "androidx.tracing:tracing:1.0.0",
+          "file": "tracing-1.0.0.aar",
+          "bytes": 4444,
+          "sha256": "07b8b6139665b884a162eccf97891ca50f7f56831233bf25168ae04f7b568612"
+        },
+        {
+          "component": "androidx.vectordrawable:vectordrawable-animated:1.1.0",
+          "file": "vectordrawable-animated-1.1.0.aar",
+          "bytes": 34496,
+          "sha256": "76da2c502371d9c38054df5e2b248d00da87809ed058f3363eae87ce5e2403f8"
+        },
+        {
+          "component": "androidx.vectordrawable:vectordrawable:1.1.0",
+          "file": "vectordrawable-1.1.0.aar",
+          "bytes": 33236,
+          "sha256": "46fd633ac01b49b7fcabc263bf098c5a8b9e9a69774d234edcca04fb02df8e26"
+        },
+        {
+          "component": "androidx.versionedparcelable:versionedparcelable:1.1.0",
+          "file": "versionedparcelable-1.1.0.aar",
+          "bytes": 31062,
+          "sha256": "9a1d77140ac222b7866b5054ee7d159bc1800987ed2d46dd6afdd145abb710c1"
+        },
+        {
+          "component": "androidx.viewpager:viewpager:1.0.0",
+          "file": "viewpager-1.0.0.aar",
+          "bytes": 53513,
+          "sha256": "147af4e14a1984010d8f155e5e19d781f03c1d70dfed02a8e0d18428b8fc8682"
+        },
+        {
+          "component": "com.github.cgutman:ShieldControllerExtensions:1.0.1",
+          "file": "ShieldControllerExtensions-1.0.1.aar",
+          "bytes": 15302,
+          "sha256": "f53ddeedfa584db60d66e11ba675d322813b60706f9b213976bf95994fcb7384"
+        },
+        {
+          "component": "com.squareup.okhttp3:okhttp-android:5.5.0",
+          "file": "okhttp.aar",
+          "bytes": 947165,
+          "sha256": "6c7fd12f092e64ca2eae0b8a8023900c0d7ffec57888cf8abc8085c6f42e1dcc"
+        },
+        {
+          "component": "com.squareup.okio:okio-jvm:3.18.1",
+          "file": "okio-jvm-3.18.1.jar",
+          "bytes": 392463,
+          "sha256": "b97b640557a650d15411f2be29aef558c4e422a83653cb18ba494311dbed18be"
+        },
+        {
+          "component": "org.bouncycastle:bcpkix-jdk18on:1.85",
+          "file": "bcpkix-jdk18on-1.85.jar",
+          "bytes": 1315409,
+          "sha256": "c9f82b2d4e99c4bbdfccf684e52cc06ea06a0b567bfd0d08f9c5a3f417055996"
+        },
+        {
+          "component": "org.bouncycastle:bcprov-jdk18on:1.85.2",
+          "file": "bcprov-jdk18on-1.85.2.jar",
+          "bytes": 10280518,
+          "sha256": "986b0fb92ec10e0c66b43e036ce0077e6150cfaecd1db9fb92b56672e157afe5"
+        },
+        {
+          "component": "org.bouncycastle:bcutil-jdk18on:1.85",
+          "file": "bcutil-jdk18on-1.85.jar",
+          "bytes": 718812,
+          "sha256": "590f55ed5d68529239898a4a5c4f730b6e37f45d1cfa3fbe51f8485abe32c42d"
+        },
+        {
+          "component": "org.jcodec:jcodec:0.2.5",
+          "file": "jcodec-0.2.5.jar",
+          "bytes": 2068570,
+          "sha256": "890329dad124e8b739c1d6602a59a53c8a474daddff265c2561e21c498496c81"
+        },
+        {
+          "component": "org.jetbrains.kotlin:kotlin-stdlib:2.2.21",
+          "file": "kotlin-stdlib-2.2.21.jar",
+          "bytes": 1761445,
+          "sha256": "6558a3d233da56a20934b32159f9db5f86ed5816ef098f78a2c223dc6abb79dd"
+        },
+        {
+          "component": "org.jetbrains:annotations:13.0",
+          "file": "annotations-13.0.jar",
+          "bytes": 17536,
+          "sha256": "ace2a10dc8e2d5fd34925ecac03e4988b2c0f851650c94b8cef49ba1bd111478"
+        },
+        {
+          "component": "org.jmdns:jmdns:3.6.3",
+          "file": "jmdns-3.6.3.jar",
+          "bytes": 217935,
+          "sha256": "6b6eb1623cb1d9e51467312ea62c567da005c2aa5a95347f566a11b8703c0ef1"
+        },
+        {
+          "component": "org.slf4j:slf4j-api:2.0.7",
+          "file": "slf4j-api-2.0.7.jar",
+          "bytes": 63635,
+          "sha256": "5d6298b93a1905c32cda6478808ac14c2d4a47e91535e53c41f7feeb85d946f4"
+        }
+      ],
+      "runtimeReport": {
+        "path": ".cache/native-stream-android/identity-04/app/build/reports/cloudy-runtime-dependencies.json",
+        "bytes": 8888,
+        "sha256": "2c6c2b0831ee15fb4fee89762f7438aa533e8ef0f12ae5a271693e1e30d41d62"
+      }
+    }
+  ],
+  "currentSourceInputs": [
+    {
+      "path": "tools/prepare_stream_android.py",
+      "bytes": 8274,
+      "sha256": "737509ebb95108c33f71d4d449895b5aece8f91585c7ad8081db669a4eadbfe2"
+    },
+    {
+      "path": "qualification/probes/device-baseline/gradlew",
+      "bytes": 8656,
+      "sha256": "a5a5c199ba02189ae8c46a334223371a20599d9c298ef65e7540ede4a3f72d59"
+    },
+    {
+      "path": "qualification/probes/device-baseline/gradle/wrapper/gradle-wrapper.jar",
+      "bytes": 48462,
+      "sha256": "497c8c2a7e5031f6aa847f88104aa80a93532ec32ee17bdb8d1d2f67a194a9c7"
+    },
+    {
+      "path": "qualification/probes/native-stream/android/app/build.gradle",
+      "bytes": 3941,
+      "sha256": "45065e53c83bf000972e56bc17667f5eb8ed22c211d0f14804d3bfd4b2ce9adf"
+    },
+    {
+      "path": "qualification/probes/native-stream/android/app/lint-baseline.xml",
+      "bytes": 11299,
+      "sha256": "8b7b1ae58e2ca3719515263eb7c8712ed61dbde84a25551e55b32c5c1817b9c0"
+    },
+    {
+      "path": "qualification/probes/native-stream/android/app/src/main/AndroidManifest.xml",
+      "bytes": 1856,
+      "sha256": "115dff9da1d48f1da9629217ac9c2a366c2795ec367d5cd3ca5823904a860f0c"
+    },
+    {
+      "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/StreamProbeActivity.java",
+      "bytes": 8058,
+      "sha256": "d827f3c055d200b79d35ba8ed3ef6200e5418bafd55467a11d1073843ccccff6"
+    },
+    {
+      "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/StreamProbeViewModel.java",
+      "bytes": 22005,
+      "sha256": "ce9b37f3180947125a1652875c98ed7ab1c14ea16470152183204f86e214a875"
+    },
+    {
+      "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/identity/IdentityAuthorization.java",
+      "bytes": 922,
+      "sha256": "0f9f65c6f494fae3a4c2bfef166ff43abc2b6df6045b001fee76f77f2619d003"
+    },
+    {
+      "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/identity/StreamIdentityStore.java",
+      "bytes": 35229,
+      "sha256": "7d308060f070d66f6b26220b005e0e2780350fb6b1c9aebcc44a99228c26ef9d"
+    },
+    {
+      "path": "qualification/probes/native-stream/android/app/src/main/res/drawable/cloudy_stream_icon.xml",
+      "bytes": 347,
+      "sha256": "99fff10d938a1361f5ecab8672e186d42923095d3d4c550a0774d305b4056cdc"
+    },
+    {
+      "path": "qualification/probes/native-stream/android/app/src/main/res/values/cloudy_strings.xml",
+      "bytes": 3922,
+      "sha256": "d5d1abf29256c49721dbef13850e952e93fb052121de0d91faf0363f0759989f"
+    },
+    {
+      "path": "qualification/probes/native-stream/android/app/src/main/res/xml/cloudy_backup.xml",
+      "bytes": 339,
+      "sha256": "f3e864f6856a75a8d52d8de359041e941ff09a8999ad24fb0af31889ca22ecf1"
+    },
+    {
+      "path": "qualification/probes/native-stream/android/app/src/main/res/xml/cloudy_extraction.xml",
+      "bytes": 717,
+      "sha256": "ca0f7c537fddf4413f256872b327a983b3de2a40aae71d7e0444468814e905ce"
+    },
+    {
+      "path": "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/identity/IdentityAuthorizationTest.java",
+      "bytes": 1553,
+      "sha256": "3f99b2488aebd4ab5bbafe01a2e33b9b66a73718ab8d7349069b7682260e9533"
+    },
+    {
+      "path": "qualification/probes/native-stream/android/build.gradle",
+      "bytes": 69,
+      "sha256": "0537c547218629772f95b8cc26803dfeca0e85b6d7ace78f42fd4af02dfc1162"
+    },
+    {
+      "path": "qualification/probes/native-stream/android/gradle-wrapper.properties",
+      "bytes": 289,
+      "sha256": "b28a17a308d55eba57bf91da1ca265262d12c101ebe663fe7f12180b4f607a92"
+    },
+    {
+      "path": "qualification/probes/native-stream/android/gradle.properties",
+      "bytes": 101,
+      "sha256": "09543e46125c3e44e3495c53f75244a701b23ce9a0e36c56bd00962a3745eea1"
+    },
+    {
+      "path": "qualification/probes/native-stream/android/settings.gradle",
+      "bytes": 335,
+      "sha256": "d5b284112da08ea05283b9d55353280dce968c8094f467b91fe0e957ea83d25f"
+    }
+  ],
+  "offlineCheck": {
+    "path": ".cache/native-stream-android/identity-04-offline-check.json",
+    "bytes": 137,
+    "sha256": "8d1d8de5b02fdb49607e9e796c0628bb10cf1594275ab139f68a12cc28838b57"
+  },
+  "identityRecords": [
+    {
+      "evidence": {
+        "path": "qualification/results/private/native-stream/2026-10-15-identity-02/010a6d3e-98ef-4d39-bd64-fa00f3423e17.json",
+        "bytes": 593,
+        "sha256": "2511f9b15f8275c94bb85462c86bd9a52b04fc6abb2e34aa7e56c05383d8a3c5"
+      },
+      "result": {
+        "schemaVersion": 1,
+        "buildRef": "6b7ee157-b28b-4a3c-936d-bf91c94f6a5a",
+        "nativeBuildRef": "f336e245-805d-4aad-bc1a-9208df8db318",
+        "version": "0.1.2",
+        "operation": "AUTHORIZE",
+        "startedElapsedMillis": 100181894,
+        "hostConnections": 0,
+        "decodedFrames": 0,
+        "observedElapsedMillis": 100185877,
+        "status": "failed",
+        "failureCode": "AUTH_REQUIRED",
+        "cancelReason": null,
+        "authenticatedAtElapsedMillis": 100185871,
+        "authenticationType": 2,
+        "failureStage": "precertificate-sign-init",
+        "failureCauseClass": "UserNotAuthenticatedException",
+        "keyStoreErrorCode": null
+      }
+    },
+    {
+      "evidence": {
+        "path": "qualification/results/private/native-stream/2026-10-15-identity-02/150e8d85-1228-49a5-9d63-635d0cb3f785.json",
+        "bytes": 463,
+        "sha256": "7fa97ba88533c416c06157345515701fe0ee2f2b449ebae63219685e5f78ad48"
+      },
+      "result": {
+        "schemaVersion": 1,
+        "buildRef": "6b7ee157-b28b-4a3c-936d-bf91c94f6a5a",
+        "nativeBuildRef": "f336e245-805d-4aad-bc1a-9208df8db318",
+        "version": "0.1.2",
+        "operation": "REFRESH",
+        "startedElapsedMillis": 100159463,
+        "hostConnections": 0,
+        "decodedFrames": 0,
+        "observedElapsedMillis": 100159469,
+        "status": "completed",
+        "failureCode": null,
+        "cancelReason": null,
+        "identityState": "ENROLLMENT_PENDING",
+        "securityLevel": "trusted-environment"
+      }
+    },
+    {
+      "evidence": {
+        "path": "qualification/results/private/native-stream/2026-10-15-identity-02/35dd6a14-f25c-4441-913f-148460e8af61.json",
+        "bytes": 461,
+        "sha256": "5af9ea8afb63114225764a0ae69a63637cf41733fe73b5913735f4226c7e22e5"
+      },
+      "result": {
+        "schemaVersion": 1,
+        "buildRef": "c61b9f1b-e1f8-4c6a-bb61-382c64743ef0",
+        "nativeBuildRef": "f336e245-805d-4aad-bc1a-9208df8db318",
+        "version": "0.1.1",
+        "operation": "REFRESH",
+        "startedElapsedMillis": 99909346,
+        "hostConnections": 0,
+        "decodedFrames": 0,
+        "observedElapsedMillis": 99909361,
+        "status": "completed",
+        "failureCode": null,
+        "cancelReason": null,
+        "identityState": "ENROLLMENT_PENDING",
+        "securityLevel": "trusted-environment"
+      }
+    },
+    {
+      "evidence": {
+        "path": "qualification/results/private/native-stream/2026-10-15-identity-02/9e063191-a64a-4ae9-87ba-07588c170da4.json",
+        "bytes": 463,
+        "sha256": "4cfb2b1a7050098c3a2a61ef796aca3f2e4530418235ed4222dbae7f1833af4c"
+      },
+      "result": {
+        "schemaVersion": 1,
+        "buildRef": "6b7ee157-b28b-4a3c-936d-bf91c94f6a5a",
+        "nativeBuildRef": "f336e245-805d-4aad-bc1a-9208df8db318",
+        "version": "0.1.2",
+        "operation": "REFRESH",
+        "startedElapsedMillis": 100147149,
+        "hostConnections": 0,
+        "decodedFrames": 0,
+        "observedElapsedMillis": 100147153,
+        "status": "completed",
+        "failureCode": null,
+        "cancelReason": null,
+        "identityState": "ENROLLMENT_PENDING",
+        "securityLevel": "trusted-environment"
+      }
+    },
+    {
+      "evidence": {
+        "path": "qualification/results/private/native-stream/2026-10-15-identity-02/ae4ca729-aff4-4d94-8c4f-c1187f33df7f.json",
+        "bytes": 441,
+        "sha256": "cb5f6609b5a0fe9a217f4a7d3b5986ba90dc00b453f11c0910381448fb06fd91"
+      },
+      "result": {
+        "schemaVersion": 1,
+        "buildRef": "c61b9f1b-e1f8-4c6a-bb61-382c64743ef0",
+        "nativeBuildRef": "f336e245-805d-4aad-bc1a-9208df8db318",
+        "version": "0.1.1",
+        "operation": "REFRESH",
+        "startedElapsedMillis": 99618003,
+        "hostConnections": 0,
+        "decodedFrames": 0,
+        "observedElapsedMillis": 99618007,
+        "status": "completed",
+        "failureCode": null,
+        "cancelReason": null,
+        "identityState": "ABSENT",
+        "securityLevel": "unavailable"
+      }
+    },
+    {
+      "evidence": {
+        "path": "qualification/results/private/native-stream/2026-10-15-identity-02/edefabe3-d87e-4e7e-b6c9-311d3c1f0b97.json",
+        "bytes": 429,
+        "sha256": "afee1053ae26c06f45a1c73eff49b35edcaad1950753949292bae2665847a876"
+      },
+      "result": {
+        "schemaVersion": 1,
+        "buildRef": "c61b9f1b-e1f8-4c6a-bb61-382c64743ef0",
+        "nativeBuildRef": "f336e245-805d-4aad-bc1a-9208df8db318",
+        "version": "0.1.1",
+        "operation": "CREATE",
+        "startedElapsedMillis": 99733398,
+        "hostConnections": 0,
+        "decodedFrames": 0,
+        "observedElapsedMillis": 99739175,
+        "status": "failed",
+        "failureCode": "AUTH_REQUIRED",
+        "cancelReason": null,
+        "authenticatedAtElapsedMillis": 99739155
+      }
+    }
+  ],
+  "priorNativeRecord": {
+    "path": "qualification/results/private/native-stream/2026-10-15-load-01/c90e90d1-01c8-4b9c-bf09-97f549a10e83.json",
+    "bytes": 340,
+    "sha256": "d9a1c951db91573315d9eb383f5658a34d06301f0c023af8411887bf405b560a"
+  },
+  "priorIdentityRecordsBytePreserved": 3,
+  "keyState": "ENROLLMENT_PENDING; same key retained",
+  "lastFailure": {
+    "authenticationType": 2,
+    "authenticationMeaning": "biometric",
+    "callbackToFailureMillis": 6,
+    "failureCode": "AUTH_REQUIRED",
+    "failureStage": "precertificate-sign-init",
+    "failureCauseClass": "UserNotAuthenticatedException",
+    "keyStoreErrorCode": null
+  },
+  "userReports": [
+    {
+      "version": "0.1.1",
+      "text": "I completed the system authentication prompt"
+    },
+    {
+      "version": "0.1.2",
+      "text": "I completed the system prompt"
+    }
+  ],
+  "closure": {
+    "stopped": true,
+    "evidence": [
+      {
+        "path": "qualification/results/private/native-stream/2026-10-15-identity-02/force-stop-command.json",
+        "bytes": 348,
+        "sha256": "799c87a73eb3e741426aa6891b2531a3c5b87a26ab80fadc053054a4842c9c2f"
+      },
+      {
+        "path": "qualification/results/private/native-stream/2026-10-15-identity-02/after-stop-command.json",
+        "bytes": 304,
+        "sha256": "37b3d844c21cc3bfd2cb53ac123038b5ceb51a1d1e6448e4918fa2be9a261d49"
+      }
+    ]
+  },
+  "sunshinePreflight": [
+    {
+      "path": ".cache/native-stream-host/preflight-01/preflight.json",
+      "bytes": 9869,
+      "sha256": "136e7bdb343d55eb93e170917fc1fe3896e61ebcb8e600a9bf015fdf1f2ce206"
+    },
+    {
+      "path": ".cache/native-stream-host/preflight-02/preflight.json",
+      "bytes": 18845,
+      "sha256": "5fea7862d33e54243dfd038e556bf3de43055027fbf4607fdbe76f070f78ef21"
+    }
+  ],
+  "privateEvidence": [
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/35dd6a14-f25c-4441-913f-148460e8af61.json",
+      "bytes": 461,
+      "sha256": "5af9ea8afb63114225764a0ae69a63637cf41733fe73b5913735f4226c7e22e5"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/ae4ca729-aff4-4d94-8c4f-c1187f33df7f.json",
+      "bytes": 441,
+      "sha256": "cb5f6609b5a0fe9a217f4a7d3b5986ba90dc00b453f11c0910381448fb06fd91"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/after-auth-layout-command.json",
+      "bytes": 610,
+      "sha256": "d5c261568f1980c4508f3259cdb38a666b1cb66fd8148634ebcded7b9e797d3b"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/after-auth-layout.json",
+      "bytes": 14431,
+      "sha256": "1d3c2867674d170b129623c78708aa284b2d38540220b86653c9da53c2099082"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/after-failure-refresh-tap-command.json",
+      "bytes": 300,
+      "sha256": "cbc7cbc4894d1e025b4ba7963a90e9f2bd5d17aec81ac23cb9cf021fa52afa13"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/after-launch-pid-command.json",
+      "bytes": 311,
+      "sha256": "041bda9f6e058691281b0d6e65cbfa85a22c277936bb4792fc4f53eef46eff7e"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/before-after-failure-refresh-layout-command.json",
+      "bytes": 646,
+      "sha256": "52c77f768493cc556441e68c6c268483af198f6477d63a512fe923bd2988e26f"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/before-after-failure-refresh-layout.json",
+      "bytes": 25521,
+      "sha256": "595d5ac48e0057cb971a32e408e77e39632621376954583ddab66ccaef0a7496"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/before-package-command.json",
+      "bytes": 6362,
+      "sha256": "a7ac2a35fb6bbc8736418117e541b2ae6911f29d96828b2ec0161ed27ed6fb5a"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/create-identity-visual-tap-command.json",
+      "bytes": 300,
+      "sha256": "40e105aec377c313571315a64108527724ea815fac14b56c25977e2647034ccc"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/device.json",
+      "bytes": 201,
+      "sha256": "f79591313921b22b9308db767f38d2d4e0cc1b67867b9518a1fe9f076ed0cc0e"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/edefabe3-d87e-4e7e-b6c9-311d3c1f0b97.json",
+      "bytes": 429,
+      "sha256": "afee1053ae26c06f45a1c73eff49b35edcaad1950753949292bae2665847a876"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/identity-abi-command.json",
+      "bytes": 304,
+      "sha256": "b123c0b3578f50b9e9c0145eafb4e17e379c48899ab49db02bb06335be4aaeaf"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/identity-api-command.json",
+      "bytes": 299,
+      "sha256": "aeed50eaad5a1ab5fde605db9488ebf964e1cf569288dd194dd50ec8703083e6"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/identity-build-command.json",
+      "bytes": 306,
+      "sha256": "a24ca722c8b6a40d8a2d14462fbec5c54e7b143f9cfb43b01ee6ac289a6b8493"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/identity-incremental-command.json",
+      "bytes": 313,
+      "sha256": "a0df6cbb3475090bc427e6bbfd2a9ece15553dcc20bdecead9bf8d126cc84d5e"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/identity-manufacturer-command.json",
+      "bytes": 302,
+      "sha256": "994e1eee5e9fa6c7cb50e30d2ec089eb90a3e77c8a65b878546944d163bdf915"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/identity-model-command.json",
+      "bytes": 309,
+      "sha256": "4b41e1b061ca4749df214bcb204c5d51f927f3b7e23b51cc9c2fb27014812008"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/identity-patch-command.json",
+      "bytes": 318,
+      "sha256": "a132bb9a5ed96db90238a000bc7040c156a40a68c3c3d32c28d966ef81ce692c"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/identity-release-command.json",
+      "bytes": 303,
+      "sha256": "b35886ed6644c3eb0a41fba260a5662669b27ec7189566b02dfe4b08f6a01893"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/identity-report-list-command.json",
+      "bytes": 478,
+      "sha256": "bf0258bd839698bce84e6462ca704ce21a36b2b8667cf6c8008089a05e26779a"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/initial-identity-layout-command.json",
+      "bytes": 622,
+      "sha256": "4acf9e1b2324c917b3c790d63dba50c8bdee737cd0cd43580399c9c7e4c08d1b"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/initial-identity-layout.json",
+      "bytes": 13354,
+      "sha256": "f4e1f6258a21cf224ca0e80c18311828743ca5121c3f8817738fa753d0ca64cb"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/initial-identity.png",
+      "bytes": 373597,
+      "sha256": "6e9e4244f379fa791c4b34366a7f29766d81c0b0e6a06ddbc3ff3d866b0ec16f"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/initial-journal-list-command.json",
+      "bytes": 392,
+      "sha256": "2401ea1604201187a98bf8914390c130dbd3b39e22ab8357c00da98246298bd1"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/initial-record-ae4ca729-aff4-4d94-8c4f-c1187f33df7f.json-command.json",
+      "bytes": 894,
+      "sha256": "410c45d7e7bea419cc98e673fe8d3b99f687020549fd77d5c73167bdc365fc33"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/initial-screen-command.json",
+      "bytes": 602,
+      "sha256": "c9baf6a5af28a5913fed5d5c4a02aaf7d7da4595efda948f236926e58d18cd26"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/install-command.json",
+      "bytes": 470,
+      "sha256": "0630f73c1456ea16fa9514ec3fad855640d514c1fdf68239703efdc6013d4e57"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/installed-package-command.json",
+      "bytes": 5859,
+      "sha256": "2a7b0e539487d09dd9f5f9b951a994ac26b6692026effb4fe2c573d50ee741eb"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/launch-command.json",
+      "bytes": 601,
+      "sha256": "c02de51e7c06de3236a858cee69eeb62c85b5df5d2bdbc43b0fc30937ac95ba2"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/prior-load-list-command.json",
+      "bytes": 383,
+      "sha256": "a21a9045cea9397f2080d6038e6a6c886d10bcfb681183c67b5bfad47665f17b"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/prior-load-record-command.json",
+      "bytes": 768,
+      "sha256": "436cacdfab1d302d895ad5ac29a77744086df74fc1832616e1482b620ed2b6ce"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/prior-native-load.json",
+      "bytes": 340,
+      "sha256": "d9a1c951db91573315d9eb383f5658a34d06301f0c023af8411887bf405b560a"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/prior-package-command.json",
+      "bytes": 370,
+      "sha256": "d194c26f8f2aad64485e2b2d71959b3bfc79a8d18cf7969dbb44c846f01821e1"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/read-35dd6a14-f25c-4441-913f-148460e8af61.json-command.json",
+      "bytes": 914,
+      "sha256": "263290978f0e3c36339f63732a35d2f8ee992adce723b5b8b443fa3a34e0f9e3"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/read-ae4ca729-aff4-4d94-8c4f-c1187f33df7f.json-command.json",
+      "bytes": 894,
+      "sha256": "df3c2196fcd3659a621dfa8bbf96eba179143510581a2def5cbbd100e4cfaa20"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/read-edefabe3-d87e-4e7e-b6c9-311d3c1f0b97.json-command.json",
+      "bytes": 877,
+      "sha256": "fac15d18abcb57195f710f995b48082cfc3892874ac00df3ac1e753de16904c0"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/scoped-crash-buffer-command.json",
+      "bytes": 7370,
+      "sha256": "45ddd0f7b9206934bdaeae4f749a5ddc5c6ac7fcb79ea8fd8a945fd65832f66b"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-01/window-focus-command.json",
+      "bytes": 104171,
+      "sha256": "0517f0e123784c8c47b261976d1a76dd42f07744e25e946e3ed4f563d46d4642"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/010a6d3e-98ef-4d39-bd64-fa00f3423e17.json",
+      "bytes": 593,
+      "sha256": "2511f9b15f8275c94bb85462c86bd9a52b04fc6abb2e34aa7e56c05383d8a3c5"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/150e8d85-1228-49a5-9d63-635d0cb3f785.json",
+      "bytes": 463,
+      "sha256": "7fa97ba88533c416c06157345515701fe0ee2f2b449ebae63219685e5f78ad48"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/35dd6a14-f25c-4441-913f-148460e8af61.json",
+      "bytes": 461,
+      "sha256": "5af9ea8afb63114225764a0ae69a63637cf41733fe73b5913735f4226c7e22e5"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/9e063191-a64a-4ae9-87ba-07588c170da4.json",
+      "bytes": 463,
+      "sha256": "4cfb2b1a7050098c3a2a61ef796aca3f2e4530418235ed4222dbae7f1833af4c"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/ae4ca729-aff4-4d94-8c4f-c1187f33df7f.json",
+      "bytes": 441,
+      "sha256": "cb5f6609b5a0fe9a217f4a7d3b5986ba90dc00b453f11c0910381448fb06fd91"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/after-stop-command.json",
+      "bytes": 304,
+      "sha256": "37b3d844c21cc3bfd2cb53ac123038b5ceb51a1d1e6448e4918fa2be9a261d49"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/authorize-012-tap-command.json",
+      "bytes": 300,
+      "sha256": "6be9da7e2d9c6421180c28ae7d1a45cf01db0209d6cc765ff5b0debce87ab28e"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/before-authorize-012-layout-command.json",
+      "bytes": 630,
+      "sha256": "81848a2437f164e2ea54238125018283535da746090c41d30d33ae0c900182cb"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/before-authorize-012-layout.json",
+      "bytes": 25517,
+      "sha256": "489013cbe2e064a24ac64ad8513116f287c265b3e771d2553961509db97a1daa"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/before-package-command.json",
+      "bytes": 6609,
+      "sha256": "7af856d732c785c4607f13da230cc2b10f09e4393736151bf598403196303cda"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/device.json",
+      "bytes": 201,
+      "sha256": "f79591313921b22b9308db767f38d2d4e0cc1b67867b9518a1fe9f076ed0cc0e"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/edefabe3-d87e-4e7e-b6c9-311d3c1f0b97.json",
+      "bytes": 429,
+      "sha256": "afee1053ae26c06f45a1c73eff49b35edcaad1950753949292bae2665847a876"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/force-stop-command.json",
+      "bytes": 348,
+      "sha256": "799c87a73eb3e741426aa6891b2531a3c5b87a26ab80fadc053054a4842c9c2f"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/identity-abi-command.json",
+      "bytes": 304,
+      "sha256": "7be15165f5fa83ff0628927ff4a6ffb599ac79775c39f40f5973b81245e9c262"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/identity-api-command.json",
+      "bytes": 299,
+      "sha256": "17ee967771b4139b0df0a0cd49d7fbcffeef8f689cc27f92d2df5ceca8d2b1bc"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/identity-build-command.json",
+      "bytes": 306,
+      "sha256": "4f1e7747b35c6d5757172f800349d710818f158d556fdbbd74476be20f994a55"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/identity-incremental-command.json",
+      "bytes": 313,
+      "sha256": "8258211c5bddc7436de177b380e25746ba7b3b3915c2d1f015ba5ed58c95b420"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/identity-manufacturer-command.json",
+      "bytes": 302,
+      "sha256": "4a13a0c2746290c0e9104b6786fb5f61167430943788f032e63034698437ea2e"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/identity-model-command.json",
+      "bytes": 309,
+      "sha256": "36486558e9670ed768e8107804e7b9d4b1eef8095ba554b4327b76df5f4b16da"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/identity-patch-command.json",
+      "bytes": 318,
+      "sha256": "5366524e387f07c20898aebe4193bf0a7cb57fa1b30c4ef8b170ee96c1562fba"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/identity-release-command.json",
+      "bytes": 303,
+      "sha256": "83e052742d8520a6f62d82e6d9f083a5274087048d449c74770fcf0a1413b2fe"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/identity-report-list-command.json",
+      "bytes": 607,
+      "sha256": "7cacfcfc51dff317f8bab38f35144a2ee9e21daac908ad05e9ccddf8a38ccf20"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/install-command.json",
+      "bytes": 470,
+      "sha256": "6165a896112cd852fca9dfdea1849db511817dec62ad2319a53a48507c3cc0b8"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/installed-package-command.json",
+      "bytes": 6609,
+      "sha256": "92ce1a36fcf7d6dcd4c0843ad294bd882ee12158d390b7dd76a1eb9a839c22fa"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/launch-command.json",
+      "bytes": 702,
+      "sha256": "dab6002d956a7d8af69a14897b33715aa9a47ae1a52a89c43d22cfc339061565"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/prior-35dd6a14-f25c-4441-913f-148460e8af61.json",
+      "bytes": 461,
+      "sha256": "5af9ea8afb63114225764a0ae69a63637cf41733fe73b5913735f4226c7e22e5"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/prior-ae4ca729-aff4-4d94-8c4f-c1187f33df7f.json",
+      "bytes": 441,
+      "sha256": "cb5f6609b5a0fe9a217f4a7d3b5986ba90dc00b453f11c0910381448fb06fd91"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/prior-edefabe3-d87e-4e7e-b6c9-311d3c1f0b97.json",
+      "bytes": 429,
+      "sha256": "afee1053ae26c06f45a1c73eff49b35edcaad1950753949292bae2665847a876"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/prior-identity-35dd6a14-f25c-4441-913f-148460e8af61.json-command.json",
+      "bytes": 914,
+      "sha256": "d4a207788beab52c5879c6b418c885ecd294f88811cc079d2f0981287b603aba"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/prior-identity-ae4ca729-aff4-4d94-8c4f-c1187f33df7f.json-command.json",
+      "bytes": 894,
+      "sha256": "128d68a6c167ab407d7ad5bb48919254ec8b00504588d0ebc2024969c4a256e0"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/prior-identity-edefabe3-d87e-4e7e-b6c9-311d3c1f0b97.json-command.json",
+      "bytes": 877,
+      "sha256": "e4e954bddfa60b71bf8d8fb5377348476cc11c8ac92cd358be3532406e8e7899"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/prior-identity-list-command.json",
+      "bytes": 478,
+      "sha256": "84c5f8028a670d5542baf6f6c14c1e35bdbacd040bfede340ea8bd2d53041800"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/prior-load-list-command.json",
+      "bytes": 383,
+      "sha256": "dc21a77c64633bb17a230062f009d0ae0e96d164c2a5e9f142bf0cbf25b868b2"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/prior-load-record-command.json",
+      "bytes": 768,
+      "sha256": "2f7be7d3c5d8052659c22ecdd162001cb4c2d97bd301d6a93e1670f430250250"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/prior-native-load.json",
+      "bytes": 340,
+      "sha256": "d9a1c951db91573315d9eb383f5658a34d06301f0c023af8411887bf405b560a"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/prior-package-command.json",
+      "bytes": 370,
+      "sha256": "6c18315be4742d0aa05203dd001f6195bceabc44c6dcb1f3f0d47307191c48da"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/read-010a6d3e-98ef-4d39-bd64-fa00f3423e17.json-command.json",
+      "bytes": 1057,
+      "sha256": "bc17f3a453bf776702c452cc50c4d535aeb2ea2d5b025e5f88386c03fb89ae14"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/read-150e8d85-1228-49a5-9d63-635d0cb3f785.json-command.json",
+      "bytes": 916,
+      "sha256": "7a772242216c4862186feb3debf97d5d4192d0db73e22aff91f523dbaeb2fa63"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/read-35dd6a14-f25c-4441-913f-148460e8af61.json-command.json",
+      "bytes": 914,
+      "sha256": "63ddc24168cb7a0e6f07775bc46d76b1a8fb36b0cc6227765eb406bf6bac35e1"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/read-9e063191-a64a-4ae9-87ba-07588c170da4.json-command.json",
+      "bytes": 916,
+      "sha256": "f1ae6d3e48e4617d6b1636f8cd9058c1269be2c1acf3781aa0d0bd48f08ba24c"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/read-ae4ca729-aff4-4d94-8c4f-c1187f33df7f.json-command.json",
+      "bytes": 894,
+      "sha256": "bff0de80588861334a48502222ed08fe0410b68e390b48f5078461a639b34b1c"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/read-edefabe3-d87e-4e7e-b6c9-311d3c1f0b97.json-command.json",
+      "bytes": 877,
+      "sha256": "61c1f3955e0b8724d1a6e716b50e10f334c06cf79e843a6481c8c55f98cbb283"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/ready-012-layout-command.json",
+      "bytes": 608,
+      "sha256": "e1f047c061bef10170ec1d57e50d8830ab5223be295fb45db8bf3723fd820e19"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-identity-02/ready-012-layout.json",
+      "bytes": 10806,
+      "sha256": "90ed8996ecf9459d648f473d3f83b174b4b8cbbdcb23ceacf83c64f3b0e8c617"
+    }
+  ],
+  "limitations": [
+    "No completed certificate, sign/verify, TLS, pairing, decoder or performance result",
+    "Credential-only same-key comparison researched but not yet executed",
+    "Keystore token/provider root cause unresolved; no policy weakening or key regeneration",
+    "27 inactive-upstream Lint errors baselined and339 warnings retained; zero owned findings",
+    "Lifecycle, cancellation, expiry and lock acceptance not established by these prompt tests",
+    "Final license/source/notices/dependency closure remains open"
+  ]
+}

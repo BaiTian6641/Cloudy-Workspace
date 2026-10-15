@@ -2,11 +2,37 @@
 <resources>
     <string name="cloudy_stream_name">Cloudy stream qualification</string>
     <string name="cloudy_stream_title">Native streaming engine qualification</string>
-    <string name="cloudy_stream_scope">Real Moonlight native bridge loading only. This diagnostic does not connect, pair, decode video or store host credentials.</string>
+    <string name="cloudy_stream_scope">Real Moonlight native loading and app-owned client identity qualification. This diagnostic does not connect, pair or decode video. Local device credentials are entered only in the system prompt.</string>
     <string name="cloudy_stream_load">Load native engine</string>
     <string name="cloudy_stream_ready">Ready for a local native ABI check.</string>
     <string name="cloudy_stream_running">Loading the actual native library…</string>
     <string name="cloudy_stream_success">Native library initialization and metadata call passed. No host connection or video decoding was performed.</string>
     <string name="cloudy_stream_failed">Native check or evidence write failed: %1$s</string>
     <string name="cloudy_stream_close">Close diagnostic</string>
+    <string name="cloudy_identity_title">App-owned client identity</string>
+    <string name="cloudy_identity_help">Create a separate non-exportable RSA client identity for this diagnostic. Approve with your device credential or a strong biometric. A successful local signature does not qualify TLS, pairing or the product vault. Pending enrollment can be completed after a new approval. Nothing connects automatically.</string>
+    <string name="cloudy_identity_ready">Ready to inspect the local identity.</string>
+    <string name="cloudy_identity_working">Local operation in progress…</string>
+    <string name="cloudy_identity_auth_wait">Waiting for system authentication, with a 120-second deadline.</string>
+    <string name="cloudy_identity_auth_retry">Authentication did not match. Use the system prompt to retry or cancel.</string>
+    <string name="cloudy_identity_cancelling">Authorization revoked. Waiting for the current operation or prompt to retire…</string>
+    <string name="cloudy_identity_cancelled">Local operation cancelled. Refresh before deciding the next action.</string>
+    <string name="cloudy_identity_failed">Local operation or evidence publication failed.</string>
+    <string name="cloudy_identity_refreshed">Identity state refreshed. No authorization was restored.</string>
+    <string name="cloudy_identity_qualified">Real certificate/key signing check passed. No TLS or host connection was tested.</string>
+    <string name="cloudy_identity_deleted">The diagnostic identity was deleted locally. This does not revoke host-side enrollment.</string>
+    <string name="cloudy_identity_state">Identity state: %1$s
+Reported key backing: %2$s</string>
+    <string name="cloudy_identity_outcome">%1$s
+%2$s</string>
+    <string name="cloudy_identity_create">Create diagnostic identity and authorize</string>
+    <string name="cloudy_identity_authorize">Authorize and check existing identity</string>
+    <string name="cloudy_identity_refresh">Refresh identity state</string>
+    <string name="cloudy_identity_cancel">Cancel local operation</string>
+    <string name="cloudy_identity_delete">Delete diagnostic identity…</string>
+    <string name="cloudy_identity_delete_confirm">Delete this identity</string>
+    <string name="cloudy_identity_delete_warning">Delete only this diagnostic’s local identity and pending keys? Its public operation journal remains. Any future enrolled host would need separate revocation and deliberate re-enrollment.</string>
+    <string name="cloudy_identity_prompt_title">Authorize diagnostic client identity</string>
+    <string name="cloudy_identity_prompt_subtitle">Allow this local certificate and signing check. No host connection will be opened.</string>
+    <string name="cloudy_stream_cancelled">The local native operation was cancelled. Its worker has retired; inspect the retained record for any completed observation.</string>
 </resources>

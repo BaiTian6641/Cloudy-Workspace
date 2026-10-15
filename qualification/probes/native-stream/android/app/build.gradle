@@ -9,11 +9,11 @@ android {
         // Preserve the exact upstream target baseline for this no-host increment.
         // A target37 network/session increment has its own behavior review.
         targetSdk 36
-        versionCode 1
-        versionName '0.1.0'
+        versionCode 3
+        versionName '0.1.2'
         ndk { abiFilters 'arm64-v8a' }
         buildConfigField 'boolean', 'ROOT_BUILD', 'false'
-        buildConfigField 'String', 'QUALIFICATION_BUILD_REF', '"04cf72ef-ece2-4e15-b072-ef6e73dd203c"'
+        buildConfigField 'String', 'QUALIFICATION_BUILD_REF', '"6b7ee157-b28b-4a3c-936d-bf91c94f6a5a"'
         buildConfigField 'String', 'NATIVE_BUILD_REF', '"f336e245-805d-4aad-bc1a-9208df8db318"'
     }
     buildFeatures { buildConfig = true; resValues = true }
@@ -56,7 +56,9 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:5.5.0'
     implementation 'org.jmdns:jmdns:3.6.3'
     implementation 'com.github.cgutman:ShieldControllerExtensions:1.0.1'
+    implementation 'androidx.biometric:biometric:1.1.0'
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.5'
+    testImplementation 'junit:junit:4.13.2'
 }
 
 def verifiedRepository = providers.gradleProperty('cloudyRepositoryRoot')
