@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cloudy:handoff:1",
+  "title": "Cloudy resource handoff draft v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "requestId", "createdAt", "expiresAt", "action", "hostId", "environmentId", "workspaceId", "resourceId"],
+  "properties": {
+    "version": {"const": 1},
+    "requestId": {"type": "string", "format": "uuid"},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "expiresAt": {"type": "string", "format": "date-time"},
+    "action": {"enum": ["open-console", "open-desktop", "open-files"]},
+    "hostId": {"$ref": "#/$defs/resourceId"},
+    "environmentId": {"$ref": "#/$defs/resourceId"},
+    "workspaceId": {"$ref": "#/$defs/resourceId"},
+    "resourceId": {"$ref": "#/$defs/resourceId"}
+  },
+  "$defs": {
+    "resourceId": {"type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"}
+  }
+}

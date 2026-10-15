@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "status": "template-not-measurements",
+  "client": {
+    "model": "HP Googlebook 14",
+    "sku": null,
+    "osBuild": null,
+    "apiLevel": null,
+    "abi": null,
+    "webViewVersion": null,
+    "displayAndScaling": null,
+    "inputDevices": [],
+    "decoders": [],
+    "tailnetClientVersion": null
+  },
+  "hosts": [
+    {"model": "MS-02Ultra", "osBuild": null, "gpuDriver": null, "session": null, "compositor": null},
+    {"model": "Mac Studio", "osBuild": null, "gpuDriver": null, "session": null, "compositor": null},
+    {"model": "ASUS Zenbook Duo", "osBuild": null, "gpuDriver": null, "session": null, "compositor": null},
+    {"model": "HP ZBook Ultra G1a", "osBuild": null, "gpuDriver": null, "session": null, "compositor": null}
+  ],
+  "peripherals": [],
+  "backends": [],
+  "networkTopology": null
+}

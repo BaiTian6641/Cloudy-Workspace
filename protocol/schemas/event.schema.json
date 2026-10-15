@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cloudy:event:1",
+  "title": "Cloudy event envelope draft v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "eventId", "streamId", "sequence", "installationId", "bootId", "occurredAt", "kind", "resourceId", "payload"],
+  "properties": {
+    "version": {"const": 1},
+    "eventId": {"type": "string", "format": "uuid"},
+    "streamId": {"type": "string", "minLength": 1, "maxLength": 128},
+    "sequence": {"type": "integer", "minimum": 1},
+    "installationId": {"type": "string", "format": "uuid"},
+    "bootId": {"type": "string", "format": "uuid"},
+    "occurredAt": {"type": "string", "format": "date-time"},
+    "kind": {"enum": ["job.status", "transfer.status", "usb.owner", "history.gap"]},
+    "resourceId": {"type": "string", "minLength": 1, "maxLength": 128},
+    "payload": {
+      "description": "Draft scalar payload vocabulary; kind-specific typed schemas enter at P1/P4.",
+      "type": "object", "maxProperties": 16,
+      "additionalProperties": {"type": ["string", "number", "boolean", "null"], "maxLength": 1024}
+    }
+  }
+}

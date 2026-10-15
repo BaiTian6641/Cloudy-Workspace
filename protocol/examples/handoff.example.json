@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "requestId": "13571113-2468-4ace-8bad-001122334455",
+  "createdAt": "2026-10-14T18:00:00Z",
+  "expiresAt": "2026-10-14T18:02:00Z",
+  "action": "open-console",
+  "hostId": "demo-host",
+  "environmentId": "demo-linux",
+  "workspaceId": "demo-fpga",
+  "resourceId": "registered-project-root"
+}

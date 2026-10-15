@@ -1,0 +1,30 @@
+# Host and editor state
+.agents/
+.codex/
+.aws/
+.idea/
+.vscode/
+.DS_Store
+*.swp
+
+# Credentials and machine-local setup
+.env
+.env.*
+!.env.example
+*.keystore
+*.jks
+*.pem
+*.key
+local.properties
+qualification/inventory.local.json
+
+# Builds, caches, and local verification
+.gradle/
+**/build/
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+.cache/
+artifacts/
+qualification/results/private/

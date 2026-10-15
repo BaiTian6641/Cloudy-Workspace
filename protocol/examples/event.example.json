@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "eventId": "33333333-4444-4555-8666-777777777777",
+  "streamId": "demo-stream-1",
+  "sequence": 1,
+  "installationId": "11111111-2222-4333-8444-555555555555",
+  "bootId": "22222222-3333-4444-8555-666666666666",
+  "occurredAt": "2026-10-14T18:01:00Z",
+  "kind": "job.status",
+  "resourceId": "demo-build",
+  "payload": {"state": "completed", "message": "Synthetic event for schema review only"}
+}

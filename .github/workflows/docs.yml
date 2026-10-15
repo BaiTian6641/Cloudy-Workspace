@@ -1,0 +1,23 @@
+name: Planning assets
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - name: Prepare schema verification
+        run: |
+          python3 -m venv .venv
+          .venv/bin/python -m pip install -r requirements-dev.txt
+      - name: Check documentation, planning data, tokens, and schemas
+        run: .venv/bin/python tools/validate_project.py --schemas
+      - name: Check specimen JavaScript syntax
+        run: node --check docs/04-design/preview.js

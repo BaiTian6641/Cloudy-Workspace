@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cloudy:capabilities:1",
+  "title": "Cloudy host capability draft v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["protocolVersion", "installationId", "bootId", "sessionId", "observedAt", "platform", "agentVersion", "environments", "desktop", "usb", "notifications", "events"],
+  "properties": {
+    "protocolVersion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["major", "minor"],
+      "properties": {"major": {"const": 1}, "minor": {"type": "integer", "minimum": 0}}
+    },
+    "installationId": {"type": "string", "format": "uuid"},
+    "bootId": {"type": "string", "format": "uuid"},
+    "sessionId": {"type": "string", "minLength": 1, "maxLength": 128},
+    "observedAt": {"type": "string", "format": "date-time"},
+    "platform": {"enum": ["windows", "macos", "linux"]},
+    "agentVersion": {"type": "string", "minLength": 1, "maxLength": 64},
+    "environments": {
+      "type": "array", "maxItems": 64,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "label", "persistence"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1, "maxLength": 128},
+          "label": {"type": "string", "minLength": 1, "maxLength": 128},
+          "persistence": {"enum": ["tmux", "managed-job", "none", "unknown"]}
+        }
+      }
+    },
+    "desktop": {"$ref": "#/$defs/backend"},
+    "usb": {"$ref": "#/$defs/backend"},
+    "notifications": {
+      "type": "object", "additionalProperties": false,
+      "required": ["state", "text", "icons", "dismissal", "actions"],
+      "properties": {
+        "state": {"$ref": "#/$defs/state"},
+        "text": {"type": "boolean"}, "icons": {"type": "boolean"},
+        "dismissal": {"type": "boolean"}, "actions": {"type": "boolean"}
+      }
+    },
+    "events": {"type": "boolean"}
+  },
+  "$defs": {
+    "state": {"enum": ["unknown", "unavailable", "permission-required", "ready", "error"]},
+    "backend": {
+      "type": "object", "additionalProperties": false,
+      "required": ["state", "backend", "version"],
+      "properties": {
+        "state": {"$ref": "#/$defs/state"},
+        "backend": {"type": ["string", "null"], "maxLength": 64},
+        "version": {"type": ["string", "null"], "maxLength": 64}
+      }
+    }
+  }
+}

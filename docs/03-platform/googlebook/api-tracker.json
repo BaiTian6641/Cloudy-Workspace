@@ -1,0 +1,487 @@
+{
+  "schemaVersion": 1,
+  "snapshotDate": "2026-10-14",
+  "timezone": "America/Chicago",
+  "apis": [
+    {
+      "id": "API01",
+      "feature": "User-requested fullscreen",
+      "symbols": [
+        "Activity.requestFullscreenMode(int, OutcomeReceiver)"
+      ],
+      "sourceIds": [
+        "G24",
+        "G02"
+      ],
+      "minimumApi": 34,
+      "libraryVersion": null,
+      "availability": "documented",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Android/platform developer",
+      "stage": "P1-S2",
+      "fallback": "Normal resizable window",
+      "experiment": "Fullscreen enter/exit, rejection callback, resize and UI thread behavior"
+    },
+    {
+      "id": "API02",
+      "feature": "Caption appearance",
+      "symbols": [
+        "WindowInsetsController.APPEARANCE_TRANSPARENT_CAPTION_BAR_BACKGROUND",
+        "WindowInsetsController.APPEARANCE_LIGHT_CAPTION_BARS"
+      ],
+      "sourceIds": [
+        "G23",
+        "G03"
+      ],
+      "minimumApi": 35,
+      "libraryVersion": null,
+      "availability": "documented",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Android/platform developer",
+      "stage": "P1-S2",
+      "fallback": "Ordinary system caption",
+      "experiment": "Light/dark, occupied controls and focus"
+    },
+    {
+      "id": "API03",
+      "feature": "Caption occupied bounds",
+      "symbols": [
+        "WindowInsets.getBoundingRects(int)"
+      ],
+      "sourceIds": [
+        "G27",
+        "G03"
+      ],
+      "minimumApi": 35,
+      "libraryVersion": null,
+      "availability": "documented",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Android/platform developer",
+      "stage": "P1-S2",
+      "fallback": "Separate toolbar and standard insets",
+      "experiment": "No control overlap while resizing or changing displays"
+    },
+    {
+      "id": "API04",
+      "feature": "Multi-instance System UI affordance",
+      "symbols": [
+        "WindowManager.PROPERTY_SUPPORTS_MULTI_INSTANCE_SYSTEM_UI"
+      ],
+      "sourceIds": [
+        "G28"
+      ],
+      "minimumApi": 35,
+      "libraryVersion": null,
+      "availability": "documented",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Android/platform developer",
+      "stage": "P2-S3",
+      "fallback": "App New window command",
+      "experiment": "Independent task state, launch flags, process recreation"
+    },
+    {
+      "id": "API05",
+      "feature": "Cross-instance drag/new window",
+      "symbols": [
+        "View.DRAG_FLAG_GLOBAL_SAME_APPLICATION",
+        "View.DRAG_FLAG_START_INTENT_SENDER_ON_UNHANDLED_DRAG"
+      ],
+      "sourceIds": [
+        "G25",
+        "G03"
+      ],
+      "minimumApi": 35,
+      "libraryVersion": null,
+      "availability": "documented",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Android/platform developer",
+      "stage": "P2-S3",
+      "fallback": "Explicit move/open menu",
+      "experiment": "Independent windows and drop cancellation"
+    },
+    {
+      "id": "API06",
+      "feature": "Relative pointer capture",
+      "symbols": [
+        "View.requestPointerCapture",
+        "View.onCapturedPointerEvent",
+        "View.releasePointerCapture"
+      ],
+      "sourceIds": [
+        "G09"
+      ],
+      "minimumApi": 26,
+      "libraryVersion": null,
+      "availability": "documented",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Android/platform developer",
+      "stage": "P0-S4",
+      "fallback": "Absolute mode or qualified external mouse",
+      "experiment": "Physical trackpad CAD and guaranteed capture release"
+    },
+    {
+      "id": "API07",
+      "feature": "Keyboard and shortcuts",
+      "symbols": [
+        "KeyEvent",
+        "Activity.onProvideKeyboardShortcuts"
+      ],
+      "sourceIds": [
+        "G10",
+        "G02"
+      ],
+      "minimumApi": null,
+      "libraryVersion": null,
+      "availability": "documented-entrypoint",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Android/platform developer",
+      "stage": "P0-S3",
+      "fallback": "Menus and command palette",
+      "experiment": "IME commit bytes, Ctrl+C, selection and reserved shortcuts"
+    },
+    {
+      "id": "API08",
+      "feature": "Adaptive window classes",
+      "symbols": [
+        "currentWindowAdaptiveInfo",
+        "WindowSizeClass"
+      ],
+      "sourceIds": [
+        "G08"
+      ],
+      "minimumApi": null,
+      "libraryVersion": null,
+      "availability": "library-version-unpinned",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Android/platform developer",
+      "stage": "P1-S2",
+      "fallback": "Measured current constraints",
+      "experiment": "Library pin, text scaling and resize transitions"
+    },
+    {
+      "id": "API09",
+      "feature": "Precision-pointer engagement",
+      "symbols": [
+        "WindowInfoTracker.windowEngagementInfo",
+        "WindowEngagementInfo.EngagementMode.PRECISE_POINTER"
+      ],
+      "sourceIds": [
+        "G03"
+      ],
+      "minimumApi": null,
+      "libraryVersion": null,
+      "availability": "guide-example-version-unpinned",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Android/platform developer",
+      "stage": "P0-S2",
+      "fallback": "Explicit user density preference",
+      "experiment": "Artifact/annotations/availability compile probe"
+    },
+    {
+      "id": "API10",
+      "feature": "Document picker and grants",
+      "symbols": [
+        "Intent.ACTION_OPEN_DOCUMENT",
+        "Intent.ACTION_CREATE_DOCUMENT",
+        "ContentResolver.takePersistableUriPermission"
+      ],
+      "sourceIds": [
+        "G13"
+      ],
+      "minimumApi": null,
+      "libraryVersion": null,
+      "availability": "documented-entrypoint",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Android/platform developer",
+      "stage": "P2-S4",
+      "fallback": "Reselect file and stage explicitly",
+      "experiment": "URI permission revoke, restart, remote path conversion"
+    },
+    {
+      "id": "API11",
+      "feature": "Remote document provider",
+      "symbols": [
+        "DocumentsProvider.queryRoots",
+        "DocumentsProvider.queryDocument",
+        "DocumentsProvider.queryChildDocuments",
+        "DocumentsProvider.openDocument"
+      ],
+      "sourceIds": [
+        "G12"
+      ],
+      "minimumApi": null,
+      "libraryVersion": null,
+      "availability": "documented-entrypoint",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Android/platform developer",
+      "stage": "P5-S3",
+      "fallback": "Explicit import/export with local staging",
+      "experiment": "Provider flags, offline cache, concurrent edit and writeback failure"
+    },
+    {
+      "id": "API12",
+      "feature": "USB host access",
+      "symbols": [
+        "UsbManager",
+        "UsbDevice",
+        "UsbDeviceConnection"
+      ],
+      "sourceIds": [
+        "G14"
+      ],
+      "minimumApi": null,
+      "libraryVersion": null,
+      "availability": "documented-entrypoint",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Android/platform developer",
+      "stage": "P0-S5",
+      "fallback": "External qualified provider / lab appliance",
+      "experiment": "Actual probe reset, bootloader identities and flash/verify"
+    },
+    {
+      "id": "API13",
+      "feature": "Service timeout handling",
+      "symbols": [
+        "Service.onTimeout(int,int)"
+      ],
+      "sourceIds": [
+        "G15"
+      ],
+      "minimumApi": 35,
+      "libraryVersion": null,
+      "availability": "documented",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Android/platform developer",
+      "stage": "P0-S2",
+      "fallback": "Persist metadata and reconnect",
+      "experiment": "Operation-specific type and timeout behavior"
+    },
+    {
+      "id": "API14",
+      "feature": "Foreground-service classification",
+      "symbols": [
+        "Service.startForeground",
+        "Foreground service types"
+      ],
+      "sourceIds": [
+        "G16"
+      ],
+      "minimumApi": null,
+      "libraryVersion": null,
+      "availability": "operation-policy-unresolved",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Android/platform developer",
+      "stage": "P1-S3",
+      "fallback": "User-visible foreground work and host-side durability",
+      "experiment": "SSH/transfers/USB/stream classification and prerequisites"
+    },
+    {
+      "id": "API15",
+      "feature": "Credential protection",
+      "symbols": [
+        "AndroidKeyStore",
+        "KeyGenParameterSpec"
+      ],
+      "sourceIds": [
+        "G18"
+      ],
+      "minimumApi": null,
+      "libraryVersion": null,
+      "availability": "documented-entrypoint",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Android/platform developer",
+      "stage": "P1-S3",
+      "fallback": "Qualified wrapped-key storage",
+      "experiment": "Algorithm support, revoke, lock state and no secret exports"
+    },
+    {
+      "id": "API16",
+      "feature": "Notification permission",
+      "symbols": [
+        "Manifest.permission.POST_NOTIFICATIONS"
+      ],
+      "sourceIds": [
+        "G22"
+      ],
+      "minimumApi": null,
+      "libraryVersion": null,
+      "availability": "documented-entrypoint",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Android/platform developer",
+      "stage": "P4-S2",
+      "fallback": "In-app activity with settings action",
+      "experiment": "Denied/revoked state and channel behavior"
+    },
+    {
+      "id": "API17",
+      "feature": "Native video decoding",
+      "symbols": [
+        "MediaCodec",
+        "MediaCodecList"
+      ],
+      "sourceIds": [
+        "G20"
+      ],
+      "minimumApi": null,
+      "libraryVersion": null,
+      "availability": "documented-entrypoint",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Android/platform developer",
+      "stage": "P0-S4",
+      "fallback": "Qualified compatibility codec/profile",
+      "experiment": "Enumerate, sustained decode, thermal and frame pacing"
+    },
+    {
+      "id": "API18",
+      "feature": "Network state",
+      "symbols": [
+        "ConnectivityManager.NetworkCallback",
+        "NetworkCapabilities"
+      ],
+      "sourceIds": [
+        "G21"
+      ],
+      "minimumApi": null,
+      "libraryVersion": null,
+      "availability": "documented-entrypoint",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Android/platform developer",
+      "stage": "P0-S6",
+      "fallback": "Unknown path and explicit user metered preference",
+      "experiment": "Network switch and counter provenance"
+    },
+    {
+      "id": "API19",
+      "feature": "Isolated terminal WebView",
+      "symbols": [
+        "WebView",
+        "Validated narrow native message bridge"
+      ],
+      "sourceIds": [
+        "G17",
+        "R10"
+      ],
+      "minimumApi": null,
+      "libraryVersion": null,
+      "availability": "architecture-proposed",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Android/platform developer",
+      "stage": "P0-S3",
+      "fallback": "Qualified native renderer",
+      "experiment": "Origin restriction, navigation blocking, bounded messages"
+    },
+    {
+      "id": "API20",
+      "feature": "Attachment drag/drop",
+      "symbols": [
+        "ClipData",
+        "Activity.requestDragAndDropPermissions"
+      ],
+      "sourceIds": [
+        "G11"
+      ],
+      "minimumApi": null,
+      "libraryVersion": null,
+      "availability": "documented-entrypoint",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Android/platform developer",
+      "stage": "P2-S4",
+      "fallback": "System document picker",
+      "experiment": "Cross-window URI grants and source change"
+    },
+    {
+      "id": "API21",
+      "feature": "Phone Continue On",
+      "symbols": [
+        "HandoffActivityData",
+        "Activity.setHandoffEnabled",
+        "Activity.onHandoffActivityDataRequested"
+      ],
+      "sourceIds": [
+        "G07",
+        "G26"
+      ],
+      "minimumApi": 37,
+      "libraryVersion": null,
+      "availability": "documented-optional",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Android/platform developer",
+      "stage": "P6-S3",
+      "fallback": "Local saved workspace; no phone continuity",
+      "experiment": "Optional supported device pair; identifiers only, receiver auth"
+    },
+    {
+      "id": "API22",
+      "feature": "Third-party Linux VM attach/control",
+      "symbols": [],
+      "sourceIds": [
+        "G01",
+        "G06"
+      ],
+      "minimumApi": null,
+      "libraryVersion": null,
+      "availability": "no-public-api-established",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Android/platform developer",
+      "stage": "P0-S2",
+      "fallback": "Remote SSH",
+      "experiment": "Find supported interface before any local-VM commitment"
+    },
+    {
+      "id": "API23",
+      "feature": "VM USB/acceleration/persistence",
+      "symbols": [],
+      "sourceIds": [
+        "G06"
+      ],
+      "minimumApi": null,
+      "libraryVersion": null,
+      "availability": "roadmap",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Android/platform developer",
+      "stage": "P0-S2",
+      "fallback": "Remote compute and qualified Android USB provider",
+      "experiment": "Recheck announcement and SDK; qualify shipped capability independently"
+    },
+    {
+      "id": "API24",
+      "feature": "Custom system IME/launcher",
+      "symbols": [],
+      "sourceIds": [
+        "G05"
+      ],
+      "minimumApi": null,
+      "libraryVersion": null,
+      "availability": "play-restricted",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Android/platform developer",
+      "stage": "P0-S2",
+      "fallback": "System IME and launcher",
+      "experiment": "System IME compatibility; do not depend on replacement"
+    }
+  ]
+}

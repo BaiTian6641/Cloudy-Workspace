@@ -1,0 +1,1312 @@
+{
+  "schemaVersion": 1,
+  "snapshotDate": "2026-10-14",
+  "effortUnit": "person-day",
+  "workingDaysPerWeek": 5,
+  "contingencyFraction": 0.25,
+  "observationGateWorkingDays": 10,
+  "phases": [
+    {
+      "id": "P0",
+      "title": "Qualification and decisions",
+      "document": "phases/p0-qualification.md",
+      "effortDays": {
+        "low": 8,
+        "high": 16
+      }
+    },
+    {
+      "id": "P1",
+      "title": "Shared foundation and design",
+      "document": "phases/p1-foundation.md",
+      "effortDays": {
+        "low": 9,
+        "high": 15
+      }
+    },
+    {
+      "id": "P2",
+      "title": "Console daily-use release",
+      "document": "phases/p2-console.md",
+      "effortDays": {
+        "low": 15,
+        "high": 25
+      }
+    },
+    {
+      "id": "P3",
+      "title": "Desktop companion release",
+      "document": "phases/p3-desktop.md",
+      "effortDays": {
+        "low": 13,
+        "high": 21
+      }
+    },
+    {
+      "id": "P4",
+      "title": "Host adapters and activity",
+      "document": "phases/p4-host-integration.md",
+      "effortDays": {
+        "low": 12,
+        "high": 20
+      }
+    },
+    {
+      "id": "P5",
+      "title": "Integrated desktop and document access",
+      "document": "phases/p5-integrated-desktop.md",
+      "effortDays": {
+        "low": 17,
+        "high": 28
+      }
+    },
+    {
+      "id": "P6",
+      "title": "Hardening and supported release",
+      "document": "phases/p6-release.md",
+      "effortDays": {
+        "low": 10,
+        "high": 18
+      }
+    }
+  ],
+  "stages": [
+    {
+      "id": "P0-S1",
+      "phase": "P0",
+      "title": "Inventory and reproducible qualification setup",
+      "status": "planned",
+      "effortDays": {
+        "low": 1,
+        "high": 2
+      },
+      "ownerRole": "Device/QA owner",
+      "dependsOn": [],
+      "tasks": [
+        "Record exact Googlebook SKU/build/API/ABI, WebView, input devices, display scaling, network, and available decoders.",
+        "Map each named host to its installed OS/build/GPU/driver/user session and Linux compositor; list actual boards/probes and reset identities.",
+        "Pair ADB through the documented model/port path; capture sanitized baseline diagnostics and a run manifest.",
+        "Select one primary host/project/probe and define a lab-side fallback topology before multiplying combinations."
+      ],
+      "deliverables": [
+        "Completed private inventory and sanitized public matrix",
+        "Qualification run template populated with versions/topology"
+      ],
+      "exitCriteria": [
+        "ADB can install/run a minimal development build on the target, or an exact blocker is documented.",
+        "No host OS, decoder, peripheral, or compositor support is inferred from model name."
+      ],
+      "sourceIds": [
+        "G04",
+        "G01"
+      ],
+      "acceptanceCases": [
+        "Q-P01"
+      ],
+      "evidenceDirectory": "qualification/results/P0-S1/"
+    },
+    {
+      "id": "P0-S2",
+      "phase": "P0",
+      "title": "Platform API, lifecycle, and capability probes",
+      "status": "planned",
+      "effortDays": {
+        "low": 1,
+        "high": 2
+      },
+      "ownerRole": "Android/platform developer",
+      "dependsOn": [
+        "P0-S1"
+      ],
+      "tasks": [
+        "Inspect the API tracker and pin candidate SDK/AndroidX versions for windows, caption bounds, input, files, and foreground-service experiments.",
+        "Build minimal resize/multi-instance/caption/focus probes with runtime guards and record experimental annotations.",
+        "Classify SSH, transfers, USB, and streaming lifecycle strategies independently; force relevant timeout/process-recreation cases.",
+        "Investigate supported local Linux VM attach/control interfaces; record absence or roadmap status without private-API assumptions."
+      ],
+      "deliverables": [
+        "API availability/compile-probe table",
+        "Operation-specific lifecycle decision note and VM boundary record"
+      ],
+      "exitCriteria": [
+        "Every proposed API use has a version guard or fallback.",
+        "System IME/launcher and Linux roadmap limits are reflected in release scope."
+      ],
+      "sourceIds": [
+        "G03",
+        "G05",
+        "G06",
+        "G15",
+        "G16",
+        "G23",
+        "G26"
+      ],
+      "acceptanceCases": [
+        "Q-P01",
+        "Q-P02"
+      ],
+      "evidenceDirectory": "qualification/results/P0-S2/"
+    },
+    {
+      "id": "P0-S3",
+      "phase": "P0",
+      "title": "SSH engine and terminal renderer qualification",
+      "status": "planned",
+      "effortDays": {
+        "low": 2,
+        "high": 4
+      },
+      "ownerRole": "Terminal/Android developer",
+      "dependsOn": [
+        "P0-S2"
+      ],
+      "tasks": [
+        "Compare maintained JVM and native SSH candidates for Android ARM64, host-key policy, algorithms, PTY/SFTP/jumps/forwards, footprint, and update ownership.",
+        "Embed a pinned local xterm.js experiment behind a narrow native boundary and compare a native renderer if needed.",
+        "Run exact-byte paste, CJK IME/preedit, wide-cell/emoji, alternate-screen TUI, selection, resize, and sustained-output cases.",
+        "Record CPU/memory/input latency and screen-reader behavior; select engine/renderer or a time-bounded remediation experiment."
+      ],
+      "deliverables": [
+        "Renderer/SSH ADR with versions and rejected alternatives",
+        "Input/TUI fixture results and local-renderer boundary probe"
+      ],
+      "exitCriteria": [
+        "First-trust/changed-key behavior and input correctness pass on actual hardware.",
+        "Unresolved accessibility/IME failures block renderer adoption, not basic project planning."
+      ],
+      "sourceIds": [
+        "G09",
+        "G10",
+        "G17",
+        "R09",
+        "R10"
+      ],
+      "acceptanceCases": [
+        "Q-C01",
+        "Q-C02",
+        "Q-A01"
+      ],
+      "evidenceDirectory": "qualification/results/P0-S3/"
+    },
+    {
+      "id": "P0-S4",
+      "phase": "P0",
+      "title": "Desktop backend, physical input, and decode qualification",
+      "status": "planned",
+      "effortDays": {
+        "low": 2,
+        "high": 3
+      },
+      "ownerRole": "Desktop/device developer",
+      "dependsOn": [
+        "P0-S2"
+      ],
+      "tasks": [
+        "Install/pair qualified Sunshine/Moonlight versions and discover whether a documented external-launch/profile mechanism exists.",
+        "Exercise real trackpad and external mouse capture/release in the actual CAD application; trace button/modifier clearing on focus loss.",
+        "Enumerate and measure selected decoder/profile behavior with native surfaces, text readability, frame pacing, and power.",
+        "Test Windows/macOS/selected Wayland session states separately; record missing permissions, lock/headless limits, and manual-launch fallback."
+      ],
+      "deliverables": [
+        "Pinned backend/input/decoder matrix",
+        "Supported external handoff contract or honest manual-launch flow"
+      ],
+      "exitCriteria": [
+        "Required visual workflow passes on the primary host with a released input path.",
+        "Unsupported OS/compositor/trackpad cases remain explicitly excluded or have a qualified fallback."
+      ],
+      "sourceIds": [
+        "G09",
+        "G20",
+        "R04",
+        "R05",
+        "R06"
+      ],
+      "acceptanceCases": [
+        "Q-D01",
+        "Q-D02",
+        "Q-P02"
+      ],
+      "evidenceDirectory": "qualification/results/P0-S4/"
+    },
+    {
+      "id": "P0-S5",
+      "phase": "P0",
+      "title": "USB provider and real programming workflow",
+      "status": "planned",
+      "effortDays": {
+        "low": 1,
+        "high": 3
+      },
+      "ownerRole": "Embedded/device developer",
+      "dependsOn": [
+        "P0-S1"
+      ],
+      "tasks": [
+        "Verify Android VirtualHere provider and workstation consumer setup/licensing/control interfaces for the actual topology.",
+        "Program and verify the actual board through the primary probe, including reset/bootloader/DFU identities and composite interfaces.",
+        "Exercise explicit release, transport loss, reenumeration timeout, owner reconciliation, and protected-operation policy in a safe lab run.",
+        "If Android forwarding fails, qualify a lab-side Linux provider or vendor hardware-server workflow and record the changed topology."
+      ],
+      "deliverables": [
+        "Probe-specific flash/verify evidence and identity set",
+        "Backend ownership/control interface decision and fallback run"
+      ],
+      "exitCriteria": [
+        "The actual target programs/verifies; serial-only success does not certify JTAG/DFU.",
+        "Ownership recovery is established without automatic flash retry or timer-based reassignment."
+      ],
+      "sourceIds": [
+        "G14",
+        "R07"
+      ],
+      "acceptanceCases": [
+        "Q-D04"
+      ],
+      "evidenceDirectory": "qualification/results/P0-S5/"
+    },
+    {
+      "id": "P0-S6",
+      "phase": "P0",
+      "title": "Network measurements and first system decision gate",
+      "status": "planned",
+      "effortDays": {
+        "low": 1,
+        "high": 2
+      },
+      "ownerRole": "Network/QA owner",
+      "dependsOn": [
+        "P0-S3",
+        "P0-S4",
+        "P0-S5"
+      ],
+      "tasks": [
+        "Measure direct/relay routing in both desktop and reverse USB directions, with actual firewall/tailnet policies.",
+        "Sample terminal, CAD video, files, USB, and idle control traffic independently; preserve payload/wire boundaries.",
+        "Run a small degraded-link experiment outside active programming and record RTT/loss/reconnect behavior.",
+        "Approve a tested primary vertical slice or explicitly accept a measured fallback and revise scope/effort/risk records."
+      ],
+      "deliverables": [
+        "Measured primary-topology baseline and counter provenance",
+        "P0 go/adjust decision with selected fallbacks"
+      ],
+      "exitCriteria": [
+        "Each critical input/probe/backend risk has evidence or an accepted qualified fallback.",
+        "Console can progress independently even while a Desktop hardware branch remains unresolved."
+      ],
+      "sourceIds": [
+        "R08",
+        "R16",
+        "G21"
+      ],
+      "acceptanceCases": [
+        "Q-N01",
+        "Q-X03"
+      ],
+      "evidenceDirectory": "qualification/results/P0-S6/"
+    },
+    {
+      "id": "P1-S1",
+      "phase": "P1",
+      "title": "Native app targets and shared-module build foundation",
+      "status": "planned",
+      "effortDays": {
+        "low": 2,
+        "high": 3
+      },
+      "ownerRole": "Android/build developer",
+      "dependsOn": [
+        "P0-S3"
+      ],
+      "tasks": [
+        "Create independent Console/Desktop application IDs, launcher entries, manifests, and debug install paths.",
+        "Pin JDK/SDK/AGP/Kotlin/Compose/WindowManager and selected engine dependencies with a reproducible wrapper/lock strategy.",
+        "Create domain/platform/identity/SSH/transfer/IPC/diagnostics module boundaries and isolated renderer assets.",
+        "Add protocol version constants and fixture loading; enforce dependency direction in the build graph."
+      ],
+      "deliverables": [
+        "Two installable debug APKs and toolchain lock record",
+        "Module graph and minimal launch smoke evidence"
+      ],
+      "exitCriteria": [
+        "Each app launches with the other app absent.",
+        "No source module depends on the other app process or UI."
+      ],
+      "sourceIds": [
+        "G01",
+        "G19"
+      ],
+      "acceptanceCases": [
+        "Q-X01"
+      ],
+      "evidenceDirectory": "qualification/results/P1-S1/"
+    },
+    {
+      "id": "P1-S2",
+      "phase": "P1",
+      "title": "Cloudy design system and native shell",
+      "status": "planned",
+      "effortDays": {
+        "low": 4,
+        "high": 6
+      },
+      "ownerRole": "Design/Android developer",
+      "dependsOn": [
+        "P1-S1"
+      ],
+      "tasks": [
+        "Map canonical tokens to native ColorScheme, typography, spacing, shape, and fixed terminal palette; generate instead of hand-copying values.",
+        "Implement semantic shared controls, navigation, inspector, menu/dialog/palette, focus, and density contracts.",
+        "Build native S02/S06 skeletons using synthetic models and guarded caption/window behavior.",
+        "Review both appearances, long names/CJK/RTL, 200% font scale, narrow windows, touch/keyboard, and actual display scaling."
+      ],
+      "deliverables": [
+        "Native Cloudy component gallery and two shell screens",
+        "Design review evidence linked to screen IDs"
+      ],
+      "exitCriteria": [
+        "No system control overlap, focus trap, unreadable semantic pair, or unreachable scaled action.",
+        "Visual choices preserve terminal/file/media working area and clear host context."
+      ],
+      "sourceIds": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D09",
+        "G03"
+      ],
+      "acceptanceCases": [
+        "Q-A01",
+        "Q-P02"
+      ],
+      "evidenceDirectory": "qualification/results/P1-S2/"
+    },
+    {
+      "id": "P1-S3",
+      "phase": "P1",
+      "title": "Identity, typed contracts, and lifecycle persistence",
+      "status": "planned",
+      "effortDays": {
+        "low": 2,
+        "high": 4
+      },
+      "ownerRole": "Platform/security developer",
+      "dependsOn": [
+        "P1-S1",
+        "P0-S2"
+      ],
+      "tasks": [
+        "Implement per-app protected credential handles, known-host trust storage, enrollment cancellation, and revocation.",
+        "Implement signature-protected explicit IPC with bounded versioned resource envelopes, caller validation, expiration, and receiver-side resource resolution.",
+        "Add persisted session/layout metadata, transfer journals, typed errors, and bounded redacted diagnostics.",
+        "Implement the qualified foreground/background strategy, timeout handlers, focus-loss cleanup, and reconnect metadata."
+      ],
+      "deliverables": [
+        "Identity/IPC/lifecycle library and schema fixtures",
+        "Threat-boundary and denial/revocation evidence"
+      ],
+      "exitCriteria": [
+        "No exported secret/raw command through handoff, logs, or renderer messages.",
+        "Process recreation restores metadata without replaying a side effect."
+      ],
+      "sourceIds": [
+        "G15",
+        "G16",
+        "G17",
+        "G18"
+      ],
+      "acceptanceCases": [
+        "Q-X01",
+        "Q-X02",
+        "Q-S01"
+      ],
+      "evidenceDirectory": "qualification/results/P1-S3/"
+    },
+    {
+      "id": "P1-S4",
+      "phase": "P1",
+      "title": "CI, dependency decision, and foundation gate",
+      "status": "planned",
+      "effortDays": {
+        "low": 1,
+        "high": 2
+      },
+      "ownerRole": "Maintainer/build developer",
+      "dependsOn": [
+        "P1-S2",
+        "P1-S3"
+      ],
+      "tasks": [
+        "Add real Android build/lint/unit/instrumentation checks and contract fixture validation; retain documentation checks.",
+        "Record dependency versions/licenses/update owners and choose the project distribution/license direction before embedding upstream implementations.",
+        "Exercise mismatched app/protocol versions, missing recipient, unavailable permissions, and independent install/uninstall.",
+        "Publish the P1 evidence bundle and refine remaining stage estimates using actual implementation results."
+      ],
+      "deliverables": [
+        "Reproducible CI artifacts and dependency register",
+        "Foundation gate record with unresolved issues"
+      ],
+      "exitCriteria": [
+        "Both apps install independently and communicate only through validated resource contracts.",
+        "CI output is labeled separately from physical-device evidence."
+      ],
+      "sourceIds": [
+        "R06",
+        "R07",
+        "G02"
+      ],
+      "acceptanceCases": [
+        "Q-X01",
+        "Q-S01"
+      ],
+      "evidenceDirectory": "qualification/results/P1-S4/"
+    },
+    {
+      "id": "P2-S1",
+      "phase": "P2",
+      "title": "Trusted SSH connectivity, authentication, and jumps",
+      "status": "planned",
+      "effortDays": {
+        "low": 3,
+        "high": 5
+      },
+      "ownerRole": "Terminal developer",
+      "dependsOn": [
+        "P1-S4"
+      ],
+      "tasks": [
+        "Implement profiles and engine adapters for connect/cancel, host trust, authentication, and typed failures.",
+        "Add key/password/keyboard-interactive methods supported by the selected engine and keep prompts in native UI.",
+        "Implement jump chains with trust at every hop and clean channel shutdown.",
+        "Exercise key change, wrong credentials, offline DNS/route, authentication cancel, and per-host revocation."
+      ],
+      "deliverables": [
+        "Trusted SSH connection workflow",
+        "Profile/trust/authentication fixtures"
+      ],
+      "exitCriteria": [
+        "A plain SSH server works without Desktop or the custom host agent.",
+        "Changed keys block before secrets are sent and errors identify the failing layer."
+      ],
+      "sourceIds": [
+        "G18",
+        "R10"
+      ],
+      "acceptanceCases": [
+        "Q-C01",
+        "Q-S01"
+      ],
+      "evidenceDirectory": "qualification/results/P2-S1/"
+    },
+    {
+      "id": "P2-S2",
+      "phase": "P2",
+      "title": "Interactive terminal correctness and bounded data path",
+      "status": "planned",
+      "effortDays": {
+        "low": 3,
+        "high": 5
+      },
+      "ownerRole": "Terminal/input developer",
+      "dependsOn": [
+        "P2-S1"
+      ],
+      "tasks": [
+        "Connect PTY bytes/resize to the selected renderer with bounded queues/backpressure off the UI thread.",
+        "Implement negotiated terminal features, exact paste/composition, selection, clipboard policy, and external link opening.",
+        "Exercise editors, agent menus/diffs, alternate screen, mouse reporting, Unicode widths, and long prompts.",
+        "Measure local input/render latency, sustained output, scrollback bounds, and accessible terminal behavior."
+      ],
+      "deliverables": [
+        "Working PTY surface and supported-feature declaration",
+        "Exact-byte and sustained-load evidence"
+      ],
+      "exitCriteria": [
+        "No duplicate/lost paste or committed IME text and no stuck modifiers.",
+        "Supported output rate is sustained without silent loss or unbounded growth."
+      ],
+      "sourceIds": [
+        "G10",
+        "G17",
+        "R09",
+        "R10"
+      ],
+      "acceptanceCases": [
+        "Q-C02",
+        "Q-A01"
+      ],
+      "evidenceDirectory": "qualification/results/P2-S2/"
+    },
+    {
+      "id": "P2-S3",
+      "phase": "P2",
+      "title": "Tabs, panes, windows, search, and durable sessions",
+      "status": "planned",
+      "effortDays": {
+        "low": 3,
+        "high": 5
+      },
+      "ownerRole": "Terminal/Android developer",
+      "dependsOn": [
+        "P2-S2"
+      ],
+      "tasks": [
+        "Implement split trees, keyboard focus, tab naming/close semantics, pane zoom, and local scrollback search.",
+        "Persist layouts per window profile and support explicit independent tasks/windows with safe resize behavior.",
+        "Attach to configured tmux sessions on supported environments; label ordinary Windows sessions non-persistent.",
+        "Recover from network loss/process eviction/host reboot with actual session identity and no input/command replay."
+      ],
+      "deliverables": [
+        "Saved multi-pane/multi-window workflow",
+        "Durability/resize/restore compatibility matrix"
+      ],
+      "exitCriteria": [
+        "Session state distinguishes disconnect, detach, ended process, and unknown.",
+        "A saved layout that no longer fits keeps sessions reachable without terminating them."
+      ],
+      "sourceIds": [
+        "G03",
+        "G25",
+        "G28"
+      ],
+      "acceptanceCases": [
+        "Q-C03",
+        "Q-P02"
+      ],
+      "evidenceDirectory": "qualification/results/P2-S3/"
+    },
+    {
+      "id": "P2-S4",
+      "phase": "P2",
+      "title": "SFTP attachments and local browser forwards",
+      "status": "planned",
+      "effortDays": {
+        "low": 3,
+        "high": 5
+      },
+      "ownerRole": "Terminal/files developer",
+      "dependsOn": [
+        "P2-S3"
+      ],
+      "tasks": [
+        "Add picker/drop/pasted-image staging with destination confirmation and hash/size validation.",
+        "Insert environment-correct remote paths only after completion; preserve failed jobs and local text.",
+        "Implement explicit loopback forwards, collisions, lifetime/close controls, and external browser previews.",
+        "Exercise URI permission revoke, source change, interrupted upload, Windows/WSL quoting, and callback timeout."
+      ],
+      "deliverables": [
+        "Attachment uploader and forward manager",
+        "Hash/path/permission and preview evidence"
+      ],
+      "exitCriteria": [
+        "No half-uploaded attachment reference or implicit shell submission.",
+        "Forwarded content never loads inside the privileged renderer."
+      ],
+      "sourceIds": [
+        "G11",
+        "G13",
+        "G17"
+      ],
+      "acceptanceCases": [
+        "Q-C04",
+        "Q-C05"
+      ],
+      "evidenceDirectory": "qualification/results/P2-S4/"
+    },
+    {
+      "id": "P2-S5",
+      "phase": "P2",
+      "title": "Agent workflows, profile import, and Console daily-use gate",
+      "status": "planned",
+      "effortDays": {
+        "low": 3,
+        "high": 5
+      },
+      "ownerRole": "Terminal/product QA",
+      "dependsOn": [
+        "P2-S4"
+      ],
+      "tasks": [
+        "Qualify selected current agent CLIs as ordinary PTY applications with versions/authentication recorded; keep their credentials on the host.",
+        "Add optional local composer, discoverable newline behavior, and configurable terminal bell/task alerts without screen-scraped approval logic.",
+        "Add a previewed non-secret profile import with an explicit supported SSH-config subset.",
+        "Run a full coding day with Desktop uninstalled and the custom host agent absent; log defects and promote only passing combinations."
+      ],
+      "deliverables": [
+        "R1 Console candidate and CLI compatibility matrix",
+        "Daily-use report and release limitations"
+      ],
+      "exitCriteria": [
+        "Real edit/build/attachment/preview/reconnect workflow passes without desktop streaming.",
+        "No repeated command/approval or hidden dependence on another app process."
+      ],
+      "sourceIds": [
+        "R02",
+        "R03",
+        "G02"
+      ],
+      "acceptanceCases": [
+        "Q-C06",
+        "Q-X02"
+      ],
+      "evidenceDirectory": "qualification/results/P2-S5/"
+    },
+    {
+      "id": "P3-S1",
+      "phase": "P3",
+      "title": "Desktop hosts, workspaces, and capability presentation",
+      "status": "planned",
+      "effortDays": {
+        "low": 2,
+        "high": 3
+      },
+      "ownerRole": "Desktop developer",
+      "dependsOn": [
+        "P1-S4"
+      ],
+      "tasks": [
+        "Implement manual host/workspace profiles with explicit environment/project roots and non-secret import.",
+        "Present installed/paired/reachable/permission-required/unknown states without conflation.",
+        "Add desktop/backend/display/input preference records without claiming an active session.",
+        "Map S06/S09 navigation and details to typed models with last-observed timestamps."
+      ],
+      "deliverables": [
+        "Desktop workspace/profile workflow",
+        "Capability-state UI review"
+      ],
+      "exitCriteria": [
+        "Host, environment, project, and backend identities remain explicit.",
+        "Missing agent/backend produces a supported setup path rather than a false connected state."
+      ],
+      "sourceIds": [
+        "G02",
+        "R04"
+      ],
+      "acceptanceCases": [
+        "Q-D01"
+      ],
+      "evidenceDirectory": "qualification/results/P3-S1/"
+    },
+    {
+      "id": "P3-S2",
+      "phase": "P3",
+      "title": "External desktop handoff and backend setup",
+      "status": "planned",
+      "effortDays": {
+        "low": 2,
+        "high": 4
+      },
+      "ownerRole": "Desktop/integration developer",
+      "dependsOn": [
+        "P3-S1",
+        "P0-S4"
+      ],
+      "tasks": [
+        "Implement only the supported launch/profile route proved in P0; validate target package/backend version.",
+        "Provide clear external transition, pairing/setup instructions, and manual-launch fallback when control is unavailable.",
+        "Persist per-host profile preferences and visible return-to-workspace actions.",
+        "Test unavailable client, unavailable host, permission denial, cancellation, and stream/client exit."
+      ],
+      "deliverables": [
+        "R2 stream launch/return workflow",
+        "Backend setup/error diagnostics"
+      ],
+      "exitCriteria": [
+        "Primary visual application is reachable with documented handoff behavior.",
+        "No unsupported upstream control API is invented or hidden behind a fake live view."
+      ],
+      "sourceIds": [
+        "R04",
+        "R05",
+        "R06"
+      ],
+      "acceptanceCases": [
+        "Q-D01",
+        "Q-D02"
+      ],
+      "evidenceDirectory": "qualification/results/P3-S2/"
+    },
+    {
+      "id": "P3-S3",
+      "phase": "P3",
+      "title": "File browser, transfer journal, and conflict-safe writes",
+      "status": "planned",
+      "effortDays": {
+        "low": 4,
+        "high": 6
+      },
+      "ownerRole": "Files developer",
+      "dependsOn": [
+        "P3-S1",
+        "P2-S4"
+      ],
+      "tasks": [
+        "Implement distinct local/SFTP/system-Drive-provider roots with supported-operation metadata.",
+        "Build list/table, selection, details, staged copy, journal, resumable transfer, and commit states.",
+        "Bind resume to source version, validate destination, preserve conflict copies, and bound caches.",
+        "Exercise huge directories, symlinks, case/reserved names, permission failures, source change, cancellation, and interrupted commit."
+      ],
+      "deliverables": [
+        "Full file/transfer workflow with state journal",
+        "Conflict/resume/cancel evidence"
+      ],
+      "exitCriteria": [
+        "No silent overwrite or false remote-commit success.",
+        "Unsupported backend semantics are visible and do not silently fall back to destructive behavior."
+      ],
+      "sourceIds": [
+        "G13",
+        "R14",
+        "R15"
+      ],
+      "acceptanceCases": [
+        "Q-D03"
+      ],
+      "evidenceDirectory": "qualification/results/P3-S3/"
+    },
+    {
+      "id": "P3-S4",
+      "phase": "P3",
+      "title": "USB ownership and protected operation orchestration",
+      "status": "planned",
+      "effortDays": {
+        "low": 3,
+        "high": 5
+      },
+      "ownerRole": "Device/integration developer",
+      "dependsOn": [
+        "P3-S1",
+        "P0-S5"
+      ],
+      "tasks": [
+        "Wrap the qualified provider/consumer control or manual workflow with version-aware capability discovery.",
+        "Implement backend-confirmed ownership states, explicit attach/release, reset identity set, and protection UI.",
+        "Reconcile after transport loss, app restart, consumer failure, and conflicting host requests.",
+        "Expose logs/errors and a deliberate recovery path; never automatically retry programming or assign an unknown device."
+      ],
+      "deliverables": [
+        "Device ownership view and reconciliation adapter",
+        "Programming protection/failure evidence"
+      ],
+      "exitCriteria": [
+        "Only a confirmed released device can be reassigned.",
+        "The primary actual probe passes the integrated program/verify journey."
+      ],
+      "sourceIds": [
+        "G14",
+        "R07"
+      ],
+      "acceptanceCases": [
+        "Q-D04",
+        "Q-X03"
+      ],
+      "evidenceDirectory": "qualification/results/P3-S4/"
+    },
+    {
+      "id": "P3-S5",
+      "phase": "P3",
+      "title": "Console/Desktop vertical slice and companion gate",
+      "status": "planned",
+      "effortDays": {
+        "low": 2,
+        "high": 3
+      },
+      "ownerRole": "Product/QA owner",
+      "dependsOn": [
+        "P3-S2",
+        "P3-S3",
+        "P3-S4",
+        "P2-S5",
+        "P0-S6"
+      ],
+      "tasks": [
+        "Connect/build in Console, upload an artifact, open the same registered workspace in Desktop, and start visual work.",
+        "Program/verify the attached target, inspect output, and preserve exact host/project/device context.",
+        "Interrupt/restore connectivity without replaying commands or losing ownership accounting.",
+        "Export a measured usage report and publish R2 limitations/dependency installations."
+      ],
+      "deliverables": [
+        "First complete real-project vertical-slice report",
+        "R2 companion release candidate/support table"
+      ],
+      "exitCriteria": [
+        "The end-to-end workflow passes on the primary qualified topology.",
+        "Every fallback and extra installed dependency is visible in release documentation."
+      ],
+      "sourceIds": [
+        "G02",
+        "R08"
+      ],
+      "acceptanceCases": [
+        "Q-X01",
+        "Q-X02",
+        "Q-X03",
+        "Q-N01"
+      ],
+      "evidenceDirectory": "qualification/results/P3-S5/"
+    },
+    {
+      "id": "P4-S1",
+      "phase": "P4",
+      "title": "Host agent pairing, capabilities, jobs, and resumable events",
+      "status": "planned",
+      "effortDays": {
+        "low": 4,
+        "high": 6
+      },
+      "ownerRole": "Host/core developer",
+      "dependsOn": [
+        "P1-S4",
+        "P3-S1"
+      ],
+      "tasks": [
+        "Implement separately versioned host core with authenticated pairing, revocation, scopes, and capability negotiation.",
+        "Add request IDs/expiration/idempotency policy, registered roots, managed jobs, and bounded diagnostics.",
+        "Implement stream/boot identities, sequence/cursors, retention, gap snapshots, and event persistence.",
+        "Test unauthorized/stale requests, repeated IDs, disconnects, restart, missing backend, and version skew."
+      ],
+      "deliverables": [
+        "Optional host-core service and protocol implementation",
+        "Pairing/replay/gap/expiry fixtures"
+      ],
+      "exitCriteria": [
+        "Ordinary Console SSH still works without the agent.",
+        "A repeated request or event cannot silently repeat a side effect."
+      ],
+      "sourceIds": [
+        "G18",
+        "R08"
+      ],
+      "acceptanceCases": [
+        "Q-S01",
+        "Q-X02"
+      ],
+      "evidenceDirectory": "qualification/results/P4-S1/"
+    },
+    {
+      "id": "P4-S2",
+      "phase": "P4",
+      "title": "Windows user-session notification adapter",
+      "status": "planned",
+      "effortDays": {
+        "low": 3,
+        "high": 5
+      },
+      "ownerRole": "Windows developer",
+      "dependsOn": [
+        "P4-S1"
+      ],
+      "tasks": [
+        "Validate packaging/capability and user-consent requirements for UserNotificationListener.",
+        "Implement source/text/icon/dismissal capabilities that are actually supported, with bounded icon handling.",
+        "Handle access denial/revocation, session switching, host restart, and background synchronization explicitly.",
+        "Test Android permission/channel denial and keep the in-app activity path functional."
+      ],
+      "deliverables": [
+        "Qualified Windows notification adapter",
+        "Permission/fidelity capability matrix"
+      ],
+      "exitCriteria": [
+        "Correct host/source attribution and no stale-action promises.",
+        "Revoked access is distinct from an empty healthy inbox."
+      ],
+      "sourceIds": [
+        "R11",
+        "G22"
+      ],
+      "acceptanceCases": [
+        "Q-X04"
+      ],
+      "evidenceDirectory": "qualification/results/P4-S2/"
+    },
+    {
+      "id": "P4-S3",
+      "phase": "P4",
+      "title": "Linux and macOS scoped event adapters",
+      "status": "planned",
+      "effortDays": {
+        "low": 3,
+        "high": 5
+      },
+      "ownerRole": "Linux/macOS developer",
+      "dependsOn": [
+        "P4-S1"
+      ],
+      "tasks": [
+        "Evaluate supported Linux desktop notification integration against the actual daemon/compositor.",
+        "Implement macOS own-job/app-specific events and permission-aware status; keep arbitrary notification capture uncommitted.",
+        "Separate user-session helper lifecycle from the background host core.",
+        "Qualify source attribution, capability absence, permission changes, lock/logout/restart, and adapter errors."
+      ],
+      "deliverables": [
+        "Per-OS adapter capabilities and supported limitations",
+        "Physical-session event runs"
+      ],
+      "exitCriteria": [
+        "No universal notification observer claim without a supported interface.",
+        "Own-job events remain useful when system-wide forwarding is unavailable."
+      ],
+      "sourceIds": [
+        "R12",
+        "R13",
+        "R05"
+      ],
+      "acceptanceCases": [
+        "Q-X04"
+      ],
+      "evidenceDirectory": "qualification/results/P4-S3/"
+    },
+    {
+      "id": "P4-S4",
+      "phase": "P4",
+      "title": "Agent hooks, event deduplication, and R3 gate",
+      "status": "planned",
+      "effortDays": {
+        "low": 2,
+        "high": 4
+      },
+      "ownerRole": "Integration/product QA",
+      "dependsOn": [
+        "P4-S2",
+        "P4-S3",
+        "P2-S5",
+        "P3-S5"
+      ],
+      "tasks": [
+        "Add version-pinned supported hooks for selected managed jobs/agent tools; keep generic PTY operation independent.",
+        "Bind running/waiting/completed/failed states to current job/request/session identities.",
+        "Deduplicate events across both apps, suppress loops, respect expiry, and avoid offline reconnect alert storms.",
+        "Run event retention/offline/gap/permission scenarios and publish exact per-OS fidelity."
+      ],
+      "deliverables": [
+        "R3 integrated activity release candidate",
+        "Hook/version/fidelity and offline replay report"
+      ],
+      "exitCriteria": [
+        "No screen-text inference or replayed approval operation.",
+        "Expired history remains history rather than newly actionable notifications."
+      ],
+      "sourceIds": [
+        "G22",
+        "R11",
+        "R13"
+      ],
+      "acceptanceCases": [
+        "Q-X02",
+        "Q-X04"
+      ],
+      "evidenceDirectory": "qualification/results/P4-S4/"
+    },
+    {
+      "id": "P5-S1",
+      "phase": "P5",
+      "title": "Integrated streaming license and maintenance decision",
+      "status": "planned",
+      "effortDays": {
+        "low": 2,
+        "high": 3
+      },
+      "ownerRole": "Maintainer/desktop developer",
+      "dependsOn": [
+        "P4-S4"
+      ],
+      "tasks": [
+        "Review actual upstream license/source obligations and choose external-only or maintained native integration.",
+        "Assess fork/update ownership, backend/client version compatibility, packaging, decoder/input surfaces, and reproducible builds.",
+        "Confirm that R2 handoff limitations justify the added integration scope.",
+        "If external-only is selected, replace P5-S2 implementation with qualified external-flow polish and re-estimate the phase."
+      ],
+      "deliverables": [
+        "Approved implementation/distribution ADR",
+        "Pinned upstream/source/maintenance plan"
+      ],
+      "exitCriteria": [
+        "No integrated streaming code is shipped before the distribution model is resolved.",
+        "Scope/effort is revised if the external-only branch is selected."
+      ],
+      "sourceIds": [
+        "R06",
+        "R04",
+        "R05"
+      ],
+      "acceptanceCases": [
+        "Q-D01"
+      ],
+      "evidenceDirectory": "qualification/results/P5-S1/"
+    },
+    {
+      "id": "P5-S2",
+      "phase": "P5",
+      "title": "Optional native streaming and input profiles",
+      "status": "planned",
+      "effortDays": {
+        "low": 7,
+        "high": 12
+      },
+      "ownerRole": "Desktop/media developer",
+      "dependsOn": [
+        "P5-S1",
+        "P0-S4"
+      ],
+      "tasks": [
+        "Integrate the selected native media/input backend with explicit pairing, monitor/profile selection, and permission state.",
+        "Keep frames off general UI bridges, clear remote input on focus/disconnect, and always expose release capture.",
+        "Implement qualified Desktop/CAD/Presentation/Metered profiles and real encode/decode/drop statistics.",
+        "Run CAD/text/readability/long-session/resize/display-change and lifecycle cases on each supported topology."
+      ],
+      "deliverables": [
+        "Native stream candidate or re-scoped external-only deliverable",
+        "Profile/input/decoder hardware evidence"
+      ],
+      "exitCriteria": [
+        "Actual CAD workflow passes with no stuck capture/modifiers and truthful observed metrics.",
+        "Unsupported codec/compositor/lock/headless cases remain excluded."
+      ],
+      "sourceIds": [
+        "G09",
+        "G20",
+        "R04",
+        "R06"
+      ],
+      "acceptanceCases": [
+        "Q-D02",
+        "Q-P02",
+        "Q-N01"
+      ],
+      "evidenceDirectory": "qualification/results/P5-S2/"
+    },
+    {
+      "id": "P5-S3",
+      "phase": "P5",
+      "title": "DocumentsProvider and cached editing",
+      "status": "planned",
+      "effortDays": {
+        "low": 5,
+        "high": 8
+      },
+      "ownerRole": "Files/Android developer",
+      "dependsOn": [
+        "P5-S1",
+        "P3-S3"
+      ],
+      "tasks": [
+        "Expose selected remote roots with stable document IDs, supported flags, explicit grants, and bounded cache.",
+        "Implement local staging, source identity/version checks, commit acknowledgements, offline queued edits, and conflict copies.",
+        "Test provider consumers, random/sequential access needs, canceled writes, revoked URI access, and process death.",
+        "Document backend semantic limits and cleanup/pinning/eviction settings."
+      ],
+      "deliverables": [
+        "Qualified remote document provider",
+        "Consumer/cache/conflict/writeback matrix"
+      ],
+      "exitCriteria": [
+        "No remote file is labeled committed until the backend confirms publication.",
+        "Concurrent/offline edits preserve data and explicit conflict choices."
+      ],
+      "sourceIds": [
+        "G12",
+        "G13",
+        "R15"
+      ],
+      "acceptanceCases": [
+        "Q-D05"
+      ],
+      "evidenceDirectory": "qualification/results/P5-S3/"
+    },
+    {
+      "id": "P5-S4",
+      "phase": "P5",
+      "title": "Metered policy, accounting, and integrated desktop gate",
+      "status": "planned",
+      "effortDays": {
+        "low": 3,
+        "high": 5
+      },
+      "ownerRole": "Network/desktop QA",
+      "dependsOn": [
+        "P5-S2",
+        "P5-S3",
+        "P0-S6"
+      ],
+      "tasks": [
+        "Add policy for hidden streams, thumbnails, prefetch, bitrate selection, and explicit large-transfer choices.",
+        "Label counters by interval/endpoint/direction/payload-or-wire/estimate and path-observability limits.",
+        "Compare app/stream counters with OS/router measurements without double-counting endpoint copies.",
+        "Run protected USB operations while changing bulk-transfer priorities and budget thresholds."
+      ],
+      "deliverables": [
+        "R4 integrated desktop candidate and measured usage report",
+        "Metered policy/failure behavior evidence"
+      ],
+      "exitCriteria": [
+        "Counter scope is understandable and measured values align within declared boundaries.",
+        "Budget policy never silently interrupts protected programming or fabricates path telemetry."
+      ],
+      "sourceIds": [
+        "G21",
+        "R08",
+        "R16"
+      ],
+      "acceptanceCases": [
+        "Q-N01",
+        "Q-X03"
+      ],
+      "evidenceDirectory": "qualification/results/P5-S4/"
+    },
+    {
+      "id": "P6-S1",
+      "phase": "P6",
+      "title": "Failure injection, long sessions, and power transitions",
+      "status": "planned",
+      "effortDays": {
+        "low": 3,
+        "high": 5
+      },
+      "ownerRole": "QA/platform developer",
+      "dependsOn": [
+        "P5-S4"
+      ],
+      "tasks": [
+        "Exercise client eviction, host restart, network switch, route loss, timeout, permission revoke, sleep/resume, and lid/display changes.",
+        "Run eight-hour terminal/stream/transfer workloads with memory/cache bounds and battery/thermal observations.",
+        "Verify independent app operation, no command/approval/flash replay, and authoritative USB/file reconciliation.",
+        "Fix critical defects and narrow support claims where reliable behavior is not established."
+      ],
+      "deliverables": [
+        "Failure matrix and sustained-run evidence",
+        "Resolved critical defect list"
+      ],
+      "exitCriteria": [
+        "No silent data loss, unbounded growth, stuck input, or surprise side-effect replay in supported cases.",
+        "Failures produce actionable bounded diagnostics."
+      ],
+      "sourceIds": [
+        "G15",
+        "G16",
+        "G02"
+      ],
+      "acceptanceCases": [
+        "Q-X02",
+        "Q-X03",
+        "Q-C06",
+        "Q-D03"
+      ],
+      "evidenceDirectory": "qualification/results/P6-S1/"
+    },
+    {
+      "id": "P6-S2",
+      "phase": "P6",
+      "title": "Protocol skew, data migrations, updates, and rollback",
+      "status": "planned",
+      "effortDays": {
+        "low": 2,
+        "high": 4
+      },
+      "ownerRole": "Build/host/platform developer",
+      "dependsOn": [
+        "P6-S1"
+      ],
+      "tasks": [
+        "Test old/new app pairs, agent/backend skew, unknown optional capabilities, and incompatible major versions.",
+        "Exercise profile/journal/cache migrations transactionally, with recoverable backups and no secret export.",
+        "Build signed update/rollback candidates for the selected distribution channel and verify actual downgrade limits.",
+        "Record release manifest, schema/dependency hashes, SBOM, and provenance of artifacts."
+      ],
+      "deliverables": [
+        "Migration/compatibility/update report",
+        "Signed candidate manifests and rollback procedure"
+      ],
+      "exitCriteria": [
+        "An upgrade failure preserves recoverable user state and explains required action.",
+        "Rollback is limited to verified supported paths, not an assumed Android downgrade."
+      ],
+      "sourceIds": [
+        "G02",
+        "R06"
+      ],
+      "acceptanceCases": [
+        "Q-R01",
+        "Q-S01"
+      ],
+      "evidenceDirectory": "qualification/results/P6-S2/"
+    },
+    {
+      "id": "P6-S3",
+      "phase": "P6",
+      "title": "Distribution requirements and user documentation",
+      "status": "planned",
+      "effortDays": {
+        "low": 2,
+        "high": 4
+      },
+      "ownerRole": "Maintainer/documentation owner",
+      "dependsOn": [
+        "P6-S2"
+      ],
+      "tasks": [
+        "Refresh current target-SDK/distribution requirements for the chosen channel; verify signing/license/source obligations.",
+        "Write setup, trust/key recovery, backend installation, permissions, input release, file conflicts, USB recovery, and diagnostics guides.",
+        "Publish only measured OS/compositor/probe/codec combinations and list explicit deferred capabilities.",
+        "Optionally qualify phone Continue On on API 37 devices; defer it explicitly without blocking the core release."
+      ],
+      "deliverables": [
+        "Release/support documentation and source/notice bundle",
+        "Distribution checklist tied to actual candidate"
+      ],
+      "exitCriteria": [
+        "Users can complete the primary journeys and recover from known failures with the shipped documentation.",
+        "Optional phone continuity or VM roadmap features do not become accidental release blockers/promises."
+      ],
+      "sourceIds": [
+        "G02",
+        "G07",
+        "G26",
+        "R06"
+      ],
+      "acceptanceCases": [
+        "Q-R01"
+      ],
+      "evidenceDirectory": "qualification/results/P6-S3/"
+    },
+    {
+      "id": "P6-S4",
+      "phase": "P6",
+      "title": "Ten-working-day dogfood and release decision",
+      "status": "planned",
+      "effortDays": {
+        "low": 3,
+        "high": 5
+      },
+      "ownerRole": "Product/QA/maintainer",
+      "dependsOn": [
+        "P6-S3"
+      ],
+      "tasks": [
+        "Use the candidate for at least ten working days across real Console, visual, files, and hardware workflows.",
+        "Track defects by severity, recurrence, topology/version, data impact, and recovery cost; reserve effort for fixes.",
+        "Re-run only affected gates after changes and recheck critical complete journeys before promotion.",
+        "Approve release with evidence/support matrix or retain candidate status with explicit unresolved defects."
+      ],
+      "deliverables": [
+        "Dogfood report with ten-day observation window",
+        "R5 release decision and known limitations"
+      ],
+      "exitCriteria": [
+        "No unresolved release-blocking data-loss/trust/replay/ownership/input defect.",
+        "At least ten working days observed; the 3\u20135 day estimate is active QA effort, not the observation duration."
+      ],
+      "sourceIds": [
+        "G02",
+        "D09"
+      ],
+      "acceptanceCases": [
+        "Q-R01",
+        "Q-A01"
+      ],
+      "evidenceDirectory": "qualification/results/P6-S4/"
+    }
+  ]
+}

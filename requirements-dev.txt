@@ -1,0 +1,2 @@
+# Optional JSON Schema verification; core documentation checks use only stdlib.
+jsonschema==4.26.0
