@@ -1,0 +1,494 @@
+{
+  "versionCode": "7",
+  "versionName": "0.5.0",
+  "apkSha256": "ca0411cd4dd677aa0636538c4089edf3482625aa91504f6622d0fa8260867507",
+  "apkBytes": 18545667,
+  "noticeAssetCount": 20,
+  "noticeAssetsMatch": true,
+  "noticeAssets": [
+    {
+      "path": "assets/third_party_notices/Apache-2.0.txt",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "assets/third_party_notices/README.txt",
+      "bytes": 2564,
+      "sha256": "87436147e46d71d096fcd1f4f88c05dd173131de88c16a179cafe8e8d2f79a88"
+    },
+    {
+      "path": "assets/third_party_notices/kotlin-stdlib-attributions.txt",
+      "bytes": 1335,
+      "sha256": "acbf0fb40551980e88adeaf38af20691395f792256ec5e90f212b8848ca116f9"
+    },
+    {
+      "path": "assets/third_party_notices/provenance.json",
+      "bytes": 50457,
+      "sha256": "825b78c8366291db698369e1e3f531814ed123a9b5f4b7b5156c757c36b0bc6a"
+    },
+    {
+      "path": "assets/third_party_notices/runtime-copyrights.txt",
+      "bytes": 7526,
+      "sha256": "9b2c6954f31064cc01f1986f72fbb44fbc06a8b026dbd8af05ffd2f4939d8b22"
+    },
+    {
+      "path": "assets/third_party_notices/ssh/README.txt",
+      "bytes": 1276,
+      "sha256": "841c663091a0b72d6f5fc2f60c54695c8d170ee53516f8dc6c783b19535136ab"
+    },
+    {
+      "path": "assets/third_party_notices/ssh/asn-one-COPYRIGHT.txt",
+      "bytes": 241,
+      "sha256": "d418a2e89acb583c5249602fde8ea8978857f1e31ca755a0d043cd8d834aca32"
+    },
+    {
+      "path": "assets/third_party_notices/ssh/asn-one-LICENSE.txt",
+      "bytes": 10273,
+      "sha256": "73ba74dfaa520b49a401b5d21459a8523a146f3b7518a833eea5efa85130bf68"
+    },
+    {
+      "path": "assets/third_party_notices/ssh/bouncycastle-LICENSE.md",
+      "bytes": 1171,
+      "sha256": "0e01f1549c9022f406392ac2947d32223b7c2e977d21ea2f8c182fdeb4dae5fd"
+    },
+    {
+      "path": "assets/third_party_notices/ssh/slf4j-embedded-LICENSE.txt",
+      "bytes": 1159,
+      "sha256": "6632f550c207be8d7d6b5e87f5d7b905bee218d18392d531df457bf60bec1447"
+    },
+    {
+      "path": "assets/third_party_notices/ssh/slf4j-module-LICENSE.txt",
+      "bytes": 1135,
+      "sha256": "226597f6ed1ff28910719f4c03264ec30d9c7e8636094649763c0166f6a02dcc"
+    },
+    {
+      "path": "assets/third_party_notices/ssh/sshj-LICENSE.txt",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "assets/third_party_notices/ssh/sshj-NOTICE.txt",
+      "bytes": 3348,
+      "sha256": "28eafe2771c7cce241f05f1a28dfe0fc71c45a107d420b1a80305b487fa2f405"
+    },
+    {
+      "path": "assets/third_party_notices/ssh-provenance.json",
+      "bytes": 17069,
+      "sha256": "fe54ea48a6a6233d392df835da807cc7f4e42638267f2f409cd6f947c84577f8"
+    },
+    {
+      "path": "assets/third_party_notices/upstream/androidx-LICENSE.txt",
+      "bytes": 10175,
+      "sha256": "809fa1ed21450f59827d1e9aec720bbc4b687434fa22283c6cb5dd82a47ab9c0"
+    },
+    {
+      "path": "assets/third_party_notices/upstream/coroutines-LICENSE.txt",
+      "bytes": 11398,
+      "sha256": "b1febe6399dffb10d19d35e7663ab16300c93cb0476a94115df1cc0097a8ffd8"
+    },
+    {
+      "path": "assets/third_party_notices/upstream/coroutines-NOTICE.txt",
+      "bytes": 452,
+      "sha256": "421d45acbd92670b4131621a28fcbb41ba0b747d3a336cb13fca38c0685426c4"
+    },
+    {
+      "path": "assets/third_party_notices/upstream/kotlin-COPYRIGHT.txt",
+      "bytes": 647,
+      "sha256": "8f1a1700adb5490604c6094fb137bf73f6c28d3ee554b58f3ff8ef975a79672d"
+    },
+    {
+      "path": "assets/third_party_notices/upstream/kotlin-boost-LICENSE.txt",
+      "bytes": 1337,
+      "sha256": "8d8291caf1cee26d23acf3eb67c9f9a2d58f1c681b16a4fbe8cbfb9e3c0b5a9b"
+    },
+    {
+      "path": "assets/third_party_notices/upstream/kotlin-threetenbp-LICENSE.txt",
+      "bytes": 1520,
+      "sha256": "d1bc53b493a3ab387b42717ed5c4b1976a5048996f81154278100bff86d39331"
+    }
+  ],
+  "runtimeCoordinates": [
+    "androidx.annotation:annotation-experimental:1.1.0",
+    "androidx.annotation:annotation-jvm:1.9.1",
+    "androidx.annotation:annotation:1.9.1",
+    "androidx.arch.core:core-common:2.1.0",
+    "androidx.arch.core:core-runtime:2.1.0",
+    "androidx.collection:collection-jvm:1.4.2",
+    "androidx.collection:collection:1.4.2",
+    "androidx.concurrent:concurrent-futures:1.0.0",
+    "androidx.core:core:1.8.0",
+    "androidx.lifecycle:lifecycle-common:2.3.1",
+    "androidx.lifecycle:lifecycle-runtime:2.3.1",
+    "androidx.versionedparcelable:versionedparcelable:1.1.1",
+    "androidx.window:window-core-android:1.6.0-alpha05",
+    "androidx.window:window-core:1.6.0-alpha05",
+    "androidx.window:window:1.6.0-alpha05",
+    "com.google.guava:listenablefuture:1.0",
+    "com.hierynomus:asn-one:0.6.0",
+    "com.hierynomus:sshj:0.41.2",
+    "org.bouncycastle:bcpkix-jdk18on:1.86",
+    "org.bouncycastle:bcprov-jdk18on:1.86",
+    "org.bouncycastle:bcutil-jdk18on:1.86",
+    "org.jetbrains.kotlin:kotlin-stdlib:2.2.10",
+    "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0",
+    "org.jetbrains.kotlinx:kotlinx-coroutines-bom:1.9.0",
+    "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.9.0",
+    "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0",
+    "org.jetbrains:annotations:23.0.0",
+    "org.jspecify:jspecify:1.0.0",
+    "org.slf4j:slf4j-api:2.0.20",
+    "org.slf4j:slf4j-nop:2.0.20"
+  ],
+  "incrementalCoordinates": [
+    "com.hierynomus:asn-one:0.6.0",
+    "com.hierynomus:sshj:0.41.2",
+    "org.bouncycastle:bcpkix-jdk18on:1.86",
+    "org.bouncycastle:bcprov-jdk18on:1.86",
+    "org.bouncycastle:bcutil-jdk18on:1.86",
+    "org.slf4j:slf4j-api:2.0.20",
+    "org.slf4j:slf4j-nop:2.0.20"
+  ],
+  "debugReleaseGraphEqual": true,
+  "existingRuntimeCoordinatesPreserved": true,
+  "incrementalBinariesMatchPinsCacheVerification": true,
+  "slf4jProvider": "org.slf4j.nop.NOPServiceProvider",
+  "mergedLicenseResources": {
+    "META-INF/LICENSE.md": {
+      "bytes": 3513,
+      "sha256": "ef524b6f2495e950811323b4050422fe0925d148ca356346dada636193699a8d"
+    },
+    "META-INF/LICENSE.txt": {
+      "bytes": 2318,
+      "sha256": "f686c37daf406101471f6f9a2afa632199785ed3b76d71530bc1654ff02e869c"
+    }
+  },
+  "tests": {
+    "tests": 109,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "jvmSuiteCount": 13,
+  "permissions": [
+    "android.permission.INTERNET",
+    "android.permission.ACCESS_NETWORK_STATE",
+    "android.permission.ACCESS_LOCAL_NETWORK",
+    "android.permission.RUN_USER_INITIATED_JOBS",
+    "android.permission.POST_NOTIFICATIONS"
+  ],
+  "components": [
+    {
+      "type": "receiver",
+      "name": "dev.cloudy.qualification.baseline.TransferCancelReceiver",
+      "exported": "false",
+      "permission": null
+    },
+    {
+      "type": "service",
+      "name": "dev.cloudy.qualification.baseline.TransferJobService",
+      "exported": "false",
+      "permission": "android.permission.BIND_JOB_SERVICE"
+    },
+    {
+      "type": "activity",
+      "name": "dev.cloudy.qualification.baseline.SshActivity",
+      "exported": "false",
+      "permission": null
+    },
+    {
+      "type": "activity",
+      "name": "dev.cloudy.qualification.baseline.TransferActivity",
+      "exported": "false",
+      "permission": null
+    },
+    {
+      "type": "activity",
+      "name": "dev.cloudy.qualification.baseline.BaselineActivity",
+      "exported": "true",
+      "permission": null
+    }
+  ],
+  "sourceHashes": [
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/AndroidManifest.xml",
+      "sha256": "a95b3fe93d3d6d80cde73b123d370508cbceb798dc6f66b76d3a120f73b26eb8"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/assets/third_party_notices/Apache-2.0.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/assets/third_party_notices/README.txt",
+      "sha256": "87436147e46d71d096fcd1f4f88c05dd173131de88c16a179cafe8e8d2f79a88"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/assets/third_party_notices/kotlin-stdlib-attributions.txt",
+      "sha256": "acbf0fb40551980e88adeaf38af20691395f792256ec5e90f212b8848ca116f9"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/assets/third_party_notices/provenance.json",
+      "sha256": "825b78c8366291db698369e1e3f531814ed123a9b5f4b7b5156c757c36b0bc6a"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/assets/third_party_notices/runtime-copyrights.txt",
+      "sha256": "9b2c6954f31064cc01f1986f72fbb44fbc06a8b026dbd8af05ffd2f4939d8b22"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/assets/third_party_notices/ssh/README.txt",
+      "sha256": "841c663091a0b72d6f5fc2f60c54695c8d170ee53516f8dc6c783b19535136ab"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/assets/third_party_notices/ssh/asn-one-COPYRIGHT.txt",
+      "sha256": "d418a2e89acb583c5249602fde8ea8978857f1e31ca755a0d043cd8d834aca32"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/assets/third_party_notices/ssh/asn-one-LICENSE.txt",
+      "sha256": "73ba74dfaa520b49a401b5d21459a8523a146f3b7518a833eea5efa85130bf68"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/assets/third_party_notices/ssh/bouncycastle-LICENSE.md",
+      "sha256": "0e01f1549c9022f406392ac2947d32223b7c2e977d21ea2f8c182fdeb4dae5fd"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/assets/third_party_notices/ssh/slf4j-embedded-LICENSE.txt",
+      "sha256": "6632f550c207be8d7d6b5e87f5d7b905bee218d18392d531df457bf60bec1447"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/assets/third_party_notices/ssh/slf4j-module-LICENSE.txt",
+      "sha256": "226597f6ed1ff28910719f4c03264ec30d9c7e8636094649763c0166f6a02dcc"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/assets/third_party_notices/ssh/sshj-LICENSE.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/assets/third_party_notices/ssh/sshj-NOTICE.txt",
+      "sha256": "28eafe2771c7cce241f05f1a28dfe0fc71c45a107d420b1a80305b487fa2f405"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/assets/third_party_notices/ssh-provenance.json",
+      "sha256": "fe54ea48a6a6233d392df835da807cc7f4e42638267f2f409cd6f947c84577f8"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/assets/third_party_notices/upstream/androidx-LICENSE.txt",
+      "sha256": "809fa1ed21450f59827d1e9aec720bbc4b687434fa22283c6cb5dd82a47ab9c0"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/assets/third_party_notices/upstream/coroutines-LICENSE.txt",
+      "sha256": "b1febe6399dffb10d19d35e7663ab16300c93cb0476a94115df1cc0097a8ffd8"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/assets/third_party_notices/upstream/coroutines-NOTICE.txt",
+      "sha256": "421d45acbd92670b4131621a28fcbb41ba0b747d3a336cb13fca38c0685426c4"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/assets/third_party_notices/upstream/kotlin-COPYRIGHT.txt",
+      "sha256": "8f1a1700adb5490604c6094fb137bf73f6c28d3ee554b58f3ff8ef975a79672d"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/assets/third_party_notices/upstream/kotlin-boost-LICENSE.txt",
+      "sha256": "8d8291caf1cee26d23acf3eb67c9f9a2d58f1c681b16a4fbe8cbfb9e3c0b5a9b"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/assets/third_party_notices/upstream/kotlin-threetenbp-LICENSE.txt",
+      "sha256": "d1bc53b493a3ab387b42717ed5c4b1976a5048996f81154278100bff86d39331"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/java/dev/cloudy/qualification/baseline/AndroidEngagementRuntime.kt",
+      "sha256": "ceafe0b2a459c0c3bea93610f552455d71323874e1c3c4c207d98957a2a10848"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/java/dev/cloudy/qualification/baseline/BaselineActivity.kt",
+      "sha256": "3a06999628b922f4d420a0990661234e5c71fe0e899f8cd9fa88636253695529"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/java/dev/cloudy/qualification/baseline/BoundedHistory.kt",
+      "sha256": "84532bb267aeb13738493a21b3b61c720ddeca41a20f3c919fab2dbcb3b92c9b"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/java/dev/cloudy/qualification/baseline/EngagementController.kt",
+      "sha256": "ca5dc52c014f7a0c5da290520943ef509dc3b440987078e8cb2ab2d81032ba95"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/java/dev/cloudy/qualification/baseline/FrameworkCollectors.kt",
+      "sha256": "3491d21daeab7d2b76eecf04df0f177f87eaca0e387b839abe9dce0b9f449a89"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/java/dev/cloudy/qualification/baseline/ListenerRegistry.kt",
+      "sha256": "8f3e57c3d750f0983fc163c8ba42e96fb967754eb3ee52a5304f0288e1471c80"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/java/dev/cloudy/qualification/baseline/ProbeApplication.kt",
+      "sha256": "535d89f7ab10c3d68bf221c198eb663e92eac78c9e60c0a9b0f7acbf90d76c1d"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/java/dev/cloudy/qualification/baseline/ProbeRecorder.kt",
+      "sha256": "4695a4eaf7fb0b6c6ae84d6521f71b1909e781a70d2889023a94dedc8aed505a"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/java/dev/cloudy/qualification/baseline/SshActivity.kt",
+      "sha256": "3814da3ea0ab1fe99b82c01eb5587c17a8f9413428b4ddafe493393f3a26c180"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/java/dev/cloudy/qualification/baseline/SshConfig.kt",
+      "sha256": "c84eb619f1ce74bad3e71b030d62d5d08d4a37909ed782ca264a5b26feaf625f"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/java/dev/cloudy/qualification/baseline/SshEngine.kt",
+      "sha256": "cc9cf8b7e7ee655bed30cd0aff62f1a60fcc736faa6a058988d1b202afb812ce"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/java/dev/cloudy/qualification/baseline/SshJournal.kt",
+      "sha256": "f20277276570506c21e8e0d368a9624e7420c6cdf57f2addeccfb55bf7640d04"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/java/dev/cloudy/qualification/baseline/SshJournalGuard.kt",
+      "sha256": "4ca262da6db6d88a2b5496ba0dccdf0c29103a1269e90282cde3b8bd6173bc9b"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/java/dev/cloudy/qualification/baseline/SshPayload.kt",
+      "sha256": "0f6f40692b1896dbd5a3be4070c31bab21aef699a515d0bf907efbd445913d77"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/java/dev/cloudy/qualification/baseline/SshRuntime.kt",
+      "sha256": "c1ce6b3bce419e9b82116d73434bb7739cd769a94bd2f3f93473f88f8b8c2e10"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/java/dev/cloudy/qualification/baseline/SshState.kt",
+      "sha256": "0ec7394d958615d32587bd05e044517a3db23e1a9de67acbfb13354f33811fd5"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/java/dev/cloudy/qualification/baseline/TransferActivity.kt",
+      "sha256": "792edda97c87f399f93c17fe286e8a2f1cc8e398e5c077bdc6551e97738dfc15"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/java/dev/cloudy/qualification/baseline/TransferCancelReceiver.kt",
+      "sha256": "d94f8f8aa919d08ca44a99a9e72a926f4850819ca1649e7d1f73543bb77b2d6f"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/java/dev/cloudy/qualification/baseline/TransferConfig.kt",
+      "sha256": "6917782a136304845269e0aeced44be5147e107d4bdaf82b5c150d46d36b3612"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/java/dev/cloudy/qualification/baseline/TransferIntegrity.kt",
+      "sha256": "e9f2081461229389bf62edf2e42f5c902a47e51eda2c8588d42b50a39d753f30"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/java/dev/cloudy/qualification/baseline/TransferJobService.kt",
+      "sha256": "237b3599b51110ad42547243e593ada5adc286d871163db54107d763d7a105ba"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/java/dev/cloudy/qualification/baseline/TransferJournal.kt",
+      "sha256": "f4aa6214f37e9248d6e33e482fbeba28949ba844058e86ca6343d5c531f61c7d"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/java/dev/cloudy/qualification/baseline/TransferRuntime.kt",
+      "sha256": "0c55e1452674c7f7475b426d7ee68d85593af37da53fadc250b3b0ea14cce56c"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/java/dev/cloudy/qualification/baseline/TransferState.kt",
+      "sha256": "8f050b3d79cd00b8a70e007c4721138c747a370a5f9c0f041006038fabeca079"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/java/dev/cloudy/qualification/baseline/WindowLedger.kt",
+      "sha256": "d79e8ad4e7085d8bd82f7c57a985bb90b758fd6f9d09f8449985699be5c7696a"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/java/dev/cloudy/qualification/baseline/WindowState.kt",
+      "sha256": "e20a48efbfa129eefe984d6d5a8e5d0107f269a4255b27645222fe8c44930b76"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/res/drawable/ic_probe.xml",
+      "sha256": "42f705513a653d59c326ea885df0aaf8f2bcab9e34b7ba937ea062b42f75847d"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/res/values/ids.xml",
+      "sha256": "3d76620280f50e338542c6d486951d2c537dadb0e554191e3051ae153ac0f31c"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/res/values/ssh_ids.xml",
+      "sha256": "1b2a86a95bc9e7f218ef94c6f96d4ca590bb60dc6037eb08c03ff57168081a7c"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/res/values/ssh_strings.xml",
+      "sha256": "063d95206e31edab52b1119003aa04fc83b80824d960e96ed60547b1548564e5"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/res/values/strings.xml",
+      "sha256": "f7e17b122d31348ce74f36539cc9fb060ebc59e7bebaf3d0d36ac45c1cff3cd8"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/res/values/styles.xml",
+      "sha256": "bbb720b56072419932012b7acb3ceee5c8a8bee28274c4a997b1bf6ef2fbd07e"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/res/values/transfer_ids.xml",
+      "sha256": "d94c8eeb18e768cf6a04b97e1135eb3a97c1bc57dc23bbbf82be0caffa8c0ff8"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/res/values/transfer_strings.xml",
+      "sha256": "3f88c85faeb42e35f43b94ee4d84dae73443bc6c4feda9c32b737c2df7a95dd1"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/res/xml/backup_rules.xml",
+      "sha256": "df0caf5a169e312492ceaa3d7e6e053c831da3fc2038b99d83967c444549621f"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/main/res/xml/data_extraction_rules.xml",
+      "sha256": "09e5cf26d18437bf29da8d9d211bfcd55a16be99ec68bbaa72fa23fa08130b4b"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/test/java/dev/cloudy/qualification/baseline/BoundedHistoryTest.kt",
+      "sha256": "dcacdc5cdde35df3e7f0b2b164f01c29e4e860c429f4f0f39b01438efc28ae5d"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/test/java/dev/cloudy/qualification/baseline/EngagementControllerTest.kt",
+      "sha256": "9f0b3b71df065bbd4bd937b92a998dd7478cbb645815e0287887619513070e78"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/test/java/dev/cloudy/qualification/baseline/EngagementLedgerTest.kt",
+      "sha256": "341e1e78d63d8f1eb5a2ba19012bcd66716e71fcc0fd45bfd9cd63ad079af1ce"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/test/java/dev/cloudy/qualification/baseline/ListenerRegistryTest.kt",
+      "sha256": "af59ae878f7b81ccae5b7884746f9403653c03217f9a11f5e225793c3c5dbd40"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/test/java/dev/cloudy/qualification/baseline/SshConfigTest.kt",
+      "sha256": "5fe222bc8bd6f4ed96f297ff03d148fad0c2562c2e9f29bcea346ed89f23d73b"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/test/java/dev/cloudy/qualification/baseline/SshJournalGuardTest.kt",
+      "sha256": "6f8c02f421b7cd41b9dabd161234a01144edb56b64a46a9ec5f7dc49790932a9"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/test/java/dev/cloudy/qualification/baseline/SshPayloadTest.kt",
+      "sha256": "db12b46cd367eeef2bb3e70d9d876c5a1d26e017d9b975e807e31d2abc79d7f3"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/test/java/dev/cloudy/qualification/baseline/SshStateTest.kt",
+      "sha256": "e5083e2b583a3f1488e8140cee14edc68ffa7541e90beff6094c6c91d4032825"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/test/java/dev/cloudy/qualification/baseline/TransferConfigSpecTest.kt",
+      "sha256": "6213c45adb82091e2e371783ac88da1adf00a44e05187c99d9491cd1dec59121"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/test/java/dev/cloudy/qualification/baseline/TransferIntegrityTest.kt",
+      "sha256": "d2a0e7d05e545d8f6e31dfc2d3b0dcd437a42c6c099c7ef41f7f2a6b6d5eec07"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/test/java/dev/cloudy/qualification/baseline/TransferStateTest.kt",
+      "sha256": "d30018a374c913ece0e7ddc66e7e3712e46798c75893d9bf7d1fe8d8f370bf6b"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/test/java/dev/cloudy/qualification/baseline/WindowLedgerTest.kt",
+      "sha256": "7ae360738654d928d7e562d523c35131e8e096f4eccd8dc21fbad50cf6fdcd95"
+    },
+    {
+      "path": "qualification/probes/device-baseline/app/src/test/java/dev/cloudy/qualification/baseline/WindowStateTest.kt",
+      "sha256": "1e313046665f228c4b695bf42b9e33758aee06816623995746e664d03c318249"
+    }
+  ],
+  "scope": "Local 0.5.0 diagnostic source/package audit. No Android SSH behavior or production adoption is established by this package record."
+}

@@ -63,6 +63,9 @@ class BaselineActivity : Activity() {
         content.addView(button(R.id.open_transfer_probe, R.string.open_transfer_probe) {
             startActivity(Intent(this, TransferActivity::class.java))
         })
+        content.addView(button(R.id.open_ssh_probe, R.string.open_ssh_probe) {
+            startActivity(Intent(this, SshActivity::class.java))
+        })
         windowLabel = TextView(this).apply { id = R.id.window_state; setTextIsSelectable(true) }
         content.addView(windowLabel)
         newWindowButton = button(R.id.new_window, R.string.new_window) { launchWindow() }

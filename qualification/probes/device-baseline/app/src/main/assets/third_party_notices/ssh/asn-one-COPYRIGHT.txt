@@ -1,0 +1,6 @@
+asn-one 0.6.0 runtime source attribution
+
+Copyright 2016 Jeroen van Erp <jeroen@hierynomus.com>
+
+Transcribed from the published source headers with comment delimiters removed.
+Apache 2.0 terms are retained separately in asn-one-LICENSE.txt.

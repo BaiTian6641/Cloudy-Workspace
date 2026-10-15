@@ -6,4 +6,11 @@
     <issue id="AndroidGradlePluginVersion">
         <ignore path="gradle/wrapper/gradle-wrapper.properties" />
     </issue>
+    <!-- Pinned bcpkix's unused EST enrollment helper JcaJceUtils.getTrustAllTrustManager
+         is unsafe if called. SSHJ uses key parsers, not EST/JSSE. This exact artifact
+         is independently hashed/reviewed in the P0-S3 dependency adoption record.
+         Re-review on graph or EST use changes; application TLS checks stay enabled. -->
+    <issue id="TrustAllX509TrustManager">
+        <ignore path="**/org.bouncycastle/bcpkix-jdk18on/1.86/*/bcpkix-jdk18on-1.86.jar" />
+    </issue>
 </lint>

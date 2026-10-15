@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="open_ssh_probe" type="id" />
+    <item name="ssh_window_identity" type="id" />
+    <item name="ssh_request_lan" type="id" />
+    <item name="ssh_run" type="id" />
+    <item name="ssh_trust" type="id" />
+    <item name="ssh_cancel" type="id" />
+    <item name="ssh_refresh" type="id" />
+    <item name="ssh_recreate" type="id" />
+    <item name="ssh_new_window" type="id" />
+    <item name="ssh_status" type="id" />
+    <item name="ssh_summary" type="id" />
+    <item name="ssh_key_summary" type="id" />
+</resources>

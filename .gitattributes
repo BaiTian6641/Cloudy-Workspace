@@ -5,3 +5,7 @@
 # final separator lines. All other whitespace checks remain enabled.
 qualification/probes/device-baseline/app/src/main/assets/third_party_notices/upstream/androidx-LICENSE.txt whitespace=-blank-at-eof
 qualification/probes/device-baseline/app/src/main/assets/third_party_notices/runtime-copyrights.txt whitespace=-blank-at-eof
+# Exact upstream SSH notice copies retain CRLF/separator/trailing bytes.
+qualification/probes/device-baseline/app/src/main/assets/third_party_notices/ssh/slf4j-embedded-LICENSE.txt -text whitespace=cr-at-eol,-blank-at-eof
+qualification/probes/device-baseline/app/src/main/assets/third_party_notices/ssh/slf4j-module-LICENSE.txt -text whitespace=-blank-at-eof
+qualification/probes/device-baseline/app/src/main/assets/third_party_notices/ssh/sshj-NOTICE.txt -text whitespace=-blank-at-eol

@@ -43,3 +43,11 @@ The Kotlin repository's `license/NOTICE.txt` explicitly concerns the **compiler 
 After the final 0.3.0 build, inspect the APK package/version and compare every file under `app/src/main/assets/third_party_notices/` with the corresponding `assets/third_party_notices/` ZIP entry. Verify byte equality/SHA-256, not only entry names. Reconcile the locked debug/release runtime graph with the provenance component list and keep the result with the exact APK hash. A successful source-file check or dependency POM inventory does not establish that the APK carries these notices.
 
 This collection intentionally remains separate from build/device qualification. No API, input, lifecycle or product capability is qualified by the presence of license assets.
+
+## 0.5.0 SSH diagnostic addition
+
+The existing engagement inventory above remains intact. The incremental [SSH provenance](app/src/main/assets/third_party_notices/ssh-provenance.json) and [scoped adoption review](../../../docs/06-validation/2026-10-15-ssh-dependency-adoption.md) add seven runtime JARs: SSHJ 0.41.2, three aligned BC 1.86 modules, SLF4J API/NOP 2.0.20 and asn-one 0.6.0. Exact upstream terms and attribution are in [ssh/README.txt](app/src/main/assets/third_party_notices/ssh/README.txt). Both provenance manifests must be inspected alongside actual locked debug/release graphs.
+
+Duplicate `META-INF/LICENSE.md` and `META-INF/LICENSE.txt` resources are explicitly merged, preserving their content; the exact upstream copies are also packaged as assets. No blanket license-resource exclusion is used. The one added lint exception covers only `TrustAllX509TrustManager` in the exact bcpkix 1.86 artifact: its unused EST helper is unsafe if called, but the reviewed SSH key-parser path does not use it. The adoption record binds its source/call-path evidence and upgrade/reachability stop conditions. Application trust checks remain enabled.
+
+Recheck all existing and new assets byte-for-byte in the final 0.5.0 APK. No dependency provenance or lint exception establishes protocol/device readiness or completes product licensing.

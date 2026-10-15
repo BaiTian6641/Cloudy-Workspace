@@ -15,11 +15,18 @@ android {
         applicationId = "dev.cloudy.qualification.baseline"
         minSdk = 35
         targetSdk = 37
-        versionCode = 6
-        versionName = "0.4.2"
+        versionCode = 7
+        versionName = "0.5.0"
     }
 
     buildFeatures { buildConfig = true }
+
+    packaging {
+        resources {
+            // Preserve all dependency license resources; exact upstream copies are also in assets.
+            merges += setOf("META-INF/LICENSE.md", "META-INF/LICENSE.txt")
+        }
+    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -49,6 +56,14 @@ dependencies {
     // Preserve the alpha's audited Core runtime; review upgrades as a separate increment.
     //noinspection GradleDependency
     implementation("androidx.core:core:1.8.0")
+    // P0-S3 diagnostic adoption only; all three BC modules are deliberately aligned.
+    implementation("com.hierynomus:sshj:0.41.2")
+    implementation("org.bouncycastle:bcprov-jdk18on:1.86")
+    implementation("org.bouncycastle:bcpkix-jdk18on:1.86")
+    implementation("org.bouncycastle:bcutil-jdk18on:1.86")
+    // Library transcripts must not enter Android logs; the probe records bounded observations.
+    implementation("org.slf4j:slf4j-api:2.0.20")
+    implementation("org.slf4j:slf4j-nop:2.0.20")
     testImplementation("junit:junit:4.13.2")
 }
 
