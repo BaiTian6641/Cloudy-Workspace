@@ -2,6 +2,8 @@
 
 An integrated workspace for a Googlebook: **Cloudy Console** for terminals and command-line work, and **Cloudy Desktop** for remote desktops, files, devices, and visual work.
 
+**Rule 0:** desktop/laptop Googlebook applications built on Android's app and package model. Keyboard, mouse/trackpad, native windows and desktop productivity define the design. Phone/tablet optimization is outside scope; narrow tiled desktop windows remain supported. Read the [platform rule](docs/00-project/platform-rule-zero.md).
+
 **Project state:** researched development plan and repository foundation. No Android application or host agent is implemented yet. Research snapshot: **14 October 2026, America/Chicago**. Hardware compatibility remains unqualified.
 
 Repository: [BaiTian6641/Cloudy-Workspace](https://github.com/BaiTian6641/Cloudy-Workspace) · SSH remote: `git@github.com:BaiTian6641/Cloudy-Workspace.git`
@@ -12,6 +14,7 @@ Repository: [BaiTian6641/Cloudy-Workspace](https://github.com/BaiTian6641/Cloudy
 | --- | --- |
 | [Documentation index](docs/README.md) | Navigate the whole project |
 | [Review of the supplied plan](docs/00-project/plan-review.md) | Retained decisions, corrections, and proposed changes |
+| [Revision 01: integrated workflows](docs/00-project/revision-01-integrated-workflows.md) | X11 windows, SFTP/drop, RDP/VNC, USB plug-and-play and desktop scope |
 | [Product scope](docs/00-project/vision-scope.md) | Console/Desktop boundaries and release scope |
 | [Repository map](docs/00-project/repository-map.md) | Code ownership, dependencies, and planned modules |
 | [Phase and stage roadmap](docs/05-delivery/roadmap.md) | Sequenced work, effort assumptions, dependencies, and gates |
@@ -22,9 +25,9 @@ Repository: [BaiTian6641/Cloudy-Workspace](https://github.com/BaiTian6641/Cloudy
 
 ## Two independently useful applications
 
-**Console** owns SSH, PTYs, tabs and panes, durable remote sessions, jump hosts, tunnels, small SFTP attachment transfers, and interaction with arbitrary agent CLIs. It works with an ordinary SSH server and without Desktop or the custom host agent.
+**Console** owns SSH, PTYs, tabs and panes, durable remote terminal sessions, jump hosts, tunnels, separate SSH-forwarded X11 application windows, an adjacent SFTP browser with upload/download/edit and drag/drop, and interaction with arbitrary agent CLIs. It works with an ordinary SSH/SFTP server and without Desktop or the custom host agent; X11 needs the separately qualified local server/broker and remote X11 prerequisites.
 
-**Desktop** owns host workspaces, remote desktop orchestration, the full file browser, transfer jobs, USB ownership, host activity, and visual applications. The first release hands streaming to an existing client; integrated streaming is a separately gated stage.
+**Desktop** owns host workspaces, native RDP and VNC client lanes, high-performance streaming, cross-root files/transfers, enrolled USB plug-and-play, host activity, and visual applications. High-performance streaming starts through a qualified existing client; native stream integration has later latency/stability and distribution gates. Native RDP/VNC are explicit companion-release requirements.
 
 Both applications share source modules and a versioned resource handoff contract. Each owns its process, storage, credentials, and permission lifecycle. The proposed native shell uses Kotlin/Compose with Cloudy design tokens; a bundled terminal renderer is evaluated separately. See [ADR 0002](docs/adr/0002-native-shell-and-terminal-surface.md).
 
@@ -50,4 +53,4 @@ Optional schema validation is documented in [tools](tools/README.md). The initia
 
 The original supplied plan is preserved byte for byte in [docs/intake](docs/intake/README.md). Its instructions are source material. The user's current request controls the product split, repository setup, detailed planning, official-reference tracking, and revised visual language.
 
-Begin implementation at [P0 qualification](docs/05-delivery/phases/p0-qualification.md). Each stage names its deliverables and the evidence required to exit.
+The revised plan contains **7 phases / 38 stages**, with **125–217 person-days** of active effort before reserve. These are planning ranges, not device results or elapsed dates. Begin implementation at [P0 qualification](docs/05-delivery/phases/p0-qualification.md). Each stage names its deliverables and the evidence required to exit.

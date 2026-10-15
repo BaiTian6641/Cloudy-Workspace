@@ -4,7 +4,7 @@
 
 ## Responsibility
 
-Reusable domain, identity, SSH, transfer, platform, IPC, and diagnostics code compiled separately into both apps.
+Reusable domain, identity, SSH, transfer, platform, IPC and diagnostics source, plus native X11-window and remote-desktop integration boundaries. Apps compile the modules they need with independent credentials/storage; shared source does not require all engines in both apps.
 
 ## Boundary
 

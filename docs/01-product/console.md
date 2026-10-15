@@ -2,9 +2,11 @@
 
 **Release:** R1, with optional structured integrations in R3. **Primary job:** enter a trustworthy remote environment quickly and stay productive through long terminal and agent sessions.
 
+**Target:** Googlebook desktop/laptop under [Rule 0](../00-project/platform-rule-zero.md). The app is an Android package with native desktop input/windows. Phone/tablet layouts are outside scope. A narrow tiled desktop window still keeps every session and file action reachable.
+
 ## Information architecture
 
-The navigation pane contains workspaces, hosts, environments, and saved layouts. A workspace selects a host/environment and one or more registered project directories. Host identity remains visible even when the pane collapses. The main area is tabs with a split tree. A tab represents a work context; each leaf is one PTY. Search, forwarding, attachments, and activity are supporting drawers with independent focus.
+The navigation pane contains workspaces, hosts, environments, and saved layouts. A workspace selects a host/environment and one or more registered project directories. Host identity remains visible even when the pane collapses. The main area is tabs with a split tree. A tab represents a work context; each leaf is one PTY. An adjacent SFTP pane can follow the selected session or stay visibly pinned. Search, forwards, transfers and activity have independent focus. SSH-forwarded X11 top-level applications open in separate native desktop windows, with a focusable window list in Console.
 
 Do not merge host, environment, workspace, and session into one overloaded name. For example: `MS-02Ultra / WSL Ubuntu / FPGA controller / build`. Display the OS/environment when path interpretation or persistence differs.
 
@@ -27,6 +29,11 @@ Do not merge host, environment, workspace, and session into one overloaded name.
 | C13 | Session search | Local bounded scrollback search, match count, next/previous; transcript logging off by default | R1 / P2-S3 |
 | C14 | Jump hosts | Verified trust at each hop, no silent authentication fallback; close dependent channels cleanly | R1 / P2-S1 |
 | C15 | Import/export | Preview supported SSH-config fields; import non-secrets only; identify unsupported directives | R1 follow-up / P2-S5 |
+| C16 | X11 forwarding | Standard SSH X11 request/channels, remote xauth/prerequisites, per-context authentication/isolation, explicit trusted-mode policy | R1 / P0-S7, P2-S6 |
+| C17 | Separate X11 app windows | Native top-level desktop windows, owned dialogs, focus/IME/resize/close behavior and visible host identity; no full-X-desktop substitute | R1 / P2-S6 |
+| C18 | Integrated SFTP browser | Session-linked list/breadcrumbs, browse/mkdir/rename/download/upload/staged edit, selection and persistent transfer status | R1 / P2-S7 |
+| C19 | File drag-and-drop | Local app→remote upload, remote→local/downloaded URI export, multi-file/directory handling and terminal reference insertion after commit | R1 / P2-S7 |
+| C20 | Directory context | Explicit project/path default and pin/follow-session state; optional verified shell-directory signal, no prompt scraping | R1 / P2-S7 |
 
 ## Session states
 
@@ -56,4 +63,6 @@ Output queues are bounded with real backpressure and diagnostics. A full queue m
 
 ## Acceptance
 
-Pass Q-C01 through Q-C06 in [test cases](../06-validation/test-cases.md). A daily-use release includes a full working day with the Desktop app absent and the custom host agent disabled, real IME, at least one agent TUI, attachment upload/hash comparison, a browser preview, and client/network interruption. Test versions and limitations become part of the support matrix.
+Pass Q-C01 through Q-C10 in [test cases](../06-validation/test-cases.md). A daily-use release includes Desktop absent and the custom host agent disabled, real keyboard/trackpad/IME, an agent TUI, two separate X11 app windows and owned dialogs, session-linked file browsing/editing, bidirectional drops, upload/download integrity, a browser preview and client/network interruption. Test versions and limitations become part of the support matrix. See the [X11 design](../02-architecture/x11-windows.md) and [Console files design](../02-architecture/console-files.md).
+
+GUI lifetime is separate from tmux lifetime. A broken X connection can end the graphical app even when its shell survives. Unsupported X extensions, GPU/Wayland/audio or GUI file-drop bridges need explicit capability labels. Shared SFTP source does not create shared app credentials.

@@ -1,14 +1,12 @@
 # Official source register
 
-Research snapshot: **2026-10-14, America/Chicago**. Canonical data: [sources.json](sources.json). Entries are official publisher/vendor sources. No forum or secondary article is used as a platform authority.
+Research snapshot: **2026-10-14, America/Chicago**, including Revision 01. Canonical data: [sources.json](sources.json). Entries are official platform, standards, vendor or upstream project sources. An upstream library interface is not a Googlebook OS API.
 
-`reviewed` means the relevant claim was inspected. `located` means the official entry point was found and opened, but exact signatures/version details still need implementation review. `javascript-required` means this tool could not inspect the page body; do not treat it as verified content. A checked date is not an API or hardware certification.
-
-Source update dates are recorded only where the inspected page provided one. Null means not recorded, not that a page is current forever. Read [watchlist.md](watchlist.md) for refresh/change handling.
+`reviewed` means the relevant claim was inspected. `located` means the entry point was found/opened but exact details still need implementation review. `javascript-required` means readable page content was unavailable. A checked date does not qualify a device or certify a release. Update dates are recorded only when inspected; null is unknown. Read [watchlist.md](watchlist.md) for change handling.
 
 | ID | Official reference | Review status | Development use |
 | --- | --- | --- | --- |
-| G01 | [Googlebook adaptive development overview](https://developer.android.com/develop/adaptive-apps/guides/googlebook/overview) | reviewed | Android and desktop product model; layout/input/tooling entry points. |
+| G01 | [Googlebook adaptive development overview](https://developer.android.com/develop/adaptive-apps/guides/googlebook/overview) | reviewed | Android stack and desktop foundations; free-form windows, precision input and multi-pane Googlebook app guidance. |
 | G02 | [Desktop app quality and test IDs](https://developer.android.com/docs/quality-guidelines/adaptive-app-quality/experiences/desktop) | reviewed | Desktop acceptance vocabulary and official test IDs. |
 | G03 | [Support desktop windowing](https://developer.android.com/develop/adaptive-apps/guides/support-desktop-windowing) | reviewed | Caption insets, instance/task behavior, drag/drop, and engagement example. |
 | G04 | [ADB debugging on Googlebook](https://developer.android.com/develop/adaptive-apps/guides/googlebook/adb-debugging) | reviewed | Model-specific debugging transports and HP left USB port. |
@@ -21,7 +19,7 @@ Source update dates are recorded only where the inspected page provided one. Nul
 | G11 | [Enable drag and drop](https://developer.android.com/develop/ui/views/touch-and-input/drag-drop) | located | ClipData and grant-aware attachment integration entry point. |
 | G12 | [Create a document provider](https://developer.android.com/guide/topics/providers/create-document-provider) | located | Remote document provider operations and supported flags. |
 | G13 | [Storage Access Framework files](https://developer.android.com/training/data-storage/shared/documents-files) | located | User-chosen document URIs and persisted access; refresh exact methods at P2. |
-| G14 | [USB host overview](https://developer.android.com/develop/connectivity/usb/host) | located | Android device permission and connection API starting point. |
+| G14 | [USB host overview](https://developer.android.com/develop/connectivity/usb/host) | reviewed | USB enumeration, permission, attach/detach and grant lifetime; network forwarding still needs a backend. |
 | G15 | [Foreground service timeouts](https://developer.android.com/develop/background-work/services/fgs/timeout) | reviewed | Target-dependent six-hour rules and API 35 timeout callback. |
 | G16 | [Foreground service types](https://developer.android.com/develop/background-work/services/fgs/service-types) | located | Operation-specific type/prerequisite decision; no type selected for SSH yet. |
 | G17 | [WebView native bridge security](https://developer.android.com/privacy-and-security/risks/insecure-webview-native-bridges) | located | Bridge attack boundary; local assets and validated origin/message design. |
@@ -47,7 +45,7 @@ Source update dates are recorded only where the inspected page provided one. Nul
 | D09 | [WCAG 2.2 recommendation](https://www.w3.org/TR/WCAG22/) | reviewed | Contrast, keyboard access, target size, focus and reflow reference; full conformance not claimed. |
 | R01 | [Termius product overview](https://termius.com/) | reviewed | Host/session organization and product vocabulary; not feature parity or platform promises. |
 | R02 | [Termius documentation](https://docs.termius.com/) | reviewed | Workspaces, snippets, keychain and split-view references. |
-| R03 | [MobaXterm official manual](https://mobaxterm.mobatek.net/documentation.html) | reviewed | Terminal/SFTP/tunnel proximity; Windows/X11 assumptions not ported. |
+| R03 | [MobaXterm official manual](https://mobaxterm.mobatek.net/documentation.html) | reviewed | Adjacent SSH/SFTP browser with bidirectional drag/drop; multiwindow X server interaction reference, distinct from one windowed X desktop. |
 | R04 | [Sunshine compatibility](https://docs.lizardbyte.dev/projects/sunshine/latest/) | reviewed | Moving backend/capture/encoder compatibility reference, not hardware proof. |
 | R05 | [Sunshine getting started source](https://github.com/LizardByte/Sunshine/blob/master/docs/getting_started.md) | reviewed | Moving setup guidance; pin actual release. Original macOS warning is not current wording. |
 | R06 | [Moonlight Android source and license](https://github.com/moonlight-stream/moonlight-android) | reviewed | Android client and GPL-3.0 licensing decision before integration. |
@@ -61,3 +59,24 @@ Source update dates are recorded only where the inspected page provided one. Nul
 | R14 | [Google Drive desktop requirements](https://support.google.com/drive/answer/2375082) | located | Host-client support authority, separate from Android provider behavior. |
 | R15 | [rclone mount and VFS](https://rclone.org/commands/rclone_mount/) | located | Host cache/writeback/conflict reference; not selected as an embedded client. |
 | R16 | [Tailscale with other VPNs](https://tailscale.com/docs/reference/faq/other-vpns) | located | Android VPN coexistence constraints; Cloudy adds no competing VPN. |
+| G29 | [MediaFormat low latency decoder key](https://developer.android.com/reference/android/media/MediaFormat) | reviewed | Optional KEY_LOW_LATENCY decoder mode, API 30; requires measured device support. |
+| G30 | [MediaCodecInfo decoder low latency capability](https://developer.android.com/reference/android/media/MediaCodecInfo.CodecCapabilities) | reviewed | FEATURE_LowLatency, API 30, is decoder-only and must be checked per selected codec. |
+| G31 | [ADB install and package manager tools](https://developer.android.com/tools/adb) | reviewed | APK installation and package-manager tooling for two independent Android packages. |
+| G32 | [About Android App Bundles](https://developer.android.com/guide/app-bundle) | reviewed | AAB publishing generates installable APKs; distinguish publishing from direct package installation. |
+| R17 | [OpenSSH client configuration: X11](https://man.openbsd.org/ssh_config) | reviewed | ForwardX11, ForwardX11Trusted, timeout and multiplexed display constraints; no implicit trusted fallback. |
+| R18 | [OpenSSH server configuration: X11](https://man.openbsd.org/sshd_config) | reviewed | X11Forwarding, X11UseLocalhost and XAuthLocation server prerequisites. |
+| R19 | [RFC 4254 SSH connection protocol](https://www.rfc-editor.org/rfc/rfc4254.html) | reviewed | Section 6.3 x11-req, cookie substitution and incoming x11 channels; not a native X server. |
+| R20 | [Termux X11 upstream](https://github.com/termux/termux-x11) | reviewed | Android X server feasibility reference with app and companion package; per-application native windows not established. |
+| R21 | [FreeRDP 3.27.1 release](https://github.com/FreeRDP/FreeRDP/releases/tag/3.27.1) | reviewed | Release notes add Android RAIL/RemoteApp window support; server/backend/Googlebook qualification still required. |
+| R22 | [FreeRDP root license](https://github.com/FreeRDP/FreeRDP/blob/master/LICENSE) | reviewed | Root Apache-2.0 license; selected dependencies, codecs and build options need independent review. |
+| R23 | [MS-RDPEMT multitransport overview](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-rdpemt/5aa61c5c-e864-4ec6-bd80-e1df51555a48) | reviewed | Secured RDP multitransport over reliable/lossy UDP; negotiated support must be measured. |
+| R24 | [RFC 6143 Remote Framebuffer Protocol](https://www.rfc-editor.org/rfc/rfc6143.html) | reviewed | Baseline RFB versions, framebuffer/input and weak basic authentication; extensions/security differ. |
+| R25 | [LibVNCClient public header](https://github.com/LibVNC/libvncserver/blob/master/include/rfb/rfbclient.h) | reviewed | Concrete native RFB client API candidate and GPL header; no Android/Googlebook support certification. |
+| R26 | [LibVNC copying terms](https://github.com/LibVNC/libvncserver/blob/master/COPYING) | reviewed | GPL text; resolve exact selected client files and linked dependencies before embedding. |
+| R27 | [TigerVNC viewer manual](https://tigervnc.org/doc/vncviewer.html) | reviewed | VNC encodings, security types, resize and clipboard options; interoperability reference. |
+| R28 | [VirtualHere client API](https://www.virtualhere.com/client_api) | reviewed | Consumer-side state/use/auto-use controls; documented auto-use toggles and timeout require reconciliation. |
+| R29 | [Parsec streaming overview](https://support.parsec.app/hc/en-us/articles/32361354307348-Overview) | reviewed | Capture, encode, network and decode pipeline reference; not an embedding license or parity proof. |
+| R30 | [GeForce NOW system requirements](https://www.nvidia.com/en-us/geforce-now/system-reqs/) | reviewed | Service/platform/network prerequisites; contextual experience reference, not a Cloudy backend API. |
+| R31 | [FreeRDP Android native integration source](https://github.com/FreeRDP/FreeRDP/blob/master/client/Android/Studio/freeRDPCore/src/main/cpp/android_freerdp.c) | reviewed | Android native callbacks and RAIL experimental-feature handling; moving source, pin an actual build. |
+| R32 | [LibVNC security maintenance policy](https://github.com/LibVNC/libvncserver/security) | reviewed | Review advisory fixes and release/commit patch coverage before selecting the VNC engine. |
+| R33 | [X.Org ICCCM](https://xorg.freedesktop.org/archive/X11R7.7/doc/xorg-docs/icccm/icccm.html) | reviewed | Window-manager conventions for top-level/transient windows and WM_DELETE_WINDOW; Android mapping is Cloudy work. |

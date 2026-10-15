@@ -10,6 +10,9 @@ This is a manual development workflow. No recurring automation or external notif
 | API/AndroidX versions | Before using/upgrading a surface | Exact signature, OS/library level, experimental annotation, fallback? | Android |
 | FGS/background/permissions | Before lifecycle implementation and target upgrade | Is the chosen operation strategy valid on this target/build? | Android |
 | Sunshine/Moonlight/USB | Before each backend version qualification | Supported capture/input/control/ownership behavior and license changes? | Integration |
+| X11 / SSH / window broker | Before engine adoption and security updates | X11 engine hooks, isolation/authentication, native top-level window behavior and license/build changes? | X11/terminal |
+| RDP / VNC engines and server matrix | Before embedding, upgrades and release | Actual release/commit, advisory fixes, license/dependencies, security/encoding/session and optional channels? | Desktop/native |
+| Android packaging / desktop quality | At P1 and release-channel changes | Independent APK/AAB behavior, device targeting, applicable desktop guidelines and no phone/tablet scope drift? | Platform/maintainer |
 | Carbon/M3 | When revising design foundations | Is the reference concept still current? Does it alter a Cloudy decision? | Design |
 | Distribution/target SDK | Before release candidate | What are the actual current channel requirements? | Maintainer |
 
@@ -29,6 +32,8 @@ This is a manual development workflow. No recurring automation or external notif
 Use `--only G01,G06` for a small targeted check. Failed/blocked responses remain visible rather than being labeled dead official documentation. Dynamic-page entries still need a browser or another official readable representation.
 
 The [initial reachability report](reachability-2026-10-14.json) records 53 successful responses. Its timestamps are UTC; the filename follows the project's America/Chicago research date. It does not change content-review or device-qualification status.
+
+The [Revision 01 report](revision-01-reachability-2026-10-14.json) covers all 74 current references. Reachability is a read-only URL check; semantic source review, engine build verification and device qualification are separate work.
 
 ## Change record template
 

@@ -1,13 +1,13 @@
 # Delivery plan index
 
-The detailed plan has seven phases and 32 stages. All implementation/qualification stages are initially planned. This repository delivers planning assets and scaffolding only.
+Revision 01 has seven phases and 38 stages under [Rule 0](../00-project/platform-rule-zero.md). All implementation/qualification stages remain planned. This repository delivers planning assets and scaffolding only; no phone/tablet workstream is included.
 
 | Phase | Stage count | Detail |
 | --- | ---: | --- |
-| P0 | 6 | [Qualification and decisions](phases/p0-qualification.md) |
+| P0 | 7 | [Qualification and decisions](phases/p0-qualification.md) |
 | P1 | 4 | [Shared foundation and design](phases/p1-foundation.md) |
-| P2 | 5 | [Console daily use](phases/p2-console.md) |
-| P3 | 5 | [Desktop companion](phases/p3-desktop.md) |
+| P2 | 7 | [Console daily use](phases/p2-console.md) |
+| P3 | 8 | [Desktop companion](phases/p3-desktop.md) |
 | P4 | 4 | [Host adapters and activity](phases/p4-host-integration.md) |
 | P5 | 4 | [Integrated desktop and document access](phases/p5-integrated-desktop.md) |
 | P6 | 4 | [Hardening and release](phases/p6-release.md) |

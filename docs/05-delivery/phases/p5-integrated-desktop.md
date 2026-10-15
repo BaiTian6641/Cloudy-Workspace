@@ -1,13 +1,13 @@
 # P5 — Integrated desktop and document access
 
-**Status:** planned. **Active effort:** 17–28 person-days before contingency. **Purpose:** Add native streaming only if justified and distributable, then deepen file/metered workflows.
+**Status:** planned. **Active effort:** 18–30 person-days before contingency. **Purpose:** Complete the separately gated native high-performance media path, measured latency/stability, document provider and metered policy.
 
-The canonical stage data is [backlog.json](../backlog.json). Estimates assume one experienced developer using established components; hardware access and upstream blockers can add elapsed time. Owner labels are roles, not staffed assignments.
+The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-project/platform-rule-zero.md) defines desktop scope. Estimates are active effort, not elapsed time or staffing commitments; re-estimate after P0. Stage IDs remain stable; the dependency order can place a later-numbered addition before an existing release gate.
 
 | Stage | Outcome | Effort, person-days | Prerequisites |
 | --- | --- | ---: | --- |
 | P5-S1 | Integrated streaming license and maintenance decision | 2–3 | P4-S4 |
-| P5-S2 | Optional native streaming and input profiles | 7–12 | P5-S1, P0-S4 |
+| P5-S2 | Native high-performance stream and latency/stability qualification | 8–14 | P5-S1, P0-S4 |
 | P5-S3 | DocumentsProvider and cached editing | 5–8 | P5-S1, P3-S3 |
 | P5-S4 | Metered policy, accounting, and integrated desktop gate | 3–5 | P5-S2, P5-S3, P0-S6 |
 
@@ -21,6 +21,7 @@ Work:
 2. Assess fork/update ownership, backend/client version compatibility, packaging, decoder/input surfaces, and reproducible builds.
 3. Confirm that R2 handoff limitations justify the added integration scope.
 4. If external-only is selected, replace P5-S2 implementation with qualified external-flow polish and re-estimate the phase.
+5. Treat native high-performance integration as the full-scope target; an external-only decision must explicitly revise user-visible scope, stage estimates and unresolved requirements.
 
 Deliverables:
 
@@ -32,30 +33,30 @@ Exit evidence:
 - No integrated streaming code is shipped before the distribution model is resolved.
 - Scope/effort is revised if the external-only branch is selected.
 
-Record evidence under `qualification/results/P5-S1/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-D01. Official source IDs: R06, R04, R05; resolve them in the [source register](../../07-reference/source-register.md).
+Record evidence under `qualification/results/P5-S1/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-D01. Official/upstream source IDs: R06, R04, R05; resolve them in the [source register](../../07-reference/source-register.md).
 
-## P5-S2 — Optional native streaming and input profiles
+## P5-S2 — Native high-performance stream and latency/stability qualification
 
 **Owner:** Desktop/media developer. **Prerequisites:** P5-S1, P0-S4. **Status:** planned.
 
 Work:
 
-1. Integrate the selected native media/input backend with explicit pairing, monitor/profile selection, and permission state.
-2. Keep frames off general UI bridges, clear remote input on focus/disconnect, and always expose release capture.
-3. Implement qualified Desktop/CAD/Presentation/Metered profiles and real encode/decode/drop statistics.
-4. Run CAD/text/readability/long-session/resize/display-change and lifecycle cases on each supported topology.
+1. Integrate the approved maintained native stream engine with direct media/input, native Surface and measured decoder/profile selection.
+2. Minimize copies/queue age, use supported low-latency decoder modes, and implement backend-supported adaptation with stable audio/video pacing.
+3. Qualify CAD/keyboard/trackpad/mouse, display/scaling/capture release, permissions/session and thermal 8-hour behavior.
+4. Compare input-to-photon and quality against qualified standalone Moonlight and Parsec where supported; run impaired links and recovery without false parity claims.
 
 Deliverables:
 
-- Native stream candidate or re-scoped external-only deliverable
-- Profile/input/decoder hardware evidence
+- Native high-performance Desktop stream path and diagnostics
+- Matched comparison/pacing/power/stability results with explicit target decisions
 
 Exit evidence:
 
-- Actual CAD workflow passes with no stuck capture/modifiers and truthful observed metrics.
-- Unsupported codec/compositor/lock/headless cases remain excluded.
+- Native media/input path and required real CAD work pass; no video through general UI bridges.
+- P0-ratified latency/quality/stability budgets have measured outcomes and no unresolved input/trust/data-integrity blocker; any scope change is explicit.
 
-Record evidence under `qualification/results/P5-S2/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-D02, Q-P02, Q-N01. Official source IDs: G09, G20, R04, R06; resolve them in the [source register](../../07-reference/source-register.md).
+Record evidence under `qualification/results/P5-S2/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-D02, Q-N01, Q-N02, Q-N03, Q-A01. Official/upstream source IDs: G09, G20, G29, G30, R04, R05, R06, R29, R30; resolve them in the [source register](../../07-reference/source-register.md).
 
 ## P5-S3 — DocumentsProvider and cached editing
 
@@ -78,7 +79,7 @@ Exit evidence:
 - No remote file is labeled committed until the backend confirms publication.
 - Concurrent/offline edits preserve data and explicit conflict choices.
 
-Record evidence under `qualification/results/P5-S3/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-D05. Official source IDs: G12, G13, R15; resolve them in the [source register](../../07-reference/source-register.md).
+Record evidence under `qualification/results/P5-S3/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-D05. Official/upstream source IDs: G12, G13, R15; resolve them in the [source register](../../07-reference/source-register.md).
 
 ## P5-S4 — Metered policy, accounting, and integrated desktop gate
 
@@ -90,6 +91,7 @@ Work:
 2. Label counters by interval/endpoint/direction/payload-or-wire/estimate and path-observability limits.
 3. Compare app/stream counters with OS/router measurements without double-counting endpoint copies.
 4. Run protected USB operations while changing bulk-transfer priorities and budget thresholds.
+5. Measure file/USB contention and adaptive stream behavior with hysteresis; preserve protocol state and protected operations while prioritizing interactive work.
 
 Deliverables:
 
@@ -101,8 +103,8 @@ Exit evidence:
 - Counter scope is understandable and measured values align within declared boundaries.
 - Budget policy never silently interrupts protected programming or fabricates path telemetry.
 
-Record evidence under `qualification/results/P5-S4/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-N01, Q-X03. Official source IDs: G21, R08, R16; resolve them in the [source register](../../07-reference/source-register.md).
+Record evidence under `qualification/results/P5-S4/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-N01, Q-X03, Q-N02, Q-N03. Official/upstream source IDs: G21, R08, R16; resolve them in the [source register](../../07-reference/source-register.md).
 
 ## Gate and failure route
 
-Every stage must satisfy its exit evidence or record an accepted, qualified fallback before this phase is declared complete. External-only streaming remains viable; re-scope and re-estimate P5-S2 rather than claiming an integration that cannot be maintained.
+Resolve licensing at P5-S1 before native streaming. An external-only decision requires explicit feature/effort/scope revision. Compare performance with matched conditions and publish limitations. Every done stage links actual evidence; a documentation check does not qualify a device.

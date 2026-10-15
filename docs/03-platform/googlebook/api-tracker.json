@@ -248,7 +248,7 @@
       "owner": "Android/platform developer",
       "stage": "P0-S5",
       "fallback": "External qualified provider / lab appliance",
-      "experiment": "Actual probe reset, bootloader identities and flash/verify"
+      "experiment": "Actual provider-owned permission, device/consumer identity, flash/verify and reenumeration; serial-only success insufficient"
     },
     {
       "id": "API13",
@@ -391,7 +391,7 @@
     },
     {
       "id": "API20",
-      "feature": "Attachment drag/drop",
+      "feature": "Desktop incoming/outgoing file drag-and-drop",
       "symbols": [
         "ClipData",
         "Activity.requestDragAndDropPermissions"
@@ -405,9 +405,9 @@
       "qualification": "untested",
       "checkedOn": "2026-10-14",
       "owner": "Android/platform developer",
-      "stage": "P2-S4",
-      "fallback": "System document picker",
-      "experiment": "Cross-window URI grants and source change"
+      "stage": "P2-S7",
+      "fallback": "Picker upload, Save/Share staged download and explicit Copy path; required drop directions still need qualification",
+      "experiment": "Cross-app URI grants, multi-file drop, staged outgoing export, late receiver, host switch and source mutation"
     },
     {
       "id": "API21",
@@ -423,13 +423,13 @@
       ],
       "minimumApi": 37,
       "libraryVersion": null,
-      "availability": "documented-optional",
+      "availability": "documented; reference-only outside desktop-only release scope",
       "qualification": "untested",
       "checkedOn": "2026-10-14",
       "owner": "Android/platform developer",
       "stage": "P6-S3",
-      "fallback": "Local saved workspace; no phone continuity",
-      "experiment": "Optional supported device pair; identifiers only, receiver auth"
+      "fallback": "Explicit desktop app resource handoff; no phone/tablet prerequisite",
+      "experiment": "No required phone continuity stage; revisit only if product scope explicitly expands"
     },
     {
       "id": "API22",
@@ -482,6 +482,216 @@
       "stage": "P0-S2",
       "fallback": "System IME and launcher",
       "experiment": "System IME compatibility; do not depend on replacement"
+    },
+    {
+      "id": "API25",
+      "feature": "SSH X11 forwarding channels",
+      "symbols": [
+        "x11-req",
+        "x11",
+        "ForwardX11",
+        "ForwardX11Trusted",
+        "X11Forwarding",
+        "X11UseLocalhost",
+        "XAuthLocation"
+      ],
+      "sourceIds": [
+        "R17",
+        "R18",
+        "R19"
+      ],
+      "minimumApi": null,
+      "libraryVersion": null,
+      "interfaceKind": "upstream-standard-and-configuration",
+      "availability": "documented upstream protocol; selected engine hook unqualified",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Android/integration developer",
+      "stage": "P0-S7",
+      "fallback": "Keep ordinary SSH; labeled full X desktop/stream fallback does not complete separate app windows",
+      "experiment": "Verify cookies, xauth, server denial/timeout, trust isolation, engine hooks and DISPLAY across jump/multiplex contexts"
+    },
+    {
+      "id": "API26",
+      "feature": "Native X11 top-level window broker",
+      "symbols": [
+        "Activity/task lifecycle (Android)",
+        "XID",
+        "WM_TRANSIENT_FOR",
+        "WM_DELETE_WINDOW"
+      ],
+      "sourceIds": [
+        "G03",
+        "G24",
+        "G27",
+        "G28",
+        "R20",
+        "R33"
+      ],
+      "minimumApi": null,
+      "libraryVersion": null,
+      "interfaceKind": "proposed-cloudy-integration",
+      "availability": "No Googlebook X11 window API established; broker prototype required",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Android/integration developer",
+      "stage": "P0-S7",
+      "fallback": "Explicit blocked capability and labeled single X desktop or Desktop backend alternative",
+      "experiment": "Map two apps and owned dialogs/popups to separate native Googlebook windows with focus/IME/resize/scaling/close semantics"
+    },
+    {
+      "id": "API27",
+      "feature": "Optional low-latency hardware decoder",
+      "symbols": [
+        "MediaFormat.KEY_LOW_LATENCY",
+        "MediaCodecInfo.CodecCapabilities.FEATURE_LowLatency",
+        "MediaCodecInfo.CodecCapabilities.isFeatureSupported"
+      ],
+      "sourceIds": [
+        "G29",
+        "G30"
+      ],
+      "minimumApi": 30,
+      "libraryVersion": null,
+      "interfaceKind": "android-sdk",
+      "availability": "documented optional decoder feature; not all codecs support it",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Android/integration developer",
+      "stage": "P0-S4",
+      "fallback": "Normal supported decoder/profile with measured latency and explicit limits",
+      "experiment": "Enumerate exact codec/profile, guard API/capability, compare queue/decode/input-to-photon and thermal behavior with mode on/off"
+    },
+    {
+      "id": "API28",
+      "feature": "USB attach/detach and permission reconciliation",
+      "symbols": [
+        "UsbManager.ACTION_USB_DEVICE_ATTACHED",
+        "UsbManager.ACTION_USB_DEVICE_DETACHED",
+        "UsbManager.hasPermission",
+        "UsbManager.requestPermission"
+      ],
+      "sourceIds": [
+        "G14"
+      ],
+      "minimumApi": 12,
+      "libraryVersion": null,
+      "interfaceKind": "android-sdk",
+      "availability": "documented; access belongs to the actual provider app",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Android/integration developer",
+      "stage": "P3-S6",
+      "fallback": "Provider permission/setup action and explicit manual attach; no bypass",
+      "experiment": "Test unplug/replug/restart/grant lifetime and verify provider access is not duplicated or assumed to transfer between apps"
+    },
+    {
+      "id": "API29",
+      "feature": "VirtualHere consumer plug-and-play controls",
+      "symbols": [
+        "GET CLIENT STATE",
+        "DEVICE INFO",
+        "USE",
+        "STOP USING",
+        "AUTO USE DEVICE",
+        "AUTO USE DEVICE PORT",
+        "AUTO USE PORT"
+      ],
+      "sourceIds": [
+        "R28",
+        "R07"
+      ],
+      "minimumApi": null,
+      "libraryVersion": null,
+      "interfaceKind": "vendor-consumer-ipc",
+      "availability": "documented consumer commands; installed HELP/state/API permission must be qualified",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Android/integration developer",
+      "stage": "P3-S6",
+      "fallback": "Vendor consumer setup/manual attach; preserve unknown/protected ownership",
+      "experiment": "Read state before toggle, reconcile timeout, 30 hotplug cycles, fixed host, bootloader aliases and contention without broad hub auto-use"
+    },
+    {
+      "id": "API30",
+      "feature": "Native RDP and optional RemoteApp",
+      "symbols": [
+        "freerdp_connect",
+        "freerdp_disconnect",
+        "OnExperimentalFeature (Android callback)",
+        "MS-RDPEMT"
+      ],
+      "sourceIds": [
+        "R21",
+        "R22",
+        "R23",
+        "R31"
+      ],
+      "minimumApi": null,
+      "libraryVersion": null,
+      "interfaceKind": "upstream-client-and-standard",
+      "availability": "Android client documented; 3.27.1 adds RAIL; selected build/optional channels unqualified",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Android/integration developer",
+      "stage": "P3-S7",
+      "fallback": "Explicit engine remediation; external viewer is partial and cannot complete the integrated RDP requirement",
+      "experiment": "Build pinned engine, verify certificate/NLA/input/IME/session/UDP-TCP behavior; RemoteApp requires actual published app and separate evidence"
+    },
+    {
+      "id": "API31",
+      "feature": "Native VNC / RFB client",
+      "symbols": [
+        "rfbGetClient",
+        "rfbInitClient",
+        "WaitForMessage",
+        "HandleRFBServerMessage",
+        "SendKeyEvent",
+        "SendPointerEvent"
+      ],
+      "sourceIds": [
+        "R24",
+        "R25",
+        "R26",
+        "R27",
+        "R32"
+      ],
+      "minimumApi": null,
+      "libraryVersion": null,
+      "interfaceKind": "upstream-client-and-standard",
+      "availability": "LibVNCClient candidate API; license/security/build selection pending",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Android/integration developer",
+      "stage": "P3-S8",
+      "fallback": "Choose a maintained compatible engine; external viewer is a labeled partial workflow",
+      "experiment": "Pin patched engine and qualify security/encoding/resize/input/recovery with primary servers; no implicit file-transfer extension"
+    },
+    {
+      "id": "API32",
+      "feature": "Independent Android package distribution",
+      "symbols": [
+        "adb install",
+        "adb shell pm",
+        "APK",
+        "Android App Bundle"
+      ],
+      "sourceIds": [
+        "G31",
+        "G32",
+        "G01"
+      ],
+      "minimumApi": null,
+      "libraryVersion": null,
+      "interfaceKind": "android-tooling-and-packaging",
+      "availability": "documented Android package model; distribution channel/targeting pending",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Android/integration developer",
+      "stage": "P1-S1",
+      "fallback": "Signed direct APK route if qualified; channel limitations explicitly documented",
+      "experiment": "Install/update/uninstall each app independently, inspect package/signature/ABI and verify actual channel device targeting without a guessed Googlebook flag"
     }
-  ]
+  ],
+  "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."
 }

@@ -24,12 +24,13 @@ MobaXterm documents a Windows application combining terminals with remote-sessio
 | --- | --- | --- | --- |
 | Host/session organization | Hosts, tags, workspaces, environments | Same non-secret identity vocabulary | P1-S1, P2-S1, P3-S1 |
 | Split terminals | Primary content | Open selected project in Console | P2-S3 |
-| Contextual SFTP | Lightweight attachments and optional file drawer | Full browser, conflicts, provider integration | P2-S4, P3-S3, P5-S3 |
+| Contextual SFTP | Required session-linked browser, bidirectional drop, staged editing and queue | Shared file/transfer model; cross-root/provider orchestration | P2-S4/S7, P3-S3, P5-S3 |
 | Port-forward manager | Loopback listeners, owner, lifetime, close | Open preview via Console handoff if installed | P2-S4 |
 | Saved workspace | PTY layout and attach policy | Host/project/desktop/device preferences | P2-S3, P3-S1 |
-| Remote graphical session | Context handoff | Explicit native backend | P3-S2, P5-S2 |
-| Serial / hardware tools | Future qualified adapter | Provider/consumer ownership | P0-S5, P3-S4 |
-| X11 server | Not in v1 | Not a substitute for Wayland desktop streaming | Deferred |
+| Remote graphical session | X11 app windows or explicit Desktop handoff | Native RDP/VNC and high-performance stream lane | P2-S6, P3-S2/S7/S8, P5-S2 |
+| Serial / hardware tools | Optional future direct serial adapter | Enrolled USB plug-and-play and protected provider/consumer ownership | P0-S5, P3-S4/S6 |
+| X11 server | Required separate native top-level windows and owned dialogs | Distinct full desktop/protocol workloads | P0-S7, P2-S6 |
+| Performance references | Terminal/X11 responsiveness measured separately | Moonlight/Sunshine and Parsec comparisons; GeForce NOW contextual experience reference | P0-S4/S6, P5-S2 |
 | Synchronized vault / team sharing | Deferred | Deferred | Separate trust and product decision |
 
-Before adding another reference product, state the concrete user problem it resolves. More protocol icons do not by themselves improve the two core workflows. Validate the interaction on actual Googlebook input and lifecycle behavior rather than copying the reference layout.
+Use [Rule 0](../00-project/platform-rule-zero.md) when adapting references: desktop workflow quality within Android's app model. Parsec/GeForce NOW references do not establish embedding rights or an automation API. Validate input, native windows and lifecycle on Googlebook; the [revision review](../00-project/revision-01-integrated-workflows.md) records the resulting choices.

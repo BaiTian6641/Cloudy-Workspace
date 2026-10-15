@@ -4,6 +4,8 @@
 
 ## Platform model
 
+Cloudy's product policy is [Rule 0](../../00-project/platform-rule-zero.md): desktop/laptop Googlebook applications using Android's package manager, app sandbox, permissions and lifecycle. Phone/tablet optimization and phone continuity are outside scope. Android install compatibility does not qualify those form factors. The [desktop application contract](desktop-application-contract.md) maps official guidance to APIs, stages and release evidence.
+
 Google describes Googlebook as using Android technology with ChromeOS desktop foundations. Develop Android apps with adaptive desktop layouts, keyboard/pointer support, and independent resizable windows. Do not assume Chrome extensions, Crostini control, privileged filesystem access, or a ChromeOS Linux API. [Official Googlebook overview](https://developer.android.com/develop/adaptive-apps/guides/googlebook/overview).
 
 The Linux Terminal is a preview environment separate from third-party Android app APIs. Its announced roadmap includes USB passthrough, GPU/NPU acceleration, and stronger VM persistence; Cloudy must not depend on those as delivered capabilities. [Google's October 12 announcement](https://developer.android.com/blog/posts/googlebook-linux-terminal-preview-vm).
@@ -17,7 +19,8 @@ The Linux Terminal is a preview environment separate from third-party Android ap
 | Layout at current window size | [Window size classes](https://developer.android.com/develop/ui/compose/layouts/adaptive/use-window-size-classes) | [Cloudy layout rules](../../04-design/layout.md) |
 | Native shell styling | [Material 3 in Compose](https://developer.android.com/develop/ui/compose/designsystems/material3) | [Implementation map](../../04-design/implementation-map.md) |
 | Installation and debugging | [Googlebook ADB guide](https://developer.android.com/develop/adaptive-apps/guides/googlebook/adb-debugging) | [Setup checklist](development-setup.md) |
-| Phone continuity | [Continue On integration](https://developer.android.com/develop/adaptive-apps/guides/googlebook/cross-device-continuity) | Optional post-v1 integration |
+| Android packages | [ADB/package tools](https://developer.android.com/tools/adb), [AAB publishing](https://developer.android.com/guide/app-bundle) | Independent signed APKs; publishing channel decided explicitly |
+| Phone continuity | [Continue On integration](https://developer.android.com/develop/adaptive-apps/guides/googlebook/cross-device-continuity) | Reference only, outside desktop-only release scope |
 | Keyboard/launcher restrictions | [Compatibility notice](https://developer.android.com/develop/adaptive-apps/guides/googlebook/keyboard-apps-and-launcher-compatibility) | System IME/launcher retained |
 | Files / peripherals / lifecycle | Android guides linked in [API catalog](api-catalog.md) | P0/P1 qualification |
 
@@ -35,4 +38,4 @@ Google's overview currently links experimental `mediaQuery`/Styles examples. The
 
 ## Near-term priorities
 
-First qualify physical input/IME, app lifecycle, decoder enumeration, external stream launch, USB provider behavior, and independent windows. Only then build the broader product around proven platform boundaries. Use [open questions](open-questions.md) for unsupported or unresolved mechanisms.
+First qualify desktop physical input/IME and windows, app lifecycle, X11 app-window broker, stream/RDP/VNC engine/decoder behavior, USB hotplug/permission, file grants/drop and latency baselines. Build the broader product around those results. [Open questions](open-questions.md) tracks unresolved mechanisms; upstream protocol engines are not Googlebook OS APIs.

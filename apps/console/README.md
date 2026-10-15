@@ -1,10 +1,10 @@
 # Cloudy Console application
 
-**State:** planned module boundary; no application/library implementation yet. **Delivery stages:** P1-S1, P2-S1–S5.
+**State:** planned module boundary; no application/library implementation yet. **Delivery stages:** P1-S1, P2-S1–S7 (dependency order in backlog).
 
 ## Responsibility
 
-Independent Android package with window/tab/split state, profile selection, terminal input, durable-session attachment, composer, small attachment uploader, and loopback-forward manager.
+Independent Googlebook desktop Android package with native window/tab/split state, trusted terminal/durable-session attachment, composer, adjacent SFTP browser/edit/drop, separate X11 app windows and loopback forwards. Phone/tablet optimization is outside scope under [Rule 0](../../docs/00-project/platform-rule-zero.md).
 
 ## Boundary
 

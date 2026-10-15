@@ -1,8 +1,8 @@
 # P4 — Host adapters and activity
 
-**Status:** planned. **Active effort:** 12–20 person-days before contingency. **Purpose:** Add the optional control plane and qualified per-OS events without weakening ordinary SSH.
+**Status:** planned. **Active effort:** 12–20 person-days before contingency. **Purpose:** Add optional host capabilities and attributed activity without making standard SSH/RDP/VNC depend on the custom agent.
 
-The canonical stage data is [backlog.json](../backlog.json). Estimates assume one experienced developer using established components; hardware access and upstream blockers can add elapsed time. Owner labels are roles, not staffed assignments.
+The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-project/platform-rule-zero.md) defines desktop scope. Estimates are active effort, not elapsed time or staffing commitments; re-estimate after P0. Stage IDs remain stable; the dependency order can place a later-numbered addition before an existing release gate.
 
 | Stage | Outcome | Effort, person-days | Prerequisites |
 | --- | --- | ---: | --- |
@@ -32,7 +32,7 @@ Exit evidence:
 - Ordinary Console SSH still works without the agent.
 - A repeated request or event cannot silently repeat a side effect.
 
-Record evidence under `qualification/results/P4-S1/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-S01, Q-X02. Official source IDs: G18, R08; resolve them in the [source register](../../07-reference/source-register.md).
+Record evidence under `qualification/results/P4-S1/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-S01, Q-X02. Official/upstream source IDs: G18, R08; resolve them in the [source register](../../07-reference/source-register.md).
 
 ## P4-S2 — Windows user-session notification adapter
 
@@ -55,7 +55,7 @@ Exit evidence:
 - Correct host/source attribution and no stale-action promises.
 - Revoked access is distinct from an empty healthy inbox.
 
-Record evidence under `qualification/results/P4-S2/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-X04. Official source IDs: R11, G22; resolve them in the [source register](../../07-reference/source-register.md).
+Record evidence under `qualification/results/P4-S2/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-X04. Official/upstream source IDs: R11, G22; resolve them in the [source register](../../07-reference/source-register.md).
 
 ## P4-S3 — Linux and macOS scoped event adapters
 
@@ -78,7 +78,7 @@ Exit evidence:
 - No universal notification observer claim without a supported interface.
 - Own-job events remain useful when system-wide forwarding is unavailable.
 
-Record evidence under `qualification/results/P4-S3/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-X04. Official source IDs: R12, R13, R05; resolve them in the [source register](../../07-reference/source-register.md).
+Record evidence under `qualification/results/P4-S3/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-X04. Official/upstream source IDs: R12, R13, R05; resolve them in the [source register](../../07-reference/source-register.md).
 
 ## P4-S4 — Agent hooks, event deduplication, and R3 gate
 
@@ -101,8 +101,8 @@ Exit evidence:
 - No screen-text inference or replayed approval operation.
 - Expired history remains history rather than newly actionable notifications.
 
-Record evidence under `qualification/results/P4-S4/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-X02, Q-X04. Official source IDs: G22, R11, R13; resolve them in the [source register](../../07-reference/source-register.md).
+Record evidence under `qualification/results/P4-S4/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-X02, Q-X04. Official/upstream source IDs: G22, R11, R13; resolve them in the [source register](../../07-reference/source-register.md).
 
 ## Gate and failure route
 
-Every stage must satisfy its exit evidence or record an accepted, qualified fallback before this phase is declared complete. Ship a smaller capability set when an OS observer/action API is unsupported; keep own-job events useful.
+Keep source fidelity and permissions explicit. Host-agent failure must not invalidate ordinary SSH/RDP/VNC or manufacture event history. Every done stage links actual evidence; a documentation check does not qualify a device.

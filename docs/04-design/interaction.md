@@ -55,6 +55,12 @@ Keep preedit/candidate composition local and visually anchored. Commit the exact
 
 Ordinary navigation, viewing details, copying text, and opening drawers require no confirmation. Confirm when consequence is destructive or crosses trust/ownership boundaries: changed host key, terminate remote session, discard uncommitted file edits, protected device release, and broad permission enrollment. Explain the specific consequence with host/device/project context. Avoid generic “Are you sure?” copy.
 
+Enrolled USB auto-attach is ordinary application of an explicit saved policy when permission and idle ownership are confirmed; do not add another Cloudy confirmation on every plug. Unknown/competing/protected state stops that automatic action with an inline recovery explanation. Backend auto-use toggles require state reconciliation, not blind retries.
+
+File drops display the captured destination host/path and operation before commit according to the saved transfer policy. Tab switches cannot silently retarget jobs. A file drop onto a terminal inserts a reference only after upload and never submits it. A remote-file export supplies a staged readable URI, not a shell path. Unsupported remote GUI file-drop is labeled separately.
+
+X11 windows and native RDP/VNC obey native task focus, IME and system shortcut precedence. Closing an X11 window requests that app's close protocol and may reveal its unsaved dialog. Leaving a native desktop surface releases held input; reconnect never replays clicks. Changing protocol/profile presents the new session context explicitly.
+
 ## Alerts and sound
 
 Terminal bell is a configurable alert, not a trustworthy agent-status parser. Structured job events may show explicit waiting/completed states only when the adapter knows the current job/request ID. Prefer quiet badges and in-app activity; user-selectable notification channels handle urgent device failure and job completion. Never generate a burst of fresh notifications from expired events after reconnect.

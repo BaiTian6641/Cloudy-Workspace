@@ -1,6 +1,6 @@
 # Cloudy Desktop product specification
 
-**Release:** R2 companion, R3 integration, R4 optional embedded streaming. **Primary job:** operate a selected host's visual workspace and nearby hardware with clear context and ownership.
+**Release:** R2 companion with native RDP/VNC, R3 host integration, R4 native high-performance streaming. **Primary job:** operate a selected host's visual workspace and nearby hardware with clear context and ownership. **Target:** Googlebook desktop/laptop Android app under [Rule 0](../00-project/platform-rule-zero.md); no phone/tablet optimization workstream.
 
 ## Information architecture
 
@@ -25,12 +25,17 @@ The workspace view puts the desktop or launch state in the main pane. Files and 
 | D11 | File provider | Selected remote roots through Android document URIs, bounded cache, conflict-safe editing | R4 / P5-S3 |
 | D12 | Metered policy | Explicit bitrate/traffic boundary, stop hidden streams, opt-in prefetch, preserve protected operation | R4 / P5-S4 |
 | D13 | Console handoff | Pass resource identifiers; receiver resolves paths and authenticates independently | R2 / P3-S5 |
+| D14 | Native RDP client | Explicit RDP profile, server trust/auth, native render/input/IME, resize/scaling, session recovery and observed transport | R2 / P3-S7 |
+| D15 | Native VNC client | RFB framebuffer/input, negotiated security/encoding, native surface, supported resize/clipboard and bounded recovery | R2 / P3-S8 |
+| D16 | USB plug-and-play | Enroll device+approved host, then discover/replug/auto-attach when permission and idle ownership are confirmed | R2 / P3-S6 |
+| D17 | Low-latency stable streaming | Measured input-to-photon/pacing/quality and impaired-link recovery compared with qualified native baselines | R4 / P0-S4/S6, P5-S2/S4 |
+| D18 | Backend transparency | Show protocol/session identity, capabilities and actual route/transport when observable; no silent protocol switch | R2 / P3-S1/S7/S8 |
 
 ## Desktop transport
 
-Use Sunshine/Moonlight as the first performance candidate, with exact versions and OS/compositor combinations recorded. An external client launch is the initial delivery boundary. Embedded native streaming is optional and requires a licensing, maintenance, input, rendering, and lifecycle decision before implementation. Review [Sunshine's documentation](https://docs.lizardbyte.dev/projects/sunshine/latest/) and the [Moonlight Android source/license](https://github.com/moonlight-stream/moonlight-android).
+Use Sunshine/Moonlight as the first performance candidate, with exact versions and OS/compositor combinations recorded. External stream launch is the early delivery boundary; native integrated high-performance streaming is the later target with licensing, maintenance, input, rendering and lifecycle gates. Review [Sunshine's documentation](https://docs.lizardbyte.dev/projects/sunshine/latest/) and the [Moonlight Android source/license](https://github.com/moonlight-stream/moonlight-android). An external-only decision requires an explicit scope revision.
 
-RDP, RustDesk, or other backends can become explicit adapters, not silent substitutes: session behavior, lock/login support, and graphics performance differ. Do not claim that a connected service can reach a locked, logged-out, headless, or pre-boot desktop without separate evidence.
+RDP and VNC are first-class native client lanes with dedicated P3 stages, ordinary server prerequisites and no custom host-agent dependency. FreeRDP and a maintained RFB engine are candidates, not selected/qualified implementations. Session behavior, security, lock/login support and graphics performance differ. Parsec/GeForce NOW are performance references; no SDK or embedding right is assumed. Do not claim a connected service reaches locked, logged-out, headless or pre-boot desktops without separate evidence. See the [backend design](../02-architecture/remote-desktop-backends.md) and [performance procedure](../06-validation/desktop-performance.md).
 
 ## Files and data semantics
 
@@ -42,7 +47,7 @@ Remote editing uses local staging and a recorded source identity. Active reposit
 
 ## Devices
 
-The Googlebook is the USB provider; the workstation is the consumer. P0 qualifies [VirtualHere's Android server](https://www.virtualhere.com/android) and the exact device identities. A UI lease timer cannot establish physical release. Reconcile with the backend before another host acquires the device.
+The Googlebook is the USB provider; the workstation is the consumer. P0 qualifies [VirtualHere's Android server](https://www.virtualhere.com/android) and the exact device identities. After enrollment, recognized idle devices attach to their approved host automatically where platform permissions permit. First-use grants, driver/setup and unavailable backend states stay explicit. A UI lease timer cannot establish physical release. Reconcile with the backend before another host acquires the device. The [plug-and-play design](../02-architecture/usb-plug-and-play.md) covers policy, toggles, replug and protection.
 
 Treat firmware resets and bootloader identities as an approved set attached to one operation, not as arbitrary new devices to auto-claim. On transport loss, show ownership unknown until reconciled. Keep the protected operation banner visible and do not trigger automatic reassignment.
 

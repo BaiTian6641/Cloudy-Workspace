@@ -2,6 +2,8 @@
 
 **Snapshot:** 2026-10-14. Machine-readable records: [api-tracker.json](api-tracker.json). Source IDs resolve in the [source register](../../07-reference/source-register.md). “API N” is a verified platform introduction level only where stated. Library availability and Cloudy's min/target SDK remain P0/P1 decisions.
 
+The target is the [Googlebook desktop application contract](desktop-application-contract.md) under [Rule 0](../../00-project/platform-rule-zero.md). Records include official Android APIs, upstream standards/engines and proposed Cloudy integration boundaries; provenance is explicit. None is device-qualified by this catalog.
+
 ## Windows and input
 
 | ID | Surface / official reference | Availability and use | Fallback / gate |
@@ -32,16 +34,29 @@ Use the API reference's spelling `requestFullscreenMode`; a guide link may rende
 | API17 | [`MediaCodec`, codec capabilities](https://developer.android.com/reference/android/media/MediaCodec) | Enumerate and actually decode chosen stream; no hardware capability inference by SKU | P0-S4 / P5-S2 |
 | API18 | [`ConnectivityManager.NetworkCallback`, `NetworkCapabilities`](https://developer.android.com/develop/connectivity/network-ops/reading-network-state) | Observe network change/metered hints; not proof of tailnet direct/relay path | P0-S6 / P5-S4 |
 | API19 | [WebView native bridge boundary](https://developer.android.com/privacy-and-security/risks/insecure-webview-native-bridges) | Local terminal assets, validated narrow messages, no untrusted navigation | P0-S3 / P1-S3 |
-| API20 | [Android drag/drop](https://developer.android.com/develop/ui/views/touch-and-input/drag-drop): `ClipData`, URI grant handling | File attachment imports with exact permissions; never interpret URI as shell path | P2-S4 |
+| API20 | [Android drag/drop](https://developer.android.com/develop/ui/views/touch-and-input/drag-drop): `ClipData`, URI grant handling | Incoming/outgoing file drops, bounded staged export and grants; a remote path is not a content URI | P2-S7 |
 
-## Optional Googlebook-specific continuity and unresolved interfaces
+## Reference-only continuity and unresolved interfaces
 
 | ID | Surface | Status and Cloudy decision |
 | --- | --- | --- |
-| API21 | [`HandoffActivityData`](https://developer.android.com/reference/android/app/HandoffActivityData), `Activity.setHandoffEnabled`, `onHandoffActivityDataRequested` | Continue On is documented for Android 17 / API 37+. Optional phone continuity; identifiers only. Separate from app-to-app IPC. [Guide](https://developer.android.com/develop/adaptive-apps/guides/googlebook/cross-device-continuity) |
+| API21 | [`HandoffActivityData`](https://developer.android.com/reference/android/app/HandoffActivityData), `Activity.setHandoffEnabled`, `onHandoffActivityDataRequested` | Continue On is documented for Android 17 / API 37+. Reference-only outside current desktop-only release scope; no required phone integration/test. Separate from app-to-app IPC. [Guide](https://developer.android.com/develop/adaptive-apps/guides/googlebook/cross-device-continuity) |
 | API22 | Public Linux VM attach/start/control API | Not established by reviewed documentation; no integration contract is invented. Remote SSH baseline |
 | API23 | VM USB passthrough, GPU/NPU acceleration, independent persistence | Roadmap in [preview announcement](https://developer.android.com/blog/posts/googlebook-linux-terminal-preview-vm); excluded from v1 dependency graph |
 | API24 | Custom system IME/launcher | [Google Play compatibility restriction](https://developer.android.com/develop/adaptive-apps/guides/googlebook/keyboard-apps-and-launcher-compatibility); work with native system facilities |
+
+## Revision 01 desktop integration surfaces
+
+| ID | Provenance and exact surface | Availability / fallback / qualification |
+| --- | --- | --- |
+| API25 | [RFC 4254](https://www.rfc-editor.org/rfc/rfc4254.html) `x11-req` / `x11`; [OpenSSH](https://man.openbsd.org/ssh_config) forwarding settings | Upstream SSH standard, not Googlebook API; selected engine hook/cookies/trust contexts need P0-S7. Ordinary SSH stays useful if GUI blocked |
+| API26 | Android Activity/task lifecycle + X11 `XID`, `WM_TRANSIENT_FOR`, `WM_DELETE_WINDOW` from [ICCCM](https://xorg.freedesktop.org/archive/X11R7.7/doc/xorg-docs/icccm/icccm.html) | Proposed Cloudy window broker; no ready Googlebook X11 API established. P0-S7/P2-S6 must prove separate app/dialog mapping; one full X desktop is partial |
+| API27 | [`MediaFormat.KEY_LOW_LATENCY`](https://developer.android.com/reference/android/media/MediaFormat#KEY_LOW_LATENCY), [`CodecCapabilities.FEATURE_LowLatency`](https://developer.android.com/reference/android/media/MediaCodecInfo.CodecCapabilities#FEATURE_LowLatency) | Both API 30, optional decoder feature; guard/check capability and measure on/off in P0-S4. Normal supported decoder is fallback |
+| API28 | [Android USB](https://developer.android.com/develop/connectivity/usb/host) `ACTION_USB_DEVICE_ATTACHED`, `ACTION_USB_DEVICE_DETACHED`, `hasPermission`, `requestPermission` | USB host API 12; permission belongs to the real provider app. P3-S6 replug/restart/grant tests; explicit setup/manual attach if needed |
+| API29 | [VirtualHere consumer API](https://www.virtualhere.com/client_api): `GET CLIENT STATE`, `USE`, `STOP USING`, `AUTO USE DEVICE`, `AUTO USE DEVICE PORT` | Vendor IPC, not OS/server-control API; qualify installed HELP, state and toggle reconciliation at P3-S6. Preserve unknown/protected ownership |
+| API30 | [FreeRDP Android source](https://github.com/FreeRDP/FreeRDP/blob/master/client/Android/Studio/freeRDPCore/src/main/cpp/android_freerdp.c), `freerdp_connect`, `freerdp_disconnect`, `OnExperimentalFeature`, [MS-RDPEMT](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-rdpemt/5aa61c5c-e864-4ec6-bd80-e1df51555a48) | Upstream native client/standard; [3.27.1](https://github.com/FreeRDP/FreeRDP/releases/tag/3.27.1) adds Android RAIL. Native RDP is P3-S7; optional RemoteApp needs separate server/build evidence |
+| API31 | [LibVNCClient](https://github.com/LibVNC/libvncserver/blob/master/include/rfb/rfbclient.h) `rfbGetClient`, `rfbInitClient`, `WaitForMessage`, `HandleRFBServerMessage`, `SendKeyEvent`, `SendPointerEvent` | Candidate upstream C API; P1 license/security decision before P3-S8 native VNC. Engine/server/security/encoding matrix required |
+| API32 | [ADB package tools](https://developer.android.com/tools/adb): `adb install`, `adb shell pm`; [AAB publishing](https://developer.android.com/guide/app-bundle) | Android package/tooling model; P1-S1 independent signed APKs, P6-S3 channel/targeting verification. No guessed Googlebook-only manifest flag |
 
 ## How to keep the catalog useful
 

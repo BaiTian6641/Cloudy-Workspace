@@ -2,7 +2,11 @@
 
 Read `README.md`, `docs/00-project/plan-review.md`, and the relevant phase before changing architecture. This is initially a planning repository; do not describe scaffold folders as implemented applications.
 
+Rule 0 is `docs/00-project/platform-rule-zero.md`: design and qualify Android-packaged desktop/laptop applications for Googlebook. Phone/tablet optimization and phone continuity are outside scope. Narrow tiled desktop windows, native IME, accessibility and Android lifecycle/permissions still matter. Use the official-guidance mapping in `docs/03-platform/googlebook/desktop-application-contract.md`.
+
 Keep Console and Desktop independently installable and useful. Shared source does not imply shared credentials or a permanently running shared daemon. Ordinary SSH must remain usable without the custom host agent.
+
+Full Console scope includes separate SSH X11 application windows and session-linked SFTP/drop. Full Desktop companion scope includes native RDP/VNC and enrolled USB plug-and-play. Distinguish partial external/manual milestones from completed integrated requirements; see ADR 0006.
 
 Track platform facts through `docs/07-reference/sources.json` and `docs/03-platform/googlebook/api-tracker.json`. Record the official symbol, availability, checked date, fallback, and qualification task. A roadmap announcement is not a released API. Do not assume ChromeOS/Crostini interfaces apply to Googlebook.
 

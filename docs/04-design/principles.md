@@ -1,5 +1,7 @@
 # Design principles and Carbon × Material 3 synthesis
 
+**Product constraint:** [Rule 0](../00-project/platform-rule-zero.md). Cloudy designs Android-packaged desktop/laptop tools for Googlebook. Physical keyboard, trackpad/mouse, native windows and desktop information density are primary. Phone/tablet optimization is outside scope; narrow tiled windows and Googlebook accessibility remain required.
+
 ## 1. Make work legible before making chrome expressive
 
 The terminal, file list, desktop, and device state are the working content. Navigation provides stable alignment and hierarchy. Avoid turning every host, row, or diagnostic into a raised card. Use whitespace and section labels to group related data; use a container when the group is itself selected, actionable, or independently manipulated.

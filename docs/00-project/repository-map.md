@@ -7,7 +7,9 @@ apps/
   console/                 Independent Android app; Console-specific state and UI
   desktop/                 Independent Android app; Desktop-specific state and UI
 shared/
-  android/                 Profiles, identity wrappers, SSH/SFTP, lifecycle, IPC, diagnostics
+  android/                 Profiles, identity, SSH/SFTP, transfer, lifecycle, IPC, diagnostics
+    x11/                   Native top-level X11 window broker boundary
+    remote-desktop/        Native stream/RDP/VNC surface, input and capability boundary
   design-system/           Canonical tokens and future Compose components
   terminal-renderer/       Isolated terminal assets and narrowly typed native messages
 protocol/
@@ -19,7 +21,11 @@ host/
   macos/                   Permission-aware session adapters and own-job events
   linux/                   Explicit compositor/session adapters
 adapters/
-  desktop/                 External client launch, later optional native stream backend
+  desktop/                 External performance-stream launch and protocol engine adapters
+    rdp/                   Native RDP client engine boundary
+    vnc/                   Native RFB client engine boundary
+    stream/                High-performance external/native stream boundary
+  x11/                     Qualified local X server engine adapter
   usb/                     VirtualHere consumer/provider orchestration and reconciliation
   agents/                  Optional structured job/CLI hooks
 qualification/
@@ -43,7 +49,7 @@ tools/                     Documentation/data checks; no host mutations
 
 | Area | Accountable role | May depend on | Must not depend on |
 | --- | --- | --- | --- |
-| Console | Android/terminal developer | shared Android, tokens, renderer, protocol | Desktop process or host agent for baseline SSH |
+| Console | Android/terminal developer | shared Android, tokens, renderer, X11 adapter, protocol | Desktop process or host agent for baseline SSH |
 | Desktop | Android/desktop developer | shared Android, tokens, adapters, protocol | Console process for its desktop/file basics |
 | Shared Android | Platform developer | approved OS/library adapters | App-specific navigation or presentation state |
 | Renderer | Terminal developer | pinned terminal engine and local asset loader | Arbitrary network pages, credentials, SSH implementation |

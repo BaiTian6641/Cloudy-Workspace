@@ -1,8 +1,8 @@
 # P6 — Hardening and supported release
 
-**Status:** planned. **Active effort:** 10–18 person-days before contingency. **Purpose:** Prove resilience, upgrades, support documentation, and sustained daily use.
+**Status:** planned. **Active effort:** 10–18 person-days before contingency. **Purpose:** Qualify complete Googlebook desktop workflows, recovery, signed distribution and sustained use; phone/tablet optimization is outside scope.
 
-The canonical stage data is [backlog.json](../backlog.json). Estimates assume one experienced developer using established components; hardware access and upstream blockers can add elapsed time. Owner labels are roles, not staffed assignments.
+The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-project/platform-rule-zero.md) defines desktop scope. Estimates are active effort, not elapsed time or staffing commitments; re-estimate after P0. Stage IDs remain stable; the dependency order can place a later-numbered addition before an existing release gate.
 
 | Stage | Outcome | Effort, person-days | Prerequisites |
 | --- | --- | ---: | --- |
@@ -21,6 +21,7 @@ Work:
 2. Run eight-hour terminal/stream/transfer workloads with memory/cache bounds and battery/thermal observations.
 3. Verify independent app operation, no command/approval/flash replay, and authoritative USB/file reconciliation.
 4. Fix critical defects and narrow support claims where reliable behavior is not established.
+5. Repeat required X11 window, SFTP grant/export/edit, RDP/VNC session and USB enrolled hotplug failure cases across suspend/resume and actual Googlebook process eviction.
 
 Deliverables:
 
@@ -32,7 +33,7 @@ Exit evidence:
 - No silent data loss, unbounded growth, stuck input, or surprise side-effect replay in supported cases.
 - Failures produce actionable bounded diagnostics.
 
-Record evidence under `qualification/results/P6-S1/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-X02, Q-X03, Q-C06, Q-D03. Official source IDs: G15, G16, G02; resolve them in the [source register](../../07-reference/source-register.md).
+Record evidence under `qualification/results/P6-S1/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-X02, Q-X03, Q-C06, Q-D03, Q-C07, Q-C08, Q-C09, Q-C10, Q-D06, Q-D07, Q-D08, Q-N03, Q-P03. Official/upstream source IDs: G15, G16, G02; resolve them in the [source register](../../07-reference/source-register.md).
 
 ## P6-S2 — Protocol skew, data migrations, updates, and rollback
 
@@ -55,7 +56,7 @@ Exit evidence:
 - An upgrade failure preserves recoverable user state and explains required action.
 - Rollback is limited to verified supported paths, not an assumed Android downgrade.
 
-Record evidence under `qualification/results/P6-S2/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-R01, Q-S01. Official source IDs: G02, R06; resolve them in the [source register](../../07-reference/source-register.md).
+Record evidence under `qualification/results/P6-S2/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-R01, Q-S01. Official/upstream source IDs: G02, R06; resolve them in the [source register](../../07-reference/source-register.md).
 
 ## P6-S3 — Distribution requirements and user documentation
 
@@ -66,7 +67,8 @@ Work:
 1. Refresh current target-SDK/distribution requirements for the chosen channel; verify signing/license/source obligations.
 2. Write setup, trust/key recovery, backend installation, permissions, input release, file conflicts, USB recovery, and diagnostics guides.
 3. Publish only measured OS/compositor/probe/codec combinations and list explicit deferred capabilities.
-4. Optionally qualify phone Continue On on API 37 devices; defer it explicitly without blocking the core release.
+4. Publish the desktop-only applicability ledger; keep phone/tablet optimization and phone continuity outside required release work.
+5. Verify the actual Android distribution/device-catalog targeting and separate APK/AAB signing/install/update behavior; publish Googlebook desktop support only, with phone/tablet explicitly outside scope.
 
 Deliverables:
 
@@ -76,9 +78,9 @@ Deliverables:
 Exit evidence:
 
 - Users can complete the primary journeys and recover from known failures with the shipped documentation.
-- Optional phone continuity or VM roadmap features do not become accidental release blockers/promises.
+- Phone continuity outside scope and VM roadmap features do not become accidental release blockers/promises.
 
-Record evidence under `qualification/results/P6-S3/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-R01. Official source IDs: G02, G07, G26, R06; resolve them in the [source register](../../07-reference/source-register.md).
+Record evidence under `qualification/results/P6-S3/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-R01, Q-P03. Official/upstream source IDs: G02, G07, G26, R06, G01, G31, G32; resolve them in the [source register](../../07-reference/source-register.md).
 
 ## P6-S4 — Ten-working-day dogfood and release decision
 
@@ -90,6 +92,7 @@ Work:
 2. Track defects by severity, recurrence, topology/version, data impact, and recovery cost; reserve effort for fixes.
 3. Re-run only affected gates after changes and recheck critical complete journeys before promotion.
 4. Approve release with evidence/support matrix or retain candidate status with explicit unresolved defects.
+5. Dogfood the complete revised desktop ecosystem workflows, collect applicable official desktop-quality evidence, and label every unsupported backend/device capability.
 
 Deliverables:
 
@@ -101,10 +104,8 @@ Exit evidence:
 - No unresolved release-blocking data-loss/trust/replay/ownership/input defect.
 - At least ten working days observed; the 3–5 day estimate is active QA effort, not the observation duration.
 
-Record evidence under `qualification/results/P6-S4/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-R01, Q-A01. Official source IDs: G02, D09; resolve them in the [source register](../../07-reference/source-register.md).
+Record evidence under `qualification/results/P6-S4/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-R01, Q-A01. Official/upstream source IDs: G02, D09; resolve them in the [source register](../../07-reference/source-register.md).
 
 ## Gate and failure route
 
-Every stage must satisfy its exit evidence or record an accepted, qualified fallback before this phase is declared complete. Remain a candidate or narrow the support matrix while release-blocking defects remain. A deadline does not waive data/trust/ownership gates.
-
-P6-S4 has a ten-working-day observation minimum. Its active effort estimate does not compress that elapsed test window.
+No unresolved trust/data/input replay/ownership defect may pass. Publish exact Googlebook/backend support and desktop-only scope; device compatibility and distribution eligibility require evidence. Every done stage links actual evidence; a documentation check does not qualify a device.

@@ -7,5 +7,6 @@
 | [0003](0003-external-backends-first.md) | Adopted for planning | External established backends first |
 | [0004](0004-resource-handoff-and-trust.md) | Adopted for planning | Resource IDs, app-owned credentials, explicit pairing |
 | [0005](0005-evidence-and-capability-gates.md) | Adopted for planning | Official references plus measured capabilities |
+| [0006](0006-desktop-integrated-workflows.md) | Adopted for planning | Googlebook desktop scope, X11/SFTP, native RDP/VNC and USB plug-and-play |
 
 “Adopted for planning” fixes a current boundary; it does not claim implementation. Amend or supersede a decision when an experiment changes it, preserving the evidence and consequence.

@@ -23,5 +23,17 @@ Statuses: **adopted for planning**, **proposed pending spike**, **unknown**, **q
 | R12 | Cross-app version skew and signing identity | Proposed | Platform | P1-S3 / P6-S2 | Version negotiation, explicit import, actionable mismatch |
 | R13 | Distribution restrictions/Play target requirements | Must refresh before release | Maintainer | P6-S3 | Record selected channel and actual requirements at release time |
 | R14 | Eye fatigue/density at actual display scaling | Unmeasured | Design/QA | P1-S2 / P6-S4 | User density/font controls and real-hardware review |
+| D06 | Googlebook desktop/laptop Android package model; no phone/tablet optimization | Adopted for planning | Product/platform | P1-S1/S2 / P6-S3 | [Rule 0](platform-rule-zero.md); narrow desktop windows and accessibility remain required |
+| D07 | Native RDP and VNC client lanes in full R2 | Adopted for planning | Desktop/integration | P0-S4 / P3-S7/S8 | Ordinary compatible servers, no custom agent dependency; external viewer is partial |
+| D08 | Enrolled idle USB auto-attach to one approved consumer | Adopted for planning | USB/device | P3-S6 | Actual permission/owner confirmation; no unknown/protected reassign or flash replay |
+| R15 | Maintained Android X server can expose top-level windows to native broker | Unknown, critical for full R1 | X11/Android | P0-S7 / P2-S6 | Prototype rootless app/dialog mapping; single full X desktop is a labeled unmet-requirement fallback |
+| R16 | X11 SECURITY extension, engine hooks and trust-context isolation | Unknown, high | SSH/X11 | P0-S7 | Truthful restricted/trusted modes, separate displays; ordinary SSH stays available |
+| R17 | RDP/VNC engines, native dependencies and distribution rights | Unknown, high | Maintainer/native | P1-S4 / P3-S7/S8 | Resolve before embedding; select maintained patched engine or record blocker |
+| R18 | Protocol session/auth/security feature divergence | Unknown per server | Desktop/QA | P0-S4 / P3-S7/S8 | Negotiated capability/server matrix; no silent protocol or security downgrade |
+| R19 | Bidirectional Android file drop, delayed receivers and staging grants | Unknown, high | Files/Android | P2-S7 | Bounded staged URI export plus tested Save/Share fallback; no remote-path-as-URI |
+| R20 | USB provider events/control, permission renewal and auto-use races | Unknown, high | USB/device | P0-S5 / P3-S6 | Consumer state reconciliation, generation IDs and explicit permission setup; no blind toggle retry |
+| R21 | Low input-to-photon latency under actual decode/thermal/relay conditions | Unmeasured, high | Desktop/network | P0-S4/S6 / P5-S2 | Matched Moonlight/Parsec comparison, optional codec flags, bounded native queues and quality budgets |
+| R22 | Android distribution can target intended Googlebook desktop audience | Unresolved channel detail | Maintainer/platform | P1-S1 / P6-S3 | Verify channel/device catalog; no invented OS feature flag or inferred phone support |
+| R23 | Expanded scope and X11 integration uncertainty | Planning range only | Product/engineering | P0-S6 / P1-S4 | Revised 125–217 active person-days before reserve; re-estimate after feasibility/build/license decisions |
 
 Update this table when evidence changes; link the run, installed version, and affected phase. A fallback is acceptable only when its user-visible limitation is documented and the fallback itself has been tested.

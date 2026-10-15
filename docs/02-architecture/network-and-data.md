@@ -6,7 +6,8 @@ Use the existing official Tailscale client initially. Cloudy does not add a comp
 
 | Direction | Flow | Measurement boundary |
 | --- | --- | --- |
-| Googlebook → host | SSH/PTYS/SFTP/local forwards | App payload plus optional OS wire counters |
+| Googlebook ↔ host | SSH/PTYS/SFTP/local forwards/X11 channels | App payload plus optional OS wire counters; X11 separate from terminal-only samples |
+| Googlebook ↔ RDP/VNC server | Native desktop protocol and negotiated channels | Per-protocol encoding/security/transport and input/response timing |
 | Googlebook → host agent | Paired capabilities/requests/events | Bounded control-plane traffic |
 | Host → Googlebook | Desktop video/audio | Stream payload and measured decoder/network statistics |
 | Googlebook ↔ host | Desktop input / optional microphone | Separate from video downlink |
@@ -41,6 +42,8 @@ At 15 Mbps, 4 h/day for 22 days is 653.4 GB before files/audio/other traffic. An
 Every reported number carries: units, start/end interval, direction, endpoint, network interface/path if observable, and `measured-payload`, `measured-wire`, or `estimated`. Unknown path and unknown traffic remain unknown. VPN-wide OS counters and application counters cover different populations; explain the difference rather than pretending exact reconciliation.
 
 Measure 10–15 minute samples of terminal light/heavy redraw, idle/scrolling/CAD video, transfers, USB programming, and idle control traffic. Test same-LAN direct, real remote direct, and relayed/degraded paths where available. Keep saturation tests separate from active programming. Capture RTT distribution, loss, bytes, frame pacing, encode/decode times, dropped frames, CPU, battery, and versions.
+
+Add X11 redraw and native RDP/VNC productivity workloads as separate rows. The [desktop performance procedure](../06-validation/desktop-performance.md) defines longer pacing/thermal runs, comparative input-to-photon measurements and impaired links. A low RTT does not establish low display latency. Prioritize interactive work using supported backend controls and bounded queues; preserve dependent RDP/VNC state and held-input transitions.
 
 ## Metered-mode policy
 

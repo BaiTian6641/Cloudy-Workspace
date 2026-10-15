@@ -2,6 +2,8 @@
 
 **Design direction:** Carbon's productive structure with Material Design 3's tonal clarity and adaptive behavior. This is an original Cloudy Workspace proposal, not an official IBM/Google theme or a requirement to combine two component frameworks.
 
+**[Rule 0](../00-project/platform-rule-zero.md):** Googlebook desktop/laptop Android applications. Optimize keyboard/precision pointer, native windows and desktop information layout. Phone/tablet optimization is outside scope; narrow desktop windows, system IME and accessibility remain required.
+
 The interface should feel calm at first glance and precise during work: pale mineral surfaces in light appearance, deep blue-green neutrals in dark appearance, restrained teal primary actions, indigo links/focus, readable productive typography, and dense aligned lists. Terminals and streamed content keep their own color semantics.
 
 ## Read in order
@@ -14,8 +16,11 @@ The interface should feel calm at first glance and precise during work: pale min
 6. [Screen specifications](screen-specs.md): both products and important edge states.
 7. [Accessibility](accessibility.md): contrast pairs, input access, scaling, and test gates.
 8. [Implementation mapping](implementation-map.md): native components, renderer boundary, and token ownership.
+9. [Desktop workflow refinement](desktop-workflows.md): integrated SFTP/drop, X11 windows, protocol profiles, USB enrollment and performance diagnostics.
 
 Canonical values live in [tokens.json](../../shared/design-system/tokens.json). The [specimen](preview.html) is an offline, interactive design study with synthetic data. It demonstrates Console/Desktop, light/dark, comfortable/compact density, connection states, an inspector, and a command palette. It does not connect to hosts, stream video, or execute commands.
+
+The specimen represents the initial screen subset. Revision 01's S13–S17 are detailed native design specifications; their functionality is not implemented in that browser artifact.
 
 ## Concrete visual decisions
 

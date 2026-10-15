@@ -15,7 +15,10 @@ The token JSON includes paired contrast checks and fixed terminal ANSI colors. N
 | Dense tables/tree | Native components/custom layout after semantics review | Alignment, selection, virtualization, readable metadata |
 | Terminal | Isolated local renderer experiment in native host | ANSI palette, exact input/selection/resize; no general web browsing |
 | Stream | Native decoder/surface/backend | Input capture and media lifecycle, no React/JSON frame path |
+| RDP / VNC | Maintained native engine + common Desktop surface/input contract | Protocol-specific trust, negotiation, session semantics and diagnostics |
+| X11 app windows | Native X server adapter + Android desktop window broker | Top-level/dialog ownership, host identity, native focus/IME/caption |
 | Files/attachments | System picker, URI grants, native transfer UI | Clear source/destination and commit/conflict states |
+| Console session files | Shared file models/transfer service + native adjacent pane + scoped export staging | Correct session binding, bidirectional drop and staged edits without Desktop dependency |
 | Device status | Native ownership state machine view | Authority/unknown/protection semantics |
 | Diagnostics | Native bounded structured views/export | Exact error, context, redaction and measurement provenance |
 
@@ -24,6 +27,8 @@ The token JSON includes paired contrast checks and fixed terminal ANSI colors. N
 The offline specimen is original HTML/CSS/JavaScript. It is a review surface for the visual language and limited local interactions. It provides app selection, appearance/density changes, simulated connection states, inspector visibility, and a keyboard-operated command palette. All hosts, files, output, traffic, and progress are synthetic. The illustrative desktop scene is not a vendor screenshot or a working stream.
 
 It deliberately does not establish Android IME, SSH, screen-reader terminal support, native video, pointer capture, cross-app IPC, backend launch APIs, or USB compatibility. The screen specification and stage gates remain the authority for those behaviors.
+
+Revision 01's S13–S17 describe additional native desktop workflows. The specimen remains an initial visual-language artifact; it does not simulate those new clients/windows or establish phone/tablet support. The [desktop workflow design](desktop-workflows.md) binds the new flows to canonical roles and native semantics.
 
 ## P1 implementation sequence
 

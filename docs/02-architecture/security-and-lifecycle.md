@@ -32,6 +32,12 @@ Do not mislabel SSH as media playback. Bound wake locks to explicit work. Stop h
 | Host capture/input | Host setup within user session | Show exact host/backend reason and supported next step |
 | Pairing / SSH key | Explicit enrollment/connect | Preserve profile; stop privileged operation |
 | Local tunnel | Explicit start | Explain bind/destination error and leave other sessions running |
+| X11 display | Per-host forwarding enrollment and isolated local X server | Show restricted/trusted capability truthfully; stop wrong-cookie/context connections |
+| RDP server identity | Connect and certificate change | Show verified identity or deliberate trust flow; no unconditional ignore/downgrade |
+| VNC security | Explicit profile and negotiated security type | Require supported protected route; no silent None/plaintext fallback |
+| USB auto-attach | Reversible enrollment for device and one host | Pause on denied permission, unknown/competing/protected ownership; no broad automatic hub claim |
+
+X11 app windows use a broker/process lifetime independent of the shell Activity but cannot promise GUI survival after X connection or app process loss. RDP/VNC session recovery follows the server's actual session model. An auto-attach intent is not permission or ownership evidence. [X11](x11-windows.md), [native desktop clients](remote-desktop-backends.md) and [USB plug-and-play](usb-plug-and-play.md) specify those boundaries.
 
 ## Logging, privacy, and diagnostics
 

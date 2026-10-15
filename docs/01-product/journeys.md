@@ -2,6 +2,8 @@
 
 These journeys join product requirements, design states, stages, and acceptance evidence. They are proposed flows; the specimen illustrates only a subset.
 
+All journeys run as Googlebook desktop workflows in Android packages under [Rule 0](../00-project/platform-rule-zero.md). Use native window/task, Files, keyboard/precision pointer and system IME behavior. Phone/tablet optimization is not a parallel journey.
+
 ## J01 — First trusted Console connection
 
 1. Create host profile with address, username, environment, and optional jump chain.
@@ -25,15 +27,15 @@ Failure paths: source changed during upload, invalid Windows/WSL path, port coll
 
 ## J03 — Switch to visual work on the same project
 
-Console sends `hostId`, `environmentId`, `workspaceId`, and registered `resourceId` through an explicit protected IPC route. Desktop resolves the resource under its own profile and asks for its own pairing/authentication if needed. It presents the selected backend and starts the stream or provides the manual-launch fallback. Unsupported or missing recipients produce an install/setup hint without losing Console state.
+Console sends `hostId`, `environmentId`, `workspaceId`, and registered `resourceId` through an explicit protected IPC route. Desktop resolves the resource under its own profile and authenticates independently. It opens the selected native RDP/VNC profile or the explicit high-performance stream lane; external streaming has a labeled launch/return flow. Switching protocols presents session differences instead of silently substituting one desktop. Missing recipients produce an install/setup hint without losing Console state.
 
 **Stages:** P1-S3, P3-S2/S5. **Evidence:** Q-X01 with both app-version skew and missing-app cases. No shell command, credential, or local Android path is passed as a resource action.
 
 ## J04 — Program hardware with exclusive ownership
 
-Inspect the device identity and current consumer. Select a host, attach through the qualified backend, and wait for confirmed ownership. Start programming in the host tool; enable protected mode when operation state is not available. Follow approved reset/bootloader identities. On loss of transport, preserve the last confirmed owner with an unknown-state label until the consumer/provider state is reconciled. Release intentionally before changing host.
+Enroll device identity, provider/permission, approved consumer and auto-attach policy once. On a later plug, reconcile actual idle ownership and attach to that consumer without another Cloudy dialog where grants permit. Start programming only after confirmed ownership/tool readiness; enable protection when operation state is unavailable. Follow approved reset/bootloader identities. On loss, preserve last confirmed owner plus unknown state until reconciliation. Release intentionally before changing host; no flash replay.
 
-**Stages:** P0-S5, P3-S4, P6-S1. **Evidence:** Q-D04, flash/verify logs, reset identities, interrupted transport, explicit recovery. A fallback provider near the board is recorded as a different topology.
+**Stages:** P0-S5, P3-S4/S6, P6-S1. **Evidence:** Q-D04/D06, hotplug cycles, permission outcomes, flash/verify/reset logs and ownership recovery. A provider near the board is a different topology, not proof of local Googlebook plug-and-play.
 
 ## J05 — Edit a remote document safely
 
@@ -52,3 +54,21 @@ Restore the layout immediately from local metadata; show disconnected state whil
 Choose Console by default. Desktop presents the selected bitrate/frame rate and a labeled estimate before streaming, with separate measured session bytes once available. Hide/close pauses media at the backend, not merely in the UI. Large transfers and thumbnails require explicit policy. A budget threshold does not interrupt active programming.
 
 **Stages:** P0-S6, P5-S4. **Evidence:** Q-N01, router/OS counters compared to app payload counters.
+
+## J08 — Launch an X11 tool beside Console
+
+Connect to ordinary SSH with qualified X11 forwarding, then launch a remote engineering GUI. Its native top-level window appears beside Console; open a second app and an owned dialog, move/resize them and type with the system IME. Focus them from Console's window list. Close one app normally without closing its sibling or terminal. On X/SSH loss show actual GUI termination/unknown state without replaying the launch command.
+
+**Stages:** P0-S7, P2-S6/S5. **Evidence:** Q-C07/C08 including two trust contexts, cookie policy and process/connection loss.
+
+## J09 — Browse and drag files beside the terminal
+
+Open the session-linked SFTP pane at a registered project root. Drop a local multi-file selection into the named directory, then insert a committed path into the terminal. Download/drag a remote file into a local editor through a staged URI, edit and commit after a version check. Switch terminal hosts during a transfer and verify the job keeps its original target. Missing directory integration offers explicit Open path instead of guessing from a shell prompt.
+
+**Stages:** P2-S7/S5, P3-S3. **Evidence:** Q-C09/C10, hash/version comparisons, grant revocation, delayed receiver and competing edits.
+
+## J10 — Choose a native desktop protocol and recover
+
+Select a saved RDP or VNC profile, verify server identity/security and authenticate through native UI. Work in the native surface, change scale/size if supported, switch focus and release held input. Exercise a controlled outage; show the actual recovered/new server session and measured recovery. No custom Cloudy host agent is needed. Performance streaming has its own profile and later matched-baseline measurement.
+
+**Stages:** P0-S4/S6, P3-S7/S8, P5-S2. **Evidence:** Q-D07/D08/Q-N02/N03 with protocol-specific server/security/encoding and workload context.

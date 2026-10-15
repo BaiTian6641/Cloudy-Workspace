@@ -22,7 +22,11 @@ The [freedesktop notification specification](https://specifications.freedesktop.
 
 ## Streaming and lifecycle
 
+Native RDP/VNC clients connect to ordinary enabled compatible servers without the custom Cloudy agent. Record actual host edition/server product, user/session type, certificate/authentication/security, negotiated graphics/encoding/transport, monitor behavior and disconnect/reconnect policy. RemoteApp needs actual server-published applications and its own qualification; it is not X11 forwarding. See [desktop backend design](../02-architecture/remote-desktop-backends.md).
+
 Record the exact [Sunshine release/setup instructions](https://github.com/LizardByte/Sunshine/blob/master/docs/getting_started.md), capture path, encoder, input path, and service/user-session topology. Test unlocked, locked, logged out, rebooted, sleeping, resumed, monitor-off, unplugged, and headless states independently. Backend release documentation may differ from moving `master`/`latest` references; qualification uses pinned versions.
+
+SSH X11 needs permitted forwarding, xauth and X11 applications on the host; native Googlebook windows are the client's broker responsibility. USB plug-and-play needs an enrolled consumer with compatible drivers and a reachable provider. A host-side consumer-control adapter may use supported IPC through a narrow paired helper or authorized SSH path; standard desktop protocols do not thereby depend on it. Query real backend state before auto-attach and preserve programming protection.
 
 ## Files and Drive
 

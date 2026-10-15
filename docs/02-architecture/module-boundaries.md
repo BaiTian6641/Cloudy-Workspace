@@ -9,6 +9,8 @@ P1 converts these source ownership boundaries into build modules after P0 choose
 | `shared/android:domain` | Host/environment/resource IDs and error categories | Immutable models and schema conversion | Unknown enum/version handling |
 | `shared/android:identity` | App-owned keys, trust records, pairing | Credential handles and signing/wrapping operations | Revocation, backup/restore, enrollment cancel |
 | `shared/android:ssh` | Engine adapters, PTY, SFTP, jumps, forwards | Bounded asynchronous streams and typed errors | Trust, algorithm policy, disconnect semantics |
+| `shared/android:x11` | Console X11 window broker, native task/surface binding and input adaptation | Generation-scoped X window records and typed engine events | Separate windows, dialogs, trust context, GUI lifecycle |
+| `shared/android:remote-desktop` | Native render/input/profile boundary for stream/RDP/VNC | Typed capabilities and lifecycle, native surface handles | Backend-specific input/session/security and bounded state |
 | `shared/android:transfer` | Journals, version checks, cache/staging | Transfer jobs and commit outcomes | Resume mismatch, conflict, cancellation cleanup |
 | `shared/android:platform` | Window/input/URI/lifecycle wrappers | Capability checks and OS callbacks | API guards, IME, process death |
 | `shared/android:ipc` | Explicit app handoff and import | Versioned non-secret envelopes | Sender identity, unknown recipient/version |
@@ -18,12 +20,16 @@ P1 converts these source ownership boundaries into build modules after P0 choose
 | `host/core` | Pairing/capability/event/job service | Versioned transport-neutral contracts | Expiry, replay gaps, scope, cancellation |
 | `host/{windows,macos,linux}` | User-session OS capabilities | Capability flags and typed adapter results | Physical OS/session matrix |
 | `adapters/{desktop,usb,agents}` | Upstream version-specific integration | Discover/start/status/stop/reconcile as supported | Unsupported API and backend-version cases |
+| `adapters/x11` | Qualified local X server packaging/connection/rendering hooks | Native local channels and X window metadata | License/ABI, authentication, no root/private API dependency |
+| `adapters/desktop/{rdp,vnc,stream}` | Independent maintained protocol engines | Native engine callbacks behind shared Desktop contracts | Negotiation, security, display/input recovery, engine updates |
 
 ## Dependency rules
 
 App UI depends on shared models and services. Shared modules never depend on either app. Protocol schemas describe serialization without importing platform UI types. Host adapters depend on host-core interfaces; host core does not import OS-specific APIs directly. Design tokens have no product-state dependency.
 
 SSH/SFTP engine adapters must be replaceable without redesigning navigation. Stream launch and integrated stream adapters expose different capability levels rather than pretending external-client lifecycle is controllable. USB ownership state is shared domain logic with backend-confirmed facts, not a boolean derived from a button.
+
+Console and Desktop reuse file/transfer source while owning credentials and journals separately. Console alone supplies its session browser and drop export staging; Desktop's later remote DocumentsProvider is not a dependency. X11 broker surfaces do not use the terminal renderer. Native RDP/VNC are separate modules from external stream launch and do not require the custom host agent.
 
 ## Versioning and release units
 

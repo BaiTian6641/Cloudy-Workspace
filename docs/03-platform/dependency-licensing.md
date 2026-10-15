@@ -11,6 +11,9 @@ This is an engineering due-diligence register. Final distribution terms require 
 | xterm.js | Terminal renderer candidate | Pinned local assets after input/security qualification | P0-S3 / P1-S4 |
 | Maintained JVM SSH engine | SSH/SFTP/jumps/forwarding candidate | Compare Android support, algorithms, footprint, licensing | P0-S3 |
 | libssh2-style native engine | Alternative SSH boundary | NDK packaging/update burden in same comparison | P0-S3 |
+| Maintained Android X server; Termux:X11 reference | Local X server with native top-level broker | P0 prototype; no assumed shared UID/root/private API or embedding right | P0-S7 / P1-S4: exact engine/files/build/license and maintenance |
+| FreeRDP | Native RDP and optional later RemoteApp | P0 build probe, P3 native integration | P1-S4: Apache-2.0 root plus actual dependency/codec obligations; pin patched release |
+| Maintained RFB engine; LibVNCClient candidate | Native VNC client | P0 build/security probe, P3 integration | P1-S4: GPL file/license/dependency model and advisory patch coverage |
 | Sunshine | Host desktop backend | Separately installed | P0-S4 |
 | Moonlight Android | Client baseline; possible later native integration | External app first | P5-S1: GPL-3.0 source/distribution and fork maintenance decision |
 | VirtualHere | Android USB provider + host consumers | External licensed software | P0-S5 / P1-S4: trial/license/API/redistribution terms |
@@ -18,7 +21,9 @@ This is an engineering due-diligence register. Final distribution terms require 
 | rclone | Optional Linux cloud-file adapter | Host-configured, not embedded by default | P3-S3/P5-S3: cache/conflicts and actual license |
 | Go | Optional host core | Select toolchain at implementation | P1-S1/P4-S1 |
 
-The [Moonlight repository](https://github.com/moonlight-stream/moonlight-android) identifies its GPL-3.0 license. Invoking an external app and distributing a derived/integrated implementation are distinct choices; do not assume one licenses the other. [VirtualHere's Android page](https://www.virtualhere.com/android) is the initial vendor entry point; integration rights and control interfaces remain a separate investigation.
+The [Moonlight repository](https://github.com/moonlight-stream/moonlight-android) identifies its GPL-3.0 license. Invoking an external app and distributing a derived/integrated implementation are distinct choices; do not assume one licenses the other. [VirtualHere's Android page](https://www.virtualhere.com/android) and [consumer API](https://www.virtualhere.com/client_api) are entry points; API availability does not grant redistribution rights. The [FreeRDP root license](https://github.com/FreeRDP/FreeRDP/blob/master/LICENSE) and [LibVNC copying terms](https://github.com/LibVNC/libvncserver/blob/master/COPYING) are starting evidence, not substitutes for reviewing the selected build.
+
+Native RDP/VNC and X11 need P1-S4 decisions before their P2/P3 implementation. Do not postpone those obligations to P5's high-performance-stream license gate. Parsec/GeForce NOW are experience references only; no embedded SDK/client or proprietary assets are selected. Keep the [LibVNC security policy](https://github.com/LibVNC/libvncserver/security) and actual release/advisory fixes in the engine selection record.
 
 ## Required record before embedding
 

@@ -1,6 +1,6 @@
 # Screen-by-screen design specifications
 
-Screen IDs are stable references for design review and implementation tickets. The [specimen](preview.html) illustrates S02 and S06 plus selected connection and inspector states. Other screens below are specifications, not completed mockups.
+Screen IDs are stable references for design review and implementation tickets. The [specimen](preview.html) illustrates the initial S02 and S06 subset plus selected states; it has not been expanded to implement the revised X11/SFTP/RDP/VNC/USB flows. S13–S17 and revisions below are specifications for native Googlebook desktop UI under [Rule 0](../00-project/platform-rule-zero.md), not completed mockups.
 
 ## S01 — Console hosts and first connection
 
@@ -67,3 +67,33 @@ Search registered actions/workspaces/hosts, displaying scope and destination. Re
 ## Review checklist for every screen
 
 Identify its primary task, host/environment context, focus entry/exit, empty/loading/partial/error states, narrow-window behavior, readable long labels, touch/keyboard path, and the exact operation authority. Link changes to a stage and an acceptance case. A visually polished happy path alone does not pass design review.
+
+## S13 — Console SFTP beside the active session
+
+Place the session-linked file pane beside the terminal with host/environment and breadcrumb always visible. Its header offers pin/follow-active, refresh, upload and destination actions. A dense table supports range/additive selection, rename, download, Copy path and staged edit through desktop menus. The transfer strip expands into the shared journal without hiding the active destination. Directory tracking shows explicit/manual, shell-integrated or unavailable state.
+
+Incoming drag targets name `Upload to host:path`; outgoing remote files show Preparing download before a staged URI is available. Dropping on the terminal offers path/reference insertion after commit. Keyboard alternatives provide every operation. States include missing SFTP, permission denied, stale listing, queued/paused/verifying/committing, conflict and revoked local grant. **Stages/cases:** P2-S7, Q-C09/C10.
+
+## S14 — Separate X11 application and window list
+
+The remote app occupies its own native window with system caption controls, sanitized application title and persistent host identity in Cloudy chrome. Console's graphical-window list groups by host/session and focuses existing windows. Owned dialogs stay with their parent; popups do not create standalone task entries. Resize and DPI updates preserve input coordinate mapping.
+
+Connection loss keeps an honest ended/unknown GUI state and explains that tmux does not preserve X connections. Closing the app requests normal remote close; force close is separate. Restricted/trusted forwarding policy and prerequisites live in session settings with exact reasons when unavailable. **Stages/cases:** P0-S7/P2-S6, Q-C07/C08/Q-P02.
+
+## S15 — Desktop protocol profiles and native session
+
+Choose High-performance stream, RDP or VNC in a labeled protocol control. Each profile exposes relevant endpoint/trust/session/input/display settings and collapses unsupported options with an explanation. First trust/authentication uses native prompts. An existing compatible profile opens directly; switching protocol never masquerades as continuation of the old session.
+
+The native surface has a compact context/release toolbar, backend-specific resize/clipboard controls and expandable observed diagnostics. Distinguish external stream launch from an integrated RDP/VNC surface. Certificate/security mismatch, missing server, unsupported encoding and expired session appear as layer-specific errors. **Stages/cases:** P3-S7/S8/P5-S2, Q-D07/D08/Q-N02/N03.
+
+## S16 — USB enrollment and routine hotplug
+
+Enrollment identifies provider, exact device/serial or explicit port, approved host, driver/provider permission state and auto-attach choice. A successful setup produces a persistent concise rule such as `This probe → Lab workstation; attach when idle`. Subsequent recognized plugs show Detecting → Attaching → Ready without another Cloudy modal when grants and ownership permit.
+
+Busy/unknown/permission-required uses the existing ownership row and a concrete recovery action; protected programming remains visible. Renaming a device does not change its identity. Unplug/replug and approved bootloader state retain the same logical device record with a new connection generation. **Stages/cases:** P3-S4/S6, Q-D04/D06.
+
+## S17 — Performance profile and diagnostic evidence
+
+Show configured resolution/fps/bitrate separately from actual decoder, negotiated transport/encoding, presented fps, queue/decode timing, RTT and route when observable. Missing metrics read Unknown with their source, never zero. Balanced/Sharp/Metered are editable starting profiles with readable text/CAD previews and no fabricated latency badge.
+
+Advanced diagnostics can export redacted measurements with exact versions and boundaries. A benchmark comparison labels matched/unmatched conditions and proposed budget versus measured result. Surface stalled/recovering state without trapping input. **Stages/cases:** P0-S4/S6/P5-S2/S4, Q-N01/N02/N03.

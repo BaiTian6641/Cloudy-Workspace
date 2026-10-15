@@ -12,6 +12,13 @@ No physical runs have been performed by this repository initialization. All rows
 | ASUS Zenbook Duo | Unknown | GPU/session unknown | Secondary host | Unqualified | None |
 | HP ZBook Ultra G1a | Unknown | GPU/session unknown | Secondary host | Unqualified | None |
 | Selected Linux environment | Unknown | Distribution + Wayland compositor/version unknown | Capture/input/lock/headless/notifications | Unqualified | None |
+| HP Googlebook 14 + selected SSH/X11 host | Unknown | SSH engine/X server/window broker unknown | Separate X11 app windows, dialogs, IME and isolation | Unqualified | None |
+| HP Googlebook 14 + selected RDP server | Unknown | RDP engine/server edition/security/graphics unknown | Native RDP render/input/session recovery | Unqualified | None |
+| HP Googlebook 14 + selected VNC servers | Unknown | RFB engine/encoding/security unknown | Native VNC desktop and protected route | Unqualified | None |
+| HP Googlebook 14 + Android Files/editor | Unknown | URI/drop/staging receiver unknown | Session SFTP and incoming/outgoing file drops | Unqualified | None |
+| HP Googlebook 14 + enrolled USB consumer | Unknown | Provider/client/driver/probe identities unknown | Repeated plug-and-play and approved reenumeration | Unqualified | None |
+
+Phones/tablets and other Android desktop modes are outside current supported scope. APK launch compatibility is not a qualified row. Googlebook touchscreen access remains part of desktop accessibility/input review where relevant.
 
 ## Add a qualified row
 

@@ -2,6 +2,8 @@
 
 Adapt to the **current window's usable content area** after system insets, not physical panel resolution. Google's [adaptive window guidance](https://developer.android.com/develop/ui/compose/layouts/adaptive/use-window-size-classes) provides the platform route; the thresholds below are Cloudy's initial content constraints and will be tuned in P1.
 
+These are Googlebook desktop window rules under [Rule 0](../00-project/platform-rule-zero.md), including narrow tiling. They do not create phone/tablet layout targets. Keep desktop commands, focus and host context even when supporting panes collapse.
+
 ## Shell geometry
 
 | Region | Proposed baseline | Behavior |
@@ -41,15 +43,17 @@ Density preference is sticky per app/window profile. Do not rearrange the UI on 
 
 ## Console arrangement
 
-The terminal gets the largest continuous area. Tabs sit above it; host/environment/workspace context stays in a compact header. Split dividers preserve leaf size constraints and resize the remote PTYs after a short debounce. Search/forwards/attachments use a supporting drawer, and opening one does not steal a running terminal's input until the user enters its control.
+The terminal gets the largest continuous area. Tabs sit above it; host/environment/workspace context stays in a compact header. An adjacent SFTP pane uses the supporting-pane width constraints, with visible host/path and pin/follow state. At moderate width it can replace navigation; at narrow width it docks as a reachable drawer or independent file window. Avoid narrowing the terminal, navigation, files and inspector all at once. Split dividers preserve leaf constraints and resize remote PTYs after a short debounce. Search/forwards/transfers use a supporting drawer; opening one does not steal terminal input until the user enters its control.
 
 Persist split proportions, active tab/pane, font scale, drawer choice, and remote session IDs by window profile. When a saved layout no longer fits, keep all sessions reachable in tabs; do not terminate hidden sessions to satisfy geometry.
 
 ## Desktop arrangement
 
-Workspace/host navigation on the left, native stream or launch state in the center, optional files/device inspector on the right. The full Files destination uses a table and details pane. Devices uses a stable ownership table with a persistent protected-operation region when needed. Activity is chronological, filterable by host/project, and preserves event provenance.
+Workspace/host navigation on the left, native RDP/VNC/stream surface or explicit external-stream launch state in the center, optional files/device inspector on the right. The full Files destination uses a table and details pane. Devices uses a stable ownership table with enrollment/auto-attach settings and a persistent protected-operation region. Activity is chronological, filterable by host/project, and preserves provenance.
 
 When the streaming app is external, display a launch/return state rather than a fabricated live thumbnail. Embedded media later uses the center surface and native input capture; app overlays must not obstruct the release affordance or misdirect input.
+
+Separate X11 applications are native desktop windows outside the main Console pane. Give each a compact host/app context and native caption, keeping menus/dialogs associated with their owner. Do not redraw an entire remote desktop as the substitute for per-app windows. See [desktop workflow design](desktop-workflows.md).
 
 ## Alignment and overflow
 

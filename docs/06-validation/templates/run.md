@@ -11,10 +11,16 @@
 - Input device / display mode / scaling / power state:
 - Probe / tool / firmware / approved reset identities:
 - Topology / direct-or-relay / measured counter boundaries:
+- Applicable official desktop-quality test IDs and justified not-applicable features:
+- Android package IDs / signature / SDK/ABI / install or publishing channel:
+- Protocol / negotiated transport, encoding or codec / server security / session identity:
+- X11 engine/display/window generation or USB enrollment/connection generation where relevant:
 
 ## Experiment
 
 State the hypothesis, prerequisites, exact stimulus, expected observations, and duration. Describe safe setup/recovery for a fault-injection run. Separate a configured setting from an observed measurement.
+
+For performance use the [measurement protocol](../desktop-performance.md): matched comparison conditions, input-to-photon method/uncertainty, warmup/run/sample counts and raw measurement path. For USB hotplug record cycle count and permission/provider/consumer-ready boundaries. Phone/tablet launch is not Googlebook desktop qualification.
 
 ## Observed result
 
