@@ -306,7 +306,16 @@ class SshChannelFixtureTests(unittest.TestCase):
         with self.terminal() as child:
             self.ready(child)
             child.close_master()
-            self.assertEqual(child.process.wait(timeout=2), 129)
+            exit_code = child.process.wait(timeout=2)
+            events = self.audits()
+            final = events[0][-1] if events else {}
+            # Keep the failure actionable on hosted runners without exposing
+            # the private audit path, command, environment or complete record.
+            outcome = {key: final.get(key) for key in ("event", "reason", "intendedExitCode")}
+            self.assertEqual(
+                exit_code, 129,
+                f"master hangup: observedExitCode={exit_code}; finalAudit={outcome!r}"[:512],
+            )
         with self.terminal() as child:
             self.ready(child)
             child.process.send_signal(signal.SIGHUP)
