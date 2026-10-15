@@ -1,6 +1,6 @@
 # P0 — Qualification and decisions
 
-**Status:** P0-S1 complete; P0-S2 investigation complete with CAP-PLATFORM `experiment`; P0-S3 and P0-S4 investigations in progress. **Active effort:** 15–28 person-days before contingency. **Purpose:** Resolve Googlebook desktop API/input/engine/window/protocol/device boundaries using scoped capability outcomes. Independent branches do not inherit an X11 phase-wide blocker.
+**Status:** P0-S1 complete; P0-S2 investigation complete with CAP-PLATFORM `experiment`; P0-S3, P0-S4 and P0-S5 investigations in progress. **Active effort:** 15–28 person-days before contingency. **Purpose:** Resolve Googlebook desktop API/input/engine/window/protocol/device boundaries using scoped capability outcomes. Independent branches do not inherit an X11 phase-wide blocker.
 
 The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-project/platform-rule-zero.md) defines desktop scope. Follow [capability outcomes](../feasibility-gates.md) and [independent release gates](../release-gates.md). Estimates are active effort, not elapsed time; re-estimate after physical evidence. Revision 02 moved the former P5-S1 decision to P1-S5; other stage IDs retain their identity.
 
@@ -137,7 +137,9 @@ The [first native RDP sessions](../../../qualification/results/P0-S4/2026-10-15-
 
 **User decision, 2026-10-15:** no board/probe is available for selection yet. Full general-purpose USB implementation remains required. Continue API/provider/licensing and real software-state work; physical forwarding, reset and programming results remain pending. General scope is not a universal hardware-support claim, and synthetic fixtures cannot satisfy CAP-USB.
 
-**Owner:** Embedded/device developer. **Prerequisites:** P0-S1. **Status:** planned.
+**Owner:** Embedded/device developer. **Prerequisites:** P0-S1. **Status:** in-progress for provider and native-access investigation.
+
+The [USB provider entry](../../03-platform/googlebook/p0-s5-usb-provider-entry.md) separates Android grant-owned libusb access, network export and workstation import. The [real native-access diagnostic](../../06-validation/2026-10-15-native-usb-review.md) now builds without a physical peripheral; missing hardware leaves granted-device and forwarding/programming results pending. External provider setup remains a partial milestone.
 
 Work:
 
@@ -216,6 +218,6 @@ An investigation may complete with a blocked capability record. Only a scoped su
 
 ## D15 RDP input and host clarification
 
-The [0.1.3 input result](../../../qualification/results/P0-S4/2026-10-15-rdp-input-boundary.md) is a retained failed host-input case with continued video and correct explicit native cleanup. The [portal/relative follow-up](../../../qualification/results/P0-S4/2026-10-15-rdp-relative-portal.md) resolves the consented keyboard-delivery boundary and adds standard relative capture/release; captured remote movement fails on the exact KRdp server. Next select a server that consumes standard relative input before physical3D qualification. The [LibVNC host build](../../../qualification/results/P0-S4/2026-10-15-vnc-host-build.md) is compilation only.
+The [0.1.3 input result](../../../qualification/results/P0-S4/2026-10-15-rdp-input-boundary.md) is a retained failed host-input case with continued video and correct explicit native cleanup. The [portal/relative follow-up](../../../qualification/results/P0-S4/2026-10-15-rdp-relative-portal.md) resolves the consented keyboard-delivery boundary and adds standard relative capture/release; captured remote movement fails on the exact KRdp server. The isolated GNOME fixture now runs, but its physical test still fails visible captured movement. Complete the [cursor-presentation repair](../../03-platform/googlebook/rdp-cursor-presentation-entry.md) and capture/release evidence before another physical or 3D verdict. The [LibVNC host build](../../../qualification/results/P0-S4/2026-10-15-vnc-host-build.md) is compilation only.
 
 P0-S4 now explicitly applies [D15](../../04-design/desktop-rdp-interaction-contract.md): standard RDP server compatibility across target Linux/Windows/macOS rows, desktop mouse/keyboard/IME and actual negotiated relative mouse for 3D. Q-D09 qualifies capture, protocol and application consumption separately. P1-S3 owns the [Googlebook credential vault](../../02-architecture/rdp-authentication-security.md), with Q-S02 integrated at P3-S7. Missing host hardware/server capability is recorded per row; it neither certifies that lane nor prevents Linux work. Stage dependencies and capability gates remain unchanged.

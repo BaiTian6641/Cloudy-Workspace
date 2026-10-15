@@ -1,0 +1,31 @@
+Cloudy native USB diagnostic: JVM runtime copyright notices
+
+These exact-version source-header notices apply to the selected runtime artifacts.
+The source archives themselves and implementation source are not bundled.
+
+org.jetbrains.kotlin:kotlin-stdlib:2.2.10
+Source: https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/2.2.10/kotlin-stdlib-2.2.10-sources.jar
+Source SHA-256: 2983f21e626325f256bc4443c7fe45a83912bba077be119142f68210c0548173
+Copyright 2010-2025 JetBrains s.r.o. and Kotlin Programming Language contributors.
+Copyright 2010-2023 JetBrains s.r.o. and Kotlin Programming Language contributors.
+Copyright 2010-2020 JetBrains s.r.o. and Kotlin Programming Language contributors.
+Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+Copyright 2010-2021 JetBrains s.r.o. and Kotlin Programming Language contributors.
+Copyright 2010-2022 JetBrains s.r.o. and Kotlin Programming Language contributors.
+Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+Copyright 2007 Google Inc.
+Copyright 2010-2019 JetBrains s.r.o. and Kotlin Programming Language contributors.
+Copyright 2010-2018 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license
+Copyright (c) 2007-present, Stephen Colebourne & Michael Nascimento Santos
+Copyright 2010-2015 JetBrains s.r.o.
+Copyright 2010-2016 JetBrains s.r.o.
+Copyright 2010-2017 JetBrains s.r.o.
+
+org.jetbrains:annotations:13.0
+Source: https://repo.maven.apache.org/maven2/org/jetbrains/annotations/13.0/annotations-13.0-sources.jar
+Source SHA-256: 42a5e144b8e81d50d6913d1007b695e62e614705268d8cf9f13dbdc478c2c68e
+Copyright 2000-2013 JetBrains s.r.o.
+Copyright 2006 Sascha Weinreuter
+Copyright 2000-2012 JetBrains s.r.o.
+Copyright 2000-2009 JetBrains s.r.o.
+

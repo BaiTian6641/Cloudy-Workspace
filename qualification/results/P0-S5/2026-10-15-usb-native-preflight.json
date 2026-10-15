@@ -1,0 +1,558 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUtc": "2026-10-15T20:17:26.297543+00:00",
+  "scope": "P0-S5 real native loading and Android enumeration only; no granted-device/forwarding/programming result",
+  "sourceBaseCommit": "871d028339a2ceee37039dabf1844bf55cdbd094",
+  "device": {
+    "model": "HP Googlebook 14",
+    "build": "CL3B.260622.276.R2",
+    "api": 37,
+    "abi": "arm64-v8a",
+    "securityPatch": "2026-09-01"
+  },
+  "build": {
+    "package": "dev.cloudy.qualification.usb",
+    "versionName": "0.1.0",
+    "versionCode": 1,
+    "buildRef": "d207f066-517d-4a2f-8897-f347998696da",
+    "apk": {
+      "path": "qualification/probes/native-usb/app/build/outputs/apk/debug/app-debug.apk",
+      "bytes": 3399686,
+      "sha256": "90f8b8f581a6b3e901f02446ffd019cd7e8401a16d81b884dead97531a158a90"
+    },
+    "sourceFiles": [
+      {
+        "path": ".github/workflows/android-native-usb.yml",
+        "bytes": 4766,
+        "sha256": "b01b184004a08edaf3a714e9af4ab7399eb08718543141a61858c89f99792e1b"
+      },
+      {
+        "path": "qualification/probes/native-usb/README.md",
+        "bytes": 7195,
+        "sha256": "2c28f91913d57aa5448a2cac0562f1ca360bd030cca15408373b11939568e9d9"
+      },
+      {
+        "path": "qualification/probes/native-usb/app/build.gradle.kts",
+        "bytes": 1860,
+        "sha256": "cd69c2a474896d4ed4ae48e6547ca248fea7b4dca4865d27381d0fe6d92e71b2"
+      },
+      {
+        "path": "qualification/probes/native-usb/app/gradle.lockfile",
+        "bytes": 6230,
+        "sha256": "b5231ade521b6da6602300e07bf8df35f4dd0f6dd8d241e543c75c35f292f1f2"
+      },
+      {
+        "path": "qualification/probes/native-usb/app/src/main/AndroidManifest.xml",
+        "bytes": 956,
+        "sha256": "7327f468637af73fb98d37afc6d3f02b77c22627525ac6b9dd90c8d20435666a"
+      },
+      {
+        "path": "qualification/probes/native-usb/app/src/main/assets/Apache-2.0.txt",
+        "bytes": 11358,
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      {
+        "path": "qualification/probes/native-usb/app/src/main/assets/README-runtime.txt",
+        "bytes": 1292,
+        "sha256": "6747d193e7c18ad80e32a77641a820ca142fa603c11489c08c2d5fc168b408ef"
+      },
+      {
+        "path": "qualification/probes/native-usb/app/src/main/assets/kotlin-COPYRIGHT.txt",
+        "bytes": 647,
+        "sha256": "8f1a1700adb5490604c6094fb137bf73f6c28d3ee554b58f3ff8ef975a79672d"
+      },
+      {
+        "path": "qualification/probes/native-usb/app/src/main/assets/kotlin-boost-LICENSE.txt",
+        "bytes": 1337,
+        "sha256": "8d8291caf1cee26d23acf3eb67c9f9a2d58f1c681b16a4fbe8cbfb9e3c0b5a9b"
+      },
+      {
+        "path": "qualification/probes/native-usb/app/src/main/assets/kotlin-stdlib-attributions.txt",
+        "bytes": 1335,
+        "sha256": "acbf0fb40551980e88adeaf38af20691395f792256ec5e90f212b8848ca116f9"
+      },
+      {
+        "path": "qualification/probes/native-usb/app/src/main/assets/kotlin-threetenbp-LICENSE.txt",
+        "bytes": 1520,
+        "sha256": "d1bc53b493a3ab387b42717ed5c4b1976a5048996f81154278100bff86d39331"
+      },
+      {
+        "path": "qualification/probes/native-usb/app/src/main/assets/runtime-copyrights.txt",
+        "bytes": 1801,
+        "sha256": "ee5ad88cd6a27221ad5191cb4bedd6d4dd83e400f2d10092a7d34c665233db0f"
+      },
+      {
+        "path": "qualification/probes/native-usb/app/src/main/assets/runtime-provenance.json",
+        "bytes": 11462,
+        "sha256": "f5114ee1e806abe7b8b3595b0e8db54157781441b11f10b7d3622dd95abdb797"
+      },
+      {
+        "path": "qualification/probes/native-usb/app/src/main/java/dev/cloudy/qualification/usb/CleanupAdmission.kt",
+        "bytes": 594,
+        "sha256": "48fb20e2a72e07a2358b9f1c1c5e41e234630a6165c318f9d81a21462ad1819a"
+      },
+      {
+        "path": "qualification/probes/native-usb/app/src/main/java/dev/cloudy/qualification/usb/LeaseOwner.kt",
+        "bytes": 1906,
+        "sha256": "5540d292c16f6ba765e3e1a90b484896983fb1d4a162700b7b315cfc8003f48d"
+      },
+      {
+        "path": "qualification/probes/native-usb/app/src/main/java/dev/cloudy/qualification/usb/NativeUsb.kt",
+        "bytes": 412,
+        "sha256": "c4f18cf8be8bc0d1ecc3f806dd83ca88170296e6db94a57eb7629107c072215d"
+      },
+      {
+        "path": "qualification/probes/native-usb/app/src/main/java/dev/cloudy/qualification/usb/PermissionRequests.kt",
+        "bytes": 956,
+        "sha256": "f340fff59feac09c760b6250d5afddd0859667fe08c769bc1bf84dfbe4749dd1"
+      },
+      {
+        "path": "qualification/probes/native-usb/app/src/main/java/dev/cloudy/qualification/usb/UsbActivity.kt",
+        "bytes": 11980,
+        "sha256": "058e17db77185e9eb92e04c710027c3a18d495fa8b2598a425e7e47b6e63b500"
+      },
+      {
+        "path": "qualification/probes/native-usb/app/src/main/res/drawable/ic_usb_probe.xml",
+        "bytes": 543,
+        "sha256": "98c65be0b2c479f33c669bdbab9f6e74baf6a9e94f0883f14966ceb5670d9dc4"
+      },
+      {
+        "path": "qualification/probes/native-usb/app/src/main/res/values/strings.xml",
+        "bytes": 954,
+        "sha256": "5281245b5d6d578a6c2210da6636998418181d01784eb82823bc7c9146c2bd8b"
+      },
+      {
+        "path": "qualification/probes/native-usb/app/src/main/res/values/styles.xml",
+        "bytes": 306,
+        "sha256": "33fbd52aaccffb4f9a73e566336a4bb16230b6af59671511005a831abd568f92"
+      },
+      {
+        "path": "qualification/probes/native-usb/app/src/main/res/xml/data_extraction_rules.xml",
+        "bytes": 221,
+        "sha256": "99c4e52969af165f8a3f79912278bf59e3d8e3a28b589160ffb99f5bf1a3fefd"
+      },
+      {
+        "path": "qualification/probes/native-usb/app/src/test/java/dev/cloudy/qualification/usb/CleanupAdmissionTest.kt",
+        "bytes": 1961,
+        "sha256": "a0c0d57947440b99220f60fd152d4d8d2332702c04313d00b2477f24f3ec4a2a"
+      },
+      {
+        "path": "qualification/probes/native-usb/app/src/test/java/dev/cloudy/qualification/usb/LeaseOwnerTest.kt",
+        "bytes": 4445,
+        "sha256": "a41d1b0a03237acd2b4808c182c9915644cfaae141af5f0c1887d504ab304723"
+      },
+      {
+        "path": "qualification/probes/native-usb/app/src/test/java/dev/cloudy/qualification/usb/PermissionRequestsTest.kt",
+        "bytes": 2457,
+        "sha256": "02306b32d8b50a4c02a8549be01df4998f2e835c648ed8319c0cbed7ca793df8"
+      },
+      {
+        "path": "qualification/probes/native-usb/build.gradle.kts",
+        "bytes": 70,
+        "sha256": "ed6ba3bdfc3cbdcd648d7213860ffa3b0d62da38c37915b731b08b4df6f9d209"
+      },
+      {
+        "path": "qualification/probes/native-usb/gradle.properties",
+        "bytes": 130,
+        "sha256": "f3f041d93f9bcc3da02e0a93415efb58cead2407c398c4d672e5f286d4d5d4d5"
+      },
+      {
+        "path": "qualification/probes/native-usb/gradle/verification-metadata.xml",
+        "bytes": 107914,
+        "sha256": "6dd06fe46e2692ec85154f1256183835e3377c158b74a6b96d5d9a860c8f212b"
+      },
+      {
+        "path": "qualification/probes/native-usb/native/usb_probe.c",
+        "bytes": 3764,
+        "sha256": "02c14517b7bc8c2e0da34115eb4da4318fb636eba01e626d5c67eadfe365de6c"
+      },
+      {
+        "path": "qualification/probes/native-usb/settings.gradle.kts",
+        "bytes": 289,
+        "sha256": "33e7a60c14f59f0d64272673e5bb70c796b246eb74ee1ea2b5da621303a3b17e"
+      },
+      {
+        "path": "qualification/probes/native-usb/source-lock.json",
+        "bytes": 581,
+        "sha256": "27421fb88942b41976d50f8a1dcaaaf3c72a42a0124aacb6ccf4163afcc59077"
+      },
+      {
+        "path": "qualification/probes/native-usb/tests/test_prepare.py",
+        "bytes": 4140,
+        "sha256": "b8dc96e238f66bf4438e9a2ccae7534ce71e98defc7cf037ae295bdb81829b3a"
+      },
+      {
+        "path": "tools/build_rdp_native.py",
+        "bytes": 4742,
+        "sha256": "07ed0db14c8f68d5eaebd810c812631baedcabc59998f5d596046bb486fd3fd1"
+      },
+      {
+        "path": "tools/prepare_rdp_native.py",
+        "bytes": 25796,
+        "sha256": "2a4d474a2a49cbaba2c1c83ada328f40cad01e61a49b53a3e554a3e9d9239ee2"
+      },
+      {
+        "path": "tools/prepare_usb_native.py",
+        "bytes": 11436,
+        "sha256": "0defb34875ac5df80f311cee235e356f473aec5c9218182cac731d77c383759d"
+      }
+    ],
+    "packagedFiles": [
+      {
+        "path": "lib/arm64-v8a/libcloudyusb.so",
+        "sha256": "257c0b08a78829f052ca11e0f67b29a0412d5dc3aa30919a0bdb9dd96c55c952",
+        "bytes": 7304
+      },
+      {
+        "path": "lib/arm64-v8a/libusb-1.0.so",
+        "sha256": "132c28689889e2db98efd01fe4a7b9261e8aa5bd6257fee8c98ada96699cc2a6",
+        "bytes": 99608
+      },
+      {
+        "path": "assets/Android-build-recipe.mk",
+        "sha256": "2d9a2ed244670ef3e9c034f29bdaddade7ca85f175734f95b77f542c555139ba",
+        "bytes": 473
+      },
+      {
+        "path": "assets/NOTICE.txt",
+        "sha256": "b47198129d6dcc2efb22e04d95a85d0f01e4cd5a2365f6051f0ce25a739a59db",
+        "bytes": 309
+      },
+      {
+        "path": "assets/build_rdp_native.py",
+        "sha256": "07ed0db14c8f68d5eaebd810c812631baedcabc59998f5d596046bb486fd3fd1",
+        "bytes": 4742
+      },
+      {
+        "path": "assets/cloudy-usb-probe.c",
+        "sha256": "02c14517b7bc8c2e0da34115eb4da4318fb636eba01e626d5c67eadfe365de6c",
+        "bytes": 3764
+      },
+      {
+        "path": "assets/libusb-1.0.30.tar.bz2",
+        "sha256": "fea36f34f9156400209595e300840767ab1a385ede1dc7ee893015aea9c6dbaf",
+        "bytes": 656112
+      },
+      {
+        "path": "assets/libusb-COPYING.txt",
+        "sha256": "5df07007198989c622f5d41de8d703e7bef3d0e79d62e24332ee739a452af62a",
+        "bytes": 26436
+      },
+      {
+        "path": "assets/native-manifest.json",
+        "sha256": "a7cb3df5515b0d9ac8a189f6df5384f4b645db4f4fe629fc3005d72efd85c831",
+        "bytes": 4545
+      },
+      {
+        "path": "assets/prepare_rdp_native.py",
+        "sha256": "2a4d474a2a49cbaba2c1c83ada328f40cad01e61a49b53a3e554a3e9d9239ee2",
+        "bytes": 25796
+      },
+      {
+        "path": "assets/prepare_usb_native.py",
+        "sha256": "0defb34875ac5df80f311cee235e356f473aec5c9218182cac731d77c383759d",
+        "bytes": 11436
+      },
+      {
+        "path": "assets/source-lock.json",
+        "sha256": "27421fb88942b41976d50f8a1dcaaaf3c72a42a0124aacb6ccf4163afcc59077",
+        "bytes": 581
+      },
+      {
+        "path": "assets/Apache-2.0.txt",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+        "bytes": 11358
+      },
+      {
+        "path": "assets/README-runtime.txt",
+        "sha256": "6747d193e7c18ad80e32a77641a820ca142fa603c11489c08c2d5fc168b408ef",
+        "bytes": 1292
+      },
+      {
+        "path": "assets/kotlin-COPYRIGHT.txt",
+        "sha256": "8f1a1700adb5490604c6094fb137bf73f6c28d3ee554b58f3ff8ef975a79672d",
+        "bytes": 647
+      },
+      {
+        "path": "assets/kotlin-boost-LICENSE.txt",
+        "sha256": "8d8291caf1cee26d23acf3eb67c9f9a2d58f1c681b16a4fbe8cbfb9e3c0b5a9b",
+        "bytes": 1337
+      },
+      {
+        "path": "assets/kotlin-stdlib-attributions.txt",
+        "sha256": "acbf0fb40551980e88adeaf38af20691395f792256ec5e90f212b8848ca116f9",
+        "bytes": 1335
+      },
+      {
+        "path": "assets/kotlin-threetenbp-LICENSE.txt",
+        "sha256": "d1bc53b493a3ab387b42717ed5c4b1976a5048996f81154278100bff86d39331",
+        "bytes": 1520
+      },
+      {
+        "path": "assets/runtime-copyrights.txt",
+        "sha256": "ee5ad88cd6a27221ad5191cb4bedd6d4dd83e400f2d10092a7d34c665233db0f",
+        "bytes": 1801
+      },
+      {
+        "path": "assets/runtime-provenance.json",
+        "sha256": "f5114ee1e806abe7b8b3595b0e8db54157781441b11f10b7d3622dd95abdb797",
+        "bytes": 11462
+      }
+    ]
+  },
+  "checks": {
+    "jvmTests": 20,
+    "pythonHelperTests": 6,
+    "repositoryTests": 67,
+    "nativeCompile": "passed",
+    "androidCompiler": "passed",
+    "androidLint": "passed",
+    "pythonAst": "passed-16-files",
+    "ruff": "passed",
+    "apkSignature": "passed",
+    "elfAndZip16KiBAlignment": "passed"
+  },
+  "observations": {
+    "loadedLibusbVersion": "1.0.30",
+    "noDiscoveryInitializationAndExit": "passed",
+    "androidUsbHostFeature": true,
+    "androidEnumeratedDevices": 2,
+    "selectedDevices": 0,
+    "permissionRequests": 0,
+    "openedConnections": 0,
+    "noSelectionGuard": "passed",
+    "emptyCleanupStatus": "complete",
+    "diagnosticProcessAfterStop": "absent"
+  },
+  "pending": [
+    "identified representative peripheral",
+    "physical grant/denial and borrowed-FD wrap",
+    "detach/replug/cancellation and reset",
+    "network export and workstation import",
+    "program/verify",
+    "product distribution adoption",
+    "CAP-USB"
+  ],
+  "privateArtifacts": [
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/TEST-dev.cloudy.qualification.usb.CleanupAdmissionTest.xml",
+      "bytes": 801,
+      "sha256": "3bec7e6c0b459ad30224982ed8e9a061d4564d4cce49f3b6e6d45d6c107b6f4f"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/TEST-dev.cloudy.qualification.usb.LeaseOwnerTest.xml",
+      "bytes": 1633,
+      "sha256": "bbb0724b80510355358e7ce07f1910aeb2dd4a82a49963c5ac4309b8362469c5"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/TEST-dev.cloudy.qualification.usb.PermissionRequestsTest.xml",
+      "bytes": 1363,
+      "sha256": "39ba8dc96d0dfdbc15020f36eb756e641c935a7e63357a4e05ed46a5b48c11ee"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/build.log",
+      "bytes": 810,
+      "sha256": "ef198663476e40d847275f7529d0f6e189cd11cd3668f7307051dda890a92034"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/diagnostic-0.1.0.apk",
+      "bytes": 3399686,
+      "sha256": "90f8b8f581a6b3e901f02446ffd019cd7e8401a16d81b884dead97531a158a90"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/gradle.log",
+      "bytes": 3164,
+      "sha256": "e6e73e4997d1b51d81e8923c432e23401c428eb9fcf3dc1e3287bc825de026de"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/lint-results-debug.xml",
+      "bytes": 86,
+      "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/operator.py",
+      "bytes": 3436,
+      "sha256": "82376b4fd22d6567b8f8046f0398a785c2a2452c71f9b935b5e0c906c54e5329"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/package-audit.json",
+      "bytes": 4099,
+      "sha256": "0ee2c8f5a34dd683cd47772bbaa7a5211b33d840110ba0f71abc14560753a15d"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/receipt.json",
+      "bytes": 5907,
+      "sha256": "3e7d24dd77128731944d481db8d0c56d3ec450bc1a7d5719bb52516feffd5277"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/repository-tests.log",
+      "bytes": 11284,
+      "sha256": "6676fc687b6f6f2419b1d31c4a1cfab07487d3b315599e40db7918b095e63a61"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-close-tap.json",
+      "bytes": 282,
+      "sha256": "ae982f2a0eafc6afbf92534556432fca1989d9245bf84653c21b13ba2e8a6ae9"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-close-user.json",
+      "bytes": 284,
+      "sha256": "37c9b6d8602cf18b6649d891ad00eb7196db8e2799b6fd2d687d3916747963e1"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-closed-layout-command.json",
+      "bytes": 588,
+      "sha256": "0ea8365840f42ce72fa0cc409fad5a3f3459c018485d277d97a64e5c81dc21cc"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-closed-layout.json",
+      "bytes": 28142,
+      "sha256": "e24bfbfb900982deeca2ca915695c17c5a06bcda8cebe9202bf10600324d09aa"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-closed-user.json",
+      "bytes": 284,
+      "sha256": "cfbaee5fe79b99a7b9bdfb85ea3f8beb1de9e5bac40104a5022c6d49782ab25b"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-final-logcat.json",
+      "bytes": 10004,
+      "sha256": "da5eaeba975b668eb90cae0bc205debbe3a65ea197c4e9726511ff81446a2a54"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-final-logcat.txt",
+      "bytes": 9651,
+      "sha256": "1f447a81da7c0338957d172fa0ae8145617d645d252bbe7231a3983cbbebbccc"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-final-meminfo.json",
+      "bytes": 4184,
+      "sha256": "db7f96667e199f4f8c5b66d93999e00744ec16a901aced49ac2e4c2bd074ed8f"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-final-package.json",
+      "bytes": 6273,
+      "sha256": "68e3e08d569ecb1b77a36e8b102e6b90bdc44a87f781a3431dce7aa288a4ae08"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-final-pid.json",
+      "bytes": 304,
+      "sha256": "0e7ae3ae61c3225aafce4e838e09cda9828f221d10cff7b644994dcf9d0ca252"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-final-user.json",
+      "bytes": 284,
+      "sha256": "b7b3a45d0d5c73c09d1208ee6d0d05595b561b4841a9f8e27e0c1b1c3423e34c"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-guard-layout-command.json",
+      "bytes": 586,
+      "sha256": "7175f41e238b0767c01487e5ce6239b729a0c31513e8f1d14b784950ab700e67"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-guard-layout.json",
+      "bytes": 28120,
+      "sha256": "a4219dcd50530858a3865496a6dbc4861cce6c5e4e210488df63eeadd848ba7c"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-guard-user.json",
+      "bytes": 284,
+      "sha256": "42af5163b6d59e302fda8eaa646857a9ce21618c1b9922b5f66268292774b560"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-identity-ro-build-id.json",
+      "bytes": 303,
+      "sha256": "4ea579b39c8b9b41fa6ffef59fffd2e1477187ca9b1aec76ef709bf685df5f6d"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-identity-ro-build-version-sdk.json",
+      "bytes": 296,
+      "sha256": "ca082ffd0295ea845221c5a8683d46a15f8d47ec43c3ae56f3806b85d2dcfc0e"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-identity-ro-build-version-security_patch.json",
+      "bytes": 315,
+      "sha256": "96d6a3b961f07dd2306dd568993718242154aeb85c3a0fe4013a7e0940007c1f"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-identity-ro-product-cpu-abi.json",
+      "bytes": 301,
+      "sha256": "c8958b650dc5f642cb3618a9d63ef90b3c37db882a4d582b079c6d4633c2505c"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-identity-ro-product-model.json",
+      "bytes": 306,
+      "sha256": "d591ecef7d1c1315d11a5fec88da5add9228527bc80f5b265eb6c3fc785d93bd"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-identity-user.json",
+      "bytes": 284,
+      "sha256": "e54d3eb83c88262ba9a58a8c186bac284f7eec47296410631eb2aa26d587a55a"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-initial-layout-command.json",
+      "bytes": 590,
+      "sha256": "86047f795dd1daf1e85828067e78925d8d4e599b7cc7aa877ecfac8f1d5e075f"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-initial-layout.json",
+      "bytes": 28188,
+      "sha256": "43cff9657601e9494f9daebbf22e1184ba36d61b450c6adb95688c73ea3cf733"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-initial-user.json",
+      "bytes": 284,
+      "sha256": "b58c0c23a4c2a7893bbd099131b71b9b446e1ebe8eaedea0fb5c3e1c3bd52b0c"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-inspect-empty-tap.json",
+      "bytes": 282,
+      "sha256": "dc9734a80503dac37999e15f6527628621b58025b45e7d90937b391cef686cfd"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-inspect-empty-user.json",
+      "bytes": 284,
+      "sha256": "28e87bc83783b686230e0a462a70993c6c616bdd5e60cabd4b971da17c50356f"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-launch-launch.json",
+      "bytes": 450,
+      "sha256": "eba23afd57d3d924bd42dbfdfb618eff8f2ee4d198ff2de7eb4c9c0e16859ee3"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-launch-user.json",
+      "bytes": 284,
+      "sha256": "6951149bda298a61999f1fa50d0f2bbbf822daa261dd592a2b65267ff194f974"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-loaded-screen-command.json",
+      "bytes": 574,
+      "sha256": "d26fa2dcbb6da9c772e4834819ecfab54dfd90fc4c9247cae06326103c3a2da6"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-loaded-user.json",
+      "bytes": 284,
+      "sha256": "d699086a41b3647fd64856beb4772031238d68c7d7ba489efe6898ee4524fca0"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-loaded.png",
+      "bytes": 354660,
+      "sha256": "08a2dffb11683323646dcbe9f27be8063ce7eedf4529799650bcffd7ddcd5137"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-stop-process.json",
+      "bytes": 43,
+      "sha256": "71a33424c1ac331550d94538e68486a78dcef731c5c3f271a116a68b545c381b"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-stop-stop.json",
+      "bytes": 316,
+      "sha256": "4e906e1fd9a0e7d23ff2e28b11e0de689b044b43dbfaf97ae6aee4edf4cc5ee1"
+    },
+    {
+      "path": "qualification/results/private/native-usb/2026-10-15-run-01/usb-stop-user.json",
+      "bytes": 284,
+      "sha256": "70eada6a0896a9dae0e1b1c04eff1a770941911d8ef0244c6ee55686fdc0d0f0"
+    }
+  ]
+}

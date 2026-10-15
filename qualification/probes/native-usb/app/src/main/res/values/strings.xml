@@ -1,0 +1,15 @@
+<resources>
+<string name="app_name">Cloudy USB qualification</string>
+<string name="title">USB access boundary · 0.1.0</string>
+<string name="scope">Descriptor-only diagnostic. No forwarding, interface claim, reset, transfer or programming. Select only an identified peripheral; hubs and ADB interfaces are excluded.</string>
+<string name="refresh">Refresh devices</string><string name="grant">Request USB access</string><string name="inspect">Inspect native descriptors</string><string name="close">Close / cancel access</string>
+<string name="devices">Select a peripheral</string><string name="initial">Loading native library…</string>
+<string name="selection">Selected device %1$d · VID %2$04x PID %3$04x</string>
+<string name="device_row">Device %1$d · VID %2$04x PID %3$04x · interface count: %4$d%5$s</string>
+<string name="excluded"> · hub/ADB excluded</string>
+<string name="diagnostic_report">%1$s
+
+%2$s
+
+Build %3$s</string>
+</resources>

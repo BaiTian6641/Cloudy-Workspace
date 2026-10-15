@@ -124,7 +124,9 @@
       "sourceIds": [
         "G09",
         "G25",
-        "G132"
+        "G132",
+        "R143",
+        "R200"
       ],
       "minimumApi": 26,
       "libraryVersion": "Android framework; diagnostic 0.1.4 on API37",
@@ -134,11 +136,11 @@
       "owner": "Android/platform developer",
       "stage": "P0-S4",
       "fallback": "Explicit absolute mode or separately qualified external mouse/backend; none is a relative 3D pass.",
-      "experiment": "Q-D09: diagnostic0.1.4 compiled, actual-source queue test passed, standard relative negotiation and Android capture confirmed. User reports local release works but captured remote cursor does not move;1,788relative queue submissions are not delivery. KRdp6.4.5 lacks a registered relative callback. Actual3D, per-mouse/trackpad cases and repeated focus/disconnect/release remain unqualified. Choose a server with an actual consumption path; Linux/Windows/macOS rows remain separate.",
+      "experiment": "Q-D09: diagnostic0.1.4 compiled, actual-source queue test passed, standard relative negotiation and Android capture confirmed. User reports local release works but captured remote cursor does not move;1,788relative queue submissions are not delivery. KRdp6.4.5 lacks a registered relative callback. Actual3D, per-mouse/trackpad cases and repeated focus/disconnect/release remain unqualified. Choose a server with an actual consumption path; Linux/Windows/macOS rows remain separate. The subsequent physical GRD run records 873 relative JNI submissions but user-visible captured movement fails; release works. Post-confirmation target activity lacks an exact release edge and is not a captured-delivery pass. Source review identifies missing relative cursor-position updates, discarded authoritative position callback and no software default cursor under capture. Repair presentation and record capture/release edges before another physical verdict.",
       "versionNotes": "Capture methods API26; relative axes API24. Captured getX/getY deltas and explicit relative axes are alternative representations, not additive. Historical samples matter.",
-      "researchEvidence": "docs/04-design/desktop-rdp-interaction-contract.md",
+      "researchEvidence": "docs/03-platform/googlebook/rdp-cursor-presentation-entry.md",
       "compileEvidence": "qualification/results/P0-S4/2026-10-15-rdp-relative-portal.md",
-      "deviceEvidence": "qualification/results/P0-S4/2026-10-15-rdp-relative-portal.md"
+      "deviceEvidence": "qualification/results/P0-S4/2026-10-15-rdp-physical-cursor.md"
     },
     {
       "id": "API07",
@@ -283,22 +285,30 @@
       "id": "API12",
       "feature": "USB host access",
       "symbols": [
-        "UsbManager",
-        "UsbDevice",
-        "UsbDeviceConnection"
+        "UsbManager.getDeviceList",
+        "UsbManager.hasPermission",
+        "UsbManager.requestPermission",
+        "UsbManager.openDevice",
+        "UsbDeviceConnection.getFileDescriptor",
+        "UsbDeviceConnection.close"
       ],
       "sourceIds": [
-        "G14"
+        "G14",
+        "G139",
+        "G140"
       ],
-      "minimumApi": null,
+      "minimumApi": 12,
       "libraryVersion": null,
-      "availability": "documented-entrypoint",
-      "qualification": "untested",
-      "checkedOn": "2026-10-14",
+      "availability": "compiled and loaded on exact Googlebook; granted-device operations unqualified",
+      "qualification": "partial",
+      "checkedOn": "2026-10-15",
       "owner": "Android/platform developer",
       "stage": "P0-S5",
       "fallback": "External qualified provider / lab appliance",
-      "experiment": "Actual provider-owned permission, device/consumer identity, flash/verify and reenumeration; serial-only success insufficient"
+      "experiment": "Actual0.1.0 loads libusb1.0.30, no-discovery init/exit and Android enumeration pass; two devices left unselected. No grant/open/native wrap or forwarding/programming. Real no-selection guard and empty cleanup observed. Physical grant/borrowedFD/replug remains pending.",
+      "researchEvidence": "docs/03-platform/googlebook/p0-s5-usb-provider-entry.md",
+      "versionNotes": "Base USB APIs since12; creator-owned immutable PendingIntent identity usesFLAG_IMMUTABLE since23. Probe min35. Stale replies do not consume a new request; relookup current device and grant instead of trusting sender extras.",
+      "deviceEvidence": "qualification/results/P0-S5/2026-10-15-usb-native-preflight.md"
     },
     {
       "id": "API13",
@@ -1344,7 +1354,11 @@
         "R181",
         "R182",
         "R183",
-        "R184"
+        "R184",
+        "R194",
+        "G09",
+        "R143",
+        "R200"
       ],
       "minimumApi": 26,
       "libraryVersion": "FreeRDP3.32.2 at 97eff6ddfbbfaa8e42a126d362686bd001ff8bdc; fifth Android relative-input patch and diagnostic 0.1.4",
@@ -1355,11 +1369,45 @@
       "owner": "Desktop/native developer",
       "stage": "P0-S4",
       "fallback": "Offer explicit absolute mode or separately qualified backend; AINPUT is a distinct extension, and accumulated absolute helper fallback is never standard relative or3D proof.",
-      "experiment": "Q-D09: diagnostic0.1.4 compiled, actual-source queue test passed, standard relative negotiation and Android capture confirmed. User reports local release works but captured remote cursor does not move;1,788relative queue submissions are not delivery. KRdp6.4.5 lacks a registered relative callback. Actual3D, per-mouse/trackpad cases and repeated focus/disconnect/release remain unqualified. Choose a server with an actual consumption path; Linux/Windows/macOS rows remain separate.",
+      "experiment": "Q-D09: diagnostic0.1.4 compiled, actual-source queue test passed, standard relative negotiation and Android capture confirmed. User reports local release works but captured remote cursor does not move;1,788relative queue submissions are not delivery. KRdp6.4.5 lacks a registered relative callback. Actual3D, per-mouse/trackpad cases and repeated focus/disconnect/release remain unqualified. Choose a server with an actual consumption path; Linux/Windows/macOS rows remain separate. Isolated GRD50.2/Mutter50.1 follow-up negotiates/captures and delivers controlled absolute pointer/keyboard; no physical relative stimulus or answer during the finite window, with zero relative events. The later user response supplied no movement or release observation. Physical relative testing remains pending. The subsequent physical GRD run records 873 relative JNI submissions but user-visible captured movement fails; release works. Post-confirmation target activity lacks an exact release edge and is not a captured-delivery pass. Source review identifies missing relative cursor-position updates, discarded authoritative position callback and no software default cursor under capture. Repair presentation and record capture/release edges before another physical verdict.",
       "versionNotes": "RDP relative capability0x80 plus earlyclient0x10 and protocol>=0x00080011; events signedINT16. minimumApi26 is Android capture prerequisite, not RDP protocol OS level. Defaults already advertise relative support; server capability gates use. New JNI uses standard core relative events only, with no AINPUT or absolute fallback. Server callback registration is a separate integration requirement; selected FreeRDPserver3.32.1 can advertise support yet discard events at a null callback.",
-      "researchEvidence": "docs/04-design/desktop-rdp-interaction-contract.md",
+      "researchEvidence": "docs/03-platform/googlebook/rdp-cursor-presentation-entry.md",
       "compileEvidence": "qualification/results/P0-S4/2026-10-15-rdp-relative-portal.md",
-      "deviceEvidence": "qualification/results/P0-S4/2026-10-15-rdp-relative-portal.md"
+      "deviceEvidence": "qualification/results/P0-S4/2026-10-15-rdp-physical-cursor.md"
+    },
+    {
+      "id": "API46",
+      "feature": "Native USB access through Android-granted file descriptor",
+      "symbols": [
+        "libusb_init_context",
+        "LIBUSB_OPTION_NO_DEVICE_DISCOVERY",
+        "libusb_wrap_sys_device",
+        "libusb_get_device_descriptor",
+        "libusb_close",
+        "libusb_exit"
+      ],
+      "sourceIds": [
+        "G14",
+        "R186",
+        "R187",
+        "R188",
+        "R189",
+        "R190",
+        "G139"
+      ],
+      "minimumApi": 12,
+      "libraryVersion": "libusb1.0.30 compiled and runtime loaded; actual granted-FD wrap pending",
+      "interfaceKind": "upstream-native-library-with-android-granted-fd",
+      "availability": "compiled and loaded on exact Googlebook; granted-device operations unqualified",
+      "qualification": "partial",
+      "checkedOn": "2026-10-15",
+      "owner": "Android/USB developer",
+      "stage": "P0-S5",
+      "fallback": "Explicit no-device/denied/unavailable/error state; external qualified provider remains separate. No root/kernel access or automatic driver detach.",
+      "experiment": "Actual0.1.0 loads libusb1.0.30, no-discovery init/exit and Android enumeration pass; two devices left unselected. No grant/open/native wrap or forwarding/programming. Real no-selection guard and empty cleanup observed. Physical grant/borrowedFD/replug remains pending.",
+      "versionNotes": "Wrap API since1.0.23; selected1.0.30 init_context no-discovery option. Borrowed Android FD remains open until libusb_close and is closed by UsbDeviceConnection owner. Probe min35 is local qualification baseline, not API introduction.",
+      "researchEvidence": "docs/03-platform/googlebook/p0-s5-usb-provider-entry.md",
+      "deviceEvidence": "qualification/results/P0-S5/2026-10-15-usb-native-preflight.md"
     }
   ],
   "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."

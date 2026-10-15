@@ -229,7 +229,8 @@
         "Test primary host sessions, lock/headless/permissions, RDP certificate/NLA requirements and protected VNC routes; record unsupported cases and dependencies.",
         "Record separate CAP-RDP, CAP-VNC and stream-feasibility outcomes; document native surface/input and integration blockers independently of external launch success.",
         "Ratify provisional native-stream and protocol-specific responsiveness budgets from the primary-lane probes; missing USB or X11 evidence does not block this decision.",
-        "D15: qualify genuine negotiated RDP relative mouse through public Android capture and an actual 3D application, separately for physical mouse/trackpad and exact Linux/Windows/macOS server rows. The 0.1.4 Android JNI/view relative adapter is implemented and compiled, and negotiation/framework capture are observed; captured remote movement failed on the selected server, local release worked in the user exercise, and actual3D/broader release cases remain unqualified. macOS RDP server selection remains unresolved; built-in Apple VNC is a separate lane."
+        "D15: qualify genuine negotiated RDP relative mouse through public Android capture and an actual 3D application, separately for physical mouse/trackpad and exact Linux/Windows/macOS server rows. The 0.1.4 Android JNI/view relative adapter is implemented and compiled, and negotiation/framework capture are observed; captured remote movement failed on the selected server, local release worked in the user exercise, and actual3D/broader release cases remain unqualified. macOS RDP server selection remains unresolved; built-in Apple VNC is a separate lane.",
+        "Repair the source-confirmed captured cursor presentation gap using the reviewed rdp-cursor-presentation-entry.md: authoritative callback, distinct visible/hidden modes, bounded presentation-only prediction, host-painted received motion and capture/release edge evidence. Preserve standard relative wire input and the failed physical result; no moving local cursor counts as remote delivery."
       ],
       "deliverables": [
         "Pinned stream/RDP/VNC engine and server feasibility matrix",
@@ -308,7 +309,7 @@
       "id": "P0-S5",
       "phase": "P0",
       "title": "USB provider and real programming workflow",
-      "status": "planned",
+      "status": "in-progress",
       "effortDays": {
         "low": 2,
         "high": 4
@@ -318,6 +319,7 @@
         "P0-S1"
       ],
       "tasks": [
+        "Complete the reviewed USB provider entry: separate public Android grant/FD access from actual network export and host import. Build a real libusb-backed diagnostic without claiming or resetting a peripheral, while retaining VirtualHere as an external candidate and full integrated plug-and-play scope. See docs/03-platform/googlebook/p0-s5-usb-provider-entry.md.",
         "Verify Android provider/workstation consumer licensing, permission ownership and consumer-side API on the actual USB topology.",
         "Program/verify the actual board/probe with runtime/bootloader/DFU/composite identities recorded.",
         "Probe hotplug, replug, permission denial, auto-use toggle/state semantics, consumer restart, contention and protected ownership reconciliation in a controlled lab.",
