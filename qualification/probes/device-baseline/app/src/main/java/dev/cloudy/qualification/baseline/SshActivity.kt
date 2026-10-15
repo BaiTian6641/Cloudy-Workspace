@@ -19,6 +19,9 @@ import java.util.UUID
 class SshActivity : Activity() {
     private lateinit var runtime: SshRuntime
     private lateinit var run: Button
+    private lateinit var runPty: Button
+    private lateinit var resizePty: Button
+    private lateinit var finishPty: Button
     private lateinit var trust: Button
     private lateinit var cancel: Button
     private lateinit var lan: Button
@@ -51,20 +54,20 @@ class SshActivity : Activity() {
             }
         }
         content.addView(lan)
-        run = button(R.id.ssh_run, R.string.ssh_run) {
-            val owner = WeakReference(this)
-            val capturedEpoch = epoch
-            runtime.run { owner.get()?.let {
-                it.visible && it.epoch == capturedEpoch && !it.isFinishing && !it.isDestroyed && it.hasLanPermission()
-            } == true }
-        }
+        run = button(R.id.ssh_run, R.string.ssh_run) { start(SshOperation.SFTP) }
         content.addView(run)
+        runPty = button(R.id.ssh_run_pty, R.string.ssh_run_pty) { start(SshOperation.EXEC_PTY) }
+        content.addView(runPty)
         keySummary = TextView(this).apply { id = R.id.ssh_key_summary; setTextIsSelectable(true) }
         content.addView(keySummary)
         trust = button(R.id.ssh_trust, R.string.ssh_trust) { runtime.acceptTrust() }
         content.addView(trust)
         cancel = button(R.id.ssh_cancel, R.string.ssh_cancel) { runtime.cancel() }
         content.addView(cancel)
+        resizePty = button(R.id.ssh_resize_pty, R.string.ssh_resize_pty) { control(SshPtyAction.RESIZE) }
+        content.addView(resizePty)
+        finishPty = button(R.id.ssh_finish_pty, R.string.ssh_finish_pty) { control(SshPtyAction.FINISH) }
+        content.addView(finishPty)
         content.addView(button(R.id.ssh_refresh, R.string.ssh_refresh) { runtime.refresh() })
         content.addView(button(R.id.ssh_recreate, R.string.ssh_recreate) { recreate() })
         content.addView(button(R.id.ssh_new_window, R.string.ssh_new_window) {
@@ -91,7 +94,9 @@ class SshActivity : Activity() {
         }
         setContentView(root)
         root.requestApplyInsets()
-        run.isEnabled = false; trust.isEnabled = false; cancel.isEnabled = false
+        run.isEnabled = false; runPty.isEnabled = false
+        resizePty.isEnabled = false; finishPty.isEnabled = false
+        trust.isEnabled = false; cancel.isEnabled = false
     }
 
     override fun onStart() {
@@ -118,9 +123,32 @@ class SshActivity : Activity() {
         summary.text = state.summary
         keySummary.text = state.trustSummary
         run.isEnabled = visible && hasLanPermission() && state.canRun
+        runPty.isEnabled = run.isEnabled
+        resizePty.isEnabled = visible && hasLanPermission() && state.ptyAction == SshPtyAction.RESIZE
+        finishPty.isEnabled = visible && hasLanPermission() && state.ptyAction == SshPtyAction.FINISH
         trust.isEnabled = visible && state.canTrust
         cancel.isEnabled = state.canCancel
         lan.isEnabled = Build.VERSION.SDK_INT >= 37 && !hasLanPermission()
+    }
+
+    private fun start(kind: SshOperation) {
+        val owner = WeakReference(this)
+        val capturedEpoch = epoch
+        runtime.run(kind) { owner.get()?.let {
+            it.visible && it.epoch == capturedEpoch && !it.isFinishing && !it.isDestroyed && it.hasLanPermission()
+        } == true }
+    }
+
+    private fun control(action: SshPtyAction) {
+        val attemptId = latest?.activeAttemptId ?: return
+        val capturedEpoch = epoch
+        if (runtime.control(attemptId, action) {
+            visible && epoch == capturedEpoch && !isFinishing && !isDestroyed
+        }) {
+            // The worker publishes the next phase only after a real server response.
+            resizePty.isEnabled = false
+            finishPty.isEnabled = false
+        }
     }
 
     private fun hasLanPermission(): Boolean = Build.VERSION.SDK_INT < 37 ||

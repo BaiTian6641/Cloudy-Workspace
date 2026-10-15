@@ -15,12 +15,10 @@ import java.time.Instant
 internal class SshJournal(directory: File) {
     private val file = AtomicFile(File(directory, "ssh-journal.json"))
 
-    data class Restored(val attempts: List<SshAttempt>, val trust: Map<String, String>)
-
-    fun read(): Restored {
+    fun read(): SshJournalData {
         checkFiles()
         if (!file.baseFile.exists() && !File(file.baseFile.path + ".bak").exists()) {
-            return Restored(emptyList(), emptyMap())
+            return SshJournalData(emptyList(), emptyMap())
         }
         val bytes = file.openRead().use { it.readNBytes(LIMIT + 1) }
         require(bytes.size <= LIMIT) { "SshJournalLimit" }
@@ -28,62 +26,21 @@ internal class SshJournal(directory: File) {
             .onUnmappableCharacter(CodingErrorAction.REPORT).decode(ByteBuffer.wrap(bytes)).toString()
         SshJournalGuard.check(text)
         val root = JSONObject(text)
-        require(root.get("schemaVersion") == 1) { "SshJournalVersion" }
-        val trusted = root.getJSONObject("trustedHosts")
-        require(trusted.length() <= SshState.ATTEMPT_LIMIT) { "SshTrustLimit" }
-        val trust = trusted.keys().asSequence().associateWith { key ->
-            require(key.matches(Regex("[0-9a-f]{64}"))) { "SshTrustIdentity" }
-            strictString(trusted, key).also { require(SshConfigSpec.validFingerprint(it)) }
-        }
-        val rows = root.getJSONArray("attempts")
-        require(rows.length() <= SshState.ATTEMPT_LIMIT) { "SshAttemptLimit" }
-        val attempts = (0 until rows.length()).map { index ->
-            val row = rows.getJSONObject(index)
-            val detail = row.getJSONObject("details")
-            require(detail.length() <= 32) { "SshDetailLimit" }
-            val events = row.getJSONArray("events")
-            require(events.length() in 1..SshState.EVENT_LIMIT) { "SshEventLimit" }
-            require(row.get("authenticated") is Boolean) { "SshAuthType" }
-            val dropped = row.get("droppedEvents")
-            require(dropped is Int || dropped is Long) { "SshDroppedEventsType" }
-            SshAttempt(
-                id = strictString(row, "id"), originProcessId = strictString(row, "originProcessId"),
-                configIdentity = strictString(row, "configIdentity"), status = strictString(row, "status"),
-                reason = optionalString(row, "reason"), observedHostKey = optionalString(row, "observedHostKey"),
-                authenticated = row.getBoolean("authenticated"),
-                details = detail.keys().asSequence().associateWith { strictString(detail, it) },
-                droppedEvents = dropped.toString().toLong(), events = (0 until events.length()).map { n ->
-                    val event = events.getJSONObject(n)
-                    val elapsed = event.get("elapsedRealtimeMs")
-                    require(elapsed is Long || elapsed is Int) { "SshEventTime" }
-                    SshEvent(strictString(event, "status"), TransferTime(
-                        strictString(event, "deviceUtc"), elapsed.toString().toLong()), optionalString(event, "reason"))
-                }
-            )
-        }
-        // The pure model validates all restored transitions, identifiers and bounds.
-        SshState(attempts)
-        return Restored(attempts, trust)
+        return SshJournalCodec.decode(root.keys().asSequence().associateWith { decoded(root.get(it)) })
     }
 
     fun encode(processId: String, revision: Long, state: SshState, trust: Map<String, String>): JSONObject =
-        JSONObject().put("schemaVersion", 1).put("probeVersion", BuildConfig.VERSION_NAME)
-            .put("processInstanceId", processId).put("revision", revision)
-            .put("snapshotAtDeviceUtc", Instant.now().toString())
-            .put("trustedHosts", JSONObject(trust))
-            .put("attempts", JSONArray(state.snapshot().map { a ->
-                JSONObject().put("id", a.id).put("originProcessId", a.originProcessId)
-                    .put("configIdentity", a.configIdentity).put("status", a.status)
-                    .put("reason", a.reason ?: JSONObject.NULL)
-                    .put("observedHostKey", a.observedHostKey ?: JSONObject.NULL)
-                    .put("authenticated", a.authenticated).put("details", JSONObject(a.details))
-                    .put("droppedEvents", a.droppedEvents)
-                    .put("events", JSONArray(a.events.map { e ->
-                        JSONObject().put("status", e.status).put("reason", e.reason ?: JSONObject.NULL)
-                            .put("deviceUtc", e.time.deviceUtc).put("elapsedRealtimeMs", e.time.elapsedRealtimeMs)
-                    }))
-            }))
-            .put("scope", "Finite native SSH/SFTP diagnostic; no automatic reconnect, overwrite or remote deletion. Historical completed attempts are observations, not a new audit of remote files.")
+        JSONObject(SshJournalCodec.encode(processId, revision, BuildConfig.VERSION_NAME,
+            Instant.now().toString(), state, trust))
+
+    // The lexical guard bounds nesting before JSONObject and this adapter recurse.
+    // Keep framework parsing separate from the pure, tested schema/migration policy.
+    private fun decoded(value: Any?): Any? = when {
+        value === JSONObject.NULL -> null
+        value is JSONObject -> value.keys().asSequence().associateWith { decoded(value.get(it)) }
+        value is JSONArray -> (0 until value.length()).map { decoded(value.get(it)) }
+        else -> value
+    }
 
     fun write(value: JSONObject) {
         checkFiles()
@@ -114,11 +71,6 @@ internal class SshJournal(directory: File) {
             }
         }
     }
-
-    private fun strictString(o: JSONObject, key: String): String =
-        (o.get(key) as? String) ?: throw IllegalArgumentException("SshJournalString")
-    private fun optionalString(o: JSONObject, key: String): String? =
-        if (o.get(key) == JSONObject.NULL) null else strictString(o, key)
 
     companion object { const val LIMIT = 128 * 1024 }
 }

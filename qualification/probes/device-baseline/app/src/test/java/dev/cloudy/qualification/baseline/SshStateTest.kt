@@ -14,11 +14,12 @@ import org.junit.Test
 class SshStateTest {
     private val process = UUID.randomUUID().toString()
     private val config = "a".repeat(64)
+    private val build = SshBuildIdentity("0.6.0", 8, "49607be8-a053-4f7f-8d22-3764b7e63136")
     private val fingerprint = "SHA256:" + Base64.getEncoder().withoutPadding().encodeToString(ByteArray(32))
     private val different = "SHA256:" + Base64.getEncoder().withoutPadding().encodeToString(ByteArray(32) { 1 })
     private var tick = 0L
     private fun time() = TransferTime("test-${++tick}", tick)
-    private fun begin(state: SshState): SshAttempt = requireNotNull(state.begin(UUID.randomUUID().toString(), process, config, time()))
+    private fun begin(state: SshState): SshAttempt = requireNotNull(state.begin(UUID.randomUUID().toString(), process, config, SshOperation.SFTP, build, time()))
     private fun current(state: SshState) = state.snapshot().last()
     private fun running(): SshAttempt = begin(SshState())
 
@@ -39,14 +40,14 @@ class SshStateTest {
         val state = SshState()
         repeat(8) {
             val active = begin(state)
-            assertNull(state.begin(UUID.randomUUID().toString(), process, config, time()))
+            assertNull(state.begin(UUID.randomUUID().toString(), process, config, SshOperation.SFTP, build, time()))
             assertTrue(state.update(active.id, "failed", "fixture-unavailable", time = time()))
-            assertNull(state.begin(active.id, process, config, time()))
+            assertNull(state.begin(active.id, process, config, SshOperation.SFTP, build, time()))
         }
         val before = state.snapshot()
         assertEquals(8, before.size)
         assertEquals(8, before.map { it.id }.distinct().size)
-        assertNull(state.begin(UUID.randomUUID().toString(), process, config, time()))
+        assertNull(state.begin(UUID.randomUUID().toString(), process, config, SshOperation.SFTP, build, time()))
         assertEquals(before, state.snapshot())
     }
 
@@ -200,5 +201,71 @@ class SshStateTest {
             events = listOf(SshEvent("failed", time(), "failed")))
         assertThrows(IllegalArgumentException::class.java) { SshState(listOf(row, later)) }
         assertEquals(listOf(later, row), SshState(listOf(later, row)).snapshot())
+    }
+
+    @Test fun operationAndExecutingBuildSurviveProgressRecoveryAndLateCallbacks() {
+        val state = SshState()
+        val attempt = requireNotNull(state.begin(UUID.randomUUID().toString(), process, config,
+            SshOperation.EXEC_PTY, build, time()))
+        assertEquals("recorded-build", attempt.provenance)
+        state.update(attempt.id, "running", "pty-awaiting-resize", fingerprint, true,
+            mapOf("ptyInitialCols" to "80", "ptyInitialRows" to "24"), time())
+        val restored = SshState(state.snapshot())
+        assertTrue(restored.reconcileInterrupted(time()))
+        assertFalse(restored.update(attempt.id, "completed", time = time()))
+        assertEquals(SshOperation.EXEC_PTY, current(restored).operation)
+        assertEquals(build, current(restored).buildIdentity)
+        assertEquals("interrupted", current(restored).status)
+        assertEquals("80", current(restored).details["ptyInitialCols"])
+    }
+
+    @Test fun legacyProvenanceIsExplicitAndCannotAppearAfterRecordedBuilds() {
+        val row = running().copy(buildIdentity = null)
+        assertEquals("external-legacy", row.provenance)
+        val legacy = SshState(listOf(row))
+        legacy.reconcileInterrupted(time())
+        assertNull(current(legacy).buildIdentity)
+        assertEquals(SshOperation.SFTP, current(legacy).operation)
+        begin(legacy)
+        assertEquals(row.id, legacy.snapshot().first().id)
+        assertEquals(build, current(legacy).buildIdentity)
+        assertThrows(IllegalArgumentException::class.java) { SshState(listOf(row.copy(operation = SshOperation.EXEC_PTY))) }
+        val recorded = running().let { it.copy(status = "failed", reason = "failed",
+            events = listOf(SshEvent("failed", time(), "failed"))) }
+        assertThrows(IllegalArgumentException::class.java) { SshState(listOf(recorded, row)) }
+    }
+
+    @Test fun executingBuildIdentityRejectsAmbiguousVersionsCodesAndReferences() {
+        listOf("", "0.6", "0.6.0\n", "secret path", "1".repeat(41)).forEach {
+            assertThrows(IllegalArgumentException::class.java) { build.copy(versionName = it) }
+        }
+        assertThrows(IllegalArgumentException::class.java) { build.copy(versionCode = 0) }
+        assertThrows(IllegalArgumentException::class.java) { build.copy(buildRef = "1-1-1-1-1") }
+        assertThrows(IllegalArgumentException::class.java) { build.copy(buildRef = build.buildRef.uppercase()) }
+    }
+
+    @Test fun operationSpecificDetailsRejectCrossLaneOrUnboundedProtocolData() {
+        val state = SshState()
+        val attempt = requireNotNull(state.begin(UUID.randomUUID().toString(), process, config,
+            SshOperation.EXEC_PTY, build, time()))
+        val invalid = listOf(mapOf("uploadName" to "cloudy-${attempt.id}.bin"),
+            mapOf("ptyStdoutBytes" to "4097"), mapOf("ptyInputBytes" to "13"),
+            mapOf("execExitStatus" to "-1"), mapOf("ptyInitialCols" to "0"),
+            mapOf("ptyInitialRows" to "024"), mapOf("execStderrBytes" to "999999999999999999999"),
+            mapOf("execStdoutSha256" to "x".repeat(64)), mapOf("ptyCompletionMarker" to "unknown"))
+        val before = state.snapshot()
+        invalid.forEach {
+            assertThrows(IllegalArgumentException::class.java) { state.update(attempt.id, "running", "protocol", details = it, time = time()) }
+        }
+        assertEquals(before, state.snapshot())
+        // Unexpected but bounded observed values remain useful failure evidence;
+        // the engine, not this serialization model, accepts the fixture protocol.
+        assertTrue(state.update(attempt.id, "running", "protocol", details = mapOf("execExitStatus" to "2",
+            "ptyInitialCols" to "79", "execStdoutSha256" to "b".repeat(64)), time = time()))
+        val sftp = SshState()
+        val old = begin(sftp)
+        assertThrows(IllegalArgumentException::class.java) {
+            sftp.update(old.id, "running", "protocol", details = mapOf("execExitStatus" to "17"), time = time())
+        }
     }
 }

@@ -4,6 +4,9 @@
     <item name="ssh_window_identity" type="id" />
     <item name="ssh_request_lan" type="id" />
     <item name="ssh_run" type="id" />
+    <item name="ssh_run_pty" type="id" />
+    <item name="ssh_resize_pty" type="id" />
+    <item name="ssh_finish_pty" type="id" />
     <item name="ssh_trust" type="id" />
     <item name="ssh_cancel" type="id" />
     <item name="ssh_refresh" type="id" />

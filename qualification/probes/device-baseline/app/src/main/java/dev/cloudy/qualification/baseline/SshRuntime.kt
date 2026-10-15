@@ -18,7 +18,8 @@ import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicReference
 
 internal data class SshUiState(val status: String, val summary: String, val canRun: Boolean,
-    val canTrust: Boolean, val canCancel: Boolean, val trustSummary: String = "")
+    val canTrust: Boolean, val canCancel: Boolean, val trustSummary: String = "",
+    val activeAttemptId: String? = null, val ptyAction: SshPtyAction? = null)
 
 /** A finite process-owned worker outlives recreation; screens never own sockets or credentials. */
 internal class SshRuntime(private val context: Context) {
@@ -30,7 +31,10 @@ internal class SshRuntime(private val context: Context) {
     private val busy = AtomicBoolean(false)
     private val cancelled = AtomicBoolean(false)
     private val publicationQueued = AtomicBoolean(false)
-    private val engine = AtomicReference<SshEngine?>()
+    private data class ActiveEngine(val attemptId: String, val engine: SshEngine)
+    private val engine = AtomicReference<ActiveEngine?>()
+    private val buildIdentity = SshBuildIdentity(BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE,
+        BuildConfig.QUALIFICATION_BUILD_REF)
     private val process = UUID.randomUUID().toString()
     private val originalProviders = Security.getProviders().map { it.name }
     private val journal = SshJournal(context.filesDir)
@@ -51,7 +55,7 @@ internal class SshRuntime(private val context: Context) {
             return
         }
         listeners.add(listener)
-        listener.update(latest)
+        listener.update(currentView())
     }
 
     fun canOpenWindow(): Boolean = listeners.size < 4
@@ -103,12 +107,13 @@ internal class SshRuntime(private val context: Context) {
         }
     }
 
-    fun run(isStillVisible: () -> Boolean) {
+    fun run(kind: SshOperation, isStillVisible: () -> Boolean) {
         if (!latest.canRun || !busy.compareAndSet(false, true)) return
         cancelled.set(false)
         io.execute {
             var id: String? = null
             var deadline: java.util.concurrent.ScheduledFuture<*>? = null
+            var cleanupUncertain = false
             // A late watchdog belongs only to this attempt, never to the next explicit run.
             val timedOut = AtomicBoolean(false)
             try {
@@ -118,15 +123,15 @@ internal class SshRuntime(private val context: Context) {
                 val owner = requireNotNull(state)
                 error = null
                 id = UUID.randomUUID().toString()
-                requireNotNull(owner.begin(id, process, spec.configIdentity, time())) { "SshAttemptUnavailable" }
+                requireNotNull(owner.begin(id, process, spec.configIdentity, kind, buildIdentity, time())) { "SshAttemptUnavailable" }
                 persist()
                 publish()
                 val operation = SshEngine()
-                engine.set(operation)
+                engine.set(ActiveEngine(id, operation))
                 if (cancelled.get() || !isStillVisible() || !hasLanAccess()) operation.cancel()
-                deadline = timer.schedule({ timedOut.set(true); operation.cancel() }, 60, TimeUnit.SECONDS)
+                deadline = timer.schedule({ timedOut.set(true); operation.cancel() }, kind.totalTimeoutSeconds, TimeUnit.SECONDS)
                 val result = operation.run(spec, File(context.filesDir, "ssh-client-key"), id,
-                    trust[spec.endpointId]) { observation ->
+                    trust[spec.endpointId], kind) { observation ->
                     if (!hasLanAccess()) { operation.cancel(); throw IllegalStateException("SshLanRevoked") }
                     require(Security.getProviders().map { it.name } == originalProviders) { "SshProviderOrderChanged" }
                     owner.update(id, "running", observation.status, observation.observedHostKey,
@@ -134,6 +139,7 @@ internal class SshRuntime(private val context: Context) {
                     persist() // Failure aborts before the engine proceeds to its next protocol operation.
                     publish()
                 }
+                cleanupUncertain = result.reason == "helper-cleanup-timeout"
                 val status = if (timedOut.get()) "failed" else if (cancelled.get()) "cancelled" else result.status
                 val reason = if (timedOut.get()) "deadline" else result.reason
                 owner.update(id, status, reason, result.observedHostKey, result.authenticated, result.details, time())
@@ -147,18 +153,40 @@ internal class SshRuntime(private val context: Context) {
                 error = error ?: safe(failure)
             } finally {
                 deadline?.cancel(false)
-                engine.getAndSet(null)?.cancel()
-                // A cancel request does not release the slot. Only actual engine return reaches here.
-                busy.set(false)
+                engine.getAndSet(null)?.engine?.cancel()
+                // A cancel request does not release the slot. If a helper survives the bounded
+                // join, quarantine this process until restart; another run cannot overlap it.
+                if (cleanupUncertain) {
+                    ready = false
+                    error = "helper-cleanup-timeout"
+                }
+                busy.set(cleanupUncertain)
                 publish()
             }
         }
     }
 
+    /** Admission stays on the UI thread; bounded engine controls never queue behind a blocked read. */
+    fun control(attemptId: String, action: SshPtyAction, isStillVisible: () -> Boolean): Boolean {
+        check(Looper.myLooper() == Looper.getMainLooper())
+        val view = latest
+        if (!isStillVisible() || !hasLanAccess() || !busy.get() || cancelled.get() ||
+            view.activeAttemptId != attemptId || view.ptyAction != action) return false
+        val active = engine.get() ?: return false
+        // Fence against a late click from a previous attempt, even if a new engine is already installed.
+        if (active.attemptId != attemptId) return false
+        return active.engine.control(action)
+    }
+
     fun cancel() {
         if (!busy.get()) return
         cancelled.set(true)
-        engine.get()?.cancel()
+        engine.get()?.engine?.cancel()
+        // Immediate UI acknowledgement is only a request. The durable terminal row follows
+        // actual worker/control cleanup; the occupied slot is deliberately retained until then.
+        if (Looper.myLooper() == Looper.getMainLooper()) {
+            listeners.toList().forEach { it.update(currentView()) }
+        }
     }
 
     private fun persist() {
@@ -182,15 +210,35 @@ internal class SshRuntime(private val context: Context) {
             } == true
         val summary = owner?.let { snapshot(it).toString(2) } ?: "No readable SSH journal"
         val keySummary = "Observed: ${attempt?.observedHostKey ?: "none"}\nIndependent fixture reference: ${spec?.expectedHostKeySha256 ?: "not loaded"}\nTrusted for endpoint: ${spec?.let { trust[it.endpointId] } ?: "none"}"
-        val view = SshUiState(error ?: attempt?.status ?: "ready", summary,
+        val ptyAction = if (busy.get() && !cancelled.get() && attempt?.status == "running" &&
+            attempt.operation == SshOperation.EXEC_PTY && engine.get()?.attemptId == attempt.id) {
+            when (attempt.reason) {
+                "pty-awaiting-resize" -> SshPtyAction.RESIZE
+                "pty-awaiting-finish" -> SshPtyAction.FINISH
+                else -> null
+            }
+        } else null
+        val visibleStatus = error ?: "cancellation-requested".takeIf { busy.get() && cancelled.get() }
+            ?: attempt?.reason?.takeIf { attempt.status == "running" }
+            ?: attempt?.status ?: "ready"
+        val view = SshUiState(visibleStatus, summary,
             ready && !busy.get() && (owner?.snapshot()?.size ?: 8) < SshState.ATTEMPT_LIMIT,
-            canTrust, busy.get() && engine.get() != null, keySummary)
+            canTrust, busy.get() && !cancelled.get() && engine.get() != null, keySummary,
+            attempt?.id?.takeIf { busy.get() }, ptyAction)
         latest = view
         if (publicationQueued.compareAndSet(false, true)) main.post {
             publicationQueued.set(false)
-            val current = latest
+            val current = currentView()
             listeners.toList().forEach { it.update(current) }
         }
+    }
+
+    private fun currentView(): SshUiState {
+        val view = latest
+        // Do not overwrite the IO owner's latest view from the main thread: a concurrent
+        // terminal publication must never be replaced by an older cancellation request.
+        return if (busy.get() && cancelled.get() && engine.get() != null) view.copy(status = "cancellation-requested",
+            canCancel = false, ptyAction = null) else view
     }
 
     private fun hasLanAccess(): Boolean = Build.VERSION.SDK_INT < 37 ||

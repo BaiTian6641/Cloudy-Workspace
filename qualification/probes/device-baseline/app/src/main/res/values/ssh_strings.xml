@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="open_ssh_probe">Open SSH/SFTP qualification</string>
-    <string name="ssh_heading">SSH/SFTP qualification</string>
-    <string name="ssh_scope">Finite native transport experiment. Unknown servers stop before authentication. Confirm the displayed key against the independent fixture reference, then press Run again. Files are retained; existing paths are never replaced. All windows observe one owner. Closing or hiding the last window cancels work; recreation preserves it.</string>
+    <string name="open_ssh_probe">Open SSH transport qualification</string>
+    <string name="ssh_heading">SSH transport qualification</string>
+    <string name="ssh_scope">Finite native SSH/SFTP or exec/PTY experiment. PTY controls send fixed test tokens to a dedicated fixture. Unknown servers stop before authentication. Confirm the displayed key against the independent fixture reference, then press Run again. Files are retained; existing paths are never replaced. All windows observe one owner. Closing or hiding the last window cancels work; recreation preserves it.</string>
     <string name="ssh_window_identity">Activity %1$s · task %2$d</string>
     <string name="ssh_request_lan">Request local network access</string>
     <string name="ssh_run">Run SSH/SFTP check</string>
+    <string name="ssh_run_pty">Run finite exec/PTY check</string>
+    <string name="ssh_resize_pty">Resize PTY to 132 × 43 and verify</string>
+    <string name="ssh_finish_pty">Finish PTY exchange</string>
     <string name="ssh_trust">Trust displayed key matching fixture reference</string>
     <string name="ssh_cancel">Cancel SSH operation</string>
     <string name="ssh_refresh">Refresh SSH configuration and evidence</string>
