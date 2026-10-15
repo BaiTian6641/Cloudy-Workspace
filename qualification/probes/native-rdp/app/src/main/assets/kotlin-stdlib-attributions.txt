@@ -1,0 +1,24 @@
+Kotlin stdlib 2.2.10: embedded third-party attributions
+
+Exact relevant path blocks from the pinned upstream license README follow.
+The source README also covers compiler, tests and other platforms; those entries
+are outside this Android JVM runtime bundle.
+
+Source: https://raw.githubusercontent.com/JetBrains/kotlin/c448af19ded1b1a4e96e9af6412cd9acb100ce1a/license/README.md
+Source SHA-256: 8cba83fcded6d166fc4398eb8cb9c1a12ad8b87ff624a404956242d22231fbc9
+
+ - Path: libraries/stdlib/src/kotlin/collections
+      - License: Apache 2 ([license/third_party/gwt_license.txt][gwt])
+      - Origin: Derived from GWT, (C) 2007-08 Google Inc.
+
+ - Path: libraries/stdlib/src/kotlin/time
+      - License: 3-clause BSD license ([license/third_party/threetenbp_license.txt][threetenbp])
+      - Origin: Copyright (c) 2007-present, Stephen Colebourne & Michael Nascimento Santos
+
+ - Path: libraries/stdlib/jvm/src/kotlin/util/UnsignedJVM.kt
+      - License: Apache 2 ([license/third_party/guava_license.txt][guava])
+      - Origin: Derived from Guava's UnsignedLongs, (C) 2011 The Guava Authors
+
+ - Path: libraries/stdlib/jvm/src/kotlin/util/MathJVM.kt
+      - License: Boost Software License 1.0 ([license/third_party/boost_LICENSE.txt][boost])
+      - Origin: Derived from boost special math functions, Copyright Eric Ford & Hubert Holin 2001.

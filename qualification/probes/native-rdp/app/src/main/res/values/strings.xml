@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Cloudy RDP qualification</string>
+    <string name="probe_title">Native RDP qualification</string>
+    <string name="probe_scope">Finite FreeRDP diagnostic probe. Connection, pixels and input require a real configured server; this is not Cloudy Desktop.</string>
+    <string name="configuration_help">Import the operator-prepared rdp-config.json into this app’s private files directory before connecting. Server identity and credentials are never displayed here. There is no automatic reconnect.</string>
+    <string name="state_initial">Initializing native engine…</string>
+    <string name="request_lan">Request local network permission</string>
+    <string name="lan_available">Local network permission available</string>
+    <string name="connect">Connect</string>
+    <string name="cancel">Cancel connection</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="input_help">Click the remote frame to focus physical keyboard and pointer input. Tab leaves the frame; focus loss releases held input. The native text composer below sends text only when Send is pressed; this is a separate diagnostic Unicode path, not direct remote IME integration.</string>
+    <string name="composer_hint">Text to send to the remote session</string>
+    <string name="composer_label">Diagnostic native text composer</string>
+    <string name="send_text">Send text</string>
+    <string name="frame_description">Real remote framebuffer. Click to focus physical keyboard input; Tab leaves the frame.</string>
+    <string name="frame_empty">No remote framebuffer available</string>
+    <string name="frame_focused">Remote input focused</string>
+    <string name="frame_unfocused">Click remote frame to focus input</string>
+    <string name="session_status">State: %1$s\n%2$s\nNative: %3$s\nFramebuffer: %4$d × %5$d; updates: %6$d; input events: %7$d</string>
+    <string name="native_notices">Native licenses and corresponding source</string>
+</resources>

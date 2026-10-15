@@ -129,6 +129,8 @@ Exit evidence:
 
 Record evidence under `qualification/results/P0-S4/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-D01, Q-D02, Q-D07, Q-D08, Q-N02, Q-P02. Official/upstream source IDs: G02, G09, G20, G29, G30, R04, R06, R21, R23, R24, R25, R27, R133–R137, R140; resolve them in the [source register](../../07-reference/source-register.md).
 
+Current bounded increment: the [real RDP diagnostic APK/load result](../../../qualification/results/P0-S4/2026-10-15-rdp-apk-load.md) passes local compiler/lint/14 JVM tests, actual patched queue checks and Googlebook native loading. It records zero RDP connections; server trust/NLA/pixels/input/cancellation and performance remain unqualified. This does not change stage dependencies or capability readiness.
+
 ## P0-S5 — USB provider and real programming workflow
 
 **User decision, 2026-10-15:** no board/probe is available for selection yet. Full general-purpose USB implementation remains required. Continue API/provider/licensing and real software-state work; physical forwarding, reset and programming results remain pending. General scope is not a universal hardware-support claim, and synthetic fixtures cannot satisfy CAP-USB.

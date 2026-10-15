@@ -1,0 +1,378 @@
+--- a/client/Android/Studio/freeRDPCore/src/main/cpp/android_event.h
++++ b/client/Android/Studio/freeRDPCore/src/main/cpp/android_event.h
+@@ -13,6 +13,7 @@
+ #define FREERDP_CLIENT_ANDROID_EVENT_H
+ #include <freerdp/freerdp.h>
+ #include <freerdp/api.h>
++#include <winpr/collections.h>
+
+ #define EVENT_TYPE_KEY 1
+ #define EVENT_TYPE_CURSOR 2
+@@ -50,10 +51,10 @@
+
+ typedef struct
+ {
+-	int size;
+-	int count;
+-	HANDLE isSet;
+-	ANDROID_EVENT** events;
++	wMessageQueue* messages;
++	/* Serialize producers across the diagnostic capacity check and post.
++	 * MessageQueue itself synchronizes the native consumer and wake event. */
++	CRITICAL_SECTION producerLock;
+ } ANDROID_EVENT_QUEUE;
+
+ FREERDP_LOCAL BOOL android_push_event(freerdp* inst, ANDROID_EVENT* event);
+--- a/client/Android/Studio/freeRDPCore/src/main/cpp/android_event.c
++++ b/client/Android/Studio/freeRDPCore/src/main/cpp/android_event.c
+@@ -22,61 +22,30 @@
+ #include "android_freerdp.h"
+ #include "android_cliprdr.h"
+
++/* A finite diagnostic backlog: failure leaves ownership with the caller. */
++#define ANDROID_EVENT_QUEUE_LIMIT 1024
++
+ BOOL android_push_event(freerdp* inst, ANDROID_EVENT* event)
+ {
++	if (!inst || !inst->context || !event)
++		return FALSE;
+ 	androidContext* aCtx = (androidContext*)inst->context;
+-
+-	if (aCtx->event_queue->count >= aCtx->event_queue->size)
+-	{
+-		size_t new_size = aCtx->event_queue->size;
+-		do
+-		{
+-			if (new_size >= SIZE_MAX - 128ull)
+-				return FALSE;
+-
+-			new_size += 128ull;
+-		} while (new_size <= aCtx->event_queue->count);
+-		void* new_events =
+-		    realloc((void*)aCtx->event_queue->events, sizeof(ANDROID_EVENT*) * new_size);
+-
+-		if (!new_events)
+-			return FALSE;
+-
+-		aCtx->event_queue->events = new_events;
+-		aCtx->event_queue->size = new_size;
+-	}
+-
+-	aCtx->event_queue->events[(aCtx->event_queue->count)++] = event;
+-	return SetEvent(aCtx->event_queue->isSet);
+-}
+-
+-static ANDROID_EVENT* android_peek_event(ANDROID_EVENT_QUEUE* queue)
+-{
+-	ANDROID_EVENT* event;
+-
+-	if (queue->count < 1)
+-		return nullptr;
+-
+-	event = queue->events[0];
+-	return event;
+-}
+-
+-static ANDROID_EVENT* android_pop_event(ANDROID_EVENT_QUEUE* queue)
+-{
+-	ANDROID_EVENT* event;
+-
+-	if (queue->count < 1)
+-		return nullptr;
+-
+-	event = queue->events[0];
+-	(queue->count)--;
+-
+-	for (size_t i = 0; i < queue->count; i++)
+-	{
+-		queue->events[i] = queue->events[i + 1];
+-	}
+-
+-	return event;
++	ANDROID_EVENT_QUEUE* queue = aCtx->event_queue;
++	if (!queue || !queue->messages)
++		return FALSE;
++
++	EnterCriticalSection(&queue->producerLock);
++	BOOL rc = FALSE;
++	if (MessageQueue_Size(queue->messages) < ANDROID_EVENT_QUEUE_LIMIT)
++		rc = MessageQueue_Post(queue->messages, nullptr, (UINT32)event->type, event, nullptr);
++	LeaveCriticalSection(&queue->producerLock);
++	return rc;
++}
++
++static void android_message_free(void* object)
++{
++	wMessage* message = object;
++	android_event_free((ANDROID_EVENT*)message->wParam);
+ }
+
+ static BOOL android_process_event(ANDROID_EVENT_QUEUE* queue, freerdp* inst)
+@@ -89,11 +58,13 @@
+ 	context = inst->context;
+ 	WINPR_ASSERT(context);
+
+-	while (android_peek_event(queue))
++	wMessage message = WINPR_C_ARRAY_INIT;
++	int next = 0;
++	while ((next = MessageQueue_Peek(queue->messages, &message, TRUE)) > 0)
+ 	{
+ 		BOOL rc = FALSE;
+ 		androidContext* afc = (androidContext*)context;
+-		ANDROID_EVENT* event = android_pop_event(queue);
++		ANDROID_EVENT* event = (ANDROID_EVENT*)message.wParam;
+
+ 		WINPR_ASSERT(event);
+
+@@ -153,7 +124,7 @@
+ 			return FALSE;
+ 	}
+
+-	return TRUE;
++	return next == 0;
+ }
+
+ HANDLE android_get_handle(freerdp* inst)
+@@ -165,10 +136,10 @@
+
+ 	aCtx = (androidContext*)inst->context;
+
+-	if (!aCtx->event_queue || !aCtx->event_queue->isSet)
+-		return nullptr;
+-
+-	return aCtx->event_queue->isSet;
++	if (!aCtx->event_queue || !aCtx->event_queue->messages)
++		return nullptr;
++
++	return MessageQueue_Event(aCtx->event_queue->messages);
+ }
+
+ BOOL android_check_handle(freerdp* inst)
+@@ -180,19 +151,12 @@
+
+ 	aCtx = (androidContext*)inst->context;
+
+-	if (!aCtx->event_queue || !aCtx->event_queue->isSet)
+-		return FALSE;
+-
+-	if (WaitForSingleObject(aCtx->event_queue->isSet, 0) == WAIT_OBJECT_0)
+-	{
+-		if (!ResetEvent(aCtx->event_queue->isSet))
+-			return FALSE;
+-
+-		if (!android_process_event(aCtx->event_queue, inst))
+-			return FALSE;
+-	}
+-
+-	return TRUE;
++	if (!aCtx->event_queue || !aCtx->event_queue->messages)
++		return FALSE;
++
++	/* Peek(remove=TRUE) resets the wake event atomically with the last pop.
++	 * Never reset it here: a concurrent producer could otherwise lose a wake. */
++	return android_process_event(aCtx->event_queue, inst);
+ }
+
+ ANDROID_EVENT_KEY* android_event_key_new(int flags, UINT16 scancode)
+@@ -320,68 +284,40 @@
+ BOOL android_event_queue_init(freerdp* inst)
+ {
+ 	androidContext* aCtx = (androidContext*)inst->context;
+-	ANDROID_EVENT_QUEUE* queue;
+-	queue = (ANDROID_EVENT_QUEUE*)calloc(1, sizeof(ANDROID_EVENT_QUEUE));
+-
++	ANDROID_EVENT_QUEUE* queue = calloc(1, sizeof(ANDROID_EVENT_QUEUE));
+ 	if (!queue)
+-	{
+-		WLog_ERR(TAG, "android_event_queue_init: memory allocation failed");
+-		return FALSE;
+-	}
+-
+-	queue->size = 16;
+-	queue->count = 0;
+-	queue->isSet = CreateEventA(nullptr, TRUE, FALSE, nullptr);
+-
+-	if (!queue->isSet)
++		return FALSE;
++	if (!InitializeCriticalSectionAndSpinCount(&queue->producerLock, 4000))
+ 	{
+ 		free(queue);
+ 		return FALSE;
+ 	}
+-
+-	queue->events = (ANDROID_EVENT**)calloc(queue->size, sizeof(ANDROID_EVENT*));
+-
+-	if (!queue->events)
+-	{
+-		WLog_ERR(TAG, "android_event_queue_init: memory allocation failed");
+-		(void)CloseHandle(queue->isSet);
++	wObject callbacks = WINPR_C_ARRAY_INIT;
++	callbacks.fnObjectFree = android_message_free;
++	queue->messages = MessageQueue_New(&callbacks);
++	if (!queue->messages)
++	{
++		DeleteCriticalSection(&queue->producerLock);
+ 		free(queue);
+ 		return FALSE;
+ 	}
+-
+ 	aCtx->event_queue = queue;
+ 	return TRUE;
+ }
+
+ void android_event_queue_uninit(freerdp* inst)
+ {
+-	androidContext* aCtx;
+-	ANDROID_EVENT_QUEUE* queue;
+-
+ 	if (!inst || !inst->context)
+ 		return;
+-
+-	aCtx = (androidContext*)inst->context;
+-	queue = aCtx->event_queue;
+-
+-	if (queue)
+-	{
+-		if (queue->isSet)
+-		{
+-			(void)CloseHandle(queue->isSet);
+-			queue->isSet = nullptr;
+-		}
+-
+-		if (queue->events)
+-		{
+-			free(queue->events);
+-			queue->events = nullptr;
+-			queue->size = 0;
+-			queue->count = 0;
+-		}
+-
+-		free(queue);
+-	}
++	androidContext* aCtx = (androidContext*)inst->context;
++	ANDROID_EVENT_QUEUE* queue = aCtx->event_queue;
++	if (!queue)
++		return;
++	/* Owner has joined the session and excluded every producer before free. */
++	aCtx->event_queue = nullptr;
++	MessageQueue_Free(queue->messages); /* Calls android_message_free for pending events. */
++	DeleteCriticalSection(&queue->producerLock);
++	free(queue);
+ }
+
+ void android_event_free(ANDROID_EVENT* event)
+--- a/client/Android/Studio/freeRDPCore/src/main/cpp/android_freerdp.h
++++ b/client/Android/Studio/freeRDPCore/src/main/cpp/android_freerdp.h
+@@ -29,6 +29,8 @@
+
+ 	ANDROID_EVENT_QUEUE* event_queue;
+ 	HANDLE thread;
++	DWORD threadId;
++	BOOL threadStarted; /* A diagnostic instance owns at most one connection attempt. */
+
+ 	BOOL is_connected;
+
+--- a/client/Android/Studio/freeRDPCore/src/main/cpp/android_freerdp.c
++++ b/client/Android/Studio/freeRDPCore/src/main/cpp/android_freerdp.c
+@@ -24,6 +24,7 @@
+
+ #include <winpr/assert.h>
+ #include <winpr/image.h>
++#include <winpr/thread.h>
+
+ #include <freerdp/graphics.h>
+ #include <freerdp/codec/rfx.h>
+@@ -857,7 +858,22 @@
+ 	freerdp* inst = (freerdp*)instance;
+
+ 	if (inst)
++	{
++		androidContext* ctx = (androidContext*)inst->context;
++		/* A terminal callback still runs on the owned native thread. */
++		if (ctx && ctx->thread)
++		{
++			WLog_ERR(TAG, "Refusing free before session thread has been joined");
++			jclass error = (*env)->FindClass(env, "java/lang/IllegalStateException");
++			if (error)
++			{
++				(*env)->ThrowNew(env, error, "FreeRDP session thread must be joined before free");
++				(*env)->DeleteLocalRef(env, error);
++			}
++			return;
++		}
+ 		freerdp_client_context_free(inst->context);
++	}
+
+ #if defined(WITH_GPROF)
+ 	moncleanup();
+@@ -929,11 +945,40 @@
+
+ 	androidContext* ctx = (androidContext*)inst->context;
+
+-	if (!(ctx->thread = CreateThread(nullptr, 0, android_thread_func, inst, 0, nullptr)))
+-	{
+-		return JNI_FALSE;
+-	}
+-
++	/* Java serializes owner operations; do not overwrite an existing thread
++	 * handle or reuse native state from a previous connection attempt. */
++	if (ctx->threadStarted || ctx->thread)
++		return JNI_FALSE;
++	if (!(ctx->thread = CreateThread(nullptr, 0, android_thread_func, inst, 0, &ctx->threadId)))
++	{
++		return JNI_FALSE;
++	}
++
++	ctx->threadStarted = TRUE;
++	return JNI_TRUE;
++}
++
++/* Called off the session/callback thread and UI thread, after Java has stopped
++ * producers and resolved pending auth/trust decisions. Timeout retains ownership. */
++JNIEXPORT jboolean JNICALL Java_com_freerdp_freerdpcore_services_LibFreeRDP_freerdp_1join(
++    JNIEnv* env, jclass cls, jlong instance, jint timeoutMillis)
++{
++	WINPR_UNUSED(env);
++	WINPR_UNUSED(cls);
++	freerdp* inst = (freerdp*)instance;
++	if (!inst || !inst->context || timeoutMillis < 0)
++		return JNI_FALSE;
++	androidContext* ctx = (androidContext*)inst->context;
++	if (!ctx->thread)
++		return JNI_TRUE;
++	if (ctx->threadId == GetCurrentThreadId())
++		return JNI_FALSE;
++	if (WaitForSingleObject(ctx->thread, (DWORD)timeoutMillis) != WAIT_OBJECT_0)
++		return JNI_FALSE;
++	if (!CloseHandle(ctx->thread))
++		return JNI_FALSE;
++	ctx->thread = nullptr;
++	ctx->threadId = 0;
+ 	return JNI_TRUE;
+ }
+
+@@ -949,19 +994,12 @@
+ 		return JNI_FALSE;
+ 	}
+
+-	androidContext* ctx = (androidContext*)inst->context;
+-	ANDROID_EVENT* event = (ANDROID_EVENT*)android_event_disconnect_new();
+-
+-	if (!event)
+-		return JNI_FALSE;
+-
+-	if (!android_push_event(inst, event))
+-	{
+-		android_event_free((ANDROID_EVENT*)event);
+-		return JNI_FALSE;
+-	}
+-
++	/* Abort connecting/connected I/O even when the input backlog is saturated.
++	 * Wake the input handle too; there is no queued disconnect allocation. */
+ 	if (!freerdp_abort_connect_context(inst->context))
++		return JNI_FALSE;
++	HANDLE wake = android_get_handle(inst);
++	if (!wake || !SetEvent(wake))
+ 		return JNI_FALSE;
+
+ 	return JNI_TRUE;

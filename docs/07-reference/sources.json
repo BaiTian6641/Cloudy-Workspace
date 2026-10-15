@@ -2303,7 +2303,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Reviewed 2.0.17 and 2.0.18–2.0.20 release notes; final diagnostic selects matched API/NOP 2.0.20. Exact source and embedded licenses are preserved.",
+      "note": "Reviewed 2.0.17 and 2.0.18\u20132.0.20 release notes; final diagnostic selects matched API/NOP 2.0.20. Exact source and embedded licenses are preserved.",
       "refresh": "Before SSH diagnostic dependency/provider changes, after relevant upstream security updates, and before product adoption."
     },
     {
@@ -3122,7 +3122,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected CLI/tool-control guidance: no-tools disables built-ins while custom tool modules have a separate discovery surface. Use explicit model selectors, bounded assignments and reviewed results; no sandbox or worker-success guarantee. Owner integration leader, P0–P6.",
+      "note": "Inspected CLI/tool-control guidance: no-tools disables built-ins while custom tool modules have a separate discovery surface. Use explicit model selectors, bounded assignments and reviewed results; no sandbox or worker-success guarantee. Owner integration leader, P0\u2013P6.",
       "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
     },
     {
@@ -3134,7 +3134,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected config roots, profiles, discovery precedence and custom-tool/MCP integration. Empty cwd and a prompt alone do not isolate user/global or foreign configuration. Use per-run controls without altering global auth/settings. Owner integration leader, P0–P6.",
+      "note": "Inspected config roots, profiles, discovery precedence and custom-tool/MCP integration. Empty cwd and a prompt alone do not isolate user/global or foreign configuration. Use per-run controls without altering global auth/settings. Owner integration leader, P0\u2013P6.",
       "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
     },
     {
@@ -3146,7 +3146,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected separate direct getAllPluginToolPaths(cwd) enumeration after capability discovery. disabledProviders is not a complete custom-tool loading switch; the accepted CLI trial additionally had absent native/project plugin roots. Owner integration leader, P0–P6.",
+      "note": "Inspected separate direct getAllPluginToolPaths(cwd) enumeration after capability discovery. disabledProviders is not a complete custom-tool loading switch; the accepted CLI trial additionally had absent native/project plugin roots. Owner integration leader, P0\u2013P6.",
       "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
     },
     {
@@ -3158,7 +3158,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected plugin-root enumeration: node_modules absence yields an empty plugin list. The trial uses observed root absence, not a general sandbox or global no-discovery claim. Owner integration leader, P0–P6.",
+      "note": "Inspected plugin-root enumeration: node_modules absence yields an empty plugin list. The trial uses observed root absence, not a general sandbox or global no-discovery claim. Owner integration leader, P0\u2013P6.",
       "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
     },
     {
@@ -3170,7 +3170,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected registered enabledProviders/disabledProviders settings; source-discovery IDs are distinct from the explicitly selected kimi-code model backend. Use a per-run overlay, not a global config edit. Owner integration leader, P0–P6.",
+      "note": "Inspected registered enabledProviders/disabledProviders settings; source-discovery IDs are distinct from the explicitly selected kimi-code model backend. Use a per-run overlay, not a global config edit. Owner integration leader, P0\u2013P6.",
       "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
     },
     {
@@ -3410,7 +3410,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Maintained JNI requires matching LibFreeRDP class/native/callback signatures; GDI RGBX32/Bitmap, trust/input/cancel ownership remain Android integration work. MPL2 file header; root license is insufficient. API30, P0-S4/P1-S4.",
+      "note": "Pinned maintained JNI integrated into separate diagnostic APK; authored callback wrapper, bounded queue/join and external certificate patches. Actual Googlebook load passes; RDP session/pixels/input/cancellation unqualified. Mixed MPL2/Apache2 bridge notices/source included. API30, P0-S4/P1-S4.",
       "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
     },
     {
@@ -3448,6 +3448,42 @@
       "sourceUpdatedOn": null,
       "note": "Forwards selected native options; camera/printer/audio build inclusion does not authorize redirection. Actual inner cache and ELF closure reviewed, OpenSSL provider paths still need Android setup. P0-S4.",
       "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
+    },
+    {
+      "id": "R147",
+      "title": "FreeRDP pinned TLS certificate ownership",
+      "url": "https://github.com/FreeRDP/FreeRDP/blob/97eff6ddfbbfaa8e42a126d362686bd001ff8bdc/libfreerdp/crypto/tls.c",
+      "publisher": "FreeRDP",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "ExternalCertificateManagement and VerifyX509Certificate direct branch: reject0, accept1 in current TLS state. Pin first leaf DER; no cert-ignore/fingerprint shortcut. Diagnostic adapter implemented; actual callback/session pending. P0-S4/API30.",
+      "refresh": "Before affected integration/distribution changes; device qualification remains separate."
+    },
+    {
+      "id": "R148",
+      "title": "WinPR pinned virtual-key to scan-code mapping",
+      "url": "https://github.com/FreeRDP/FreeRDP/blob/97eff6ddfbbfaa8e42a126d362686bd001ff8bdc/winpr/libwinpr/input/scancode.c",
+      "publisher": "FreeRDP",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "GetVirtualScanCodeFromVirtualKeyCode selects extended table through KBDEXT0x100; unknown0 rejected before queue. Authored mapper and7 JVM tests; physical input pending. P0-S4/API30.",
+      "refresh": "Before affected integration/distribution changes; device qualification remains separate."
+    },
+    {
+      "id": "R149",
+      "title": "Mozilla Public License 2.0 full text",
+      "url": "https://www.mozilla.org/en-US/MPL/2.0/",
+      "publisher": "Mozilla",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Selected bridge files retain MPL headers; full canonical text and actual corresponding modified bridge source accompany diagnostic APK. Product distribution decision remains P1-S4.",
+      "refresh": "Before affected integration/distribution changes; device qualification remains separate."
     }
   ]
 }

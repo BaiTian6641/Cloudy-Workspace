@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "checkedOn": "2026-10-15",
-  "purpose": "P0-S4 isolated native compile; not a product dependency adoption or runtime qualification",
+  "purpose": "P0-S4 diagnostic native build and APK integration; not a product dependency adoption or runtime qualification",
   "source": {
     "url": "https://codeload.github.com/FreeRDP/FreeRDP/tar.gz/97eff6ddfbbfaa8e42a126d362686bd001ff8bdc",
     "sourceCommit": "97eff6ddfbbfaa8e42a126d362686bd001ff8bdc",
@@ -40,11 +40,6 @@
       "url": "https://github.com/uriparser/uriparser/releases/download/uriparser-1.0.2/uriparser-1.0.2.tar.xz"
     }
   ],
-  "patch": {
-    "path": "patches/bounded-openssl-jobs.patch",
-    "bytes": 1129,
-    "sha256": "63a5604af211b82790def540d9bd4e4217bb962117b7457207035dd34682a8d5"
-  },
   "cmakeOptions": [
     "-DANDROID_ABI=arm64-v8a",
     "-DANDROID_PLATFORM=android-29",
@@ -62,5 +57,27 @@
     "-DWITH_JPEG=OFF"
   ],
   "nativeTarget": "freerdp-android",
-  "buildParallelism": 4
+  "buildParallelism": 4,
+  "patches": [
+    {
+      "path": "patches/bounded-openssl-jobs.patch",
+      "bytes": 1129,
+      "sha256": "63a5604af211b82790def540d9bd4e4217bb962117b7457207035dd34682a8d5"
+    },
+    {
+      "path": "patches/android-session-ownership.patch",
+      "bytes": 10231,
+      "sha256": "13a1828f8e1a88a72623c41e40138fa4f60aaf36155d11bbb75a2c118073a0eb"
+    },
+    {
+      "path": "patches/android-external-certificate.patch",
+      "bytes": 3436,
+      "sha256": "d960614718b6851dab49b8b52469804f93a9ed0efc85dc123ee5135e3291024d"
+    },
+    {
+      "path": "patches/android-key-validation.patch",
+      "bytes": 614,
+      "sha256": "dff3423f333a3d76a7c27ea22ab1408eb77d4be565dd32c84b5b82efd2b583f3"
+    }
+  ]
 }

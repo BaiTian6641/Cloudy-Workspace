@@ -95,3 +95,20 @@ node tests/test_terminal_input_browser.cjs \
 The harness executes the actual selected core/fit bundles, authored bridge and stylesheet with synthetic DOM events and a test-only native endpoint. It requires an absolute asset directory and supports `--chrome` for an installed executable. It installs nothing, starts no server and preserves the browser sandbox. Eleven input cases and one startup/fit/output parser smoke remain bounded. Exit zero means declared **characterizations** match; inspect `allInputIntegrity` and each `inputIntegrity` separately. The current candidate retains coalesced-deletion and equal-length-replacement failures. Neither virtual-clock timing nor parser ACK proves input latency or painted pixels. Actual resize, APK CSP, WebView, physical input, native IME and accessibility require their own device checks. CI parses both harness files but does not claim to execute this local browser check.
 
 The [candidate review](../docs/06-validation/2026-10-15-terminal-upstream-review.md) records the exact executed pair, failure limits and retained earlier harness runs. To compare an older retained bundle directory, select its documented `--expect-rapid duplicated` characterization; never label its expected defect as input correctness.
+
+## Real native RDP packaging and offline check
+
+[prepare_rdp_native.py](prepare_rdp_native.py) prepares the separate [native RDP diagnostic](../qualification/probes/native-rdp/README.md). It uses Python's standard library, performs no downloads/builds, and requires the actual completed FreeRDP 3.32.2 arm64 build, pristine pinned archive, all four reviewed patches, canonical MPL text and matching receipt. Use the exact import command in that diagnostic README, including `--receipt .cache/native-rdp/build-06-receipt.json`; preserve the existing SDK/toolchain and dependency caches rather than rebuilding unchanged inputs.
+
+```bash
+python3 tools/prepare_rdp_native.py --check
+./qualification/probes/device-baseline/gradlew \
+  -p qualification/probes/native-rdp \
+  :app:assembleDebug :app:testDebugUnitTest :app:lintDebug
+```
+
+The importer checks original source against the pinned archive plus patches, records provenance, validates AArch64 ELF alignment/dependencies, and generates exactly eight native libraries, notices and corresponding modified MPL bridge source assets. There are no dummy libraries or simulated connection fallbacks. The offline check rejects absent/extra/changed prepared files and current lock/patch drift; the native APK's preBuild invokes it. Shared-wrapper `-p` selects this separate package/project and does not replace the device-baseline app. Neither import nor offline check establishes actual server pixels, APK/device loading or interoperability.
+
+The current authored native diagnostic code compiles locally and 14 JVM tests passed; Android Lint repair is being rerun, so no final lint pass is asserted here. Existing baseline CI is separate: the new native APK has no CI coverage yet. Follow the established-library policy: validate the changed authored packaging/trust/ownership/input boundary, retain upstream engine evidence, and expand only for a concrete observed failure or changed consequential input. Do not rerun unchanged APK/device evidence for documentation-only edits.
+
+`build_rdp_native.py` runs the already configured, source-verified native target with four jobs and records an actual successful receipt for the importer. It verifies source before/after, rejects changed tracked inputs, confines fresh receipt/log paths to this checkout’s ignored cache, and terminates the build process group on interruption/deadline. Follow the probe recipe for source acquisition/configuration; no SDK or system installation is performed.

@@ -1,0 +1,512 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUtc": "2026-10-15T17:38:56.054427+00:00",
+  "scope": "P0-S4 real native diagnostic packaging/load and patched-queue checks; no RDP connection qualification",
+  "buildRef": "2b12a3d1-74aa-47ee-8238-d606181adbd5",
+  "package": "dev.cloudy.qualification.rdp",
+  "versionName": "0.1.0",
+  "versionCode": 1,
+  "apk": {
+    "bytes": 40729286,
+    "sha256": "35fb24931dd5e3acdbd5a20898dbdb7c64de276743624c4b4d7469dba0d89371"
+  },
+  "deviceProperties": {
+    "ro.product.model": "HP Googlebook 14",
+    "ro.build.id": "CL3B.260622.276.R2",
+    "ro.build.version.incremental": "16560795",
+    "ro.build.version.sdk": "37",
+    "ro.product.cpu.abilist": "arm64-v8a"
+  },
+  "results": {
+    "localBuild": "passed",
+    "androidLintErrors": 0,
+    "jvmTests": 14,
+    "jvmFailures": 0,
+    "apkSignature": "passed",
+    "zipAlignment16KiB": "passed",
+    "nativeLibraryCount": 8,
+    "verifiedNoticeSourceAssets": 21,
+    "nativeLoadVersion": "3.32.2",
+    "rdpAttempts": 0,
+    "frames": 0,
+    "inputEvents": 0,
+    "patchedQueueOnDevice": "passed",
+    "actualNegativeImportCases": 4,
+    "postCloseRdpResumed": false,
+    "hostPackageLoaderAndHelp": "passed; no listener/capture"
+  },
+  "sourceFiles": [
+    {
+      "path": "qualification/probes/native-rdp/README.md",
+      "bytes": 13006,
+      "sha256": "f8c38bb0a7dde3f25ac143a024ad1127ab863eef4c9470c6d9f4b0269a8ff2d0"
+    },
+    {
+      "path": "qualification/probes/native-rdp/app/build.gradle.kts",
+      "bytes": 2048,
+      "sha256": "91e1085d69d5e0c00dd47f5921cfd95e5df0b31e2fc2024e6c1b96827026476b"
+    },
+    {
+      "path": "qualification/probes/native-rdp/app/gradle.lockfile",
+      "bytes": 6230,
+      "sha256": "b5231ade521b6da6602300e07bf8df35f4dd0f6dd8d241e543c75c35f292f1f2"
+    },
+    {
+      "path": "qualification/probes/native-rdp/app/src/main/AndroidManifest.xml",
+      "bytes": 888,
+      "sha256": "ed0a0ef2d308d8161cdea990434c5aa7bf7b097adc8afc5da1164626866f6671"
+    },
+    {
+      "path": "qualification/probes/native-rdp/app/src/main/assets/Apache-2.0.txt",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "qualification/probes/native-rdp/app/src/main/assets/README-runtime.txt",
+      "bytes": 1292,
+      "sha256": "c187eed365cffbd0c4914f4c0c068eedb2707ba5a6292059c37b7a0bbf9612c6"
+    },
+    {
+      "path": "qualification/probes/native-rdp/app/src/main/assets/kotlin-COPYRIGHT.txt",
+      "bytes": 647,
+      "sha256": "8f1a1700adb5490604c6094fb137bf73f6c28d3ee554b58f3ff8ef975a79672d"
+    },
+    {
+      "path": "qualification/probes/native-rdp/app/src/main/assets/kotlin-boost-LICENSE.txt",
+      "bytes": 1337,
+      "sha256": "8d8291caf1cee26d23acf3eb67c9f9a2d58f1c681b16a4fbe8cbfb9e3c0b5a9b"
+    },
+    {
+      "path": "qualification/probes/native-rdp/app/src/main/assets/kotlin-stdlib-attributions.txt",
+      "bytes": 1335,
+      "sha256": "acbf0fb40551980e88adeaf38af20691395f792256ec5e90f212b8848ca116f9"
+    },
+    {
+      "path": "qualification/probes/native-rdp/app/src/main/assets/kotlin-threetenbp-LICENSE.txt",
+      "bytes": 1520,
+      "sha256": "d1bc53b493a3ab387b42717ed5c4b1976a5048996f81154278100bff86d39331"
+    },
+    {
+      "path": "qualification/probes/native-rdp/app/src/main/assets/runtime-copyrights.txt",
+      "bytes": 1801,
+      "sha256": "d07703bcc7788bb1141d739f3e275e62011b0be7e85ac3c1f57e55835198e15e"
+    },
+    {
+      "path": "qualification/probes/native-rdp/app/src/main/assets/runtime-provenance.json",
+      "bytes": 11315,
+      "sha256": "ca48ebcba38588f9962de7647b30ecf4f27536febd21d39adcd6a11780b0211d"
+    },
+    {
+      "path": "qualification/probes/native-rdp/app/src/main/java/com/freerdp/freerdpcore/services/LibFreeRDP.java",
+      "bytes": 7527,
+      "sha256": "d9d4bee2be89b361653f8d39e9494635b6bb7866fc152a35984dba9c1a0a019d"
+    },
+    {
+      "path": "qualification/probes/native-rdp/app/src/main/java/dev/cloudy/qualification/rdp/RdpActivity.kt",
+      "bytes": 7158,
+      "sha256": "90b8f2d05ea35022d7e091141b5abe966f3f1c40a49c0fec4fd156a17dd806fa"
+    },
+    {
+      "path": "qualification/probes/native-rdp/app/src/main/java/dev/cloudy/qualification/rdp/RdpConfig.kt",
+      "bytes": 1972,
+      "sha256": "e8cd4e96ba8f77ba5aef9d07870a5d29bdb09551ab7ca17840583a17c5f12d1e"
+    },
+    {
+      "path": "qualification/probes/native-rdp/app/src/main/java/dev/cloudy/qualification/rdp/RdpFrameBuffer.kt",
+      "bytes": 2527,
+      "sha256": "473ae78c7f77e60e2a40995c724807469d1b5b2cffc7bcbc0caa63bfeb7dd2fb"
+    },
+    {
+      "path": "qualification/probes/native-rdp/app/src/main/java/dev/cloudy/qualification/rdp/RdpFrameView.kt",
+      "bytes": 10199,
+      "sha256": "66f414e434df599b1d7f676029a589804b5e93bab952fa1df4da95798ffede13"
+    },
+    {
+      "path": "qualification/probes/native-rdp/app/src/main/java/dev/cloudy/qualification/rdp/RdpKeyMap.kt",
+      "bytes": 3475,
+      "sha256": "f371f26cccdeb2ad0007ed1dc0c791f19be9ef87b2e1d7dab21fe60269713f49"
+    },
+    {
+      "path": "qualification/probes/native-rdp/app/src/main/java/dev/cloudy/qualification/rdp/RdpSession.kt",
+      "bytes": 19496,
+      "sha256": "6f60d7755203884897a7893ac1d75d86b7268b36d29e3510ac7f6256be51d4bf"
+    },
+    {
+      "path": "qualification/probes/native-rdp/app/src/main/java/dev/cloudy/qualification/rdp/RdpTrustPolicy.kt",
+      "bytes": 2121,
+      "sha256": "6c60aaa93ae56416d7e5a065918efa13340bfa2adfedb963b2783124debd672b"
+    },
+    {
+      "path": "qualification/probes/native-rdp/app/src/main/res/drawable/ic_probe.xml",
+      "bytes": 437,
+      "sha256": "fe9b0efb3e056d1b4b59847ba726a2879c01e4ca46d486b125582ac6a719dc28"
+    },
+    {
+      "path": "qualification/probes/native-rdp/app/src/main/res/values/strings.xml",
+      "bytes": 2006,
+      "sha256": "f2c61e451be569d74a3514d093d1f416365a4ab3d06ec24a9a8a6b0a983ac57b"
+    },
+    {
+      "path": "qualification/probes/native-rdp/app/src/main/res/values/styles.xml",
+      "bytes": 418,
+      "sha256": "3fa32fbc33b9567e517f0e7fc1a3af3b7672385d9f9f41e3edc532d6922ea0b0"
+    },
+    {
+      "path": "qualification/probes/native-rdp/app/src/main/res/xml/data_extraction_rules.xml",
+      "bytes": 1050,
+      "sha256": "cb029b35db0e976c087100424e16e14a6256b46962398887520e51508c3b5842"
+    },
+    {
+      "path": "qualification/probes/native-rdp/app/src/test/java/dev/cloudy/qualification/rdp/RdpKeyMapTest.kt",
+      "bytes": 4407,
+      "sha256": "fe89221b76d913e3127cde2674a29944015221a57167ff5e89796e78026242c3"
+    },
+    {
+      "path": "qualification/probes/native-rdp/app/src/test/java/dev/cloudy/qualification/rdp/RdpTrustPolicyTest.kt",
+      "bytes": 3551,
+      "sha256": "9b1d4409eff692043a6040801ad858bf222518735592f4801431403e2d0d8260"
+    },
+    {
+      "path": "qualification/probes/native-rdp/app/src/test/resources/rdp-trust-test-certificate.pem",
+      "bytes": 1220,
+      "sha256": "f223224461929915c9e15f479cb59be1f807a448b2486305df1c7bac01c1eebd"
+    },
+    {
+      "path": "qualification/probes/native-rdp/build.gradle.kts",
+      "bytes": 70,
+      "sha256": "ed6ba3bdfc3cbdcd648d7213860ffa3b0d62da38c37915b731b08b4df6f9d209"
+    },
+    {
+      "path": "qualification/probes/native-rdp/gradle.properties",
+      "bytes": 157,
+      "sha256": "1bcb88ca822cbb3e6984a8b1e7993a3342ba801a0678ea234da655681abc0820"
+    },
+    {
+      "path": "qualification/probes/native-rdp/gradle/verification-metadata.xml",
+      "bytes": 107914,
+      "sha256": "6dd06fe46e2692ec85154f1256183835e3377c158b74a6b96d5d9a860c8f212b"
+    },
+    {
+      "path": "qualification/probes/native-rdp/patches/android-external-certificate.patch",
+      "bytes": 3436,
+      "sha256": "d960614718b6851dab49b8b52469804f93a9ed0efc85dc123ee5135e3291024d"
+    },
+    {
+      "path": "qualification/probes/native-rdp/patches/android-key-validation.patch",
+      "bytes": 614,
+      "sha256": "dff3423f333a3d76a7c27ea22ab1408eb77d4be565dd32c84b5b82efd2b583f3"
+    },
+    {
+      "path": "qualification/probes/native-rdp/patches/android-session-ownership.patch",
+      "bytes": 10231,
+      "sha256": "13a1828f8e1a88a72623c41e40138fa4f60aaf36155d11bbb75a2c118073a0eb"
+    },
+    {
+      "path": "qualification/probes/native-rdp/patches/bounded-openssl-jobs.patch",
+      "bytes": 1129,
+      "sha256": "63a5604af211b82790def540d9bd4e4217bb962117b7457207035dd34682a8d5"
+    },
+    {
+      "path": "qualification/probes/native-rdp/settings.gradle.kts",
+      "bytes": 289,
+      "sha256": "cfe1a02ed0bed08812e9e843b02c22d51c1a3897316c55fb537e546e740b34dc"
+    },
+    {
+      "path": "qualification/probes/native-rdp/source-lock.json",
+      "bytes": 2816,
+      "sha256": "557197626b1bd886e46e16658f438888c99951b247030fff299056a16afd28cc"
+    },
+    {
+      "path": "qualification/probes/native-rdp/tests/CMakeLists.txt",
+      "bytes": 1853,
+      "sha256": "09b4bd6eef5e76e576648c8c8598da40d843ddf4715aa45ce96ad860b8277204"
+    },
+    {
+      "path": "qualification/probes/native-rdp/tests/README.md",
+      "bytes": 3100,
+      "sha256": "a93202c1fa0fa6a6d938347b335b031f41fa665dce77d1e0dc3fe0e07e46a79e"
+    },
+    {
+      "path": "qualification/probes/native-rdp/tests/android_event_queue_test.c",
+      "bytes": 4655,
+      "sha256": "7d09ec21624116ce797fb2ce8276df7492f9367f32db7ae62ba6f65d1d630467"
+    },
+    {
+      "path": "tools/build_rdp_native.py",
+      "bytes": 4742,
+      "sha256": "07ed0db14c8f68d5eaebd810c812631baedcabc59998f5d596046bb486fd3fd1"
+    },
+    {
+      "path": "tools/prepare_rdp_native.py",
+      "bytes": 25569,
+      "sha256": "c93022842e1d410702f7fc38ea30ca547634b09f06ddf95bb1d7e50cf104f140"
+    }
+  ],
+  "privateEvidence": [
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/artifacts/android_event_queue_test",
+      "bytes": 212040,
+      "sha256": "52c2b5289b2b9d06d3b64bec8733f2027636717e772e4680e1b9539e295fa9ae"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/artifacts/libfreerdp-android.so",
+      "bytes": 498432,
+      "sha256": "9db44d34a66ab35b1a27249d081af8f5ab6900f474e53db8a3d452de8f97b96a"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/artifacts/rdp-0.1.0-code1.apk",
+      "bytes": 40729286,
+      "sha256": "35fb24931dd5e3acdbd5a20898dbdb7c64de276743624c4b4d7469dba0d89371"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/device-load.json",
+      "bytes": 643,
+      "sha256": "39788ceccfcecb625379bf4c68415309871b6f4cf72532a6d2ee663917a85754"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/initial-journal.json",
+      "bytes": 42,
+      "sha256": "bdb68b184232975a7a3a42351243a18df64039992b0db5c63db9e4d671dbdd07"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/initial-layout-command.log",
+      "bytes": 143,
+      "sha256": "23a2887baed32f6074563295698b14d25a5350d446159fe58746dd9fbe230e02"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/initial-layout.json",
+      "bytes": 43747,
+      "sha256": "fa84833b616ee33a6c55bd36d2592a58cbb84e06892e81ff5573b22d49088464"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/install-launch-02.json",
+      "bytes": 174,
+      "sha256": "b6f5971704fe54dede30f8df68d1607faa4cefcdb7969c2e624e23c1597db27f"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/install-launch-02.log",
+      "bytes": 40,
+      "sha256": "8022b74e04fd0e192f7907b76c1e550a19de7cbb700d49c37f23f2ba5d6f70f4"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/install-launch.json",
+      "bytes": 212,
+      "sha256": "6c469ec7d6430165d7e9a0503fabf0d0d3ad5a6824660c789379a0bbab5ae13a"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/install-launch.log",
+      "bytes": 142,
+      "sha256": "f984b3b7f40c0ea61e1ff16503bf764d1b72002527ec2535fab0d9a26a8f452b"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/layout-help.log",
+      "bytes": 983,
+      "sha256": "541201c834ccbfac30f88d1eab6213d60ff876c32c5a878a3f7642a80660af83"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/native-ready-screen.log",
+      "bytes": 144,
+      "sha256": "27b3b0d9cc2a97b5f8ab3b2eca027b174de5c16c317dad9be0e4c15ecee79e4e"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/native-ready.png",
+      "bytes": 329852,
+      "sha256": "492554eff379c0d9f05f4266c95dc5a780f00b73324e331aa4ee5f2e3a0e71f2"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/package-dump.log",
+      "bytes": 6313,
+      "sha256": "d8dec8537a9371c1bd4939586d86c9b615c74a574a85b402157d9fe1f90f0a7e"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/post-close-activities.log",
+      "bytes": 84951,
+      "sha256": "84988c1f0315bf2027cfe199d099d40058f85855ff1c41b592f0a3f4372f26b0"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/post-close.json",
+      "bytes": 106,
+      "sha256": "a0cd0a11443dcb675a1beb8c757692023ba3352548490a42e38ae1cebfbcca96"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/prior-package.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/queue-device.json",
+      "bytes": 6979,
+      "sha256": "122a09c3ae25e529f9355146fb8c14993dfbf74b68c9430ea3fde98d6f2945e7"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/TEST-dev.cloudy.qualification.rdp.RdpKeyMapTest.xml",
+      "bytes": 1335,
+      "sha256": "fe378c9db0e41d00c05686a34e95ab42daa8778a517e065609e67317d77dbffd"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/TEST-dev.cloudy.qualification.rdp.RdpTrustPolicyTest.xml",
+      "bytes": 1319,
+      "sha256": "69d738198e2165eee9e5dc32a686d5e3ef85f8fd330ae57912496d1321a4a21a"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/apk-audit.json",
+      "bytes": 6738,
+      "sha256": "4a3915ee13288f6a6b7c52546561e426c47f77818c8ecdf2894f15a968bff1d0"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/app-build-01.json",
+      "bytes": 591,
+      "sha256": "3c267f9ddc4e3053f633a5f69385f946105715e6caa3c6b77d2c52282536c1f4"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/app-build-01.log",
+      "bytes": 1886,
+      "sha256": "acd2e287dd50ff1eda28c59f5e212efa21320859c27d81c20f87b6a87d950508"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/app-build-02.json",
+      "bytes": 591,
+      "sha256": "f9ae626ca7f8beb10b707b63b14c69d9c213e4612f5120e0cce4459011af5b92"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/app-build-02.log",
+      "bytes": 6678,
+      "sha256": "97ae1973a15c91fbfceb419d7aac9b7bd2f20ad5afdc7a3835b55efa1e11d77b"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/app-build-03.json",
+      "bytes": 570,
+      "sha256": "071acd8d56710bc77e617091d23706391d3b05c7db154cb06e1c478d7305f41a"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/app-build-03.log",
+      "bytes": 3085,
+      "sha256": "e04229d09a66f3a2bff5e96fe769b8f6401a6c357602b7175f5753c79578ac2c"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/app-build-04.json",
+      "bytes": 570,
+      "sha256": "d0a397d145966836973b3ba86fffb800908b20333e24481ac5bbcbf42db25308"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/app-build-04.log",
+      "bytes": 3254,
+      "sha256": "1f3fb0844c3aad5c7b74777a04c61d23fc7dfed9d93babbb624a9656007e977f"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/build-04.json",
+      "bytes": 727,
+      "sha256": "872ef55f9a9bad0a345e77a22dee18913c874cb3bc719d51ff9e9588dfced03d"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/build-04.log",
+      "bytes": 824,
+      "sha256": "293dedda4c2dac5c5697b8d3fbbf437b3514be4c5d78cb0dd424d47ed4f5eb13"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/build-05.json",
+      "bytes": 730,
+      "sha256": "bd076ec8de3c45f0bf6c8943c58cba241e98e8ae1510bb9643707e204899d135"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/build-05.log",
+      "bytes": 532,
+      "sha256": "cf72c2394c004819634e9e71f0db810a06339c5806c8e03a0b5965f04ff6da97"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/build-06-receipt-evidence.json",
+      "bytes": 1850,
+      "sha256": "774a4c6e28d8ace0f6e83e7d705080f69fecab9391b24f8f1c5c584a17c927c0"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/build-06-receipt.json",
+      "bytes": 1650,
+      "sha256": "f2c725b3b85a92d6c8d04309f9a1d2d0d5a852740c50e3a4ac54b77f03fea72f"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/build-06.json",
+      "bytes": 724,
+      "sha256": "d8a5d4c48619243c5cce9943ecde32ab1bde7ef90e15425fdfc23642edfc1cd5"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/build-06.log",
+      "bytes": 532,
+      "sha256": "cf72c2394c004819634e9e71f0db810a06339c5806c8e03a0b5965f04ff6da97"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/build-receipt-helper-01.json",
+      "bytes": 1650,
+      "sha256": "f2c725b3b85a92d6c8d04309f9a1d2d0d5a852740c50e3a4ac54b77f03fea72f"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/build-receipt-helper-01.log",
+      "bytes": 404,
+      "sha256": "63c9fbe063346bee6b127a3d2dc9a99e2c10e4d060e49285e1936e8040b04873"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/host-help.log",
+      "bytes": 1756,
+      "sha256": "5002f2e257c2bfa7139b96e5ee144a1aa71fae08916d94d06ee7c9cea39c5f0a"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/host-loader.log",
+      "bytes": 19102,
+      "sha256": "1fead793b9f7de4af867d94543ca79bc2324a1c9d251b83fb74ea34f0d2b725d"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/host-preparation.json",
+      "bytes": 1006,
+      "sha256": "fd57c4661cc09d9714249c8057c427bc4b8761c790f6d3f6079ab9a9923feed8"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/import-tamper-checks.json",
+      "bytes": 1090,
+      "sha256": "1f21c9b48ce7bd1ff64fd88272a961e9b7fe5c44b6a664dea52527db5fef39c7"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/lint-results-debug.txt",
+      "bytes": 17,
+      "sha256": "a69ecb171bea9d40de22744c85220b4a4ea12f5a25ce7976d67f2c88c9195334"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/lint-results-debug.xml",
+      "bytes": 86,
+      "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/prepared-native-manifest.json",
+      "bytes": 7709,
+      "sha256": "8c69cca4044c6626191b7cd4b2693cfb8dcf588267eec100da5d02f30d3d147d"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/queue-test-compile.json",
+      "bytes": 1712,
+      "sha256": "bf4a66b9bb0e1bc30de62b3231e17de1b28d055a86b7f3f7244834f2b14aef03"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/queue-test-compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/receipt-fresh-configure.log",
+      "bytes": 579,
+      "sha256": "24c0078a7942a8986cadd92d17c7823116ae6c71642400c0fb576b957ebbfc45"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/receipt-helper-check.json",
+      "bytes": 311,
+      "sha256": "911f83878552c3ee233f4a6f5118449aff755a6785e9167cda6b1ca7a8d09633"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/records/receipt-helper-review.json",
+      "bytes": 748,
+      "sha256": "a01a762b19cd3798c83b7b02430886a6cb191f48adee0ac13b731941332bc864"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-probe/2026-10-15/screen-help.log",
+      "bytes": 658,
+      "sha256": "54e7c097674cbb1cb915da3aef4a66a460025b947aacc1f18283487d397c5eee"
+    }
+  ]
+}

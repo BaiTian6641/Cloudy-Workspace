@@ -1,0 +1,12 @@
+--- a/client/Android/Studio/freeRDPCore/src/main/cpp/android_freerdp.c
++++ b/client/Android/Studio/freeRDPCore/src/main/cpp/android_freerdp.c
+@@ -1162,6 +1162,9 @@
+ 	ANDROID_EVENT* event;
+ 	freerdp* inst = (freerdp*)instance;
+ 	scancode = GetVirtualScanCodeFromVirtualKeyCode(keycode, 4);
++	/* Zero means this virtual key has no mapping; never enqueue scan code zero. */
++	if (scancode == 0)
++		return JNI_FALSE;
+ 	int flags = (down == JNI_TRUE) ? KBD_FLAGS_DOWN : KBD_FLAGS_RELEASE;
+ 	flags |= (scancode & KBDEXT) ? KBD_FLAGS_EXTENDED : 0;
+ 	event = (ANDROID_EVENT*)android_event_key_new(flags, scancode & 0xFF);

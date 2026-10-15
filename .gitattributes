@@ -9,3 +9,8 @@ qualification/probes/device-baseline/app/src/main/assets/third_party_notices/run
 qualification/probes/device-baseline/app/src/main/assets/third_party_notices/ssh/slf4j-embedded-LICENSE.txt -text whitespace=cr-at-eol,-blank-at-eof
 qualification/probes/device-baseline/app/src/main/assets/third_party_notices/ssh/slf4j-module-LICENSE.txt -text whitespace=-blank-at-eof
 qualification/probes/device-baseline/app/src/main/assets/third_party_notices/ssh/sshj-NOTICE.txt -text whitespace=-blank-at-eol
+# Preserve the native diagnostic's reviewed notice bytes and APK provenance.
+qualification/probes/native-rdp/app/src/main/assets/runtime-copyrights.txt whitespace=-blank-at-eof
+# Unified diffs prefix context with a space before upstream tab indentation.
+# Added source indentation remains reviewed through the applied native source.
+qualification/probes/native-rdp/patches/*.patch whitespace=-space-before-tab

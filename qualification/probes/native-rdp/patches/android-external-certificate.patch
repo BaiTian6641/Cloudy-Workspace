@@ -1,0 +1,91 @@
+--- a/client/Android/Studio/freeRDPCore/src/main/cpp/android_freerdp.c
++++ b/client/Android/Studio/freeRDPCore/src/main/cpp/android_freerdp.c
+@@ -490,6 +490,59 @@
+ 	                                   android_OnChannelConnectedEventHandler);
+ 	PubSub_UnsubscribeChannelDisconnected(instance->context->pubSub,
+ 	                                      android_OnChannelDisconnectedEventHandler);
++}
++
++/* External certificate management delegates the full PEM chain to the Java
++ * owner before any CA/known-host acceptance path. Never return a negative
++ * status: the upstream TLS error branch logs certificate bytes for negatives. */
++static int android_verify_x509_certificate(freerdp* instance, const BYTE* data, size_t length,
++                                           const char* hostname, UINT16 port, DWORD flags)
++{
++	if (!instance || !data || length == 0 || length > 128 * 1024 || !hostname)
++		return 0;
++
++	JNIEnv* env = nullptr;
++	jboolean attached = jni_attach_thread(&env);
++	if (!env)
++	{
++		if (attached == JNI_TRUE)
++			jni_detach_thread();
++		return 0;
++	}
++
++	int accepted = 0;
++	BOOL frame = FALSE;
++	if ((*env)->ExceptionCheck(env))
++		goto out;
++	if ((*env)->PushLocalFrame(env, 8) < 0)
++		goto out;
++	frame = TRUE;
++
++	jbyteArray pem = (*env)->NewByteArray(env, (jsize)length);
++	if (!pem || (*env)->ExceptionCheck(env))
++		goto out;
++	(*env)->SetByteArrayRegion(env, pem, 0, (jsize)length, (const jbyte*)data);
++	if ((*env)->ExceptionCheck(env))
++		goto out;
++	jstring host = (*env)->NewStringUTF(env, hostname);
++	if (!host || (*env)->ExceptionCheck(env))
++		goto out;
++
++	const jint result = freerdp_callback_int_result(
++	    "OnVerifyX509Certificate", "(J[BLjava/lang/String;JJ)I", (jlong)instance, pem,
++	    host, (jlong)port, (jlong)flags);
++	if (!(*env)->ExceptionCheck(env) && result == 1)
++		accepted = 1;
++out:
++	/* Allocation, missing-method and Java validation exceptions all reject.
++	 * Do not describe exceptions: their messages may contain certificate data. */
++	if ((*env)->ExceptionCheck(env))
++		(*env)->ExceptionClear(env);
++	if (frame)
++		(*env)->PopLocalFrame(env, nullptr);
++	if (attached == JNI_TRUE)
++		jni_detach_thread();
++	return accepted;
+ }
+
+ static BOOL android_authenticate_int(freerdp* instance, char** username, char** password,
+@@ -931,6 +984,28 @@
+ 	return (status == 0) ? JNI_TRUE : JNI_FALSE;
+ }
+
++/* Owner invokes after argument parsing and before the one connect attempt.
++ * External mode bypasses CA/known-host fallback; callers must not configure
++ * CertificateAcceptedFingerprints, which is a prior positive shortcut. */
++JNIEXPORT jboolean JNICALL
++Java_com_freerdp_freerdpcore_services_LibFreeRDP_freerdp_1set_1external_1certificate_1management(
++    JNIEnv* env, jclass cls, jlong instance)
++{
++	WINPR_UNUSED(env);
++	WINPR_UNUSED(cls);
++	freerdp* inst = (freerdp*)instance;
++	if (!inst || !inst->context || !inst->context->settings)
++		return JNI_FALSE;
++	androidContext* ctx = (androidContext*)inst->context;
++	if (ctx->threadStarted || ctx->thread)
++		return JNI_FALSE;
++	if (!freerdp_settings_set_bool(inst->context->settings, FreeRDP_ExternalCertificateManagement,
++	                               TRUE))
++		return JNI_FALSE;
++	inst->VerifyX509Certificate = android_verify_x509_certificate;
++	return JNI_TRUE;
++}
++
+ JNIEXPORT jboolean JNICALL Java_com_freerdp_freerdpcore_services_LibFreeRDP_freerdp_1connect(
+     JNIEnv* env, jclass cls, jlong instance)
+ {

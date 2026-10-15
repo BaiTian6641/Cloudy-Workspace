@@ -1,0 +1,252 @@
+{
+  "formatVersion": 1,
+  "checkedOn": "2026-10-15",
+  "scope": "Standalone native RDP qualification JVM runtime notices; native-engine notices supplied separately",
+  "selection": "app/gradle.lockfile debugRuntimeClasspath selects only the two component coordinates below; exact APK packaging checked separately",
+  "runtimeBinaryCount": 2,
+  "components": [
+    {
+      "coordinate": "org.jetbrains.kotlin:kotlin-stdlib:2.2.10",
+      "binaryArtifacts": [
+        {
+          "verificationName": "kotlin-stdlib-2.2.10.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/2.2.10/kotlin-stdlib-2.2.10.jar",
+          "sha256": "9c67cc79efd6b9215b49d2a4308f5f3433537376c7c88e89bdd6729bd096e61a",
+          "notices": []
+        }
+      ],
+      "pom": {
+        "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/2.2.10/kotlin-stdlib-2.2.10.pom",
+        "sha256": "454ba507a3d36b4ac253df6df96f8739bd26ea19df3f332b10b13f2c5715f787",
+        "declaredLicenses": [
+          {
+            "name": "The Apache License, Version 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+          }
+        ],
+        "licenseParent": null
+      },
+      "sourceArchive": {
+        "coordinate": "org.jetbrains.kotlin:kotlin-stdlib:2.2.10",
+        "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/2.2.10/kotlin-stdlib-2.2.10-sources.jar",
+        "sha256": "2983f21e626325f256bc4443c7fe45a83912bba077be119142f68210c0548173",
+        "copyrights": [
+          {
+            "text": "Copyright 2010-2025 JetBrains s.r.o. and Kotlin Programming Language contributors.",
+            "representativeEntry": "commonMain/generated/_Arrays.kt",
+            "matchingSourceFileCount": 33
+          },
+          {
+            "text": "Copyright 2010-2023 JetBrains s.r.o. and Kotlin Programming Language contributors.",
+            "representativeEntry": "commonMain/generated/_OneToManyTitlecaseMappings.kt",
+            "matchingSourceFileCount": 22
+          },
+          {
+            "text": "Copyright 2010-2020 JetBrains s.r.o. and Kotlin Programming Language contributors.",
+            "representativeEntry": "commonMain/kotlin/Comparator.kt",
+            "matchingSourceFileCount": 46
+          },
+          {
+            "text": "Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.",
+            "representativeEntry": "commonMain/kotlin/JsAnnotationsH.kt",
+            "matchingSourceFileCount": 141
+          },
+          {
+            "text": "Copyright 2010-2021 JetBrains s.r.o. and Kotlin Programming Language contributors.",
+            "representativeEntry": "commonMain/kotlin/JvmAnnotationsH.kt",
+            "matchingSourceFileCount": 30
+          },
+          {
+            "text": "Copyright 2010-2022 JetBrains s.r.o. and Kotlin Programming Language contributors.",
+            "representativeEntry": "commonMain/kotlin/MathH.kt",
+            "matchingSourceFileCount": 26
+          },
+          {
+            "text": "Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.",
+            "representativeEntry": "commonMain/kotlin/TextH.kt",
+            "matchingSourceFileCount": 79
+          },
+          {
+            "text": "Copyright 2007 Google Inc.",
+            "representativeEntry": "commonMain/kotlin/collections/AbstractList.kt",
+            "matchingSourceFileCount": 2
+          },
+          {
+            "text": "Copyright 2010-2019 JetBrains s.r.o. and Kotlin Programming Language contributors.",
+            "representativeEntry": "commonMain/kotlin/collections/ArrayDeque.kt",
+            "matchingSourceFileCount": 20
+          },
+          {
+            "text": "Copyright 2010-2018 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license",
+            "representativeEntry": "commonMain/kotlin/experimental/ExperimentalNativeApi.kt",
+            "matchingSourceFileCount": 1
+          },
+          {
+            "text": "Copyright (c) 2007-present, Stephen Colebourne & Michael Nascimento Santos",
+            "representativeEntry": "commonMain/kotlin/time/Instant.kt",
+            "matchingSourceFileCount": 1
+          },
+          {
+            "text": "Copyright 2010-2015 JetBrains s.r.o.",
+            "representativeEntry": "jvmMain/kotlin/reflect/KDeclarationContainer.kt",
+            "matchingSourceFileCount": 2
+          },
+          {
+            "text": "Copyright 2010-2016 JetBrains s.r.o.",
+            "representativeEntry": "jvmMain/kotlin/reflect/KVisibility.kt",
+            "matchingSourceFileCount": 1
+          },
+          {
+            "text": "Copyright 2010-2017 JetBrains s.r.o.",
+            "representativeEntry": "jvmMain/jdk8/kotlin/collections/Collections.kt",
+            "matchingSourceFileCount": 3
+          }
+        ],
+        "notices": []
+      },
+      "bundledNoticeFiles": [
+        "Apache-2.0.txt",
+        "runtime-copyrights.txt",
+        "kotlin-COPYRIGHT.txt",
+        "kotlin-stdlib-attributions.txt",
+        "kotlin-threetenbp-LICENSE.txt",
+        "kotlin-boost-LICENSE.txt"
+      ],
+      "additionalEmbeddedTerms": [
+        "BSD-3-Clause (ThreeTenBP)",
+        "BSL-1.0 (Boost)"
+      ]
+    },
+    {
+      "coordinate": "org.jetbrains:annotations:13.0",
+      "binaryArtifacts": [
+        {
+          "verificationName": "annotations-13.0.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/jetbrains/annotations/13.0/annotations-13.0.jar",
+          "sha256": "ace2a10dc8e2d5fd34925ecac03e4988b2c0f851650c94b8cef49ba1bd111478",
+          "notices": []
+        }
+      ],
+      "pom": {
+        "url": "https://repo.maven.apache.org/maven2/org/jetbrains/annotations/13.0/annotations-13.0.pom",
+        "sha256": "965aeb2bedff369819bdde1bf7a0b3b89b8247dd69c88b86375d76163bb8c397",
+        "declaredLicenses": [
+          {
+            "name": "The Apache Software License, Version 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+          }
+        ],
+        "licenseParent": null
+      },
+      "sourceArchive": {
+        "coordinate": "org.jetbrains:annotations:13.0",
+        "url": "https://repo.maven.apache.org/maven2/org/jetbrains/annotations/13.0/annotations-13.0-sources.jar",
+        "sha256": "42a5e144b8e81d50d6913d1007b695e62e614705268d8cf9f13dbdc478c2c68e",
+        "copyrights": [
+          {
+            "text": "Copyright 2000-2013 JetBrains s.r.o.",
+            "representativeEntry": "org/intellij/lang/annotations/Flow.java",
+            "matchingSourceFileCount": 2
+          },
+          {
+            "text": "Copyright 2006 Sascha Weinreuter",
+            "representativeEntry": "org/intellij/lang/annotations/Identifier.java",
+            "matchingSourceFileCount": 6
+          },
+          {
+            "text": "Copyright 2000-2012 JetBrains s.r.o.",
+            "representativeEntry": "org/intellij/lang/annotations/JdkConstants.java",
+            "matchingSourceFileCount": 4
+          },
+          {
+            "text": "Copyright 2000-2009 JetBrains s.r.o.",
+            "representativeEntry": "org/jetbrains/annotations/Nls.java",
+            "matchingSourceFileCount": 4
+          }
+        ],
+        "notices": []
+      },
+      "bundledNoticeFiles": [
+        "Apache-2.0.txt",
+        "runtime-copyrights.txt"
+      ],
+      "additionalEmbeddedTerms": []
+    }
+  ],
+  "upstreamRevisions": {
+    "JetBrains/kotlin": "c448af19ded1b1a4e96e9af6412cd9acb100ce1a (v2.2.10)"
+  },
+  "sharedApacheSourceEquivalence": {
+    "Apache-2.0.txt": [
+      "license/LICENSE.txt",
+      "license/third_party/gwt_license.txt",
+      "license/third_party/guava_license.txt"
+    ],
+    "repository": "JetBrains/kotlin",
+    "revision": "c448af19ded1b1a4e96e9af6412cd9acb100ce1a",
+    "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  "files": [
+    {
+      "file": "Apache-2.0.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "bytes": 11358,
+      "method": "verbatim upstream file",
+      "url": "https://raw.githubusercontent.com/JetBrains/kotlin/c448af19ded1b1a4e96e9af6412cd9acb100ce1a/license/LICENSE.txt",
+      "reuseSource": "qualification/probes/device-baseline/app/src/main/assets/third_party_notices/Apache-2.0.txt"
+    },
+    {
+      "file": "kotlin-COPYRIGHT.txt",
+      "sha256": "8f1a1700adb5490604c6094fb137bf73f6c28d3ee554b58f3ff8ef975a79672d",
+      "bytes": 647,
+      "method": "verbatim upstream file",
+      "url": "https://raw.githubusercontent.com/JetBrains/kotlin/c448af19ded1b1a4e96e9af6412cd9acb100ce1a/license/COPYRIGHT.txt",
+      "reuseSource": "qualification/probes/device-baseline/app/src/main/assets/third_party_notices/upstream/kotlin-COPYRIGHT.txt"
+    },
+    {
+      "file": "kotlin-threetenbp-LICENSE.txt",
+      "sha256": "d1bc53b493a3ab387b42717ed5c4b1976a5048996f81154278100bff86d39331",
+      "bytes": 1520,
+      "method": "verbatim upstream file",
+      "url": "https://raw.githubusercontent.com/JetBrains/kotlin/c448af19ded1b1a4e96e9af6412cd9acb100ce1a/license/third_party/threetenbp_license.txt",
+      "reuseSource": "qualification/probes/device-baseline/app/src/main/assets/third_party_notices/upstream/kotlin-threetenbp-LICENSE.txt"
+    },
+    {
+      "file": "kotlin-boost-LICENSE.txt",
+      "sha256": "8d8291caf1cee26d23acf3eb67c9f9a2d58f1c681b16a4fbe8cbfb9e3c0b5a9b",
+      "bytes": 1337,
+      "method": "verbatim upstream file",
+      "url": "https://raw.githubusercontent.com/JetBrains/kotlin/c448af19ded1b1a4e96e9af6412cd9acb100ce1a/license/third_party/boost_LICENSE.txt",
+      "reuseSource": "qualification/probes/device-baseline/app/src/main/assets/third_party_notices/upstream/kotlin-boost-LICENSE.txt"
+    },
+    {
+      "file": "kotlin-stdlib-attributions.txt",
+      "sha256": "acbf0fb40551980e88adeaf38af20691395f792256ec5e90f212b8848ca116f9",
+      "bytes": 1335,
+      "method": "verbatim selected runtime path blocks with explanatory heading",
+      "url": "https://raw.githubusercontent.com/JetBrains/kotlin/c448af19ded1b1a4e96e9af6412cd9acb100ce1a/license/README.md",
+      "sourceSha256": "8cba83fcded6d166fc4398eb8cb9c1a12ad8b87ff624a404956242d22231fbc9",
+      "selectedPaths": [
+        "libraries/stdlib/src/kotlin/collections",
+        "libraries/stdlib/src/kotlin/time",
+        "libraries/stdlib/jvm/src/kotlin/util/UnsignedJVM.kt",
+        "libraries/stdlib/jvm/src/kotlin/util/MathJVM.kt"
+      ],
+      "reuseSource": "qualification/probes/device-baseline/app/src/main/assets/third_party_notices/kotlin-stdlib-attributions.txt"
+    },
+    {
+      "file": "runtime-copyrights.txt",
+      "sha256": "d07703bcc7788bb1141d739f3e275e62011b0be7e85ac3c1f57e55835198e15e",
+      "bytes": 1801,
+      "method": "deduplicated copyright lines from exact-version source archive headers"
+    },
+    {
+      "file": "README-runtime.txt",
+      "sha256": "c187eed365cffbd0c4914f4c0c068eedb2707ba5a6292059c37b7a0bbf9612c6",
+      "bytes": 1292,
+      "method": "Cloudy explanatory index"
+    }
+  ],
+  "excluded": "No AndroidX, compiler, Gradle/AGP, JUnit, host SDK or third-party implementation source is included in this JVM runtime notice bundle.",
+  "packagingStatus": "pending integration leader exact APK inspection"
+}

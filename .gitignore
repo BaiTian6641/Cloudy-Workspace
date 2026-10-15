@@ -32,3 +32,6 @@ __pycache__/
 .mypy_cache/
 artifacts/
 qualification/results/private/
+
+# Public deterministic certificate fixture; no private key.
+!qualification/probes/native-rdp/app/src/test/resources/rdp-trust-test-certificate.pem
