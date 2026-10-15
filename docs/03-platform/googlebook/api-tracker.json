@@ -790,19 +790,20 @@
         "R32",
         "R135",
         "R136",
-        "R137"
+        "R137",
+        "R140"
       ],
       "minimumApi": null,
-      "libraryVersion": null,
+      "libraryVersion": "98aaee0560baa0332339b2ef464ea96ed9b9b28c",
       "interfaceKind": "upstream-client-and-standard",
-      "availability": "LibVNCClient candidate API; license/security/build selection pending",
+      "availability": "Accepted bounded LibVNCClient source/build candidate containing three identified fixes; runtime regressions, Android integration and GPL distribution unresolved",
       "qualification": "untested",
       "checkedOn": "2026-10-15",
       "owner": "Android/integration developer",
       "stage": "P3-S8",
       "fallback": "Choose a maintained compatible engine; external viewer is a labeled partial workflow",
-      "experiment": "Pin patched engine and qualify security/encoding/resize/input/recovery with primary servers; no implicit file-transfer extension Before opening a server connection, resolve exact client advisory fix coverage; bare0.9.15 is not the probe pin. GPL distribution decision remains separate.",
-      "researchEvidence": "docs/03-platform/googlebook/p0-s4-native-desktop-entry.md"
+      "experiment": "Before ordinary server probe, run focused Tight excess-row, Gradient 2048/2049 and UltraZip header/raw-payload/count regressions plus valid decode controls. Require nonzero normal per-encoding update counts and zero failures. Build selected arm64 Android vncclient with explicit dependency pins; qualify Cloudy trust/security/encoding/resize/input/cancel/recovery. Source coverage is resolved for the three named fixes only; CAP-VNC and distribution license remain pending.",
+      "researchEvidence": "docs/07-reference/2026-10-15-vnc-patched-source-selection.md"
     },
     {
       "id": "API32",

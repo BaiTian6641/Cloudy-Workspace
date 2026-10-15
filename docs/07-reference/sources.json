@@ -876,7 +876,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Review advisory fixes and release/commit patch coverage before selecting the VNC engine. 2026-10-15 reviewed client advisories require exact fix coverage before the P0-S4 network probe; latest tag alone is insufficient.",
+      "note": "Fixes go to master with downstream cherry-picks and no point releases. Exact 98aaee0560baa0332339b2ef464ea96ed9b9b28c accepted as bounded source/build candidate covering three reviewed client fixes; focused runtime regressions and Android/device/license gates remain open.",
       "refresh": "Before engine selection, after relevant upstream change, and before release qualification."
     },
     {
@@ -3241,8 +3241,8 @@
       "category": "backend",
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
-      "sourceUpdatedOn": null,
-      "note": "Tight decoder attacker-controlled out-of-bounds write. Released 0.9.15 predates advisory; exact upstream fix coverage is a P0-S4 pre-network gate. No claim that observed master is certified patched; reuse upstream fixes/regressions under D12.",
+      "sourceUpdatedOn": "2026-06-04",
+      "note": "Tight decoder attacker-controlled out-of-bounds write. Exact upstream fix 540332be3e0acc566fa64da6f1b4680c72c724dd is an ancestor of accepted source/build candidate 98aaee0560baa0332339b2ef464ea96ed9b9b28c; guard retained. Focused runtime regression and Android integration pending; no general security certification. P0-S4/P1-S4.",
       "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
     },
     {
@@ -3253,8 +3253,8 @@
       "category": "backend",
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
-      "sourceUpdatedOn": null,
-      "note": "Tight Gradient malicious-server memory corruption. Released 0.9.15 predates advisory; exact upstream fix coverage is a P0-S4 pre-network gate. No claim that observed master is certified patched; reuse upstream fixes/regressions under D12.",
+      "sourceUpdatedOn": "2026-05-08",
+      "note": "Tight Gradient corruption. Exact upstream fix 5b270544b85233668b98161323297d418a8f5fd1 is an ancestor of accepted source/build candidate 98aaee0560baa0332339b2ef464ea96ed9b9b28c; 2048 width guard retained. Focused runtime regression and Android integration pending; no general security certification. P0-S4/P1-S4.",
       "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
     },
     {
@@ -3265,8 +3265,8 @@
       "category": "backend",
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
-      "sourceUpdatedOn": null,
-      "note": "UltraZip unchecked subrectangle count out-of-bounds read. Released 0.9.15 predates advisory; exact upstream fix coverage is a P0-S4 pre-network gate. No claim that observed master is certified patched; reuse upstream fixes/regressions under D12.",
+      "sourceUpdatedOn": "2026-03-28",
+      "note": "UltraZip subrectangle bounds issue. Exact upstream fix 009008e2f4d5a54dd71f422070df3af7b3dbc931 is an ancestor of accepted source/build candidate 98aaee0560baa0332339b2ef464ea96ed9b9b28c; header/raw-payload guards retained. Focused runtime regression and Android integration pending; no general security certification. P0-S4/P1-S4.",
       "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
     },
     {
@@ -3339,6 +3339,18 @@
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
       "note": "Native ClipData/MIME handling and sensitive clipboard guidance. D14 explicit per-surface clipboard operations; no implicit remote clipboard bridge. P1-S2/P2-S2.",
+      "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
+    },
+    {
+      "id": "R140",
+      "title": "LibVNC exact maintained source candidate",
+      "url": "https://github.com/LibVNC/libvncserver/tree/98aaee0560baa0332339b2ef464ea96ed9b9b28c",
+      "publisher": "LibVNC",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-10-07",
+      "note": "Accepted bounded source/build candidate containing the three reviewed Tight/Gradient/UltraZip fixes by exact ancestry and retained guards. Not a patched tag or comprehensive security claim. Focused advisory regressions, selected Android build, Cloudy adapter/device and GPL distribution gates remain pending. Owner Desktop/device developer; P0-S4/P1-S4; native VNC unavailable until prerequisites pass.",
       "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
     }
   ]

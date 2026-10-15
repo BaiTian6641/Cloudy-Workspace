@@ -1,0 +1,742 @@
+{
+  "schemaVersion": 1,
+  "scope": "Bounded upstream candidate physical-device injected-input/resize/output observations; no capability promotion",
+  "source": {
+    "sourceCommit": "b26ab2481ce9e822de2c3f170bbcddc1be50fe48",
+    "verifiedSourceFiles": 121,
+    "apkSha256": "c6f52b83d66846c528f867f3f450e66e32c8add0e14e717d8c8820b6fda9e949",
+    "apkBytes": 15976273,
+    "buildRef": "475bcf30-ce99-4995-a549-7fcbb1cfd31d",
+    "versionName": "0.7.2",
+    "versionCode": 11,
+    "preinstallBindingDeviceInstalled": false
+  },
+  "installationEvidence": "postinstall072-package-command.json and candidate final journal; source binding deviceInstalled=false describes preinstall binding only",
+  "captures": [
+    {
+      "case": "bulk4",
+      "origin": "ADB injected text, not physical keyboard",
+      "capture": {
+        "schemaVersion": 1,
+        "runId": "26ca2cca-a3da-40d7-be4b-6780c4a494ab",
+        "mode": "capture",
+        "startedAtUtc": "2026-10-15T16:09:31.413594+00:00",
+        "timeoutSeconds": 30.0,
+        "maxBytes": 64,
+        "inputOrigin": "Unclassified: operator must separately identify physical, IME or injected stimulus.",
+        "capturedBytes": 4,
+        "capturedHex": "73747479",
+        "capturedSha256": "d6e2a42f436d3f01aaff8a5602213b3ada0206721097c2d4591cc1ef6c752a0d",
+        "pendingInputDiscardedOnRestore": true,
+        "termination": "capture-timeout",
+        "finishedAtUtc": "2026-10-15T16:10:01.439128+00:00",
+        "elapsedMs": 30025.535,
+        "intendedExitCode": 0
+      },
+      "stimulus": {
+        "mode": "bulk",
+        "value": "stty",
+        "atUtc": "2026-10-15T16:09:34.607257+00:00",
+        "finishedAtUtc": "2026-10-15T16:09:34.762249+00:00",
+        "events": [
+          {
+            "value": "stty",
+            "atUtc": "2026-10-15T16:09:34.707186+00:00",
+            "exitCode": 0
+          }
+        ],
+        "nativeFocusVerified": true,
+        "completed": true
+      },
+      "allStimulusTimesInsideCapture": true,
+      "readinessProjection": {
+        "lastVisibleTerminalLine": "CLOUDY_CAPTURE_READY",
+        "editTextFocused": true
+      },
+      "captureStartToStimulusStartSeconds": 3.193663
+    },
+    {
+      "case": "paced1",
+      "origin": "ADB injected text, not physical keyboard",
+      "capture": {
+        "schemaVersion": 1,
+        "runId": "d3dd01da-c93c-4e70-b870-7eba1fcf4c38",
+        "mode": "capture",
+        "startedAtUtc": "2026-10-15T16:10:24.664328+00:00",
+        "timeoutSeconds": 30.0,
+        "maxBytes": 64,
+        "inputOrigin": "Unclassified: operator must separately identify physical, IME or injected stimulus.",
+        "capturedBytes": 4,
+        "capturedHex": "73747479",
+        "capturedSha256": "d6e2a42f436d3f01aaff8a5602213b3ada0206721097c2d4591cc1ef6c752a0d",
+        "pendingInputDiscardedOnRestore": true,
+        "termination": "capture-timeout",
+        "finishedAtUtc": "2026-10-15T16:10:54.690594+00:00",
+        "elapsedMs": 30026.266,
+        "intendedExitCode": 0
+      },
+      "stimulus": {
+        "mode": "paced",
+        "value": "stty",
+        "atUtc": "2026-10-15T16:10:27.845193+00:00",
+        "finishedAtUtc": "2026-10-15T16:10:28.716840+00:00",
+        "events": [
+          {
+            "value": "s",
+            "atUtc": "2026-10-15T16:10:27.952184+00:00",
+            "exitCode": 0
+          },
+          {
+            "value": "t",
+            "atUtc": "2026-10-15T16:10:28.140293+00:00",
+            "exitCode": 0
+          },
+          {
+            "value": "t",
+            "atUtc": "2026-10-15T16:10:28.332189+00:00",
+            "exitCode": 0
+          },
+          {
+            "value": "y",
+            "atUtc": "2026-10-15T16:10:28.524654+00:00",
+            "exitCode": 0
+          }
+        ],
+        "nativeFocusVerified": true,
+        "completed": true
+      },
+      "allStimulusTimesInsideCapture": true,
+      "readinessProjection": {
+        "lastVisibleTerminalLine": "CLOUDY_CAPTURE_READY",
+        "editTextFocused": true
+      },
+      "captureStartToStimulusStartSeconds": 3.180865
+    }
+  ],
+  "selectedWorkRecords": [
+    {
+      "path": "host-01/work/device-size-26fa120a-34b3-42cc-bc8c-55e243fc0cb1.json",
+      "record": {
+        "atUtc": "2026-10-15T16:12:09.248918+00:00",
+        "columns": 146,
+        "rows": 23,
+        "term": "xterm-256color",
+        "locale": "C.UTF-8"
+      }
+    },
+    {
+      "path": "host-01/work/device-size-8ec79e2f-80ee-4faa-a178-7b5835d60a8d.json",
+      "record": {
+        "atUtc": "2026-10-15T16:11:49.053518+00:00",
+        "columns": 205,
+        "rows": 32,
+        "term": "xterm-256color",
+        "locale": "C.UTF-8"
+      }
+    },
+    {
+      "path": "host-01/work/device-size-f57e6230-0e75-448b-94c1-c9fe487247ad.json",
+      "record": {
+        "atUtc": "2026-10-15T16:11:24.466092+00:00",
+        "columns": 146,
+        "rows": 23,
+        "term": "xterm-256color",
+        "locale": "C.UTF-8"
+      }
+    },
+    {
+      "path": "host-01/work/exercise-26ca2cca-a3da-40d7-be4b-6780c4a494ab.json",
+      "record": {
+        "schemaVersion": 1,
+        "runId": "26ca2cca-a3da-40d7-be4b-6780c4a494ab",
+        "mode": "capture",
+        "startedAtUtc": "2026-10-15T16:09:31.413594+00:00",
+        "timeoutSeconds": 30.0,
+        "maxBytes": 64,
+        "inputOrigin": "Unclassified: operator must separately identify physical, IME or injected stimulus.",
+        "capturedBytes": 4,
+        "capturedHex": "73747479",
+        "capturedSha256": "d6e2a42f436d3f01aaff8a5602213b3ada0206721097c2d4591cc1ef6c752a0d",
+        "pendingInputDiscardedOnRestore": true,
+        "termination": "capture-timeout",
+        "finishedAtUtc": "2026-10-15T16:10:01.439128+00:00",
+        "elapsedMs": 30025.535,
+        "intendedExitCode": 0
+      }
+    },
+    {
+      "path": "host-01/work/exercise-4537ad2b-8736-4485-a117-bf65ef72ef1e.json",
+      "record": {
+        "schemaVersion": 1,
+        "runId": "4537ad2b-8736-4485-a117-bf65ef72ef1e",
+        "mode": "capture",
+        "startedAtUtc": "2026-10-15T16:03:07.412168+00:00",
+        "timeoutSeconds": 30.0,
+        "maxBytes": 64,
+        "inputOrigin": "Unclassified: operator must separately identify physical, IME or injected stimulus.",
+        "capturedBytes": 0,
+        "capturedHex": "",
+        "capturedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "pendingInputDiscardedOnRestore": true,
+        "termination": "capture-timeout",
+        "finishedAtUtc": "2026-10-15T16:03:37.441467+00:00",
+        "elapsedMs": 30029.301,
+        "intendedExitCode": 0
+      }
+    },
+    {
+      "path": "host-01/work/exercise-6a62c6eb-7e9a-41e8-83a3-c4c8b07980b8.json",
+      "record": {
+        "schemaVersion": 1,
+        "runId": "6a62c6eb-7e9a-41e8-83a3-c4c8b07980b8",
+        "mode": "capture",
+        "startedAtUtc": "2026-10-15T16:08:12.178164+00:00",
+        "timeoutSeconds": 30.0,
+        "maxBytes": 64,
+        "inputOrigin": "Unclassified: operator must separately identify physical, IME or injected stimulus.",
+        "capturedBytes": 1,
+        "capturedHex": "2e",
+        "capturedSha256": "cdb4ee2aea69cc6a83331bbe96dc2caa9a299d21329efb0336fc02a82e1839a8",
+        "pendingInputDiscardedOnRestore": true,
+        "termination": "capture-timeout",
+        "finishedAtUtc": "2026-10-15T16:08:42.196429+00:00",
+        "elapsedMs": 30018.268,
+        "intendedExitCode": 0
+      }
+    },
+    {
+      "path": "host-01/work/exercise-8380e94c-c6c1-4964-bc58-2fe7a9856635.json",
+      "record": {
+        "schemaVersion": 1,
+        "runId": "8380e94c-c6c1-4964-bc58-2fe7a9856635",
+        "mode": "ansi",
+        "startedAtUtc": "2026-10-15T16:12:10.023029+00:00",
+        "timeoutSeconds": 30,
+        "expectedOutputBytes": 488,
+        "expectedOutputSha256": "760c9e66310026305b9434d85c974a4f701c63bb1c3eab2ece55ca7ab03effe9",
+        "writtenBytes": 488,
+        "scope": "Generated output; rendering and glyph quality require independent observation.",
+        "termination": "output-written",
+        "finishedAtUtc": "2026-10-15T16:12:10.023354+00:00",
+        "elapsedMs": 0.306,
+        "intendedExitCode": 0
+      }
+    },
+    {
+      "path": "host-01/work/exercise-d3dd01da-c93c-4e70-b870-7eba1fcf4c38.json",
+      "record": {
+        "schemaVersion": 1,
+        "runId": "d3dd01da-c93c-4e70-b870-7eba1fcf4c38",
+        "mode": "capture",
+        "startedAtUtc": "2026-10-15T16:10:24.664328+00:00",
+        "timeoutSeconds": 30.0,
+        "maxBytes": 64,
+        "inputOrigin": "Unclassified: operator must separately identify physical, IME or injected stimulus.",
+        "capturedBytes": 4,
+        "capturedHex": "73747479",
+        "capturedSha256": "d6e2a42f436d3f01aaff8a5602213b3ada0206721097c2d4591cc1ef6c752a0d",
+        "pendingInputDiscardedOnRestore": true,
+        "termination": "capture-timeout",
+        "finishedAtUtc": "2026-10-15T16:10:54.690594+00:00",
+        "elapsedMs": 30026.266,
+        "intendedExitCode": 0
+      }
+    }
+  ],
+  "candidateSession": {
+    "buildIdentity": {
+      "versionName": "0.7.2",
+      "versionCode": 11,
+      "buildRef": "475bcf30-ce99-4995-a549-7fcbb1cfd31d"
+    },
+    "status": "closed",
+    "reason": "remote-eof",
+    "authenticated": true,
+    "details": {
+      "rendererProvider": "com.google.android.webview",
+      "rendererVersion": "149.0.7827.5",
+      "rendererMessageListener": "true",
+      "rendererArrayBuffer": "true",
+      "hostVerificationCount": "1",
+      "inputBytes": "59",
+      "stdoutBytes": "1342",
+      "stderrBytes": "0",
+      "kex": "ecdh-sha2-nistp256",
+      "hostSignature": "ecdsa-sha2-nistp256",
+      "cipherC2S": "aes128-gcm@openssh.com",
+      "cipherS2C": "aes128-gcm@openssh.com",
+      "macC2S": "hmac-sha2-256",
+      "macS2C": "hmac-sha2-256",
+      "compressionC2S": "none",
+      "compressionS2C": "none",
+      "ptyInitialCols": "146",
+      "ptyInitialRows": "23",
+      "ptyLastCols": "146",
+      "ptyLastRows": "23"
+    },
+    "droppedEvents": 0,
+    "events": [
+      {
+        "status": "connecting",
+        "reason": null,
+        "deviceUtc": "2026-10-15T16:01:44.828924Z",
+        "elapsedRealtimeMs": 78341633
+      },
+      {
+        "status": "connecting",
+        "reason": null,
+        "deviceUtc": "2026-10-15T16:01:44.853677Z",
+        "elapsedRealtimeMs": 78341658
+      },
+      {
+        "status": "host-key-verified",
+        "reason": null,
+        "deviceUtc": "2026-10-15T16:01:44.947096Z",
+        "elapsedRealtimeMs": 78341751
+      },
+      {
+        "status": "authenticated",
+        "reason": null,
+        "deviceUtc": "2026-10-15T16:01:45.072405Z",
+        "elapsedRealtimeMs": 78341877
+      },
+      {
+        "status": "open",
+        "reason": null,
+        "deviceUtc": "2026-10-15T16:01:45.112518Z",
+        "elapsedRealtimeMs": 78341917
+      },
+      {
+        "status": "closing",
+        "reason": null,
+        "deviceUtc": "2026-10-15T16:12:30.805422Z",
+        "elapsedRealtimeMs": 78987610
+      },
+      {
+        "status": "closed",
+        "reason": "remote-eof",
+        "deviceUtc": "2026-10-15T16:12:30.819021Z",
+        "elapsedRealtimeMs": 78987623
+      }
+    ]
+  },
+  "journalProjection": {
+    "revision": 8,
+    "snapshotAtDeviceUtc": "2026-10-15T16:12:30.819615Z",
+    "attemptCount": 2,
+    "eventCount": 14,
+    "providerOrderUnchanged": true
+  },
+  "preservation": {
+    "atUtc": "2026-10-15T16:13:34.276019+00:00",
+    "protectedFileCount": 5,
+    "protectedFiles": [
+      {
+        "devicePath": "files/transfer-journal.json",
+        "sha256": "39962f7dc2c17a0e23d64557f9896fa941b7f1e8a245eabecd08bef1d0205160"
+      },
+      {
+        "devicePath": "files/ssh-journal.json",
+        "sha256": "8118d0feb3ec33da6068d25296562a1a6d4077d511ddb30b694f54134b91826f"
+      },
+      {
+        "devicePath": "files/ssh-archive-20261015-01/ssh-journal.json",
+        "sha256": "49b888efcf0c91ebabe7b1044ed22b5c7b99bcb0e175026a01c1f71afa99d664"
+      },
+      {
+        "devicePath": "files/transfer-archives/run-20261015-01/transfer-journal.json",
+        "sha256": "343fbda40009c501cae0e0787d012b9e4949a33bbf1b2c064185289d08959d58"
+      },
+      {
+        "devicePath": "files/terminal-archive-20261015-01/terminal-journal.json",
+        "sha256": "8d35a416f8b1669c0ad9b841fd7e275a5b9c9d226eea8ea636d4059b23513441"
+      }
+    ],
+    "priorAttemptsPreserved": 1,
+    "priorEventsPreserved": 7,
+    "finalAttempts": 2,
+    "finalEvents": 14,
+    "trustUnchanged": true,
+    "selectedDeviceForwardCount": 0,
+    "baselineExcluded": "Mutable launcher diagnostic refresh",
+    "terminalJournalExcluded": "Prior attempts/events/trust preserved; new candidate attempt appended"
+  },
+  "upgrade": {
+    "sixJournalsAndArchivesUnchanged": true,
+    "changedFiles": [
+      "files/baseline.json"
+    ],
+    "initialComparisonFailed": "Included mutable baseline.json in equality check; six protected journals/archive files matched. Baseline refreshed independently.",
+    "installedVersionLines": [
+      "versionCode=11 minSdk=35 targetSdk=37",
+      "versionName=0.7.2"
+    ]
+  },
+  "controllerStop": {
+    "atUtc": "2026-10-15T16:12:38.222459+00:00",
+    "serverExitCode": 0,
+    "listenerClosed": true,
+    "listenerConnectErrno": 111,
+    "descendantScope": "Observed identities under controlled foreground-only commands; no arbitrary daemon containment claim",
+    "remainingOwnedProcesses": [],
+    "forcedKillPids": [],
+    "observedCount": 8
+  },
+  "privateEvidence": [
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/bulk2-capture-command-stimulus.json",
+      "bytes": 723,
+      "sha256": "3d7a6103cd21d2dc0ac75da1d237b19f8db5aa9c680d06d336571dabd0a638fc"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/bulk2-capture-ready-current-user-command.json",
+      "bytes": 215,
+      "sha256": "32bcbd12790ba262f161e28c9f1d59ec5572283c65bd22a6e31d3066eee32f95"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/bulk2-capture-ready-layout-command.json",
+      "bytes": 607,
+      "sha256": "f4b823e2e3948d604b26528a7db0d62b4d3de656169bdd4ddfb4a4f1f7b67da9"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/bulk2-capture-ready-layout.json",
+      "bytes": 12215,
+      "sha256": "06710fe393c137e95bef19d22ad1ecb7b62a0562e8f9fee29c0fadd371cce7ad"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/bulk2-visible.json",
+      "bytes": 4036,
+      "sha256": "cb95a500c390c17cba829b45c14e419908f2c2d87f14dc8de65614d751a09289"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/bulk3-capture-command-stimulus.json",
+      "bytes": 723,
+      "sha256": "1d9aaf44b828ab5f6c22166650e60dd100d6a386b1ef1b86809695f2ba99c148"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/bulk3-capture-ready-current-user-command.json",
+      "bytes": 215,
+      "sha256": "f843426b58a267be442e4023b27373bbbdafab3b5cc13da3b04cbcb78743bff8"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/bulk3-capture-ready-layout-command.json",
+      "bytes": 607,
+      "sha256": "3929252cd3329bf46b8c1a60f303f6ba4b5a038d0122172410a764c61d242d7c"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/bulk3-capture-ready-layout.json",
+      "bytes": 20131,
+      "sha256": "cab2ca9458dc977ad957d12ee9b8efe4398a05794f366a82d01d176fb0b0878b"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/bulk3-visible.json",
+      "bytes": 4593,
+      "sha256": "faee9824b15cd8d1fc2d727ed30314c9caa63eb756a402c91cb8b7efd4c30401"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/bulk4-capture-command-stimulus.json",
+      "bytes": 723,
+      "sha256": "72778a70ab146f0de596d8dafc7d8289447464f986f4c5ab8cfb55525a5fe8b0"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/bulk4-capture-ready-layout.json",
+      "bytes": 20164,
+      "sha256": "74b21f4414efe54226084404b3b10c369e2d5d1614468e97a12f4f03a66aa86b"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/bulk4-visible.json",
+      "bytes": 4784,
+      "sha256": "6e5e3711ef7bfbf6761fb2ccbf995228d8901c09b8413c6eefd5839e290a6ee8"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/candidate-ansi-stimulus.json",
+      "bytes": 723,
+      "sha256": "d146147765c51b859b17f0951112150cf51fee5d479d3ef7ed1f84976987b703"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/candidate-bulk-stimulus.json",
+      "bytes": 495,
+      "sha256": "82faed0e73fd68fcef412e1644018b3b0b4981efe45e81929104bb5189176941"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/candidate-bulk3-stimulus.json",
+      "bytes": 495,
+      "sha256": "232ed8ac1304d89a454bb1ea8cdb6471dbc3cdd806d35892ccd9db556f06be55"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/candidate-bulk4-stimulus.json",
+      "bytes": 495,
+      "sha256": "03a1e849febc984951354e5b404ac9c8b7c5a1e1cd4040f521e29d9b72a90421"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/candidate-final-journal-command.json",
+      "bytes": 7020,
+      "sha256": "fb7165164189cae23d58fb303c1d3be876c4a5428449c98dabb6a7f01ba60c39"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/candidate-final-journal-current-user-command.json",
+      "bytes": 215,
+      "sha256": "4bfe85cf8cb492681d7333eca932ffe08e024f98ec4fd86c56590e341fba0ff8"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/candidate-final-journal-journal.json",
+      "bytes": 6068,
+      "sha256": "e9029fe95acfd9e08ec2e7ff0c04bc8980474a291c06447c3fd6a34afe312a8f"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/candidate-maximized-layout-command.json",
+      "bytes": 607,
+      "sha256": "10bd1e5536f896f4828d92e5ddfb028934dac9e108a627cd477f695264f2e10c"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/candidate-maximized-layout.json",
+      "bytes": 13629,
+      "sha256": "3bc71c42f2669d92212d8e9e794484e2b4d3180794232ca98a5f96869be63bbb"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/candidate-paced1-stimulus.json",
+      "bytes": 805,
+      "sha256": "1e7acb8e99cf1faa84dbe6279295a8ad45e5c75ac6464834a19439f434a5d37d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/candidate-restore-layout-command.json",
+      "bytes": 603,
+      "sha256": "1bef96b9de2431759702ac27e9f9ce3f0368265dabbf3936a9f19f547ae576cd"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/candidate-restore-layout.json",
+      "bytes": 13802,
+      "sha256": "6601932e0e50ceb077fc66355ebcdbd79c2488f819440c267ca196867de3bd36"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/candidate-restored-layout-command.json",
+      "bytes": 605,
+      "sha256": "e1ae1b52f45d66613ede69f7f1682d448c18f4580d02d70dbcc0b4a26d3a0b62"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/candidate-restored-layout.json",
+      "bytes": 20573,
+      "sha256": "906f6e6ba802a03cf675003563b54618e2cff3cdbcc77ad751e593146fed2bfe"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/candidate-session-exit-stimulus.json",
+      "bytes": 828,
+      "sha256": "ccc531422a779bf1c8cc5ce1c46efffc29d84ef296ec375843c2de9448a45c37"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/candidate-size-before-layout-command.json",
+      "bytes": 611,
+      "sha256": "d2d1a199834163ba024a86b14a4ee268c91601cfca97432fefc56d2df897a671"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/candidate-size-before-layout.json",
+      "bytes": 20404,
+      "sha256": "23c68fd579393a6da349e84118864410ed61faf83bb9fd7b794e73def64f832a"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/candidate-size-before-stimulus.json",
+      "bytes": 723,
+      "sha256": "b4d834b11167391b41297116e0b5a54887d01f1f230c16e7a14ff933a2a771b5"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/candidate-size-maximized-stimulus.json",
+      "bytes": 723,
+      "sha256": "49b033dfe981fe8e7067677bc1226a3c7432354ea41979444ec3738d97df2161"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/candidate-size-restored-stimulus.json",
+      "bytes": 723,
+      "sha256": "45c927e1150d0ae4b9beb17a5cb54820ca6889af916086ae96dc0fdf88a24097"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/candidate072-ansi-current-user-command.json",
+      "bytes": 215,
+      "sha256": "ad72f9b1ebb38335a26c09fa9f02c175d3bbf580eb3fe16703b15448b7ecde72"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/candidate072-ansi-screen-command.json",
+      "bytes": 589,
+      "sha256": "ddedf8dc92b0358511b315d052ed575ff1ed9456ec69affff78d2e6b9c08aef3"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/candidate072-ansi.png",
+      "bytes": 430197,
+      "sha256": "9fef8032a250e713bc8c0416f6852e7726ac25f1c93ed0cc7da5fabc151f4dbb"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/clear-late-bulk-current-user-command.json",
+      "bytes": 215,
+      "sha256": "b25606933566b018027507c9b9a2d6985e33ed2389ba0b4deb2d058a27419224"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/clear-late-bulk-input-command.json",
+      "bytes": 219,
+      "sha256": "883e315378470ef177a522791c01900dbfe7e9b9ce981d88fa491726cba8e134"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/clear-late-bulk3-current-user-command.json",
+      "bytes": 215,
+      "sha256": "c0624e6043166c44aee18e622f460fe05aaee7136d978ce6cd66d77cc76c3d6e"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/clear-late-bulk3-input-command.json",
+      "bytes": 219,
+      "sha256": "02390932d3875b081b7821468d29fa78c3d2fe52b8d0ff85f94ece89f0824eab"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/final-preservation-check.json",
+      "bytes": 1242,
+      "sha256": "3eb5f1db12076c94d745517ade99bf007f87305fcc52851e84541d2758753bd5"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/install072-install-command.json",
+      "bytes": 479,
+      "sha256": "bc5aa162379eed328c70b3f3e9cb537fcdfa6f25ef577be70408a8c490813aaa"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/paced1-capture-command-stimulus.json",
+      "bytes": 723,
+      "sha256": "6b6445bac08e4782c234eaa28bb4bce4f16ae28b0fc0e6684316946cd8fb9046"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/paced1-capture-ready-layout.json",
+      "bytes": 20214,
+      "sha256": "b903132454e52cb8415e17840e2912442cccc6546c462e5ccb8102be85a36502"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/paced1-visible.json",
+      "bytes": 5151,
+      "sha256": "30f9c1d4bfb28bb3df8c63f13cb2739f7a56d2cc1ab95546f9e6bae04b18e240"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/postinstall072-package-command.json",
+      "bytes": 7572,
+      "sha256": "82ce21ac1e504fd8854c416761a3771d59cd489ca21d3de8852416842f8afc5b"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/postinstall072-preservation.json",
+      "bytes": 1950,
+      "sha256": "da413a6e1f5641af874863e2b712c34747cd4947419d18724b55610c327af3ef"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/postinstall072-properties-command.json",
+      "bytes": 39743,
+      "sha256": "535f5537072430f2587a0fcd0e014fb30d189b0d88d5c9615e7a9a7f359017bc"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/preinstall072-preservation.json",
+      "bytes": 1943,
+      "sha256": "3b3bec128a636aafa20cf08e3d9b7c69ae484de5147eb5caa67942077917ede7"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-03/upgrade-comparison.json",
+      "bytes": 362,
+      "sha256": "4485cd43f31d0d4fb033d2d31274f90c48370568b282407ecd004c012ff48653"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/candidate072-process-events.json",
+      "bytes": 1411,
+      "sha256": "4f353952822474d9ed06fec6cb4b87ff9e8903cabac848e6e6bb2d094209a43d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/candidate072-server.log",
+      "bytes": 1426,
+      "sha256": "9b25cca8d60e996240fda6709b6d25184c56dce2a6d45e6df4ee316bda4f46ec"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/candidate072-started.json",
+      "bytes": 167,
+      "sha256": "c290c182ec3d73c4769e4b6f029204d94a5717fac57f229b1542f76ea22d7447"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/candidate072-stopped.json",
+      "bytes": 334,
+      "sha256": "45760494201c13e74359208cb992fdfba6e587af78040ddca8926d65a88e615e"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/a",
+      "bytes": 241,
+      "sha256": "d16e2e2b44dc22a2b012c61feffb7e748a6ae8dc04a8b5bdb336257354e2328b"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/b",
+      "bytes": 284,
+      "sha256": "3a48e17d78e8fb25d88f1656a3876e65edda55956e00a4962896d547a6befba7"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/device-size-26fa120a-34b3-42cc-bc8c-55e243fc0cb1.json",
+      "bytes": 120,
+      "sha256": "d323050d85349204c8f0d174257a48b00a3e178a31718cad23e104b0b4b4e7d4"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/device-size-8ec79e2f-80ee-4faa-a178-7b5835d60a8d.json",
+      "bytes": 120,
+      "sha256": "31c3ac8107af9815489fb8e98d76c3b5a779f1379df6a3c98a21a266127940d9"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/device-size-f57e6230-0e75-448b-94c1-c9fe487247ad.json",
+      "bytes": 120,
+      "sha256": "ad2f01895685c0c8ecddf7c8088b771f70d7a7325deed7412e370587035f1a0a"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/exercise-26ca2cca-a3da-40d7-be4b-6780c4a494ab.json",
+      "bytes": 561,
+      "sha256": "cffe6c8feac31b828ee39864ae22f2dda68c851b84f1e203587302cbbbaa68bd"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/exercise-4537ad2b-8736-4485-a117-bf65ef72ef1e.json",
+      "bytes": 553,
+      "sha256": "b84e5be175f5bd60fbe6dec7f5967f4f59e76a62963bd505f210517495cdc173"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/exercise-6a62c6eb-7e9a-41e8-83a3-c4c8b07980b8.json",
+      "bytes": 555,
+      "sha256": "19897949acfdbb77a9f144a8333938ced323b8def0df11ab1101a154190f0fb9"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/exercise-8380e94c-c6c1-4964-bc58-2fe7a9856635.json",
+      "bytes": 496,
+      "sha256": "01d3cd3f9a7d80afa4140a9fc04715ea99c5ed61f163b8363b78a69aa2761cb3"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/exercise-d3dd01da-c93c-4e70-b870-7eba1fcf4c38.json",
+      "bytes": 561,
+      "sha256": "c8e3e8b7b2461132583b5424927aae1b933f31fe679e71caa6b349f37d5adb2e"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/exercise.py",
+      "bytes": 11558,
+      "sha256": "e5e29b213356b78d75a3e560ed0f7c9119e6d6282cc385f031bcbba2c16fa406"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/s",
+      "bytes": 351,
+      "sha256": "cc0208535f2bb42fd00caa7126d0de45b349c44ec1910fd6e56c34ba656ecec6"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/source-072/cloudy-baseline-0.7.2-code11.apk",
+      "bytes": 15976273,
+      "sha256": "c6f52b83d66846c528f867f3f450e66e32c8add0e14e717d8c8820b6fda9e949"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/source-072/commit-binding.json",
+      "bytes": 331,
+      "sha256": "65892339e27748c2c7f4c9d662b6a4a8ce9710990636a0930aeb0b31b44b4f07"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/source-072/preinstall-binding.json",
+      "bytes": 46432,
+      "sha256": "3271640fa7912854800e0ad491be28fb22881894747c0067b999ca1cdefd3a5d"
+    }
+  ],
+  "privacy": "Raw evidence stays ignored/private. Public projection excludes accounts, serials, endpoints, trust fingerprints, keys and screenshots; screenshot hash binds private observation only.",
+  "limitations": [
+    "Physical keyboard",
+    "Native CJK IME",
+    "TalkBack/accessibility",
+    "Clipboard and direct selection",
+    "Sustained throughput/backpressure",
+    "Comprehensive glyph correctness",
+    "Two retained synthetic editing limits in upstream review"
+  ]
+}
