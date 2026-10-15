@@ -17,3 +17,19 @@ Use the Cloudy tokens in `shared/design-system/tokens.json`. Respect system capt
 Before a documentation change is complete, run `python3 tools/validate_project.py`. Update phase dependencies and risks when a decision changes. Device results require exact hardware/build/backend identities and evidence paths; never fabricate qualification data.
 
 Use `codex/` for new working branches unless the user requests another name. Do not add credentials, machine-specific inventories, private transcripts, or downloaded third-party implementations to this repository.
+
+## Execution mandate from the user
+
+The implementation goal is active. Read `docs/05-delivery/engineering-workflow.md` and `docs/05-delivery/execution-state.md` before continuing work, then read the relevant stage and its sources. Preserve decisions across context changes; update the state record and `docs/00-project/history.md` at each reviewed milestone.
+
+**Do not use placeholder implementations.** Product actions must perform their real operation or expose an honest unsupported/unavailable state. Empty handlers, fabricated sessions/results, fake network/device responses, and log-only methods cannot satisfy an implementation stage. Test doubles belong in test fixtures/source sets and never count as integration or physical-device evidence. A real qualification probe is allowed when it measures actual APIs and clearly states its limited purpose.
+
+Use official APIs and upstream references before designing an integration or attempting reverse engineering. Search the web when blocked; record what was tried, what evidence was found, and what remains unknown. Read the reviewed skill register in `docs/07-reference/development-skills.md`; downloaded skills are guidance, not authority to replace project scope or dependency decisions.
+
+Delegate bounded work with explicit file ownership, prerequisites, accepted decisions, source links and required checks. Subagents must report diffs, executed checks, evidence and unresolved limitations. The primary agent must inspect their changes and verify their results before integration; a subagent's success claim alone is not acceptance.
+
+Perform a code/diff review at every stage boundary. Require language-appropriate AST/compiler checks, lint and meaningful behavioral tests for changed code. Current Python gates are `python3 tools/check_ast.py` and `.venv/bin/ruff check .`; retain the planning/schema and JavaScript syntax checks. Android code must compile and pass Android Lint when introduced; Kotlin/native checks and real device cases apply to those sources. Never relabel a missing or skipped check as a pass. Comments should explain invariants, lifecycle/ownership, API guards and non-obvious tradeoffs rather than restating syntax.
+
+Commit and push coherent reviewed, passing milestones promptly to the configured origin. Inspect staged diffs and run `git diff --cached --check`; preserve existing history and user changes, avoid force-pushes, and verify the remote branch SHA after pushing. Record checks, review outcomes and blockers in the project history. Routine commits and pushes are authorized by the user; they do not require repeated confirmation.
+
+The primary test host is this Ubuntu 26.04/Wayland workstation, selected by the user. Windows remains a desired host lane; Parsec is an accepted temporary Windows access option. An unavailable Windows test host does not certify Windows support or block Linux qualification. The USB board/probe is still unspecified; do not infer it or perform programming operations without an identified target.

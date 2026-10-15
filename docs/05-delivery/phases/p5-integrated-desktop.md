@@ -1,43 +1,20 @@
 # P5 — Integrated desktop and document access
 
-**Status:** planned. **Active effort:** 18–30 person-days before contingency. **Purpose:** Complete the separately gated native high-performance media path, measured latency/stability, document provider and metered policy.
+**Status:** planned. **Active effort:** 16–27 person-days before contingency. **Purpose:** Integrate native performance streaming, document access and contention policy using their actual dependencies; the adoption decision now belongs to P1-S5.
 
-The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-project/platform-rule-zero.md) defines desktop scope. Estimates are active effort, not elapsed time or staffing commitments; re-estimate after P0. Stage IDs remain stable; the dependency order can place a later-numbered addition before an existing release gate.
+The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-project/platform-rule-zero.md) defines desktop scope. Follow [capability outcomes](../feasibility-gates.md) and [independent release gates](../release-gates.md). Estimates are active effort, not elapsed time; re-estimate after physical evidence. Revision 02 moved the former P5-S1 decision to P1-S5; other stage IDs retain their identity.
 
 | Stage | Outcome | Effort, person-days | Prerequisites |
 | --- | --- | ---: | --- |
-| P5-S1 | Integrated streaming license and maintenance decision | 2–3 | P4-S4 |
-| P5-S2 | Native high-performance stream and latency/stability qualification | 8–14 | P5-S1, P0-S4 |
-| P5-S3 | DocumentsProvider and cached editing | 5–8 | P5-S1, P3-S3 |
-| P5-S4 | Metered policy, accounting, and integrated desktop gate | 3–5 | P5-S2, P5-S3, P0-S6 |
-
-## P5-S1 — Integrated streaming license and maintenance decision
-
-**Owner:** Maintainer/desktop developer. **Prerequisites:** P4-S4. **Status:** planned.
-
-Work:
-
-1. Review actual upstream license/source obligations and choose external-only or maintained native integration.
-2. Assess fork/update ownership, backend/client version compatibility, packaging, decoder/input surfaces, and reproducible builds.
-3. Confirm that R2 handoff limitations justify the added integration scope.
-4. If external-only is selected, replace P5-S2 implementation with qualified external-flow polish and re-estimate the phase.
-5. Treat native high-performance integration as the full-scope target; an external-only decision must explicitly revise user-visible scope, stage estimates and unresolved requirements.
-
-Deliverables:
-
-- Approved implementation/distribution ADR
-- Pinned upstream/source/maintenance plan
-
-Exit evidence:
-
-- No integrated streaming code is shipped before the distribution model is resolved.
-- Scope/effort is revised if the external-only branch is selected.
-
-Record evidence under `qualification/results/P5-S1/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-D01. Official/upstream source IDs: R06, R04, R05; resolve them in the [source register](../../07-reference/source-register.md).
+| P5-S2 | Native high-performance stream and latency/stability qualification | 8–14 | P1-S5, P0-S4, P1-S4, P3-S1 |
+| P5-S3 | DocumentsProvider and cached editing | 5–8 | P1-S3, P3-S3 |
+| P5-S4 | Metered policy, accounting, and integrated desktop gate | 3–5 | P5-S2, P5-S3, P0-S6, P3-S4, P3-S6 |
 
 ## P5-S2 — Native high-performance stream and latency/stability qualification
 
-**Owner:** Desktop/media developer. **Prerequisites:** P5-S1, P0-S4. **Status:** planned.
+**Owner:** Desktop/media developer. **Prerequisites:** P1-S5, P0-S4, P1-S4, P3-S1. **Status:** planned.
+
+**Required supported capabilities:** CAP-STREAM.
 
 Work:
 
@@ -60,7 +37,7 @@ Record evidence under `qualification/results/P5-S2/` using the [run template](..
 
 ## P5-S3 — DocumentsProvider and cached editing
 
-**Owner:** Files/Android developer. **Prerequisites:** P5-S1, P3-S3. **Status:** planned.
+**Owner:** Files/Android developer. **Prerequisites:** P1-S3, P3-S3. **Status:** planned.
 
 Work:
 
@@ -68,6 +45,8 @@ Work:
 2. Implement local staging, source identity/version checks, commit acknowledgements, offline queued edits, and conflict copies.
 3. Test provider consumers, random/sequential access needs, canceled writes, revoked URI access, and process death.
 4. Document backend semantic limits and cleanup/pinning/eviction settings.
+5. Implement the selected file-publication policy: on a backend without conditional replacement, ask before every remote overwrite; offer save-copy/cancel, never remember blanket consent, and preserve pending staging.
+6. Inject another writer between the last version check and publication, plus exclusive-name collision and lost-acknowledgement cases; never claim stat-plus-rename prevents concurrent lost updates.
 
 Deliverables:
 
@@ -78,12 +57,13 @@ Exit evidence:
 
 - No remote file is labeled committed until the backend confirms publication.
 - Concurrent/offline edits preserve data and explicit conflict choices.
+- Every non-conditional remote overwrite has consent for that file and save generation; known conflicts and ambiguous completion preserve staged work and do not trigger an automatic overwrite retry.
 
-Record evidence under `qualification/results/P5-S3/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-D05. Official/upstream source IDs: G12, G13, R15; resolve them in the [source register](../../07-reference/source-register.md).
+Record evidence under `qualification/results/P5-S3/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-D05, Q-F01. Official/upstream source IDs: G12, G13, R15, R34, R35; resolve them in the [source register](../../07-reference/source-register.md).
 
 ## P5-S4 — Metered policy, accounting, and integrated desktop gate
 
-**Owner:** Network/desktop QA. **Prerequisites:** P5-S2, P5-S3, P0-S6. **Status:** planned.
+**Owner:** Network/desktop QA. **Prerequisites:** P5-S2, P5-S3, P0-S6, P3-S4, P3-S6. **Status:** planned.
 
 Work:
 
@@ -107,4 +87,4 @@ Record evidence under `qualification/results/P5-S4/` using the [run template](..
 
 ## Gate and failure route
 
-Resolve licensing at P5-S1 before native streaming. An external-only decision requires explicit feature/effort/scope revision. Compare performance with matched conditions and publish limitations. Every done stage links actual evidence; a documentation check does not qualify a device.
+Native streaming requires supported CAP-STREAM and the early P1-S5 adoption decision. DocumentsProvider depends on files/lifecycle rather than the streaming decision. External-only scope reduction still requires an explicit decision. Every done stage links actual evidence; a documentation check does not qualify a device.

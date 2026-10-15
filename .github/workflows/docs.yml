@@ -1,4 +1,4 @@
-name: Planning assets
+name: Repository checks
 
 on:
   push:
@@ -13,10 +13,17 @@ jobs:
     steps:
       - name: Check out source
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
-      - name: Prepare schema verification
+      - name: Prepare pinned verification tools
         run: |
           python3 -m venv .venv
           .venv/bin/python -m pip install -r requirements-dev.txt
+      # These checks cover authored repository Python, not Android applications.
+      - name: Parse Python AST and compile syntax
+        run: .venv/bin/python tools/check_ast.py
+      - name: Lint Python
+        run: .venv/bin/ruff check . --output-format github
+      - name: Verify planning policy regressions
+        run: .venv/bin/python -m unittest discover -s tests -v
       - name: Check documentation, planning data, tokens, and schemas
         run: .venv/bin/python tools/validate_project.py --schemas
       - name: Check specimen JavaScript syntax

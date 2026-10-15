@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "snapshotDate": "2026-10-14",
+  "snapshotDate": "2026-10-15",
   "effortUnit": "person-day",
   "workingDaysPerWeek": 5,
   "contingencyFraction": 0.25,
@@ -20,8 +20,8 @@
       "title": "Shared foundation and design",
       "document": "phases/p1-foundation.md",
       "effortDays": {
-        "low": 13,
-        "high": 21
+        "low": 15,
+        "high": 24
       }
     },
     {
@@ -29,8 +29,8 @@
       "title": "Console daily-use release",
       "document": "phases/p2-console.md",
       "effortDays": {
-        "low": 30,
-        "high": 54
+        "low": 33,
+        "high": 59
       }
     },
     {
@@ -38,8 +38,8 @@
       "title": "Desktop companion release",
       "document": "phases/p3-desktop.md",
       "effortDays": {
-        "low": 27,
-        "high": 46
+        "low": 28,
+        "high": 47
       }
     },
     {
@@ -56,8 +56,8 @@
       "title": "Integrated desktop and document access",
       "document": "phases/p5-integrated-desktop.md",
       "effortDays": {
-        "low": 18,
-        "high": 30
+        "low": 16,
+        "high": 27
       }
     },
     {
@@ -75,7 +75,7 @@
       "id": "P0-S1",
       "phase": "P0",
       "title": "Inventory and reproducible qualification setup",
-      "status": "planned",
+      "status": "in-progress",
       "effortDays": {
         "low": 1,
         "high": 2
@@ -122,11 +122,13 @@
         "Inspect the API tracker and pin candidate SDK/AndroidX versions for windows, caption bounds, input, files, and foreground-service experiments.",
         "Build minimal resize/multi-instance/caption/focus probes with runtime guards and record experimental annotations.",
         "Classify SSH, transfers, USB, and streaming lifecycle strategies independently; force relevant timeout/process-recreation cases.",
-        "Investigate supported local Linux VM attach/control interfaces; record absence or roadmap status without private-API assumptions."
+        "Investigate supported local Linux VM attach/control interfaces; record absence or roadmap status without private-API assumptions.",
+        "Record CAP-PLATFORM as supported, bounded experiment or blocked, with scope and evidence; investigation completion does not activate dependent implementation."
       ],
       "deliverables": [
         "API availability/compile-probe table",
-        "Operation-specific lifecycle decision note and VM boundary record"
+        "Operation-specific lifecycle decision note and VM boundary record",
+        "CAP-PLATFORM outcome and any bounded follow-up experiment"
       ],
       "exitCriteria": [
         "Every proposed API use has a version guard or fallback.",
@@ -161,18 +163,20 @@
         "P0-S2"
       ],
       "tasks": [
-        "Compare maintained JVM/native SSH candidates for Android ABI, algorithms/trust, PTY/SFTP/jumps/forwards, X11 channel/cookie hooks, footprint, license and update ownership.",
+        "Compare maintained JVM/native SSH candidates for Android ABI, algorithms/trust, PTY/SFTP/jumps/forwards, X11 channel/cookie hooks, footprint, license and update ownership; probe SSH authentication and SFTP operations independently of any terminal renderer.",
         "Embed a pinned local xterm.js experiment with a narrow native boundary and compare a native renderer if needed.",
         "Run exact-byte paste, CJK IME/preedit, wide-cell/emoji, TUI, selection, resize and sustained-output cases with physical desktop inputs.",
-        "Record CPU/memory/input latency and accessible terminal behavior; select the engine/renderer or a bounded remediation experiment."
+        "Record CPU/memory/input latency and accessible terminal behavior; select the engine/renderer or a bounded remediation experiment.",
+        "Record separate CAP-SSH and CAP-TERMINAL feasibility verdicts with scope and evidence. Final supported readiness also requires the relevant P1-S4 adoption decision; renderer-only IME/accessibility failure must not block a qualified SSH/SFTP route or be hidden by its success."
       ],
       "deliverables": [
         "Renderer/SSH ADR with versions and rejected alternatives",
-        "Input/TUI fixture results and local-renderer boundary probe"
+        "Input/TUI fixture results and local-renderer boundary probe",
+        "Separate CAP-SSH and CAP-TERMINAL outcomes with any bounded follow-up experiments"
       ],
       "exitCriteria": [
-        "First-trust/changed-key behavior and input correctness pass on actual hardware.",
-        "Unresolved accessibility/IME failures block renderer adoption, not basic project planning."
+        "First-trust/changed-key, SSH/SFTP and terminal-input probes have separate actual-hardware verdicts; an unsuccessful route is blocked or a bounded experiment and cannot inherit another route's pass.",
+        "Unresolved accessibility/IME failures block terminal renderer adoption, not a separately supported SSH/SFTP approach or completion of the investigation record."
       ],
       "sourceIds": [
         "G09",
@@ -184,7 +188,8 @@
       "acceptanceCases": [
         "Q-C01",
         "Q-C02",
-        "Q-A01"
+        "Q-A01",
+        "Q-F02"
       ],
       "evidenceDirectory": "qualification/results/P0-S3/"
     },
@@ -205,15 +210,18 @@
         "Pin Sunshine/Moonlight and prove external handoff; select buildable RDP/VNC engine candidates and record actual server/encoding/security negotiation.",
         "Exercise trackpad and external mouse in real CAD and text/desktop workloads; verify focus-loss release and native IME/keyboard paths.",
         "Enumerate codecs and optional API-30 low-latency support; measure native decode/pacing/text quality, power and input-to-photon baseline.",
-        "Test primary host sessions, lock/headless/permissions, RDP certificate/NLA requirements and protected VNC routes; record unsupported cases and dependencies."
+        "Test primary host sessions, lock/headless/permissions, RDP certificate/NLA requirements and protected VNC routes; record unsupported cases and dependencies.",
+        "Record separate CAP-RDP, CAP-VNC and stream-feasibility outcomes; document native surface/input and integration blockers independently of external launch success.",
+        "Ratify provisional native-stream and protocol-specific responsiveness budgets from the primary-lane probes; missing USB or X11 evidence does not block this decision."
       ],
       "deliverables": [
         "Pinned stream/RDP/VNC engine and server feasibility matrix",
         "Native decoder/input baseline, measured boundaries and external handoff contract"
       ],
       "exitCriteria": [
-        "The primary stream workflow passes or has an explicit tested fallback; RDP and VNC each have a build/integration path and blocker list.",
-        "No inference of latency, RemoteApp, server security or trackpad support from a package name; unqualified combinations remain excluded."
+        "The primary stream workflow and RDP/VNC integration probes have scoped verdicts, tested fallbacks or explicit blockers; blocked lanes do not inherit another lane's pass.",
+        "No inference of latency, RemoteApp, server security or trackpad support from a package name; unqualified combinations remain excluded.",
+        "RDP/VNC supported outcomes require actual engine integration probes; a candidate name or build alone cannot activate its product stage."
       ],
       "sourceIds": [
         "G02",
@@ -256,15 +264,17 @@
         "Verify Android provider/workstation consumer licensing, permission ownership and consumer-side API on the actual USB topology.",
         "Program/verify the actual board/probe with runtime/bootloader/DFU/composite identities recorded.",
         "Probe hotplug, replug, permission denial, auto-use toggle/state semantics, consumer restart, contention and protected ownership reconciliation in a controlled lab.",
-        "If Android forwarding fails, qualify a lab-side provider/hardware server and report that the local Googlebook plug-and-play requirement remains unmet."
+        "If Android forwarding fails, qualify a lab-side provider/hardware server and report that the local Googlebook plug-and-play requirement remains unmet.",
+        "Record CAP-USB feasibility verdict with scope and evidence; its final supported readiness also requires the relevant P1-S4 engine/distribution decision, and investigation completion alone does not activate implementation."
       ],
       "deliverables": [
         "Probe-specific flash/verify evidence, enrollment identity set and permission map",
-        "Backend control/auto-use decision and tested fallback topology"
+        "Backend control/auto-use decision and tested fallback topology",
+        "CAP-USB outcome and any bounded follow-up experiment"
       ],
       "exitCriteria": [
-        "The actual target programs/verifies; serial-only success does not certify JTAG/DFU.",
-        "Ownership recovery is established without automatic flash retry or timer-based reassignment."
+        "The actual target's program/verify attempt has evidence and a scoped verdict; serial-only success never certifies JTAG/DFU, and failure leaves that capability blocked.",
+        "Ownership recovery is demonstrated without automatic flash retry or timer-based reassignment, or its exact blocker and bounded next experiment are recorded."
       ],
       "sourceIds": [
         "G14",
@@ -295,15 +305,18 @@
         "Prove ordinary SSH x11-req/cookie substitution with remote xauth and two isolated host contexts.",
         "Build a maintained Android X server candidate and prototype top-level, transient-dialog and popup mapping to Googlebook native windows without root/private APIs.",
         "Test physical keyboard/IME, focus, caption/resize/display scaling, clipboard boundaries and disconnect/process-death semantics.",
-        "Record exact engine/license/build/backend and broker cost; reject a single X desktop as completion of the separate-window requirement."
+        "Record exact engine/license/build/backend and broker cost; reject a single X desktop as completion of the separate-window requirement.",
+        "Record CAP-X11 feasibility verdict with scope and evidence; its final supported readiness also requires the relevant P1-S4 engine/distribution decision, and investigation completion alone does not activate implementation.",
+        "Record X11 network/redraw and lifetime behavior for the full Console gate; attach the result to the scoped system decision after it exists."
       ],
       "deliverables": [
         "X11 engine/window-broker feasibility ADR and prototype evidence",
-        "Per-application window support/failure matrix and re-estimate"
+        "Per-application window support/failure matrix and re-estimate",
+        "CAP-X11 outcome and any bounded follow-up experiment"
       ],
       "exitCriteria": [
         "Two remote apps have independent native desktop windows and correct owned dialogs, or the required capability is explicitly blocked with a scope proposal.",
-        "Cookie/trust context isolation and actual GUI connection lifetime are demonstrated; no root/shared-signing/private VM dependency."
+        "Cookie/trust isolation and actual GUI lifetime have recorded verdicts; a supported route cannot rely on root/shared-signing/private VM behavior, and failed cases remain blocked."
       ],
       "sourceIds": [
         "G03",
@@ -328,7 +341,7 @@
     {
       "id": "P0-S6",
       "phase": "P0",
-      "title": "Network measurements and first system decision gate",
+      "title": "Network measurements and scoped system decisions",
       "status": "planned",
       "effortDays": {
         "low": 2,
@@ -338,22 +351,22 @@
       "dependsOn": [
         "P0-S3",
         "P0-S4",
-        "P0-S5",
-        "P0-S7"
+        "P0-S5"
       ],
       "tasks": [
-        "Measure direct/relay routing for stream/RDP/VNC/X11/files and reverse USB with actual firewall/tailnet policies.",
+        "Measure direct/relay routing for available stream/RDP/VNC/files and reverse USB branches; add X11 evidence from P0-S7 when available without blocking unrelated lanes.",
         "Record independent payload/wire counters plus repeatable Moonlight/Parsec comparisons where supported; label GeForce NOW contextual.",
         "Run controlled latency/jitter/loss/route/outage profiles outside protected programming and measure adaptation/recovery/input integrity.",
-        "Ratify or revise desktop budgets and full workflow estimates; publish explicit blockers, tested fallbacks and support exclusions."
+        "Ratify or revise per-lane desktop budgets and estimates; record explicit blockers, tested fallbacks and support exclusions for each branch.",
+        "Reconcile capability outcomes and stage readiness; publish scoped go/experiment/blocked decisions and re-estimate after evidence without treating completed research as feature support."
       ],
       "deliverables": [
         "Primary topology latency/pacing/traffic/recovery baseline with raw evidence",
-        "P0 go/adjust decision for all revised requirements and desktop-only scope"
+        "Scoped go/experiment/blocked decisions; X11 investigation remains separately required for full Console"
       ],
       "exitCriteria": [
-        "Each critical input/probe/backend risk has evidence or an accepted qualified fallback.",
-        "Console can progress independently even while a Desktop hardware branch remains unresolved."
+        "Each measured lane has evidence, limits and a capability decision; pending X11 work is named and cannot be counted as a passing result.",
+        "Neither app waits for an unrelated capability decision; its own required gates remain mandatory."
       ],
       "sourceIds": [
         "R08",
@@ -407,7 +420,10 @@
         "Q-X01",
         "Q-P03"
       ],
-      "evidenceDirectory": "qualification/results/P1-S1/"
+      "evidenceDirectory": "qualification/results/P1-S1/",
+      "requiresCapabilities": [
+        "CAP-PLATFORM"
+      ]
     },
     {
       "id": "P1-S2",
@@ -426,15 +442,19 @@
         "Implement canonical Cloudy tokens and native desktop controls with user font scaling, two themes, density and system caption bounds.",
         "Prototype resizable terminal+SFTP arrangements, X11 app/dialog windows, backend profile/trust screens, USB enrollment and diagnostics.",
         "Qualify keyboard navigation, shortcut discovery, right-click/hover/cursors, range selection, pointer/touch access and focus ownership on Googlebook.",
-        "Run narrow tiled/short windows, multi-instance and display-scale changes; preserve desktop workflows without adding phone/tablet navigation."
+        "Run narrow tiled/short windows, multi-instance and display-scale changes; preserve desktop workflows without adding phone/tablet navigation.",
+        "Run the native workspace review with two host contexts, terminal/SFTP, X11 modal, RDP/VNC input release and a device interruption; label synthetic and engine-backed evidence separately.",
+        "Record Q-A02 shell/geometry findings and feature-specific pending checks before freezing revised interaction components."
       ],
       "deliverables": [
         "Native desktop component catalog and S01–S17 interaction review",
-        "Rule 0 and applicable official desktop-quality evidence ledger"
+        "Rule 0 and applicable official desktop-quality evidence ledger",
+        "Native workspace review record with accepted geometry/focus decisions and explicit provisional components"
       ],
       "exitCriteria": [
         "No system control overlap, focus trap, unreadable semantic pair, or unreachable scaled action.",
-        "Visual choices preserve terminal/file/media working area and clear host context."
+        "Visual choices preserve terminal/file/media working area and clear host context.",
+        "Freeze only demonstrated native component geometry/interaction; unresolved engine-dependent behavior remains provisional and linked to its feature stage."
       ],
       "sourceIds": [
         "G01",
@@ -451,9 +471,13 @@
       "acceptanceCases": [
         "Q-P02",
         "Q-P03",
-        "Q-A01"
+        "Q-A01",
+        "Q-A02"
       ],
-      "evidenceDirectory": "qualification/results/P1-S2/"
+      "evidenceDirectory": "qualification/results/P1-S2/",
+      "requiresCapabilities": [
+        "CAP-PLATFORM"
+      ]
     },
     {
       "id": "P1-S3",
@@ -495,7 +519,50 @@
         "Q-X02",
         "Q-S01"
       ],
-      "evidenceDirectory": "qualification/results/P1-S3/"
+      "evidenceDirectory": "qualification/results/P1-S3/",
+      "requiresCapabilities": [
+        "CAP-PLATFORM"
+      ]
+    },
+    {
+      "id": "P1-S5",
+      "phase": "P1",
+      "title": "Early native-stream adoption and distribution decision",
+      "status": "planned",
+      "effortDays": {
+        "low": 2,
+        "high": 3
+      },
+      "ownerRole": "Maintainer/desktop developer",
+      "dependsOn": [
+        "P0-S4",
+        "P1-S1"
+      ],
+      "tasks": [
+        "Review the P0 native-engine feasibility probe and exact upstream/dependency obligations during the foundation phase, before committing the streaming implementation.",
+        "Resolve the selected project/distribution model, source/notice obligations, maintained-engine ownership, update strategy and reproducible build route without assuming a particular license has already been chosen.",
+        "Record native surface/input/decoder and backend-version boundaries; estimate remaining integration from the actual probe.",
+        "Record CAP-STREAM as supported, bounded experiment or blocked. A blocker does not prevent ordinary SSH, RDP or VNC work; an external-only alternative needs an explicit user-visible scope decision.",
+        "Keep the early external stream lane available while native integration proceeds on its own prerequisites, independently of optional host adapters and event integrations."
+      ],
+      "deliverables": [
+        "Early implementation/distribution ADR with selected engine and obligations",
+        "Pinned maintenance/build plan, CAP-STREAM outcome and revised estimate"
+      ],
+      "exitCriteria": [
+        "The adoption investigation has a recorded outcome; only a supported CAP-STREAM outcome can activate native stream implementation.",
+        "No implementation or distribution right is inferred from an external app, and no native-stream scope reduction is made without an explicit decision."
+      ],
+      "sourceIds": [
+        "R06",
+        "R04",
+        "R05"
+      ],
+      "acceptanceCases": [
+        "Q-D01",
+        "Q-N02"
+      ],
+      "evidenceDirectory": "qualification/results/P1-S5/"
     },
     {
       "id": "P1-S4",
@@ -516,7 +583,8 @@
         "Record dependency versions/licenses/update owners and choose the project distribution/license direction before embedding upstream implementations.",
         "Exercise mismatched app/protocol versions, missing recipient, unavailable permissions, and independent install/uninstall.",
         "Publish the P1 evidence bundle and refine remaining stage estimates using actual implementation results.",
-        "Resolve X server, FreeRDP, VNC engine and transitive native codec/license/security/build obligations before P2/P3 embedding; P5 stream review does not substitute for this gate."
+        "Resolve X server, FreeRDP, VNC engine and transitive native codec/license/security/build obligations before P2/P3 embedding; P5 stream review does not substitute for this gate.",
+        "Finalize each engine capability outcome after its own feasibility and distribution/build review, including separate CAP-SSH transport and CAP-TERMINAL renderer adoption. A blocked renderer, X11, VNC or USB choice leaves that feature blocked without holding the independently usable foundation or unrelated app lanes."
       ],
       "deliverables": [
         "Reproducible CI artifacts and dependency register",
@@ -524,7 +592,8 @@
       ],
       "exitCriteria": [
         "Both apps install independently and communicate only through validated resource contracts.",
-        "CI output is labeled separately from physical-device evidence."
+        "CI output is labeled separately from physical-device evidence.",
+        "Every reviewed engine has an explicit scoped readiness outcome; unresolved feature-specific adoption is not hidden by the foundation being done."
       ],
       "sourceIds": [
         "R06",
@@ -545,28 +614,28 @@
     {
       "id": "P2-S1",
       "phase": "P2",
-      "title": "Trusted SSH connectivity, authentication, and jumps",
+      "title": "Shared SSH transport, authentication, and jumps",
       "status": "planned",
       "effortDays": {
         "low": 3,
         "high": 5
       },
-      "ownerRole": "Terminal developer",
+      "ownerRole": "SSH/platform developer",
       "dependsOn": [
         "P1-S4"
       ],
       "tasks": [
-        "Implement profiles and engine adapters for connect/cancel, host trust, authentication, and typed failures.",
-        "Add key/password/keyboard-interactive methods supported by the selected engine and keep prompts in native UI.",
+        "Implement reusable SSH profile/engine adapters for connect/cancel, host trust, authentication and typed failures; each consuming app supplies its own profile store, credentials, jobs and lifecycle.",
+        "Add key/password/keyboard-interactive methods supported by the selected engine through a typed native authentication-prompt contract; do not require a PTY, terminal renderer or Console process.",
         "Implement jump chains with trust at every hop and clean channel shutdown.",
-        "Exercise key change, wrong credentials, offline DNS/route, authentication cancel, and per-host revocation."
+        "Exercise key change, wrong credentials, offline DNS/route, authentication cancel and per-host revocation in an isolated native test consumer, then repeat applicable cases in each consuming app."
       ],
       "deliverables": [
-        "Trusted SSH connection workflow",
-        "Profile/trust/authentication fixtures"
+        "Reusable SSH transport/authentication/jump library and native prompt contract",
+        "Profile/trust/authentication fixtures and evidence independent of Console UI"
       ],
       "exitCriteria": [
-        "A plain SSH server works without Desktop or the custom host agent.",
+        "A plain SSH server works through the shared library with no PTY, terminal renderer, other app process or custom host agent; source reuse never shares credential stores.",
         "Changed keys block before secrets are sent and errors identify the failing layer."
       ],
       "sourceIds": [
@@ -575,9 +644,63 @@
       ],
       "acceptanceCases": [
         "Q-C01",
+        "Q-S01",
+        "Q-F02"
+      ],
+      "evidenceDirectory": "qualification/results/P2-S1/",
+      "requiresCapabilities": [
+        "CAP-SSH"
+      ]
+    },
+    {
+      "id": "P2-S8",
+      "phase": "P2",
+      "title": "Shared SFTP transfer, staging, and publication core",
+      "status": "planned",
+      "effortDays": {
+        "low": 3,
+        "high": 5
+      },
+      "ownerRole": "Files/SSH/Android developer",
+      "dependsOn": [
+        "P2-S1",
+        "P1-S3"
+      ],
+      "tasks": [
+        "Implement shared SFTP browsing/action primitives, capability discovery and URI-grant-aware upload/download/directory jobs on the qualified SSH transport; no terminal, pane, tab or installed Console dependency.",
+        "Build bounded local staging, source-version-bound resume, integrity checks, transfer journals and typed publication/recovery states with per-app storage, credentials, grants and job ownership.",
+        "Implement exclusive-copy and conditional/ordinary publication semantics. Every non-conditional overwrite requires explicit consent bound to the exact file/destination/save generation; expose a typed decision request that each app presents in native UI, with save-copy/cancel and no remembered blanket consent.",
+        "Define staging content-provider grants and late/seekable receiver behavior without requiring the later remote DocumentsProvider. Preserve local work and reconcile lost acknowledgements/process death without replaying destructive operations.",
+        "Exercise actual SSH/SFTP servers through a native qualification consumer with the terminal renderer absent: source changes, denied/revoked URI access, directory partial failure, name collisions, another writer between check/publish and ambiguous completion.",
+        "Publish the reusable source contract and evidence; Console attachments/pane and Desktop cross-root UI must repeat their integration-specific cases using the same core with independent app state."
+      ],
+      "deliverables": [
+        "Shared SSH/SFTP transfer library, journal/staging content-provider contract and typed publication decision interface",
+        "Native consumer evidence for integrity, per-save consent, concurrent writes and recovery without Console UI"
+      ],
+      "exitCriteria": [
+        "Browse/upload/download/stage-edit and cancellation/recovery pass against the qualified ordinary SSH/SFTP server with no terminal renderer, Console panes or custom host agent.",
+        "Every non-conditional overwrite is bound to its explicit save decision; canceled or obsolete decisions preserve staging and cannot publish a newer revision.",
+        "Exclusive-copy collisions never truncate an existing file, and ambiguous completion never triggers blind rename/overwrite replay or a false remote-commit claim.",
+        "The core owns no global credentials or permanently shared process; consuming apps independently own their stores, URI grants, lifecycle and transfer jobs."
+      ],
+      "sourceIds": [
+        "G11",
+        "G13",
+        "G17",
+        "R10",
+        "R34",
+        "R35"
+      ],
+      "acceptanceCases": [
+        "Q-F01",
+        "Q-F02",
         "Q-S01"
       ],
-      "evidenceDirectory": "qualification/results/P2-S1/"
+      "evidenceDirectory": "qualification/results/P2-S8/",
+      "requiresCapabilities": [
+        "CAP-SSH"
+      ]
     },
     {
       "id": "P2-S2",
@@ -616,7 +739,10 @@
         "Q-C02",
         "Q-A01"
       ],
-      "evidenceDirectory": "qualification/results/P2-S2/"
+      "evidenceDirectory": "qualification/results/P2-S2/",
+      "requiresCapabilities": [
+        "CAP-TERMINAL"
+      ]
     },
     {
       "id": "P2-S3",
@@ -667,10 +793,11 @@
       },
       "ownerRole": "Terminal/files developer",
       "dependsOn": [
-        "P2-S3"
+        "P2-S3",
+        "P2-S8"
       ],
       "tasks": [
-        "Add picker/drop/pasted-image staging with destination confirmation and hash/size validation.",
+        "Integrate the shared P2-S8 transfer core with picker/drop/pasted-image attachment UI, destination confirmation and hash/size validation.",
         "Insert environment-correct remote paths only after completion; preserve failed jobs and local text.",
         "Implement explicit loopback forwards, collisions, lifetime/close controls, and external browser previews.",
         "Exercise URI permission revoke, source change, interrupted upload, Windows/WSL quoting, and callback timeout."
@@ -739,7 +866,10 @@
         "Q-P02",
         "Q-A01"
       ],
-      "evidenceDirectory": "qualification/results/P2-S6/"
+      "evidenceDirectory": "qualification/results/P2-S6/",
+      "requiresCapabilities": [
+        "CAP-X11"
+      ]
     },
     {
       "id": "P2-S7",
@@ -747,50 +877,57 @@
       "title": "Session-linked SFTP pane and bidirectional drag-and-drop",
       "status": "planned",
       "effortDays": {
-        "low": 5,
-        "high": 9
+        "low": 3,
+        "high": 6
       },
       "ownerRole": "Console/files/Android developer",
       "dependsOn": [
         "P2-S4",
-        "P1-S3"
+        "P1-S3",
+        "P2-S8"
       ],
       "tasks": [
         "Build adjacent session-bound SFTP browsing/actions, pinned/follow-active context, breadcrumbs, search and transfer drawer using shared file/transfer models.",
-        "Implement URI-grant-aware uploads, downloads, directory jobs, staged exports to other apps and terminal path insertion after verified commit.",
+        "Integrate P2-S8 URI-grant-aware upload/download/directory jobs and staged exports into the Console pane and Android drag/drop; insert terminal paths only after verified commit.",
         "Add explicit manual directory selection and optional validated shell integration; do not scrape prompts or infer shell CWD from SFTP.",
-        "Qualify staged remote edits/conflicts, late-reading receivers, changed/revoked sources, process death and tab/host switch during transfer."
+        "Qualify staged remote edits/conflicts, late-reading receivers, changed/revoked sources, process death and tab/host switch during transfer.",
+        "Present the shared file-publication decision in Console: on a non-conditional backend, ask before every remote overwrite with save-copy/cancel; bind the visible choice to the exact file/destination/save generation and never remember blanket consent.",
+        "Repeat shared-core concurrency, exclusive-name collision and lost-acknowledgement cases through the actual Console edit/drop flows, including tab/context change; never claim stat-plus-rename prevents concurrent lost updates."
       ],
       "deliverables": [
-        "Console SFTP pane, shared transfer journal and staging content-provider contract",
+        "Console SFTP pane and app-specific integration of the shared journal/staging content-provider contract",
         "Incoming/outgoing drop and remote-edit integrity evidence"
       ],
       "exitCriteria": [
         "Browse/upload/download/edit and both Android drop directions pass with Desktop absent, correct captured host/path, and no auto-submit.",
-        "Unsupported receivers/server features show a tested Save/Share or manual path fallback; source changes preserve conflict copies."
+        "Unsupported receivers/server features show a tested Save/Share or manual fallback; publication follows the per-save consent and conflict contract.",
+        "Every non-conditional remote overwrite has consent for that file and save generation; known conflicts and ambiguous completion preserve staged work and do not trigger an automatic overwrite retry."
       ],
       "sourceIds": [
         "R03",
         "G11",
         "G13",
-        "G25"
+        "G25",
+        "R34",
+        "R35"
       ],
       "acceptanceCases": [
         "Q-C04",
         "Q-C09",
         "Q-C10",
-        "Q-S01"
+        "Q-S01",
+        "Q-F01"
       ],
       "evidenceDirectory": "qualification/results/P2-S7/"
     },
     {
       "id": "P2-S5",
       "phase": "P2",
-      "title": "Agent workflows, profile import, and Console daily-use gate",
+      "title": "Agent workflows, profile import and independent Console release gate",
       "status": "planned",
       "effortDays": {
-        "low": 3,
-        "high": 5
+        "low": 5,
+        "high": 8
       },
       "ownerRole": "Terminal/product QA",
       "dependsOn": [
@@ -802,15 +939,18 @@
         "Qualify selected current agent CLIs as ordinary PTY applications with versions/authentication recorded; keep their credentials on the host.",
         "Add optional local composer, discoverable newline behavior, and configurable terminal bell/task alerts without screen-scraped approval logic.",
         "Add a previewed non-secret profile import with an explicit supported SSH-config subset.",
-        "Run a full coding day with Desktop/custom host agent absent, including separate X11 apps, session-linked SFTP upload/download/edit/drop, terminal/TUI and recovery."
+        "Run a full coding day with Desktop/custom host agent absent, including separate X11 apps, session-linked SFTP upload/download/edit/drop, terminal/TUI and recovery.",
+        "Run the app-scoped release checklist for signed Console install/update/recovery, dependencies/notices, setup/support documentation and at least ten working days of candidate use; Desktop and the custom host agent are absent."
       ],
       "deliverables": [
         "R1 Console candidate and CLI compatibility matrix",
-        "Daily-use report and release limitations"
+        "Daily-use report and release limitations",
+        "Independent Console candidate/support decision with app-scoped release evidence"
       ],
       "exitCriteria": [
         "The full revised Console workflow passes including X11 windows and integrated SFTP; an earlier SSH-only build is labeled a partial milestone.",
-        "No command/approval replay, hidden dependency on Desktop/host agent or unsupported GUI durability claim."
+        "No command/approval replay, hidden dependency on Desktop/host agent or unsupported GUI durability claim.",
+        "Console may release after its own functional and app-scoped quality gates pass; Desktop, native streaming and optional host adapters are not release prerequisites."
       ],
       "sourceIds": [
         "R02",
@@ -823,7 +963,9 @@
         "Q-C08",
         "Q-C09",
         "Q-C10",
-        "Q-X02"
+        "Q-X02",
+        "Q-R02",
+        "Q-R01"
       ],
       "evidenceDirectory": "qualification/results/P2-S5/"
     },
@@ -908,20 +1050,22 @@
       "title": "File browser, transfer journal, and conflict-safe writes",
       "status": "planned",
       "effortDays": {
-        "low": 4,
-        "high": 6
+        "low": 3,
+        "high": 4
       },
       "ownerRole": "Files developer",
       "dependsOn": [
         "P3-S1",
-        "P2-S7"
+        "P2-S8"
       ],
       "tasks": [
         "Implement distinct local/SFTP/system-Drive-provider roots with supported-operation metadata.",
-        "Build list/table, selection, details, staged copy, journal, resumable transfer, and commit states.",
-        "Bind resume to source version, validate destination, preserve conflict copies, and bound caches.",
+        "Build list/table, selection and details UI; integrate P2-S8 staged copy, journal, resumable transfer and publication states into Desktop cross-root orchestration.",
+        "Preserve shared-core source-version, destination, conflict and cache constraints across local/SFTP/provider roots; qualify the actual provider-specific semantics.",
         "Exercise huge directories, symlinks, case/reserved names, permission failures, source change, cancellation, and interrupted commit.",
-        "Reuse the Console-qualified file/transfer components with independent Desktop credentials/jobs; distinguish cross-root orchestration from session-level file context."
+        "Reuse the independently qualified P2-S8 transfer core with Desktop-owned credentials/jobs; verify that no PTY, terminal renderer, Console package or Console file-pane implementation is required.",
+        "Present the shared file-publication decision in Desktop: every non-conditional remote overwrite needs an exact file/destination/save-generation choice with save-copy/cancel, no remembered blanket consent and retained pending staging.",
+        "Repeat the shared-core racing-writer, exclusive-name collision and lost-acknowledgement cases through actual Desktop cross-root flows; do not substitute core-only evidence for app integration evidence."
       ],
       "deliverables": [
         "Full file/transfer workflow with state journal",
@@ -929,15 +1073,20 @@
       ],
       "exitCriteria": [
         "No silent overwrite or false remote-commit success.",
-        "Unsupported backend semantics are visible and do not silently fall back to destructive behavior."
+        "Unsupported backend semantics are visible and do not silently fall back to destructive behavior.",
+        "Every non-conditional remote overwrite has consent for that file and save generation; known conflicts and ambiguous completion preserve staged work and do not trigger an automatic overwrite retry."
       ],
       "sourceIds": [
         "G13",
         "R14",
-        "R15"
+        "R15",
+        "R34",
+        "R35"
       ],
       "acceptanceCases": [
-        "Q-D03"
+        "Q-D03",
+        "Q-F01",
+        "Q-F02"
       ],
       "evidenceDirectory": "qualification/results/P3-S3/"
     },
@@ -977,7 +1126,10 @@
         "Q-D04",
         "Q-X03"
       ],
-      "evidenceDirectory": "qualification/results/P3-S4/"
+      "evidenceDirectory": "qualification/results/P3-S4/",
+      "requiresCapabilities": [
+        "CAP-USB"
+      ]
     },
     {
       "id": "P3-S6",
@@ -1018,7 +1170,10 @@
         "Q-D06",
         "Q-X03"
       ],
-      "evidenceDirectory": "qualification/results/P3-S6/"
+      "evidenceDirectory": "qualification/results/P3-S6/",
+      "requiresCapabilities": [
+        "CAP-USB"
+      ]
     },
     {
       "id": "P3-S7",
@@ -1064,7 +1219,10 @@
         "Q-N03",
         "Q-S01"
       ],
-      "evidenceDirectory": "qualification/results/P3-S7/"
+      "evidenceDirectory": "qualification/results/P3-S7/",
+      "requiresCapabilities": [
+        "CAP-RDP"
+      ]
     },
     {
       "id": "P3-S8",
@@ -1111,16 +1269,19 @@
         "Q-N03",
         "Q-S01"
       ],
-      "evidenceDirectory": "qualification/results/P3-S8/"
+      "evidenceDirectory": "qualification/results/P3-S8/",
+      "requiresCapabilities": [
+        "CAP-VNC"
+      ]
     },
     {
       "id": "P3-S5",
       "phase": "P3",
-      "title": "Console/Desktop vertical slice and companion gate",
+      "title": "Independent Desktop companion release gate",
       "status": "planned",
       "effortDays": {
-        "low": 2,
-        "high": 3
+        "low": 3,
+        "high": 5
       },
       "ownerRole": "Product/QA owner",
       "dependsOn": [
@@ -1130,23 +1291,67 @@
         "P3-S6",
         "P3-S7",
         "P3-S8",
-        "P2-S5",
         "P0-S6"
       ],
       "tasks": [
-        "Connect/build in Console, upload an artifact, open the same registered workspace in Desktop, and start visual work.",
-        "Program/verify the attached target, inspect output, and preserve exact host/project/device context.",
-        "Interrupt/restore connectivity without replaying commands or losing ownership accounting.",
-        "Export a measured usage report and publish R2 limitations/dependency installations.",
-        "Run native RDP and VNC independently, then the enrolled USB plug/build/program/inspect path; document capability differences and partial milestones."
+        "Run native RDP and VNC, qualified external stream handoff, files and enrolled USB with Console and the optional Cloudy host agent absent; record any separately required USB consumer adapter.",
+        "Complete the primary edit/build/program/inspect workflow through the remote desktop and Desktop file/device tools, preserving host/project/device context.",
+        "Interrupt and restore connectivity without replaying commands or losing ownership accounting; export measured usage and the supported backend/device matrix.",
+        "Run the app-scoped release checklist for signed Desktop install/update/recovery, dependency/notices, setup/support documentation and at least ten working days of candidate use.",
+        "Publish the independent R2 candidate decision; Console/X11, optional host events and later native streaming do not block a qualified R2 scope."
       ],
       "deliverables": [
-        "First complete real-project vertical-slice report",
-        "R2 companion release candidate/support table"
+        "Independent Desktop functional/quality report and R2 candidate decision",
+        "App-scoped support table, setup/recovery material and dependency installation list"
       ],
       "exitCriteria": [
-        "R2 includes working native RDP/VNC, files and enrolled USB plug-and-play on qualified combinations plus honest high-performance stream handoff.",
-        "No app borrows another app credential/process; protected ownership and file/source context remain correct across handoff."
+        "R2 includes native RDP/VNC, files, enrolled USB plug-and-play and honest external performance-stream handoff on qualified combinations, with its own release checklist passed.",
+        "Desktop functions with Console absent and no borrowed credentials/process; a Console-specific X11 blocker cannot hold this gate."
+      ],
+      "sourceIds": [
+        "G02",
+        "R08"
+      ],
+      "acceptanceCases": [
+        "Q-X01",
+        "Q-X03",
+        "Q-N01",
+        "Q-D06",
+        "Q-D07",
+        "Q-D08",
+        "Q-N03",
+        "Q-R02",
+        "Q-R01"
+      ],
+      "evidenceDirectory": "qualification/results/P3-S5/"
+    },
+    {
+      "id": "P3-S9",
+      "phase": "P3",
+      "title": "Console/Desktop suite integration milestone",
+      "status": "planned",
+      "effortDays": {
+        "low": 1,
+        "high": 1
+      },
+      "ownerRole": "Product/integration QA",
+      "dependsOn": [
+        "P2-S5",
+        "P3-S5"
+      ],
+      "tasks": [
+        "Connect/build in Console, upload the artifact, hand off the registered workspace to Desktop and perform visual work.",
+        "Program/verify the target and inspect output while preserving host/project/device identity and each app's independent credentials.",
+        "Exercise missing counterpart, version skew and interruption; reconcile transfers/ownership without replaying commands.",
+        "Record the combined suite result separately from the already independently releasable app candidates."
+      ],
+      "deliverables": [
+        "Complete cross-app build/program/inspect report",
+        "Suite handoff/version-skew and context-integrity evidence"
+      ],
+      "exitCriteria": [
+        "Both app candidates pass their own gates and the combined journey passes without sharing credentials or requiring a shared daemon.",
+        "A suite-only failure blocks promotion of that suite integration; it does not revoke an unaffected standalone support claim."
       ],
       "sourceIds": [
         "G02",
@@ -1155,14 +1360,9 @@
       "acceptanceCases": [
         "Q-X01",
         "Q-X02",
-        "Q-X03",
-        "Q-N01",
-        "Q-D06",
-        "Q-D07",
-        "Q-D08",
-        "Q-N03"
+        "Q-X03"
       ],
-      "evidenceDirectory": "qualification/results/P3-S5/"
+      "evidenceDirectory": "qualification/results/P3-S9/"
     },
     {
       "id": "P4-S1",
@@ -1288,8 +1488,7 @@
       "dependsOn": [
         "P4-S2",
         "P4-S3",
-        "P2-S5",
-        "P3-S5"
+        "P3-S9"
       ],
       "tasks": [
         "Add version-pinned supported hooks for selected managed jobs/agent tools; keep generic PTY operation independent.",
@@ -1317,44 +1516,6 @@
       "evidenceDirectory": "qualification/results/P4-S4/"
     },
     {
-      "id": "P5-S1",
-      "phase": "P5",
-      "title": "Integrated streaming license and maintenance decision",
-      "status": "planned",
-      "effortDays": {
-        "low": 2,
-        "high": 3
-      },
-      "ownerRole": "Maintainer/desktop developer",
-      "dependsOn": [
-        "P4-S4"
-      ],
-      "tasks": [
-        "Review actual upstream license/source obligations and choose external-only or maintained native integration.",
-        "Assess fork/update ownership, backend/client version compatibility, packaging, decoder/input surfaces, and reproducible builds.",
-        "Confirm that R2 handoff limitations justify the added integration scope.",
-        "If external-only is selected, replace P5-S2 implementation with qualified external-flow polish and re-estimate the phase.",
-        "Treat native high-performance integration as the full-scope target; an external-only decision must explicitly revise user-visible scope, stage estimates and unresolved requirements."
-      ],
-      "deliverables": [
-        "Approved implementation/distribution ADR",
-        "Pinned upstream/source/maintenance plan"
-      ],
-      "exitCriteria": [
-        "No integrated streaming code is shipped before the distribution model is resolved.",
-        "Scope/effort is revised if the external-only branch is selected."
-      ],
-      "sourceIds": [
-        "R06",
-        "R04",
-        "R05"
-      ],
-      "acceptanceCases": [
-        "Q-D01"
-      ],
-      "evidenceDirectory": "qualification/results/P5-S1/"
-    },
-    {
       "id": "P5-S2",
       "phase": "P5",
       "title": "Native high-performance stream and latency/stability qualification",
@@ -1365,8 +1526,10 @@
       },
       "ownerRole": "Desktop/media developer",
       "dependsOn": [
-        "P5-S1",
-        "P0-S4"
+        "P1-S5",
+        "P0-S4",
+        "P1-S4",
+        "P3-S1"
       ],
       "tasks": [
         "Integrate the approved maintained native stream engine with direct media/input, native Surface and measured decoder/profile selection.",
@@ -1400,7 +1563,10 @@
         "Q-N03",
         "Q-A01"
       ],
-      "evidenceDirectory": "qualification/results/P5-S2/"
+      "evidenceDirectory": "qualification/results/P5-S2/",
+      "requiresCapabilities": [
+        "CAP-STREAM"
+      ]
     },
     {
       "id": "P5-S3",
@@ -1413,14 +1579,16 @@
       },
       "ownerRole": "Files/Android developer",
       "dependsOn": [
-        "P5-S1",
+        "P1-S3",
         "P3-S3"
       ],
       "tasks": [
         "Expose selected remote roots with stable document IDs, supported flags, explicit grants, and bounded cache.",
         "Implement local staging, source identity/version checks, commit acknowledgements, offline queued edits, and conflict copies.",
         "Test provider consumers, random/sequential access needs, canceled writes, revoked URI access, and process death.",
-        "Document backend semantic limits and cleanup/pinning/eviction settings."
+        "Document backend semantic limits and cleanup/pinning/eviction settings.",
+        "Implement the selected file-publication policy: on a backend without conditional replacement, ask before every remote overwrite; offer save-copy/cancel, never remember blanket consent, and preserve pending staging.",
+        "Inject another writer between the last version check and publication, plus exclusive-name collision and lost-acknowledgement cases; never claim stat-plus-rename prevents concurrent lost updates."
       ],
       "deliverables": [
         "Qualified remote document provider",
@@ -1428,15 +1596,19 @@
       ],
       "exitCriteria": [
         "No remote file is labeled committed until the backend confirms publication.",
-        "Concurrent/offline edits preserve data and explicit conflict choices."
+        "Concurrent/offline edits preserve data and explicit conflict choices.",
+        "Every non-conditional remote overwrite has consent for that file and save generation; known conflicts and ambiguous completion preserve staged work and do not trigger an automatic overwrite retry."
       ],
       "sourceIds": [
         "G12",
         "G13",
-        "R15"
+        "R15",
+        "R34",
+        "R35"
       ],
       "acceptanceCases": [
-        "Q-D05"
+        "Q-D05",
+        "Q-F01"
       ],
       "evidenceDirectory": "qualification/results/P5-S3/"
     },
@@ -1453,7 +1625,9 @@
       "dependsOn": [
         "P5-S2",
         "P5-S3",
-        "P0-S6"
+        "P0-S6",
+        "P3-S4",
+        "P3-S6"
       ],
       "tasks": [
         "Add policy for hidden streams, thumbnails, prefetch, bitrate selection, and explicit large-transfer choices.",
@@ -1494,14 +1668,17 @@
       },
       "ownerRole": "QA/platform developer",
       "dependsOn": [
-        "P5-S4"
+        "P5-S4",
+        "P4-S4",
+        "P3-S9"
       ],
       "tasks": [
         "Exercise client eviction, host restart, network switch, route loss, timeout, permission revoke, sleep/resume, and lid/display changes.",
         "Run eight-hour terminal/stream/transfer workloads with memory/cache bounds and battery/thermal observations.",
         "Verify independent app operation, no command/approval/flash replay, and authoritative USB/file reconciliation.",
         "Fix critical defects and narrow support claims where reliable behavior is not established.",
-        "Repeat required X11 window, SFTP grant/export/edit, RDP/VNC session and USB enrolled hotplug failure cases across suspend/resume and actual Googlebook process eviction."
+        "Repeat required X11 window, SFTP grant/export/edit, RDP/VNC session and USB enrolled hotplug failure cases across suspend/resume and actual Googlebook process eviction.",
+        "Reuse app-scoped release evidence only for unchanged versions and applicable cases; run full-suite regressions without retroactively coupling standalone releases."
       ],
       "deliverables": [
         "Failure matrix and sustained-run evidence",
@@ -1529,7 +1706,9 @@
         "Q-D07",
         "Q-D08",
         "Q-N03",
-        "Q-P03"
+        "Q-P03",
+        "Q-F01",
+        "Q-R02"
       ],
       "evidenceDirectory": "qualification/results/P6-S1/"
     },
@@ -1631,7 +1810,8 @@
         "Track defects by severity, recurrence, topology/version, data impact, and recovery cost; reserve effort for fixes.",
         "Re-run only affected gates after changes and recheck critical complete journeys before promotion.",
         "Approve release with evidence/support matrix or retain candidate status with explicit unresolved defects.",
-        "Dogfood the complete revised desktop ecosystem workflows, collect applicable official desktop-quality evidence, and label every unsupported backend/device capability."
+        "Dogfood the complete revised desktop ecosystem workflows, collect applicable official desktop-quality evidence, and label every unsupported backend/device capability.",
+        "Record the full-suite observation separately from each standalone app candidate; overlapping days count only where the exact build and required workflows were actually observed."
       ],
       "deliverables": [
         "Dogfood report with ten-day observation window",
@@ -1652,6 +1832,202 @@
       "evidenceDirectory": "qualification/results/P6-S4/"
     }
   ],
-  "revision": "01-desktop-integrated-workflows",
-  "targetScope": "Googlebook desktop/laptop Android applications; no phone/tablet optimization workstream."
+  "revision": "03-execution-setup-and-shared-transfer",
+  "targetScope": "Googlebook desktop/laptop Android applications; no phone/tablet optimization workstream.",
+  "capabilityGates": [
+    {
+      "id": "CAP-PLATFORM",
+      "title": "Desktop Android windows and operation lifetimes",
+      "outcome": "pending",
+      "decidingStages": [
+        "P0-S2"
+      ],
+      "ownerRole": "Android/platform developer",
+      "supportedScope": null,
+      "evidencePaths": [],
+      "nextExperiment": null,
+      "decisionNote": null
+    },
+    {
+      "id": "CAP-SSH",
+      "title": "Shared SSH transport and SFTP route",
+      "outcome": "pending",
+      "decidingStages": [
+        "P0-S3",
+        "P1-S4"
+      ],
+      "ownerRole": "SSH/platform developer",
+      "supportedScope": null,
+      "evidencePaths": [],
+      "nextExperiment": null,
+      "decisionNote": null
+    },
+    {
+      "id": "CAP-TERMINAL",
+      "title": "Terminal renderer and committed input",
+      "outcome": "pending",
+      "decidingStages": [
+        "P0-S3",
+        "P1-S4"
+      ],
+      "ownerRole": "Terminal/Android developer",
+      "supportedScope": null,
+      "evidencePaths": [],
+      "nextExperiment": null,
+      "decisionNote": null
+    },
+    {
+      "id": "CAP-X11",
+      "title": "Separate native X11 application windows",
+      "outcome": "pending",
+      "decidingStages": [
+        "P0-S7",
+        "P1-S4"
+      ],
+      "ownerRole": "X11/Android developer",
+      "supportedScope": null,
+      "evidencePaths": [],
+      "nextExperiment": null,
+      "decisionNote": null
+    },
+    {
+      "id": "CAP-USB",
+      "title": "Actual USB forwarding and enrolled hotplug",
+      "outcome": "pending",
+      "decidingStages": [
+        "P0-S5",
+        "P1-S4"
+      ],
+      "ownerRole": "USB/device developer",
+      "supportedScope": null,
+      "evidencePaths": [],
+      "nextExperiment": null,
+      "decisionNote": null
+    },
+    {
+      "id": "CAP-RDP",
+      "title": "Native RDP integration route",
+      "outcome": "pending",
+      "decidingStages": [
+        "P0-S4",
+        "P1-S4"
+      ],
+      "ownerRole": "RDP/native developer",
+      "supportedScope": null,
+      "evidencePaths": [],
+      "nextExperiment": null,
+      "decisionNote": null
+    },
+    {
+      "id": "CAP-VNC",
+      "title": "Native VNC integration route",
+      "outcome": "pending",
+      "decidingStages": [
+        "P0-S4",
+        "P1-S4"
+      ],
+      "ownerRole": "VNC/native developer",
+      "supportedScope": null,
+      "evidencePaths": [],
+      "nextExperiment": null,
+      "decisionNote": null
+    },
+    {
+      "id": "CAP-STREAM",
+      "title": "Native performance streaming adoption",
+      "outcome": "pending",
+      "decidingStages": [
+        "P0-S4",
+        "P1-S5"
+      ],
+      "ownerRole": "Desktop/media maintainer",
+      "supportedScope": null,
+      "evidencePaths": [],
+      "nextExperiment": null,
+      "decisionNote": null
+    }
+  ],
+  "retiredStages": [
+    {
+      "id": "P5-S1",
+      "replacement": "P1-S5",
+      "reason": "User moved native-stream adoption and distribution review into the foundation phase."
+    }
+  ],
+  "planningDecisions": [
+    {
+      "id": "D09",
+      "status": "user-selected",
+      "selection": "Ask before every remote overwrite when the backend cannot guarantee conditional replacement",
+      "record": "docs/00-project/revision-02-final-review.md"
+    },
+    {
+      "id": "D10",
+      "status": "user-selected",
+      "selection": "Independent app releases plus a separate suite integration milestone",
+      "record": "docs/00-project/revision-02-final-review.md"
+    },
+    {
+      "id": "D11",
+      "status": "user-selected",
+      "selection": "Resolve native streaming feasibility/distribution in P0/P1 and integrate independently of optional host adapters",
+      "record": "docs/00-project/revision-02-final-review.md"
+    }
+  ],
+  "dependencyConstraints": [
+    {
+      "stage": "P2-S5",
+      "forbiddenAncestors": [
+        "P3-S5",
+        "P3-S9",
+        "P4-S4",
+        "P1-S5",
+        "P5-S2"
+      ],
+      "reason": "Console release is independent of Desktop, optional hosts and native streaming."
+    },
+    {
+      "stage": "P3-S5",
+      "forbiddenAncestors": [
+        "P2-S2",
+        "P2-S3",
+        "P2-S4",
+        "P2-S5",
+        "P2-S6",
+        "P2-S7",
+        "P0-S7",
+        "P4-S4",
+        "P5-S2"
+      ],
+      "reason": "Desktop R2 uses shared SSH/SFTP source but does not wait for Console PTY/renderer, tabs/panes, attachments, SFTP UI, X11, optional hosts or later native streaming."
+    },
+    {
+      "stage": "P5-S2",
+      "forbiddenAncestors": [
+        "P4-S1",
+        "P4-S2",
+        "P4-S3",
+        "P4-S4",
+        "P3-S9"
+      ],
+      "reason": "Native stream integration depends on early adoption and its own foundation/profile prerequisites."
+    },
+    {
+      "stage": "P5-S3",
+      "forbiddenAncestors": [
+        "P1-S5",
+        "P5-S2",
+        "P4-S4"
+      ],
+      "reason": "Document access depends on files/lifecycle rather than streaming adoption or host events."
+    },
+    {
+      "stage": "P3-S9",
+      "requiredAncestors": [
+        "P2-S5",
+        "P3-S5"
+      ],
+      "reason": "Suite promotion uses independently qualified app candidates."
+    }
+  ]
 }

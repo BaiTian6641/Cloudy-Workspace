@@ -9,3 +9,5 @@ Build Cloudy Console and Cloudy Desktop as independent Android packages. Share s
 The alternative is one app with two modes, which simplifies packaging but couples lifecycle/permissions and independent windows. A shared credential daemon could reduce duplicate enrollment but adds availability and trust complexity. Neither is selected for v1.
 
 Consequences: duplicate some visible attachment-transfer functionality using shared implementation; support missing counterpart/version skew; explicitly import non-secret profiles; qualify independent install/uninstall. **Stages:** P1-S1/S3/S4, P3-S5.
+
+[ADR 0007](0007-publication-and-independent-delivery.md) extends independence to delivery: P2-S5 and P3-S5 are separate app release gates, with P3-S9 for the combined journey. Each app passes its own release hygiene and sustained-use checks.

@@ -1,15 +1,15 @@
 # P4 — Host adapters and activity
 
-**Status:** planned. **Active effort:** 12–20 person-days before contingency. **Purpose:** Add optional host capabilities and attributed activity without making standard SSH/RDP/VNC depend on the custom agent.
+**Status:** planned. **Active effort:** 12–20 person-days before contingency. **Purpose:** Deliver optional host adapters and attributed activity. These features do not gate native streaming or standalone app releases.
 
-The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-project/platform-rule-zero.md) defines desktop scope. Estimates are active effort, not elapsed time or staffing commitments; re-estimate after P0. Stage IDs remain stable; the dependency order can place a later-numbered addition before an existing release gate.
+The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-project/platform-rule-zero.md) defines desktop scope. Follow [capability outcomes](../feasibility-gates.md) and [independent release gates](../release-gates.md). Estimates are active effort, not elapsed time; re-estimate after physical evidence. Revision 02 moved the former P5-S1 decision to P1-S5; other stage IDs retain their identity.
 
 | Stage | Outcome | Effort, person-days | Prerequisites |
 | --- | --- | ---: | --- |
 | P4-S1 | Host agent pairing, capabilities, jobs, and resumable events | 4–6 | P1-S4, P3-S1 |
 | P4-S2 | Windows user-session notification adapter | 3–5 | P4-S1 |
 | P4-S3 | Linux and macOS scoped event adapters | 3–5 | P4-S1 |
-| P4-S4 | Agent hooks, event deduplication, and R3 gate | 2–4 | P4-S2, P4-S3, P2-S5, P3-S5 |
+| P4-S4 | Agent hooks, event deduplication, and R3 gate | 2–4 | P4-S2, P4-S3, P3-S9 |
 
 ## P4-S1 — Host agent pairing, capabilities, jobs, and resumable events
 
@@ -82,7 +82,7 @@ Record evidence under `qualification/results/P4-S3/` using the [run template](..
 
 ## P4-S4 — Agent hooks, event deduplication, and R3 gate
 
-**Owner:** Integration/product QA. **Prerequisites:** P4-S2, P4-S3, P2-S5, P3-S5. **Status:** planned.
+**Owner:** Integration/product QA. **Prerequisites:** P4-S2, P4-S3, P3-S9. **Status:** planned.
 
 Work:
 
@@ -105,4 +105,4 @@ Record evidence under `qualification/results/P4-S4/` using the [run template](..
 
 ## Gate and failure route
 
-Keep source fidelity and permissions explicit. Host-agent failure must not invalidate ordinary SSH/RDP/VNC or manufacture event history. Every done stage links actual evidence; a documentation check does not qualify a device.
+Keep ordinary SSH/RDP/VNC and native streaming independent of the optional host agent. Unsupported OS event capabilities stay explicit; a suite integration failure does not fabricate a standalone app defect. Every done stage links actual evidence; a documentation check does not qualify a device.

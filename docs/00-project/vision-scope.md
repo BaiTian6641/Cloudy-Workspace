@@ -19,13 +19,14 @@ The primary user works from an HP Googlebook 14 while compute, repositories, too
 | Slice | Included | Excluded until later gates |
 | --- | --- | --- |
 | R0: qualification | Desktop Android/window/input, SSH/renderer/X11 broker, stream/RDP/VNC engines, probe/hotplug, latency experiments | Product readiness claims |
-| R1: Console daily use | Trusted SSH, PTY, layout, tmux where available, separate X11 app windows, session-linked SFTP/drop/edit, local tunnels | Graphical agent approval automation, local VM attach |
-| R2: Desktop companion | Saved hosts/workspaces, native RDP/VNC, external high-performance stream handoff, files/queue, enrolled USB plug-and-play | Embedded high-performance video until P5, universal cloud filesystem |
+| R1: Console daily use | Trusted SSH, PTY, layout, tmux where available, separate X11 app windows, session-linked SFTP/drop/edit, local tunnels and independent release checks | Graphical agent approval automation, local VM attach |
+| R2: Desktop companion | Saved hosts/workspaces, native RDP/VNC, external high-performance stream handoff, files/queue, enrolled USB and independent release checks | Embedded high-performance video until its own P5 gate, universal cloud filesystem |
+| Suite: P3-S9 milestone | Complete Console build/upload → Desktop handoff/program/inspect with independent credentials and correct context | No dependency back into either standalone release |
 | R3: integrated workspace | Agent capabilities/events, qualified OS adapters, richer file access | Full notification fidelity on every OS |
 | R4: integrated desktop | Qualified native high-performance streaming with measured latency/stability, document provider, metered policy | Any unsupported compositor/probe combination |
 | R5: supported release | Signed packages, migration/rollback, published support matrix, dogfooding | Unmeasured hardware promises |
 
-R1 can ship before Desktop. R2 may require separate Tailscale, Moonlight, and VirtualHere installations. “Two products” does not promise only two installed packages.
+R1 and R2 can release independently after their own functional, signed-package, recovery and sustained-use checks. The combined journey has its own P3-S9 milestone. R2 may require separate Tailscale, Moonlight, and VirtualHere installations. “Two products” does not promise only two installed packages. Release labels identify scope; optional host integration does not hold native streaming. See [Revision 02](revision-02-final-review.md) and the [release gates](../05-delivery/release-gates.md).
 
 An early SSH-only Console or launcher-only Desktop is a useful partial development milestone. It does not complete the revised R1/R2 gates. Native streaming distribution and X11/USB feasibility can require explicit scope revision; fallback labels must preserve what remains unmet.
 

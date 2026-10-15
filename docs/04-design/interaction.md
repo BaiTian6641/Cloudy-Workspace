@@ -59,6 +59,8 @@ Enrolled USB auto-attach is ordinary application of an explicit saved policy whe
 
 File drops display the captured destination host/path and operation before commit according to the saved transfer policy. Tab switches cannot silently retarget jobs. A file drop onto a terminal inserts a reference only after upload and never submits it. A remote-file export supplies a staged readable URI, not a shell path. Unsupported remote GUI file-drop is labeled separately.
 
+Remote overwrites on a backend without conditional replacement prompt on every save. Show the exact host/path and staged revision, with Overwrite this save, Save a copy and Cancel / keep pending. Do not offer a remember/always-overwrite option. Local autosaves stay pending instead of stacking dialogs; a changed staged revision or destination requires a refreshed decision. Explicit consent does not remove the possibility of an intervening remote edit; follow the [publication contract](../02-architecture/file-publication.md).
+
 X11 windows and native RDP/VNC obey native task focus, IME and system shortcut precedence. Closing an X11 window requests that app's close protocol and may reveal its unsaved dialog. Leaving a native desktop surface releases held input; reconnect never replays clicks. Changing protocol/profile presents the new session context explicitly.
 
 ## Alerts and sound

@@ -4,6 +4,7 @@ import argparse
 import copy
 import hashlib
 import json
+import math
 import os
 import re
 import sys
@@ -13,7 +14,9 @@ from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
-IGNORED = {'.git', '.agents', '.aws', '.codex', '.venv', '.cache', 'node_modules', '__pycache__', 'artifacts'}
+IGNORED = {'.git', '.agents', '.aws', '.codex', '.venv', '.cache', '.gradle',
+           '.ruff_cache', '.pytest_cache', '.mypy_cache', 'node_modules',
+           '__pycache__', 'artifacts', 'build', 'dist'}
 INTAKE_HASH = '08b61fb0376634c1b6ffffbce9833f0d5fa053d5e4ee2212066716a330e45811'
 
 
@@ -24,8 +27,13 @@ def load(relative):
 def files():
     result = []
     for directory, names, filenames in os.walk(ROOT):
-        names[:] = [name for name in names if name not in IGNORED]
-        result.extend(Path(directory) / name for name in filenames)
+        relative = Path(directory).relative_to(ROOT)
+        # Raw device evidence is deliberately private. Public validation must be
+        # reproducible without a developer's inventory or unsanitized run logs.
+        names[:] = [name for name in names if name not in IGNORED
+                    and not (relative == Path('qualification/results') and name == 'private')]
+        result.extend(Path(directory) / name for name in filenames
+                      if not (relative == Path('qualification') and name == 'inventory.local.json'))
     return result
 
 
@@ -142,6 +150,65 @@ def main():
             check(documented == [s['id'] for s in phase_stages], f"{phase['id']}: stage headings differ from backlog")
     checks.update(phases=len(backlog['phases']), stages=len(stage_ids), acceptanceCases=len(cases), dependencyGraph='acyclic' if not any('Cycle' in e for e in errors) else 'invalid', effortDays={bound: sum(s['effortDays'][bound] for s in backlog['stages']) for bound in ('low', 'high')})
 
+    def ancestors(ident, seen=None):
+        # Check the complete path: a broad foundation gate can accidentally
+        # reintroduce an app dependency even after the direct edge was removed.
+        seen = set() if seen is None else seen
+        for parent in stage_map.get(ident, {}).get('dependsOn', []):
+            if parent not in seen:
+                seen.add(parent)
+                ancestors(parent, seen)
+        return seen
+
+    constraints = backlog.get('dependencyConstraints', [])
+    for constraint in constraints:
+        ident = constraint['stage']
+        check(ident in stage_map, f'Unknown constrained stage {ident}')
+        actual = ancestors(ident)
+        for forbidden in constraint.get('forbiddenAncestors', []):
+            check(forbidden in stage_map, f'{ident}: unknown forbidden ancestor {forbidden}')
+            check(forbidden not in actual, f'{ident}: forbidden dependency path through {forbidden}')
+        for required in constraint.get('requiredAncestors', []):
+            check(required in stage_map and required in actual, f'{ident}: missing required dependency path through {required}')
+    checks['dependencyConstraints'] = len(constraints)
+
+    gates = backlog.get('capabilityGates', [])
+    gate_map = {gate['id']: gate for gate in gates}
+    check(len(gate_map) == len(gates), 'Duplicate capability gate IDs')
+    for gate in gates:
+        ident, outcome = gate['id'], gate['outcome']
+        check(outcome in {'pending', 'supported', 'experiment', 'blocked'}, f'{ident}: invalid capability outcome')
+        check(bool(gate.get('ownerRole')) and bool(gate.get('decidingStages')), f'{ident}: missing decision owner/stages')
+        for stage_id in gate.get('decidingStages', []):
+            check(stage_id in stage_map, f'{ident}: unknown deciding stage {stage_id}')
+        for evidence in gate.get('evidencePaths', []):
+            path = (ROOT / evidence).resolve()
+            # Capability decisions require public evidence available in a clean
+            # checkout, not ignored raw diagnostics from one developer's machine.
+            public = path.is_relative_to(ROOT / 'qualification/results')
+            private = path.is_relative_to(ROOT / 'qualification/results/private')
+            check(public and not private and path.is_file(), f'{ident}: missing/outside/private qualification evidence {evidence}')
+        if outcome != 'pending':
+            check(bool(gate.get('evidencePaths')) and bool(gate.get('decisionNote')), f'{ident}: decided outcome requires evidence and a decision note')
+        if outcome == 'supported':
+            check(bool(gate.get('supportedScope')), f'{ident}: supported outcome lacks exact scope')
+            check(all(stage_map.get(s, {}).get('status') == 'done' for s in gate.get('decidingStages', [])), f'{ident}: supported outcome requires completed deciding stages')
+        if outcome == 'experiment':
+            experiment = gate.get('nextExperiment') or {}
+            check(all(experiment.get(key) for key in ('hypothesis', 'ownerRole', 'stopCondition', 'expectedEvidence')), f'{ident}: further experiment lacks a bounded plan')
+            cap = experiment.get('effortCapDays')
+            finite = not isinstance(cap, float) or math.isfinite(cap)
+            check(isinstance(cap, (int, float)) and not isinstance(cap, bool) and finite and cap > 0, f'{ident}: further experiment lacks a finite positive effort cap')
+    activated = {'ready', 'in-progress', 'review', 'done'}
+    for stage in backlog['stages']:
+        for ident in stage.get('requiresCapabilities', []):
+            check(ident in gate_map, f"{stage['id']}: unknown capability gate {ident}")
+            if stage['status'] in activated:
+                check(gate_map.get(ident, {}).get('outcome') == 'supported', f"{stage['id']}: capability {ident} is not supported")
+        if stage['status'] in activated:
+            check(all(stage_map.get(s, {}).get('status') == 'done' for s in stage['dependsOn']), f"{stage['id']}: stage prerequisites are not complete")
+    checks['capabilityGates'] = {'total': len(gates), 'supported': sum(g['outcome'] == 'supported' for g in gates)}
+
     apis = load('docs/03-platform/googlebook/api-tracker.json')['apis']
     check(len({a['id'] for a in apis}) == len(apis), 'Duplicate API IDs')
     for api in apis:
@@ -205,12 +272,24 @@ def main():
                     errors.append(f'{name} example: {error.message}')
                 validators[name], examples[name] = validator, example
             invalid = []
-            value = copy.deepcopy(examples['handoff']); value['command'] = 'forbidden'; invalid.append(('handoff', value, 'command field'))
-            value = copy.deepcopy(examples['handoff']); value['action'] = 'execute'; invalid.append(('handoff', value, 'executable action'))
-            value = copy.deepcopy(examples['capabilities']); value['protocolVersion']['major'] = 2; invalid.append(('capabilities', value, 'unknown major'))
-            value = copy.deepcopy(examples['capabilities']); value['platform'] = 'android'; invalid.append(('capabilities', value, 'invalid host platform'))
-            value = copy.deepcopy(examples['event']); value['sequence'] = -1; invalid.append(('event', value, 'invalid sequence'))
-            value = copy.deepcopy(examples['event']); value['eventId'] = 'invalid'; invalid.append(('event', value, 'invalid UUID'))
+            value = copy.deepcopy(examples['handoff'])
+            value['command'] = 'forbidden'
+            invalid.append(('handoff', value, 'command field'))
+            value = copy.deepcopy(examples['handoff'])
+            value['action'] = 'execute'
+            invalid.append(('handoff', value, 'executable action'))
+            value = copy.deepcopy(examples['capabilities'])
+            value['protocolVersion']['major'] = 2
+            invalid.append(('capabilities', value, 'unknown major'))
+            value = copy.deepcopy(examples['capabilities'])
+            value['platform'] = 'android'
+            invalid.append(('capabilities', value, 'invalid host platform'))
+            value = copy.deepcopy(examples['event'])
+            value['sequence'] = -1
+            invalid.append(('event', value, 'invalid sequence'))
+            value = copy.deepcopy(examples['event'])
+            value['eventId'] = 'invalid'
+            invalid.append(('event', value, 'invalid UUID'))
             for name, value, reason in invalid:
                 check(not validators[name].is_valid(value), f'{name}: accepted {reason}')
             checks['schemas'] = dict(validSchemas=3, validExamples=3, rejectedInvalidCases=len(invalid))

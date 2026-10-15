@@ -36,6 +36,8 @@ Context menus and task toolbars expose Upload, Download, Copy path, Rename, Open
 
 An integrated file pane follows an explicitly displayed session binding. Its jobs retain source/destination after a tab switch. A remote edit shows staged/modified/uploading/committed/conflict separately. The drop overlay names copy versus path insertion and never implies a binary paste into the terminal. Outgoing exports show preparation and keep local staging access bounded.
 
+On ordinary non-conditional servers, an overwrite decision appears for every remote save and names the exact staged revision. Preserve pending local work on cancel and show save-copy as an alternative; do not introduce a remembered overwrite permission. The dialog explains the remaining concurrent-writer risk without calling a prior check race-free.
+
 An auto-attach preference describes intent. Ready describes a fresh confirmed consumer and usable device. Show both when needed: `Auto-attach enabled · Busy on another host`. Routine successful hotplug uses a quiet row/badge, while permission or protected ownership uses persistent inline recovery. Avoid repeated modals for previously enrolled idle-device rules.
 
 Performance controls distinguish configured values from observed results. Use readable units and measurement sources; no decorative green latency score. Put detailed queue/codec/route statistics in a diagnostic panel so the default workspace remains focused on work. State uncertainty and comparison conditions in exported evidence.
@@ -43,3 +45,5 @@ Performance controls distinguish configured values from observed results. Use re
 ## Review gates
 
 Review S13–S17 with two hosts, two Console windows, separate X11 apps/dialogs, a native RDP/VNC session and an enrolled probe. Test keyboard/trackpad/mouse, native IME, narrow/short tiled windows, external-display scaling, light/dark, user text scaling and reduced motion. All operations have keyboard alternatives. Verify host/path/consumer identity remains legible through errors and context changes. Q-P03/Q-A01 and the linked feature cases are required; a browser specimen alone cannot pass them.
+
+Use the [native workspace review procedure](native-workspace-review.md) to separate shell/state presentation from engine-backed evidence. Record unresolved feature components against their implementation stages; a synthetic device row cannot qualify USB permission or hotplug.

@@ -1,6 +1,6 @@
 # Official source register
 
-Research snapshot: **2026-10-14, America/Chicago**, including Revision 01. Canonical data: [sources.json](sources.json). Entries are official platform, standards, vendor or upstream project sources. An upstream library interface is not a Googlebook OS API.
+Research snapshot: **2026-10-15, America/Chicago**, including reviewed development skills/toolchain sources; earlier source check dates remain in the canonical records. Canonical data: [sources.json](sources.json). Entries are official platform, standards, vendor or upstream project sources. An upstream library interface is not a Googlebook OS API.
 
 `reviewed` means the relevant claim was inspected. `located` means the entry point was found/opened but exact details still need implementation review. `javascript-required` means readable page content was unavailable. A checked date does not qualify a device or certify a release. Update dates are recorded only when inspected; null is unknown. Read [watchlist.md](watchlist.md) for change handling.
 
@@ -80,3 +80,19 @@ Research snapshot: **2026-10-14, America/Chicago**, including Revision 01. Canon
 | R31 | [FreeRDP Android native integration source](https://github.com/FreeRDP/FreeRDP/blob/master/client/Android/Studio/freeRDPCore/src/main/cpp/android_freerdp.c) | reviewed | Android native callbacks and RAIL experimental-feature handling; moving source, pin an actual build. |
 | R32 | [LibVNC security maintenance policy](https://github.com/LibVNC/libvncserver/security) | reviewed | Review advisory fixes and release/commit patch coverage before selecting the VNC engine. |
 | R33 | [X.Org ICCCM](https://xorg.freedesktop.org/archive/X11R7.7/doc/xorg-docs/icccm/icccm.html) | reviewed | Window-manager conventions for top-level/transient windows and WM_DELETE_WINDOW; Android mapping is Cloudy work. |
+| R34 | [OpenSSH protocol extensions](https://raw.githubusercontent.com/openssh/openssh-portable/master/PROTOCOL) | reviewed | POSIX rename version 1 has no expected-version condition; atomic publication alone cannot protect a concurrent edit. |
+| R35 | [Historical SFTP v3 draft](https://datatracker.ietf.org/doc/html/draft-ietf-secsh-filexfer-02) | reviewed | Expired draft, not a current IETF standard; exclusive creation and rename semantics require selected-server qualification. |
+
+## Development tooling and reviewed skills
+
+These references guide implementation setup. They do not qualify an application or device. Read the [skill provenance and mandatory project overrides](development-skills.md) before applying downloaded instructions.
+
+| ID | Official reference | Review status | Development use |
+| --- | --- | --- | --- |
+| G33 | [Official Android skills overview](https://developer.android.com/tools/agents/android-skills) | reviewed | Official skill format, discovery and update behavior; project decisions and reviewed pinned guidance remain authoritative. |
+| G34 | [Official Android CLI overview](https://developer.android.com/tools/agents/android-cli) | reviewed | Official documentation search, device/tooling entry points and telemetry controls; skill installation does not install or initialize the CLI. |
+| G35 | [Android Gradle Plugin 9.4 compatibility](https://developer.android.com/build/releases/agp-9-4-0-release-notes) | reviewed | Candidate AGP 9.4: maximum API 37, Gradle minimum/default 9.6.0, JDK minimum/default 17, Build Tools minimum/default 36.0.0; not a selected Cloudy toolchain. |
+| G36 | [Android 17 SDK setup](https://developer.android.com/about/versions/17/setup-sdk) | reviewed | compileSdk 37 exposes Android 17 APIs; targetSdk 37 is a separate behavior opt-in. Manual preview/Build Tools wording differs from the versioned AGP table; verify actual packages and build. |
+| G37 | [Java versions in Android builds](https://developer.android.com/build/jdks) | reviewed | Distinguish IDE and Gradle runtimes, Java toolchain, bytecode/language targets and Android API availability; record the tested complete version combination. |
+| R36 | [Pinned official Android skills repository](https://github.com/android/skills/tree/5bda39f154fb859a08d45e2392f3568e049f83fb) | reviewed | Reviewed android-cli, testing-setup and edge-to-edge at the pinned commit, including skill bodies and selected directory inventories; provenance and project overrides are in development-skills.md. |
+| R37 | [Pinned Android skills license](https://github.com/android/skills/blob/5bda39f154fb859a08d45e2392f3568e049f83fb/LICENSE.txt) | reviewed | Apache-2.0 license retained beside each installed skill; third-party guidance remains outside the project repository. |

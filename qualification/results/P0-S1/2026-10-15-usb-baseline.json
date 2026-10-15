@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "runId": "P0-S1-usb-baseline-2026-10-15",
+  "scope": "read-only transport and reported properties; not product qualification",
+  "observedAt": "2026-10-15T04:56:52.801232+00:00",
+  "deviceLabel": "googlebook-primary",
+  "adbAuthorization": "device",
+  "transport": "USB",
+  "properties": {
+    "ro.product.manufacturer": "HP",
+    "ro.product.model": "HP Googlebook 14",
+    "ro.product.device": "quartz",
+    "ro.build.version.release": "17",
+    "ro.build.version.sdk": "37",
+    "ro.build.version.security_patch": "2026-09-01",
+    "ro.product.cpu.abilist": "arm64-v8a",
+    "ro.build.id": "CL3B.260622.276.R2",
+    "ro.build.version.incremental": "16560795",
+    "ro.build.type": "user",
+    "ro.debuggable": "0"
+  },
+  "display": {
+    "physicalSizePixels": [
+      2880,
+      1800
+    ],
+    "physicalDensityDpi": 260,
+    "sourceCommands": [
+      "wm size",
+      "wm density"
+    ]
+  },
+  "webView": {
+    "package": "com.google.android.webview",
+    "versionName": "149.0.7827.5",
+    "versionCode": "782700504",
+    "sourceCommand": "dumpsys webviewupdate"
+  },
+  "clientTools": {
+    "adb": "1.0.41 / 34.0.5-debian",
+    "java": "21.0.9",
+    "installedSdkPlatforms": [
+      34,
+      35,
+      36
+    ],
+    "installedBuildTools": [
+      "35.0.0",
+      "36.1.0"
+    ],
+    "gradleOnPath": false,
+    "sdkmanagerOnPath": false
+  },
+  "primaryHost": {
+    "selectionAuthority": "user",
+    "observedOs": "Ubuntu 26.04.1 LTS",
+    "observedSessionType": "wayland",
+    "sshPort22ListenerObserved": false,
+    "observedAt": "2026-10-15T05:03:33.947735+00:00"
+  },
+  "apk": null,
+  "verdict": "inconclusive",
+  "reason": "Transport baseline observed; no APK built/installed, remaining inventory and backend qualification incomplete",
+  "unqualified": [
+    "APK installation and launch",
+    "window/input/lifecycle behavior",
+    "SSH/SFTP/RDP/VNC/stream backends",
+    "decoder performance",
+    "X11 separate windows",
+    "USB forwarding and programming",
+    "Windows host"
+  ]
+}

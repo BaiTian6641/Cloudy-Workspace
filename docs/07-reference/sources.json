@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "snapshotDate": "2026-10-14",
+  "snapshotDate": "2026-10-15",
   "timezone": "America/Chicago",
   "sources": [
     {
@@ -890,6 +890,114 @@
       "sourceUpdatedOn": null,
       "note": "Window-manager conventions for top-level/transient windows and WM_DELETE_WINDOW; Android mapping is Cloudy work.",
       "refresh": "Before engine selection, after relevant upstream change, and before release qualification."
+    },
+    {
+      "id": "R34",
+      "title": "OpenSSH protocol extensions: POSIX rename",
+      "url": "https://raw.githubusercontent.com/openssh/openssh-portable/master/PROTOCOL",
+      "publisher": "OpenSSH project",
+      "category": "protocol",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-14",
+      "sourceUpdatedOn": null,
+      "note": "posix-rename@openssh.com version 1 carries oldpath/newpath and returns operation status; it has no expected-version condition. Atomic replacement does not establish conflict-free concurrent editing. Moving upstream reference; pin the deployed server/client before qualification.",
+      "refresh": "At SFTP engine/server selection and before file-publication qualification."
+    },
+    {
+      "id": "R35",
+      "title": "SFTP version 3 historical protocol draft",
+      "url": "https://datatracker.ietf.org/doc/html/draft-ietf-secsh-filexfer-02",
+      "publisher": "IETF Datatracker / draft authors",
+      "category": "protocol",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-14",
+      "sourceUpdatedOn": null,
+      "note": "Expired Internet-Draft describing v3, not a current IETF standard. SSH_FXF_CREAT|SSH_FXF_EXCL requests failure when the destination exists; rename has no expected-version argument and separate connections may interleave. Server behavior still needs qualification.",
+      "refresh": "At SFTP protocol/server selection and before file-publication qualification."
+    },
+    {
+      "id": "G33",
+      "title": "Official Android skills overview",
+      "url": "https://developer.android.com/tools/agents/android-skills",
+      "publisher": "Google",
+      "category": "development-tooling",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-09-25",
+      "note": "Official skill format, discovery and update behavior; project decisions and reviewed pinned guidance remain authoritative.",
+      "refresh": "Before toolchain or skill updates; pin exact versions and review changed instructions before use."
+    },
+    {
+      "id": "G34",
+      "title": "Official Android CLI overview",
+      "url": "https://developer.android.com/tools/agents/android-cli",
+      "publisher": "Google",
+      "category": "development-tooling",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-09-25",
+      "note": "Official documentation search, device/tooling entry points and telemetry controls; skill installation does not install or initialize the CLI.",
+      "refresh": "Before toolchain or skill updates; pin exact versions and review changed instructions before use."
+    },
+    {
+      "id": "G35",
+      "title": "Android Gradle Plugin 9.4 compatibility",
+      "url": "https://developer.android.com/build/releases/agp-9-4-0-release-notes",
+      "publisher": "Google",
+      "category": "development-tooling",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-10-08",
+      "note": "Candidate AGP 9.4: maximum API 37, Gradle minimum/default 9.6.0, JDK minimum/default 17, Build Tools minimum/default 36.0.0; not a selected Cloudy toolchain.",
+      "refresh": "Before toolchain or skill updates; pin exact versions and review changed instructions before use."
+    },
+    {
+      "id": "G36",
+      "title": "Android 17 SDK setup",
+      "url": "https://developer.android.com/about/versions/17/setup-sdk",
+      "publisher": "Google",
+      "category": "development-tooling",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-10-01",
+      "note": "compileSdk 37 exposes Android 17 APIs; targetSdk 37 is a separate behavior opt-in. Manual preview/Build Tools wording differs from the versioned AGP table; verify actual packages and build.",
+      "refresh": "Before toolchain or skill updates; pin exact versions and review changed instructions before use."
+    },
+    {
+      "id": "G37",
+      "title": "Java versions in Android builds",
+      "url": "https://developer.android.com/build/jdks",
+      "publisher": "Google",
+      "category": "development-tooling",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Distinguish IDE and Gradle runtimes, Java toolchain, bytecode/language targets and Android API availability; record the tested complete version combination.",
+      "refresh": "Before toolchain or skill updates; pin exact versions and review changed instructions before use."
+    },
+    {
+      "id": "R36",
+      "title": "Pinned official Android skills repository",
+      "url": "https://github.com/android/skills/tree/5bda39f154fb859a08d45e2392f3568e049f83fb",
+      "publisher": "Google LLC",
+      "category": "development-tooling",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-10-14",
+      "note": "Reviewed android-cli, testing-setup and edge-to-edge at the pinned commit, including skill bodies and selected directory inventories; provenance and project overrides are in development-skills.md.",
+      "refresh": "Before toolchain or skill updates; pin exact versions and review changed instructions before use."
+    },
+    {
+      "id": "R37",
+      "title": "Pinned Android skills license",
+      "url": "https://github.com/android/skills/blob/5bda39f154fb859a08d45e2392f3568e049f83fb/LICENSE.txt",
+      "publisher": "Google LLC",
+      "category": "development-tooling",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Apache-2.0 license retained beside each installed skill; third-party guidance remains outside the project repository.",
+      "refresh": "Before toolchain or skill updates; pin exact versions and review changed instructions before use."
     }
   ]
 }

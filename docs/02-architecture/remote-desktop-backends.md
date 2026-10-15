@@ -1,6 +1,6 @@
 # Desktop clients, latency, and backend boundaries
 
-**Status:** required product lanes, proposed integration. **Stages:** P0-S4/S6, P3-S2/S7/S8, P5-S1/S2/S4. Googlebook is the desktop client; each host exposes the appropriate server. Standard RDP/VNC must work without Cloudy's custom host agent or Console installed.
+**Status:** required product lanes, proposed integration. **Stages:** P0-S4/S6, P3-S2/S7/S8, P1-S5, P5-S2/S4. Googlebook is the desktop client; each host exposes the appropriate server. Standard RDP/VNC must work without Cloudy's custom host agent or Console installed.
 
 ## Three explicit lanes
 

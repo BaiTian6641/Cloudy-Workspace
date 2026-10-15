@@ -1,19 +1,19 @@
 # P6 — Hardening and supported release
 
-**Status:** planned. **Active effort:** 10–18 person-days before contingency. **Purpose:** Qualify complete Googlebook desktop workflows, recovery, signed distribution and sustained use; phone/tablet optimization is outside scope.
+**Status:** planned. **Active effort:** 10–18 person-days before contingency. **Purpose:** Qualify the complete suite, reusing applicable standalone evidence and validating combined failure, migration, distribution and sustained-use behavior.
 
-The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-project/platform-rule-zero.md) defines desktop scope. Estimates are active effort, not elapsed time or staffing commitments; re-estimate after P0. Stage IDs remain stable; the dependency order can place a later-numbered addition before an existing release gate.
+The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-project/platform-rule-zero.md) defines desktop scope. Follow [capability outcomes](../feasibility-gates.md) and [independent release gates](../release-gates.md). Estimates are active effort, not elapsed time; re-estimate after physical evidence. Revision 02 moved the former P5-S1 decision to P1-S5; other stage IDs retain their identity.
 
 | Stage | Outcome | Effort, person-days | Prerequisites |
 | --- | --- | ---: | --- |
-| P6-S1 | Failure injection, long sessions, and power transitions | 3–5 | P5-S4 |
+| P6-S1 | Failure injection, long sessions, and power transitions | 3–5 | P5-S4, P4-S4, P3-S9 |
 | P6-S2 | Protocol skew, data migrations, updates, and rollback | 2–4 | P6-S1 |
 | P6-S3 | Distribution requirements and user documentation | 2–4 | P6-S2 |
 | P6-S4 | Ten-working-day dogfood and release decision | 3–5 | P6-S3 |
 
 ## P6-S1 — Failure injection, long sessions, and power transitions
 
-**Owner:** QA/platform developer. **Prerequisites:** P5-S4. **Status:** planned.
+**Owner:** QA/platform developer. **Prerequisites:** P5-S4, P4-S4, P3-S9. **Status:** planned.
 
 Work:
 
@@ -22,6 +22,7 @@ Work:
 3. Verify independent app operation, no command/approval/flash replay, and authoritative USB/file reconciliation.
 4. Fix critical defects and narrow support claims where reliable behavior is not established.
 5. Repeat required X11 window, SFTP grant/export/edit, RDP/VNC session and USB enrolled hotplug failure cases across suspend/resume and actual Googlebook process eviction.
+6. Reuse app-scoped release evidence only for unchanged versions and applicable cases; run full-suite regressions without retroactively coupling standalone releases.
 
 Deliverables:
 
@@ -33,7 +34,7 @@ Exit evidence:
 - No silent data loss, unbounded growth, stuck input, or surprise side-effect replay in supported cases.
 - Failures produce actionable bounded diagnostics.
 
-Record evidence under `qualification/results/P6-S1/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-X02, Q-X03, Q-C06, Q-D03, Q-C07, Q-C08, Q-C09, Q-C10, Q-D06, Q-D07, Q-D08, Q-N03, Q-P03. Official/upstream source IDs: G15, G16, G02; resolve them in the [source register](../../07-reference/source-register.md).
+Record evidence under `qualification/results/P6-S1/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-X02, Q-X03, Q-C06, Q-D03, Q-C07, Q-C08, Q-C09, Q-C10, Q-D06, Q-D07, Q-D08, Q-N03, Q-P03, Q-F01, Q-R02. Official/upstream source IDs: G15, G16, G02; resolve them in the [source register](../../07-reference/source-register.md).
 
 ## P6-S2 — Protocol skew, data migrations, updates, and rollback
 
@@ -93,6 +94,7 @@ Work:
 3. Re-run only affected gates after changes and recheck critical complete journeys before promotion.
 4. Approve release with evidence/support matrix or retain candidate status with explicit unresolved defects.
 5. Dogfood the complete revised desktop ecosystem workflows, collect applicable official desktop-quality evidence, and label every unsupported backend/device capability.
+6. Record the full-suite observation separately from each standalone app candidate; overlapping days count only where the exact build and required workflows were actually observed.
 
 Deliverables:
 
@@ -108,4 +110,4 @@ Record evidence under `qualification/results/P6-S4/` using the [run template](..
 
 ## Gate and failure route
 
-No unresolved trust/data/input replay/ownership defect may pass. Publish exact Googlebook/backend support and desktop-only scope; device compatibility and distribution eligibility require evidence. Every done stage links actual evidence; a documentation check does not qualify a device.
+Full-suite promotion requires all applicable app, integration and host-feature evidence. Standalone releases retain their own gates. No unresolved trust/data/input replay/ownership defect may pass. Every done stage links actual evidence; a documentation check does not qualify a device.

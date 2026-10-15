@@ -4,6 +4,8 @@
 
 **Current revision:** [Revision 01](revision-01-integrated-workflows.md) adds the user's X11, SFTP/drop, native RDP/VNC, USB plug-and-play requirements and [Rule 0](platform-rule-zero.md). Read it with this intake review; early external-backend milestones do not complete the revised integrated scope.
 
+**Final-review update:** [Revision 02](revision-02-final-review.md) records the user's three subsequent choices: ask before every remote overwrite on a non-conditional backend, release Console and Desktop independently with a separate suite milestone, and decide native-stream adoption in P0/P1 independently of optional host adapters. It also adds explicit capability readiness and native UX review gates. This is the current delivery policy; Revision 01 remains the scope history.
+
 ## Retain
 
 The two independently useful apps, host-local compute, ordinary SSH, optional host agent, direct media/USB/file paths, established backends, conservative file writes, explicit USB ownership, and evidence-based release gates are sound foundations. Preserve the original distinctions among terminal persistence, agent conversation resume, and host reboot survival. Keep bandwidth assumptions separate from measurements.

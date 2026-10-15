@@ -1,6 +1,6 @@
 # Desktop backend adapters
 
-**State:** planned module boundary; no application/library implementation yet. **Delivery stages:** P0-S4, P3-S2/S7/S8, P5-S1/S2.
+**State:** planned module boundary; no application/library implementation yet. **Delivery stages:** P0-S4, P3-S2/S7/S8, P1-S5, P5-S2.
 
 ## Responsibility
 

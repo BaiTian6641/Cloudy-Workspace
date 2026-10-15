@@ -33,6 +33,6 @@ Do not select a custom launcher or system IME as a shortcut to desktop integrati
 
 Phone Continue On, handset onboarding, portrait handset screens, touch-only navigation, and tablet layouts have no required delivery stages. Continue On remains a reference capability, outside the release gates. External-display desktop modes on other Android hardware are future qualification candidates, not inherited support.
 
-P1 must document actual package/manifest/ABI requirements. P6 must verify the chosen distribution channel and available device targeting; do not invent a Googlebook-only manifest flag or assume a screen-size filter identifies the OS. An unsupported-device message may explain scope when detected reliably, without guessing from display size alone.
+P1 must document actual package/manifest/ABI requirements. Each independent app release and the full-suite P6 gate must verify the chosen distribution channel and available device targeting; do not invent a Googlebook-only manifest flag or assume a screen-size filter identifies the OS. An unsupported-device message may explain scope when detected reliably, without guessing from display size alone.
 
 Read the [desktop application contract](../03-platform/googlebook/desktop-application-contract.md) for the official API and acceptance mapping. A change that adds a mobile-specific dependency or compromises desktop usability must revisit this rule explicitly.

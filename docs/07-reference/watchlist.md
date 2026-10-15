@@ -33,9 +33,11 @@ Use `--only G01,G06` for a small targeted check. Failed/blocked responses remain
 
 The [initial reachability report](reachability-2026-10-14.json) records 53 successful responses. Its timestamps are UTC; the filename follows the project's America/Chicago research date. It does not change content-review or device-qualification status.
 
-The [Revision 01 report](revision-01-reachability-2026-10-14.json) covers all 74 current references. Reachability is a read-only URL check; semantic source review, engine build verification and device qualification are separate work.
+The [Revision 01 report](revision-01-reachability-2026-10-14.json) covers the 74 references present at that revision. Revision 02 adds R34/R35 for SFTP publication; its [targeted report](revision-02-reachability-2026-10-14.json) checks those two added sources. This is not a fresh reachability claim for all 76 entries. Semantic source review, engine build verification and device qualification remain separate work.
 
 ## Change record template
+
+The execution setup on 2026-10-15 adds G33–G37 and R36–R37 for official Android skills and build tooling, bringing the current register to 83 sources. Those contents were reviewed separately; the earlier reachability reports remain historical and do not cover every current source.
 
 ```text
 Date / source ID / API ID:

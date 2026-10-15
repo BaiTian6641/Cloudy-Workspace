@@ -22,6 +22,8 @@ Canonical values live in [tokens.json](../../shared/design-system/tokens.json). 
 
 The specimen represents the initial screen subset. Revision 01's S13–S17 are detailed native design specifications; their functionality is not implemented in that browser artifact.
 
+The final-review refinement adds a [native workspace prototype review](native-workspace-review.md) at P1-S2. Component geometry and engine-dependent interactions remain provisional until their relevant native checks pass.
+
 ## Concrete visual decisions
 
 | Decision | Rule |

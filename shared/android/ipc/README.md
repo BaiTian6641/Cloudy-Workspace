@@ -1,6 +1,6 @@
 # Cross-app resource handoff
 
-**State:** planned module boundary; no application/library implementation yet. **Delivery stages:** P1-S3/S4, P3-S5.
+**State:** planned module boundary; no application/library implementation yet. **Delivery stages:** P1-S3/S4, P3-S9; independent-install checks also apply at P3-S5.
 
 ## Responsibility
 

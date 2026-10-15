@@ -33,6 +33,8 @@ Console and Desktop reuse file/transfer source while owning credentials and jour
 
 ## Versioning and release units
 
+P2-S1 implements reusable SSH transport/authentication under CAP-SSH. P2-S8 implements transfer, journal, staging and publication primitives; both apps integrate those primitives in their own stages. CAP-TERMINAL controls Console's renderer/input route, not Desktop's SSH/SFTP readiness. Shared modules cannot import Console UI or require its installed process. Q-F02 checks this boundary with real SSH/SFTP behavior.
+
 Apps, host agent, protocol, and external adapters have separate versions. Build-time shared code can move together without forcing runtime lockstep. Negotiate compatible protocol ranges and named capabilities. A newer app receiving unknown optional capabilities ignores them; unknown required major versions fail with an actionable upgrade path.
 
 Release manifests record app and agent versions, protocol range, backend versions, schema hashes, and supported qualification runs. P1 selects dependency locks and a reproducible build environment; P6 qualifies upgrade/rollback and stored-data migrations.

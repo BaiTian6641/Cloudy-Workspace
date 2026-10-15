@@ -691,6 +691,32 @@
       "stage": "P1-S1",
       "fallback": "Signed direct APK route if qualified; channel limitations explicitly documented",
       "experiment": "Install/update/uninstall each app independently, inspect package/signature/ABI and verify actual channel device targeting without a guessed Googlebook flag"
+    },
+    {
+      "id": "API33",
+      "feature": "SFTP publication and concurrent-edit boundary",
+      "symbols": [
+        "SSH_FXP_STAT",
+        "SSH_FXP_OPEN",
+        "SSH_FXF_CREAT",
+        "SSH_FXF_EXCL",
+        "SSH_FXP_RENAME",
+        "posix-rename@openssh.com"
+      ],
+      "sourceIds": [
+        "R34",
+        "R35"
+      ],
+      "minimumApi": null,
+      "libraryVersion": null,
+      "interfaceKind": "upstream-protocol-and-extension",
+      "availability": "Historical SFTP v3 semantics and advertised OpenSSH POSIX-rename extension version 1; selected server/engine and optional capabilities unqualified",
+      "qualification": "untested",
+      "checkedOn": "2026-10-14",
+      "owner": "Files/Android developer",
+      "stage": "P2-S8",
+      "fallback": "Ask before every remote overwrite on non-conditional backends, offer save-copy/cancel and retain staging; never infer conditional replacement from stat plus rename",
+      "experiment": "Test per-save generation-bound consent, canceled/obsolete autosaves, a second writer between final check and publication, exclusive-name collision, ambiguous rename and process-loss recovery; record actual server/engine/extensions; rerun app-specific integration cases at P2-S7, P3-S3 and P5-S3"
     }
   ],
   "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."

@@ -1,0 +1,14 @@
+[tool.ruff]
+required-version = "==0.17.0"
+target-version = "py310"
+include = ["*.py", "*.pyi", "pyproject.toml"]
+force-exclude = true
+# Keep local inventories, fetched skills, and downloaded implementations out of
+# authored-source checks. Mirror these directory names in tools/check_ast.py.
+extend-exclude = [
+    ".agents", ".aws", ".cache", ".codex", ".gradle", "artifacts",
+    "downloads", "external", "private", "third-party", "third_party", "vendor",
+]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]

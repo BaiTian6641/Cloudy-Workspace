@@ -29,3 +29,7 @@ Record actual steps, timestamps, measurements/units/percentiles, error chain, st
 ## Verdict
 
 Choose **pass / fail / blocked / inconclusive**. Explain the criterion behind the verdict. List supported combination, exclusions, fallback tested, remaining defects, and next experiment. Update the compatibility matrix and relevant API record only when this evidence establishes their status.
+
+## Capability decision and readiness
+
+When this run resolves a [feasibility gate](../../05-delivery/feasibility-gates.md), record its gate ID and separate outcome: `pending`, `supported`, `experiment` or `blocked`. Name the exact supported scope and linked dependent stages. For a further experiment, include hypothesis, owner, active-effort cap, stop condition and expected evidence. For a blocker, identify the unmet requirement and any proposed scope decision. Completing the investigation does not automatically make its implementation stage ready.

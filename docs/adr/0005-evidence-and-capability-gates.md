@@ -9,3 +9,5 @@ Capability discovery includes unknown/unavailable/permission-required states. Do
 Performance budgets and bandwidth arithmetic remain proposed until measured. CI and synthetic contract/specimen checks do not establish capture permissions, decoding, USB, or power behavior. A failed critical gate narrows scope or requires a tested fallback.
 
 Consequences: more explicit P0 work, a maintained support matrix, evidence-linked release claims, and bounded drift review. **Stages:** all; first gate P0-S6, release gate P6-S4.
+
+**Final-review refinement:** use [explicit capability outcomes](../05-delivery/feasibility-gates.md) alongside stage status. `pending`, `experiment` and `blocked` do not authorize their linked product stages. `supported` needs scoped evidence and completed deciding work; completing a failed investigation cannot silently satisfy a feature prerequisite.

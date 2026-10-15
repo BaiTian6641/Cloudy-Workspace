@@ -8,4 +8,4 @@ Do not pass executable shell strings, private keys, or local paths that the rece
 
 Tailnet membership provides a route, while SSH host trust and host-agent pairing establish application identity. The host core authorizes each scoped request and does not replay arbitrary side effects after reconnect.
 
-The alternative is a shared daemon/store with broad command-style links, which creates availability and trust coupling. Consequences: explicit non-secret import, version-skew handling, registered roots/resources, and separate pairing. **Stages:** P1-S3/S4, P3-S5, P4-S1.
+The alternative is a shared daemon/store with broad command-style links, which creates availability and trust coupling. Consequences: explicit non-secret import, version-skew handling, registered roots/resources, and separate pairing. **Stages:** P1-S3/S4, P3-S9, P4-S1. Standalone package checks also run at P3-S5; cross-app handoff belongs to the separate suite milestone.

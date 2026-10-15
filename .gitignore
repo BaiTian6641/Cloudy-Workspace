@@ -26,5 +26,8 @@ node_modules/
 __pycache__/
 *.pyc
 .cache/
+.ruff_cache/
+.pytest_cache/
+.mypy_cache/
 artifacts/
 qualification/results/private/

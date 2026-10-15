@@ -32,7 +32,7 @@ Keep prior output readable and the target visible. Show route/host/authenticatio
 
 ## S06 — Desktop workspace overview
 
-**Goal:** open the right visual context and inspect supporting resources. Navigation selects workspace/host. Header shows project/host/environment and a Connect/Open desktop action. The main region is an honest backend launch state in R2; the specimen uses a labeled illustrative desktop scene. Supporting panes show selected files and device ownership.
+**Goal:** open the right visual context and inspect supporting resources. Navigation selects workspace/host. Header shows project/host/environment and a Connect/Open desktop action. In R2 the main region hosts the native RDP/VNC surface or an honest external high-performance-stream launch state, according to the selected protocol. The specimen uses a labeled illustrative desktop scene. Supporting panes show selected files and device ownership.
 
 Distinguish installed backend, paired backend, available host session, and stream state. If the stream opens externally, label the destination and return affordance. Do not show live-looking metrics or thumbnails unless actually measured/current. The specimen's numbers are explicitly synthetic.
 
@@ -47,6 +47,8 @@ States: initial decode, playing, permission-required, stream stalled, host locke
 Root selector identifies Local Googlebook, host SFTP, Drive provider, or lab location. Breadcrumb/path is selectable/copyable. File table uses density preference, sortable columns, range selection, and local horizontal overflow where needed. Inspector shows full path, source version, cached/offline state, and permissions.
 
 Transfer drawer groups active/queued/history. Status names separate sent, verifying, committed remotely, and synced by another provider. Conflict view displays both versions with modified/size/version evidence and explicit preserve/replace/save-copy choices. An unknown remote version disables a destructive resume/commit.
+
+For ordinary backends without conditional replacement, every remote save presents an overwrite choice for that exact destination and staged revision. Cancel keeps local work; Save a copy uses a qualified no-replace operation. A previous confirmation does not approve another save, and completion-unknown cannot turn into an automatic retry. Display the concurrency limitation in the decision flow.
 
 ## S09 — Devices and protected operation
 
@@ -73,6 +75,8 @@ Identify its primary task, host/environment context, focus entry/exit, empty/loa
 Place the session-linked file pane beside the terminal with host/environment and breadcrumb always visible. Its header offers pin/follow-active, refresh, upload and destination actions. A dense table supports range/additive selection, rename, download, Copy path and staged edit through desktop menus. The transfer strip expands into the shared journal without hiding the active destination. Directory tracking shows explicit/manual, shell-integrated or unavailable state.
 
 Incoming drag targets name `Upload to host:path`; outgoing remote files show Preparing download before a staged URI is available. Dropping on the terminal offers path/reference insertion after commit. Keyboard alternatives provide every operation. States include missing SFTP, permission denied, stale listing, queued/paused/verifying/committing, conflict and revoked local grant. **Stages/cases:** P2-S7, Q-C09/C10.
+
+Remote edit state includes Pending remote save, Awaiting overwrite decision, Saved copy, Replaced and Completion unknown. The per-save overwrite prompt follows S08 and [the shared publication contract](../02-architecture/file-publication.md); local editor autosaves never become blanket consent.
 
 ## S14 — Separate X11 application and window list
 

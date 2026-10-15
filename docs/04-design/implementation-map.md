@@ -32,11 +32,11 @@ Revision 01's S13–S17 describe additional native desktop workflows. The specim
 
 ## P1 implementation sequence
 
-1. Lock schema/version/names for tokens and map them to native roles.
+1. Stabilize schema/version/names for tokens and map them to native roles; keep component geometry provisional until native review.
 2. Implement shared shell and shared controls with semantic states and keyboard behavior.
 3. Add current-window resize/caption/instance probes with guarded platform calls.
-4. Port S02 and S06 as native skeletons using synthetic models first.
-5. Review text scale, light/dark, narrow windows, focus, IME handoff, and density on hardware.
+4. Port S02/S06 and the revised S13–S17 flows as native skeletons, using synthetic state models with explicit limits and qualified engine probes where available.
+5. Run the [native workspace review](native-workspace-review.md) for text scale, both themes/densities, tiled windows, host context, input release, owned modals and permission interruptions on hardware. Freeze only demonstrated component behavior.
 6. Bind real domain state only after its authority/failure semantics exist.
 
 Keep reusable component APIs small. A button takes a semantic role/action/state, not arbitrary color overrides. File/USB/session components render typed states with required identity/context. Product copy should not expose implementation details unless they help the user recover or choose meaningfully.

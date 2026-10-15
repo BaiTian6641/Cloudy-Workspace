@@ -8,7 +8,7 @@ Statuses: **adopted for planning**, **proposed pending spike**, **unknown**, **q
 | D02 | Compose native shell; xterm.js isolated surface | Proposed pending spike | Android/terminal | P0-S3 | Swap renderer or revisit shell if IME/accessibility/latency gates fail |
 | D03 | External streaming before embedding | Adopted for planning | Desktop | P0-S4 | Manual launch if no documented handoff; expose the transition honestly |
 | D04 | Tailnet plus app-level pairing for agent APIs | Adopted for planning | Host/security | P1-S3 | SSH alone remains available |
-| D05 | Project license and upstream embedding model | Unknown | Maintainer | P1-S4 / P5-S1 | Keep third-party implementations external until decided |
+| D05 | Project license and upstream embedding model | Unknown | Maintainer | P1-S4 / P1-S5 | Keep third-party implementations external until decided |
 | R01 | Physical trackpad relative capture/CAD behavior | Unknown, high impact | Device owner | P0-S4 | Absolute mode or qualified external mouse; do not claim trackpad CAD readiness |
 | R02 | Primary USB probe reset/reenumeration over Android provider | Unknown, critical | Device/embedded | P0-S5 | Lab-side Linux provider or vendor hardware server |
 | R03 | SSH engine compatibility and modern algorithms on ARM64 | Unknown, high | Terminal | P0-S3 | Compare maintained engines; do not implement cryptography |
@@ -17,11 +17,11 @@ Statuses: **adopted for planning**, **proposed pending spike**, **unknown**, **q
 | R06 | Linux VM public attach/control API | Unknown; roadmap dependencies | Platform | P0-S2 | No local-VM feature commitment |
 | R07 | Wayland capture/input/lock support | Unknown per compositor | Linux | P0-S4 | Qualified matrix and explicit unsupported states |
 | R08 | macOS capture permission and notification scope | Unknown per backend | macOS | P0-S4 / P4-S3 | Own-job events and supported user-session integration |
-| R09 | Conflict detection and provider write semantics | Proposed | Files | P3-S3 / P5-S3 | Staged writes, source-version checks, conflict copies |
+| R09 | Concurrent edit between version check and publication | Backend guarantee unqualified | Files | P2-S8 / P2-S7 / P3-S3 / P5-S3 | [Publication contract](../02-architecture/file-publication.md); prompt for every non-conditional overwrite, retain staging, test racing writes and ambiguous results |
 | R10 | Backend API absence/version drift | Unknown | Integration | P0-S4/S5 | Isolate adapters; pin measured versions |
 | R11 | Metered data use/relay path | Unmeasured | Network/QA | P0-S6 | Terminal-first, explicit video budget and measurement boundary |
 | R12 | Cross-app version skew and signing identity | Proposed | Platform | P1-S3 / P6-S2 | Version negotiation, explicit import, actionable mismatch |
-| R13 | Distribution restrictions/Play target requirements | Must refresh before release | Maintainer | P6-S3 | Record selected channel and actual requirements at release time |
+| R13 | Distribution restrictions/Play target requirements | Must refresh before each release | Maintainer | P2-S5 / P3-S5 / P6-S3 | Each independent app and full-suite candidate needs actual channel/signing/dependency evidence |
 | R14 | Eye fatigue/density at actual display scaling | Unmeasured | Design/QA | P1-S2 / P6-S4 | User density/font controls and real-hardware review |
 | D06 | Googlebook desktop/laptop Android package model; no phone/tablet optimization | Adopted for planning | Product/platform | P1-S1/S2 / P6-S3 | [Rule 0](platform-rule-zero.md); narrow desktop windows and accessibility remain required |
 | D07 | Native RDP and VNC client lanes in full R2 | Adopted for planning | Desktop/integration | P0-S4 / P3-S7/S8 | Ordinary compatible servers, no custom agent dependency; external viewer is partial |
@@ -34,6 +34,12 @@ Statuses: **adopted for planning**, **proposed pending spike**, **unknown**, **q
 | R20 | USB provider events/control, permission renewal and auto-use races | Unknown, high | USB/device | P0-S5 / P3-S6 | Consumer state reconciliation, generation IDs and explicit permission setup; no blind toggle retry |
 | R21 | Low input-to-photon latency under actual decode/thermal/relay conditions | Unmeasured, high | Desktop/network | P0-S4/S6 / P5-S2 | Matched Moonlight/Parsec comparison, optional codec flags, bounded native queues and quality budgets |
 | R22 | Android distribution can target intended Googlebook desktop audience | Unresolved channel detail | Maintainer/platform | P1-S1 / P6-S3 | Verify channel/device catalog; no invented OS feature flag or inferred phone support |
-| R23 | Expanded scope and X11 integration uncertainty | Planning range only | Product/engineering | P0-S6 / P1-S4 | Revised 125–217 active person-days before reserve; re-estimate after feasibility/build/license decisions |
+| R23 | Expanded scope and X11 integration uncertainty | Planning range only | Product/engineering | P0-S6 / P1-S4 | Revision 02: 129–223 active person-days before reserve; re-estimate after feasibility/build/license decisions |
+| D09 | Ask before every remote overwrite without guaranteed conditional replacement | User selected | Product/files | P2-S8 / P2-S7 / P3-S3 / P5-S3 | Consent for exact destination/save generation; save-copy/cancel, no blanket remembered consent |
+| D10 | Independently releasable Console and Desktop plus separate suite milestone | User selected | Product/QA | P2-S5 / P3-S5 / P3-S9 | App-specific release checks; Console renderer/UI and X11 do not block R2, suite-only failures stay scoped |
+| D11 | Early native-stream adoption independently of optional host adapters | User selected | Desktop/maintainer | P0-S4 / P1-S5 / P5-S2 | Former P5-S1 moves to P1-S5; document provider also separates from stream adoption |
+| R24 | Completed research accidentally treated as supported implementation | Controlled by readiness contract; no evidence yet | Platform/QA | All capability deciding stages | Pending/experiment/blocked outcomes cannot activate dependent product stages; scoped evidence required |
+| R25 | Updated workflows have specifications but no native interaction evidence | Unqualified | Design/Android | P1-S2 and feature stages | [Native workspace review](../04-design/native-workspace-review.md); freeze only demonstrated geometry and behavior |
+| R26 | Independent releases omit package quality or double-count suite evidence | Planned checks, unqualified | Release/QA | P2-S5 / P3-S5 / P6 | App-scoped signed update/recovery/notices/support and observation; reuse exact-build evidence only |
 
 Update this table when evidence changes; link the run, installed version, and affected phase. A fallback is acceptable only when its user-visible limitation is documented and the fallback itself has been tested.

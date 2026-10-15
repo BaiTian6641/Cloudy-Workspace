@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "scope": "reachability-and-raw-response-drift-only",
+  "checkedAt": "2026-10-15T04:10:17.871854+00:00",
+  "semanticReviewPerformed": false,
+  "summary": {
+    "total": 2,
+    "reachable": 2,
+    "errors": 0,
+    "driftCandidates": 0
+  },
+  "results": [
+    {
+      "id": "R34",
+      "requestedUrl": "https://raw.githubusercontent.com/openssh/openssh-portable/master/PROTOCOL",
+      "checkedAt": "2026-10-15T04:10:15.005881+00:00",
+      "httpStatus": 200,
+      "finalUrl": "https://raw.githubusercontent.com/openssh/openssh-portable/master/PROTOCOL",
+      "contentType": "text/plain; charset=utf-8",
+      "bodySha256": "4a9e7f6d26d3f59deae825ab11ca34a4ffb260b47a19b5a174ddfd1ee009bca4",
+      "hashedBytes": 25246,
+      "truncated": false,
+      "error": null,
+      "driftCandidate": false,
+      "redirectChanged": false
+    },
+    {
+      "id": "R35",
+      "requestedUrl": "https://datatracker.ietf.org/doc/html/draft-ietf-secsh-filexfer-02",
+      "checkedAt": "2026-10-15T04:10:15.006800+00:00",
+      "httpStatus": 200,
+      "finalUrl": "https://datatracker.ietf.org/doc/html/draft-ietf-secsh-filexfer-02",
+      "contentType": "text/html; charset=utf-8",
+      "bodySha256": "52b34e6e7df0e9b8b0b41f48398b6130098a75523123402c20a3012be921e37f",
+      "hashedBytes": 107932,
+      "truncated": false,
+      "error": null,
+      "driftCandidate": false,
+      "redirectChanged": false
+    }
+  ]
+}

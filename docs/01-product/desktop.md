@@ -15,7 +15,7 @@ The workspace view puts the desktop or launch state in the main pane. Files and 
 | D01 | Hosts | Manual profiles first; optional capability discovery after pairing | R2 / P3-S1 |
 | D02 | Workspace | Registered project, host/environment, desktop preferences, file roots, optional device preferences | R2 / P3-S1 |
 | D03 | Stream launch | Validate installed client/host/profile, use documented mechanism if available, offer manual fallback | R2 / P3-S2 |
-| D04 | Desktop input | Absolute/CAD/presentation/metered profiles; actual physical input qualification | R4 / P5-S2 |
+| D04 | Streaming input profiles | Absolute/CAD/presentation/metered profiles; native RDP/VNC input remains required in R2 | R4 / P5-S2 |
 | D05 | Files | Distinct Local, SFTP host, Drive-provider, and optional lab roots; locations and semantics visible | R2 / P3-S3 |
 | D06 | Transfers | Queued/running/verifying/committed/failed/conflict states; pause/resume only when backend and source version allow | R2 / P3-S3 |
 | D07 | USB | One actual consuming host; attaching/in-use/reenumerating/releasing/fault/unknown states | R2 / P3-S4 |
@@ -24,7 +24,7 @@ The workspace view puts the desktop or launch state in the main pane. Files and 
 | D10 | Notifications | Per-adapter fidelity flags; system permission and channel settings; no loop or reconnect storm | R3 / P4-S2/S3 |
 | D11 | File provider | Selected remote roots through Android document URIs, bounded cache, conflict-safe editing | R4 / P5-S3 |
 | D12 | Metered policy | Explicit bitrate/traffic boundary, stop hidden streams, opt-in prefetch, preserve protected operation | R4 / P5-S4 |
-| D13 | Console handoff | Pass resource identifiers; receiver resolves paths and authenticates independently | R2 / P3-S5 |
+| D13 | Console handoff | Pass resource identifiers; receiver resolves paths and authenticates independently | Suite milestone / P3-S9; no standalone R2 release dependency |
 | D14 | Native RDP client | Explicit RDP profile, server trust/auth, native render/input/IME, resize/scaling, session recovery and observed transport | R2 / P3-S7 |
 | D15 | Native VNC client | RFB framebuffer/input, negotiated security/encoding, native surface, supported resize/clipboard and bounded recovery | R2 / P3-S8 |
 | D16 | USB plug-and-play | Enroll device+approved host, then discover/replug/auto-attach when permission and idle ownership are confirmed | R2 / P3-S6 |
@@ -43,6 +43,8 @@ SFTP is the first direct host filesystem path. Drive starts through the system p
 
 Write to a temporary destination, validate size/hash as supported, check destination/source versions, and publish using the backend's available operation. Rename atomicity is not presumed across servers/filesystems. On conflict, retain both versions and ask the user to choose. A canceled operation reports whether a temporary remote object remains.
 
+On backends without guaranteed conditional replacement, ask before every remote overwrite, offering save-copy/cancel with no blanket future consent. A later writer can race a prior check; apply the exact generation, ambiguous-completion and exclusive-copy rules in the [publication contract](../02-architecture/file-publication.md). Local staging survives cancellation and uncertainty.
+
 Remote editing uses local staging and a recorded source identity. Active repositories, databases, VM disks, toolchain caches, and model weights remain on the execution host. No destructive two-way sync in the first release. File-provider support uses [DocumentsProvider](https://developer.android.com/guide/topics/providers/create-document-provider); it does not create a universal POSIX mount.
 
 ## Devices
@@ -53,4 +55,6 @@ Treat firmware resets and bootloader identities as an approved set attached to o
 
 ## Acceptance
 
-Pass Q-D01 through Q-D05 and Q-X01 through Q-X03 in [test cases](../06-validation/test-cases.md). The MVP proof is a real project edited/built through Console, opened visually, programmed/debugged through the actual probe, and inspected with measured network use. Report each fallback as part of the achieved workflow.
+The independent R2 gate is P3-S5: qualify native RDP/VNC, the external performance-stream lane, files and enrolled USB through the primary edit/build/program/inspect workflow with Console absent. Apply Q-D01/D02/D03/D04/D06/D07/D08, the relevant network/file cases, and Q-R02's app-scoped release checks. The later P3-S9 suite milestone adds Console build/upload and cross-app handoff. Q-D05 belongs to the later document provider; host event replay belongs to P4. See [release gates](../05-delivery/release-gates.md) and [test cases](../06-validation/test-cases.md).
+
+Native streaming adoption is decided early at P1-S5 from P0 evidence. P5-S2 can proceed once its native app/profile and engine prerequisites pass, independently of P4 host adapters; the first R2 scope still permits a qualified external performance-stream handoff.

@@ -36,3 +36,5 @@ An event has event ID, stream ID, monotonically increasing stream sequence, host
 ## Compatibility policy
 
 Use explicit major/minor protocol fields. A minor addition must be optional with an understood default. Do not repurpose an enum value or an identifier's meaning. Wire schema validation, semantic validation, and authorization are separate checks. JSON Schemas cannot establish request expiry relative to the current clock, ownership, path scope, authenticity, or replay safety; server/runtime code must enforce those rules.
+
+File publication additionally declares exclusive-create, ordinary/conditional replacement and acknowledgement semantics per backend. An overwrite confirmation is scoped to a file/destination/staged revision and cannot authorize future saves. A timeout after publication is completion-unknown until reconciled; see [the publication contract](file-publication.md).

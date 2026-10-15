@@ -58,6 +58,10 @@ Use the API reference's spelling `requestFullscreenMode`; a guide link may rende
 | API31 | [LibVNCClient](https://github.com/LibVNC/libvncserver/blob/master/include/rfb/rfbclient.h) `rfbGetClient`, `rfbInitClient`, `WaitForMessage`, `HandleRFBServerMessage`, `SendKeyEvent`, `SendPointerEvent` | Candidate upstream C API; P1 license/security decision before P3-S8 native VNC. Engine/server/security/encoding matrix required |
 | API32 | [ADB package tools](https://developer.android.com/tools/adb): `adb install`, `adb shell pm`; [AAB publishing](https://developer.android.com/guide/app-bundle) | Android package/tooling model; P1-S1 independent signed APKs, P6-S3 channel/targeting verification. No guessed Googlebook-only manifest flag |
 
+## Revision 02 file publication boundary
+
+Revision 02 adds **API33**, the upstream SFTP file-publication boundary: `SSH_FXP_STAT`, `SSH_FXP_OPEN`, `SSH_FXF_CREAT`, `SSH_FXF_EXCL`, `SSH_FXP_RENAME` and `posix-rename@openssh.com`. [OpenSSH's extension](https://raw.githubusercontent.com/openssh/openssh-portable/master/PROTOCOL) has old/new path fields and no expected-version condition. The [historical v3 draft](https://datatracker.ietf.org/doc/html/draft-ietf-secsh-filexfer-02) is an expired protocol reference, not a newly released Googlebook API. P2-S7 must qualify the actual server/engine, exclusive creation, concurrent writer between check and publication, and ambiguous completion. A metadata check followed by rename cannot itself promise conflict-free replacement; retain staging and expose only supported publication choices.
+
 ## How to keep the catalog useful
 
 For an implementation change: find the tracker entry, inspect the official signature and release notes, fill the exact SDK/library version, compile a minimal probe, record device evidence, and update the linked stage. Use distinct statuses for documented, experimental, roadmap, unavailable, and unknown. No successful HTTP response can promote an API to device-qualified.

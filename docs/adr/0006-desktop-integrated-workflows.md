@@ -1,5 +1,7 @@
 # ADR 0006 — Desktop ecosystem and integrated workflow scope
 
+**Refined by [ADR 0007](0007-publication-and-independent-delivery.md):** the full feature scope remains; per-save file consent, independent app release gates and earlier native-stream adoption now govern delivery.
+
 **Status:** adopted for planning; implementation choices pending qualification. **Date:** 2026-10-14. **Amends:** [0002](0002-native-shell-and-terminal-surface.md) and [0003](0003-external-backends-first.md) without changing app independence.
 
 Cloudy is a Googlebook desktop/laptop suite using Android packages and platform APIs. [Rule 0](../00-project/platform-rule-zero.md) excludes phone/tablet optimization work while requiring usable narrow desktop windows, accessibility, native IME, and Android lifecycle/permission behavior.

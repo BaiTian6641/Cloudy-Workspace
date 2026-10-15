@@ -1,2 +1,3 @@
-# Optional JSON Schema verification; core documentation checks use only stdlib.
+# Local/CI verification tools; core documentation and AST checks use only stdlib.
 jsonschema==4.26.0
+ruff==0.17.0

@@ -1,6 +1,6 @@
 # Console session-linked SFTP and drag-and-drop
 
-**Status:** required product behavior, proposed implementation. **Stages:** P2-S4/P2-S7, shared reuse in P3-S3. **Cases:** Q-C04/Q-C09/Q-C10. The file pane works with Console alone and an ordinary SFTP-capable SSH server.
+**Status:** required product behavior, proposed implementation. **Stages:** P2-S8 shared core; P2-S4/P2-S7 Console integration; P3-S3 Desktop integration. **Cases:** Q-C04/Q-C09/Q-C10 and Q-F02 for shared-core qualification. The file pane works with Console alone and an ordinary SFTP-capable SSH server.
 
 ## Integrated workspace
 
@@ -32,6 +32,8 @@ Use Android [drag-and-drop](https://developer.android.com/develop/ui/views/touch
 Use the same journaled transfer service as Desktop. A job captures source identity/version, source/destination, operation, size if known, grant lifetime, state, bytes, integrity result, and remote commit result. States are `queued → preparing → transferring → verifying → committing → completed`, with explicit blocked/conflict/canceled/failed outcomes. Persist jobs so a window close does not create an invisible upload. Recovery queries partial state; it does not repeat a destructive publish.
 
 Remote editing downloads to bounded staging, remembers the source version, opens a supported local editor through a URI grant, detects an explicit save/return, checks for remote changes, and uploads a temporary file before publish. A changed or unknown version preserves a conflict copy. A closed editor or 100% byte count is not proof of remote commit. Hash verification uses supported server methods or a clearly stated readback; SFTP alone does not guarantee a server-side hash API.
+
+Follow the [file-publication contract](file-publication.md): a check followed by rename does not prevent another writer from changing the destination in between. On backends without guaranteed conditional replacement, the user's selected policy asks before **every remote overwrite**, with save-copy/cancel alternatives and no remembered blanket consent. Bind the decision to the exact file and save generation, retain local autosaves as pending, and reconcile ambiguous completion before another attempt. Record the backend's actual guarantees rather than claiming universal conflict-free editing.
 
 Directory transfers need a manifest, cancellation and partial-result summary, bounded concurrency, and explicit link handling. Do not follow remote symlinks recursively by default or treat Windows/WSL/container paths as interchangeable. Destructive actions name the selected host/path and provide confirmation/recovery semantics appropriate to backend support.
 

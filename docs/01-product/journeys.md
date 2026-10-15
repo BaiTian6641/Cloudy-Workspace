@@ -29,7 +29,7 @@ Failure paths: source changed during upload, invalid Windows/WSL path, port coll
 
 Console sends `hostId`, `environmentId`, `workspaceId`, and registered `resourceId` through an explicit protected IPC route. Desktop resolves the resource under its own profile and authenticates independently. It opens the selected native RDP/VNC profile or the explicit high-performance stream lane; external streaming has a labeled launch/return flow. Switching protocols presents session differences instead of silently substituting one desktop. Missing recipients produce an install/setup hint without losing Console state.
 
-**Stages:** P1-S3, P3-S2/S5. **Evidence:** Q-X01 with both app-version skew and missing-app cases. No shell command, credential, or local Android path is passed as a resource action.
+**Stages:** P1-S3, P3-S2/S9. **Evidence:** Q-X01 with both app-version skew and missing-app cases. This is the suite milestone; standalone Desktop release does not wait for Console. No shell command, credential, or local Android path is passed as a resource action.
 
 ## J04 — Program hardware with exclusive ownership
 
@@ -39,9 +39,9 @@ Enroll device identity, provider/permission, approved consumer and auto-attach p
 
 ## J05 — Edit a remote document safely
 
-Choose a named root and file, stage a versioned local copy, open through the system's document workflow, and commit only if the remote version still matches. A competing remote edit creates a conflict copy with timestamps/source details. Offline edits remain queued and visibly uncommitted. Deleting a local cache copy does not delete the remote file.
+Choose a named root and file, stage a local copy with its source observation, and open through the system document workflow. A backend with guaranteed conditional replacement can reject a changed version atomically. On an ordinary backend, ask before every remote overwrite of the exact staged revision, offering save-copy/cancel and explaining that a prior check cannot prevent a later racing edit. Known changes refresh the conflict choice; lost acknowledgements require reconciliation. Offline/local autosaves remain pending and visibly uncommitted. Deleting a local cache copy does not delete the remote file.
 
-**Stages:** P3-S3, P5-S3. **Evidence:** Q-D03 and Q-D05, including permission revocation and process death during writeback.
+**Stages:** P2-S7, P3-S3, P5-S3. **Evidence:** Q-F01, Q-D03 and Q-D05, including permission revocation, per-save consent, racing writers and process death during publication. See the [publication contract](../02-architecture/file-publication.md).
 
 ## J06 — Resume after network or client loss
 
@@ -63,7 +63,7 @@ Connect to ordinary SSH with qualified X11 forwarding, then launch a remote engi
 
 ## J09 — Browse and drag files beside the terminal
 
-Open the session-linked SFTP pane at a registered project root. Drop a local multi-file selection into the named directory, then insert a committed path into the terminal. Download/drag a remote file into a local editor through a staged URI, edit and commit after a version check. Switch terminal hosts during a transfer and verify the job keeps its original target. Missing directory integration offers explicit Open path instead of guessing from a shell prompt.
+Open the session-linked SFTP pane at a registered project root. Drop a local multi-file selection into the named directory, then insert a committed path into the terminal. Download/drag a remote file into a local editor through a staged URI, edit and follow the per-save publication choice for the actual backend. Switch terminal hosts during a transfer and verify the job keeps its original target. Missing directory integration offers explicit Open path instead of guessing from a shell prompt.
 
 **Stages:** P2-S7/S5, P3-S3. **Evidence:** Q-C09/C10, hash/version comparisons, grant revocation, delayed receiver and competing edits.
 

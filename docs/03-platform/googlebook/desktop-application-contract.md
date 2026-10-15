@@ -17,7 +17,7 @@ The two clients are Android packages for the Googlebook desktop ecosystem. Use A
 | USB presence and permission | G14; `UsbManager`, attach/detach actions, permission check/request | Qualified provider owns device access; Cloudy reconciles observations and enrollment; API12/API28 |
 | Native media | G20/G29/G30; `MediaCodec`, `KEY_LOW_LATENCY`, `FEATURE_LowLatency` | Native surface and capability-checked optional low latency mode; measure rather than infer; API17/API27 |
 | App lifecycle | G15/G16; foreground-service types/timeouts | Explicit per-operation lifetimes and restoration; no permanently running shared daemon; API13/API14 |
-| Android distribution | G31/G32; APK install/package manager and AAB publishing | Separate package IDs/signatures/data; install/update/uninstall tests; API32, P1-S1, P6-S3 |
+| Android distribution | G31/G32; APK install/package manager and AAB publishing | Separate package IDs/signatures/data; install/update/uninstall tests; API32, P1-S1, P2-S5/P3-S5, P6-S3 |
 
 Source IDs resolve in the [register](../../07-reference/source-register.md); exact availability, fallback, and qualification work are in the [API tracker](api-tracker.json). Some entries are Android-wide APIs, others are upstream protocol interfaces. The tracker labels their provenance; it does not call FreeRDP or X11 a Googlebook OS API.
 
@@ -37,4 +37,4 @@ The desktop emulator is an early layout/input tool. Real Googlebook hardware is 
 
 Use provisional independent IDs already listed in the app READMEs. Do not require telephony or touchscreen-only navigation in the manifests. Declare hardware requirements according to actual feature use; an optional USB feature must not accidentally exclude SSH-only users. Per-backend capabilities are discoverable at runtime.
 
-Play versus signed direct distribution, device-catalog eligibility, dependency obligations, and signing-key recovery are P1/P6 decisions. Verify supported Googlebook targeting with the actual channel; broad Android compatibility does not expand the published support matrix. Store operational data under each app's sandbox and grant only selected file access through Android mechanisms.
+Play versus signed direct distribution, device-catalog eligibility, dependency obligations, and signing-key recovery start in P1 and must be resolved for each independent app release at P2-S5/P3-S5, with a full-suite refresh at P6-S3. Verify supported Googlebook targeting with the actual channel; broad Android compatibility does not expand the published support matrix. Store operational data under each app's sandbox and grant only selected file access through Android mechanisms.
