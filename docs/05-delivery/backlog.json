@@ -223,7 +223,7 @@
         "P0-S2"
       ],
       "tasks": [
-        "Pin Sunshine/Moonlight and prove external handoff; select buildable RDP/VNC engine candidates and record actual server/encoding/security negotiation. Use the reviewed native entry brief: FreeRDP 3.32.2 build candidate; LibVNC 98aaee0560baa0332339b2ef464ea96ed9b9b28c contains the three identified fixes, with focused advisory regressions and Android build/integration before its network probe.",
+        "Pin Sunshine/Moonlight and prove external handoff; select buildable RDP/VNC engine candidates and record actual server/encoding/security negotiation. Use the reviewed native entry brief: FreeRDP3.32.2 arm64 MediaCodec native/JNI build accepted; Android package/trust/framebuffer/input/cancel and actual KDE fixture remain next; LibVNC 98aaee0560baa0332339b2ef464ea96ed9b9b28c contains the three identified fixes, with focused advisory regressions and Android build/integration before its network probe.",
         "Exercise trackpad and external mouse in real CAD and text/desktop workloads; verify focus-loss release and native IME/keyboard paths.",
         "Enumerate codecs and optional API-30 low-latency support; measure native decode/pacing/text quality, power and input-to-photon baseline.",
         "Test primary host sessions, lock/headless/permissions, RDP certificate/NLA requirements and protected VNC routes; record unsupported cases and dependencies.",
@@ -256,7 +256,16 @@
         "R134",
         "R135",
         "R136",
-        "R137"
+        "R137",
+        "G126",
+        "G127",
+        "R140",
+        "R141",
+        "R142",
+        "R143",
+        "R144",
+        "R145",
+        "R146"
       ],
       "acceptanceCases": [
         "Q-D01",

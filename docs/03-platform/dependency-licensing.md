@@ -14,7 +14,7 @@ Use the [established-library policy](../05-delivery/library-reuse-policy.md) whe
 | Maintained JVM SSH engine | SSH/SFTP/jumps/forwarding candidate | Compare Android support, algorithms, footprint, licensing | P0-S3 |
 | libssh2-style native engine | Alternative SSH boundary | NDK packaging/update burden in same comparison | P0-S3 |
 | Maintained Android X server; Termux:X11 reference | Local X server with native top-level broker | P0 prototype; no assumed shared UID/root/private API or embedding right | P0-S7 / P1-S4: exact engine/files/build/license and maintenance |
-| FreeRDP | Native RDP and optional later RemoteApp | P0 build probe, P3 native integration | P1-S4: Apache-2.0 root plus actual dependency/codec obligations; pin patched release |
+| FreeRDP | Native RDP and optional later RemoteApp | P0 3.32.2 arm64 native/JNI build accepted; Android integration pending | P1-S4: Apache-2.0 core plus selected MPL-2.0 JNI/Java files, actual dependency/codec obligations; preserve exact pin |
 | Maintained RFB engine; LibVNCClient candidate | Native VNC client | P0 exact `98aaee0560baa0332339b2ef464ea96ed9b9b28c` source/build candidate, P3 integration | Three named fixes source-covered; focused runtime regressions/Android integration pending. P1-S4: GPL file/license/dependency model |
 | Sunshine | Host desktop backend | Separately installed | P0-S4 |
 | Moonlight Android | Client baseline; possible later native integration | External app first | P1-S5: GPL-3.0 source/distribution and fork maintenance decision |
@@ -34,3 +34,5 @@ For every distributed dependency record version/commit, source URL, license iden
 Select the project's own license before public code release. The current repository has no blanket open-source grant. Keep product-reference research distinct from implementation reuse and avoid copying proprietary assets, icons, screenshots, or component CSS into the product.
 
 The [accepted VNC source selection](../07-reference/2026-10-15-vnc-patched-source-selection.md) resolves only exact source coverage for the three identified advisories. It does not establish runtime decoder safety, Android/device support, CAP-VNC acceptance or a distributable license arrangement.
+
+The [FreeRDP native build](../06-validation/2026-10-15-native-rdp-build.md) records actual OpenSSL4.0.1, cJSON1.7.19 and uriparser1.0.2 outputs, the resource-only patch and mixed selected-file licenses. MediaCodec adds no bundled codec implementation; that fact does not settle AVC obligations. This private build does not decide product distribution terms.

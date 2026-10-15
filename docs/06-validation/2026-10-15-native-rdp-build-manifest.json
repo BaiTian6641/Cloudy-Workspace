@@ -1,0 +1,532 @@
+{
+  "schemaVersion": 1,
+  "recordedOn": "2026-10-15",
+  "stage": "P0-S4",
+  "scope": "native compile/link and static ELF inspection only",
+  "sourceLock": "qualification/probes/native-rdp/source-lock.json",
+  "sourceBinding": {
+    "archiveRegularFilesCompared": 2975,
+    "modifiedSourceFiles": [
+      {
+        "path": "client/Android/cmake/ExternalOpenSSL.cmake",
+        "originalSha256": "e5e6edeca454af86e78763218ac2281c4f4745254dff0c4e208a34e58ee18437",
+        "selectedSha256": "179bbb0370d19344f2c53e7889d5943ce1b7f9062dd67cb2065ed9df9eb18a4a"
+      }
+    ],
+    "note": "Generated build outputs are outside the official archive and are bound separately."
+  },
+  "toolIdentities": {
+    "ndkProperties": {
+      "bytes": 107,
+      "sha256": "716f3518a923198cfab037abb32dc3f1b1f7e9a9dcdcda6b66be5906215d2658",
+      "content": "Pkg.Desc = Android NDK\nPkg.Revision = 29.0.14206865\nPkg.BaseRevision = 29.0.14206865\nPkg.ReleaseName = r29\n"
+    },
+    "ndkPackage": {
+      "bytes": 18672,
+      "sha256": "59cad45c9fd7852bcf198bc5630473b485f90f1f24914ce06ba60f37b2f3937e"
+    },
+    "cmakeProperties": {
+      "bytes": 67,
+      "sha256": "e6308fd6f9d829f3f7f4c80035d516af5bbbe8ecc55d8d1660c244d7ad076f05",
+      "content": "Pkg.Revision = 4.1.2\nPkg.Path = cmake;4.1.2\nPkg.Desc = CMake 4.1.2\n"
+    },
+    "cmakePackage": {
+      "bytes": 18637,
+      "sha256": "fb672f32aeea6cbe6653119ffd8956779b19fbc8a663cbaec8bd87cf8329dbde"
+    },
+    "clang": {
+      "sha256": "d326ed4fc4f71e5315b9ce388fc23ec792f81652ca7b29e66294de6ed2520844"
+    },
+    "cmake": {
+      "sha256": "7f9c6c6df5774621b6dbd749402f27d5404bc47ad6eb4fdc855aceb66f1d05ef"
+    },
+    "ninja": {
+      "sha256": "f5d6ae74f53c3714734d0bde7f6ede82c926c84bec06120677bad0c9c331952a"
+    }
+  },
+  "configuration": {
+    "abi": "arm64-v8a",
+    "minimumNativeApi": 29,
+    "mediaCodec": true,
+    "gfxH264": true,
+    "ffmpeg": false,
+    "openh264": false,
+    "nativeTarget": "freerdp-android",
+    "defaultPkgConfigSearchDisabled": true,
+    "stageLocalCcache": true
+  },
+  "attempts": [
+    {
+      "id": "build-01",
+      "startedAtUtc": "2026-10-15T16:30:20.809397+00:00",
+      "finishedAtUtc": "2026-10-15T16:30:31.664731+00:00",
+      "exitCode": 1,
+      "outcome": "OpenSSL make split a source path containing spaces; retained failure"
+    },
+    {
+      "id": "build-02",
+      "startedAtUtc": "2026-10-15T16:32:02.065167+00:00",
+      "finishedAtUtc": "2026-10-15T16:32:59.397891+00:00",
+      "exitCode": 1,
+      "outcome": "Dependencies built; inner compilation failed writing default ccache directory; retained failure"
+    },
+    {
+      "id": "build-03",
+      "startedAtUtc": "2026-10-15T16:33:46.856335+00:00",
+      "finishedAtUtc": "2026-10-15T16:34:03.316479+00:00",
+      "exitCode": 0,
+      "outcome": "Resumed with stage-local CCACHE_DIR; JNI target linked"
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "libfreerdp-android.so",
+      "bytes": 490704,
+      "sha256": "e299798dc4d90634fc274f9373b32a0562ea1c775314ee02a98ff678cdd7e9a6",
+      "soname": [
+        "libfreerdp-android.so"
+      ],
+      "needed": [
+        "libfreerdp3.so",
+        "libfreerdp-client3.so",
+        "libwinpr3.so",
+        "liblog.so",
+        "libdl.so",
+        "libjnigraphics.so",
+        "libm.so",
+        "libc.so"
+      ],
+      "loadAlignment": [
+        "0x4000",
+        "0x4000",
+        "0x4000"
+      ],
+      "aarch64": true,
+      "role": "jni"
+    },
+    {
+      "file": "legacy.so",
+      "bytes": 146424,
+      "sha256": "bd66ecb4e96969364f22e5d9b1c0696649d9a2bff25602ed7b1b8a5da9147cc7",
+      "soname": [],
+      "needed": [
+        "libcrypto.so",
+        "libdl.so",
+        "libc.so"
+      ],
+      "loadAlignment": [
+        "0x4000",
+        "0x4000",
+        "0x4000",
+        "0x4000"
+      ],
+      "aarch64": true,
+      "role": "optional-provider-not-in-needed-closure"
+    },
+    {
+      "file": "libcjson.so",
+      "bytes": 134800,
+      "sha256": "10507afc74bea27bc66c45bf130fc9613a2f1fa87084e83bff680e19a22c7177",
+      "soname": [
+        "libcjson.so"
+      ],
+      "needed": [
+        "libm.so",
+        "libdl.so",
+        "libc.so"
+      ],
+      "loadAlignment": [
+        "0x4000",
+        "0x4000",
+        "0x4000"
+      ],
+      "aarch64": true,
+      "role": "linked-dependency"
+    },
+    {
+      "file": "libcrypto.so",
+      "bytes": 6016896,
+      "sha256": "8c25e5f5b78ff5a61a641b9a70db341d3e99f781ade932e65670971466469225",
+      "soname": [
+        "libcrypto.so"
+      ],
+      "needed": [
+        "libdl.so",
+        "libc.so"
+      ],
+      "loadAlignment": [
+        "0x4000",
+        "0x4000",
+        "0x4000",
+        "0x4000"
+      ],
+      "aarch64": true,
+      "role": "linked-dependency"
+    },
+    {
+      "file": "libfreerdp-client3.so",
+      "bytes": 3552120,
+      "sha256": "d538d832dba68739069efc15719371b92f51c2fd57fea5242083de97c125f2fb",
+      "soname": [
+        "libfreerdp-client3.so"
+      ],
+      "needed": [
+        "liblog.so",
+        "libfreerdp3.so",
+        "libwinpr3.so",
+        "libm.so",
+        "libssl.so",
+        "libcrypto.so",
+        "libz.so",
+        "libcamera2ndk.so",
+        "libmediandk.so",
+        "libaaudio.so",
+        "libOpenSLES.so",
+        "libdl.so",
+        "libc.so"
+      ],
+      "loadAlignment": [
+        "0x4000",
+        "0x4000",
+        "0x4000"
+      ],
+      "aarch64": true,
+      "role": "linked-dependency"
+    },
+    {
+      "file": "libfreerdp3.so",
+      "bytes": 20356072,
+      "sha256": "71967c4ff3465b8cd1bd6e027ca8abff59fd07b0c9e3f82a131c9a74e6a99a29",
+      "soname": [
+        "libfreerdp3.so"
+      ],
+      "needed": [
+        "liblog.so",
+        "libz.so",
+        "libm.so",
+        "libssl.so",
+        "libcrypto.so",
+        "libmediandk.so",
+        "libwinpr3.so",
+        "libdl.so",
+        "libc.so"
+      ],
+      "loadAlignment": [
+        "0x4000",
+        "0x4000",
+        "0x4000"
+      ],
+      "aarch64": true,
+      "role": "linked-dependency"
+    },
+    {
+      "file": "libssl.so",
+      "bytes": 1205848,
+      "sha256": "66288be31a05675f6a319632d6abb137eb38b07f10eea302a8b128bd6ed7d5c0",
+      "soname": [
+        "libssl.so"
+      ],
+      "needed": [
+        "libcrypto.so",
+        "libdl.so",
+        "libc.so"
+      ],
+      "loadAlignment": [
+        "0x4000",
+        "0x4000",
+        "0x4000",
+        "0x4000"
+      ],
+      "aarch64": true,
+      "role": "linked-dependency"
+    },
+    {
+      "file": "liburiparser.so",
+      "bytes": 558008,
+      "sha256": "ebbd41d0bfce59ad7890c1acdb3f1949a0376c25545c0294e4269f48837c5ce6",
+      "soname": [
+        "liburiparser.so"
+      ],
+      "needed": [
+        "libm.so",
+        "libdl.so",
+        "libc.so"
+      ],
+      "loadAlignment": [
+        "0x4000",
+        "0x4000",
+        "0x4000"
+      ],
+      "aarch64": true,
+      "role": "linked-dependency"
+    },
+    {
+      "file": "libwinpr3.so",
+      "bytes": 5731088,
+      "sha256": "a91a6f512438ceb1bc8ef10ac7291630483f486f85f8ff8e43872dac774a0129",
+      "soname": [
+        "libwinpr3.so"
+      ],
+      "needed": [
+        "liblog.so",
+        "liburiparser.so",
+        "libssl.so",
+        "libcrypto.so",
+        "libcjson.so",
+        "libm.so",
+        "libdl.so",
+        "libc.so"
+      ],
+      "loadAlignment": [
+        "0x4000",
+        "0x4000",
+        "0x4000"
+      ],
+      "aarch64": true,
+      "role": "linked-dependency"
+    },
+    {
+      "file": "libc++_shared.so",
+      "bytes": 9290184,
+      "sha256": "0c52cfab2df0d957d8b346a2bdc5ae8d71feca2591924d77e1cd724d5bf74352",
+      "soname": [
+        "libc++_shared.so"
+      ],
+      "needed": [
+        "libc.so",
+        "libm.so",
+        "libdl.so"
+      ],
+      "loadAlignment": [
+        "0x4000",
+        "0x4000",
+        "0x4000"
+      ],
+      "aarch64": true,
+      "role": "inspected-ndk-runtime-not-required-by-current-closure"
+    }
+  ],
+  "warnings": [
+    "Two upstream WinPR PARITY_NONE macro redefinitions in final build",
+    "Upstream MediaCodec H.264/AAC configuration declares experimental API/ABI",
+    "Optional dependency and CMake development warnings retained in private logs"
+  ],
+  "observed": {
+    "buildExitCode": 0,
+    "elfMachine": "AArch64",
+    "allLoadSegments16KiBAligned": true,
+    "rpathOrRunpathObserved": false,
+    "apkZipAlignmentTested": false,
+    "jniLoadedOnDevice": false,
+    "remoteConnectionTested": false,
+    "capabilityPromoted": false
+  },
+  "review": {
+    "workerModel": "gpt-6.1-sol",
+    "route": "Codex collaboration",
+    "leader": "parent Codex agent",
+    "result": "native build accepted; JNI/trust/provider/license/runtime obligations retained"
+  },
+  "privateEvidence": [
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/artifacts/legacy.so",
+      "bytes": 146424,
+      "sha256": "bd66ecb4e96969364f22e5d9b1c0696649d9a2bff25602ed7b1b8a5da9147cc7"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/artifacts/libc++_shared.so",
+      "bytes": 9290184,
+      "sha256": "0c52cfab2df0d957d8b346a2bdc5ae8d71feca2591924d77e1cd724d5bf74352"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/artifacts/libcjson.so",
+      "bytes": 134800,
+      "sha256": "10507afc74bea27bc66c45bf130fc9613a2f1fa87084e83bff680e19a22c7177"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/artifacts/libcrypto.so",
+      "bytes": 6016896,
+      "sha256": "8c25e5f5b78ff5a61a641b9a70db341d3e99f781ade932e65670971466469225"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/artifacts/libfreerdp-android.so",
+      "bytes": 490704,
+      "sha256": "e299798dc4d90634fc274f9373b32a0562ea1c775314ee02a98ff678cdd7e9a6"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/artifacts/libfreerdp-client3.so",
+      "bytes": 3552120,
+      "sha256": "d538d832dba68739069efc15719371b92f51c2fd57fea5242083de97c125f2fb"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/artifacts/libfreerdp3.so",
+      "bytes": 20356072,
+      "sha256": "71967c4ff3465b8cd1bd6e027ca8abff59fd07b0c9e3f82a131c9a74e6a99a29"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/artifacts/libssl.so",
+      "bytes": 1205848,
+      "sha256": "66288be31a05675f6a319632d6abb137eb38b07f10eea302a8b128bd6ed7d5c0"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/artifacts/liburiparser.so",
+      "bytes": 558008,
+      "sha256": "ebbd41d0bfce59ad7890c1acdb3f1949a0376c25545c0294e4269f48837c5ce6"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/artifacts/libwinpr3.so",
+      "bytes": 5731088,
+      "sha256": "a91a6f512438ceb1bc8ef10ac7291630483f486f85f8ff8e43872dac774a0129"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/records/CMakeCCompiler.cmake",
+      "bytes": 4023,
+      "sha256": "a5412729968af42c451dc5397f1212d7ca84a43647569e116a762d3e878f90af"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/records/bounded-openssl-jobs.patch",
+      "bytes": 1129,
+      "sha256": "63a5604af211b82790def540d9bd4e4217bb962117b7457207035dd34682a8d5"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/records/build-01.json",
+      "bytes": 722,
+      "sha256": "b859d9ed7ac0ac9bdc6186338dc31b58f3e570ef830d246a0af7615609805e9d"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/records/build-01.log",
+      "bytes": 25457,
+      "sha256": "1e600dd645d0d3a0d1ea96b212b94632a33c5a8e71c51b1d81a313889da1bb5e"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/records/build-02.json",
+      "bytes": 588,
+      "sha256": "dcadb3a56500e5d3c76877143e05fe2806c913fca0217b0ae4fdc7ba8ac0f2c8"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/records/build-02.log",
+      "bytes": 3608018,
+      "sha256": "c6755ef7a79c029e56d2f5867134535dca9f209327058a5317626c6964e2ec03"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/records/build-03.json",
+      "bytes": 641,
+      "sha256": "fa25ecec5a6e3db13c55468faf2b8abf639d0dcbdb327d468ccfc3cabbb7533b"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/records/build-03.log",
+      "bytes": 94234,
+      "sha256": "650a0d14d3ed98fc13239999e40851deff0c3ea1173e75cdf68f28c8d17ec77c"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/records/build-inputs.json",
+      "bytes": 2634,
+      "sha256": "9fdae37bd58b10c388c96edead45eda6ef19bc549657de81ba33327b08e643a4"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/records/configure-01.json",
+      "bytes": 1471,
+      "sha256": "bee42b83df7df0b4bbb7454fd4d474eb518d7587fa0a1732ff2496222cf1ddfb"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/records/configure-01.log",
+      "bytes": 658,
+      "sha256": "aa8b4f4caa4f8b3cc1756648ec4981dcaff8ca134b9ae5d27e12cccec2108ca7"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/records/configure-02.json",
+      "bytes": 1648,
+      "sha256": "5474eeebb1afe9fca3675724fc5d633b8911dd7df22977473b56059abd754e87"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/records/configure-02.log",
+      "bytes": 564,
+      "sha256": "1ab1253bdb227484d9c584b86d3633bf0eea8b1800eb0ec4195519338eb494a0"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/records/elf-audit.json",
+      "bytes": 4189,
+      "sha256": "0d8faf0ea86eac246e8b20336595b84c5e56a5f6d7741009107ad373fdd9487b"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/records/freerdp-config.h",
+      "bytes": 6864,
+      "sha256": "b338ef31e8964e38344f50b6e58fbdf2c7e31a3a60ed30d4aebe77baf98c59ee"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/records/independent-build-review.md",
+      "bytes": 3454,
+      "sha256": "519f5ad7555f882d0d54de869b4243ae0e4850db8f2ed7f2c41831ff99aa7085"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/records/inner-CMakeCache.txt",
+      "bytes": 55762,
+      "sha256": "50fe7d596d4bfea63876185e02bb651b91d877f7a21c2326f445771de43ac001"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/records/legacy.so.readelf.txt",
+      "bytes": 4112,
+      "sha256": "e95584875ffe7c0ad58074e139408c33a99cee690ff0427caa3bb15e503a18ee"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/records/libc++_shared.so.readelf.txt",
+      "bytes": 4485,
+      "sha256": "ff18677a1dcf6e1e11b9eeea13c5384a9459053c4a59d88360844aa8a7f3bb18"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/records/libcjson.so.readelf.txt",
+      "bytes": 4046,
+      "sha256": "45ff651c4faaf2157d4955f8155dd8d570b6d3e4b72c0c841bf2ba1407cf9d52"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/records/libcrypto.so.readelf.txt",
+      "bytes": 4242,
+      "sha256": "890a9feae2ba40b43aa6b4c7ef93b03bc2accd456415f378585c70b6593a22f5"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/records/libfreerdp-android.so.readelf.txt",
+      "bytes": 4257,
+      "sha256": "32a085e88bcccb9c25f717cea6bf200211ee3f276f781fdfdc9a2f27935b7ce7"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/records/libfreerdp-client3.so.readelf.txt",
+      "bytes": 4760,
+      "sha256": "185f8babfa6a8b1dea966e4ae31430cd47bc51883ae1ec23df0edbe739c7db4f"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/records/libfreerdp3.so.readelf.txt",
+      "bytes": 4588,
+      "sha256": "bd3896b265cff737572f7d0c4736ee3f9b495ea46bfba828f0798ac918623454"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/records/libssl.so.readelf.txt",
+      "bytes": 4297,
+      "sha256": "af0329b92d9c7eb61f7d4e0cd9f2ffc8ff6262daccae8f6f98c1c4a02a51e3b2"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/records/liburiparser.so.readelf.txt",
+      "bytes": 4052,
+      "sha256": "709d184899b2aa067dd182046d43b7f98a8df79220d9b64a477206652b80517d"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/records/libwinpr3.so.readelf.txt",
+      "bytes": 4534,
+      "sha256": "4075dff1221202fad2887d8ef4a58d726f0dcdcc979610ae4fea1245fb231ea6"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/records/outer-CMakeCache.txt",
+      "bytes": 19544,
+      "sha256": "7aff055ba4b0862375a3c50032ded0d54f30d2c474d9ef56f308e4a30de3dca0"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/records/source-binding.json",
+      "bytes": 425,
+      "sha256": "3a77efdaced9f0df799befbe510f82febe0a708907a61310d29fdc1344f94407"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-build/2026-10-15/records/source-download.json",
+      "bytes": 289,
+      "sha256": "cb15adeceb92fa5a2a39b71de7e7ccfd1bc8d56b3a64a729fb86e99095d75439"
+    }
+  ]
+}

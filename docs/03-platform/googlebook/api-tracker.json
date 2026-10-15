@@ -757,19 +757,23 @@
         "R23",
         "R31",
         "R133",
-        "R134"
+        "R134",
+        "R143",
+        "R146",
+        "G127"
       ],
       "minimumApi": null,
-      "libraryVersion": "FreeRDP3.32.2 build candidate, 97eff6ddfbbfaa8e42a126d362686bd001ff8bdc",
+      "libraryVersion": "FreeRDP3.32.2 native build, 97eff6ddfbbfaa8e42a126d362686bd001ff8bdc",
       "interfaceKind": "upstream-client-and-standard",
-      "availability": "Android client documented; 3.27.1 adds RAIL; selected build/optional channels unqualified",
+      "availability": "Pinned arm64 Android native/JNI target compiled; APK loading and actual session integration unqualified",
       "qualification": "untested",
       "checkedOn": "2026-10-15",
       "owner": "Android/integration developer",
       "stage": "P3-S7",
       "fallback": "Explicit engine remediation; external viewer is partial and cannot complete the integrated RDP requirement",
-      "experiment": "Build pinned engine, verify certificate/NLA/input/IME/session/UDP-TCP behavior; RemoteApp requires actual published app and separate evidence P0-S4 begins with reduced arm64 native GDI/Bitmap/View build and explicit trust/input/cancel integration; tool availability/build remain unverified.",
-      "researchEvidence": "docs/03-platform/googlebook/p0-s4-native-desktop-entry.md"
+      "experiment": "Carry forward P0-S4 native build; integrate actual JNI class/callbacks, Bitmap/trust/input/cancel and OpenSSL provider/trust paths. Verify APK alignment/loading and real certificate/NLA/session/transport behavior. RemoteApp requires actual published-app evidence. No device/server support inferred from compile.",
+      "researchEvidence": "docs/03-platform/googlebook/p0-s4-native-desktop-entry.md",
+      "compileEvidence": "docs/06-validation/2026-10-15-native-rdp-build.md"
     },
     {
       "id": "API31",
@@ -1203,6 +1207,38 @@
       "experiment": "D14: explicit shortcuts and Edit/context actions, native field editing, exact selected text and paste bytes, focused recipient/attachment invalidation, clipboard unavailable/MIME/lifecycle behavior and no content logging.",
       "versionNotes": "Core clipboard methods API11; clearPrimaryClip API28; EXTRA_IS_SENSITIVE API33. Runtime guards if below these levels. Clipboard sensitivity does not imply secrecy or erasure.",
       "researchEvidence": "docs/04-design/desktop-terminal-interaction-contract.md"
+    },
+    {
+      "id": "API43",
+      "feature": "Native Android MediaCodec H264 through FreeRDP",
+      "symbols": [
+        "AMediaCodec_createDecoderByType",
+        "AMediaCodec_configure",
+        "AMediaCodec_dequeueInputBuffer",
+        "AMediaCodec_dequeueOutputBuffer",
+        "AMediaCodec_setParameters",
+        "AMediaCodec_getName",
+        "AMediaCodec_releaseName"
+      ],
+      "sourceIds": [
+        "G126",
+        "R141",
+        "R142",
+        "R144"
+      ],
+      "minimumApi": 29,
+      "libraryVersion": "FreeRDP3.32.2 at97eff6ddfbbfaa8e42a126d362686bd001ff8bdc; selected arm64 build",
+      "interfaceKind": "official-ndk-through-upstream-client",
+      "availability": "compiled-not-device-qualified",
+      "qualification": "untested",
+      "checkedOn": "2026-10-15",
+      "owner": "Desktop/device developer",
+      "stage": "P0-S4",
+      "fallback": "Report decoder initialization/decode failure and clean up; consider upstream OpenH264 only after concrete MediaCodec failure. No automatic runtime decoder failover.",
+      "experiment": "Load actual JNI APK, record codec name/output format/stride/crop, display changing H264 desktop pixels and check resize/cancel/cleanup. Measure performance separately; no hardware/zero-copy claim from compiled option.",
+      "versionNotes": "Core NDK buffer APIs21; setParameters26; getName/releaseName28. Selected upstream minimum29 covers direct symbols. Literal low-latency key is API30 behavior/hint, not a higher required symbol. FreeRDP uses CPU YUV/GDI/Bitmap; flexible YUV interpreted as NV12 needs device observation.",
+      "researchEvidence": "docs/07-reference/2026-10-15-rdp-android-mediacodec.md",
+      "compileEvidence": "docs/06-validation/2026-10-15-native-rdp-build.md"
     }
   ],
   "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."

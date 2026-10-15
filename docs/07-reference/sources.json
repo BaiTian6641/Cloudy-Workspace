@@ -3218,7 +3218,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": "2026-10-12",
-      "note": "Security/regression release at 97eff6ddfbbfaa8e42a126d362686bd001ff8bdc; selected for first reduced Android arm64 build investigation. Not built/device-qualified. Owner Desktop, P0-S4/P1-S4.",
+      "note": "Exact FreeRDP3.32.2 revision97eff6ddfbbfaa8e42a126d362686bd001ff8bdc; isolated Android arm64 MediaCodec native/JNI build accepted. APK loading/server/device qualification and P1-S4 distribution remain pending. Owner Desktop, P0-S4.",
       "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
     },
     {
@@ -3230,7 +3230,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Reviewed Android toolchain/qa build source with associated tag CMake dependency files. Actual tool availability, resolved dependency graph, build and native adapter remain pending. First display route GDI to Bitmap to View, not demonstrated zero-copy Surface. P0-S4.",
+      "note": "Native CMake target built with stable NDK29.0.14206865 instead of declared r29RC1; CMake4.1.2. Actual OpenSSL/cJSON/uriparser hashes and outputs recorded. GDI/Bitmap route, mixed MPL2/Apache2 bridge; no app/device qualification. P0-S4.",
       "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
     },
     {
@@ -3351,6 +3351,102 @@
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": "2026-10-07",
       "note": "Accepted bounded source/build candidate containing the three reviewed Tight/Gradient/UltraZip fixes by exact ancestry and retained guards. Not a patched tag or comprehensive security claim. Focused advisory regressions, selected Android build, Cloudy adapter/device and GPL distribution gates remain pending. Owner Desktop/device developer; P0-S4/P1-S4; native VNC unavailable until prerequisites pass.",
+      "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
+    },
+    {
+      "id": "G126",
+      "title": "Android NDK media API reference",
+      "url": "https://developer.android.com/ndk/reference/group/media",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "AMediaCodec byte-buffer APIs21, setParameters26, getName/releaseName28; selected upstream native minimum29 covers direct calls. Codec creation/low-latency hint do not prove hardware decode. API43; Desktop/device owner, P0-S4.",
+      "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
+    },
+    {
+      "id": "G127",
+      "title": "Android NDK CMake integration",
+      "url": "https://developer.android.com/ndk/guides/cmake",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Official toolchain/ANDROID_ABI/ANDROID_PLATFORM integration; explicit selected NDK/CMake native build now accepted, APK/device loading remains pending. Desktop/native owner, P0-S4.",
+      "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
+    },
+    {
+      "id": "R141",
+      "title": "FreeRDP pinned Android MediaCodec H264 backend",
+      "url": "https://github.com/FreeRDP/FreeRDP/blob/97eff6ddfbbfaa8e42a126d362686bd001ff8bdc/libfreerdp/codec/h264_mediacodec.c",
+      "publisher": "FreeRDP",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Actual selected experimental backend uses byte-buffer video/avc and CPU-visible YUV, assumes flexible output is NV12. Inspect real format/stride/crop/pixels; compile success is not decode evidence. API43, P0-S4.",
+      "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
+    },
+    {
+      "id": "R142",
+      "title": "FreeRDP pinned H264 backend selection",
+      "url": "https://github.com/FreeRDP/FreeRDP/blob/97eff6ddfbbfaa8e42a126d362686bd001ff8bdc/libfreerdp/codec/h264.c",
+      "publisher": "FreeRDP",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Compiled backend initialization order MediaCodec/OpenH264/FFmpeg; no automatic active-stream decode-error fallback. Only MediaCodec enabled in accepted build; surface failure and cleanup, consider upstream fallback only on concrete defect. P0-S4.",
+      "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
+    },
+    {
+      "id": "R143",
+      "title": "FreeRDP pinned Android JNI entry",
+      "url": "https://github.com/FreeRDP/FreeRDP/blob/97eff6ddfbbfaa8e42a126d362686bd001ff8bdc/client/Android/Studio/freeRDPCore/src/main/cpp/android_freerdp.c",
+      "publisher": "FreeRDP",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Maintained JNI requires matching LibFreeRDP class/native/callback signatures; GDI RGBX32/Bitmap, trust/input/cancel ownership remain Android integration work. MPL2 file header; root license is insufficient. API30, P0-S4/P1-S4.",
+      "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
+    },
+    {
+      "id": "R144",
+      "title": "KDE KRdp v6.6.4 server requirements",
+      "url": "https://github.com/KDE/krdp/blob/v6.6.4/README.md",
+      "publisher": "KDE",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Logged-in Plasma session and Graphics Pipeline/H264 client requirements informed MediaCodec selection. Versioned source does not prove local server installation or compatible package graph. Select fixture separately; P0-S4.",
+      "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
+    },
+    {
+      "id": "R145",
+      "title": "Ubuntu KRdp runtime-library packaging correction",
+      "url": "https://lists.ubuntu.com/archives/resolute-changes/2026-August/029266.html",
+      "publisher": "Ubuntu",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "6.6.4-0ubuntu2 announcement for proposed records missing runtime library fix; not proof of promotion into enabled repositories. Current broad-upgrade simulation is not installation. Host fixture owner, P0-S4.",
+      "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
+    },
+    {
+      "id": "R146",
+      "title": "FreeRDP pinned Android external native build",
+      "url": "https://github.com/FreeRDP/FreeRDP/blob/97eff6ddfbbfaa8e42a126d362686bd001ff8bdc/client/Android/cmake/ExternalFreeRDP.cmake",
+      "publisher": "FreeRDP",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Forwards selected native options; camera/printer/audio build inclusion does not authorize redirection. Actual inner cache and ELF closure reviewed, OpenSSL provider paths still need Android setup. P0-S4.",
       "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
     }
   ]
