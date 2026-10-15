@@ -43,13 +43,13 @@ Record evidence under `qualification/results/P0-S1/` using the [run template](..
 
 **Owner:** Android/platform developer. **Prerequisites:** P0-S1 complete. **Status:** in-progress.
 
-The [operation-lifetime research](../../03-platform/googlebook/p0-s2-operation-lifetimes.md) records API13/API14 and API39/API40 proposals, runtime/target guards, fallbacks and remaining timeout/process-loss experiments. Supplemental official sources G59–G68 cover UIDT, foreground-service prerequisites, Android 17 audio, actual USB permission and distribution review. No continuous-session service type or policy approval is selected, and no capability gate is promoted by this research.
+The [operation-lifetime research](../../03-platform/googlebook/p0-s2-operation-lifetimes.md) records API13/API14 and API39/API40 proposals, runtime/target guards, fallbacks and remaining timeout/process-loss experiments. Supplemental official sources G59–G68 cover UIDT, foreground-service prerequisites, Android 17 audio, actual USB permission and distribution review. No continuous-session service type or policy approval is selected, and no capability gate is promoted by this research. API41 and G79–G81 add the Android17/target37 runtime LAN permission prerequisite before an actual host transfer.
 
-The [window run](../../../qualification/results/P0-S2/2026-10-15-window-probe.md) and separate [process-restoration run](../../../qualification/results/P0-S2/2026-10-15-process-restoration.md) provide bounded device evidence for task isolation, native window geometry, same-process Activity recreation and saved-state restoration after a verified background-process kill. Service/timeout, engagement, physical-input and final capability decisions remain open.
+The [window run](../../../qualification/results/P0-S2/2026-10-15-window-probe.md) and separate [process-restoration run](../../../qualification/results/P0-S2/2026-10-15-process-restoration.md) provide bounded device evidence for task isolation, native window geometry, same-process Activity recreation and saved-state restoration after a verified background-process kill. The [font-scale run](../../../qualification/results/P0-S2/2026-10-15-font-scale.md) and [engagement run](../../../qualification/results/P0-S2/2026-10-15-engagement-probe.md) add bounded enlarged-text and actual alpha callback/lifecycle evidence. Last-window task removal left no persisted final cleanup report. Service/timeout, physical-input and final capability decisions remain open.
 
 Work:
 
-1. Inspect the API tracker and pin candidate SDK/AndroidX versions for windows, caption bounds, input, files, and foreground-service experiments.
+1. Inspect the API tracker and pin candidate SDK/AndroidX versions for windows, caption bounds, input, files, direct LAN permission, and foreground-service experiments.
 2. Build minimal resize/multi-instance/caption/focus probes with runtime guards and record experimental annotations.
 3. Classify SSH, transfers, USB, and streaming lifecycle strategies independently; force relevant timeout/process-recreation cases.
 4. Investigate supported local Linux VM attach/control interfaces; record absence or roadmap status without private-API assumptions.

@@ -1651,6 +1651,54 @@
       "refresh": "Before engagement diagnostic dependency resolution or product adoption.",
       "artifactVersion": "1.6.0-alpha05",
       "sha256": "2506d3b2880ad9f12704e59896ff2e55cebfcd83906defe1246948454accdebe"
+    },
+    {
+      "id": "G78",
+      "title": "ApplicationExitInfo user-requested process termination",
+      "url": "https://developer.android.com/reference/android/app/ApplicationExitInfo",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-08-28",
+      "note": "ApplicationExitInfo.REASON_USER_REQUESTED is public since API30, constant10, includes user-directed termination such as removing an app from Recents. P0-S2 shell exit-history reason10 contextualizes one last-window close; shell subreason22 REMOVE TASK is an observed diagnostic, not a public app API. No guarantee of final Activity/cleanup callbacks. Android/platform owner; fallback is unknown exit and previously committed state. App-side accessor use remains unimplemented/unqualified.",
+      "refresh": "Before implementation of process-recovery diagnostics; recheck against qualified device behavior."
+    },
+    {
+      "id": "G79",
+      "title": "Android local network permission",
+      "url": "https://developer.android.com/privacy-and-security/local-network-permission",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-10-02",
+      "note": "Runtime37 and target37+ require ACCESS_LOCAL_NETWORK for direct LAN access. Covers TCP/UDP/library/WebView traffic; denial may appear as timeout. System-mediated service picker is a separate documented route. No grant or network test performed.",
+      "refresh": "Before network probe implementation and each target SDK update."
+    },
+    {
+      "id": "G80",
+      "title": "Android 17 target-dependent behavior changes",
+      "url": "https://developer.android.com/about/versions/17/behavior-changes-17",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-10-09",
+      "note": "Confirms mandatory local-network permission for target37+ on Android17, with the alternative of system-mediated device selection. Existing shell ICMP does not qualify app access.",
+      "refresh": "Before network probe implementation and each target SDK update."
+    },
+    {
+      "id": "G81",
+      "title": "Manifest local network permission reference",
+      "url": "https://developer.android.com/reference/android/Manifest.permission.html#ACCESS_LOCAL_NETWORK",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Manifest.permission.ACCESS_LOCAL_NETWORK addedAPI37, dangerous; value android.permission.ACCESS_LOCAL_NETWORK. Reference defines local network on broadcast-capable Wi-Fi/Ethernet and excludes cellular/VPN; do not generalize LAN results to VPN routes. Constant presence/value independently checked in selected SDK37.0 android.jar; no app grant/device pass.",
+      "refresh": "Before network probe implementation and each target SDK update."
     }
   ]
 }

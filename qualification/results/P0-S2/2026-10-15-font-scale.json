@@ -1,0 +1,1666 @@
+{
+  "schemaVersion": 1,
+  "runId": "P0-S2-font-scale-2026-10-15",
+  "stage": "P0-S2",
+  "stageStatus": "in-progress",
+  "verdict": "pass within the stated narrow-window font-scale and control-reachability scope",
+  "scope": "Real system font-scale changes on the identified Googlebook with the 0.2.0 diagnostic APK. Injected vertical scrolling reached four controls at 1.3 and 2.0; Refresh was invoked and observed. Not product or accessibility qualification.",
+  "sourceCommit": "13dce23dd4052163f22703752b16438ec81c8306",
+  "apk": {
+    "package": "dev.cloudy.qualification.baseline",
+    "versionName": "0.2.0",
+    "versionCode": 2,
+    "variant": "debug",
+    "reportSchemaVersion": 2,
+    "sha256": "4a7a47df18b8d48541ce7f1d7ed347c0d6e48c2f79898c8e65064199d1596b32"
+  },
+  "device": {
+    "manufacturer": "HP",
+    "model": "HP Googlebook 14",
+    "buildId": "CL3B.260622.276.R2",
+    "release": "17",
+    "sdkInt": 37,
+    "securityPatch": "2026-09-01",
+    "incremental": "16560795",
+    "supportedAbis": [
+      "arm64-v8a"
+    ]
+  },
+  "buildChecksReference": "qualification/results/P0-S2/2026-10-15-window-probe.json",
+  "buildBoundary": "Same 0.2.0 source/APK and 17-test build as the earlier window/process experiments. This run predates the separate 0.3.0 engagement implementation; no engagement result is claimed.",
+  "time": {
+    "recordingTimezone": "UTC",
+    "localTimezone": "America/Chicago",
+    "firstSettingReadAtHostUtc": "2026-10-15T07:05:37.738656+00:00",
+    "finalReportCapturedAtHostUtc": "2026-10-15T07:14:38.043034+00:00",
+    "clockBoundary": "Host command records and device timestamps are separate reported clocks; no cross-clock timing or latency inference."
+  },
+  "actionProvenance": "Primary agent used explicitly targeted ADB/official Android CLI on the real device. Font setting was temporarily changed for the current user and restored exactly. Pointer/touch actions were injected and used freshly inspected own-app bounds.",
+  "windowRoles": {
+    "B": {
+      "taskIdObserved": 1000150,
+      "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+      "state": "C / 2"
+    },
+    "C": {
+      "taskIdObserved": 1000151,
+      "logicalWindowId": "7cf6210b-9e03-4508-a029-9ae4a3cea21c",
+      "stateAfterExplicitMarkerChange": "B / 1",
+      "windowSizeAfterResizePx": [
+        648,
+        600
+      ],
+      "density": 1.625,
+      "densityDpi": 260,
+      "configurationSizeDp": [
+        399,
+        369
+      ],
+      "attachedCaptionTopPx": 65
+    }
+  },
+  "setup": {
+    "originalFontScaleSetting": "1.0",
+    "originalSettingRead": {
+      "privateArtifact": "qualification/results/private/font-scale/font-original-setting-command.json",
+      "recordedAtHostUtc": "2026-10-15T07:05:37.738656+00:00",
+      "exitCode": 0
+    },
+    "newWindowInitiallyFreshEventSequence": 12,
+    "resizeRecreationEventSequences": [
+      24,
+      25
+    ],
+    "explicitMarkerChangeEventSequence": 30,
+    "baselinePrivateImage": "qualification/results/private/font-scale/font-c-100.png",
+    "baselineBoundary": "The 100% screenshot and marker layout precede the explicit marker change. Created report revision19 precedes the resize. Narrow 100% report geometry is independently present after setting restoration at revision97; no full-control-at-once baseline claim."
+  },
+  "scaleExperiments": [
+    {
+      "fontScaleObserved": 1.3,
+      "targetTaskObserved": 1000151,
+      "windowSizePx": [
+        648,
+        600
+      ],
+      "settingRequest": {
+        "privateArtifact": "qualification/results/private/font-scale/font-c-130-report-setting-command.json",
+        "recordedAtHostUtc": "2026-10-15T07:07:07.485093+00:00",
+        "exitCode": 0
+      },
+      "injectedVerticalSwipeCount": 1,
+      "swipes": [
+        {
+          "privateArtifact": "qualification/results/private/font-scale/font-c-130-scroll-input-command.json",
+          "recordedAtHostUtc": "2026-10-15T07:07:41.483990+00:00",
+          "exitCode": 0
+        }
+      ],
+      "controlsObservation": {
+        "privateLayout": "qualification/results/private/font-scale/font-c-130-controls-layout.json",
+        "controls": [
+          {
+            "resourceName": "new_window",
+            "fullyWithinObservedContentViewport": true
+          },
+          {
+            "resourceName": "change_marker",
+            "fullyWithinObservedContentViewport": true
+          },
+          {
+            "resourceName": "recreate_window",
+            "fullyWithinObservedContentViewport": true
+          },
+          {
+            "resourceName": "refresh_diagnostics",
+            "fullyWithinObservedContentViewport": true
+          }
+        ],
+        "allFourControlsInSameObservedViewport": true,
+        "boundary": "Allowlisted own-probe control presence and containment only; no raw UI tree, coordinates or unrelated contents published."
+      },
+      "refreshAction": {
+        "privateArtifact": "qualification/results/private/font-scale/font-c-130-refresh-tap-command.json",
+        "recordedAtHostUtc": "2026-10-15T07:07:55.422525+00:00",
+        "exitCode": 0,
+        "freshOwnControlBoundsMatched": true
+      },
+      "refreshObservedEventSequences": [
+        52,
+        53,
+        54
+      ],
+      "afterRefreshReport": "qualification/results/private/font-scale/font-c-130-after-refresh.json",
+      "afterRefreshRevision": 54,
+      "privateTopImage": "qualification/results/private/font-scale/font-c-130-top.png",
+      "privateReachableImage": "qualification/results/private/font-scale/font-c-130-reachable.png"
+    },
+    {
+      "fontScaleObserved": 2,
+      "targetTaskObserved": 1000151,
+      "windowSizePx": [
+        648,
+        600
+      ],
+      "settingRequest": {
+        "privateArtifact": "qualification/results/private/font-scale/font-c-200-report-setting-command.json",
+        "recordedAtHostUtc": "2026-10-15T07:08:17.158812+00:00",
+        "exitCode": 0
+      },
+      "injectedVerticalSwipeCount": 2,
+      "swipes": [
+        {
+          "privateArtifact": "qualification/results/private/font-scale/font-c-200-scroll-1-input-command.json",
+          "recordedAtHostUtc": "2026-10-15T07:09:00.915739+00:00",
+          "exitCode": 0
+        },
+        {
+          "privateArtifact": "qualification/results/private/font-scale/font-c-200-scroll-2-input-command.json",
+          "recordedAtHostUtc": "2026-10-15T07:09:11.336215+00:00",
+          "exitCode": 0
+        }
+      ],
+      "controlsObservation": {
+        "privateLayout": "qualification/results/private/font-scale/font-c-200-controls-layout.json",
+        "controls": [
+          {
+            "resourceName": "new_window",
+            "fullyWithinObservedContentViewport": true
+          },
+          {
+            "resourceName": "change_marker",
+            "fullyWithinObservedContentViewport": true
+          },
+          {
+            "resourceName": "recreate_window",
+            "fullyWithinObservedContentViewport": true
+          },
+          {
+            "resourceName": "refresh_diagnostics",
+            "fullyWithinObservedContentViewport": true
+          }
+        ],
+        "allFourControlsInSameObservedViewport": true,
+        "boundary": "Allowlisted own-probe control presence and containment only; no raw UI tree, coordinates or unrelated contents published."
+      },
+      "refreshAction": {
+        "privateArtifact": "qualification/results/private/font-scale/font-c-200-refresh-tap-command.json",
+        "recordedAtHostUtc": "2026-10-15T07:09:23.387906+00:00",
+        "exitCode": 0,
+        "freshOwnControlBoundsMatched": true
+      },
+      "refreshObservedEventSequences": [
+        76,
+        77,
+        78
+      ],
+      "afterRefreshReport": "qualification/results/private/font-scale/font-c-200-after-refresh.json",
+      "afterRefreshRevision": 78,
+      "privateTopImage": "qualification/results/private/font-scale/font-c-200-top.png",
+      "privateReachableImage": "qualification/results/private/font-scale/font-c-200-reachable.png"
+    }
+  ],
+  "reportSnapshots": [
+    {
+      "privateReport": "qualification/results/private/font-scale/font-original-report.json",
+      "revision": 8,
+      "snapshotAtDeviceUtc": "2026-10-15T06:37:13.390310Z",
+      "processStartedAtDeviceUtc": "2026-10-15T06:37:12.976557Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "identity": {
+            "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+            "taskIdObserved": 1000150,
+            "activityGenerationId": "46262590-7f70-41b8-a421-ab99c4e15ba1"
+          },
+          "localState": {
+            "marker": "C",
+            "markerIndex": 2,
+            "changeCount": 2
+          },
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "fontScale": 1,
+          "density": 1.625,
+          "densityDpi": 260,
+          "currentBoundsPx": {
+            "left": 669,
+            "top": 59,
+            "right": 2880,
+            "bottom": 1709
+          },
+          "decorWidthPx": 2211,
+          "decorHeightPx": 1650,
+          "attachedCaptionTopPx": 65,
+          "attachedCaptionVisible": true,
+          "attachedCaptionBoundingRectCount": 2,
+          "taskRootObserved": true
+        }
+      ]
+    },
+    {
+      "privateReport": "qualification/results/private/font-scale/font-c-created.json",
+      "revision": 19,
+      "snapshotAtDeviceUtc": "2026-10-15T07:06:03.999478Z",
+      "processStartedAtDeviceUtc": "2026-10-15T06:37:12.976557Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "identity": {
+            "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+            "taskIdObserved": 1000150,
+            "activityGenerationId": "46262590-7f70-41b8-a421-ab99c4e15ba1"
+          },
+          "localState": {
+            "marker": "C",
+            "markerIndex": 2,
+            "changeCount": 2
+          },
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "fontScale": 1,
+          "density": 1.625,
+          "densityDpi": 260,
+          "currentBoundsPx": {
+            "left": 669,
+            "top": 59,
+            "right": 2880,
+            "bottom": 1709
+          },
+          "decorWidthPx": 2211,
+          "decorHeightPx": 1650,
+          "attachedCaptionTopPx": 65,
+          "attachedCaptionVisible": true,
+          "attachedCaptionBoundingRectCount": 2,
+          "taskRootObserved": true
+        },
+        {
+          "identity": {
+            "logicalWindowId": "7cf6210b-9e03-4508-a029-9ae4a3cea21c",
+            "taskIdObserved": 1000151,
+            "activityGenerationId": "5a5a82bb-b3ac-48da-8c4e-3c155f75166d"
+          },
+          "localState": {
+            "marker": "A",
+            "markerIndex": 0,
+            "changeCount": 0
+          },
+          "restorationSource": "fresh-no-bundle",
+          "activityAliveObserved": true,
+          "fontScale": 1,
+          "density": 1.625,
+          "densityDpi": 260,
+          "currentBoundsPx": {
+            "left": 403,
+            "top": 191,
+            "right": 2476,
+            "bottom": 1487
+          },
+          "decorWidthPx": 2073,
+          "decorHeightPx": 1296,
+          "attachedCaptionTopPx": 65,
+          "attachedCaptionVisible": true,
+          "attachedCaptionBoundingRectCount": 2,
+          "taskRootObserved": true
+        }
+      ]
+    },
+    {
+      "privateReport": "qualification/results/private/font-scale/font-c-130-report.json",
+      "revision": 51,
+      "snapshotAtDeviceUtc": "2026-10-15T07:07:07.084760Z",
+      "processStartedAtDeviceUtc": "2026-10-15T06:37:12.976557Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "identity": {
+            "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+            "taskIdObserved": 1000150,
+            "activityGenerationId": "464e2c65-51ab-43f1-ba85-4e4ef4eaf0f8"
+          },
+          "localState": {
+            "marker": "C",
+            "markerIndex": 2,
+            "changeCount": 2
+          },
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "fontScale": 1.3,
+          "density": 1.625,
+          "densityDpi": 260,
+          "currentBoundsPx": {
+            "left": 669,
+            "top": 59,
+            "right": 2880,
+            "bottom": 1709
+          },
+          "decorWidthPx": 2211,
+          "decorHeightPx": 1650,
+          "attachedCaptionTopPx": 65,
+          "attachedCaptionVisible": true,
+          "attachedCaptionBoundingRectCount": 2,
+          "taskRootObserved": true
+        },
+        {
+          "identity": {
+            "logicalWindowId": "7cf6210b-9e03-4508-a029-9ae4a3cea21c",
+            "taskIdObserved": 1000151,
+            "activityGenerationId": "7a4df120-4c28-4db5-9699-b6ae241ad111"
+          },
+          "localState": {
+            "marker": "B",
+            "markerIndex": 1,
+            "changeCount": 1
+          },
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "fontScale": 1.3,
+          "density": 1.625,
+          "densityDpi": 260,
+          "currentBoundsPx": {
+            "left": 403,
+            "top": 191,
+            "right": 1051,
+            "bottom": 791
+          },
+          "decorWidthPx": 648,
+          "decorHeightPx": 600,
+          "attachedCaptionTopPx": 65,
+          "attachedCaptionVisible": true,
+          "attachedCaptionBoundingRectCount": 2,
+          "taskRootObserved": true
+        }
+      ]
+    },
+    {
+      "privateReport": "qualification/results/private/font-scale/font-c-130-after-refresh.json",
+      "revision": 54,
+      "snapshotAtDeviceUtc": "2026-10-15T07:07:54.811454Z",
+      "processStartedAtDeviceUtc": "2026-10-15T06:37:12.976557Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "identity": {
+            "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+            "taskIdObserved": 1000150,
+            "activityGenerationId": "464e2c65-51ab-43f1-ba85-4e4ef4eaf0f8"
+          },
+          "localState": {
+            "marker": "C",
+            "markerIndex": 2,
+            "changeCount": 2
+          },
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "fontScale": 1.3,
+          "density": 1.625,
+          "densityDpi": 260,
+          "currentBoundsPx": {
+            "left": 669,
+            "top": 59,
+            "right": 2880,
+            "bottom": 1709
+          },
+          "decorWidthPx": 2211,
+          "decorHeightPx": 1650,
+          "attachedCaptionTopPx": 65,
+          "attachedCaptionVisible": true,
+          "attachedCaptionBoundingRectCount": 2,
+          "taskRootObserved": true
+        },
+        {
+          "identity": {
+            "logicalWindowId": "7cf6210b-9e03-4508-a029-9ae4a3cea21c",
+            "taskIdObserved": 1000151,
+            "activityGenerationId": "7a4df120-4c28-4db5-9699-b6ae241ad111"
+          },
+          "localState": {
+            "marker": "B",
+            "markerIndex": 1,
+            "changeCount": 1
+          },
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "fontScale": 1.3,
+          "density": 1.625,
+          "densityDpi": 260,
+          "currentBoundsPx": {
+            "left": 403,
+            "top": 191,
+            "right": 1051,
+            "bottom": 791
+          },
+          "decorWidthPx": 648,
+          "decorHeightPx": 600,
+          "attachedCaptionTopPx": 65,
+          "attachedCaptionVisible": true,
+          "attachedCaptionBoundingRectCount": 2,
+          "taskRootObserved": true
+        }
+      ]
+    },
+    {
+      "privateReport": "qualification/results/private/font-scale/font-c-200-report.json",
+      "revision": 75,
+      "snapshotAtDeviceUtc": "2026-10-15T07:08:16.932972Z",
+      "processStartedAtDeviceUtc": "2026-10-15T06:37:12.976557Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "identity": {
+            "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+            "taskIdObserved": 1000150,
+            "activityGenerationId": "74e47030-93f2-472d-97b6-3aaca845a8bb"
+          },
+          "localState": {
+            "marker": "C",
+            "markerIndex": 2,
+            "changeCount": 2
+          },
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "fontScale": 2,
+          "density": 1.625,
+          "densityDpi": 260,
+          "currentBoundsPx": {
+            "left": 669,
+            "top": 59,
+            "right": 2880,
+            "bottom": 1709
+          },
+          "decorWidthPx": 2211,
+          "decorHeightPx": 1650,
+          "attachedCaptionTopPx": 65,
+          "attachedCaptionVisible": true,
+          "attachedCaptionBoundingRectCount": 2,
+          "taskRootObserved": true
+        },
+        {
+          "identity": {
+            "logicalWindowId": "7cf6210b-9e03-4508-a029-9ae4a3cea21c",
+            "taskIdObserved": 1000151,
+            "activityGenerationId": "d5729e91-47c5-44e1-adde-bce508d0dbee"
+          },
+          "localState": {
+            "marker": "B",
+            "markerIndex": 1,
+            "changeCount": 1
+          },
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "fontScale": 2,
+          "density": 1.625,
+          "densityDpi": 260,
+          "currentBoundsPx": {
+            "left": 403,
+            "top": 191,
+            "right": 1051,
+            "bottom": 791
+          },
+          "decorWidthPx": 648,
+          "decorHeightPx": 600,
+          "attachedCaptionTopPx": 65,
+          "attachedCaptionVisible": true,
+          "attachedCaptionBoundingRectCount": 2,
+          "taskRootObserved": true
+        }
+      ]
+    },
+    {
+      "privateReport": "qualification/results/private/font-scale/font-c-200-after-refresh.json",
+      "revision": 78,
+      "snapshotAtDeviceUtc": "2026-10-15T07:09:22.778213Z",
+      "processStartedAtDeviceUtc": "2026-10-15T06:37:12.976557Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "identity": {
+            "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+            "taskIdObserved": 1000150,
+            "activityGenerationId": "74e47030-93f2-472d-97b6-3aaca845a8bb"
+          },
+          "localState": {
+            "marker": "C",
+            "markerIndex": 2,
+            "changeCount": 2
+          },
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "fontScale": 2,
+          "density": 1.625,
+          "densityDpi": 260,
+          "currentBoundsPx": {
+            "left": 669,
+            "top": 59,
+            "right": 2880,
+            "bottom": 1709
+          },
+          "decorWidthPx": 2211,
+          "decorHeightPx": 1650,
+          "attachedCaptionTopPx": 65,
+          "attachedCaptionVisible": true,
+          "attachedCaptionBoundingRectCount": 2,
+          "taskRootObserved": true
+        },
+        {
+          "identity": {
+            "logicalWindowId": "7cf6210b-9e03-4508-a029-9ae4a3cea21c",
+            "taskIdObserved": 1000151,
+            "activityGenerationId": "d5729e91-47c5-44e1-adde-bce508d0dbee"
+          },
+          "localState": {
+            "marker": "B",
+            "markerIndex": 1,
+            "changeCount": 1
+          },
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "fontScale": 2,
+          "density": 1.625,
+          "densityDpi": 260,
+          "currentBoundsPx": {
+            "left": 403,
+            "top": 191,
+            "right": 1051,
+            "bottom": 791
+          },
+          "decorWidthPx": 648,
+          "decorHeightPx": 600,
+          "attachedCaptionTopPx": 65,
+          "attachedCaptionVisible": true,
+          "attachedCaptionBoundingRectCount": 2,
+          "taskRootObserved": true
+        }
+      ]
+    },
+    {
+      "privateReport": "qualification/results/private/font-scale/font-restored-verified.json",
+      "revision": 97,
+      "snapshotAtDeviceUtc": "2026-10-15T07:09:51.422732Z",
+      "processStartedAtDeviceUtc": "2026-10-15T06:37:12.976557Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "identity": {
+            "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+            "taskIdObserved": 1000150,
+            "activityGenerationId": "12432ac4-f426-4428-bb80-71caa0ac2e03"
+          },
+          "localState": {
+            "marker": "C",
+            "markerIndex": 2,
+            "changeCount": 2
+          },
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "fontScale": 1,
+          "density": 1.625,
+          "densityDpi": 260,
+          "currentBoundsPx": {
+            "left": 669,
+            "top": 59,
+            "right": 2880,
+            "bottom": 1709
+          },
+          "decorWidthPx": 2211,
+          "decorHeightPx": 1650,
+          "attachedCaptionTopPx": 65,
+          "attachedCaptionVisible": true,
+          "attachedCaptionBoundingRectCount": 2,
+          "taskRootObserved": true
+        },
+        {
+          "identity": {
+            "logicalWindowId": "7cf6210b-9e03-4508-a029-9ae4a3cea21c",
+            "taskIdObserved": 1000151,
+            "activityGenerationId": "4b7eaf1f-2cf4-4cd9-897b-39913eced099"
+          },
+          "localState": {
+            "marker": "B",
+            "markerIndex": 1,
+            "changeCount": 1
+          },
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "fontScale": 1,
+          "density": 1.625,
+          "densityDpi": 260,
+          "currentBoundsPx": {
+            "left": 403,
+            "top": 191,
+            "right": 1051,
+            "bottom": 791
+          },
+          "decorWidthPx": 648,
+          "decorHeightPx": 600,
+          "attachedCaptionTopPx": 65,
+          "attachedCaptionVisible": true,
+          "attachedCaptionBoundingRectCount": 2,
+          "taskRootObserved": true
+        }
+      ]
+    },
+    {
+      "privateReport": "qualification/results/private/font-scale/font-cleanup-report.json",
+      "revision": 97,
+      "snapshotAtDeviceUtc": "2026-10-15T07:09:51.422732Z",
+      "processStartedAtDeviceUtc": "2026-10-15T06:37:12.976557Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "identity": {
+            "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+            "taskIdObserved": 1000150,
+            "activityGenerationId": "12432ac4-f426-4428-bb80-71caa0ac2e03"
+          },
+          "localState": {
+            "marker": "C",
+            "markerIndex": 2,
+            "changeCount": 2
+          },
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "fontScale": 1,
+          "density": 1.625,
+          "densityDpi": 260,
+          "currentBoundsPx": {
+            "left": 669,
+            "top": 59,
+            "right": 2880,
+            "bottom": 1709
+          },
+          "decorWidthPx": 2211,
+          "decorHeightPx": 1650,
+          "attachedCaptionTopPx": 65,
+          "attachedCaptionVisible": true,
+          "attachedCaptionBoundingRectCount": 2,
+          "taskRootObserved": true
+        },
+        {
+          "identity": {
+            "logicalWindowId": "7cf6210b-9e03-4508-a029-9ae4a3cea21c",
+            "taskIdObserved": 1000151,
+            "activityGenerationId": "4b7eaf1f-2cf4-4cd9-897b-39913eced099"
+          },
+          "localState": {
+            "marker": "B",
+            "markerIndex": 1,
+            "changeCount": 1
+          },
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "fontScale": 1,
+          "density": 1.625,
+          "densityDpi": 260,
+          "currentBoundsPx": {
+            "left": 403,
+            "top": 191,
+            "right": 1051,
+            "bottom": 791
+          },
+          "decorWidthPx": 648,
+          "decorHeightPx": 600,
+          "attachedCaptionTopPx": 65,
+          "attachedCaptionVisible": true,
+          "attachedCaptionBoundingRectCount": 2,
+          "taskRootObserved": true
+        }
+      ]
+    },
+    {
+      "privateReport": "qualification/results/private/font-scale/font-final-report.json",
+      "revision": 105,
+      "snapshotAtDeviceUtc": "2026-10-15T07:14:02.557018Z",
+      "processStartedAtDeviceUtc": "2026-10-15T06:37:12.976557Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "identity": {
+            "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+            "taskIdObserved": 1000150,
+            "activityGenerationId": "12432ac4-f426-4428-bb80-71caa0ac2e03"
+          },
+          "localState": {
+            "marker": "C",
+            "markerIndex": 2,
+            "changeCount": 2
+          },
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "fontScale": 1,
+          "density": 1.625,
+          "densityDpi": 260,
+          "currentBoundsPx": {
+            "left": 669,
+            "top": 59,
+            "right": 2880,
+            "bottom": 1709
+          },
+          "decorWidthPx": 2211,
+          "decorHeightPx": 1650,
+          "attachedCaptionTopPx": 65,
+          "attachedCaptionVisible": true,
+          "attachedCaptionBoundingRectCount": 2,
+          "taskRootObserved": true
+        },
+        {
+          "identity": {
+            "logicalWindowId": "7cf6210b-9e03-4508-a029-9ae4a3cea21c",
+            "taskIdObserved": 1000151,
+            "activityGenerationId": "4b7eaf1f-2cf4-4cd9-897b-39913eced099"
+          },
+          "localState": {
+            "marker": "B",
+            "markerIndex": 1,
+            "changeCount": 1
+          },
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": false,
+          "fontScale": 1,
+          "density": 1.625,
+          "densityDpi": 260,
+          "currentBoundsPx": {
+            "left": 403,
+            "top": 191,
+            "right": 1051,
+            "bottom": 791
+          },
+          "decorWidthPx": 648,
+          "decorHeightPx": 600,
+          "attachedCaptionTopPx": 65,
+          "attachedCaptionVisible": true,
+          "attachedCaptionBoundingRectCount": 2,
+          "taskRootObserved": true
+        }
+      ]
+    }
+  ],
+  "selectedEvents": {
+    "privateReport": "qualification/results/private/font-scale/font-final-report.json",
+    "events": [
+      {
+        "sequence": 12,
+        "elapsedRealtimeMs": 46200442,
+        "identity": {
+          "logicalWindowId": "7cf6210b-9e03-4508-a029-9ae4a3cea21c",
+          "taskIdObserved": 1000151,
+          "activityGenerationId": "5a5a82bb-b3ac-48da-8c4e-3c155f75166d"
+        },
+        "kind": "activity-created",
+        "detail": "fresh-no-bundle",
+        "attribution": "current",
+        "localState": {
+          "marker": "A",
+          "markerIndex": 0,
+          "changeCount": 0
+        }
+      },
+      {
+        "sequence": 24,
+        "elapsedRealtimeMs": 46231668,
+        "identity": {
+          "logicalWindowId": "7cf6210b-9e03-4508-a029-9ae4a3cea21c",
+          "taskIdObserved": 1000151,
+          "activityGenerationId": "5a5a82bb-b3ac-48da-8c4e-3c155f75166d"
+        },
+        "kind": "activity-destroyed",
+        "detail": "changingConfigurations=true;finishing=false",
+        "attribution": "current",
+        "localState": {
+          "marker": "A",
+          "markerIndex": 0,
+          "changeCount": 0
+        }
+      },
+      {
+        "sequence": 25,
+        "elapsedRealtimeMs": 46231671,
+        "identity": {
+          "logicalWindowId": "7cf6210b-9e03-4508-a029-9ae4a3cea21c",
+          "taskIdObserved": 1000151,
+          "activityGenerationId": "0994d78c-9a4b-423f-b059-1a7e14201cc1"
+        },
+        "kind": "activity-created",
+        "detail": "restored-bundle",
+        "attribution": "current",
+        "localState": {
+          "marker": "A",
+          "markerIndex": 0,
+          "changeCount": 0
+        }
+      },
+      {
+        "sequence": 30,
+        "elapsedRealtimeMs": 46259473,
+        "identity": {
+          "logicalWindowId": "7cf6210b-9e03-4508-a029-9ae4a3cea21c",
+          "taskIdObserved": 1000151,
+          "activityGenerationId": "0994d78c-9a4b-423f-b059-1a7e14201cc1"
+        },
+        "kind": "marker-changed",
+        "detail": "",
+        "attribution": "current",
+        "localState": {
+          "marker": "B",
+          "markerIndex": 1,
+          "changeCount": 1
+        }
+      },
+      {
+        "sequence": 35,
+        "elapsedRealtimeMs": 46263549,
+        "identity": {
+          "logicalWindowId": "7cf6210b-9e03-4508-a029-9ae4a3cea21c",
+          "taskIdObserved": 1000151,
+          "activityGenerationId": "0994d78c-9a4b-423f-b059-1a7e14201cc1"
+        },
+        "kind": "activity-destroyed",
+        "detail": "changingConfigurations=true;finishing=false",
+        "attribution": "current",
+        "localState": {
+          "marker": "B",
+          "markerIndex": 1,
+          "changeCount": 1
+        }
+      },
+      {
+        "sequence": 36,
+        "elapsedRealtimeMs": 46263555,
+        "identity": {
+          "logicalWindowId": "7cf6210b-9e03-4508-a029-9ae4a3cea21c",
+          "taskIdObserved": 1000151,
+          "activityGenerationId": "7a4df120-4c28-4db5-9699-b6ae241ad111"
+        },
+        "kind": "activity-created",
+        "detail": "restored-bundle",
+        "attribution": "current",
+        "localState": {
+          "marker": "B",
+          "markerIndex": 1,
+          "changeCount": 1
+        }
+      },
+      {
+        "sequence": 43,
+        "elapsedRealtimeMs": 46263567,
+        "identity": {
+          "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+          "taskIdObserved": 1000150,
+          "activityGenerationId": "46262590-7f70-41b8-a421-ab99c4e15ba1"
+        },
+        "kind": "activity-destroyed",
+        "detail": "changingConfigurations=true;finishing=false",
+        "attribution": "current",
+        "localState": {
+          "marker": "C",
+          "markerIndex": 2,
+          "changeCount": 2
+        }
+      },
+      {
+        "sequence": 44,
+        "elapsedRealtimeMs": 46263576,
+        "identity": {
+          "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+          "taskIdObserved": 1000150,
+          "activityGenerationId": "464e2c65-51ab-43f1-ba85-4e4ef4eaf0f8"
+        },
+        "kind": "activity-created",
+        "detail": "restored-bundle",
+        "attribution": "current",
+        "localState": {
+          "marker": "C",
+          "markerIndex": 2,
+          "changeCount": 2
+        }
+      },
+      {
+        "sequence": 52,
+        "elapsedRealtimeMs": 46311463,
+        "identity": {
+          "logicalWindowId": "7cf6210b-9e03-4508-a029-9ae4a3cea21c",
+          "taskIdObserved": 1000151,
+          "activityGenerationId": "7a4df120-4c28-4db5-9699-b6ae241ad111"
+        },
+        "kind": "refresh-requested",
+        "detail": "Device metadata is shared by the process.",
+        "attribution": "current",
+        "localState": {
+          "marker": "B",
+          "markerIndex": 1,
+          "changeCount": 1
+        }
+      },
+      {
+        "sequence": 53,
+        "elapsedRealtimeMs": 46311463,
+        "identity": null,
+        "kind": "refresh-started",
+        "detail": "",
+        "attribution": "process",
+        "localState": null
+      },
+      {
+        "sequence": 54,
+        "elapsedRealtimeMs": 46311465,
+        "identity": null,
+        "kind": "refresh-finished",
+        "detail": "Inspect section errors; completion is not qualification.",
+        "attribution": "process",
+        "localState": null
+      },
+      {
+        "sequence": 59,
+        "elapsedRealtimeMs": 46333216,
+        "identity": {
+          "logicalWindowId": "7cf6210b-9e03-4508-a029-9ae4a3cea21c",
+          "taskIdObserved": 1000151,
+          "activityGenerationId": "7a4df120-4c28-4db5-9699-b6ae241ad111"
+        },
+        "kind": "activity-destroyed",
+        "detail": "changingConfigurations=true;finishing=false",
+        "attribution": "current",
+        "localState": {
+          "marker": "B",
+          "markerIndex": 1,
+          "changeCount": 1
+        }
+      },
+      {
+        "sequence": 60,
+        "elapsedRealtimeMs": 46333219,
+        "identity": {
+          "logicalWindowId": "7cf6210b-9e03-4508-a029-9ae4a3cea21c",
+          "taskIdObserved": 1000151,
+          "activityGenerationId": "d5729e91-47c5-44e1-adde-bce508d0dbee"
+        },
+        "kind": "activity-created",
+        "detail": "restored-bundle",
+        "attribution": "current",
+        "localState": {
+          "marker": "B",
+          "markerIndex": 1,
+          "changeCount": 1
+        }
+      },
+      {
+        "sequence": 67,
+        "elapsedRealtimeMs": 46333228,
+        "identity": {
+          "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+          "taskIdObserved": 1000150,
+          "activityGenerationId": "464e2c65-51ab-43f1-ba85-4e4ef4eaf0f8"
+        },
+        "kind": "activity-destroyed",
+        "detail": "changingConfigurations=true;finishing=false",
+        "attribution": "current",
+        "localState": {
+          "marker": "C",
+          "markerIndex": 2,
+          "changeCount": 2
+        }
+      },
+      {
+        "sequence": 68,
+        "elapsedRealtimeMs": 46333235,
+        "identity": {
+          "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+          "taskIdObserved": 1000150,
+          "activityGenerationId": "74e47030-93f2-472d-97b6-3aaca845a8bb"
+        },
+        "kind": "activity-created",
+        "detail": "restored-bundle",
+        "attribution": "current",
+        "localState": {
+          "marker": "C",
+          "markerIndex": 2,
+          "changeCount": 2
+        }
+      },
+      {
+        "sequence": 76,
+        "elapsedRealtimeMs": 46399430,
+        "identity": {
+          "logicalWindowId": "7cf6210b-9e03-4508-a029-9ae4a3cea21c",
+          "taskIdObserved": 1000151,
+          "activityGenerationId": "d5729e91-47c5-44e1-adde-bce508d0dbee"
+        },
+        "kind": "refresh-requested",
+        "detail": "Device metadata is shared by the process.",
+        "attribution": "current",
+        "localState": {
+          "marker": "B",
+          "markerIndex": 1,
+          "changeCount": 1
+        }
+      },
+      {
+        "sequence": 77,
+        "elapsedRealtimeMs": 46399430,
+        "identity": null,
+        "kind": "refresh-started",
+        "detail": "",
+        "attribution": "process",
+        "localState": null
+      },
+      {
+        "sequence": 78,
+        "elapsedRealtimeMs": 46399432,
+        "identity": null,
+        "kind": "refresh-finished",
+        "detail": "Inspect section errors; completion is not qualification.",
+        "attribution": "process",
+        "localState": null
+      },
+      {
+        "sequence": 83,
+        "elapsedRealtimeMs": 46427900,
+        "identity": {
+          "logicalWindowId": "7cf6210b-9e03-4508-a029-9ae4a3cea21c",
+          "taskIdObserved": 1000151,
+          "activityGenerationId": "d5729e91-47c5-44e1-adde-bce508d0dbee"
+        },
+        "kind": "activity-destroyed",
+        "detail": "changingConfigurations=true;finishing=false",
+        "attribution": "current",
+        "localState": {
+          "marker": "B",
+          "markerIndex": 1,
+          "changeCount": 1
+        }
+      },
+      {
+        "sequence": 84,
+        "elapsedRealtimeMs": 46427912,
+        "identity": {
+          "logicalWindowId": "7cf6210b-9e03-4508-a029-9ae4a3cea21c",
+          "taskIdObserved": 1000151,
+          "activityGenerationId": "4b7eaf1f-2cf4-4cd9-897b-39913eced099"
+        },
+        "kind": "activity-created",
+        "detail": "restored-bundle",
+        "attribution": "current",
+        "localState": {
+          "marker": "B",
+          "markerIndex": 1,
+          "changeCount": 1
+        }
+      },
+      {
+        "sequence": 91,
+        "elapsedRealtimeMs": 46427920,
+        "identity": {
+          "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+          "taskIdObserved": 1000150,
+          "activityGenerationId": "74e47030-93f2-472d-97b6-3aaca845a8bb"
+        },
+        "kind": "activity-destroyed",
+        "detail": "changingConfigurations=true;finishing=false",
+        "attribution": "current",
+        "localState": {
+          "marker": "C",
+          "markerIndex": 2,
+          "changeCount": 2
+        }
+      },
+      {
+        "sequence": 92,
+        "elapsedRealtimeMs": 46427928,
+        "identity": {
+          "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+          "taskIdObserved": 1000150,
+          "activityGenerationId": "12432ac4-f426-4428-bb80-71caa0ac2e03"
+        },
+        "kind": "activity-created",
+        "detail": "restored-bundle",
+        "attribution": "current",
+        "localState": {
+          "marker": "C",
+          "markerIndex": 2,
+          "changeCount": 2
+        }
+      },
+      {
+        "sequence": 98,
+        "elapsedRealtimeMs": 46679042,
+        "identity": {
+          "logicalWindowId": "7cf6210b-9e03-4508-a029-9ae4a3cea21c",
+          "taskIdObserved": 1000151,
+          "activityGenerationId": "4b7eaf1f-2cf4-4cd9-897b-39913eced099"
+        },
+        "kind": "activity-top-resumed",
+        "detail": "topResumed=false",
+        "attribution": "current",
+        "localState": {
+          "marker": "B",
+          "markerIndex": 1,
+          "changeCount": 1
+        }
+      },
+      {
+        "sequence": 99,
+        "elapsedRealtimeMs": 46679042,
+        "identity": {
+          "logicalWindowId": "7cf6210b-9e03-4508-a029-9ae4a3cea21c",
+          "taskIdObserved": 1000151,
+          "activityGenerationId": "4b7eaf1f-2cf4-4cd9-897b-39913eced099"
+        },
+        "kind": "activity-paused",
+        "detail": "",
+        "attribution": "current",
+        "localState": {
+          "marker": "B",
+          "markerIndex": 1,
+          "changeCount": 1
+        }
+      },
+      {
+        "sequence": 100,
+        "elapsedRealtimeMs": 46679081,
+        "identity": {
+          "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+          "taskIdObserved": 1000150,
+          "activityGenerationId": "12432ac4-f426-4428-bb80-71caa0ac2e03"
+        },
+        "kind": "activity-top-resumed",
+        "detail": "topResumed=true",
+        "attribution": "current",
+        "localState": {
+          "marker": "C",
+          "markerIndex": 2,
+          "changeCount": 2
+        }
+      },
+      {
+        "sequence": 101,
+        "elapsedRealtimeMs": 46679090,
+        "identity": {
+          "logicalWindowId": "7cf6210b-9e03-4508-a029-9ae4a3cea21c",
+          "taskIdObserved": 1000151,
+          "activityGenerationId": "4b7eaf1f-2cf4-4cd9-897b-39913eced099"
+        },
+        "kind": "window-focus",
+        "detail": "focused=false",
+        "attribution": "current",
+        "localState": {
+          "marker": "B",
+          "markerIndex": 1,
+          "changeCount": 1
+        }
+      },
+      {
+        "sequence": 102,
+        "elapsedRealtimeMs": 46679090,
+        "identity": {
+          "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+          "taskIdObserved": 1000150,
+          "activityGenerationId": "12432ac4-f426-4428-bb80-71caa0ac2e03"
+        },
+        "kind": "window-focus",
+        "detail": "focused=true",
+        "attribution": "current",
+        "localState": {
+          "marker": "C",
+          "markerIndex": 2,
+          "changeCount": 2
+        }
+      },
+      {
+        "sequence": 103,
+        "elapsedRealtimeMs": 46679175,
+        "identity": {
+          "logicalWindowId": "7cf6210b-9e03-4508-a029-9ae4a3cea21c",
+          "taskIdObserved": 1000151,
+          "activityGenerationId": "4b7eaf1f-2cf4-4cd9-897b-39913eced099"
+        },
+        "kind": "activity-stopped",
+        "detail": "",
+        "attribution": "current",
+        "localState": {
+          "marker": "B",
+          "markerIndex": 1,
+          "changeCount": 1
+        }
+      },
+      {
+        "sequence": 104,
+        "elapsedRealtimeMs": 46679175,
+        "identity": {
+          "logicalWindowId": "7cf6210b-9e03-4508-a029-9ae4a3cea21c",
+          "taskIdObserved": 1000151,
+          "activityGenerationId": "4b7eaf1f-2cf4-4cd9-897b-39913eced099"
+        },
+        "kind": "activity-destroyed",
+        "detail": "changingConfigurations=false;finishing=true",
+        "attribution": "current",
+        "localState": {
+          "marker": "B",
+          "markerIndex": 1,
+          "changeCount": 1
+        }
+      },
+      {
+        "sequence": 105,
+        "elapsedRealtimeMs": 46679211,
+        "identity": {
+          "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+          "taskIdObserved": 1000150,
+          "activityGenerationId": "12432ac4-f426-4428-bb80-71caa0ac2e03"
+        },
+        "kind": "window-observed",
+        "detail": "",
+        "attribution": "current",
+        "localState": {
+          "marker": "C",
+          "markerIndex": 2,
+          "changeCount": 2
+        }
+      }
+    ]
+  },
+  "settingRestoration": {
+    "originalSetting": "1.0",
+    "restoredSetting": "1.0",
+    "matched": true,
+    "verifiedAtHostUtc": "2026-10-15T07:09:51.860515+00:00",
+    "restoreAction": {
+      "privateArtifact": "qualification/results/private/font-scale/font-restore-original-command.json",
+      "recordedAtHostUtc": "2026-10-15T07:09:51.839202+00:00",
+      "exitCode": 0
+    },
+    "verificationQuery": {
+      "privateArtifact": "qualification/results/private/font-scale/font-verify-restored-command.json",
+      "recordedAtHostUtc": "2026-10-15T07:09:51.860133+00:00",
+      "exitCode": 0
+    },
+    "bothWindowConfigurationsObserved": 1.0,
+    "reportRevision": 97,
+    "privateReport": "qualification/results/private/font-scale/font-restored-verified.json"
+  },
+  "windowCleanup": {
+    "action": {
+      "privateArtifact": "qualification/results/private/font-scale/font-cleanup-close-command.json",
+      "recordedAtHostUtc": "2026-10-15T07:14:03.001345+00:00",
+      "exitCode": 0
+    },
+    "nativeOwnCaptionBoundsMatched": true,
+    "immediateExport": {
+      "privateReport": "qualification/results/private/font-scale/font-cleanup-report.json",
+      "revision": 97,
+      "temporaryWindowStillMarkedAlive": true,
+      "interpretation": "Previous saved snapshot; does not establish close success."
+    },
+    "finalExport": {
+      "privateReport": "qualification/results/private/font-scale/font-final-report.json",
+      "revision": 105,
+      "temporaryWindowActivityAliveObserved": false,
+      "originalWindowActivityAliveObserved": true,
+      "destroyedEventSequence": 104,
+      "finishingObserved": true
+    },
+    "historicalBoundary": "The closed C record retains its last geometry/configuration/focus snapshot; those fields are historical and do not mean C is still visible."
+  },
+  "visualReview": {
+    "primaryAgentInspectedScreenshots": true,
+    "evidenceAuthorBoundary": "Author independently checked report projections, own-probe control nodes, action-to-control matching, restoration result and final closure. Screenshots were inspected by the primary agent and remain private; this author does not claim independent pixel inspection."
+  },
+  "notEstablished": [
+    "Physical mouse, trackpad, touchscreen or keyboard behavior",
+    "Screen-reader, keyboard-navigation, IME or complete accessibility acceptance",
+    "All controls functioning at every scale: only Refresh was invoked at 130% and 200%",
+    "Full Console/Desktop layouts or production font-scale acceptance",
+    "Every window size, display, font scale, density, locale or text length",
+    "Long-running or performance stability",
+    "New 0.3.0 engagement APK behavior",
+    "Completion of P0-S2 or activation of CAP-PLATFORM"
+  ],
+  "capabilityDecision": {
+    "gate": "CAP-PLATFORM",
+    "outcome": "pending",
+    "reason": "This bounded native-Views diagnostic establishes narrow-window control reachability and state preservation at selected font scales only."
+  },
+  "privateEvidence": [
+    {
+      "path": "qualification/results/private/font-scale/font-c-100-screen-command.json",
+      "sha256": "4fb83b7cc0418f906f9abbd294b4ec03dd20d116a0918c411a4ef50587938940",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-100.png",
+      "sha256": "fcbdcc9e22104eb2b30f47ba798827a1e90babce983da3c3ca965e7d02d222db",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-130-after-refresh-command.json",
+      "sha256": "7f209ff12b9b3d86110d77290ef61a0775202db6ced35ed27a593a77cd3f1c68",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-130-after-refresh.json",
+      "sha256": "cc5bbabd785fa9dcc7442e1b83956e48db7596b70845ee96559ed15da099c384",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-130-controls-layout-command.json",
+      "sha256": "d3285e9951c054695e79e4ca8120252c72e601e04ba95974ffba828259ea30a6",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-130-controls-layout.json",
+      "sha256": "0f27f540d776ce2929798aa68ecdc9aecda1357c1accfc2db8f998f2e9b838cc",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-130-reachable-screen-command.json",
+      "sha256": "38ffef8f037e12c3d1d099812fd7e6133ada18e30872d67a08d029f0973bdd92",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-130-reachable.png",
+      "sha256": "1936af3af5456cf86de62534a82acbfef4fdf312c91292cce0b7e0ae0f846e7e",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-130-refresh-layout-command.json",
+      "sha256": "bb308656180aa5d7cf6e374a87359e7844d9e2aeaa7e8a9193744d41395067ac",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-130-refresh-layout.json",
+      "sha256": "0f27f540d776ce2929798aa68ecdc9aecda1357c1accfc2db8f998f2e9b838cc",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-130-refresh-tap-command.json",
+      "sha256": "fb07e831313edff0e7b433a1b9515e3e635d00cf14e629c801f51be4bb468ada",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-130-report-command.json",
+      "sha256": "ac0146532fb01d48d1d12a22cc1f0b5c43fa8f55dc5db27b4ce95499849a4fdb",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-130-report-setting-command.json",
+      "sha256": "2364ed4f7337d039781239448e77d80780c10c0fccdd43726224549fb538bdc4",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-130-report.json",
+      "sha256": "13225ef9daccc219ab3f3629954558f928343d3fb9ddb34e741fd6f9d18badab",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-130-scroll-input-command.json",
+      "sha256": "45145b89533c59dd0bca3b6c937bc7c8d9c856a90e9d0206ae3acef2d1738811",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-130-top-screen-command.json",
+      "sha256": "ed75bbf4fc2a84d9b6f986a5de04943580175aefe0f0a46a269b76edc82cd536",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-130-top.png",
+      "sha256": "fdad104f325046f9d39b56f2372f4e1b2776b4754a28c0e5628151faf873c464",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-200-after-refresh-command.json",
+      "sha256": "3642e931bb4c94fd41935a4cd4cbe455cb39a3e6fb9b48669debac4bf9f0ccec",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-200-after-refresh.json",
+      "sha256": "f65bee8ff614c017d3d758745185c510349afb1d310012d75064367a422b5392",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-200-controls-layout-command.json",
+      "sha256": "2f005a290688cd093a591e1e78abe45d2ceb69ba1f00475f160c78c197b8b995",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-200-controls-layout.json",
+      "sha256": "dc85b3259767af1038638e88bfc4bfec38f4adbbe7c347d9445b14195580963e",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-200-mid-layout-command.json",
+      "sha256": "3fbce0266eea4fa99f6afec126e1bebeb27abdacfaacad96190c94cdb84edb59",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-200-mid-layout.json",
+      "sha256": "5409805d1b5911c18df626f7e639db585cdac5b44652b4bf2056554e16aa3046",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-200-reachable-screen-command.json",
+      "sha256": "872bff1ec6b8e5d95ed6f09692c4f9e7849cc3ba8752de282a4a26b960a79fb4",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-200-reachable.png",
+      "sha256": "f333df230847d65d5d013ddbc1126ae8c17ef481d6dbbda8a57324bdea5e0349",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-200-refresh-layout-command.json",
+      "sha256": "592cc1203a990ceb7caf79687c26939d22914401b8da2d214c5eee8e1cb44323",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-200-refresh-layout.json",
+      "sha256": "dc85b3259767af1038638e88bfc4bfec38f4adbbe7c347d9445b14195580963e",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-200-refresh-tap-command.json",
+      "sha256": "fc08c0ad165f9814c196d791bf92b51c023e80a51b800a04f0509fe4272ded0d",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-200-report-command.json",
+      "sha256": "784b111231f456ce4c4da8f0bb9bcbfce0bdb219db9db60135cf57c4d2c7c153",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-200-report-setting-command.json",
+      "sha256": "fd6f42733c6be30ac5a35aa10b503b5e40432200f4c1a0c4285e0fc7c16e1d91",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-200-report.json",
+      "sha256": "6dae5f36a6e2832a7cc8c61d225e50094137a742e57e075d7a406ba1ee4af375",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-200-scroll-1-input-command.json",
+      "sha256": "6691402325991ec8e8a1f70e8436a7fb58408e1ae7538a6791915fcbf0a9cdda",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-200-scroll-2-input-command.json",
+      "sha256": "bc8e3d8f140e6e7834e5e95b054895cae350ea09a633737040c85e617cbb2386",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-200-top-screen-command.json",
+      "sha256": "3c90fe975808f68008e41b64a85202565e354c3f8f0fb806df62e84fab61c4e1",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-200-top.png",
+      "sha256": "a49d331f2ac0448e38ac6f63d3ae801b335865f5b89ffde94d0fdee0b0344afb",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-created-command.json",
+      "sha256": "5ec52983d3e01af18c719af8947b967157bba2718945256579ebed58be0c37ba",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-created.json",
+      "sha256": "3f0bb896679926fa511deb6a1bfa4f1d80de54d1820d23c546462fc55a419841",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-marker-layout-command.json",
+      "sha256": "2a5099a47ae215e384e7c341d6b52ec4dcc03cb7da09d9dae2e2eb2be1d6273b",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-marker-layout.json",
+      "sha256": "ea6908bd5263e9e79af55de8ea4de3980851758dfeb81c67fe8e42f2580fa020",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-marker-tap-command.json",
+      "sha256": "6a5194caf03193c003b1d55a20259989fdc6a6a13d3fc177a33547b372bcb670",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-c-resize-input-command.json",
+      "sha256": "60730369084c018257cce2b17ee432717f386d189d5e7cbb1a2321087a38b566",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-cleanup-close-command.json",
+      "sha256": "98e3451181793a671fd20efb187e2ba6f48ab0c825d85fbb077efeb2bbffe97e",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-cleanup-layout-command.json",
+      "sha256": "eb422ede35481c9d83ff4ee15591ce82ebca65086c95d8fc1256afcb7f855b76",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-cleanup-layout.json",
+      "sha256": "b2a4367fc7741064a4213a168b6b0e7d24fd71e8effe5ab8b26681cddf7be436",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-cleanup-report-command.json",
+      "sha256": "d4fc7bcbf90b6493bdee011a6e49d33a525599d3f6703884625bbfd73790f772",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-cleanup-report.json",
+      "sha256": "e360277cf0250d5c1527e7e7148e1672a1a6922a11cd1f99507a8e6c6d489779",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-cleanup-verified-layout-command.json",
+      "sha256": "3201eadb3cec25adcaed5871338d6ffd8507080ca4ee3fab6a615b3bc217619b",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-cleanup-verified-layout.json",
+      "sha256": "6d9b8fd6666d996b2242cbe4547ce915fa4bad13814a65c42ebb58cc9c74d5ea",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-final-report-command.json",
+      "sha256": "f7a86323bf21aef45877e25aca2dac3f99437d054105df8a383a67797f393e1f",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-final-report.json",
+      "sha256": "875151ac3c1921347e84cf593a6d63f7ea6608699d8ce258c6cd5e522966cccb",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-initial-layout-layout-command.json",
+      "sha256": "33c813f871bc508d9a76433bf078f256b811c580eba48d8f834212595ef704f4",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-initial-layout-layout.json",
+      "sha256": "91ffcdc94af3e5940c42f9fb34e0d2a1ec1641e2c6af74c249b2497480267a53",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-new-window-layout-command.json",
+      "sha256": "28edd282cf1213044aaae03b4a3321ec87b03fd74360388a6fe3f34d12e3ce88",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-new-window-layout.json",
+      "sha256": "397d610fcb4580a0403e5a114b3030318c47ae59f8150e8c27af079dc7f664d8",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-new-window-tap-command.json",
+      "sha256": "5356e2c04744d78313cc60d39f4ac900157588aab7434412434708caca6bb1a2",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-original-report-command.json",
+      "sha256": "0f4d78b2cb9e2a7eb5798163e2cb0b69e1e82130ca3df4fecebce3dc87875fda",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-original-report.json",
+      "sha256": "a059932bbc1f9d84829cc7d78c241031ef2979657b1c09f6b88cde10ed365552",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-original-setting-command.json",
+      "sha256": "7c19062e981d8b8f824570b886455902c653404f6d4e8941980454f9f43c2cdf",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-restoration-plan.json",
+      "sha256": "2ea5b8719f328e0f8e2fa002d242cbdfb6be7bd7d61025cf8e9f15703ca0926d",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-restoration-result.json",
+      "sha256": "218e217a3daf232187998881093fd4bd37d51ab414db755e3b853d4ccdbd697f",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-restore-original-command.json",
+      "sha256": "d48d64f8df339f44581a84b667a9d2c7839ff375b82948a856d304e5df7f1f9a",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-restored-report-command.json",
+      "sha256": "c95c3800a4628da374bd3ac074b8befb5bcd2bb6659e2c9e5780cc9716cdd889",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-restored-report.json",
+      "sha256": "e360277cf0250d5c1527e7e7148e1672a1a6922a11cd1f99507a8e6c6d489779",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-restored-verified-command.json",
+      "sha256": "2a9b65a57876f09cb647b785158b80d463459ba8c964c862e531b7999a98d353",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-restored-verified.json",
+      "sha256": "e360277cf0250d5c1527e7e7148e1672a1a6922a11cd1f99507a8e6c6d489779",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/font-scale/font-verify-restored-command.json",
+      "sha256": "5b270af57731efdc1b89d2a30b15e410a377881e0ef18708ea5022f9c0958aa7",
+      "publication": "Hash/path only; raw contents remain private"
+    }
+  ],
+  "sanitization": {
+    "included": "Exact source/APK/build, probe-generated task/logical/generation identities and marker/counter, measured font/density/window/caption dimensions, allowlisted control-presence booleans, selected lifecycle events, settings values, timestamps and artifact hashes.",
+    "excluded": [
+      "Raw command arguments/stdout/stderr",
+      "Transport serials and hardware unique identifiers",
+      "Process IDs and UIDs",
+      "Raw UI trees and injected-input coordinates",
+      "Screenshots and unrelated desktop content",
+      "Machine inventories"
+    ]
+  }
+}

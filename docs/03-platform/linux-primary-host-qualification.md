@@ -19,6 +19,10 @@ Read-only checks used OS release/kernel values, the session-type/desktop environ
 
 KWin/Plasma version commands emitted Qt/EGL initialization warnings in this execution environment. Package versions corroborate their printed versions. No compositor restart, permission change or repair was attempted. Repeat capability checks in the intended local desktop session through an approved execution path; do not use these warnings as a host-support verdict.
 
+## Googlebook app access prerequisite
+
+The selected Android17/target37 app must qualify **API41** before direct LAN protocols: declare and request `ACCESS_LOCAL_NETWORK` for the real operation, handle denial/revocation, and test the app's route. Existing shell ICMP does not exercise that permission. A TCP timeout can be a local permission failure. Follow the [operation note](googlebook/p0-s2-operation-lifetimes.md) and [official local-network guide](https://developer.android.com/privacy-and-security/local-network-permission). No host listener or app permission was changed by this research.
+
 ## Proposed backend routes and prerequisites
 
 **SSH/SFTP first.** Establish an OpenSSH server with a reviewed bind/network policy, host keys, selected authentication and a functioning SFTP subsystem. Validate configuration before activation and test from the intended Googlebook route. A local SSH client is insufficient. The [Ubuntu OpenSSH guide](https://ubuntu.com/server/docs/how-to/security/openssh-server/) describes server setup and configuration testing. For X11 later, verify `X11Forwarding`, `XAuthLocation`, cookie isolation and remote X11 application dependencies using the [OpenSSH server manual](https://man.openbsd.org/sshd_config). Xwayland's presence is not a test of Cloudy's separate X11 windows. A durable terminal-session mechanism must be chosen and tested independently.

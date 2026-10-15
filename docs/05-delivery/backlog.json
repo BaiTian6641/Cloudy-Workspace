@@ -124,7 +124,7 @@
         "P0-S1"
       ],
       "tasks": [
-        "Inspect the API tracker and pin candidate SDK/AndroidX versions for windows, caption bounds, input, files, and foreground-service experiments.",
+        "Inspect the API tracker and pin candidate SDK/AndroidX versions for windows, caption bounds, input, files, direct LAN permission, and foreground-service experiments.",
         "Build minimal resize/multi-instance/caption/focus probes with runtime guards and record experimental annotations.",
         "Classify SSH, transfers, USB, and streaming lifecycle strategies independently; force relevant timeout/process-recreation cases.",
         "Investigate supported local Linux VM attach/control interfaces; record absence or roadmap status without private-API assumptions.",
@@ -146,7 +146,11 @@
         "G15",
         "G16",
         "G23",
-        "G26"
+        "G26",
+        "G78",
+        "G79",
+        "G80",
+        "G81"
       ],
       "acceptanceCases": [
         "Q-P01",

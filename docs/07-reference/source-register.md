@@ -161,12 +161,26 @@ The [process-lifecycle method](../03-platform/googlebook/p0-s2-process-lifecycle
 
 ## P0-S2 engagement candidate
 
-The [engagement contract](../03-platform/googlebook/p0-s2-engagement-probe-contract.md) pins a proposed diagnostic alpha and preserves the manual density fallback. No dependency is added by this research.
+The [engagement contract](../03-platform/googlebook/p0-s2-engagement-probe-contract.md) pins the diagnostic alpha and preserves the manual density fallback. The separate [0.3.0 source review](../06-validation/2026-10-15-engagement-probe-review.md) records actual dependency adoption and build checks within the probe.
 
 | ID | Official reference | Review status | Development use |
 | --- | --- | --- | --- |
 | G73 | [AndroidX WindowManager releases](https://developer.android.com/jetpack/androidx/releases/window) | reviewed | Stable1.5.1 versus alpha1.6.0-alpha05; June17,2026 alpha adds PRECISE_POINTER/windowEngagementInfo. No product adoption. |
 | G74 | [WindowManager alpha05 published source](https://dl.google.com/dl/android/maven2/androidx/window/window/1.6.0-alpha05/window-1.6.0-alpha05-sources.jar) | reviewed | Exact public engagement callbacks and compatibility implementation; no engagement extension opt-in requirement. Meaningful precise-pointer computation API30+, lower compatibility result TOUCH. |
-| G75 | [WindowManager alpha05 AAR metadata](https://dl.google.com/dl/android/maven2/androidx/window/window/1.6.0-alpha05/window-1.6.0-alpha05.aar) | reviewed | Manifest minSdk23; metadata minCompileSdk34, minAGP8.1.1, extension0. Artifact inspected, not installed or device-qualified. |
-| G76 | [WindowManager alpha05 POM](https://dl.google.com/dl/android/maven2/androidx/window/window/1.6.0-alpha05/window-1.6.0-alpha05.pom) | reviewed | Declared transitive dependencies and Apache2 license; resolved graph/checksums remain required before diagnostic adoption. |
+| G75 | [WindowManager alpha05 AAR metadata](https://dl.google.com/dl/android/maven2/androidx/window/window/1.6.0-alpha05/window-1.6.0-alpha05.aar) | reviewed | Manifest minSdk23; metadata minCompileSdk34, minAGP8.1.1, extension0. Artifact contract; installation/runtime evidence is recorded separately from this source review. |
+| G76 | [WindowManager alpha05 POM](https://dl.google.com/dl/android/maven2/androidx/window/window/1.6.0-alpha05/window-1.6.0-alpha05.pom) | reviewed | Declared transitive dependencies and Apache2 license; resolved graph/checksums and additional embedded runtime terms are recorded in the probe source review. |
 | G77 | [WindowManager alpha05 module metadata](https://dl.google.com/dl/android/maven2/androidx/window/window/1.6.0-alpha05/window-1.6.0-alpha05.module) | reviewed | Published variant metadata; release publication status does not make an alpha version stable. |
+
+## P0-S2 last-window task removal
+
+| ID | Official reference | Review status | Development use |
+| --- | --- | --- | --- |
+| G78 | [ApplicationExitInfo](https://developer.android.com/reference/android/app/ApplicationExitInfo) | reviewed | Public API30 `REASON_USER_REQUESTED` is constant10 and includes user-directed task removal. The HP shell exit history is a diagnostic observation; its subreason is not an application API. Treat missing final callbacks/writes as unknown cleanup and recover from previously committed state. |
+
+## P0-S2 direct LAN prerequisite
+
+| ID | Official reference | Review status | Development use |
+| --- | --- | --- | --- |
+| G79 | [Local network permission](https://developer.android.com/privacy-and-security/local-network-permission) | reviewed | Android17/target37+ direct LAN traffic needs an actual runtime grant; permission denial can resemble a connection timeout. System-mediated discovery is a separate route. |
+| G80 | [Android17 target changes](https://developer.android.com/about/versions/17/behavior-changes-17) | reviewed | Enforcement is mandatory at target37+, not the Android16 opt-in experiment. |
+| G81 | [ACCESS_LOCAL_NETWORK reference](https://developer.android.com/reference/android/Manifest.permission.html#ACCESS_LOCAL_NETWORK) | reviewed | API37 dangerous permission; constant/value exists in selected SDK37.0. Public LAN definition excludes cellular/VPN; qualify each route independently. |

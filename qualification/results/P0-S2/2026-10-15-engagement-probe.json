@@ -1,0 +1,3069 @@
+{
+  "schemaVersion": 1,
+  "runId": "P0-S2-engagement-probe-2026-10-15",
+  "stage": "P0-S2",
+  "stageStatus": "in-progress",
+  "verdict": "bounded callback and ownership observations passed; lifecycle and fallback acceptance partial; final-close cleanup persistence unobserved",
+  "scope": "Real callbacks from the published WindowManager alpha on the identified Googlebook, with two diagnostic document tasks, first-window close, remaining-window stop/return/recreate and bounded quiet sampling. Not physical-input or product qualification.",
+  "sourceCommit": "11c94be17e3d6b53a8125bfa0a56e0148ea748d2",
+  "apk": {
+    "package": "dev.cloudy.qualification.baseline",
+    "versionName": "0.3.0",
+    "versionCode": 3,
+    "variant": "debug",
+    "reportSchemaVersion": 3,
+    "sha256": "1c6959501df43e712a5a90c227b91577c954f8b67c0124127ac9b94759667b16"
+  },
+  "device": {
+    "manufacturer": "HP",
+    "model": "HP Googlebook 14",
+    "buildId": "CL3B.260622.276.R2",
+    "release": "17",
+    "sdkInt": 37,
+    "securityPatch": "2026-09-01",
+    "incremental": "16560795",
+    "supportedAbis": [
+      "arm64-v8a"
+    ]
+  },
+  "library": {
+    "coordinate": "androidx.window:window:1.6.0-alpha05",
+    "maturity": "published-alpha",
+    "productDependencySelected": false,
+    "contract": "docs/03-platform/googlebook/p0-s2-engagement-probe-contract.md"
+  },
+  "buildEvidence": {
+    "sourceReview": "docs/06-validation/2026-10-15-engagement-probe-review.md",
+    "packageAudit": "docs/06-validation/2026-10-15-engagement-package-audit.json",
+    "sourceReviewAtCommit": "https://github.com/BaiTian6641/Cloudy-Workspace/blob/11c94be17e3d6b53a8125bfa0a56e0148ea748d2/docs/06-validation/2026-10-15-engagement-probe-review.md",
+    "kotlinCompilation": "passed",
+    "apkAssembly": "passed",
+    "jvmTests": {
+      "tests": 31,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "androidLintIssueCount": 0,
+    "packagedNoticeAssetsMatched": 11,
+    "manifestNoPermissionsServicesReceiversProviders": true,
+    "hostedChecks": [
+      {
+        "url": "https://github.com/BaiTian6641/Cloudy-Workspace/actions/runs/38698200577",
+        "conclusion": "success",
+        "verificationOwner": "primary agent"
+      },
+      {
+        "url": "https://github.com/BaiTian6641/Cloudy-Workspace/actions/runs/38698200639",
+        "conclusion": "success",
+        "verificationOwner": "primary agent"
+      }
+    ],
+    "boundary": "Build/source/package records were reviewed separately; this evidence author performed no build or device action. Test-only failure injection is not device behavior."
+  },
+  "deployment": {
+    "privateRecord": "qualification/results/private/engagement-probe/engagement-030-deployment.json",
+    "recordedAtHostUtc": "2026-10-15T07:21:33.088717+00:00",
+    "install": {
+      "privateArtifact": "qualification/results/private/engagement-probe/engagement-030-install-command.json",
+      "recordedAtHostUtc": "2026-10-15T07:21:33.050068+00:00",
+      "exitCode": 0
+    },
+    "launch": {
+      "privateArtifact": "qualification/results/private/engagement-probe/engagement-030-launch-command.json",
+      "recordedAtHostUtc": "2026-10-15T07:21:33.086041+00:00",
+      "exitCode": 0
+    }
+  },
+  "time": {
+    "recordingTimezone": "UTC",
+    "localTimezone": "America/Chicago",
+    "processStartedAtDeviceUtc": "2026-10-15T07:21:32.410297Z",
+    "clockBoundary": "Host action records, device UTC and elapsed-realtime readings are separate clock evidence, not synchronized latency measurements. Shell exit-history timestamps have no encoded timezone and are not normalized here."
+  },
+  "windowRoles": {
+    "A": {
+      "logicalWindowId": "8fbdb166-a607-456e-8486-7a55b30b2e67",
+      "taskIdObserved": 1000150,
+      "activityGenerationId": "c4c53406-1526-425e-8c57-1a10f0bf3200"
+    },
+    "B_initialGeneration": {
+      "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+      "taskIdObserved": 1000152,
+      "activityGenerationId": "06788a08-1ad6-4de6-aa4e-fcc01560b0c7"
+    },
+    "B_recreatedGeneration": {
+      "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+      "taskIdObserved": 1000152,
+      "activityGenerationId": "238a280b-9ba5-4402-9f8a-ccfe149f1e99"
+    },
+    "boundary": "A/B labels are local to this 0.3.0 run. Task ID 1000150 also occurred in older runs; its new logical identity and process identify this observation, not prior state continuity."
+  },
+  "actions": [
+    {
+      "action": "open second window",
+      "privateArtifact": "qualification/results/private/engagement-probe/engagement-open-b-tap-command.json",
+      "recordedAtHostUtc": "2026-10-15T07:22:26.779262+00:00",
+      "exitCode": 0,
+      "privateInspectedLayout": "qualification/results/private/engagement-probe/engagement-open-b-layout.json",
+      "matchedFreshOwnControlOrTask": true
+    },
+    {
+      "action": "close first window",
+      "privateArtifact": "qualification/results/private/engagement-probe/engagement-first-close-tap-command.json",
+      "recordedAtHostUtc": "2026-10-15T07:23:06.517876+00:00",
+      "exitCode": 0,
+      "privateInspectedLayout": "qualification/results/private/engagement-probe/engagement-first-close-layout.json",
+      "matchedFreshOwnControlOrTask": true
+    },
+    {
+      "action": "minimize remaining window",
+      "privateArtifact": "qualification/results/private/engagement-probe/engagement-b-minimize-tap-command.json",
+      "recordedAtHostUtc": "2026-10-15T07:23:12.059885+00:00",
+      "exitCode": 0,
+      "privateInspectedLayout": "qualification/results/private/engagement-probe/engagement-b-minimize-layout.json",
+      "matchedFreshOwnControlOrTask": true
+    },
+    {
+      "action": "restore existing Recents task",
+      "privateArtifact": "qualification/results/private/engagement-probe/engagement-recents-restore-input-command.json",
+      "recordedAtHostUtc": "2026-10-15T07:23:38.421918+00:00",
+      "exitCode": 0,
+      "privateInspectedLayout": "qualification/results/private/engagement-probe/engagement-recents-layout.json",
+      "matchedFreshOwnControlOrTask": true
+    },
+    {
+      "action": "recreate remaining window",
+      "privateArtifact": "qualification/results/private/engagement-probe/engagement-b-recreate-tap-command.json",
+      "recordedAtHostUtc": "2026-10-15T07:23:48.469142+00:00",
+      "exitCode": 0,
+      "privateInspectedLayout": "qualification/results/private/engagement-probe/engagement-b-recreate-layout.json",
+      "matchedFreshOwnControlOrTask": true
+    },
+    {
+      "action": "refresh diagnostics",
+      "privateArtifact": "qualification/results/private/engagement-probe/engagement-b-refresh-tap-command.json",
+      "recordedAtHostUtc": "2026-10-15T07:23:59.545094+00:00",
+      "exitCode": 0,
+      "privateInspectedLayout": "qualification/results/private/engagement-probe/engagement-b-refresh-layout.json",
+      "matchedFreshOwnControlOrTask": true
+    },
+    {
+      "action": "close last window",
+      "privateArtifact": "qualification/results/private/engagement-probe/engagement-final-close-tap-command.json",
+      "recordedAtHostUtc": "2026-10-15T07:24:56.435326+00:00",
+      "exitCode": 0,
+      "privateInspectedLayout": "qualification/results/private/engagement-probe/engagement-final-close-layout.json",
+      "matchedFreshOwnControlOrTask": true
+    }
+  ],
+  "acceptanceCases": [
+    {
+      "id": "E01",
+      "outcome": "pass for this isolated source/APK",
+      "evidence": "Compiled public API methods, 31 JVM tests, lint, verified dependencies, packaged notices and two successful hosted checks; see exact source/build records. No product dependency selected."
+    },
+    {
+      "id": "E02",
+      "outcome": "pass for bounded actual callback observation",
+      "evidence": "A epoch 1 recorded AUDIO_ON/TOUCH/VISUALS_ON, then AUDIO_ON/PRECISE_POINTER/VISUALS_ON. B also reported a real precise-pointer mode. No input hardware, audio, latency or display-performance inference."
+    },
+    {
+      "id": "E03",
+      "outcome": "pass for observed two-window ownership",
+      "evidence": "Distinct logical/task/generation identities, independent B1/C2 markers, first A close with cleanup-complete while B remains active; recreated B rejects old-generation cleanup delivery at event 58 and accepts current state at 59."
+    },
+    {
+      "id": "E04",
+      "outcome": "partial",
+      "evidence": "A close and B minimize recorded cleanup completion; B returned in same generation at epoch 2, then recreated into a new generation/epoch 1. Four later revision 63 samples were stable over 4.144702 host seconds. Final last-window close terminated the process with no newly persisted lifecycle or cleanup callbacks; final cleanup success is unobserved. Broad race/long-running coverage remains outside this run."
+    },
+    {
+      "id": "E05",
+      "outcome": "partial",
+      "evidence": "Actual pending transitions and initial TOUCH are preserved, with font 1.0/density 260 unchanged. No persistent no-value, registration error, cleanup error or unavailable-library state was induced on hardware; those distinctions have source/JVM coverage only."
+    }
+  ],
+  "reportSnapshots": [
+    {
+      "privateReport": "qualification/results/private/engagement-probe/engagement-initial.json",
+      "revision": 9,
+      "snapshotAtDeviceUtc": "2026-10-15T07:21:32.794717Z",
+      "processStartedAtDeviceUtc": "2026-10-15T07:21:32.410297Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "identity": {
+            "logicalWindowId": "8fbdb166-a607-456e-8486-7a55b30b2e67",
+            "taskIdObserved": 1000150,
+            "activityGenerationId": "c4c53406-1526-425e-8c57-1a10f0bf3200"
+          },
+          "localState": {
+            "marker": "A",
+            "markerIndex": 0,
+            "changeCount": 0
+          },
+          "restorationSource": "fresh-no-bundle",
+          "activityAliveObserved": true,
+          "fontScale": 1,
+          "densityDpi": 260,
+          "density": 1.625,
+          "currentBoundsPx": {
+            "left": 669,
+            "top": 59,
+            "right": 2880,
+            "bottom": 1709
+          },
+          "taskRootObserved": true,
+          "engagement": {
+            "status": "reported",
+            "subscriptionEpoch": 1,
+            "activeSubscriptionEpoch": true,
+            "registrationState": "registered",
+            "library": "androidx.window:window:1.6.0-alpha05",
+            "modes": {
+              "names": [
+                "AUDIO_ON",
+                "PRECISE_POINTER",
+                "VISUALS_ON"
+              ],
+              "omittedModeCount": 0,
+              "truncatedNameCount": 0
+            },
+            "lastCallbackTime": {
+              "deviceUtc": "2026-10-15T07:21:32.432694Z",
+              "elapsedRealtimeMs": 47129237
+            },
+            "callbackCount": 2,
+            "currentEpochCallbackCount": 2,
+            "repeatedCallbackCount": 0,
+            "rejectedLateCallbackCount": 0,
+            "cleanupFailureCount": 0,
+            "errorType": null,
+            "droppedEventCount": 0
+          }
+        }
+      ],
+      "retention": {
+        "windowRecordLimit": 8,
+        "retainedWindowCount": 1,
+        "activityAliveCountObserved": 1,
+        "evictedClosedWindowCount": 0,
+        "rejectedRegistrationCount": 0,
+        "rejectedCallbackCount": 0,
+        "supersededGenerationCount": 0,
+        "eventLimit": 128,
+        "droppedEventCount": 0,
+        "windowSnapshotByteLimit": 32768,
+        "engagementEventLimitPerGeneration": 32,
+        "engagementRegistrationLimit": 8,
+        "engagementModeLimit": 16,
+        "engagementModeNameCharacterLimit": 80
+      },
+      "engagementCleanup": {
+        "status": "no-failure-observed",
+        "failureCount": 0,
+        "failures": [],
+        "droppedFailureCount": 0
+      }
+    },
+    {
+      "privateReport": "qualification/results/private/engagement-probe/engagement-two-windows.json",
+      "revision": 10,
+      "snapshotAtDeviceUtc": "2026-10-15T07:22:24.502443Z",
+      "processStartedAtDeviceUtc": "2026-10-15T07:21:32.410297Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "identity": {
+            "logicalWindowId": "8fbdb166-a607-456e-8486-7a55b30b2e67",
+            "taskIdObserved": 1000150,
+            "activityGenerationId": "c4c53406-1526-425e-8c57-1a10f0bf3200"
+          },
+          "localState": {
+            "marker": "B",
+            "markerIndex": 1,
+            "changeCount": 1
+          },
+          "restorationSource": "fresh-no-bundle",
+          "activityAliveObserved": true,
+          "fontScale": 1,
+          "densityDpi": 260,
+          "density": 1.625,
+          "currentBoundsPx": {
+            "left": 669,
+            "top": 59,
+            "right": 2880,
+            "bottom": 1709
+          },
+          "taskRootObserved": true,
+          "engagement": {
+            "status": "reported",
+            "subscriptionEpoch": 1,
+            "activeSubscriptionEpoch": true,
+            "registrationState": "registered",
+            "library": "androidx.window:window:1.6.0-alpha05",
+            "modes": {
+              "names": [
+                "AUDIO_ON",
+                "PRECISE_POINTER",
+                "VISUALS_ON"
+              ],
+              "omittedModeCount": 0,
+              "truncatedNameCount": 0
+            },
+            "lastCallbackTime": {
+              "deviceUtc": "2026-10-15T07:21:32.432694Z",
+              "elapsedRealtimeMs": 47129237
+            },
+            "callbackCount": 2,
+            "currentEpochCallbackCount": 2,
+            "repeatedCallbackCount": 0,
+            "rejectedLateCallbackCount": 0,
+            "cleanupFailureCount": 0,
+            "errorType": null,
+            "droppedEventCount": 0
+          }
+        }
+      ],
+      "retention": {
+        "windowRecordLimit": 8,
+        "retainedWindowCount": 1,
+        "activityAliveCountObserved": 1,
+        "evictedClosedWindowCount": 0,
+        "rejectedRegistrationCount": 0,
+        "rejectedCallbackCount": 0,
+        "supersededGenerationCount": 0,
+        "eventLimit": 128,
+        "droppedEventCount": 0,
+        "windowSnapshotByteLimit": 32768,
+        "engagementEventLimitPerGeneration": 32,
+        "engagementRegistrationLimit": 8,
+        "engagementModeLimit": 16,
+        "engagementModeNameCharacterLimit": 80
+      },
+      "engagementCleanup": {
+        "status": "no-failure-observed",
+        "failureCount": 0,
+        "failures": [],
+        "droppedFailureCount": 0
+      }
+    },
+    {
+      "privateReport": "qualification/results/private/engagement-probe/engagement-two-settled.json",
+      "revision": 22,
+      "snapshotAtDeviceUtc": "2026-10-15T07:22:26.340996Z",
+      "processStartedAtDeviceUtc": "2026-10-15T07:21:32.410297Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "identity": {
+            "logicalWindowId": "8fbdb166-a607-456e-8486-7a55b30b2e67",
+            "taskIdObserved": 1000150,
+            "activityGenerationId": "c4c53406-1526-425e-8c57-1a10f0bf3200"
+          },
+          "localState": {
+            "marker": "B",
+            "markerIndex": 1,
+            "changeCount": 1
+          },
+          "restorationSource": "fresh-no-bundle",
+          "activityAliveObserved": true,
+          "fontScale": 1,
+          "densityDpi": 260,
+          "density": 1.625,
+          "currentBoundsPx": {
+            "left": 669,
+            "top": 59,
+            "right": 2880,
+            "bottom": 1709
+          },
+          "taskRootObserved": true,
+          "engagement": {
+            "status": "reported",
+            "subscriptionEpoch": 1,
+            "activeSubscriptionEpoch": true,
+            "registrationState": "registered",
+            "library": "androidx.window:window:1.6.0-alpha05",
+            "modes": {
+              "names": [
+                "AUDIO_ON",
+                "PRECISE_POINTER",
+                "VISUALS_ON"
+              ],
+              "omittedModeCount": 0,
+              "truncatedNameCount": 0
+            },
+            "lastCallbackTime": {
+              "deviceUtc": "2026-10-15T07:21:32.432694Z",
+              "elapsedRealtimeMs": 47129237
+            },
+            "callbackCount": 2,
+            "currentEpochCallbackCount": 2,
+            "repeatedCallbackCount": 0,
+            "rejectedLateCallbackCount": 0,
+            "cleanupFailureCount": 0,
+            "errorType": null,
+            "droppedEventCount": 0
+          }
+        },
+        {
+          "identity": {
+            "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+            "taskIdObserved": 1000152,
+            "activityGenerationId": "06788a08-1ad6-4de6-aa4e-fcc01560b0c7"
+          },
+          "localState": {
+            "marker": "A",
+            "markerIndex": 0,
+            "changeCount": 0
+          },
+          "restorationSource": "fresh-no-bundle",
+          "activityAliveObserved": true,
+          "fontScale": 1,
+          "densityDpi": 260,
+          "density": 1.625,
+          "currentBoundsPx": {
+            "left": 403,
+            "top": 191,
+            "right": 2476,
+            "bottom": 1487
+          },
+          "taskRootObserved": true,
+          "engagement": {
+            "status": "reported",
+            "subscriptionEpoch": 1,
+            "activeSubscriptionEpoch": true,
+            "registrationState": "registered",
+            "library": "androidx.window:window:1.6.0-alpha05",
+            "modes": {
+              "names": [
+                "AUDIO_ON",
+                "PRECISE_POINTER",
+                "VISUALS_ON"
+              ],
+              "omittedModeCount": 0,
+              "truncatedNameCount": 0
+            },
+            "lastCallbackTime": {
+              "deviceUtc": "2026-10-15T07:22:26.041098Z",
+              "elapsedRealtimeMs": 47182845
+            },
+            "callbackCount": 1,
+            "currentEpochCallbackCount": 1,
+            "repeatedCallbackCount": 0,
+            "rejectedLateCallbackCount": 0,
+            "cleanupFailureCount": 0,
+            "errorType": null,
+            "droppedEventCount": 0
+          }
+        }
+      ],
+      "retention": {
+        "windowRecordLimit": 8,
+        "retainedWindowCount": 2,
+        "activityAliveCountObserved": 2,
+        "evictedClosedWindowCount": 0,
+        "rejectedRegistrationCount": 0,
+        "rejectedCallbackCount": 0,
+        "supersededGenerationCount": 0,
+        "eventLimit": 128,
+        "droppedEventCount": 0,
+        "windowSnapshotByteLimit": 32768,
+        "engagementEventLimitPerGeneration": 32,
+        "engagementRegistrationLimit": 8,
+        "engagementModeLimit": 16,
+        "engagementModeNameCharacterLimit": 80
+      },
+      "engagementCleanup": {
+        "status": "no-failure-observed",
+        "failureCount": 0,
+        "failures": [],
+        "droppedFailureCount": 0
+      }
+    },
+    {
+      "privateReport": "qualification/results/private/engagement-probe/engagement-before-first-close.json",
+      "revision": 24,
+      "snapshotAtDeviceUtc": "2026-10-15T07:22:40.725938Z",
+      "processStartedAtDeviceUtc": "2026-10-15T07:21:32.410297Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "identity": {
+            "logicalWindowId": "8fbdb166-a607-456e-8486-7a55b30b2e67",
+            "taskIdObserved": 1000150,
+            "activityGenerationId": "c4c53406-1526-425e-8c57-1a10f0bf3200"
+          },
+          "localState": {
+            "marker": "B",
+            "markerIndex": 1,
+            "changeCount": 1
+          },
+          "restorationSource": "fresh-no-bundle",
+          "activityAliveObserved": true,
+          "fontScale": 1,
+          "densityDpi": 260,
+          "density": 1.625,
+          "currentBoundsPx": {
+            "left": 669,
+            "top": 59,
+            "right": 2880,
+            "bottom": 1709
+          },
+          "taskRootObserved": true,
+          "engagement": {
+            "status": "reported",
+            "subscriptionEpoch": 1,
+            "activeSubscriptionEpoch": true,
+            "registrationState": "registered",
+            "library": "androidx.window:window:1.6.0-alpha05",
+            "modes": {
+              "names": [
+                "AUDIO_ON",
+                "PRECISE_POINTER",
+                "VISUALS_ON"
+              ],
+              "omittedModeCount": 0,
+              "truncatedNameCount": 0
+            },
+            "lastCallbackTime": {
+              "deviceUtc": "2026-10-15T07:21:32.432694Z",
+              "elapsedRealtimeMs": 47129237
+            },
+            "callbackCount": 2,
+            "currentEpochCallbackCount": 2,
+            "repeatedCallbackCount": 0,
+            "rejectedLateCallbackCount": 0,
+            "cleanupFailureCount": 0,
+            "errorType": null,
+            "droppedEventCount": 0
+          }
+        },
+        {
+          "identity": {
+            "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+            "taskIdObserved": 1000152,
+            "activityGenerationId": "06788a08-1ad6-4de6-aa4e-fcc01560b0c7"
+          },
+          "localState": {
+            "marker": "C",
+            "markerIndex": 2,
+            "changeCount": 2
+          },
+          "restorationSource": "fresh-no-bundle",
+          "activityAliveObserved": true,
+          "fontScale": 1,
+          "densityDpi": 260,
+          "density": 1.625,
+          "currentBoundsPx": {
+            "left": 403,
+            "top": 191,
+            "right": 2476,
+            "bottom": 1487
+          },
+          "taskRootObserved": true,
+          "engagement": {
+            "status": "reported",
+            "subscriptionEpoch": 1,
+            "activeSubscriptionEpoch": true,
+            "registrationState": "registered",
+            "library": "androidx.window:window:1.6.0-alpha05",
+            "modes": {
+              "names": [
+                "AUDIO_ON",
+                "PRECISE_POINTER",
+                "VISUALS_ON"
+              ],
+              "omittedModeCount": 0,
+              "truncatedNameCount": 0
+            },
+            "lastCallbackTime": {
+              "deviceUtc": "2026-10-15T07:22:26.041098Z",
+              "elapsedRealtimeMs": 47182845
+            },
+            "callbackCount": 1,
+            "currentEpochCallbackCount": 1,
+            "repeatedCallbackCount": 0,
+            "rejectedLateCallbackCount": 0,
+            "cleanupFailureCount": 0,
+            "errorType": null,
+            "droppedEventCount": 0
+          }
+        }
+      ],
+      "retention": {
+        "windowRecordLimit": 8,
+        "retainedWindowCount": 2,
+        "activityAliveCountObserved": 2,
+        "evictedClosedWindowCount": 0,
+        "rejectedRegistrationCount": 0,
+        "rejectedCallbackCount": 0,
+        "supersededGenerationCount": 0,
+        "eventLimit": 128,
+        "droppedEventCount": 0,
+        "windowSnapshotByteLimit": 32768,
+        "engagementEventLimitPerGeneration": 32,
+        "engagementRegistrationLimit": 8,
+        "engagementModeLimit": 16,
+        "engagementModeNameCharacterLimit": 80
+      },
+      "engagementCleanup": {
+        "status": "no-failure-observed",
+        "failureCount": 0,
+        "failures": [],
+        "droppedFailureCount": 0
+      }
+    },
+    {
+      "privateReport": "qualification/results/private/engagement-probe/engagement-first-closed.json",
+      "revision": 34,
+      "snapshotAtDeviceUtc": "2026-10-15T07:23:06.110149Z",
+      "processStartedAtDeviceUtc": "2026-10-15T07:21:32.410297Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "identity": {
+            "logicalWindowId": "8fbdb166-a607-456e-8486-7a55b30b2e67",
+            "taskIdObserved": 1000150,
+            "activityGenerationId": "c4c53406-1526-425e-8c57-1a10f0bf3200"
+          },
+          "localState": {
+            "marker": "B",
+            "markerIndex": 1,
+            "changeCount": 1
+          },
+          "restorationSource": "fresh-no-bundle",
+          "activityAliveObserved": false,
+          "fontScale": 1,
+          "densityDpi": 260,
+          "density": 1.625,
+          "currentBoundsPx": {
+            "left": 669,
+            "top": 59,
+            "right": 2880,
+            "bottom": 1709
+          },
+          "taskRootObserved": true,
+          "engagement": {
+            "status": "stopped",
+            "subscriptionEpoch": 1,
+            "activeSubscriptionEpoch": false,
+            "registrationState": "cleanup-complete",
+            "library": "androidx.window:window:1.6.0-alpha05",
+            "modes": {
+              "names": [
+                "AUDIO_ON",
+                "PRECISE_POINTER",
+                "VISUALS_ON"
+              ],
+              "omittedModeCount": 0,
+              "truncatedNameCount": 0
+            },
+            "lastCallbackTime": {
+              "deviceUtc": "2026-10-15T07:21:32.432694Z",
+              "elapsedRealtimeMs": 47129237
+            },
+            "callbackCount": 2,
+            "currentEpochCallbackCount": 2,
+            "repeatedCallbackCount": 0,
+            "rejectedLateCallbackCount": 0,
+            "cleanupFailureCount": 0,
+            "errorType": null,
+            "droppedEventCount": 0
+          }
+        },
+        {
+          "identity": {
+            "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+            "taskIdObserved": 1000152,
+            "activityGenerationId": "06788a08-1ad6-4de6-aa4e-fcc01560b0c7"
+          },
+          "localState": {
+            "marker": "C",
+            "markerIndex": 2,
+            "changeCount": 2
+          },
+          "restorationSource": "fresh-no-bundle",
+          "activityAliveObserved": true,
+          "fontScale": 1,
+          "densityDpi": 260,
+          "density": 1.625,
+          "currentBoundsPx": {
+            "left": 403,
+            "top": 191,
+            "right": 2476,
+            "bottom": 1487
+          },
+          "taskRootObserved": true,
+          "engagement": {
+            "status": "reported",
+            "subscriptionEpoch": 1,
+            "activeSubscriptionEpoch": true,
+            "registrationState": "registered",
+            "library": "androidx.window:window:1.6.0-alpha05",
+            "modes": {
+              "names": [
+                "AUDIO_ON",
+                "PRECISE_POINTER",
+                "VISUALS_ON"
+              ],
+              "omittedModeCount": 0,
+              "truncatedNameCount": 0
+            },
+            "lastCallbackTime": {
+              "deviceUtc": "2026-10-15T07:22:26.041098Z",
+              "elapsedRealtimeMs": 47182845
+            },
+            "callbackCount": 1,
+            "currentEpochCallbackCount": 1,
+            "repeatedCallbackCount": 0,
+            "rejectedLateCallbackCount": 0,
+            "cleanupFailureCount": 0,
+            "errorType": null,
+            "droppedEventCount": 0
+          }
+        }
+      ],
+      "retention": {
+        "windowRecordLimit": 8,
+        "retainedWindowCount": 2,
+        "activityAliveCountObserved": 1,
+        "evictedClosedWindowCount": 0,
+        "rejectedRegistrationCount": 0,
+        "rejectedCallbackCount": 0,
+        "supersededGenerationCount": 0,
+        "eventLimit": 128,
+        "droppedEventCount": 0,
+        "windowSnapshotByteLimit": 32768,
+        "engagementEventLimitPerGeneration": 32,
+        "engagementRegistrationLimit": 8,
+        "engagementModeLimit": 16,
+        "engagementModeNameCharacterLimit": 80
+      },
+      "engagementCleanup": {
+        "status": "no-failure-observed",
+        "failureCount": 0,
+        "failures": [],
+        "droppedFailureCount": 0
+      }
+    },
+    {
+      "privateReport": "qualification/results/private/engagement-probe/engagement-b-stopped.json",
+      "revision": 41,
+      "snapshotAtDeviceUtc": "2026-10-15T07:23:11.656251Z",
+      "processStartedAtDeviceUtc": "2026-10-15T07:21:32.410297Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "identity": {
+            "logicalWindowId": "8fbdb166-a607-456e-8486-7a55b30b2e67",
+            "taskIdObserved": 1000150,
+            "activityGenerationId": "c4c53406-1526-425e-8c57-1a10f0bf3200"
+          },
+          "localState": {
+            "marker": "B",
+            "markerIndex": 1,
+            "changeCount": 1
+          },
+          "restorationSource": "fresh-no-bundle",
+          "activityAliveObserved": false,
+          "fontScale": 1,
+          "densityDpi": 260,
+          "density": 1.625,
+          "currentBoundsPx": {
+            "left": 669,
+            "top": 59,
+            "right": 2880,
+            "bottom": 1709
+          },
+          "taskRootObserved": true,
+          "engagement": {
+            "status": "stopped",
+            "subscriptionEpoch": 1,
+            "activeSubscriptionEpoch": false,
+            "registrationState": "cleanup-complete",
+            "library": "androidx.window:window:1.6.0-alpha05",
+            "modes": {
+              "names": [
+                "AUDIO_ON",
+                "PRECISE_POINTER",
+                "VISUALS_ON"
+              ],
+              "omittedModeCount": 0,
+              "truncatedNameCount": 0
+            },
+            "lastCallbackTime": {
+              "deviceUtc": "2026-10-15T07:21:32.432694Z",
+              "elapsedRealtimeMs": 47129237
+            },
+            "callbackCount": 2,
+            "currentEpochCallbackCount": 2,
+            "repeatedCallbackCount": 0,
+            "rejectedLateCallbackCount": 0,
+            "cleanupFailureCount": 0,
+            "errorType": null,
+            "droppedEventCount": 0
+          }
+        },
+        {
+          "identity": {
+            "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+            "taskIdObserved": 1000152,
+            "activityGenerationId": "06788a08-1ad6-4de6-aa4e-fcc01560b0c7"
+          },
+          "localState": {
+            "marker": "C",
+            "markerIndex": 2,
+            "changeCount": 2
+          },
+          "restorationSource": "fresh-no-bundle",
+          "activityAliveObserved": true,
+          "fontScale": 1,
+          "densityDpi": 260,
+          "density": 1.625,
+          "currentBoundsPx": {
+            "left": 403,
+            "top": 191,
+            "right": 2476,
+            "bottom": 1487
+          },
+          "taskRootObserved": true,
+          "engagement": {
+            "status": "stopped",
+            "subscriptionEpoch": 1,
+            "activeSubscriptionEpoch": false,
+            "registrationState": "cleanup-complete",
+            "library": "androidx.window:window:1.6.0-alpha05",
+            "modes": {
+              "names": [
+                "AUDIO_ON",
+                "PRECISE_POINTER",
+                "VISUALS_ON"
+              ],
+              "omittedModeCount": 0,
+              "truncatedNameCount": 0
+            },
+            "lastCallbackTime": {
+              "deviceUtc": "2026-10-15T07:22:26.041098Z",
+              "elapsedRealtimeMs": 47182845
+            },
+            "callbackCount": 1,
+            "currentEpochCallbackCount": 1,
+            "repeatedCallbackCount": 0,
+            "rejectedLateCallbackCount": 0,
+            "cleanupFailureCount": 0,
+            "errorType": null,
+            "droppedEventCount": 0
+          }
+        }
+      ],
+      "retention": {
+        "windowRecordLimit": 8,
+        "retainedWindowCount": 2,
+        "activityAliveCountObserved": 1,
+        "evictedClosedWindowCount": 0,
+        "rejectedRegistrationCount": 0,
+        "rejectedCallbackCount": 0,
+        "supersededGenerationCount": 0,
+        "eventLimit": 128,
+        "droppedEventCount": 0,
+        "windowSnapshotByteLimit": 32768,
+        "engagementEventLimitPerGeneration": 32,
+        "engagementRegistrationLimit": 8,
+        "engagementModeLimit": 16,
+        "engagementModeNameCharacterLimit": 80
+      },
+      "engagementCleanup": {
+        "status": "no-failure-observed",
+        "failureCount": 0,
+        "failures": [],
+        "droppedFailureCount": 0
+      }
+    },
+    {
+      "privateReport": "qualification/results/private/engagement-probe/engagement-b-returned.json",
+      "revision": 47,
+      "snapshotAtDeviceUtc": "2026-10-15T07:23:38.017821Z",
+      "processStartedAtDeviceUtc": "2026-10-15T07:21:32.410297Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "identity": {
+            "logicalWindowId": "8fbdb166-a607-456e-8486-7a55b30b2e67",
+            "taskIdObserved": 1000150,
+            "activityGenerationId": "c4c53406-1526-425e-8c57-1a10f0bf3200"
+          },
+          "localState": {
+            "marker": "B",
+            "markerIndex": 1,
+            "changeCount": 1
+          },
+          "restorationSource": "fresh-no-bundle",
+          "activityAliveObserved": false,
+          "fontScale": 1,
+          "densityDpi": 260,
+          "density": 1.625,
+          "currentBoundsPx": {
+            "left": 669,
+            "top": 59,
+            "right": 2880,
+            "bottom": 1709
+          },
+          "taskRootObserved": true,
+          "engagement": {
+            "status": "stopped",
+            "subscriptionEpoch": 1,
+            "activeSubscriptionEpoch": false,
+            "registrationState": "cleanup-complete",
+            "library": "androidx.window:window:1.6.0-alpha05",
+            "modes": {
+              "names": [
+                "AUDIO_ON",
+                "PRECISE_POINTER",
+                "VISUALS_ON"
+              ],
+              "omittedModeCount": 0,
+              "truncatedNameCount": 0
+            },
+            "lastCallbackTime": {
+              "deviceUtc": "2026-10-15T07:21:32.432694Z",
+              "elapsedRealtimeMs": 47129237
+            },
+            "callbackCount": 2,
+            "currentEpochCallbackCount": 2,
+            "repeatedCallbackCount": 0,
+            "rejectedLateCallbackCount": 0,
+            "cleanupFailureCount": 0,
+            "errorType": null,
+            "droppedEventCount": 0
+          }
+        },
+        {
+          "identity": {
+            "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+            "taskIdObserved": 1000152,
+            "activityGenerationId": "06788a08-1ad6-4de6-aa4e-fcc01560b0c7"
+          },
+          "localState": {
+            "marker": "C",
+            "markerIndex": 2,
+            "changeCount": 2
+          },
+          "restorationSource": "fresh-no-bundle",
+          "activityAliveObserved": true,
+          "fontScale": 1,
+          "densityDpi": 260,
+          "density": 1.625,
+          "currentBoundsPx": {
+            "left": 403,
+            "top": 191,
+            "right": 2476,
+            "bottom": 1487
+          },
+          "taskRootObserved": true,
+          "engagement": {
+            "status": "reported",
+            "subscriptionEpoch": 2,
+            "activeSubscriptionEpoch": true,
+            "registrationState": "registered",
+            "library": "androidx.window:window:1.6.0-alpha05",
+            "modes": {
+              "names": [
+                "AUDIO_ON",
+                "PRECISE_POINTER",
+                "VISUALS_ON"
+              ],
+              "omittedModeCount": 0,
+              "truncatedNameCount": 0
+            },
+            "lastCallbackTime": {
+              "deviceUtc": "2026-10-15T07:23:37.676280Z",
+              "elapsedRealtimeMs": 47254480
+            },
+            "callbackCount": 2,
+            "currentEpochCallbackCount": 1,
+            "repeatedCallbackCount": 0,
+            "rejectedLateCallbackCount": 0,
+            "cleanupFailureCount": 0,
+            "errorType": null,
+            "droppedEventCount": 0
+          }
+        }
+      ],
+      "retention": {
+        "windowRecordLimit": 8,
+        "retainedWindowCount": 2,
+        "activityAliveCountObserved": 1,
+        "evictedClosedWindowCount": 0,
+        "rejectedRegistrationCount": 0,
+        "rejectedCallbackCount": 0,
+        "supersededGenerationCount": 0,
+        "eventLimit": 128,
+        "droppedEventCount": 0,
+        "windowSnapshotByteLimit": 32768,
+        "engagementEventLimitPerGeneration": 32,
+        "engagementRegistrationLimit": 8,
+        "engagementModeLimit": 16,
+        "engagementModeNameCharacterLimit": 80
+      },
+      "engagementCleanup": {
+        "status": "no-failure-observed",
+        "failureCount": 0,
+        "failures": [],
+        "droppedFailureCount": 0
+      }
+    },
+    {
+      "privateReport": "qualification/results/private/engagement-probe/engagement-b-recreated.json",
+      "revision": 60,
+      "snapshotAtDeviceUtc": "2026-10-15T07:23:48.035334Z",
+      "processStartedAtDeviceUtc": "2026-10-15T07:21:32.410297Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "identity": {
+            "logicalWindowId": "8fbdb166-a607-456e-8486-7a55b30b2e67",
+            "taskIdObserved": 1000150,
+            "activityGenerationId": "c4c53406-1526-425e-8c57-1a10f0bf3200"
+          },
+          "localState": {
+            "marker": "B",
+            "markerIndex": 1,
+            "changeCount": 1
+          },
+          "restorationSource": "fresh-no-bundle",
+          "activityAliveObserved": false,
+          "fontScale": 1,
+          "densityDpi": 260,
+          "density": 1.625,
+          "currentBoundsPx": {
+            "left": 669,
+            "top": 59,
+            "right": 2880,
+            "bottom": 1709
+          },
+          "taskRootObserved": true,
+          "engagement": {
+            "status": "stopped",
+            "subscriptionEpoch": 1,
+            "activeSubscriptionEpoch": false,
+            "registrationState": "cleanup-complete",
+            "library": "androidx.window:window:1.6.0-alpha05",
+            "modes": {
+              "names": [
+                "AUDIO_ON",
+                "PRECISE_POINTER",
+                "VISUALS_ON"
+              ],
+              "omittedModeCount": 0,
+              "truncatedNameCount": 0
+            },
+            "lastCallbackTime": {
+              "deviceUtc": "2026-10-15T07:21:32.432694Z",
+              "elapsedRealtimeMs": 47129237
+            },
+            "callbackCount": 2,
+            "currentEpochCallbackCount": 2,
+            "repeatedCallbackCount": 0,
+            "rejectedLateCallbackCount": 0,
+            "cleanupFailureCount": 0,
+            "errorType": null,
+            "droppedEventCount": 0
+          }
+        },
+        {
+          "identity": {
+            "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+            "taskIdObserved": 1000152,
+            "activityGenerationId": "238a280b-9ba5-4402-9f8a-ccfe149f1e99"
+          },
+          "localState": {
+            "marker": "C",
+            "markerIndex": 2,
+            "changeCount": 2
+          },
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "fontScale": 1,
+          "densityDpi": 260,
+          "density": 1.625,
+          "currentBoundsPx": {
+            "left": 403,
+            "top": 191,
+            "right": 2476,
+            "bottom": 1487
+          },
+          "taskRootObserved": true,
+          "engagement": {
+            "status": "reported",
+            "subscriptionEpoch": 1,
+            "activeSubscriptionEpoch": true,
+            "registrationState": "registered",
+            "library": "androidx.window:window:1.6.0-alpha05",
+            "modes": {
+              "names": [
+                "AUDIO_ON",
+                "PRECISE_POINTER",
+                "VISUALS_ON"
+              ],
+              "omittedModeCount": 0,
+              "truncatedNameCount": 0
+            },
+            "lastCallbackTime": {
+              "deviceUtc": "2026-10-15T07:23:47.760802Z",
+              "elapsedRealtimeMs": 47264565
+            },
+            "callbackCount": 1,
+            "currentEpochCallbackCount": 1,
+            "repeatedCallbackCount": 0,
+            "rejectedLateCallbackCount": 0,
+            "cleanupFailureCount": 0,
+            "errorType": null,
+            "droppedEventCount": 0
+          }
+        }
+      ],
+      "retention": {
+        "windowRecordLimit": 8,
+        "retainedWindowCount": 2,
+        "activityAliveCountObserved": 1,
+        "evictedClosedWindowCount": 0,
+        "rejectedRegistrationCount": 0,
+        "rejectedCallbackCount": 1,
+        "supersededGenerationCount": 1,
+        "eventLimit": 128,
+        "droppedEventCount": 0,
+        "windowSnapshotByteLimit": 32768,
+        "engagementEventLimitPerGeneration": 32,
+        "engagementRegistrationLimit": 8,
+        "engagementModeLimit": 16,
+        "engagementModeNameCharacterLimit": 80
+      },
+      "engagementCleanup": {
+        "status": "no-failure-observed",
+        "failureCount": 0,
+        "failures": [],
+        "droppedFailureCount": 0
+      }
+    },
+    {
+      "privateReport": "qualification/results/private/engagement-probe/engagement-settled-3.json",
+      "revision": 63,
+      "snapshotAtDeviceUtc": "2026-10-15T07:23:58.951568Z",
+      "processStartedAtDeviceUtc": "2026-10-15T07:21:32.410297Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "identity": {
+            "logicalWindowId": "8fbdb166-a607-456e-8486-7a55b30b2e67",
+            "taskIdObserved": 1000150,
+            "activityGenerationId": "c4c53406-1526-425e-8c57-1a10f0bf3200"
+          },
+          "localState": {
+            "marker": "B",
+            "markerIndex": 1,
+            "changeCount": 1
+          },
+          "restorationSource": "fresh-no-bundle",
+          "activityAliveObserved": false,
+          "fontScale": 1,
+          "densityDpi": 260,
+          "density": 1.625,
+          "currentBoundsPx": {
+            "left": 669,
+            "top": 59,
+            "right": 2880,
+            "bottom": 1709
+          },
+          "taskRootObserved": true,
+          "engagement": {
+            "status": "stopped",
+            "subscriptionEpoch": 1,
+            "activeSubscriptionEpoch": false,
+            "registrationState": "cleanup-complete",
+            "library": "androidx.window:window:1.6.0-alpha05",
+            "modes": {
+              "names": [
+                "AUDIO_ON",
+                "PRECISE_POINTER",
+                "VISUALS_ON"
+              ],
+              "omittedModeCount": 0,
+              "truncatedNameCount": 0
+            },
+            "lastCallbackTime": {
+              "deviceUtc": "2026-10-15T07:21:32.432694Z",
+              "elapsedRealtimeMs": 47129237
+            },
+            "callbackCount": 2,
+            "currentEpochCallbackCount": 2,
+            "repeatedCallbackCount": 0,
+            "rejectedLateCallbackCount": 0,
+            "cleanupFailureCount": 0,
+            "errorType": null,
+            "droppedEventCount": 0
+          }
+        },
+        {
+          "identity": {
+            "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+            "taskIdObserved": 1000152,
+            "activityGenerationId": "238a280b-9ba5-4402-9f8a-ccfe149f1e99"
+          },
+          "localState": {
+            "marker": "C",
+            "markerIndex": 2,
+            "changeCount": 2
+          },
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "fontScale": 1,
+          "densityDpi": 260,
+          "density": 1.625,
+          "currentBoundsPx": {
+            "left": 403,
+            "top": 191,
+            "right": 2476,
+            "bottom": 1487
+          },
+          "taskRootObserved": true,
+          "engagement": {
+            "status": "reported",
+            "subscriptionEpoch": 1,
+            "activeSubscriptionEpoch": true,
+            "registrationState": "registered",
+            "library": "androidx.window:window:1.6.0-alpha05",
+            "modes": {
+              "names": [
+                "AUDIO_ON",
+                "PRECISE_POINTER",
+                "VISUALS_ON"
+              ],
+              "omittedModeCount": 0,
+              "truncatedNameCount": 0
+            },
+            "lastCallbackTime": {
+              "deviceUtc": "2026-10-15T07:23:47.760802Z",
+              "elapsedRealtimeMs": 47264565
+            },
+            "callbackCount": 1,
+            "currentEpochCallbackCount": 1,
+            "repeatedCallbackCount": 0,
+            "rejectedLateCallbackCount": 0,
+            "cleanupFailureCount": 0,
+            "errorType": null,
+            "droppedEventCount": 0
+          }
+        }
+      ],
+      "retention": {
+        "windowRecordLimit": 8,
+        "retainedWindowCount": 2,
+        "activityAliveCountObserved": 1,
+        "evictedClosedWindowCount": 0,
+        "rejectedRegistrationCount": 0,
+        "rejectedCallbackCount": 1,
+        "supersededGenerationCount": 1,
+        "eventLimit": 128,
+        "droppedEventCount": 0,
+        "windowSnapshotByteLimit": 32768,
+        "engagementEventLimitPerGeneration": 32,
+        "engagementRegistrationLimit": 8,
+        "engagementModeLimit": 16,
+        "engagementModeNameCharacterLimit": 80
+      },
+      "engagementCleanup": {
+        "status": "no-failure-observed",
+        "failureCount": 0,
+        "failures": [],
+        "droppedFailureCount": 0
+      }
+    },
+    {
+      "privateReport": "qualification/results/private/engagement-probe/engagement-final-closed.json",
+      "revision": 63,
+      "snapshotAtDeviceUtc": "2026-10-15T07:23:58.951568Z",
+      "processStartedAtDeviceUtc": "2026-10-15T07:21:32.410297Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "identity": {
+            "logicalWindowId": "8fbdb166-a607-456e-8486-7a55b30b2e67",
+            "taskIdObserved": 1000150,
+            "activityGenerationId": "c4c53406-1526-425e-8c57-1a10f0bf3200"
+          },
+          "localState": {
+            "marker": "B",
+            "markerIndex": 1,
+            "changeCount": 1
+          },
+          "restorationSource": "fresh-no-bundle",
+          "activityAliveObserved": false,
+          "fontScale": 1,
+          "densityDpi": 260,
+          "density": 1.625,
+          "currentBoundsPx": {
+            "left": 669,
+            "top": 59,
+            "right": 2880,
+            "bottom": 1709
+          },
+          "taskRootObserved": true,
+          "engagement": {
+            "status": "stopped",
+            "subscriptionEpoch": 1,
+            "activeSubscriptionEpoch": false,
+            "registrationState": "cleanup-complete",
+            "library": "androidx.window:window:1.6.0-alpha05",
+            "modes": {
+              "names": [
+                "AUDIO_ON",
+                "PRECISE_POINTER",
+                "VISUALS_ON"
+              ],
+              "omittedModeCount": 0,
+              "truncatedNameCount": 0
+            },
+            "lastCallbackTime": {
+              "deviceUtc": "2026-10-15T07:21:32.432694Z",
+              "elapsedRealtimeMs": 47129237
+            },
+            "callbackCount": 2,
+            "currentEpochCallbackCount": 2,
+            "repeatedCallbackCount": 0,
+            "rejectedLateCallbackCount": 0,
+            "cleanupFailureCount": 0,
+            "errorType": null,
+            "droppedEventCount": 0
+          }
+        },
+        {
+          "identity": {
+            "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+            "taskIdObserved": 1000152,
+            "activityGenerationId": "238a280b-9ba5-4402-9f8a-ccfe149f1e99"
+          },
+          "localState": {
+            "marker": "C",
+            "markerIndex": 2,
+            "changeCount": 2
+          },
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "fontScale": 1,
+          "densityDpi": 260,
+          "density": 1.625,
+          "currentBoundsPx": {
+            "left": 403,
+            "top": 191,
+            "right": 2476,
+            "bottom": 1487
+          },
+          "taskRootObserved": true,
+          "engagement": {
+            "status": "reported",
+            "subscriptionEpoch": 1,
+            "activeSubscriptionEpoch": true,
+            "registrationState": "registered",
+            "library": "androidx.window:window:1.6.0-alpha05",
+            "modes": {
+              "names": [
+                "AUDIO_ON",
+                "PRECISE_POINTER",
+                "VISUALS_ON"
+              ],
+              "omittedModeCount": 0,
+              "truncatedNameCount": 0
+            },
+            "lastCallbackTime": {
+              "deviceUtc": "2026-10-15T07:23:47.760802Z",
+              "elapsedRealtimeMs": 47264565
+            },
+            "callbackCount": 1,
+            "currentEpochCallbackCount": 1,
+            "repeatedCallbackCount": 0,
+            "rejectedLateCallbackCount": 0,
+            "cleanupFailureCount": 0,
+            "errorType": null,
+            "droppedEventCount": 0
+          }
+        }
+      ],
+      "retention": {
+        "windowRecordLimit": 8,
+        "retainedWindowCount": 2,
+        "activityAliveCountObserved": 1,
+        "evictedClosedWindowCount": 0,
+        "rejectedRegistrationCount": 0,
+        "rejectedCallbackCount": 1,
+        "supersededGenerationCount": 1,
+        "eventLimit": 128,
+        "droppedEventCount": 0,
+        "windowSnapshotByteLimit": 32768,
+        "engagementEventLimitPerGeneration": 32,
+        "engagementRegistrationLimit": 8,
+        "engagementModeLimit": 16,
+        "engagementModeNameCharacterLimit": 80
+      },
+      "engagementCleanup": {
+        "status": "no-failure-observed",
+        "failureCount": 0,
+        "failures": [],
+        "droppedFailureCount": 0
+      }
+    }
+  ],
+  "engagementHistories": [
+    {
+      "privateReport": "qualification/results/private/engagement-probe/engagement-initial.json",
+      "identity": {
+        "logicalWindowId": "8fbdb166-a607-456e-8486-7a55b30b2e67",
+        "taskIdObserved": 1000150,
+        "activityGenerationId": "c4c53406-1526-425e-8c57-1a10f0bf3200"
+      },
+      "events": [
+        {
+          "subscriptionEpoch": 1,
+          "kind": "pending",
+          "time": {
+            "deviceUtc": "2026-10-15T07:21:32.424217Z",
+            "elapsedRealtimeMs": 47129228
+          },
+          "modes": null,
+          "errorType": null
+        },
+        {
+          "subscriptionEpoch": 1,
+          "kind": "registered",
+          "time": {
+            "deviceUtc": "2026-10-15T07:21:32.432186Z",
+            "elapsedRealtimeMs": 47129236
+          },
+          "modes": null,
+          "errorType": null
+        },
+        {
+          "subscriptionEpoch": 1,
+          "kind": "modes-reported",
+          "time": {
+            "deviceUtc": "2026-10-15T07:21:32.432537Z",
+            "elapsedRealtimeMs": 47129237
+          },
+          "modes": {
+            "names": [
+              "AUDIO_ON",
+              "TOUCH",
+              "VISUALS_ON"
+            ],
+            "omittedModeCount": 0,
+            "truncatedNameCount": 0
+          },
+          "errorType": null
+        },
+        {
+          "subscriptionEpoch": 1,
+          "kind": "modes-reported",
+          "time": {
+            "deviceUtc": "2026-10-15T07:21:32.432743Z",
+            "elapsedRealtimeMs": 47129237
+          },
+          "modes": {
+            "names": [
+              "AUDIO_ON",
+              "PRECISE_POINTER",
+              "VISUALS_ON"
+            ],
+            "omittedModeCount": 0,
+            "truncatedNameCount": 0
+          },
+          "errorType": null
+        }
+      ],
+      "droppedEventCount": 0
+    },
+    {
+      "privateReport": "qualification/results/private/engagement-probe/engagement-first-closed.json",
+      "identity": {
+        "logicalWindowId": "8fbdb166-a607-456e-8486-7a55b30b2e67",
+        "taskIdObserved": 1000150,
+        "activityGenerationId": "c4c53406-1526-425e-8c57-1a10f0bf3200"
+      },
+      "events": [
+        {
+          "subscriptionEpoch": 1,
+          "kind": "pending",
+          "time": {
+            "deviceUtc": "2026-10-15T07:21:32.424217Z",
+            "elapsedRealtimeMs": 47129228
+          },
+          "modes": null,
+          "errorType": null
+        },
+        {
+          "subscriptionEpoch": 1,
+          "kind": "registered",
+          "time": {
+            "deviceUtc": "2026-10-15T07:21:32.432186Z",
+            "elapsedRealtimeMs": 47129236
+          },
+          "modes": null,
+          "errorType": null
+        },
+        {
+          "subscriptionEpoch": 1,
+          "kind": "modes-reported",
+          "time": {
+            "deviceUtc": "2026-10-15T07:21:32.432537Z",
+            "elapsedRealtimeMs": 47129237
+          },
+          "modes": {
+            "names": [
+              "AUDIO_ON",
+              "TOUCH",
+              "VISUALS_ON"
+            ],
+            "omittedModeCount": 0,
+            "truncatedNameCount": 0
+          },
+          "errorType": null
+        },
+        {
+          "subscriptionEpoch": 1,
+          "kind": "modes-reported",
+          "time": {
+            "deviceUtc": "2026-10-15T07:21:32.432743Z",
+            "elapsedRealtimeMs": 47129237
+          },
+          "modes": {
+            "names": [
+              "AUDIO_ON",
+              "PRECISE_POINTER",
+              "VISUALS_ON"
+            ],
+            "omittedModeCount": 0,
+            "truncatedNameCount": 0
+          },
+          "errorType": null
+        },
+        {
+          "subscriptionEpoch": 1,
+          "kind": "stopped",
+          "time": {
+            "deviceUtc": "2026-10-15T07:23:05.959481Z",
+            "elapsedRealtimeMs": 47222764
+          },
+          "modes": null,
+          "errorType": null
+        },
+        {
+          "subscriptionEpoch": 1,
+          "kind": "cleanup-complete",
+          "time": {
+            "deviceUtc": "2026-10-15T07:23:05.959712Z",
+            "elapsedRealtimeMs": 47222764
+          },
+          "modes": null,
+          "errorType": null
+        }
+      ],
+      "droppedEventCount": 0
+    },
+    {
+      "privateReport": "qualification/results/private/engagement-probe/engagement-b-returned.json",
+      "identity": {
+        "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+        "taskIdObserved": 1000152,
+        "activityGenerationId": "06788a08-1ad6-4de6-aa4e-fcc01560b0c7"
+      },
+      "events": [
+        {
+          "subscriptionEpoch": 1,
+          "kind": "pending",
+          "time": {
+            "deviceUtc": "2026-10-15T07:22:26.038564Z",
+            "elapsedRealtimeMs": 47182843
+          },
+          "modes": null,
+          "errorType": null
+        },
+        {
+          "subscriptionEpoch": 1,
+          "kind": "registered",
+          "time": {
+            "deviceUtc": "2026-10-15T07:22:26.040960Z",
+            "elapsedRealtimeMs": 47182845
+          },
+          "modes": null,
+          "errorType": null
+        },
+        {
+          "subscriptionEpoch": 1,
+          "kind": "modes-reported",
+          "time": {
+            "deviceUtc": "2026-10-15T07:22:26.041122Z",
+            "elapsedRealtimeMs": 47182845
+          },
+          "modes": {
+            "names": [
+              "AUDIO_ON",
+              "PRECISE_POINTER",
+              "VISUALS_ON"
+            ],
+            "omittedModeCount": 0,
+            "truncatedNameCount": 0
+          },
+          "errorType": null
+        },
+        {
+          "subscriptionEpoch": 1,
+          "kind": "stopped",
+          "time": {
+            "deviceUtc": "2026-10-15T07:23:11.629792Z",
+            "elapsedRealtimeMs": 47228434
+          },
+          "modes": null,
+          "errorType": null
+        },
+        {
+          "subscriptionEpoch": 1,
+          "kind": "cleanup-complete",
+          "time": {
+            "deviceUtc": "2026-10-15T07:23:11.630092Z",
+            "elapsedRealtimeMs": 47228434
+          },
+          "modes": null,
+          "errorType": null
+        },
+        {
+          "subscriptionEpoch": 2,
+          "kind": "pending",
+          "time": {
+            "deviceUtc": "2026-10-15T07:23:37.675161Z",
+            "elapsedRealtimeMs": 47254479
+          },
+          "modes": null,
+          "errorType": null
+        },
+        {
+          "subscriptionEpoch": 2,
+          "kind": "registered",
+          "time": {
+            "deviceUtc": "2026-10-15T07:23:37.676083Z",
+            "elapsedRealtimeMs": 47254480
+          },
+          "modes": null,
+          "errorType": null
+        },
+        {
+          "subscriptionEpoch": 2,
+          "kind": "modes-reported",
+          "time": {
+            "deviceUtc": "2026-10-15T07:23:37.676294Z",
+            "elapsedRealtimeMs": 47254480
+          },
+          "modes": {
+            "names": [
+              "AUDIO_ON",
+              "PRECISE_POINTER",
+              "VISUALS_ON"
+            ],
+            "omittedModeCount": 0,
+            "truncatedNameCount": 0
+          },
+          "errorType": null
+        }
+      ],
+      "droppedEventCount": 0
+    },
+    {
+      "privateReport": "qualification/results/private/engagement-probe/engagement-b-recreated.json",
+      "identity": {
+        "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+        "taskIdObserved": 1000152,
+        "activityGenerationId": "238a280b-9ba5-4402-9f8a-ccfe149f1e99"
+      },
+      "events": [
+        {
+          "subscriptionEpoch": 1,
+          "kind": "pending",
+          "time": {
+            "deviceUtc": "2026-10-15T07:23:47.760286Z",
+            "elapsedRealtimeMs": 47264564
+          },
+          "modes": null,
+          "errorType": null
+        },
+        {
+          "subscriptionEpoch": 1,
+          "kind": "registered",
+          "time": {
+            "deviceUtc": "2026-10-15T07:23:47.760689Z",
+            "elapsedRealtimeMs": 47264565
+          },
+          "modes": null,
+          "errorType": null
+        },
+        {
+          "subscriptionEpoch": 1,
+          "kind": "modes-reported",
+          "time": {
+            "deviceUtc": "2026-10-15T07:23:47.760810Z",
+            "elapsedRealtimeMs": 47264565
+          },
+          "modes": {
+            "names": [
+              "AUDIO_ON",
+              "PRECISE_POINTER",
+              "VISUALS_ON"
+            ],
+            "omittedModeCount": 0,
+            "truncatedNameCount": 0
+          },
+          "errorType": null
+        }
+      ],
+      "droppedEventCount": 0
+    }
+  ],
+  "selectedLifecycleEvents": {
+    "privateReport": "qualification/results/private/engagement-probe/engagement-settled-3.json",
+    "events": [
+      {
+        "sequence": 1,
+        "elapsedRealtimeMs": 47129215,
+        "identity": {
+          "logicalWindowId": "8fbdb166-a607-456e-8486-7a55b30b2e67",
+          "taskIdObserved": 1000150,
+          "activityGenerationId": "c4c53406-1526-425e-8c57-1a10f0bf3200"
+        },
+        "kind": "activity-created",
+        "detail": "fresh-no-bundle",
+        "attribution": "current",
+        "localState": {
+          "marker": "A",
+          "markerIndex": 0,
+          "changeCount": 0
+        }
+      },
+      {
+        "sequence": 5,
+        "elapsedRealtimeMs": 47129239,
+        "identity": {
+          "logicalWindowId": "8fbdb166-a607-456e-8486-7a55b30b2e67",
+          "taskIdObserved": 1000150,
+          "activityGenerationId": "c4c53406-1526-425e-8c57-1a10f0bf3200"
+        },
+        "kind": "engagement-state",
+        "detail": "epoch=1;status=reported;registration=registered",
+        "attribution": "current",
+        "localState": {
+          "marker": "A",
+          "markerIndex": 0,
+          "changeCount": 0
+        }
+      },
+      {
+        "sequence": 10,
+        "elapsedRealtimeMs": 47181156,
+        "identity": {
+          "logicalWindowId": "8fbdb166-a607-456e-8486-7a55b30b2e67",
+          "taskIdObserved": 1000150,
+          "activityGenerationId": "c4c53406-1526-425e-8c57-1a10f0bf3200"
+        },
+        "kind": "marker-changed",
+        "detail": "",
+        "attribution": "current",
+        "localState": {
+          "marker": "B",
+          "markerIndex": 1,
+          "changeCount": 1
+        }
+      },
+      {
+        "sequence": 11,
+        "elapsedRealtimeMs": 47182813,
+        "identity": {
+          "logicalWindowId": "8fbdb166-a607-456e-8486-7a55b30b2e67",
+          "taskIdObserved": 1000150,
+          "activityGenerationId": "c4c53406-1526-425e-8c57-1a10f0bf3200"
+        },
+        "kind": "new-window-launch-requested",
+        "detail": "",
+        "attribution": "current",
+        "localState": {
+          "marker": "B",
+          "markerIndex": 1,
+          "changeCount": 1
+        }
+      },
+      {
+        "sequence": 12,
+        "elapsedRealtimeMs": 47182819,
+        "identity": {
+          "logicalWindowId": "8fbdb166-a607-456e-8486-7a55b30b2e67",
+          "taskIdObserved": 1000150,
+          "activityGenerationId": "c4c53406-1526-425e-8c57-1a10f0bf3200"
+        },
+        "kind": "new-window-launch-returned",
+        "detail": "Inspect the new task/window; return is not qualification.",
+        "attribution": "current",
+        "localState": {
+          "marker": "B",
+          "markerIndex": 1,
+          "changeCount": 1
+        }
+      },
+      {
+        "sequence": 14,
+        "elapsedRealtimeMs": 47182840,
+        "identity": {
+          "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+          "taskIdObserved": 1000152,
+          "activityGenerationId": "06788a08-1ad6-4de6-aa4e-fcc01560b0c7"
+        },
+        "kind": "activity-created",
+        "detail": "fresh-no-bundle",
+        "attribution": "current",
+        "localState": {
+          "marker": "A",
+          "markerIndex": 0,
+          "changeCount": 0
+        }
+      },
+      {
+        "sequence": 18,
+        "elapsedRealtimeMs": 47182867,
+        "identity": {
+          "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+          "taskIdObserved": 1000152,
+          "activityGenerationId": "06788a08-1ad6-4de6-aa4e-fcc01560b0c7"
+        },
+        "kind": "engagement-state",
+        "detail": "epoch=1;status=reported;registration=registered",
+        "attribution": "current",
+        "localState": {
+          "marker": "A",
+          "markerIndex": 0,
+          "changeCount": 0
+        }
+      },
+      {
+        "sequence": 23,
+        "elapsedRealtimeMs": 47195730,
+        "identity": {
+          "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+          "taskIdObserved": 1000152,
+          "activityGenerationId": "06788a08-1ad6-4de6-aa4e-fcc01560b0c7"
+        },
+        "kind": "marker-changed",
+        "detail": "",
+        "attribution": "current",
+        "localState": {
+          "marker": "B",
+          "markerIndex": 1,
+          "changeCount": 1
+        }
+      },
+      {
+        "sequence": 24,
+        "elapsedRealtimeMs": 47197380,
+        "identity": {
+          "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+          "taskIdObserved": 1000152,
+          "activityGenerationId": "06788a08-1ad6-4de6-aa4e-fcc01560b0c7"
+        },
+        "kind": "marker-changed",
+        "detail": "",
+        "attribution": "current",
+        "localState": {
+          "marker": "C",
+          "markerIndex": 2,
+          "changeCount": 2
+        }
+      },
+      {
+        "sequence": 29,
+        "elapsedRealtimeMs": 47222614,
+        "identity": {
+          "logicalWindowId": "8fbdb166-a607-456e-8486-7a55b30b2e67",
+          "taskIdObserved": 1000150,
+          "activityGenerationId": "c4c53406-1526-425e-8c57-1a10f0bf3200"
+        },
+        "kind": "activity-top-resumed",
+        "detail": "topResumed=false",
+        "attribution": "current",
+        "localState": {
+          "marker": "B",
+          "markerIndex": 1,
+          "changeCount": 1
+        }
+      },
+      {
+        "sequence": 30,
+        "elapsedRealtimeMs": 47222614,
+        "identity": {
+          "logicalWindowId": "8fbdb166-a607-456e-8486-7a55b30b2e67",
+          "taskIdObserved": 1000150,
+          "activityGenerationId": "c4c53406-1526-425e-8c57-1a10f0bf3200"
+        },
+        "kind": "activity-paused",
+        "detail": "",
+        "attribution": "current",
+        "localState": {
+          "marker": "B",
+          "markerIndex": 1,
+          "changeCount": 1
+        }
+      },
+      {
+        "sequence": 31,
+        "elapsedRealtimeMs": 47222665,
+        "identity": {
+          "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+          "taskIdObserved": 1000152,
+          "activityGenerationId": "06788a08-1ad6-4de6-aa4e-fcc01560b0c7"
+        },
+        "kind": "activity-top-resumed",
+        "detail": "topResumed=true",
+        "attribution": "current",
+        "localState": {
+          "marker": "C",
+          "markerIndex": 2,
+          "changeCount": 2
+        }
+      },
+      {
+        "sequence": 32,
+        "elapsedRealtimeMs": 47222764,
+        "identity": {
+          "logicalWindowId": "8fbdb166-a607-456e-8486-7a55b30b2e67",
+          "taskIdObserved": 1000150,
+          "activityGenerationId": "c4c53406-1526-425e-8c57-1a10f0bf3200"
+        },
+        "kind": "activity-stopped",
+        "detail": "",
+        "attribution": "current",
+        "localState": {
+          "marker": "B",
+          "markerIndex": 1,
+          "changeCount": 1
+        }
+      },
+      {
+        "sequence": 33,
+        "elapsedRealtimeMs": 47222764,
+        "identity": {
+          "logicalWindowId": "8fbdb166-a607-456e-8486-7a55b30b2e67",
+          "taskIdObserved": 1000150,
+          "activityGenerationId": "c4c53406-1526-425e-8c57-1a10f0bf3200"
+        },
+        "kind": "activity-destroyed",
+        "detail": "changingConfigurations=false;finishing=true",
+        "attribution": "current",
+        "localState": {
+          "marker": "B",
+          "markerIndex": 1,
+          "changeCount": 1
+        }
+      },
+      {
+        "sequence": 34,
+        "elapsedRealtimeMs": 47222765,
+        "identity": {
+          "logicalWindowId": "8fbdb166-a607-456e-8486-7a55b30b2e67",
+          "taskIdObserved": 1000150,
+          "activityGenerationId": "c4c53406-1526-425e-8c57-1a10f0bf3200"
+        },
+        "kind": "engagement-state",
+        "detail": "epoch=1;status=stopped;registration=cleanup-complete",
+        "attribution": "closed-generation",
+        "localState": {
+          "marker": "B",
+          "markerIndex": 1,
+          "changeCount": 1
+        }
+      },
+      {
+        "sequence": 35,
+        "elapsedRealtimeMs": 47228124,
+        "identity": {
+          "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+          "taskIdObserved": 1000152,
+          "activityGenerationId": "06788a08-1ad6-4de6-aa4e-fcc01560b0c7"
+        },
+        "kind": "activity-top-resumed",
+        "detail": "topResumed=false",
+        "attribution": "current",
+        "localState": {
+          "marker": "C",
+          "markerIndex": 2,
+          "changeCount": 2
+        }
+      },
+      {
+        "sequence": 36,
+        "elapsedRealtimeMs": 47228125,
+        "identity": {
+          "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+          "taskIdObserved": 1000152,
+          "activityGenerationId": "06788a08-1ad6-4de6-aa4e-fcc01560b0c7"
+        },
+        "kind": "activity-paused",
+        "detail": "",
+        "attribution": "current",
+        "localState": {
+          "marker": "C",
+          "markerIndex": 2,
+          "changeCount": 2
+        }
+      },
+      {
+        "sequence": 39,
+        "elapsedRealtimeMs": 47228434,
+        "identity": {
+          "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+          "taskIdObserved": 1000152,
+          "activityGenerationId": "06788a08-1ad6-4de6-aa4e-fcc01560b0c7"
+        },
+        "kind": "activity-stopped",
+        "detail": "",
+        "attribution": "current",
+        "localState": {
+          "marker": "C",
+          "markerIndex": 2,
+          "changeCount": 2
+        }
+      },
+      {
+        "sequence": 40,
+        "elapsedRealtimeMs": 47228434,
+        "identity": {
+          "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+          "taskIdObserved": 1000152,
+          "activityGenerationId": "06788a08-1ad6-4de6-aa4e-fcc01560b0c7"
+        },
+        "kind": "activity-save-instance-state",
+        "detail": "",
+        "attribution": "current",
+        "localState": {
+          "marker": "C",
+          "markerIndex": 2,
+          "changeCount": 2
+        }
+      },
+      {
+        "sequence": 41,
+        "elapsedRealtimeMs": 47228434,
+        "identity": {
+          "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+          "taskIdObserved": 1000152,
+          "activityGenerationId": "06788a08-1ad6-4de6-aa4e-fcc01560b0c7"
+        },
+        "kind": "engagement-state",
+        "detail": "epoch=1;status=stopped;registration=cleanup-complete",
+        "attribution": "current",
+        "localState": {
+          "marker": "C",
+          "markerIndex": 2,
+          "changeCount": 2
+        }
+      },
+      {
+        "sequence": 42,
+        "elapsedRealtimeMs": 47254479,
+        "identity": {
+          "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+          "taskIdObserved": 1000152,
+          "activityGenerationId": "06788a08-1ad6-4de6-aa4e-fcc01560b0c7"
+        },
+        "kind": "activity-started",
+        "detail": "",
+        "attribution": "current",
+        "localState": {
+          "marker": "C",
+          "markerIndex": 2,
+          "changeCount": 2
+        }
+      },
+      {
+        "sequence": 43,
+        "elapsedRealtimeMs": 47254480,
+        "identity": {
+          "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+          "taskIdObserved": 1000152,
+          "activityGenerationId": "06788a08-1ad6-4de6-aa4e-fcc01560b0c7"
+        },
+        "kind": "activity-resumed",
+        "detail": "",
+        "attribution": "current",
+        "localState": {
+          "marker": "C",
+          "markerIndex": 2,
+          "changeCount": 2
+        }
+      },
+      {
+        "sequence": 45,
+        "elapsedRealtimeMs": 47254516,
+        "identity": {
+          "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+          "taskIdObserved": 1000152,
+          "activityGenerationId": "06788a08-1ad6-4de6-aa4e-fcc01560b0c7"
+        },
+        "kind": "engagement-state",
+        "detail": "epoch=2;status=reported;registration=registered",
+        "attribution": "current",
+        "localState": {
+          "marker": "C",
+          "markerIndex": 2,
+          "changeCount": 2
+        }
+      },
+      {
+        "sequence": 48,
+        "elapsedRealtimeMs": 47264527,
+        "identity": {
+          "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+          "taskIdObserved": 1000152,
+          "activityGenerationId": "06788a08-1ad6-4de6-aa4e-fcc01560b0c7"
+        },
+        "kind": "recreate-requested",
+        "detail": "",
+        "attribution": "current",
+        "localState": {
+          "marker": "C",
+          "markerIndex": 2,
+          "changeCount": 2
+        }
+      },
+      {
+        "sequence": 49,
+        "elapsedRealtimeMs": 47264561,
+        "identity": {
+          "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+          "taskIdObserved": 1000152,
+          "activityGenerationId": "06788a08-1ad6-4de6-aa4e-fcc01560b0c7"
+        },
+        "kind": "activity-top-resumed",
+        "detail": "topResumed=false",
+        "attribution": "current",
+        "localState": {
+          "marker": "C",
+          "markerIndex": 2,
+          "changeCount": 2
+        }
+      },
+      {
+        "sequence": 50,
+        "elapsedRealtimeMs": 47264561,
+        "identity": {
+          "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+          "taskIdObserved": 1000152,
+          "activityGenerationId": "06788a08-1ad6-4de6-aa4e-fcc01560b0c7"
+        },
+        "kind": "activity-paused",
+        "detail": "",
+        "attribution": "current",
+        "localState": {
+          "marker": "C",
+          "markerIndex": 2,
+          "changeCount": 2
+        }
+      },
+      {
+        "sequence": 51,
+        "elapsedRealtimeMs": 47264561,
+        "identity": {
+          "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+          "taskIdObserved": 1000152,
+          "activityGenerationId": "06788a08-1ad6-4de6-aa4e-fcc01560b0c7"
+        },
+        "kind": "activity-stopped",
+        "detail": "",
+        "attribution": "current",
+        "localState": {
+          "marker": "C",
+          "markerIndex": 2,
+          "changeCount": 2
+        }
+      },
+      {
+        "sequence": 52,
+        "elapsedRealtimeMs": 47264561,
+        "identity": {
+          "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+          "taskIdObserved": 1000152,
+          "activityGenerationId": "06788a08-1ad6-4de6-aa4e-fcc01560b0c7"
+        },
+        "kind": "activity-save-instance-state",
+        "detail": "",
+        "attribution": "current",
+        "localState": {
+          "marker": "C",
+          "markerIndex": 2,
+          "changeCount": 2
+        }
+      },
+      {
+        "sequence": 53,
+        "elapsedRealtimeMs": 47264561,
+        "identity": {
+          "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+          "taskIdObserved": 1000152,
+          "activityGenerationId": "06788a08-1ad6-4de6-aa4e-fcc01560b0c7"
+        },
+        "kind": "activity-destroyed",
+        "detail": "changingConfigurations=true;finishing=false",
+        "attribution": "current",
+        "localState": {
+          "marker": "C",
+          "markerIndex": 2,
+          "changeCount": 2
+        }
+      },
+      {
+        "sequence": 54,
+        "elapsedRealtimeMs": 47264562,
+        "identity": {
+          "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+          "taskIdObserved": 1000152,
+          "activityGenerationId": "238a280b-9ba5-4402-9f8a-ccfe149f1e99"
+        },
+        "kind": "activity-created",
+        "detail": "restored-bundle",
+        "attribution": "current",
+        "localState": {
+          "marker": "C",
+          "markerIndex": 2,
+          "changeCount": 2
+        }
+      },
+      {
+        "sequence": 55,
+        "elapsedRealtimeMs": 47264564,
+        "identity": {
+          "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+          "taskIdObserved": 1000152,
+          "activityGenerationId": "238a280b-9ba5-4402-9f8a-ccfe149f1e99"
+        },
+        "kind": "activity-started",
+        "detail": "",
+        "attribution": "current",
+        "localState": {
+          "marker": "C",
+          "markerIndex": 2,
+          "changeCount": 2
+        }
+      },
+      {
+        "sequence": 56,
+        "elapsedRealtimeMs": 47264565,
+        "identity": {
+          "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+          "taskIdObserved": 1000152,
+          "activityGenerationId": "238a280b-9ba5-4402-9f8a-ccfe149f1e99"
+        },
+        "kind": "activity-resumed",
+        "detail": "",
+        "attribution": "current",
+        "localState": {
+          "marker": "C",
+          "markerIndex": 2,
+          "changeCount": 2
+        }
+      },
+      {
+        "sequence": 58,
+        "elapsedRealtimeMs": 47264572,
+        "identity": {
+          "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+          "taskIdObserved": 1000152,
+          "activityGenerationId": "06788a08-1ad6-4de6-aa4e-fcc01560b0c7"
+        },
+        "kind": "engagement-state",
+        "detail": "epoch=2;status=stopped;registration=cleanup-complete",
+        "attribution": "rejected-engagement-generation-or-epoch",
+        "localState": null
+      },
+      {
+        "sequence": 59,
+        "elapsedRealtimeMs": 47264573,
+        "identity": {
+          "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+          "taskIdObserved": 1000152,
+          "activityGenerationId": "238a280b-9ba5-4402-9f8a-ccfe149f1e99"
+        },
+        "kind": "engagement-state",
+        "detail": "epoch=1;status=reported;registration=registered",
+        "attribution": "current",
+        "localState": {
+          "marker": "C",
+          "markerIndex": 2,
+          "changeCount": 2
+        }
+      },
+      {
+        "sequence": 60,
+        "elapsedRealtimeMs": 47264687,
+        "identity": {
+          "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+          "taskIdObserved": 1000152,
+          "activityGenerationId": "238a280b-9ba5-4402-9f8a-ccfe149f1e99"
+        },
+        "kind": "window-observed",
+        "detail": "",
+        "attribution": "current",
+        "localState": {
+          "marker": "C",
+          "markerIndex": 2,
+          "changeCount": 2
+        }
+      },
+      {
+        "sequence": 61,
+        "elapsedRealtimeMs": 47275603,
+        "identity": {
+          "logicalWindowId": "033f5ecc-4ab9-4b27-9e68-83a753ccc80f",
+          "taskIdObserved": 1000152,
+          "activityGenerationId": "238a280b-9ba5-4402-9f8a-ccfe149f1e99"
+        },
+        "kind": "refresh-requested",
+        "detail": "Device metadata is shared by the process.",
+        "attribution": "current",
+        "localState": {
+          "marker": "C",
+          "markerIndex": 2,
+          "changeCount": 2
+        }
+      },
+      {
+        "sequence": 62,
+        "elapsedRealtimeMs": 47275603,
+        "identity": null,
+        "kind": "refresh-started",
+        "detail": "",
+        "attribution": "process",
+        "localState": null
+      },
+      {
+        "sequence": 63,
+        "elapsedRealtimeMs": 47275605,
+        "identity": null,
+        "kind": "refresh-finished",
+        "detail": "Inspect section errors; completion is not qualification.",
+        "attribution": "process",
+        "localState": null
+      }
+    ]
+  },
+  "earlyExportLimit": {
+    "privateReport": "qualification/results/private/engagement-probe/engagement-two-windows.json",
+    "revision": 10,
+    "retainedWindowCount": 1,
+    "interpretation": "An export immediately after launch still contained A only. The later revision 22 report establishes two retained live windows; the early filename does not prove two-window completion."
+  },
+  "recreationBoundary": {
+    "sameLogicalWindowId": true,
+    "sameObservedTaskId": true,
+    "statePreserved": {
+      "marker": "C",
+      "markerIndex": 2,
+      "changeCount": 2
+    },
+    "processUnchanged": true,
+    "oldGeneration": "06788a08-1ad6-4de6-aa4e-fcc01560b0c7",
+    "newGeneration": "238a280b-9ba5-4402-9f8a-ccfe149f1e99",
+    "rejectedHistoricalCleanupEventSequence": 58,
+    "newGenerationEngagementEventSequence": 59,
+    "interpretation": "The rejection is delivery of an old-generation cleanup snapshot, not an observed late mode callback. Sampled per-controller rejectedLateCallbackCount remained 0; ledger rejectedCallbackCount became 1."
+  },
+  "quietness": {
+    "series": [
+      {
+        "label": "initial sample",
+        "privateSummary": "qualification/results/private/engagement-probe/engagement-quiet-settling.json",
+        "stable": false,
+        "revisions": [
+          60,
+          63,
+          63,
+          63
+        ],
+        "captures": [
+          {
+            "privateReport": "qualification/results/private/engagement-probe/engagement-quiet-0.json",
+            "recordedAtHostUtc": "2026-10-15T07:23:59.621255+00:00",
+            "revision": 60
+          },
+          {
+            "privateReport": "qualification/results/private/engagement-probe/engagement-quiet-1.json",
+            "recordedAtHostUtc": "2026-10-15T07:24:00.171066+00:00",
+            "revision": 63
+          },
+          {
+            "privateReport": "qualification/results/private/engagement-probe/engagement-quiet-2.json",
+            "recordedAtHostUtc": "2026-10-15T07:24:00.717697+00:00",
+            "revision": 63
+          },
+          {
+            "privateReport": "qualification/results/private/engagement-probe/engagement-quiet-3.json",
+            "recordedAtHostUtc": "2026-10-15T07:24:03.759497+00:00",
+            "revision": 63
+          }
+        ],
+        "hostObservationSpanSeconds": 4.138242
+      },
+      {
+        "label": "settled sample",
+        "privateSummary": "qualification/results/private/engagement-probe/engagement-settled-settling.json",
+        "stable": true,
+        "revisions": [
+          63,
+          63,
+          63,
+          63
+        ],
+        "captures": [
+          {
+            "privateReport": "qualification/results/private/engagement-probe/engagement-settled-0.json",
+            "recordedAtHostUtc": "2026-10-15T07:24:22.478411+00:00",
+            "revision": 63
+          },
+          {
+            "privateReport": "qualification/results/private/engagement-probe/engagement-settled-1.json",
+            "recordedAtHostUtc": "2026-10-15T07:24:23.022696+00:00",
+            "revision": 63
+          },
+          {
+            "privateReport": "qualification/results/private/engagement-probe/engagement-settled-2.json",
+            "recordedAtHostUtc": "2026-10-15T07:24:23.566397+00:00",
+            "revision": 63
+          },
+          {
+            "privateReport": "qualification/results/private/engagement-probe/engagement-settled-3.json",
+            "recordedAtHostUtc": "2026-10-15T07:24:26.623113+00:00",
+            "revision": 63
+          }
+        ],
+        "hostObservationSpanSeconds": 4.144702
+      }
+    ],
+    "refreshEventSequences": [
+      61,
+      62,
+      63
+    ],
+    "interpretation": "The first four-sample series is not stable. After the recorded Refresh and its saved update, the separate four-sample series stayed at 63. This short sample does not establish a soak test or exclude unpersisted/sampled counters."
+  },
+  "finalClose": {
+    "outcome": "window/process absence observed; final callback persistence and cleanup success unobserved",
+    "action": {
+      "action": "close last window",
+      "privateArtifact": "qualification/results/private/engagement-probe/engagement-final-close-tap-command.json",
+      "recordedAtHostUtc": "2026-10-15T07:24:56.435326+00:00",
+      "exitCode": 0,
+      "privateInspectedLayout": "qualification/results/private/engagement-probe/engagement-final-close-layout.json",
+      "matchedFreshOwnControlOrTask": true
+    },
+    "initialPostCloseExport": {
+      "privateReport": "qualification/results/private/engagement-probe/engagement-final-closed.json",
+      "revision": 63,
+      "byteIdenticalToPreCloseReport": true
+    },
+    "boundedConfirmations": [
+      {
+        "privateReport": "qualification/results/private/engagement-probe/engagement-final-close-confirm-0.json",
+        "recordedAtHostUtc": "2026-10-15T07:25:13.982103+00:00",
+        "exportExitCode": 0,
+        "revision": 63,
+        "byteIdenticalToPreCloseReport": true
+      },
+      {
+        "privateReport": "qualification/results/private/engagement-probe/engagement-final-close-confirm-1.json",
+        "recordedAtHostUtc": "2026-10-15T07:25:15.029392+00:00",
+        "exportExitCode": 0,
+        "revision": 63,
+        "byteIdenticalToPreCloseReport": true
+      },
+      {
+        "privateReport": "qualification/results/private/engagement-probe/engagement-final-close-confirm-2.json",
+        "recordedAtHostUtc": "2026-10-15T07:25:16.084896+00:00",
+        "exportExitCode": 0,
+        "revision": 63,
+        "byteIdenticalToPreCloseReport": true
+      },
+      {
+        "privateReport": "qualification/results/private/engagement-probe/engagement-final-close-confirm-3.json",
+        "recordedAtHostUtc": "2026-10-15T07:25:17.141171+00:00",
+        "exportExitCode": 0,
+        "revision": 63,
+        "byteIdenticalToPreCloseReport": true
+      },
+      {
+        "privateReport": "qualification/results/private/engagement-probe/engagement-final-close-confirm-4.json",
+        "recordedAtHostUtc": "2026-10-15T07:25:18.184880+00:00",
+        "exportExitCode": 0,
+        "revision": 63,
+        "byteIdenticalToPreCloseReport": true
+      },
+      {
+        "privateReport": "qualification/results/private/engagement-probe/engagement-final-close-confirm-5.json",
+        "recordedAtHostUtc": "2026-10-15T07:25:19.234246+00:00",
+        "exportExitCode": 0,
+        "revision": 63,
+        "byteIdenticalToPreCloseReport": true
+      }
+    ],
+    "preCloseReportSha256": "fc688781a1bdab5e07d654ccc01086e6a864805038f4679533c122fa88ea1464",
+    "processAbsence": {
+      "privateArtifact": "qualification/results/private/engagement-probe/engagement-final-pid.json",
+      "recordedAtHostUtc": "2026-10-15T07:26:02.571677+00:00",
+      "queryExitCode": 1,
+      "queryOutputEmpty": true,
+      "processAbsent": true
+    },
+    "latestPackageExitDiagnostic": {
+      "privateArtifact": "qualification/results/private/engagement-probe/engagement-exit-info-command.json",
+      "recordedAtHostUtc": "2026-10-15T07:26:02.600792+00:00",
+      "queryExitCode": 0,
+      "reasonNumberObserved": 10,
+      "reasonLabelObserved": "USER REQUESTED",
+      "subreasonNumberObserved": 22,
+      "subreasonLabelObserved": "REMOVE TASK",
+      "publicReasonSymbol": "ApplicationExitInfo.REASON_USER_REQUESTED",
+      "publicReasonMinimumApi": 30,
+      "publicReasonReference": "https://developer.android.com/reference/android/app/ApplicationExitInfo#REASON_USER_REQUESTED",
+      "subreasonBoundary": "The shell-reported subreason is observed diagnostic output only, not a selected public SDK contract or an API called by this probe."
+    },
+    "primaryAgentVisualObservation": {
+      "privateImage": "qualification/results/private/engagement-probe/engagement-after-last-close.png",
+      "probeWindowAbsent": true,
+      "authorIndependentlyViewedPixels": false
+    },
+    "interpretation": "Report 63 predates last close and still marks B alive/subscribed. After close it is historical, not evidence of a live process, successful final unregister or persisted onDestroy. No final callback is fabricated; process teardown may prevent its observation or asynchronous save."
+  },
+  "visualReview": {
+    "primaryAgentInspectedImmediately": [
+      "qualification/results/private/engagement-probe/engagement-two-windows.png",
+      "qualification/results/private/engagement-probe/engagement-final.png"
+    ],
+    "boundary": "Primary agent inspected the actual screenshots. This author checked report/history/control projections and command/result evidence without independently inspecting pixels or publishing raw UI."
+  },
+  "observedConfiguration": {
+    "fontScale": 1.0,
+    "densityDpi": 260,
+    "density": 1.625,
+    "unchangedAcrossRetainedReports": true
+  },
+  "notEstablished": [
+    "Physical keyboard/mouse/trackpad behavior or hotplug",
+    "Audio playback, audio permissions or actual visual rendering performance from AUDIO_ON/VISUALS_ON hints",
+    "External-display moves, alternate devices/builds or all alpha backends",
+    "Final last-window unregister completion or persisted destruction/cleanup callbacks",
+    "Real-device no-value, registration-failure, cleanup-failure or exhausted-admission outcomes",
+    "Leak freedom, hard IPC timeouts or long-running stability",
+    "Reboot/process-death restoration or remote-operation survival in this 0.3.0 run",
+    "Larger font behavior of this new APK; the separate font run used 0.2.0",
+    "Product dependency adoption, completed API09 qualification, P0-S2 closure or CAP-PLATFORM support"
+  ],
+  "capabilityDecision": {
+    "gate": "CAP-PLATFORM",
+    "outcome": "pending",
+    "reason": "Actual engagement observations are partial API09 evidence. Physical input, operation-specific lifecycle and remaining platform acceptance are separate."
+  },
+  "privateEvidence": [
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-030-deployment.json",
+      "sha256": "21afdeea4dfbce061d58ccff610ecfe0746473752cd946d2ead0b5febf3a2fb4",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-030-install-command.json",
+      "sha256": "e7b8ef8b430aca217e144da63c62765cb20bb66535a9387309566cdfe0c46371",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-030-launch-command.json",
+      "sha256": "06e4cc3772947b473c3f43a41df5f1d7030f613ec11483f6d540996570a321ca",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-a-marker-layout-command.json",
+      "sha256": "9a50adf56d0d92dd9e5909713808377bdeee1d1b879c4a22f537119cce48cceb",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-a-marker-layout.json",
+      "sha256": "1d4ed5b79ab0dbd9e24e5d1ae497878f3f1b62373f8f6dc5f68094de3772a1b2",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-a-marker-tap-command.json",
+      "sha256": "81a126ecaabeb389897b915dd07f25aa9a40145018932bd8f6c665854669d4cf",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-after-last-close-screen-command.json",
+      "sha256": "782ee2ad7136500f66655c5c8b40959c83489d9418e09fe0e9494a51925fa379",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-after-last-close.png",
+      "sha256": "05c3b639c45da3200252ee596c3ccd0aa5844795e78c13534fd89a11239f8128",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-b-marker-1-layout-command.json",
+      "sha256": "26bdd50539910b00660301b39b2bdcca40d10c2d6c6ea79493049cd8139b1785",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-b-marker-1-layout.json",
+      "sha256": "98e56cd042da4fa152c9939ef7c4ea1ea9c377355cff8e8b0872fe7634ef8d2e",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-b-marker-1-tap-command.json",
+      "sha256": "b0ded0d7b36a2e37d5788866866421e87d65b28cad54d90880f7779cc3d23efb",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-b-marker-2-layout-command.json",
+      "sha256": "6ac7490ca550d602cc067d21a709580197d700da798891e13d0bafb5b5f829fd",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-b-marker-2-layout.json",
+      "sha256": "4e2e7f4fcf6b0768fa5b1c69890d122eac685e5d430ae4897d4adfea437fe3b9",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-b-marker-2-tap-command.json",
+      "sha256": "c7bb71e43aff1c330c789e31bcfcb220921e9434993a874e02e47278cc73d160",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-b-minimize-layout-command.json",
+      "sha256": "3fabbb6dcbe6ceb20cac4aaf9fe032f9d1fb021c6467fa6ef7f84869f5095572",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-b-minimize-layout.json",
+      "sha256": "80d814d08d70bb457d4f588cb94946e6f589628ba9034dc8086392c1074cbd99",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-b-minimize-tap-command.json",
+      "sha256": "863366673b7d8631cb96817eb59cce0d4538b0717e0408ee2317a3cab1807aec",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-b-recreate-layout-command.json",
+      "sha256": "c2a6411ee4efb52509cd457dbcc14ff4a0d9ce42f28e7682f0385fa92147d826",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-b-recreate-layout.json",
+      "sha256": "a1adeb06d911034aef18e045e5388ded8d8d843ef30a114a4ca5f93d027d52f6",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-b-recreate-tap-command.json",
+      "sha256": "7e3e719bd372316da418ebfb69b93ee8a252d4ee1445b573afe8876cf1fbe2cf",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-b-recreated-command.json",
+      "sha256": "f8e8933cba0219ca8e8848ad799e9b2a4f726a737d86046e76905c4b04409b17",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-b-recreated-layout-command.json",
+      "sha256": "53735d39c8eb5f803d16e192866a0f5ac467121d9d05fd5c7a7725a6257e1b2d",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-b-recreated-layout.json",
+      "sha256": "d8d7e0bf7adcd76deb438acc40d60f6747199b7ddd758cb3e5e4d715672bdb3c",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-b-recreated.json",
+      "sha256": "fb4e7ef166521a123c7d5e59aa2cc51761b52af2f6b09069e0c2dc94b4ae85e2",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-b-refresh-layout-command.json",
+      "sha256": "38bee26ce7cf74f080583fcf6ae11bfbf4c886642a3682e2e11c49cbeb199413",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-b-refresh-layout.json",
+      "sha256": "d8d7e0bf7adcd76deb438acc40d60f6747199b7ddd758cb3e5e4d715672bdb3c",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-b-refresh-tap-command.json",
+      "sha256": "606b733cab25efbc23de4f466861804aa337848e6fa2e4c0cc17bbd024aabd3d",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-b-returned-command.json",
+      "sha256": "c33da3fda22654d365799eb7acae8b91de9baf2d7806e355ce4d1b5ed6db5449",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-b-returned-layout-command.json",
+      "sha256": "9fc4021ecc8d8c09367986d2535e5fba6764da894289cd81c42f3451fd4dc554",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-b-returned-layout.json",
+      "sha256": "a1adeb06d911034aef18e045e5388ded8d8d843ef30a114a4ca5f93d027d52f6",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-b-returned.json",
+      "sha256": "40102e2e6d9f6db8ed7f62dcea2e4105de131b7c63241bd50e1910766aa918bc",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-b-stopped-command.json",
+      "sha256": "b02e9795ed26c1965c67541374f2bf01b8519cb24373cc94a5dc41a497223c0d",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-b-stopped.json",
+      "sha256": "1557f26b97e3f7a9f265bef55906b4ef9795ed7e70b0f1d0244f583aa0e7a499",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-before-first-close-command.json",
+      "sha256": "faf251ad88549301c72c44f4ab38d793fad883638b50ad7b3bab23404ea31521",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-before-first-close.json",
+      "sha256": "7e46f1895faffba0957a1d54778daefa256e63a393120866f6c3c747edc5b919",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-exit-info-command.json",
+      "sha256": "1e91ff6230377c876ee1b85ce58560d37cb2bfbfa6ac87b5acb6057e4172dd5f",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-final-close-confirm-0-command.json",
+      "sha256": "8f0281621d4d94a8d9b69dabe1381cb40571502b7a0c206c5a9840720b86829c",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-final-close-confirm-0.json",
+      "sha256": "fc688781a1bdab5e07d654ccc01086e6a864805038f4679533c122fa88ea1464",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-final-close-confirm-1-command.json",
+      "sha256": "d70b012663751731190a59e3e847bc14bd11afe6c34036ac39a60ca7e94d6090",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-final-close-confirm-1.json",
+      "sha256": "fc688781a1bdab5e07d654ccc01086e6a864805038f4679533c122fa88ea1464",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-final-close-confirm-2-command.json",
+      "sha256": "d45d93d8b5e498637a15698f900fba2996f2b4bfb886dd67332a8ccbb998c4e6",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-final-close-confirm-2.json",
+      "sha256": "fc688781a1bdab5e07d654ccc01086e6a864805038f4679533c122fa88ea1464",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-final-close-confirm-3-command.json",
+      "sha256": "235ee53084f2747926422ff6cba1ed6ebd20511c615853e5a25fceeb9d53fa22",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-final-close-confirm-3.json",
+      "sha256": "fc688781a1bdab5e07d654ccc01086e6a864805038f4679533c122fa88ea1464",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-final-close-confirm-4-command.json",
+      "sha256": "560a5a1559a396173c685de162d51089e1623b257bc3c604493c18150968c12c",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-final-close-confirm-4.json",
+      "sha256": "fc688781a1bdab5e07d654ccc01086e6a864805038f4679533c122fa88ea1464",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-final-close-confirm-5-command.json",
+      "sha256": "f12ebbc962bcfc5e26f2e6c1c2e243dcea714ae648fc3d70a6952d2d693939fa",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-final-close-confirm-5.json",
+      "sha256": "fc688781a1bdab5e07d654ccc01086e6a864805038f4679533c122fa88ea1464",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-final-close-layout-command.json",
+      "sha256": "76c5d91784ae0f5ec9bf834e35cab12b59fe4326f72d0cadeb2b050bf8ac19c8",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-final-close-layout.json",
+      "sha256": "3512f077214851b9d56e73bc1db161a0b0b99aec24b2a1f4b966587f46a1a4c9",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-final-close-tap-command.json",
+      "sha256": "651f76bb4302a35616a55e75e229def8ef4b598acb29de625ea1d40f2b1921ef",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-final-closed-command.json",
+      "sha256": "6f79923c138791dac44600248dbcfe8f0c3cb5571a9ddfa67978574f31524fab",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-final-closed.json",
+      "sha256": "fc688781a1bdab5e07d654ccc01086e6a864805038f4679533c122fa88ea1464",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-final-pid.json",
+      "sha256": "d17a87021d6f8417c0f2b1d60f224afb6a0f01ecd23228fb547d2aee181589ca",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-final-screen-command.json",
+      "sha256": "c4a212b070c6928012b0900580a63a6b5f9b17a2ea3b7bb716720bca0f49aaab",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-final.png",
+      "sha256": "6061b17a37d98f9ecd2a0846c2a3f6ed871b64dbac17335ba35bb5fcad4f3b78",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-first-close-layout-command.json",
+      "sha256": "4564c8860a1a27cb80fef84ab38d5bda310923678ade0e37d808bd074655c310",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-first-close-layout.json",
+      "sha256": "9e4d1bf307ff8ba7dc0459b5e95994e6ca13e47ca319156eb52cc55e4a4e38cb",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-first-close-tap-command.json",
+      "sha256": "4ed390c1391c07ca6a3ddb783ef4b4725b27da1da5573b3daff8317826fbf96b",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-first-closed-command.json",
+      "sha256": "3846eef4b3b018eab76875b61cc851124425941ade65739c9353dcf5bdd420f9",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-first-closed.json",
+      "sha256": "cee230622fb4d5bb2a0ecd37b5678994743dc4b1941760e822dcc917dbf35afb",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-initial-command.json",
+      "sha256": "08e58bf0abadc163ba041cd15d80a94fd922a4b16162b92995256d3dec0ee260",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-initial-layout-command.json",
+      "sha256": "6328b1fedf4525277234e86f97d166b006681b71d17f99241579997e58baa9b0",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-initial-layout.json",
+      "sha256": "27be78a86bf23f11a395c5035ec9af9933a0006bed3f3eec5b1b26eb04612b36",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-initial.json",
+      "sha256": "992a76002bfb17f5cb8cd72f381496b69a6f995b00492d6a59e9a1f6288b358e",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-open-b-layout-command.json",
+      "sha256": "87c71a38c643ceb7c9fff6a253c3680f495e6fdca7faf2c66cd733b3c1b31148",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-open-b-layout.json",
+      "sha256": "d5fc14e698b1f2ca9ee1b238eff97eaec602acccf1deba051a680049fd92602d",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-open-b-tap-command.json",
+      "sha256": "c4ff6431db34db607114fc9c1094d8a5a6985443eef134a3c89ac70f2480c542",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-quiet-0-command.json",
+      "sha256": "29be88f9ef18399ae8b1338958a5b8cba864c7c0500c5a6aafcec4b57f55bace",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-quiet-0.json",
+      "sha256": "fb4e7ef166521a123c7d5e59aa2cc51761b52af2f6b09069e0c2dc94b4ae85e2",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-quiet-1-command.json",
+      "sha256": "95eccc1976e82ceb294e94445e65bb4a4e5428b7baa4ebcff62ff1d7122119f9",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-quiet-1.json",
+      "sha256": "fc688781a1bdab5e07d654ccc01086e6a864805038f4679533c122fa88ea1464",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-quiet-2-command.json",
+      "sha256": "83221b562f3940c65db67ad7a9b6e42043f3cfda5c25a3581379f1173430498f",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-quiet-2.json",
+      "sha256": "fc688781a1bdab5e07d654ccc01086e6a864805038f4679533c122fa88ea1464",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-quiet-3-command.json",
+      "sha256": "389463b7423740f19724b19f73e8a64ed0020a527413fd5c40c2db0b0f713aa8",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-quiet-3.json",
+      "sha256": "fc688781a1bdab5e07d654ccc01086e6a864805038f4679533c122fa88ea1464",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-quiet-settling.json",
+      "sha256": "37dcbbedf3fe41a2a19f8c9a66fadd9af42adc71f6b00eadf6a40b1aa96da5be",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-recents-layout-command.json",
+      "sha256": "061d05b5ef04e85275a08872f16bb7e1c3dc73d979cfe74b9e2777084e337e89",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-recents-layout.json",
+      "sha256": "afffbbc487ecaaaf77d4dfee197cec43f5f75cc56e164c7c8e6f26d3b16c8065",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-recents-open-command.json",
+      "sha256": "8ae5cada3267becb2c11c44ad80898622f8482777be8bf98e83e22d8c907fbf7",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-recents-restore-input-command.json",
+      "sha256": "98c17ad790ddfa39e38415b2bb5e589014d5f7bce595e5f79dc951051b9d186c",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-settled-0-command.json",
+      "sha256": "3149bb726f1edaaababbd42a79978217d54dbfb9e6a3103a1bf60ee7a43b003a",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-settled-0.json",
+      "sha256": "fc688781a1bdab5e07d654ccc01086e6a864805038f4679533c122fa88ea1464",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-settled-1-command.json",
+      "sha256": "a986f4e1e8a9f6f8f227f6c2494c8ff58281fc74c725ab72890e74699206c4c8",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-settled-1.json",
+      "sha256": "fc688781a1bdab5e07d654ccc01086e6a864805038f4679533c122fa88ea1464",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-settled-2-command.json",
+      "sha256": "c87ea283d498fac92d7a6a466e915b3053e923f781b426d4c340f064a7394b33",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-settled-2.json",
+      "sha256": "fc688781a1bdab5e07d654ccc01086e6a864805038f4679533c122fa88ea1464",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-settled-3-command.json",
+      "sha256": "abeee55be26c7d1fcbd18e82463dee188d3942e0fc0114cbdfa9aea9b36aadd4",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-settled-3.json",
+      "sha256": "fc688781a1bdab5e07d654ccc01086e6a864805038f4679533c122fa88ea1464",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-settled-settling.json",
+      "sha256": "ae8859d785751fef63d99716e71a2762a871630ec9f40e03249d4238e77fbc25",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-two-settled-command.json",
+      "sha256": "09f77f082a383ffe44713520e1b19eda3a0e7889b95236ef50138a70ac2006a6",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-two-settled.json",
+      "sha256": "858b147e6e4a24c3e1b50c4c015c1b71032febc468e2831c5b50c4b7d1c3f061",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-two-windows-command.json",
+      "sha256": "bc05e631c989b49d324007907b7ba23869d3f3b7cde08e4f3786933cc4c2a26a",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-two-windows-screen-command.json",
+      "sha256": "fe1c08768eaf81a86cf858132031201b04f1412359a8b5ab2c8c2563484062ad",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-two-windows.json",
+      "sha256": "7de45d210c81321f4277e594a0194bd00869192801131e50e8f4c1099b445516",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/engagement-probe/engagement-two-windows.png",
+      "sha256": "8de605ec6f515c1fddead50153eaec27faf61d4d56922512a0ae984389118c97",
+      "publication": "Hash/path only; raw contents remain private"
+    }
+  ],
+  "sanitization": {
+    "included": "Source/APK/device build, random probe identities and observed task IDs, local marker state, engagement modes/epochs/counters/times, selected lifecycle events, configuration/bounds, command-result booleans and reason classifications, and private artifact hashes.",
+    "excluded": [
+      "Raw process IDs",
+      "UIDs and user IDs",
+      "Transport serials and hardware unique identifiers",
+      "Raw command arguments/stdout/stderr",
+      "Raw UI trees and injected-input coordinates",
+      "Screenshots and unrelated desktop or Recents content",
+      "Machine inventories"
+    ]
+  }
+}

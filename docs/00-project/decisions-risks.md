@@ -41,6 +41,7 @@ Statuses: **adopted for planning**, **proposed pending spike**, **unknown**, **q
 | R24 | Completed research accidentally treated as supported implementation | Controlled by readiness contract; no evidence yet | Platform/QA | All capability deciding stages | Pending/experiment/blocked outcomes cannot activate dependent product stages; scoped evidence required |
 | R25 | Updated workflows have specifications but no native interaction evidence | Unqualified | Design/Android | P1-S2 and feature stages | [Native workspace review](../04-design/native-workspace-review.md); freeze only demonstrated geometry and behavior |
 | R26 | Independent releases omit package quality or double-count suite evidence | Planned checks, unqualified | Release/QA | P2-S5 / P3-S5 / P6 | App-scoped signed update/recovery/notices/support and observation; reuse exact-build evidence only |
+| R27 | Android17/target37 direct LAN permission and app-route readiness | Documented; runtime grant/denial/revocation untested | Android/network | P0-S2 / P0-S6 | [API41 prerequisite](../03-platform/googlebook/p0-s2-operation-lifetimes.md); surface denied access, qualify actual app TCP/TLS route, preserve pending operation, keep VPN/shell results separate |
 
 Update this table when evidence changes; link the run, installed version, and affected phase. A fallback is acceptable only when its user-visible limitation is documented and the fallback itself has been tested.
 

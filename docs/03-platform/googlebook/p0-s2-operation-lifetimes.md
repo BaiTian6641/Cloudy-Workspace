@@ -4,6 +4,18 @@
 
 Apply [Rule 0](../../00-project/platform-rule-zero.md), the [desktop contract](desktop-application-contract.md), and [security/lifecycle architecture](../../02-architecture/security-and-lifecycle.md). Console and Desktop own their operations independently. Sharing source does not introduce shared credentials, a cross-app daemon, or a guarantee that a process stays alive. Target SDK 37 does not remove earlier Android execution restrictions.
 
+## Observed last-window limit
+
+The [0.3.0 engagement run](../../../qualification/results/P0-S2/2026-10-15-engagement-probe.md) closed the first window while another stayed alive and recorded successful listener removal. Closing the last remaining window instead left the saved report at its earlier revision; six bounded exports did not establish final cleanup, the process was absent, and the shell exit history reported reason 10 (`USER REQUESTED`) / subreason 22 (`REMOVE TASK`). The public `ApplicationExitInfo.REASON_USER_REQUESTED` constant is available from API 30; its meaning includes user-directed task removal. The shell subreason is an observation, not a public application API. [G78](https://developer.android.com/reference/android/app/ApplicationExitInfo)
+
+This is one task-removal observation on the identified HP build, distinct from the earlier background-process-kill experiment. It does not establish FGS/UIDT behavior, force-stop equivalence, or a guaranteed kill policy for every app. It reinforces the proposed requirement to commit operation state during work and treat missing cleanup acknowledgments as unknown. The diagnostic recorder intentionally cannot guarantee a final queued write after process termination.
+
+## Prerequisite for a real LAN operation
+
+For the selected runtime **37 / target 37** probe, a direct connection to the Linux LAN host requires `INTERNET` plus the Android 17 dangerous permission `Manifest.permission.ACCESS_LOCAL_NETWORK`. Check the grant with `Context.checkSelfPermission`, request through `Activity.requestPermissions` for the actual user operation, and handle denial/revocation explicitly. The permission constant/value is present in the selected SDK37.0 `android.jar`; no permission request or app network operation has been tested. The current 0.3.0 diagnostic remains permission-free. [G79](https://developer.android.com/privacy-and-security/local-network-permission), [G80](https://developer.android.com/about/versions/17/behavior-changes-17), [G81](https://developer.android.com/reference/android/Manifest.permission.html#ACCESS_LOCAL_NETWORK)
+
+Register this prerequisite as **API41 / P0-S2**. Local TCP denial may look like a timeout; do not blame the host or routing before checking app access. The permission reference defines LAN over Wi-Fi/Ethernet separately from cellular/VPN, so shell ICMP and a VPN route are independent observations. Do not add unrelated Nearby Devices permissions to obtain a group grant. System-mediated mDNS service selection is an alternative requiring its own discovery/connection experiment, not a tested replacement for the fixed-host route. No permission grant implies SSH authentication, TLS trust, server readiness or UIDT scheduling eligibility.
+
 ## Proposed operation choices
 
 These are project interpretations of the official contracts below, pending implementation review and real experiments. A permission must serve an actual feature; adding one solely to pass a foreground-service prerequisite is prohibited.
