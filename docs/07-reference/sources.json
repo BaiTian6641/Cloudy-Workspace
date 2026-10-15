@@ -1283,8 +1283,8 @@
       "category": "platform",
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
-      "sourceUpdatedOn": null,
-      "note": "InputManager enumeration/query API16; handle devices removed during query; public reports omit transient IDs.",
+      "sourceUpdatedOn": "2026-08-03",
+      "note": "InputManager enumeration/query/listener APIs start at API16; handle detach races and omit transient IDs publicly. registerInputDeviceListener with null Handler uses the calling thread Looper, relevant to alpha05 engagement registration.",
       "refresh": "Recheck exact public contract and implementation when updating the persistence/input path."
     },
     {

@@ -185,7 +185,8 @@
         "G74",
         "G75",
         "G76",
-        "G77"
+        "G77",
+        "G49"
       ],
       "minimumApi": null,
       "libraryVersion": "androidx.window:window:1.6.0-alpha05 (candidate only)",
@@ -198,7 +199,8 @@
       "experiment": "Resolve/verify candidate dependencies, compile exact public callbacks, then record E01–E05 on the selected device; physical transitions remain separate.",
       "researchEvidence": "docs/03-platform/googlebook/p0-s2-engagement-probe-contract.md",
       "libraryMinSdk": 23,
-      "runtimeGuard": "This candidate computes precise-pointer engagement on API30+; below30 its compatibility backend reports TOUCH. No engagement-specific WindowSdkExtension requirement. No product minimum or dependency selected."
+      "runtimeGuard": "This candidate computes precise-pointer engagement on API30+; below30 its compatibility backend reports TOUCH. No engagement-specific WindowSdkExtension requirement. No product minimum or dependency selected.",
+      "registrationConstraint": "Pinned alpha input listener registration delegates a null Handler to InputManager. Use a live Looper-backed registration thread and serialized cleanup; the existing plain scheduled executor is not suitable."
     },
     {
       "id": "API10",
