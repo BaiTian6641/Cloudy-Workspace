@@ -32,6 +32,8 @@ SYSTEM = {
 }
 MPL_SHA256 = "3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04"
 JNI_BOUNDARY_EXPORTS = {
+    "Java_com_freerdp_freerdpcore_services_LibFreeRDP_freerdp_1is_1relative_1mouse_1supported",
+    "Java_com_freerdp_freerdpcore_services_LibFreeRDP_freerdp_1send_1relative_1cursor_1event",
     "Java_com_freerdp_freerdpcore_services_LibFreeRDP_freerdp_1join",
     "Java_com_freerdp_freerdpcore_services_LibFreeRDP_freerdp_1set_1external_1certificate_1management",
     "Java_com_freerdp_freerdpcore_services_LibFreeRDP_freerdp_1send_1key_1event",
@@ -39,6 +41,7 @@ JNI_BOUNDARY_EXPORTS = {
 PATCH_ORDER = (
     "bounded-openssl-jobs.patch", "android-session-ownership.patch",
     "android-external-certificate.patch", "android-key-validation.patch",
+    "android-relative-input.patch",
 )
 
 

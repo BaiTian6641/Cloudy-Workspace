@@ -78,6 +78,11 @@
       "path": "patches/android-key-validation.patch",
       "bytes": 614,
       "sha256": "dff3423f333a3d76a7c27ea22ab1408eb77d4be565dd32c84b5b82efd2b583f3"
+    },
+    {
+      "path": "patches/android-relative-input.patch",
+      "bytes": 7911,
+      "sha256": "41ef34bbb17a06883ccc5635192ba022b4d500ba406b44a43f98544823ea8dd4"
     }
   ]
 }

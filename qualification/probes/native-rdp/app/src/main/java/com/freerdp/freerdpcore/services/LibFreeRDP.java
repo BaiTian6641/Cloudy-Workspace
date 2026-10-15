@@ -118,6 +118,8 @@ public final class LibFreeRDP {
     public static native boolean freerdp_connect(long instance);
     public static native boolean freerdp_disconnect(long instance);
     public static native boolean freerdp_update_graphics(long instance, Bitmap bitmap, int x, int y, int width, int height);
+    public static native boolean freerdp_is_relative_mouse_supported(long instance);
+    public static native boolean freerdp_send_relative_cursor_event(long instance, int dx, int dy, int flags);
     public static native boolean freerdp_send_cursor_event(long instance, int x, int y, int flags);
     public static native boolean freerdp_send_key_event(long instance, int virtualKey, boolean down);
     public static native boolean freerdp_send_unicodekey_event(long instance, int codeUnit, boolean down);

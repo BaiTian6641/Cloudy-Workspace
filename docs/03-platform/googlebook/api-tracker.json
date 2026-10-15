@@ -127,16 +127,18 @@
         "G132"
       ],
       "minimumApi": 26,
-      "libraryVersion": null,
-      "availability": "documented-not-implemented",
-      "qualification": "untested",
+      "libraryVersion": "Android framework; diagnostic 0.1.4 on API37",
+      "availability": "compiled-and-bounded-device-observed",
+      "qualification": "partial",
       "checkedOn": "2026-10-15",
       "owner": "Android/platform developer",
       "stage": "P0-S4",
       "fallback": "Explicit absolute mode or separately qualified external mouse/backend; none is a relative 3D pass.",
-      "experiment": "Q-D09: physical mouse/trackpad capture, actual negotiated RDP relative route (API45), continuous3D beyond edges, signed delta/order, focus/disconnect/local escape release. No current relative adapter or device evidence.",
+      "experiment": "Q-D09: diagnostic0.1.4 compiled, actual-source queue test passed, standard relative negotiation and Android capture confirmed. User reports local release works but captured remote cursor does not move;1,788relative queue submissions are not delivery. KRdp6.4.5 lacks a registered relative callback. Actual3D, per-mouse/trackpad cases and repeated focus/disconnect/release remain unqualified. Choose a server with an actual consumption path; Linux/Windows/macOS rows remain separate.",
       "versionNotes": "Capture methods API26; relative axes API24. Captured getX/getY deltas and explicit relative axes are alternative representations, not additive. Historical samples matter.",
-      "researchEvidence": "docs/04-design/desktop-rdp-interaction-contract.md"
+      "researchEvidence": "docs/04-design/desktop-rdp-interaction-contract.md",
+      "compileEvidence": "qualification/results/P0-S4/2026-10-15-rdp-relative-portal.md",
+      "deviceEvidence": "qualification/results/P0-S4/2026-10-15-rdp-relative-portal.md"
     },
     {
       "id": "API07",
@@ -815,10 +817,10 @@
       "owner": "Android/integration developer",
       "stage": "P3-S7",
       "fallback": "Explicit engine remediation; external viewer is partial and cannot complete the integrated RDP requirement",
-      "experiment": "0.1.3 has 5331frame updates and79acceptedJNI inputs but zero controlled-target input. Preserve seven closed/original six unchanged and actualjoin/free; no local positive control/wire trace. Resolve KRdp FakeInput auth prerequisite via normal portal consent or exact isolated backport, then actualinput/focus/release. D15 relative and vault remain pending; Windows/macOS/RemoteApp unqualified.",
+      "experiment": "Q-D03/Q-D09: real diagnostic0.1.4 uses public window/view focus and explicit native lifecycle ownership. Earlier Plasma0.1.3 input attempt had zero target events. Normal portal consent subsequently permits keyboard delivery:0.1.3 marker has one case mismatch,0.1.4 editor text matches exactly. Standard relative adapter negotiates and framework capture is confirmed; user reports local release works but captured remote cursor never moves on KRdp6.4.5. Keep3D, per-device mouse/trackpad, broader focus-release, clipboard andIME acceptance open. Vault remains proposed; diagnostic provisioning is not saved credential protection.",
       "researchEvidence": "docs/03-platform/googlebook/p0-s4-native-desktop-entry.md",
-      "compileEvidence": "qualification/results/P0-S4/2026-10-15-rdp-input-boundary.md",
-      "deviceEvidence": "qualification/results/P0-S4/2026-10-15-rdp-input-boundary.md"
+      "compileEvidence": "qualification/results/P0-S4/2026-10-15-rdp-relative-portal.md",
+      "deviceEvidence": "qualification/results/P0-S4/2026-10-15-rdp-relative-portal.md"
     },
     {
       "id": "API31",
@@ -966,9 +968,9 @@
       "experiment": "Compare actual view/metrics insets while resizing and moving between displays.",
       "partialObservation": {
         "evidence": "qualification/results/P0-S2/2026-10-15-window-probe.md",
-        "note": "Actual maximize/restore, corner resize to 638 \u00d7 612 px and tiled divider resize to a 653 px wide window observed at density 1.625 / font scale 1.0. Activity recreation preserved local state. Attached-decor versus metrics inset source differences retained. No physical-input, larger-font or external-display claim.",
+        "note": "Actual maximize/restore, corner resize to 638 × 612 px and tiled divider resize to a 653 px wide window observed at density 1.625 / font scale 1.0. Activity recreation preserved local state. Attached-decor versus metrics inset source differences retained. No physical-input, larger-font or external-display claim.",
         "fontScaleEvidence": "qualification/results/P0-S2/2026-10-15-font-scale.md",
-        "fontScaleNote": "Separate 0.2.0 run: 130%/200% actual font configurations, reachable controls by scrolling in 648\u00d7600px window, actual Refresh completion and independent saved marker state; original1.0 restored. No full accessibility/physical input qualification."
+        "fontScaleNote": "Separate 0.2.0 run: 130%/200% actual font configurations, reachable controls by scrolling in 648×600px window, actual Refresh completion and independent saved marker state; original1.0 restored. No full accessibility/physical input qualification."
       }
     },
     {
@@ -1066,7 +1068,7 @@
         "note": "Explicit recreate preserved A logical ID/task/marker/count in a fresh generation with unchanged process and B state. Resize-triggered recreations retained state. The separate background-kill run verified old PID absence, then restored B logical ID/task/C2 from Bundle in a new generation and process via existing Recents task. No force-stop, reboot, natural low-memory or operation durability claim.",
         "processRestorationEvidence": "qualification/results/P0-S2/2026-10-15-process-restoration.md",
         "fontScaleEvidence": "qualification/results/P0-S2/2026-10-15-font-scale.md",
-        "fontScaleNote": "Separate 0.2.0 run: 130%/200% actual font configurations, reachable controls by scrolling in 648\u00d7600px window, actual Refresh completion and independent saved marker state; original1.0 restored. No full accessibility/physical input qualification."
+        "fontScaleNote": "Separate 0.2.0 run: 130%/200% actual font configurations, reachable controls by scrolling in 648×600px window, actual Refresh completion and independent saved marker state; original1.0 restored. No full accessibility/physical input qualification."
       }
     },
     {
@@ -1334,20 +1336,30 @@
         "R165",
         "R166",
         "R167",
-        "R168"
+        "R168",
+        "R176",
+        "R177",
+        "R178",
+        "R179",
+        "R181",
+        "R182",
+        "R183",
+        "R184"
       ],
       "minimumApi": 26,
-      "libraryVersion": "FreeRDP3.32.2 at97eff6ddfbbfaa8e42a126d362686bd001ff8bdc; AndroidJNI adapter not implemented",
+      "libraryVersion": "FreeRDP3.32.2 at 97eff6ddfbbfaa8e42a126d362686bd001ff8bdc; fifth Android relative-input patch and diagnostic 0.1.4",
       "interfaceKind": "standard-rdp-through-upstream-native-client",
-      "availability": "documented-core-present-adapter-missing",
-      "qualification": "untested",
+      "availability": "adapter-compiled-and-negotiation-observed",
+      "qualification": "partial",
       "checkedOn": "2026-10-15",
       "owner": "Desktop/native developer",
       "stage": "P0-S4",
       "fallback": "Offer explicit absolute mode or separately qualified backend; AINPUT is a distinct extension, and accumulated absolute helper fallback is never standard relative or3D proof.",
-      "experiment": "Q-D09: bounded typed signed-delta JNI/queue route; negotiated standard capability plus Android capture; actual host 3D beyond edges and release acrossfocus/disconnect, external mouse/trackpad separate. Qualify exactserver including Linux/Windows/macOS rows.",
-      "versionNotes": "RDP relative capability0x80 plus earlyclient0x10 andprotocol>=0x00080011; events signedINT16. minimumApi26 is Android capture prerequisite, not an RDP protocol OS level. Currentjniabsolute only.",
-      "researchEvidence": "docs/04-design/desktop-rdp-interaction-contract.md"
+      "experiment": "Q-D09: diagnostic0.1.4 compiled, actual-source queue test passed, standard relative negotiation and Android capture confirmed. User reports local release works but captured remote cursor does not move;1,788relative queue submissions are not delivery. KRdp6.4.5 lacks a registered relative callback. Actual3D, per-mouse/trackpad cases and repeated focus/disconnect/release remain unqualified. Choose a server with an actual consumption path; Linux/Windows/macOS rows remain separate.",
+      "versionNotes": "RDP relative capability0x80 plus earlyclient0x10 and protocol>=0x00080011; events signedINT16. minimumApi26 is Android capture prerequisite, not RDP protocol OS level. Defaults already advertise relative support; server capability gates use. New JNI uses standard core relative events only, with no AINPUT or absolute fallback. Server callback registration is a separate integration requirement; selected FreeRDPserver3.32.1 can advertise support yet discard events at a null callback.",
+      "researchEvidence": "docs/04-design/desktop-rdp-interaction-contract.md",
+      "compileEvidence": "qualification/results/P0-S4/2026-10-15-rdp-relative-portal.md",
+      "deviceEvidence": "qualification/results/P0-S4/2026-10-15-rdp-relative-portal.md"
     }
   ],
   "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."

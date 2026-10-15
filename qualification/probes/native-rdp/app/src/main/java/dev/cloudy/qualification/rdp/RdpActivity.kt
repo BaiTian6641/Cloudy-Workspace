@@ -9,9 +9,13 @@ import android.os.Build
 import android.os.Bundle
 import android.text.InputType
 import android.view.WindowInsets
+import android.view.KeyEvent
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.PopupMenu
 import android.widget.ScrollView
 import android.widget.TextView
 
@@ -25,6 +29,9 @@ class RdpActivity : Activity() {
     private lateinit var disconnect: Button
     private lateinit var composer: EditText
     private lateinit var send: Button
+    private lateinit var capture: Button
+    private lateinit var release: Button
+    private lateinit var captureStatus: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,6 +80,34 @@ class RdpActivity : Activity() {
         }
         controls.addView(disconnect)
         label(R.string.input_help)
+        label(R.string.relative_help)
+        captureStatus = label(R.string.relative_disconnected).apply {
+            accessibilityLiveRegion = android.view.View.ACCESSIBILITY_LIVE_REGION_POLITE
+        }
+        capture = Button(this).apply {
+            setText(R.string.capture_relative)
+            setOnClickListener {
+                if (frame.isCaptureRequested || frame.isCaptureConfirmed) frame.releaseInput()
+                else frame.requestRelativeCapture()
+            }
+        }
+        controls.addView(capture)
+        release = Button(this).apply {
+            setText(R.string.release_input)
+            setOnClickListener { frame.releaseInput() }
+        }
+        controls.addView(release)
+        controls.addView(Button(this).apply {
+            setText(R.string.input_menu)
+            setOnClickListener { anchor ->
+                val popup = PopupMenu(this@RdpActivity, anchor)
+                popup.menu.add(Menu.NONE, RELEASE_INPUT_MENU, Menu.NONE, R.string.release_input)
+                popup.setOnMenuItemClickListener { item ->
+                    if (item.itemId == RELEASE_INPUT_MENU) { frame.releaseInput(); true } else false
+                }
+                popup.show()
+            }
+        })
         composer = EditText(this).apply {
             hint = getString(R.string.composer_hint)
             contentDescription = getString(R.string.composer_label)
@@ -102,6 +137,7 @@ class RdpActivity : Activity() {
         })
         root.addView(scroll, LinearLayout.LayoutParams(-1, 0, 1f))
         frame = RdpFrameView(this, session)
+        frame.captureStateListener = { renderCapture() }
         root.addView(frame, LinearLayout.LayoutParams(-1, 0, 2f))
         setContentView(root)
         root.requestApplyInsets()
@@ -134,6 +170,31 @@ class RdpActivity : Activity() {
         disconnect.setText(if (snapshot.busy && !snapshot.connected) R.string.cancel else R.string.disconnect)
         send.isEnabled = snapshot.connected
         frame.update(snapshot)
+        renderCapture()
+    }
+
+    private fun renderCapture() {
+        val snapshot = session.snapshot()
+        val owned = frame.isCaptureRequested || frame.isCaptureConfirmed
+        captureStatus.setText(frame.captureStatusResource)
+        capture.setText(if (owned) R.string.release_relative else R.string.capture_relative)
+        capture.isEnabled = snapshot.connected && (snapshot.relativeSupported || owned)
+        release.isEnabled = snapshot.connected || owned
+    }
+
+    override fun dispatchKeyEvent(event: KeyEvent): Boolean {
+        if (::frame.isInitialized && frame.handleLocalReleaseChord(event)) return true
+        return super.dispatchKeyEvent(event)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menu.add(Menu.NONE, RELEASE_INPUT_MENU, Menu.NONE, R.string.release_input)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == RELEASE_INPUT_MENU) { frame.releaseInput(); return true }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun hasLanPermission() = Build.VERSION.SDK_INT < 37 ||
@@ -157,11 +218,12 @@ class RdpActivity : Activity() {
 
     override fun onDestroy() {
         session.listener = null
+        frame.captureStateListener = null
         frame.releaseInput()
         session.close()
         super.onDestroy()
     }
 
     private fun dp(value: Int) = (value * resources.displayMetrics.density).toInt()
-    companion object { private const val REQUEST_LAN = 71 }
+    companion object { private const val REQUEST_LAN = 71; private const val RELEASE_INPUT_MENU = 1 }
 }

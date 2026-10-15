@@ -14,3 +14,7 @@ qualification/probes/native-rdp/app/src/main/assets/runtime-copyrights.txt white
 # Unified diffs prefix context with a space before upstream tab indentation.
 # Added source indentation remains reviewed through the applied native source.
 qualification/probes/native-rdp/patches/*.patch whitespace=-space-before-tab
+
+# This reviewed unified diff retains blank context lines as a single space.
+# Its added source lines were checked separately for trailing whitespace.
+qualification/probes/native-rdp/patches/android-relative-input.patch whitespace=-space-before-tab,-blank-at-eol

@@ -25,7 +25,7 @@ data class RdpSnapshot(
     val state: String = "loading", val detail: String = "Loading pinned native libraries",
     val nativeVersion: String = "unavailable", val width: Int = 0, val height: Int = 0,
     val frameUpdates: Long = 0, val inputEvents: Long = 0,
-    val busy: Boolean = true, val connected: Boolean = false, val cursorMode: String = "default",
+    val busy: Boolean = true, val connected: Boolean = false, val cursorMode: String = "default", val relativeSupported: Boolean = false,
 )
 
 /** One visible diagnostic owner. No credentials, callback objects or executor retain an Activity.
@@ -41,6 +41,8 @@ class RdpSession(context: Context) : LibFreeRDP.Sink {
     private val pendingInput = AtomicInteger()
     private val frameCount = AtomicLong()
     private val inputCount = AtomicLong()
+    private val relativeCount = AtomicLong()
+    private var relativeNegotiated = false // Attempt evidence survives the closed snapshot reset.
     private val certAccepted = AtomicLong()
     private val certRejected = AtomicLong()
     private val authCallbacks = AtomicLong()
@@ -63,7 +65,7 @@ class RdpSession(context: Context) : LibFreeRDP.Sink {
     @Volatile private var terminalEvent = ""
     private var stopReason = ""
     private val heldKeys = linkedSetOf<Int>()
-    private val heldButtons = linkedSetOf<Int>()
+    private val heldButtons = linkedMapOf<Int, Boolean>() // true means the standard relative route.
     private var pointerX = 0
     private var pointerY = 0
     private val journalFile = AtomicFile(File(app.filesDir, "rdp-journal.json"))
@@ -181,9 +183,10 @@ class RdpSession(context: Context) : LibFreeRDP.Sink {
             config = selected
             failureToken = null; persistedFailure = null
             stopping.set(false); liveConnected = false; terminalEvent = ""; stopReason = ""
-            frameCount.set(0); inputCount.set(0); certAccepted.set(0); certRejected.set(0); authCallbacks.set(0)
+            relativeNegotiated = false
+            frameCount.set(0); inputCount.set(0); relativeCount.set(0); certAccepted.set(0); certRejected.set(0); authCallbacks.set(0)
             heldKeys.clear(); heldButtons.clear(); frame.clear()
-            change { it.copy(width = 0, height = 0, cursorMode = "default") }
+            change { it.copy(width = 0, height = 0, cursorMode = "default", relativeSupported = false) }
             startedAt = SystemClock.elapsedRealtime(); stopAt = 0; nativeThreadStarted = false
             attempt = JSONObject().put("id", UUID.randomUUID().toString())
                 .put("buildRef", BuildConfig.QUALIFICATION_BUILD_REF).put("version", BuildConfig.VERSION_NAME)
@@ -244,7 +247,7 @@ class RdpSession(context: Context) : LibFreeRDP.Sink {
             config = null; heldKeys.clear(); heldButtons.clear(); frame.clear()
             attempt?.put("closed", true)?.put("nativeThreadJoined", nativeThreadStarted)?.put("nativeInstanceFreed", true)?.put("nativeError", error)
                 ?.put("terminalEvent", terminalEvent)?.put("stopReason", stopReason)
-            change { it.copy(state = "closed", detail = failureDetail(error), busy = false, connected = false) }
+            change { it.copy(state = "closed", detail = failureDetail(error), busy = false, connected = false, relativeSupported = false) }
             try { record("native-instance-reaped-and-freed") }
             finally {
                 attempt = null
@@ -284,12 +287,51 @@ class RdpSession(context: Context) : LibFreeRDP.Sink {
             pointerX = x; pointerY = y; frame.move(x, y)
             for (button in intArrayOf(0x1000, 0x2000, 0x4000)) {
                 if (flags and button != 0) {
-                    if (flags and 0x8000 != 0) heldButtons.add(button) else heldButtons.remove(button)
+                    if (flags and 0x8000 != 0) heldButtons[button] = false else heldButtons.remove(button)
                 }
             }
             inputCount.incrementAndGet()
         }
     }
+    internal fun relativeMotion(steps: List<RdpRelativeStep>): Boolean {
+        if (!liveConnected || stopping.get() || !state.relativeSupported) return false
+        require(steps.size <= RdpRelativeMotion.MAX_STEPS && steps.all {
+            it.dx in Short.MIN_VALUE..Short.MAX_VALUE && it.dy in Short.MIN_VALUE..Short.MAX_VALUE
+        })
+        if (steps.isNotEmpty()) input {
+            for (step in steps) sendRelativeOnOwner(step.dx, step.dy, 0x0800)
+        }
+        return true
+    }
+
+    fun relativeButton(flags: Int): Boolean {
+        if (!liveConnected || stopping.get() || !state.relativeSupported) return false
+        require(flags in setOf(0x1000, 0x2000, 0x4000, 0x9000, 0xA000, 0xC000))
+        input { sendRelativeOnOwner(0, 0, flags) }
+        return true
+    }
+
+    private fun sendRelativeOnOwner(dx: Int, dy: Int, flags: Int) {
+        check(LibFreeRDP.freerdp_send_relative_cursor_event(handle, dx, dy, flags))
+        for (button in intArrayOf(0x1000, 0x2000, 0x4000)) {
+            if (flags and button != 0) {
+                if (flags and 0x8000 != 0) heldButtons[button] = true else heldButtons.remove(button)
+            }
+        }
+        inputCount.incrementAndGet(); relativeCount.incrementAndGet()
+    }
+
+    fun capturedWheel(flags: Int) {
+        if (!liveConnected || stopping.get() || !state.relativeSupported) return
+        // Standard relative pointer events have no wheel flag. Use the ordinary wheel
+        // event at the last absolute point, with no MOVE or absolute-mode fallback.
+        require(flags and 0x0200 != 0 && flags and 0xfc00 == 0)
+        input {
+            check(LibFreeRDP.freerdp_send_cursor_event(handle, pointerX, pointerY, flags))
+            inputCount.incrementAndGet()
+        }
+    }
+
     fun text(value: String) {
         if (!liveConnected || stopping.get()) return
         if (!RdpTextPolicy.accepts(value)) {
@@ -318,8 +360,13 @@ class RdpSession(context: Context) : LibFreeRDP.Sink {
     private fun releaseOnOwner(): Boolean {
         var released = true
         if (handle != 0L && liveConnected) {
+            // Finish a modified drag before releasing its Ctrl/Shift prefix.
+            for ((button, relative) in heldButtons) {
+                val sent = if (relative) LibFreeRDP.freerdp_send_relative_cursor_event(handle, 0, 0, button)
+                    else LibFreeRDP.freerdp_send_cursor_event(handle, pointerX, pointerY, button)
+                released = sent && released
+            }
             for (key in heldKeys) released = LibFreeRDP.freerdp_send_key_event(handle, key, false) && released
-            for (button in heldButtons) released = LibFreeRDP.freerdp_send_cursor_event(handle, pointerX, pointerY, button) && released
             if (!released) stopping.set(true)
         }
         heldKeys.clear(); heldButtons.clear()
@@ -351,7 +398,10 @@ class RdpSession(context: Context) : LibFreeRDP.Sink {
         owner {
             if (instance != handle) return@owner
             if (name == "connected" && !stopping.get()) {
-                change { it.copy(state = "connected", detail = "Native connection callback received", busy = true, connected = true) }
+                val relative = LibFreeRDP.freerdp_is_relative_mouse_supported(handle)
+                relativeNegotiated = relative
+                change { it.copy(state = "connected", detail = "Native connection callback received", busy = true, connected = true,
+                    relativeSupported = relative) }
             }
             record(name)
             if (name.startsWith("unsupported-") || name.contains("certificate") || name.startsWith("unexpected-")) stopOnOwner(name)
@@ -437,7 +487,8 @@ class RdpSession(context: Context) : LibFreeRDP.Sink {
         }
         attempt?.put("frameUpdates", frameCount.get())?.put("inputEvents", inputCount.get())
             ?.put("certificateAccepts", certAccepted.get())?.put("certificateRejects", certRejected.get())
-            ?.put("authenticationCallbacks", authCallbacks.get())?.put("width", state.width)?.put("height", state.height)
+            ?.put("authenticationCallbacks", authCallbacks.get())?.put("relativeInputEvents", relativeCount.get())
+            ?.put("relativeInputSupported", relativeNegotiated)?.put("width", state.width)?.put("height", state.height)
         val bytes = JSONObject().put("schemaVersion", 1).put("attempts", attempts).toString(2).toByteArray()
         check(bytes.size <= 262144)
         val output = journalFile.startWrite()

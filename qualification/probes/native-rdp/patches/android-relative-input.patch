@@ -1,0 +1,216 @@
+--- a/client/Android/Studio/freeRDPCore/src/main/cpp/android_event.c
++++ b/client/Android/Studio/freeRDPCore/src/main/cpp/android_event.c
+@@ -13,6 +13,7 @@
+ #include <freerdp/config.h>
+ 
+ #include <winpr/crt.h>
++#include <winpr/interlocked.h>
+ 
+ #include <freerdp/freerdp.h>
+ #include <freerdp/log.h>
+@@ -97,6 +98,20 @@
+ 			}
+ 			break;
+ 
++			case EVENT_TYPE_RELATIVE_CURSOR:
++			{
++				ANDROID_EVENT_RELATIVE_CURSOR* relative = (ANDROID_EVENT_RELATIVE_CURSOR*)event;
++				/* Recheck on the native consumer thread: queued input must never
++				 * become an absolute/AINPUT fallback after capability or state loss. */
++				if (android_relative_input_supported(inst) &&
++				    freerdp_is_active_state(context) &&
++				    freerdp_settings_get_bool(context->settings, FreeRDP_HasRelativeMouseEvent) &&
++				    !freerdp_settings_get_bool(context->settings, FreeRDP_SuspendInput))
++					rc = freerdp_input_send_rel_mouse_event(context->input, relative->flags,
++					                                       relative->dx, relative->dy);
++			}
++			break;
++
+ 			case EVENT_TYPE_CLIPBOARD:
+ 			{
+ 				ANDROID_EVENT_CLIPBOARD* clipboard_event = (ANDROID_EVENT_CLIPBOARD*)event;
+@@ -214,6 +229,52 @@
+ static void android_event_cursor_free(ANDROID_EVENT_CURSOR* event)
+ {
+ 	free(event);
++}
++
++/* Only the connected callback publishes this negotiated snapshot. Reading
++ * settings directly from a Java producer would race the native handshake. */
++BOOL android_relative_input_supported(freerdp* inst)
++{
++	if (!inst || !inst->context)
++		return FALSE;
++	androidContext* ctx = (androidContext*)inst->context;
++	return InterlockedCompareExchange(&ctx->relativeInputEnabled, 0, 0) == 1;
++}
++
++ANDROID_EVENT_RELATIVE_CURSOR* android_event_relative_cursor_new(int flags, int dx, int dy)
++{
++	const int buttons = PTR_FLAGS_BUTTON1 | PTR_FLAGS_BUTTON2 | PTR_FLAGS_BUTTON3;
++	const int allowed = PTR_FLAGS_MOVE | PTR_FLAGS_DOWN | buttons;
++	/* Wheels use their existing route; reject unknown bits and DOWN without
++	 * buttons instead of truncating flags/deltas at the JNI boundary. */
++	if (dx < INT16_MIN || dx > INT16_MAX || dy < INT16_MIN || dy > INT16_MAX ||
++	    flags < 0 || (flags & ~allowed) || !(flags & (PTR_FLAGS_MOVE | buttons)) ||
++	    ((flags & PTR_FLAGS_DOWN) && !(flags & buttons)))
++		return nullptr;
++	ANDROID_EVENT_RELATIVE_CURSOR* event = calloc(1, sizeof(*event));
++	if (!event)
++		return nullptr;
++	event->type = EVENT_TYPE_RELATIVE_CURSOR;
++	event->flags = (UINT16)flags;
++	event->dx = (INT16)dx;
++	event->dy = (INT16)dy;
++	return event;
++}
++
++BOOL android_send_relative_event(freerdp* inst, int flags, int dx, int dy)
++{
++	if (!android_relative_input_supported(inst))
++		return FALSE;
++	ANDROID_EVENT* event = (ANDROID_EVENT*)android_event_relative_cursor_new(flags, dx, dy);
++	if (!event)
++		return FALSE;
++	if (!android_push_event(inst, event))
++	{
++		android_event_free(event);
++		return FALSE;
++	}
++	/* Queue acceptance only; the native consumer/core can still reject delivery. */
++	return TRUE;
+ }
+ 
+ ANDROID_EVENT* android_event_disconnect_new(void)
+@@ -339,6 +400,10 @@
+ 			android_event_cursor_free((ANDROID_EVENT_CURSOR*)event);
+ 			break;
+ 
++		case EVENT_TYPE_RELATIVE_CURSOR:
++			free(event);
++			break;
++
+ 		case EVENT_TYPE_DISCONNECT:
+ 			android_event_disconnect_free((ANDROID_EVENT*)event);
+ 			break;
+--- a/client/Android/Studio/freeRDPCore/src/main/cpp/android_event.h
++++ b/client/Android/Studio/freeRDPCore/src/main/cpp/android_event.h
+@@ -20,6 +20,7 @@
+ #define EVENT_TYPE_DISCONNECT 3
+ #define EVENT_TYPE_KEY_UNICODE 4
+ #define EVENT_TYPE_CLIPBOARD 5
++#define EVENT_TYPE_RELATIVE_CURSOR 6
+ 
+ typedef struct
+ {
+@@ -40,6 +41,14 @@
+ 	UINT16 x;
+ 	UINT16 y;
+ } ANDROID_EVENT_CURSOR;
++
++typedef struct
++{
++	int type;
++	UINT16 flags;
++	INT16 dx;
++	INT16 dy;
++} ANDROID_EVENT_RELATIVE_CURSOR;
+ 
+ typedef struct
+ {
+@@ -65,6 +74,10 @@
+ FREERDP_LOCAL ANDROID_EVENT_KEY* android_event_key_new(int flags, UINT16 scancode);
+ FREERDP_LOCAL ANDROID_EVENT_KEY* android_event_unicodekey_new(UINT16 flags, UINT16 key);
+ FREERDP_LOCAL ANDROID_EVENT_CURSOR* android_event_cursor_new(UINT16 flags, UINT16 x, UINT16 y);
++FREERDP_LOCAL ANDROID_EVENT_RELATIVE_CURSOR*
++android_event_relative_cursor_new(int flags, int dx, int dy);
++FREERDP_LOCAL BOOL android_relative_input_supported(freerdp* inst);
++FREERDP_LOCAL BOOL android_send_relative_event(freerdp* inst, int flags, int dx, int dy);
+ FREERDP_LOCAL ANDROID_EVENT* android_event_disconnect_new(void);
+ FREERDP_LOCAL ANDROID_EVENT_CLIPBOARD*
+ android_event_clipboard_new(const void* data, size_t data_length, const char* mimeType);
+--- a/client/Android/Studio/freeRDPCore/src/main/cpp/android_freerdp.c
++++ b/client/Android/Studio/freeRDPCore/src/main/cpp/android_freerdp.c
+@@ -14,6 +14,7 @@
+ */
+ 
+ #include <freerdp/config.h>
++#include <winpr/interlocked.h>
+ 
+ #include <locale.h>
+ 
+@@ -471,12 +472,18 @@
+ 	                 freerdp_settings_get_uint32(settings, FreeRDP_DesktopWidth),
+ 	                 freerdp_settings_get_uint32(settings, FreeRDP_DesktopHeight),
+ 	                 freerdp_settings_get_uint32(settings, FreeRDP_ColorDepth));
++	androidContext* ctx = (androidContext*)instance->context;
++	/* A cancellation racing PostConnect must not reopen input admission. */
++	InterlockedCompareExchange(&ctx->relativeInputEnabled,
++	                           freerdp_settings_get_bool(settings, FreeRDP_HasRelativeMouseEvent), 0);
+ 	freerdp_callback("OnConnectionSuccess", "(J)V", (jlong)instance);
+ 	return TRUE;
+ }
+ 
+ static void android_post_disconnect(freerdp* instance)
+ {
++	androidContext* ctx = (androidContext*)instance->context;
++	InterlockedExchange(&ctx->relativeInputEnabled, -1);
+ 	freerdp_callback("OnDisconnecting", "(J)V", (jlong)instance);
+ 	gdi_free(instance);
+ }
+@@ -753,6 +760,7 @@
+ 		goto fail;
+ 
+ fail:
++	InterlockedExchange(&((androidContext*)instance->context)->relativeInputEnabled, -1);
+ 	WLog_DBG(TAG, "Session ended with %08" PRIX32 "", status);
+ 
+ 	if (status == CHANNEL_RC_OK)
+@@ -1069,6 +1077,7 @@
+ 		return JNI_FALSE;
+ 	}
+ 
++	InterlockedExchange(&((androidContext*)inst->context)->relativeInputEnabled, -1);
+ 	/* Abort connecting/connected I/O even when the input backlog is saturated.
+ 	 * Wake the input handle too; there is no queued disconnect allocation. */
+ 	if (!freerdp_abort_connect_context(inst->context))
+@@ -1238,6 +1247,26 @@
+ 
+ 	WLog_DBG(TAG, "send_cursor_event: (%d, %d), %d", x, y, flags);
+ 	return JNI_TRUE;
++}
++
++/* The Java session owner serializes these calls and retains the instance until
++ * producers stop and native join succeeds, as for the existing input methods. */
++JNIEXPORT jboolean JNICALL
++Java_com_freerdp_freerdpcore_services_LibFreeRDP_freerdp_1is_1relative_1mouse_1supported(
++    JNIEnv* env, jclass cls, jlong instance)
++{
++	WINPR_UNUSED(env);
++	WINPR_UNUSED(cls);
++	return android_relative_input_supported((freerdp*)instance) ? JNI_TRUE : JNI_FALSE;
++}
++
++JNIEXPORT jboolean JNICALL
++Java_com_freerdp_freerdpcore_services_LibFreeRDP_freerdp_1send_1relative_1cursor_1event(
++    JNIEnv* env, jclass cls, jlong instance, jint dx, jint dy, jint flags)
++{
++	WINPR_UNUSED(env);
++	WINPR_UNUSED(cls);
++	return android_send_relative_event((freerdp*)instance, flags, dx, dy) ? JNI_TRUE : JNI_FALSE;
+ }
+ 
+ static jboolean android_push_clipboard_event(freerdp* inst, const void* data, size_t data_length,
+--- a/client/Android/Studio/freeRDPCore/src/main/cpp/android_freerdp.h
++++ b/client/Android/Studio/freeRDPCore/src/main/cpp/android_freerdp.h
+@@ -33,6 +33,10 @@
+ 	BOOL threadStarted; /* A diagnostic instance owns at most one connection attempt. */
+ 
+ 	BOOL is_connected;
++	/* Atomic snapshot: 1=connected + standard relative negotiated;
++	 * 0=not yet available, -1=stopped permanently for this one-attempt instance.
++	 * Java stops producers before join/free; this is not a handle lifetime lock. */
++	LONG relativeInputEnabled;
+ 
+ 	BOOL clipboardSync;
+ 	wClipboard* clipboard;

@@ -223,13 +223,13 @@
         "P0-S2"
       ],
       "tasks": [
-        "Pin Sunshine/Moonlight and prove external handoff; select buildable RDP/VNC engine candidates and record actual server/encoding/security negotiation. Use the reviewed native entry brief: FreeRDP 3.32.2 arm64 MediaCodec diagnostic APK builds/loads on the HP Googlebook; actual wrong-pin rejection/NLA connection and failure cleanup are observed; first-failure context identifies the resize guard; 0.1.2 displays changing 2880x1800 pixels and explicitly joins/frees on disconnect; 0.1.3 records 79JNI input submissions but zero controlled-target input; resolve the source-supported KRdp FakeInput authentication prerequisite using normal portal consent or an isolated upstream backport, then qualify controlled input/focus/cancel and sustained resource/performance behavior; LibVNC 98aaee0560baa0332339b2ef464ea96ed9b9b28c contains the three identified fixes, with focused advisory regressions and Android build/integration before its network probe.",
+        "Pin Sunshine/Moonlight and prove external handoff; select buildable RDP/VNC engine candidates and record actual server/encoding/security negotiation. Use the reviewed native entry brief: FreeRDP 3.32.2 arm64 MediaCodec diagnostic APK builds/loads on the HP Googlebook; actual wrong-pin rejection/NLA connection and failure cleanup are observed; first-failure context identifies the resize guard; 0.1.2 displays changing 2880x1800 pixels and explicitly joins/frees on disconnect; retain the failed 0.1.3 Plasma attempt with 79 JNI submissions and zero target input; a separate normal-consent portal session delivers the controlled keyboard marker with one case mismatch. The 0.1.4 standard relative adapter compiles with Android Lint and 36 JVM tests passing; actual native queue device test passes, standard relative negotiation and framework capture are observed, the user confirms release works but captured remote cursor movement fails on KRdp6.4.5;3D, broader release cases and sustained resource/performance remain pending; LibVNC 98aaee0560baa0332339b2ef464ea96ed9b9b28c contains the three identified fixes, with focused advisory regressions and Android build/integration before its network probe. The attempted private VNC harness exits 1 on a miniLZO misaligned load before a case verdict; it supplies no advisory pass or accepted harness implementation.",
         "Exercise trackpad and external mouse in real CAD and text/desktop workloads; verify focus-loss release and native IME/keyboard paths.",
         "Enumerate codecs and optional API-30 low-latency support; measure native decode/pacing/text quality, power and input-to-photon baseline.",
         "Test primary host sessions, lock/headless/permissions, RDP certificate/NLA requirements and protected VNC routes; record unsupported cases and dependencies.",
         "Record separate CAP-RDP, CAP-VNC and stream-feasibility outcomes; document native surface/input and integration blockers independently of external launch success.",
         "Ratify provisional native-stream and protocol-specific responsiveness budgets from the primary-lane probes; missing USB or X11 evidence does not block this decision.",
-        "D15: qualify genuine negotiated RDP relative mouse through public Android capture and an actual 3D application, separately for physical mouse/trackpad and exact Linux/Windows/macOS server rows. Current Android JNI is absolute-only. macOS RDP server selection remains unresolved; built-in Apple VNC is a separate lane."
+        "D15: qualify genuine negotiated RDP relative mouse through public Android capture and an actual 3D application, separately for physical mouse/trackpad and exact Linux/Windows/macOS server rows. The 0.1.4 Android JNI/view relative adapter is implemented and compiled, and negotiation/framework capture are observed; captured remote movement failed on the selected server, local release worked in the user exercise, and actual3D/broader release cases remain unqualified. macOS RDP server selection remains unresolved; built-in Apple VNC is a separate lane."
       ],
       "deliverables": [
         "Pinned stream/RDP/VNC engine and server feasibility matrix",
@@ -505,7 +505,7 @@
         "Record Q-A02 shell/geometry findings and feature-specific pending checks before freezing revised interaction components."
       ],
       "deliverables": [
-        "Native desktop component catalog and S01\u2013S17 interaction review",
+        "Native desktop component catalog and S01–S17 interaction review",
         "Rule 0 and applicable official desktop-quality evidence ledger",
         "Native workspace review record with accepted geometry/focus decisions and explicit provisional components"
       ],
@@ -1909,7 +1909,7 @@
       ],
       "exitCriteria": [
         "No unresolved release-blocking data-loss/trust/replay/ownership/input defect.",
-        "At least ten working days observed; the 3\u20135 day estimate is active QA effort, not the observation duration."
+        "At least ten working days observed; the 3–5 day estimate is active QA effort, not the observation duration."
       ],
       "sourceIds": [
         "G02",

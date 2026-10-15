@@ -72,6 +72,12 @@ Focus loss releases held input and pointer capture; it does not grant background
 
 Clipboard synchronization, drives/filesystem shares, printers, microphone, camera, smartcards and USB redirection default off. Enable only a supported, explicitly chosen capability scoped to the target profile/session, with Android permissions at use time. Imported RDP files, server requests and saved secrets cannot enable redirection implicitly. Audio output has its own visible preference. Drive sharing does not grant arbitrary storage access; ordinary SFTP remains independent. Disabling a capability must stop its actual channel and revoke ongoing access where the backend permits; otherwise reconnect with it disabled and explain the limitation.
 
+## Host consent is separate from authentication
+
+Successful TLS/NLA authenticates the RDP connection; it does not grant compositor screen/input access. On the qualified Linux portal route, the normal system prompt must actually be approved by the host user. General authorization to test is not evidence that the portal grant exists. Keep denied, pending and granted states distinct; do not modify permission stores or bypass compositor checks to make a test pass. The [portal run](../../qualification/results/P0-S4/2026-10-15-rdp-relative-portal.md) observed input only after consent.
+
+Portal restoration tokens are authorization-bearing state. The finite fixture scopes XDG configuration/state privately and removes its owned restoration state, temporary key/configuration and route at teardown. Product host enrollment needs its own explicit persistence/revocation policy. A granted screen/input session also does not prove a protocol feature is implemented: the observed relative capability flag did not produce cursor movement on this server. Maintain the local release action even when remote input is ineffective.
+
 ## Threat limits and acceptance boundary
 
 This design reduces exposure from copied app files, accidental backups/logs, stolen locked-device access and endpoint substitution. It does not protect plaintext after a compromised app/OS/native engine can use it, prevent an accepted malicious server receiving delegated credentials, certify remote session isolation, or establish protection from every accessibility/IME/screen-capture actor. Authentication approval is not consent to every remote action. Uninstall/data-clear, lock-policy changes and damaged vault records may make saved secrets unavailable.

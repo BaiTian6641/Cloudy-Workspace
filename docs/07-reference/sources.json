@@ -300,7 +300,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "API 35 cross-instance drag flags. Re-reviewed API 1 requestFocus(), setFocusable(boolean), setFocusableInTouchMode(boolean), isFocusableInTouchMode() and hasFocus(); boolean request result is checked, and hasFocus includes descendants. Exact method sections fetched from the canonical official page after browser-tool retrieval failed. Remaining View methods still require individual review. RDP ownership: hasWindowFocus/onWindowFocusChanged API1; pointer capture request/release/callback/hasPointerCapture API26. Current0.1.3 compiles absolute ownership path; relative capture unimplemented. API06/30; P0-S4.",
+      "note": "API 35 cross-instance drag flags. Re-reviewed API 1 requestFocus(), setFocusable(boolean), setFocusableInTouchMode(boolean), isFocusableInTouchMode() and hasFocus(); boolean request result is checked, and hasFocus includes descendants. Exact method sections fetched from the canonical official page after browser-tool retrieval failed. Remaining View methods still require individual review. RDP ownership: hasWindowFocus/onWindowFocusChanged API1; pointer capture request/release/callback/hasPointerCapture API26. Current0.1.4 compiles relative capture and framework confirmation/release are observed; host relative movement failed on the selected KRdp server. API06/30; P0-S4.",
       "refresh": "Before implementation against this surface; weekly during active platform qualification."
     },
     {
@@ -1188,7 +1188,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Session/device consent, ScreenCast/PipeWire and EIS input contracts; installed portal does not prove granted working session. SelectDevices/Start consent and Notify input methods provide normal alternate route. Existing KRdp PortalSession is candidate, not yet executed. Owner: Desktop/native; P0-S4/P1-S4/P3-S7.",
+      "note": "Session/device consent, ScreenCast/PipeWire and EIS input contracts; installed portal does not prove granted working session. SelectDevices/Start consent and Notify input methods provide normal alternate route. KRdp6.4.5 PortalSession now executed with actual user approval and controlled keyboard delivery; relative movement remains failed on this server. Owner: Desktop/native; P0-S4/P1-S4/P3-S7.",
       "refresh": "Before selecting or updating a package; recheck moving documentation against the pinned release."
     },
     {
@@ -2303,7 +2303,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Reviewed 2.0.17 and 2.0.18\u20132.0.20 release notes; final diagnostic selects matched API/NOP 2.0.20. Exact source and embedded licenses are preserved.",
+      "note": "Reviewed 2.0.17 and 2.0.18–2.0.20 release notes; final diagnostic selects matched API/NOP 2.0.20. Exact source and embedded licenses are preserved.",
       "refresh": "Before SSH diagnostic dependency/provider changes, after relevant upstream security updates, and before product adoption."
     },
     {
@@ -3122,7 +3122,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected CLI/tool-control guidance: no-tools disables built-ins while custom tool modules have a separate discovery surface. Use explicit model selectors, bounded assignments and reviewed results; no sandbox or worker-success guarantee. Owner integration leader, P0\u2013P6.",
+      "note": "Inspected CLI/tool-control guidance: no-tools disables built-ins while custom tool modules have a separate discovery surface. Use explicit model selectors, bounded assignments and reviewed results; no sandbox or worker-success guarantee. Owner integration leader, P0–P6.",
       "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
     },
     {
@@ -3134,7 +3134,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected config roots, profiles, discovery precedence and custom-tool/MCP integration. Empty cwd and a prompt alone do not isolate user/global or foreign configuration. Use per-run controls without altering global auth/settings. Owner integration leader, P0\u2013P6.",
+      "note": "Inspected config roots, profiles, discovery precedence and custom-tool/MCP integration. Empty cwd and a prompt alone do not isolate user/global or foreign configuration. Use per-run controls without altering global auth/settings. Owner integration leader, P0–P6.",
       "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
     },
     {
@@ -3146,7 +3146,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected separate direct getAllPluginToolPaths(cwd) enumeration after capability discovery. disabledProviders is not a complete custom-tool loading switch; the accepted CLI trial additionally had absent native/project plugin roots. Owner integration leader, P0\u2013P6.",
+      "note": "Inspected separate direct getAllPluginToolPaths(cwd) enumeration after capability discovery. disabledProviders is not a complete custom-tool loading switch; the accepted CLI trial additionally had absent native/project plugin roots. Owner integration leader, P0–P6.",
       "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
     },
     {
@@ -3158,7 +3158,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected plugin-root enumeration: node_modules absence yields an empty plugin list. The trial uses observed root absence, not a general sandbox or global no-discovery claim. Owner integration leader, P0\u2013P6.",
+      "note": "Inspected plugin-root enumeration: node_modules absence yields an empty plugin list. The trial uses observed root absence, not a general sandbox or global no-discovery claim. Owner integration leader, P0–P6.",
       "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
     },
     {
@@ -3170,7 +3170,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected registered enabledProviders/disabledProviders settings; source-discovery IDs are distinct from the explicitly selected kimi-code model backend. Use a per-run overlay, not a global config edit. Owner integration leader, P0\u2013P6.",
+      "note": "Inspected registered enabledProviders/disabledProviders settings; source-discovery IDs are distinct from the explicitly selected kimi-code model backend. Use a per-run overlay, not a global config edit. Owner integration leader, P0–P6.",
       "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
     },
     {
@@ -3638,7 +3638,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Method reference API31 controls guard; API23\u201330 older isInsideSecureHardware boolean cannot identify StrongBox. Actual Googlebook backing untested. Owner: Android/security; API15, P1-S3/P3-S7.",
+      "note": "Method reference API31 controls guard; API23–30 older isInsideSecureHardware boolean cannot identify StrongBox. Actual Googlebook backing untested. Owner: Android/security; API15, P1-S3/P3-S7.",
       "refresh": "Before changing the affected adapter, security policy or compatibility claim."
     },
     {
@@ -3794,7 +3794,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "freerdp_input_send_rel_mouse_event and RelMouseEvent use signedINT16 deltas. Android JNI lacks typed relative route. API45; Desktop/native P0-S4/P3-S7.",
+      "note": "freerdp_input_send_rel_mouse_event and RelMouseEvent use signedINT16 deltas. Diagnostic0.1.4 adds reviewed typed relative JNI route; device capture/negotiation do not prove host movement. API45; Desktop/native P0-S4/P3-S7.",
       "refresh": "Before changing the affected adapter, security policy or compatibility claim."
     },
     {
@@ -3928,6 +3928,126 @@
       "sourceUpdatedOn": null,
       "note": "Desktop FreeRDP integration/UI reference, predominantly GPL2-or-later per selected files. No adoption or compatibility result. Owner: Desktop/native; P0-S4/P1-S4/P3-S7.",
       "refresh": "Before changing the affected adapter, security policy or compatibility claim."
+    },
+    {
+      "id": "R176",
+      "title": "KRdp 6.4.5 standard input callback registration",
+      "url": "https://github.com/KDE/krdp/blob/v6.4.5/src/InputHandler.cpp",
+      "publisher": "KDE",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "InputHandler::initialize registers ordinary/extended mouse and keyboard callbacks but no RelMouseEvent. Consistent with failed captured movement on exact portal fixture; no wire-arrival proof. API45; Desktop/native, P0-S4.",
+      "refresh": "Before changing affected adapter, server or compatibility claim."
+    },
+    {
+      "id": "R177",
+      "title": "FreeRDP 3.32.1 server relative-input default",
+      "url": "https://github.com/FreeRDP/FreeRDP/blob/3.32.1/libfreerdp/core/settings.c",
+      "publisher": "FreeRDP",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "HasRelativeMouseEvent defaults TRUE; advertisement alone does not establish callback consumption. API45; Desktop/native, P0-S4.",
+      "refresh": "Before changing affected adapter, server or compatibility claim."
+    },
+    {
+      "id": "R178",
+      "title": "FreeRDP 3.32.1 relative-event receive path",
+      "url": "https://github.com/FreeRDP/FreeRDP/blob/3.32.1/libfreerdp/core/input.c",
+      "publisher": "FreeRDP",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "input_recv_relmouse_event checks state and dispatches IFCALLRESULT(TRUE,input->RelMouseEvent,...); input_new zero-initializes callbacks. API45; Desktop/native, P0-S4.",
+      "refresh": "Before changing affected adapter, server or compatibility claim."
+    },
+    {
+      "id": "R179",
+      "title": "FreeRDP nullable callback default",
+      "url": "https://github.com/FreeRDP/FreeRDP/blob/3.32.1/include/freerdp/api.h",
+      "publisher": "FreeRDP",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "IFCALLRESULT returns supplied default for null callback; selected relative receive path can succeed without dispatch. API45; Desktop/native, P0-S4.",
+      "refresh": "Before changing affected adapter, server or compatibility claim."
+    },
+    {
+      "id": "R180",
+      "title": "KRdp 6.8.0 input handler follow-up",
+      "url": "https://github.com/KDE/krdp/blob/v6.8.0/src/InputHandler.cpp",
+      "publisher": "KDE",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Inspected newer release still omits standard relative callback; no demonstrated upgrade repair. API45; Desktop/native, P0-S4.",
+      "refresh": "Before changing affected adapter, server or compatibility claim."
+    },
+    {
+      "id": "R181",
+      "title": "GNOME Remote Desktop 50.2 relative callback",
+      "url": "https://github.com/GNOME/gnome-remote-desktop/blob/50.2/src/grd-session-rdp.c",
+      "publisher": "GNOME",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Candidate pin60423c896a54e3eacb65bd93167e91c1ce5e648c registers rdp_input_rel_mouse_event and queues relative motion/buttons. Source candidate only; not installed or qualified. API45; Desktop/native, P0-S4.",
+      "refresh": "Before changing affected adapter, server or compatibility claim."
+    },
+    {
+      "id": "R182",
+      "title": "GNOME Remote Desktop relative event dispatch",
+      "url": "https://github.com/GNOME/gnome-remote-desktop/blob/50.2/src/grd-rdp-event-queue.c",
+      "publisher": "GNOME",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Relative event queue calls grd_session_notify_pointer_motion; source chain only. API45; Desktop/native, P0-S4.",
+      "refresh": "Before changing affected adapter, server or compatibility claim."
+    },
+    {
+      "id": "R183",
+      "title": "GNOME Remote Desktop libei relative input",
+      "url": "https://github.com/GNOME/gnome-remote-desktop/blob/50.2/src/grd-session.c",
+      "publisher": "GNOME",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "grd_session_notify_pointer_motion calls ei_device_pointer_motion and frame only with an available ei_pointer; runtime/session gate remains. API45; Desktop/native, P0-S4.",
+      "refresh": "Before changing affected adapter, server or compatibility claim."
+    },
+    {
+      "id": "R184",
+      "title": "GNOME Remote Desktop server modes and dependencies",
+      "url": "https://github.com/GNOME/gnome-remote-desktop/blob/50.2/README.md",
+      "publisher": "GNOME",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Mutter remote-desktop API, libei and PipeWire; separate applicable GNOME/Mutter/headless fixture required, not a drop-in KWin portal server. API45; Desktop/native, P0-S4.",
+      "refresh": "Before changing affected adapter, server or compatibility claim."
+    },
+    {
+      "id": "R185",
+      "title": "KRdp normal portal session and consent",
+      "url": "https://github.com/KDE/krdp/blob/v6.4.5/src/PortalSession.cpp",
+      "publisher": "KDE",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "CreateSession/SelectDevices/SelectSources/Start consent precede PipeWire/input. Private restore state requires cleanup; destructor closes session and releases modifiers. Actual portal run reaches controlled keyboard target after user grant. Desktop/native, P0-S4.",
+      "refresh": "Before changing affected adapter, server or compatibility claim."
     }
   ]
 }

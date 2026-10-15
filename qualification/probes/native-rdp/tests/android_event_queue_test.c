@@ -119,10 +119,75 @@ static void concurrent_order_and_wake(void)
     android_event_queue_uninit(&instance);
 }
 
+/* Exercise the actual fifth-patch constructor/admission/queue/free path.
+ * There is no fake server or replacement encoder: inspecting copied queue
+ * payloads is a boundary assertion, not evidence of protocol delivery. */
+static void relative_validation_and_ownership(void)
+{
+    CHECK(!android_relative_input_supported(NULL));
+    CHECK(!android_send_relative_event(NULL, PTR_FLAGS_MOVE, 1, -1));
+    fresh_queue();
+    InterlockedExchange(&context.relativeInputEnabled, 0);
+    CHECK(!android_relative_input_supported(&instance));
+    CHECK(!android_send_relative_event(&instance, PTR_FLAGS_MOVE, 1, -1));
+    CHECK(MessageQueue_Size(context.event_queue->messages) == 0);
+    const int invalid[][3] = {
+        { PTR_FLAGS_MOVE, -32769, 0 }, { PTR_FLAGS_MOVE, 32768, 0 },
+        { PTR_FLAGS_MOVE, 0, -32769 }, { PTR_FLAGS_MOVE, 0, 32768 },
+        { -1, 0, 0 }, { 0x10000 | PTR_FLAGS_MOVE, 0, 0 },
+        { PTR_FLAGS_WHEEL, 0, 0 }, { PTR_FLAGS_HWHEEL, 0, 0 },
+        { PTR_FLAGS_MOVE | PTR_FLAGS_WHEEL, 0, 0 },
+        { PTR_FLAGS_DOWN, 0, 0 }, { PTR_FLAGS_MOVE | PTR_FLAGS_DOWN, 0, 0 },
+        { 0, 0, 0 }
+    };
+    InterlockedExchange(&context.relativeInputEnabled, 1);
+    CHECK(android_relative_input_supported(&instance));
+    for (size_t i = 0; i < sizeof(invalid) / sizeof(invalid[0]); i++)
+    {
+        CHECK(android_event_relative_cursor_new(invalid[i][0], invalid[i][1], invalid[i][2]) == NULL);
+        CHECK(!android_send_relative_event(&instance, invalid[i][0], invalid[i][1], invalid[i][2]));
+    }
+    const int valid[][3] = {
+        { PTR_FLAGS_MOVE, -32768, 32767 }, { PTR_FLAGS_MOVE, 32767, -32768 },
+        { PTR_FLAGS_BUTTON1 | PTR_FLAGS_DOWN, 0, 0 }, { PTR_FLAGS_BUTTON1, 0, 0 },
+        { PTR_FLAGS_BUTTON2 | PTR_FLAGS_DOWN, 0, 0 }, { PTR_FLAGS_BUTTON2, 0, 0 },
+        { PTR_FLAGS_BUTTON3 | PTR_FLAGS_DOWN, 0, 0 }, { PTR_FLAGS_BUTTON3, 0, 0 }
+    };
+    for (size_t i = 0; i < sizeof(valid) / sizeof(valid[0]); i++)
+        CHECK(android_send_relative_event(&instance, valid[i][0], valid[i][1], valid[i][2]));
+    for (size_t i = 0; i < sizeof(valid) / sizeof(valid[0]); i++)
+    {
+        wMessage message = { 0 };
+        CHECK(MessageQueue_Peek(context.event_queue->messages, &message, TRUE) == 1);
+        ANDROID_EVENT_RELATIVE_CURSOR* event = message.wParam;
+        CHECK(event->type == EVENT_TYPE_RELATIVE_CURSOR);
+        CHECK(event->flags == valid[i][0]);
+        CHECK(event->dx == valid[i][1] && event->dy == valid[i][2]);
+        android_event_free((ANDROID_EVENT*)event);
+    }
+    for (unsigned i = 0; i < ANDROID_EVENT_QUEUE_LIMIT; i++)
+        CHECK(android_send_relative_event(&instance, PTR_FLAGS_MOVE, -1, 1));
+    CHECK(!android_send_relative_event(&instance, PTR_FLAGS_BUTTON1, 0, 0));
+    drained = 0;
+    android_event_queue_uninit(&instance);
+    CHECK(drained == ANDROID_EVENT_QUEUE_LIMIT);
+    fresh_queue();
+    CHECK(android_send_relative_event(&instance, PTR_FLAGS_MOVE, -1, 1));
+    /* Cancellation revokes capability admission and the real consumer frees a
+     * pending relative event without reaching any protocol/context function. */
+    InterlockedExchange(&context.relativeInputEnabled, -1);
+    CHECK(!android_relative_input_supported(&instance));
+    CHECK(!android_send_relative_event(&instance, PTR_FLAGS_MOVE, 1, 1));
+    CHECK(!android_check_handle(&instance));
+    CHECK(MessageQueue_Size(context.event_queue->messages) == 0);
+    android_event_queue_uninit(&instance);
+}
+
 int main(void)
 {
     capacity_wake_and_ownership();
     concurrent_order_and_wake();
-    puts("actual patched Android queue: capacity/FIFO/wake/ownership/concurrency passed");
+    relative_validation_and_ownership();
+    puts("actual patched Android queue: capacity/FIFO/wake/ownership/concurrency/relative validation passed");
     return 0;
 }

@@ -19,4 +19,17 @@
     <string name="frame_unfocused">Click remote frame to focus input</string>
     <string name="session_status">State: %1$s\n%2$s\nNative: %3$s\nFramebuffer: %4$d × %5$d; updates: %6$d; input events: %7$d</string>
     <string name="native_notices">Native licenses and corresponding source</string>
+    <string name="relative_help">Standard relative RDP is a separate diagnostic path. Enter through Capture, then confirm the capture status. Release input using the visible action, menu or Ctrl+Alt+Shift+R. Local capture and accepted native submissions do not establish remote 3D support.</string>
+    <string name="capture_relative">Capture pointer for standard relative RDP</string>
+    <string name="release_relative">Release relative pointer</string>
+    <string name="input_menu">Remote input menu</string>
+    <string name="release_input">Release remote input · Ctrl+Alt+Shift+R</string>
+    <string name="relative_disconnected">Absolute mode · connect before requesting relative capture</string>
+    <string name="relative_unsupported">Absolute mode · this server did not negotiate standard relative input</string>
+    <string name="relative_ready">Absolute mode · standard relative capability negotiated; capture is available</string>
+    <string name="relative_focus_required">Absolute mode · focus this app before requesting capture</string>
+    <string name="relative_requesting">Capture requested · awaiting Android callback; release with Ctrl+Alt+Shift+R</string>
+    <string name="relative_captured">Captured · standard relative route · release with Ctrl+Alt+Shift+R</string>
+    <string name="relative_released">Absolute mode · relative capture released</string>
+    <string name="relative_timeout">Absolute mode · no capture callback within 3 seconds; request ended</string>
 </resources>
