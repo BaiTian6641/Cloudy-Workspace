@@ -164,6 +164,8 @@ Record evidence under `qualification/results/P0-S5/` using the [run template](..
 
 ## P0-S7 — X11 forwarding and native application-window feasibility
 
+The [pinned engine entry](../../03-platform/googlebook/native-x11-engine-entry.md) is preparatory source research only. Termux:X11 offers per-display Android windows, while the required per-XID broker and public APK-owned startup need a real proof. Existing phase prerequisites and Console licensing decisions remain in force.
+
 **Owner:** X11/Android/terminal developer. **Prerequisites:** P0-S2, P0-S3. **Status:** planned.
 
 Work:
@@ -235,3 +237,7 @@ The [0.1.3 credential control](../../../qualification/results/P0-S4/2026-10-15-s
 The [VNC0.1.0 APK/load](../../../qualification/results/P0-S4/2026-10-15-vnc-apk-load.md) now passes actual Android packaging/native-library loading with zero connections; protected-server integration remains next. The [streaming pairing adapter build](../../../qualification/results/P0-S4/2026-10-15-stream-pairing-build.md) compiles its exact protected transport patch with eleven JVM tests but remains unactivated in the UI. The independent [Sunshine runtime](../../06-validation/2026-10-15-stream-host-runtime-review.md) reaches KWin/PipeWire and VA-API startup probes using scoped permission-path/resource corrections. Preserve all failed attempts and cleanup evidence. Actual client-key TLS, pairing, changed client output/input and latency remain gates. Existing phase dependencies and capability readiness are unchanged.
 
 Current P0-S4 follow-up: [streaming0.1.5](../../../qualification/results/P0-S4/2026-10-15-stream-first-pairing.md) completes real same-key credential-authorized pairing and client-certificate HTTPS on the selected Googlebook/Sunshine fixture. Host/client evidence and explicit cleanup are retained. The [VNC0.1.1 build](../../../qualification/results/P0-S4/2026-10-15-vnc-auth-timeout-build.md) accommodates normal PAM latency within fixed phase/session bounds and passes native/Android checks; it is not installed. Wrong-pin/cancel/expiry, actual VNC sessions, native streaming video/input/performance and distribution closure remain gates. No dependency or supported-capability change follows.
+
+The [VNC0.1.1 first-trust run](../../../qualification/results/P0-S4/2026-10-15-vnc-first-trust.md) supersedes the uninstalled state above: real wrong-leaf rejection, native join/free and finite isolated-host cleanup pass. Accepted-pin login/frame/input await the user on a fresh fixture. No phase dependency or capability promotion.
+
+The [streaming0.1.6 playback adapter build](../../../qualification/results/P0-S4/2026-10-15-stream-playback-build.md) compiles actual connection/Surface/MediaCodec/audio with fixed original authorization and ownership limits. It remains uninstalled/build-only; the [next integration contract](../../03-platform/googlebook/native-stream-playback-entry.md) owns UI/Surface/journal prerequisites before actual media qualification. P0-S4 and existing dependent gates remain unchanged.

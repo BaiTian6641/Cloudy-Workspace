@@ -2303,7 +2303,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Reviewed 2.0.17 and 2.0.18–2.0.20 release notes; final diagnostic selects matched API/NOP 2.0.20. Exact source and embedded licenses are preserved.",
+      "note": "Reviewed 2.0.17 and 2.0.18\u20132.0.20 release notes; final diagnostic selects matched API/NOP 2.0.20. Exact source and embedded licenses are preserved.",
       "refresh": "Before SSH diagnostic dependency/provider changes, after relevant upstream security updates, and before product adoption."
     },
     {
@@ -3122,7 +3122,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected CLI/tool-control guidance: no-tools disables built-ins while custom tool modules have a separate discovery surface. Use explicit model selectors, bounded assignments and reviewed results; no sandbox or worker-success guarantee. Owner integration leader, P0–P6.",
+      "note": "Inspected CLI/tool-control guidance: no-tools disables built-ins while custom tool modules have a separate discovery surface. Use explicit model selectors, bounded assignments and reviewed results; no sandbox or worker-success guarantee. Owner integration leader, P0\u2013P6.",
       "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
     },
     {
@@ -3134,7 +3134,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected config roots, profiles, discovery precedence and custom-tool/MCP integration. Empty cwd and a prompt alone do not isolate user/global or foreign configuration. Use per-run controls without altering global auth/settings. Owner integration leader, P0–P6.",
+      "note": "Inspected config roots, profiles, discovery precedence and custom-tool/MCP integration. Empty cwd and a prompt alone do not isolate user/global or foreign configuration. Use per-run controls without altering global auth/settings. Owner integration leader, P0\u2013P6.",
       "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
     },
     {
@@ -3146,7 +3146,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected separate direct getAllPluginToolPaths(cwd) enumeration after capability discovery. disabledProviders is not a complete custom-tool loading switch; the accepted CLI trial additionally had absent native/project plugin roots. Owner integration leader, P0–P6.",
+      "note": "Inspected separate direct getAllPluginToolPaths(cwd) enumeration after capability discovery. disabledProviders is not a complete custom-tool loading switch; the accepted CLI trial additionally had absent native/project plugin roots. Owner integration leader, P0\u2013P6.",
       "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
     },
     {
@@ -3158,7 +3158,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected plugin-root enumeration: node_modules absence yields an empty plugin list. The trial uses observed root absence, not a general sandbox or global no-discovery claim. Owner integration leader, P0–P6.",
+      "note": "Inspected plugin-root enumeration: node_modules absence yields an empty plugin list. The trial uses observed root absence, not a general sandbox or global no-discovery claim. Owner integration leader, P0\u2013P6.",
       "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
     },
     {
@@ -3170,7 +3170,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected registered enabledProviders/disabledProviders settings; source-discovery IDs are distinct from the explicitly selected kimi-code model backend. Use a per-run overlay, not a global config edit. Owner integration leader, P0–P6.",
+      "note": "Inspected registered enabledProviders/disabledProviders settings; source-discovery IDs are distinct from the explicitly selected kimi-code model backend. Use a per-run overlay, not a global config edit. Owner integration leader, P0\u2013P6.",
       "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
     },
     {
@@ -3638,7 +3638,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Method reference API31 controls guard; API23–30 older isInsideSecureHardware boolean cannot identify StrongBox. Actual Googlebook backing untested. Owner: Android/security; API15, P1-S3/P3-S7.",
+      "note": "Method reference API31 controls guard; API23\u201330 older isInsideSecureHardware boolean cannot identify StrongBox. Actual Googlebook backing untested. Owner: Android/security; API15, P1-S3/P3-S7.",
       "refresh": "Before changing the affected adapter, security policy or compatibility claim."
     },
     {
@@ -4742,7 +4742,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Candidate1.15.0+dfsg-2build1 verified1239416B SHA256912df371f896aa26b5ec9bd4c2e0b239253ff64e21a1638206fa4d979b6337b4; extracted Xtigervnc loader resolution passed, no install/server launch. Desktop/native, P0-S4.",
+      "note": "Candidate1.15.0+dfsg-2build1 verified1239416B SHA256912df371f896aa26b5ec9bd4c2e0b239253ff64e21a1638206fa4d979b6337b4; extracted Xtigervnc loader resolution and finite unprivileged isolated server launch passed; actual wrong-leaf rejection recorded separately. No global install or authenticated session. Desktop/native, P0-S4.",
       "refresh": "Before changing selected host package/backend or the protected-server experiment."
     },
     {
@@ -4792,6 +4792,138 @@
       "sourceUpdatedOn": null,
       "note": "PAMService selects real policy; PlainUsers restricts accepted username, with %u selecting server user. Planned unprivileged isolatedXvnc uses existing other policy; no permissive PAM service/newaccount/rootserver. Owner Desktop/security, P0-S4.",
       "refresh": "Before changing selected version, permission policy or protected-server integration."
+    },
+    {
+      "id": "R236",
+      "title": "Pinned Termux:X11 display-to-window routing",
+      "url": "https://github.com/termux/termux-x11/blob/fa3a8b430e2896a19f44c99a9cb056254615ae06/README.md",
+      "publisher": "Termux project",
+      "category": "upstream-engine",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "-tag maps each X display to an Android window, not each application XID; two displays cannot pass the per-application broker gate. Owner Console/X11; P0-S7/P1-S4. Source review only.",
+      "refresh": "Before engine adoption, candidate revision change or distribution."
+    },
+    {
+      "id": "R237",
+      "title": "Pinned Termux:X11 root pixmap boundary",
+      "url": "https://github.com/termux/termux-x11/blob/fa3a8b430e2896a19f44c99a9cb056254615ae06/lorie/src/main/cpp/lorie/InitOutput.c",
+      "publisher": "Termux project",
+      "category": "upstream-engine",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "GetWindowPixmap(pScreenPtr->root) feeds root composition; existing SetWindowPixmap wrapper is a candidate for a real XID broker, not an exposed per-XID API. Owner Console/X11; P0-S7/P1-S4. Source review only.",
+      "refresh": "Before engine adoption, candidate revision change or distribution."
+    },
+    {
+      "id": "R238",
+      "title": "Pinned Termux:X11 renderer and native surfaces",
+      "url": "https://github.com/termux/termux-x11/blob/fa3a8b430e2896a19f44c99a9cb056254615ae06/lorie/src/main/cpp/lorie/renderer.cpp",
+      "publisher": "Termux project",
+      "category": "upstream-engine",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Root texture rendering and ANativeWindow/EGL seam; public Surface adapter still needs per-window buffer/lifetime mapping. Owner Console/X11; P0-S7/P1-S4. Source review only.",
+      "refresh": "Before engine adoption, candidate revision change or distribution."
+    },
+    {
+      "id": "R239",
+      "title": "Pinned Termux:X11 shell startup and hidden framework calls",
+      "url": "https://github.com/termux/termux-x11/blob/fa3a8b430e2896a19f44c99a9cb056254615ae06/lorie/src/main/java/com/termux/x11/CmdEntryPoint.java",
+      "publisher": "Termux project",
+      "category": "upstream-engine",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "createContext uses Unsafe and ActivityThread hidden framework context; exclude this startup from Cloudy and use an APK-owned public process/JNI route. Owner Console/X11; P0-S7/P1-S4. Source review only.",
+      "refresh": "Before engine adoption, candidate revision change or distribution."
+    },
+    {
+      "id": "R240",
+      "title": "Pinned Termux:X11 native build entry",
+      "url": "https://github.com/termux/termux-x11/blob/fa3a8b430e2896a19f44c99a9cb056254615ae06/lorie/src/main/cpp/recipes/xserver.cmake",
+      "publisher": "Termux project",
+      "category": "upstream-engine",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Xlorie shared library includes existing X.Org core, Composite and Damage; selected X.Org submodule65d790bd208ec380b196eb98f144abb0b32e334d. Build/load pending. Owner Console/X11; P0-S7/P1-S4. Source review only.",
+      "refresh": "Before engine adoption, candidate revision change or distribution."
+    },
+    {
+      "id": "R241",
+      "title": "Pinned Termux:X11 control socket boundary",
+      "url": "https://github.com/termux/termux-x11/blob/fa3a8b430e2896a19f44c99a9cb056254615ae06/lorie/src/main/cpp/lorie/cmdentrypoint.cpp",
+      "publisher": "Termux project",
+      "category": "upstream-engine",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "getXConnection creates a Lorie control/event socketpair; SSH x11 channels need an actual authenticated X client connection and cannot use this control socket. Owner Console/X11; P0-S7/P1-S4. Source review only.",
+      "refresh": "Before engine adoption, candidate revision change or distribution."
+    },
+    {
+      "id": "R242",
+      "title": "Pinned Termux:X11 license",
+      "url": "https://github.com/termux/termux-x11/blob/fa3a8b430e2896a19f44c99a9cb056254615ae06/LICENSE",
+      "publisher": "Termux project",
+      "category": "upstream-engine",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "GPLv3 top-level text; exact constituent closure and Console distribution decision remain open. D16 applies to Desktop only. Owner Console/X11; P0-S7/P1-S4. Source review only.",
+      "refresh": "Before engine adoption, candidate revision change or distribution."
+    },
+    {
+      "id": "G151",
+      "title": "Android TextureView surface destruction ownership",
+      "url": "https://developer.android.com/reference/android/view/TextureView.SurfaceTextureListener",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-08-03",
+      "note": "API14 onSurfaceTextureDestroyed false transfers release responsibility to client. Proposed finite preview cancels then retains SurfaceTexture until actual decoder retirement; no automatic rebind. API47/P0-S4.",
+      "refresh": "Before playback surface integration, SDK update or decoder evidence changes."
+    },
+    {
+      "id": "G152",
+      "title": "Android codec rendered-frame callback semantics",
+      "url": "https://developer.android.com/reference/android/media/MediaCodec.OnFrameRenderedListener",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-08-03",
+      "note": "API23 callback reports output-surface rendering and may be delayed/batched. API34+ callback delivery requires codec still executing at dispatch; counts are not input-to-photon or visible-pixel evidence. API17/API47/P0-S4.",
+      "refresh": "Before playback surface integration, SDK update or decoder evidence changes."
+    },
+    {
+      "id": "G153",
+      "title": "Android codec hardware acceleration metadata",
+      "url": "https://developer.android.com/reference/android/media/MediaCodecInfo#isHardwareAccelerated()",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-08-03",
+      "note": "API29 isHardwareAccelerated is manufacturer-supplied metadata, not measured performance; retain actual codec identity and hardwareReported separately from physical qualification. API17/API47/P0-S4.",
+      "refresh": "Before playback surface integration, SDK update or decoder evidence changes."
+    },
+    {
+      "id": "R243",
+      "title": "AOSP Android EGL display reference counting",
+      "url": "https://android.googlesource.com/platform/frameworks/native/+/refs/heads/main/opengl/libs/EGL/egl_display.cpp",
+      "publisher": "AOSP / Google",
+      "category": "upstream-engine",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Official moving source initialize refs++ and terminate refs-- preserve existingdisplay while refsremain; Android-specific basis for balanced workerEGL metadataquery, not portableEGL or exactGooglebookvendor proof. AppusespublicEGL14 APIs, no privatecalls. Owner Desktop/media, API47/P0-S4.",
+      "refresh": "Before GL query integration changes or target/vendor qualification."
     }
   ]
 }

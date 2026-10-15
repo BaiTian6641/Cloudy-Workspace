@@ -1,0 +1,286 @@
+--- a/app/src/main/java/com/limelight/nvstream/NvConnection.java
++++ b/app/src/main/java/com/limelight/nvstream/NvConnection.java
+@@ -41,6 +41,94 @@
+ import com.limelight.nvstream.jni.MoonBridge;
+ 
+ public class NvConnection {
++    /** Optional finite qualification path; the original start/stop API stays unchanged. */
++    public interface CloudyPlaybackControl extends NvHTTP.CloudyControl {
++        void verifySessionUrl(String url) throws IOException;
++    }
++    private CloudyPlaybackControl cloudyControl;
++    private final java.util.concurrent.atomic.AtomicBoolean cloudyUsed = new java.util.concurrent.atomic.AtomicBoolean();
++    private final java.util.concurrent.atomic.AtomicBoolean cloudyCancelled = new java.util.concurrent.atomic.AtomicBoolean();
++    private final dev.cloudy.qualification.stream.playback.PlaybackOwnership cloudyPermit = new dev.cloudy.qualification.stream.playback.PlaybackOwnership();
++    private final java.util.concurrent.CountDownLatch cloudyStartRetired = new java.util.concurrent.CountDownLatch(1);
++    private volatile boolean cloudyNativeEntered, cloudyNativeRunning, cloudyNativeNeedsStop;
++    private final Object cloudyStopLock = new Object();
++
++    /** Blocking owner-thread start. Retain the owner until this and stop have returned. */
++    public int cloudyStartBlocking(AudioRenderer audio, VideoDecoderRenderer video,
++            NvConnectionListener listener, CloudyPlaybackControl control) throws IOException, XmlPullParserException, InterruptedException {
++        if (control == null || !cloudyUsed.compareAndSet(false, true)) throw new IllegalStateException("single-use");
++        cloudyControl = control;
++        boolean success = false;
++        try {
++            control.check();
++            while (!connectionAllowed.tryAcquire(100, java.util.concurrent.TimeUnit.MILLISECONDS)) {
++                control.check();
++                if (cloudyCancelled.get()) throw new IOException("cancelled");
++            }
++            cloudyPermit.acquired();
++            control.check();
++            if (cloudyCancelled.get()) throw new IOException("cancelled");
++            context.connListener = listener;
++            context.videoCapabilities = video.getCapabilities();
++            if (!startApp()) return -1;
++            control.verifySessionUrl(context.rtspSessionUrl);
++            control.check();
++            ByteBuffer iv = ByteBuffer.allocate(16); iv.putInt(context.riKeyId);
++            synchronized (MoonBridge.class) {
++                control.check();
++                if (cloudyCancelled.get()) throw new IOException("cancelled");
++                MoonBridge.setupBridge(video, audio, listener);
++                cloudyNativeEntered = true; cloudyNativeNeedsStop = true;
++                int result;
++                try {
++                    result = MoonBridge.startConnection(context.serverAddress.address,
++                        context.serverAppVersion, context.serverGfeVersion, context.rtspSessionUrl,
++                        context.serverCodecModeSupport, context.negotiatedWidth, context.negotiatedHeight,
++                        context.streamConfig.getRefreshRate(), context.streamConfig.getBitrate(),
++                        context.negotiatedPacketSize, context.negotiatedRemoteStreaming,
++                        context.streamConfig.getAudioConfiguration().toInt(), context.streamConfig.getSupportedVideoFormats(),
++                        context.streamConfig.getClientRefreshRateX100(), context.riKey.getEncoded(), iv.array(),
++                        context.videoCapabilities, context.streamConfig.getColorSpace(), context.streamConfig.getColorRange());
++                } finally { java.util.Arrays.fill(iv.array(), (byte)0); }
++                if (result != 0) { cloudyNativeNeedsStop = false; MoonBridge.cleanupBridge(); return result; }
++                cloudyNativeRunning = true; success = true;
++                return 0;
++            }
++        } finally {
++            if (!success && !cloudyNativeNeedsStop) cloudyReleasePermit();
++            cloudyStartRetired.countDown();
++        }
++    }
++    private void cloudyReleasePermit() {
++        cloudyPermit.release(connectionAllowed::release);
++    }
++    /** Safe during native callbacks: never acquires the start/stop monitor. */
++    public void cloudyCancel() {
++        cloudyCancelled.set(true);
++        if (cloudyNativeEntered) MoonBridge.interruptConnection();
++    }
++    /** Recheck from every native stage callback, after core resets its interrupt flag. */
++    public void cloudyRecheckCancellation() {
++        if (cloudyCancelled.get() && cloudyNativeEntered) MoonBridge.interruptConnection();
++    }
++    public boolean cloudyStarterRetired() { return cloudyStartRetired.getCount() == 0; }
++    /** Off UI/callback threads. A caller must retain ownership while this is incomplete. */
++    public void cloudyStopBlocking() throws InterruptedException {
++        cloudyCancel();
++        if (!cloudyUsed.get()) return;
++        cloudyStartRetired.await();
++        synchronized (cloudyStopLock) {
++            synchronized (MoonBridge.class) {
++                if (cloudyNativeRunning || cloudyNativeNeedsStop) {
++                    MoonBridge.stopConnection();
++                    cloudyNativeRunning = false; cloudyNativeNeedsStop = false;
++                    MoonBridge.cleanupBridge();
++                }
++            }
++            cloudyReleasePermit();
++        }
++    }
++
+     // Context parameters
+     private LimelightCryptoProvider cryptoProvider;
+     private String uniqueId;
+@@ -221,9 +309,9 @@
+     
+     private boolean startApp() throws XmlPullParserException, IOException
+     {
+-        NvHTTP h = new NvHTTP(context.serverAddress, context.httpsPort, uniqueId, context.serverCert, cryptoProvider);
+-
+-        String serverInfo = h.getServerInfo(true);
++        NvHTTP h = new NvHTTP(context.serverAddress, context.httpsPort, uniqueId, context.serverCert, cryptoProvider, cloudyControl);
++
++        String serverInfo = cloudyControl == null ? h.getServerInfo(true) : h.cloudyPinnedServerInfo();
+         
+         context.serverAppVersion = h.getServerVersion(serverInfo);
+         if (context.serverAppVersion == null) {
+@@ -231,11 +319,12 @@
+             return false;
+         }
+ 
+-        ComputerDetails details = h.getComputerDetails(serverInfo);
+-        context.isNvidiaServerSoftware = details.nvidiaServer;
++        if (cloudyControl == null) context.isNvidiaServerSoftware = h.getComputerDetails(serverInfo).nvidiaServer;
++        else context.isNvidiaServerSoftware = h.cloudyIsNvidiaServer(serverInfo);
+ 
+         // May be missing for older servers
+         context.serverGfeVersion = h.getGfeVersion(serverInfo);
++        if (cloudyControl != null && (!dev.cloudy.qualification.stream.playback.PlaybackPolicy.serverVersion(context.serverAppVersion, false) || !dev.cloudy.qualification.stream.playback.PlaybackPolicy.serverVersion(context.serverGfeVersion, true))) throw new IOException("server-version-rejected");
+                 
+         if (h.getPairState(serverInfo) != PairingManager.PairState.PAIRED) {
+             context.connListener.displayMessage("Device not paired with computer");
+@@ -316,6 +405,10 @@
+                         return false;
+                     }
+                 } else {
++                    if (cloudyControl != null) {
++                        context.connListener.displayMessage("different-application-running");
++                        return false;
++                    }
+                     return quitAndLaunch(h, context);
+                 }
+             } catch (HostHttpResponseException e) {
+--- a/app/src/main/java/com/limelight/nvstream/http/NvHTTP.java
++++ b/app/src/main/java/com/limelight/nvstream/http/NvHTTP.java
+@@ -73,6 +73,14 @@
+         if (cloudyControl != null) cloudyControl.check();
+     }
+     /** Explicit HTTP bootstrap, never a silent TLS fallback. */
++    public boolean cloudyIsNvidiaServer(String info) throws IOException, org.xmlpull.v1.XmlPullParserException {
++        return getXmlString(info, "state", true).contains("MJOLNIR");
++    }
++    public String cloudyPinnedServerInfo() throws IOException {
++        if (cloudyControl == null) throw new IOException("controlled-operation-required");
++        cloudyControl.check();
++        return openHttpConnectionToString(httpClientLongConnectTimeout, getHttpsUrl(true), "serverinfo");
++    }
+     public String cloudyBootstrapServerInfo() throws IOException {
+         if (cloudyControl == null) throw new IOException("controlled-operation-required");
+         cloudyControl.check();
+--- a/app/src/main/java/com/limelight/binding/video/MediaCodecDecoderRenderer.java
++++ b/app/src/main/java/com/limelight/binding/video/MediaCodecDecoderRenderer.java
+@@ -68,6 +68,27 @@
+     private int initialWidth, initialHeight;
+     private int videoFormat;
+     private SurfaceHolder renderTarget;
++    private android.view.Surface cloudySurface;
++    private volatile boolean cloudyEvidence;
++    private volatile boolean cloudyStopComplete;
++    private volatile android.media.MediaCodecInfo cloudyCodec;
++    private volatile int cloudyWidth, cloudyHeight, cloudyFormat;
++    private final java.util.concurrent.atomic.AtomicLong cloudySubmitted = new java.util.concurrent.atomic.AtomicLong();
++    private final java.util.concurrent.atomic.AtomicLong cloudyOutputReleased = new java.util.concurrent.atomic.AtomicLong();
++    private final java.util.concurrent.atomic.AtomicLong cloudyRendered = new java.util.concurrent.atomic.AtomicLong();
++    /** App owns this Surface until actual decoder/native retirement; never release it here. */
++    public void cloudySetRenderTarget(android.view.Surface surface) {
++        if (surface == null || !surface.isValid()) throw new IllegalArgumentException("surface-required");
++        cloudySurface = surface; cloudyEvidence = true;
++    }
++    /** Submissions may include multiple units per frame; releases are not rendered callbacks. */
++    public long[] cloudyMetrics() {
++        return new long[]{cloudySubmitted.get(), cloudyOutputReleased.get(), cloudyRendered.get(),
++            cloudyWidth, cloudyHeight, cloudyFormat};
++    }
++    public String cloudyCodecName() { return cloudyCodec == null ? "unavailable" : cloudyCodec.getName(); }
++    public boolean cloudyHardwareReported() { return cloudyCodec != null && cloudyCodec.isHardwareAccelerated(); }
++
+     private volatile boolean stopping;
+     private CrashListener crashListener;
+     private boolean reportedCrash;
+@@ -516,7 +537,7 @@
+ 
+         LimeLog.info("Configuring with format: "+format);
+ 
+-        videoDecoder.configure(format, renderTarget.getSurface(), null, 0);
++        videoDecoder.configure(format, cloudySurface != null ? cloudySurface : renderTarget.getSurface(), null, 0);
+ 
+         configuredFormat = format;
+ 
+@@ -648,6 +669,7 @@
+             // Throw the underlying codec exception on the last attempt if the caller requested it
+             if (tryConfigureDecoder(selectedDecoderInfo, mediaFormat, !newFormat && throwOnCodecError)) {
+                 // Success!
++                if (cloudyEvidence) cloudyCodec = selectedDecoderInfo;
+                 break;
+             }
+ 
+@@ -657,10 +679,11 @@
+             }
+         }
+ 
+-        if (USE_FRAME_RENDER_TIME && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
++        if ((USE_FRAME_RENDER_TIME || cloudyEvidence) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+             videoDecoder.setOnFrameRenderedListener(new MediaCodec.OnFrameRenderedListener() {
+                 @Override
+                 public void onFrameRendered(MediaCodec mediaCodec, long presentationTimeUs, long renderTimeNanos) {
++                    if (cloudyEvidence) cloudyRendered.incrementAndGet();
+                     long delta = (renderTimeNanos / 1000000L) - (presentationTimeUs / 1000);
+                     if (delta >= 0 && delta < 1000) {
+                         if (USE_FRAME_RENDER_TIME) {
+@@ -676,6 +699,8 @@
+ 
+     @Override
+     public int setup(int format, int width, int height, int redrawRate) {
++        if (cloudyEvidence && (format != MoonBridge.VIDEO_FORMAT_H264 || width != 1280 || height != 720 || redrawRate <= 0 || redrawRate > 60)) return -1;
++        cloudyWidth = width; cloudyHeight = height; cloudyFormat = format;
+         this.initialWidth = width;
+         this.initialHeight = height;
+         this.videoFormat = format;
+@@ -970,6 +995,7 @@
+ 
+                     lastRenderedFrameTimeNanos = frameTimeNanos;
+                     activeWindowVideoStats.totalFramesRendered++;
++                    if (cloudyEvidence) cloudyOutputReleased.incrementAndGet();
+                 } catch (IllegalStateException ignored) {
+                     try {
+                         // Try to avoid leaking the output buffer by releasing it without rendering
+@@ -1052,6 +1078,7 @@
+                                 }
+ 
+                                 activeWindowVideoStats.totalFramesRendered++;
++                    if (cloudyEvidence) cloudyOutputReleased.incrementAndGet();
+                             }
+                             else {
+                                 // For balanced frame pacing case, the Choreographer callback will handle rendering.
+@@ -1215,6 +1242,12 @@
+ 
+     @Override
+     public void stop() {
++        if (cloudyEvidence) {
++            if (cloudyStopComplete) return;
++            prepareForStop();
++            cloudyJoin(choreographerHandlerThread); cloudyJoin(rendererThread);
++            cloudyStopComplete = true; return;
++        }
+         // May be called already, but we'll call it now to be safe
+         prepareForStop();
+ 
+@@ -1245,9 +1278,25 @@
+         }
+     }
+ 
++    private static void cloudyJoin(Thread thread) {
++        if (thread == null) return;
++        boolean interrupted = false;
++        while (thread.isAlive()) {
++            try { thread.join(); } catch (InterruptedException ignored) { interrupted = true; }
++        }
++        if (interrupted) Thread.currentThread().interrupt();
++    }
++
++    public void cloudyRetire() {
++        if (!cloudyStopComplete) stop();
++        cleanup();
++    }
++
+     @Override
+     public void cleanup() {
+-        videoDecoder.release();
++        if (cloudyEvidence) {
++            if (videoDecoder != null) { videoDecoder.release(); videoDecoder = null; }
++        } else videoDecoder.release();
+     }
+ 
+     @Override
+@@ -1346,6 +1395,7 @@
+     public int submitDecodeUnit(byte[] decodeUnitData, int decodeUnitLength, int decodeUnitType,
+                                 int frameNumber, int frameType, char frameHostProcessingLatency,
+                                 long receiveTimeUs, long enqueueTimeUs) {
++        if (cloudyEvidence) cloudySubmitted.incrementAndGet();
+         if (stopping) {
+             // Don't bother if we're stopping
+             return MoonBridge.DR_OK;

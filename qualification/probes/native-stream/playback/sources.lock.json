@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "scope": "authored controlled playback overlay after accepted finite pairing overlay; native core unchanged",
+  "upstreamRevision": "b48494cb96bff23d8886c4775cc4f39a1075495d",
+  "appliesAfter": {
+    "path": "qualification/probes/native-stream/pairing/finite-pairing.patch",
+    "sha256": "45516825cfaa6832264d4d0b6ead822947d70b95f7e939c1135fbd4145358531"
+  },
+  "patch": {
+    "file": "finite-playback.patch",
+    "sha256": "8daab24501c8eeb6e2794e1a45e92b846ed0b3291454cb506af539aa51beeb5a"
+  },
+  "files": {
+    "app/src/main/java/com/limelight/nvstream/NvConnection.java": {
+      "beforeSha256": "31d6474664e7885aed03c43eeb1af09dfaf067e5630ad38a74cbbf0c346472d6",
+      "afterSha256": "c815c0b0c4a0a24aaa7e8ce76e52d6c35794577b4c1164e4442ef546b2efae10"
+    },
+    "app/src/main/java/com/limelight/nvstream/http/NvHTTP.java": {
+      "beforeSha256": "bd1392e2ff162cf530ed856bacc7a8efcfbfe07a908528843ff11ba475584e13",
+      "afterSha256": "c9c283511c40145d01fab25376aaedb21a1e0eab0807311203ddcc898e261f53"
+    },
+    "app/src/main/java/com/limelight/binding/video/MediaCodecDecoderRenderer.java": {
+      "beforeSha256": "7d005fa96389fd26af1849f6b424bdef8b2c15b4f75f69fde7a220f312442f53",
+      "afterSha256": "91b928cacf003bca3453b7982eaeff356de47808821b39bb8777e5265887ccef"
+    }
+  },
+  "authoredSources": {
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/playback/GlRendererProbe.java": {
+      "bytes": 2724,
+      "sha256": "560516509ace080f14f59a9ca162226eab24b79b853948d1c53b1ac3ef91b875"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/playback/PlaybackController.java": {
+      "bytes": 16052,
+      "sha256": "6ba0c1bae246a3f9cae387c5acbc7f63d84341a42083a9e9d316d2138477a33a"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/playback/PlaybackLease.java": {
+      "bytes": 1269,
+      "sha256": "43ad352d14a8c072402ff9f7a59daef588743226a26e324b3dbc63ac7bf437a2"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/playback/PlaybackOwnership.java": {
+      "bytes": 515,
+      "sha256": "b789fbb58630d47ca4dcc761ae4c47ef8b84fc7d6dc0bd2cde2a4de10a325830"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/playback/PlaybackPolicy.java": {
+      "bytes": 1722,
+      "sha256": "a9740afde71a561e5bef475d9b2e988bb549b0ee539669c8618c2583970ad11d"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/playback/PlaybackProcessLease.java": {
+      "bytes": 619,
+      "sha256": "141d68f80262ec7112333adc93faad7a076eb3c51e37e4ed668bc90ae6ff47e3"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/playback/PlaybackProfile.java": {
+      "bytes": 3542,
+      "sha256": "063b914a27df0a694032fb8e38dc54222ae4157b9795c3193fc1e4e6fc2ec812"
+    },
+    "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/playback/PlaybackPolicyTest.java": {
+      "bytes": 5205,
+      "sha256": "9090308be4673e75d1d9f3072053b45fc1f1563fdad4e5b2cda79061d5ff260f"
+    }
+  }
+}

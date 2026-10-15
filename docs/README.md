@@ -49,3 +49,8 @@ The [desktop workflow design](04-design/desktop-workflows.md) expands the visual
 
 - [First real streaming pairing and client-certificate HTTPS](../qualification/results/P0-S4/2026-10-15-stream-first-pairing.md), with [UI/ownership review](06-validation/2026-10-15-stream-pairing-ui-review.md): same-key device result, independent host observation and finite cleanup.
 - [VNC authentication-budget build](../qualification/results/P0-S4/2026-10-15-vnc-auth-timeout-build.md): normal PAM timing, fixed phase deadline, actual compiler/package checks and live-server boundary.
+
+- [VNC first real trust rejection](../qualification/results/P0-S4/2026-10-15-vnc-first-trust.md) and [finite host canvas review](06-validation/2026-10-15-vnc-host-canvas-review.md): authenticated session remains pending.
+- [Pinned native X11 engine entry](03-platform/googlebook/native-x11-engine-entry.md): existing display windows, missing per-XID broker, public startup and Console-license boundaries.
+
+- [Finite streaming playback adapter build](../qualification/results/P0-S4/2026-10-15-stream-playback-build.md) and [next UI/Surface/journal integration contract](03-platform/googlebook/native-stream-playback-entry.md): build-only0.1.6, actual playback pending.

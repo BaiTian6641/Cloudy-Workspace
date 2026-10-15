@@ -10,6 +10,8 @@ The [native USB diagnostic review](docs/06-validation/2026-10-15-native-usb-revi
 
 Repository: [BaiTian6641/Cloudy-Workspace](https://github.com/BaiTian6641/Cloudy-Workspace) · SSH remote: `git@github.com:BaiTian6641/Cloudy-Workspace.git`
 
+Latest P0 follow-up: [VNC 0.1.1](qualification/results/P0-S4/2026-10-15-vnc-first-trust.md) is installed and stopped after real wrong-certificate rejection and clean native/host retirement; authenticated login, frames and input await the user's next finite test. The [streaming 0.1.6 adapter](qualification/results/P0-S4/2026-10-15-stream-playback-build.md) compiles real connection/Surface/MediaCodec/audio code with 23 JVM tests and scoped Lint, but remains uninstalled with UI/runtime qualification pending. The [X11 source entry](docs/03-platform/googlebook/native-x11-engine-entry.md) identifies the required per-application window bridge beyond upstream per-display windows. These are bounded qualification increments; no capability is promoted.
+
 ## Start here
 
 | Read | Purpose |

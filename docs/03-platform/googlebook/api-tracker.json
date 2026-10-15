@@ -137,7 +137,7 @@
       "owner": "Android/platform developer",
       "stage": "P0-S4",
       "fallback": "Explicit absolute mode or separately qualified external mouse/backend; none is a relative 3D pass.",
-      "experiment": "Q-D09: Diagnostic 0.1.5 (six-patch FreeRDP3.32.2) passed native build, Android compilation/Lint and 45 JVM tests. Its sixth patch adds authoritative server-position dispatch; the Kotlin adapter adds bounded presentation-only prediction, and standard relative wire input has no absolute fallback. Physical attempt 13: user reports “Host trail and cursor move; release works”; mouse versus trackpad was unspecified. Two confirmed capture intervals have eight actual UI edges and 619+418 relative JNI admissions (1,037 total relative, 1,678 total input); 565 framebuffer updates at 1280x720. The controlled host target recorded 824 moves and normal operator close with held input 0; native thread joined and instance freed. This is bounded user-report/target-behavior evidence, not latency, 3D, device-type coverage or other-OS qualification. Live authoritative-position callback and server default/hidden states were not separately exercised; prior lag remains unmeasured. Earlier diagnostic 0.1.4 KRdp6.4.5 captured movement failed despite queue admission; source review found no registered relative callback. The later GRD run also had user-visible captured movement failure with release working; missing release-edge evidence prevented attributing target moves to the captured interval.",
+      "experiment": "Q-D09: Diagnostic 0.1.5 (six-patch FreeRDP3.32.2) passed native build, Android compilation/Lint and 45 JVM tests. Its sixth patch adds authoritative server-position dispatch; the Kotlin adapter adds bounded presentation-only prediction, and standard relative wire input has no absolute fallback. Physical attempt 13: user reports \u201cHost trail and cursor move; release works\u201d; mouse versus trackpad was unspecified. Two confirmed capture intervals have eight actual UI edges and 619+418 relative JNI admissions (1,037 total relative, 1,678 total input); 565 framebuffer updates at 1280x720. The controlled host target recorded 824 moves and normal operator close with held input 0; native thread joined and instance freed. This is bounded user-report/target-behavior evidence, not latency, 3D, device-type coverage or other-OS qualification. Live authoritative-position callback and server default/hidden states were not separately exercised; prior lag remains unmeasured. Earlier diagnostic 0.1.4 KRdp6.4.5 captured movement failed despite queue admission; source review found no registered relative callback. The later GRD run also had user-visible captured movement failure with release working; missing release-edge evidence prevented attributing target moves to the captured interval.",
       "versionNotes": "Capture methods API26; relative axes API24. Captured getX/getY deltas and explicit relative axes are alternative representations, not additive. Historical samples matter.",
       "researchEvidence": "docs/03-platform/googlebook/rdp-cursor-presentation-entry.md",
       "compileEvidence": "qualification/results/P0-S4/2026-10-15-rdp-cursor-repair.md",
@@ -436,7 +436,9 @@
         "G20",
         "G40",
         "G41",
-        "R205"
+        "R205",
+        "G152",
+        "G153"
       ],
       "minimumApi": null,
       "libraryVersion": null,
@@ -665,18 +667,20 @@
       "sourceIds": [
         "R17",
         "R18",
-        "R19"
+        "R19",
+        "R241"
       ],
       "minimumApi": null,
       "libraryVersion": null,
       "interfaceKind": "upstream-standard-and-configuration",
       "availability": "documented upstream protocol; selected engine hook unqualified",
       "qualification": "untested",
-      "checkedOn": "2026-10-14",
+      "checkedOn": "2026-10-15",
       "owner": "Android/integration developer",
       "stage": "P0-S7",
       "fallback": "Keep ordinary SSH; labeled full X desktop/stream fallback does not complete separate app windows",
-      "experiment": "Verify cookies, xauth, server denial/timeout, trust isolation, engine hooks and DISPLAY across jump/multiplex contexts"
+      "experiment": "Verify cookies, xauth, server denial/timeout, trust isolation, engine hooks and DISPLAY across jump/multiplex contexts; use a real private authenticated X client socket, never Lorie getXConnection control protocol",
+      "researchEvidence": "docs/03-platform/googlebook/native-x11-engine-entry.md"
     },
     {
       "id": "API26",
@@ -685,7 +689,11 @@
         "Activity/task lifecycle (Android)",
         "XID",
         "WM_TRANSIENT_FOR",
-        "WM_DELETE_WINDOW"
+        "WM_DELETE_WINDOW",
+        "LorieView.surfaceChanged(long, Surface)",
+        "ANativeWindow_fromSurface",
+        "GetWindowPixmap",
+        "SetWindowPixmap"
       ],
       "sourceIds": [
         "G03",
@@ -693,18 +701,25 @@
         "G27",
         "G28",
         "R20",
-        "R33"
+        "R33",
+        "R236",
+        "R237",
+        "R238",
+        "R239",
+        "R240",
+        "R242"
       ],
       "minimumApi": null,
-      "libraryVersion": null,
+      "libraryVersion": "Termux:X11 candidate fa3a8b430e2896a19f44c99a9cb056254615ae06; X.Org65d790bd208ec380b196eb98f144abb0b32e334d",
       "interfaceKind": "proposed-cloudy-integration",
-      "availability": "No Googlebook X11 window API established; broker prototype required",
+      "availability": "Existing engine maps X displays to Android windows and renders root pixmaps; no reviewed per-XID Android broker. Public APK/JNI startup must replace hidden shell context creation.",
       "qualification": "untested",
-      "checkedOn": "2026-10-14",
+      "checkedOn": "2026-10-15",
       "owner": "Android/integration developer",
       "stage": "P0-S7",
       "fallback": "Explicit blocked capability and labeled single X desktop or Desktop backend alternative",
-      "experiment": "Map two apps and owned dialogs/popups to separate native Googlebook windows with focus/IME/resize/scaling/close semantics"
+      "experiment": "Compile/load exact existing engine, then two XIDs from one display into independent native surfaces/tasks with owned dialog, real cookie/SSH isolation and stale-generation cleanup. No root, shared UID or hidden APIs. Console GPL/dependency decision pending; no runtime claim.",
+      "researchEvidence": "docs/03-platform/googlebook/native-x11-engine-entry.md"
     },
     {
       "id": "API27",
@@ -868,16 +883,16 @@
       "minimumApi": null,
       "libraryVersion": "98aaee0560baa0332339b2ef464ea96ed9b9b28c; libjpeg-turbo3.2.0; reused accepted OpenSSL4.0.1",
       "interfaceKind": "upstream-client-and-standard",
-      "availability": "Pinned host regressions, real Android TLS/JPEG/JNI/APK build and native-library loading pass; protected-server session unqualified",
+      "availability": "Actual Android build/load and0.1.1 wrong-leaf X509Plain rejection pass; accepted-pin authentication and frames/input remain unqualified",
       "qualification": "partial",
       "checkedOn": "2026-10-15",
       "owner": "Android/integration developer",
       "stage": "P3-S8",
       "fallback": "Choose a maintained compatible engine; external viewer is a labeled partial workflow",
-      "experiment": "Carry forward27 accepted upstream host cases and exact adapter/native bytes. Diagnostic0.1.0 passes seven JVM tests/zero Lint findings and actually loads crypto/SSL/JNI on HP Googlebook14/API37 with one closed zero-connection journal. Exact-leaf X509Plain session path is implemented but actual JNI create/start/stop/join/free, server pin/authentication/frame/input/lifecycle remain next. Extracted Ubuntu TigerVNC candidate resolves dependencies, not a protocol pass. Complete real protected-server evidence and ADR0010 source/license closure; no CAP-VNC promotion. Rebuilt0.1.1 remains uninstalled: fixed30s authentication phase clipped to total,15s auth read-idle then2s after success, final deadline recheck.37 policy assertions, seven JVM tests and zero owned Lint findings pass; exact signing continuity checked. Live PAM/session behavior remains pending.",
+      "experiment": "Carry forward27 accepted upstream cases,37 C policy assertions and7 JVM/zeroLint build checks. Installed0.1.1 on HP Googlebook14/API37 reaches real RFB3.8/VeNCrypt19/X509Plain262 then rejects changed certificate pin in46ms: initialized0, frames0, workerjoined/freed/closed. IsolatedXvnc and realQt/Xcb canvas exit0 after570875ms; noaccepted-pinattempt beforeexpiry. User deferred native-field login untilreturn. Bothjournals preserved, profile/reverse removed, appstopped. Nextfreshfixture qualifies realPAM/frame/input/cancel; noCAP-VNCpromotion.",
       "researchEvidence": "docs/07-reference/2026-10-15-vnc-patched-source-selection.md",
       "compileEvidence": "qualification/results/P0-S4/2026-10-15-vnc-auth-timeout-build.md",
-      "deviceEvidence": "qualification/results/P0-S4/2026-10-15-vnc-apk-load.md"
+      "deviceEvidence": "qualification/results/P0-S4/2026-10-15-vnc-first-trust.md"
     },
     {
       "id": "API32",
@@ -991,9 +1006,9 @@
       "experiment": "Compare actual view/metrics insets while resizing and moving between displays.",
       "partialObservation": {
         "evidence": "qualification/results/P0-S2/2026-10-15-window-probe.md",
-        "note": "Actual maximize/restore, corner resize to 638 × 612 px and tiled divider resize to a 653 px wide window observed at density 1.625 / font scale 1.0. Activity recreation preserved local state. Attached-decor versus metrics inset source differences retained. No physical-input, larger-font or external-display claim.",
+        "note": "Actual maximize/restore, corner resize to 638 \u00d7 612 px and tiled divider resize to a 653 px wide window observed at density 1.625 / font scale 1.0. Activity recreation preserved local state. Attached-decor versus metrics inset source differences retained. No physical-input, larger-font or external-display claim.",
         "fontScaleEvidence": "qualification/results/P0-S2/2026-10-15-font-scale.md",
-        "fontScaleNote": "Separate 0.2.0 run: 130%/200% actual font configurations, reachable controls by scrolling in 648×600px window, actual Refresh completion and independent saved marker state; original1.0 restored. No full accessibility/physical input qualification."
+        "fontScaleNote": "Separate 0.2.0 run: 130%/200% actual font configurations, reachable controls by scrolling in 648\u00d7600px window, actual Refresh completion and independent saved marker state; original1.0 restored. No full accessibility/physical input qualification."
       }
     },
     {
@@ -1091,7 +1106,7 @@
         "note": "Explicit recreate preserved A logical ID/task/marker/count in a fresh generation with unchanged process and B state. Resize-triggered recreations retained state. The separate background-kill run verified old PID absence, then restored B logical ID/task/C2 from Bundle in a new generation and process via existing Recents task. No force-stop, reboot, natural low-memory or operation durability claim.",
         "processRestorationEvidence": "qualification/results/P0-S2/2026-10-15-process-restoration.md",
         "fontScaleEvidence": "qualification/results/P0-S2/2026-10-15-font-scale.md",
-        "fontScaleNote": "Separate 0.2.0 run: 130%/200% actual font configurations, reachable controls by scrolling in 648×600px window, actual Refresh completion and independent saved marker state; original1.0 restored. No full accessibility/physical input qualification."
+        "fontScaleNote": "Separate 0.2.0 run: 130%/200% actual font configurations, reachable controls by scrolling in 648\u00d7600px window, actual Refresh completion and independent saved marker state; original1.0 restored. No full accessibility/physical input qualification."
       }
     },
     {
@@ -1383,7 +1398,7 @@
       "owner": "Desktop/native developer",
       "stage": "P0-S4",
       "fallback": "Offer explicit absolute mode or separately qualified backend; AINPUT is a distinct extension, and accumulated absolute helper fallback is never standard relative or3D proof.",
-      "experiment": "Q-D09: Diagnostic 0.1.5 (six-patch FreeRDP3.32.2) passed native build, Android compilation/Lint and 45 JVM tests. Its sixth patch adds authoritative server-position dispatch; the Kotlin adapter adds bounded presentation-only prediction, and standard relative wire input has no absolute fallback. Physical attempt 13: user reports “Host trail and cursor move; release works”; mouse versus trackpad was unspecified. Two confirmed capture intervals have eight actual UI edges and 619+418 relative JNI admissions (1,037 total relative, 1,678 total input); 565 framebuffer updates at 1280x720. The controlled host target recorded 824 moves and normal operator close with held input 0; native thread joined and instance freed. This is bounded user-report/target-behavior evidence, not latency, 3D, device-type coverage or other-OS qualification. Live authoritative-position callback and server default/hidden states were not separately exercised; prior lag remains unmeasured. Earlier diagnostic 0.1.4 KRdp6.4.5 captured movement failed despite queue admission; source review found no registered relative callback. The later GRD run also had user-visible captured movement failure with release working; missing release-edge evidence prevented attributing target moves to the captured interval.",
+      "experiment": "Q-D09: Diagnostic 0.1.5 (six-patch FreeRDP3.32.2) passed native build, Android compilation/Lint and 45 JVM tests. Its sixth patch adds authoritative server-position dispatch; the Kotlin adapter adds bounded presentation-only prediction, and standard relative wire input has no absolute fallback. Physical attempt 13: user reports \u201cHost trail and cursor move; release works\u201d; mouse versus trackpad was unspecified. Two confirmed capture intervals have eight actual UI edges and 619+418 relative JNI admissions (1,037 total relative, 1,678 total input); 565 framebuffer updates at 1280x720. The controlled host target recorded 824 moves and normal operator close with held input 0; native thread joined and instance freed. This is bounded user-report/target-behavior evidence, not latency, 3D, device-type coverage or other-OS qualification. Live authoritative-position callback and server default/hidden states were not separately exercised; prior lag remains unmeasured. Earlier diagnostic 0.1.4 KRdp6.4.5 captured movement failed despite queue admission; source review found no registered relative callback. The later GRD run also had user-visible captured movement failure with release working; missing release-edge evidence prevented attributing target moves to the captured interval.",
       "versionNotes": "RDP relative capability0x80 plus earlyclient0x10 and protocol>=0x00080011; events signedINT16. minimumApi26 is Android capture prerequisite, not RDP protocol OS level. Defaults already advertise relative support; server capability gates use. New JNI uses standard core relative events only, with no AINPUT or absolute fallback. Server callback registration is a separate integration requirement; selected FreeRDPserver3.32.1 can advertise support yet discard events at a null callback. Sixth patch enables authoritative pointer-position dispatch/callback; bounded cursor prediction changes presentation only. Accepted relative wire input remains unchanged with no absolute fallback.",
       "researchEvidence": "docs/03-platform/googlebook/rdp-cursor-presentation-entry.md",
       "compileEvidence": "qualification/results/P0-S4/2026-10-15-rdp-cursor-repair.md",
@@ -1447,7 +1462,10 @@
         "KeyStoreException.getNumericErrorCode",
         "BiometricPrompt.AuthenticationResult.getAuthenticationType",
         "BiometricPrompt.PromptInfo.Builder.setAllowedAuthenticators",
-        "NvHTTP.getAppListRaw"
+        "NvHTTP.getAppListRaw",
+        "TextureView.SurfaceTextureListener.onSurfaceTextureDestroyed",
+        "MediaCodec.OnFrameRenderedListener.onFrameRendered",
+        "MediaCodecInfo.isHardwareAccelerated"
       ],
       "sourceIds": [
         "R203",
@@ -1487,7 +1505,11 @@
         "R230",
         "G79",
         "G150",
-        "R233"
+        "R233",
+        "G151",
+        "G152",
+        "G153",
+        "R243"
       ],
       "minimumApi": null,
       "libraryVersion": "Moonlight Androidv12.2/b48494cb96bff23d8886c4775cc4f39a1075495d; common-C874ac9548f1bd6f095ef2b435c42cdde460e7821",
@@ -1498,10 +1520,10 @@
       "owner": "Desktop/media maintainer",
       "stage": "P0-S4",
       "fallback": "Explicit separately installed Moonlight enrolled-host handoff/manual selection, independently useful RDP/VNC lanes; external handoff does not complete native scope",
-      "experiment": "Accepted0.1.5/code6 HP Googlebook14/API37 CL3B.260622.276.R2: fresh DEVICE_CREDENTIAL/type1 callback, same TEE RSA2048 public certificate, real upstream pairing and64byte HTTPS application-list read complete218ms after authorization. Host pending-ID PIN API separately reports success. One closed pairing record and ten identity records retained, prior nine and native-load byte-identical after stop. Actual nearby-devices grant reported by user; loopback USB reverse route does not prove denied-LAN enforcement. No-client-certificate host control reached TLS1.3 then SSLError with no application list; exact alert reason not retained. Finite host/process/listener/permission-entry and scoped device reverse/profile cleanup verified; retained private enrollment is not revoked. Earlier biometric failure, wrong-PIN/cancel/expiry and real video/input/performance remain open. D16 source/notices/build closure remains a release gate.",
+      "experiment": "Accepted0.1.5/code6 HP Googlebook14/API37 CL3B.260622.276.R2: fresh DEVICE_CREDENTIAL/type1 callback, same TEE RSA2048 public certificate, real upstream pairing and64byte HTTPS application-list read complete218ms after authorization. Host pending-ID PIN API separately reports success. One closed pairing record and ten identity records retained, prior nine and native-load byte-identical after stop. Actual nearby-devices grant reported by user; loopback USB reverse route does not prove denied-LAN enforcement. No-client-certificate host control reached TLS1.3 then SSLError with no application list; exact alert reason not retained. Finite host/process/listener/permission-entry and scoped device reverse/profile cleanup verified; retained private enrollment is not revoked. Earlier biometric failure, wrong-PIN/cancel/expiry and real video/input/performance remain open. D16 source/notices/build closure remains a release gate. Build-only0.1.6 compiles realfiniteNvConnection/Surface/MediaCodec/audio with23JVM andzeroownedLint. Notinstalled orUIactivated. Originalcredential30s, exactHTTPS/RTSPpeer, nohostappquit andoneplaybackrunperprocess; Surface/journal/UI andactualmedia next.",
       "researchEvidence": "docs/03-platform/googlebook/native-stream-adoption-entry.md",
-      "versionNotes": "Upstream min21,target36,compile37; owned0.1.5 diagnostic min35,target37,compile37; explicit local-network runtime permission and127.0.0.1-only cleartext config/profile, with independent exact-leaf TLS policy. Public API26+ pointer capture for Googlebook, no root/evdev/private route. One process-global native attempt; external shortcut uses Moonlight-owned enrolled host state. Keystore builder23, unlocked restriction28, timed auth parameters30, actual security level31; source candidate uses Googlebook37. Conscrypt/AOSP/BC moving source explains compatibility, not installed provider pin. Identity inspector isUnlockedDeviceRequired added36.1; new identity diagnostic deliberately requiresAPI37 before creating or inspecting keys. Stable AndroidXBiometric1.1.0 time-based strong/devicecredential prompt has no CryptoObject; actual integration result recorded separately. Credential-only PromptInfo is supported by selected AndroidX1.1.0 onAPI30+; same-key control requires actual resulttype1 and does not change keypolicy. G149/R227.",
-      "compileEvidence": "qualification/results/P0-S4/2026-10-15-stream-first-pairing.md",
+      "versionNotes": "Upstream min21,target36,compile37; owned0.1.5 diagnostic min35,target37,compile37; explicit local-network runtime permission and127.0.0.1-only cleartext config/profile, with independent exact-leaf TLS policy. Public API26+ pointer capture for Googlebook, no root/evdev/private route. One process-global native attempt; external shortcut uses Moonlight-owned enrolled host state. Keystore builder23, unlocked restriction28, timed auth parameters30, actual security level31; source candidate uses Googlebook37. Conscrypt/AOSP/BC moving source explains compatibility, not installed provider pin. Identity inspector isUnlockedDeviceRequired added36.1; new identity diagnostic deliberately requiresAPI37 before creating or inspecting keys. Stable AndroidXBiometric1.1.0 time-based strong/devicecredential prompt has no CryptoObject; actual integration result recorded separately. Credential-only PromptInfo is supported by selected AndroidX1.1.0 onAPI30+; same-key control requires actual resulttype1 and does not change keypolicy. G149/R227. Playback surface ownership14, rendered callback23 (dispatch guarantee from34 only whileexecuting), hardware metadata29; existingmin35coverssymbols. Actualrenderer/codec/runtimequalification separate. Latestsource0.1.6/code7 keeps min35/target37/compile37 andsamepermissions/native/dependencyclosure; installed0.1.5 unchanged.",
+      "compileEvidence": "qualification/results/P0-S4/2026-10-15-stream-playback-build.md",
       "deviceEvidence": "qualification/results/P0-S4/2026-10-15-stream-first-pairing.md"
     }
   ],

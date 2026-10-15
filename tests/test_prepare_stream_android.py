@@ -160,5 +160,33 @@ class PairingReplayChecks(unittest.TestCase):
             MODULE.apply_pairing({name: before}, contents)
 
 
+class PlaybackReplayChecks(unittest.TestCase):
+    def test_composed_replay_requires_exact_pairing_output_and_dependency(self):
+        name, before, paired, _, _, _, contents = PairingReplayChecks().fixture()
+        prefix = MODULE.PLAYBACK.relative_to(ROOT).as_posix() + "/"
+        prerequisite = MODULE.PAIRING.relative_to(ROOT).as_posix() + "/finite-pairing.patch"
+        raw = ("--- a/" + name + "\n+++ b/" + name +
+               "\n@@ -1 +1 @@\n-after\n+playback\n").encode()
+        lock = {"appliesAfter": {"path": prerequisite,
+                                 "sha256": MODULE.digest(contents[prerequisite])},
+                "patch": {"file": "finite-playback.patch", "sha256": MODULE.digest(raw)},
+                "authoredSources": {}, "files": {name: {
+                    "beforeSha256": MODULE.digest(paired),
+                    "afterSha256": MODULE.digest(b"playback\n")}}}
+        contents[prefix + "finite-playback.patch"] = raw
+        contents[prefix + "sources.lock.json"] = json.dumps(lock).encode()
+        # A patch may only consume the reviewed preceding transform, not the
+        # original upstream source or a different revision with similar hunks.
+        with self.assertRaisesRegex(ValueError, "before hash changed"):
+            MODULE.apply_playback({name: before}, contents)
+        files = {name: before}
+        MODULE.apply_pairing(files, contents)
+        MODULE.apply_playback(files, contents)
+        self.assertEqual(files[name], b"playback\n")
+        contents[prerequisite] += b"different prerequisite"
+        with self.assertRaisesRegex(ValueError, "prerequisite pairing patch changed"):
+            MODULE.apply_playback({name: paired}, contents)
+
+
 if __name__ == "__main__":
     unittest.main()

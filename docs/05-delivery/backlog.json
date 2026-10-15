@@ -436,7 +436,14 @@
         "R18",
         "R19",
         "R20",
-        "R33"
+        "R33",
+        "R236",
+        "R237",
+        "R238",
+        "R239",
+        "R240",
+        "R241",
+        "R242"
       ],
       "acceptanceCases": [
         "Q-C07",
@@ -555,7 +562,7 @@
         "Record Q-A02 shell/geometry findings and feature-specific pending checks before freezing revised interaction components."
       ],
       "deliverables": [
-        "Native desktop component catalog and S01–S17 interaction review",
+        "Native desktop component catalog and S01\u2013S17 interaction review",
         "Rule 0 and applicable official desktop-quality evidence ledger",
         "Native workspace review record with accepted geometry/focus decisions and explicit provisional components"
       ],
@@ -1963,7 +1970,7 @@
       ],
       "exitCriteria": [
         "No unresolved release-blocking data-loss/trust/replay/ownership/input defect.",
-        "At least ten working days observed; the 3–5 day estimate is active QA effort, not the observation duration."
+        "At least ten working days observed; the 3\u20135 day estimate is active QA effort, not the observation duration."
       ],
       "sourceIds": [
         "G02",

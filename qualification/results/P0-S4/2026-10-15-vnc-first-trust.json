@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-15",
+  "stage": "P0-S4",
+  "scope": "real Googlebook VNC wrong-leaf rejection against finite isolated X509Plain TigerVNC; authenticated session deferred",
+  "status": "negative-trust-case-passed-authentication-pending",
+  "device": {
+    "model": "HP Googlebook 14",
+    "manufacturer": "HP",
+    "release": "17",
+    "api": "37",
+    "build": "CL3B.260622.276.R2",
+    "incremental": "16560795",
+    "patch": "2026-09-01",
+    "abi": "arm64-v8a"
+  },
+  "build": {
+    "applicationId": "dev.cloudy.qualification.vnc",
+    "versionName": "0.1.1",
+    "versionCode": 2,
+    "buildRef": "ebfc6f16-0b7a-4ace-8849-23e9bc748492",
+    "apk": {
+      "path": "qualification/results/private/native-vnc/2026-10-15-session-01/cloudy-vnc-0.1.1.apk",
+      "bytes": 10888191,
+      "sha256": "37ed5c92c5a385ce357df0bf2204c4031d6c131e76d2990238875909b878ba11"
+    },
+    "compileEvidence": "qualification/results/P0-S4/2026-10-15-vnc-auth-timeout-build.json"
+  },
+  "host": {
+    "os": "Ubuntu26.04",
+    "backend": "TigerVNC1.15.0+dfsg-2build1 standalone Xtigervnc",
+    "serverBinarySha256": "e59b12d25e9a9341db3b54b2da365c0964faeb52b5b720fb50674631d3fcac84",
+    "isolation": "private X display/Xauthority; RFBloopback over scoped USBADBreverse; no real desktop capture",
+    "security": "VeNCrypt/X509Plain only, exact certificate leaf pin, normal other PAM service, current-user allowlist",
+    "canvas": {
+      "source": {
+        "path": "tools/vnc_input_target.cpp",
+        "bytes": 10159,
+        "sha256": "e4db543cf4169dcb5db5bfa348c1c8ecefdb32fc36ab26f960f20a6a543061a3"
+      },
+      "binary": {
+        "path": ".cache/native-vnc-host/canvas-02/vnc_input_target",
+        "bytes": 156472,
+        "sha256": "112b670652213c700bd0baee568dee1a67e8baf47cd90bac793fc0a2371beb1a"
+      },
+      "qtVersion": "6.9.2",
+      "compiler": "GCC15.2.0",
+      "completion": {
+        "buttonEvents": 0,
+        "elapsedNanoseconds": "570436254890",
+        "event": "completion",
+        "exitCode": 0,
+        "heldKeys": [],
+        "keyEvents": 0,
+        "lastObservedButtons": 0,
+        "motionEvents": 0,
+        "paintEvents": 2282,
+        "reason": "time-limit",
+        "sequence": 1,
+        "timerTicks": 2281,
+        "wheelEvents": 0
+      }
+    },
+    "runDurationMillis": 570875,
+    "serverExitCode": 0,
+    "canvasExitCode": 0
+  },
+  "attempt": {
+    "schema": 1,
+    "attemptId": "1b452388-235c-4c56-bab6-20bba0435c87",
+    "kind": "session",
+    "version": "0.1.1",
+    "buildRef": "ebfc6f16-0b7a-4ace-8849-23e9bc748492",
+    "nativeBuildRef": "vnc-adapter-x509plain-2026-10-15",
+    "startedElapsedMs": 104202580,
+    "state": "native-terminal",
+    "detail": "native-error-4",
+    "reason": "native-terminal",
+    "closed": true,
+    "threadStarted": true,
+    "joined": true,
+    "freed": true,
+    "elapsedMs": 46,
+    "connectionsInitialized": 0,
+    "nativeState": 4,
+    "nativeError": 4,
+    "nativeFrameCallbacks": 0,
+    "javaFrameCallbacks": 0,
+    "convertedFrames": 0,
+    "uniqueFrameDraws": 0,
+    "admittedInputs": 0,
+    "completedInputs": 0,
+    "successfulWrites": 0,
+    "width": 0,
+    "height": 0,
+    "releaseResult": "none"
+  },
+  "priorAttemptPreserved": "52109479-3fd7-4f1e-bb27-fd51430f7015",
+  "cleanup": {
+    "noOwnedAppProcess": true,
+    "bothJournalsUnchanged": true,
+    "deviceProfileRemoved": true,
+    "exactReverseRemoved": true,
+    "rfbListenerClosed": true,
+    "xSocketAbsent": true,
+    "xLockAbsent": true
+  },
+  "evidence": [
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-session-01/device.json",
+      "bytes": 201,
+      "sha256": "f79591313921b22b9308db767f38d2d4e0cc1b67867b9518a1fe9f076ed0cc0e"
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-session-01/cleanup.json",
+      "bytes": 1108,
+      "sha256": "c61719ef1e6f5c95d60fa9c9faf6196423a16af337a34bbc5481dd3e69898415"
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-session-01/preserved-52109479-3fd7-4f1e-bb27-fd51430f7015.json",
+      "bytes": 624,
+      "sha256": "3a9cc5093f4b5008b0b9659a5607591025394207d1570ec73df20e3ed68138ca"
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-session-01/preserved-1b452388-235c-4c56-bab6-20bba0435c87.json",
+      "bytes": 637,
+      "sha256": "b7c3dbe1b7b811e4e35b1e3799831115579ecfd589382637821cb3868c99878c"
+    },
+    {
+      "path": ".cache/native-vnc-host/session-01/result.json",
+      "bytes": 1030,
+      "sha256": "3cb81713afecefe63d45fff6cf376e1b8493ca45b37951b2a071cfe034541c0b"
+    },
+    {
+      "path": ".cache/native-vnc-host/session-01/server.log",
+      "bytes": 1442,
+      "sha256": "2d898009e6343c65ecd1124801f1a56236c4890b52614f54bca2dec4624e1be6"
+    },
+    {
+      "path": ".cache/native-vnc-host/session-01/canvas/events.jsonl",
+      "bytes": 421,
+      "sha256": "137220df197e7c991c4e3dd5c5545f019cd26cea33c2c25422dc5f2924ede313"
+    },
+    {
+      "path": ".cache/native-vnc-host/session-01/canvas.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/native-vnc-host/session_fixture.py",
+      "bytes": 6383,
+      "sha256": "696bb298f8c4e1bb57369409f45b432f3e9bf6684cf36185b9fe264420298cec"
+    },
+    {
+      "path": ".cache/native-vnc-android/device_011.py",
+      "bytes": 7112,
+      "sha256": "c8cbf8b30eb403ae9bba9ff41ebb705debe87e1e4f0a8e45f45c3272fb7f53f2"
+    },
+    {
+      "path": ".cache/native-vnc-host/canvas-02/build.json",
+      "bytes": 1120,
+      "sha256": "d269edc2a239d12690332ad113b90ee3679640be34fe5413685bef6238d1dec9"
+    },
+    {
+      "path": ".cache/native-vnc-host/canvas-02/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tools/vnc_input_target.cpp",
+      "bytes": 10159,
+      "sha256": "e4db543cf4169dcb5db5bfa348c1c8ecefdb32fc36ab26f960f20a6a543061a3"
+    }
+  ],
+  "limitations": [
+    "No authenticated accepted-pin attempt was created before the finite fixture expired; user subsequently deferred hands-on test.",
+    "Zero client frames and input; canvas timer/paint counts are host-only and do not prove transport delivery.",
+    "No denied-LAN, physical-input, latency, VNC interoperability or supported-capability pass.",
+    "Known-invalid dummy credentials were used only for wrong-pin control; normal host password must stay in the Googlebook native field."
+  ]
+}
