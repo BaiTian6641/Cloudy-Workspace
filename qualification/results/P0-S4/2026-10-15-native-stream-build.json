@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-15",
+  "stage": "P0-S4",
+  "scope": "actual arm64 native core compilation and offline ELF/source integrity only; no APK, JNI runtime or streaming qualification",
+  "buildRef": "f336e245-805d-4aad-bc1a-9208df8db318",
+  "status": "native-build-and-offline-check-passed",
+  "sourcesLock": {
+    "path": "qualification/probes/native-stream/sources.lock.json",
+    "bytes": 4003,
+    "sha256": "0ff3667b36d91e7dd1678aa6fffeb6d931218483f90334b40260fe3cb11dde30"
+  },
+  "inputs": {
+    "qualification/probes/native-stream/sources.lock.json": "0ff3667b36d91e7dd1678aa6fffeb6d931218483f90334b40260fe3cb11dde30",
+    "tools/prepare_native_stream.py": "3740ca70f97e5585a621434752ccee33c35a078e15fed04ece1f0aaf8dc943b7",
+    "tools/build_rdp_native.py": "07ed0db14c8f68d5eaebd810c812631baedcabc59998f5d596046bb486fd3fd1",
+    "tools/prepare_rdp_native.py": "63105726cac73f8c6fd7519962a67bf1bac789666846fc73355f3b842e63d1ed"
+  },
+  "toolchain": {
+    "files": {
+      "source.properties": "716f3518a923198cfab037abb32dc3f1b1f7e9a9dcdcda6b66be5906215d2658",
+      "clang": "d326ed4fc4f71e5315b9ce388fc23ec792f81652ca7b29e66294de6ed2520844",
+      "sources/android/cpufeatures/Android.mk": "31b87682821005b53361aefcf5523ddc2eadf2263ac1e68f5809168b8068ae3b",
+      "sources/android/cpufeatures/NOTICE": "c870d52f42a8f93023b99a85fe68d02637d6b04e5f35bbcd7f98759adb4e4d49",
+      "sources/android/cpufeatures/README.md": "b5f1cbbc92710740bd61658270da781446add4dbadf07c5a9a25b1a2b297a751",
+      "sources/android/cpufeatures/cpu-features.c": "1b8a88eb7d3a5437d17e12475539398d3e1c5eef13d85941679841254af0a8f5",
+      "sources/android/cpufeatures/cpu-features.h": "f4989fabece7ea538e3c1272dca47f8a9a4423a87c79a1344a2611e884cb7319"
+    },
+    "clangVersion": "Android (13989888, +pgo, +bolt, +lto, +mlgo, based on r563880c) clang version 21.0.0 (https://android.googlesource.com/toolchain/llvm-project 5e96669f06077099aa41290cdb4c5e6fa0f59349)"
+  },
+  "library": {
+    "bytes": 5110376,
+    "sha256": "95640675b34cd4d1a7908ff4e22949af7d214b8771e1c3bc954dbc21eea99a98",
+    "elf": {
+      "needed": [
+        "libc.so",
+        "libdl.so",
+        "liblog.so",
+        "libm.so"
+      ],
+      "soname": "libmoonlight-core.so",
+      "machine": "AArch64",
+      "minimumLoadAlignment": 16384
+    },
+    "requiredJniExports": [
+      "Java_com_limelight_nvstream_jni_MoonBridge_init",
+      "Java_com_limelight_nvstream_jni_MoonBridge_interruptConnection",
+      "Java_com_limelight_nvstream_jni_MoonBridge_sendMouseMove",
+      "Java_com_limelight_nvstream_jni_MoonBridge_startConnection",
+      "Java_com_limelight_nvstream_jni_MoonBridge_stopConnection"
+    ]
+  },
+  "sourceFileCount": 617,
+  "preparedFileCount": 21,
+  "patchCount": 0,
+  "evidence": [
+    {
+      "path": ".cache/native-stream-build/entry-02/receipt.json",
+      "bytes": 88116,
+      "sha256": "dbb6035ba335dd39f41fdb0d4f672d5beda65710c2bbfb08dab063773944feae"
+    },
+    {
+      "path": ".cache/native-stream-build/entry-02/command.json",
+      "bytes": 478,
+      "sha256": "a89b60875ca232285d539ccedc1075920fc200d95cf0640e03a66e5c3f77f0fa"
+    },
+    {
+      "path": ".cache/native-stream-build/entry-02/build.log",
+      "bytes": 2339,
+      "sha256": "e36cbc6a784ca1e8d449ae2f418a50cdfd2779c77a3640847b4ae5d02043805c"
+    },
+    {
+      "path": ".cache/native-stream-build/entry-02/exports.txt",
+      "bytes": 16151,
+      "sha256": "0a18c981c7cc3e86545af836cd2568337829349c63ae473de2128026150c4971"
+    }
+  ],
+  "earlierAttempt": {
+    "run": "entry-01",
+    "status": "native-compile-link-completed-preparation-failed",
+    "reason": "Initial notice path used LICENSE instead of common-C LICENSE.txt; no successful receipt accepted.",
+    "evidence": ".cache/native-stream-build/entry-01/failure.json"
+  },
+  "checks": {
+    "focusedPythonTests": {
+      "count": 6,
+      "failures": 0,
+      "command": "python3 -m unittest discover -s tests -p test_prepare_native_stream.py -v"
+    },
+    "independentReview": "integration leader and independent direct Codex reviewer accepted bounded source/build result; no blocking defects",
+    "authoredAst": {
+      "passed": true,
+      "checkedFiles": 20
+    },
+    "focusedRuff": {
+      "passed": true
+    },
+    "projectValidation": {
+      "passed": true
+    }
+  },
+  "pending": [
+    "Actual Java/JNI ABI load and Android compile/Lint/APK packaging",
+    "Owned pairing/trust/key provider and cancellation adapter",
+    "Surface/MediaCodec decode, host streaming, desktop input and performance qualification",
+    "Final compatible license closure and complete corresponding dependency sources/build materials per ADR0010"
+  ],
+  "distributionDecision": "Open-source Desktop direction adopted in ADR0010; private preparation notices are not final distribution layout or complete Opus/OpenSSL source bundle."
+}

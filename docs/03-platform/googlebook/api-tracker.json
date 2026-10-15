@@ -435,7 +435,8 @@
       "sourceIds": [
         "G20",
         "G40",
-        "G41"
+        "G41",
+        "R205"
       ],
       "minimumApi": null,
       "libraryVersion": null,
@@ -449,7 +450,8 @@
       "partialObservation": {
         "evidence": "qualification/results/P0-S1/2026-10-15-device-probe.md",
         "note": "MediaCodecList video enumeration compiled and returned 36 entries (including aliases/special codecs). No MediaCodec instance or actual decoding was exercised."
-      }
+      },
+      "researchEvidence": "docs/03-platform/googlebook/native-stream-adoption-entry.md"
     },
     {
       "id": "API18",
@@ -714,7 +716,8 @@
       ],
       "sourceIds": [
         "G29",
-        "G30"
+        "G30",
+        "R205"
       ],
       "minimumApi": 30,
       "libraryVersion": null,
@@ -729,7 +732,8 @@
       "partialObservation": {
         "evidence": "qualification/results/P0-S1/2026-10-15-device-probe.md",
         "note": "Optional supported/required low-latency flags were queried per video MIME; actual KEY_LOW_LATENCY configuration, decode or latency was not exercised."
-      }
+      },
+      "researchEvidence": "docs/03-platform/googlebook/native-stream-adoption-entry.md"
     },
     {
       "id": "API28",
@@ -853,19 +857,21 @@
         "R135",
         "R136",
         "R137",
-        "R140"
+        "R140",
+        "R202"
       ],
       "minimumApi": null,
       "libraryVersion": "98aaee0560baa0332339b2ef464ea96ed9b9b28c",
       "interfaceKind": "upstream-client-and-standard",
-      "availability": "Accepted bounded LibVNCClient source/build candidate containing three identified fixes; runtime regressions, Android integration and GPL distribution unresolved",
-      "qualification": "untested",
+      "availability": "Pinned host static build and27 focused decoder regressions pass; Android/TLS/real-server integration pending; open-source Desktop direction selected",
+      "qualification": "partial",
       "checkedOn": "2026-10-15",
       "owner": "Android/integration developer",
       "stage": "P3-S8",
       "fallback": "Choose a maintained compatible engine; external viewer is a labeled partial workflow",
-      "experiment": "Before ordinary server probe, run focused Tight excess-row, Gradient 2048/2049 and UltraZip header/raw-payload/count regressions plus valid decode controls. Require nonzero normal per-encoding update counts and zero failures. Build selected arm64 Android vncclient with explicit dependency pins; qualify Cloudy trust/security/encoding/resize/input/cancel/recovery. Source coverage is resolved for the three named fixes only; CAP-VNC and distribution license remain pending.",
-      "researchEvidence": "docs/07-reference/2026-10-15-vnc-patched-source-selection.md"
+      "experiment": "Carry forward27 ASan/UBSan host cases with nine valid controls for three named advisory guards under portable miniLZO. Build actual arm64 client with selected TLS/compression dependencies, then qualify protected-server trust/security/encoding/resize/input/cancel/recovery. ADR0010 selects open-source Desktop; exact distribution/license closure remains P1-S4. No general security or CAP-VNC pass.",
+      "researchEvidence": "docs/07-reference/2026-10-15-vnc-patched-source-selection.md",
+      "compileEvidence": "qualification/results/P0-S4/2026-10-15-vnc-regressions.md"
     },
     {
       "id": "API32",
@@ -1410,6 +1416,45 @@
       "versionNotes": "Wrap API since1.0.23; selected1.0.30 init_context no-discovery option. Borrowed Android FD remains open until libusb_close and is closed by UsbDeviceConnection owner. Probe min35 is local qualification baseline, not API introduction.",
       "researchEvidence": "docs/03-platform/googlebook/p0-s5-usb-provider-entry.md",
       "deviceEvidence": "qualification/results/P0-S5/2026-10-15-usb-native-preflight.md"
+    },
+    {
+      "id": "API47",
+      "feature": "Native Moonlight stream integration and enrolled-host external handoff",
+      "symbols": [
+        "NvConnection.start",
+        "NvConnection.stop",
+        "MoonBridge",
+        "MediaCodecDecoderRenderer.setRenderTarget",
+        "LimelightCryptoProvider",
+        "PairingManager.pair",
+        "PairingManager.getPairedCert",
+        "ShortcutTrampoline"
+      ],
+      "sourceIds": [
+        "R203",
+        "R204",
+        "R205",
+        "R206",
+        "R207",
+        "R208",
+        "R209",
+        "R210",
+        "R211",
+        "G20"
+      ],
+      "minimumApi": null,
+      "libraryVersion": "Moonlight Androidv12.2/b48494cb96bff23d8886c4775cc4f39a1075495d; common-C874ac9548f1bd6f095ef2b435c42cdde460e7821",
+      "interfaceKind": "pinned-upstream-source-integration-not-embedding-sdk",
+      "availability": "Pinned real nonRoot arm64 native core built and ELF/exports checked; Android APK/JNI runtime and stream unqualified",
+      "qualification": "partial",
+      "checkedOn": "2026-10-15",
+      "owner": "Desktop/media maintainer",
+      "stage": "P0-S4",
+      "fallback": "Explicit separately installed Moonlight enrolled-host handoff/manual selection, independently useful RDP/VNC lanes; external handoff does not complete native scope",
+      "experiment": "Carry forward exact nonRoot arm64 core build; build isolated Android diagnostic, reuse actual MediaCodec/audio renderer, qualify app-owned key provider/pairing/trust, HTTP-before-native cancellation/reap and surface lifecycle, then real host/input/decoder evidence. ADR0010 selects compatible open-source Desktop distribution; P1-S5 retains actual closure/source/notices/build review.",
+      "researchEvidence": "docs/03-platform/googlebook/native-stream-adoption-entry.md",
+      "versionNotes": "Upstream min21,target36,compile37; target37 migration separate. Public API26+ pointer capture for Googlebook, no root/evdev/private route. One process-global native attempt; external shortcut uses Moonlight-owned enrolled host state.",
+      "compileEvidence": "qualification/results/P0-S4/2026-10-15-native-stream-build.md"
     }
   ],
   "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."

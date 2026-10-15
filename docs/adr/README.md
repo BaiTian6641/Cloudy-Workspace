@@ -10,4 +10,6 @@
 | [0006](0006-desktop-integrated-workflows.md) | Adopted for planning | Googlebook desktop scope, X11/SFTP, native RDP/VNC and USB plug-and-play |
 | [0007](0007-publication-and-independent-delivery.md) | User selected; adopted for planning | Per-save overwrite consent, independent app releases and early native-stream adoption |
 
+| [0010](0010-desktop-open-source-distribution.md) | User selected | Open-source Desktop with compatible terms and required source/notices/build materials |
+
 “Adopted for planning” fixes a current boundary; it does not claim implementation. Amend or supersede a decision when an experiment changes it, preserving the evidence and consequence.

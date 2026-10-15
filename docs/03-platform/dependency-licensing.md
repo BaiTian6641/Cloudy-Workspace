@@ -15,9 +15,9 @@ Use the [established-library policy](../05-delivery/library-reuse-policy.md) whe
 | libssh2-style native engine | Alternative SSH boundary | NDK packaging/update burden in same comparison | P0-S3 |
 | Maintained Android X server; Termux:X11 reference | Local X server with native top-level broker | P0 prototype; no assumed shared UID/root/private API or embedding right | P0-S7 / P1-S4: exact engine/files/build/license and maintenance |
 | FreeRDP | Native RDP and optional later RemoteApp | P0 3.32.2 arm64 native/JNI build accepted; Android integration pending | P1-S4: Apache-2.0 core plus selected MPL-2.0 JNI/Java files, actual dependency/codec obligations; preserve exact pin |
-| Maintained RFB engine; LibVNCClient candidate | Native VNC client | P0 exact `98aaee0560baa0332339b2ef464ea96ed9b9b28c` source/build candidate, P3 integration | Three named fixes source-covered; focused runtime regressions/Android integration pending. P1-S4: GPL file/license/dependency model |
+| Maintained RFB engine; LibVNCClient candidate | Native VNC client | P0 exact `98aaee0560baa0332339b2ef464ea96ed9b9b28c` source/build candidate, P3 integration | Three named fixes source-covered; 27 focused portable host regressions pass; Android/TLS/server integration pending. P1-S4: GPL file/license/dependency model |
 | Sunshine | Host desktop backend | Separately installed | P0-S4 |
-| Moonlight Android | Client baseline; possible later native integration | External app first | P1-S5: GPL-3.0 source/distribution and fork maintenance decision |
+| Moonlight Android | Client baseline; possible later native integration | Pinned v12.2 native feasibility alongside external handoff | P1-S5: compatible open-source Desktop selected; exact source/notices/build/fork-maintenance obligations |
 | VirtualHere | Android USB provider + host consumers | External licensed software | P0-S5 / P1-S4: trial/license/API/redistribution terms |
 | Tailscale | Existing private network route | Official separate app | P0-S6: route/one-VPN behavior; no admin key in client |
 | rclone | Optional Linux cloud-file adapter | Host-configured, not embedded by default | P3-S3/P5-S3: cache/conflicts and actual license |
@@ -36,3 +36,7 @@ Select the project's own license before public code release. The current reposit
 The [accepted VNC source selection](../07-reference/2026-10-15-vnc-patched-source-selection.md) resolves only exact source coverage for the three identified advisories. It does not establish runtime decoder safety, Android/device support, CAP-VNC acceptance or a distributable license arrangement.
 
 The [FreeRDP native build](../06-validation/2026-10-15-native-rdp-build.md) records actual OpenSSL4.0.1, cJSON1.7.19 and uriparser1.0.2 outputs, the resource-only patch and mixed selected-file licenses. MediaCodec adds no bundled codec implementation; that fact does not settle AVC obligations. This private build does not decide product distribution terms.
+
+## Selected Desktop distribution direction
+
+The user selected [ADR0010](../adr/0010-desktop-open-source-distribution.md): open-source Desktop with compatible licensing and required source/notices/build materials. This settles the direction for the pinned Moonlight/VNC adoption path; exact release license expression and actual artifact closure remain review work. Console retains independent terms; no blanket repository grant is inferred. The [native-stream entry](googlebook/native-stream-adoption-entry.md) pins real source/submodule/static-input provenance; the [VNC regressions](../../qualification/results/P0-S4/2026-10-15-vnc-regressions.md) close only the named host decoder question.

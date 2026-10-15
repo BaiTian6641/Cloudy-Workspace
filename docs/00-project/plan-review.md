@@ -39,7 +39,7 @@ The HP Googlebook is connected over authorized USB ADB, and the user selected th
 
 ## Open decisions with bounded defaults
 
-Default to Kotlin/Compose for the Android desktop shell, a separately bundled xterm.js experiment for the terminal, SFTP for remote files, FreeRDP/maintained RFB engine investigations for native clients, and external high-performance streaming for the early R2 lane. Qualify a local X server and native window broker before adopting an engine. Freeze versions after actual toolchain/device tests. The user has not selected a distribution license, USB probe, Windows test host or local VM requirement; Linux is the selected primary host and broader OS support remains unqualified; these have explicit owners and stages in [risks](decisions-risks.md).
+Default to Kotlin/Compose for the Android desktop shell, a separately bundled xterm.js experiment for the terminal, SFTP for remote files, FreeRDP/maintained RFB engine investigations for native clients, and external high-performance streaming for the early R2 lane. Qualify a local X server and native window broker before adopting an engine. Freeze versions after actual toolchain/device tests. The user selected [open-source Desktop with compatible terms and required source/notices/build materials](../adr/0010-desktop-open-source-distribution.md); exact release license/closure, independent Console terms, USB probe, Windows test host and local VM requirement remain unresolved; Linux is the selected primary host and broader OS support remains unqualified; these have explicit owners and stages in [risks](decisions-risks.md).
 
 ## What this repository delivers
 

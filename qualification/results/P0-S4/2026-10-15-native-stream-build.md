@@ -1,0 +1,9 @@
+# P0-S4 native streaming core build result
+
+**2026-10-15:** real native compilation and offline source/ELF verification passed for Moonlight Android v12.2 with the four exact official inputs in the [source lock](../../probes/native-stream/sources.lock.json). Build reference: **`f336e245-805d-4aad-bc1a-9208df8db318`**. The actual arm64 `libmoonlight-core.so` is **5,110,376 bytes**, SHA256 **`95640675b34cd4d1a7908ff4e22949af7d214b8771e1c3bc954dbc21eea99a98`**. It has 16KiB ELF load alignment and only Android system dynamic dependencies.
+
+The [review](../../../docs/06-validation/2026-10-15-native-stream-build.md) records source pins, reused upstream recipe, ownership/integrity boundaries, executed helper tests and remaining gates. The [machine-readable result](2026-10-15-native-stream-build.json) records exact private evidence hashes. Six focused preparation tests passed; these are adapter integrity/process checks, not streaming or hardware evidence.
+
+Private evidence is `.cache/native-stream-build/entry-02/receipt.json`, `command.json`, `build.log`, `exports.txt`, `source/` and `prepared/`. The native package input is `prepared/nativeLibraries/arm64-v8a/libmoonlight-core.so` under that run. Initial `entry-01` compiled/linked but failed finalization on a notice filename; `.cache/native-stream-build/entry-01/failure.json` preserves that failure and no accepted receipt exists for it.
+
+No Android package, JNI runtime load, MediaCodec/Surface, pairing, host connection, device performance or latency pass is claimed. Open-source Desktop direction is adopted by [ADR0010](../../../docs/adr/0010-desktop-open-source-distribution.md); exact compatible licensing/source/notices closure remains a release gate. Private preparation notices are not final APK/source-distribution packaging or a complete Opus/OpenSSL source bundle. Desktop must own its trust/pairing/key storage in the next integration.

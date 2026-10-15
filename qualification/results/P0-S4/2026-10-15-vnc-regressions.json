@@ -1,0 +1,252 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-15",
+  "stage": "P0-S4",
+  "result": "focused-host-advisory-regressions-passed",
+  "sourceRevision": "98aaee0560baa0332339b2ef464ea96ed9b9b28c",
+  "sourceArchive": {
+    "url": "https://codeload.github.com/LibVNC/libvncserver/tar.gz/98aaee0560baa0332339b2ef464ea96ed9b9b28c",
+    "bytes": 612494,
+    "sha256": "e4aba30e25cd7bcc743794ccaf4a9b7c3236d15945b9e8b8bb059b0ae1d2f1bb",
+    "sourceRecords": 174,
+    "beforeAfterMatches": true
+  },
+  "historicalHostBuild": "qualification/results/P0-S4/2026-10-15-vnc-host-build.json",
+  "review": {
+    "parent": "accepted-bounded-host-regression",
+    "independentWorker": "accepted-no-blockers",
+    "document": "docs/06-validation/2026-10-15-vnc-regression-review.md"
+  },
+  "configuration": {
+    "compilerFlags": "-fsanitize=address,undefined -fno-omit-frame-pointer -O1 -g -DLZO_CFG_NO_UNALIGNED=1",
+    "strictHarnessFlags": [
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-Wpedantic",
+      "-Werror"
+    ],
+    "target": "vncclient",
+    "parallelJobs": 4,
+    "staticLibrary": true,
+    "zlibEnabled": true,
+    "jpegEnabled": true,
+    "bundledMiniLzo": true,
+    "tlsEnabled": false,
+    "ASAN_OPTIONS": "detect_leaks=1:abort_on_error=1",
+    "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1",
+    "sanitizersDisabled": [],
+    "portableLzoBoundary": "Supported LZO_CFG_NO_UNALIGNED=1 selects portable accesses in unchanged bundled miniLZO. Prior stop was its lzo_init/_lzo_config_check unaligned self-check before any decoder verdict; original optimized configuration and Android are not qualified.",
+    "officialSource": "https://raw.githubusercontent.com/LibVNC/libvncserver/98aaee0560baa0332339b2ef464ea96ed9b9b28c/src/common/minilzo.c"
+  },
+  "summary": {
+    "cases": 27,
+    "failures": 0,
+    "validControls": 9,
+    "validControlUpdates": 9,
+    "bitsPerPixel": [
+      8,
+      16,
+      32
+    ],
+    "tightValidControls": 3,
+    "gradientValidControls": 3,
+    "ultrazipValidControls": 3,
+    "expectedMalformedRejections": 18,
+    "outOfFrameCallbacks": 0,
+    "exhaustedFixtureReads": 0,
+    "sanitizerReports": 0,
+    "ultraZipExcessCount": "One valid bounded subrectangle is decoded before rejection of the absent second header; no transactional rollback claim."
+  },
+  "advisories": [
+    {
+      "id": "GHSA-v9pm-47h4-jcq8",
+      "cases": 6,
+      "validControls": 3,
+      "malformedCases": 3,
+      "scope": "Tight excess decompressed rows"
+    },
+    {
+      "id": "GHSA-jcc5-8wj4-7c58",
+      "cases": 6,
+      "validControls": 3,
+      "malformedCases": 3,
+      "scope": "Gradient width2048 valid and width2049 rejected"
+    },
+    {
+      "id": "GHSA-87q7-v983-qwcj",
+      "cases": 15,
+      "validControls": 3,
+      "malformedCases": 12,
+      "scope": "UltraZip truncated header/raw, excess count and large raw-size product"
+    }
+  ],
+  "checks": {
+    "strictCCompile": "passed-no-warnings",
+    "asanUbsanLeakRun": "passed-no-reports",
+    "pythonAst": {
+      "passed": true,
+      "files": 18
+    },
+    "targetedRuff": "passed"
+  },
+  "scopeLimits": {
+    "testTransport": "In-memory wrappers for public transport reads/writes; actual upstream dispatcher/compression/decoders/cleanup execute.",
+    "networkProbeExecuted": false,
+    "androidBuildExecuted": false,
+    "deviceProbeExecuted": false,
+    "tlsQualified": false,
+    "productCapabilityPromoted": false,
+    "capVnc": "pending",
+    "remainingGates": [
+      "selected Android/TLS dependency build",
+      "protected real-server adapter integration",
+      "render/input/cancellation/recovery",
+      "GPL/distribution decision"
+    ]
+  },
+  "sourceInputs": [
+    {
+      "path": "tools/vnc_client_regression.c",
+      "bytes": 11595,
+      "sha256": "a6454ac5e13ea71e29f1c59af1b825c69488caadd38a2500146e5037c91c1bba"
+    },
+    {
+      "path": "tools/run_vnc_regression.py",
+      "bytes": 7524,
+      "sha256": "120bacdaee55ed591d9e15b4904d6dc53728cea7232fc75d9e299c9ff58fe696"
+    },
+    {
+      "path": "docs/06-validation/2026-10-15-vnc-regression-review.md",
+      "bytes": 4596,
+      "sha256": "8e1d62b5c3f48d41e632b903143b89c4c0d709391795cf2161497888fc7072aa"
+    },
+    {
+      "path": "qualification/results/P0-S4/2026-10-15-vnc-regressions.md",
+      "bytes": 6387,
+      "sha256": "6ef8bc4518915c456feb491b6016aba65d4ca83ae175db17e612edcecb8c61e0"
+    }
+  ],
+  "privateEvidence": [
+    {
+      "path": ".cache/vnc-qualification/followup/portable-01/build.json",
+      "bytes": 260,
+      "sha256": "2899aec2065bbf565117569c422e28d4c0847c32869312685857ffde73fe4e39"
+    },
+    {
+      "path": ".cache/vnc-qualification/followup/portable-01/build.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/vnc-qualification/followup/portable-01/build.stdout",
+      "bytes": 971,
+      "sha256": "99d4ca1fa3bbbc588be716803e614304b036e10d44e1eb9c34a87a9fa30209c2"
+    },
+    {
+      "path": ".cache/vnc-qualification/followup/portable-01/build/libvncclient.a",
+      "bytes": 5070862,
+      "sha256": "efa9df134bf7e161b8ade965ffccfb2df7ec0f1e309bf1a1847e6e9b120e8738"
+    },
+    {
+      "path": ".cache/vnc-qualification/followup/portable-01/compile.json",
+      "bytes": 1128,
+      "sha256": "919e4469f5969a90768180a90667ae783392ba97af43c095134f435f23ebc5fe"
+    },
+    {
+      "path": ".cache/vnc-qualification/followup/portable-01/compile.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/vnc-qualification/followup/portable-01/compile.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/vnc-qualification/followup/portable-01/configure.json",
+      "bytes": 1012,
+      "sha256": "cdbec846c6d13beda9a07abc510563c00ea8c04218cf6c06da752d5f5513c3f5"
+    },
+    {
+      "path": ".cache/vnc-qualification/followup/portable-01/configure.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/vnc-qualification/followup/portable-01/configure.stdout",
+      "bytes": 3369,
+      "sha256": "d459ea9aeb95afe0efea8b89d306978996f0fa6cbcde406bd6c2cbd30d67348b"
+    },
+    {
+      "path": ".cache/vnc-qualification/followup/portable-01/inputs.json",
+      "bytes": 25928,
+      "sha256": "886d25361539e760f015c76b97734aea687d4b311f900b3836e2e78eef574022"
+    },
+    {
+      "path": ".cache/vnc-qualification/followup/portable-01/run.json",
+      "bytes": 188,
+      "sha256": "7774dae8e40d080c222d7b1af04dfd65d8082983934d5d8abf55ab64f4967124"
+    },
+    {
+      "path": ".cache/vnc-qualification/followup/portable-01/run.stderr",
+      "bytes": 1410,
+      "sha256": "09a45e29cb8e0b44232eaaa2dc9733fcc2587455495072e273c8e17987637676"
+    },
+    {
+      "path": ".cache/vnc-qualification/followup/portable-01/run.stdout",
+      "bytes": 6362,
+      "sha256": "52ea3880121fed853c54e8387afd1a2df4674513521cd790d5858cfc864ce9c7"
+    },
+    {
+      "path": ".cache/vnc-qualification/followup/portable-01/sanitizers.json",
+      "bytes": 113,
+      "sha256": "0744b8f768e5f54f00ff82866d8c63b953cc7beea90d87d9fc474d002effd140"
+    },
+    {
+      "path": ".cache/vnc-qualification/followup/portable-01/vnc_client_regression",
+      "bytes": 3777064,
+      "sha256": "838726254a04d402ba623bc94895f6502e87ca5dd61b968b0baf8b44e8939aa5"
+    },
+    {
+      "path": ".cache/vnc-qualification/followup/portable-01/result.json",
+      "bytes": 9058,
+      "sha256": "5b6c9b1ef6ffbacee325f8e8c23f121697b4b93a2f1b6ae4dad647046ef6430a"
+    },
+    {
+      "path": ".cache/vnc-qualification/followup/checks.json",
+      "bytes": 564,
+      "sha256": "fcdc3ffdecbaec6739bdeb32c28de13dcaab0677d811fa64a688db663aa5e09a"
+    }
+  ],
+  "priorFailedInitialization": {
+    "result": "initialization-failed-before-case-verdict",
+    "immutableEvidence": [
+      {
+        "path": "qualification/results/private/vnc-runtime/2026-10-15-run-01/vnc_client_regression-draft.c",
+        "bytes": 11279,
+        "sha256": "a511b634edb23621ddc26034449b2ce8772a1b5d9f7046c5a7fdc4829be5f537"
+      },
+      {
+        "path": "qualification/results/private/vnc-runtime/2026-10-15-run-01/compile.json",
+        "bytes": 1120,
+        "sha256": "c5680abb93ded9050704cbcdaa6a459048115690af072e518385518285ebe988"
+      },
+      {
+        "path": "qualification/results/private/vnc-runtime/2026-10-15-run-01/run-01.json",
+        "bytes": 351,
+        "sha256": "3218408c1843db5d5c5d3e51afaa682f4401420e71022a4cfb2a3f9e1e0ccf9f"
+      },
+      {
+        "path": "qualification/results/private/vnc-runtime/2026-10-15-run-01/run-01.stderr",
+        "bytes": 447,
+        "sha256": "269992387a699ab13a705e273a1771167ae2526af21c1bb907ac17e9ffcb2ac1"
+      },
+      {
+        "path": "qualification/results/private/vnc-runtime/2026-10-15-run-01/run-01.stdout.jsonl",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ]
+  }
+}

@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.os.SystemClock
 import android.text.InputType
 import android.view.WindowInsets
 import android.view.KeyEvent
@@ -32,6 +33,8 @@ class RdpActivity : Activity() {
     private lateinit var capture: Button
     private lateinit var release: Button
     private lateinit var captureStatus: TextView
+    private val statusPolicy = RdpStatusPolicy()
+    private val renderedLabels = mutableMapOf<TextView, Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -161,25 +164,47 @@ class RdpActivity : Activity() {
     }
 
     private fun render(snapshot: RdpSnapshot) {
-        status.text = getString(R.string.session_status, snapshot.state, snapshot.detail, snapshot.nativeVersion,
-            snapshot.width, snapshot.height, snapshot.frameUpdates, snapshot.inputEvents)
-        permission.isEnabled = !hasLanPermission()
-        permission.setText(if (hasLanPermission()) R.string.lan_available else R.string.request_lan)
-        connect.isEnabled = hasLanPermission() && !snapshot.busy && !snapshot.connected
-        disconnect.isEnabled = snapshot.busy || snapshot.connected
-        disconnect.setText(if (snapshot.busy && !snapshot.connected) R.string.cancel else R.string.disconnect)
-        send.isEnabled = snapshot.connected
+        val identity = RdpStatusPolicy.Identity(snapshot.attemptId, snapshot.state, snapshot.detail,
+            snapshot.nativeVersion, snapshot.width, snapshot.height, snapshot.busy, snapshot.connected)
+        if (statusPolicy.shouldRender(identity, snapshot.frameUpdates, snapshot.inputEvents, SystemClock.elapsedRealtime())) {
+            status.text = getString(R.string.session_status, snapshot.state, snapshot.detail, snapshot.nativeVersion,
+                snapshot.width, snapshot.height, snapshot.frameUpdates, snapshot.inputEvents)
+        }
+        // Read once per refresh, including resume/grant; cached setters never cache permission itself.
+        val lanAvailable = hasLanPermission()
+        permission.enableIfChanged(!lanAvailable)
+        permission.labelIfChanged(if (lanAvailable) R.string.lan_available else R.string.request_lan)
+        connect.enableIfChanged(lanAvailable && !snapshot.busy && !snapshot.connected)
+        disconnect.enableIfChanged(snapshot.busy || snapshot.connected)
+        disconnect.labelIfChanged(if (snapshot.busy && !snapshot.connected) R.string.cancel else R.string.disconnect)
+        send.enableIfChanged(snapshot.connected)
+        // Status pacing must not suppress framebuffer/cursor updates or capture transitions.
         frame.update(snapshot)
-        renderCapture()
+        renderCapture(snapshot)
     }
 
-    private fun renderCapture() {
-        val snapshot = session.snapshot()
+    private fun renderCapture(snapshot: RdpSnapshot = session.snapshot()) {
         val owned = frame.isCaptureRequested || frame.isCaptureConfirmed
-        captureStatus.setText(frame.captureStatusResource)
-        capture.setText(if (owned) R.string.release_relative else R.string.capture_relative)
-        capture.isEnabled = snapshot.connected && (snapshot.relativeSupported || owned)
-        release.isEnabled = snapshot.connected || owned
+        captureStatus.labelIfChanged(frame.captureStatusResource)
+        capture.labelIfChanged(if (owned) R.string.release_relative else R.string.capture_relative)
+        capture.enableIfChanged(snapshot.connected && (snapshot.relativeSupported || owned))
+        release.enableIfChanged(snapshot.connected || owned)
+    }
+
+    private fun TextView.labelIfChanged(resource: Int) {
+        if (renderedLabels[this] != resource) {
+            setText(resource)
+            renderedLabels[this] = resource
+        }
+    }
+
+    private fun Button.enableIfChanged(enabled: Boolean) {
+        if (isEnabled != enabled) isEnabled = enabled
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (::frame.isInitialized) render(session.snapshot())
     }
 
     override fun dispatchKeyEvent(event: KeyEvent): Boolean {

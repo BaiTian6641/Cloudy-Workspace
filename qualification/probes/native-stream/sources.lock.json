@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "checkedOn": "2026-10-15",
+  "purpose": "Private native core build feasibility only; no APK, runtime or distribution approval",
+  "buildRef": "f336e245-805d-4aad-bc1a-9208df8db318",
+  "sources": [
+    {
+      "name": "moonlight-android",
+      "revision": "b48494cb96bff23d8886c4775cc4f39a1075495d",
+      "url": "https://codeload.github.com/moonlight-stream/moonlight-android/tar.gz/b48494cb96bff23d8886c4775cc4f39a1075495d",
+      "archive": "moonlight-android-b48494cb96bff23d8886c4775cc4f39a1075495d.tar.gz",
+      "root": "moonlight-android-b48494cb96bff23d8886c4775cc4f39a1075495d",
+      "destination": "",
+      "bytes": 17275428,
+      "sha256": "92820032a6e59306018a30e5600cf6bde5d4ab8b528f396f4a741876a6d34e3d"
+    },
+    {
+      "name": "moonlight-common-c",
+      "revision": "874ac9548f1bd6f095ef2b435c42cdde460e7821",
+      "url": "https://codeload.github.com/moonlight-stream/moonlight-common-c/tar.gz/874ac9548f1bd6f095ef2b435c42cdde460e7821",
+      "archive": "moonlight-common-c-874ac9548f1bd6f095ef2b435c42cdde460e7821.tar.gz",
+      "root": "moonlight-common-c-874ac9548f1bd6f095ef2b435c42cdde460e7821",
+      "destination": "app/src/main/jni/moonlight-core/moonlight-common-c",
+      "bytes": 150177,
+      "sha256": "b8f50784bea9cae40eccbc6caba4a19f6051a5055a7dc5061cd365088cf09251"
+    },
+    {
+      "name": "enet",
+      "revision": "aca87840b57f045a1f7f9299e4b1b9b8e2a5e2f1",
+      "url": "https://codeload.github.com/cgutman/enet/tar.gz/aca87840b57f045a1f7f9299e4b1b9b8e2a5e2f1",
+      "archive": "enet-aca87840b57f045a1f7f9299e4b1b9b8e2a5e2f1.tar.gz",
+      "root": "enet-aca87840b57f045a1f7f9299e4b1b9b8e2a5e2f1",
+      "destination": "app/src/main/jni/moonlight-core/moonlight-common-c/enet",
+      "bytes": 87167,
+      "sha256": "6bb1a151e6d21e1756baeff5a95eaf85a5b6731aeda6d0bc255651192ba4a32d"
+    },
+    {
+      "name": "nanors",
+      "revision": "b1e3c22ca0cdc0bb83e3cd6ed1a2fc77869ed99a",
+      "url": "https://codeload.github.com/sleepybishop/nanors/tar.gz/b1e3c22ca0cdc0bb83e3cd6ed1a2fc77869ed99a",
+      "archive": "nanors-b1e3c22ca0cdc0bb83e3cd6ed1a2fc77869ed99a.tar.gz",
+      "root": "nanors-b1e3c22ca0cdc0bb83e3cd6ed1a2fc77869ed99a",
+      "destination": "app/src/main/jni/moonlight-core/moonlight-common-c/nanors",
+      "bytes": 69427,
+      "sha256": "41edc0309b255b0eeb5e8eb1ad79f7c7e9e6c31db1bd79a16d73271c62867003"
+    }
+  ],
+  "patches": [],
+  "toolchain": {
+    "ndk": "29.0.14206865",
+    "abi": "arm64-v8a",
+    "androidPlatform": 21,
+    "module": "moonlight-core",
+    "flavor": "nonRoot",
+    "jobs": 4,
+    "timeoutSeconds": 180,
+    "maximumLogBytes": 8388608
+  },
+  "staticInputs": [
+    {
+      "path": "app/src/main/jni/moonlight-core/openssl/arm64-v8a/libcrypto.a",
+      "version": "OpenSSL4.0.2",
+      "bytes": 11368142,
+      "sha256": "d593ba8f576db9ff20d058bee7f0f154b4e000b447548533bc8f16eb95290b54"
+    },
+    {
+      "path": "app/src/main/jni/moonlight-core/opus/arm64-v8a/libopus.a",
+      "version": "Opus1.6.1",
+      "bytes": 2933886,
+      "sha256": "d6c39b9135017ab76a42e364569f18622e6e3df691ac2d1d9d36ee4a02eb2e13"
+    }
+  ],
+  "dependencyProvenance": {
+    "mobileDepsRevision": "419349aa689e8749a9fb91a22dc45531ddd3df45",
+    "androidUpdateRevision": "31b700304a9eb2827516f52c33d9da0845fc1ece",
+    "opensslRevision": "f089acdf4bc7ba94a79f4bf6eb7362c3e7d14aa9",
+    "opusRevision": "22244de5a79bd1d6d623c32e72bf1954b56235be"
+  },
+  "additionalNotices": [
+    {
+      "file": "OpenSSL-LICENSE.txt",
+      "url": "https://raw.githubusercontent.com/openssl/openssl/f089acdf4bc7ba94a79f4bf6eb7362c3e7d14aa9/LICENSE.txt",
+      "bytes": 10175,
+      "sha256": "7d5450cb2d142651b8afa315b5f238efc805dad827d91ba367d8516bc9d49e7a"
+    },
+    {
+      "file": "Opus-COPYING.txt",
+      "url": "https://raw.githubusercontent.com/xiph/opus/22244de5a79bd1d6d623c32e72bf1954b56235be/COPYING",
+      "bytes": 1945,
+      "sha256": "01e1167d54a096d123cf6dfbbeb19587278845c6481d2d66d545669846079551"
+    }
+  ]
+}

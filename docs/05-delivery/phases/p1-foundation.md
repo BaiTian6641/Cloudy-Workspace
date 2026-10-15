@@ -101,7 +101,7 @@ Record evidence under `qualification/results/P1-S3/` using the [run template](..
 Work:
 
 1. Review the P0 native-engine feasibility probe and exact upstream/dependency obligations during the foundation phase, before committing the streaming implementation.
-2. Resolve the selected project/distribution model, source/notice obligations, maintained-engine ownership, update strategy and reproducible build route without assuming a particular license has already been chosen.
+2. Apply [ADR0010](../../adr/0010-desktop-open-source-distribution.md): compatible open-source Desktop is selected. Finalize the exact license expression, actual dependency graph/SBOM, corresponding source/notices/build materials, engine ownership and reproducible build route; Console terms remain independent.
 3. Record native surface/input/decoder and backend-version boundaries; estimate remaining integration from the actual probe.
 4. Record CAP-STREAM as supported, bounded experiment or blocked. A blocker does not prevent ordinary SSH, RDP or VNC work; an external-only alternative needs an explicit user-visible scope decision.
 5. Keep the early external stream lane available while native integration proceeds on its own prerequisites, independently of optional host adapters and event integrations.
@@ -125,7 +125,7 @@ Record evidence under `qualification/results/P1-S5/` using the [run template](..
 Work:
 
 1. Add real Android build/lint/unit/instrumentation checks and contract fixture validation; retain documentation checks.
-2. Record dependency versions/licenses/update owners and choose the project distribution/license direction before embedding upstream implementations.
+2. Record dependency versions/licenses/update owners and actual artifact closure. Apply the selected open-source Desktop direction in ADR0010 while retaining independent Console terms; finalize compatible exact terms and source/notices/build materials before release.
 3. Exercise mismatched app/protocol versions, missing recipient, unavailable permissions, and independent install/uninstall.
 4. Publish the P1 evidence bundle and refine remaining stage estimates using actual implementation results.
 5. Resolve X server, FreeRDP, VNC engine and transitive native codec/license/security/build obligations before P2/P3 embedding; P5 stream review does not substitute for this gate.
