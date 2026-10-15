@@ -1,6 +1,6 @@
 # P0 — Qualification and decisions
 
-**Status:** P0-S1 complete; P0-S2 in progress. **Active effort:** 15–28 person-days before contingency. **Purpose:** Resolve Googlebook desktop API/input/engine/window/protocol/device boundaries using scoped capability outcomes. Independent branches do not inherit an X11 phase-wide blocker.
+**Status:** P0-S1 complete; P0-S2 investigation complete with CAP-PLATFORM `experiment`; P0-S3 in progress. **Active effort:** 15–28 person-days before contingency. **Purpose:** Resolve Googlebook desktop API/input/engine/window/protocol/device boundaries using scoped capability outcomes. Independent branches do not inherit an X11 phase-wide blocker.
 
 The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-project/platform-rule-zero.md) defines desktop scope. Follow [capability outcomes](../feasibility-gates.md) and [independent release gates](../release-gates.md). Estimates are active effort, not elapsed time; re-estimate after physical evidence. Revision 02 moved the former P5-S1 decision to P1-S5; other stage IDs retain their identity.
 
@@ -41,11 +41,11 @@ Record evidence under `qualification/results/P0-S1/` using the [run template](..
 
 ## P0-S2 — Platform API, lifecycle, and capability probes
 
-**Owner:** Android/platform developer. **Prerequisites:** P0-S1 complete. **Status:** in-progress.
+**Owner:** Android/platform developer. **Prerequisites:** P0-S1 complete. **Status:** done for the initial investigation and bounded-experiment decision; platform support remains unqualified.
 
-The [operation-lifetime research](../../03-platform/googlebook/p0-s2-operation-lifetimes.md) records API13/API14 and API39/API40 proposals, runtime/target guards, fallbacks and remaining timeout/process-loss experiments. Supplemental official sources G59–G68 cover UIDT, foreground-service prerequisites, Android 17 audio, actual USB permission and distribution review. No continuous-session service type or policy approval is selected, and no capability gate is promoted by this research. API41 and G79–G81 add the Android17/target37 runtime LAN permission prerequisite before an actual host transfer.
+The [platform decision](../../03-platform/googlebook/p0-s2-platform-decision.md) records CAP-PLATFORM as **experiment**, with accepted public evidence, a two-engineer-day native SSH ownership/classification follow-up and explicit stop conditions. The API/compile subset, [operation decisions](../../03-platform/googlebook/p0-s2-operation-lifetimes.md) and [VM boundary](../../03-platform/googlebook/p0-s2-linux-vm-boundary.md) complete the initial investigation deliverables. Q-P01/Q-P02 remain partial; no continuous-session FGS type, policy approval or product readiness is established. P1-S1/P1-S2/P1-S3 remain planned under the existing supported-capability gate.
 
-The [window run](../../../qualification/results/P0-S2/2026-10-15-window-probe.md) and separate [process-restoration run](../../../qualification/results/P0-S2/2026-10-15-process-restoration.md) provide bounded device evidence for task isolation, native window geometry, same-process Activity recreation and saved-state restoration after a verified background-process kill. The [font-scale run](../../../qualification/results/P0-S2/2026-10-15-font-scale.md) and [engagement run](../../../qualification/results/P0-S2/2026-10-15-engagement-probe.md) add bounded enlarged-text and actual alpha callback/lifecycle evidence. Last-window task removal left no persisted final cleanup report. Service/timeout, physical-input and final capability decisions remain open.
+The [window run](../../../qualification/results/P0-S2/2026-10-15-window-probe.md), [process restoration](../../../qualification/results/P0-S2/2026-10-15-process-restoration.md), [font-scale run](../../../qualification/results/P0-S2/2026-10-15-font-scale.md) and [engagement run](../../../qualification/results/P0-S2/2026-10-15-engagement-probe.md) establish bounded native window/lifecycle observations. Last-window task removal left no persisted final cleanup report. The accepted [transfer preflight](../../../qualification/results/P0-S2/2026-10-15-transfer-preflight.md) and [0.4.1 lifecycle run](../../../qualification/results/P0-S2/2026-10-15-transfer-lifecycle.md) add finite HTTPS completion, permission UI, cancellation, failure/retry and injected-loss recovery. Physical keyboard/mouse/native IME/focus release, full Q-P02 display/fullscreen cases, continuous operation classification and remaining UIDT failure cases are carried forward explicitly. No timed FGS was selected, so accelerated FGS timeout cases are conditional future work rather than fabricated passes.
 
 Work:
 
@@ -66,11 +66,13 @@ Exit evidence:
 - Every proposed API use has a version guard or fallback.
 - System IME/launcher and Linux roadmap limits are reflected in release scope.
 
-Record evidence under `qualification/results/P0-S2/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-P01, Q-P02. Official/upstream source IDs: G03, G05, G06, G15, G16, G23, G26; resolve them in the [source register](../../07-reference/source-register.md).
+Record evidence under `qualification/results/P0-S2/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-P01, Q-P02, both partial at this investigation closeout. Official/upstream source IDs: G03, G05, G06, G15, G16, G23, G26, G72, G78–G81, G98–G99; resolve them in the [source register](../../07-reference/source-register.md).
 
 ## P0-S3 — SSH engine and terminal renderer qualification
 
-**Owner:** Terminal/Android developer. **Prerequisites:** P0-S2. **Status:** planned.
+**Owner:** Terminal/Android developer. **Prerequisites:** P0-S2 investigation decision complete. **Status:** in-progress for engine/renderer qualification.
+
+Begin with real native SSH trust/authentication/SFTP qualification independently of the renderer, then retain the full physical input/IME/accessibility and renderer work below. The [CAP-PLATFORM follow-up](../../03-platform/googlebook/p0-s2-platform-decision.md) evaluates connection ownership and any justified background route alongside this investigation. CAP-SSH/CAP-TERMINAL remain pending, and neither this stage activation nor the bounded platform experiment activates a dependent product stage.
 
 Work:
 

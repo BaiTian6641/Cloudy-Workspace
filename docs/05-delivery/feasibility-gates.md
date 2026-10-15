@@ -1,6 +1,6 @@
 # Feasibility outcomes and implementation readiness
 
-**Status:** adopted for planning following the final review. No capability has been qualified. Stage progress and a capability decision answer different questions: a completed investigation can establish that the requested integration is blocked.
+**Status:** adopted for planning following the final review. CAP-PLATFORM now has a bounded `experiment` outcome; the other seven capability outcomes remain pending. No capability is supported. Stage progress and a capability decision answer different questions: a completed investigation can establish that the requested integration is blocked or requires a bounded follow-up.
 
 ## Decision record
 
@@ -41,6 +41,8 @@ The repository checker validates the structure, references and supported-outcome
 
 P0 records the experimental verdict even when final engine adoption remains pending. P0-S3 must distinguish SSH/SFTP transport from terminal renderer results. Its investigation can finish with supported transport feasibility and a blocked renderer; CAP-SSH becomes supported only after its own P1-S4 adoption review, independently of CAP-TERMINAL. P2-S8 qualifies shared transfer/publication source without a PTY, terminal renderer or Console UI; Desktop's P3-S3 then integrates it with its own credentials and lifecycle.
 
-P1-S4 completes each relevant engine decision separately: a blocked renderer, VNC or X11 choice does not stop foundation completion or promote that blocked feature. Its capability outcome continues to hold only its own dependent implementation. The eight initial capability outcomes remain pending; splitting a record creates no qualification evidence.
+P1-S4 completes each relevant engine decision separately: a blocked renderer, VNC or X11 choice does not stop foundation completion or promote that blocked feature. Its capability outcome continues to hold only its own dependent implementation. Splitting a record creates no qualification evidence.
+
+The [2026-10-15 platform decision](../03-platform/googlebook/p0-s2-platform-decision.md) completes P0-S2's investigation with partial Q-P01/Q-P02 and accepted window/lifecycle/finite UIDT observations. Its remaining continuous-service classification, physical keyboard/mouse/native IME/focus-release and display cases remain explicit in the CAP-PLATFORM experiment. P0-S3 may proceed because it depends on the completed investigation and does not require a supported CAP-PLATFORM outcome. P1-S1, P1-S2 and P1-S3 do require that supported outcome and remain planned. No feature scope, product prerequisite or acceptance pass has been waived.
 
 The USB and X11 fallbacks retain their existing product limits: a lab-side USB server does not establish Googlebook-local plug-and-play, and one full X desktop does not establish separate native application windows.

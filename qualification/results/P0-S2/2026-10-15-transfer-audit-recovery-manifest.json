@@ -1,0 +1,535 @@
+{
+  "schemaVersion": 1,
+  "runId": "P0-S2-transfer-audit-recovery-2026-10-15",
+  "stage": "P0-S2",
+  "recordType": "bounded follow-up device evidence; primary and independent review accepted",
+  "verdict": "Actual missing saved-file audit preserved historical completion and journal bytes; restoring the same file and explicitly refreshing reverified it without creating a transfer attempt.",
+  "capabilityDecision": {
+    "CAP-PLATFORM": "experiment",
+    "productSupportPromoted": false,
+    "boundary": "P0-S2 initial investigation is complete; this follow-up does not resolve continuous-operation or physical-input support."
+  },
+  "sourceCommit": "d0f5ed205207fa2e7159afde1f0e6e676c975241",
+  "apk": {
+    "package": "dev.cloudy.qualification.baseline",
+    "versionName": "0.4.2",
+    "versionCode": 6,
+    "variant": "debug",
+    "bytes": 6863589,
+    "sha256": "b52ebabeb8a6e84801425b3c0bad813a67d189be902c3dbfa69ebbca9448b77b"
+  },
+  "deploymentRecordedAtHostUtc": "2026-10-15T09:25:59.799955+00:00",
+  "device": {
+    "manufacturer": "HP",
+    "model": "HP Googlebook 14",
+    "release": "17",
+    "sdkInt": 37,
+    "buildId": "CL3B.260622.276.R2",
+    "incremental": "16560795",
+    "securityPatch": "2026-09-01",
+    "supportedAbis": [
+      "arm64-v8a"
+    ],
+    "identityEvidence": "qualification/results/P0-S1/2026-10-15-usb-baseline.md"
+  },
+  "baselineReadback": {
+    "schemaVersion": 3,
+    "probeVersion": "0.4.2"
+  },
+  "softwareEvidence": {
+    "review": "docs/06-validation/2026-10-15-transfer-audit-review.md",
+    "packageAudit": "docs/06-validation/2026-10-15-transfer-audit-package.json",
+    "jvmTests": 66,
+    "compilerAndLint": "passed in separately reviewed primary-agent build",
+    "boundary": "Evidence author ran no build or device operation; software checks do not establish physical behavior."
+  },
+  "timeBoundary": "Host UTC, device UTC and device elapsed-realtime are separate clocks; command record times do not establish cross-clock causal durations.",
+  "batchBoundary": {
+    "currentBatch": "02",
+    "retainedAttempts": 3,
+    "attemptLimit": 8,
+    "previousBatch": "01 was preserved separately before this batch; its eight attempts are not this journal",
+    "priorBatchEvidence": "qualification/results/P0-S2/2026-10-15-transfer-followup-manifest.json",
+    "fixtureRunningDuringAudit": false,
+    "fixtureStateAuthority": "Primary operator confirmed the fixture remained stopped; no new network case was run."
+  },
+  "faultPreparation": {
+    "atUtc": "2026-10-15T09:25:59.166243+00:00",
+    "action": "operator-temporary-move-of-completed-file",
+    "attemptId": "df52f689-f5f2-41a6-b7ce-f18d68a06a97",
+    "sourceRelativePath": "files/transfer-payloads/df52f689-f5f2-41a6-b7ce-f18d68a06a97.part",
+    "holdRelativePath": "files/transfer-audit-hold/df52f689-f5f2-41a6-b7ce-f18d68a06a97.part",
+    "expectedBytes": 67108864,
+    "verifiedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+    "journalSha256": "84d15a68f96f3cbb20ab9db8cbe62e322aa2a37398fe0e7e46ebf14795f891c2",
+    "allAttemptsTerminalBeforePreparation": true,
+    "processAbsentBeforeMove": true,
+    "heldFileHashMatches": true,
+    "previousProbeVersion": "0.4.1"
+  },
+  "journalSnapshots": [
+    {
+      "privateArtifact": "qualification/results/private/transfer-audit/before-fault-journal.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.4.1",
+      "recordingProcessInstanceId": "47669298-1266-403b-85ae-d96397fc6127",
+      "processStartedAtDeviceUtc": "2026-10-15T09:17:06.909985Z",
+      "snapshotAtDeviceUtc": "2026-10-15T09:17:06.973625Z",
+      "revision": 2,
+      "attemptCount": 3,
+      "sha256": "84d15a68f96f3cbb20ab9db8cbe62e322aa2a37398fe0e7e46ebf14795f891c2"
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-audit/unavailable-journal.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.4.1",
+      "recordingProcessInstanceId": "47669298-1266-403b-85ae-d96397fc6127",
+      "processStartedAtDeviceUtc": "2026-10-15T09:17:06.909985Z",
+      "snapshotAtDeviceUtc": "2026-10-15T09:17:06.973625Z",
+      "revision": 2,
+      "attemptCount": 3,
+      "sha256": "84d15a68f96f3cbb20ab9db8cbe62e322aa2a37398fe0e7e46ebf14795f891c2"
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-audit/unavailable-after-controls-journal.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.4.1",
+      "recordingProcessInstanceId": "47669298-1266-403b-85ae-d96397fc6127",
+      "processStartedAtDeviceUtc": "2026-10-15T09:17:06.909985Z",
+      "snapshotAtDeviceUtc": "2026-10-15T09:17:06.973625Z",
+      "revision": 2,
+      "attemptCount": 3,
+      "sha256": "84d15a68f96f3cbb20ab9db8cbe62e322aa2a37398fe0e7e46ebf14795f891c2"
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-audit/audit-restored-state-journal.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.4.2",
+      "recordingProcessInstanceId": "743b2fd5-a9a8-4fcc-8e88-d63722f1f446",
+      "processStartedAtDeviceUtc": "2026-10-15T09:26:14.560653Z",
+      "snapshotAtDeviceUtc": "2026-10-15T09:27:39.070634Z",
+      "revision": 1,
+      "attemptCount": 3,
+      "sha256": "39962f7dc2c17a0e23d64557f9896fa941b7f1e8a245eabecd08bef1d0205160"
+    }
+  ],
+  "windowObservations": [
+    {
+      "privateArtifact": "qualification/results/private/transfer-audit/audit-unavailable-layout.json",
+      "activityInstance": "55ef0e79-3ff1-4d9a-a01b-e44174390cd8",
+      "observedTaskId": 1000157,
+      "status": "saved-file-audit-unavailable",
+      "processInstanceId": "743b2fd5-a9a8-4fcc-8e88-d63722f1f446",
+      "processStartedAtDeviceUtc": "2026-10-15T09:26:14.560653Z",
+      "configuration": "not-loaded",
+      "inMemoryRevision": 0,
+      "savedRevision": -1,
+      "auditUnavailableReason": "NoSuchFileException",
+      "historicalEvidenceWarningObserved": true,
+      "attemptCount": 3,
+      "latestAttemptId": "2e35aff5-7623-442e-be85-a1d12b98e4d7",
+      "latestBytesWritten": 41287680,
+      "journalError": "none",
+      "setupError": "none",
+      "controlError": "none",
+      "localNetworkAccessGranted": true,
+      "notificationPermissionGranted": true
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-audit/audit-unavailable-start-layout.json",
+      "activityInstance": "55ef0e79-3ff1-4d9a-a01b-e44174390cd8",
+      "observedTaskId": 1000157,
+      "status": "saved-file-audit-unavailable",
+      "processInstanceId": "743b2fd5-a9a8-4fcc-8e88-d63722f1f446",
+      "processStartedAtDeviceUtc": "2026-10-15T09:26:14.560653Z",
+      "configuration": "not-loaded",
+      "inMemoryRevision": 0,
+      "savedRevision": -1,
+      "auditUnavailableReason": "NoSuchFileException",
+      "historicalEvidenceWarningObserved": true,
+      "attemptCount": 3,
+      "latestAttemptId": "2e35aff5-7623-442e-be85-a1d12b98e4d7",
+      "latestBytesWritten": 41287680,
+      "journalError": "none",
+      "setupError": "none",
+      "controlError": "none",
+      "localNetworkAccessGranted": true,
+      "notificationPermissionGranted": true
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-audit/audit-unavailable-refresh-layout.json",
+      "activityInstance": "55ef0e79-3ff1-4d9a-a01b-e44174390cd8",
+      "observedTaskId": 1000157,
+      "status": "saved-file-audit-unavailable",
+      "processInstanceId": "743b2fd5-a9a8-4fcc-8e88-d63722f1f446",
+      "processStartedAtDeviceUtc": "2026-10-15T09:26:14.560653Z",
+      "configuration": "not-loaded",
+      "inMemoryRevision": 0,
+      "savedRevision": -1,
+      "auditUnavailableReason": "NoSuchFileException",
+      "historicalEvidenceWarningObserved": true,
+      "attemptCount": 3,
+      "latestAttemptId": "2e35aff5-7623-442e-be85-a1d12b98e4d7",
+      "latestBytesWritten": 41287680,
+      "journalError": "none",
+      "setupError": "none",
+      "controlError": "none",
+      "localNetworkAccessGranted": true,
+      "notificationPermissionGranted": true
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-audit/audit-restored-refresh-layout.json",
+      "activityInstance": "55ef0e79-3ff1-4d9a-a01b-e44174390cd8",
+      "observedTaskId": 1000157,
+      "status": "saved-file-audit-unavailable",
+      "processInstanceId": "743b2fd5-a9a8-4fcc-8e88-d63722f1f446",
+      "processStartedAtDeviceUtc": "2026-10-15T09:26:14.560653Z",
+      "configuration": "not-loaded",
+      "inMemoryRevision": 0,
+      "savedRevision": -1,
+      "auditUnavailableReason": "NoSuchFileException",
+      "historicalEvidenceWarningObserved": true,
+      "attemptCount": 3,
+      "latestAttemptId": "2e35aff5-7623-442e-be85-a1d12b98e4d7",
+      "latestBytesWritten": 41287680,
+      "journalError": "none",
+      "setupError": "none",
+      "controlError": "none",
+      "localNetworkAccessGranted": true,
+      "notificationPermissionGranted": true
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-audit/audit-restored-layout.json",
+      "activityInstance": "55ef0e79-3ff1-4d9a-a01b-e44174390cd8",
+      "observedTaskId": 1000157,
+      "status": "interrupted",
+      "processInstanceId": "743b2fd5-a9a8-4fcc-8e88-d63722f1f446",
+      "processStartedAtDeviceUtc": "2026-10-15T09:26:14.560653Z",
+      "configuration": "validated-private-fixture",
+      "inMemoryRevision": 1,
+      "savedRevision": 1,
+      "auditUnavailableReason": null,
+      "historicalEvidenceWarningObserved": false,
+      "attemptCount": 3,
+      "latestAttemptId": "2e35aff5-7623-442e-be85-a1d12b98e4d7",
+      "latestBytesWritten": 41287680,
+      "journalError": "none",
+      "setupError": "none",
+      "controlError": "none",
+      "localNetworkAccessGranted": true,
+      "notificationPermissionGranted": true
+    }
+  ],
+  "injectedActions": [
+    {
+      "commandArtifact": "qualification/results/private/transfer-audit/audit-unavailable-start-tap-command.json",
+      "layoutArtifact": "qualification/results/private/transfer-audit/audit-unavailable-start-layout.json",
+      "recordedAtHostUtc": "2026-10-15T09:27:10.250364+00:00",
+      "exitCode": 0,
+      "controlResourceId": "dev.cloudy.qualification.baseline:id/transfer_start",
+      "controlLabel": "Download test fixture",
+      "boundsPx": [
+        19,
+        434,
+        2861,
+        512
+      ],
+      "tapPx": [
+        1440,
+        473
+      ],
+      "tapWithinObservedBounds": true,
+      "observation": "Tap on visually disabled Download; no new attempt appeared in the subsequent journal."
+    },
+    {
+      "commandArtifact": "qualification/results/private/transfer-audit/audit-unavailable-refresh-tap-command.json",
+      "layoutArtifact": "qualification/results/private/transfer-audit/audit-unavailable-refresh-layout.json",
+      "recordedAtHostUtc": "2026-10-15T09:27:11.337196+00:00",
+      "exitCode": 0,
+      "controlResourceId": "dev.cloudy.qualification.baseline:id/transfer_refresh",
+      "controlLabel": "Refresh transfer state",
+      "boundsPx": [
+        19,
+        668,
+        2861,
+        746
+      ],
+      "tapPx": [
+        1440,
+        707
+      ],
+      "tapWithinObservedBounds": true,
+      "observation": "Explicit audit retry while the file remained absent; historical journal remained unchanged."
+    },
+    {
+      "commandArtifact": "qualification/results/private/transfer-audit/audit-restored-refresh-tap-command.json",
+      "layoutArtifact": "qualification/results/private/transfer-audit/audit-restored-refresh-layout.json",
+      "recordedAtHostUtc": "2026-10-15T09:27:39.813384+00:00",
+      "exitCode": 0,
+      "controlResourceId": "dev.cloudy.qualification.baseline:id/transfer_refresh",
+      "controlLabel": "Refresh transfer state",
+      "boundsPx": [
+        19,
+        668,
+        2861,
+        746
+      ],
+      "tapPx": [
+        1440,
+        707
+      ],
+      "tapWithinObservedBounds": true,
+      "observation": "Explicit retry after the same file was restored; reread succeeded in the existing process."
+    }
+  ],
+  "visualReview": {
+    "privateScreenshots": [
+      "qualification/results/private/transfer-audit/audit-unavailable-screen.png",
+      "qualification/results/private/transfer-audit/audit-restored-screen.png"
+    ],
+    "authorInspectedBoth": true,
+    "observations": "Unavailable screenshot visibly dims Download/Cancel and shows NoSuchFileException plus historical-evidence warning. Restored screenshot shows Download available, Cancel disabled, interrupted latest attempt and revision1 saved1. The layout format does not expose an enabled boolean; no such field is fabricated."
+  },
+  "fileRestore": {
+    "atUtc": "2026-10-15T09:27:38.750514+00:00",
+    "restoredSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+    "matchesOriginal": true,
+    "operation": "restore-same-file-before-explicit-refresh"
+  },
+  "preservedAttemptComparisons": [
+    {
+      "attempt": {
+        "attemptId": "c7289b1b-bdb6-4362-934f-783508c96a4c",
+        "status": "failed",
+        "bytesWritten": 0,
+        "claimed": true,
+        "expectedLengthBytes": 67108864,
+        "expectedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": "SSLPeerUnverifiedException"
+      },
+      "eventCountBefore": 3,
+      "eventCountAfter": 3,
+      "serializedObjectBytesUnchanged": true,
+      "serializedObjectSha256Before": "97d0f9697a736f329a37a138bc783e10fea27e5a49dd8b632a4d35a81a6971d4",
+      "serializedObjectSha256After": "97d0f9697a736f329a37a138bc783e10fea27e5a49dd8b632a4d35a81a6971d4"
+    },
+    {
+      "attempt": {
+        "attemptId": "df52f689-f5f2-41a6-b7ce-f18d68a06a97",
+        "status": "completed",
+        "bytesWritten": 67108864,
+        "claimed": true,
+        "expectedLengthBytes": 67108864,
+        "expectedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+        "verifiedLengthBytes": 67108864,
+        "verifiedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+        "reason": "new-process-file-reverified"
+      },
+      "eventCountBefore": 5,
+      "eventCountAfter": 6,
+      "serializedObjectBytesUnchanged": false,
+      "serializedObjectSha256Before": "d5fda1affaf49f7228fbbe9e7fbd55101c5da245930a8bdf7c652934ecf1bd83",
+      "serializedObjectSha256After": "742202b21cbf672a054ddc0aea5ebe1935969d3c1f846ea430c607428728cefa"
+    },
+    {
+      "attempt": {
+        "attemptId": "2e35aff5-7623-442e-be85-a1d12b98e4d7",
+        "status": "interrupted",
+        "bytesWritten": 41287680,
+        "claimed": true,
+        "expectedLengthBytes": 67108864,
+        "expectedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": "new-process-unfinished-attempt"
+      },
+      "eventCountBefore": 3,
+      "eventCountAfter": 3,
+      "serializedObjectBytesUnchanged": true,
+      "serializedObjectSha256Before": "470c2759ce893f47c06c4bfe37a23c62f61f99f0253d578c1d00bb3682fb5d19",
+      "serializedObjectSha256After": "470c2759ce893f47c06c4bfe37a23c62f61f99f0253d578c1d00bb3682fb5d19"
+    }
+  ],
+  "newCompletionAuditEvent": {
+    "status": "completed",
+    "deviceUtc": "2026-10-15T09:27:39.066904Z",
+    "elapsedRealtimeMs": 54695871,
+    "reason": "new-process-file-reverified"
+  },
+  "recoveryAssertions": {
+    "threeJournalExportsByteIdenticalWhileUnavailable": true,
+    "allAttemptIdsStatusesAndVerifiedDigestsPreserved": true,
+    "nonCompletedSerializedAttemptObjectsByteIdentical": true,
+    "sameLiveProcessAndActivityAcrossRetry": true,
+    "newAttemptCreated": false,
+    "newCompletedDownloadClaimed": false,
+    "successfulAuditJournalRevision": 1,
+    "onDiskUnavailableJournalRemainedPriorVersion": "0.4.1",
+    "successfulAuditJournalVersion": "0.4.2"
+  },
+  "independentPayloadChecks": [
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-02-completion-payload.bin",
+      "bytes": 67108864,
+      "sha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-03-stable-payload.bin",
+      "bytes": 41287680,
+      "sha256": "db589f5daab38ac26936b1938d4e88effcf2c89614c999cbd7f06692e6a33db9"
+    },
+    {
+      "path": "qualification/results/private/transfer-audit/audit-restored-state-payload.bin",
+      "bytes": 41287680,
+      "sha256": "db589f5daab38ac26936b1938d4e88effcf2c89614c999cbd7f06692e6a33db9"
+    }
+  ],
+  "payloadEvidenceBoundary": "Author independently rehashed the prior completed export and pre/post interrupted exports. The device move/restore SHA-256 is the primary operator record; no new completed-payload export was made during this audit. The restored-state payload export is the latest interrupted attempt, not the restored completed file.",
+  "notEstablished": [
+    "Actual Android audit timeout or permission-based read failure; those classification branches have JVM tests only.",
+    "Actual changed-length or changed-digest device case; no corruption was injected here.",
+    "Late JobService or notification-cancellation delivery while initialization is unavailable.",
+    "A new network download after recovery; visible Download availability is not scheduler eligibility proof.",
+    "SFTP/publication, continuous SSH/desktop/USB lifetime, physical input, endurance or arbitrary power-loss durability."
+  ],
+  "reviewStatus": {
+    "evidenceAuthor": "authored; hashes, projections, row bytes, action bounds and two screenshots checked",
+    "primary": "accepted; actual device execution, historical-row preservation, scoped UI recovery and all 26 private artifact hash/size pairs checked",
+    "independent": "accepted; 26 artifact hash/size pairs, payloads, journal and row projections, action bounds, screenshots and APK checked; no actionable finding"
+  },
+  "sanitization": "Public data is allowlisted probe identity, state, owned-control projections, paths and hashes. Raw UI trees/screenshots, command arguments/stdout, endpoints, certificates, serials and unrelated UI remain private.",
+  "privateEvidence": [
+    {
+      "path": "qualification/results/private/transfer-audit/audit-042-deployment.json",
+      "bytes": 192,
+      "sha256": "7670217dc8d2d7a9f90612ce4c344f170fac63618e3ff1643663be9e934af429"
+    },
+    {
+      "path": "qualification/results/private/transfer-audit/audit-042-install-command.json",
+      "bytes": 354,
+      "sha256": "3c1fb1fde2a2b5fcce141840c05f72ce5b5204754d89e8f625080a7177a876cd"
+    },
+    {
+      "path": "qualification/results/private/transfer-audit/audit-042-launch-command.json",
+      "bytes": 486,
+      "sha256": "9567d7d7e2b74a6e792f2fa8f7362bf14f656a9d29c72cd6ee917022b04ce522"
+    },
+    {
+      "path": "qualification/results/private/transfer-audit/installed-baseline.json",
+      "bytes": 74677,
+      "sha256": "5061915f8de39b192dc4ee755e174e71e177aa32b1b0c3e2e5853df865d624a5"
+    },
+    {
+      "path": "qualification/results/private/transfer-audit/fault-preparation.json",
+      "bytes": 701,
+      "sha256": "3e2bc57387fa79ce1ca21fc847003e3c14ef975b8dd2c4e2add3e06603b923ea"
+    },
+    {
+      "path": "qualification/results/private/transfer-audit/file-restored.json",
+      "bytes": 225,
+      "sha256": "ec4014db07508f9433b5810d089cc7d0c865c063bd78a116e9f6e5bbed251252"
+    },
+    {
+      "path": "qualification/results/private/transfer-audit/recovery-check.json",
+      "bytes": 267,
+      "sha256": "b716f7c2cb5fb8b47b95324c5c4e8317384375b264093b010f10cce295b2d6e7"
+    },
+    {
+      "path": "qualification/results/private/transfer-audit/unavailable-after-controls-observation.json",
+      "bytes": 179,
+      "sha256": "80a8c58afbd616792055b125ee90eb65b03a38cf01be1c270707c03cb4280383"
+    },
+    {
+      "path": "qualification/results/private/transfer-audit/audit-restored-state-observation.json",
+      "bytes": 584,
+      "sha256": "effdb624f7c992808589b9757622675713b31d362f32d1cb83d127873ff740ae"
+    },
+    {
+      "path": "qualification/results/private/transfer-audit/before-fault-journal.json",
+      "bytes": 4835,
+      "sha256": "84d15a68f96f3cbb20ab9db8cbe62e322aa2a37398fe0e7e46ebf14795f891c2"
+    },
+    {
+      "path": "qualification/results/private/transfer-audit/unavailable-journal.json",
+      "bytes": 4835,
+      "sha256": "84d15a68f96f3cbb20ab9db8cbe62e322aa2a37398fe0e7e46ebf14795f891c2"
+    },
+    {
+      "path": "qualification/results/private/transfer-audit/unavailable-after-controls-journal.json",
+      "bytes": 4835,
+      "sha256": "84d15a68f96f3cbb20ab9db8cbe62e322aa2a37398fe0e7e46ebf14795f891c2"
+    },
+    {
+      "path": "qualification/results/private/transfer-audit/audit-restored-state-journal.json",
+      "bytes": 5034,
+      "sha256": "39962f7dc2c17a0e23d64557f9896fa941b7f1e8a245eabecd08bef1d0205160"
+    },
+    {
+      "path": "qualification/results/private/transfer-audit/audit-unavailable-layout.json",
+      "bytes": 11307,
+      "sha256": "28337384d71ff055b50acc4238c94ab9d09583284e6d10c4bc487beb246e62d8"
+    },
+    {
+      "path": "qualification/results/private/transfer-audit/audit-unavailable-start-layout.json",
+      "bytes": 11307,
+      "sha256": "c47b24f2761d0bcda101cb4dad4d410b23ded6387285bdac67051c5ccf1e8865"
+    },
+    {
+      "path": "qualification/results/private/transfer-audit/audit-unavailable-refresh-layout.json",
+      "bytes": 11307,
+      "sha256": "c47b24f2761d0bcda101cb4dad4d410b23ded6387285bdac67051c5ccf1e8865"
+    },
+    {
+      "path": "qualification/results/private/transfer-audit/audit-restored-refresh-layout.json",
+      "bytes": 11307,
+      "sha256": "c47b24f2761d0bcda101cb4dad4d410b23ded6387285bdac67051c5ccf1e8865"
+    },
+    {
+      "path": "qualification/results/private/transfer-audit/audit-restored-layout.json",
+      "bytes": 11135,
+      "sha256": "3a8e0ddaa0b9db0814e41cb7bd7fa8629bbead25f1e15d613518637146c56a52"
+    },
+    {
+      "path": "qualification/results/private/transfer-audit/audit-unavailable-start-tap-command.json",
+      "bytes": 218,
+      "sha256": "032a64d6db08512e542e5366c5432abd3766b277ed9493b67ed2ee5af8ceb272"
+    },
+    {
+      "path": "qualification/results/private/transfer-audit/audit-unavailable-refresh-tap-command.json",
+      "bytes": 218,
+      "sha256": "0c3fef1f5184e566bcb02d6bbd81f9f4b475be1eb8a56feaacfffb0fb62e72cd"
+    },
+    {
+      "path": "qualification/results/private/transfer-audit/audit-restored-refresh-tap-command.json",
+      "bytes": 218,
+      "sha256": "dd1a1cec6613b33deb2c0828eb535b946184e4b20f520b3b66ef830985dde6ce"
+    },
+    {
+      "path": "qualification/results/private/transfer-audit/audit-unavailable-screen.png",
+      "bytes": 282134,
+      "sha256": "d24c732062d30d70bea571568f56721f0af80f51e2285252cb15d4a017afdd09"
+    },
+    {
+      "path": "qualification/results/private/transfer-audit/audit-restored-screen.png",
+      "bytes": 269458,
+      "sha256": "aa34b17e41cc6f32b528456db57820c175edf795e5ebce22dd73f9fa68b87280"
+    },
+    {
+      "path": "qualification/results/private/transfer-audit/audit-restored-state-payload.bin",
+      "bytes": 41287680,
+      "sha256": "db589f5daab38ac26936b1938d4e88effcf2c89614c999cbd7f06692e6a33db9"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-02-completion-payload.bin",
+      "bytes": 67108864,
+      "sha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-03-stable-payload.bin",
+      "bytes": 41287680,
+      "sha256": "db589f5daab38ac26936b1938d4e88effcf2c89614c999cbd7f06692e6a33db9"
+    }
+  ]
+}

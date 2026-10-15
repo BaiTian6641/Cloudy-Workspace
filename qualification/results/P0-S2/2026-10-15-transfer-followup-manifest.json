@@ -1,0 +1,1412 @@
+{
+  "schemaVersion": 1,
+  "runId": "P0-S2-transfer-followup-2026-10-15",
+  "stage": "P0-S2",
+  "recordType": "bounded follow-up evidence",
+  "verdict": "Wrong-hostname rejection, active UIDT task-removal continuity to exact completion, and scoped shell stop-app process-loss/reconciliation with automatic process return; no product readiness or actual Task Manager UI pass.",
+  "sourceCommit": "a2b3e33d3ba4dabf40bdd1730e1eaf582c84527d",
+  "apk": {
+    "package": "dev.cloudy.qualification.baseline",
+    "versionName": "0.4.1",
+    "versionCode": 5,
+    "variant": "debug",
+    "bytes": 6858313,
+    "sha256": "704546e5d6a24167c7c982cf3be0e4ab27e2a1fe86221e69aa68f7a1f42d2396",
+    "identityEvidence": "qualification/results/P0-S2/2026-10-15-transfer-lifecycle-manifest.json"
+  },
+  "device": {
+    "manufacturer": "HP",
+    "model": "HP Googlebook 14",
+    "release": "17",
+    "sdkInt": 37,
+    "supportedAbis": [
+      "arm64-v8a"
+    ],
+    "buildId": "CL3B.260622.276.R2",
+    "incremental": "16560795",
+    "securityPatch": "2026-09-01"
+  },
+  "scopeBoundary": "All observations are installed 0.4.1. Newer 0.4.2 source/audit changes were not installed during this run and acquire no device pass from it. Host and device timestamps are separate clocks. All control taps were injected, not physical-input tests.",
+  "archive": {
+    "privateArtifact": "qualification/results/private/transfer-followup/batch-01.tar",
+    "record": "qualification/results/private/transfer-followup/batch-01-archive.json",
+    "atHostUtc": "2026-10-15T09:08:04.294820+00:00",
+    "attemptCount": 8,
+    "sourceProbeVersion": "0.4.1",
+    "sourceRevision": 3,
+    "sourceProcess": "8dc3c9fc-386f-4063-b4e9-ab2b8d91e106",
+    "processAbsentBeforeExportRecorded": true,
+    "bytes": 180374016,
+    "sha256": "0ec185060a359996c09bdffa62a5aa382ef6c5dd32d13f1f5396a99b227b668a",
+    "regularFileCount": 8,
+    "allMembersIndependentlyHashVerified": true,
+    "memberManifest": [
+      {
+        "relativePath": "files/transfer-journal.json",
+        "bytes": 11614,
+        "sha256": "343fbda40009c501cae0e0787d012b9e4949a33bbf1b2c064185289d08959d58"
+      },
+      {
+        "relativePath": "files/transfer-config.json",
+        "bytes": 1469,
+        "sha256": "fddcc32dfd8ce0adf99a2c00c4679138e90b2a4e0e828cd26fe2d1e2b88b27b3"
+      },
+      {
+        "relativePath": "files/transfer-payloads/2b601e48-de60-4d7d-9e0c-f38d7dc85111.part",
+        "bytes": 67108864,
+        "sha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f"
+      },
+      {
+        "relativePath": "files/transfer-payloads/0cbc01df-d15f-4466-b13b-eefde4fad0d7.part",
+        "bytes": 4849664,
+        "sha256": "d369753ba1c6350c583d2d990232d05789e7250f33909f1a11f299fc4978709d"
+      },
+      {
+        "relativePath": "files/transfer-payloads/8404f03d-fbb9-4674-9fcd-460473859c2e.part",
+        "bytes": 5177344,
+        "sha256": "e8cdd3a7b9868d4cbded3d7cd571b5e965f94b3ab2fd489e92a30605f038b549"
+      },
+      {
+        "relativePath": "files/transfer-payloads/5aebc288-b4f8-4b56-b564-e6b608c49832.part",
+        "bytes": 4128768,
+        "sha256": "91664bf35bdfb03fa0fb8881389c5b801047d45b37ca174b56dc6656d901177a"
+      },
+      {
+        "relativePath": "files/transfer-payloads/57d50a87-5970-4c10-a8f0-6933c0dd3e55.part",
+        "bytes": 31981568,
+        "sha256": "b800edac9b0e8cdc93d13f3b436a1d80e01a399da10c568fd556f4a2271047e9"
+      },
+      {
+        "relativePath": "files/transfer-payloads/4e27bdbc-535b-49bf-82f4-782e4a78e1b0.part",
+        "bytes": 67108864,
+        "sha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f"
+      }
+    ],
+    "privacyBoundary": "Contains private endpoint configuration and CA material; archive remains ignored/private, no member contents published."
+  },
+  "fixture": {
+    "expectedLengthBytes": 67108864,
+    "expectedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+    "bytesPerSecond": 524288,
+    "boundary": "Generated throttled payload; no throughput benchmark or packet-route claim."
+  },
+  "wrongHostname": {
+    "preparationArtifact": "qualification/results/private/transfer-followup/fixture-02/preparation.json",
+    "atUtc": "2026-10-15T09:09:01.622823+00:00",
+    "onlyOriginalFixtureFilesChanged": [
+      "server.pem"
+    ],
+    "sameAndroidConfig": true,
+    "sameHostConfig": true,
+    "sameCa": true,
+    "sameServerKey": true,
+    "verificationExitCodes": {
+      "chain": 0,
+      "wrong_endpoint": 2,
+      "loopback_san": 0
+    },
+    "verdict": "Valid trusted chain with mismatched endpoint identity; device failed SSLPeerUnverifiedException before any payload or logged HTTP request.",
+    "fileCheck": {
+      "attemptId": "c7289b1b-bdb6-4362-934f-783508c96a4c",
+      "payloadPresent": false,
+      "testExitCode": 1
+    },
+    "restoration": {
+      "privateArtifact": "qualification/results/private/transfer-followup/fixture-02/correct-leaf-restored.json",
+      "atUtc": "2026-10-15T09:11:49.984501+00:00",
+      "listenerClosedBeforeRestore": true,
+      "restoredLeafSha256": "02d3591015d6809b84214a3b447afb9caaa9ebdd0785250d029be4e3656142dd",
+      "matchesOriginalLeaf": true
+    }
+  },
+  "journalSnapshots": [
+    {
+      "privateArtifact": "qualification/results/private/transfer-followup/batch-02-attempt-01-settled-journal.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.4.1",
+      "recordingProcessInstanceId": "751bf336-43db-4968-a617-eae6a0ccdfe7",
+      "processStartedAtDeviceUtc": "2026-10-15T09:10:22.494765Z",
+      "snapshotAtDeviceUtc": "2026-10-15T09:10:51.947948Z",
+      "revision": 3,
+      "attemptCount": 1,
+      "latest": {
+        "attemptId": "c7289b1b-bdb6-4362-934f-783508c96a4c",
+        "originProcessInstanceId": "751bf336-43db-4968-a617-eae6a0ccdfe7",
+        "status": "failed",
+        "bytesWritten": 0,
+        "claimed": true,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": "SSLPeerUnverifiedException",
+        "stopReason": null,
+        "stopOutcome": null,
+        "events": [
+          {
+            "status": "queued",
+            "deviceUtc": "2026-10-15T09:10:51.791697Z",
+            "elapsedRealtimeMs": 53688596,
+            "reason": null
+          },
+          {
+            "status": "running",
+            "deviceUtc": "2026-10-15T09:10:51.854602Z",
+            "elapsedRealtimeMs": 53688659,
+            "reason": null
+          },
+          {
+            "status": "failed",
+            "deviceUtc": "2026-10-15T09:10:51.947825Z",
+            "elapsedRealtimeMs": 53688752,
+            "reason": "SSLPeerUnverifiedException"
+          }
+        ]
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-followup/batch-02-attempt-02-before-close-journal.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.4.1",
+      "recordingProcessInstanceId": "751bf336-43db-4968-a617-eae6a0ccdfe7",
+      "processStartedAtDeviceUtc": "2026-10-15T09:10:22.494765Z",
+      "snapshotAtDeviceUtc": "2026-10-15T09:12:36.535475Z",
+      "revision": 597,
+      "attemptCount": 2,
+      "latest": {
+        "attemptId": "df52f689-f5f2-41a6-b7ce-f18d68a06a97",
+        "originProcessInstanceId": "751bf336-43db-4968-a617-eae6a0ccdfe7",
+        "status": "running",
+        "bytesWritten": 4849664,
+        "claimed": true,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": null,
+        "stopReason": null,
+        "stopOutcome": null,
+        "events": [
+          {
+            "status": "queued",
+            "deviceUtc": "2026-10-15T09:12:27.178211Z",
+            "elapsedRealtimeMs": 53783982,
+            "reason": null
+          },
+          {
+            "status": "running",
+            "deviceUtc": "2026-10-15T09:12:27.227045Z",
+            "elapsedRealtimeMs": 53784031,
+            "reason": null
+          }
+        ]
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-followup/batch-02-attempt-02-after-close-journal.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.4.1",
+      "recordingProcessInstanceId": "751bf336-43db-4968-a617-eae6a0ccdfe7",
+      "processStartedAtDeviceUtc": "2026-10-15T09:10:22.494765Z",
+      "snapshotAtDeviceUtc": "2026-10-15T09:12:37.530893Z",
+      "revision": 661,
+      "attemptCount": 2,
+      "latest": {
+        "attemptId": "df52f689-f5f2-41a6-b7ce-f18d68a06a97",
+        "originProcessInstanceId": "751bf336-43db-4968-a617-eae6a0ccdfe7",
+        "status": "running",
+        "bytesWritten": 5373952,
+        "claimed": true,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": null,
+        "stopReason": null,
+        "stopOutcome": null,
+        "events": [
+          {
+            "status": "queued",
+            "deviceUtc": "2026-10-15T09:12:27.178211Z",
+            "elapsedRealtimeMs": 53783982,
+            "reason": null
+          },
+          {
+            "status": "running",
+            "deviceUtc": "2026-10-15T09:12:27.227045Z",
+            "elapsedRealtimeMs": 53784031,
+            "reason": null
+          }
+        ]
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-followup/batch-02-attempt-02-closed-stable-journal.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.4.1",
+      "recordingProcessInstanceId": "751bf336-43db-4968-a617-eae6a0ccdfe7",
+      "processStartedAtDeviceUtc": "2026-10-15T09:10:22.494765Z",
+      "snapshotAtDeviceUtc": "2026-10-15T09:12:52.030167Z",
+      "revision": 1589,
+      "attemptCount": 2,
+      "latest": {
+        "attemptId": "df52f689-f5f2-41a6-b7ce-f18d68a06a97",
+        "originProcessInstanceId": "751bf336-43db-4968-a617-eae6a0ccdfe7",
+        "status": "running",
+        "bytesWritten": 12976128,
+        "claimed": true,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": null,
+        "stopReason": null,
+        "stopOutcome": null,
+        "events": [
+          {
+            "status": "queued",
+            "deviceUtc": "2026-10-15T09:12:27.178211Z",
+            "elapsedRealtimeMs": 53783982,
+            "reason": null
+          },
+          {
+            "status": "running",
+            "deviceUtc": "2026-10-15T09:12:27.227045Z",
+            "elapsedRealtimeMs": 53784031,
+            "reason": null
+          }
+        ]
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-followup/batch-02-attempt-02-return-journal.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.4.1",
+      "recordingProcessInstanceId": "751bf336-43db-4968-a617-eae6a0ccdfe7",
+      "processStartedAtDeviceUtc": "2026-10-15T09:10:22.494765Z",
+      "snapshotAtDeviceUtc": "2026-10-15T09:13:31.123958Z",
+      "revision": 4085,
+      "attemptCount": 2,
+      "latest": {
+        "attemptId": "df52f689-f5f2-41a6-b7ce-f18d68a06a97",
+        "originProcessInstanceId": "751bf336-43db-4968-a617-eae6a0ccdfe7",
+        "status": "running",
+        "bytesWritten": 33423360,
+        "claimed": true,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": null,
+        "stopReason": null,
+        "stopOutcome": null,
+        "events": [
+          {
+            "status": "queued",
+            "deviceUtc": "2026-10-15T09:12:27.178211Z",
+            "elapsedRealtimeMs": 53783982,
+            "reason": null
+          },
+          {
+            "status": "running",
+            "deviceUtc": "2026-10-15T09:12:27.227045Z",
+            "elapsedRealtimeMs": 53784031,
+            "reason": null
+          }
+        ]
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-followup/batch-02-attempt-02-completion-journal.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.4.1",
+      "recordingProcessInstanceId": "751bf336-43db-4968-a617-eae6a0ccdfe7",
+      "processStartedAtDeviceUtc": "2026-10-15T09:10:22.494765Z",
+      "snapshotAtDeviceUtc": "2026-10-15T09:14:35.336764Z",
+      "revision": 8199,
+      "attemptCount": 2,
+      "latest": {
+        "attemptId": "df52f689-f5f2-41a6-b7ce-f18d68a06a97",
+        "originProcessInstanceId": "751bf336-43db-4968-a617-eae6a0ccdfe7",
+        "status": "completed",
+        "bytesWritten": 67108864,
+        "claimed": true,
+        "verifiedLengthBytes": 67108864,
+        "verifiedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+        "reason": null,
+        "stopReason": null,
+        "stopOutcome": null,
+        "events": [
+          {
+            "status": "queued",
+            "deviceUtc": "2026-10-15T09:12:27.178211Z",
+            "elapsedRealtimeMs": 53783982,
+            "reason": null
+          },
+          {
+            "status": "running",
+            "deviceUtc": "2026-10-15T09:12:27.227045Z",
+            "elapsedRealtimeMs": 53784031,
+            "reason": null
+          },
+          {
+            "status": "verifying",
+            "deviceUtc": "2026-10-15T09:14:35.290638Z",
+            "elapsedRealtimeMs": 53912095,
+            "reason": null
+          },
+          {
+            "status": "completed",
+            "deviceUtc": "2026-10-15T09:14:35.336495Z",
+            "elapsedRealtimeMs": 53912141,
+            "reason": null
+          }
+        ]
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-followup/batch-02-attempt-03-before-stop-journal.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.4.1",
+      "recordingProcessInstanceId": "751bf336-43db-4968-a617-eae6a0ccdfe7",
+      "processStartedAtDeviceUtc": "2026-10-15T09:10:22.494765Z",
+      "snapshotAtDeviceUtc": "2026-10-15T09:16:20.241447Z",
+      "revision": 10265,
+      "attemptCount": 3,
+      "latest": {
+        "attemptId": "2e35aff5-7623-442e-be85-a1d12b98e4d7",
+        "originProcessInstanceId": "751bf336-43db-4968-a617-eae6a0ccdfe7",
+        "status": "running",
+        "bytesWritten": 16908288,
+        "claimed": true,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": null,
+        "stopReason": null,
+        "stopOutcome": null,
+        "events": [
+          {
+            "status": "queued",
+            "deviceUtc": "2026-10-15T09:15:47.841088Z",
+            "elapsedRealtimeMs": 53984645,
+            "reason": null
+          },
+          {
+            "status": "running",
+            "deviceUtc": "2026-10-15T09:15:47.908114Z",
+            "elapsedRealtimeMs": 53984712,
+            "reason": null
+          }
+        ]
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-followup/batch-02-attempt-03-after-stop-journal.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.4.1",
+      "recordingProcessInstanceId": "751bf336-43db-4968-a617-eae6a0ccdfe7",
+      "processStartedAtDeviceUtc": "2026-10-15T09:10:22.494765Z",
+      "snapshotAtDeviceUtc": "2026-10-15T09:16:22.348183Z",
+      "revision": 10401,
+      "attemptCount": 3,
+      "latest": {
+        "attemptId": "2e35aff5-7623-442e-be85-a1d12b98e4d7",
+        "originProcessInstanceId": "751bf336-43db-4968-a617-eae6a0ccdfe7",
+        "status": "running",
+        "bytesWritten": 18022400,
+        "claimed": true,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": null,
+        "stopReason": null,
+        "stopOutcome": null,
+        "events": [
+          {
+            "status": "queued",
+            "deviceUtc": "2026-10-15T09:15:47.841088Z",
+            "elapsedRealtimeMs": 53984645,
+            "reason": null
+          },
+          {
+            "status": "running",
+            "deviceUtc": "2026-10-15T09:15:47.908114Z",
+            "elapsedRealtimeMs": 53984712,
+            "reason": null
+          }
+        ]
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-followup/batch-02-attempt-03-current-user-stopped-journal.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.4.1",
+      "recordingProcessInstanceId": "47669298-1266-403b-85ae-d96397fc6127",
+      "processStartedAtDeviceUtc": "2026-10-15T09:17:06.909985Z",
+      "snapshotAtDeviceUtc": "2026-10-15T09:17:06.973625Z",
+      "revision": 2,
+      "attemptCount": 3,
+      "latest": {
+        "attemptId": "2e35aff5-7623-442e-be85-a1d12b98e4d7",
+        "originProcessInstanceId": "751bf336-43db-4968-a617-eae6a0ccdfe7",
+        "status": "interrupted",
+        "bytesWritten": 41287680,
+        "claimed": true,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": "new-process-unfinished-attempt",
+        "stopReason": null,
+        "stopOutcome": null,
+        "events": [
+          {
+            "status": "queued",
+            "deviceUtc": "2026-10-15T09:15:47.841088Z",
+            "elapsedRealtimeMs": 53984645,
+            "reason": null
+          },
+          {
+            "status": "running",
+            "deviceUtc": "2026-10-15T09:15:47.908114Z",
+            "elapsedRealtimeMs": 53984712,
+            "reason": null
+          },
+          {
+            "status": "interrupted",
+            "deviceUtc": "2026-10-15T09:17:06.920138Z",
+            "elapsedRealtimeMs": 54063724,
+            "reason": "new-process-unfinished-attempt"
+          }
+        ]
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-followup/batch-02-attempt-03-recovered-journal.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.4.1",
+      "recordingProcessInstanceId": "47669298-1266-403b-85ae-d96397fc6127",
+      "processStartedAtDeviceUtc": "2026-10-15T09:17:06.909985Z",
+      "snapshotAtDeviceUtc": "2026-10-15T09:17:06.973625Z",
+      "revision": 2,
+      "attemptCount": 3,
+      "latest": {
+        "attemptId": "2e35aff5-7623-442e-be85-a1d12b98e4d7",
+        "originProcessInstanceId": "751bf336-43db-4968-a617-eae6a0ccdfe7",
+        "status": "interrupted",
+        "bytesWritten": 41287680,
+        "claimed": true,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": "new-process-unfinished-attempt",
+        "stopReason": null,
+        "stopOutcome": null,
+        "events": [
+          {
+            "status": "queued",
+            "deviceUtc": "2026-10-15T09:15:47.841088Z",
+            "elapsedRealtimeMs": 53984645,
+            "reason": null
+          },
+          {
+            "status": "running",
+            "deviceUtc": "2026-10-15T09:15:47.908114Z",
+            "elapsedRealtimeMs": 53984712,
+            "reason": null
+          },
+          {
+            "status": "interrupted",
+            "deviceUtc": "2026-10-15T09:17:06.920138Z",
+            "elapsedRealtimeMs": 54063724,
+            "reason": "new-process-unfinished-attempt"
+          }
+        ]
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-followup/batch-02-attempt-03-stable-journal.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.4.1",
+      "recordingProcessInstanceId": "47669298-1266-403b-85ae-d96397fc6127",
+      "processStartedAtDeviceUtc": "2026-10-15T09:17:06.909985Z",
+      "snapshotAtDeviceUtc": "2026-10-15T09:17:06.973625Z",
+      "revision": 2,
+      "attemptCount": 3,
+      "latest": {
+        "attemptId": "2e35aff5-7623-442e-be85-a1d12b98e4d7",
+        "originProcessInstanceId": "751bf336-43db-4968-a617-eae6a0ccdfe7",
+        "status": "interrupted",
+        "bytesWritten": 41287680,
+        "claimed": true,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": "new-process-unfinished-attempt",
+        "stopReason": null,
+        "stopOutcome": null,
+        "events": [
+          {
+            "status": "queued",
+            "deviceUtc": "2026-10-15T09:15:47.841088Z",
+            "elapsedRealtimeMs": 53984645,
+            "reason": null
+          },
+          {
+            "status": "running",
+            "deviceUtc": "2026-10-15T09:15:47.908114Z",
+            "elapsedRealtimeMs": 53984712,
+            "reason": null
+          },
+          {
+            "status": "interrupted",
+            "deviceUtc": "2026-10-15T09:17:06.920138Z",
+            "elapsedRealtimeMs": 54063724,
+            "reason": "new-process-unfinished-attempt"
+          }
+        ]
+      }
+    }
+  ],
+  "hostObservations": [
+    {
+      "privateArtifact": "qualification/results/private/transfer-followup/batch-02-attempt-01-settled-observation.json",
+      "observedAtUtc": "2026-10-15T09:11:27.681823+00:00",
+      "recordingProcess": "751bf336-43db-4968-a617-eae6a0ccdfe7",
+      "revision": 3,
+      "attemptCount": 1,
+      "latest": {
+        "attemptId": "c7289b1b-bdb6-4362-934f-783508c96a4c",
+        "status": "failed",
+        "bytesWritten": 0,
+        "claimed": true,
+        "reason": "SSLPeerUnverifiedException",
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-followup/batch-02-attempt-02-before-close-observation.json",
+      "observedAtUtc": "2026-10-15T09:12:37.568308+00:00",
+      "recordingProcess": "751bf336-43db-4968-a617-eae6a0ccdfe7",
+      "revision": 597,
+      "attemptCount": 2,
+      "latest": {
+        "attemptId": "df52f689-f5f2-41a6-b7ce-f18d68a06a97",
+        "status": "running",
+        "bytesWritten": 4849664,
+        "claimed": true,
+        "reason": null,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-followup/batch-02-attempt-02-after-close-observation.json",
+      "observedAtUtc": "2026-10-15T09:12:38.685512+00:00",
+      "recordingProcess": "751bf336-43db-4968-a617-eae6a0ccdfe7",
+      "revision": 661,
+      "attemptCount": 2,
+      "latest": {
+        "attemptId": "df52f689-f5f2-41a6-b7ce-f18d68a06a97",
+        "status": "running",
+        "bytesWritten": 5373952,
+        "claimed": true,
+        "reason": null,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-followup/batch-02-attempt-02-closed-stable-observation.json",
+      "observedAtUtc": "2026-10-15T09:12:53.542657+00:00",
+      "recordingProcess": "751bf336-43db-4968-a617-eae6a0ccdfe7",
+      "revision": 1589,
+      "attemptCount": 2,
+      "latest": {
+        "attemptId": "df52f689-f5f2-41a6-b7ce-f18d68a06a97",
+        "status": "running",
+        "bytesWritten": 12976128,
+        "claimed": true,
+        "reason": null,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null
+      },
+      "independentFile": {
+        "bytes": 13565952,
+        "sha256": "4002b10148e9adcd8a0abd0b2be7f4d1a8983ee3d734e6ed6317e5a56ed0080f",
+        "matchesExpected": false
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-followup/batch-02-attempt-02-return-observation.json",
+      "observedAtUtc": "2026-10-15T09:13:32.691155+00:00",
+      "recordingProcess": "751bf336-43db-4968-a617-eae6a0ccdfe7",
+      "revision": 4085,
+      "attemptCount": 2,
+      "latest": {
+        "attemptId": "df52f689-f5f2-41a6-b7ce-f18d68a06a97",
+        "status": "running",
+        "bytesWritten": 33423360,
+        "claimed": true,
+        "reason": null,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-followup/batch-02-attempt-02-completion-observation.json",
+      "observedAtUtc": "2026-10-15T09:15:08.518950+00:00",
+      "recordingProcess": "751bf336-43db-4968-a617-eae6a0ccdfe7",
+      "revision": 8199,
+      "attemptCount": 2,
+      "latest": {
+        "attemptId": "df52f689-f5f2-41a6-b7ce-f18d68a06a97",
+        "status": "completed",
+        "bytesWritten": 67108864,
+        "claimed": true,
+        "reason": null,
+        "verifiedLengthBytes": 67108864,
+        "verifiedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f"
+      },
+      "independentFile": {
+        "bytes": 67108864,
+        "sha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+        "matchesExpected": true
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-followup/batch-02-attempt-03-before-stop-observation.json",
+      "observedAtUtc": "2026-10-15T09:16:21.182038+00:00",
+      "recordingProcess": "751bf336-43db-4968-a617-eae6a0ccdfe7",
+      "revision": 10265,
+      "attemptCount": 3,
+      "latest": {
+        "attemptId": "2e35aff5-7623-442e-be85-a1d12b98e4d7",
+        "status": "running",
+        "bytesWritten": 16908288,
+        "claimed": true,
+        "reason": null,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null
+      },
+      "independentFile": {
+        "bytes": 17301504,
+        "sha256": "504ddf13f9ab0d43692aa040810442405fb8188f7a9c723851ea5d1ae7072f64",
+        "matchesExpected": false
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-followup/batch-02-attempt-03-after-stop-observation.json",
+      "observedAtUtc": "2026-10-15T09:16:23.265227+00:00",
+      "recordingProcess": "751bf336-43db-4968-a617-eae6a0ccdfe7",
+      "revision": 10401,
+      "attemptCount": 3,
+      "latest": {
+        "attemptId": "2e35aff5-7623-442e-be85-a1d12b98e4d7",
+        "status": "running",
+        "bytesWritten": 18022400,
+        "claimed": true,
+        "reason": null,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null
+      },
+      "independentFile": {
+        "bytes": 18415616,
+        "sha256": "4a23d2604a200ef1c040547ceed7557d90df37abdb689ff4661e1db2cb028c0b",
+        "matchesExpected": false
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-followup/batch-02-attempt-03-current-user-stopped-observation.json",
+      "observedAtUtc": "2026-10-15T09:17:09.144965+00:00",
+      "recordingProcess": "47669298-1266-403b-85ae-d96397fc6127",
+      "revision": 2,
+      "attemptCount": 3,
+      "latest": {
+        "attemptId": "2e35aff5-7623-442e-be85-a1d12b98e4d7",
+        "status": "interrupted",
+        "bytesWritten": 41287680,
+        "claimed": true,
+        "reason": "new-process-unfinished-attempt",
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null
+      },
+      "independentFile": {
+        "bytes": 41287680,
+        "sha256": "db589f5daab38ac26936b1938d4e88effcf2c89614c999cbd7f06692e6a33db9",
+        "matchesExpected": false
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-followup/batch-02-attempt-03-recovered-observation.json",
+      "observedAtUtc": "2026-10-15T09:17:50.865469+00:00",
+      "recordingProcess": "47669298-1266-403b-85ae-d96397fc6127",
+      "revision": 2,
+      "attemptCount": 3,
+      "latest": {
+        "attemptId": "2e35aff5-7623-442e-be85-a1d12b98e4d7",
+        "status": "interrupted",
+        "bytesWritten": 41287680,
+        "claimed": true,
+        "reason": "new-process-unfinished-attempt",
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null
+      },
+      "independentFile": {
+        "bytes": 41287680,
+        "sha256": "db589f5daab38ac26936b1938d4e88effcf2c89614c999cbd7f06692e6a33db9",
+        "matchesExpected": false
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-followup/batch-02-attempt-03-stable-observation.json",
+      "observedAtUtc": "2026-10-15T09:18:20.768918+00:00",
+      "recordingProcess": "47669298-1266-403b-85ae-d96397fc6127",
+      "revision": 2,
+      "attemptCount": 3,
+      "latest": {
+        "attemptId": "2e35aff5-7623-442e-be85-a1d12b98e4d7",
+        "status": "interrupted",
+        "bytesWritten": 41287680,
+        "claimed": true,
+        "reason": "new-process-unfinished-attempt",
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null
+      },
+      "independentFile": {
+        "bytes": 41287680,
+        "sha256": "db589f5daab38ac26936b1938d4e88effcf2c89614c999cbd7f06692e6a33db9",
+        "matchesExpected": false
+      }
+    }
+  ],
+  "exportedPayloads": [
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-02-closed-stable-payload.bin",
+      "bytes": 13565952,
+      "sha256": "4002b10148e9adcd8a0abd0b2be7f4d1a8983ee3d734e6ed6317e5a56ed0080f"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-02-completion-payload.bin",
+      "bytes": 67108864,
+      "sha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-03-before-stop-payload.bin",
+      "bytes": 17301504,
+      "sha256": "504ddf13f9ab0d43692aa040810442405fb8188f7a9c723851ea5d1ae7072f64"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-03-after-stop-payload.bin",
+      "bytes": 18415616,
+      "sha256": "4a23d2604a200ef1c040547ceed7557d90df37abdb689ff4661e1db2cb028c0b"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-03-current-user-stopped-payload.bin",
+      "bytes": 41287680,
+      "sha256": "db589f5daab38ac26936b1938d4e88effcf2c89614c999cbd7f06692e6a33db9"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-03-recovered-payload.bin",
+      "bytes": 41287680,
+      "sha256": "db589f5daab38ac26936b1938d4e88effcf2c89614c999cbd7f06692e6a33db9"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-03-stable-payload.bin",
+      "bytes": 41287680,
+      "sha256": "db589f5daab38ac26936b1938d4e88effcf2c89614c999cbd7f06692e6a33db9"
+    }
+  ],
+  "injectedActions": [
+    {
+      "privateCommand": "qualification/results/private/transfer-followup/batch-02-attempt-01-start-tap-command.json",
+      "privateLayout": "qualification/results/private/transfer-followup/batch-02-attempt-01-start-layout.json",
+      "atHostUtc": "2026-10-15T09:10:52.576049+00:00",
+      "exitCode": 0,
+      "injectedTapPx": [
+        1440,
+        473
+      ],
+      "control": {
+        "resourceId": "dev.cloudy.qualification.baseline:id/transfer_start",
+        "label": "Download test fixture",
+        "boundsPx": [
+          19,
+          434,
+          2861,
+          512
+        ]
+      },
+      "withinObservedBounds": true
+    },
+    {
+      "privateCommand": "qualification/results/private/transfer-followup/batch-02-attempt-02-start-tap-command.json",
+      "privateLayout": "qualification/results/private/transfer-followup/batch-02-attempt-02-start-layout.json",
+      "atHostUtc": "2026-10-15T09:12:27.994782+00:00",
+      "exitCode": 0,
+      "injectedTapPx": [
+        1440,
+        473
+      ],
+      "control": {
+        "resourceId": "dev.cloudy.qualification.baseline:id/transfer_start",
+        "label": "Download test fixture",
+        "boundsPx": [
+          19,
+          434,
+          2861,
+          512
+        ]
+      },
+      "withinObservedBounds": true
+    },
+    {
+      "privateCommand": "qualification/results/private/transfer-followup/batch-02-attempt-03-start-tap-command.json",
+      "privateLayout": "qualification/results/private/transfer-followup/batch-02-attempt-03-start-layout.json",
+      "atHostUtc": "2026-10-15T09:15:48.644949+00:00",
+      "exitCode": 0,
+      "injectedTapPx": [
+        1440,
+        473
+      ],
+      "control": {
+        "resourceId": "dev.cloudy.qualification.baseline:id/transfer_start",
+        "label": "Download test fixture",
+        "boundsPx": [
+          19,
+          434,
+          2861,
+          512
+        ]
+      },
+      "withinObservedBounds": true
+    },
+    {
+      "privateCommand": "qualification/results/private/transfer-followup/batch-02-attempt-02-close-tap-command.json",
+      "privateLayout": "qualification/results/private/transfer-followup/batch-02-attempt-02-close-layout.json",
+      "atHostUtc": "2026-10-15T09:12:38.624579+00:00",
+      "exitCode": 0,
+      "injectedTapPx": [
+        2821,
+        91
+      ],
+      "control": {
+        "resourceId": "com.android.systemui:id/close_window",
+        "label": "Close Cloudy device baseline probe",
+        "boundsPx": [
+          2795,
+          65,
+          2847,
+          117
+        ]
+      },
+      "withinObservedBounds": true
+    },
+    {
+      "privateCommand": "qualification/results/private/transfer-followup/batch-02-return-after-overlay-tap-command.json",
+      "privateLayout": "qualification/results/private/transfer-followup/batch-02-return-after-overlay-layout.json",
+      "atHostUtc": "2026-10-15T09:18:59.794756+00:00",
+      "exitCode": 0,
+      "injectedTapPx": [
+        1440,
+        258
+      ],
+      "control": {
+        "resourceId": "dev.cloudy.qualification.baseline:id/open_transfer_probe",
+        "label": "Open transfer experiment",
+        "boundsPx": [
+          19,
+          219,
+          2861,
+          297
+        ]
+      },
+      "withinObservedBounds": true
+    }
+  ],
+  "nativeTaskRemoval": {
+    "systemObservationArtifact": "qualification/results/private/transfer-followup/batch-02-after-close-system.json",
+    "atUtc": "2026-10-15T09:12:53.343498+00:00",
+    "processPresent": true,
+    "ownTaskRecordLines": 0,
+    "boundary": "Native caption close while running, later own task-record count 0 with process present. Same process and attempt progressed and completed; no final-Activity callback or general survival policy inferred."
+  },
+  "shellStopTest": {
+    "officialTestReference": "https://developer.android.com/develop/background-work/services/fgs/handle-user-stopping",
+    "actualTaskManagerUiUsed": false,
+    "defaultUserAttempt": {
+      "privateArtifact": "qualification/results/private/transfer-followup/batch-02-attempt-03-stop-action.json",
+      "atUtc": "2026-10-15T09:16:21.903455+00:00",
+      "action": "documented-adb-cmd-activity-stop-app",
+      "package": "dev.cloudy.qualification.baseline",
+      "exitCode": 0,
+      "attemptId": "2e35aff5-7623-442e-be85-a1d12b98e4d7",
+      "userSelection": "not explicitly selected",
+      "processSamples": [
+        {
+          "atUtc": "2026-10-15T09:16:21.927204+00:00",
+          "present": true,
+          "exitCode": 0
+        },
+        {
+          "atUtc": "2026-10-15T09:16:22.158722+00:00",
+          "present": true,
+          "exitCode": 0
+        },
+        {
+          "atUtc": "2026-10-15T09:16:23.185222+00:00",
+          "present": true,
+          "exitCode": 0
+        }
+      ]
+    },
+    "currentUserAttempt": {
+      "privateArtifact": "qualification/results/private/transfer-followup/batch-02-attempt-03-current-user-stop.json",
+      "atUtc": "2026-10-15T09:17:07.662350+00:00",
+      "action": "documented-adb-cmd-activity-stop-app",
+      "package": "dev.cloudy.qualification.baseline",
+      "exitCode": 0,
+      "attemptId": "2e35aff5-7623-442e-be85-a1d12b98e4d7",
+      "userSelection": "current",
+      "processSamples": [
+        {
+          "atUtc": "2026-10-15T09:17:07.683994+00:00",
+          "present": false,
+          "exitCode": 1
+        },
+        {
+          "atUtc": "2026-10-15T09:17:08.015186+00:00",
+          "present": true,
+          "exitCode": 0
+        },
+        {
+          "atUtc": "2026-10-15T09:17:09.044693+00:00",
+          "present": true,
+          "exitCode": 0
+        }
+      ]
+    },
+    "absenceToNextPresenceSampleSeconds": 0.331192,
+    "latestExitDiagnostic": {
+      "privateArtifact": "qualification/results/private/transfer-followup/batch-02-attempt-03-current-user-exit-info.txt",
+      "reason": 10,
+      "reasonName": "USER REQUESTED",
+      "subreason": 23,
+      "subreasonName": "STOP APP",
+      "boundary": "Shell subreason observed on this build; not a public application API."
+    },
+    "newProcessObservedBeforeExplicitUiReturn": true,
+    "automaticRestartTrigger": "not established",
+    "postStopStableObservationSeconds": 71.623953,
+    "boundary": "No stop callback was persisted. Null stopReason/stopOutcome does not prove callbacks never occurred. No request replay observed through frozen server log; process restart is not transfer restart. No promise that process stays stopped."
+  },
+  "uiReturn": {
+    "launchArtifact": "qualification/results/private/transfer-followup/batch-02-after-stop-launch.txt",
+    "launchStatus": "ok",
+    "launchState": "WARM",
+    "postLaunchLayoutAtHostUtc": "2026-10-15T09:17:50.793475+00:00",
+    "helperErrorArtifact": "qualification/results/private/transfer-followup/batch-02-after-stop-open-helper-error.json",
+    "helperError": {
+      "type": "RuntimeError",
+      "detail": "Expected one active probe window"
+    },
+    "activeQuickSettingsOverlayObserved": true,
+    "overlayLayoutArtifact": "qualification/results/private/transfer-followup/batch-02-after-stop-open-layout.json",
+    "applicationActiveAfterOverlayDismissal": true,
+    "finalLayoutArtifact": "qualification/results/private/transfer-followup/batch-02-final-ui-layout.json",
+    "finalOwnAppFields": [
+      {
+        "resource-id": "dev.cloudy.qualification.baseline:id/transfer_window_identity",
+        "text": "Activity instance: 55098d97-5700-4205-a08f-fd887c40e9b4\nObserved task: 1000156",
+        "bounds": "[19,219][2861,278]"
+      },
+      {
+        "resource-id": "dev.cloudy.qualification.baseline:id/transfer_status",
+        "text": "interrupted",
+        "bounds": "[19,859][2861,891]"
+      }
+    ],
+    "boundary": "Failed helper did not tap or establish a missing app control. Subsequent fresh active-app layout and matched Open transfer action produced the interrupted screen."
+  },
+  "fixtureServers": [
+    {
+      "privateArtifact": "qualification/results/private/transfer-followup/fixture-02/server-04.log",
+      "requestCount": 0,
+      "events": []
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-followup/fixture-02/server-05.log",
+      "requestCount": 2,
+      "events": [
+        {
+          "event": "request_started",
+          "requestId": "45dc8545cc1fe7497a0cbc36dfd726d6",
+          "atUtc": "2026-10-15T09:12:28.077Z",
+          "expectedLengthBytes": 67108864
+        },
+        {
+          "event": "stream_written",
+          "requestId": "45dc8545cc1fe7497a0cbc36dfd726d6",
+          "atUtc": "2026-10-15T09:14:36.077Z",
+          "bytesWritten": 67108864
+        },
+        {
+          "event": "request_started",
+          "requestId": "3e43eb884c95406b0bb11752103d80fc",
+          "atUtc": "2026-10-15T09:15:48.769Z",
+          "expectedLengthBytes": 67108864
+        },
+        {
+          "event": "connection_interrupted",
+          "requestId": "3e43eb884c95406b0bb11752103d80fc",
+          "atUtc": "2026-10-15T09:17:07.644Z",
+          "bytesWritten": 41287680
+        }
+      ]
+    }
+  ],
+  "fixtureShutdown": [
+    {
+      "privateArtifact": "qualification/results/private/transfer-followup/fixture-02/server-04-stopped.json",
+      "atUtc": "2026-10-15T09:11:37.164688+00:00",
+      "event": "stopped",
+      "exitCode": 0
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-followup/fixture-02/server-05-stopped.json",
+      "atUtc": "2026-10-15T09:18:59.805458+00:00",
+      "event": "stopped",
+      "exitCode": 0
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-followup/fixture-02/server-05-port-closed.json",
+      "atUtc": "2026-10-15T09:19:32.074593+00:00",
+      "listenerPresent": false
+    }
+  ],
+  "artifactNamingBoundary": "batch-02-attempt-02-final-* was still running, not completion evidence. Only completion-journal/observation/payload supply terminal completion; early result for attempt1 was queued, so settled evidence is used.",
+  "notEstablished": [
+    "Actual native Task Manager UI workflow or all UIDT user-stop semantics",
+    "Cause of automatic process restart and absence of any callback",
+    "0.4.2 lifecycle audit behavior",
+    "LAN revocation/denied-socket OS enforcement, assigned-network changes, deadline/exhausted budgets",
+    "Natural low-memory, reboot/power-loss, indefinite background reliability",
+    "SFTP/publication/SSH/desktop/USB product behavior",
+    "Physical keyboard/mouse/touch/IME or full platform acceptance"
+  ],
+  "capabilityDecision": {
+    "existingOutcome": "CAP-PLATFORM experiment",
+    "changedByThisReport": false,
+    "supportedCapabilityCount": 0
+  },
+  "reviewStatus": "Accepted by primary and independent reviewers: selected hashes, all eight archive members, journal/host projections, payloads, own-control bounds, stop samples and cleanup checked; no actionable finding.",
+  "sanitization": "Allowlisted probe observations and file path/size/hash metadata only. No raw UI, screenshots, shell dumps, private endpoint/address/hostname/user identifiers, OS PID/UID, configuration values, certificates or keys are published.",
+  "privateEvidence": [
+    {
+      "path": "qualification/results/private/transfer-followup/batch-01-archive.json",
+      "bytes": 2190,
+      "sha256": "1f9162c955e1f60e902bf555ca32743482746aa86cf8ba5c74a94bacd1812366"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-01.tar",
+      "bytes": 180374016,
+      "sha256": "0ec185060a359996c09bdffa62a5aa382ef6c5dd32d13f1f5396a99b227b668a"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-after-close-activities.txt",
+      "bytes": 97323,
+      "sha256": "9cd160ab2a0480999a6aa667fe161cdd227c78e724f1baf5997e79aa7a05d4b4"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-after-close-process.txt",
+      "bytes": 6,
+      "sha256": "916a5d5ffea5a491b102be8bf8ce53e969a7c139b5630ad60ab87be4b971563b"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-after-close-system.json",
+      "bytes": 103,
+      "sha256": "aa51c261ba9f4735b5472222e380cd490e7f074d38cce68b2a3eb708dff347c0"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-after-stop-launch.txt",
+      "bytes": 206,
+      "sha256": "8a1f764e40dc3952be337813a4f530988f202e0ff87f6dcc1513c9fa64a5461f"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-after-stop-open-helper-error.json",
+      "bytes": 77,
+      "sha256": "4f2f70a28b1a691e3b2b129b928c87419628234f74e7da2b14f5941b7a3df051"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-after-stop-open-layout-command.json",
+      "bytes": 600,
+      "sha256": "478f98127ac865044cc104be09dc37a41c9b028834318c9675989816b61f4fd2"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-after-stop-open-layout.json",
+      "bytes": 27168,
+      "sha256": "c74cbe924b91696c61dfbbe2b837f24597d27ec6b0f868b3e03db5eb91087ca6"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-01-file-check.json",
+      "bytes": 106,
+      "sha256": "a32600c9fa405019f7020d2f5127c14417ad9249b0b23a7d29f003ea3f1fab51"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-01-settled-journal.json",
+      "bytes": 1987,
+      "sha256": "deff9707b6d80e4dc0bd206fd87838de2f76deb55640abb63e63dba6d1368aab"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-01-settled-observation.json",
+      "bytes": 406,
+      "sha256": "a1b8fe08a3d16d46f2dd84d37214177e7744786107e61d9716546de3358141de"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-01-start-layout.json",
+      "bytes": 10836,
+      "sha256": "1b3167af0b31e8ad7607f694da31d7d5055407c1c16d259024be4ab58b97cc9c"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-01-start-tap-command.json",
+      "bytes": 218,
+      "sha256": "56ef51031791ffcd562b0d68ec6c82558a641a171c0a7317065d1e4142024952"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-02-after-close-journal.json",
+      "bytes": 2974,
+      "sha256": "b2d36e923dfd0c958bd697177d2af66da5c0ce20b7866ac29efcbbf9707e2fff"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-02-after-close-observation.json",
+      "bytes": 391,
+      "sha256": "c3e1193b8251ebaabc5ce7d4a2f8a310f3b8d954d8a09f502a68f32c8f931169"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-02-before-close-journal.json",
+      "bytes": 2974,
+      "sha256": "b5e5b45cbf1ea3b889361517db24a638ae59610aaebeae93001a89a71b2112da"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-02-before-close-observation.json",
+      "bytes": 391,
+      "sha256": "ec079c721f1d4f2257f313d083f9de28f86996eee2d6ffbbad7097d5fd57a823"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-02-close-layout.json",
+      "bytes": 11104,
+      "sha256": "9015aa27a2ce4222843494d2b9559d244a37dce0f1eac0d525b62a35c9591131"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-02-close-tap-command.json",
+      "bytes": 217,
+      "sha256": "1c61073d8025f1ce01bb9fec4dea794df186ceaf20ea24b6d4a4bb30d72f9640"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-02-closed-stable-journal.json",
+      "bytes": 2976,
+      "sha256": "98cdc9811611133e1fbd8f2d3a97c62646c22591f5cf6b7d9d97488e415dbcea"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-02-closed-stable-observation.json",
+      "bytes": 555,
+      "sha256": "4e87aae941c61325f9bdd561a5c12e79e9a03766433e76232ccd202aae8ac5e5"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-02-closed-stable-payload.bin",
+      "bytes": 13565952,
+      "sha256": "4002b10148e9adcd8a0abd0b2be7f4d1a8983ee3d734e6ed6317e5a56ed0080f"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-02-completion-journal.json",
+      "bytes": 3392,
+      "sha256": "4cc82ba212dc708bad0d977e8a8f9bf92b8d0d2a80cc88877180efe23fd70b7d"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-02-completion-observation.json",
+      "bytes": 622,
+      "sha256": "0abf5178d1e58eb57c97717f5b7bd68b7e4521286eed024e9de6cf0c295f33da"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-02-completion-payload.bin",
+      "bytes": 67108864,
+      "sha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-02-return-journal.json",
+      "bytes": 2976,
+      "sha256": "612490a060619350580c9a55615ef27b6b07a459b9908a73031b740664adfc85"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-02-return-observation.json",
+      "bytes": 393,
+      "sha256": "678f42f7898a43c3657b01f661991da6db665499031487e7cc2bfd5381856051"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-02-start-layout.json",
+      "bytes": 11114,
+      "sha256": "9fe3da549db2d7cc07c80589966e156e42f7bc5c258c1298c57ae0489c3f6970"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-02-start-tap-command.json",
+      "bytes": 218,
+      "sha256": "07deb38d2d99e60325ead81aa64436d34b1e927be1bd7b3834fdf2f3908d7b16"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-03-after-stop-journal.json",
+      "bytes": 4379,
+      "sha256": "754fd097abf4a8346b05386e16a25477342296977b104d7446c2ffe068acd7e8"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-03-after-stop-observation.json",
+      "bytes": 556,
+      "sha256": "70164c9bd7ea1b5b27e3208f9517862c86ac945857044343d121f853c7b963c6"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-03-after-stop-payload.bin",
+      "bytes": 18415616,
+      "sha256": "4a23d2604a200ef1c040547ceed7557d90df37abdb689ff4661e1db2cb028c0b"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-03-before-stop-journal.json",
+      "bytes": 4379,
+      "sha256": "370aafa7a109a683089c86f7bb549443b612c9ab4580cd73ed02f2118b25dca3"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-03-before-stop-observation.json",
+      "bytes": 556,
+      "sha256": "5171d148706297f100f11192c8174e5bdea2caa04510630541cdfdce18720948"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-03-before-stop-payload.bin",
+      "bytes": 17301504,
+      "sha256": "504ddf13f9ab0d43692aa040810442405fb8188f7a9c723851ea5d1ae7072f64"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-03-current-user-exit-info.txt",
+      "bytes": 3724,
+      "sha256": "27aad7690c9f4f4b36985ff2b17de00f8c1ed252130bcbc2f956c254ce198619"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-03-current-user-stop.json",
+      "bytes": 602,
+      "sha256": "420f699d70ef8fe44dcf623251b9427a027659fbe0cb087d11984020aec399e1"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-03-current-user-stopped-journal.json",
+      "bytes": 4835,
+      "sha256": "84d15a68f96f3cbb20ab9db8cbe62e322aa2a37398fe0e7e46ebf14795f891c2"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-03-current-user-stopped-observation.json",
+      "bytes": 584,
+      "sha256": "a395b86de99f554a248539ddbecc948b5e70032b0f2dbd3eee463b99850f4f9d"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-03-current-user-stopped-payload.bin",
+      "bytes": 41287680,
+      "sha256": "db589f5daab38ac26936b1938d4e88effcf2c89614c999cbd7f06692e6a33db9"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-03-recovered-journal.json",
+      "bytes": 4835,
+      "sha256": "84d15a68f96f3cbb20ab9db8cbe62e322aa2a37398fe0e7e46ebf14795f891c2"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-03-recovered-observation.json",
+      "bytes": 584,
+      "sha256": "dff51acb719c70dc527fc456814d88bab62c08a56153f9baa239dcd74bf3ca8e"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-03-recovered-payload.bin",
+      "bytes": 41287680,
+      "sha256": "db589f5daab38ac26936b1938d4e88effcf2c89614c999cbd7f06692e6a33db9"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-03-stable-journal.json",
+      "bytes": 4835,
+      "sha256": "84d15a68f96f3cbb20ab9db8cbe62e322aa2a37398fe0e7e46ebf14795f891c2"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-03-stable-observation.json",
+      "bytes": 584,
+      "sha256": "5aa6093d7be14858357ab843e0f511abe242c848080da30d15a947ffc6e63e7c"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-03-stable-payload.bin",
+      "bytes": 41287680,
+      "sha256": "db589f5daab38ac26936b1938d4e88effcf2c89614c999cbd7f06692e6a33db9"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-03-start-layout.json",
+      "bytes": 11159,
+      "sha256": "9b125fa207fce78bcfa0eb12583ee557759f617edf830b04b9c7c3c59e55b8a4"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-03-start-tap-command.json",
+      "bytes": 218,
+      "sha256": "4b3982fb73bdc3ae58228a653a11749bffafd8b5c8040ec93e4fd7e9f943e7f0"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-attempt-03-stop-action.json",
+      "bytes": 571,
+      "sha256": "28c6181878ed2b3c6c2bcae35ba313c7fb8a200122f4072e37501f3c60d37fc2"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-final-ui-layout.json",
+      "bytes": 11135,
+      "sha256": "8e3b5758b90f52716af7bf4cd16bdc81982ee5f57a4cb466efab216b8b70441c"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-return-after-overlay-layout.json",
+      "bytes": 27249,
+      "sha256": "bc759360d43fbbe38ef185e7844a108570c96c4795e391ddf58e0e02be76890b"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/batch-02-return-after-overlay-tap-command.json",
+      "bytes": 218,
+      "sha256": "31a42443d65c3c54c51a36fc6548a2c02f7def80a3dc4b701c2b624ffe21f854"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/fixture-02/chain-verify.txt",
+      "bytes": 15,
+      "sha256": "f67ba1d6b3207ed5c3bf9d79bdce5bd19c23de6a4d05cd9fafb89f66a94f1edc"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/fixture-02/correct-leaf-restored.json",
+      "bytes": 212,
+      "sha256": "d18a85060fe70d3abd5046b9fcd9ae0b62f970a1e6b271122d444a94173bd7e6"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/fixture-02/loopback_san-verify.txt",
+      "bytes": 15,
+      "sha256": "f67ba1d6b3207ed5c3bf9d79bdce5bd19c23de6a4d05cd9fafb89f66a94f1edc"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/fixture-02/preparation.json",
+      "bytes": 1504,
+      "sha256": "265131711f9ccb36395bdf593ed198ab6bc86e9a1ecc1cbd963738712235ee49"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/fixture-02/server-04-stopped.json",
+      "bytes": 89,
+      "sha256": "43e2c7fe4b07564ab2de22d446348559ac9ae333428b9ae57fe587cee8fd68a0"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/fixture-02/server-04.log",
+      "bytes": 50,
+      "sha256": "75049ee13969ee7f5669b10e0348729faca0b1d8fa6a2285270cea69c62fe169"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/fixture-02/server-05-port-closed.json",
+      "bytes": 78,
+      "sha256": "fe2067daa02f345a56edf25add699cc031b6c6bda77d712596691a64630ff08d"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/fixture-02/server-05-stopped.json",
+      "bytes": 89,
+      "sha256": "f19bab07ee94a5944b3b1f3a107e45a319d428851bdc23478fa88e87bdd2db5f"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/fixture-02/server-05.log",
+      "bytes": 634,
+      "sha256": "151b4bdb96ee9a14473a1825a448a05e2b1a22d3eaa453893a28ed1fbc8ea2bc"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/fixture-02/server-wrong-host.ext",
+      "bytes": 204,
+      "sha256": "6d43c12b86dd1949fa487629dd3c5f90312580317bfe139462c38b90fd5a1a4a"
+    },
+    {
+      "path": "qualification/results/private/transfer-followup/fixture-02/wrong_endpoint-verify.txt",
+      "bytes": 116,
+      "sha256": "964b6cd65683c34158e3e1894526188c4ad9ab27dcc1e2672e63157213d77f6d"
+    }
+  ]
+}

@@ -289,16 +289,20 @@
       "owner": "Android/platform developer",
       "stage": "P0-S2",
       "fallback": "Journal continuously, stop bounded work promptly, reconcile interrupted operations and reconnect explicitly; no callback-dependent durability.",
-      "experiment": "P0-S2/P1-S3: real operation-specific start/timeout/exhausted-budget handling; distinguish accelerated timeout, Activity recreation, process loss and user stop. Restore any changed global test configuration.",
+      "experiment": "P0-S2 classification/P1-S3 implementation: real start/timeout/exhausted-budget handling if a timed FGS route is selected. dataSync/mediaProcessing are not selected by the finite UIDT probe, so no FGS timeout is claimed. UIDT stop/deadline cases remain separate. Restore any changed global test configuration.",
       "researchEvidence": "docs/03-platform/googlebook/p0-s2-operation-lifetimes.md",
-      "versionNotes": "onTimeout(int,int) exists from API35. On runtime35+ with target35+, background dataSync/mediaProcessing budgets apply per app and type. Older runtimes need explicit cleanup without this callback."
+      "versionNotes": "onTimeout(int,int) exists from API35. On runtime35+ with target35+, background dataSync/mediaProcessing budgets apply per app and type. Older runtimes need explicit cleanup without this callback.",
+      "decisionEvidence": "docs/03-platform/googlebook/p0-s2-platform-decision.md"
     },
     {
       "id": "API14",
       "feature": "Foreground-service classification",
       "symbols": [
         "Service.startForeground",
-        "Foreground service types"
+        "ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE",
+        "ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC",
+        "ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE",
+        "android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
       ],
       "sourceIds": [
         "G16",
@@ -307,7 +311,10 @@
         "G62",
         "G64",
         "G65",
-        "G68"
+        "G68",
+        "G72",
+        "G98",
+        "G99"
       ],
       "minimumApi": null,
       "libraryVersion": null,
@@ -317,9 +324,10 @@
       "owner": "Android/platform developer",
       "stage": "P1-S3",
       "fallback": "Visible user work, honest background disconnection, journaled recovery and host-side durability; no unrelated permissions or invented provider ownership.",
-      "experiment": "P0-S2 research/P1-S3 implementation: select and qualify SSH, transfers, USB and streaming strategies independently against actual prerequisites and chosen distribution policy. No service type or Play approval is selected by this research.",
+      "experiment": "CAP-PLATFORM remains experiment after P0-S2 investigation closeout. P0-S3 first proves visible native SSH ownership independently of renderer; a real continuous-session FGS candidate requires separate feature/prerequisite review, bounded lifecycle/stop/process-loss evidence and distribution assessment. No FGS type, compilation, runtime support or Play approval is established. USB and streaming remain independent operation decisions.",
       "researchEvidence": "docs/03-platform/googlebook/p0-s2-operation-lifetimes.md",
-      "versionNotes": "connectedDevice/dataSync constants API29; specialUse API34. Target31+ background starts and target34+ types/prerequisites apply on relevant runtimes. API level for this mixed policy record remains null."
+      "versionNotes": "connectedDevice/dataSync constants API29; specialUse API34. Target31+ background starts and target34+ types/prerequisites apply on relevant runtimes. API level for this mixed policy record remains null.",
+      "decisionEvidence": "docs/03-platform/googlebook/p0-s2-platform-decision.md"
     },
     {
       "id": "API15",
@@ -849,7 +857,9 @@
       ],
       "sourceIds": [
         "G24",
-        "G78"
+        "G78",
+        "G72",
+        "G99"
       ],
       "minimumApi": 29,
       "libraryVersion": null,
@@ -867,7 +877,8 @@
         "engagementLifecycleEvidence": "qualification/results/P0-S2/2026-10-15-engagement-probe.md"
       },
       "researchEvidence": "docs/03-platform/googlebook/p0-s2-process-lifecycle-method.md",
-      "exitHistoryBoundary": "Public ApplicationExitInfo.REASON_USER_REQUESTED (API30, value10) provides diagnostic context for the observed HP last-task removal. Shell subreason is not a public app API. Process loss may omit final callbacks/writes; fallback to committed state and unknown cleanup. App-side exit-history access is not implemented."
+      "exitHistoryBoundary": "Public ApplicationExitInfo.REASON_USER_REQUESTED (API30, value10) provides diagnostic context for the observed HP last-task removal. Shell subreason is not a public app API. Process loss may omit final callbacks/writes; fallback to committed state and unknown cleanup. App-side exit-history access is not implemented.",
+      "versionNotes": "onTopResumedActivityChanged API29; earlier lifecycle/focus callbacks retain their own introduction levels. API29+ permits multi-resume: resumed and focused are distinct, and onStop is the off-screen lifecycle signal. No callback or process-owned executor guarantees background transport survival."
     },
     {
       "id": "API37",
@@ -998,7 +1009,11 @@
       "partialObservation": {
         "evidence": "qualification/results/P0-S2/2026-10-15-transfer-lifecycle.md",
         "preflightEvidence": "qualification/results/P0-S2/2026-10-15-transfer-preflight.md",
-        "note": "0.4.1 on the identified HP API37 build: two actual 64 MiB HTTPS completions with independent exported-file SHA-256 validation, including a fresh explicit retry after host-stop failure. Active Activity recreation/minimize/return retained the attempt. Native UI and hidden-Activity notification cancellation reached saved terminal states with stable partial bytes. Wrong-CA-only input failed with SSLHandshakeException before payload; host-stop midstream failed with ProtocolException and no automatic retry when the fixture returned. An injected package-scoped SIGKILL during claimed work left historical running state; a new process reconciled the same attempt to interrupted with unchanged 5,177,344-byte partial/hash and no observed replay over more than 64 seconds. Eight retained slots also blocked further Start, so post-recovery Start eligibility is not established. No wrong-hostname, permission-revocation, assigned-network-change, Task Manager, natural low-memory, physical-input, general VPN or product gate claim."
+        "note": "0.4.1 on the identified HP API37 build: two actual 64 MiB HTTPS completions with independent exported-file SHA-256 validation, including a fresh explicit retry after host-stop failure. Active Activity recreation/minimize/return retained the attempt. Native UI and hidden-Activity notification cancellation reached saved terminal states with stable partial bytes. Wrong-CA-only input failed with SSLHandshakeException before payload; host-stop midstream failed with ProtocolException and no automatic retry when the fixture returned. An injected package-scoped SIGKILL during claimed work left historical running state; a new process reconciled the same attempt to interrupted with unchanged 5,177,344-byte partial/hash and no observed replay over more than 64 seconds. Eight retained slots also blocked further Start, so post-recovery Start eligibility is not established. That original run made no wrong-hostname, permission-revocation, assigned-network-change, Task Manager, natural low-memory, physical-input, general VPN or product gate claim.",
+        "followupEvidence": "qualification/results/P0-S2/2026-10-15-transfer-followup.md",
+        "followupNote": "Accepted separate 0.4.1 batch: trusted CA with wrong hostname rejected with SSLPeerUnverifiedException before payload; active native task closure/return retained one exact 64 MiB download. Current-user shell stop test caused process loss followed by automatic process return before explicit relaunch, interruption reconciliation and no new HTTP request. Restart cause and actual Task Manager UI behavior remain unqualified. Direct-LAN denied-socket enforcement, revocation and assigned-network changes remain untested.",
+        "auditRecoveryEvidence": "qualification/results/P0-S2/2026-10-15-transfer-audit-recovery.md",
+        "auditRecoveryNote": "Accepted 0.4.2 missing completed-file path: historical journal remained byte-identical and new work was blocked. Restoring the same file and explicit Refresh reverified completion in the same process, preserving all three IDs and failed/interrupted rows. No new transfer was started after recovery; actual audit deadline/read-permission and late-callback cases remain unqualified."
       }
     },
     {
@@ -1071,7 +1086,7 @@
       "owner": "Android/platform developer",
       "stage": "P0-S2",
       "fallback": "Expose local-access denial and preserve the pending operation; explicit retry after user grant. System-mediated service selection is a separate candidate, not a bypass.",
-      "experiment": "P0-S2 finite HTTPS fixture: actual target37 permission grant/denial UI and app admission; later selected-route HTTPS completion after grant, accepted fixture CA trust and wrong-CA rejection. Permission revocation, denied-socket OS enforcement and wrong-hostname rejection remain untested; VPN-route success does not qualify direct-LAN enforcement. SDK presence and shell ICMP alone do not prove app access.",
+      "experiment": "P0-S2 finite HTTPS fixture: actual target37 permission grant/denial UI and app admission; later selected-route HTTPS completion after grant, accepted fixture CA trust and wrong-CA rejection. The separate follow-up establishes wrong-hostname rejection; permission revocation and denied-socket OS enforcement remain untested; VPN-route success does not qualify direct-LAN enforcement. SDK presence and shell ICMP alone do not prove app access.",
       "runtimeGuard": "ACCESS_LOCAL_NETWORK is enforced for runtime37/target37+; check before scheduling and again before I/O. Earlier runtimes need a guard, not a request for this nonexistent permission. Do not request unrelated Nearby Devices grants. Network.openConnection API21 and TLS trust/hostname methods API1 predate this record minimum37. Preserve denial/revocation state separately from TLS, route and scheduler failure.",
       "researchEvidence": "docs/03-platform/googlebook/p0-s2-transfer-probe-contract.md",
       "versionNotes": "SDK37.0 android.jar inspected for permission constants and UIDT/network signatures. Default NetworkRequest excludes VPN; reviewed 0.4.1 explicitly removes NOT_VPN while retaining Wi-Fi/Ethernet advertised transport alternatives and other defaults. It omits INTERNET/VALIDATED/NOT_METERED and does not use NET_CAPABILITY_LOCAL_NETWORK as a generic LAN capability. It uses only JobParameters.network without VPN bypass; transport labels do not prove the physical route. Use scoped fixture-CA trust and unchanged platform hostname verification; no global TLS overrides, accept-all verifier or production pinning decision.",
@@ -1079,7 +1094,9 @@
       "partialObservation": {
         "evidence": "qualification/results/P0-S2/2026-10-15-transfer-lifecycle.md",
         "preflightEvidence": "qualification/results/P0-S2/2026-10-15-transfer-preflight.md",
-        "note": "0.4.0 preflight observed LAN permission denial/grant UI and no automatic start; the app prevented scheduling while denied, so this was not an OS-denied socket test. Separate 0.4.1 reached the selected HTTPS fixture after grant and independently verified its received file; changing only the trusted CA produced SSLHandshakeException, zero bytes and no payload. Existing OS-selected VPN routing means this does not establish direct-LAN permission enforcement. Revocation and wrong-hostname rejection remain untested; overall qualification remains untested."
+        "note": "0.4.0 preflight observed LAN permission denial/grant UI and no automatic start; the app prevented scheduling while denied, so this was not an OS-denied socket test. Separate 0.4.1 reached the selected HTTPS fixture after grant and independently verified its received file; changing only the trusted CA produced SSLHandshakeException, zero bytes and no payload. Existing OS-selected VPN routing means this does not establish direct-LAN permission enforcement. That original run did not test wrong-hostname rejection; the separate follow-up below supplies that bounded result. Revocation and overall qualification remain untested.",
+        "followupEvidence": "qualification/results/P0-S2/2026-10-15-transfer-followup.md",
+        "followupNote": "Accepted separate 0.4.1 batch: trusted CA with wrong hostname rejected with SSLPeerUnverifiedException before payload; active native task closure/return retained one exact 64 MiB download. Current-user shell stop test caused process loss followed by automatic process return before explicit relaunch, interruption reconciliation and no new HTTP request. Restart cause and actual Task Manager UI behavior remain unqualified. Direct-LAN denied-socket enforcement, revocation and assigned-network changes remain untested."
       }
     }
   ],

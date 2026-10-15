@@ -1,0 +1,191 @@
+{
+  "schemaVersion": 1,
+  "runId": "P0-S3-ssh-host-preflight-2026-10-15",
+  "stage": "P0-S3",
+  "stageStatus": "in-progress",
+  "verdict": "Real host-loopback OpenSSH public-key authentication and one exact SFTP read; Android SSH/SFTP remains untested",
+  "scope": {
+    "executor": "primary agent",
+    "evidenceAuthor": "read-only source/evidence review",
+    "host": "selected Ubuntu 26.04.1 LTS workstation",
+    "route": "loopback only",
+    "androidDeviceUsed": false,
+    "sshjUsed": false,
+    "systemPackageInstalled": false,
+    "systemServiceChanged": false,
+    "capabilityGatePromoted": false
+  },
+  "package": {
+    "name": "openssh-server",
+    "version": "1:10.2p1-2ubuntu3.8",
+    "architecture": "amd64",
+    "acquisition": "Official Ubuntu package extracted under ignored project cache; no system installation",
+    "aptMetadataReadCommand": [
+      "apt-cache",
+      "show",
+      "openssh-server=1:10.2p1-2ubuntu3.8"
+    ],
+    "aptMetadataRecheckExitCode": 0,
+    "aptMetadataSizeMatches": true,
+    "aptMetadataSha256Matches": true,
+    "artifact": {
+      "path": ".cache/openssh-10.2-fixture/openssh-server_10.2p1-2ubuntu3.8_amd64.deb",
+      "bytes": 622420,
+      "sha256": "d14910ed045bd4a2a4c9a4eeb6b3edf08d527fb4cdee5cf527fe66b8bb364c31"
+    },
+    "boundary": "Hash matches the locally available APT metadata and inspected package bytes; no fresh archive-signature verification or package security audit is claimed by this report."
+  },
+  "backend": {
+    "serverVersion": "OpenSSH_10.2p1 Ubuntu-2ubuntu3.8",
+    "clientVersion": "OpenSSH_10.2p1 Ubuntu-2ubuntu3.7",
+    "clientOpenSslVersion": "3.5.5 27 Jan 2026",
+    "versionEvidence": "preparation.json records server identity; loopback-02-client.log records client/OpenSSL identity",
+    "serverOpenSslVersionReportedByPrimaryAgent": "3.5.5",
+    "preparationRecordedAtHostUtc": "2026-10-15T09:20:06.807391+00:00",
+    "configTestExitCode": 0,
+    "listenScope": "loopback",
+    "configuration": {
+      "passwordauthentication": "no",
+      "kbdinteractiveauthentication": "no",
+      "pubkeyauthentication": "yes",
+      "permitrootlogin": "no",
+      "usepam": "no",
+      "allowtcpforwarding": "no",
+      "x11forwarding": "no",
+      "subsystem": "sftp internal-sftp",
+      "strictmodes": "yes"
+    },
+    "privateCredentials": "Generated fixture keys remain private; no key material or private-key digest is included in this manifest."
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "privateResult": "qualification/results/private/ssh-probe/host-01/loopback-result.json",
+      "startedAtUtc": "2026-10-15T09:20:49.798449+00:00",
+      "scope": "real-loopback-OpenSSH-SFTP-only",
+      "systemServiceChanged": false,
+      "clientExitCode": 255,
+      "downloadPresent": false,
+      "serverExitCode": 0,
+      "finishedAtUtc": "2026-10-15T09:20:50.232509+00:00",
+      "listenerClosed": true,
+      "logProjection": {
+        "hostKeyVerificationFailed": true,
+        "knownHostKeyMatched": false,
+        "clientPublicKeyAuthenticated": false,
+        "sftpSubsystemRequested": false,
+        "clientReportedExitStatusZero": false,
+        "serverAcceptedPublicKey": false,
+        "serverReceivedTerminationSignal15": true
+      }
+    },
+    {
+      "attempt": 2,
+      "privateResult": "qualification/results/private/ssh-probe/host-01/loopback-02-result.json",
+      "startedAtUtc": "2026-10-15T09:22:00.892131+00:00",
+      "scope": "real-loopback-OpenSSH-SFTP-only",
+      "systemServiceChanged": false,
+      "clientExitCode": 0,
+      "downloadPresent": true,
+      "downloadBytes": 28,
+      "downloadSha256": "114d3935955b73a27a64f51412c84f668f2054e96f66ad07114de44682bfc6b6",
+      "matchesSentinel": true,
+      "serverExitCode": 0,
+      "finishedAtUtc": "2026-10-15T09:22:01.383035+00:00",
+      "listenerClosed": true,
+      "logProjection": {
+        "hostKeyVerificationFailed": false,
+        "knownHostKeyMatched": true,
+        "clientPublicKeyAuthenticated": true,
+        "sftpSubsystemRequested": true,
+        "clientReportedExitStatusZero": true,
+        "serverAcceptedPublicKey": true,
+        "serverReceivedTerminationSignal15": true
+      }
+    }
+  ],
+  "payload": {
+    "fixture": "generated sentinel",
+    "expectedLengthBytes": 28,
+    "expectedSha256": "114d3935955b73a27a64f51412c84f668f2054e96f66ad07114de44682bfc6b6",
+    "downloadLengthBytes": 28,
+    "downloadSha256": "114d3935955b73a27a64f51412c84f668f2054e96f66ad07114de44682bfc6b6",
+    "independentlyRehashedOriginalAndDownload": true
+  },
+  "review": {
+    "privateArtifactHashCount": 11,
+    "method": "Read both result records and configuration; derive whitelisted log observations; independently hash original/download and selected supporting private files; compare package hash/size with local apt-cache metadata. No host listener, build, device or Git operation performed by the evidence author.",
+    "firstFailure": "The initial client could not use the intended known-hosts file because its path with spaces was not quoted correctly. It failed strict host-key verification before authentication; the primary agent corrected the client invocation for attempt 2.",
+    "notMeasured": [
+      "Android app route or LAN permission",
+      "SSHJ class loading/provider/algorithm selection",
+      "Unknown or changed host-key UI",
+      "Authentication refusal and cancellation",
+      "SFTP write, EXCL collision, replacement or durability",
+      "PTY/resize or terminal renderer",
+      "Direct channels, jump hosts or X11",
+      "Session lifecycle, reconnect or background execution",
+      "Performance or product readiness"
+    ],
+    "primary": "accepted; actual fixture execution, strict trust/authentication outcome, retained first failure, all 11 selected artifact hash/size pairs and package against exact APT metadata checked",
+    "independent": "accepted; all selected artifacts, package metadata, log projections, byte hashes and scope/privacy boundaries checked; no actionable finding"
+  },
+  "privacy": "Only relative evidence references, hashes, public package versions and whitelisted observations are published. Raw logs/configuration, local usernames, endpoint/port, credentials and keys remain ignored private evidence.",
+  "privateArtifacts": [
+    {
+      "path": "qualification/results/private/ssh-probe/host-01/preparation.json",
+      "bytes": 380,
+      "sha256": "9b793c2cc23077469188a243a409944662388a3c300f2370bccc32223d44c283"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-01/config-test.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-01/sshd_config",
+      "bytes": 1245,
+      "sha256": "e1804b15c56c52a97e0b705b67fd6dc591cf87b9b2927bcf9cd9427dd25fe10e"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-01/loopback-result.json",
+      "bytes": 293,
+      "sha256": "f48cf85273dd426b2eba5155b8a5b2fa4da0fc45d84280a595ce043b2ca09af7"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-01/loopback-client.log",
+      "bytes": 2885,
+      "sha256": "35a16774a032af1e6b1e67d700e4aee48e69e78e7ae7bb174a0ebf4223afd075"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-01/loopback-server.log",
+      "bytes": 203,
+      "sha256": "c692aa89f1027c0b3cfe408e1f8c6d3182e8d9b05f7aba7a3d54de21b7f9f895"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-01/loopback-02-result.json",
+      "bytes": 428,
+      "sha256": "f60874c0c3e8aa3df28e787a07c78cd0d38d664696ebaa8a908f9791070f9691"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-01/loopback-02-client.log",
+      "bytes": 5001,
+      "sha256": "64019341151c4bb5f8980d947680915ae3de4648f6f758c45543132286ecced1"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-01/loopback-02-server.log",
+      "bytes": 1145,
+      "sha256": "46a2752589ec3f200536935f5b99000f5d0f1165b22411c1644dcf4f435f57d8"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-01/files/sentinel.txt",
+      "bytes": 28,
+      "sha256": "114d3935955b73a27a64f51412c84f668f2054e96f66ad07114de44682bfc6b6"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-01/downloaded-02-sentinel.txt",
+      "bytes": 28,
+      "sha256": "114d3935955b73a27a64f51412c84f668f2054e96f66ad07114de44682bfc6b6"
+    }
+  ]
+}

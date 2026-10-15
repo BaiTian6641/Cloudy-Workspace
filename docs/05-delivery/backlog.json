@@ -114,7 +114,7 @@
       "id": "P0-S2",
       "phase": "P0",
       "title": "Platform API, lifecycle, and capability probes",
-      "status": "in-progress",
+      "status": "done",
       "effortDays": {
         "low": 1,
         "high": 2
@@ -150,7 +150,10 @@
         "G78",
         "G79",
         "G80",
-        "G81"
+        "G81",
+        "G72",
+        "G98",
+        "G99"
       ],
       "acceptanceCases": [
         "Q-P01",
@@ -162,7 +165,7 @@
       "id": "P0-S3",
       "phase": "P0",
       "title": "SSH engine and terminal renderer qualification",
-      "status": "planned",
+      "status": "in-progress",
       "effortDays": {
         "low": 2,
         "high": 4
@@ -1848,15 +1851,29 @@
     {
       "id": "CAP-PLATFORM",
       "title": "Desktop Android windows and operation lifetimes",
-      "outcome": "pending",
+      "outcome": "experiment",
       "decidingStages": [
         "P0-S2"
       ],
       "ownerRole": "Android/platform developer",
       "supportedScope": null,
-      "evidencePaths": [],
-      "nextExperiment": null,
-      "decisionNote": null
+      "evidencePaths": [
+        "qualification/results/P0-S1/2026-10-15-device-probe.md",
+        "qualification/results/P0-S2/2026-10-15-window-probe.md",
+        "qualification/results/P0-S2/2026-10-15-process-restoration.md",
+        "qualification/results/P0-S2/2026-10-15-font-scale.md",
+        "qualification/results/P0-S2/2026-10-15-engagement-probe.md",
+        "qualification/results/P0-S2/2026-10-15-transfer-preflight.md",
+        "qualification/results/P0-S2/2026-10-15-transfer-lifecycle.md"
+      ],
+      "nextExperiment": {
+        "hypothesis": "A reviewed native SSH engine can own an actual ordinary-SSH session independently of renderer and Activity generation on the selected Linux host; any hidden-session lifetime can be evaluated under a separately justified service classification without unrelated permissions or automatic input replay.",
+        "ownerRole": "Android/platform developer with Terminal/Android developer",
+        "effortCapDays": 2,
+        "stopCondition": "Stop the candidate at an unsupported API/type/prerequisite, private-API or unrelated-permission requirement, lost ownership, unexpected authentication/input replay, unbounded resources or two engineer-days. Preserve failures and record blocked/inconclusive scope; no silent cap extension or relabelled service.",
+        "expectedEvidence": "Exact source/APK/engine/server/build/route and reviewed compile/lint/tests; real SSH trust/authentication and independent SFTP hash round trip; visible/recreation/two-window owner correlation; justified FGS declaration/prerequisites plus actual notification, hidden/return, stop and process-loss observations or an explicit classification blocker; no input replay; separate distribution assessment. Retain required physical keyboard, trackpad/mouse, native IME/preedit/exact committed bytes, focus-loss modifier/pointer release, keyboard navigation/accessibility and remaining Q-P02 fullscreen/external-display cases. ADB injection and engagement hints do not satisfy physical cases. Full requirements remain pending when unavailable."
+      },
+      "decisionNote": "docs/03-platform/googlebook/p0-s2-platform-decision.md: P0-S2 investigation closes with partial Q-P01/Q-P02 and accepted bounded window/engagement/finite HTTPS evidence; continuous SSH/desktop FGS, physical input, remaining geometry and operation-specific failure cases stay unresolved. No supported scope or product readiness. P0-S3 investigation may proceed; P1-S1/P1-S2/P1-S3 remain planned."
     },
     {
       "id": "CAP-SSH",

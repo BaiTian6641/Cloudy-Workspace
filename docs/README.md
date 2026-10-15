@@ -17,11 +17,12 @@ The numbered folders describe one development program. Read project decisions be
 | Decisions | [ADR index](adr/README.md) |
 | Intake | [Original plan and provenance](intake/README.md) |
 
-The [desktop workflow design](04-design/desktop-workflows.md) expands the visual system for S13–S17; the offline specimen remains the initial subset. Cross-links are repository-relative for GitHub/local use. P0-S1 qualification setup is **complete**, with a real diagnostic APK, device run and explicit inventory gaps; P0-S2 is in progress. Console, Desktop and host implementation remain planned. See the [setup closeout](../qualification/results/P0-S1/2026-10-15-setup-closeout.md).
+The [desktop workflow design](04-design/desktop-workflows.md) expands the visual system for S13–S17; the offline specimen remains the initial subset. Cross-links are repository-relative for GitHub/local use. P0-S1 qualification setup is **complete**, with a real diagnostic APK, device run and explicit inventory gaps; P0-S2 investigation is complete with CAP-PLATFORM in a bounded experiment; P0-S3 SSH/terminal qualification is in progress. Console, Desktop and host implementation remain planned. See the [setup closeout](../qualification/results/P0-S1/2026-10-15-setup-closeout.md).
 
 ## Active qualification references
 
 - [P0 diagnostic toolchain](03-platform/googlebook/probe-toolchain.md) and [real device-baseline probe](../qualification/probes/device-baseline/README.md).
-- [P0-S2 operation lifetimes](03-platform/googlebook/p0-s2-operation-lifetimes.md): researched SSH, transfer, USB and remote-session policies; real service/timeout qualification remains pending.
+- [P0-S2 platform decision](03-platform/googlebook/p0-s2-platform-decision.md) and [operation lifetimes](03-platform/googlebook/p0-s2-operation-lifetimes.md): accepted finite UIDT/window evidence, unresolved continuous-session classification and required physical-input/backend cases.
+- [P0-S3 SSH/SFTP engine brief](03-platform/googlebook/p0-s3-ssh-engine-qualification.md) and [real host preflight](../qualification/results/P0-S3/2026-10-15-ssh-host-preflight.md).
 - [Primary Linux host prerequisites](03-platform/linux-primary-host-qualification.md).
 - [Sunshine release/master source divergence](07-reference/2026-10-15-sunshine-source-drift.md).
