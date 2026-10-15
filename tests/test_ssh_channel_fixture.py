@@ -27,10 +27,10 @@ SPEC = importlib.util.spec_from_file_location("ssh_channel_fixture", SCRIPT)
 FIXTURE = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(FIXTURE)
 
-# Only this test launcher shortens deadlines or injects storage faults. The
+# Only this test launcher shortens deadlines, synchronizes or injects faults. The
 # production CLI accepts no such arguments or environment overrides.
 TEST_LAUNCHER = """
-import os, runpy, sys
+import os, runpy, signal, sys
 m = runpy.run_path(sys.argv[1])
 if sys.argv[5] == 'fail-fsync':
     def fail(fd):
@@ -46,6 +46,28 @@ elif sys.argv[5] == 'fail-event-fsync':
             raise OSError('secret-event-failure-must-not-be-logged')
         original(fd)
     m['os'].fsync = fail_event
+elif sys.argv[5] == 'signal-ready-fsync':
+    original = m['os'].fsync
+    calls = 0
+    def interrupt_ready(fd):
+        global calls
+        calls += 1
+        if calls == 4:
+            os.kill(os.getpid(), signal.SIGHUP)
+        original(fd)
+    m['os'].fsync = interrupt_ready
+if int(sys.argv[6]) >= 0:
+    namespace = m['run'].__globals__
+    original_read = namespace['_read_token']
+    announced = False
+    def announce_input_wait(*args, **kwargs):
+        global announced
+        if not announced:
+            os.write(int(sys.argv[6]), b'R')
+            os.close(int(sys.argv[6]))
+            announced = True
+        return original_read(*args, **kwargs)
+    namespace['_read_token'] = announce_input_wait
 sys.exit(m['run'](os.environ.get('SSH_ORIGINAL_COMMAND', ''), sys.argv[2],
                  step_seconds=float(sys.argv[3]), overall_seconds=float(sys.argv[4])))
 """
@@ -56,9 +78,10 @@ def resize(descriptor, columns, rows):
 
 
 class PtyChild:
-    def __init__(self, process, master):
+    def __init__(self, process, master, input_wait=None):
         self.process = process
         self.master = master
+        self.input_wait = input_wait
         self.pending = bytearray()
 
     def send(self, data):
@@ -95,6 +118,20 @@ class PtyChild:
             os.close(self.master)
             self.master = None
 
+    def await_input_wait(self, seconds=3):
+        if self.input_wait is None:
+            raise AssertionError("test input-wait pipe is not open")
+        if not select.select([self.input_wait], [], [], seconds)[0]:
+            raise AssertionError("fixture did not reach input wait before test deadline")
+        if os.read(self.input_wait, 1) != b"R":
+            raise AssertionError("fixture exited before announcing input wait")
+        self.close_input_wait()
+
+    def close_input_wait(self):
+        if self.input_wait is not None:
+            os.close(self.input_wait)
+            self.input_wait = None
+
 
 class SshChannelFixtureTests(unittest.TestCase):
     def setUp(self):
@@ -103,9 +140,9 @@ class SshChannelFixtureTests(unittest.TestCase):
         self.audit_dir = Path(self.temp.name) / "audit"
         self.audit_dir.mkdir(mode=0o700)
 
-    def command(self, *, step=2, overall=4, fault="none"):
+    def command(self, *, step=2, overall=4, fault="none", input_wait=-1):
         return [sys.executable, "-I", "-c", TEST_LAUNCHER, str(SCRIPT), str(self.audit_dir),
-                str(step), str(overall), fault]
+                str(step), str(overall), fault, str(input_wait)]
 
     def environment(self, command):
         return {"PATH": os.defpath, "SSH_ORIGINAL_COMMAND": command,
@@ -132,11 +169,15 @@ class SshChannelFixtureTests(unittest.TestCase):
         return records
 
     @contextlib.contextmanager
-    def terminal(self, *, command="", columns=80, rows=24, change=None, step=2, overall=4):
+    def terminal(self, *, command="", columns=80, rows=24, change=None, step=2, overall=4,
+                 fault="none", synchronize_input=False):
         master, slave = pty.openpty()
         process = None
         child = None
+        input_read = input_write = None
         try:
+            if synchronize_input:
+                input_read, input_write = os.pipe()
             attrs = termios.tcgetattr(slave)
             attrs[3] = (attrs[3] | termios.ICANON) & ~(termios.ECHO | termios.ECHONL)
             attrs[1] &= ~termios.ONLCR
@@ -145,20 +186,30 @@ class SshChannelFixtureTests(unittest.TestCase):
                 change(attrs)
             termios.tcsetattr(slave, termios.TCSANOW, attrs)
             resize(slave, columns, rows)
-            process = subprocess.Popen(self.command(step=step, overall=overall),
+            process = subprocess.Popen(self.command(step=step, overall=overall, fault=fault,
+                                                   input_wait=-1 if input_write is None else input_write),
                                        env=self.environment(command), stdin=slave, stdout=slave,
-                                       stderr=slave, start_new_session=True, close_fds=True)
+                                       stderr=slave, start_new_session=True, close_fds=True,
+                                       pass_fds=() if input_write is None else (input_write,))
+            if input_write is not None:
+                os.close(input_write)
+                input_write = None
             os.close(slave)
             slave = None
-            child = PtyChild(process, master)
+            child = PtyChild(process, master, input_read)
+            input_read = None
             yield child
         finally:
             if child is not None:
                 child.close_master()
+                child.close_input_wait()
             else:
                 os.close(master)
             if slave is not None:
                 os.close(slave)
+            for descriptor in (input_read, input_write):
+                if descriptor is not None:
+                    os.close(descriptor)
             if process is not None:
                 if process.poll() is None:
                     process.terminate()
@@ -317,8 +368,11 @@ class SshChannelFixtureTests(unittest.TestCase):
                 f"master hangup: observedExitCode={exit_code}; finalAudit={outcome!r}"[:512],
             )
         prior_run_ids = {rows[0]["runId"] for rows in self.audits()}
-        with self.terminal() as child:
+        with self.terminal(synchronize_input=True) as child:
             self.ready(child)
+            # READY is written before its audit fsync. Signal only after that
+            # audit returned; otherwise an interrupted audit must fail closed.
+            child.await_input_wait()
             child.process.send_signal(signal.SIGHUP)
             exit_code = child.process.wait(timeout=2)
             events = [rows for rows in self.audits() if rows[0]["runId"] not in prior_run_ids]
@@ -330,6 +384,18 @@ class SshChannelFixtureTests(unittest.TestCase):
             )
         self.assertEqual({events[-1]["reason"] for events in self.audits()},
                          {"terminal-hangup", "signal-hup"})
+
+    def test_signal_during_ready_audit_fsync_cannot_claim_clean_signal_exit(self):
+        # fsync #1 binds the directory entry; #2/#3 sync started/terminal.
+        # #4 interrupts ready-written after bytes exist but before durability.
+        with self.terminal(fault="signal-ready-fsync") as child:
+            self.ready(child)
+            child.read_exact(b"CLOUDY_FIXTURE_ERROR audit-io-failure\n")
+            self.assertEqual(child.process.wait(timeout=2), 74)
+        events = self.audits()[0]
+        self.assertEqual([event["event"] for event in events],
+                         ["started", "terminal-observed", "ready-written"])
+        self.assertFalse(any(event["event"] == "finished" for event in events))
 
     def test_private_directory_symlinks_and_nonprivate_modes_are_rejected(self):
         self.audit_dir.chmod(0o755)

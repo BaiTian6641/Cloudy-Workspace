@@ -1,0 +1,3148 @@
+{
+  "schemaVersion": 1,
+  "runId": "P0-S3-ssh-pty-probe-2026-10-15",
+  "stage": "P0-S3",
+  "stageStatus": "in-progress",
+  "reviewStatus": "Accepted by primary and independent evidence reviewers on 2026-10-15; no remaining actionable finding",
+  "verdict": "Actual Android finite exec/PTY completion through active observer changes, injected process-loss recovery without observed replay, and terminal cancellation; no capability promotion",
+  "scope": {
+    "executor": "primary agent",
+    "evidenceAuthor": "read-only artifact/projection review",
+    "androidSshjUsed": true,
+    "physicalInputTested": false,
+    "capabilityGatePromoted": false,
+    "customHostAgentUsed": false,
+    "arbitraryShellInputAccepted": false,
+    "foregroundServiceAdded": false,
+    "route": "Existing default app socket route to the fixture; no underlying transport, VPN bypass, latency or throughput qualification",
+    "clocks": "Host command/capture UTC, host per-channel elapsed time and Android UTC/elapsedRealtime are separate; no cross-clock latency claim"
+  },
+  "application": {
+    "packageName": "dev.cloudy.qualification.baseline",
+    "versionName": "0.6.0",
+    "versionCode": 8,
+    "buildRef": "49607be8-a053-4f7f-8d22-3764b7e63136",
+    "sourceCommit": "af9deaed594fe53fbe52c4825a2e3e96a0e8fd83",
+    "deploymentSource": "qualification/results/private/ssh-probe/device-02/deploy-060-deployment.json",
+    "deployedAtHostUtc": "2026-10-15T11:00:20.482257+00:00",
+    "sourcePushBeforeInstall": "Primary operator verified the pushed source before installation",
+    "apk": {
+      "path": "qualification/results/private/ssh-probe/device-02/tested-0.6.0-af9deae.apk",
+      "bytes": 15827911,
+      "sha256": "4f673be2ca5c0f2f4dcf9659645c827885f3aa4ee0952405d64d5f4c3d1a4f40"
+    },
+    "install": {
+      "source": "qualification/results/private/ssh-probe/device-02/deploy-060-install-command.json",
+      "atHostUtc": "2026-10-15T11:00:20.449424+00:00",
+      "exitCode": 0
+    },
+    "launch": {
+      "source": "qualification/results/private/ssh-probe/device-02/deploy-060-launch-command.json",
+      "atHostUtc": "2026-10-15T11:00:20.480400+00:00",
+      "exitCode": 0
+    },
+    "sourceReview": "docs/06-validation/2026-10-15-ssh-pty-probe-review.md",
+    "packageAudit": "docs/06-validation/2026-10-15-ssh-pty-probe-package.json",
+    "journalSchema": 2,
+    "jvmTests": {
+      "tests": 134,
+      "suites": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "repositoryChecks": "Primary operator reported 41 local repository tests and required local checks passed; separate from device evidence and hosted CI",
+    "hostedCi": {
+      "sourceCommit": "af9deaed594fe53fbe52c4825a2e3e96a0e8fd83",
+      "android": {
+        "runId": 38724229618,
+        "outcome": "passed"
+      },
+      "repository": {
+        "runId": 38724229346,
+        "outcome": "failed",
+        "boundary": "Repository step failed; the later diagnostic run identified an exit mismatch in the combined PTY hangup/SIGHUP test. No proven underlying cause or completed correction is claimed."
+      },
+      "diagnostic": {
+        "sourceCommitPrefix": "f0cc935",
+        "runId": 38725272238,
+        "outcome": "failed",
+        "fixtureAndTestSemanticsChanged": false,
+        "change": "Added failure annotations",
+        "observedFailure": "Combined PTY hangup/SIGHUP test returned exit 74 instead of expected 129; the explicit-SIGHUP assertion failed",
+        "boundary": "Diagnostic source is separate from tested af9deae Android/fixture artifacts; underlying cause remains under investigation"
+      }
+    }
+  },
+  "device": {
+    "freshIdentitySource": "qualification/results/private/ssh-probe/device-02/final-runtime-inspection.json",
+    "atHostUtc": "2026-10-15T11:04:22.009743+00:00",
+    "priorFullIdentityReference": "qualification/results/P0-S3/2026-10-15-ssh-sftp-probe-manifest.json",
+    "build": {
+      "manufacturer": "HP",
+      "model": "HP Googlebook 14",
+      "release": "17",
+      "sdkInt": 37,
+      "buildId": "CL3B.260622.276.R2",
+      "incremental": "16560795",
+      "securityPatch": "2026-09-01",
+      "supportedAbis": [
+        "arm64-v8a"
+      ]
+    },
+    "freshBuildProperties": {
+      "ro.product.model": "HP Googlebook 14",
+      "ro.build.version.release": "17",
+      "ro.build.version.sdk": "37",
+      "ro.product.cpu.abi": "arm64-v8a",
+      "ro.build.id": "CL3B.260622.276.R2",
+      "ro.build.version.incremental": "16560795",
+      "ro.build.version.security_patch": "2026-09-01"
+    },
+    "installedPackageVersionLines": [
+      "versionCode=8 minSdk=35 targetSdk=37",
+      "versionName=0.6.0"
+    ],
+    "uniqueIdentifiersPublished": false
+  },
+  "backend": {
+    "identityReference": "qualification/results/P0-S3/2026-10-15-ssh-sftp-probe-manifest.json",
+    "system": "Linux",
+    "kernelRelease": "7.0.0-38-generic",
+    "architecture": "x86_64",
+    "osRelease": "Ubuntu 26.04.1 LTS",
+    "desktop": "KDE",
+    "sessionType": "wayland",
+    "serverVersion": "OpenSSH_10.2p1 Ubuntu-2ubuntu3.8, OpenSSL 3.5.5 27 Jan 2026",
+    "fixtureSource": {
+      "path": "qualification/results/private/ssh-probe/host-03/tested-fixture-af9deae.py",
+      "bytes": 13666,
+      "sha256": "e771898736e4bc9ef99a866ac4dea2c2fe3a5eec8a906fcd7a2c583c0019436f",
+      "repositoryPath": "tools/ssh_channel_fixture.py",
+      "sourceCommit": "af9deaed594fe53fbe52c4825a2e3e96a0e8fd83"
+    },
+    "restriction": "Separate forced fixed dispatcher with restrict,pty; passwords, arbitrary commands, forwarding and user RC disabled. Same non-root fixture account; no chroot/general account isolation claim.",
+    "historicalInternalSftpFixtureModified": false,
+    "systemServiceChanged": false,
+    "deviceServerLog": {
+      "source": "qualification/results/private/ssh-probe/host-03/device-01-server.log",
+      "acceptedPublickeys": 3,
+      "sessionStarts": 6
+    },
+    "auditBoundary": "Audit terminal intendedExitCode is a host helper record, not an Android Shell exit-status getter or independent process-exit proof"
+  },
+  "migration": {
+    "verificationSource": "qualification/results/private/ssh-probe/device-02/migration-verification.json",
+    "passed": true,
+    "legacyAttempts": 5,
+    "trustUnchanged": true,
+    "allLegacyFieldsUnchanged": true,
+    "originalSource": "qualification/results/private/ssh-probe/device-02/pre-upgrade-050-journal.json",
+    "migratedSource": "qualification/results/private/ssh-probe/device-02/migrated-idle-journal.json",
+    "allFiveLegacyRowsStillEqualAtFinal": true,
+    "onlyAddedLegacyFields": {
+      "operation": "sftp",
+      "provenance": "external-legacy",
+      "buildIdentity": null
+    },
+    "comparison": "Exact decoded original field/event/detail equality and trust equality; no cross-format byte-equality claim",
+    "legacyAttemptIds": [
+      "e734d60e-8edc-49c2-bb3a-59ca087c0d46",
+      "f4adff9e-128e-4f0f-9389-2bad58ac8685",
+      "de9d7dec-abd5-4858-9b4d-64454b5bf033",
+      "882dd0d2-a9fe-47b1-b041-8619147e98c2",
+      "57e4e169-a051-4193-a1bd-6e353e6f9197"
+    ]
+  },
+  "attempts": [
+    {
+      "attempt": 6,
+      "id": "6ab6cf81-91c0-48c3-a37d-973db08565a5",
+      "originProcessId": "753ba776-90d8-487e-8785-5a508c586d7a",
+      "operation": "exec-pty",
+      "provenance": "recorded-build",
+      "buildIdentity": {
+        "versionName": "0.6.0",
+        "versionCode": 8,
+        "buildRef": "49607be8-a053-4f7f-8d22-3764b7e63136"
+      },
+      "status": "completed",
+      "reason": null,
+      "authenticated": true,
+      "details": {
+        "hostVerificationCount": "1",
+        "kex": "ecdh-sha2-nistp256",
+        "hostSignature": "ecdsa-sha2-nistp256",
+        "cipherC2S": "aes128-gcm@openssh.com",
+        "cipherS2C": "aes128-gcm@openssh.com",
+        "macC2S": "hmac-sha2-256",
+        "macS2C": "hmac-sha2-256",
+        "compressionC2S": "none",
+        "compressionS2C": "none",
+        "execStdoutBytes": "19",
+        "execStdoutSha256": "66a606a71a67baef12910e3efd5c0ad4bcdeabecdc9dae790bf0f505f811438d",
+        "execStderrBytes": "19",
+        "execStderrSha256": "4753e7ad67b9d485cc6b1e1cdf7c36d2e6d673c1ce894348c96f4dc41147238b",
+        "execExitStatus": "17",
+        "ptyStdoutBytes": "62",
+        "ptyStdoutSha256": "2a1d94e913eac24e63ee3455706198abc39eb51033b4e5a7eb659a94771d21f1",
+        "ptyInitialCols": "80",
+        "ptyInitialRows": "24",
+        "ptyInputBytes": "12",
+        "ptyResizedCols": "132",
+        "ptyResizedRows": "43",
+        "ptyStderrBytes": "0",
+        "ptyStderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "ptyCompletionMarker": "CLOUDY_PTY_DONE_V1"
+      },
+      "events": [
+        {
+          "status": "running",
+          "reason": null,
+          "deviceUtc": "2026-10-15T11:01:09.205691Z",
+          "elapsedRealtimeMs": 60306010
+        },
+        {
+          "status": "running",
+          "reason": "connecting",
+          "deviceUtc": "2026-10-15T11:01:09.242546Z",
+          "elapsedRealtimeMs": 60306047
+        },
+        {
+          "status": "running",
+          "reason": "host-key-verified",
+          "deviceUtc": "2026-10-15T11:01:09.381394Z",
+          "elapsedRealtimeMs": 60306186
+        },
+        {
+          "status": "running",
+          "reason": "authenticated",
+          "deviceUtc": "2026-10-15T11:01:09.500682Z",
+          "elapsedRealtimeMs": 60306305
+        },
+        {
+          "status": "running",
+          "reason": "exec-requested",
+          "deviceUtc": "2026-10-15T11:01:09.516452Z",
+          "elapsedRealtimeMs": 60306321
+        },
+        {
+          "status": "running",
+          "reason": "exec-verified",
+          "deviceUtc": "2026-10-15T11:01:09.602583Z",
+          "elapsedRealtimeMs": 60306407
+        },
+        {
+          "status": "running",
+          "reason": "pty-requested",
+          "deviceUtc": "2026-10-15T11:01:09.617100Z",
+          "elapsedRealtimeMs": 60306421
+        },
+        {
+          "status": "running",
+          "reason": "pty-awaiting-resize",
+          "deviceUtc": "2026-10-15T11:01:09.750784Z",
+          "elapsedRealtimeMs": 60306555
+        },
+        {
+          "status": "running",
+          "reason": "pty-resize-verified",
+          "deviceUtc": "2026-10-15T11:02:02.091085Z",
+          "elapsedRealtimeMs": 60358895
+        },
+        {
+          "status": "running",
+          "reason": "pty-awaiting-finish",
+          "deviceUtc": "2026-10-15T11:02:02.107319Z",
+          "elapsedRealtimeMs": 60358911
+        },
+        {
+          "status": "running",
+          "reason": "pty-verified",
+          "deviceUtc": "2026-10-15T11:02:11.971542Z",
+          "elapsedRealtimeMs": 60368776
+        },
+        {
+          "status": "completed",
+          "reason": null,
+          "deviceUtc": "2026-10-15T11:02:11.991569Z",
+          "elapsedRealtimeMs": 60368796
+        }
+      ],
+      "droppedEvents": 0,
+      "observedKeyLabel": "fixture-original",
+      "sameExecFixtureConfiguration": true
+    },
+    {
+      "attempt": 7,
+      "id": "b1c9796e-ffc2-4b82-8337-68e7a8569716",
+      "originProcessId": "753ba776-90d8-487e-8785-5a508c586d7a",
+      "operation": "exec-pty",
+      "provenance": "recorded-build",
+      "buildIdentity": {
+        "versionName": "0.6.0",
+        "versionCode": 8,
+        "buildRef": "49607be8-a053-4f7f-8d22-3764b7e63136"
+      },
+      "status": "interrupted",
+      "reason": "new-process-unfinished-attempt",
+      "authenticated": true,
+      "details": {
+        "hostVerificationCount": "1",
+        "kex": "ecdh-sha2-nistp256",
+        "hostSignature": "ecdsa-sha2-nistp256",
+        "cipherC2S": "aes128-gcm@openssh.com",
+        "cipherS2C": "aes128-gcm@openssh.com",
+        "macC2S": "hmac-sha2-256",
+        "macS2C": "hmac-sha2-256",
+        "compressionC2S": "none",
+        "compressionS2C": "none",
+        "execStdoutBytes": "19",
+        "execStdoutSha256": "66a606a71a67baef12910e3efd5c0ad4bcdeabecdc9dae790bf0f505f811438d",
+        "execStderrBytes": "19",
+        "execStderrSha256": "4753e7ad67b9d485cc6b1e1cdf7c36d2e6d673c1ce894348c96f4dc41147238b",
+        "execExitStatus": "17",
+        "ptyStdoutBytes": "31",
+        "ptyStdoutSha256": "bc49cb5345ef54c96831c3c56b8fcc635352d5a26c15ae61b9754698f75da248",
+        "ptyInitialCols": "80",
+        "ptyInitialRows": "24",
+        "ptyInputBytes": "0"
+      },
+      "events": [
+        {
+          "status": "running",
+          "reason": null,
+          "deviceUtc": "2026-10-15T11:02:23.373202Z",
+          "elapsedRealtimeMs": 60380177
+        },
+        {
+          "status": "running",
+          "reason": "connecting",
+          "deviceUtc": "2026-10-15T11:02:23.393378Z",
+          "elapsedRealtimeMs": 60380198
+        },
+        {
+          "status": "running",
+          "reason": "host-key-verified",
+          "deviceUtc": "2026-10-15T11:02:23.682855Z",
+          "elapsedRealtimeMs": 60380487
+        },
+        {
+          "status": "running",
+          "reason": "authenticated",
+          "deviceUtc": "2026-10-15T11:02:23.805561Z",
+          "elapsedRealtimeMs": 60380610
+        },
+        {
+          "status": "running",
+          "reason": "exec-requested",
+          "deviceUtc": "2026-10-15T11:02:23.818097Z",
+          "elapsedRealtimeMs": 60380622
+        },
+        {
+          "status": "running",
+          "reason": "exec-verified",
+          "deviceUtc": "2026-10-15T11:02:23.903746Z",
+          "elapsedRealtimeMs": 60380708
+        },
+        {
+          "status": "running",
+          "reason": "pty-requested",
+          "deviceUtc": "2026-10-15T11:02:23.919857Z",
+          "elapsedRealtimeMs": 60380724
+        },
+        {
+          "status": "running",
+          "reason": "pty-awaiting-resize",
+          "deviceUtc": "2026-10-15T11:02:24.062377Z",
+          "elapsedRealtimeMs": 60380867
+        },
+        {
+          "status": "interrupted",
+          "reason": "new-process-unfinished-attempt",
+          "deviceUtc": "2026-10-15T11:03:06.288969Z",
+          "elapsedRealtimeMs": 60423093
+        }
+      ],
+      "droppedEvents": 0,
+      "observedKeyLabel": "fixture-original",
+      "sameExecFixtureConfiguration": true
+    },
+    {
+      "attempt": 8,
+      "id": "ef14116c-e3e5-4812-ad6d-e435a4ea4273",
+      "originProcessId": "c980803d-85ff-47dd-aa10-29425aebd96f",
+      "operation": "exec-pty",
+      "provenance": "recorded-build",
+      "buildIdentity": {
+        "versionName": "0.6.0",
+        "versionCode": 8,
+        "buildRef": "49607be8-a053-4f7f-8d22-3764b7e63136"
+      },
+      "status": "cancelled",
+      "reason": "cancelled",
+      "authenticated": true,
+      "details": {
+        "hostVerificationCount": "1",
+        "kex": "ecdh-sha2-nistp256",
+        "hostSignature": "ecdsa-sha2-nistp256",
+        "cipherC2S": "aes128-gcm@openssh.com",
+        "cipherS2C": "aes128-gcm@openssh.com",
+        "macC2S": "hmac-sha2-256",
+        "macS2C": "hmac-sha2-256",
+        "compressionC2S": "none",
+        "compressionS2C": "none",
+        "execStdoutBytes": "19",
+        "execStdoutSha256": "66a606a71a67baef12910e3efd5c0ad4bcdeabecdc9dae790bf0f505f811438d",
+        "execStderrBytes": "19",
+        "execStderrSha256": "4753e7ad67b9d485cc6b1e1cdf7c36d2e6d673c1ce894348c96f4dc41147238b",
+        "execExitStatus": "17",
+        "ptyStdoutBytes": "31",
+        "ptyStdoutSha256": "bc49cb5345ef54c96831c3c56b8fcc635352d5a26c15ae61b9754698f75da248",
+        "ptyInitialCols": "80",
+        "ptyInitialRows": "24",
+        "ptyInputBytes": "0"
+      },
+      "events": [
+        {
+          "status": "running",
+          "reason": null,
+          "deviceUtc": "2026-10-15T11:03:14.548647Z",
+          "elapsedRealtimeMs": 60431353
+        },
+        {
+          "status": "running",
+          "reason": "connecting",
+          "deviceUtc": "2026-10-15T11:03:14.582595Z",
+          "elapsedRealtimeMs": 60431387
+        },
+        {
+          "status": "running",
+          "reason": "host-key-verified",
+          "deviceUtc": "2026-10-15T11:03:14.737140Z",
+          "elapsedRealtimeMs": 60431541
+        },
+        {
+          "status": "running",
+          "reason": "authenticated",
+          "deviceUtc": "2026-10-15T11:03:14.864286Z",
+          "elapsedRealtimeMs": 60431668
+        },
+        {
+          "status": "running",
+          "reason": "exec-requested",
+          "deviceUtc": "2026-10-15T11:03:14.884642Z",
+          "elapsedRealtimeMs": 60431689
+        },
+        {
+          "status": "running",
+          "reason": "exec-verified",
+          "deviceUtc": "2026-10-15T11:03:14.985462Z",
+          "elapsedRealtimeMs": 60431790
+        },
+        {
+          "status": "running",
+          "reason": "pty-requested",
+          "deviceUtc": "2026-10-15T11:03:15.001599Z",
+          "elapsedRealtimeMs": 60431806
+        },
+        {
+          "status": "running",
+          "reason": "pty-awaiting-resize",
+          "deviceUtc": "2026-10-15T11:03:15.153683Z",
+          "elapsedRealtimeMs": 60431958
+        },
+        {
+          "status": "cancelled",
+          "reason": "cancelled",
+          "deviceUtc": "2026-10-15T11:03:23.840434Z",
+          "elapsedRealtimeMs": 60440645
+        }
+      ],
+      "droppedEvents": 0,
+      "observedKeyLabel": "fixture-original",
+      "sameExecFixtureConfiguration": true
+    }
+  ],
+  "journalCheckpoints": [
+    {
+      "source": "qualification/results/private/ssh-probe/device-02/cancel-waiting-journal.json",
+      "schemaVersion": 2,
+      "probeVersion": "0.6.0",
+      "revision": 9,
+      "processInstanceId": "c980803d-85ff-47dd-aa10-29425aebd96f",
+      "snapshotAtDeviceUtc": "2026-10-15T11:03:15.154967Z",
+      "attemptCount": 8,
+      "trustedHostCount": 1,
+      "trustEqualsPreUpgrade": true,
+      "latest": {
+        "id": "ef14116c-e3e5-4812-ad6d-e435a4ea4273",
+        "originProcessId": "c980803d-85ff-47dd-aa10-29425aebd96f",
+        "status": "running",
+        "reason": "pty-awaiting-resize",
+        "authenticated": true,
+        "details": {
+          "hostVerificationCount": "1",
+          "kex": "ecdh-sha2-nistp256",
+          "hostSignature": "ecdsa-sha2-nistp256",
+          "cipherC2S": "aes128-gcm@openssh.com",
+          "cipherS2C": "aes128-gcm@openssh.com",
+          "macC2S": "hmac-sha2-256",
+          "macS2C": "hmac-sha2-256",
+          "compressionC2S": "none",
+          "compressionS2C": "none",
+          "execStdoutBytes": "19",
+          "execStdoutSha256": "66a606a71a67baef12910e3efd5c0ad4bcdeabecdc9dae790bf0f505f811438d",
+          "execStderrBytes": "19",
+          "execStderrSha256": "4753e7ad67b9d485cc6b1e1cdf7c36d2e6d673c1ce894348c96f4dc41147238b",
+          "execExitStatus": "17",
+          "ptyStdoutBytes": "31",
+          "ptyStdoutSha256": "bc49cb5345ef54c96831c3c56b8fcc635352d5a26c15ae61b9754698f75da248",
+          "ptyInitialCols": "80",
+          "ptyInitialRows": "24",
+          "ptyInputBytes": "0"
+        },
+        "droppedEvents": 0
+      },
+      "latestEventCount": 8,
+      "providerNamesAtRuntimeCreation": [
+        "AndroidNSSP",
+        "AndroidOpenSSL",
+        "CertPathProvider",
+        "AndroidKeyStoreBCWorkaround",
+        "BC",
+        "HarmonyJSSE",
+        "AndroidKeyStore"
+      ],
+      "providerNamesNow": [
+        "AndroidNSSP",
+        "AndroidOpenSSL",
+        "CertPathProvider",
+        "AndroidKeyStoreBCWorkaround",
+        "BC",
+        "HarmonyJSSE",
+        "AndroidKeyStore"
+      ],
+      "providerOrderUnchanged": true
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/device-02/cancelled-journal.json",
+      "schemaVersion": 2,
+      "probeVersion": "0.6.0",
+      "revision": 10,
+      "processInstanceId": "c980803d-85ff-47dd-aa10-29425aebd96f",
+      "snapshotAtDeviceUtc": "2026-10-15T11:03:23.841256Z",
+      "attemptCount": 8,
+      "trustedHostCount": 1,
+      "trustEqualsPreUpgrade": true,
+      "latest": {
+        "id": "ef14116c-e3e5-4812-ad6d-e435a4ea4273",
+        "originProcessId": "c980803d-85ff-47dd-aa10-29425aebd96f",
+        "status": "cancelled",
+        "reason": "cancelled",
+        "authenticated": true,
+        "details": {
+          "hostVerificationCount": "1",
+          "kex": "ecdh-sha2-nistp256",
+          "hostSignature": "ecdsa-sha2-nistp256",
+          "cipherC2S": "aes128-gcm@openssh.com",
+          "cipherS2C": "aes128-gcm@openssh.com",
+          "macC2S": "hmac-sha2-256",
+          "macS2C": "hmac-sha2-256",
+          "compressionC2S": "none",
+          "compressionS2C": "none",
+          "execStdoutBytes": "19",
+          "execStdoutSha256": "66a606a71a67baef12910e3efd5c0ad4bcdeabecdc9dae790bf0f505f811438d",
+          "execStderrBytes": "19",
+          "execStderrSha256": "4753e7ad67b9d485cc6b1e1cdf7c36d2e6d673c1ce894348c96f4dc41147238b",
+          "execExitStatus": "17",
+          "ptyStdoutBytes": "31",
+          "ptyStdoutSha256": "bc49cb5345ef54c96831c3c56b8fcc635352d5a26c15ae61b9754698f75da248",
+          "ptyInitialCols": "80",
+          "ptyInitialRows": "24",
+          "ptyInputBytes": "0"
+        },
+        "droppedEvents": 0
+      },
+      "latestEventCount": 9,
+      "providerNamesAtRuntimeCreation": [
+        "AndroidNSSP",
+        "AndroidOpenSSL",
+        "CertPathProvider",
+        "AndroidKeyStoreBCWorkaround",
+        "BC",
+        "HarmonyJSSE",
+        "AndroidKeyStore"
+      ],
+      "providerNamesNow": [
+        "AndroidNSSP",
+        "AndroidOpenSSL",
+        "CertPathProvider",
+        "AndroidKeyStoreBCWorkaround",
+        "BC",
+        "HarmonyJSSE",
+        "AndroidKeyStore"
+      ],
+      "providerOrderUnchanged": true
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/device-02/final-cleanup-journal.json",
+      "schemaVersion": 2,
+      "probeVersion": "0.6.0",
+      "revision": 10,
+      "processInstanceId": "c980803d-85ff-47dd-aa10-29425aebd96f",
+      "snapshotAtDeviceUtc": "2026-10-15T11:03:23.841256Z",
+      "attemptCount": 8,
+      "trustedHostCount": 1,
+      "trustEqualsPreUpgrade": true,
+      "latest": {
+        "id": "ef14116c-e3e5-4812-ad6d-e435a4ea4273",
+        "originProcessId": "c980803d-85ff-47dd-aa10-29425aebd96f",
+        "status": "cancelled",
+        "reason": "cancelled",
+        "authenticated": true,
+        "details": {
+          "hostVerificationCount": "1",
+          "kex": "ecdh-sha2-nistp256",
+          "hostSignature": "ecdsa-sha2-nistp256",
+          "cipherC2S": "aes128-gcm@openssh.com",
+          "cipherS2C": "aes128-gcm@openssh.com",
+          "macC2S": "hmac-sha2-256",
+          "macS2C": "hmac-sha2-256",
+          "compressionC2S": "none",
+          "compressionS2C": "none",
+          "execStdoutBytes": "19",
+          "execStdoutSha256": "66a606a71a67baef12910e3efd5c0ad4bcdeabecdc9dae790bf0f505f811438d",
+          "execStderrBytes": "19",
+          "execStderrSha256": "4753e7ad67b9d485cc6b1e1cdf7c36d2e6d673c1ce894348c96f4dc41147238b",
+          "execExitStatus": "17",
+          "ptyStdoutBytes": "31",
+          "ptyStdoutSha256": "bc49cb5345ef54c96831c3c56b8fcc635352d5a26c15ae61b9754698f75da248",
+          "ptyInitialCols": "80",
+          "ptyInitialRows": "24",
+          "ptyInputBytes": "0"
+        },
+        "droppedEvents": 0
+      },
+      "latestEventCount": 9,
+      "providerNamesAtRuntimeCreation": [
+        "AndroidNSSP",
+        "AndroidOpenSSL",
+        "CertPathProvider",
+        "AndroidKeyStoreBCWorkaround",
+        "BC",
+        "HarmonyJSSE",
+        "AndroidKeyStore"
+      ],
+      "providerNamesNow": [
+        "AndroidNSSP",
+        "AndroidOpenSSL",
+        "CertPathProvider",
+        "AndroidKeyStoreBCWorkaround",
+        "BC",
+        "HarmonyJSSE",
+        "AndroidKeyStore"
+      ],
+      "providerOrderUnchanged": true
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/device-02/loss-before-relaunch-journal.json",
+      "schemaVersion": 2,
+      "probeVersion": "0.6.0",
+      "revision": 21,
+      "processInstanceId": "753ba776-90d8-487e-8785-5a508c586d7a",
+      "snapshotAtDeviceUtc": "2026-10-15T11:02:24.063800Z",
+      "attemptCount": 7,
+      "trustedHostCount": 1,
+      "trustEqualsPreUpgrade": true,
+      "latest": {
+        "id": "b1c9796e-ffc2-4b82-8337-68e7a8569716",
+        "originProcessId": "753ba776-90d8-487e-8785-5a508c586d7a",
+        "status": "running",
+        "reason": "pty-awaiting-resize",
+        "authenticated": true,
+        "details": {
+          "hostVerificationCount": "1",
+          "kex": "ecdh-sha2-nistp256",
+          "hostSignature": "ecdsa-sha2-nistp256",
+          "cipherC2S": "aes128-gcm@openssh.com",
+          "cipherS2C": "aes128-gcm@openssh.com",
+          "macC2S": "hmac-sha2-256",
+          "macS2C": "hmac-sha2-256",
+          "compressionC2S": "none",
+          "compressionS2C": "none",
+          "execStdoutBytes": "19",
+          "execStdoutSha256": "66a606a71a67baef12910e3efd5c0ad4bcdeabecdc9dae790bf0f505f811438d",
+          "execStderrBytes": "19",
+          "execStderrSha256": "4753e7ad67b9d485cc6b1e1cdf7c36d2e6d673c1ce894348c96f4dc41147238b",
+          "execExitStatus": "17",
+          "ptyStdoutBytes": "31",
+          "ptyStdoutSha256": "bc49cb5345ef54c96831c3c56b8fcc635352d5a26c15ae61b9754698f75da248",
+          "ptyInitialCols": "80",
+          "ptyInitialRows": "24",
+          "ptyInputBytes": "0"
+        },
+        "droppedEvents": 0
+      },
+      "latestEventCount": 8,
+      "providerNamesAtRuntimeCreation": [
+        "AndroidNSSP",
+        "AndroidOpenSSL",
+        "CertPathProvider",
+        "AndroidKeyStoreBCWorkaround",
+        "BC",
+        "HarmonyJSSE",
+        "AndroidKeyStore"
+      ],
+      "providerNamesNow": [
+        "AndroidNSSP",
+        "AndroidOpenSSL",
+        "CertPathProvider",
+        "AndroidKeyStoreBCWorkaround",
+        "BC",
+        "HarmonyJSSE",
+        "AndroidKeyStore"
+      ],
+      "providerOrderUnchanged": true
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/device-02/loss-immediate-before-journal.json",
+      "schemaVersion": 2,
+      "probeVersion": "0.6.0",
+      "revision": 21,
+      "processInstanceId": "753ba776-90d8-487e-8785-5a508c586d7a",
+      "snapshotAtDeviceUtc": "2026-10-15T11:02:24.063800Z",
+      "attemptCount": 7,
+      "trustedHostCount": 1,
+      "trustEqualsPreUpgrade": true,
+      "latest": {
+        "id": "b1c9796e-ffc2-4b82-8337-68e7a8569716",
+        "originProcessId": "753ba776-90d8-487e-8785-5a508c586d7a",
+        "status": "running",
+        "reason": "pty-awaiting-resize",
+        "authenticated": true,
+        "details": {
+          "hostVerificationCount": "1",
+          "kex": "ecdh-sha2-nistp256",
+          "hostSignature": "ecdsa-sha2-nistp256",
+          "cipherC2S": "aes128-gcm@openssh.com",
+          "cipherS2C": "aes128-gcm@openssh.com",
+          "macC2S": "hmac-sha2-256",
+          "macS2C": "hmac-sha2-256",
+          "compressionC2S": "none",
+          "compressionS2C": "none",
+          "execStdoutBytes": "19",
+          "execStdoutSha256": "66a606a71a67baef12910e3efd5c0ad4bcdeabecdc9dae790bf0f505f811438d",
+          "execStderrBytes": "19",
+          "execStderrSha256": "4753e7ad67b9d485cc6b1e1cdf7c36d2e6d673c1ce894348c96f4dc41147238b",
+          "execExitStatus": "17",
+          "ptyStdoutBytes": "31",
+          "ptyStdoutSha256": "bc49cb5345ef54c96831c3c56b8fcc635352d5a26c15ae61b9754698f75da248",
+          "ptyInitialCols": "80",
+          "ptyInitialRows": "24",
+          "ptyInputBytes": "0"
+        },
+        "droppedEvents": 0
+      },
+      "latestEventCount": 8,
+      "providerNamesAtRuntimeCreation": [
+        "AndroidNSSP",
+        "AndroidOpenSSL",
+        "CertPathProvider",
+        "AndroidKeyStoreBCWorkaround",
+        "BC",
+        "HarmonyJSSE",
+        "AndroidKeyStore"
+      ],
+      "providerNamesNow": [
+        "AndroidNSSP",
+        "AndroidOpenSSL",
+        "CertPathProvider",
+        "AndroidKeyStoreBCWorkaround",
+        "BC",
+        "HarmonyJSSE",
+        "AndroidKeyStore"
+      ],
+      "providerOrderUnchanged": true
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/device-02/loss-reconciled-journal.json",
+      "schemaVersion": 2,
+      "probeVersion": "0.6.0",
+      "revision": 1,
+      "processInstanceId": "c980803d-85ff-47dd-aa10-29425aebd96f",
+      "snapshotAtDeviceUtc": "2026-10-15T11:03:06.289452Z",
+      "attemptCount": 7,
+      "trustedHostCount": 1,
+      "trustEqualsPreUpgrade": true,
+      "latest": {
+        "id": "b1c9796e-ffc2-4b82-8337-68e7a8569716",
+        "originProcessId": "753ba776-90d8-487e-8785-5a508c586d7a",
+        "status": "interrupted",
+        "reason": "new-process-unfinished-attempt",
+        "authenticated": true,
+        "details": {
+          "hostVerificationCount": "1",
+          "kex": "ecdh-sha2-nistp256",
+          "hostSignature": "ecdsa-sha2-nistp256",
+          "cipherC2S": "aes128-gcm@openssh.com",
+          "cipherS2C": "aes128-gcm@openssh.com",
+          "macC2S": "hmac-sha2-256",
+          "macS2C": "hmac-sha2-256",
+          "compressionC2S": "none",
+          "compressionS2C": "none",
+          "execStdoutBytes": "19",
+          "execStdoutSha256": "66a606a71a67baef12910e3efd5c0ad4bcdeabecdc9dae790bf0f505f811438d",
+          "execStderrBytes": "19",
+          "execStderrSha256": "4753e7ad67b9d485cc6b1e1cdf7c36d2e6d673c1ce894348c96f4dc41147238b",
+          "execExitStatus": "17",
+          "ptyStdoutBytes": "31",
+          "ptyStdoutSha256": "bc49cb5345ef54c96831c3c56b8fcc635352d5a26c15ae61b9754698f75da248",
+          "ptyInitialCols": "80",
+          "ptyInitialRows": "24",
+          "ptyInputBytes": "0"
+        },
+        "droppedEvents": 0
+      },
+      "latestEventCount": 9,
+      "providerNamesAtRuntimeCreation": [
+        "AndroidNSSP",
+        "AndroidOpenSSL",
+        "CertPathProvider",
+        "AndroidKeyStoreBCWorkaround",
+        "BC",
+        "HarmonyJSSE",
+        "AndroidKeyStore"
+      ],
+      "providerNamesNow": [
+        "AndroidNSSP",
+        "AndroidOpenSSL",
+        "CertPathProvider",
+        "AndroidKeyStoreBCWorkaround",
+        "BC",
+        "HarmonyJSSE",
+        "AndroidKeyStore"
+      ],
+      "providerOrderUnchanged": true
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/device-02/loss-waiting-journal.json",
+      "schemaVersion": 2,
+      "probeVersion": "0.6.0",
+      "revision": 21,
+      "processInstanceId": "753ba776-90d8-487e-8785-5a508c586d7a",
+      "snapshotAtDeviceUtc": "2026-10-15T11:02:24.063800Z",
+      "attemptCount": 7,
+      "trustedHostCount": 1,
+      "trustEqualsPreUpgrade": true,
+      "latest": {
+        "id": "b1c9796e-ffc2-4b82-8337-68e7a8569716",
+        "originProcessId": "753ba776-90d8-487e-8785-5a508c586d7a",
+        "status": "running",
+        "reason": "pty-awaiting-resize",
+        "authenticated": true,
+        "details": {
+          "hostVerificationCount": "1",
+          "kex": "ecdh-sha2-nistp256",
+          "hostSignature": "ecdsa-sha2-nistp256",
+          "cipherC2S": "aes128-gcm@openssh.com",
+          "cipherS2C": "aes128-gcm@openssh.com",
+          "macC2S": "hmac-sha2-256",
+          "macS2C": "hmac-sha2-256",
+          "compressionC2S": "none",
+          "compressionS2C": "none",
+          "execStdoutBytes": "19",
+          "execStdoutSha256": "66a606a71a67baef12910e3efd5c0ad4bcdeabecdc9dae790bf0f505f811438d",
+          "execStderrBytes": "19",
+          "execStderrSha256": "4753e7ad67b9d485cc6b1e1cdf7c36d2e6d673c1ce894348c96f4dc41147238b",
+          "execExitStatus": "17",
+          "ptyStdoutBytes": "31",
+          "ptyStdoutSha256": "bc49cb5345ef54c96831c3c56b8fcc635352d5a26c15ae61b9754698f75da248",
+          "ptyInitialCols": "80",
+          "ptyInitialRows": "24",
+          "ptyInputBytes": "0"
+        },
+        "droppedEvents": 0
+      },
+      "latestEventCount": 8,
+      "providerNamesAtRuntimeCreation": [
+        "AndroidNSSP",
+        "AndroidOpenSSL",
+        "CertPathProvider",
+        "AndroidKeyStoreBCWorkaround",
+        "BC",
+        "HarmonyJSSE",
+        "AndroidKeyStore"
+      ],
+      "providerNamesNow": [
+        "AndroidNSSP",
+        "AndroidOpenSSL",
+        "CertPathProvider",
+        "AndroidKeyStoreBCWorkaround",
+        "BC",
+        "HarmonyJSSE",
+        "AndroidKeyStore"
+      ],
+      "providerOrderUnchanged": true
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/device-02/migrated-idle-journal.json",
+      "schemaVersion": 2,
+      "probeVersion": "0.6.0",
+      "revision": 1,
+      "processInstanceId": "753ba776-90d8-487e-8785-5a508c586d7a",
+      "snapshotAtDeviceUtc": "2026-10-15T11:00:44.658438Z",
+      "attemptCount": 5,
+      "trustedHostCount": 1,
+      "trustEqualsPreUpgrade": true,
+      "latest": {
+        "id": "57e4e169-a051-4193-a1bd-6e353e6f9197",
+        "originProcessId": "a2fbe473-e998-4440-b3ab-c98a3ae177ea",
+        "status": "completed",
+        "reason": null,
+        "authenticated": true,
+        "details": {
+          "hostVerificationCount": "1",
+          "kex": "ecdh-sha2-nistp256",
+          "hostSignature": "ecdsa-sha2-nistp256",
+          "cipherC2S": "aes128-gcm@openssh.com",
+          "cipherS2C": "aes128-gcm@openssh.com",
+          "macC2S": "hmac-sha2-256",
+          "macS2C": "hmac-sha2-256",
+          "compressionC2S": "none",
+          "compressionS2C": "none",
+          "sftpVersion": "3",
+          "sentinelBytes": "28",
+          "sentinelSha256": "114d3935955b73a27a64f51412c84f668f2054e96f66ad07114de44682bfc6b6",
+          "uploadName": "cloudy-57e4e169-a051-4193-a1bd-6e353e6f9197.bin",
+          "uploadBytes": "65536",
+          "uploadSha256": "f8a38b49873588eea0fa55c178b2ad20a05eb7f3eccf55623323405fdec79fe9",
+          "uploadAcknowledgedBytes": "65536",
+          "readbackBytes": "65536",
+          "readbackSha256": "f8a38b49873588eea0fa55c178b2ad20a05eb7f3eccf55623323405fdec79fe9",
+          "collisionStatus": "FAILURE",
+          "collisionBytes": "65536",
+          "collisionSha256": "f8a38b49873588eea0fa55c178b2ad20a05eb7f3eccf55623323405fdec79fe9"
+        },
+        "droppedEvents": 0
+      },
+      "latestEventCount": 11,
+      "providerNamesAtRuntimeCreation": [
+        "AndroidNSSP",
+        "AndroidOpenSSL",
+        "CertPathProvider",
+        "AndroidKeyStoreBCWorkaround",
+        "BC",
+        "HarmonyJSSE",
+        "AndroidKeyStore"
+      ],
+      "providerNamesNow": [
+        "AndroidNSSP",
+        "AndroidOpenSSL",
+        "CertPathProvider",
+        "AndroidKeyStoreBCWorkaround",
+        "BC",
+        "HarmonyJSSE",
+        "AndroidKeyStore"
+      ],
+      "providerOrderUnchanged": true
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/device-02/pre-upgrade-050-journal.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.5.0",
+      "revision": 34,
+      "processInstanceId": "a2fbe473-e998-4440-b3ab-c98a3ae177ea",
+      "snapshotAtDeviceUtc": "2026-10-15T10:25:38.482445Z",
+      "attemptCount": 5,
+      "trustedHostCount": 1,
+      "trustEqualsPreUpgrade": true,
+      "latest": {
+        "id": "57e4e169-a051-4193-a1bd-6e353e6f9197",
+        "originProcessId": "a2fbe473-e998-4440-b3ab-c98a3ae177ea",
+        "status": "completed",
+        "reason": null,
+        "authenticated": true,
+        "details": {
+          "hostVerificationCount": "1",
+          "kex": "ecdh-sha2-nistp256",
+          "hostSignature": "ecdsa-sha2-nistp256",
+          "cipherC2S": "aes128-gcm@openssh.com",
+          "cipherS2C": "aes128-gcm@openssh.com",
+          "macC2S": "hmac-sha2-256",
+          "macS2C": "hmac-sha2-256",
+          "compressionC2S": "none",
+          "compressionS2C": "none",
+          "sftpVersion": "3",
+          "sentinelBytes": "28",
+          "sentinelSha256": "114d3935955b73a27a64f51412c84f668f2054e96f66ad07114de44682bfc6b6",
+          "uploadName": "cloudy-57e4e169-a051-4193-a1bd-6e353e6f9197.bin",
+          "uploadBytes": "65536",
+          "uploadSha256": "f8a38b49873588eea0fa55c178b2ad20a05eb7f3eccf55623323405fdec79fe9",
+          "uploadAcknowledgedBytes": "65536",
+          "readbackBytes": "65536",
+          "readbackSha256": "f8a38b49873588eea0fa55c178b2ad20a05eb7f3eccf55623323405fdec79fe9",
+          "collisionStatus": "FAILURE",
+          "collisionBytes": "65536",
+          "collisionSha256": "f8a38b49873588eea0fa55c178b2ad20a05eb7f3eccf55623323405fdec79fe9"
+        },
+        "droppedEvents": 0
+      },
+      "latestEventCount": 11,
+      "providerNamesAtRuntimeCreation": [
+        "AndroidNSSP",
+        "AndroidOpenSSL",
+        "CertPathProvider",
+        "AndroidKeyStoreBCWorkaround",
+        "BC",
+        "HarmonyJSSE",
+        "AndroidKeyStore"
+      ],
+      "providerNamesNow": [
+        "AndroidNSSP",
+        "AndroidOpenSSL",
+        "CertPathProvider",
+        "AndroidKeyStoreBCWorkaround",
+        "BC",
+        "HarmonyJSSE",
+        "AndroidKeyStore"
+      ],
+      "providerOrderUnchanged": true
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/device-02/success-completed-journal.json",
+      "schemaVersion": 2,
+      "probeVersion": "0.6.0",
+      "revision": 13,
+      "processInstanceId": "753ba776-90d8-487e-8785-5a508c586d7a",
+      "snapshotAtDeviceUtc": "2026-10-15T11:02:11.993346Z",
+      "attemptCount": 6,
+      "trustedHostCount": 1,
+      "trustEqualsPreUpgrade": true,
+      "latest": {
+        "id": "6ab6cf81-91c0-48c3-a37d-973db08565a5",
+        "originProcessId": "753ba776-90d8-487e-8785-5a508c586d7a",
+        "status": "completed",
+        "reason": null,
+        "authenticated": true,
+        "details": {
+          "hostVerificationCount": "1",
+          "kex": "ecdh-sha2-nistp256",
+          "hostSignature": "ecdsa-sha2-nistp256",
+          "cipherC2S": "aes128-gcm@openssh.com",
+          "cipherS2C": "aes128-gcm@openssh.com",
+          "macC2S": "hmac-sha2-256",
+          "macS2C": "hmac-sha2-256",
+          "compressionC2S": "none",
+          "compressionS2C": "none",
+          "execStdoutBytes": "19",
+          "execStdoutSha256": "66a606a71a67baef12910e3efd5c0ad4bcdeabecdc9dae790bf0f505f811438d",
+          "execStderrBytes": "19",
+          "execStderrSha256": "4753e7ad67b9d485cc6b1e1cdf7c36d2e6d673c1ce894348c96f4dc41147238b",
+          "execExitStatus": "17",
+          "ptyStdoutBytes": "62",
+          "ptyStdoutSha256": "2a1d94e913eac24e63ee3455706198abc39eb51033b4e5a7eb659a94771d21f1",
+          "ptyInitialCols": "80",
+          "ptyInitialRows": "24",
+          "ptyInputBytes": "12",
+          "ptyResizedCols": "132",
+          "ptyResizedRows": "43",
+          "ptyStderrBytes": "0",
+          "ptyStderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "ptyCompletionMarker": "CLOUDY_PTY_DONE_V1"
+        },
+        "droppedEvents": 0
+      },
+      "latestEventCount": 12,
+      "providerNamesAtRuntimeCreation": [
+        "AndroidNSSP",
+        "AndroidOpenSSL",
+        "CertPathProvider",
+        "AndroidKeyStoreBCWorkaround",
+        "BC",
+        "HarmonyJSSE",
+        "AndroidKeyStore"
+      ],
+      "providerNamesNow": [
+        "AndroidNSSP",
+        "AndroidOpenSSL",
+        "CertPathProvider",
+        "AndroidKeyStoreBCWorkaround",
+        "BC",
+        "HarmonyJSSE",
+        "AndroidKeyStore"
+      ],
+      "providerOrderUnchanged": true
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/device-02/success-resized-journal.json",
+      "schemaVersion": 2,
+      "probeVersion": "0.6.0",
+      "revision": 11,
+      "processInstanceId": "753ba776-90d8-487e-8785-5a508c586d7a",
+      "snapshotAtDeviceUtc": "2026-10-15T11:02:02.108586Z",
+      "attemptCount": 6,
+      "trustedHostCount": 1,
+      "trustEqualsPreUpgrade": true,
+      "latest": {
+        "id": "6ab6cf81-91c0-48c3-a37d-973db08565a5",
+        "originProcessId": "753ba776-90d8-487e-8785-5a508c586d7a",
+        "status": "running",
+        "reason": "pty-awaiting-finish",
+        "authenticated": true,
+        "details": {
+          "hostVerificationCount": "1",
+          "kex": "ecdh-sha2-nistp256",
+          "hostSignature": "ecdsa-sha2-nistp256",
+          "cipherC2S": "aes128-gcm@openssh.com",
+          "cipherS2C": "aes128-gcm@openssh.com",
+          "macC2S": "hmac-sha2-256",
+          "macS2C": "hmac-sha2-256",
+          "compressionC2S": "none",
+          "compressionS2C": "none",
+          "execStdoutBytes": "19",
+          "execStdoutSha256": "66a606a71a67baef12910e3efd5c0ad4bcdeabecdc9dae790bf0f505f811438d",
+          "execStderrBytes": "19",
+          "execStderrSha256": "4753e7ad67b9d485cc6b1e1cdf7c36d2e6d673c1ce894348c96f4dc41147238b",
+          "execExitStatus": "17",
+          "ptyStdoutBytes": "43",
+          "ptyStdoutSha256": "a8d64bfd6a47252c252038c68b19645f31d81b235d795224c5087cecbf4b4ba6",
+          "ptyInitialCols": "80",
+          "ptyInitialRows": "24",
+          "ptyInputBytes": "5",
+          "ptyResizedCols": "132",
+          "ptyResizedRows": "43"
+        },
+        "droppedEvents": 0
+      },
+      "latestEventCount": 10,
+      "providerNamesAtRuntimeCreation": [
+        "AndroidNSSP",
+        "AndroidOpenSSL",
+        "CertPathProvider",
+        "AndroidKeyStoreBCWorkaround",
+        "BC",
+        "HarmonyJSSE",
+        "AndroidKeyStore"
+      ],
+      "providerNamesNow": [
+        "AndroidNSSP",
+        "AndroidOpenSSL",
+        "CertPathProvider",
+        "AndroidKeyStoreBCWorkaround",
+        "BC",
+        "HarmonyJSSE",
+        "AndroidKeyStore"
+      ],
+      "providerOrderUnchanged": true
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/device-02/success-two-observers-journal.json",
+      "schemaVersion": 2,
+      "probeVersion": "0.6.0",
+      "revision": 9,
+      "processInstanceId": "753ba776-90d8-487e-8785-5a508c586d7a",
+      "snapshotAtDeviceUtc": "2026-10-15T11:01:09.751492Z",
+      "attemptCount": 6,
+      "trustedHostCount": 1,
+      "trustEqualsPreUpgrade": true,
+      "latest": {
+        "id": "6ab6cf81-91c0-48c3-a37d-973db08565a5",
+        "originProcessId": "753ba776-90d8-487e-8785-5a508c586d7a",
+        "status": "running",
+        "reason": "pty-awaiting-resize",
+        "authenticated": true,
+        "details": {
+          "hostVerificationCount": "1",
+          "kex": "ecdh-sha2-nistp256",
+          "hostSignature": "ecdsa-sha2-nistp256",
+          "cipherC2S": "aes128-gcm@openssh.com",
+          "cipherS2C": "aes128-gcm@openssh.com",
+          "macC2S": "hmac-sha2-256",
+          "macS2C": "hmac-sha2-256",
+          "compressionC2S": "none",
+          "compressionS2C": "none",
+          "execStdoutBytes": "19",
+          "execStdoutSha256": "66a606a71a67baef12910e3efd5c0ad4bcdeabecdc9dae790bf0f505f811438d",
+          "execStderrBytes": "19",
+          "execStderrSha256": "4753e7ad67b9d485cc6b1e1cdf7c36d2e6d673c1ce894348c96f4dc41147238b",
+          "execExitStatus": "17",
+          "ptyStdoutBytes": "31",
+          "ptyStdoutSha256": "bc49cb5345ef54c96831c3c56b8fcc635352d5a26c15ae61b9754698f75da248",
+          "ptyInitialCols": "80",
+          "ptyInitialRows": "24",
+          "ptyInputBytes": "0"
+        },
+        "droppedEvents": 0
+      },
+      "latestEventCount": 8,
+      "providerNamesAtRuntimeCreation": [
+        "AndroidNSSP",
+        "AndroidOpenSSL",
+        "CertPathProvider",
+        "AndroidKeyStoreBCWorkaround",
+        "BC",
+        "HarmonyJSSE",
+        "AndroidKeyStore"
+      ],
+      "providerNamesNow": [
+        "AndroidNSSP",
+        "AndroidOpenSSL",
+        "CertPathProvider",
+        "AndroidKeyStoreBCWorkaround",
+        "BC",
+        "HarmonyJSSE",
+        "AndroidKeyStore"
+      ],
+      "providerOrderUnchanged": true
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/device-02/success-waiting-journal.json",
+      "schemaVersion": 2,
+      "probeVersion": "0.6.0",
+      "revision": 9,
+      "processInstanceId": "753ba776-90d8-487e-8785-5a508c586d7a",
+      "snapshotAtDeviceUtc": "2026-10-15T11:01:09.751492Z",
+      "attemptCount": 6,
+      "trustedHostCount": 1,
+      "trustEqualsPreUpgrade": true,
+      "latest": {
+        "id": "6ab6cf81-91c0-48c3-a37d-973db08565a5",
+        "originProcessId": "753ba776-90d8-487e-8785-5a508c586d7a",
+        "status": "running",
+        "reason": "pty-awaiting-resize",
+        "authenticated": true,
+        "details": {
+          "hostVerificationCount": "1",
+          "kex": "ecdh-sha2-nistp256",
+          "hostSignature": "ecdsa-sha2-nistp256",
+          "cipherC2S": "aes128-gcm@openssh.com",
+          "cipherS2C": "aes128-gcm@openssh.com",
+          "macC2S": "hmac-sha2-256",
+          "macS2C": "hmac-sha2-256",
+          "compressionC2S": "none",
+          "compressionS2C": "none",
+          "execStdoutBytes": "19",
+          "execStdoutSha256": "66a606a71a67baef12910e3efd5c0ad4bcdeabecdc9dae790bf0f505f811438d",
+          "execStderrBytes": "19",
+          "execStderrSha256": "4753e7ad67b9d485cc6b1e1cdf7c36d2e6d673c1ce894348c96f4dc41147238b",
+          "execExitStatus": "17",
+          "ptyStdoutBytes": "31",
+          "ptyStdoutSha256": "bc49cb5345ef54c96831c3c56b8fcc635352d5a26c15ae61b9754698f75da248",
+          "ptyInitialCols": "80",
+          "ptyInitialRows": "24",
+          "ptyInputBytes": "0"
+        },
+        "droppedEvents": 0
+      },
+      "latestEventCount": 8,
+      "providerNamesAtRuntimeCreation": [
+        "AndroidNSSP",
+        "AndroidOpenSSL",
+        "CertPathProvider",
+        "AndroidKeyStoreBCWorkaround",
+        "BC",
+        "HarmonyJSSE",
+        "AndroidKeyStore"
+      ],
+      "providerNamesNow": [
+        "AndroidNSSP",
+        "AndroidOpenSSL",
+        "CertPathProvider",
+        "AndroidKeyStoreBCWorkaround",
+        "BC",
+        "HarmonyJSSE",
+        "AndroidKeyStore"
+      ],
+      "providerOrderUnchanged": true
+    }
+  ],
+  "hostObservations": [
+    {
+      "source": "qualification/results/private/ssh-probe/host-03/cancel-waiting-observation.json",
+      "atHostUtc": "2026-10-15T11:03:23.453256+00:00",
+      "acceptedPublickeys": 3,
+      "sessionStarts": 6,
+      "liveFixtureProcessCount": 1,
+      "deviceAuditSnapshots": [
+        {
+          "file": "channel-46c687b0-fa33-43fb-9a82-ab05b116994a.jsonl",
+          "eventCount": 7,
+          "prefixSha256": "fd993fe82bbbd3658fff235c9fdb9e6d78c1175f3c7a8478ef804eeddfe4a087",
+          "lastEvent": "finished"
+        },
+        {
+          "file": "channel-529d90e3-ab1f-444d-9f0e-5488b3743c2e.jsonl",
+          "eventCount": 3,
+          "prefixSha256": "92bdba3e80b8fe9148bb37a8f7139e8e8c4186d03c03d4583ddeb7fc6283961b",
+          "lastEvent": "ready-written"
+        },
+        {
+          "file": "channel-6dd0b2ae-8230-4d0d-a988-0fef274e739b.jsonl",
+          "eventCount": 4,
+          "prefixSha256": "5311a0c9a13c1df085a57097d6092d954e8297fe241ac2f9871323f3fddb883c",
+          "lastEvent": "finished"
+        },
+        {
+          "file": "channel-b8a89b7c-e076-44a8-9b74-d60530d3d0ce.jsonl",
+          "eventCount": 3,
+          "prefixSha256": "3e1f0e3cbb48c4aa9f7a016ae8470fae142d71eaf3d67926fa1e4c8a48cc7f6f",
+          "lastEvent": "finished"
+        },
+        {
+          "file": "channel-cb637484-fa56-489d-9443-46ef3f5324c1.jsonl",
+          "eventCount": 3,
+          "prefixSha256": "74088fb5989b1bdd6c390992485e5c358706e00dc3d02e7a26e778a7b900b2f4",
+          "lastEvent": "finished"
+        },
+        {
+          "file": "channel-d0420a24-dbd5-4af9-9886-f08fad5afa90.jsonl",
+          "eventCount": 3,
+          "prefixSha256": "da7002e145657c7b8f511a114c0b1ceb7b24ce91aff78ed85feb98a4adc14f24",
+          "lastEvent": "finished"
+        }
+      ],
+      "preflightAuditFilesExcludedFromDeviceCounts": 4
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/host-03/cancelled-observation.json",
+      "atHostUtc": "2026-10-15T11:03:26.716022+00:00",
+      "acceptedPublickeys": 3,
+      "sessionStarts": 6,
+      "liveFixtureProcessCount": 0,
+      "deviceAuditSnapshots": [
+        {
+          "file": "channel-46c687b0-fa33-43fb-9a82-ab05b116994a.jsonl",
+          "eventCount": 7,
+          "prefixSha256": "fd993fe82bbbd3658fff235c9fdb9e6d78c1175f3c7a8478ef804eeddfe4a087",
+          "lastEvent": "finished"
+        },
+        {
+          "file": "channel-529d90e3-ab1f-444d-9f0e-5488b3743c2e.jsonl",
+          "eventCount": 4,
+          "prefixSha256": "2059dda57c1a4f24668b01f45c94626ca17f08a17531c44c21b8c4dd33f2401e",
+          "lastEvent": "finished"
+        },
+        {
+          "file": "channel-6dd0b2ae-8230-4d0d-a988-0fef274e739b.jsonl",
+          "eventCount": 4,
+          "prefixSha256": "5311a0c9a13c1df085a57097d6092d954e8297fe241ac2f9871323f3fddb883c",
+          "lastEvent": "finished"
+        },
+        {
+          "file": "channel-b8a89b7c-e076-44a8-9b74-d60530d3d0ce.jsonl",
+          "eventCount": 3,
+          "prefixSha256": "3e1f0e3cbb48c4aa9f7a016ae8470fae142d71eaf3d67926fa1e4c8a48cc7f6f",
+          "lastEvent": "finished"
+        },
+        {
+          "file": "channel-cb637484-fa56-489d-9443-46ef3f5324c1.jsonl",
+          "eventCount": 3,
+          "prefixSha256": "74088fb5989b1bdd6c390992485e5c358706e00dc3d02e7a26e778a7b900b2f4",
+          "lastEvent": "finished"
+        },
+        {
+          "file": "channel-d0420a24-dbd5-4af9-9886-f08fad5afa90.jsonl",
+          "eventCount": 3,
+          "prefixSha256": "da7002e145657c7b8f511a114c0b1ceb7b24ce91aff78ed85feb98a4adc14f24",
+          "lastEvent": "finished"
+        }
+      ],
+      "preflightAuditFilesExcludedFromDeviceCounts": 4
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/host-03/final-cleanup-observation.json",
+      "atHostUtc": "2026-10-15T11:04:21.530716+00:00",
+      "acceptedPublickeys": 3,
+      "sessionStarts": 6,
+      "liveFixtureProcessCount": 0,
+      "deviceAuditSnapshots": [
+        {
+          "file": "channel-46c687b0-fa33-43fb-9a82-ab05b116994a.jsonl",
+          "eventCount": 7,
+          "prefixSha256": "fd993fe82bbbd3658fff235c9fdb9e6d78c1175f3c7a8478ef804eeddfe4a087",
+          "lastEvent": "finished"
+        },
+        {
+          "file": "channel-529d90e3-ab1f-444d-9f0e-5488b3743c2e.jsonl",
+          "eventCount": 4,
+          "prefixSha256": "2059dda57c1a4f24668b01f45c94626ca17f08a17531c44c21b8c4dd33f2401e",
+          "lastEvent": "finished"
+        },
+        {
+          "file": "channel-6dd0b2ae-8230-4d0d-a988-0fef274e739b.jsonl",
+          "eventCount": 4,
+          "prefixSha256": "5311a0c9a13c1df085a57097d6092d954e8297fe241ac2f9871323f3fddb883c",
+          "lastEvent": "finished"
+        },
+        {
+          "file": "channel-b8a89b7c-e076-44a8-9b74-d60530d3d0ce.jsonl",
+          "eventCount": 3,
+          "prefixSha256": "3e1f0e3cbb48c4aa9f7a016ae8470fae142d71eaf3d67926fa1e4c8a48cc7f6f",
+          "lastEvent": "finished"
+        },
+        {
+          "file": "channel-cb637484-fa56-489d-9443-46ef3f5324c1.jsonl",
+          "eventCount": 3,
+          "prefixSha256": "74088fb5989b1bdd6c390992485e5c358706e00dc3d02e7a26e778a7b900b2f4",
+          "lastEvent": "finished"
+        },
+        {
+          "file": "channel-d0420a24-dbd5-4af9-9886-f08fad5afa90.jsonl",
+          "eventCount": 3,
+          "prefixSha256": "da7002e145657c7b8f511a114c0b1ceb7b24ce91aff78ed85feb98a4adc14f24",
+          "lastEvent": "finished"
+        }
+      ],
+      "preflightAuditFilesExcludedFromDeviceCounts": 4
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/host-03/loss-before-relaunch-observation.json",
+      "atHostUtc": "2026-10-15T11:03:05.693726+00:00",
+      "acceptedPublickeys": 2,
+      "sessionStarts": 4,
+      "liveFixtureProcessCount": 0,
+      "deviceAuditSnapshots": [
+        {
+          "file": "channel-46c687b0-fa33-43fb-9a82-ab05b116994a.jsonl",
+          "eventCount": 7,
+          "prefixSha256": "fd993fe82bbbd3658fff235c9fdb9e6d78c1175f3c7a8478ef804eeddfe4a087",
+          "lastEvent": "finished"
+        },
+        {
+          "file": "channel-6dd0b2ae-8230-4d0d-a988-0fef274e739b.jsonl",
+          "eventCount": 4,
+          "prefixSha256": "5311a0c9a13c1df085a57097d6092d954e8297fe241ac2f9871323f3fddb883c",
+          "lastEvent": "finished"
+        },
+        {
+          "file": "channel-b8a89b7c-e076-44a8-9b74-d60530d3d0ce.jsonl",
+          "eventCount": 3,
+          "prefixSha256": "3e1f0e3cbb48c4aa9f7a016ae8470fae142d71eaf3d67926fa1e4c8a48cc7f6f",
+          "lastEvent": "finished"
+        },
+        {
+          "file": "channel-d0420a24-dbd5-4af9-9886-f08fad5afa90.jsonl",
+          "eventCount": 3,
+          "prefixSha256": "da7002e145657c7b8f511a114c0b1ceb7b24ce91aff78ed85feb98a4adc14f24",
+          "lastEvent": "finished"
+        }
+      ],
+      "preflightAuditFilesExcludedFromDeviceCounts": 4
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/host-03/loss-reconciled-observation.json",
+      "atHostUtc": "2026-10-15T11:03:14.264192+00:00",
+      "acceptedPublickeys": 2,
+      "sessionStarts": 4,
+      "liveFixtureProcessCount": 0,
+      "deviceAuditSnapshots": [
+        {
+          "file": "channel-46c687b0-fa33-43fb-9a82-ab05b116994a.jsonl",
+          "eventCount": 7,
+          "prefixSha256": "fd993fe82bbbd3658fff235c9fdb9e6d78c1175f3c7a8478ef804eeddfe4a087",
+          "lastEvent": "finished"
+        },
+        {
+          "file": "channel-6dd0b2ae-8230-4d0d-a988-0fef274e739b.jsonl",
+          "eventCount": 4,
+          "prefixSha256": "5311a0c9a13c1df085a57097d6092d954e8297fe241ac2f9871323f3fddb883c",
+          "lastEvent": "finished"
+        },
+        {
+          "file": "channel-b8a89b7c-e076-44a8-9b74-d60530d3d0ce.jsonl",
+          "eventCount": 3,
+          "prefixSha256": "3e1f0e3cbb48c4aa9f7a016ae8470fae142d71eaf3d67926fa1e4c8a48cc7f6f",
+          "lastEvent": "finished"
+        },
+        {
+          "file": "channel-d0420a24-dbd5-4af9-9886-f08fad5afa90.jsonl",
+          "eventCount": 3,
+          "prefixSha256": "da7002e145657c7b8f511a114c0b1ceb7b24ce91aff78ed85feb98a4adc14f24",
+          "lastEvent": "finished"
+        }
+      ],
+      "preflightAuditFilesExcludedFromDeviceCounts": 4
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/host-03/loss-waiting-observation.json",
+      "atHostUtc": "2026-10-15T11:02:53.039168+00:00",
+      "acceptedPublickeys": 2,
+      "sessionStarts": 4,
+      "liveFixtureProcessCount": 1,
+      "deviceAuditSnapshots": [
+        {
+          "file": "channel-46c687b0-fa33-43fb-9a82-ab05b116994a.jsonl",
+          "eventCount": 7,
+          "prefixSha256": "fd993fe82bbbd3658fff235c9fdb9e6d78c1175f3c7a8478ef804eeddfe4a087",
+          "lastEvent": "finished"
+        },
+        {
+          "file": "channel-6dd0b2ae-8230-4d0d-a988-0fef274e739b.jsonl",
+          "eventCount": 3,
+          "prefixSha256": "bd31872f4b44a2ff3db84b6403edb8567c54babacb4bce6902c0b091a701229f",
+          "lastEvent": "ready-written"
+        },
+        {
+          "file": "channel-b8a89b7c-e076-44a8-9b74-d60530d3d0ce.jsonl",
+          "eventCount": 3,
+          "prefixSha256": "3e1f0e3cbb48c4aa9f7a016ae8470fae142d71eaf3d67926fa1e4c8a48cc7f6f",
+          "lastEvent": "finished"
+        },
+        {
+          "file": "channel-d0420a24-dbd5-4af9-9886-f08fad5afa90.jsonl",
+          "eventCount": 3,
+          "prefixSha256": "da7002e145657c7b8f511a114c0b1ceb7b24ce91aff78ed85feb98a4adc14f24",
+          "lastEvent": "finished"
+        }
+      ],
+      "preflightAuditFilesExcludedFromDeviceCounts": 4
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/host-03/migrated-idle-observation.json",
+      "atHostUtc": "2026-10-15T11:00:50.146079+00:00",
+      "acceptedPublickeys": 0,
+      "sessionStarts": 0,
+      "liveFixtureProcessCount": 0,
+      "deviceAuditSnapshots": [],
+      "preflightAuditFilesExcludedFromDeviceCounts": 4
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/host-03/success-completed-observation.json",
+      "atHostUtc": "2026-10-15T11:02:22.040277+00:00",
+      "acceptedPublickeys": 1,
+      "sessionStarts": 2,
+      "liveFixtureProcessCount": 0,
+      "deviceAuditSnapshots": [
+        {
+          "file": "channel-46c687b0-fa33-43fb-9a82-ab05b116994a.jsonl",
+          "eventCount": 7,
+          "prefixSha256": "fd993fe82bbbd3658fff235c9fdb9e6d78c1175f3c7a8478ef804eeddfe4a087",
+          "lastEvent": "finished"
+        },
+        {
+          "file": "channel-b8a89b7c-e076-44a8-9b74-d60530d3d0ce.jsonl",
+          "eventCount": 3,
+          "prefixSha256": "3e1f0e3cbb48c4aa9f7a016ae8470fae142d71eaf3d67926fa1e4c8a48cc7f6f",
+          "lastEvent": "finished"
+        }
+      ],
+      "preflightAuditFilesExcludedFromDeviceCounts": 4
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/host-03/success-resized-observation.json",
+      "atHostUtc": "2026-10-15T11:02:11.400491+00:00",
+      "acceptedPublickeys": 1,
+      "sessionStarts": 2,
+      "liveFixtureProcessCount": 1,
+      "deviceAuditSnapshots": [
+        {
+          "file": "channel-46c687b0-fa33-43fb-9a82-ab05b116994a.jsonl",
+          "eventCount": 5,
+          "prefixSha256": "435f29297160167bea41c8a821c607103640ef24d7531942f52133125db46c66",
+          "lastEvent": "size-written"
+        },
+        {
+          "file": "channel-b8a89b7c-e076-44a8-9b74-d60530d3d0ce.jsonl",
+          "eventCount": 3,
+          "prefixSha256": "3e1f0e3cbb48c4aa9f7a016ae8470fae142d71eaf3d67926fa1e4c8a48cc7f6f",
+          "lastEvent": "finished"
+        }
+      ],
+      "preflightAuditFilesExcludedFromDeviceCounts": 4
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/host-03/success-two-observers-observation.json",
+      "atHostUtc": "2026-10-15T11:01:33.094105+00:00",
+      "acceptedPublickeys": 1,
+      "sessionStarts": 2,
+      "liveFixtureProcessCount": 1,
+      "deviceAuditSnapshots": [
+        {
+          "file": "channel-46c687b0-fa33-43fb-9a82-ab05b116994a.jsonl",
+          "eventCount": 3,
+          "prefixSha256": "fa62f095f8e76697ba80170b4a359b0efb573b85981f0bd55b07f04afe1aa3c3",
+          "lastEvent": "ready-written"
+        },
+        {
+          "file": "channel-b8a89b7c-e076-44a8-9b74-d60530d3d0ce.jsonl",
+          "eventCount": 3,
+          "prefixSha256": "3e1f0e3cbb48c4aa9f7a016ae8470fae142d71eaf3d67926fa1e4c8a48cc7f6f",
+          "lastEvent": "finished"
+        }
+      ],
+      "preflightAuditFilesExcludedFromDeviceCounts": 4
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/host-03/success-waiting-observation.json",
+      "atHostUtc": "2026-10-15T11:01:19.155763+00:00",
+      "acceptedPublickeys": 1,
+      "sessionStarts": 2,
+      "liveFixtureProcessCount": 1,
+      "deviceAuditSnapshots": [
+        {
+          "file": "channel-46c687b0-fa33-43fb-9a82-ab05b116994a.jsonl",
+          "eventCount": 3,
+          "prefixSha256": "fa62f095f8e76697ba80170b4a359b0efb573b85981f0bd55b07f04afe1aa3c3",
+          "lastEvent": "ready-written"
+        },
+        {
+          "file": "channel-b8a89b7c-e076-44a8-9b74-d60530d3d0ce.jsonl",
+          "eventCount": 3,
+          "prefixSha256": "3e1f0e3cbb48c4aa9f7a016ae8470fae142d71eaf3d67926fa1e4c8a48cc7f6f",
+          "lastEvent": "finished"
+        }
+      ],
+      "preflightAuditFilesExcludedFromDeviceCounts": 4
+    }
+  ],
+  "deviceChannelAudits": [
+    {
+      "source": "qualification/results/private/ssh-probe/host-03/audit/channel-b8a89b7c-e076-44a8-9b74-d60530d3d0ce.jsonl",
+      "mode": "exec",
+      "events": [
+        {
+          "schemaVersion": 1,
+          "runId": "b8a89b7c-e076-44a8-9b74-d60530d3d0ce",
+          "sequence": 1,
+          "event": "started",
+          "atUtc": "2026-10-15T11:01:10.439963+00:00",
+          "elapsedMs": 14.899,
+          "mode": "exec"
+        },
+        {
+          "schemaVersion": 1,
+          "runId": "b8a89b7c-e076-44a8-9b74-d60530d3d0ce",
+          "sequence": 2,
+          "event": "exec-output-written",
+          "atUtc": "2026-10-15T11:01:10.446318+00:00",
+          "elapsedMs": 21.26,
+          "stdoutBytes": 19,
+          "stderrBytes": 19
+        },
+        {
+          "schemaVersion": 1,
+          "runId": "b8a89b7c-e076-44a8-9b74-d60530d3d0ce",
+          "sequence": 3,
+          "event": "finished",
+          "atUtc": "2026-10-15T11:01:10.452361+00:00",
+          "elapsedMs": 27.277,
+          "intendedExitCode": 17,
+          "reason": "completed"
+        }
+      ],
+      "attempt": 6
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/host-03/audit/channel-46c687b0-fa33-43fb-9a82-ab05b116994a.jsonl",
+      "mode": "pty",
+      "events": [
+        {
+          "schemaVersion": 1,
+          "runId": "46c687b0-fa33-43fb-9a82-ab05b116994a",
+          "sequence": 1,
+          "event": "started",
+          "atUtc": "2026-10-15T11:01:10.594755+00:00",
+          "elapsedMs": 14.945,
+          "mode": "pty"
+        },
+        {
+          "schemaVersion": 1,
+          "runId": "46c687b0-fa33-43fb-9a82-ab05b116994a",
+          "sequence": 2,
+          "event": "terminal-observed",
+          "atUtc": "2026-10-15T11:01:10.601117+00:00",
+          "elapsedMs": 21.281,
+          "phase": "initial",
+          "columns": 80,
+          "rows": 24,
+          "flags": {
+            "echo": false,
+            "echoNewline": false,
+            "canonical": true,
+            "outputCrLf": false
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "runId": "46c687b0-fa33-43fb-9a82-ab05b116994a",
+          "sequence": 3,
+          "event": "ready-written",
+          "atUtc": "2026-10-15T11:01:10.607189+00:00",
+          "elapsedMs": 27.349
+        },
+        {
+          "schemaVersion": 1,
+          "runId": "46c687b0-fa33-43fb-9a82-ab05b116994a",
+          "sequence": 4,
+          "event": "terminal-observed",
+          "atUtc": "2026-10-15T11:02:02.936008+00:00",
+          "elapsedMs": 52356.19,
+          "phase": "query",
+          "columns": 132,
+          "rows": 43,
+          "flags": {
+            "echo": false,
+            "echoNewline": false,
+            "canonical": true,
+            "outputCrLf": false
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "runId": "46c687b0-fa33-43fb-9a82-ab05b116994a",
+          "sequence": 5,
+          "event": "size-written",
+          "atUtc": "2026-10-15T11:02:02.951329+00:00",
+          "elapsedMs": 52371.506,
+          "columns": 132,
+          "rows": 43
+        },
+        {
+          "schemaVersion": 1,
+          "runId": "46c687b0-fa33-43fb-9a82-ab05b116994a",
+          "sequence": 6,
+          "event": "done-written",
+          "atUtc": "2026-10-15T11:02:12.806243+00:00",
+          "elapsedMs": 62226.426
+        },
+        {
+          "schemaVersion": 1,
+          "runId": "46c687b0-fa33-43fb-9a82-ab05b116994a",
+          "sequence": 7,
+          "event": "finished",
+          "atUtc": "2026-10-15T11:02:12.821302+00:00",
+          "elapsedMs": 62241.465,
+          "intendedExitCode": 0,
+          "reason": "completed"
+        }
+      ],
+      "attempt": 6
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/host-03/audit/channel-d0420a24-dbd5-4af9-9886-f08fad5afa90.jsonl",
+      "mode": "exec",
+      "events": [
+        {
+          "schemaVersion": 1,
+          "runId": "d0420a24-dbd5-4af9-9886-f08fad5afa90",
+          "sequence": 1,
+          "event": "started",
+          "atUtc": "2026-10-15T11:02:24.741562+00:00",
+          "elapsedMs": 15.377,
+          "mode": "exec"
+        },
+        {
+          "schemaVersion": 1,
+          "runId": "d0420a24-dbd5-4af9-9886-f08fad5afa90",
+          "sequence": 2,
+          "event": "exec-output-written",
+          "atUtc": "2026-10-15T11:02:24.748097+00:00",
+          "elapsedMs": 21.899,
+          "stdoutBytes": 19,
+          "stderrBytes": 19
+        },
+        {
+          "schemaVersion": 1,
+          "runId": "d0420a24-dbd5-4af9-9886-f08fad5afa90",
+          "sequence": 3,
+          "event": "finished",
+          "atUtc": "2026-10-15T11:02:24.754331+00:00",
+          "elapsedMs": 28.13,
+          "intendedExitCode": 17,
+          "reason": "completed"
+        }
+      ],
+      "attempt": 7
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/host-03/audit/channel-6dd0b2ae-8230-4d0d-a988-0fef274e739b.jsonl",
+      "mode": "pty",
+      "events": [
+        {
+          "schemaVersion": 1,
+          "runId": "6dd0b2ae-8230-4d0d-a988-0fef274e739b",
+          "sequence": 1,
+          "event": "started",
+          "atUtc": "2026-10-15T11:02:24.909932+00:00",
+          "elapsedMs": 6.458,
+          "mode": "pty"
+        },
+        {
+          "schemaVersion": 1,
+          "runId": "6dd0b2ae-8230-4d0d-a988-0fef274e739b",
+          "sequence": 2,
+          "event": "terminal-observed",
+          "atUtc": "2026-10-15T11:02:24.916228+00:00",
+          "elapsedMs": 12.736,
+          "phase": "initial",
+          "columns": 80,
+          "rows": 24,
+          "flags": {
+            "echo": false,
+            "echoNewline": false,
+            "canonical": true,
+            "outputCrLf": false
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "runId": "6dd0b2ae-8230-4d0d-a988-0fef274e739b",
+          "sequence": 3,
+          "event": "ready-written",
+          "atUtc": "2026-10-15T11:02:24.922312+00:00",
+          "elapsedMs": 18.82
+        },
+        {
+          "schemaVersion": 1,
+          "runId": "6dd0b2ae-8230-4d0d-a988-0fef274e739b",
+          "sequence": 4,
+          "event": "finished",
+          "atUtc": "2026-10-15T11:02:53.368354+00:00",
+          "elapsedMs": 28464.877,
+          "intendedExitCode": 129,
+          "reason": "signal-hup"
+        }
+      ],
+      "attempt": 7
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/host-03/audit/channel-cb637484-fa56-489d-9443-46ef3f5324c1.jsonl",
+      "mode": "exec",
+      "events": [
+        {
+          "schemaVersion": 1,
+          "runId": "cb637484-fa56-489d-9443-46ef3f5324c1",
+          "sequence": 1,
+          "event": "started",
+          "atUtc": "2026-10-15T11:03:15.821198+00:00",
+          "elapsedMs": 19.4,
+          "mode": "exec"
+        },
+        {
+          "schemaVersion": 1,
+          "runId": "cb637484-fa56-489d-9443-46ef3f5324c1",
+          "sequence": 2,
+          "event": "exec-output-written",
+          "atUtc": "2026-10-15T11:03:15.830673+00:00",
+          "elapsedMs": 28.858,
+          "stdoutBytes": 19,
+          "stderrBytes": 19
+        },
+        {
+          "schemaVersion": 1,
+          "runId": "cb637484-fa56-489d-9443-46ef3f5324c1",
+          "sequence": 3,
+          "event": "finished",
+          "atUtc": "2026-10-15T11:03:15.837142+00:00",
+          "elapsedMs": 35.323,
+          "intendedExitCode": 17,
+          "reason": "completed"
+        }
+      ],
+      "attempt": 8
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/host-03/audit/channel-529d90e3-ab1f-444d-9f0e-5488b3743c2e.jsonl",
+      "mode": "pty",
+      "events": [
+        {
+          "schemaVersion": 1,
+          "runId": "529d90e3-ab1f-444d-9f0e-5488b3743c2e",
+          "sequence": 1,
+          "event": "started",
+          "atUtc": "2026-10-15T11:03:15.999931+00:00",
+          "elapsedMs": 18.871,
+          "mode": "pty"
+        },
+        {
+          "schemaVersion": 1,
+          "runId": "529d90e3-ab1f-444d-9f0e-5488b3743c2e",
+          "sequence": 2,
+          "event": "terminal-observed",
+          "atUtc": "2026-10-15T11:03:16.006147+00:00",
+          "elapsedMs": 25.067,
+          "phase": "initial",
+          "columns": 80,
+          "rows": 24,
+          "flags": {
+            "echo": false,
+            "echoNewline": false,
+            "canonical": true,
+            "outputCrLf": false
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "runId": "529d90e3-ab1f-444d-9f0e-5488b3743c2e",
+          "sequence": 3,
+          "event": "ready-written",
+          "atUtc": "2026-10-15T11:03:16.016057+00:00",
+          "elapsedMs": 34.978
+        },
+        {
+          "schemaVersion": 1,
+          "runId": "529d90e3-ab1f-444d-9f0e-5488b3743c2e",
+          "sequence": 4,
+          "event": "finished",
+          "atUtc": "2026-10-15T11:03:24.772897+00:00",
+          "elapsedMs": 8791.84,
+          "intendedExitCode": 129,
+          "reason": "signal-hup"
+        }
+      ],
+      "attempt": 8
+    }
+  ],
+  "deviceAuditAttribution": "The six device channel audits are associated with the three sequential controlled attempts by their exec/PTY order and server-count checkpoints; audit runId and Android attemptId are distinct identifiers",
+  "providerBoundary": "Recorded names/order unchanged at all selected journal checkpoints; no implementation attestation or claim about unobserved transient changes",
+  "windowObservations": [
+    {
+      "source": "qualification/results/private/ssh-probe/device-02/migrated-idle-layout.json",
+      "windows": [
+        {
+          "activityInstanceId": "ff6aee68-eb10-4c07-b0d1-f1b8e871e70b",
+          "taskIdObserved": 1000157,
+          "windowBoundsPx": [
+            0,
+            59,
+            2880,
+            1709
+          ],
+          "status": "completed",
+          "processInstanceId": "753ba776-90d8-487e-8785-5a508c586d7a",
+          "revision": 1,
+          "attemptCount": 5,
+          "latestAttemptId": "57e4e169-a051-4193-a1bd-6e353e6f9197"
+        }
+      ]
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/device-02/run-success-layout.json",
+      "windows": [
+        {
+          "activityInstanceId": "ff6aee68-eb10-4c07-b0d1-f1b8e871e70b",
+          "taskIdObserved": 1000157,
+          "windowBoundsPx": [
+            0,
+            59,
+            2880,
+            1709
+          ],
+          "status": "completed",
+          "processInstanceId": "753ba776-90d8-487e-8785-5a508c586d7a",
+          "revision": 1,
+          "attemptCount": 5,
+          "latestAttemptId": "57e4e169-a051-4193-a1bd-6e353e6f9197"
+        }
+      ]
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/device-02/success-recreate-layout.json",
+      "windows": [
+        {
+          "activityInstanceId": "ff6aee68-eb10-4c07-b0d1-f1b8e871e70b",
+          "taskIdObserved": 1000157,
+          "windowBoundsPx": [
+            0,
+            59,
+            2880,
+            1709
+          ],
+          "status": "pty-awaiting-resize",
+          "processInstanceId": "753ba776-90d8-487e-8785-5a508c586d7a",
+          "revision": 9,
+          "attemptCount": 6,
+          "latestAttemptId": "6ab6cf81-91c0-48c3-a37d-973db08565a5"
+        }
+      ]
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/device-02/success-recreated-layout.json",
+      "windows": [
+        {
+          "activityInstanceId": "393614ef-82f7-4ccb-bdae-c1c630875932",
+          "taskIdObserved": 1000157,
+          "windowBoundsPx": [
+            0,
+            59,
+            2880,
+            1709
+          ],
+          "status": "pty-awaiting-resize",
+          "processInstanceId": "753ba776-90d8-487e-8785-5a508c586d7a",
+          "revision": 9,
+          "attemptCount": 6,
+          "latestAttemptId": "6ab6cf81-91c0-48c3-a37d-973db08565a5"
+        }
+      ]
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/device-02/success-second-observer-layout.json",
+      "windows": [
+        {
+          "activityInstanceId": "393614ef-82f7-4ccb-bdae-c1c630875932",
+          "taskIdObserved": 1000157,
+          "windowBoundsPx": [
+            0,
+            59,
+            2880,
+            1709
+          ],
+          "status": "pty-awaiting-resize",
+          "processInstanceId": "753ba776-90d8-487e-8785-5a508c586d7a",
+          "revision": 9,
+          "attemptCount": 6,
+          "latestAttemptId": "6ab6cf81-91c0-48c3-a37d-973db08565a5"
+        }
+      ]
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/device-02/success-two-observers-layout.json",
+      "windows": [
+        {
+          "activityInstanceId": "faa1b75e-0899-4e94-ad42-16a2e95510f0",
+          "taskIdObserved": 1000159,
+          "windowBoundsPx": [
+            403,
+            191,
+            2476,
+            1487
+          ],
+          "status": "pty-awaiting-resize",
+          "processInstanceId": "753ba776-90d8-487e-8785-5a508c586d7a",
+          "revision": 9,
+          "attemptCount": 6,
+          "latestAttemptId": "6ab6cf81-91c0-48c3-a37d-973db08565a5"
+        },
+        {
+          "activityInstanceId": "393614ef-82f7-4ccb-bdae-c1c630875932",
+          "taskIdObserved": 1000157,
+          "windowBoundsPx": [
+            0,
+            59,
+            2880,
+            1709
+          ],
+          "status": "pty-awaiting-resize",
+          "processInstanceId": "753ba776-90d8-487e-8785-5a508c586d7a",
+          "revision": 9,
+          "attemptCount": 6,
+          "latestAttemptId": "6ab6cf81-91c0-48c3-a37d-973db08565a5"
+        }
+      ]
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/device-02/success-before-original-close-layout.json",
+      "windows": [
+        {
+          "activityInstanceId": "faa1b75e-0899-4e94-ad42-16a2e95510f0",
+          "taskIdObserved": 1000159,
+          "windowBoundsPx": [
+            403,
+            191,
+            2476,
+            1487
+          ],
+          "status": "pty-awaiting-resize",
+          "processInstanceId": "753ba776-90d8-487e-8785-5a508c586d7a",
+          "revision": 9,
+          "attemptCount": 6,
+          "latestAttemptId": "6ab6cf81-91c0-48c3-a37d-973db08565a5"
+        },
+        {
+          "activityInstanceId": "393614ef-82f7-4ccb-bdae-c1c630875932",
+          "taskIdObserved": 1000157,
+          "windowBoundsPx": [
+            0,
+            59,
+            2880,
+            1709
+          ],
+          "status": "pty-awaiting-resize",
+          "processInstanceId": "753ba776-90d8-487e-8785-5a508c586d7a",
+          "revision": 9,
+          "attemptCount": 6,
+          "latestAttemptId": "6ab6cf81-91c0-48c3-a37d-973db08565a5"
+        }
+      ]
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/device-02/success-resize-layout.json",
+      "windows": [
+        {
+          "activityInstanceId": "faa1b75e-0899-4e94-ad42-16a2e95510f0",
+          "taskIdObserved": 1000159,
+          "windowBoundsPx": [
+            403,
+            191,
+            2476,
+            1487
+          ],
+          "status": "pty-awaiting-resize",
+          "processInstanceId": "753ba776-90d8-487e-8785-5a508c586d7a",
+          "revision": 9,
+          "attemptCount": 6,
+          "latestAttemptId": "6ab6cf81-91c0-48c3-a37d-973db08565a5"
+        }
+      ]
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/device-02/success-finish-layout.json",
+      "windows": [
+        {
+          "activityInstanceId": "faa1b75e-0899-4e94-ad42-16a2e95510f0",
+          "taskIdObserved": 1000159,
+          "windowBoundsPx": [
+            403,
+            191,
+            2476,
+            1487
+          ],
+          "status": "pty-awaiting-finish",
+          "processInstanceId": "753ba776-90d8-487e-8785-5a508c586d7a",
+          "revision": 11,
+          "attemptCount": 6,
+          "latestAttemptId": "6ab6cf81-91c0-48c3-a37d-973db08565a5"
+        }
+      ]
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/device-02/success-completed-layout.json",
+      "windows": [
+        {
+          "activityInstanceId": "faa1b75e-0899-4e94-ad42-16a2e95510f0",
+          "taskIdObserved": 1000159,
+          "windowBoundsPx": [
+            403,
+            191,
+            2476,
+            1487
+          ],
+          "status": "completed",
+          "processInstanceId": "753ba776-90d8-487e-8785-5a508c586d7a",
+          "revision": 13,
+          "attemptCount": 6,
+          "latestAttemptId": "6ab6cf81-91c0-48c3-a37d-973db08565a5"
+        }
+      ]
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/device-02/run-process-loss-layout.json",
+      "windows": [
+        {
+          "activityInstanceId": "faa1b75e-0899-4e94-ad42-16a2e95510f0",
+          "taskIdObserved": 1000159,
+          "windowBoundsPx": [
+            403,
+            191,
+            2476,
+            1487
+          ],
+          "status": "completed",
+          "processInstanceId": "753ba776-90d8-487e-8785-5a508c586d7a",
+          "revision": 13,
+          "attemptCount": 6,
+          "latestAttemptId": "6ab6cf81-91c0-48c3-a37d-973db08565a5"
+        }
+      ]
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/device-02/run-cancel-layout.json",
+      "windows": [
+        {
+          "activityInstanceId": "52022480-251d-42b7-b3a8-17dea8b82f7f",
+          "taskIdObserved": 1000160,
+          "windowBoundsPx": [
+            0,
+            59,
+            2880,
+            1709
+          ],
+          "status": "interrupted",
+          "processInstanceId": "c980803d-85ff-47dd-aa10-29425aebd96f",
+          "revision": 1,
+          "attemptCount": 7,
+          "latestAttemptId": "b1c9796e-ffc2-4b82-8337-68e7a8569716"
+        }
+      ]
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/device-02/cancel-active-layout.json",
+      "windows": [
+        {
+          "activityInstanceId": "52022480-251d-42b7-b3a8-17dea8b82f7f",
+          "taskIdObserved": 1000160,
+          "windowBoundsPx": [
+            0,
+            59,
+            2880,
+            1709
+          ],
+          "status": "pty-awaiting-resize",
+          "processInstanceId": "c980803d-85ff-47dd-aa10-29425aebd96f",
+          "revision": 9,
+          "attemptCount": 8,
+          "latestAttemptId": "ef14116c-e3e5-4812-ad6d-e435a4ea4273"
+        }
+      ]
+    },
+    {
+      "source": "qualification/results/private/ssh-probe/device-02/final-idle-layout.json",
+      "windows": [
+        {
+          "activityInstanceId": "52022480-251d-42b7-b3a8-17dea8b82f7f",
+          "taskIdObserved": 1000160,
+          "windowBoundsPx": [
+            0,
+            59,
+            2880,
+            1709
+          ],
+          "status": "cancelled",
+          "processInstanceId": "c980803d-85ff-47dd-aa10-29425aebd96f",
+          "revision": 10,
+          "attemptCount": 8,
+          "latestAttemptId": "ef14116c-e3e5-4812-ad6d-e435a4ea4273"
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "action": "open-ssh-060",
+      "source": "qualification/results/private/ssh-probe/device-02/open-ssh-060-tap-command.json",
+      "atHostUtc": "2026-10-15T11:00:45.469963+00:00",
+      "exitCode": 0,
+      "layoutSource": "qualification/results/private/ssh-probe/device-02/open-ssh-060-layout.json",
+      "resourceId": "dev.cloudy.qualification.baseline:id/open_ssh_probe",
+      "controlText": "Open SSH transport qualification",
+      "tapPx": [
+        1440,
+        336
+      ],
+      "controlBoundsPx": [
+        19,
+        297,
+        2861,
+        375
+      ],
+      "observedClickable": true,
+      "enabledStateInferred": false,
+      "layoutCaptureCommand": {
+        "source": "qualification/results/private/ssh-probe/device-02/open-ssh-060-layout-command.json",
+        "atHostUtc": "2026-10-15T11:00:45.422695+00:00",
+        "exitCode": 0
+      }
+    },
+    {
+      "action": "run-success",
+      "source": "qualification/results/private/ssh-probe/device-02/run-success-tap-command.json",
+      "atHostUtc": "2026-10-15T11:01:10.045265+00:00",
+      "exitCode": 0,
+      "layoutSource": "qualification/results/private/ssh-probe/device-02/run-success-layout.json",
+      "resourceId": "dev.cloudy.qualification.baseline:id/ssh_run_pty",
+      "controlText": "Run finite exec/PTY check",
+      "tapPx": [
+        1440,
+        473
+      ],
+      "controlBoundsPx": [
+        19,
+        434,
+        2861,
+        512
+      ],
+      "observedClickable": true,
+      "enabledStateInferred": false,
+      "layoutCaptureCommand": {
+        "source": "qualification/results/private/ssh-probe/device-02/run-success-layout-command.json",
+        "atHostUtc": "2026-10-15T11:01:10.000559+00:00",
+        "exitCode": 0
+      }
+    },
+    {
+      "action": "success-recreate",
+      "source": "qualification/results/private/ssh-probe/device-02/success-recreate-tap-command.json",
+      "atHostUtc": "2026-10-15T11:01:20.294015+00:00",
+      "exitCode": 0,
+      "layoutSource": "qualification/results/private/ssh-probe/device-02/success-recreate-layout.json",
+      "resourceId": "dev.cloudy.qualification.baseline:id/ssh_recreate",
+      "controlText": "Recreate SSH window",
+      "tapPx": [
+        1440,
+        1027
+      ],
+      "controlBoundsPx": [
+        19,
+        988,
+        2861,
+        1066
+      ],
+      "observedClickable": true,
+      "enabledStateInferred": false,
+      "layoutCaptureCommand": {
+        "source": "qualification/results/private/ssh-probe/device-02/success-recreate-layout-command.json",
+        "atHostUtc": "2026-10-15T11:01:20.253121+00:00",
+        "exitCode": 0
+      }
+    },
+    {
+      "action": "success-second-observer",
+      "source": "qualification/results/private/ssh-probe/device-02/success-second-observer-tap-command.json",
+      "atHostUtc": "2026-10-15T11:01:26.766658+00:00",
+      "exitCode": 0,
+      "layoutSource": "qualification/results/private/ssh-probe/device-02/success-second-observer-layout.json",
+      "resourceId": "dev.cloudy.qualification.baseline:id/ssh_new_window",
+      "controlText": "Open another SSH observer window",
+      "tapPx": [
+        1440,
+        1105
+      ],
+      "controlBoundsPx": [
+        19,
+        1066,
+        2861,
+        1144
+      ],
+      "observedClickable": true,
+      "enabledStateInferred": false,
+      "layoutCaptureCommand": {
+        "source": "qualification/results/private/ssh-probe/device-02/success-second-observer-layout-command.json",
+        "atHostUtc": "2026-10-15T11:01:26.720715+00:00",
+        "exitCode": 0
+      }
+    },
+    {
+      "action": "native-close-original-observer",
+      "source": "qualification/results/private/ssh-probe/device-02/success-close-original-input-command.json",
+      "atHostUtc": "2026-10-15T11:02:01.772176+00:00",
+      "exitCode": 0,
+      "layoutSource": "qualification/results/private/ssh-probe/device-02/success-before-original-close-layout.json",
+      "resourceId": "com.android.systemui:id/close_window",
+      "contentDescription": "Close Cloudy device baseline probe",
+      "tapPx": [
+        2821,
+        91
+      ],
+      "controlBoundsPx": [
+        2795,
+        65,
+        2847,
+        117
+      ],
+      "targetTaskIdObserved": 1000157,
+      "observedClickable": true,
+      "enabledStateInferred": false
+    },
+    {
+      "action": "success-resize",
+      "source": "qualification/results/private/ssh-probe/device-02/success-resize-tap-command.json",
+      "atHostUtc": "2026-10-15T11:02:02.909543+00:00",
+      "exitCode": 0,
+      "layoutSource": "qualification/results/private/ssh-probe/device-02/success-resize-layout.json",
+      "resourceId": "dev.cloudy.qualification.baseline:id/ssh_resize_pty",
+      "controlText": "Resize PTY to 132 \u00d7 43 and verify",
+      "tapPx": [
+        1439,
+        952
+      ],
+      "controlBoundsPx": [
+        422,
+        913,
+        2457,
+        991
+      ],
+      "observedClickable": true,
+      "enabledStateInferred": false,
+      "layoutCaptureCommand": {
+        "source": "qualification/results/private/ssh-probe/device-02/success-resize-layout-command.json",
+        "atHostUtc": "2026-10-15T11:02:02.860949+00:00",
+        "exitCode": 0
+      }
+    },
+    {
+      "action": "success-finish",
+      "source": "qualification/results/private/ssh-probe/device-02/success-finish-tap-command.json",
+      "atHostUtc": "2026-10-15T11:02:12.573125+00:00",
+      "exitCode": 0,
+      "layoutSource": "qualification/results/private/ssh-probe/device-02/success-finish-layout.json",
+      "resourceId": "dev.cloudy.qualification.baseline:id/ssh_finish_pty",
+      "controlText": "Finish PTY exchange",
+      "tapPx": [
+        1439,
+        1030
+      ],
+      "controlBoundsPx": [
+        422,
+        991,
+        2457,
+        1069
+      ],
+      "observedClickable": true,
+      "enabledStateInferred": false,
+      "layoutCaptureCommand": {
+        "source": "qualification/results/private/ssh-probe/device-02/success-finish-layout-command.json",
+        "atHostUtc": "2026-10-15T11:02:12.525066+00:00",
+        "exitCode": 0
+      }
+    },
+    {
+      "action": "run-process-loss",
+      "source": "qualification/results/private/ssh-probe/device-02/run-process-loss-tap-command.json",
+      "atHostUtc": "2026-10-15T11:02:24.226813+00:00",
+      "exitCode": 0,
+      "layoutSource": "qualification/results/private/ssh-probe/device-02/run-process-loss-layout.json",
+      "resourceId": "dev.cloudy.qualification.baseline:id/ssh_run_pty",
+      "controlText": "Run finite exec/PTY check",
+      "tapPx": [
+        1439,
+        632
+      ],
+      "controlBoundsPx": [
+        422,
+        593,
+        2457,
+        671
+      ],
+      "observedClickable": true,
+      "enabledStateInferred": false,
+      "layoutCaptureCommand": {
+        "source": "qualification/results/private/ssh-probe/device-02/run-process-loss-layout-command.json",
+        "atHostUtc": "2026-10-15T11:02:24.183677+00:00",
+        "exitCode": 0
+      }
+    },
+    {
+      "action": "loss-reopen-ssh",
+      "source": "qualification/results/private/ssh-probe/device-02/loss-reopen-ssh-tap-command.json",
+      "atHostUtc": "2026-10-15T11:03:07.111612+00:00",
+      "exitCode": 0,
+      "layoutSource": "qualification/results/private/ssh-probe/device-02/loss-reopen-ssh-layout.json",
+      "resourceId": "dev.cloudy.qualification.baseline:id/open_ssh_probe",
+      "controlText": "Open SSH transport qualification",
+      "tapPx": [
+        1440,
+        336
+      ],
+      "controlBoundsPx": [
+        19,
+        297,
+        2861,
+        375
+      ],
+      "observedClickable": true,
+      "enabledStateInferred": false,
+      "layoutCaptureCommand": {
+        "source": "qualification/results/private/ssh-probe/device-02/loss-reopen-ssh-layout-command.json",
+        "atHostUtc": "2026-10-15T11:03:07.061867+00:00",
+        "exitCode": 0
+      }
+    },
+    {
+      "action": "run-cancel",
+      "source": "qualification/results/private/ssh-probe/device-02/run-cancel-tap-command.json",
+      "atHostUtc": "2026-10-15T11:03:15.413911+00:00",
+      "exitCode": 0,
+      "layoutSource": "qualification/results/private/ssh-probe/device-02/run-cancel-layout.json",
+      "resourceId": "dev.cloudy.qualification.baseline:id/ssh_run_pty",
+      "controlText": "Run finite exec/PTY check",
+      "tapPx": [
+        1440,
+        473
+      ],
+      "controlBoundsPx": [
+        19,
+        434,
+        2861,
+        512
+      ],
+      "observedClickable": true,
+      "enabledStateInferred": false,
+      "layoutCaptureCommand": {
+        "source": "qualification/results/private/ssh-probe/device-02/run-cancel-layout-command.json",
+        "atHostUtc": "2026-10-15T11:03:15.367933+00:00",
+        "exitCode": 0
+      }
+    },
+    {
+      "action": "cancel-active",
+      "source": "qualification/results/private/ssh-probe/device-02/cancel-active-tap-command.json",
+      "atHostUtc": "2026-10-15T11:03:24.677344+00:00",
+      "exitCode": 0,
+      "layoutSource": "qualification/results/private/ssh-probe/device-02/cancel-active-layout.json",
+      "resourceId": "dev.cloudy.qualification.baseline:id/ssh_cancel",
+      "controlText": "Cancel SSH operation",
+      "tapPx": [
+        1440,
+        715
+      ],
+      "controlBoundsPx": [
+        19,
+        676,
+        2861,
+        754
+      ],
+      "observedClickable": true,
+      "enabledStateInferred": false,
+      "layoutCaptureCommand": {
+        "source": "qualification/results/private/ssh-probe/device-02/cancel-active-layout-command.json",
+        "atHostUtc": "2026-10-15T11:03:24.629570+00:00",
+        "exitCode": 0
+      }
+    }
+  ],
+  "uiBoundary": "Only own-app identity/status and selected control projections are public. Raw layouts have no reliable enabled attribute; clickable is not treated as enabled. All taps are ADB-injected, not physical input qualification.",
+  "processLoss": {
+    "source": "qualification/results/private/ssh-probe/device-02/process-loss-action.json",
+    "stimulus": "ADB-injected SIGKILL of the verified own-package process",
+    "identityVerifiedBeforeKill": true,
+    "targetPidMatchedObservedOwnPackagePid": true,
+    "identityCheckedAtHostUtc": "2026-10-15T11:02:53.215175+00:00",
+    "killCompletedAtHostUtc": "2026-10-15T11:02:53.291580+00:00",
+    "killExitCode": 0,
+    "absenceSamples": [
+      {
+        "atHostUtc": "2026-10-15T11:02:53.322923+00:00",
+        "exitCode": 1,
+        "packagePidOutputEmpty": true,
+        "secondsAfterKillCommandCompleted": 0.031343
+      },
+      {
+        "atHostUtc": "2026-10-15T11:02:53.660054+00:00",
+        "exitCode": 1,
+        "packagePidOutputEmpty": true,
+        "secondsAfterKillCommandCompleted": 0.368474
+      },
+      {
+        "atHostUtc": "2026-10-15T11:02:54.700736+00:00",
+        "exitCode": 1,
+        "packagePidOutputEmpty": true,
+        "secondsAfterKillCommandCompleted": 1.409156
+      }
+    ],
+    "continuousAbsenceMonitoring": false,
+    "newObservedPidDiffers": true,
+    "oldProcessInstanceId": "753ba776-90d8-487e-8785-5a508c586d7a",
+    "newProcessInstanceId": "c980803d-85ff-47dd-aa10-29425aebd96f",
+    "historicalJournalByteUnchangedBeforeRelaunch": true,
+    "historicalSources": [
+      "qualification/results/private/ssh-probe/device-02/loss-immediate-before-journal.json",
+      "qualification/results/private/ssh-probe/device-02/loss-before-relaunch-journal.json"
+    ],
+    "relaunch": {
+      "source": "qualification/results/private/ssh-probe/device-02/loss-relaunch-command.json",
+      "atHostUtc": "2026-10-15T11:03:06.035507+00:00",
+      "exitCode": 0
+    },
+    "reconciliationSource": "qualification/results/private/ssh-probe/device-02/loss-reconciled-journal.json",
+    "sameAttemptReconciledWithoutNewAttempt": true,
+    "hostAuthSessionCountsBeforeAndAfterReconcile": [
+      2,
+      4
+    ],
+    "boundary": "A bounded injected kill/relaunch observation, not natural LMK, reboot, force-stop, guaranteed uninterrupted PID absence or a sustained no-replay soak"
+  },
+  "cleanup": {
+    "serverControllers": [
+      {
+        "source": "qualification/results/private/ssh-probe/host-03/preflight-01-stopped.json",
+        "atHostUtc": "2026-10-15T10:56:12.942675+00:00",
+        "serverExitCode": 0,
+        "listenerClosed": true
+      },
+      {
+        "source": "qualification/results/private/ssh-probe/host-03/preflight-02-stopped.json",
+        "atHostUtc": "2026-10-15T10:56:36.744049+00:00",
+        "serverExitCode": 0,
+        "listenerClosed": true
+      },
+      {
+        "source": "qualification/results/private/ssh-probe/host-03/preflight-03-stopped.json",
+        "atHostUtc": "2026-10-15T10:57:17.255808+00:00",
+        "serverExitCode": 0,
+        "listenerClosed": true
+      },
+      {
+        "source": "qualification/results/private/ssh-probe/host-03/device-01-stopped.json",
+        "atHostUtc": "2026-10-15T11:03:37.743585+00:00",
+        "serverExitCode": 0,
+        "listenerClosed": true
+      }
+    ],
+    "finalRuntimeSource": "qualification/results/private/ssh-probe/device-02/final-runtime-inspection.json",
+    "atHostUtc": "2026-10-15T11:04:22.009743+00:00",
+    "namedOwnedHelperThreads": [],
+    "threadBoundary": "No threads named cloudy-ssh-* in this final observation; not a claim that all SSHJ/system threads are absent",
+    "finalHostLiveFixtureProcessCount": 0,
+    "finalJournalRevision": 10,
+    "retainedAttempts": 8,
+    "attemptCapacity": 8,
+    "cancelledAndFinalJournalByteEqual": true,
+    "journalArchivedOrReset": false,
+    "finalScreenshotSource": "qualification/results/private/ssh-probe/device-02/final-060.png",
+    "screenshotInspection": "Primary operator and evidence author inspected the actual cancelled UI; image remains private"
+  },
+  "hostPreflight": {
+    "source": "qualification/results/private/ssh-probe/host-03/preflight03-result.json",
+    "passed": true,
+    "execExit": 17,
+    "execStdoutBytes": 19,
+    "execStderrBytes": 19,
+    "ptyExit": 0,
+    "ptyBytes": 62,
+    "ptySha256": "2a1d94e913eac24e63ee3455706198abc39eb51033b4e5a7eb659a94771d21f1",
+    "initial": [
+      80,
+      24
+    ],
+    "resized": [
+      132,
+      43
+    ],
+    "atUtc": "2026-10-15T10:56:46.830085+00:00",
+    "streamArtifacts": [
+      {
+        "path": "qualification/results/private/ssh-probe/host-03/preflight03-exec.stdout",
+        "bytes": 19,
+        "sha256": "66a606a71a67baef12910e3efd5c0ad4bcdeabecdc9dae790bf0f505f811438d"
+      },
+      {
+        "path": "qualification/results/private/ssh-probe/host-03/preflight03-exec.stderr",
+        "bytes": 19,
+        "sha256": "4753e7ad67b9d485cc6b1e1cdf7c36d2e6d673c1ce894348c96f4dc41147238b"
+      },
+      {
+        "path": "qualification/results/private/ssh-probe/host-03/preflight03-pty.stdout",
+        "bytes": 62,
+        "sha256": "2a1d94e913eac24e63ee3455706198abc39eb51033b4e5a7eb659a94771d21f1"
+      }
+    ],
+    "earlierAuditFilesExcludedFromDeviceCounts": [
+      "channel-0d42b160-a606-457d-b78b-f958fa38dd0f.jsonl",
+      "channel-37405a2f-2969-4011-855f-945b57ea605b.jsonl",
+      "channel-9a38cb8c-9267-4873-8567-96160cdbc5b7.jsonl",
+      "channel-dd0c3c0f-301b-4dd9-a7c9-3dfc237976b8.jsonl"
+    ],
+    "environmentBoundary": "Sandboxed PTY allocation failed on device-node group ownership; authorized same non-root fixture outside sandbox passed. This preflight is separate from all three Android attempts."
+  },
+  "remaining": [
+    "Physical keyboard/mouse and native IME",
+    "Renderer, ANSI, accessibility and focus release",
+    "Last-observer hide/close cancellation and continuous hidden-session classification",
+    "Permission revocation, live rekey mismatch and network failure cases",
+    "Tunnels/jump channels, X11 and product integration",
+    "Broader hosts, key types, algorithm policy, throughput and sustained reliability"
+  ],
+  "privacy": {
+    "rawUiPublished": false,
+    "endpointOrUsernamePublished": false,
+    "hostKeyFingerprintPublished": false,
+    "keyMaterialOrPrivateKeyDigestPublished": false,
+    "processNumericIdsPublished": false
+  },
+  "privateArtifacts": [
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/cancel-active-layout-command.json",
+      "bytes": 582,
+      "sha256": "c04b5a1b1dd4cd3b20ad9a2cd8393763a7084fd839f84269c16b87625936a7e1"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/cancel-active-layout.json",
+      "bytes": 36654,
+      "sha256": "d1189df4b55f25603b40b7340e72936b54087cbb50f1dd2e528b5e7d4861d06b"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/cancel-active-tap-command.json",
+      "bytes": 218,
+      "sha256": "48a79c9c489c636f4b61e4c9b7e21e190fab55f9dd04f001eb542ccb12d4b192"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/cancel-waiting-journal.json",
+      "bytes": 23135,
+      "sha256": "6864368b93483baeaffd1d76a07585071c70bb0aaf449aacdeda663dd198a6ee"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/cancelled-journal.json",
+      "bytes": 23309,
+      "sha256": "49b888efcf0c91ebabe7b1044ed22b5c7b99bcb0e175026a01c1f71afa99d664"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/deploy-060-deployment.json",
+      "bytes": 192,
+      "sha256": "8d5fe53cc5ff4ad753cce76cdd88065df02462e28ef58c9ddcb031d3680f5d4a"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/deploy-060-install-command.json",
+      "bytes": 466,
+      "sha256": "c36884ac4edadaae16745248ff89375534196d0d85ce2a5a5abcf17d604bf1d1"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/deploy-060-launch-command.json",
+      "bytes": 587,
+      "sha256": "1d2154015857b46e3afab21977f199dfeb88dee1460d8b89b5bcbb6b2745ba9e"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/final-060-screen-command.json",
+      "bytes": 560,
+      "sha256": "83a5a63e9a88f64cbcc4ad99025d9b371375b5d3915f72df2b933367e92897fa"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/final-060.png",
+      "bytes": 325397,
+      "sha256": "c73e1c809dc004f83016062441b900133278c95670a55a41bb5ea699ad19a172"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/final-cleanup-journal.json",
+      "bytes": 23309,
+      "sha256": "49b888efcf0c91ebabe7b1044ed22b5c7b99bcb0e175026a01c1f71afa99d664"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/final-idle-layout.json",
+      "bytes": 36838,
+      "sha256": "6e8b58b3ff9f7ab1c3972b7bfbf70c5b79d412b9d57373397f9f4494860f3586"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/final-runtime-inspection.json",
+      "bytes": 1155,
+      "sha256": "c1495e9de01be98b5434257692f6798344ce79b28e7b023fb693445810f405ee"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/loss-before-relaunch-journal.json",
+      "bytes": 19894,
+      "sha256": "0aaef727e1967cec81d2704ba923a45c7250cb4a23f8344366d0f4acd3bac9a9"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/loss-immediate-before-journal.json",
+      "bytes": 19894,
+      "sha256": "0aaef727e1967cec81d2704ba923a45c7250cb4a23f8344366d0f4acd3bac9a9"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/loss-reconciled-journal.json",
+      "bytes": 20112,
+      "sha256": "c4d1060bd4c01db707f93a8eb403be2b3a5f0028ed02ef06d0543b65f78091bf"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/loss-relaunch-command.json",
+      "bytes": 443,
+      "sha256": "0bac21b84ff0650f28dd4822fa73d0a005e423a72969da8631da833f9d0bdeef"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/loss-reopen-ssh-layout-command.json",
+      "bytes": 586,
+      "sha256": "4328a79f9e81cd75935050811f0a2330d757208a95daa5ad571be1f94caf1d22"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/loss-reopen-ssh-layout.json",
+      "bytes": 27010,
+      "sha256": "b95512f0c30d75f1e628bbc35ddfb170d1d72b9d5dee644c3770948ed8a5aa2f"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/loss-reopen-ssh-tap-command.json",
+      "bytes": 218,
+      "sha256": "6a3d8a4711bb7228900ae74b0d8d88708b176f60cfc9bd21d69f30e9df669618"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/loss-waiting-journal.json",
+      "bytes": 19894,
+      "sha256": "0aaef727e1967cec81d2704ba923a45c7250cb4a23f8344366d0f4acd3bac9a9"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/migrated-idle-journal.json",
+      "bytes": 12883,
+      "sha256": "a363eea40acfa49752962b9ee868238d94262995c52643eca568f1da3aa9ba74"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/migrated-idle-layout.json",
+      "bytes": 25287,
+      "sha256": "6d89e013d8f48b2707eb32628912ee3117aeb0c5099de8d48edbed304b32b6b1"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/migration-verification.json",
+      "bytes": 106,
+      "sha256": "46c70a8dc3aae08a18e2d20bbb607024654a3025edf6b1ff1a084ab54368493f"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/open-ssh-060-layout-command.json",
+      "bytes": 580,
+      "sha256": "0c2760f3d7da318f145e03bdd0286fcb39ec3919da2de7f7d0ddfe457f4688f0"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/open-ssh-060-layout.json",
+      "bytes": 26428,
+      "sha256": "fe6cf6a53d36cb47d7d3374fc6706a8990affabb7e6605855945630cbc59175b"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/open-ssh-060-tap-command.json",
+      "bytes": 218,
+      "sha256": "871455b135be18071fe99b3d49df5e1448f180ee5636f678c2bb72893b04dfe8"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/pre-upgrade-050-journal.json",
+      "bytes": 12372,
+      "sha256": "bf54bba0447c0d38edbfdc8cd20ade59885eb1885cea3c2ea2b2bb8ab2591588"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/process-loss-action.json",
+      "bytes": 1872,
+      "sha256": "8d57b9781bfcd143e3e6e6c0c8b0988ac6268dd636457a0f21adca070fcb6941"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/run-cancel-layout-command.json",
+      "bytes": 576,
+      "sha256": "d1003ec9161cff20554add1242257de6bb3e564ba3cb53586b60376143001e64"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/run-cancel-layout.json",
+      "bytes": 33295,
+      "sha256": "af06752b55ac5c67bc070ceaaee2db4878e6e18766a9a14ceebe81796e6f45f2"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/run-cancel-tap-command.json",
+      "bytes": 218,
+      "sha256": "8cf5517e73505e7ec2ca289a851ec6456e460262f14225d804fe1e53e91e03ab"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/run-process-loss-layout-command.json",
+      "bytes": 588,
+      "sha256": "85fe5a2d8630b494cf4b4fa213852195e7fa06db2a7eaf85d856bffca7d9deef"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/run-process-loss-layout.json",
+      "bytes": 37420,
+      "sha256": "9da45596426fdfc2f1192d4b5e992106a52f84868181e9ffde3813d1f8f3db31"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/run-process-loss-tap-command.json",
+      "bytes": 218,
+      "sha256": "e08b2a721464fe8a51157bcf3f397390be7b30d396c8908058f12e7c45022daf"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/run-success-layout-command.json",
+      "bytes": 578,
+      "sha256": "5960ade739ae6f1657a305154b5b4ababb3a98bf5f202453280d5da32d0fe6d6"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/run-success-layout.json",
+      "bytes": 25287,
+      "sha256": "fe29a90d86bdef6f3a6c3c8ed8b45c6c85712062be915f471a81cddb5944081a"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/run-success-tap-command.json",
+      "bytes": 218,
+      "sha256": "0ddb6933277d05586015fe1b29fcff8f56a33fdf394568189db11699143574b2"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/success-before-original-close-layout.json",
+      "bytes": 52053,
+      "sha256": "83fd901ddd89be41fcd6455d92fe5eb90e6bf2aa85c8275b760a04d030d1a36e"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/success-close-original-input-command.json",
+      "bytes": 217,
+      "sha256": "81a18469112103bec10d144b6f070b1a2e79fbd0847f143b302fb0e8cef86aae"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/success-completed-journal.json",
+      "bytes": 16871,
+      "sha256": "0731ffee4adffb3363dabae258a7aba72ccbd88db7c1aa7483573e4c4109ea9a"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/success-completed-layout.json",
+      "bytes": 37420,
+      "sha256": "9da45596426fdfc2f1192d4b5e992106a52f84868181e9ffde3813d1f8f3db31"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/success-finish-layout-command.json",
+      "bytes": 584,
+      "sha256": "1218a0e1c6f78e5e96a4c845b76421660e0936f4920b8e23a171ebd3348fecc6"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/success-finish-layout.json",
+      "bytes": 36858,
+      "sha256": "d85cb6a7bd6eb35ea46dbc128c70e2665de9222bded32bf5ec68ebad18ae0864"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/success-finish-tap-command.json",
+      "bytes": 219,
+      "sha256": "7afdca5788e8969c88db04e874f4e2a24eed943daa06273cc2f7f82993f77153"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/success-recreate-layout-command.json",
+      "bytes": 588,
+      "sha256": "38f2bdb98616ac111785966057e882de8b3384f00fab164f59209f0af3e324b0"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/success-recreate-layout.json",
+      "bytes": 28648,
+      "sha256": "b947a762bead357fed53e2f9449974d970179ee622474958f952e89e03862d66"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/success-recreate-tap-command.json",
+      "bytes": 219,
+      "sha256": "60b0e4746e16c91c05ca3e6bd2c91bdfa63857439889b48bf148f005a0e01290"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/success-recreated-layout.json",
+      "bytes": 28648,
+      "sha256": "79eb0dc81fae5dfdedba790b86c3be55b14385ae0eb46aa353a28811d0045b28"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/success-resize-layout-command.json",
+      "bytes": 584,
+      "sha256": "67eeb8488c03c0637a8d904f9c2d6bf9f4915060345fe42c8a4f2bba2246add5"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/success-resize-layout.json",
+      "bytes": 36364,
+      "sha256": "2db40e244010965ffb2c22af98fcc51ca38a3ab94536fcd5d93fc0c50905fa03"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/success-resize-tap-command.json",
+      "bytes": 218,
+      "sha256": "1f8f9c20dc5e6460cc0facc996d054e6e896059ec6d70f8fbcd2ccb98174165b"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/success-resized-journal.json",
+      "bytes": 16350,
+      "sha256": "1f88ebd40463bb8ef83d69e58fac3e573734c1db42d15ffa6ab3c07581b39b06"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/success-second-observer-layout-command.json",
+      "bytes": 602,
+      "sha256": "9eb062ec66927b83fdcdd786b2128c05551b3e784b8ecb2f88f7e245d80bc4b9"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/success-second-observer-layout.json",
+      "bytes": 28648,
+      "sha256": "79eb0dc81fae5dfdedba790b86c3be55b14385ae0eb46aa353a28811d0045b28"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/success-second-observer-tap-command.json",
+      "bytes": 219,
+      "sha256": "da76a4367b43ef1e7182d9215783b69120343e3fa9967717b449a2346add4eb5"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/success-two-observers-journal.json",
+      "bytes": 15906,
+      "sha256": "d0a60f3c5c73f88cee4c2bf0de095d06e434e5b4a558ab713bf42907a4a3a1df"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/success-two-observers-layout.json",
+      "bytes": 52053,
+      "sha256": "83fd901ddd89be41fcd6455d92fe5eb90e6bf2aa85c8275b760a04d030d1a36e"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/success-waiting-journal.json",
+      "bytes": 15906,
+      "sha256": "d0a60f3c5c73f88cee4c2bf0de095d06e434e5b4a558ab713bf42907a4a3a1df"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-02/tested-0.6.0-af9deae.apk",
+      "bytes": 15827911,
+      "sha256": "4f673be2ca5c0f2f4dcf9659645c827885f3aa4ee0952405d64d5f4c3d1a4f40"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/audit/channel-0d42b160-a606-457d-b78b-f958fa38dd0f.jsonl",
+      "bytes": 1474,
+      "sha256": "0ff4c2da3ab0b6de242c5725be9aaef44ab75a85c2204f9357232418cea8146f"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/audit/channel-37405a2f-2969-4011-855f-945b57ea605b.jsonl",
+      "bytes": 583,
+      "sha256": "87871c862b092dca3ee9d1ebac4d2d91b767fa429792cf207067cdc01683c789"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/audit/channel-46c687b0-fa33-43fb-9a82-ab05b116994a.jsonl",
+      "bytes": 1486,
+      "sha256": "fd993fe82bbbd3658fff235c9fdb9e6d78c1175f3c7a8478ef804eeddfe4a087"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/audit/channel-529d90e3-ab1f-444d-9f0e-5488b3743c2e.jsonl",
+      "bytes": 836,
+      "sha256": "2059dda57c1a4f24668b01f45c94626ca17f08a17531c44c21b8c4dd33f2401e"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/audit/channel-6dd0b2ae-8230-4d0d-a988-0fef274e739b.jsonl",
+      "bytes": 836,
+      "sha256": "5311a0c9a13c1df085a57097d6092d954e8297fe241ac2f9871323f3fddb883c"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/audit/channel-9a38cb8c-9267-4873-8567-96160cdbc5b7.jsonl",
+      "bytes": 582,
+      "sha256": "3ba87e335f427da3858180571a1434b92b470392920ab6296e04659598464a59"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/audit/channel-b8a89b7c-e076-44a8-9b74-d60530d3d0ce.jsonl",
+      "bytes": 583,
+      "sha256": "3e1f0e3cbb48c4aa9f7a016ae8470fae142d71eaf3d67926fa1e4c8a48cc7f6f"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/audit/channel-cb637484-fa56-489d-9443-46ef3f5324c1.jsonl",
+      "bytes": 582,
+      "sha256": "74088fb5989b1bdd6c390992485e5c358706e00dc3d02e7a26e778a7b900b2f4"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/audit/channel-d0420a24-dbd5-4af9-9886-f08fad5afa90.jsonl",
+      "bytes": 583,
+      "sha256": "da7002e145657c7b8f511a114c0b1ceb7b24ce91aff78ed85feb98a4adc14f24"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/audit/channel-dd0c3c0f-301b-4dd9-a7c9-3dfc237976b8.jsonl",
+      "bytes": 581,
+      "sha256": "488f3d1ed721558b27070115357862ca8d67abd83df0b2683336f4bbf2962f47"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/cancel-waiting-observation.json",
+      "bytes": 14820,
+      "sha256": "56b8f0c85572c52a790ac208b7da83215f3c37b0340e8ebeab4918faae0c7e7f"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/cancelled-observation.json",
+      "bytes": 15014,
+      "sha256": "f8b27226d40a24ab72e0e2137b9e4206b25267f744f5f8e602f12685ca8ddcd2"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/device-01-server.log",
+      "bytes": 5256,
+      "sha256": "fda1c3edf80c6da8adfd266a52400f6a6ba27fc6e7f833a5ad61aef3309bab9d"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/device-01-started.json",
+      "bytes": 159,
+      "sha256": "3e3de5b704bec2758841dfe57e7156d6118fd3122aa72079e6f08856aa511305"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/device-01-stopped.json",
+      "bytes": 123,
+      "sha256": "43b18687c65f9e84f36f9e3a23e5619a1127e3b4b2d8f69f2d2e9a7e8997b6dd"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/final-cleanup-observation.json",
+      "bytes": 15014,
+      "sha256": "6d4c258031372d2de8a04ef0c22cc71f7acf67e022c04800bf700ca8b27093bc"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/loss-before-relaunch-observation.json",
+      "bytes": 12375,
+      "sha256": "f81b61d1ea4d68588749bb6a5ea10998d933faa10d944566d97e95271e74fd42"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/loss-reconciled-observation.json",
+      "bytes": 12375,
+      "sha256": "6a1af7f046e6066ca2f9f40f667a9c35e2e2cfbca83b96ebd71db09b16b2ba26"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/loss-waiting-observation.json",
+      "bytes": 12179,
+      "sha256": "c9ed7921295fb15f090be5a8b0d5c71e2e82bf94922b62fc9221c709c7b6122a"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/migrated-idle-observation.json",
+      "bytes": 6036,
+      "sha256": "5129e242920ed61cc074c9f6bc81ae3cafb505c05dc7efd7bada38a9e4236ea3"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/preflight-01-server.log",
+      "bytes": 2307,
+      "sha256": "af173033f3387f64f3d7eb6925c0749e426d4b6a6a2a82f95b9de039e84d32f9"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/preflight-01-started.json",
+      "bytes": 162,
+      "sha256": "ab3f4b2fc5abd730bd2916c076f2790145978b7ad44528a8940dcb0d8a81fbbe"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/preflight-01-stopped.json",
+      "bytes": 126,
+      "sha256": "a2bbe5fcd6ba6532261d791e3f4d6287606b25e6211dabff9f7242546a0055e6"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/preflight-02-server.log",
+      "bytes": 2095,
+      "sha256": "75f0267aa3b0d489b96afd07daf4e67ab4d186905f0b8324a028970683c258ad"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/preflight-02-started.json",
+      "bytes": 162,
+      "sha256": "9457573e32166b7caacfc76a9fc0ff30b87809e86915c27534dd1324769754ff"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/preflight-02-stopped.json",
+      "bytes": 126,
+      "sha256": "72bf7e2ae4a43ff6781236beee0019433da4a69d3c723f69dfb5d13ff5a126c4"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/preflight-03-server.log",
+      "bytes": 2580,
+      "sha256": "e4b986b7eb44a672e44d16fc3ef73917ecf2c4305656addcd8194033f2e4a662"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/preflight-03-started.json",
+      "bytes": 162,
+      "sha256": "03099448aa1bc520c6a18f445eadc19d369cc3e987ea95a5a78b367134d3aff9"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/preflight-03-stopped.json",
+      "bytes": 126,
+      "sha256": "12f82be73a483cec04bd864afc2f95b3139b078c6900c5dfd5bb77b3a3e7e1e0"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/preflight03-exec.stderr",
+      "bytes": 19,
+      "sha256": "4753e7ad67b9d485cc6b1e1cdf7c36d2e6d673c1ce894348c96f4dc41147238b"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/preflight03-exec.stdout",
+      "bytes": 19,
+      "sha256": "66a606a71a67baef12910e3efd5c0ad4bcdeabecdc9dae790bf0f505f811438d"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/preflight03-pty.stdout",
+      "bytes": 62,
+      "sha256": "2a1d94e913eac24e63ee3455706198abc39eb51033b4e5a7eb659a94771d21f1"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/preflight03-result.json",
+      "bytes": 462,
+      "sha256": "89dacbba3c5e0d0bb3e38d6810e2d9635628cdcd199833454694a1535e863b6e"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/success-completed-observation.json",
+      "bytes": 9735,
+      "sha256": "c7966f3a66f8cd602927f2e2018544a6021c87ea01b9170bdd74f86ff30a646d"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/success-resized-observation.json",
+      "bytes": 9284,
+      "sha256": "2a4cf86e70c29d2ee381dcc9268e7b8a5b4e2ff7f64ece12a9d3c21092fc6c2b"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/success-two-observers-observation.json",
+      "bytes": 8482,
+      "sha256": "238bc4799ca11ae352d7eede14fed5635d50fcd1377f3dbe707609b80a1f638f"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/success-waiting-observation.json",
+      "bytes": 8482,
+      "sha256": "2f527c893fa460431101eda823d58882902263676eb287c1ad4eaf3e67311512"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-03/tested-fixture-af9deae.py",
+      "bytes": 13666,
+      "sha256": "e771898736e4bc9ef99a866ac4dea2c2fe3a5eec8a906fcd7a2c583c0019436f"
+    }
+  ],
+  "counts": {
+    "privateArtifacts": 98,
+    "attempts": 3,
+    "attemptEvents": 30,
+    "journalCheckpoints": 13,
+    "hostObservations": 11,
+    "deviceChannelAudits": 6,
+    "deviceAuditEvents": 24,
+    "windowLayouts": 14,
+    "ownWindowProjections": 16,
+    "actions": 11
+  }
+}
