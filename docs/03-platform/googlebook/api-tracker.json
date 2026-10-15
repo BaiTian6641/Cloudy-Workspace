@@ -762,20 +762,27 @@
         "R146",
         "G127",
         "R147",
-        "R148"
+        "R148",
+        "R150",
+        "R151",
+        "R152",
+        "R153",
+        "R154",
+        "R155"
       ],
       "minimumApi": null,
       "libraryVersion": "FreeRDP3.32.2 native build, 97eff6ddfbbfaa8e42a126d362686bd001ff8bdc",
       "interfaceKind": "upstream-client-and-standard",
-      "availability": "Pinned arm64 native/JNI diagnostic APK compiled and loaded on HP Googlebook; actual RDP sessions remain unqualified",
-      "qualification": "untested",
+      "availability": "Pinned arm64 diagnostic: actual wrong-pin rejection and pinned NLA connection on HP Googlebook; no displayed frames/input and no supported RDP capability",
+      "qualification": "partial",
       "checkedOn": "2026-10-15",
       "owner": "Android/integration developer",
       "stage": "P3-S7",
       "fallback": "Explicit engine remediation; external viewer is partial and cannot complete the integrated RDP requirement",
-      "experiment": "Carry forward accepted APK packaging/loading and actual patched queue checks. Exercise actual external certificate callback rejection, NLA, changing frames, keyboard/pointer/text, focus release, cancellation/join and negotiated decoder/transport against the scoped KDE fixture. No server or RemoteApp support inferred from loading.",
+      "experiment": "Carry forward actual pin rejection/NLA and cleanup/reconciliation evidence. Persist missing first-callback failure context, then identify adapter failure before changing bounds. Qualify real changing pixels, decoder layout, input/focus and explicit cancellation/cleanup. RemoteApp remains untested.",
       "researchEvidence": "docs/03-platform/googlebook/p0-s4-native-desktop-entry.md",
-      "compileEvidence": "qualification/results/P0-S4/2026-10-15-rdp-apk-load.md"
+      "compileEvidence": "qualification/results/P0-S4/2026-10-15-rdp-apk-load.md",
+      "deviceEvidence": "qualification/results/P0-S4/2026-10-15-rdp-first-sessions.md"
     },
     {
       "id": "API31",

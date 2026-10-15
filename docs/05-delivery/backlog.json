@@ -223,7 +223,7 @@
         "P0-S2"
       ],
       "tasks": [
-        "Pin Sunshine/Moonlight and prove external handoff; select buildable RDP/VNC engine candidates and record actual server/encoding/security negotiation. Use the reviewed native entry brief: FreeRDP3.32.2 arm64 MediaCodec diagnostic APK builds/loads on the HP Googlebook; actual certificate/NLA/framebuffer/input/cancel and existing-Wayland KDE fixture remain next; LibVNC 98aaee0560baa0332339b2ef464ea96ed9b9b28c contains the three identified fixes, with focused advisory regressions and Android build/integration before its network probe.",
+        "Pin Sunshine/Moonlight and prove external handoff; select buildable RDP/VNC engine candidates and record actual server/encoding/security negotiation. Use the reviewed native entry brief: FreeRDP3.32.2 arm64 MediaCodec diagnostic APK builds/loads on the HP Googlebook; actual wrong-pin rejection/NLA connection and failure cleanup are observed; preserve callback error context and resolve zero-frame adapter failure before framebuffer/input/cancel acceptance; LibVNC 98aaee0560baa0332339b2ef464ea96ed9b9b28c contains the three identified fixes, with focused advisory regressions and Android build/integration before its network probe.",
         "Exercise trackpad and external mouse in real CAD and text/desktop workloads; verify focus-loss release and native IME/keyboard paths.",
         "Enumerate codecs and optional API-30 low-latency support; measure native decode/pacing/text quality, power and input-to-photon baseline.",
         "Test primary host sessions, lock/headless/permissions, RDP certificate/NLA requirements and protected VNC routes; record unsupported cases and dependencies.",
@@ -265,7 +265,13 @@
         "R143",
         "R144",
         "R145",
-        "R146"
+        "R146",
+        "R150",
+        "R151",
+        "R152",
+        "R153",
+        "R154",
+        "R155"
       ],
       "acceptanceCases": [
         "Q-D01",

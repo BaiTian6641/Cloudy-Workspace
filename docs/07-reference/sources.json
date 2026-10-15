@@ -3458,7 +3458,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "ExternalCertificateManagement and VerifyX509Certificate direct branch: reject0, accept1 in current TLS state. Pin first leaf DER; no cert-ignore/fingerprint shortcut. Diagnostic adapter implemented; actual callback/session pending. P0-S4/API30.",
+      "note": "ExternalCertificateManagement/VerifyX509Certificate direct branch: reject0/accept1 in current TLS state. Actual wrong-pin rejection and pinned NLA connection observed in four-attempt P0-S4 run; no frames/input qualification.",
       "refresh": "Before affected integration/distribution changes; device qualification remains separate."
     },
     {
@@ -3484,6 +3484,78 @@
       "sourceUpdatedOn": null,
       "note": "Selected bridge files retain MPL headers; full canonical text and actual corresponding modified bridge source accompany diagnostic APK. Product distribution decision remains P1-S4.",
       "refresh": "Before affected integration/distribution changes; device qualification remains separate."
+    },
+    {
+      "id": "R150",
+      "title": "KWin executable-to-service matching",
+      "url": "https://github.com/KDE/kwin/blob/v6.5.5/src/utils/serviceutils.h",
+      "publisher": "KDE",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Canonical desktop Exec must match actual executable; temporary legitimate registration used for finite fixture, removed afterward. Owner: Desktop integration; P0-S4.",
+      "refresh": "Before affected integration changes and capability claims."
+    },
+    {
+      "id": "R151",
+      "title": "KWin declared Wayland interface policy",
+      "url": "https://github.com/KDE/kwin/blob/v6.5.5/src/wayland_server.cpp",
+      "publisher": "KDE",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Declared interfaces tied to matched service; no permission-check bypass. Owner: Desktop integration; P0-S4.",
+      "refresh": "Before affected integration changes and capability claims."
+    },
+    {
+      "id": "R152",
+      "title": "KRdp selected session controller",
+      "url": "https://github.com/KDE/krdp/blob/v6.4.5/server/SessionController.cpp",
+      "publisher": "KDE",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Omitted monitor supplies -1; default null request investigated with exact Plasma branch. Owner: Desktop integration; P0-S4.",
+      "refresh": "Before affected integration changes and capability claims."
+    },
+    {
+      "id": "R153",
+      "title": "KRdp exact Plasma capture session",
+      "url": "https://github.com/KDE/krdp/blob/v6.4.5/src/PlasmaScreencastV1Session.cpp",
+      "publisher": "KDE",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "!activeStream() is false for -1; --monitor0 enters workspace-stream branch. Actual capture starts; no client pixels qualified. Owner: Desktop integration; P0-S4.",
+      "refresh": "Before affected integration changes and capability claims."
+    },
+    {
+      "id": "R154",
+      "title": "KRdp workspace screencast helper",
+      "url": "https://github.com/KDE/krdp/blob/v6.4.5/src/screencasting.cpp",
+      "publisher": "KDE",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Workspace stream may cover multiple outputs; monitor0 argument does not qualify physical output selection in this version. Owner: Desktop integration; P0-S4.",
+      "refresh": "Before affected integration changes and capability claims."
+    },
+    {
+      "id": "R155",
+      "title": "KRdp NLA temporary SAM ownership",
+      "url": "https://github.com/KDE/krdp/blob/v6.4.5/src/RdpConnection.cpp",
+      "publisher": "KDE",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Runtime krdp/rdp-sam-XXXXXX contains credential hashes; remove-on-success/temporary-file destruction. Actual files absent after finite teardown. Owner: Desktop integration; P0-S4.",
+      "refresh": "Before affected integration changes and capability claims."
     }
   ]
 }

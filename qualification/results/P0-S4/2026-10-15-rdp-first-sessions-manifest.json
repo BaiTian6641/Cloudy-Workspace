@@ -1,0 +1,925 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUtc": "2026-10-15T17:58:46.248298+00:00",
+  "scope": "P0-S4 bounded live certificate/NLA/cleanup and failed framebuffer path; no displayed pixels/input/performance",
+  "sourceCommit": "2e15f830063badf5167b226b3ea3e59bdf731dea",
+  "buildRef": "2b12a3d1-74aa-47ee-8238-d606181adbd5",
+  "apkSha256": "35fb24931dd5e3acdbd5a20898dbdb7c64de276743624c4b4d7469dba0d89371",
+  "device": {
+    "model": "HP Googlebook 14",
+    "build": "CL3B.260622.276.R2",
+    "api": 37,
+    "abi": "arm64-v8a"
+  },
+  "host": {
+    "os": "Ubuntu26.04",
+    "session": "KDE Wayland",
+    "kwin": "6.5.5",
+    "krdp": "6.4.5-0ubuntu1",
+    "freerdpServer": "3.32.1+dfsg-0ubuntu0.26.04.1",
+    "kpipewire": "6.5.5-0ubuntu1"
+  },
+  "attempts": [
+    {
+      "ordinal": 1,
+      "buildRef": "2b12a3d1-74aa-47ee-8238-d606181adbd5",
+      "version": "0.1.0",
+      "closed": true,
+      "nativeThreadStarted": true,
+      "nativeThreadJoined": true,
+      "nativeInstanceFreed": true,
+      "frameUpdates": 0,
+      "inputEvents": 0,
+      "certificateAccepts": 0,
+      "certificateRejects": 0,
+      "authenticationCallbacks": 0,
+      "width": 0,
+      "height": 0,
+      "nativeError": "The connection transport layer failed.",
+      "terminalEvent": "native-failure",
+      "stopReason": "",
+      "events": [
+        "start-requested",
+        "pre-connect",
+        "disconnecting",
+        "native-failure",
+        "native-instance-reaped-and-freed"
+      ]
+    },
+    {
+      "ordinal": 2,
+      "buildRef": "2b12a3d1-74aa-47ee-8238-d606181adbd5",
+      "version": "0.1.0",
+      "closed": true,
+      "nativeThreadStarted": true,
+      "nativeThreadJoined": true,
+      "nativeInstanceFreed": true,
+      "frameUpdates": 0,
+      "inputEvents": 0,
+      "certificateAccepts": 0,
+      "certificateRejects": 1,
+      "authenticationCallbacks": 0,
+      "width": 0,
+      "height": 0,
+      "nativeError": "The connection failed at TLS connect.",
+      "terminalEvent": "native-failure",
+      "stopReason": "",
+      "events": [
+        "start-requested",
+        "pre-connect",
+        "disconnecting",
+        "native-failure",
+        "native-instance-reaped-and-freed"
+      ]
+    },
+    {
+      "ordinal": 3,
+      "buildRef": "2b12a3d1-74aa-47ee-8238-d606181adbd5",
+      "version": "0.1.0",
+      "closed": true,
+      "nativeThreadStarted": true,
+      "nativeThreadJoined": false,
+      "nativeInstanceFreed": false,
+      "frameUpdates": 0,
+      "inputEvents": 0,
+      "certificateAccepts": 1,
+      "certificateRejects": 0,
+      "authenticationCallbacks": 1,
+      "width": 1280,
+      "height": 720,
+      "outcome": "process-interrupted",
+      "events": [
+        "start-requested",
+        "pre-connect",
+        "settings",
+        "connected"
+      ]
+    },
+    {
+      "ordinal": 4,
+      "buildRef": "2b12a3d1-74aa-47ee-8238-d606181adbd5",
+      "version": "0.1.0",
+      "closed": true,
+      "nativeThreadStarted": true,
+      "nativeThreadJoined": true,
+      "nativeInstanceFreed": true,
+      "frameUpdates": 0,
+      "inputEvents": 0,
+      "certificateAccepts": 1,
+      "certificateRejects": 0,
+      "authenticationCallbacks": 1,
+      "width": 1280,
+      "height": 720,
+      "nativeError": "The connection was cancelled.",
+      "terminalEvent": "native-failure",
+      "stopReason": "adapter-failure",
+      "events": [
+        "start-requested",
+        "pre-connect",
+        "settings",
+        "connected",
+        "stop-requested",
+        "disconnecting",
+        "native-failure",
+        "native-instance-reaped-and-freed"
+      ]
+    }
+  ],
+  "privateEvidence": [
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/controls-scroll-swipe.json",
+      "bytes": 297,
+      "sha256": "9662896f32c4aee7e50ad5f6cb7f4a2acb6ca7e1b4052fce726e48b89929a761"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/controls-scroll-user.json",
+      "bytes": 284,
+      "sha256": "d2c1d9496aba54956769a1aef4e1db3fd4480143703b29ff88cb519c29ac6261"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/failed-host-cleanup-config-remove.json",
+      "bytes": 337,
+      "sha256": "1d88fcfcfc76b77b2080fcb9d33cb70e9b28e6111cd399f32d0bffe87d12410e"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/failed-host-cleanup-reverse-after.json",
+      "bytes": 264,
+      "sha256": "7cd02857186cfa0643f8b91e3f558171c90f83aae9fc91fe0e91e11146033780"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/failed-host-cleanup-reverse-remove.json",
+      "bytes": 281,
+      "sha256": "6b1a7d3fa3202e67e0178e8c17436a9601e198675e4ccd40185a29dac99013dc"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/failed-host-cleanup-user.json",
+      "bytes": 284,
+      "sha256": "21d63efce8f82da4f984d0715a30eb43554a39b00b6a2ad37367a87fe2ed0a72"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/failed-run-close-tap.json",
+      "bytes": 282,
+      "sha256": "369daffbcdd8c9b9df75afb1d39f8302cad3e692d89b2055852ad414fbcb4e03"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/failed-run-close-user.json",
+      "bytes": 284,
+      "sha256": "2260818e5a7ec891fe72372b45584e408341786ab6b16dab11c65ec398032dfc"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/first-attempt-logcat.txt",
+      "bytes": 63596,
+      "sha256": "37528a77022ce2f2f3b87f23cc69ce844e35bda3681b2193387da9d2de138cf8"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/first-launch.json",
+      "bytes": 596,
+      "sha256": "5326e21ed740cb56c11e9380eab5c0f0d7e1daa7d68fe5b65cf10eac76947e37"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/first-layout-layout-command.json",
+      "bytes": 608,
+      "sha256": "3ce1ac8b284803250ab3a736f764dcaa4bac4ee5891d4832dde877f86cca821a"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/first-layout-layout.json",
+      "bytes": 14954,
+      "sha256": "70100442feaa85e8c5631ec6b5f67762b661453d0f4b62794a632398726431e5"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/first-layout-user.json",
+      "bytes": 284,
+      "sha256": "47a9c5a5908e376a4107144c852ce7aa4c65f624943463e32436aabe7efbd4dd"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/first-user.json",
+      "bytes": 284,
+      "sha256": "1c5b5ef5b1a1c1d175beb8bb037c4c60a9b0d95ddf7adbbedc6c82a307e7a0e0"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/host/finished.json",
+      "bytes": 497,
+      "sha256": "094a6b88568a92f3eca3f54cf7633610de9ebce1c5446ad885d9ccae19bf65fc"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/host/runtime.json",
+      "bytes": 424,
+      "sha256": "7658bcea6bdf86d45d7b9cd007d587a3a316a2cc00ef44acfa204ace29821288"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/host/server.log",
+      "bytes": 622,
+      "sha256": "0e00ca89827ec46586522575e7dce6ab56bd694e253ebfc5bf5df3fc50dd0a06"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/initial-listener.txt",
+      "bytes": 76,
+      "sha256": "e01bbeef9c6a63ec7d8f70c95e19893979657c5ead55559e012958c89b9fa675"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/initial-preserved-journal.json",
+      "bytes": 42,
+      "sha256": "bdb68b184232975a7a3a42351243a18df64039992b0db5c63db9e4d671dbdd07"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/initial-prior-journal.json",
+      "bytes": 385,
+      "sha256": "0dd426a4e833bc9930266601d09a6ff6cf54ac690e0a6fbb69d25f7993b09625"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/initial-reverse-add.json",
+      "bytes": 289,
+      "sha256": "13e5126a15b744d77d2352c32a81a31474554f75d14e34f349b502e1f1ad06bd"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/initial-reverse-before.json",
+      "bytes": 264,
+      "sha256": "fef22157e4dd2cdebb47cf4b617829deb11e5efdf71cc35877d02b1ea6e2686d"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/initial-user.json",
+      "bytes": 284,
+      "sha256": "195c567c60b051a6ae91c7d0d7cb702b29efd4c9cc752d3333900c1cf23bd08b"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/initial-wrong-pin-config.json",
+      "bytes": 356,
+      "sha256": "32e1b9fa8effd98eb525df9177114f47a3fd3d5388dbdbf805f58d6f0dcf1c69"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/lan-allow-tap.json",
+      "bytes": 283,
+      "sha256": "fdec895aa7807a9d5534f475725c189399a60b51910dfbd61fbcd90be20b44d7"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/lan-allow-user.json",
+      "bytes": 284,
+      "sha256": "63706b158d654be7a007356a2c7e7a19c7e7c084b86601fa831eddd7f0c14e62"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/lan-prompt-layout-command.json",
+      "bytes": 604,
+      "sha256": "70cc9bc7c473a247454d39ac24158a41801173b5bfecc5df0b4d3eb7d2dd231c"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/lan-prompt-layout.json",
+      "bytes": 23995,
+      "sha256": "d96846fd3fc1d36ea140aac3ba791401577f05a296cd068fb9d8cabc6fa71f07"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/lan-prompt-user.json",
+      "bytes": 284,
+      "sha256": "6aaef956cfc99dbe4d9484ce4d76448d8df57870ecdbfbefc85f82da50d811d1"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/lan-request-tap.json",
+      "bytes": 282,
+      "sha256": "fc8bc2309b64ae354ecc1d1e704095e8733cbb39df1e75db96aaa6df45d93514"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/lan-request-user.json",
+      "bytes": 284,
+      "sha256": "0bc24cfb604f86f3038b9e0fa4c0ac4433ded85472862f0d4ec245c8164d6130"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/ready-controls-layout-command.json",
+      "bytes": 612,
+      "sha256": "7e3f5f4e9d9c60deda0be12c61ac9c965d743ac7909d5bb43067da227498418f"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/ready-controls-layout.json",
+      "bytes": 24341,
+      "sha256": "ce35c5f2f3bc21b89c4a0d91ebe6ff0e013489c5d12d6b7ce709a6f464732a57"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/ready-controls-user.json",
+      "bytes": 284,
+      "sha256": "44c0d38307c29c1756cc8625eaf26b711bc752d6a8a77fa981aa1a46a4239d38"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/wrong-pin-connect-tap.json",
+      "bytes": 282,
+      "sha256": "6eecc1ce6a0bad0d79215b571f3cb97af0011dee859ee0466a9fb2c193fe4f6e"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/wrong-pin-connect-user.json",
+      "bytes": 284,
+      "sha256": "9d5228f5ad4de70a520770a0f95234439bf4e119af1119211e43daccd3d2e949"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/wrong-pin-final-journal-raw.json",
+      "bytes": 1225,
+      "sha256": "f390ff230972f30fd13defc28f876ea28938591408df873d66d07ef1f4bd1338"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/wrong-pin-final-journal.json",
+      "bytes": 1694,
+      "sha256": "ae06718d674754696242679c9f93f41b3808009d1968d96bf2007e170d9cd238"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/wrong-pin-final-user.json",
+      "bytes": 284,
+      "sha256": "6fc773f82e90fe9c89905c7a49f7102c5e17e35ca3c007eafdc7d81047129cf7"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/wrong-pin-observe-journal.json",
+      "bytes": 1228,
+      "sha256": "c28aade06228a9640d3d258a31fdec2a4d349bf3e9b00274829bc51a764cb461"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-01/wrong-pin-observe-user.json",
+      "bytes": 284,
+      "sha256": "2bd6df3178d6e0061bea4c4788be2ea7b100e937f11cbcdcee33fc306fbf0d81"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/after-close-activities.txt",
+      "bytes": 84957,
+      "sha256": "9d4233d904d7a8c4f8e1ed0365cffc42b58eaec1fecc30316c1dc7f921bc78e3"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/after-close-logcat.txt",
+      "bytes": 2250,
+      "sha256": "416a68869909af6feeec2f3a28452b8ffbc670c3623e7a838c21a313d35b2c62"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/after-close-pid.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/closed-window-final-journal-raw.json",
+      "bytes": 3345,
+      "sha256": "904a785abb23392f2519d0a232590df998926a13029421c2b60fe16aa982a84f"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/closed-window-final-journal.json",
+      "bytes": 4039,
+      "sha256": "7b9871535778322b393fca2311b9f9a704283b8d87eed67c02c6c07317bc16c0"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/closed-window-final-user.json",
+      "bytes": 284,
+      "sha256": "6c6a842bae09ed65ca5d37daeb9a4ea7904cb33cd464f2c0ed3f5000100de523"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/closure-confirmed-journal-raw.json",
+      "bytes": 3345,
+      "sha256": "904a785abb23392f2519d0a232590df998926a13029421c2b60fe16aa982a84f"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/closure-confirmed-journal.json",
+      "bytes": 4039,
+      "sha256": "333c0b08662a4e73aac23be1dc2af7ed60cd44705c6e9702b953ec61bc00e3d2"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/closure-confirmed-user.json",
+      "bytes": 284,
+      "sha256": "05b7f40bfca8d033aadb07c0e657fba2c4aaf6ebce1ed7576eb68678c60d320e"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/connected-window-close-tap.json",
+      "bytes": 282,
+      "sha256": "877040f7ad27771c1a9744b508603d4f863675ddf1a8c6884cac66b13fc88e72"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/connected-window-close-user.json",
+      "bytes": 284,
+      "sha256": "be8eb3092acec8c4f06fd52abb8c3834064cfdc079334113c6ece216482fbdcf"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/exit-info.txt",
+      "bytes": 1591,
+      "sha256": "6bdd3160e2c8c8b2e032ea5f0c8c582a91605c2bba0c315160dde837bb88bf54"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/first-launch.json",
+      "bytes": 596,
+      "sha256": "83ec2d71f7abd034337d3bcbf0ccca9d96a09c46bbb008f49e5a05d28fb2bfed"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/first-user.json",
+      "bytes": 284,
+      "sha256": "0a808c59972003b0693695fabeb616210f6d3f6648c63b3931f721ddbb4cb389"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/host/finished.json",
+      "bytes": 508,
+      "sha256": "fdf74d7f38edff6b671551161b6563f07956e0f82d7956c69931239cf29d044e"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/host/registration-after.json",
+      "bytes": 328,
+      "sha256": "35d1fbd46ee699b6d04e34d4422afd6537e7b46fbd06b44b3520763ea2bb4a32"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/host/registration-before.json",
+      "bytes": 212,
+      "sha256": "3bae5e7369b3aa3e1f5a3db3bdc65beb79869960a75ee63a76de893896e31d9b"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/host/registration-cache-register.log",
+      "bytes": 25,
+      "sha256": "a4f18fbe39010c14f05888bddd2c2cadbf8c19a84fdbcf6782e96d30aecb4a9d"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/host/registration-cache-remove.log",
+      "bytes": 25,
+      "sha256": "a4f18fbe39010c14f05888bddd2c2cadbf8c19a84fdbcf6782e96d30aecb4a9d"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/host/runtime.json",
+      "bytes": 436,
+      "sha256": "195b7531a74f2e4f32010217b63e73c6f6e9fa47bcbe778247ceb73abac8c553"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/host/server.log",
+      "bytes": 2558,
+      "sha256": "392de732e2fe2a09e3f92fe44f5995e6ef4924d44422d971562826f9c3a8c6e2"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/initial-listener.txt",
+      "bytes": 76,
+      "sha256": "b18a48abada88c6aa49f1d9008b3b8f69c04f062c661825dd70c24cbf7cd2c0b"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/initial-preserved-journal.json",
+      "bytes": 1225,
+      "sha256": "f390ff230972f30fd13defc28f876ea28938591408df873d66d07ef1f4bd1338"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/initial-prior-journal.json",
+      "bytes": 1694,
+      "sha256": "275cfbb3d4294d82dd787296c2eca6ba99a56fdddd3dc0058ec63eb502b95480"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/initial-reverse-add.json",
+      "bytes": 289,
+      "sha256": "a948c16360dead2c1807687b0271c54fd4efc15c10402a5a30d748cbffa95453"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/initial-reverse-before.json",
+      "bytes": 264,
+      "sha256": "71613de1c137fa8d23bf7f547ef76b3706364c70b56b3229564355c5e2f59f7f"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/initial-user.json",
+      "bytes": 284,
+      "sha256": "d9e0d819a5bf441b36ae1ca7735d49df0f25c8f18b6374a86664d8fb7ef6ebec"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/initial-wrong-pin-config.json",
+      "bytes": 356,
+      "sha256": "38e9c815311e8f5b87ce107934b9659526cba72d08f8ebbf942387a78d23bfc4"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/launch-activity.txt",
+      "bytes": 91340,
+      "sha256": "53f89a915ed1ad61cded956a97d6780db4954af7fa708034353bc792156a8b66"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/run02-cleanup-config-remove.json",
+      "bytes": 337,
+      "sha256": "1ca4b1adad75490a9752e50bc9f5c6fe7cb2514bf4153f310dcf76c4fd60c5bd"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/run02-cleanup-reverse-after.json",
+      "bytes": 264,
+      "sha256": "b98b7ba915d1271449496b06c9a85c46c6e0db1fa31783386ab0abe5b61978d5"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/run02-cleanup-reverse-remove.json",
+      "bytes": 281,
+      "sha256": "43116d18d2b60040db1706604eb64e226685725eb326d125274bd9e8c665a72f"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/run02-cleanup-user.json",
+      "bytes": 284,
+      "sha256": "fbde1f2972dbc5fdadbad863e16501a66a7a4e421295e8d9c3c7efd5c1f5a641"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/started-layout-command.json",
+      "bytes": 598,
+      "sha256": "71cd965f0898c2674f074b27fa4abaa1f4f3178e7fd87361e49e25abfb857218"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/started-layout.json",
+      "bytes": 11788,
+      "sha256": "0fe2c893630adec653a3b250cd049e31068f1fbe4495b664f97366e01bf0114f"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/started-ready-layout-command.json",
+      "bytes": 610,
+      "sha256": "f9b1b8af7f32226fd60dc0b25cfc471101776be2146772332232efe4f3d9d107"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/started-ready-layout.json",
+      "bytes": 24213,
+      "sha256": "c2cdb70eea1fa09c2999e53a9c37ebf394e8159485832e80b87176d927fe2768"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/started-ready-user.json",
+      "bytes": 284,
+      "sha256": "e629f846fa5715f108f2bd068057bcd2f9f905468132cbfadeb59c15b14b3c8d"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/started-user.json",
+      "bytes": 284,
+      "sha256": "c5578f703ab7a43cb1ea20b96cc59f81e1406bfdfbf806711647cf083e9ee23f"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/trusted-connect-tap.json",
+      "bytes": 282,
+      "sha256": "5ecbaa4cd400cd0bfd925e4d131c551b16cf9c73266586c8c46a5e6031b3f20e"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/trusted-connect-user.json",
+      "bytes": 284,
+      "sha256": "918cba8b8a55ebb6d40135050586b4758c55af977890235441b8357bc5fcbae9"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/trusted-final-journal-raw.json",
+      "bytes": 3345,
+      "sha256": "904a785abb23392f2519d0a232590df998926a13029421c2b60fe16aa982a84f"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/trusted-final-journal.json",
+      "bytes": 4039,
+      "sha256": "919808ba3a02681aa2283d1f4d2f37d27047f3cf1c86fd2c656ce4a4c1c7f474"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/trusted-final-user.json",
+      "bytes": 284,
+      "sha256": "902c9450f237c868cef03c42c89b270d65d9d94c37aea87e6f8c397f20228bca"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/trusted-first-observe-journal-raw.json",
+      "bytes": 3165,
+      "sha256": "5030edb49e0e4f02c216f47cc966b76ccacbf2582203047596bd2bd3a2f744aa"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/trusted-first-observe-journal.json",
+      "bytes": 3839,
+      "sha256": "499ec17c2d433010cfafb6194ed532d449b562638766389648a9dad1cf091cad"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/trusted-first-observe-user.json",
+      "bytes": 284,
+      "sha256": "18e5824f34d738b7cd5e319d1c76ef7f809f04c30eca0dd947cab51160372e5d"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/trusted-no-frames-screen-command.json",
+      "bytes": 604,
+      "sha256": "72f93ddf0197ac6a078a622f7265fa6894cd2f8841644d43e20dfc6fa7da45b1"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/trusted-no-frames-user.json",
+      "bytes": 284,
+      "sha256": "ff18b410d15bcd9032b2c9804763cb4303829fb9fe2cd8b98b2f38deb98995af"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/trusted-no-frames.png",
+      "bytes": 322167,
+      "sha256": "a37dadd23f1f7f4d82b71acd89bdfb229834a5b7b575cd8b9dc530c8e94a808b"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/trusted-ready-layout-command.json",
+      "bytes": 610,
+      "sha256": "dfde1a9f339529945fd42f94bced7b1fe510ef9a1e24f5f472e1913faca599e6"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/trusted-ready-layout.json",
+      "bytes": 24190,
+      "sha256": "6f35dd232a2169dcfe55e4175b36861a592fd24e4658f94d8acaf14f2e848554"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/trusted-ready-user.json",
+      "bytes": 284,
+      "sha256": "81e3483a8ffe4bac14468d90a155d811c9cf66ca874d1f110a99f241c3e4de55"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/verified-certificate-correct-pin-config.json",
+      "bytes": 356,
+      "sha256": "f12a89e0fdbaf883b7f745832105bede6c801f998f28bbf2604ddc357e7ffd30"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/verified-certificate-user.json",
+      "bytes": 284,
+      "sha256": "9a3f39aad779fbb729debf33d5bd88260b12ea2dd7dde3d0aee851d0be981377"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/wrong-pin-connect-tap.json",
+      "bytes": 282,
+      "sha256": "6cee395c9fc518fcff6f9410b66cd915772d4f90595328f23097ec784d93c370"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/wrong-pin-connect-user.json",
+      "bytes": 284,
+      "sha256": "bb896aec436302d783acceed1dd94e260f8be3fe300210df7676ebc8ac3d78e5"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/wrong-pin-final-journal-raw.json",
+      "bytes": 2405,
+      "sha256": "b2e0fb1fd0d18dfbe1a9c5cc3292f8e53aefb36b3deabd29379b92ad80ec091f"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/wrong-pin-final-journal.json",
+      "bytes": 2999,
+      "sha256": "ce18af702b099fb0cd306159aeb959b5a22a9bef20e462626bd2ecad4631c1e2"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/wrong-pin-final-user.json",
+      "bytes": 284,
+      "sha256": "a759a6a70ae9c58181849317c9049b192182b4a1d6fd4540f2eb278444c9f178"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/wrong-pin-first-observe-journal-raw.json",
+      "bytes": 1985,
+      "sha256": "f9dcee56fb4458fe3b7e5d1bbd3a088232419b71f4d48c1e3fb307aff2223e5e"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/wrong-pin-first-observe-journal.json",
+      "bytes": 2534,
+      "sha256": "b88685534bcfbcc725d56761ac0cf95cd9469c306a4a39e412bdb5d2db3524f5"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-02/wrong-pin-first-observe-user.json",
+      "bytes": 284,
+      "sha256": "2f7058791a5c26ded12f8666407e719376852fa65250bdec56b433cb1984c194"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/final-cleanup-config-remove.json",
+      "bytes": 337,
+      "sha256": "02bf39df5b55a53c7d548b92a3af2f1cdf74a4b7e40a62cf404d0c88c38dc1c3"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/final-cleanup-reverse-after.json",
+      "bytes": 264,
+      "sha256": "b06a1ac66137140cbc4adf513d3cac2cbb40bdcacc8062af7639a2dadb552130"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/final-cleanup-reverse-remove.json",
+      "bytes": 281,
+      "sha256": "d0ce3a663285bef4029338bf52a8f791dab65ed72f0c9d34cb8e5be25474aaeb"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/final-cleanup-user.json",
+      "bytes": 284,
+      "sha256": "f256b0ee968e5b56a34c63c5ec2ea1ba2e249aa73c4e4448284191293ed63316"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/final-preserve-journal-raw.json",
+      "bytes": 4844,
+      "sha256": "3bb5478403ed17783d7f90c221d49f27a4f925482c33f957fc26e87c0b4e64cb"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/final-preserve-journal.json",
+      "bytes": 5698,
+      "sha256": "686e246feecd84fbeeab5873b25b164cb749d883699c455b458ec27b3d42d0c9"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/final-preserve-user.json",
+      "bytes": 284,
+      "sha256": "1b451ce802c697d830b77ef1c3bc93d311da20970b75dc58535d9f3ea9e1ffc6"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/first-launch.json",
+      "bytes": 596,
+      "sha256": "b66a35975ea34918ab76d7d20502d52abe3c98da242ab62bfd61136547c5798e"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/first-user.json",
+      "bytes": 284,
+      "sha256": "18b15c442c0fcd47f6c1cde2ab5c05b9553ee83ee2cec1fe28f44d7e63eb0ef7"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/host/finished.json",
+      "bytes": 570,
+      "sha256": "2ff06312ab06c4f84fc6e5409dfdd9315fd91a204b640a79439a1df4e0a234ea"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/host/registration-after.json",
+      "bytes": 328,
+      "sha256": "1fbfee8a32e459c5accfab20e654221e4d54036286e79179828fb3a50e437a37"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/host/registration-before.json",
+      "bytes": 212,
+      "sha256": "184d974cb72f28df5735517deda6eca3623e6b67715c1b529a4750eca765eebb"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/host/registration-cache-register.log",
+      "bytes": 25,
+      "sha256": "a4f18fbe39010c14f05888bddd2c2cadbf8c19a84fdbcf6782e96d30aecb4a9d"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/host/registration-cache-remove.log",
+      "bytes": 25,
+      "sha256": "a4f18fbe39010c14f05888bddd2c2cadbf8c19a84fdbcf6782e96d30aecb4a9d"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/host/runtime.json",
+      "bytes": 498,
+      "sha256": "04558c453776f2d38b5a8d5325b7ed56f640843e4c96ea280376a782febb73f3"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/host/server.log",
+      "bytes": 3053,
+      "sha256": "43aed8a96e83a5d540b729be1efd7c2bb9b4aec6a677821cb618a6ba87e85c48"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/idle-close-tap.json",
+      "bytes": 282,
+      "sha256": "962a07d68ceece7ce16ab3068102c445355e76f9d5fec5dd4b68f7836f8b2840"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/idle-close-user.json",
+      "bytes": 284,
+      "sha256": "126c423b478995d32d8191023137ad0686c886b08cacc862e95ca6f4aabe6685"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/initial-accepted-pin-config.json",
+      "bytes": 356,
+      "sha256": "24ee81147b41e3b1886545853771adb4335a37608faaa21ae2bc7d03534629f5"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/initial-listener.txt",
+      "bytes": 76,
+      "sha256": "b18a48abada88c6aa49f1d9008b3b8f69c04f062c661825dd70c24cbf7cd2c0b"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/initial-preserved-journal.json",
+      "bytes": 3384,
+      "sha256": "a8ac08ec8f33e1311f9034011ec24dfedfe4105faed33a889ca88c8ee038f096"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/initial-prior-journal.json",
+      "bytes": 4083,
+      "sha256": "78a080a38791f8f9fce819b84b3688ee26bfd1706819702f4220d18712e1065f"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/initial-reverse-add.json",
+      "bytes": 289,
+      "sha256": "68512c1f109c00e02caf982cd2943b4ac2a6eab531b7f286c8f8e5552b736c47"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/initial-reverse-before.json",
+      "bytes": 264,
+      "sha256": "30995d7a1f00c7f47d7e223d7703088246d5b1a9b58359b6a57537af249c55ce"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/initial-user.json",
+      "bytes": 284,
+      "sha256": "cbb5ca30c0a2942ccbc13f2ce0f7881cf2d3da15272d0d430341015c9a333276"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/monitor-attempt-logcat.txt",
+      "bytes": 72818,
+      "sha256": "3a2c97f585f8027243ed2b7418c9dd9377aaceb41f8f7e32930dc056a90ad00f"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/monitor-connect-tap.json",
+      "bytes": 282,
+      "sha256": "ac21d572ad6ae8ee561baab75ef47d6c94f2238ff51cd606514cbedce8afbce9"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/monitor-connect-user.json",
+      "bytes": 284,
+      "sha256": "8596b09b762c0490310714e112da66f51adb96115e11003e003585b3c535f89e"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/monitor-frame-screen-command.json",
+      "bytes": 596,
+      "sha256": "a2e63bcdf16e16d21f3082802282631c2b1d08e98f87a6fcad81c9af1a34e61f"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/monitor-frame-user.json",
+      "bytes": 284,
+      "sha256": "06862bcb6996eb31d04145f034fbdaf0d775632b3b133b384fca38a9b746d8e3"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/monitor-frame.png",
+      "bytes": 326725,
+      "sha256": "5962786d1db3a72df0f43cf35b84f8b3c9f83d5bae464e34ccd14dbeec6754bb"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/monitor-observe-journal-raw.json",
+      "bytes": 4844,
+      "sha256": "3bb5478403ed17783d7f90c221d49f27a4f925482c33f957fc26e87c0b4e64cb"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/monitor-observe-journal.json",
+      "bytes": 5698,
+      "sha256": "3f4d90bc832eafdfabf8f4e89975625936779114988fe4c77c7bbde4444df2ce"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/monitor-observe-user.json",
+      "bytes": 284,
+      "sha256": "1df8cc76451162485ea91a46cbcec5345a960b2d6b2c62249d10b5a41d44a42c"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/ready-layout-command.json",
+      "bytes": 594,
+      "sha256": "6621649900ab1d5de8b577bc820626eb50137372cc88bc23cf81863e17c431ea"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/ready-layout.json",
+      "bytes": 1154,
+      "sha256": "8d83aaa7995d754e3d8a3f81e742092cf90457c92983cbf2dcd70de35d05eaf8"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/ready-settled-layout-command.json",
+      "bytes": 610,
+      "sha256": "b90bef12f38f7baee00fbcb0368c0a8079e6429e38029d28f54c41a07a7ba12e"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/ready-settled-layout.json",
+      "bytes": 24213,
+      "sha256": "4a2e8caf8bb14483fab61009718f3384571eb0c0b9b39601121df0b12b69abef"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/ready-settled-user.json",
+      "bytes": 284,
+      "sha256": "62746d531e08f0885fc4fafe4675703be81962e29c4dd65c2c57ec7a695995a0"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/ready-user.json",
+      "bytes": 284,
+      "sha256": "396dc7d1643c6f5befe1e76933df1e9584cb365233def7038dd2a79282d4a84a"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/recovery-journal-raw.json",
+      "bytes": 3384,
+      "sha256": "a8ac08ec8f33e1311f9034011ec24dfedfe4105faed33a889ca88c8ee038f096"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/recovery-journal.json",
+      "bytes": 4083,
+      "sha256": "5734e38d3e9d88f8dcade969ecdbc4f29e3a37273f558fb1c415059e29e14898"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/2026-10-15-run-03/recovery-user.json",
+      "bytes": 284,
+      "sha256": "3e9798f5b33915912861666bf3925406c85c52285810609a864994429bb20de9"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/cleanup.json",
+      "bytes": 625,
+      "sha256": "dcd16942ef3345bba376f7c88a917ef5659d0f28fd11af3ecb3dc91bea9ff197"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/operator-source/cloudy-krdp-registered-run.py",
+      "bytes": 1722,
+      "sha256": "532d341d09339536fb095774ebd8d5f47a690d3c429dc380a2ac14e8c6b734be"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/operator-source/cloudy-krdp-registered-run03.py",
+      "bytes": 1722,
+      "sha256": "0bb3ed77c0a667b2dada71fb2d012f2b4afcd87489eb02789591425190ae9266"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/operator-source/cloudy-krdp-run.py",
+      "bytes": 2659,
+      "sha256": "9611616f09d72073f2faa5c3db4af0b42ee9fc8b13e20a82b7ca9676b0cf2e7d"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/operator-source/cloudy-krdp-run02.py",
+      "bytes": 2659,
+      "sha256": "86a90110ca0df68d628e9e9ff1b0f8a35346a37d77cc10a62f8abb9f20edbf58"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/operator-source/cloudy-krdp-run03.py",
+      "bytes": 2168,
+      "sha256": "5ade033b38acb6a0c2ae42ca7ede1b3e163f83aab4d1c8d3c0aaac867c11668d"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/operator-source/cloudy-rdp-session-device.py",
+      "bytes": 4604,
+      "sha256": "c910d874ec2777a64ba9484e230a5236f1c46baf69af4f001c0eb399f24786f3"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/operator-source/cloudy-rdp-session-device02.py",
+      "bytes": 4818,
+      "sha256": "7f5a62f1bee480ae5cef979a801f7d23d698679d608261c2c8cbdbc977206737"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/operator-source/cloudy-rdp-session-device03.py",
+      "bytes": 4795,
+      "sha256": "c8c4e6233a90575c9776b2394a97d9731f1dcad1da3a0632b373a06fb6a2a755"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/wayland-generic-help.json",
+      "bytes": 254,
+      "sha256": "6dde803df7bedb68284ea03f96e94fe2adb58b43a6960dfb0d308f64aa35f8f8"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/wayland-generic-help.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualification/results/private/native-rdp-session/wayland-generic-help.stdout",
+      "bytes": 1756,
+      "sha256": "5002f2e257c2bfa7139b96e5ee144a1aa71fae08916d94d06ee7c9cea39c5f0a"
+    }
+  ]
+}

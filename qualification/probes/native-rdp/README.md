@@ -1,6 +1,6 @@
 # Native RDP diagnostic
 
-This separate **0.1.0** Android diagnostic package, `dev.cloudy.qualification.rdp`, uses real FreeRDP 3.32.2 JNI and a native framebuffer view. It is an implemented qualification application, not Cloudy Desktop or completed CAP-RDP. It does not change the existing device-baseline package. The original accepted **build03** was an isolated native compile with only the OpenSSL resource patch; retain its [historical result](../../../docs/06-validation/2026-10-15-native-rdp-build.md). The current adapter adds the three reviewed boundary patches below. Its local compilation, Android Lint and **14 JVM tests pass**. The [APK/load result](../../results/P0-S4/2026-10-15-rdp-apk-load.md) records exact packaging, installation and FreeRDP3.32.2 startup on the HP Googlebook; no server connection/pixel result is claimed. Existing baseline CI passes do not establish CI coverage for this new native APK; current native build evidence is local.
+This separate **0.1.0** Android diagnostic package, `dev.cloudy.qualification.rdp`, uses real FreeRDP 3.32.2 JNI and a native framebuffer view. It is an implemented qualification application, not Cloudy Desktop or completed CAP-RDP. It does not change the existing device-baseline package. The original accepted **build03** was an isolated native compile with only the OpenSSL resource patch; retain its [historical result](../../../docs/06-validation/2026-10-15-native-rdp-build.md). The current adapter adds the three reviewed boundary patches below. Its local compilation, Android Lint and **14 JVM tests pass**. The [APK/load result](../../results/P0-S4/2026-10-15-rdp-apk-load.md) records exact packaging, installation and FreeRDP3.32.2 startup on the HP Googlebook; the [first live sessions](../../results/P0-S4/2026-10-15-rdp-first-sessions.md) now record actual pin rejection and NLA connection, but no displayed frames or input. The separate [native CI workflow](../../../.github/workflows/android-native-rdp.yml) now builds pinned native sources and the real APK; its first hosted result remains pending. Existing baseline CI passes do not establish coverage for this lane.
 
 Read the [MediaCodec/API decision](../../../docs/07-reference/2026-10-15-rdp-android-mediacodec.md), [stage entry](../../../docs/03-platform/googlebook/p0-s4-native-desktop-entry.md) and [library-reuse policy](../../../docs/05-delivery/library-reuse-policy.md). Reuse upstream protocol/codec behavior; target Cloudy's authored trust, lifecycle, input and packaging boundaries rather than recreate upstream conformance suites.
 
@@ -81,7 +81,7 @@ The build helper issues a fresh receipt only after the actual native target exit
 python3 tools/prepare_rdp_native.py \
   --source "$cloudy_src" --build "$cloudy_build" \
   --archive ".cache/native-rdp/FreeRDP-$cloudy_rev.tar.gz" \
-  --mpl-license .cache/native-rdp/MPL-2.0.txt \
+  --mpl-license qualification/probes/native-rdp/licenses/MPL-2.0.txt \
   --receipt "$cloudy_receipt"
 python3 tools/prepare_rdp_native.py --check
 ./qualification/probes/device-baseline/gradlew \
@@ -90,6 +90,25 @@ python3 tools/prepare_rdp_native.py --check
 ```
 
 Run from the repository root using the existing qualified JDK/SDK and project-local Gradle cache. This reuses the shared checked-in wrapper without introducing a second Gradle distribution; Gradle `-p` selects the separate native project. Missing prepared inputs fail preBuild rather than generating a fabricated session. The importer verifies the pristine archive plus reviewed patches, receipt, ELF ABI/alignment/dependency closure and exact eight-library output set. Its offline `--check` rejects missing/extra prepared libraries, changed notices/hashes or changed lock/patch inputs. Generated libraries are under `app/build/generated/nativeLibraries/arm64-v8a`; notices, manifest and actual corresponding native bridge source archive are under `app/build/generated/nativeNotices` and bundled as APK assets. Notice text alone does not replace corresponding MPL source; the archive contains the modified bridge files/headers and patch recipe.
+
+## Fresh setup and hosted compiler coverage
+
+The [setup helper](../../../tools/setup_rdp_native.py) implements verified acquisition and the configure-only part of the recipe above. It requires an installed selected SDK and a fresh stage path without whitespace. It verifies each cached/downloaded archive, applies the four exact patches, checks all original source files, seeds upstream ExternalProject download locations with the verified dependency archives and checks the resulting outer configuration. It does not compile or install anything:
+
+```bash
+cloudy_stage=/tmp/cloudy-rdp-fresh-stage # Must not already exist.
+python3 tools/setup_rdp_native.py --sdk "$ANDROID_HOME" --stage "$cloudy_stage"
+cloudy_rev=97eff6ddfbbfaa8e42a126d362686bd001ff8bdc
+cloudy_src="$cloudy_stage/FreeRDP-$cloudy_rev"
+cloudy_build="$cloudy_stage/build"
+cloudy_receipt="$PWD/.cache/native-rdp/fresh-receipt.json" # Must be a fresh name.
+python3 tools/build_rdp_native.py --source "$cloudy_src" --build "$cloudy_build" \
+  --archive ".cache/native-rdp/downloads/FreeRDP-$cloudy_rev.tar.gz" --receipt "$cloudy_receipt"
+```
+
+Then run the import/Gradle commands above using the `downloads/` archive path. The checked-in [canonical MPL text](licenses/MPL-2.0.txt) matches the importer's required hash, removing the previous implicit local license-file prerequisite.
+
+The separate hosted workflow selects Ubuntu24.04/Temurin21, verifies the same wrapper and SDK package revisions, builds the actual four-patch native graph, issues a successful receipt, imports all eight real libraries and runs assembly, Android Lint and JVM tests. Only source/dependency downloads are cached; every cache hit is rehashed. Native outputs are built for each run, with no fallback artifact or skipped integrity gate. Configure/build logs, receipt and test/Lint reports are retained for seven days. The first hosted execution will establish runner duration and availability; this workflow declaration alone is not a passed CI result. Device queue execution, JNI loading, certificate callbacks, authenticated desktops, input and lifecycle remain separate evidence.
 
 ## Private fixture configuration and finite operation
 

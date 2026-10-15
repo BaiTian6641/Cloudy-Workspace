@@ -131,6 +131,8 @@ Record evidence under `qualification/results/P0-S4/` using the [run template](..
 
 Current bounded increment: the [real RDP diagnostic APK/load result](../../../qualification/results/P0-S4/2026-10-15-rdp-apk-load.md) passes local compiler/lint/14 JVM tests, actual patched queue checks and Googlebook native loading. It records zero RDP connections; server trust/NLA/pixels/input/cancellation and performance remain unqualified. This does not change stage dependencies or capability readiness.
 
+The [first native RDP sessions](../../../qualification/results/P0-S4/2026-10-15-rdp-first-sessions.md) now establish actual pin rejection, NLA connection and bounded join/free or process-interruption reconciliation. No frame/input result passes: source-guided host setup reaches capture, then the Android adapter fails before delivery. Preserve this failed case and record its missing callback diagnostics before changing framebuffer limits. P0-S4 and CAP-RDP remain incomplete.
+
 ## P0-S5 — USB provider and real programming workflow
 
 **User decision, 2026-10-15:** no board/probe is available for selection yet. Full general-purpose USB implementation remains required. Continue API/provider/licensing and real software-state work; physical forwarding, reset and programming results remain pending. General scope is not a universal hardware-support claim, and synthetic fixtures cannot satisfy CAP-USB.
