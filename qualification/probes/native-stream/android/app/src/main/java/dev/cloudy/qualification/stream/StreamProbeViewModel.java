@@ -1,6 +1,9 @@
 package dev.cloudy.qualification.stream;
 
 import android.app.Application;
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
@@ -12,6 +15,7 @@ import com.limelight.BuildConfig;
 import com.limelight.R;
 import com.limelight.nvstream.jni.MoonBridge;
 import dev.cloudy.qualification.stream.identity.StreamIdentityStore;
+import dev.cloudy.qualification.stream.pairing.PairingController;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -24,7 +28,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.json.JSONObject;
 
-/** Memory-only operation owner. No saved authorization, Activity reference or network operation. */
+/** Memory-only operation owner. No saved authorization or Activity reference; one finite foreground operation. */
 public final class StreamProbeViewModel extends AndroidViewModel {
     public enum PromptMode {
         NONE, STRONG_OR_CREDENTIAL, DEVICE_CREDENTIAL;
@@ -45,9 +49,10 @@ public final class StreamProbeViewModel extends AndroidViewModel {
         public final boolean promptRequested;
         public final boolean cancelPrompt;
         public final PromptMode promptMode;
+        public final boolean pairing;
         private UiState(int message, int nativeMessage, String detail, String identityState,
                 String securityLevel, boolean busy, boolean nativeTried, long promptToken,
-                boolean promptRequested, boolean cancelPrompt, PromptMode promptMode) {
+                boolean promptRequested, boolean cancelPrompt, PromptMode promptMode, boolean pairing) {
             this.message = message;
             this.nativeMessage = nativeMessage;
             this.detail = detail;
@@ -59,9 +64,10 @@ public final class StreamProbeViewModel extends AndroidViewModel {
             this.promptRequested = promptRequested;
             this.cancelPrompt = cancelPrompt;
             this.promptMode = promptMode;
+            this.pairing = pairing;
         }
     }
-    private enum Kind { REFRESH, CREATE, AUTHORIZE, DELETE, NATIVE }
+    private enum Kind { REFRESH, CREATE, AUTHORIZE, DELETE, NATIVE, PAIR }
     private static final class Operation {
         final long token;
         final Kind kind;
@@ -71,10 +77,15 @@ public final class StreamProbeViewModel extends AndroidViewModel {
         final long started = SystemClock.elapsedRealtime();
         volatile String cancelReason = "OPERATOR";
         File journal;
+        char[] pin;
+        PairingController.Profile profile;
+        volatile PairingController controller;
+        volatile boolean finalRetired;
+        volatile boolean evidenceFailed;
         volatile Result lastResult;
         boolean workerRunning;
         boolean promptRequested;
-        boolean promptOutstanding;
+        volatile boolean promptOutstanding;
         boolean completeEnrollment;
         long promptDeadline;
         volatile long authenticatedAt = -1;
@@ -96,8 +107,13 @@ public final class StreamProbeViewModel extends AndroidViewModel {
         Integer keyStoreErrorCode;
         String nativeMetadata;
         long nativeDuration;
+        boolean pairingCompleted, clientTlsRead;
+        String pairingStage = "CREATED";
+        int applicationListBytes;
     }
     private interface Action { Result run() throws Exception; }
+    private static final StreamOperationLease PROCESS_OWNER = new StreamOperationLease();
+    private static final AtomicBoolean NETWORK_BLOCKED = new AtomicBoolean();
     private static final Object JOURNAL_LOCK = new Object();
     private static final long PROMPT_MILLIS = 120_000;
     private static final int MAX_RECORD_BYTES = 32_768;
@@ -159,6 +175,27 @@ public final class StreamProbeViewModel extends AndroidViewModel {
             return result;
         });
     }
+    /** Caller transfers a native-field PIN copy; it is wiped on every terminal path. */
+    public void pair(char[] pin) {
+        if (!localNetworkGranted()) {
+            if (pin!=null) Arrays.fill(pin,'\0');
+            message=R.string.cloudy_identity_failed; detail="LOCAL_NETWORK_PERMISSION_REQUIRED"; emit(); return;
+        }
+        if (!PairingPinPolicy.valid(pin)) {
+            if (pin != null) Arrays.fill(pin, '\0');
+            message=R.string.cloudy_identity_failed; detail="INVALID_PAIRING_PIN"; emit(); return;
+        }
+        Operation op=start(Kind.PAIR,PromptMode.DEVICE_CREDENTIAL);
+        if (op==null) { Arrays.fill(pin,'\0'); return; }
+        op.pin=pin;
+        submit(op,() -> {
+            Result result=new Result(); result.info=store.prepare();
+            if (result.info.state!=StreamIdentityStore.State.READY) { result.failure="READY_IDENTITY_REQUIRED"; return result; }
+            op.profile=PairingProfile.read(getApplication());
+            result.needsPrompt=true; return result;
+        });
+    }
+
     public void deleteIdentity() {
         Operation op = start(Kind.DELETE);
         if (op == null) return;
@@ -191,8 +228,11 @@ public final class StreamProbeViewModel extends AndroidViewModel {
     }
     private Operation start(Kind kind, PromptMode mode) {
         if (!visible || cleared || active != null) return null;
+        if ((kind==Kind.PAIR && NETWORK_BLOCKED.get()) || !PROCESS_OWNER.claim(this)) {
+            message=R.string.cloudy_identity_failed; detail=NETWORK_BLOCKED.get() ? "PAIRING_EVIDENCE_BLOCKED" : "PROCESS_OWNER_BUSY"; emit(); return null;
+        }
         try {
-            StreamIdentityStore.Attempt attempt = kind == Kind.CREATE || kind == Kind.AUTHORIZE ? store.newAttempt() : null;
+            StreamIdentityStore.Attempt attempt = kind == Kind.CREATE || kind == Kind.AUTHORIZE || kind == Kind.PAIR ? store.newAttempt() : null;
             Operation op = new Operation(++sequence, kind, attempt, mode);
             active = op;
             message = R.string.cloudy_identity_working;
@@ -200,6 +240,7 @@ public final class StreamProbeViewModel extends AndroidViewModel {
             emit();
             return op;
         } catch (RuntimeException failure) {
+            PROCESS_OWNER.release(this);
             message = R.string.cloudy_identity_failed;
             detail = code(failure);
             emit();
@@ -215,6 +256,7 @@ public final class StreamProbeViewModel extends AndroidViewModel {
                 if (op.journal == null) {
                     try { reserve(op); }
                     catch (Exception failure) {
+                        evidenceFailure(op);
                         // Evidence capacity must never prevent deliberate key deletion.
                         if (op.kind != Kind.DELETE) throw failure;
                         result.failure = "EVIDENCE_UNAVAILABLE";
@@ -226,6 +268,8 @@ public final class StreamProbeViewModel extends AndroidViewModel {
                     if (!priorFailure.isEmpty()) result.failure = priorFailure;
                 }
             } catch (Exception | LinkageError failure) {
+                if (op.kind==Kind.PAIR && op.controller!=null && op.lastResult!=null) result=op.lastResult;
+                result.needsPrompt=false;
                 result.failure = code(failure);
                 if (failure instanceof StreamIdentityStore.IdentityException) {
                     StreamIdentityStore.IdentityException identityFailure = (StreamIdentityStore.IdentityException) failure;
@@ -236,8 +280,9 @@ public final class StreamProbeViewModel extends AndroidViewModel {
             }
             if (op.cancelled.get() || cleared || !visible) result.needsPrompt = false;
             try { persist(op, result); }
-            catch (Exception failure) { result.failure = "EVIDENCE_UNAVAILABLE"; result.needsPrompt = false; }
+            catch (Exception failure) { evidenceFailure(op); result.failure = "EVIDENCE_UNAVAILABLE"; result.needsPrompt = false; }
             op.lastResult = result;
+            if (op.kind==Kind.PAIR && !op.evidenceFailed && !result.needsPrompt && !op.promptOutstanding) op.finalRetired=true;
             Result completed = result;
             main.post(() -> completed(op, completed));
         });
@@ -268,10 +313,11 @@ public final class StreamProbeViewModel extends AndroidViewModel {
         }
         if (op.kind == Kind.NATIVE) nativeMessage = result.failure.isEmpty()
                 ? R.string.cloudy_stream_success : R.string.cloudy_stream_failed;
-        message = result.failure.isEmpty() ? (op.kind == Kind.DELETE ? R.string.cloudy_identity_deleted
+        message = result.failure.isEmpty() ? (op.kind == Kind.PAIR ? R.string.cloudy_pair_success : op.kind == Kind.DELETE ? R.string.cloudy_identity_deleted
                 : result.qualification != null ? R.string.cloudy_identity_qualified : R.string.cloudy_identity_refreshed)
                 : R.string.cloudy_identity_failed;
         detail = result.failure + (result.failureStage == null ? "" : " (" + result.failureStage + ")");
+        if (op.kind==Kind.PAIR && op.controller!=null) detail += " · " + op.controller.stage().name() + " · pairingCompleted=" + op.controller.pairingCompleted() + " · clientTlsRead=" + result.clientTlsRead;
         retire(op);
     }
 
@@ -293,6 +339,7 @@ public final class StreamProbeViewModel extends AndroidViewModel {
         Operation op = active;
         if (op == null || op.token != token || !op.promptOutstanding) return;
         op.promptOutstanding = false;
+        if (cleared) { if (op.finalRetired) PROCESS_OWNER.release(this); return; }
         clearTimeout();
         if (op.cancelled.get() || !visible || !store.checkCurrent(op.attempt)
                 || SystemClock.elapsedRealtime() >= op.promptDeadline) {
@@ -306,21 +353,59 @@ public final class StreamProbeViewModel extends AndroidViewModel {
             submit(op, () -> { Result rejected = new Result(); rejected.failure = "AUTH_TYPE_MISMATCH"; return rejected; });
             return;
         }
+        if (op.kind==Kind.PAIR) {
+            promptTimeout=() -> { if (active==op) cancel("PAIRING_AUTH_DEADLINE"); };
+            main.postDelayed(promptTimeout,Math.max(0,30_000-(SystemClock.elapsedRealtime()-authenticatedAtElapsedMillis)));
+        }
         message = R.string.cloudy_identity_working;
         emit();
         submit(op, () -> {
             Result result = new Result();
+            if (op.kind==Kind.PAIR) checkPairing(op);
             result.qualification = op.completeEnrollment
                     ? store.completeEnrollment(op.attempt, authenticatedAtElapsedMillis)
                     : store.qualify(op.attempt, authenticatedAtElapsedMillis);
+            if (op.kind==Kind.PAIR) {
+                checkPairing(op);
+                PairingController controller=new PairingController(op.profile,store.provider(op.attempt),
+                        () -> checkPairing(op),authenticatedAtElapsedMillis,30_000);
+                op.controller=controller;
+                try {
+                    checkPairing(op); // Cancellation may have won before controller publication.
+                    PairingController.Result paired=controller.run(op.pin);
+                    result.clientTlsRead=paired.clientTlsRead;
+                    result.applicationListBytes=paired.applicationListBytes;
+                } finally {
+                    result.pairingCompleted=controller.pairingCompleted();
+                    result.pairingStage=controller.stage().name();
+                    op.lastResult=result;
+                    controller.cancel();
+                    wipePin(op);
+                }
+            }
             result.info = store.prepare();
             return result;
         });
     }
+    private boolean localNetworkGranted() {
+        return Build.VERSION.SDK_INT<37 || getApplication().checkSelfPermission(Manifest.permission.ACCESS_LOCAL_NETWORK)==PackageManager.PERMISSION_GRANTED;
+    }
+    private void checkPairing(Operation op) throws IOException {
+        if (!localNetworkGranted() || !visible || cleared || op.cancelled.get() || !store.checkCurrent(op.attempt)
+                || op.authenticatedAt<0 || SystemClock.elapsedRealtime()-op.authenticatedAt>=30_000) throw new IOException("pairing-owner-unavailable");
+    }
+    private void evidenceFailure(Operation op) {
+        op.evidenceFailed=true;
+        NETWORK_BLOCKED.set(true);
+        if (op.controller!=null) op.controller.cancel();
+        store.cancel(op.attempt);
+    }
+    private static void wipePin(Operation op) { if (op.pin!=null) { Arrays.fill(op.pin,'\0'); op.pin=null; } }
     public void authenticationError(long token, int errorCode) {
         Operation op = active;
         if (op == null || op.token != token || !op.promptOutstanding) return;
         op.promptOutstanding = false;
+        if (cleared) { if (op.finalRetired) PROCESS_OWNER.release(this); return; }
         revoke(op, errorCode >= 1 && errorCode <= 15 ? "AUTH_ERROR_" + errorCode : "AUTH_ERROR_UNKNOWN");
         finishCancellation(op);
     }
@@ -347,6 +432,7 @@ public final class StreamProbeViewModel extends AndroidViewModel {
     private void revoke(Operation op, String reason) {
         if (!op.cancelled.getAndSet(true)) op.cancelReason = reason;
         store.cancel(op.attempt);
+        if (op.controller!=null) op.controller.cancel();
         op.promptRequested = false;
         clearTimeout();
         message = R.string.cloudy_identity_cancelling;
@@ -354,12 +440,15 @@ public final class StreamProbeViewModel extends AndroidViewModel {
         emit();
     }
     private void finishCancellation(Operation op) {
+        if (op.kind==Kind.PAIR && op.finalRetired && !op.workerRunning && !op.promptOutstanding) {
+            message=R.string.cloudy_identity_cancelled; detail=op.cancelReason; retire(op); return;
+        }
         if (op.workerRunning || op.promptOutstanding) { emit(); return; }
         op.workerRunning = true;
         worker.execute(() -> {
             String failure = "";
             try { if (op.journal == null) reserve(op); persist(op, op.lastResult == null ? new Result() : op.lastResult); }
-            catch (Exception error) { failure = "EVIDENCE_UNAVAILABLE"; }
+            catch (Exception error) { evidenceFailure(op); failure = "EVIDENCE_UNAVAILABLE"; }
             String finalFailure = failure;
             main.post(() -> {
                 if (cleared || active != op) return;
@@ -374,6 +463,9 @@ public final class StreamProbeViewModel extends AndroidViewModel {
     private void retire(Operation op) {
         clearTimeout();
         store.cancel(op.attempt);
+        if (op.controller!=null) op.controller.cancel();
+        wipePin(op);
+        PROCESS_OWNER.release(this);
         if (active == op) active = null;
         emit();
     }
@@ -387,12 +479,12 @@ public final class StreamProbeViewModel extends AndroidViewModel {
         ui.setValue(new UiState(message, nativeMessage, detail, identityState, securityLevel,
                 op != null, nativeTried, op == null ? 0 : op.token,
                 op != null && op.promptRequested, op != null && op.cancelled.get() && op.promptOutstanding,
-                op == null ? PromptMode.NONE : op.promptMode));
+                op == null ? PromptMode.NONE : op.promptMode,op != null && op.kind==Kind.PAIR));
     }
 
     private File directory(Operation op) throws IOException {
         File parent = op.kind == Kind.NATIVE ? getApplication().getFilesDir() : getApplication().getNoBackupFilesDir();
-        File directory = new File(parent, op.kind == Kind.NATIVE ? "native-load" : "identity-journal");
+        File directory = new File(parent, op.kind == Kind.NATIVE ? "native-load" : op.kind==Kind.PAIR ? "pairing-journal" : "identity-journal");
         if (!directory.isDirectory() && !directory.mkdirs()) throw new IOException();
         return directory;
     }
@@ -401,18 +493,30 @@ public final class StreamProbeViewModel extends AndroidViewModel {
             File directory = directory(op);
             String[] records = directory.list();
             if (records == null || records.length >= 16) throw new IOException();
+            if (op.kind==Kind.PAIR) for (String name:records) {
+                File previous=new File(directory,name);
+                if (!name.endsWith(".json") || !previous.isFile() || previous.length()>MAX_RECORD_BYTES) throw new IOException();
+                try (FileInputStream input=new FileInputStream(previous)) {
+                    byte[] bytes=input.readNBytes(MAX_RECORD_BYTES+1);
+                    JSONObject prior=new JSONObject(new String(bytes,StandardCharsets.UTF_8));
+                    if (bytes.length>MAX_RECORD_BYTES || !prior.getBoolean("closed") || "EVIDENCE_UNAVAILABLE".equals(prior.optString("failureCode"))) throw new IOException();
+                }
+            }
             op.journal = new File(directory, UUID.randomUUID() + ".json");
             if (op.journal.exists()) throw new IOException();
             JSONObject record = baseRecord(op).put("status", "in-progress");
+            if (op.kind==Kind.PAIR) record.put("closed",false);
             atomic(op.journal, record);
         }
     }
     private JSONObject baseRecord(Operation op) throws Exception {
-        return new JSONObject().put("schemaVersion", 1).put("buildRef", BuildConfig.QUALIFICATION_BUILD_REF)
+        JSONObject record=new JSONObject().put("schemaVersion", 1).put("buildRef", BuildConfig.QUALIFICATION_BUILD_REF)
                 .put("nativeBuildRef", BuildConfig.NATIVE_BUILD_REF).put("version", BuildConfig.VERSION_NAME)
                 .put("operation", op.kind.name()).put("requestedAuthenticationMode", op.promptMode.name())
                 .put("startedElapsedMillis", op.started)
-                .put("hostConnections", 0).put("decodedFrames", 0);
+                .put("decodedFrames", 0);
+        if (op.kind!=Kind.PAIR) record.put("hostConnections",0);
+        return record;
     }
     private void persist(Operation op, Result result) throws Exception {
         synchronized (JOURNAL_LOCK) {
@@ -421,8 +525,16 @@ public final class StreamProbeViewModel extends AndroidViewModel {
                     .put("status", op.cancelled.get() || cleared || !visible ? "cancelled"
                             : !result.failure.isEmpty() ? "failed" : result.needsPrompt ? "authorization-required"
                             : op.kind == Kind.NATIVE ? "native-load-and-metadata-passed" : "completed")
-                    .put("failureCode", result.failure.isEmpty() ? JSONObject.NULL : result.failure)
+                    .put("failureCode", op.evidenceFailed ? "EVIDENCE_UNAVAILABLE" : result.failure.isEmpty() ? JSONObject.NULL : result.failure)
                     .put("cancelReason", op.cancelled.get() ? op.cancelReason : JSONObject.NULL);
+            if (op.kind==Kind.PAIR) {
+                PairingController controller=op.controller;
+                record.put("closed",StreamOperationLease.closed(op.cancelled.get(),result.needsPrompt,op.promptOutstanding))
+                        .put("pairingCompleted",controller!=null && controller.pairingCompleted())
+                        .put("clientTlsRead",result.clientTlsRead).put("applicationListBytes",result.applicationListBytes)
+                        .put("pairingStage",controller==null ? "CREATED" : controller.stage().name())
+                        .put("pairingFailureAt",controller==null ? "CREATED" : controller.failureAt().name());
+            }
             if (op.authenticatedAt >= 0) record.put("authenticatedAtElapsedMillis", op.authenticatedAt)
                     .put("authenticationType", op.authenticationType);
             if (result.failureStage != null) record.put("failureStage", result.failureStage)
@@ -477,11 +589,17 @@ public final class StreamProbeViewModel extends AndroidViewModel {
             op.cancelReason = "OWNER_CLEARED";
             op.cancelled.set(true);
             store.cancel(op.attempt);
+            if (op.controller!=null) op.controller.cancel();
+            if (op.kind==Kind.PAIR && op.finalRetired && !op.promptOutstanding) {
+                wipePin(op); PROCESS_OWNER.release(this);
+                store.close(); worker.shutdown(); super.onCleared(); return;
+            }
             // Always queue the final cancellation after the current worker. It may
             // already have posted completion when onCleared wins the main queue.
             worker.execute(() -> {
-                try { if (op.journal == null) reserve(op); persist(op, op.lastResult == null ? new Result() : op.lastResult); }
-                catch (Exception ignored) { /* No Activity remains; no success is published. */ }
+                try { if (!(op.kind==Kind.PAIR && op.finalRetired)) { if (op.journal == null) reserve(op); persist(op, op.lastResult == null ? new Result() : op.lastResult); } }
+                catch (Exception ignored) { evidenceFailure(op); }
+                finally { wipePin(op); op.finalRetired=true; if (!op.promptOutstanding) PROCESS_OWNER.release(this); }
             });
         }
         store.close();

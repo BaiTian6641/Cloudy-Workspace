@@ -26,7 +26,7 @@ typedef struct {
     pthread_t thread;
     int started, done, joining, joined, socket;
     atomic_int state, error, stop;
-    uint64_t deadline, frames, admitted, completed, successful;
+    uint64_t deadline, auth_deadline, frames, admitted, completed, successful;
     int width, height, last_x, last_y, buttons;
     uint32_t held[HELD_CAPACITY];
     size_t held_count;
@@ -107,7 +107,8 @@ static rfbBool continuing(rfbClient *client)
 {
     Session *s = owner(client);
     if (!s) return FALSE;
-    if (now_millis() >= s->deadline) fail(s, DEADLINE);
+    uint64_t now = now_millis();
+    if (now >= s->deadline || (s->auth_deadline && now >= s->auth_deadline)) fail(s, DEADLINE);
     return !atomic_load(&s->stop);
 }
 
@@ -263,7 +264,7 @@ static void *worker(void *argument)
     free(client->serverHost); client->serverHost = strdup(s->address);
     if (!client->serverHost) { fail(s, MEMORY_ERROR); goto terminal; }
     client->serverPort = s->port;
-    client->connectTimeout = 3; client->readTimeout = 2;
+    client->connectTimeout = 3; client->readTimeout = CLOUDY_SESSION_READ_IDLE_SECONDS;
     client->GetCredential = credential;
     client->MallocFrameBuffer = allocate_frame;
     client->FinishedFrameBufferUpdate = frame_finished;
@@ -278,12 +279,21 @@ static void *worker(void *argument)
     s->socket = client->sock;
     if (atomic_load(&s->stop)) shutdown(s->socket, SHUT_RDWR);
     pthread_mutex_unlock(&s->mutex);
+    /* Only initialization/authentication admits the existing PAM fingerprint wait
+     * before normal password validation. A fixed monotonic phase budget prevents
+     * a peer from extending authentication by sending occasional bytes. Socket
+     * shutdown and the existing I/O retry checks still cancel this phase. */
+    s->auth_deadline = cloudy_phase_deadline(now_millis(), s->deadline, CLOUDY_AUTH_PHASE_MILLIS);
+    client->readTimeout = CLOUDY_AUTH_READ_IDLE_SECONDS;
     /* Split connect/initialize APIs never auto-free on failure, unlike rfbInitClient. */
-    if (!continuing(client) || !rfbClientInitialise(client) || !s->certificate_checked ||
+    if (!continuing(client) || !rfbClientInitialise(client) || !continuing(client) || !s->certificate_checked ||
         client->authScheme != rfbVeNCrypt || client->subAuthScheme != rfbVeNCryptX509Plain) {
         if (!atomic_load(&s->stop)) fail(s, SECURITY_ERROR);
         goto terminal;
     }
+    /* Restore the ordinary read-idle policy before admitting authenticated work. */
+    client->readTimeout = CLOUDY_SESSION_READ_IDLE_SECONDS;
+    s->auth_deadline = 0;
     state_callback(s, CONNECTED);
     while (continuing(client)) {
         drain(s);

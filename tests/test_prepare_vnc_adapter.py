@@ -53,6 +53,11 @@ static void certificate(long before, long after, int expected) {
     free(trailing); OPENSSL_free(der); X509_free(cert); EVP_PKEY_free(key);
 }
 int main(void) {
+    check(cloudy_phase_deadline(1000, 601000, CLOUDY_AUTH_PHASE_MILLIS) == 31000);
+    check(cloudy_phase_deadline(1000, 11000, CLOUDY_AUTH_PHASE_MILLIS) == 11000);
+    check(cloudy_phase_deadline(11000, 11000, CLOUDY_AUTH_PHASE_MILLIS) == 11000);
+    check(cloudy_phase_deadline(UINT64_MAX - 4, UINT64_MAX, 30000) == UINT64_MAX);
+    check(CLOUDY_AUTH_READ_IDLE_SECONDS > 10 && CLOUDY_SESSION_READ_IDLE_SECONDS == 2);
     certificate(-60, 3600, 1);      /* Matching valid leaf. */
     certificate(-7200, -3600, 0); /* Matching expired leaf still rejects. */
     certificate(3600, 7200, 0);   /* Matching not-yet-valid leaf still rejects. */
@@ -103,7 +108,7 @@ class PolicyTests(unittest.TestCase):
             result = subprocess.run([str(binary)], capture_output=True, text=True, timeout=10, check=True)
             self.assertEqual(compiled.stderr, "")
             self.assertEqual(result.stderr, "")
-            self.assertEqual(json.loads(result.stdout), {"policyChecks": 32, "failures": 0})
+            self.assertEqual(json.loads(result.stdout), {"policyChecks": 37, "failures": 0})
 
 
 class HelperTests(unittest.TestCase):

@@ -46,3 +46,6 @@ The [desktop workflow design](04-design/desktop-workflows.md) expands the visual
 
 - [VNC Android APK/load](../qualification/results/P0-S4/2026-10-15-vnc-apk-load.md): actual separate0.1.0 package and Googlebook native-library loading, with protected-server work next.
 - [Streaming pairing transport build](../qualification/results/P0-S4/2026-10-15-stream-pairing-build.md): reviewed exact patch, bounded HTTP/TLS controller and eleven JVM tests; UI/device pairing remains pending.
+
+- [First real streaming pairing and client-certificate HTTPS](../qualification/results/P0-S4/2026-10-15-stream-first-pairing.md), with [UI/ownership review](06-validation/2026-10-15-stream-pairing-ui-review.md): same-key device result, independent host observation and finite cleanup.
+- [VNC authentication-budget build](../qualification/results/P0-S4/2026-10-15-vnc-auth-timeout-build.md): normal PAM timing, fixed phase deadline, actual compiler/package checks and live-server boundary.

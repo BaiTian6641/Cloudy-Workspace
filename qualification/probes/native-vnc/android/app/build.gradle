@@ -11,12 +11,12 @@ android {
         applicationId 'dev.cloudy.qualification.vnc'
         minSdk 35
         targetSdk 37
-        versionCode 1
-        versionName '0.1.0'
+        versionCode 2
+        versionName '0.1.1'
         // Finite arm64 Googlebook diagnostic, not cross-ABI qualification.
         //noinspection ChromeOsAbiSupport
         ndk { abiFilters 'arm64-v8a' }
-        buildConfigField 'String', 'QUALIFICATION_BUILD_REF', '"90d674e2-4fef-49e2-a0e3-954fed5b2d7c"'
+        buildConfigField 'String', 'QUALIFICATION_BUILD_REF', '"ebfc6f16-0b7a-4ace-8849-23e9bc748492"'
         buildConfigField 'String', 'NATIVE_BUILD_REF', '"vnc-adapter-x509plain-2026-10-15"'
     }
     buildFeatures { buildConfig = true }
@@ -35,7 +35,12 @@ android {
     buildTypes { release { minifyEnabled false } }
     // Preserve exact receipt-bound native bytes; qualification audits the APK entries.
     packaging { jniLibs { useLegacyPackaging false; keepDebugSymbols += ['**/*.so'] } }
-    lint { abortOnError true; warningsAsErrors true; checkReleaseBuilds true }
+    lint {
+        abortOnError true; warningsAsErrors true; checkReleaseBuilds true
+        // Intentionally retain the reviewed AGP/Gradle pins. This detector reports
+        // release availability, not a source defect; upgrades have a separate review.
+        disable 'AndroidGradlePluginVersion'
+    }
 }
 tasks.withType(JavaCompile).configureEach {
     options.compilerArgs += ['-Xlint:all', '-Werror']

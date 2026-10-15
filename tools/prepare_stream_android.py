@@ -27,6 +27,7 @@ REQUIRED_OVERLAYS = {
     "app/src/main/res/values/cloudy_strings.xml",
     "app/src/main/res/drawable/cloudy_stream_icon.xml",
     "app/src/main/res/xml/cloudy_backup.xml", "app/src/main/res/xml/cloudy_extraction.xml",
+    "app/src/main/res/xml/cloudy_network_security.xml",
 }
 
 

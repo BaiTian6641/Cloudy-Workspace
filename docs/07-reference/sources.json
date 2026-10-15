@@ -1673,7 +1673,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": "2026-10-02",
-      "note": "Runtime37 and target37+ require ACCESS_LOCAL_NETWORK for direct LAN access. Covers TCP/UDP/library/WebView traffic; denial may appear as timeout. System-mediated service picker is a separate documented route. No grant or network test performed.",
+      "note": "Runtime37 and target37+ require ACCESS_LOCAL_NETWORK for direct LAN access. Covers TCP/UDP/library/WebView traffic; denial may appear as timeout. System-mediated picker is separate. Streaming0.1.5 requests this permission before its finite USB-reversed loopback pairing; this route does not establish denied direct-LAN enforcement. Owner Android/platform, P0-S4.",
       "refresh": "Before network probe implementation and each target SDK update."
     },
     {
@@ -4670,7 +4670,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "setAllowedAuthenticators introduced Biometric1.1.0; DEVICE_CREDENTIAL alone supported API30+. No negative button with credential mode. Proposed existing-key control must observe actual authentication result type1; not yet executed. Owner: Desktop/security, P0-S4.",
+      "note": "setAllowedAuthenticators introduced Biometric1.1.0; DEVICE_CREDENTIAL alone supported API30+. No negative button with credential mode. Existing-key control requires actual authentication result type1; separate0.1.3 signing and0.1.5 pairing device records now observe it. Owner: Desktop/security, P0-S4.",
       "refresh": "Before changed prompt/AndroidX version or interpreting actual credential-control evidence."
     },
     {
@@ -4744,6 +4744,54 @@
       "sourceUpdatedOn": null,
       "note": "Candidate1.15.0+dfsg-2build1 verified1239416B SHA256912df371f896aa26b5ec9bd4c2e0b239253ff64e21a1638206fa4d979b6337b4; extracted Xtigervnc loader resolution passed, no install/server launch. Desktop/native, P0-S4.",
       "refresh": "Before changing selected host package/backend or the protected-server experiment."
+    },
+    {
+      "id": "G150",
+      "title": "Android network security configuration and Android17 loopback behavior",
+      "url": "https://developer.android.com/privacy-and-security/security-config",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Explicit domain-config supports scoped cleartext. API37 adds an implicit localhost policy when none is specified. Cloudy0.1.5 explicitly selects127.0.0.1 plus controller-level exact certificate pin; no global cleartext/TLS trust override. Owner Android/security, P0-S4.",
+      "refresh": "Before changing selected version, permission policy or protected-server integration."
+    },
+    {
+      "id": "R233",
+      "title": "Sunshine pinned administrative pairing and CSRF endpoints",
+      "url": "https://github.com/LizardByte/Sunshine/blob/63d35f702ee9e362e43263742981836ec0710384/src/confighttp.cpp",
+      "publisher": "LizardByte",
+      "category": "remote-desktop",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Inspected real /api/password and GET/POST /api/pin: random pending32hexID,4digitPIN, bounded handshake wait. Non-browser requests without Origin/Referer follow explicit accepted API branch; no CSRF settings changed. Private finite fixture uses exact-pinned adminTLS. Owner host integration, P0-S4.",
+      "refresh": "Before changing selected version, permission policy or protected-server integration."
+    },
+    {
+      "id": "R234",
+      "title": "TigerVNC1.15 real PAM authentication path",
+      "url": "https://github.com/TigerVNC/tigervnc/blob/v1.15.0/common/rfb/pam.c",
+      "publisher": "TigerVNC",
+      "category": "security",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "do_pam_auth calls pam_start, pam_authenticate, pam_acct_mgmt and pam_end; supplied credentials use normal PAM conversation. No session opening or password change. Host normal10s fingerprint wait motivates bounded authphase/read-timeout correction; no authentication success yet. Owner Desktop/security, P0-S4.",
+      "refresh": "Before changing selected version, permission policy or protected-server integration."
+    },
+    {
+      "id": "R235",
+      "title": "TigerVNC1.15 selected PAM service and user restriction",
+      "url": "https://github.com/TigerVNC/tigervnc/blob/v1.15.0/common/rfb/UnixPasswordValidator.cxx",
+      "publisher": "TigerVNC",
+      "category": "security",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "PAMService selects real policy; PlainUsers restricts accepted username, with %u selecting server user. Planned unprivileged isolatedXvnc uses existing other policy; no permissive PAM service/newaccount/rootserver. Owner Desktop/security, P0-S4.",
+      "refresh": "Before changing selected version, permission policy or protected-server integration."
     }
   ]
 }

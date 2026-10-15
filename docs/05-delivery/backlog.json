@@ -232,7 +232,7 @@
         "D15: qualify genuine negotiated RDP relative mouse through public Android capture and an actual3D application, separately for physical mouse/trackpad and exact Linux/Windows/macOS server rows. Diagnostic0.1.5 adds a user-confirmed captured host-trail/cursor/release result on GRD50.2, preserving earlier KRdp/0.1.4 failures. Input subtype was not supplied;3D/broader release and performance remain unqualified. macOS RDP server selection remains unresolved; built-in Apple VNC is a separate lane.",
         "Carry forward the reviewed0.1.5 cursor repair and attempt13 physical result: user confirms captured host trail/cursor movement and release; eight capture edges and real host-painted motion are retained. Prediction stays presentation-only and the standard relative wire route is unchanged. Input subtype, actual3D and measured latency remain unqualified; investigate the earlier lag with bounded client/host measurements and explicit software-fixture limitations.",
         "Review the bounded0.1.6 status/control optimization and same four-gesture device sample: p95 Android frame time remains11ms with one janky frame per sample. No measured lag improvement, end-to-end latency or new physical capture result. Next isolate measured draw/monitor/host costs; do not infer latency from framework counters.",
-        "Carry forward accepted Moonlight core/JNI loading and0.1.3 same-key screen-lock credential control. Actual type1 authorization completes local RSA signing/certificate enrollment and fresh-process READY reload on the existing TEE key; five JVM tests/compiler/scoped Lint pass, zero owned findings,27 inactive baseline errors and339 warnings retained. Preserve earlier0.1.2 biometric type2/initSign failure and its unresolved cause. Use the explicit credential route for finite HTTP/TLS/pairing with same-attempt reauthorization/deadlines; no widened policy, automatic retry or software/key regeneration fallback. Complete lock/cancel/expiry boundaries, then real Surface/MediaCodec streaming. Sunshine runtime04 reaches actual KWin/PipeWire and VA-API startup probes after quoted desktop-entry and AppDir cwd fixes; processes/listeners/owned permission files cleaned up. Actual input/client frames/performance pending. Local0.1.4 finite pairing transport compiles with eleven JVM tests and strict pin/cancellation; UI/live authorization/network integration and actual client-key TLS/pairing remain pending, with installed0.1.3 preserved. D16 exact source/notices/build closure remains release work."
+        "Carry forward0.1.5 real Googlebook/Sunshine same-key credential-authenticated pairing and client-certificate HTTPS result. One closed pairing record, ten identity records and native-load evidence retained. Earlier biometric failure remains unresolved; qualify wrong-pin, cancellation and expiry before real Surface/MediaCodec streaming. Host KWin/PipeWire/VA-API startup is accepted, no client frames/input/performance yet. VNC0.1.1 is built with bounded real-PAM authentication timing, final phase-deadline recheck,37 policy assertions/seven JVM tests and zero owned Lint findings; installed0.1.0 remains stopped. Next actual protected X509Plain server negotiation/authentication/frame/input/cancel. Preserve independent app gates, exact hashes and D16 distribution closure."
       ],
       "deliverables": [
         "Pinned stream/RDP/VNC engine and server feasibility matrix",
@@ -335,7 +335,12 @@
         "R229",
         "R230",
         "R231",
-        "R232"
+        "R232",
+        "G79",
+        "G150",
+        "R233",
+        "R234",
+        "R235"
       ],
       "acceptanceCases": [
         "Q-D01",

@@ -2,7 +2,7 @@
 <resources>
     <string name="cloudy_stream_name">Cloudy stream qualification</string>
     <string name="cloudy_stream_title">Native streaming engine qualification</string>
-    <string name="cloudy_stream_scope">Real Moonlight native loading and app-owned client identity qualification. This diagnostic does not connect, pair or decode video. Local device credentials are entered only in the system prompt.</string>
+    <string name="cloudy_stream_scope">Real Moonlight native loading and app-owned client identity qualification. Explicit pairing uses a private loopback fixture; this diagnostic does not decode video. Local device credentials are entered only in the system prompt.</string>
     <string name="cloudy_stream_load">Load native engine</string>
     <string name="cloudy_stream_ready">Ready for a local native ABI check.</string>
     <string name="cloudy_stream_running">Loading the actual native library…</string>
@@ -12,12 +12,12 @@
     <string name="cloudy_identity_title">App-owned client identity</string>
     <string name="cloudy_identity_help">Create a separate non-exportable RSA client identity for this diagnostic. Approve with your device credential or a strong biometric. A successful local signature does not qualify TLS, pairing or the product vault. Pending enrollment can be completed after a new approval. Nothing connects automatically.</string>
     <string name="cloudy_identity_ready">Ready to inspect the local identity.</string>
-    <string name="cloudy_identity_working">Local operation in progress…</string>
+    <string name="cloudy_identity_working">Diagnostic operation in progress…</string>
     <string name="cloudy_identity_auth_wait">Waiting for system authentication, with a 120-second deadline.</string>
     <string name="cloudy_identity_auth_retry">Authentication did not match. Use the system prompt to retry or cancel.</string>
     <string name="cloudy_identity_cancelling">Authorization revoked. Waiting for the current operation or prompt to retire…</string>
-    <string name="cloudy_identity_cancelled">Local operation cancelled. Refresh before deciding the next action.</string>
-    <string name="cloudy_identity_failed">Local operation or evidence publication failed.</string>
+    <string name="cloudy_identity_cancelled">Operation cancelled. Refresh before deciding the next action.</string>
+    <string name="cloudy_identity_failed">Diagnostic operation or evidence publication failed.</string>
     <string name="cloudy_identity_refreshed">Identity state refreshed. No authorization was restored.</string>
     <string name="cloudy_identity_qualified">Real certificate/key signing check passed. No TLS or host connection was tested.</string>
     <string name="cloudy_identity_deleted">The diagnostic identity was deleted locally. This does not revoke host-side enrollment.</string>
@@ -28,7 +28,7 @@ Reported key backing: %2$s</string>
     <string name="cloudy_identity_create">Create diagnostic identity and authorize</string>
     <string name="cloudy_identity_authorize">Authorize and check existing identity</string>
     <string name="cloudy_identity_refresh">Refresh identity state</string>
-    <string name="cloudy_identity_cancel">Cancel local operation</string>
+    <string name="cloudy_identity_cancel">Cancel diagnostic operation</string>
     <string name="cloudy_identity_delete">Delete diagnostic identity…</string>
     <string name="cloudy_identity_delete_confirm">Delete this identity</string>
     <string name="cloudy_identity_delete_warning">Delete only this diagnostic’s local identity and pending keys? Its public operation journal remains. Any future enrolled host would need separate revocation and deliberate re-enrollment.</string>
@@ -37,4 +37,10 @@ Reported key backing: %2$s</string>
     <string name="cloudy_stream_cancelled">The local native operation was cancelled. Its worker has retired; inspect the retained record for any completed observation.</string>
     <string name="cloudy_identity_authorize_credential">Authorize with screen-lock credential</string>
     <string name="cloudy_identity_credential_subtitle">Use the screen-lock PIN, pattern or password for this local signing check. The existing key policy is unchanged.</string>
+    <string name="cloudy_pair_help">Finite pairing with the existing READY identity only. Provision no_backup/pairing-config.json with the approved public certificate, exact pin and 127.0.0.1 HTTP/HTTPS ports forwarded to the isolated fixture. Enter its four-digit pairing PIN here, then approve a fresh screen-lock prompt. The 30-second authorization includes signing, real pairing and one client-certificate HTTPS application-list read. No automatic retry, unpair or playback occurs. Cancellation can leave host enrollment intact.</string>
+    <string name="cloudy_pair_pin">Memory-only four-digit host pairing PIN</string>
+    <string name="cloudy_pair_start">Pair with fixture using screen-lock credential</string>
+    <string name="cloudy_pair_permission">Request local network permission</string>
+    <string name="cloudy_pair_prompt_subtitle">Authorize this finite loopback pairing and client-certificate HTTPS read with the existing identity.</string>
+    <string name="cloudy_pair_success">Real pairing and client-certificate HTTPS application-list read completed. No video was decoded.</string>
 </resources>

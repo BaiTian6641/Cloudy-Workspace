@@ -6,6 +6,12 @@
 #include <openssl/x509.h>
 #include <time.h>
 
+uint64_t cloudy_phase_deadline(uint64_t now, uint64_t overall, uint64_t budget)
+{
+    if (now >= overall || budget >= overall - now) return overall;
+    return now + budget;
+}
+
 void cloudy_wipe(void *data, size_t length)
 {
     volatile uint8_t *bytes = data;

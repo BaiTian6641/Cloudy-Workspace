@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
   "checkedOn": "2026-10-15",
-  "buildRef": "90d674e2-4fef-49e2-a0e3-954fed5b2d7c",
+  "buildRef": "ebfc6f16-0b7a-4ace-8849-23e9bc748492",
   "nativeBuildRef": "vnc-adapter-x509plain-2026-10-15",
-  "nativeRun": "entry-02",
+  "nativeRun": "auth-timeout-01",
   "nativeReceipt": {
     "bytes": 108609,
-    "sha256": "e65a0a5de7ed1636f47f57b901985507d8c82be1cb5a4feba90f8d45e1fbebd2"
+    "sha256": "018c24b4fc4472a56c26083ca36bb129eee4170b28227e039b3706fd9de210e8"
   },
   "application": {
     "id": "dev.cloudy.qualification.vnc",
-    "versionName": "0.1.0",
-    "versionCode": 1,
+    "versionName": "0.1.1",
+    "versionCode": 2,
     "compileSdk": 37,
     "targetSdk": 37,
     "minSdk": 35,
@@ -32,8 +32,8 @@
   },
   "nativeLibraries": {
     "libcloudy-vnc-jni.so": {
-      "bytes": 3522024,
-      "sha256": "199d99a527305209c8e540c0a137958a51550c90ed523a4f970ed6d0ea941594"
+      "bytes": 3523672,
+      "sha256": "912dc8dd17f41ce458ed5b65a8387dca2875ef49913b0eb67ccbc897dda31f45"
     },
     "libssl.so": {
       "bytes": 1205848,

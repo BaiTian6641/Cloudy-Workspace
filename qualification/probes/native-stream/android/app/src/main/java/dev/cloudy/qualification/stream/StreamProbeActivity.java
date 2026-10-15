@@ -1,6 +1,13 @@
 package dev.cloudy.qualification.stream;
 
 import android.app.AlertDialog;
+import android.Manifest;
+import android.os.Build;
+import android.text.InputType;
+import android.text.InputFilter;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
@@ -32,10 +39,13 @@ public final class StreamProbeActivity extends FragmentActivity {
     private Button cancel;
     private Button delete;
     private Button load;
+    private Button pair;
+    private EditText pairingPin;
     private long cancelledPromptToken;
 
     @Override public void onCreate(Bundle state) {
         super.onCreate(state);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
         model = new ViewModelProvider(this).get(StreamProbeViewModel.class);
         // Reconstruct on every creation to replace AndroidX's callback for an
         // existing prompt. Never call authenticate() just to reattach it.
@@ -63,6 +73,26 @@ public final class StreamProbeActivity extends FragmentActivity {
         create = button(content, R.string.cloudy_identity_create, view -> model.createIdentity());
         authorize = button(content, R.string.cloudy_identity_authorize, view -> model.authorizeIdentity());
         authorizeCredential = button(content, R.string.cloudy_identity_authorize_credential, view -> model.authorizeWithCredential());
+        label(content,R.string.cloudy_pair_help);
+        pairingPin=new EditText(this);
+        pairingPin.setHint(R.string.cloudy_pair_pin);
+        pairingPin.setContentDescription(getString(R.string.cloudy_pair_pin));
+        pairingPin.setSingleLine(true);
+        pairingPin.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+        pairingPin.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
+        pairingPin.setSaveEnabled(false);
+        pairingPin.setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_NO_EXCLUDE_DESCENDANTS);
+        pairingPin.setImeOptions(EditorInfo.IME_FLAG_NO_PERSONALIZED_LEARNING);
+        content.addView(pairingPin);
+        button(content,R.string.cloudy_pair_permission,view -> {
+            if (Build.VERSION.SDK_INT>=37) requestPermissions(new String[]{Manifest.permission.ACCESS_LOCAL_NETWORK},17);
+        });
+        pair=button(content,R.string.cloudy_pair_start,view -> {
+            char[] pin=new char[pairingPin.length()];
+            pairingPin.getText().getChars(0,pin.length,pin,0);
+            pairingPin.getText().clear();
+            model.pair(pin);
+        });
         refresh = button(content, R.string.cloudy_identity_refresh, view -> model.refreshIdentity());
         cancel = button(content, R.string.cloudy_identity_cancel, view -> {
             model.cancel(); // Revoke the owner before cancelling framework authentication.
@@ -105,6 +135,8 @@ public final class StreamProbeActivity extends FragmentActivity {
         create.setEnabled(!state.busy && state.identityState.equals("ABSENT"));
         authorize.setEnabled(!state.busy && (state.identityState.equals("READY") || state.identityState.equals("ENROLLMENT_PENDING")));
         authorizeCredential.setEnabled(!state.busy && (state.identityState.equals("READY") || state.identityState.equals("ENROLLMENT_PENDING")));
+        pair.setEnabled(!state.busy && state.identityState.equals("READY"));
+        pairingPin.setEnabled(!state.busy);
         refresh.setEnabled(!state.busy);
         delete.setEnabled(!state.busy);
         cancel.setEnabled(state.busy);
@@ -124,7 +156,7 @@ public final class StreamProbeActivity extends FragmentActivity {
             try {
                 prompt.authenticate(new BiometricPrompt.PromptInfo.Builder()
                         .setTitle(getString(R.string.cloudy_identity_prompt_title))
-                        .setSubtitle(getString(state.promptMode == StreamProbeViewModel.PromptMode.DEVICE_CREDENTIAL
+                        .setSubtitle(getString(state.pairing ? R.string.cloudy_pair_prompt_subtitle : state.promptMode == StreamProbeViewModel.PromptMode.DEVICE_CREDENTIAL
                                 ? R.string.cloudy_identity_credential_subtitle : R.string.cloudy_identity_prompt_subtitle))
                         .setAllowedAuthenticators(authenticators).build());
             } catch (IllegalArgumentException | IllegalStateException unavailable) {
@@ -154,6 +186,7 @@ public final class StreamProbeActivity extends FragmentActivity {
         // A real background stop does; configuration recreation only reattaches.
         if (!isChangingConfigurations()) {
             model.onHidden();
+            pairingPin.getText().clear();
             prompt.cancelAuthentication();
         }
         super.onStop();

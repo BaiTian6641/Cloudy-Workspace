@@ -1,0 +1,460 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-15",
+  "stage": "P0-S4",
+  "scope": "finite foreground credential-authorized same-key pairing and client-certificate HTTPS application-list read; no stream/playback",
+  "status": "bounded-pairing-and-client-tls-passed",
+  "device": {
+    "model": "HP Googlebook 14",
+    "manufacturer": "HP",
+    "release": "17",
+    "api": "37",
+    "build": "CL3B.260622.276.R2",
+    "incremental": "16560795",
+    "patch": "2026-09-01",
+    "abi": "arm64-v8a"
+  },
+  "build": {
+    "applicationId": "dev.cloudy.qualification.stream",
+    "versionName": "0.1.5",
+    "versionCode": 6,
+    "buildRef": "8673aa5d-f310-48e8-aeba-d3a7169c7c12",
+    "minSdk": 35,
+    "targetSdk": 37,
+    "compileSdk": 37,
+    "identityMinimumApi": 37,
+    "apk": {
+      "path": ".cache/native-stream-android/pairing-ui-01/app/build/outputs/apk/debug/app-debug.apk",
+      "bytes": 24710631,
+      "sha256": "4441cabc3039bce2a97d4fd2bd190bf037d8882ed936e9072dc459683e0fc61b"
+    },
+    "nativeBuildRef": "f336e245-805d-4aad-bc1a-9208df8db318",
+    "native": {
+      "bytes": 5110376,
+      "sha256": "95640675b34cd4d1a7908ff4e22949af7d214b8771e1c3bc954dbc21eea99a98",
+      "zipOffset": 16826368,
+      "alignment": 16384,
+      "stored": true
+    },
+    "nativeBytesUnchangedFromAcceptedEntry02": true,
+    "preparationReceipt": {
+      "path": ".cache/native-stream-android/pairing-ui-01/cloudy-preparation.json",
+      "bytes": 123411,
+      "sha256": "ec03eecb4ed2359228dac23b55e03c8f34d4d004c485452793343a5f148e9c1c"
+    },
+    "stagedFiles": 648,
+    "sourceInputs": [
+      {
+        "path": "tools/prepare_stream_android.py",
+        "bytes": 10573,
+        "sha256": "ef0aedfdc9d7e3e57b06e8952a82ae9713a00c07562bf16f49aee9939477f6a1"
+      },
+      {
+        "path": "qualification/probes/device-baseline/gradlew",
+        "bytes": 8656,
+        "sha256": "a5a5c199ba02189ae8c46a334223371a20599d9c298ef65e7540ede4a3f72d59"
+      },
+      {
+        "path": "qualification/probes/device-baseline/gradle/wrapper/gradle-wrapper.jar",
+        "bytes": 48462,
+        "sha256": "497c8c2a7e5031f6aa847f88104aa80a93532ec32ee17bdb8d1d2f67a194a9c7"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/build.gradle",
+        "bytes": 3861,
+        "sha256": "6547141181fd7f02e2a7eb8903b5ffce41085b338a6f1d44fdba2701ecec466c"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/lint-baseline.xml",
+        "bytes": 11299,
+        "sha256": "8b7b1ae58e2ca3719515263eb7c8712ed61dbde84a25551e55b32c5c1817b9c0"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/AndroidManifest.xml",
+        "bytes": 1902,
+        "sha256": "4553c13af9127e3042085d6c05375de87d0e74210609cdc0c36d276300c75ab7"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/PairingPinPolicy.java",
+        "bytes": 694,
+        "sha256": "80939358dfc6cb02efc17015fb12ea78e58062d959e44a731ac93674467b46fc"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/PairingProfile.java",
+        "bytes": 2986,
+        "sha256": "ad0a5f566586a27cb485e3c2c5597324fe51e1a48826f194cde3253ddd01080a"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/StreamOperationLease.java",
+        "bytes": 624,
+        "sha256": "3dc59c6d8e89be4e51f16bbca3196ed7bef300a3b0fbe80aa3a3f6ab7f3356d9"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/StreamProbeActivity.java",
+        "bytes": 10461,
+        "sha256": "02e4ba865352e850d8f8aaa5aabd0d1b418d9bff9d9d92c4ae7971f3ed93e423"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/StreamProbeViewModel.java",
+        "bytes": 30937,
+        "sha256": "5e367a1698d52117c8646ea2389067e81c5e0cf25db242a9fc6a1bccf1a1e946"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/identity/IdentityAuthorization.java",
+        "bytes": 922,
+        "sha256": "0f9f65c6f494fae3a4c2bfef166ff43abc2b6df6045b001fee76f77f2619d003"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/identity/StreamIdentityStore.java",
+        "bytes": 35309,
+        "sha256": "be19ddd21f841acd8353065fdffe538aec0d22e0af4647b58cddd25368d8579c"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/pairing/AttemptLease.java",
+        "bytes": 1606,
+        "sha256": "b63166585504daea630aadf5e3c8b0ad5fade6237664902286c4e04bcca2b61e"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/pairing/LeafPolicy.java",
+        "bytes": 1154,
+        "sha256": "bf8e426ec6e276f7edbc93e79f701a00366b0254dcad5a61ee7c3c0f6e22122b"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/pairing/PairingController.java",
+        "bytes": 8423,
+        "sha256": "9e56c1071df5281440fd6b0018bb816ad3dcef5bf2b26c1fe06daecb65630c1e"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/res/drawable/cloudy_stream_icon.xml",
+        "bytes": 347,
+        "sha256": "99fff10d938a1361f5ecab8672e186d42923095d3d4c550a0774d305b4056cdc"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/res/values/cloudy_strings.xml",
+        "bytes": 5349,
+        "sha256": "3df4fe3a8f37d934bde7cff8807fdf2b9e435402efcb10bf183e7544e95cb50c"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/res/xml/cloudy_backup.xml",
+        "bytes": 339,
+        "sha256": "f3e864f6856a75a8d52d8de359041e941ff09a8999ad24fb0af31889ca22ecf1"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/res/xml/cloudy_extraction.xml",
+        "bytes": 717,
+        "sha256": "ca0f7c537fddf4413f256872b327a983b3de2a40aae71d7e0444468814e905ce"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/res/xml/cloudy_network_security.xml",
+        "bytes": 452,
+        "sha256": "6c91d8321a5e1a33f52d96a2c963a6010492f759a66629e682632b20072c1164"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/PairingPoliciesTest.java",
+        "bytes": 2215,
+        "sha256": "176bd0206eb5214e29b1c470ff6df251bd643de03225e2a69d916d4716b39b89"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/PromptModeTest.java",
+        "bytes": 1180,
+        "sha256": "9203404a754aa3dd1ceac88531919079708e59c1344c536a4be6088c0b49ebcb"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/identity/IdentityAuthorizationTest.java",
+        "bytes": 1553,
+        "sha256": "3f99b2488aebd4ab5bbafe01a2e33b9b66a73718ab8d7349069b7682260e9533"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/pairing/AttemptLeaseTest.java",
+        "bytes": 2797,
+        "sha256": "8031ee8e8a08dd4fcbf6fbde892ef0f88e7e9fd1faf1443d9d74095c13bcb558"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/pairing/LeafPolicyTest.java",
+        "bytes": 2804,
+        "sha256": "df8efb136c0fda7766a757256ba508cfe847058af9cff6eceae23038d2a0337c"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/build.gradle",
+        "bytes": 69,
+        "sha256": "0537c547218629772f95b8cc26803dfeca0e85b6d7ace78f42fd4af02dfc1162"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/gradle-wrapper.properties",
+        "bytes": 289,
+        "sha256": "b28a17a308d55eba57bf91da1ca265262d12c101ebe663fe7f12180b4f607a92"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/gradle.properties",
+        "bytes": 101,
+        "sha256": "09543e46125c3e44e3495c53f75244a701b23ce9a0e36c56bd00962a3745eea1"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/settings.gradle",
+        "bytes": 335,
+        "sha256": "d5b284112da08ea05283b9d55353280dce968c8094f467b91fe0e957ea83d25f"
+      },
+      {
+        "path": "qualification/probes/native-stream/pairing/sources.lock.json",
+        "bytes": 2081,
+        "sha256": "a5ea4328a3543b355378866b5702ae76a19b4722b2616222c3cbf7861308e73b"
+      },
+      {
+        "path": "qualification/probes/native-stream/pairing/finite-pairing.patch",
+        "bytes": 11586,
+        "sha256": "45516825cfaa6832264d4d0b6ead822947d70b95f7e939c1135fbd4145358531"
+      }
+    ],
+    "permissions": [
+      "android.permission.ACCESS_LOCAL_NETWORK",
+      "android.permission.INTERNET",
+      "android.permission.USE_BIOMETRIC",
+      "android.permission.USE_FINGERPRINT"
+    ],
+    "components": [
+      "dev.cloudy.qualification.stream.StreamProbeActivity"
+    ],
+    "mergedManifest": {
+      "path": ".cache/native-stream-android/pairing-ui-01/app/build/intermediates/merged_manifests/debug/processDebugManifest/AndroidManifest.xml",
+      "bytes": 2220,
+      "sha256": "b6b5e46f2d907d6368d7e7bf10119081b409f3315b61fe669b841162e91c557d"
+    }
+  },
+  "host": {
+    "product": "Sunshine",
+    "version": "v2026.914.233613",
+    "revision": "63d35f702ee9e362e43263742981836ec0710384",
+    "architecture": "x86_64",
+    "platform": "Ubuntu 26.04 / KDE Wayland",
+    "kwinPackageVersion": "4:6.5.5-0ubuntu2",
+    "packageSha256": "6f80297a853bcf8cda114ff131b5c0a8c9a4d96a2a9c3dee1f04c39c54206846",
+    "executableSha256": "6946d8ac8bb0e99da1e51b374029c8b24dcabb315265a0e7004d046eb6f143fd",
+    "runtimeBasis": "qualification/results/P0-S4/2026-10-15-stream-host-runtime.json",
+    "runtimeBasisUnchanged": true,
+    "route": "loopback-only finite private fixture through parent-owned ADB reverse; explicit HTTP bootstrap/pairing and pinned HTTPS",
+    "deadlineSeconds": 600
+  },
+  "attempt": {
+    "id": "945e8271-0120-48c3-b486-dd12c48ec5a0",
+    "operation": "PAIR",
+    "requestedAuthenticationMode": "DEVICE_CREDENTIAL",
+    "authenticationType": 1,
+    "authenticatedAtElapsedMillis": 103374262,
+    "observedElapsedMillis": 103374480,
+    "callbackToObservationMillis": 218,
+    "intervalMeaning": "single client monotonic callback-to-terminal-observation interval including qualification/pairing/TLS/evidence preparation; not a performance benchmark or cross-clock measurement",
+    "status": "completed",
+    "closed": true,
+    "pairingCompleted": true,
+    "clientTlsRead": true,
+    "applicationListBytes": 64,
+    "pairingStage": "COMPLETED",
+    "failureCode": null,
+    "qualification": {
+      "securityLevel": "trusted-environment",
+      "authenticationHardwareEnforced": true,
+      "privateEncodingUnavailable": true,
+      "signVerified": true,
+      "keyBits": 2048,
+      "certificateBytes": 715,
+      "signatureBytes": 256,
+      "certificateSha256": "1746d903cbcfc803874fef80b5386cce453e8df18143816e634d4165f6fc901b"
+    },
+    "decodedFrames": 0
+  },
+  "hostObservation": {
+    "pinSubmissionStatus": true,
+    "durationMillis": 193276,
+    "exitCode": 0,
+    "observedListeners": 4,
+    "allObservedListenersClosed": true,
+    "desktopCacheCleanupExitCode": 0,
+    "privateHostStateRetained": true,
+    "automaticUnpairPerformed": false,
+    "hostRevocationClaimed": false
+  },
+  "negativeControl": {
+    "scope": "application list request without client certificate",
+    "clientCertificateSupplied": false,
+    "tlsProtocol": "TLSv1.3",
+    "failureClass": "SSLError",
+    "denied": true,
+    "limit": "TLS 1.3 was reached followed by SSLError without a successful application-list result; reason string was not retained and no exact TLS alert is inferred"
+  },
+  "preservationAndCleanup": {
+    "priorIdentityRecordsByteMatched": 9,
+    "nativeRecordByteMatched": true,
+    "pairingRecordByteMatchedAfterStop": true,
+    "pairingRecordCount": 1,
+    "identityRecordCountAfterRun": 10,
+    "identityCountSource": "integration-leader observation; selected cleanup independently binds nine prior unchanged records",
+    "reverseRoutesRemoved": 2,
+    "fixtureProfileRemoved": true,
+    "deviceAppStopped": true,
+    "appStopSource": "integration-leader final observation",
+    "noAutomaticHostRevocation": true
+  },
+  "checks": {
+    "androidCompilation": "passed",
+    "gradleLog": {
+      "path": ".cache/native-stream-android/pairing-ui-01-gradle.log",
+      "bytes": 4410,
+      "sha256": "a9e476c6045ad0ee7d47856451ec7cce8f4dafabde243b26014172d0c526ac5e"
+    },
+    "jvm": {
+      "tests": 15,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "reports": [
+        {
+          "path": ".cache/native-stream-android/pairing-ui-01/app/build/test-results/testDebugUnitTest/TEST-dev.cloudy.qualification.stream.PairingPoliciesTest.xml",
+          "bytes": 970,
+          "sha256": "d70815a6327079ed0f11c338323f87d1d3aafffe330455c88f061e74011bc514",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": ".cache/native-stream-android/pairing-ui-01/app/build/test-results/testDebugUnitTest/TEST-dev.cloudy.qualification.stream.PromptModeTest.xml",
+          "bytes": 668,
+          "sha256": "5de5d7a5dc313b0b5b8221a55e15ba5c48138ad91f87fdee5f6cec8afee6c912",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": ".cache/native-stream-android/pairing-ui-01/app/build/test-results/testDebugUnitTest/TEST-dev.cloudy.qualification.stream.identity.IdentityAuthorizationTest.xml",
+          "bytes": 878,
+          "sha256": "24790e8ca593cae3c9c959c1f8f395893d84b06968d1b3e442f3b783fbdffa35",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": ".cache/native-stream-android/pairing-ui-01/app/build/test-results/testDebugUnitTest/TEST-dev.cloudy.qualification.stream.pairing.AttemptLeaseTest.xml",
+          "bytes": 971,
+          "sha256": "42152a9395f5e11df9a1fc7f192cc84f66e3ab7850c659cdebd28eccf0fd28f2",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "path": ".cache/native-stream-android/pairing-ui-01/app/build/test-results/testDebugUnitTest/TEST-dev.cloudy.qualification.stream.pairing.LeafPolicyTest.xml",
+          "bytes": 679,
+          "sha256": "a8216f49f75e52dc24480ed78820a04885c2e1db39d93768d304a558e607363e",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ]
+    },
+    "lint": {
+      "report": {
+        "path": ".cache/native-stream-android/pairing-ui-01/app/build/reports/lint-results-debug.xml",
+        "bytes": 395644,
+        "sha256": "71e176b0ec4ecc96509e02093e1ba5536221b9489c1fa38de9eaa83a5f4bed8e"
+      },
+      "errors": 0,
+      "counts": {
+        "Hint": 1,
+        "Warning": 336
+      },
+      "baseline": {
+        "path": ".cache/native-stream-android/pairing-ui-01/app/lint-baseline.xml",
+        "bytes": 11299,
+        "sha256": "8b7b1ae58e2ca3719515263eb7c8712ed61dbde84a25551e55b32c5c1817b9c0"
+      },
+      "baselinedInactiveUpstreamErrors": 27,
+      "ownedFindings": 0
+    },
+    "apkAudit": {
+      "path": ".cache/native-stream-android/pairing-ui-audit-01/apk-audit.json",
+      "bytes": 10964,
+      "sha256": "ce42fcbef722b1de51d577ca4763852f03b02f987fc46d5a13be27bbc429ec5a"
+    },
+    "runtimeArtifacts": 39,
+    "apkSignature": "passed in retained audit",
+    "nativeZipAlignment": 16384,
+    "selectedNotices": "passed in retained audit",
+    "review": "docs/06-validation/2026-10-15-stream-pairing-ui-review.md"
+  },
+  "selectedPrivateEvidence": [
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-pairing-01/945e8271-0120-48c3-b486-dd12c48ec5a0.json",
+      "bytes": 1063,
+      "sha256": "cf7067e6a6c5d6cc0554f1763c4e8b64eba0f3c835a2f88a984db04a545807c2"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-pairing-01/preserved-pairing-945e8271-0120-48c3-b486-dd12c48ec5a0.json",
+      "bytes": 1063,
+      "sha256": "cf7067e6a6c5d6cc0554f1763c4e8b64eba0f3c835a2f88a984db04a545807c2"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-pairing-01/cleanup.json",
+      "bytes": 385,
+      "sha256": "ddf30bf0b9cd61a2d3f87ca8650990802bc6500e7525bf1a745ab9a29562ff56"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-pairing-01/device.json",
+      "bytes": 201,
+      "sha256": "f79591313921b22b9308db767f38d2d4e0cc1b67867b9518a1fe9f076ed0cc0e"
+    },
+    {
+      "path": ".cache/native-stream-host/pairing-01/result.json",
+      "bytes": 933,
+      "sha256": "4bbfeeeb244d4e3565208bddf681b58b7df29c5ec678c28e5b1c11fc591a4878"
+    },
+    {
+      "path": ".cache/native-stream-host/pairing-01/no-client-certificate-control.json",
+      "bytes": 269,
+      "sha256": "9c29f2b1f3c26ee2b872680232a083ee2589cd75a3a701d7a2ede86b9770105e"
+    },
+    {
+      "path": ".cache/native-stream-host/pairing-01/fixture-permission.desktop",
+      "bytes": 260,
+      "sha256": "565689b52dc53bd7e89dbaf249408ae8a601b05807702dc24775c0bc73723154"
+    }
+  ],
+  "unqualified": [
+    "wrong-pin rejection",
+    "actual foreground/background cancellation and deadline",
+    "biometric authentication failure remains unresolved",
+    "arbitrary PIN delay or mid-pairing reauthentication",
+    "Surface/MediaCodec playback and decoded frames",
+    "physical streaming input/release",
+    "performance and latency",
+    "other device/host builds",
+    "host-side revocation and complete distribution/source/notices closure",
+    "CAP-STREAM and product credential vault completion"
+  ],
+  "additionalParentAudit": {
+    "actualCompiledNetworkPolicy": {
+      "path": ".cache/native-stream-android/pairing-ui-audit-01/apk-network-security.txt",
+      "bytes": 266,
+      "sha256": "5aa400a41c104bff581f74aa2b523e8afb821c26f5729c6f49f7d1befa1154ae"
+    },
+    "targetSdk37": true,
+    "runtimeArtifactsIdenticalToAcceptedPairingTransport": 39,
+    "hostOperator": {
+      "path": ".cache/native-stream-host/pairing_fixture.py",
+      "bytes": 8207,
+      "sha256": "118a565f61ab6d8a5467cd709889751016cb8498a2bab0e1590d505976772893"
+    },
+    "deviceOperator": {
+      "path": ".cache/native-stream-android/device_pairing_015.py",
+      "bytes": 8168,
+      "sha256": "89656b43dc1e77866ad178ed03b7b051bcc20234662d9ec25e2275832bf7d0c2"
+    },
+    "repositoryTests": {
+      "path": ".cache/native-stream-android/pairing-ui-repository-tests.log",
+      "bytes": 16005,
+      "sha256": "e95cccadefb31598ad67d9fb8d5577811273b7eb9848297bdd8b9724f458d27e"
+    }
+  }
+}
