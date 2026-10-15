@@ -6,6 +6,9 @@ import hashlib
 import json
 from pathlib import Path
 import re
+import tempfile
+
+from prepare_rdp_native import replay_patch
 
 import prepare_native_stream as native
 
@@ -13,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OVERLAY = ROOT / "qualification/probes/native-stream/android"
 CACHE = ROOT / ".cache/native-stream-android"
 WRAPPER = ROOT / "qualification/probes/device-baseline"
+PAIRING = ROOT / "qualification/probes/native-stream/pairing"
 REQUIRED_OVERLAYS = {
     "build.gradle", "settings.gradle", "gradle.properties", "gradle-wrapper.properties",
     "app/build.gradle", "app/lint-baseline.xml", "app/src/main/AndroidManifest.xml",
@@ -41,7 +45,44 @@ def inputs():
     paths = [Path(__file__).resolve(), WRAPPER / "gradlew",
              WRAPPER / "gradle/wrapper/gradle-wrapper.jar"]
     paths.extend(path for path in sorted(OVERLAY.rglob("*")) if path.is_file())
+    paths.extend(PAIRING / name for name in ("sources.lock.json", "finite-pairing.patch"))
     return {str(path.relative_to(ROOT)): native.read(path) for path in paths}
+
+
+def apply_pairing(files, source_inputs):
+    """Replay only the frozen Java overlay; the native receipt remains unchanged."""
+    prefix = PAIRING.relative_to(ROOT).as_posix() + "/"
+    lock = json.loads(source_inputs[prefix + "sources.lock.json"])
+    raw = source_inputs[prefix + lock["patch"]["file"]]
+    if digest(raw) != lock["patch"]["sha256"]:
+        raise ValueError("Pairing patch hash changed")
+    for name, pin in lock["authoredSources"].items():
+        if file_record(source_inputs[name]) != pin:
+            raise ValueError("Frozen authored pairing source changed: " + name)
+    targets = set(lock["files"])
+    old_headers = re.findall(r"^--- a/(.+)$", raw.decode("utf-8"), re.MULTILINE)
+    new_headers = re.findall(r"^\+\+\+ b/(.+)$", raw.decode("utf-8"), re.MULTILINE)
+    if set(old_headers) != targets or old_headers != new_headers or len(old_headers) != len(targets):
+        raise ValueError("Pairing patch target set differs from lock")
+    with tempfile.TemporaryDirectory(prefix="cloudy-pairing-replay-") as temporary:
+        root = Path(temporary)
+        for name, pin in lock["files"].items():
+            if digest(files[name]) != pin["beforeSha256"]:
+                raise ValueError("Pairing upstream before hash changed: " + name)
+            target = root / native.relative(name)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(files[name])
+        replay_patch(root, raw)
+        result = {}
+        for name, pin in lock["files"].items():
+            changed = native.read(root / native.relative(name))
+            if digest(changed) != pin["afterSha256"]:
+                raise ValueError("Pairing replay after hash changed: " + name)
+            result[name] = changed
+        actual = {path.relative_to(root).as_posix() for path in root.rglob("*") if path.is_file()}
+        if actual != targets:
+            raise ValueError("Unexpected file created by pairing replay")
+        files.update(result)
 
 
 def expected_files(native_run, source_inputs):
@@ -70,6 +111,7 @@ def expected_files(native_run, source_inputs):
         elif path.parent.as_posix() == "nativeNotices" and (
                 path.suffix == ".txt" or path.name == "NDK-cpufeatures-NOTICE"):
             files["app/build/generated/cloudy/" + name] = native.read(native_run / "prepared" / name)
+    apply_pairing(files, source_inputs)
     return files, receipt
 
 

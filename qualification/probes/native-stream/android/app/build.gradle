@@ -9,11 +9,11 @@ android {
         // Preserve the exact upstream target baseline for this no-host increment.
         // A target37 network/session increment has its own behavior review.
         targetSdk 36
-        versionCode 4
-        versionName '0.1.3'
+        versionCode 5
+        versionName '0.1.4'
         ndk { abiFilters 'arm64-v8a' }
         buildConfigField 'boolean', 'ROOT_BUILD', 'false'
-        buildConfigField 'String', 'QUALIFICATION_BUILD_REF', '"470ba056-289a-4404-bee6-73695aa8798b"'
+        buildConfigField 'String', 'QUALIFICATION_BUILD_REF', '"97055d59-89af-49fb-80a5-664eca2f8095"'
         buildConfigField 'String', 'NATIVE_BUILD_REF', '"f336e245-805d-4aad-bc1a-9208df8db318"'
     }
     buildFeatures { buildConfig = true; resValues = true }

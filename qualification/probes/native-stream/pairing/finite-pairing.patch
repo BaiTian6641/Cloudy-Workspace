@@ -1,0 +1,245 @@
+--- a/app/src/main/java/com/limelight/nvstream/http/NvHTTP.java
++++ b/app/src/main/java/com/limelight/nvstream/http/NvHTTP.java
+@@ -61,6 +61,23 @@
+ 
+ 
+ public class NvHTTP {
++    /** Authored qualification hook; null retains original upstream behavior. */
++    public interface CloudyControl {
++        void check() throws IOException;
++        void verifyLeaf(X509Certificate certificate) throws CertificateException;
++        ResponseBody execute(OkHttpClient client, Request request) throws IOException;
++    }
++    private final CloudyControl cloudyControl;
++    boolean cloudyControlled() { return cloudyControl != null; }
++    void cloudyBeforeSigning() throws IOException {
++        if (cloudyControl != null) cloudyControl.check();
++    }
++    /** Explicit HTTP bootstrap, never a silent TLS fallback. */
++    public String cloudyBootstrapServerInfo() throws IOException {
++        if (cloudyControl == null) throw new IOException("controlled-operation-required");
++        cloudyControl.check();
++        return openHttpConnectionToString(httpClientLongConnectTimeout, baseUrlHttp, "serverinfo");
++    }
+     private String uniqueId;
+     private PairingManager pm;
+ 
+@@ -86,7 +103,12 @@
+     private X509KeyManager keyManager;
+     private X509Certificate serverCert;
+ 
+-    void setServerCert(X509Certificate serverCert) {
++    void setServerCert(X509Certificate serverCert) throws IOException {
++        if (cloudyControl != null) {
++            cloudyControl.check();
++            try { cloudyControl.verifyLeaf(serverCert); }
++            catch (CertificateException rejected) { throw new IOException("server-identity-rejected"); }
++        }
+         this.serverCert = serverCert;
+     }
+ 
+@@ -134,6 +156,11 @@
+                 throw new IllegalStateException("Should never be called");
+             }
+             public void checkServerTrusted(X509Certificate[] certs, String authType) throws CertificateException {
++                if (cloudyControl != null) {
++                    if (certs == null || certs.length == 0) throw new CertificateException("leaf-required");
++                    cloudyControl.verifyLeaf(certs[0]);
++                    return;
++                }
+                 try {
+                     // Try the default trust manager first to allow pairing with certificates
+                     // that chain up to a trusted root CA. This will raise CertificateException
+@@ -157,6 +184,14 @@
+ 
+         HostnameVerifier hv = new HostnameVerifier() {
+             public boolean verify(String hostname, SSLSession session) {
++                if (cloudyControl != null) {
++                    try {
++                        Certificate[] leaves = session.getPeerCertificates();
++                        if (leaves.length == 0 || !(leaves[0] instanceof X509Certificate)) return false;
++                        cloudyControl.verifyLeaf((X509Certificate) leaves[0]);
++                        return true;
++                    } catch (SSLPeerUnverifiedException | CertificateException rejected) { return false; }
++                }
+                 try {
+                     Certificate[] certificates = session.getPeerCertificates();
+                     if (certificates.length == 1 && certificates[0].equals(NvHTTP.this.serverCert)) {
+@@ -201,9 +236,19 @@
+     }
+     
+     public NvHTTP(ComputerDetails.AddressTuple address, int httpsPort, String uniqueId, X509Certificate serverCert, LimelightCryptoProvider cryptoProvider) throws IOException {
++        this(address, httpsPort, uniqueId, serverCert, cryptoProvider, null);
++    }
++    public NvHTTP(ComputerDetails.AddressTuple address, int httpsPort, String uniqueId,
++            X509Certificate serverCert, LimelightCryptoProvider cryptoProvider, CloudyControl control) throws IOException {
++        cloudyControl = control;
++        if (control != null) {
++            control.check();
++            try { control.verifyLeaf(serverCert); }
++            catch (CertificateException rejected) { throw new IOException("server-identity-rejected"); }
++        }
+         // Use the same UID for all Moonlight clients so we can quit games
+         // started by other Moonlight clients.
+-        this.uniqueId = "0123456789ABCDEF";
++        this.uniqueId = control == null ? "0123456789ABCDEF" : uniqueId;
+ 
+         this.serverCert = serverCert;
+ 
+@@ -430,6 +475,10 @@
+     private ResponseBody openHttpConnection(OkHttpClient client, HttpUrl baseUrl, String path, String query) throws IOException {
+         HttpUrl completeUrl = getCompleteUrl(baseUrl, path, query);
+         Request request = new Request.Builder().url(completeUrl).get().build();
++        if (cloudyControl != null) {
++            cloudyControl.check();
++            return cloudyControl.execute(performAndroidTlsHack(client), request);
++        }
+         Response response = performAndroidTlsHack(client).newCall(request).execute();
+ 
+         ResponseBody body = response.body();
+@@ -461,13 +510,13 @@
+             String respString = resp.string();
+             resp.close();
+ 
+-            if (verbose && !path.equals("serverinfo")) {
++            if (cloudyControl == null && verbose && !path.equals("serverinfo")) {
+                 LimeLog.info(getCompleteUrl(baseUrl, path, query)+" -> "+respString);
+             }
+ 
+             return respString;
+         } catch (IOException e) {
+-            if (verbose && !path.equals("serverinfo")) {
++            if (cloudyControl == null && verbose && !path.equals("serverinfo")) {
+                 LimeLog.warning(getCompleteUrl(baseUrl, path, query)+" -> "+e.getMessage());
+                 e.printStackTrace();
+             }
+@@ -627,6 +676,12 @@
+     }
+     
+     public static LinkedList<NvApp> getAppListByReader(Reader r) throws XmlPullParserException, IOException {
++        return getAppListByReader(r, false);
++    }
++    public static LinkedList<NvApp> cloudyGetAppListByReader(Reader r) throws XmlPullParserException, IOException {
++        return getAppListByReader(r, true);
++    }
++    private static LinkedList<NvApp> getAppListByReader(Reader r, boolean quiet) throws XmlPullParserException, IOException {
+         XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+         factory.setNamespaceAware(true);
+         XmlPullParser xpp = factory.newPullParser();
+@@ -680,7 +735,7 @@
+             
+             // Remove uninitialized apps
+             if (!app.isInitialized()) {
+-                LimeLog.warning("GFE returned incomplete app: "+app.getAppId()+" "+app.getAppName());
++                if (!quiet) LimeLog.warning("GFE returned incomplete app: "+app.getAppId()+" "+app.getAppName());
+                 i.remove();
+             }
+         }
+--- a/app/src/main/java/com/limelight/nvstream/http/PairingManager.java
++++ b/app/src/main/java/com/limelight/nvstream/http/PairingManager.java
+@@ -76,7 +76,7 @@
+                 CertificateFactory cf = CertificateFactory.getInstance("X.509");
+                 return (X509Certificate)cf.generateCertificate(new ByteArrayInputStream(certBytes));
+             } catch (CertificateException e) {
+-                e.printStackTrace();
++                if (!http.cloudyControlled()) e.printStackTrace();
+                 throw new RuntimeException(e);
+             }
+         }
+@@ -110,26 +110,26 @@
+         }
+     }
+     
+-    private static boolean verifySignature(byte[] data, byte[] signature, Certificate cert) {
++    private boolean verifySignature(byte[] data, byte[] signature, Certificate cert) {
+         try {
+             Signature sig = PairingManager.getSha256SignatureInstanceForKey(cert.getPublicKey());
+             sig.initVerify(cert.getPublicKey());
+             sig.update(data);
+             return sig.verify(signature);
+         } catch (NoSuchAlgorithmException | SignatureException | InvalidKeyException e) {
+-            e.printStackTrace();
++            if (!http.cloudyControlled()) e.printStackTrace();
+             throw new RuntimeException(e);
+         }
+     }
+     
+-    private static byte[] signData(byte[] data, PrivateKey key) {
++    private byte[] signData(byte[] data, PrivateKey key) {
+         try {
+             Signature sig = PairingManager.getSha256SignatureInstanceForKey(key);
+             sig.initSign(key);
+             sig.update(data);
+             return sig.sign();
+         } catch (NoSuchAlgorithmException | SignatureException | InvalidKeyException e) {
+-            e.printStackTrace();
++            if (!http.cloudyControlled()) e.printStackTrace();
+             throw new RuntimeException(e);
+         }
+     }
+@@ -216,7 +216,7 @@
+         if (serverCert == null) {
+             // Attempting to pair while another device is pairing will cause GFE
+             // to give an empty cert in the response.
+-            http.unpair();
++            if (!http.cloudyControlled()) http.unpair();
+             return PairState.ALREADY_IN_PROGRESS;
+         }
+ 
+@@ -230,7 +230,7 @@
+         // Send the encrypted challenge to the server
+         String challengeResp = http.executePairingCommand("clientchallenge="+bytesToHex(encryptedChallenge), true);
+         if (!NvHTTP.getXmlString(challengeResp, "paired", true).equals("1")) {
+-            http.unpair();
++            if (!http.cloudyControlled()) http.unpair();
+             return PairState.FAILED;
+         }
+         
+@@ -247,7 +247,7 @@
+         byte[] challengeRespEncrypted = encryptAes(challengeRespHash, aesKey);
+         String secretResp = http.executePairingCommand("serverchallengeresp="+bytesToHex(challengeRespEncrypted), true);
+         if (!NvHTTP.getXmlString(secretResp, "paired", true).equals("1")) {
+-            http.unpair();
++            if (!http.cloudyControlled()) http.unpair();
+             return PairState.FAILED;
+         }
+         
+@@ -259,7 +259,7 @@
+         // Ensure the authenticity of the data
+         if (!verifySignature(serverSecret, serverSignature, serverCert)) {
+             // Cancel the pairing process
+-            http.unpair();
++            if (!http.cloudyControlled()) http.unpair();
+             
+             // Looks like a MITM
+             return PairState.FAILED;
+@@ -269,24 +269,26 @@
+         byte[] serverChallengeRespHash = hashAlgo.hashData(concatBytes(concatBytes(randomChallenge, serverCert.getSignature()), serverSecret));
+         if (!Arrays.equals(serverChallengeRespHash, serverResponse)) {
+             // Cancel the pairing process
+-            http.unpair();
++            if (!http.cloudyControlled()) http.unpair();
+             
+             // Probably got the wrong PIN
+             return PairState.PIN_WRONG;
+         }
+         
+         // Send the server our signed secret
++        // Cached opaque handles never bypass the current owner's authorization.
++        http.cloudyBeforeSigning();
+         byte[] clientPairingSecret = concatBytes(clientSecret, signData(clientSecret, pk));
+         String clientSecretResp = http.executePairingCommand("clientpairingsecret="+bytesToHex(clientPairingSecret), true);
+         if (!NvHTTP.getXmlString(clientSecretResp, "paired", true).equals("1")) {
+-            http.unpair();
++            if (!http.cloudyControlled()) http.unpair();
+             return PairState.FAILED;
+         }
+         
+         // Do the initial challenge (seems necessary for us to show as paired)
+         String pairChallenge = http.executePairingChallenge();
+         if (!NvHTTP.getXmlString(pairChallenge, "paired", true).equals("1")) {
+-            http.unpair();
++            if (!http.cloudyControlled()) http.unpair();
+             return PairState.FAILED;
+         }
+ 

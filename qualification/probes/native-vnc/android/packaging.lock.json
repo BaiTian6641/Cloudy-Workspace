@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "checkedOn": "2026-10-15",
+  "buildRef": "90d674e2-4fef-49e2-a0e3-954fed5b2d7c",
+  "nativeBuildRef": "vnc-adapter-x509plain-2026-10-15",
+  "nativeRun": "entry-02",
+  "nativeReceipt": {
+    "bytes": 108609,
+    "sha256": "e65a0a5de7ed1636f47f57b901985507d8c82be1cb5a4feba90f8d45e1fbebd2"
+  },
+  "application": {
+    "id": "dev.cloudy.qualification.vnc",
+    "versionName": "0.1.0",
+    "versionCode": 1,
+    "compileSdk": 37,
+    "targetSdk": 37,
+    "minSdk": 35,
+    "javaVersion": 17,
+    "agp": "9.4.0",
+    "gradle": "9.6.0",
+    "abi": "arm64-v8a"
+  },
+  "wrapper": {
+    "gradlew": {
+      "bytes": 8656,
+      "sha256": "a5a5c199ba02189ae8c46a334223371a20599d9c298ef65e7540ede4a3f72d59"
+    },
+    "gradle/wrapper/gradle-wrapper.jar": {
+      "bytes": 48462,
+      "sha256": "497c8c2a7e5031f6aa847f88104aa80a93532ec32ee17bdb8d1d2f67a194a9c7"
+    }
+  },
+  "nativeLibraries": {
+    "libcloudy-vnc-jni.so": {
+      "bytes": 3522024,
+      "sha256": "199d99a527305209c8e540c0a137958a51550c90ed523a4f970ed6d0ea941594"
+    },
+    "libssl.so": {
+      "bytes": 1205848,
+      "sha256": "66288be31a05675f6a319632d6abb137eb38b07f10eea302a8b128bd6ed7d5c0"
+    },
+    "libcrypto.so": {
+      "bytes": 6020992,
+      "sha256": "46c0eb8c3c601f3c9d8746e051aefe61e7a324bf152a535feac3f97472deb2d8"
+    }
+  },
+  "bridge": {
+    "source": "nativeNotices/adapter-inputs/qualification/probes/native-vnc/adapter/VncBridge.java",
+    "bytes": 2911,
+    "sha256": "4addfe369e1595ed8dffceb8260fbe8a8f2e59dd023ae9664d0c0a272f27b95a"
+  },
+  "notices": [
+    {
+      "source": "nativeNotices/LibVNC-GPL2.txt",
+      "asset": "LibVNC-GPL2.txt",
+      "bytes": 18043,
+      "sha256": "4d23c8c814e5baf007d854f01d8502e77dc56a41144934e003fb32c4e052d20f"
+    },
+    {
+      "source": "nativeNotices/libjpeg-turbo-LICENSE.md",
+      "asset": "libjpeg-turbo-LICENSE.txt",
+      "bytes": 6077,
+      "sha256": "ba6bceebcba0fdd35488477c2cca8c4632ce82c74dbfbc87d886ce6fc4433579"
+    },
+    {
+      "source": "nativeNotices/libjpeg-turbo-README.ijg",
+      "asset": "libjpeg-turbo-IJG.txt",
+      "bytes": 12799,
+      "sha256": "75815e3bf6484201a3c3d17a1bbf10f2e8e3237f84df10a2357ea896db2a81d6"
+    },
+    {
+      "source": "nativeNotices/OpenSSL-LICENSE.txt",
+      "asset": "OpenSSL-LICENSE.txt",
+      "bytes": 10175,
+      "sha256": "7d5450cb2d142651b8afa315b5f238efc805dad827d91ba367d8516bc9d49e7a"
+    },
+    {
+      "source": "nativeNotices/NOTICE.txt",
+      "asset": "NOTICE.txt",
+      "bytes": 503,
+      "sha256": "a3b0edc389375c8362702923a9e9aa1badcf9df36519e7d40778f6eb696092b8"
+    },
+    {
+      "source": "nativeNotices/BASE-NOTICE.txt",
+      "asset": "BASE-NOTICE.txt",
+      "bytes": 635,
+      "sha256": "0fbbd491a6f73c6200bc2efba0d5b15161aa772a180040023f6e95d2c5119c69"
+    }
+  ],
+  "runtimeDependencies": [],
+  "testDependencies": [
+    "junit:junit:4.13.2",
+    "org.hamcrest:hamcrest-core:1.3"
+  ],
+  "scope": "Private diagnostic APK preparation; runtime/native/server qualification and final corresponding-source distribution remain separate"
+}

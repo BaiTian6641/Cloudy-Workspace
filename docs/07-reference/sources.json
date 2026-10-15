@@ -4684,6 +4684,66 @@
       "sourceUpdatedOn": null,
       "note": "Inspected AuthenticatorUtils credential-only support>=API30 and BiometricFragment forwarding allowed-authenticator mask to framework builder. Supports proposed API37 credential control without changing existing combined-auth timed key; no device outcome. Owner: Desktop/security, P0-S4.",
       "refresh": "Before changed prompt/AndroidX version or interpreting actual credential-control evidence."
+    },
+    {
+      "id": "R228",
+      "title": "KWin6.5.5 executable-to-desktop permission matching",
+      "url": "https://github.com/KDE/kwin/blob/v6.5.5/src/utils/serviceutils.h",
+      "publisher": "KDE",
+      "category": "remote-desktop",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "fetchProcessServiceField uses QProcess::splitCommand and canonical first-token match. Unquoted workspace spaces fail executable identity; normal separately named quoted fixture entry is required. Host integration, P0-S4.",
+      "refresh": "Before changing selected host package/backend or the protected-server experiment."
+    },
+    {
+      "id": "R229",
+      "title": "KWin6.5.5 restricted Wayland interface filter",
+      "url": "https://github.com/KDE/kwin/blob/v6.5.5/src/wayland_server.cpp",
+      "publisher": "KDE",
+      "category": "remote-desktop",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "KWinDisplay restricts zkde_screencast_unstable_v1 and caches requestedInterfaces per client. Refresh desktop entry visibility before a fresh client; never disable checks. Host integration, P0-S4.",
+      "refresh": "Before changing selected host package/backend or the protected-server experiment."
+    },
+    {
+      "id": "R230",
+      "title": "KService6.23.0 application-trader cache query",
+      "url": "https://github.com/KDE/kservice/blob/v6.23.0/src/services/kapplicationtrader.cpp",
+      "publisher": "KDE",
+      "category": "remote-desktop",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "KApplicationTrader query uses validated service cache. Source matches installed major/tag context, not a byte audit of downstream Ubuntu. Actual capture admission recorded separately. Host integration, P0-S4.",
+      "refresh": "Before changing selected host package/backend or the protected-server experiment."
+    },
+    {
+      "id": "R231",
+      "title": "TigerVNC Xvnc protected authentication and finite fixture options",
+      "url": "https://tigervnc.org/doc/Xvnc.html",
+      "publisher": "TigerVNC",
+      "category": "remote-desktop",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Official manual documents X509Plain, X509Cert/Key, PlainUsers and PAMService plus interface/lifetime controls. PAM is not VNC-password-file authentication. Actual protected interoperability pending; Desktop/native, P0-S4.",
+      "refresh": "Before changing selected host package/backend or the protected-server experiment."
+    },
+    {
+      "id": "R232",
+      "title": "Ubuntu26.04 TigerVNC standalone candidate package",
+      "url": "https://us.archive.ubuntu.com/ubuntu/pool/universe/t/tigervnc/tigervnc-standalone-server_1.15.0+dfsg-2build1_amd64.deb",
+      "publisher": "Ubuntu",
+      "category": "remote-desktop",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Candidate1.15.0+dfsg-2build1 verified1239416B SHA256912df371f896aa26b5ec9bd4c2e0b239253ff64e21a1638206fa4d979b6337b4; extracted Xtigervnc loader resolution passed, no install/server launch. Desktop/native, P0-S4.",
+      "refresh": "Before changing selected host package/backend or the protected-server experiment."
     }
   ]
 }

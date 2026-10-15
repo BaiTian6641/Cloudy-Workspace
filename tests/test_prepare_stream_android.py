@@ -111,5 +111,54 @@ class AndroidPreparationChecks(unittest.TestCase):
             MODULE.check(self.stage)
 
 
+class PairingReplayChecks(unittest.TestCase):
+    def fixture(self):
+        name = "app/src/main/java/Example.java"
+        before, after = b"before\n", b"after\n"
+        raw = ("--- a/" + name + "\n+++ b/" + name +
+               "\n@@ -1 +1 @@\n-before\n+after\n").encode()
+        prefix = MODULE.PAIRING.relative_to(ROOT).as_posix() + "/"
+        lock = {"patch": {"file": "finite-pairing.patch", "sha256": MODULE.digest(raw)},
+                "authoredSources": {}, "files": {name: {
+                    "beforeSha256": MODULE.digest(before), "afterSha256": MODULE.digest(after)}}}
+        contents = {prefix + "finite-pairing.patch": raw,
+                    prefix + "sources.lock.json": json.dumps(lock).encode()}
+        return name, before, after, raw, prefix, lock, contents
+
+    def test_exact_offline_replay(self):
+        name, before, after, _, _, _, contents = self.fixture()
+        files = {name: before, "unrelated-native.so": b"unchanged"}
+        MODULE.apply_pairing(files, contents)
+        self.assertEqual(files, {name: after, "unrelated-native.so": b"unchanged"})
+
+    def test_changed_patch_before_after_and_extra_target_rejected(self):
+        for case in ("patch", "before", "after", "extra"):
+            with self.subTest(case=case):
+                name, before, _, raw, prefix, lock, contents = self.fixture()
+                files = {name: before}
+                if case == "patch":
+                    contents[prefix + "finite-pairing.patch"] += b"changed"
+                elif case == "before":
+                    files[name] = b"changed\n"
+                elif case == "after":
+                    lock["files"][name]["afterSha256"] = MODULE.digest(b"wrong")
+                else:
+                    raw += b"--- a/extra\n+++ b/extra\n@@ -1 +1 @@\n-x\n+y\n"
+                    contents[prefix + "finite-pairing.patch"] = raw
+                    lock["patch"]["sha256"] = MODULE.digest(raw)
+                contents[prefix + "sources.lock.json"] = json.dumps(lock).encode()
+                with self.assertRaises(ValueError):
+                    MODULE.apply_pairing(files, contents)
+                self.assertEqual(files[name], b"changed\n" if case == "before" else before)
+
+    def test_authored_pairing_source_is_frozen(self):
+        name, before, _, _, prefix, lock, contents = self.fixture()
+        lock["authoredSources"] = {"owned.java": MODULE.file_record(b"accepted")}
+        contents["owned.java"] = b"changed"
+        contents[prefix + "sources.lock.json"] = json.dumps(lock).encode()
+        with self.assertRaisesRegex(ValueError, "authored pairing source changed"):
+            MODULE.apply_pairing({name: before}, contents)
+
+
 if __name__ == "__main__":
     unittest.main()

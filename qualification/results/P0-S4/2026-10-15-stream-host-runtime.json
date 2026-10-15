@@ -1,0 +1,296 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-15",
+  "stage": "P0-S4",
+  "scope": "finite-host-startup-capture-path-and-encoder-probes-no-client",
+  "server": {
+    "release": "v2026.914.233613",
+    "revision": "63d35f702ee9e362e43263742981836ec0710384",
+    "binary": {
+      "path": ".cache/native-stream-host/preflight-02/squashfs-root/usr/bin/sunshine",
+      "bytes": 27596969,
+      "sha256": "6946d8ac8bb0e99da1e51b374029c8b24dcabb315265a0e7004d046eb6f143fd"
+    },
+    "packageSha256": "6f80297a853bcf8cda114ff131b5c0a8c9a4d96a2a9c3dee1f04c39c54206846"
+  },
+  "host": {
+    "os": "Ubuntu26.04",
+    "session": "Wayland/KDE",
+    "kwinPackage": "4:6.5.5-0ubuntu2",
+    "kservice": "6.23.0",
+    "vaapiDriverFromLog": "Mesa Gallium26.0.0-devel radeonsi gfx1151 ACO DRM3.64",
+    "kernelFromLog": "7.0.0-38-generic"
+  },
+  "runs": [
+    {
+      "run": "runtime-01",
+      "record": {
+        "path": ".cache/native-stream-host/runtime-01/result.json",
+        "bytes": 1705,
+        "sha256": "76091666041afc4b3373fc1629317ea145112df66e3cdd18d646e1da23f7defc"
+      },
+      "durationMillis": 12233,
+      "exitCode": 0,
+      "listenersObservedAndClosed": 4,
+      "httpStatus": 200,
+      "webTls": {
+        "protocol": "TLSv1.3",
+        "peerSha256": "b223b60eeb3b9ef170a174cb7a84c6c4c7d0cfc9a9706886beea831ad24ada84",
+        "sameAsPrivateFixtureCertificate": true
+      },
+      "ownedPermissionsRemoved": true,
+      "captureInterfaceAvailable": false,
+      "vaapiStartupProbePassed": false
+    },
+    {
+      "run": "runtime-02",
+      "record": {
+        "path": ".cache/native-stream-host/runtime-02/result.json",
+        "bytes": 1999,
+        "sha256": "bdcab76c101a9b00a423163c47db96e101c81c530c70ba797235e8438cec33b2"
+      },
+      "durationMillis": 12321,
+      "exitCode": 0,
+      "listenersObservedAndClosed": 4,
+      "httpStatus": 200,
+      "webTls": {
+        "protocol": "TLSv1.3",
+        "peerSha256": "d050190b7f6b38df9b175cded2902faa98249f2b35a8a724ca4ddcb5dd5a2c75",
+        "sameAsPrivateFixtureCertificate": true
+      },
+      "ownedPermissionsRemoved": true,
+      "captureInterfaceAvailable": true,
+      "vaapiStartupProbePassed": false
+    },
+    {
+      "run": "runtime-03",
+      "processStarted": false,
+      "failure": "prelaunch-bind-errno98",
+      "record": {
+        "path": ".cache/native-stream-host/runtime-03/operator-failure.json",
+        "bytes": 186,
+        "sha256": "33696c9e8ea1255c5a78e6f9f1be073e407b92a5dd9917a9b7363d6fb3daf620"
+      }
+    },
+    {
+      "run": "runtime-04",
+      "record": {
+        "path": ".cache/native-stream-host/runtime-04/result.json",
+        "bytes": 1999,
+        "sha256": "13b81bacb608e5ec90938565eeb9f6e576d957d5373af75b06e2f03d1be121ea"
+      },
+      "durationMillis": 12322,
+      "exitCode": 0,
+      "listenersObservedAndClosed": 4,
+      "httpStatus": 200,
+      "webTls": {
+        "protocol": "TLSv1.3",
+        "peerSha256": "0f3dd0e9805dcf0be479cf821efd04af3b4fbcb5dadc15dbc967f1ec51892fdc",
+        "sameAsPrivateFixtureCertificate": true
+      },
+      "ownedPermissionsRemoved": true,
+      "captureInterfaceAvailable": true,
+      "vaapiStartupProbePassed": true
+    }
+  ],
+  "privateEvidence": [
+    {
+      "path": ".cache/native-stream-host/runtime-01/result.json",
+      "bytes": 1705,
+      "sha256": "76091666041afc4b3373fc1629317ea145112df66e3cdd18d646e1da23f7defc"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime-01/sunshine.conf",
+      "bytes": 954,
+      "sha256": "ea030f0f97dd0dbbba7bb1a34ef5bdae9615a58568d97452582b5aa6e8e9be1e"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime-01/stdout.log",
+      "bytes": 12700,
+      "sha256": "38c1201ca00a31f734d755dcc73592de8a695b1031c3c7069efe841d99b396bd"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime-01/sunshine.log",
+      "bytes": 10416,
+      "sha256": "73987ab9221d3cff1acc67989b02ec5757affcc8c80d4b3161fe989942cfd96d"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime-01/serverinfo.xml",
+      "bytes": 541,
+      "sha256": "b38ed98a89a0c83e988314996c5a684c4c7ed5fe730863af7b9f04e80a5dce7a"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime-01/permission-preflight.json",
+      "bytes": 116,
+      "sha256": "2b43eb9185318c44f52dd483cd8dd63c2258ea4a42984951aead636a97907494"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime-01/permission-dev.lizardbyte.app.Sunshine.kwin1792103262233.desktop",
+      "bytes": 324,
+      "sha256": "21bdef1a2ae5ded187d1b24d8452f9fff0adf01528412e2eb4f48212e5463982"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime-02/result.json",
+      "bytes": 1999,
+      "sha256": "bdcab76c101a9b00a423163c47db96e101c81c530c70ba797235e8438cec33b2"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime-02/sunshine.conf",
+      "bytes": 954,
+      "sha256": "6b34fd0fee272121019cf3caf06b383bf4b4f44c417f98bb421068170f1665db"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime-02/stdout.log",
+      "bytes": 39106,
+      "sha256": "68bf48c16ede2c8a1f446fc7811f51dd042f55fd1e3aebec05413115d90822f0"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime-02/sunshine.log",
+      "bytes": 36416,
+      "sha256": "be0705fcfea30d15f7e4d973f3578cf40ae67085e86cb33c3709db1028da5978"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime-02/serverinfo.xml",
+      "bytes": 555,
+      "sha256": "2e7398252f71de7da0ee91b9d29a470c57e9e2f5347d04a0946fd9ec19378253"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime-02/permission-preflight.json",
+      "bytes": 116,
+      "sha256": "2b43eb9185318c44f52dd483cd8dd63c2258ea4a42984951aead636a97907494"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime-02/fixture-permission.desktop",
+      "bytes": 260,
+      "sha256": "565689b52dc53bd7e89dbaf249408ae8a601b05807702dc24775c0bc73723154"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime-02/permission-dev.lizardbyte.app.Sunshine.kwin1792103663504.desktop",
+      "bytes": 324,
+      "sha256": "21bdef1a2ae5ded187d1b24d8452f9fff0adf01528412e2eb4f48212e5463982"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime-02/desktop-cache-cleanup.log",
+      "bytes": 25,
+      "sha256": "a4f18fbe39010c14f05888bddd2c2cadbf8c19a84fdbcf6782e96d30aecb4a9d"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime-02/desktop-cache.log",
+      "bytes": 25,
+      "sha256": "a4f18fbe39010c14f05888bddd2c2cadbf8c19a84fdbcf6782e96d30aecb4a9d"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime-02/desktop-validation.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime-03/operator-failure.json",
+      "bytes": 186,
+      "sha256": "33696c9e8ea1255c5a78e6f9f1be073e407b92a5dd9917a9b7363d6fb3daf620"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime-03/permission-preflight.json",
+      "bytes": 116,
+      "sha256": "2b43eb9185318c44f52dd483cd8dd63c2258ea4a42984951aead636a97907494"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime-04/result.json",
+      "bytes": 1999,
+      "sha256": "13b81bacb608e5ec90938565eeb9f6e576d957d5373af75b06e2f03d1be121ea"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime-04/sunshine.conf",
+      "bytes": 954,
+      "sha256": "94891ffbcfe648338afb580918a78ecd37ed75b7f19424212a257895108278a2"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime-04/stdout.log",
+      "bytes": 33105,
+      "sha256": "78f172d412023794ce7b66ec127414a1fb953a7b1603a079ba95509196836665"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime-04/sunshine.log",
+      "bytes": 29806,
+      "sha256": "bde91d2756d9bf58cee138ae20c2871bf4cbb83fc1365ea5e4b7639347ed5fdc"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime-04/serverinfo.xml",
+      "bytes": 555,
+      "sha256": "8c045df399034882b7b0ea5a6113f19c0068f408dca04b04a023ed0a0daa0591"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime-04/permission-preflight.json",
+      "bytes": 116,
+      "sha256": "2b43eb9185318c44f52dd483cd8dd63c2258ea4a42984951aead636a97907494"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime-04/fixture-permission.desktop",
+      "bytes": 260,
+      "sha256": "565689b52dc53bd7e89dbaf249408ae8a601b05807702dc24775c0bc73723154"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime-04/permission-dev.lizardbyte.app.Sunshine.kwin1792103726937.desktop",
+      "bytes": 324,
+      "sha256": "21bdef1a2ae5ded187d1b24d8452f9fff0adf01528412e2eb4f48212e5463982"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime-04/desktop-cache-cleanup.log",
+      "bytes": 25,
+      "sha256": "a4f18fbe39010c14f05888bddd2c2cadbf8c19a84fdbcf6782e96d30aecb4a9d"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime-04/desktop-cache.log",
+      "bytes": 25,
+      "sha256": "a4f18fbe39010c14f05888bddd2c2cadbf8c19a84fdbcf6782e96d30aecb4a9d"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime-04/desktop-validation.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime_probe_03.py",
+      "bytes": 7213,
+      "sha256": "e844f65bbc55ea43b032970fa0957759175506dbb9dfb1643565a9352aae35b9"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime_probe_04.py",
+      "bytes": 7213,
+      "sha256": "851d2f5b33eb2bd5d3b6ada7f2ae43ddca5abe2ed3f4ad4978838726de9f156d"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime_probe_02.py",
+      "bytes": 7213,
+      "sha256": "48aaec08b6964cade5b79cba724ea277f91f159844ff81afaabe61da034d6d06"
+    },
+    {
+      "path": ".cache/native-stream-host/runtime_probe.py",
+      "bytes": 5868,
+      "sha256": "15e8f72451a830ff1d95f4db19b8bfde619dbd464b243de2f0835e4c67c867d4"
+    },
+    {
+      "path": ".cache/native-stream-host/source-review/receipt.json",
+      "bytes": 2319,
+      "sha256": "e5b9244a678fbee577f83a9d14f6a1d5a9cea6c509ea3a01faeda0430bf0c765"
+    },
+    {
+      "path": ".cache/native-stream-host/preflight-02/preflight.json",
+      "bytes": 18845,
+      "sha256": "5fea7862d33e54243dfd038e556bf3de43055027fbf4607fdbe76f070f78ef21"
+    },
+    {
+      "path": ".cache/native-stream-host/preflight-02/squashfs-root/AppRun",
+      "bytes": 2846,
+      "sha256": "4e79f170f38429cc7df268483483be6ef8ff0f289c02cebcf06ac7d8f1554257"
+    }
+  ],
+  "unqualified": [
+    "Android pairing and client-key TLS",
+    "delivered changing client frames",
+    "selected streaming codec and Surface decode",
+    "keyboard/relative input and release",
+    "sustained hardware encode and latency",
+    "CAP-STREAM"
+  ]
+}

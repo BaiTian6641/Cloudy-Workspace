@@ -1,0 +1,70 @@
+plugins { id 'com.android.application' }
+
+android {
+    namespace 'dev.cloudy.qualification.vnc'
+    compileSdk 37
+    buildToolsVersion '36.0.0'
+    ndkVersion '29.0.14206865'
+    // Official AGP module switch: Java-only source needs no automatic Kotlin runtime.
+    enableKotlin = false
+    defaultConfig {
+        applicationId 'dev.cloudy.qualification.vnc'
+        minSdk 35
+        targetSdk 37
+        versionCode 1
+        versionName '0.1.0'
+        // Finite arm64 Googlebook diagnostic, not cross-ABI qualification.
+        //noinspection ChromeOsAbiSupport
+        ndk { abiFilters 'arm64-v8a' }
+        buildConfigField 'String', 'QUALIFICATION_BUILD_REF', '"90d674e2-4fef-49e2-a0e3-954fed5b2d7c"'
+        buildConfigField 'String', 'NATIVE_BUILD_REF', '"vnc-adapter-x509plain-2026-10-15"'
+    }
+    buildFeatures { buildConfig = true }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    sourceSets {
+        main {
+            java.srcDir 'build/generated/cloudy/java'
+            jniLibs.srcDir 'build/generated/cloudy/nativeLibraries'
+            assets.srcDir 'build/generated/cloudy/nativeNotices'
+        }
+    }
+    // Symbol-name JNI and callback methods must retain the exact authored ABI.
+    buildTypes { release { minifyEnabled false } }
+    // Preserve exact receipt-bound native bytes; qualification audits the APK entries.
+    packaging { jniLibs { useLegacyPackaging false; keepDebugSymbols += ['**/*.so'] } }
+    lint { abortOnError true; warningsAsErrors true; checkReleaseBuilds true }
+}
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs += ['-Xlint:all', '-Werror']
+}
+dependencies { testImplementation 'junit:junit:4.13.2' }
+dependencyLocking { lockAllConfigurations() }
+
+def repositoryRoot = providers.gradleProperty('cloudyRepositoryRoot')
+def verifyCloudyInputs = tasks.register('verifyCloudyInputs', Exec) {
+    commandLine 'python3', new File(repositoryRoot.get(), 'tools/prepare_vnc_android.py'),
+            '--check', '--stage', rootProject.projectDir.name
+}
+tasks.named('preBuild').configure { dependsOn verifyCloudyInputs }
+
+// Run with assemble/lint/tests to bind the actual resolved APK runtime closure.
+tasks.register('recordCloudyRuntimeDependencies') {
+    dependsOn verifyCloudyInputs
+    doLast {
+        def records = configurations.debugRuntimeClasspath.incoming.artifacts.artifacts.collect { artifact ->
+            def bytes = artifact.file.bytes
+            [component: artifact.id.componentIdentifier.displayName, file: artifact.file.name,
+             bytes: bytes.length,
+             sha256: java.security.MessageDigest.getInstance('SHA-256').digest(bytes).encodeHex().toString()]
+        }.sort { a, b -> a.component <=> b.component ?: a.file <=> b.file }
+        if (!records.isEmpty()) {
+            throw new GradleException('Unexpected Java runtime dependency; review source/notices before packaging')
+        }
+        def target = layout.buildDirectory.file('reports/cloudy-runtime-dependencies.json').get().asFile
+        target.parentFile.mkdirs()
+        target.text = groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(records)) + '\n'
+    }
+}

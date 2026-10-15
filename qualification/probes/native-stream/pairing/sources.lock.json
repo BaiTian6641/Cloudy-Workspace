@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "scope": "authored Java HTTP/pairing qualification overlay; native source inputs unchanged",
+  "upstreamRevision": "b48494cb96bff23d8886c4775cc4f39a1075495d",
+  "patch": {
+    "file": "finite-pairing.patch",
+    "sha256": "45516825cfaa6832264d4d0b6ead822947d70b95f7e939c1135fbd4145358531"
+  },
+  "files": {
+    "app/src/main/java/com/limelight/nvstream/http/NvHTTP.java": {
+      "beforeSha256": "363b0618e6c911ab35930b8a40528618100d2135726aded76804e113cfd537f7",
+      "afterSha256": "bd1392e2ff162cf530ed856bacc7a8efcfbfe07a908528843ff11ba475584e13"
+    },
+    "app/src/main/java/com/limelight/nvstream/http/PairingManager.java": {
+      "beforeSha256": "83858d10e77026777acbee6857c95a0af22dc025a0b1f76072704639ac5d572a",
+      "afterSha256": "177feb316c7b145e6c26658dc18778d67664dd4268b7a43b22dbd1c970497893"
+    }
+  },
+  "authoredSources": {
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/pairing/PairingController.java": {
+      "bytes": 8423,
+      "sha256": "9e56c1071df5281440fd6b0018bb816ad3dcef5bf2b26c1fe06daecb65630c1e"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/pairing/AttemptLease.java": {
+      "bytes": 1606,
+      "sha256": "b63166585504daea630aadf5e3c8b0ad5fade6237664902286c4e04bcca2b61e"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/pairing/LeafPolicy.java": {
+      "bytes": 1154,
+      "sha256": "bf8e426ec6e276f7edbc93e79f701a00366b0254dcad5a61ee7c3c0f6e22122b"
+    },
+    "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/pairing/LeafPolicyTest.java": {
+      "bytes": 2804,
+      "sha256": "df8efb136c0fda7766a757256ba508cfe847058af9cff6eceae23038d2a0337c"
+    },
+    "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/pairing/AttemptLeaseTest.java": {
+      "bytes": 2797,
+      "sha256": "8031ee8e8a08dd4fcbf6fbde892ef0f88e7e9fd1faf1443d9d74095c13bcb558"
+    }
+  }
+}

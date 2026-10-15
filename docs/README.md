@@ -40,6 +40,9 @@ The [desktop workflow design](04-design/desktop-workflows.md) expands the visual
 
 - [Streaming identity device result](../qualification/results/P0-S4/2026-10-15-stream-identity.md) and [implementation review](06-validation/2026-10-15-stream-identity-review.md): real pending TEE key, actual prompt success and failed plain-JCA signing boundary.
 - [VNC adapter build](../qualification/results/P0-S4/2026-10-15-vnc-adapter-build.md) and [review](06-validation/2026-10-15-vnc-adapter-review.md): exact trust, bounded native lifetime and next Android/server gate.
-- [Sunshine host preflight](03-platform/googlebook/native-stream-host-entry.md): pinned distribution/dependency and KWin permission route, with host launch still pending.
+- [Sunshine host preflight](03-platform/googlebook/native-stream-host-entry.md): pinned distribution/dependency and KWin permission route; the [finite runtime review](06-validation/2026-10-15-stream-host-runtime-review.md) records actual capture-path/VA-API startup probes and cleanup.
 
 - [Same-key screen-lock credential result](../qualification/results/P0-S4/2026-10-15-stream-credential-control.md):0.1.3 real local signing/certificate/reload pass, preserving the earlier biometric failure and later TLS/pairing gates.
+
+- [VNC Android APK/load](../qualification/results/P0-S4/2026-10-15-vnc-apk-load.md): actual separate0.1.0 package and Googlebook native-library loading, with protected-server work next.
+- [Streaming pairing transport build](../qualification/results/P0-S4/2026-10-15-stream-pairing-build.md): reviewed exact patch, bounded HTTP/TLS controller and eleven JVM tests; UI/device pairing remains pending.

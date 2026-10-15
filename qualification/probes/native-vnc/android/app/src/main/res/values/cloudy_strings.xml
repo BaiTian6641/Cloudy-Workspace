@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Cloudy VNC qualification</string>
+    <string name="vnc_explanation">Diagnostic only. Import app-private vnc-config.json (schema 1: profileId, numericAddress, port, certificateSha256, durationSeconds 10–600). Only VeNCrypt X509Plain with an exact approved leaf pin is supported. Enter session-only credentials below. No reconnect or background service. Remote interoperability and desktop behavior require actual host qualification. Keyboard input uses physical keys; native fields retain their Android editing and IME behavior.</string>
+    <string name="vnc_username">Session username</string>
+    <string name="vnc_password">Session password</string>
+    <string name="vnc_permission">Request local network permission</string>
+    <string name="vnc_load">Load native libraries (no connection)</string>
+    <string name="vnc_connect">Connect finite session</string>
+    <string name="vnc_disconnect">Cancel / disconnect</string>
+    <string name="vnc_frame_description">Remote VNC framebuffer. Focus here for physical keyboard and absolute pointer input.</string>
+    <string name="vnc_no_frame">No remote framebuffer received</string>
+    <string name="vnc_credentials_invalid">Credentials must be nonempty canonical UTF-8 without NUL (username ≤256 bytes, password ≤1024 bytes).</string>
+    <string name="vnc_status">State: %1$s · %2$s\nGeometry: %3$d × %4$d\nFrame callbacks: %5$d · converted: %6$d · unique View draws: %7$d\nInputs admitted: %8$d · completed: %9$d · upstream writes: %10$d\nAdmission and writes do not prove host delivery; View draws do not measure display latency.</string>
+</resources>

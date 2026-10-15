@@ -859,20 +859,23 @@
         "R137",
         "R140",
         "R202",
-        "R218"
+        "R218",
+        "R231",
+        "R232"
       ],
       "minimumApi": null,
       "libraryVersion": "98aaee0560baa0332339b2ef464ea96ed9b9b28c; libjpeg-turbo3.2.0; reused accepted OpenSSL4.0.1",
       "interfaceKind": "upstream-client-and-standard",
-      "availability": "Pinned host static build/27 decoder regressions and actual Android arm64 TLS/JPEG native entry03 build passed; Android load/JNI/trust/protected-server integration pending",
+      "availability": "Pinned host regressions, real Android TLS/JPEG/JNI/APK build and native-library loading pass; protected-server session unqualified",
       "qualification": "partial",
       "checkedOn": "2026-10-15",
       "owner": "Android/integration developer",
       "stage": "P3-S8",
       "fallback": "Choose a maintained compatible engine; external viewer is a labeled partial workflow",
-      "experiment": "Carry forward27 accepted host ASan/UBSan cases. Accepted entry03 built actual arm64 LibVNCClient with OpenSSL4.0.1, static JPEG3.2.0, Android zlib and portable miniLZO; ELF/16KiB/source integrity verified, no app/JNI adapter. Next implement owned JNI/lifecycle, enforce protected security-type policy and fail-closed server identity, qualify protected-server encoding/resize/input/cancel/recovery. Compiled TLS does not forbid plaintext/anonymous upstream alternatives. ADR0010 distribution/source/license closure remains release gate; no CAP-VNC pass.",
+      "experiment": "Carry forward27 accepted upstream host cases and exact adapter/native bytes. Diagnostic0.1.0 passes seven JVM tests/zero Lint findings and actually loads crypto/SSL/JNI on HP Googlebook14/API37 with one closed zero-connection journal. Exact-leaf X509Plain session path is implemented but actual JNI create/start/stop/join/free, server pin/authentication/frame/input/lifecycle remain next. Extracted Ubuntu TigerVNC candidate resolves dependencies, not a protocol pass. Complete real protected-server evidence and ADR0010 source/license closure; no CAP-VNC promotion.",
       "researchEvidence": "docs/07-reference/2026-10-15-vnc-patched-source-selection.md",
-      "compileEvidence": "qualification/results/P0-S4/2026-10-15-vnc-native-build.md"
+      "compileEvidence": "qualification/results/P0-S4/2026-10-15-vnc-apk-load.md",
+      "deviceEvidence": "qualification/results/P0-S4/2026-10-15-vnc-apk-load.md"
     },
     {
       "id": "API32",
@@ -1441,7 +1444,8 @@
         "BiometricManager.canAuthenticate",
         "KeyStoreException.getNumericErrorCode",
         "BiometricPrompt.AuthenticationResult.getAuthenticationType",
-        "BiometricPrompt.PromptInfo.Builder.setAllowedAuthenticators"
+        "BiometricPrompt.PromptInfo.Builder.setAllowedAuthenticators",
+        "NvHTTP.getAppListRaw"
       ],
       "sourceIds": [
         "R203",
@@ -1475,21 +1479,25 @@
         "R225",
         "R226",
         "G149",
-        "R227"
+        "R227",
+        "R228",
+        "R229",
+        "R230"
       ],
       "minimumApi": null,
       "libraryVersion": "Moonlight Androidv12.2/b48494cb96bff23d8886c4775cc4f39a1075495d; common-C874ac9548f1bd6f095ef2b435c42cdde460e7821",
       "interfaceKind": "pinned-upstream-source-integration-not-embedding-sdk",
-      "availability": "Pinned native core/Android build/JNI loading pass; same-key0.1.3 device-credential local signing/certificate enrollment/reload passes; earlier biometric signing failure unresolved; TLS/pairing/streaming pending",
+      "availability": "Native/JNI loading and same-key0.1.3 credential signing/reload pass; finite pairing adapter compiles in0.1.4 but UI/network route not activated; host KWin/PipeWire/VA-API startup probes pass; client TLS/pairing/stream pending",
       "qualification": "partial",
       "checkedOn": "2026-10-15",
       "owner": "Desktop/media maintainer",
       "stage": "P0-S4",
       "fallback": "Explicit separately installed Moonlight enrolled-host handoff/manual selection, independently useful RDP/VNC lanes; external handoff does not complete native scope",
-      "experiment": "Carry forward0.1.0 actual MoonBridge initialization/metadata. Same-key0.1.3/code4 HP Googlebook14/API37 CL3B.260622.276.R2 explicit DEVICE_CREDENTIAL type1 callback completes real RSA2048 signing/certificate enrollment61ms later, with TEE/HWauth/nullprivateencoding; fresh-process modeNONE reloads READY. Nine records preserved, previous six unchanged. Earlier0.1.2 biometric type2 ->initSign UserNotAuthenticatedException6ms remains unexplained. Next finite authenticated HTTP/TLS/pairing with same-attempt credential reauthorization and cancellation; unchanged30second policy/no automatic retry/regeneration/softwarefallback. Actual lock/cancel/expiry and Surface/MediaCodec/host/input/decode pending. D16 full delivered source/notices/build review remains releasegate.",
+      "experiment": "Carry forward0.1.0 actual MoonBridge initialization/metadata. Same-key0.1.3/code4 HP Googlebook14/API37 CL3B.260622.276.R2 explicit DEVICE_CREDENTIAL type1 callback completes real RSA2048 signing/certificate enrollment61ms later, with TEE/HWauth/nullprivateencoding; fresh-process modeNONE reloads READY. Nine records preserved, previous six unchanged. Earlier0.1.2 biometric type2 ->initSign UserNotAuthenticatedException6ms remains unexplained. Next finite authenticated HTTP/TLS/pairing with same-attempt credential reauthorization and cancellation; unchanged30second policy/no automatic retry/regeneration/softwarefallback. Actual lock/cancel/expiry and Surface/MediaCodec/host/input/decode pending. D16 full delivered source/notices/build review remains releasegate. Local0.1.4/code5 adds exact patched finite pairing transport, strict leaf pin and registered OkHttp body/call cancellation; eleven JVM tests pass, not installed or UI-activated. Selected Sunshine runtime04 resolves quoted permission-path/AppDir cwd blockers and passes actual KWin/PipeWire/VA-API startup probes with cleanup, without client frames/TLS/input/performance proof.",
       "researchEvidence": "docs/03-platform/googlebook/native-stream-adoption-entry.md",
       "versionNotes": "Upstream min21,target36,compile37; owned diagnostic min35,target36,compile37; target37 migration separate. Public API26+ pointer capture for Googlebook, no root/evdev/private route. One process-global native attempt; external shortcut uses Moonlight-owned enrolled host state. Keystore builder23, unlocked restriction28, timed auth parameters30, actual security level31; source candidate uses Googlebook37. Conscrypt/AOSP/BC moving source explains compatibility, not installed provider pin. Identity inspector isUnlockedDeviceRequired added36.1; new identity diagnostic deliberately requiresAPI37 before creating or inspecting keys. Stable AndroidXBiometric1.1.0 time-based strong/devicecredential prompt has no CryptoObject; actual integration result recorded separately. Credential-only PromptInfo is supported by selected AndroidX1.1.0 onAPI30+; same-key control requires actual resulttype1 and does not change keypolicy. G149/R227.",
-      "compileEvidence": "qualification/results/P0-S4/2026-10-15-stream-credential-control.md"
+      "compileEvidence": "qualification/results/P0-S4/2026-10-15-stream-pairing-build.md",
+      "deviceEvidence": "qualification/results/P0-S4/2026-10-15-stream-credential-control.md"
     }
   ],
   "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."

@@ -24,3 +24,7 @@ qualification/probes/native-rdp/patches/android-pointer-position.patch whitespac
 # This exact VNC diff preserves upstream blank/tab/trailing context bytes.
 # Its added source lines are reviewed independently and have no trailing spaces.
 qualification/probes/native-vnc/adapter/security-and-cancel.patch whitespace=-space-before-tab,-blank-at-eol
+
+# Exact pairing diff retains upstream context whitespace and its final separator.
+# Added source lines are separately checked for trailing whitespace.
+qualification/probes/native-stream/pairing/finite-pairing.patch whitespace=-space-before-tab,-blank-at-eol,-blank-at-eof
