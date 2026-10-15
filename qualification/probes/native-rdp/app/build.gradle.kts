@@ -8,12 +8,12 @@ android {
         applicationId = "dev.cloudy.qualification.rdp"
         minSdk = 35
         targetSdk = 37
-        versionCode = 1
-        versionName = "0.1.0"
+        versionCode = 3
+        versionName = "0.1.2"
         // This finite diagnostic targets the connected arm64 Googlebook only.
         //noinspection ChromeOsAbiSupport
         ndk { abiFilters += "arm64-v8a" }
-        buildConfigField("String", "QUALIFICATION_BUILD_REF", "\"2b12a3d1-74aa-47ee-8238-d606181adbd5\"")
+        buildConfigField("String", "QUALIFICATION_BUILD_REF", "\"832bfa1b-4d82-44a6-aa04-101d9c52e7e8\"")
     }
     buildFeatures { buildConfig = true }
     compileOptions {

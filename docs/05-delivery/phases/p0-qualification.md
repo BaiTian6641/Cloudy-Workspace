@@ -101,9 +101,9 @@ Record evidence under `qualification/results/P0-S3/` using the [run template](..
 
 ## P0-S4 — Streaming, RDP/VNC, physical input and decoder qualification
 
-**Owner:** Desktop/device developer. **Prerequisites:** P0-S2. **Status:** in-progress; FreeRDP Android native/JNI build accepted, APK and real session integration pending.
+**Owner:** Desktop/device developer. **Prerequisites:** P0-S2. **Status:** in-progress; FreeRDP native/JNI/APK, trust/NLA and bounded real framebuffer/explicit cleanup observed; input/performance and other engine lanes remain pending.
 
-The [FreeRDP3.32.2 native/JNI build](../../06-validation/2026-10-15-native-rdp-build.md) now compiles for arm64/API29 with MediaCodec. Carry forward its exact inputs and static ELF evidence; the next work is Android package/JNI/trust/framebuffer/input/cancel integration and a compatible existing-session KDE fixture. The [API decision](../../07-reference/2026-10-15-rdp-android-mediacodec.md) records why H.264 is enabled, experimental output-layout/fallback limits and the current host package-upgrade constraint. No CAP-RDP promotion follows from a compile; VNC, streaming and physical-input branches keep their own prerequisites.
+The [FreeRDP3.32.2 native/JNI build](../../06-validation/2026-10-15-native-rdp-build.md) now compiles for arm64/API29 with MediaCodec. Carry forward its exact inputs and static ELF evidence; the [current device result](../../../qualification/results/P0-S4/2026-10-15-rdp-framebuffer.md) now observes real changing pixels and explicit cleanup. The next boundary is controlled input/focus/cancel and sustained resource/performance qualification. The [API decision](../../07-reference/2026-10-15-rdp-android-mediacodec.md) records why H.264 is enabled, experimental output-layout/fallback limits and the current host package-upgrade constraint. No CAP-RDP promotion follows from a compile; VNC, streaming and physical-input branches keep their own prerequisites.
 
 The [native desktop entry brief](../../03-platform/googlebook/p0-s4-native-desktop-entry.md) records the accepted FreeRDP 3.32.2 Android build and the [exact LibVNC patched-source candidate](../../07-reference/2026-10-15-vnc-patched-source-selection.md), with focused advisory regression and Android build/integration checks remaining before a network probe. Platform/library availability, compilation and actual server/device support remain separate. CAP-RDP/CAP-VNC remain pending.
 
@@ -131,7 +131,7 @@ Record evidence under `qualification/results/P0-S4/` using the [run template](..
 
 Current bounded increment: the [real RDP diagnostic APK/load result](../../../qualification/results/P0-S4/2026-10-15-rdp-apk-load.md) passes local compiler/lint/14 JVM tests, actual patched queue checks and Googlebook native loading. It records zero RDP connections; server trust/NLA/pixels/input/cancellation and performance remain unqualified. This does not change stage dependencies or capability readiness.
 
-The [first native RDP sessions](../../../qualification/results/P0-S4/2026-10-15-rdp-first-sessions.md) now establish actual pin rejection, NLA connection and bounded join/free or process-interruption reconciliation. No frame/input result passes: source-guided host setup reaches capture, then the Android adapter fails before delivery. Preserve this failed case and record its missing callback diagnostics before changing framebuffer limits. P0-S4 and CAP-RDP remain incomplete.
+The [first native RDP sessions](../../../qualification/results/P0-S4/2026-10-15-rdp-first-sessions.md) now establish actual pin rejection, NLA connection and bounded join/free or process-interruption reconciliation. No frame/input result passes: source-guided host setup reaches capture, then the Android adapter fails before delivery. The [framebuffer follow-up](../../../qualification/results/P0-S4/2026-10-15-rdp-framebuffer.md) preserves this failed case, measures the resize cause and validates the bounded correction with changing pixels and explicit cleanup. Input/performance remain pending; P0-S4 and CAP-RDP remain incomplete.
 
 ## P0-S5 — USB provider and real programming workflow
 

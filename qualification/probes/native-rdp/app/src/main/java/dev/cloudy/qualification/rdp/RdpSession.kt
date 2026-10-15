@@ -45,6 +45,9 @@ class RdpSession(context: Context) : LibFreeRDP.Sink {
     private val certRejected = AtomicLong()
     private val authCallbacks = AtomicLong()
     private val frame = RdpFrameBuffer()
+    private val callbackFailures = RdpFailureTracker()
+    private var failureToken: RdpFailureTracker.Token? = null
+    private var persistedFailure: RdpCallbackFailure? = null
     private val stateLock = Any()
     @Volatile private var state = RdpSnapshot()
     @Volatile private var nativeAvailable = false
@@ -110,8 +113,8 @@ class RdpSession(context: Context) : LibFreeRDP.Sink {
 
     private fun guarded(action: () -> Unit) {
         try { action() }
-        catch (error: Exception) { failedOnOwner(error.javaClass.simpleName) }
-        catch (error: LinkageError) { failedOnOwner(error.javaClass.simpleName) }
+        catch (error: Exception) { ownerFailure(error.javaClass.simpleName) }
+        catch (error: LinkageError) { ownerFailure(error.javaClass.simpleName) }
     }
 
     private fun finishOwnerIfClosed() {
@@ -127,21 +130,41 @@ class RdpSession(context: Context) : LibFreeRDP.Sink {
         }, 0, 100, TimeUnit.MILLISECONDS)
     }
 
+    private fun ownerFailure(failureClass: String) {
+        callbackFailures.captureOwner(failureToken, failureClass, SystemClock.elapsedRealtime() - startedAt) {
+            stopping.set(true)
+        }
+        failedOnOwner("adapter-failure")
+    }
+
+    private fun failureDetail(fallback: String): String = callbackFailures.snapshot(failureToken)?.summary() ?: fallback
+
+    private fun persistFirstFailure() {
+        val cause = callbackFailures.snapshot(failureToken) ?: return
+        if (cause === persistedFailure) return
+        attempt?.put("firstFailure", JSONObject(cause.journalFields()))
+        // Failure disables new connections and queues stop without throwing/re-entering.
+        if (persist()) persistedFailure = cause
+    }
+
     private fun failedOnOwner(kind: String) {
         stopping.set(true)
-        change { it.copy(state = "failed", detail = kind, busy = handle != 0L, connected = false) }
+        persistFirstFailure()
+        change { it.copy(state = "failed", detail = failureDetail(kind), busy = handle != 0L, connected = false) }
         if (handle != 0L) {
             // Reap must survive diagnostics or stop-request errors. Never free an unjoined thread.
             ensureObserver()
             try { stopOnOwner("adapter-failure") }
-            catch (_: Exception) { change { it.copy(detail = "Stop failed; native ownership retained") } }
-            catch (_: LinkageError) { change { it.copy(detail = "Native stop unavailable; ownership retained") } }
+            catch (_: Exception) { change { it.copy(detail = failureDetail("Stop failed; native ownership retained")) } }
+            catch (_: LinkageError) { change { it.copy(detail = failureDetail("Native stop unavailable; ownership retained")) } }
         } else {
             config = null
             if (lease.get() === this) LibFreeRDP.setSink(null)
             attempt?.put("closed", true)?.put("outcome", "failed-before-native-allocation")
             record("adapter-failure")
+            callbackFailures.retire(failureToken)
             attempt = null
+            failureToken = null; persistedFailure = null
             finishOwnerIfClosed()
         }
     }
@@ -156,6 +179,7 @@ class RdpSession(context: Context) : LibFreeRDP.Sink {
             val selected = RdpConfig.parse(file.readText())
             check(lease.get() === this) { "previous-native-owner-still-cleaning-up" }
             config = selected
+            failureToken = null; persistedFailure = null
             stopping.set(false); liveConnected = false; terminalEvent = ""; stopReason = ""
             frameCount.set(0); inputCount.set(0); certAccepted.set(0); certRejected.set(0); authCallbacks.set(0)
             heldKeys.clear(); heldButtons.clear(); frame.clear()
@@ -166,10 +190,12 @@ class RdpSession(context: Context) : LibFreeRDP.Sink {
                 .put("startedAtDeviceUtcMillis", System.currentTimeMillis()).put("startedElapsedMillis", startedAt)
                 .put("closed", false).put("nativeThreadStarted", false).put("nativeInstanceFreed", false).put("nativeThreadJoined", false).put("events", JSONArray())
             attempts.put(attempt)
+            failureToken = callbackFailures.begin()
             check(record("start-requested")) { "journal-unavailable" } // Durable intent precedes native allocation/authentication.
             LibFreeRDP.setSink(this)
             handle = LibFreeRDP.freerdp_new(app)
             check(handle != 0L) { "native-allocation-failed" }
+            callbackFailures.bind(checkNotNull(failureToken), handle)
             check(LibFreeRDP.freerdp_parse_arguments(handle, selected.arguments())) { "native-arguments-rejected" }
             check(LibFreeRDP.freerdp_set_external_certificate_management(handle)) { "native-trust-policy-rejected" }
             change { it.copy(state = "connecting", detail = "NLA and an endpoint-bound leaf certificate pin are required", busy = true, connected = false) }
@@ -190,12 +216,13 @@ class RdpSession(context: Context) : LibFreeRDP.Sink {
             return
         }
         ensureObserver()
+        persistFirstFailure()
         if (stopAt == 0L) {
             stopAt = SystemClock.elapsedRealtime(); stopReason = reason
             releaseOnOwner()
             stopping.set(true); liveConnected = false
             val requested = LibFreeRDP.freerdp_disconnect(handle)
-            change { it.copy(state = "stopping", detail = if (requested) reason else "Native stop request failed; retaining ownership", busy = true, connected = false) }
+            change { it.copy(state = "stopping", detail = failureDetail(if (requested) reason else "Native stop request failed; retaining ownership"), busy = true, connected = false) }
             record(if (requested) "stop-requested" else "stop-request-failed")
         }
     }
@@ -203,7 +230,12 @@ class RdpSession(context: Context) : LibFreeRDP.Sink {
     private fun observeNative() {
         val current = handle
         if (current == 0L) return
+        persistFirstFailure()
         if (LibFreeRDP.freerdp_join(current, 0)) {
+            // A successful join has completed callbacks. Drain the synchronous cause
+            // here even if the polling task beat its queued failure handler.
+            callbackFailures.retire(failureToken)
+            persistFirstFailure()
             liveConnected = false; stopping.set(true)
             val error = LibFreeRDP.freerdp_get_last_error_string(current).take(180)
             LibFreeRDP.freerdp_free(current)
@@ -212,10 +244,13 @@ class RdpSession(context: Context) : LibFreeRDP.Sink {
             config = null; heldKeys.clear(); heldButtons.clear(); frame.clear()
             attempt?.put("closed", true)?.put("nativeThreadJoined", nativeThreadStarted)?.put("nativeInstanceFreed", true)?.put("nativeError", error)
                 ?.put("terminalEvent", terminalEvent)?.put("stopReason", stopReason)
-            change { it.copy(state = "closed", detail = error, busy = false, connected = false) }
+            change { it.copy(state = "closed", detail = failureDetail(error), busy = false, connected = false) }
             try { record("native-instance-reaped-and-freed") }
             finally {
                 attempt = null
+                // The closed journal/UI retain the cause. A later configuration
+                // failure before a new attempt must not inherit its summary.
+                failureToken = null; persistedFailure = null
                 poll?.cancel(false); poll = null
                 finishOwnerIfClosed()
             }
@@ -224,7 +259,7 @@ class RdpSession(context: Context) : LibFreeRDP.Sink {
         val now = SystemClock.elapsedRealtime()
         if (!stopping.get() && now - startedAt > 10 * 60 * 1000) stopOnOwner("finite-probe-deadline")
         if (stopAt != 0L && now - stopAt > 10000) {
-            change { it.copy(state = "cleanup-pending", detail = "Native thread has not joined; ownership retained", busy = true, connected = false) }
+            change { it.copy(state = "cleanup-pending", detail = failureDetail("Native thread has not joined; ownership retained"), busy = true, connected = false) }
         }
         change { it }
         if (now - lastPersist > 2000) persist()
@@ -348,9 +383,18 @@ class RdpSession(context: Context) : LibFreeRDP.Sink {
         if (accepted) certAccepted.incrementAndGet() else certRejected.incrementAndGet()
         return if (accepted) 1 else 0
     }
-    override fun callbackFailure(failureClass: String) {
-        stopping.set(true)
-        owner { failedOnOwner("native-callback-$failureClass") }
+    override fun callbackFailure(instance: Long, operation: String, failureClass: String, dimensions: IntArray) {
+        if (instance == 0L || instance != handle) return
+        val captured = callbackFailures.capture(instance, operation, failureClass, dimensions, SystemClock.elapsedRealtime() - startedAt) {
+            stopping.set(true)
+        } ?: return
+        owner {
+            // Native addresses may be reused. Token identity rejects a queued failure
+            // from an already reaped attempt even when its address matches again.
+            if (instance != handle || !callbackFailures.isActive(captured)) return@owner
+            persistFirstFailure()
+            failedOnOwner("native-callback-failure")
+        }
     }
 
     private fun readJournal() {
@@ -381,13 +425,16 @@ class RdpSession(context: Context) : LibFreeRDP.Sink {
         catch (_: Exception) {
             journalReady = false
             stopping.set(true)
-            change { it.copy(detail = "Journal write failed; further connections disabled") }
+            change { it.copy(detail = failureDetail("Journal write failed; further connections disabled") + "; journal unavailable") }
             // Queue stop after this operation so persistence failure cannot recurse into itself.
             if (handle != 0L) owner { stopOnOwner("journal-write-failed") }
             false
         }
     }
     private fun persistChecked() {
+        callbackFailures.snapshot(failureToken)?.let { cause ->
+            attempt?.put("firstFailure", JSONObject(cause.journalFields()))
+        }
         attempt?.put("frameUpdates", frameCount.get())?.put("inputEvents", inputCount.get())
             ?.put("certificateAccepts", certAccepted.get())?.put("certificateRejects", certRejected.get())
             ?.put("authenticationCallbacks", authCallbacks.get())?.put("width", state.width)?.put("height", state.height)

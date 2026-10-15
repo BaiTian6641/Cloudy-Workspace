@@ -17,9 +17,14 @@ internal class RdpFrameBuffer {
     private val paint = Paint().apply { isFilterBitmap = true }
 
     @Synchronized fun resize(width: Int, height: Int) {
-        require(width in 1..4096 && height in 1..4096 && width.toLong() * height <= 4096000)
+        require(RdpFrameGeometry.accepts(width, height))
         if (bitmap?.width == width && bitmap?.height == height) return
-        bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        val replacement = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        require(RdpFrameGeometry.acceptsAllocation(replacement.allocationByteCount))
+        // Publish only a checked allocation. Old/new bitmaps may overlap in lifetime;
+        // native GDI and codec buffers are additional memory. Do not force recycle a
+        // bitmap that Canvas/rendering may still reference after replacement.
+        bitmap = replacement
     }
     @Synchronized fun update(instance: Long, x: Int, y: Int, width: Int, height: Int): Boolean {
         val target = bitmap ?: return false

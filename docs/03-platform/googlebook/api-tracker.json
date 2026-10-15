@@ -768,21 +768,22 @@
         "R152",
         "R153",
         "R154",
-        "R155"
+        "R155",
+        "G131"
       ],
       "minimumApi": null,
       "libraryVersion": "FreeRDP3.32.2 native build, 97eff6ddfbbfaa8e42a126d362686bd001ff8bdc",
       "interfaceKind": "upstream-client-and-standard",
-      "availability": "Pinned arm64 diagnostic: actual wrong-pin rejection and pinned NLA connection on HP Googlebook; no displayed frames/input and no supported RDP capability",
+      "availability": "Pinned arm64 diagnostic: pin rejection/NLA and changing 2880x1800 KDE desktop pixels with explicit disconnect/join/free on HP Googlebook; input/performance and product RDP capability remain unqualified",
       "qualification": "partial",
       "checkedOn": "2026-10-15",
       "owner": "Android/integration developer",
       "stage": "P3-S7",
       "fallback": "Explicit engine remediation; external viewer is partial and cannot complete the integrated RDP requirement",
-      "experiment": "Carry forward actual pin rejection/NLA and cleanup/reconciliation evidence. Persist missing first-callback failure context, then identify adapter failure before changing bounds. Qualify real changing pixels, decoder layout, input/focus and explicit cancellation/cleanup. RemoteApp remains untested.",
+      "experiment": "Carry forward pin/NLA, first-failure diagnostics and actual changing framebuffer/explicit cleanup evidence. Next use a controlled input target for pointer/keyboard/focus-release and cancellation, then scoped performance and server cases. RemoteApp remains untested.",
       "researchEvidence": "docs/03-platform/googlebook/p0-s4-native-desktop-entry.md",
       "compileEvidence": "qualification/results/P0-S4/2026-10-15-rdp-apk-load.md",
-      "deviceEvidence": "qualification/results/P0-S4/2026-10-15-rdp-first-sessions.md"
+      "deviceEvidence": "qualification/results/P0-S4/2026-10-15-rdp-framebuffer.md"
     },
     {
       "id": "API31",
@@ -1238,16 +1239,45 @@
       "minimumApi": 29,
       "libraryVersion": "FreeRDP3.32.2 at97eff6ddfbbfaa8e42a126d362686bd001ff8bdc; selected arm64 build",
       "interfaceKind": "official-ndk-through-upstream-client",
-      "availability": "compiled-not-device-qualified",
-      "qualification": "untested",
+      "availability": "compiled-and-bounded-device-decode-observed",
+      "qualification": "partial",
       "checkedOn": "2026-10-15",
       "owner": "Desktop/device developer",
       "stage": "P0-S4",
       "fallback": "Report decoder initialization/decode failure and clean up; consider upstream OpenH264 only after concrete MediaCodec failure. No automatic runtime decoder failover.",
-      "experiment": "Load actual JNI APK, record codec name/output format/stride/crop, display changing H264 desktop pixels and check resize/cancel/cleanup. Measure performance separately; no hardware/zero-copy claim from compiled option.",
+      "experiment": "Actual c2.qti.avc.decoder produces changing 2880x1800 pixels through GDI/Bitmap; output color-format 19, inclusive crop (0,0,2879,1799) and buffer stride 2880 / vertical stride 1800 retained. Qualify controlled input, sustained resize/memory/performance separately. Flexible-format/NV12 fallback and zero-copy remain unqualified.",
       "versionNotes": "Core NDK buffer APIs21; setParameters26; getName/releaseName28. Selected upstream minimum29 covers direct symbols. Literal low-latency key is API30 behavior/hint, not a higher required symbol. FreeRDP uses CPU YUV/GDI/Bitmap; flexible YUV interpreted as NV12 needs device observation.",
       "researchEvidence": "docs/07-reference/2026-10-15-rdp-android-mediacodec.md",
-      "compileEvidence": "docs/06-validation/2026-10-15-native-rdp-build.md"
+      "compileEvidence": "docs/06-validation/2026-10-15-native-rdp-build.md",
+      "deviceEvidence": "qualification/results/P0-S4/2026-10-15-rdp-framebuffer.md"
+    },
+    {
+      "id": "API44",
+      "feature": "Bounded diagnostic framebuffer Bitmap allocation",
+      "symbols": [
+        "Bitmap.createBitmap(int,int,Bitmap.Config)",
+        "Bitmap.Config.ARGB_8888",
+        "Bitmap.getAllocationByteCount()"
+      ],
+      "sourceIds": [
+        "G128",
+        "G129",
+        "G130"
+      ],
+      "minimumApi": 19,
+      "libraryVersion": "Android framework; diagnostic 0.1.2 on API37",
+      "interfaceKind": "official-framework",
+      "availability": "compiled-and-bounded-device-observed",
+      "qualification": "partial",
+      "checkedOn": "2026-10-15",
+      "owner": "Desktop/device developer",
+      "stage": "P0-S4",
+      "fallback": "Reject geometry above 4096 per edge or 20 MiB per bitmap; persist the first failure and stop/join/free. No unlimited allocation, silent resizing or guaranteed total-session budget.",
+      "experiment": "Observed 2880x1800 resize fits 20,736,000 nominal bytes and actual allocation check; displayed changing desktop pixels and explicit cleanup. Sustained memory, arbitrary resolutions and input remain pending.",
+      "versionNotes": "ARGB8888/createBitmap API1; getAllocationByteCount API19. Budget is 5,242,880 pixels and actual allocation <= 20 MiB. Initial requested configuration retains its 4,096,000-pixel cap; server resize is independent.",
+      "researchEvidence": "qualification/results/P0-S4/2026-10-15-rdp-framebuffer.md",
+      "compileEvidence": "qualification/results/P0-S4/2026-10-15-rdp-framebuffer.md",
+      "deviceEvidence": "qualification/results/P0-S4/2026-10-15-rdp-framebuffer.md"
     }
   ],
   "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."

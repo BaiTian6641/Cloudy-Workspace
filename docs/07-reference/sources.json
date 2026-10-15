@@ -3556,6 +3556,54 @@
       "sourceUpdatedOn": null,
       "note": "Runtime krdp/rdp-sam-XXXXXX contains credential hashes; remove-on-success/temporary-file destruction. Actual files absent after finite teardown. Owner: Desktop integration; P0-S4.",
       "refresh": "Before affected integration changes and capability claims."
+    },
+    {
+      "id": "G128",
+      "title": "Android Bitmap allocation API",
+      "url": "https://developer.android.com/reference/android/graphics/Bitmap#getAllocationByteCount()",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Bitmap.getAllocationByteCount() API19 reports actual pixel allocation; createBitmap(width,height,ARGB_8888) API1 is used by the bounded diagnostic. API44; Desktop/device owner, P0-S4.",
+      "refresh": "Before changing allocation or rendering ownership and before capability claims."
+    },
+    {
+      "id": "G129",
+      "title": "Android ARGB8888 pixel configuration",
+      "url": "https://developer.android.com/reference/android/graphics/Bitmap.Config#ARGB_8888",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-08-03",
+      "note": "ARGB_8888 API1 stores four bytes per pixel. Cloudy20MiB nominal geometry budget is a project diagnostic policy, not a platform-wide memory guarantee. API44; P0-S4.",
+      "refresh": "Before changing allocation or rendering ownership and before capability claims."
+    },
+    {
+      "id": "G130",
+      "title": "Android bitmap memory ownership",
+      "url": "https://developer.android.com/topic/performance/graphics/manage-memory",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Bitmap pixel storage uses native heap on API26+. Recycle requires known absence of further use; Cloudy preserves Canvas lifetime and does not force recycle. Single-bitmap budget excludes old/new overlap, native GDI, codec and display allocations. API44; P0-S4.",
+      "refresh": "Before changing allocation or rendering ownership and before capability claims."
+    },
+    {
+      "id": "G131",
+      "title": "Android public NDK bitmap access",
+      "url": "https://developer.android.com/ndk/reference/group/bitmap",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "AndroidBitmap_getInfo/lockPixels/unlockPixels are documented NDK functions used by the selected FreeRDP graphics-copy path. Successful lock must be balanced with unlock. Observed platform hidden-field warning does not establish direct hidden API use by Cloudy; exact HP implementation not traced. Desktop/device owner, P0-S4.",
+      "refresh": "Before changing JNI framebuffer ownership or making capability claims."
     }
   ]
 }

@@ -13,7 +13,7 @@ public final class LibFreeRDP {
         void pointer(long instance, int[] pixels, int width, int height, int hotX, int hotY);
         boolean authenticate(long instance, StringBuilder user, StringBuilder domain, StringBuilder password);
         int verify(long instance, byte[] pem, String host, long port, long flags);
-        void callbackFailure(String failureClass);
+        void callbackFailure(long instance, String operation, String failureClass, int[] dimensions);
     }
     private static volatile Sink sink;
     private static boolean loaded;
@@ -31,10 +31,11 @@ public final class LibFreeRDP {
         loaded = true;
     }
     public static void setSink(Sink value) { sink = value; }
-    private static void failed(Throwable error) {
-        Sink current = sink;
+    private static void failed(Sink current, long id, String operation, Throwable error, int... dimensions) {
+        // Retain the catch site's owner and instance. A newer global sink must never
+        // receive an old callback's exception, message, credentials or pixel buffer.
         if (current != null) {
-            try { current.callbackFailure(error.getClass().getSimpleName()); }
+            try { current.callbackFailure(id, operation, error.getClass().getSimpleName(), dimensions); }
             catch (Throwable ignored) { /* Never leave a pending exception on a native callback. */ }
         }
     }
@@ -42,7 +43,7 @@ public final class LibFreeRDP {
         Sink current = sink;
         if (current == null) return; // A stale callback cannot acquire a later session.
         try { current.event(id, name, width, height, bpp); }
-        catch (Throwable error) { failed(error); }
+        catch (Throwable error) { failed(current, id, name, error, width, height, bpp); }
     }
     private static void event(long id, String name) { event(id, name, 0, 0, 0); }
     private static void OnPreConnect(long id) { event(id, "pre-connect"); }
@@ -55,13 +56,14 @@ public final class LibFreeRDP {
     private static void OnGraphicsUpdate(long id, int x, int y, int w, int h) {
         Sink current = sink;
         if (current == null) return;
-        try { current.graphics(id, x, y, w, h); } catch (Throwable error) { failed(error); }
+        try { current.graphics(id, x, y, w, h); }
+        catch (Throwable error) { failed(current, id, "graphics-update", error, x, y, w, h); }
     }
     private static boolean OnAuthenticate(long id, StringBuilder user, StringBuilder domain, StringBuilder password) {
         Sink current = sink;
         if (current == null) return false;
         try { return current.authenticate(id, user, domain, password); }
-        catch (Throwable error) { failed(error); return false; }
+        catch (Throwable error) { failed(current, id, "authenticate", error); return false; }
     }
     private static boolean OnGatewayAuthenticate(long id, StringBuilder u, StringBuilder d, StringBuilder p) {
         event(id, "unsupported-gateway"); return false;
@@ -74,7 +76,7 @@ public final class LibFreeRDP {
         Sink current = sink;
         if (current == null) return 0;
         try { return current.verify(id, pem, host, port, flags); }
-        catch (Throwable error) { failed(error); return 0; }
+        catch (Throwable error) { failed(current, id, "verify-x509", error); return 0; }
     }
 
     private static int OnVerifyChangedCertificateEx(long id, String host, long port, String cn, String subject,
@@ -91,7 +93,7 @@ public final class LibFreeRDP {
         Sink current = sink;
         if (current == null) return;
         try { current.pointer(id, pixels, w, h, hotX, hotY); }
-        catch (Throwable error) { failed(error); }
+        catch (Throwable error) { failed(current, id, "pointer-set", error, w, h, hotX, hotY); }
     }
     private static void OnPointerSetNull(long id) { event(id, "pointer-null"); }
     private static void OnPointerSetDefault(long id) { event(id, "pointer-default"); }
