@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lint>
+    <!-- AGP 9.4's documented Gradle 9.6 baseline is deliberately pinned for
+         reproducibility; see docs/03-platform/googlebook/probe-toolchain.md.
+         Keep every other version notice and all source/resource checks enabled. -->
+    <issue id="AndroidGradlePluginVersion">
+        <ignore path="gradle/wrapper/gradle-wrapper.properties" />
+    </issue>
+</lint>

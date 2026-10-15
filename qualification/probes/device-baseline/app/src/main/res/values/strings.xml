@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cloudy device baseline probe</string>
+    <string name="probe_heading">Device baseline · qualification only</string>
+    <string name="probe_scope">Reads reported Android capabilities. It does not decode video, test input latency, or implement Console or Desktop. No network or USB access.</string>
+    <string name="refresh">Refresh diagnostics</string>
+    <string name="status_collecting">Collecting actual framework reports…</string>
+    <string name="status_saved">Private report saved. %1$s</string>
+    <string name="status_pending">Private report save pending.</string>
+    <string name="status_failed">Private report could not be saved: %1$s. The previous saved report may be older.</string>
+    <string name="status_partial">Some collectors reported errors; inspect the JSON.</string>
+    <string name="status_reported">Reported capabilities only; performance is untested.</string>
+</resources>

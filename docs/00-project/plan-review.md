@@ -28,18 +28,18 @@ The two independently useful apps, host-local compute, ordinary SSH, optional ho
 | ADB | Debugging transport depends on model/port | Follow [Google's model table](https://developer.android.com/develop/adaptive-apps/guides/googlebook/adb-debugging); HP 14 USB debugging is documented on the left port |
 | SSH engine | “Native SSH” is a boundary, not a selected implementation | P0 compares maintained JVM and native options against Android requirements |
 | Streaming | An app's existence does not establish a supported control/deep-link API | P0 proves external handoff; manual launch is an honest fallback |
-| Sunshine wording | The original blanket macOS experimental label is not the current getting-started wording | Pin the selected release and qualify capture/input/permissions; do not repeat a stale label as current support evidence |
+| Sunshine wording | Stable v2026.914.233613 retains the macOS experimental warning; inspected master has newer gamepad/broker guidance | Follow the selected release/build, qualify capture/input/permissions, and keep the [release/master distinction](../07-reference/2026-10-15-sunshine-source-drift.md) explicit |
 | Notifications | macOS arbitrary notification capture is not established | Own-job events first; capability flags for every adapter |
 | Timeline | Original 18–31 person-week sum excludes newly detailed UX/pinning work | Use stage estimates and explicit contingency; do not present person-weeks as elapsed weeks |
 | Licensing | Original embeds possible GPL and proprietary dependencies | Decide source/distribution model before embedding, with a stage gate |
 
 ## Assumptions carried forward
 
-The user controls the hosts and tailnet. A physical HP Googlebook, the primary programming probe, and a supported board will be available for P0. External backend apps are acceptable for the first Desktop release. Remote environments support SSH; Windows durable-session behavior may differ from tmux on Linux/macOS. None of these assumptions is reported as verified.
+The HP Googlebook is connected over authorized USB ADB, and the user selected this Ubuntu 26.04/Wayland workstation as the primary host. The user left the programming board/probe undecided because little hardware is available, while retaining full general-purpose USB implementation scope. Record unavailable hardware explicitly and keep physical USB qualification pending. External backend apps remain an accepted early Desktop lane, with full native RDP/VNC and enrolled USB requirements preserved. A working tailnet route and SSH/server services still need qualification; Windows durable-session behavior may differ from tmux on Linux/macOS.
 
 ## Open decisions with bounded defaults
 
-Default to Kotlin/Compose for the Android desktop shell, a separately bundled xterm.js experiment for the terminal, SFTP for remote files, FreeRDP/maintained RFB engine investigations for native clients, and external high-performance streaming for the early R2 lane. Qualify a local X server and native window broker before adopting an engine. Freeze versions after actual toolchain/device tests. The user has not selected a distribution license, exact probe inventory, host OS matrix, or local VM requirement; these have explicit owners and stages in [risks](decisions-risks.md).
+Default to Kotlin/Compose for the Android desktop shell, a separately bundled xterm.js experiment for the terminal, SFTP for remote files, FreeRDP/maintained RFB engine investigations for native clients, and external high-performance streaming for the early R2 lane. Qualify a local X server and native window broker before adopting an engine. Freeze versions after actual toolchain/device tests. The user has not selected a distribution license, USB probe, Windows test host or local VM requirement; Linux is the selected primary host and broader OS support remains unqualified; these have explicit owners and stages in [risks](decisions-risks.md).
 
 ## What this repository delivers
 

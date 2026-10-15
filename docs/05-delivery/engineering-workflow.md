@@ -58,6 +58,6 @@ For context recovery, read AGENTS → README → this workflow → execution sta
 
 ## Initial qualification scope
 
-The user connected the HP Googlebook by USB and selected the current Ubuntu 26.04/Wayland workstation as the primary Linux host. Windows is desired; Parsec is an accepted temporary access option. Windows compatibility remains unqualified until a real Windows target is available. No development board/debug probe was identified in that answer.
+The user connected the HP Googlebook by USB and selected the current Ubuntu 26.04/Wayland workstation as the primary Linux host. Windows is desired; Parsec is an accepted temporary access option. Windows compatibility remains unqualified until a real Windows target is available. The user subsequently left the development board/debug probe deliberately undecided because little hardware is available, and retained full general-purpose USB implementation scope. Do not substitute a simulated peripheral for real forwarding or promise universal device compatibility. Continue software/API/provider and failure-state work, record the missing physical lane, and keep actual attach/reset/programming claims pending.
 
 Use a private inventory for transport serials and exact local setup, and a sanitized run record for the model/build/API/ABI and measured results. Begin with real ADB/build/launch evidence, then API/lifecycle/input probes. The Linux host selection does not establish installed SSH, streaming, RDP/VNC or USB backend readiness.

@@ -18,3 +18,9 @@ The numbered folders describe one development program. Read project decisions be
 | Intake | [Original plan and provenance](intake/README.md) |
 
 The [desktop workflow design](04-design/desktop-workflows.md) expands the visual system for S13–S17; the offline specimen remains the initial subset. Cross-links are repository-relative for GitHub/local use. P0-S1 qualification setup is **in progress**, with a real USB ADB baseline; all application stages remain planned. No application or host backend is implemented yet.
+
+## Active qualification references
+
+- [P0 diagnostic toolchain](03-platform/googlebook/probe-toolchain.md) and [real device-baseline probe](../qualification/probes/device-baseline/README.md).
+- [Primary Linux host prerequisites](03-platform/linux-primary-host-qualification.md).
+- [Sunshine release/master source divergence](07-reference/2026-10-15-sunshine-source-drift.md).

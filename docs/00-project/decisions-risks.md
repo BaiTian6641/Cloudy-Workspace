@@ -43,3 +43,7 @@ Statuses: **adopted for planning**, **proposed pending spike**, **unknown**, **q
 | R26 | Independent releases omit package quality or double-count suite evidence | Planned checks, unqualified | Release/QA | P2-S5 / P3-S5 / P6 | App-scoped signed update/recovery/notices/support and observation; reuse exact-build evidence only |
 
 Update this table when evidence changes; link the run, installed version, and affected phase. A fallback is acceptable only when its user-visible limitation is documented and the fallback itself has been tested.
+
+## 2026-10-15 — USB hardware availability
+
+The user retained full general-purpose USB forwarding and enrolled plug-and-play scope, but left the board/debug probe undecided because little hardware is available. Keep discovery, enrollment, exclusive ownership, permission loss, detach/reattach and reconciliation in the implementation scope. Record missing physical coverage explicitly; it is not permission to claim every USB class/device works. P0-S5/CAP-USB must distinguish reviewed provider/API/software evidence from actual attach/reset/programming tests. P0-S1 may record an unavailable target rather than invent one; unrelated Android and Linux-host work continues.

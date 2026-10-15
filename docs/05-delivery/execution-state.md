@@ -9,7 +9,7 @@
 - Full Console includes separate X11 application windows and session-linked SFTP/drop. Full Desktop companion includes native RDP/VNC and enrolled USB plug-and-play.
 - Ask on every remote overwrite without backend conditional replacement. Do not remember blanket consent or automatically replay ambiguous publication.
 - App release gates are independent; the suite has its own integration milestone. Decide native streaming feasibility/distribution in P0/P1, independently of optional host adapters.
-- The user selected this Ubuntu 26.04/Wayland workstation as the primary Linux host. Windows is desired; Parsec is an accepted temporary access option. No Windows test host or USB board/probe is identified yet.
+- The user selected this Ubuntu 26.04/Wayland workstation as the primary Linux host. Windows is desired; Parsec is an accepted temporary access option. No Windows test host is identified. The user explicitly left the USB board/probe undecided because hardware is limited, while retaining full general-purpose USB implementation scope. Software discovery/enrollment/ownership/reconnect work must be real; physical forwarding/reset/programming support remains unqualified until representative hardware is available.
 - Use real implementations, official references, stage reviews, AST/compiler and lint checks, reviewed delegation, timely commits/pushes and documented history. See [engineering workflow](engineering-workflow.md).
 
 ## Verified setup so far

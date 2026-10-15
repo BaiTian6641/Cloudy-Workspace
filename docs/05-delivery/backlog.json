@@ -86,7 +86,7 @@
         "Record exact Googlebook SKU/build/API/ABI, WebView, input devices, display scaling, network, and available decoders.",
         "Map each named host to its installed OS/build/GPU/driver/user session and Linux compositor; list actual boards/probes and reset identities.",
         "Pair ADB through the documented model/port path; capture sanitized baseline diagnostics and a run manifest.",
-        "Select one primary host/project/probe and define a lab-side fallback topology before multiplying combinations."
+        "Select one primary host/project and define a lab-side fallback topology; record deliberately unavailable hardware as an inventory gap rather than inventing a board/probe."
       ],
       "deliverables": [
         "Completed private inventory and sanitized public matrix",
@@ -265,7 +265,8 @@
         "Program/verify the actual board/probe with runtime/bootloader/DFU/composite identities recorded.",
         "Probe hotplug, replug, permission denial, auto-use toggle/state semantics, consumer restart, contention and protected ownership reconciliation in a controlled lab.",
         "If Android forwarding fails, qualify a lab-side provider/hardware server and report that the local Googlebook plug-and-play requirement remains unmet.",
-        "Record CAP-USB feasibility verdict with scope and evidence; its final supported readiness also requires the relevant P1-S4 engine/distribution decision, and investigation completion alone does not activate implementation."
+        "Record CAP-USB feasibility verdict with scope and evidence; its final supported readiness also requires the relevant P1-S4 engine/distribution decision, and investigation completion alone does not activate implementation.",
+        "User decision 2026-10-15: no board/probe selected; preserve full generic USB scope. Complete official API/provider/licensing and software-state investigation while physical attach/reset/programming evidence remains unavailable; no universal support or synthetic gate pass."
       ],
       "deliverables": [
         "Probe-specific flash/verify evidence, enrollment identity set and permission map",

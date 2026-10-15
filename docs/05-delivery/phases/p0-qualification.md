@@ -25,7 +25,7 @@ Work:
 1. Record exact Googlebook SKU/build/API/ABI, WebView, input devices, display scaling, network, and available decoders.
 2. Map each named host to its installed OS/build/GPU/driver/user session and Linux compositor; list actual boards/probes and reset identities.
 3. Pair ADB through the documented model/port path; capture sanitized baseline diagnostics and a run manifest.
-4. Select one primary host/project/probe and define a lab-side fallback topology before multiplying combinations.
+4. Select one primary host/project and define a lab-side fallback topology. The user left the board/probe undecided; record it as an explicit inventory gap rather than inventing hardware.
 
 Deliverables:
 
@@ -116,6 +116,8 @@ Exit evidence:
 Record evidence under `qualification/results/P0-S4/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-D01, Q-D02, Q-D07, Q-D08, Q-N02, Q-P02. Official/upstream source IDs: G02, G09, G20, G29, G30, R04, R06, R21, R23, R24, R25, R27; resolve them in the [source register](../../07-reference/source-register.md).
 
 ## P0-S5 — USB provider and real programming workflow
+
+**User decision, 2026-10-15:** no board/probe is available for selection yet. Full general-purpose USB implementation remains required. Continue API/provider/licensing and real software-state work; physical forwarding, reset and programming results remain pending. General scope is not a universal hardware-support claim, and synthetic fixtures cannot satisfy CAP-USB.
 
 **Owner:** Embedded/device developer. **Prerequisites:** P0-S1. **Status:** planned.
 
