@@ -32,4 +32,9 @@
     <string name="relative_captured">Captured · standard relative route · release with Ctrl+Alt+Shift+R</string>
     <string name="relative_released">Absolute mode · relative capture released</string>
     <string name="relative_timeout">Absolute mode · no capture callback within 3 seconds; request ended</string>
+    <string name="relative_releasing">Release requested · awaiting framework capture callback</string>
+    <string name="cursor_predicted">Cursor: local prediction only · host delivery unconfirmed</string>
+    <string name="cursor_server">Cursor: last server position · subsequent input unconfirmed</string>
+    <string name="cursor_absolute">Cursor: last admitted absolute input · host delivery unconfirmed</string>
+    <string name="cursor_initial">Cursor: initial center estimate · host position unknown</string>
 </resources>

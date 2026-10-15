@@ -229,8 +229,8 @@
         "Test primary host sessions, lock/headless/permissions, RDP certificate/NLA requirements and protected VNC routes; record unsupported cases and dependencies.",
         "Record separate CAP-RDP, CAP-VNC and stream-feasibility outcomes; document native surface/input and integration blockers independently of external launch success.",
         "Ratify provisional native-stream and protocol-specific responsiveness budgets from the primary-lane probes; missing USB or X11 evidence does not block this decision.",
-        "D15: qualify genuine negotiated RDP relative mouse through public Android capture and an actual 3D application, separately for physical mouse/trackpad and exact Linux/Windows/macOS server rows. The 0.1.4 Android JNI/view relative adapter is implemented and compiled, and negotiation/framework capture are observed; captured remote movement failed on the selected server, local release worked in the user exercise, and actual3D/broader release cases remain unqualified. macOS RDP server selection remains unresolved; built-in Apple VNC is a separate lane.",
-        "Repair the source-confirmed captured cursor presentation gap using the reviewed rdp-cursor-presentation-entry.md: authoritative callback, distinct visible/hidden modes, bounded presentation-only prediction, host-painted received motion and capture/release edge evidence. Preserve standard relative wire input and the failed physical result; no moving local cursor counts as remote delivery."
+        "D15: qualify genuine negotiated RDP relative mouse through public Android capture and an actual3D application, separately for physical mouse/trackpad and exact Linux/Windows/macOS server rows. Diagnostic0.1.5 adds a user-confirmed captured host-trail/cursor/release result on GRD50.2, preserving earlier KRdp/0.1.4 failures. Input subtype was not supplied;3D/broader release and performance remain unqualified. macOS RDP server selection remains unresolved; built-in Apple VNC is a separate lane.",
+        "Carry forward the reviewed0.1.5 cursor repair and attempt13 physical result: user confirms captured host trail/cursor movement and release; eight capture edges and real host-painted motion are retained. Prediction stays presentation-only and the standard relative wire route is unchanged. Input subtype, actual3D and measured latency remain unqualified; investigate the earlier lag with bounded client/host measurements and explicit software-fixture limitations."
       ],
       "deliverables": [
         "Pinned stream/RDP/VNC engine and server feasibility matrix",
@@ -292,7 +292,8 @@
         "R163",
         "R171",
         "R173",
-        "R175"
+        "R175",
+        "R201"
       ],
       "acceptanceCases": [
         "Q-D01",

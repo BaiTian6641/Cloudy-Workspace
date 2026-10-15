@@ -34,6 +34,9 @@ class RdpFrameView(context: Context, private val session: RdpSession) : View(con
     private val pendingModifiers = RdpPendingModifiers()
     private var captureRequested = false
     private var captureConfirmed = false
+    private var captureAttemptId = ""
+    private var captureHadConfirmation = false
+    private var captureReleaseReason = "system"
     private var localReleaseKeyDown = false
     private var captureNotice = R.string.relative_disconnected
     var captureStateListener: (() -> Unit)? = null
@@ -42,6 +45,8 @@ class RdpFrameView(context: Context, private val session: RdpSession) : View(con
     val captureStatusResource: Int get() = captureNotice
     private val captureDeadline = Runnable {
         if (captureRequested && !captureConfirmed) {
+            session.captureEdge(captureAttemptId, "capture-timeout", "timeout")
+            captureReleaseReason = "timeout"
             captureRequested = false
             releaseRemoteInput()
             captureNotice = R.string.relative_timeout
@@ -64,7 +69,7 @@ class RdpFrameView(context: Context, private val session: RdpSession) : View(con
         val captureAvailabilityChanged = value.connected != snapshot.connected || value.relativeSupported != snapshot.relativeSupported
         val pointerChanged = value.connected != snapshot.connected || value.cursorMode != snapshot.cursorMode
         snapshot = value
-        if (lostConnection || !value.relativeSupported && (captureRequested || captureConfirmed)) releaseInput()
+        if (lostConnection || !value.relativeSupported && (captureRequested || captureConfirmed)) releaseInput("connection-loss")
         if (captureAvailabilityChanged && !captureRequested && !captureConfirmed) {
             captureNotice = when {
                 !value.connected -> R.string.relative_disconnected
@@ -84,7 +89,7 @@ class RdpFrameView(context: Context, private val session: RdpSession) : View(con
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         canvas.drawColor(Color.rgb(16, 28, 34))
-        val labelHeight = paint.textSize * 2
+        val labelHeight = paint.textSize * 3
         destination.setEmpty()
         val availableHeight = height - labelHeight
         if (snapshot.width > 0 && snapshot.height > 0 && width > 0 && availableHeight > 0) {
@@ -97,6 +102,13 @@ class RdpFrameView(context: Context, private val session: RdpSession) : View(con
         val drawn = !destination.isEmpty && session.drawFrame(canvas, destination)
         canvas.drawText(context.getString(if (hasFocus()) R.string.frame_focused else R.string.frame_unfocused),
             8f, paint.textSize + 4f, paint)
+        val feedback = when (snapshot.cursorPositionSource) {
+            "predicted" -> R.string.cursor_predicted
+            "server-position" -> R.string.cursor_server
+            "absolute-input" -> R.string.cursor_absolute
+            else -> R.string.cursor_initial
+        }
+        canvas.drawText(context.getString(feedback), 8f, paint.textSize * 2 + 4f, paint)
         if (!drawn) canvas.drawText(context.getString(R.string.frame_empty), 8f, labelHeight + paint.textSize, paint)
         if (hasFocus()) {
             paint.style = Paint.Style.STROKE
@@ -163,13 +175,22 @@ class RdpFrameView(context: Context, private val session: RdpSession) : View(con
     }
 
     fun requestRelativeCapture() {
+        val current = session.snapshot()
+        if (!current.connected || current.attemptId != snapshot.attemptId || current.attemptId.isEmpty()) {
+            captureNotice = R.string.relative_disconnected; captureStateListener?.invoke(); return
+        }
+        if (hasPointerCapture() || captureHadConfirmation) { releaseInput(); return }
         if (!snapshot.connected) { captureNotice = R.string.relative_disconnected; captureStateListener?.invoke(); return }
         if (!snapshot.relativeSupported) { captureNotice = R.string.relative_unsupported; captureStateListener?.invoke(); return }
         if (!hasWindowFocus() || !requestFocus()) {
             captureNotice = R.string.relative_focus_required; captureStateListener?.invoke(); return
         }
         releaseRemoteInput()
+        captureAttemptId = snapshot.attemptId
+        captureReleaseReason = "system"
+        captureHadConfirmation = false
         captureRequested = true
+        session.captureEdge(captureAttemptId, "capture-requested", "operator")
         captureNotice = R.string.relative_requesting
         captureStateListener?.invoke()
         requestPointerCapture()
@@ -183,14 +204,31 @@ class RdpFrameView(context: Context, private val session: RdpSession) : View(con
         releaseRemoteInput()
         // The system callback is authoritative. A grant arriving after cancellation
         // must be released, rather than silently reacquiring remote ownership.
-        if (hasCapture && captureRequested && snapshot.connected && snapshot.relativeSupported && hasWindowFocus() && hasFocus()) {
+        val current = session.snapshot()
+        val sameAttempt = captureAttemptId.isNotEmpty() && captureAttemptId == snapshot.attemptId &&
+            captureAttemptId == current.attemptId && current.connected && current.relativeSupported
+        if (hasCapture && sameAttempt && captureRequested && snapshot.connected && snapshot.relativeSupported && hasWindowFocus() && hasFocus()) {
             captureConfirmed = true
+            captureHadConfirmation = true
             captureRequested = false
             captureNotice = R.string.relative_captured
+            session.captureEdge(captureAttemptId, "capture-confirmed", "system")
         } else {
             captureConfirmed = false
             captureRequested = false
-            if (hasCapture) releasePointerCapture()
+            if (captureAttemptId.isNotEmpty()) {
+                val edge = when {
+                    hasCapture || !captureHadConfirmation -> "capture-rejected"
+                    captureReleaseReason == "system" -> "capture-lost"
+                    else -> "capture-released"
+                }
+                session.captureEdge(captureAttemptId, edge, captureReleaseReason)
+            }
+            if (hasCapture) releasePointerCapture() else {
+                captureAttemptId = ""
+                captureHadConfirmation = false
+                captureReleaseReason = "system"
+            }
             captureNotice = if (snapshot.connected && snapshot.relativeSupported) R.string.relative_released
                 else if (snapshot.connected) R.string.relative_unsupported else R.string.relative_disconnected
         }
@@ -199,7 +237,7 @@ class RdpFrameView(context: Context, private val session: RdpSession) : View(con
     }
 
     override fun onCapturedPointerEvent(event: MotionEvent): Boolean {
-        if (event.actionMasked == MotionEvent.ACTION_CANCEL) { releaseInput(); return true }
+        if (event.actionMasked == MotionEvent.ACTION_CANCEL) { releaseInput("cancel"); return true }
         if (!captureConfirmed || !hasPointerCapture() || !hasFocus() || !hasWindowFocus() ||
             !snapshot.connected || !snapshot.relativeSupported) { releaseInput(); return false }
         // Captured MOVE getX/getY are deltas, not framebuffer coordinates. Button
@@ -385,13 +423,25 @@ class RdpFrameView(context: Context, private val session: RdpSession) : View(con
         return true
     }
 
-    fun releaseInput() {
+    fun releaseInput(reason: String = "operator") {
         removeCallbacks(captureDeadline)
+        val resolvedReason = when {
+            reason != "operator" -> reason
+            !hasWindowFocus() -> "window-focus-loss"
+            !hasFocus() -> "focus-loss"
+            else -> "operator"
+        }
+        if (captureRequested || captureConfirmed || hasPointerCapture()) {
+            captureReleaseReason = resolvedReason
+            session.captureEdge(captureAttemptId, "release-requested", resolvedReason)
+        }
         captureRequested = false
         captureConfirmed = false
-        if (hasPointerCapture()) releasePointerCapture()
+        val awaitingCallback = hasPointerCapture()
+        if (awaitingCallback) releasePointerCapture()
         releaseRemoteInput()
-        captureNotice = if (snapshot.connected && snapshot.relativeSupported) R.string.relative_released
+        captureNotice = if (hasPointerCapture()) R.string.relative_releasing
+            else if (snapshot.connected && snapshot.relativeSupported) R.string.relative_released
             else if (snapshot.connected) R.string.relative_unsupported else R.string.relative_disconnected
         captureStateListener?.invoke()
     }
@@ -407,13 +457,13 @@ class RdpFrameView(context: Context, private val session: RdpSession) : View(con
     }
 
     override fun onFocusChanged(gainFocus: Boolean, direction: Int, previouslyFocusedRect: android.graphics.Rect?) {
-        if (!gainFocus) releaseInput()
+        if (!gainFocus) releaseInput("focus-loss")
         super.onFocusChanged(gainFocus, direction, previouslyFocusedRect)
         invalidate()
     }
 
     override fun onDetachedFromWindow() {
-        releaseInput()
+        releaseInput("detached")
         super.onDetachedFromWindow()
     }
 

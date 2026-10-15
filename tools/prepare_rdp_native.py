@@ -41,7 +41,7 @@ JNI_BOUNDARY_EXPORTS = {
 PATCH_ORDER = (
     "bounded-openssl-jobs.patch", "android-session-ownership.patch",
     "android-external-certificate.patch", "android-key-validation.patch",
-    "android-relative-input.patch",
+    "android-relative-input.patch", "android-pointer-position.patch",
 )
 
 
@@ -78,7 +78,7 @@ def current_inputs():
     patches = PROBE / "patches"
     found = {p.name for p in patches.glob("*.patch")}
     if found != set(PATCH_ORDER):
-        raise ValueError("Patch directory differs from reviewed four-patch set")
+        raise ValueError("Patch directory differs from reviewed patch set")
     records = []
     for name in PATCH_ORDER:
         raw = read_file(patches / name)

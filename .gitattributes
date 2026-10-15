@@ -19,3 +19,4 @@ qualification/probes/native-rdp/patches/*.patch whitespace=-space-before-tab
 # This reviewed unified diff retains blank context lines as a single space.
 # Its added source lines were checked separately for trailing whitespace.
 qualification/probes/native-rdp/patches/android-relative-input.patch whitespace=-space-before-tab,-blank-at-eol
+qualification/probes/native-rdp/patches/android-pointer-position.patch whitespace=-space-before-tab,-blank-at-eol

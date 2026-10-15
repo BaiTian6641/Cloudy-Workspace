@@ -1,0 +1,78 @@
+--- a/client/Android/Studio/freeRDPCore/src/main/cpp/android_freerdp.c
++++ b/client/Android/Studio/freeRDPCore/src/main/cpp/android_freerdp.c
+@@ -66,6 +66,7 @@
+ 
+ static jclass gJavaActivityClass;
+ static jmethodID gOnPointerSetMethod;
++static jmethodID gOnPointerSetPositionMethod;
+ static jmethodID gOnRailWindowUpdateMethod;
+ 
+ static UINT android_UpdateWindowFromSurface(RdpgfxClientContext* context, gdiGfxSurface* surface);
+@@ -334,9 +335,33 @@
+ 
+ static BOOL android_Pointer_SetPosition(rdpContext* context, UINT32 x, UINT32 y)
+ {
+-	WINPR_ASSERT(context);
+-
+-	return TRUE;
++	/* These are authoritative server coordinates, not input or local prediction.
++	 * Reject narrowing instead of wrapping UINT32 into negative JNI coordinates. */
++	if (!context || !context->instance || x > INT32_MAX || y > INT32_MAX)
++	{
++		WLog_ERR(TAG, "Pointer position callback has invalid context or JNI coordinate range");
++		return FALSE;
++	}
++
++	JNIEnv* env = nullptr;
++	jboolean attached = jni_attach_thread(&env);
++	BOOL delivered = FALSE;
++	if (env && !(*env)->ExceptionCheck(env) && gJavaActivityClass && gOnPointerSetPositionMethod)
++	{
++		(*env)->CallStaticVoidMethod(env, gJavaActivityClass, gOnPointerSetPositionMethod,
++		                             (jlong)context->instance, (jint)x, (jint)y);
++		delivered = !(*env)->ExceptionCheck(env);
++	}
++	/* The authored Java wrapper retains Sink failures synchronously. JNI lookup,
++	 * attachment or unexpected Java failures must still fail the native update;
++	 * never leave a pending exception or log its potentially private message. */
++	if (env && (*env)->ExceptionCheck(env))
++		(*env)->ExceptionClear(env);
++	if (attached == JNI_TRUE)
++		jni_detach_thread();
++	if (!delivered)
++		WLog_ERR(TAG, "Pointer position callback delivery failed");
++	return delivered;
+ }
+ 
+ static BOOL android_Pointer_SetNull(rdpContext* context)
+@@ -448,6 +473,11 @@
+ 
+ 	rdpSettings* settings = instance->context->settings;
+ 	WINPR_ASSERT(settings);
++
++	/* Enable generic server-position dispatch in the upstream pointer cache.
++	 * This does not request Android pointer capture or emit any input event. */
++	if (!freerdp_settings_set_bool(settings, FreeRDP_GrabMouse, TRUE))
++		return FALSE;
+ 
+ 	if (freerdp_settings_get_bool(settings, FreeRDP_RemoteApplicationMode) &&
+ 	    !freerdp_callback_bool_result("OnExperimentalFeature", "(JI)Z", (jlong)instance,
+@@ -1427,6 +1457,18 @@
+ 
+ 	/* create global reference for class */
+ 	gJavaActivityClass = (*env)->NewGlobalRef(env, activityClass);
++	if (!gJavaActivityClass)
++		return JNI_ERR;
++	gOnPointerSetPositionMethod =
++	    (*env)->GetStaticMethodID(env, gJavaActivityClass, "OnPointerSetPosition", "(JII)V");
++	if (!gOnPointerSetPositionMethod)
++	{
++		(*env)->ExceptionClear(env);
++		(*env)->DeleteGlobalRef(env, gJavaActivityClass);
++		gJavaActivityClass = nullptr;
++		WLog_ERR(TAG, "Required OnPointerSetPosition callback not found");
++		return JNI_ERR;
++	}
+ 	gOnPointerSetMethod =
+ 	    (*env)->GetStaticMethodID(env, gJavaActivityClass, "OnPointerSet", "(J[IIIII)V");
+ 	gOnRailWindowUpdateMethod =

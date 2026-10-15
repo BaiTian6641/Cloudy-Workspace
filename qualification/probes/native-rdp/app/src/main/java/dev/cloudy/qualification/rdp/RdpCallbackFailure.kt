@@ -21,6 +21,7 @@ internal class RdpCallbackFailure private constructor(
             "resize" to listOf("width", "height", "bpp"),
             "graphics-update" to listOf("x", "y", "width", "height"),
             "pointer-set" to listOf("width", "height", "hotX", "hotY"),
+            "pointer-position" to listOf("x", "y"),
         )
         private val otherOperations = setOf(
             "pre-connect", "connected", "native-failure", "disconnecting", "disconnected",

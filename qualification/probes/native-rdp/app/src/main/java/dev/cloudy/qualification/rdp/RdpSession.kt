@@ -25,6 +25,7 @@ data class RdpSnapshot(
     val state: String = "loading", val detail: String = "Loading pinned native libraries",
     val nativeVersion: String = "unavailable", val width: Int = 0, val height: Int = 0,
     val frameUpdates: Long = 0, val inputEvents: Long = 0,
+    val attemptId: String = "", val cursorPositionSource: String = "initial-estimate",
     val busy: Boolean = true, val connected: Boolean = false, val cursorMode: String = "default", val relativeSupported: Boolean = false,
 )
 
@@ -48,6 +49,7 @@ class RdpSession(context: Context) : LibFreeRDP.Sink {
     private val authCallbacks = AtomicLong()
     private val frame = RdpFrameBuffer()
     private val callbackFailures = RdpFailureTracker()
+    private val captureJournal = RdpCaptureJournal()
     private var failureToken: RdpFailureTracker.Token? = null
     private var persistedFailure: RdpCallbackFailure? = null
     private val stateLock = Any()
@@ -98,8 +100,24 @@ class RdpSession(context: Context) : LibFreeRDP.Sink {
     fun snapshot(): RdpSnapshot = state
     fun drawFrame(canvas: Canvas, destination: RectF) = frame.draw(canvas, destination)
 
+    /** Called at the actual UI edge. Snapshot counts/time before the owner queue can race reap. */
+    fun captureEdge(attemptId: String, edge: String, reason: String) {
+        if (attemptId.isEmpty() || attemptId != state.attemptId || handle == 0L || closed.get()) return
+        val elapsed = SystemClock.elapsedRealtime() - startedAt
+        val relative = relativeCount.get()
+        val total = inputCount.get() // This later read cannot be smaller than relative.
+        captureJournal.capture(attemptId, edge, reason, elapsed, total, relative) ?: return
+        owner {
+            if (attempt?.optString("id") != attemptId || handle == 0L) return@owner
+            frame.capture(edge == "capture-confirmed" && !stopping.get() && liveConnected)
+            change { it }
+            persist()
+        }
+    }
+
     private fun change(transform: (RdpSnapshot) -> RdpSnapshot) {
-        synchronized(stateLock) { state = transform(state).copy(frameUpdates = frameCount.get(), inputEvents = inputCount.get()) }
+        synchronized(stateLock) { state = transform(state).copy(frameUpdates = frameCount.get(), inputEvents = inputCount.get(),
+            cursorPositionSource = frame.presentation()) }
         if (uiPending.compareAndSet(false, true)) main.post {
             uiPending.set(false)
             listener?.invoke(state)
@@ -165,6 +183,7 @@ class RdpSession(context: Context) : LibFreeRDP.Sink {
             attempt?.put("closed", true)?.put("outcome", "failed-before-native-allocation")
             record("adapter-failure")
             callbackFailures.retire(failureToken)
+            captureJournal.retire()
             attempt = null
             failureToken = null; persistedFailure = null
             finishOwnerIfClosed()
@@ -192,6 +211,8 @@ class RdpSession(context: Context) : LibFreeRDP.Sink {
                 .put("buildRef", BuildConfig.QUALIFICATION_BUILD_REF).put("version", BuildConfig.VERSION_NAME)
                 .put("startedAtDeviceUtcMillis", System.currentTimeMillis()).put("startedElapsedMillis", startedAt)
                 .put("closed", false).put("nativeThreadStarted", false).put("nativeInstanceFreed", false).put("nativeThreadJoined", false).put("events", JSONArray())
+            captureJournal.begin(checkNotNull(attempt).getString("id"))
+            change { it.copy(attemptId = checkNotNull(attempt).getString("id")) }
             attempts.put(attempt)
             failureToken = callbackFailures.begin()
             check(record("start-requested")) { "journal-unavailable" } // Durable intent precedes native allocation/authentication.
@@ -223,6 +244,7 @@ class RdpSession(context: Context) : LibFreeRDP.Sink {
         if (stopAt == 0L) {
             stopAt = SystemClock.elapsedRealtime(); stopReason = reason
             releaseOnOwner()
+            frame.capture(false)
             stopping.set(true); liveConnected = false
             val requested = LibFreeRDP.freerdp_disconnect(handle)
             change { it.copy(state = "stopping", detail = failureDetail(if (requested) reason else "Native stop request failed; retaining ownership"), busy = true, connected = false) }
@@ -238,6 +260,7 @@ class RdpSession(context: Context) : LibFreeRDP.Sink {
             // A successful join has completed callbacks. Drain the synchronous cause
             // here even if the polling task beat its queued failure handler.
             callbackFailures.retire(failureToken)
+            captureJournal.retire()
             persistFirstFailure()
             liveConnected = false; stopping.set(true)
             val error = LibFreeRDP.freerdp_get_last_error_string(current).take(180)
@@ -291,6 +314,7 @@ class RdpSession(context: Context) : LibFreeRDP.Sink {
                 }
             }
             inputCount.incrementAndGet()
+            change { it } // Cursor-only absolute motion uses the same coalesced redraw.
         }
     }
     internal fun relativeMotion(steps: List<RdpRelativeStep>): Boolean {
@@ -312,6 +336,7 @@ class RdpSession(context: Context) : LibFreeRDP.Sink {
     }
 
     private fun sendRelativeOnOwner(dx: Int, dy: Int, flags: Int) {
+        val cursorRevision = frame.positionRevision()
         check(LibFreeRDP.freerdp_send_relative_cursor_event(handle, dx, dy, flags))
         for (button in intArrayOf(0x1000, 0x2000, 0x4000)) {
             if (flags and button != 0) {
@@ -319,6 +344,10 @@ class RdpSession(context: Context) : LibFreeRDP.Sink {
             }
         }
         inputCount.incrementAndGet(); relativeCount.incrementAndGet()
+        // A JNI TRUE admits the delta to the native queue, not to the host. Only
+        // this successful admission may advance the explicitly predicted cursor.
+        // A server correction/resize crossing admission wins over local prediction.
+        if (flags and 0x0800 != 0 && frame.admittedRelative(dx, dy, cursorRevision)) change { it }
     }
 
     fun capturedWheel(flags: Int) {
@@ -390,7 +419,8 @@ class RdpSession(context: Context) : LibFreeRDP.Sink {
                 change { it.copy(connected = false) }
             }
             "pointer-null", "pointer-default" -> {
-                frame.defaultPointer()
+                if (stopping.get()) return
+                frame.defaultPointer(hidden = name == "pointer-null")
                 change { it.copy(cursorMode = if (name == "pointer-null") "hidden" else "default") }
                 return
             }
@@ -416,6 +446,12 @@ class RdpSession(context: Context) : LibFreeRDP.Sink {
     override fun pointer(instance: Long, pixels: IntArray, width: Int, height: Int, hotX: Int, hotY: Int) {
         if (instance != handle || stopping.get()) return
         frame.pointer(pixels, width, height, hotX, hotY); change { it.copy(cursorMode = "custom") }
+    }
+    override fun pointerPosition(instance: Long, x: Int, y: Int) {
+        if (instance == 0L || instance != handle || stopping.get()) return
+        // Real server coordinates reconcile presentation; never echo them as input.
+        check(frame.serverPosition(x, y)) { "invalid-server-pointer-position" }
+        change { it }
     }
     override fun authenticate(instance: Long, user: StringBuilder, domain: StringBuilder, password: StringBuilder): Boolean {
         val selected = config ?: return false
@@ -482,9 +518,12 @@ class RdpSession(context: Context) : LibFreeRDP.Sink {
         }
     }
     private fun persistChecked() {
+        captureJournal.acknowledgePending(SystemClock.elapsedRealtime() - startedAt, inputCount.get(), relativeCount.get())
         callbackFailures.snapshot(failureToken)?.let { cause ->
             attempt?.put("firstFailure", JSONObject(cause.journalFields()))
         }
+        attempt?.put("captureEdges", JSONArray(captureJournal.snapshot().map { JSONObject(it) }))
+            ?.put("captureEdgesOmitted", captureJournal.omitted())
         attempt?.put("frameUpdates", frameCount.get())?.put("inputEvents", inputCount.get())
             ?.put("certificateAccepts", certAccepted.get())?.put("certificateRejects", certRejected.get())
             ?.put("authenticationCallbacks", authCallbacks.get())?.put("relativeInputEvents", relativeCount.get())

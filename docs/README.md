@@ -32,3 +32,5 @@ The [desktop workflow design](04-design/desktop-workflows.md) expands the visual
 
 - [Standard RDP desktop interaction, relative mouse and host matrix](04-design/desktop-rdp-interaction-contract.md) and [authentication/on-device credential security](02-architecture/rdp-authentication-security.md): D15 implementation and release requirements.
 - [RDP0.1.3 controlled input result](../qualification/results/P0-S4/2026-10-15-rdp-input-boundary.md): continued real frames, zero target input, upstream KDE prerequisite and retained failure/cleanup evidence. [LibVNC host build entry](../qualification/results/P0-S4/2026-10-15-vnc-host-build.md) is compilation only; focused runtime/Android/TLS/license gates remain.
+
+- [RDP0.1.5 cursor repair review](06-validation/2026-10-15-rdp-cursor-repair-review.md) and [physical follow-up](../qualification/results/P0-S4/2026-10-15-rdp-cursor-repair.md): user-confirmed captured host-trail/cursor movement and local release; exact evidence and remaining latency/3D/input-device limits.

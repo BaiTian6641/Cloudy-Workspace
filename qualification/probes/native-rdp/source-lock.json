@@ -83,6 +83,11 @@
       "path": "patches/android-relative-input.patch",
       "bytes": 7911,
       "sha256": "41ef34bbb17a06883ccc5635192ba022b4d500ba406b44a43f98544823ea8dd4"
+    },
+    {
+      "path": "patches/android-pointer-position.patch",
+      "bytes": 3079,
+      "sha256": "63ed1b864d2782e19c5e9c4245a6b6a157a1c58b468186952899374c0fdf910e"
     }
   ]
 }

@@ -104,6 +104,15 @@ class RdpCallbackFailureTest {
     }
 
     @Test
+    fun serverPositionFailureKeepsOnlyItsTwoNumericSlots() {
+        val cause = checkNotNull(RdpCallbackFailure.create("pointer-position", "IllegalStateException", intArrayOf(-1, 720)))
+        assertEquals(-1, cause.journalFields()["x"])
+        assertEquals(720, cause.journalFields()["y"])
+        assertEquals(setOf("operation", "exceptionClass", "elapsedMillis", "x", "y"), cause.journalFields().keys)
+        assertNull(RdpCallbackFailure.create("pointer-position", "Error", intArrayOf(1)))
+    }
+
+    @Test
     fun nonDimensionalCallbacksNeverSerializeSuppliedExtraValues() {
         val cause = checkNotNull(RdpCallbackFailure.create("connected", "Error", intArrayOf(1, 2, 3)))
         assertEquals(setOf("operation", "exceptionClass", "elapsedMillis"), cause.journalFields().keys)

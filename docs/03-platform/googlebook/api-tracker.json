@@ -126,21 +126,22 @@
         "G25",
         "G132",
         "R143",
-        "R200"
+        "R200",
+        "R201"
       ],
       "minimumApi": 26,
-      "libraryVersion": "Android framework; diagnostic 0.1.4 on API37",
+      "libraryVersion": "Android framework; diagnostic 0.1.5 on API37",
       "availability": "compiled-and-bounded-device-observed",
       "qualification": "partial",
       "checkedOn": "2026-10-15",
       "owner": "Android/platform developer",
       "stage": "P0-S4",
       "fallback": "Explicit absolute mode or separately qualified external mouse/backend; none is a relative 3D pass.",
-      "experiment": "Q-D09: diagnostic0.1.4 compiled, actual-source queue test passed, standard relative negotiation and Android capture confirmed. User reports local release works but captured remote cursor does not move;1,788relative queue submissions are not delivery. KRdp6.4.5 lacks a registered relative callback. Actual3D, per-mouse/trackpad cases and repeated focus/disconnect/release remain unqualified. Choose a server with an actual consumption path; Linux/Windows/macOS rows remain separate. The subsequent physical GRD run records 873 relative JNI submissions but user-visible captured movement fails; release works. Post-confirmation target activity lacks an exact release edge and is not a captured-delivery pass. Source review identifies missing relative cursor-position updates, discarded authoritative position callback and no software default cursor under capture. Repair presentation and record capture/release edges before another physical verdict.",
+      "experiment": "Q-D09: Diagnostic 0.1.5 (six-patch FreeRDP3.32.2) passed native build, Android compilation/Lint and 45 JVM tests. Its sixth patch adds authoritative server-position dispatch; the Kotlin adapter adds bounded presentation-only prediction, and standard relative wire input has no absolute fallback. Physical attempt 13: user reports “Host trail and cursor move; release works”; mouse versus trackpad was unspecified. Two confirmed capture intervals have eight actual UI edges and 619+418 relative JNI admissions (1,037 total relative, 1,678 total input); 565 framebuffer updates at 1280x720. The controlled host target recorded 824 moves and normal operator close with held input 0; native thread joined and instance freed. This is bounded user-report/target-behavior evidence, not latency, 3D, device-type coverage or other-OS qualification. Live authoritative-position callback and server default/hidden states were not separately exercised; prior lag remains unmeasured. Earlier diagnostic 0.1.4 KRdp6.4.5 captured movement failed despite queue admission; source review found no registered relative callback. The later GRD run also had user-visible captured movement failure with release working; missing release-edge evidence prevented attributing target moves to the captured interval.",
       "versionNotes": "Capture methods API26; relative axes API24. Captured getX/getY deltas and explicit relative axes are alternative representations, not additive. Historical samples matter.",
       "researchEvidence": "docs/03-platform/googlebook/rdp-cursor-presentation-entry.md",
-      "compileEvidence": "qualification/results/P0-S4/2026-10-15-rdp-relative-portal.md",
-      "deviceEvidence": "qualification/results/P0-S4/2026-10-15-rdp-physical-cursor.md"
+      "compileEvidence": "qualification/results/P0-S4/2026-10-15-rdp-cursor-repair.md",
+      "deviceEvidence": "qualification/results/P0-S4/2026-10-15-rdp-cursor-repair.md"
     },
     {
       "id": "API07",
@@ -1358,22 +1359,23 @@
         "R194",
         "G09",
         "R143",
-        "R200"
+        "R200",
+        "R201"
       ],
       "minimumApi": 26,
-      "libraryVersion": "FreeRDP3.32.2 at 97eff6ddfbbfaa8e42a126d362686bd001ff8bdc; fifth Android relative-input patch and diagnostic 0.1.4",
+      "libraryVersion": "FreeRDP3.32.2 at 97eff6ddfbbfaa8e42a126d362686bd001ff8bdc; six reviewed patches and diagnostic 0.1.5",
       "interfaceKind": "standard-rdp-through-upstream-native-client",
-      "availability": "adapter-compiled-and-negotiation-observed",
+      "availability": "adapter-compiled-and-bounded-device-observed",
       "qualification": "partial",
       "checkedOn": "2026-10-15",
       "owner": "Desktop/native developer",
       "stage": "P0-S4",
       "fallback": "Offer explicit absolute mode or separately qualified backend; AINPUT is a distinct extension, and accumulated absolute helper fallback is never standard relative or3D proof.",
-      "experiment": "Q-D09: diagnostic0.1.4 compiled, actual-source queue test passed, standard relative negotiation and Android capture confirmed. User reports local release works but captured remote cursor does not move;1,788relative queue submissions are not delivery. KRdp6.4.5 lacks a registered relative callback. Actual3D, per-mouse/trackpad cases and repeated focus/disconnect/release remain unqualified. Choose a server with an actual consumption path; Linux/Windows/macOS rows remain separate. Isolated GRD50.2/Mutter50.1 follow-up negotiates/captures and delivers controlled absolute pointer/keyboard; no physical relative stimulus or answer during the finite window, with zero relative events. The later user response supplied no movement or release observation. Physical relative testing remains pending. The subsequent physical GRD run records 873 relative JNI submissions but user-visible captured movement fails; release works. Post-confirmation target activity lacks an exact release edge and is not a captured-delivery pass. Source review identifies missing relative cursor-position updates, discarded authoritative position callback and no software default cursor under capture. Repair presentation and record capture/release edges before another physical verdict.",
-      "versionNotes": "RDP relative capability0x80 plus earlyclient0x10 and protocol>=0x00080011; events signedINT16. minimumApi26 is Android capture prerequisite, not RDP protocol OS level. Defaults already advertise relative support; server capability gates use. New JNI uses standard core relative events only, with no AINPUT or absolute fallback. Server callback registration is a separate integration requirement; selected FreeRDPserver3.32.1 can advertise support yet discard events at a null callback.",
+      "experiment": "Q-D09: Diagnostic 0.1.5 (six-patch FreeRDP3.32.2) passed native build, Android compilation/Lint and 45 JVM tests. Its sixth patch adds authoritative server-position dispatch; the Kotlin adapter adds bounded presentation-only prediction, and standard relative wire input has no absolute fallback. Physical attempt 13: user reports “Host trail and cursor move; release works”; mouse versus trackpad was unspecified. Two confirmed capture intervals have eight actual UI edges and 619+418 relative JNI admissions (1,037 total relative, 1,678 total input); 565 framebuffer updates at 1280x720. The controlled host target recorded 824 moves and normal operator close with held input 0; native thread joined and instance freed. This is bounded user-report/target-behavior evidence, not latency, 3D, device-type coverage or other-OS qualification. Live authoritative-position callback and server default/hidden states were not separately exercised; prior lag remains unmeasured. Earlier diagnostic 0.1.4 KRdp6.4.5 captured movement failed despite queue admission; source review found no registered relative callback. The later GRD run also had user-visible captured movement failure with release working; missing release-edge evidence prevented attributing target moves to the captured interval.",
+      "versionNotes": "RDP relative capability0x80 plus earlyclient0x10 and protocol>=0x00080011; events signedINT16. minimumApi26 is Android capture prerequisite, not RDP protocol OS level. Defaults already advertise relative support; server capability gates use. New JNI uses standard core relative events only, with no AINPUT or absolute fallback. Server callback registration is a separate integration requirement; selected FreeRDPserver3.32.1 can advertise support yet discard events at a null callback. Sixth patch enables authoritative pointer-position dispatch/callback; bounded cursor prediction changes presentation only. Accepted relative wire input remains unchanged with no absolute fallback.",
       "researchEvidence": "docs/03-platform/googlebook/rdp-cursor-presentation-entry.md",
-      "compileEvidence": "qualification/results/P0-S4/2026-10-15-rdp-relative-portal.md",
-      "deviceEvidence": "qualification/results/P0-S4/2026-10-15-rdp-physical-cursor.md"
+      "compileEvidence": "qualification/results/P0-S4/2026-10-15-rdp-cursor-repair.md",
+      "deviceEvidence": "qualification/results/P0-S4/2026-10-15-rdp-cursor-repair.md"
     },
     {
       "id": "API46",

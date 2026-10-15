@@ -30,6 +30,7 @@
 #include <QVBoxLayout>
 #include <QWheelEvent>
 #include <QWidget>
+#include <array>
 #include <charconv>
 #include <cstdio>
 #include <functional>
@@ -42,6 +43,7 @@
 namespace {
 constexpr int MaxEvents = 4000;
 constexpr int MaxTextUnits = 256;
+constexpr std::size_t MaxMotionPoints = 64;
 constexpr qint64 MaxLogBytes = 2 * 1024 * 1024;
 
 QJsonObject rectangle(const QRect& value)
@@ -188,13 +190,53 @@ protected:
         painter.fillRect(width() - 8, 2, 6, 6, Qt::cyan);
         painter.fillRect(2, height() - 8, 6, 6, Qt::magenta);
         painter.fillRect(width() - 8, height() - 8, 6, 6, Qt::green);
+        // This is painted from received canvas events only. It is independent of
+        // a client-side cursor prediction and makes no claim about event transport.
+        if (retainedMotionPoints > 0) {
+            painter.setPen(QPen(QColor(125, 213, 199), 2));
+            const std::size_t first = (nextMotionPoint + MaxMotionPoints - retainedMotionPoints) % MaxMotionPoints;
+            for (std::size_t i = 1; i < retainedMotionPoints; ++i)
+                painter.drawLine(motionTrail[(first + i - 1) % MaxMotionPoints], motionTrail[(first + i) % MaxMotionPoints]);
+            const QPointF last = motionTrail[(nextMotionPoint + MaxMotionPoints - 1) % MaxMotionPoints];
+            for (const QPen& pen : {QPen(Qt::black, 5), QPen(Qt::white, 2)}) {
+                painter.setPen(pen);
+                painter.drawEllipse(last, 7, 7);
+                painter.drawLine(last + QPointF(-11, 0), last + QPointF(11, 0));
+                painter.drawLine(last + QPointF(0, -11), last + QPointF(0, 11));
+            }
+        }
+        painter.setPen(Qt::white);
+        painter.setBackground(QColor(16, 28, 34));
+        painter.setBackgroundMode(Qt::OpaqueMode);
+        painter.drawText(14, height() - 34, QString("Actual host canvas motion events: %1 (limit %2)").arg(motionEvents).arg(MaxEvents));
+        const QString lastPosition = retainedMotionPoints == 0 ? "none" :
+            QString("%1,%2").arg(motionTrail[(nextMotionPoint + MaxMotionPoints - 1) % MaxMotionPoints].x(), 0, 'f', 1)
+                              .arg(motionTrail[(nextMotionPoint + MaxMotionPoints - 1) % MaxMotionPoints].y(), 0, 'f', 1);
+        painter.drawText(14, height() - 14, QString("Last host position: %1 | trail <= 64 | no transport attribution").arg(lastPosition));
     }
     void mousePressEvent(QMouseEvent* event) override { setFocus(Qt::MouseFocusReason); event->accept(); }
     void mouseReleaseEvent(QMouseEvent* event) override { event->accept(); }
-    void mouseMoveEvent(QMouseEvent* event) override { event->accept(); }
+    void mouseMoveEvent(QMouseEvent* event) override
+    {
+        // The existing event filter logs the same event under the finite budget.
+        // Saturation is defensive; no timer, pointer query or synthetic event adds a point.
+        if (motionEvents < MaxEvents) {
+            motionEvents++;
+            motionTrail[nextMotionPoint] = event->position();
+            nextMotionPoint = (nextMotionPoint + 1) % MaxMotionPoints;
+            if (retainedMotionPoints < MaxMotionPoints) retainedMotionPoints++;
+            update();
+        }
+        event->accept();
+    }
     void wheelEvent(QWheelEvent* event) override { event->accept(); }
     void keyPressEvent(QKeyEvent* event) override { event->accept(); }
     void keyReleaseEvent(QKeyEvent* event) override { event->accept(); }
+private:
+    std::array<QPointF, MaxMotionPoints> motionTrail{};
+    std::size_t nextMotionPoint = 0;
+    std::size_t retainedMotionPoints = 0;
+    int motionEvents = 0;
 };
 
 class Editor final : public QPlainTextEdit {
@@ -406,7 +448,8 @@ int main(int argc, char** argv)
             std::fputs("Native Wayland backend required\n", stderr); return 1;
         }
         log.requestExit = [&app](int code) { QTimer::singleShot(0, &app, [&app, code] { app.exit(code); }); };
-        log.record("provenance", {{"schemaVersion", 1}, {"qtRuntime", qVersion()}, {"qtCompile", QT_VERSION_STR},
+        log.record("provenance", {{"schemaVersion", 1}, {"fixtureRevision", "host-motion-1"},
+                                  {"maximumMotionTrailPoints", static_cast<int>(MaxMotionPoints)}, {"qtRuntime", qVersion()}, {"qtCompile", QT_VERSION_STR},
                                   {"platform", QGuiApplication::platformName()}, {"pid", QCoreApplication::applicationPid()},
                                   {"startedUtc", QDateTime::currentDateTimeUtc().toString(Qt::ISODateWithMs)},
                                   {"lifetimeSeconds", seconds}, {"maximumEvents", MaxEvents},

@@ -11,6 +11,7 @@ public final class LibFreeRDP {
         void event(long instance, String name, int width, int height, int bpp);
         void graphics(long instance, int x, int y, int width, int height);
         void pointer(long instance, int[] pixels, int width, int height, int hotX, int hotY);
+        void pointerPosition(long instance, int x, int y);
         boolean authenticate(long instance, StringBuilder user, StringBuilder domain, StringBuilder password);
         int verify(long instance, byte[] pem, String host, long port, long flags);
         void callbackFailure(long instance, String operation, String failureClass, int[] dimensions);
@@ -94,6 +95,12 @@ public final class LibFreeRDP {
         if (current == null) return;
         try { current.pointer(id, pixels, w, h, hotX, hotY); }
         catch (Throwable error) { failed(current, id, "pointer-set", error, w, h, hotX, hotY); }
+    }
+    private static void OnPointerSetPosition(long id, int x, int y) {
+        Sink current = sink;
+        if (current == null) return;
+        try { current.pointerPosition(id, x, y); }
+        catch (Throwable error) { failed(current, id, "pointer-position", error, x, y); }
     }
     private static void OnPointerSetNull(long id) { event(id, "pointer-null"); }
     private static void OnPointerSetDefault(long id) { event(id, "pointer-default"); }

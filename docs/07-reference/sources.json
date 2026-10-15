@@ -4252,6 +4252,18 @@
       "sourceUpdatedOn": null,
       "note": "Inspected renderer emits shape/default/hidden pointer updates; no PointerPosition emission in this file. Source boundary supports presentation-only prediction research, not proof of whole-server behavior or actual relative delivery. API06/API45, P0-S4.",
       "refresh": "Before changing cursor presentation or qualifying server cursor behavior."
+    },
+    {
+      "id": "R201",
+      "title": "FreeRDP 3.32.2 pointer-position dispatch gate",
+      "url": "https://raw.githubusercontent.com/FreeRDP/FreeRDP/97eff6ddfbbfaa8e42a126d362686bd001ff8bdc/libfreerdp/cache/pointer.c",
+      "publisher": "FreeRDP",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Exact pinned source: update_pointer_position returns TRUE without dispatch when FreeRDP_GrabMouse is false; otherwise calls rdpPointer.SetPosition. The sixth Android patch enables this dispatch and bridges authoritative server coordinates. This setting does not request Android capture or emit input. Source semantics, not device proof; live authoritative-position callback and server default/hidden behavior remain separately unqualified. API06/API45, P0-S4.",
+      "refresh": "Before changing pointer-position dispatch or qualifying server cursor behavior."
     }
   ]
 }
