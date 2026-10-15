@@ -1440,7 +1440,8 @@
         "BiometricPrompt.cancelAuthentication",
         "BiometricManager.canAuthenticate",
         "KeyStoreException.getNumericErrorCode",
-        "BiometricPrompt.AuthenticationResult.getAuthenticationType"
+        "BiometricPrompt.AuthenticationResult.getAuthenticationType",
+        "BiometricPrompt.PromptInfo.Builder.setAllowedAuthenticators"
       ],
       "sourceIds": [
         "R203",
@@ -1472,21 +1473,23 @@
         "R223",
         "R224",
         "R225",
-        "R226"
+        "R226",
+        "G149",
+        "R227"
       ],
       "minimumApi": null,
       "libraryVersion": "Moonlight Androidv12.2/b48494cb96bff23d8886c4775cc4f39a1075495d; common-C874ac9548f1bd6f095ef2b435c42cdde460e7821",
       "interfaceKind": "pinned-upstream-source-integration-not-embedding-sdk",
-      "availability": "Pinned native core, Android build/Lint and actual JNI loading pass; real identity diagnostic generates pending TEE key but plain-JCA initSign fails after biometric success; signing/TLS/pairing/streaming unqualified",
+      "availability": "Pinned native core/Android build/JNI loading pass; same-key0.1.3 device-credential local signing/certificate enrollment/reload passes; earlier biometric signing failure unresolved; TLS/pairing/streaming pending",
       "qualification": "partial",
       "checkedOn": "2026-10-15",
       "owner": "Desktop/media maintainer",
       "stage": "P0-S4",
       "fallback": "Explicit separately installed Moonlight enrolled-host handoff/manual selection, independently useful RDP/VNC lanes; external handoff does not complete native scope",
-      "experiment": "Carry forward0.1.0 actual MoonBridge initialization/metadata. The0.1.2/code3 actual HP Googlebook14/API37 CL3B.260622.276.R2 control on the same pending TEE key records biometric result2 then AUTH_REQUIRED/UserNotAuthenticatedException at precertificate-sign-init6ms later, public numeric code null. Six identity records preserved; no certificate or qualification result, zero host connections/decoded frames. Next compare explicit credential-only authentication on this same key under unchanged30second policy, then actual signing/certificate, client TLS/pairing and finite HTTP cancellation. No automatic retry, key regeneration, software fallback or forced provider. Real Surface/MediaCodec and host/input/decode remain pending. D16 exact source/notices/build closure remains a release gate.",
+      "experiment": "Carry forward0.1.0 actual MoonBridge initialization/metadata. Same-key0.1.3/code4 HP Googlebook14/API37 CL3B.260622.276.R2 explicit DEVICE_CREDENTIAL type1 callback completes real RSA2048 signing/certificate enrollment61ms later, with TEE/HWauth/nullprivateencoding; fresh-process modeNONE reloads READY. Nine records preserved, previous six unchanged. Earlier0.1.2 biometric type2 ->initSign UserNotAuthenticatedException6ms remains unexplained. Next finite authenticated HTTP/TLS/pairing with same-attempt credential reauthorization and cancellation; unchanged30second policy/no automatic retry/regeneration/softwarefallback. Actual lock/cancel/expiry and Surface/MediaCodec/host/input/decode pending. D16 full delivered source/notices/build review remains releasegate.",
       "researchEvidence": "docs/03-platform/googlebook/native-stream-adoption-entry.md",
-      "versionNotes": "Upstream min21,target36,compile37; owned diagnostic min35,target36,compile37; target37 migration separate. Public API26+ pointer capture for Googlebook, no root/evdev/private route. One process-global native attempt; external shortcut uses Moonlight-owned enrolled host state. Keystore builder23, unlocked restriction28, timed auth parameters30, actual security level31; source candidate uses Googlebook37. Conscrypt/AOSP/BC moving source explains compatibility, not installed provider pin. Identity inspector isUnlockedDeviceRequired added36.1; new identity diagnostic deliberately requiresAPI37 before creating or inspecting keys. Stable AndroidXBiometric1.1.0 time-based strong/devicecredential prompt has no CryptoObject; actual integration result recorded separately.",
-      "compileEvidence": "qualification/results/P0-S4/2026-10-15-stream-identity.md"
+      "versionNotes": "Upstream min21,target36,compile37; owned diagnostic min35,target36,compile37; target37 migration separate. Public API26+ pointer capture for Googlebook, no root/evdev/private route. One process-global native attempt; external shortcut uses Moonlight-owned enrolled host state. Keystore builder23, unlocked restriction28, timed auth parameters30, actual security level31; source candidate uses Googlebook37. Conscrypt/AOSP/BC moving source explains compatibility, not installed provider pin. Identity inspector isUnlockedDeviceRequired added36.1; new identity diagnostic deliberately requiresAPI37 before creating or inspecting keys. Stable AndroidXBiometric1.1.0 time-based strong/devicecredential prompt has no CryptoObject; actual integration result recorded separately. Credential-only PromptInfo is supported by selected AndroidX1.1.0 onAPI30+; same-key control requires actual resulttype1 and does not change keypolicy. G149/R227.",
+      "compileEvidence": "qualification/results/P0-S4/2026-10-15-stream-credential-control.md"
     }
   ],
   "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."

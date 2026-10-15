@@ -27,6 +27,7 @@ public final class StreamProbeActivity extends FragmentActivity {
     private TextView nativeStatus;
     private Button create;
     private Button authorize;
+    private Button authorizeCredential;
     private Button refresh;
     private Button cancel;
     private Button delete;
@@ -61,6 +62,7 @@ public final class StreamProbeActivity extends FragmentActivity {
         status.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);
         create = button(content, R.string.cloudy_identity_create, view -> model.createIdentity());
         authorize = button(content, R.string.cloudy_identity_authorize, view -> model.authorizeIdentity());
+        authorizeCredential = button(content, R.string.cloudy_identity_authorize_credential, view -> model.authorizeWithCredential());
         refresh = button(content, R.string.cloudy_identity_refresh, view -> model.refreshIdentity());
         cancel = button(content, R.string.cloudy_identity_cancel, view -> {
             model.cancel(); // Revoke the owner before cancelling framework authentication.
@@ -102,6 +104,7 @@ public final class StreamProbeActivity extends FragmentActivity {
                 ? getString(state.nativeMessage, state.detail) : getString(state.nativeMessage));
         create.setEnabled(!state.busy && state.identityState.equals("ABSENT"));
         authorize.setEnabled(!state.busy && (state.identityState.equals("READY") || state.identityState.equals("ENROLLMENT_PENDING")));
+        authorizeCredential.setEnabled(!state.busy && (state.identityState.equals("READY") || state.identityState.equals("ENROLLMENT_PENDING")));
         refresh.setEnabled(!state.busy);
         delete.setEnabled(!state.busy);
         cancel.setEnabled(state.busy);
@@ -111,7 +114,9 @@ public final class StreamProbeActivity extends FragmentActivity {
             prompt.cancelAuthentication();
         } else if (state.promptRequested && model.claimPrompt(state.promptToken)) {
             long token = state.promptToken;
-            if (BiometricManager.from(this).canAuthenticate(AUTHENTICATORS) != BiometricManager.BIOMETRIC_SUCCESS) {
+            int authenticators = state.promptMode == StreamProbeViewModel.PromptMode.DEVICE_CREDENTIAL
+                    ? BiometricManager.Authenticators.DEVICE_CREDENTIAL : AUTHENTICATORS;
+            if (BiometricManager.from(this).canAuthenticate(authenticators) != BiometricManager.BIOMETRIC_SUCCESS) {
                 model.promptLaunchFailed(token);
                 return;
             }
@@ -119,8 +124,9 @@ public final class StreamProbeActivity extends FragmentActivity {
             try {
                 prompt.authenticate(new BiometricPrompt.PromptInfo.Builder()
                         .setTitle(getString(R.string.cloudy_identity_prompt_title))
-                        .setSubtitle(getString(R.string.cloudy_identity_prompt_subtitle))
-                        .setAllowedAuthenticators(AUTHENTICATORS).build());
+                        .setSubtitle(getString(state.promptMode == StreamProbeViewModel.PromptMode.DEVICE_CREDENTIAL
+                                ? R.string.cloudy_identity_credential_subtitle : R.string.cloudy_identity_prompt_subtitle))
+                        .setAllowedAuthenticators(authenticators).build());
             } catch (IllegalArgumentException | IllegalStateException unavailable) {
                 model.promptLaunchFailed(token);
             }

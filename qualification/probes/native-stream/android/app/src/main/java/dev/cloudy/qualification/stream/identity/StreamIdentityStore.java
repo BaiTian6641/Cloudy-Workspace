@@ -463,11 +463,12 @@ public final class StreamIdentityStore implements AutoCloseable {
         }
     }
     private void preCertificateControl(Attempt attempt, PrivateKey key, java.security.PublicKey publicKey) throws Exception {
-        FailureStage stage = FailureStage.PRECERTIFICATE_SIGN_INIT;
+        FailureStage stage = FailureStage.GUARD;
         try {
             guard(attempt, false);
             byte[] challenge = new byte[32];
             RANDOM.nextBytes(challenge);
+            stage = FailureStage.PRECERTIFICATE_SIGN_INIT;
             Signature signer = Signature.getInstance("SHA256withRSA");
             signer.initSign(key);
             stage = FailureStage.PRECERTIFICATE_SIGN;
@@ -478,6 +479,7 @@ public final class StreamIdentityStore implements AutoCloseable {
             verifier.initVerify(publicKey);
             verifier.update(challenge);
             if (!verifier.verify(signature)) throw error(Code.KEY_POLICY);
+            stage = FailureStage.GUARD;
             guard(attempt, false);
         } catch (Exception failure) { throw failure(failure, stage); }
     }

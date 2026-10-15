@@ -4660,6 +4660,30 @@
       "sourceUpdatedOn": null,
       "note": "KeyStoreException.getNumericErrorCode API33 supplies public numeric error category for bounded diagnostic cause inspection; do not interpret alone as exact KeyMint/HAT failure. Owner: Desktop/security, P0-S4.",
       "refresh": "Before changed diagnostic interpretation or SDK/provider."
+    },
+    {
+      "id": "G149",
+      "title": "AndroidX credential-only prompt authenticator selection",
+      "url": "https://developer.android.com/reference/androidx/biometric/BiometricPrompt.PromptInfo.Builder#setAllowedAuthenticators(int)",
+      "publisher": "Google",
+      "category": "security",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "setAllowedAuthenticators introduced Biometric1.1.0; DEVICE_CREDENTIAL alone supported API30+. No negative button with credential mode. Proposed existing-key control must observe actual authentication result type1; not yet executed. Owner: Desktop/security, P0-S4.",
+      "refresh": "Before changed prompt/AndroidX version or interpreting actual credential-control evidence."
+    },
+    {
+      "id": "R227",
+      "title": "AndroidX Biometric exact1.1.0 published sources",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/biometric/biometric/1.1.0/biometric-1.1.0-sources.jar",
+      "publisher": "Google",
+      "category": "security",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Inspected AuthenticatorUtils credential-only support>=API30 and BiometricFragment forwarding allowed-authenticator mask to framework builder. Supports proposed API37 credential control without changing existing combined-auth timed key; no device outcome. Owner: Desktop/security, P0-S4.",
+      "refresh": "Before changed prompt/AndroidX version or interpreting actual credential-control evidence."
     }
   ]
 }

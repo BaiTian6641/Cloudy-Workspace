@@ -35,4 +35,6 @@ Reported key backing: %2$s</string>
     <string name="cloudy_identity_prompt_title">Authorize diagnostic client identity</string>
     <string name="cloudy_identity_prompt_subtitle">Allow this local certificate and signing check. No host connection will be opened.</string>
     <string name="cloudy_stream_cancelled">The local native operation was cancelled. Its worker has retired; inspect the retained record for any completed observation.</string>
+    <string name="cloudy_identity_authorize_credential">Authorize with screen-lock credential</string>
+    <string name="cloudy_identity_credential_subtitle">Use the screen-lock PIN, pattern or password for this local signing check. The existing key policy is unchanged.</string>
 </resources>

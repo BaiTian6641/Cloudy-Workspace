@@ -26,6 +26,13 @@ import org.json.JSONObject;
 
 /** Memory-only operation owner. No saved authorization, Activity reference or network operation. */
 public final class StreamProbeViewModel extends AndroidViewModel {
+    public enum PromptMode {
+        NONE, STRONG_OR_CREDENTIAL, DEVICE_CREDENTIAL;
+        public boolean acceptsAuthenticationType(int type) {
+            return this == DEVICE_CREDENTIAL ? type == 1
+                    : this == STRONG_OR_CREDENTIAL && (type == 1 || type == 2);
+        }
+    }
     public static final class UiState {
         public final int message;
         public final int nativeMessage;
@@ -37,9 +44,10 @@ public final class StreamProbeViewModel extends AndroidViewModel {
         public final long promptToken;
         public final boolean promptRequested;
         public final boolean cancelPrompt;
+        public final PromptMode promptMode;
         private UiState(int message, int nativeMessage, String detail, String identityState,
                 String securityLevel, boolean busy, boolean nativeTried, long promptToken,
-                boolean promptRequested, boolean cancelPrompt) {
+                boolean promptRequested, boolean cancelPrompt, PromptMode promptMode) {
             this.message = message;
             this.nativeMessage = nativeMessage;
             this.detail = detail;
@@ -50,12 +58,14 @@ public final class StreamProbeViewModel extends AndroidViewModel {
             this.promptToken = promptToken;
             this.promptRequested = promptRequested;
             this.cancelPrompt = cancelPrompt;
+            this.promptMode = promptMode;
         }
     }
     private enum Kind { REFRESH, CREATE, AUTHORIZE, DELETE, NATIVE }
     private static final class Operation {
         final long token;
         final Kind kind;
+        final PromptMode promptMode;
         final StreamIdentityStore.Attempt attempt;
         final AtomicBoolean cancelled = new AtomicBoolean();
         final long started = SystemClock.elapsedRealtime();
@@ -69,9 +79,10 @@ public final class StreamProbeViewModel extends AndroidViewModel {
         long promptDeadline;
         volatile long authenticatedAt = -1;
         volatile int authenticationType = -1;
-        Operation(long token, Kind kind, StreamIdentityStore.Attempt attempt) {
+        Operation(long token, Kind kind, StreamIdentityStore.Attempt attempt, PromptMode promptMode) {
             this.token = token;
             this.kind = kind;
+            this.promptMode = promptMode;
             this.attempt = attempt;
         }
     }
@@ -135,8 +146,10 @@ public final class StreamProbeViewModel extends AndroidViewModel {
             return result;
         });
     }
-    public void authorizeIdentity() {
-        Operation op = start(Kind.AUTHORIZE);
+    public void authorizeIdentity() { authorizeIdentity(PromptMode.STRONG_OR_CREDENTIAL); }
+    public void authorizeWithCredential() { authorizeIdentity(PromptMode.DEVICE_CREDENTIAL); }
+    private void authorizeIdentity(PromptMode mode) {
+        Operation op = start(Kind.AUTHORIZE, mode);
         if (op == null) return;
         submit(op, () -> {
             Result result = new Result();
@@ -173,10 +186,14 @@ public final class StreamProbeViewModel extends AndroidViewModel {
     }
 
     private Operation start(Kind kind) {
+        return start(kind, kind == Kind.CREATE || kind == Kind.AUTHORIZE
+                ? PromptMode.STRONG_OR_CREDENTIAL : PromptMode.NONE);
+    }
+    private Operation start(Kind kind, PromptMode mode) {
         if (!visible || cleared || active != null) return null;
         try {
             StreamIdentityStore.Attempt attempt = kind == Kind.CREATE || kind == Kind.AUTHORIZE ? store.newAttempt() : null;
-            Operation op = new Operation(++sequence, kind, attempt);
+            Operation op = new Operation(++sequence, kind, attempt, mode);
             active = op;
             message = R.string.cloudy_identity_working;
             detail = "";
@@ -283,6 +300,12 @@ public final class StreamProbeViewModel extends AndroidViewModel {
         }
         op.authenticatedAt = authenticatedAtElapsedMillis;
         op.authenticationType = authenticationType == 1 || authenticationType == 2 ? authenticationType : -1;
+        // A framework success is not permission to substitute a different requested authenticator.
+        if (!op.promptMode.acceptsAuthenticationType(op.authenticationType)) {
+            store.cancel(op.attempt);
+            submit(op, () -> { Result rejected = new Result(); rejected.failure = "AUTH_TYPE_MISMATCH"; return rejected; });
+            return;
+        }
         message = R.string.cloudy_identity_working;
         emit();
         submit(op, () -> {
@@ -363,7 +386,8 @@ public final class StreamProbeViewModel extends AndroidViewModel {
         Operation op = active;
         ui.setValue(new UiState(message, nativeMessage, detail, identityState, securityLevel,
                 op != null, nativeTried, op == null ? 0 : op.token,
-                op != null && op.promptRequested, op != null && op.cancelled.get() && op.promptOutstanding));
+                op != null && op.promptRequested, op != null && op.cancelled.get() && op.promptOutstanding,
+                op == null ? PromptMode.NONE : op.promptMode));
     }
 
     private File directory(Operation op) throws IOException {
@@ -386,7 +410,8 @@ public final class StreamProbeViewModel extends AndroidViewModel {
     private JSONObject baseRecord(Operation op) throws Exception {
         return new JSONObject().put("schemaVersion", 1).put("buildRef", BuildConfig.QUALIFICATION_BUILD_REF)
                 .put("nativeBuildRef", BuildConfig.NATIVE_BUILD_REF).put("version", BuildConfig.VERSION_NAME)
-                .put("operation", op.kind.name()).put("startedElapsedMillis", op.started)
+                .put("operation", op.kind.name()).put("requestedAuthenticationMode", op.promptMode.name())
+                .put("startedElapsedMillis", op.started)
                 .put("hostConnections", 0).put("decodedFrames", 0);
     }
     private void persist(Operation op, Result result) throws Exception {

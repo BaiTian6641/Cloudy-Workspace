@@ -232,7 +232,7 @@
         "D15: qualify genuine negotiated RDP relative mouse through public Android capture and an actual3D application, separately for physical mouse/trackpad and exact Linux/Windows/macOS server rows. Diagnostic0.1.5 adds a user-confirmed captured host-trail/cursor/release result on GRD50.2, preserving earlier KRdp/0.1.4 failures. Input subtype was not supplied;3D/broader release and performance remain unqualified. macOS RDP server selection remains unresolved; built-in Apple VNC is a separate lane.",
         "Carry forward the reviewed0.1.5 cursor repair and attempt13 physical result: user confirms captured host trail/cursor movement and release; eight capture edges and real host-painted motion are retained. Prediction stays presentation-only and the standard relative wire route is unchanged. Input subtype, actual3D and measured latency remain unqualified; investigate the earlier lag with bounded client/host measurements and explicit software-fixture limitations.",
         "Review the bounded0.1.6 status/control optimization and same four-gesture device sample: p95 Android frame time remains11ms with one janky frame per sample. No measured lag improvement, end-to-end latency or new physical capture result. Next isolate measured draw/monitor/host costs; do not infer latency from framework counters.",
-        "Carry forward accepted Moonlight native core/JNI loading and real0.1.2 identity diagnostic: pending TEE-backed key survives upgrade; actual biometric success is followed6ms later by plain-JCA initSign UserNotAuthenticatedException before BC certificate creation. Compiler/three JVM tests/scoped Lint pass with zero owned findings,27 inactive-upstream errors baselined and339 warnings. Compare an explicit credential-only prompt on the same key; no regeneration, software fallback or widened policy. Complete local sign/certificate, TLS/pairing and finite HTTP ownership before Surface/MediaCodec streaming. Sunshine stable AppImage dependency preflight passes; actual host launch/capture/VAAPI/input remains pending. D16 open-source direction is settled; exact source/notices/build closure remains release work."
+        "Carry forward accepted Moonlight core/JNI loading and0.1.3 same-key screen-lock credential control. Actual type1 authorization completes local RSA signing/certificate enrollment and fresh-process READY reload on the existing TEE key; five JVM tests/compiler/scoped Lint pass, zero owned findings,27 inactive baseline errors and339 warnings retained. Preserve earlier0.1.2 biometric type2/initSign failure and its unresolved cause. Use the explicit credential route for finite HTTP/TLS/pairing with same-attempt reauthorization/deadlines; no widened policy, automatic retry or software/key regeneration fallback. Complete lock/cancel/expiry boundaries, then real Surface/MediaCodec streaming. Sunshine AppImage dependency preflight passes; actual host capture/VAAPI/input pending. D16 exact source/notices/build closure remains release work."
       ],
       "deliverables": [
         "Pinned stream/RDP/VNC engine and server feasibility matrix",
@@ -328,7 +328,9 @@
         "R223",
         "R224",
         "R225",
-        "R226"
+        "R226",
+        "G149",
+        "R227"
       ],
       "acceptanceCases": [
         "Q-D01",
