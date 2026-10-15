@@ -4,7 +4,7 @@
 
 The two clients are Android packages for the Googlebook desktop ecosystem. Use Android Studio/SDK, Compose for native application chrome, and NDK components for qualified protocol/rendering engines. Build and install each package independently. Select minSdk, targetSdk, ABI, SDK extensions, and AndroidX versions after P0 inspection; the existence of one API does not set the whole application's minimum version.
 
-The [desktop terminal interaction contract](../../04-design/desktop-terminal-interaction-contract.md) specifies keyboard, clipboard, pointer and focus behavior across native fields, terminal, SFTP and remote GUI surfaces. Android/Termux engine reuse cannot waive these desktop requirements. API07/API42 track the native boundary; device acceptance remains pending.
+The [desktop terminal interaction contract](../../04-design/desktop-terminal-interaction-contract.md) specifies keyboard, clipboard, pointer and focus behavior across native fields, terminal, SFTP and remote GUI surfaces. Termius is the user-selected SSH/SFTP product and UX reference; Android/terminal engine reuse cannot waive these desktop requirements. This reference does not establish a Termius embedding API or select an implementation. API07/API42 track the native boundary; device acceptance remains pending.
 
 ## Official guidance mapped to work
 

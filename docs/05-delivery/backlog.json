@@ -2032,7 +2032,7 @@
     {
       "id": "D14",
       "status": "user-selected",
-      "selection": "Require desktop keyboard, pointer, copy/paste, selection and context-menu workflows independently of reused Android/Termux components; no touch-only prerequisite",
+      "selection": "Require desktop keyboard, pointer, copy/paste, selection and context-menu workflows independently of reused Android/terminal components; no touch-only prerequisite. Termius is the user-selected SSH/SFTP product and UX reference; Termux remains a separate technical candidate where relevant.",
       "record": "docs/04-design/desktop-terminal-interaction-contract.md"
     }
   ],
