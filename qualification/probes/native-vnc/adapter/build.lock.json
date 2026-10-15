@@ -31,7 +31,7 @@
     "readIdleTimeoutSeconds": 2,
     "joinTimeoutMillis": 5000,
     "authenticationPhaseMillis": 30000,
-    "authenticationReadIdleTimeoutSeconds": 15,
+    "authenticationReadIdleTimeoutSeconds": 30,
     "authenticationDeadline": "Fixed from initialization start, clipped to overall session deadline; cancelled by existing socket shutdown/retry guard"
   }
 }

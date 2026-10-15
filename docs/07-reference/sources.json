@@ -4924,6 +4924,30 @@
       "sourceUpdatedOn": null,
       "note": "Official moving source initialize refs++ and terminate refs-- preserve existingdisplay while refsremain; Android-specific basis for balanced workerEGL metadataquery, not portableEGL or exactGooglebookvendor proof. AppusespublicEGL14 APIs, no privatecalls. Owner Desktop/media, API47/P0-S4.",
       "refresh": "Before GL query integration changes or target/vendor qualification."
+    },
+    {
+      "id": "R244",
+      "title": "TigerVNC 1.15.0 authenticated connection callback",
+      "url": "https://github.com/TigerVNC/tigervnc/blob/v1.15.0/common/rfb/VNCSConnectionST.cxx",
+      "publisher": "TigerVNC",
+      "category": "upstream-engine",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "VNCSConnectionST::authSuccess lines392-410 emits Server default pixel format after authenticated acceptance. Maps finite X509Plain fixture log to server-side success; client frames and input still require separate evidence. Desktop/VNC, P0-S4; fallback preserve failed client journal, do not infer a supported session.",
+      "refresh": "Before changing authentication timing or the selected TigerVNC fixture version."
+    },
+    {
+      "id": "R245",
+      "title": "TigerVNC 1.15.0 security result and initialization transition",
+      "url": "https://github.com/TigerVNC/tigervnc/blob/v1.15.0/common/rfb/SConnection.cxx",
+      "publisher": "TigerVNC",
+      "category": "upstream-engine",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "SConnection::approveConnection(true) sends secResultOK, enters RFBSTATE_INITIALISATION and calls authSuccess; clientInit sends ServerInit later. Separates server authentication success from client initialization/frames. Desktop/VNC, P0-S4; fallback retain exact failure and bounded timeout without weakening authentication.",
+      "refresh": "Before changing authentication timing or the selected TigerVNC fixture version."
     }
   ]
 }

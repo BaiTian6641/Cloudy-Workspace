@@ -6,6 +6,8 @@ import android.os.Build;
 import android.text.InputType;
 import android.text.InputFilter;
 import android.view.WindowManager;
+import android.graphics.SurfaceTexture;
+import android.view.TextureView;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.os.Bundle;
@@ -41,6 +43,11 @@ public final class StreamProbeActivity extends FragmentActivity {
     private Button load;
     private Button pair;
     private EditText pairingPin;
+    private LinearLayout previewContainer;
+    private PlaybackSurfaceOwner previewSurface;
+    private TextView playbackStatus;
+    private Button preview, cleanup, reconcile;
+    private boolean idle, readyIdentity, restartRequired;
     private long cancelledPromptToken;
 
     @Override public void onCreate(Bundle state) {
@@ -93,6 +100,21 @@ public final class StreamProbeActivity extends FragmentActivity {
             pairingPin.getText().clear();
             model.pair(pin);
         });
+        label(content,R.string.cloudy_play_title).setTextSize(20);
+        label(content,R.string.cloudy_play_help);
+        previewContainer=new LinearLayout(this);
+        content.addView(previewContainer,new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,dp(240)));
+        installPreview();
+        playbackStatus=label(content,R.string.cloudy_play_ready);
+        preview=button(content,R.string.cloudy_play_start,view -> model.preview(previewSurface));
+        cleanup=button(content,R.string.cloudy_play_retry,view -> model.retryPlaybackCleanup());
+        reconcile=button(content,R.string.cloudy_network_reconcile,view -> new AlertDialog.Builder(this)
+                .setTitle(R.string.cloudy_network_reconcile)
+                .setMessage(R.string.cloudy_network_reconcile_warning)
+                .setNegativeButton(android.R.string.cancel,null)
+                .setPositiveButton(R.string.cloudy_network_reconcile_confirm,(dialog,which) -> model.reconcileNetworkEvidence())
+                .show());
         refresh = button(content, R.string.cloudy_identity_refresh, view -> model.refreshIdentity());
         cancel = button(content, R.string.cloudy_identity_cancel, view -> {
             model.cancel(); // Revoke the owner before cancelling framework authentication.
@@ -128,6 +150,12 @@ public final class StreamProbeActivity extends FragmentActivity {
                 });
     }
     private void render(StreamProbeViewModel.UiState state) {
+        idle=!state.busy; readyIdentity=state.identityState.equals("READY"); restartRequired=state.restartRequired;
+        if (idle && !restartRequired && previewContainer.getChildCount()==0) installPreview();
+        playbackStatus.setText(state.playbackStatus.isEmpty() ? getString(R.string.cloudy_play_ready) : state.playbackStatus);
+        preview.setEnabled(idle && readyIdentity && !restartRequired && previewSurface!=null && previewSurface.ready());
+        cleanup.setEnabled(state.cleanupRetry);
+        reconcile.setEnabled(idle);
         identity.setText(getString(R.string.cloudy_identity_state, state.identityState, state.securityLevel));
         status.setText(getString(R.string.cloudy_identity_outcome, getString(state.message), state.detail));
         nativeStatus.setText(state.nativeMessage == R.string.cloudy_stream_failed
@@ -156,13 +184,38 @@ public final class StreamProbeActivity extends FragmentActivity {
             try {
                 prompt.authenticate(new BiometricPrompt.PromptInfo.Builder()
                         .setTitle(getString(R.string.cloudy_identity_prompt_title))
-                        .setSubtitle(getString(state.pairing ? R.string.cloudy_pair_prompt_subtitle : state.promptMode == StreamProbeViewModel.PromptMode.DEVICE_CREDENTIAL
+                        .setSubtitle(getString(state.playback ? R.string.cloudy_play_prompt_subtitle : state.pairing ? R.string.cloudy_pair_prompt_subtitle : state.promptMode == StreamProbeViewModel.PromptMode.DEVICE_CREDENTIAL
                                 ? R.string.cloudy_identity_credential_subtitle : R.string.cloudy_identity_prompt_subtitle))
                         .setAllowedAuthenticators(authenticators).build());
             } catch (IllegalArgumentException | IllegalStateException unavailable) {
                 model.promptLaunchFailed(token);
             }
         }
+    }
+    private void installPreview() {
+        TextureView textureView=new TextureView(this);
+        textureView.setContentDescription(getString(R.string.cloudy_play_surface));
+        textureView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
+            private PlaybackSurfaceOwner owner;
+            @Override public void onSurfaceTextureAvailable(SurfaceTexture texture,int width,int height) {
+                owner=new PlaybackSurfaceOwner(StreamProbeActivity.this,texture,() -> previewContainer.removeView(textureView));
+                previewSurface=owner;
+                if (preview!=null) preview.setEnabled(idle && readyIdentity && !restartRequired);
+            }
+            @Override public boolean onSurfaceTextureDestroyed(SurfaceTexture texture) {
+                // Returning false transfers the real texture to the retained owner.
+                // A detach request alone never permits release while the codec can use it.
+                PlaybackSurfaceOwner destroyed=owner;
+                if (previewSurface==destroyed) previewSurface=null;
+                if (preview!=null) preview.setEnabled(false);
+                if (destroyed!=null) model.surfaceDestroyed(destroyed);
+                return false;
+            }
+            @Override public void onSurfaceTextureSizeChanged(SurfaceTexture texture,int width,int height) { }
+            @Override public void onSurfaceTextureUpdated(SurfaceTexture texture) { }
+        });
+        previewContainer.addView(textureView,new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT));
     }
     private TextView label(LinearLayout parent, int resource) {
         TextView view = new TextView(this);

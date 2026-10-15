@@ -1,0 +1,418 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-15",
+  "stage": "P0-S4",
+  "scope": "authentication-idle-budget-build-checkpoint-runtime-recorded-separately",
+  "status": "native-and-android-build-audit-passed",
+  "buildRef": "f1b74f98-3691-4399-8169-ffc4fb36ba99",
+  "versionName": "0.1.2",
+  "versionCode": 3,
+  "nativeBuildRef": "vnc-adapter-x509plain-2026-10-15",
+  "previousBuild": "qualification/results/P0-S4/2026-10-15-vnc-auth-timeout-build.json",
+  "rationale": {
+    "priorClientInitializationMillis": 15129,
+    "priorNativeError": 10,
+    "priorInitialized": false,
+    "serverAuthenticationCallbackApproximateSeconds": 20,
+    "interpretation": "Official TigerVNC authSuccess and approveConnection sources establish that Server default pixel format is after authenticated acceptance, not wrong-password evidence. Client initialization/frame delivery are separate.",
+    "sources": [
+      {
+        "id": "R244",
+        "url": "https://github.com/TigerVNC/tigervnc/blob/v1.15.0/common/rfb/VNCSConnectionST.cxx",
+        "symbols": [
+          "VNCSConnectionST::authSuccess"
+        ]
+      },
+      {
+        "id": "R245",
+        "url": "https://github.com/TigerVNC/tigervnc/blob/v1.15.0/common/rfb/SConnection.cxx",
+        "symbols": [
+          "SConnection::approveConnection",
+          "SConnection::clientInit"
+        ]
+      }
+    ]
+  },
+  "bounds": {
+    "authenticationReadIdleSeconds": 30,
+    "authenticationPhaseMillis": 30000,
+    "sessionReadIdleSeconds": 2,
+    "maximumSessionSeconds": 600,
+    "connectTimeoutSeconds": 3,
+    "invariant": "Fixed authentication deadline remains clipped to total monotonic deadline; post-initialize continuing guard preserved; no authentication/security/cancellation weakening"
+  },
+  "nativeInputs": {
+    "tools/prepare_vnc_adapter.py": "fcdf5810a3aa444d3d40a3612a7af3c72ffd5c126f9dec625492d12614954d98",
+    "tools/prepare_vnc_native.py": "1ef998d18e9f008b99491bbfe0d662c1ce4bd0c085c6e26dd46a36e8d59925e0",
+    "tools/build_rdp_native.py": "07ed0db14c8f68d5eaebd810c812631baedcabc59998f5d596046bb486fd3fd1",
+    "tools/prepare_rdp_native.py": "63105726cac73f8c6fd7519962a67bf1bac789666846fc73355f3b842e63d1ed",
+    "qualification/probes/native-vnc/adapter/CMakeLists.txt": "185716cafd6ef3db57655c5707d0ec35885280f5bd82df363866e375503e4154",
+    "qualification/probes/native-vnc/adapter/VncBridge.java": "4addfe369e1595ed8dffceb8260fbe8a8f2e59dd023ae9664d0c0a272f27b95a",
+    "qualification/probes/native-vnc/adapter/adapter.c": "e3de365df791628c4d6c88df6ecca97726aa12243eb36bbc2a109e701fda277c",
+    "qualification/probes/native-vnc/adapter/build.lock.json": "9ad4e50b04b25c33d6b7ebcb0ed6e2fcc9da33e81de5c69979044d8448c1f115",
+    "qualification/probes/native-vnc/adapter/policy.c": "0a47ca5e817ca8c858c69bc43c01569e72b61b1931a07ad21cda6d767fca6096",
+    "qualification/probes/native-vnc/adapter/policy.h": "aa380f6708f6e1f8eb16759d97ab8079ae1db9c655d241af1afcfbcf479d9e2b",
+    "qualification/probes/native-vnc/adapter/security-and-cancel.patch": "e110e84f0c093375ac01f1b421afa6d5131fb9fdbdb7a5cf9348a24c40f476ff"
+  },
+  "androidInputs": {
+    "tools/prepare_vnc_android.py": {
+      "bytes": 9040,
+      "sha256": "57ad74f06173477082d1064a325870301c1d2086d19db6bd196337d8b098fb7f"
+    },
+    "qualification/probes/device-baseline/gradlew": {
+      "bytes": 8656,
+      "sha256": "a5a5c199ba02189ae8c46a334223371a20599d9c298ef65e7540ede4a3f72d59"
+    },
+    "qualification/probes/device-baseline/gradle/wrapper/gradle-wrapper.jar": {
+      "bytes": 48462,
+      "sha256": "497c8c2a7e5031f6aa847f88104aa80a93532ec32ee17bdb8d1d2f67a194a9c7"
+    },
+    "qualification/probes/native-vnc/android/README.md": {
+      "bytes": 2794,
+      "sha256": "16449bc2a4c91b8e427bd5ad05d39c096c801a13cae80867bdc230e846d4c090"
+    },
+    "qualification/probes/native-vnc/android/app/build.gradle": {
+      "bytes": 3457,
+      "sha256": "70bc74e7e12538ccdc55effb83a3d37ff49b5dabfc93b7fc4b0ce5f68aeef81f"
+    },
+    "qualification/probes/native-vnc/android/app/gradle.lockfile": {
+      "bytes": 4648,
+      "sha256": "1ade62a942b889635ea28a7b79b4f80987d2d8ccb5f4fad94908f9e18864f5e3"
+    },
+    "qualification/probes/native-vnc/android/app/src/main/AndroidManifest.xml": {
+      "bytes": 1078,
+      "sha256": "2d2bbe034ae8cf70dc88ccd9bec7793d649561e19195e9352c325d916dabe518"
+    },
+    "qualification/probes/native-vnc/android/app/src/main/java/dev/cloudy/qualification/vnc/VncActivity.java": {
+      "bytes": 6898,
+      "sha256": "3e3450eadf4e85f3cf598b07e8c7603da88a4c75e72bdc4ff7291aee61c2f280"
+    },
+    "qualification/probes/native-vnc/android/app/src/main/java/dev/cloudy/qualification/vnc/VncFramePolicy.java": {
+      "bytes": 738,
+      "sha256": "0faa6d69a4a50b2239237f7fa2bf1761c814835bc38a2ebf82db26354a84cc36"
+    },
+    "qualification/probes/native-vnc/android/app/src/main/java/dev/cloudy/qualification/vnc/VncFrameView.java": {
+      "bytes": 7768,
+      "sha256": "b9f35214336e53e74965ce8ec8bc27e7a7be82c5e50624c98b297090041cf2fc"
+    },
+    "qualification/probes/native-vnc/android/app/src/main/java/dev/cloudy/qualification/vnc/VncKeyMap.java": {
+      "bytes": 2835,
+      "sha256": "0033165de97b2f1665db4dd38456721da8f2f494f3fd075bbcf76c9d853f0e09"
+    },
+    "qualification/probes/native-vnc/android/app/src/main/java/dev/cloudy/qualification/vnc/VncLifetime.java": {
+      "bytes": 484,
+      "sha256": "c94ca278badb81240bbde4119d5e5bbcd09754925359959040eaebace30da5ed"
+    },
+    "qualification/probes/native-vnc/android/app/src/main/java/dev/cloudy/qualification/vnc/VncPointerState.java": {
+      "bytes": 534,
+      "sha256": "020741c17a5c92aef993af688e7b2f0f6ca0475feec74f7ad31512a4421dba0f"
+    },
+    "qualification/probes/native-vnc/android/app/src/main/java/dev/cloudy/qualification/vnc/VncProfile.java": {
+      "bytes": 2402,
+      "sha256": "131a02a499bce5587563a84d78a890c10acd7fb160c29785f38548e8a125af58"
+    },
+    "qualification/probes/native-vnc/android/app/src/main/java/dev/cloudy/qualification/vnc/VncSession.java": {
+      "bytes": 17378,
+      "sha256": "733258fd795ecc3189b5f5c398784fb6fe9a19d3829935365bc5b416b07d820e"
+    },
+    "qualification/probes/native-vnc/android/app/src/main/java/dev/cloudy/qualification/vnc/VncSnapshot.java": {
+      "bytes": 681,
+      "sha256": "b96be955dbe42d97dee51239f67b5427995d419c9ff04901c747f9aa42c66710"
+    },
+    "qualification/probes/native-vnc/android/app/src/main/java/dev/cloudy/qualification/vnc/VncWheel.java": {
+      "bytes": 609,
+      "sha256": "84e9cd4d211b36fc75a49aa3191d60c2f16d40ce94c852e362a728bb10112d49"
+    },
+    "qualification/probes/native-vnc/android/app/src/main/res/drawable/ic_vnc_probe.xml": {
+      "bytes": 437,
+      "sha256": "fe9b0efb3e056d1b4b59847ba726a2879c01e4ca46d486b125582ac6a719dc28"
+    },
+    "qualification/probes/native-vnc/android/app/src/main/res/values/cloudy_strings.xml": {
+      "bytes": 1664,
+      "sha256": "31d0ce6211853e3c4338fb34dee570002e3ae9f98b6554825ad93947080c5aac"
+    },
+    "qualification/probes/native-vnc/android/app/src/main/res/values/styles.xml": {
+      "bytes": 418,
+      "sha256": "3fa32fbc33b9567e517f0e7fc1a3af3b7672385d9f9f41e3edc532d6922ea0b0"
+    },
+    "qualification/probes/native-vnc/android/app/src/main/res/xml/data_extraction_rules.xml": {
+      "bytes": 1050,
+      "sha256": "cb029b35db0e976c087100424e16e14a6256b46962398887520e51508c3b5842"
+    },
+    "qualification/probes/native-vnc/android/app/src/test/java/dev/cloudy/qualification/vnc/VncPoliciesTest.java": {
+      "bytes": 3270,
+      "sha256": "c73db7123aa08c9bcf6baf5fa2249f1797b625cba3afe9264455dfb3eeb23026"
+    },
+    "qualification/probes/native-vnc/android/build.gradle": {
+      "bytes": 69,
+      "sha256": "0537c547218629772f95b8cc26803dfeca0e85b6d7ace78f42fd4af02dfc1162"
+    },
+    "qualification/probes/native-vnc/android/gradle/verification-metadata.xml": {
+      "bytes": 107914,
+      "sha256": "6dd06fe46e2692ec85154f1256183835e3377c158b74a6b96d5d9a860c8f212b"
+    },
+    "qualification/probes/native-vnc/android/gradle-wrapper.properties": {
+      "bytes": 368,
+      "sha256": "c629b14195c2b627ef184fba4416f5dfce6f69c8b088230965bf3f77b8a1a7b4"
+    },
+    "qualification/probes/native-vnc/android/gradle.properties": {
+      "bytes": 110,
+      "sha256": "50af93879b5b3b01a6977bf286090cab928d521ce45f24180a3986d0428c65da"
+    },
+    "qualification/probes/native-vnc/android/packaging.lock.json": {
+      "bytes": 3070,
+      "sha256": "47b7d9d249b2e92a490b7697049387a60e7740411087bc113df7debd187f3490"
+    },
+    "qualification/probes/native-vnc/android/settings.gradle": {
+      "bytes": 288,
+      "sha256": "fdbdb959d0b069c6b89f5bf1d87ff402352af5e405b2526f61c094f33d052094"
+    }
+  },
+  "additionalSourceChecks": [
+    {
+      "path": "tests/test_prepare_vnc_adapter.py",
+      "bytes": 6550,
+      "sha256": "0ffe09e3673bc0cb5542a408747a66b97164499c2edce76f4e42f441c161147c"
+    },
+    {
+      "path": "qualification/probes/native-vnc/adapter/README.md",
+      "bytes": 12991,
+      "sha256": "befd713beeff249fdcec9ce9a4f6c8f5f6855f8e82659068e4c428cad2b2657c"
+    }
+  ],
+  "libraries": {
+    "libcloudy-vnc-jni.so": {
+      "bytes": 3523672,
+      "sha256": "543ec26e1bf5ad5dc65fc3c22f53d85fe39ea24e08acf85122b890076416a1b7",
+      "elf": {
+        "needed": [
+          "libc.so",
+          "libcrypto.so",
+          "libdl.so",
+          "libm.so",
+          "libssl.so",
+          "libz.so"
+        ],
+        "soname": "libcloudy-vnc-jni.so",
+        "machine": "AArch64",
+        "minimumLoadAlignment": 16384
+      }
+    },
+    "libssl.so": {
+      "bytes": 1205848,
+      "sha256": "66288be31a05675f6a319632d6abb137eb38b07f10eea302a8b128bd6ed7d5c0",
+      "elf": {
+        "needed": [
+          "libc.so",
+          "libcrypto.so",
+          "libdl.so"
+        ],
+        "soname": "libssl.so",
+        "machine": "AArch64",
+        "minimumLoadAlignment": 16384
+      }
+    },
+    "libcrypto.so": {
+      "bytes": 6020992,
+      "sha256": "46c0eb8c3c601f3c9d8746e051aefe61e7a324bf152a535feac3f97472deb2d8",
+      "elf": {
+        "needed": [
+          "libc.so",
+          "libdl.so"
+        ],
+        "soname": "libcrypto.so",
+        "machine": "AArch64",
+        "minimumLoadAlignment": 16384
+      }
+    }
+  },
+  "sslCryptoUnchangedFromPreviousReceipt": true,
+  "apk": {
+    "path": ".cache/native-vnc-android/auth-idle-01/app/build/outputs/apk/debug/app-debug.apk",
+    "bytes": 10888191,
+    "sha256": "7a59f68429a89ece878d1d17ec9cc089f7a2672aa51a8893817a13d9e1ebec83"
+  },
+  "packageAudit": {
+    "sameSigningCertificateAsAccepted010": true,
+    "permissions": [
+      "android.permission.ACCESS_LOCAL_NETWORK",
+      "android.permission.INTERNET"
+    ],
+    "components": [
+      "dev.cloudy.qualification.vnc.VncActivity"
+    ],
+    "notices": [
+      "assets/BASE-NOTICE.txt",
+      "assets/LibVNC-GPL2.txt",
+      "assets/libjpeg-turbo-IJG.txt",
+      "assets/native-build.json",
+      "assets/NOTICE.txt",
+      "assets/libjpeg-turbo-LICENSE.txt",
+      "assets/OpenSSL-LICENSE.txt"
+    ],
+    "lintFindings": 0,
+    "jvmTests": 7,
+    "javaRuntimeDependencies": []
+  },
+  "checks": {
+    "focusedTests": 3,
+    "hostCAssertions": 37,
+    "hostCInstrumentation": "Strict host compiler, actual OpenSSL, ASan/UBSan; not Android sanitizer runtime",
+    "ownedNativeCompiler": "C11 -Wall -Wextra -Wpedantic -Werror and no-undefined link",
+    "javaAbi": "--release 17 -Xlint:all -Werror",
+    "androidGradle": "21 seconds; 52 tasks executed; assembleDebug lintDebug testDebugUnitTest recordCloudyRuntimeDependencies passed",
+    "jvmTests": 7,
+    "lintFindings": 0,
+    "pythonASTFiles": 28,
+    "targetedRuff": "passed",
+    "nativeOffline": "passed",
+    "androidOfflineFiles": 39,
+    "package": "Exact three prepared arm64 libraries and notices; sole Activity/two expected permissions; ELF and ZIP16KiB alignment; valid signature and accepted0.1.0 signing continuity",
+    "independentReview": "Source review accepted idle30/phase30000/session2 and preserved post-initialize guard; reviewer did not execute build",
+    "sourceConsistency": "Read-only current native/Android inputs matched captured receipt hashes; packaging identity and unchanged SSL/crypto matched previous receipt"
+  },
+  "toolchain": {
+    "jdk": "21.0.9",
+    "agp": "9.4.0",
+    "gradle": "9.6.0",
+    "ndk": "29.0.14206865",
+    "cmake": "4.1.2",
+    "abi": "arm64-v8a",
+    "nativeApi": 29,
+    "androidCompileTarget": 37
+  },
+  "commands": [
+    "python3 -m unittest discover -s tests -p test_prepare_vnc_adapter.py -v",
+    "python3 tools/prepare_vnc_adapter.py --build --run auth-idle-01",
+    "python3 tools/prepare_vnc_adapter.py --check --run auth-idle-01",
+    "python3 tools/prepare_vnc_android.py --prepare --stage auth-idle-01",
+    "GRADLE_USER_HOME=\"$PWD/.cache/gradle-home\" ANDROID_HOME=\"$PWD/.cache/android-sdk\" ANDROID_USER_HOME=\"$PWD/.cache/android-user\" .cache/native-vnc-android/auth-idle-01/gradlew -p .cache/native-vnc-android/auth-idle-01 --no-daemon assembleDebug lintDebug testDebugUnitTest recordCloudyRuntimeDependencies",
+    "python3 .cache/native-vnc-android/audit_auth_idle.py",
+    "python3 tools/prepare_vnc_android.py --check --stage auth-idle-01",
+    "python3 tools/check_ast.py",
+    ".venv/bin/ruff check tools/prepare_vnc_adapter.py tools/prepare_vnc_android.py tests/test_prepare_vnc_adapter.py"
+  ],
+  "evidence": [
+    {
+      "path": ".cache/native-vnc/adapter/auth-idle-01/receipt.json",
+      "bytes": 108609,
+      "sha256": "55a9d23cba883119fd45442a7a75895dfd1cc52ce56e8297417e4cf26515cd53"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/auth-idle-01/inputs.json",
+      "bytes": 1297,
+      "sha256": "171d3039c0a68e8ce23b34cea5eb7b1bd2c43cee938e1ec1af4f046eb9e0ddc8"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/auth-idle-01/exports.txt",
+      "bytes": 881,
+      "sha256": "e02156aab63ba6adc2939e595900a37ba1ba8ed394d2473b6d5590fc8f5c4c51"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/auth-idle-01/java-compile.json",
+      "bytes": 351,
+      "sha256": "4e9b90e260d4d9d86a42d3da5596e5fdaa6c8b104b50407c1c6d62b4af17459f"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/auth-idle-01/java-compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/auth-idle-01/jni-build.json",
+      "bytes": 309,
+      "sha256": "52ef69d199b15b1052af62284937ee1308042501b1e9e9fa3d9680ba859e12c3"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/auth-idle-01/jni-build.log",
+      "bytes": 183,
+      "sha256": "008fd052544bfbb0f42340ba64dc9256f4f6059566809322ee092e8ddefb3ee2"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/auth-idle-01/jni-configure.json",
+      "bytes": 951,
+      "sha256": "9dd4393e78928a7ab31e139ba942008fae5f32aee1569b7c08987f519eb9b0a5"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/auth-idle-01/jni-configure.log",
+      "bytes": 505,
+      "sha256": "a104757f047c7f0a9b5815974fe8e6d55a8edbbf93da719b37667f4ac2413fe0"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/auth-idle-01/vnc-build.json",
+      "bytes": 300,
+      "sha256": "6b7d1862b212dbf3da92bdb3b180bfde21ba1bc80457c2c093ffbd25c358efc9"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/auth-idle-01/vnc-build.log",
+      "bytes": 12157,
+      "sha256": "f8a8fe061523f74d3c80dc9b9efd7659bf92904afd031bfab79f5de17fe0f70e"
+    },
+    {
+      "path": ".cache/native-vnc-android/auth-idle-01/cloudy-preparation.json",
+      "bytes": 12360,
+      "sha256": "0de1c2760ac3146b5ce6ac9b1a17d832a8fe8fef1d6625b040e449c8e9216c40"
+    },
+    {
+      "path": ".cache/native-vnc-android/auth-idle-audit-01/apk-audit.json",
+      "bytes": 2644,
+      "sha256": "821385f2fc73254781bb24516e5f83657d184482c73875aa1e01b37f92c91b12"
+    },
+    {
+      "path": ".cache/native-vnc-android/auth-idle-audit-01/signature.txt",
+      "bytes": 955,
+      "sha256": "d9d71ff2180513e2821e3b52d3bf38158890572ed199f998fb383a5652e93fa1"
+    },
+    {
+      "path": ".cache/native-vnc-android/auth-idle-audit-01/alignment.txt",
+      "bytes": 1036,
+      "sha256": "dec650618384fbc99fe33935cf17115f207ca979dc68eae4595cc3f3ecbd0e43"
+    },
+    {
+      "path": ".cache/native-vnc-android/auth-idle-01-gradle.log",
+      "bytes": 3498,
+      "sha256": "f41ba48ca77951fde587dfbba8b02ded91dd61d4c603466b1cf23ca6c1d50d42"
+    },
+    {
+      "path": ".cache/native-vnc-android/auth-idle-offline-check.json",
+      "bytes": 36,
+      "sha256": "eb9d77ed90ce19ed3533fa6098281ef6e13d5cce1f124a3e1343671d4c69cb66"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/auth-idle-01-offline-check.json",
+      "bytes": 1344,
+      "sha256": "bd55c252994a397174a109cbaef0d0de3ff3ea0e98ff200da0c91136993ccc65"
+    },
+    {
+      "path": ".cache/native-vnc/adapter/auth-idle-source-checks.json",
+      "bytes": 572,
+      "sha256": "c5d7a4f2994b3609015a661bddb024a931a984f3b26e58969db25a32ceddb194"
+    },
+    {
+      "path": ".cache/native-vnc-android/auth-idle-01/app/build/reports/lint-results-debug.xml",
+      "bytes": 86,
+      "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f"
+    },
+    {
+      "path": ".cache/native-vnc-android/auth-idle-01/app/build/reports/cloudy-runtime-dependencies.json",
+      "bytes": 9,
+      "sha256": "ed7a03718bfa994095a377c46d359ebba966453acaac2a76b2718e7bb4e494c4"
+    },
+    {
+      "path": ".cache/native-vnc-android/auth-idle-01/app/build/test-results/testDebugUnitTest/TEST-dev.cloudy.qualification.vnc.VncPoliciesTest.xml",
+      "bytes": 1320,
+      "sha256": "fa5604f5f8bbc5a0c70d3cd541d1e720b5dd436720be973881839df854e7a65f"
+    }
+  ],
+  "limitations": [
+    "Build checkpoint; installation and real protected-server runtime are recorded separately by parent",
+    "No live successful authentication, framebuffer, input, cancellation, latency or performance claim from these checks",
+    "Generic native security error10 is not independently a wrong-password verdict",
+    "No source/notices distribution approval; no new CAP-VNC promotion"
+  ],
+  "report": {
+    "path": "qualification/results/P0-S4/2026-10-15-vnc-auth-idle-build.md",
+    "bytes": 5723,
+    "sha256": "42757154882c0270b3034217f02540171d36e828dd74351fa84ceaa07024089d"
+  }
+}

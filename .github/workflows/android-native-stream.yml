@@ -1,0 +1,119 @@
+name: Android native stream diagnostic
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Check out source
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - name: Set isolated build directories on the runner
+        run: |
+          echo "ANDROID_USER_HOME=$RUNNER_TEMP/cloudy-stream-android-user" >> "$GITHUB_ENV"
+          mkdir -p "$RUNNER_TEMP/cloudy-stream-android-user"
+          echo "GRADLE_USER_HOME=$RUNNER_TEMP/cloudy-native-stream-gradle" >> "$GITHUB_ENV"
+      - name: Select Java 21
+        uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify pinned Gradle wrapper
+        working-directory: qualification/probes/device-baseline
+        run: |
+          echo '497c8c2a7e5031f6aa847f88104aa80a93532ec32ee17bdb8d1d2f67a194a9c7  gradle/wrapper/gradle-wrapper.jar' | sha256sum --check
+      - name: Install selected SDK with verified command-line tools
+        run: |
+          cloudy_tools="$RUNNER_TEMP/cloudy-command-tools"
+          mkdir -p "$cloudy_tools" "$ANDROID_USER_HOME"
+          curl --fail --location --retry 2 --output "$cloudy_tools/tools.zip" https://dl.google.com/android/repository/commandlinetools-linux-15859902_latest.zip
+          echo "4e4c464f145a7512b57d088ac6c278c03c9eea610886b35a5e0804e74eedf583  $cloudy_tools/tools.zip" | sha256sum --check
+          unzip -q "$cloudy_tools/tools.zip" -d "$cloudy_tools"
+          # Use the hosted runner's accepted SDK license records; do not pipe yes
+          # to new licenses or invoke the bundled CLI's automatic update path.
+          "$cloudy_tools/cmdline-tools/bin/sdkmanager" --sdk_root="$ANDROID_HOME" 'platforms;android-37.0' 'build-tools;36.0.0' 'ndk;29.0.14206865'
+      - name: Reject unreviewed SDK revision drift
+        run: |
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          sdk = Path(os.environ['ANDROID_HOME'])
+          expected = {
+              'platforms/android-37.0/source.properties': {
+                  'Pkg.Revision': '2', 'AndroidVersion.ApiLevel': '37.0',
+                  'AndroidVersion.ExtensionLevel': '22', 'AndroidVersion.IsBaseSdk': 'true',
+              },
+              'build-tools/36.0.0/source.properties': {'Pkg.Revision': '36.0.0'},
+              'ndk/29.0.14206865/source.properties': {'Pkg.Revision': '29.0.14206865'},
+          }
+          for relative, pins in expected.items():
+              observed = dict(tuple(part.strip() for part in line.split('=', 1))
+                              for line in (sdk / relative).read_text().splitlines()
+                              if '=' in line and not line.startswith('#'))
+              for key, value in pins.items():
+                  if observed.get(key) != value:
+                      raise SystemExit(f'SDK drift in {relative}: {key} must be {value}')
+          print('SDK platform/build-tool revision pins verified')
+          PY
+      - name: Cache verified source downloads only
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: .cache/native-stream-build/downloads
+          key: native-stream-downloads-${{ runner.os }}-${{ hashFiles('qualification/probes/native-stream/sources.lock.json') }}
+      - name: Check authored preparation boundaries
+        run: |
+          python3 -m unittest discover -s tests -p 'test_prepare_native_stream.py' -v
+          python3 -m unittest discover -s tests -p 'test_prepare_stream_android.py' -v
+      - name: Build and verify pinned Moonlight native core
+        run: |
+          python3 tools/prepare_native_stream.py --build --run ci --sdk "$ANDROID_HOME"
+          python3 tools/prepare_native_stream.py --check --run ci
+      - name: Prepare exact upstream Java and authored Android overlays
+        run: |
+          python3 tools/prepare_stream_android.py --prepare --stage ci --native-run ci --sdk "$ANDROID_HOME"
+      - name: Compile, lint and test the real stream diagnostic APK
+        run: |
+          .cache/native-stream-android/ci/gradlew -p .cache/native-stream-android/ci \
+            -PcloudyRepositoryRoot="$GITHUB_WORKSPACE" \
+            assembleDebug lintDebug testDebugUnitTest recordCloudyRuntimeDependencies \
+            --no-daemon --console=plain
+          python3 tools/prepare_stream_android.py --check --stage ci
+          python3 - <<'PYDEPS'
+          import json
+          from pathlib import Path
+          records = json.loads(Path('.cache/native-stream-android/ci/app/build/reports/cloudy-runtime-dependencies.json').read_text())
+          if len(records) != 39:
+              raise SystemExit('Reviewed stream runtime closure must contain 39 artifacts')
+          print('Recorded 39 resolved runtime artifacts with byte counts and SHA256 hashes')
+          PYDEPS
+      - name: Retain bounded build diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: native-stream-build-diagnostics
+          if-no-files-found: ignore
+          retention-days: 7
+          include-hidden-files: true
+          # Explicit allowlist: no APKs, debug keystores, downloaded archives,
+          # upstream source trees, Gradle caches or runtime identity/profile files.
+          path: |
+            .cache/native-stream-build/ci/receipt.json
+            .cache/native-stream-build/ci/failure.json
+            .cache/native-stream-build/ci/command.json
+            .cache/native-stream-build/ci/exports.txt
+            .cache/native-stream-build/ci/build.log
+            .cache/native-stream-android/ci/cloudy-preparation.json
+            .cache/native-stream-android/ci/cloudy-failure.json
+            .cache/native-stream-android/ci/app/build/reports/cloudy-runtime-dependencies.json
+            .cache/native-stream-android/ci/app/build/reports/tests/testDebugUnitTest/
+            .cache/native-stream-android/ci/app/build/test-results/testDebugUnitTest/
+            .cache/native-stream-android/ci/app/build/reports/lint-results-debug.*
+      # Hosted CI has no Googlebook or paired host. This lane builds actual native
+      # and Java/codec closure, but does not qualify runtime loading, Keystore,
+      # pairing, TLS, decoding/presentation, input, media routing or cleanup.

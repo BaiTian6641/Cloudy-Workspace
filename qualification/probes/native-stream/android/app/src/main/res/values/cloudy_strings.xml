@@ -2,7 +2,7 @@
 <resources>
     <string name="cloudy_stream_name">Cloudy stream qualification</string>
     <string name="cloudy_stream_title">Native streaming engine qualification</string>
-    <string name="cloudy_stream_scope">Real Moonlight native loading and app-owned client identity qualification. Explicit pairing uses a private loopback fixture; this diagnostic does not decode video. Local device credentials are entered only in the system prompt.</string>
+    <string name="cloudy_stream_scope">Real Moonlight native loading and app-owned client identity qualification. Explicit pairing uses a private loopback fixture; a separate explicit preview uses a pinned LAN host and the real video/audio engine. Local device credentials are entered only in the system prompt.</string>
     <string name="cloudy_stream_load">Load native engine</string>
     <string name="cloudy_stream_ready">Ready for a local native ABI check.</string>
     <string name="cloudy_stream_running">Loading the actual native library…</string>
@@ -43,4 +43,18 @@ Reported key backing: %2$s</string>
     <string name="cloudy_pair_permission">Request local network permission</string>
     <string name="cloudy_pair_prompt_subtitle">Authorize this finite loopback pairing and client-certificate HTTPS read with the existing identity.</string>
     <string name="cloudy_pair_success">Real pairing and client-certificate HTTPS application-list read completed. No video was decoded.</string>
+    <string name="cloudy_play_title">Finite native playback preview</string>
+    <string name="cloudy_play_help">Provision no_backup/playback-config.json for an approved numeric LAN peer, exact public certificate and selected application ID. A fresh screen-lock approval starts at most 30 seconds of real 1280 × 720 H.264 SDR video and audio, including setup. No automatic pairing, retry or replacement of another host application occurs. Input forwarding is not part of this preview. One native playback run is allowed per process; restart the diagnostic for another. Cancellation may leave the host application running.</string>
+    <string name="cloudy_play_ready">No playback observation yet. Decoder submissions, buffers released for rendering and actual frame-render callbacks are separate counters; none alone proves visible presentation or latency.</string>
+    <string name="cloudy_play_start">Authorize and start finite playback</string>
+    <string name="cloudy_play_surface">Native video preview surface</string>
+    <string name="cloudy_play_prompt_subtitle">Authorize this selected pinned LAN application preview with the existing identity. The entire attempt shares this approval’s 30-second window.</string>
+    <string name="cloudy_play_retry">Retry pending local playback cleanup</string>
+    <string name="cloudy_play_cleanup_pending">Playback ownership is retained until the worker, native cleanup, surface handoff and terminal evidence are confirmed.</string>
+    <string name="cloudy_play_surface_wait">The engine retired. Waiting for the actual preview surface destruction callback before release.</string>
+    <string name="cloudy_play_finished">Playback retired and its surface was released. Inspect the actual counters and retained terminal record.</string>
+    <string name="cloudy_network_reconcile">Reconcile previous process evidence…</string>
+    <string name="cloudy_network_reconcile_confirm">Acknowledge local interruption</string>
+    <string name="cloudy_network_reconcile_warning">Acknowledge only well-formed unfinished records from a previous diagnostic process. Original records remain unchanged and host state remains UNKNOWN. This performs no network operation, retry, unpair or host stop. Malformed evidence requires deliberate private-file repair.</string>
+    <string name="cloudy_network_reconciled">Previous process interruption acknowledged in a separate verified receipt. Host state remains UNKNOWN; no network action was replayed.</string>
 </resources>

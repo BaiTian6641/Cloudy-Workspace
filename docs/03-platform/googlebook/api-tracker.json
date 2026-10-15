@@ -861,7 +861,9 @@
         "WaitForMessage",
         "HandleRFBServerMessage",
         "SendKeyEvent",
-        "SendPointerEvent"
+        "SendPointerEvent",
+        "rfbClientConnect",
+        "rfbClientInitialise"
       ],
       "sourceIds": [
         "R24",
@@ -878,21 +880,23 @@
         "R231",
         "R232",
         "R234",
-        "R235"
+        "R235",
+        "R244",
+        "R245"
       ],
       "minimumApi": null,
       "libraryVersion": "98aaee0560baa0332339b2ef464ea96ed9b9b28c; libjpeg-turbo3.2.0; reused accepted OpenSSL4.0.1",
       "interfaceKind": "upstream-client-and-standard",
-      "availability": "Actual Android build/load and0.1.1 wrong-leaf X509Plain rejection pass; accepted-pin authentication and frames/input remain unqualified",
+      "availability": "Actual Android0.1.2 protected X509Plain authentication/frame/pointer/disconnect passes on isolated TigerVNC; startup latency and controlled host keyboard delivery remain open",
       "qualification": "partial",
       "checkedOn": "2026-10-15",
       "owner": "Android/integration developer",
       "stage": "P3-S8",
       "fallback": "Choose a maintained compatible engine; external viewer is a labeled partial workflow",
-      "experiment": "Carry forward27 accepted upstream cases,37 C policy assertions and7 JVM/zeroLint build checks. Installed0.1.1 on HP Googlebook14/API37 reaches real RFB3.8/VeNCrypt19/X509Plain262 then rejects changed certificate pin in46ms: initialized0, frames0, workerjoined/freed/closed. IsolatedXvnc and realQt/Xcb canvas exit0 after570875ms; noaccepted-pinattempt beforeexpiry. User deferred native-field login untilreturn. Bothjournals preserved, profile/reverse removed, appstopped. Nextfreshfixture qualifies realPAM/frame/input/cancel; noCAP-VNCpromotion.",
+      "experiment": "Carry accepted27 upstream cases,37C assertions/sevenJVM/zeroLint forward. Two0.1.1 attempts expire near15s before serverauthSuccess near20s; corrected0.1.2 uses unchanged30s phase with30s idle/session2s. ActualGooglebook0.1.2 shows1280x720, firstsession558callbacks/480draws/328writteninputs/operatorcancel; reconnect235callbacks/220draws thenparentfixturestop. Host254motions/fourbuttons/zero keys: keyboard userreported, F8hostunconfirmed. Userreports roughly1minblankstartup; no first-frame/drawtimestamps, performanceunqualified. Sevenrecordsclosed/preserved, ownedapp/fixtures/routescleaned. Nextmonotonicstartup/focus evidence and broaderlifecycle; noCAPpromotion.",
       "researchEvidence": "docs/07-reference/2026-10-15-vnc-patched-source-selection.md",
-      "compileEvidence": "qualification/results/P0-S4/2026-10-15-vnc-auth-timeout-build.md",
-      "deviceEvidence": "qualification/results/P0-S4/2026-10-15-vnc-first-trust.md"
+      "compileEvidence": "qualification/results/P0-S4/2026-10-15-vnc-auth-idle-build.md",
+      "deviceEvidence": "qualification/results/P0-S4/2026-10-15-vnc-first-session.md"
     },
     {
       "id": "API32",
@@ -1520,10 +1524,10 @@
       "owner": "Desktop/media maintainer",
       "stage": "P0-S4",
       "fallback": "Explicit separately installed Moonlight enrolled-host handoff/manual selection, independently useful RDP/VNC lanes; external handoff does not complete native scope",
-      "experiment": "Accepted0.1.5/code6 HP Googlebook14/API37 CL3B.260622.276.R2: fresh DEVICE_CREDENTIAL/type1 callback, same TEE RSA2048 public certificate, real upstream pairing and64byte HTTPS application-list read complete218ms after authorization. Host pending-ID PIN API separately reports success. One closed pairing record and ten identity records retained, prior nine and native-load byte-identical after stop. Actual nearby-devices grant reported by user; loopback USB reverse route does not prove denied-LAN enforcement. No-client-certificate host control reached TLS1.3 then SSLError with no application list; exact alert reason not retained. Finite host/process/listener/permission-entry and scoped device reverse/profile cleanup verified; retained private enrollment is not revoked. Earlier biometric failure, wrong-PIN/cancel/expiry and real video/input/performance remain open. D16 source/notices/build closure remains a release gate. Build-only0.1.6 compiles realfiniteNvConnection/Surface/MediaCodec/audio with23JVM andzeroownedLint. Notinstalled orUIactivated. Originalcredential30s, exactHTTPS/RTSPpeer, nohostappquit andoneplaybackrunperprocess; Surface/journal/UI andactualmedia next.",
+      "experiment": "Accepted0.1.5/code6 HP Googlebook14/API37 CL3B.260622.276.R2: fresh DEVICE_CREDENTIAL/type1 callback, same TEE RSA2048 public certificate, real upstream pairing and64byte HTTPS application-list read complete218ms after authorization. Host pending-ID PIN API separately reports success. One closed pairing record and ten identity records retained, prior nine and native-load byte-identical after stop. Actual nearby-devices grant reported by user; loopback USB reverse route does not prove denied-LAN enforcement. No-client-certificate host control reached TLS1.3 then SSLError with no application list; exact alert reason not retained. Finite host/process/listener/permission-entry and scoped device reverse/profile cleanup verified; retained private enrollment is not revoked. Earlier biometric failure, wrong-PIN/cancel/expiry and real video/input/performance remain open. D16 source/notices/build closure remains a release gate. Build-only0.1.7 now compiles realTextureView preview/sharedlease/durablecross-network journals and explicitexact-byte prior-process reconciliation;29JVM/zeroownedLint,663verifiedfiles. Originalcredential30s/sameidentity and native/codec\u2192matchingSurfacehandoff\u2192terminalreadback\u2192lease ordering retained. Native/frozenadapter/39deps unchanged. Notinstalled, actualselectedappID/LAN/media runtime remain pending.",
       "researchEvidence": "docs/03-platform/googlebook/native-stream-adoption-entry.md",
-      "versionNotes": "Upstream min21,target36,compile37; owned0.1.5 diagnostic min35,target37,compile37; explicit local-network runtime permission and127.0.0.1-only cleartext config/profile, with independent exact-leaf TLS policy. Public API26+ pointer capture for Googlebook, no root/evdev/private route. One process-global native attempt; external shortcut uses Moonlight-owned enrolled host state. Keystore builder23, unlocked restriction28, timed auth parameters30, actual security level31; source candidate uses Googlebook37. Conscrypt/AOSP/BC moving source explains compatibility, not installed provider pin. Identity inspector isUnlockedDeviceRequired added36.1; new identity diagnostic deliberately requiresAPI37 before creating or inspecting keys. Stable AndroidXBiometric1.1.0 time-based strong/devicecredential prompt has no CryptoObject; actual integration result recorded separately. Credential-only PromptInfo is supported by selected AndroidX1.1.0 onAPI30+; same-key control requires actual resulttype1 and does not change keypolicy. G149/R227. Playback surface ownership14, rendered callback23 (dispatch guarantee from34 only whileexecuting), hardware metadata29; existingmin35coverssymbols. Actualrenderer/codec/runtimequalification separate. Latestsource0.1.6/code7 keeps min35/target37/compile37 andsamepermissions/native/dependencyclosure; installed0.1.5 unchanged.",
-      "compileEvidence": "qualification/results/P0-S4/2026-10-15-stream-playback-build.md",
+      "versionNotes": "Upstream min21,target36,compile37; owned0.1.5 diagnostic min35,target37,compile37; explicit local-network runtime permission and127.0.0.1-only cleartext config/profile, with independent exact-leaf TLS policy. Public API26+ pointer capture for Googlebook, no root/evdev/private route. One process-global native attempt; external shortcut uses Moonlight-owned enrolled host state. Keystore builder23, unlocked restriction28, timed auth parameters30, actual security level31; source candidate uses Googlebook37. Conscrypt/AOSP/BC moving source explains compatibility, not installed provider pin. Identity inspector isUnlockedDeviceRequired added36.1; new identity diagnostic deliberately requiresAPI37 before creating or inspecting keys. Stable AndroidXBiometric1.1.0 time-based strong/devicecredential prompt has no CryptoObject; actual integration result recorded separately. Credential-only PromptInfo is supported by selected AndroidX1.1.0 onAPI30+; same-key control requires actual resulttype1 and does not change keypolicy. G149/R227. Playback surface ownership14, rendered callback23 (dispatch guarantee from34 only whileexecuting), hardware metadata29; existingmin35coverssymbols. Actualrenderer/codec/runtimequalification separate. Latestsource0.1.7/code8 keeps min35/target37/compile37 andsamepermissions/native/dependencyclosure; installed0.1.5 unchanged.",
+      "compileEvidence": "qualification/results/P0-S4/2026-10-15-stream-playback-ui-build.md",
       "deviceEvidence": "qualification/results/P0-S4/2026-10-15-stream-first-pairing.md"
     }
   ],
