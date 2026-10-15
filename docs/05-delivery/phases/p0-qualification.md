@@ -1,6 +1,6 @@
 # P0 — Qualification and decisions
 
-**Status:** P0-S1 complete; P0-S2 ready. **Active effort:** 15–28 person-days before contingency. **Purpose:** Resolve Googlebook desktop API/input/engine/window/protocol/device boundaries using scoped capability outcomes. Independent branches do not inherit an X11 phase-wide blocker.
+**Status:** P0-S1 complete; P0-S2 in progress. **Active effort:** 15–28 person-days before contingency. **Purpose:** Resolve Googlebook desktop API/input/engine/window/protocol/device boundaries using scoped capability outcomes. Independent branches do not inherit an X11 phase-wide blocker.
 
 The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-project/platform-rule-zero.md) defines desktop scope. Follow [capability outcomes](../feasibility-gates.md) and [independent release gates](../release-gates.md). Estimates are active effort, not elapsed time; re-estimate after physical evidence. Revision 02 moved the former P5-S1 decision to P1-S5; other stage IDs retain their identity.
 
@@ -41,7 +41,9 @@ Record evidence under `qualification/results/P0-S1/` using the [run template](..
 
 ## P0-S2 — Platform API, lifecycle, and capability probes
 
-**Owner:** Android/platform developer. **Prerequisites:** P0-S1 complete. **Status:** ready.
+**Owner:** Android/platform developer. **Prerequisites:** P0-S1 complete. **Status:** in-progress.
+
+The [operation-lifetime research](../../03-platform/googlebook/p0-s2-operation-lifetimes.md) records API13/API14 and API39/API40 proposals, runtime/target guards, fallbacks and remaining timeout/process-loss experiments. Supplemental official sources G59–G68 cover UIDT, foreground-service prerequisites, Android 17 audio, actual USB permission and distribution review. No continuous-session service type or policy approval is selected, and no capability gate is promoted by this research.
 
 Work:
 

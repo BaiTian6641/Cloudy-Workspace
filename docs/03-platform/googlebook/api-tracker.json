@@ -261,17 +261,20 @@
         "Service.onTimeout(int,int)"
       ],
       "sourceIds": [
-        "G15"
+        "G15",
+        "G67"
       ],
       "minimumApi": 35,
       "libraryVersion": null,
       "availability": "documented",
       "qualification": "untested",
-      "checkedOn": "2026-10-14",
+      "checkedOn": "2026-10-15",
       "owner": "Android/platform developer",
       "stage": "P0-S2",
-      "fallback": "Persist metadata and reconnect",
-      "experiment": "Operation-specific type and timeout behavior"
+      "fallback": "Journal continuously, stop bounded work promptly, reconcile interrupted operations and reconnect explicitly; no callback-dependent durability.",
+      "experiment": "P0-S2/P1-S3: real operation-specific start/timeout/exhausted-budget handling; distinguish accelerated timeout, Activity recreation, process loss and user stop. Restore any changed global test configuration.",
+      "researchEvidence": "docs/03-platform/googlebook/p0-s2-operation-lifetimes.md",
+      "versionNotes": "onTimeout(int,int) exists from API35. On runtime35+ with target35+, background dataSync/mediaProcessing budgets apply per app and type. Older runtimes need explicit cleanup without this callback."
     },
     {
       "id": "API14",
@@ -281,17 +284,25 @@
         "Foreground service types"
       ],
       "sourceIds": [
-        "G16"
+        "G16",
+        "G60",
+        "G61",
+        "G62",
+        "G64",
+        "G65",
+        "G68"
       ],
       "minimumApi": null,
       "libraryVersion": null,
       "availability": "operation-policy-unresolved",
       "qualification": "untested",
-      "checkedOn": "2026-10-14",
+      "checkedOn": "2026-10-15",
       "owner": "Android/platform developer",
       "stage": "P1-S3",
-      "fallback": "User-visible foreground work and host-side durability",
-      "experiment": "SSH/transfers/USB/stream classification and prerequisites"
+      "fallback": "Visible user work, honest background disconnection, journaled recovery and host-side durability; no unrelated permissions or invented provider ownership.",
+      "experiment": "P0-S2 research/P1-S3 implementation: select and qualify SSH, transfers, USB and streaming strategies independently against actual prerequisites and chosen distribution policy. No service type or Play approval is selected by this research.",
+      "researchEvidence": "docs/03-platform/googlebook/p0-s2-operation-lifetimes.md",
+      "versionNotes": "connectedDevice/dataSync constants API29; specialUse API34. Target31+ background starts and target34+ types/prerequisites apply on relevant runtimes. API level for this mixed policy record remains null."
     },
     {
       "id": "API15",
@@ -450,17 +461,19 @@
       "symbols": [],
       "sourceIds": [
         "G01",
-        "G06"
+        "G06",
+        "G54"
       ],
       "minimumApi": null,
       "libraryVersion": null,
       "availability": "no-public-api-established",
       "qualification": "untested",
-      "checkedOn": "2026-10-14",
+      "checkedOn": "2026-10-15",
       "owner": "Android/platform developer",
       "stage": "P0-S2",
       "fallback": "Remote SSH",
-      "experiment": "Find supported interface before any local-VM commitment"
+      "experiment": "Find supported interface before any local-VM commitment",
+      "researchEvidence": "docs/03-platform/googlebook/p0-s2-linux-vm-boundary.md"
     },
     {
       "id": "API23",
@@ -473,11 +486,12 @@
       "libraryVersion": null,
       "availability": "roadmap",
       "qualification": "untested",
-      "checkedOn": "2026-10-14",
+      "checkedOn": "2026-10-15",
       "owner": "Android/platform developer",
       "stage": "P0-S2",
       "fallback": "Remote compute and qualified Android USB provider",
-      "experiment": "Recheck announcement and SDK; qualify shipped capability independently"
+      "experiment": "Recheck announcement and SDK; qualify shipped capability independently",
+      "researchEvidence": "docs/03-platform/googlebook/p0-s2-linux-vm-boundary.md"
     },
     {
       "id": "API24",
@@ -826,6 +840,109 @@
         "evidence": "qualification/results/P0-S1/2026-10-15-device-probe.md",
         "note": "ADB HOME/return produced distinct focus/top-resumed/lifecycle callbacks; physical interactions, recreation and process death unqualified."
       }
+    },
+    {
+      "id": "API37",
+      "feature": "Independent document task creation",
+      "symbols": [
+        "Intent.FLAG_ACTIVITY_NEW_DOCUMENT",
+        "Intent.FLAG_ACTIVITY_MULTIPLE_TASK",
+        "Activity.getTaskId",
+        "Activity.isTaskRoot"
+      ],
+      "sourceIds": [
+        "G03",
+        "G24",
+        "G55",
+        "G56",
+        "G57"
+      ],
+      "minimumApi": 21,
+      "libraryVersion": null,
+      "availability": "documented",
+      "qualification": "untested",
+      "checkedOn": "2026-10-15",
+      "owner": "Android/platform developer",
+      "stage": "P0-S2",
+      "fallback": "Surface a failed launch; keep existing task usable and no claim of another window until observed.",
+      "experiment": "P0-S2 W01/W04/W05: two native task windows, independent state, focus and close isolation.",
+      "researchEvidence": "docs/03-platform/googlebook/p0-s2-window-probe-contract.md"
+    },
+    {
+      "id": "API38",
+      "feature": "Activity saved-state recreation",
+      "symbols": [
+        "Activity.recreate",
+        "Activity.onSaveInstanceState",
+        "Activity.onCreate"
+      ],
+      "sourceIds": [
+        "G24",
+        "G58"
+      ],
+      "minimumApi": 11,
+      "libraryVersion": null,
+      "availability": "documented",
+      "qualification": "untested",
+      "checkedOn": "2026-10-15",
+      "owner": "Android/platform developer",
+      "stage": "P0-S2",
+      "fallback": "Missing or invalid Bundle yields an explicitly fresh diagnostic state; no claim of restored state or process survival.",
+      "experiment": "P0-S2 W02: same logical window/task and marker restored into a fresh Activity generation; separate actual process-death test remains required.",
+      "researchEvidence": "docs/03-platform/googlebook/p0-s2-window-probe-contract.md"
+    },
+    {
+      "id": "API39",
+      "feature": "User-initiated network transfer jobs",
+      "symbols": [
+        "JobInfo.Builder.setUserInitiated",
+        "JobScheduler.schedule",
+        "JobService.setNotification",
+        "JobService.onStopJob",
+        "JobService.jobFinished"
+      ],
+      "sourceIds": [
+        "G59",
+        "G61",
+        "G66"
+      ],
+      "minimumApi": 34,
+      "libraryVersion": null,
+      "availability": "documented",
+      "qualification": "untested",
+      "checkedOn": "2026-10-15",
+      "owner": "Android/platform developer",
+      "stage": "P0-S2",
+      "fallback": "Keep work queued or visible; below API34 select a separately reviewed transfer route. Journal partial state and reconcile publication before retry.",
+      "experiment": "P0-S2 classification/P1-S3 and P2-S7 implementation: user-triggered SFTP UIDT scheduling and network constraints, notification deadline, cancellation, loss without callback and safe publication recovery.",
+      "researchEvidence": "docs/03-platform/googlebook/p0-s2-operation-lifetimes.md",
+      "versionNotes": "API34 is the UIDT/setNotification bundle boundary; JobScheduler and older JobService callbacks predate it. Required UIDT notification is due within ten seconds of onStartJob on each execution. Job quotas and user-stop behavior do not imply uninterrupted lifetime."
+    },
+    {
+      "id": "API40",
+      "feature": "Android 17 background audio lifecycle restrictions",
+      "symbols": [
+        "AudioTrack.write",
+        "AudioManager.requestAudioFocus",
+        "AudioManager.setStreamVolume",
+        "ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK"
+      ],
+      "sourceIds": [
+        "G63",
+        "G16",
+        "G60"
+      ],
+      "minimumApi": null,
+      "libraryVersion": null,
+      "availability": "documented-behavior-change",
+      "qualification": "untested",
+      "checkedOn": "2026-10-15",
+      "owner": "Android/platform developer",
+      "stage": "P0-S2",
+      "fallback": "Limit remote audio to a visible session and expose explicit resume; do not retain unrelated work through media playback or add alarm permissions.",
+      "experiment": "P0-S2 classification/P0-S4 backend validation: visible, unfocused-visible, hidden and sleep transitions with actual audible output/focus results; qualify any user-triggered continued background playback separately.",
+      "researchEvidence": "docs/03-platform/googlebook/p0-s2-operation-lifetimes.md",
+      "versionNotes": "Runtime37 imposes visible-Activity or non-short-FGS requirements on all apps; target37 additionally requires background FGS while-in-use capability. Listed methods predate API37, so minimumApi is null rather than assigning their introduction to this behavior change. A background-start exemption alone does not establish WIU capability; no background-audio product route is selected."
     }
   ],
   "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."

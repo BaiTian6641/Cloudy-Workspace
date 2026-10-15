@@ -13,7 +13,12 @@
         <activity
             android:name=".BaselineActivity"
             android:exported="true"
+            android:launchMode="standard"
             android:resizeableActivity="true">
+            <!-- Enables the system affordance only; explicit task launch is in the Activity. -->
+            <property
+                android:name="android.window.PROPERTY_SUPPORTS_MULTI_INSTANCE_SYSTEM_UI"
+                android:value="true" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

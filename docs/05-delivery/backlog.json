@@ -114,7 +114,7 @@
       "id": "P0-S2",
       "phase": "P0",
       "title": "Platform API, lifecycle, and capability probes",
-      "status": "ready",
+      "status": "in-progress",
       "effortDays": {
         "low": 1,
         "high": 2

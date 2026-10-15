@@ -10,7 +10,6 @@ import org.json.JSONObject
 import java.io.File
 import java.io.IOException
 import java.time.Instant
-import java.util.concurrent.CopyOnWriteArraySet
 import java.util.concurrent.ScheduledThreadPoolExecutor
 import java.util.concurrent.TimeUnit
 
@@ -20,6 +19,9 @@ internal data class ProbeUiState(
     val saveError: String?,
     val hasCollectorError: Boolean,
     val summary: String,
+    val windowTracking: String,
+    val aliveWindowCount: Int,
+    val windowCapacity: Int,
 )
 
 /** Process-scoped recorder: activity recreation does not erase the current event ring. */
@@ -28,16 +30,17 @@ internal class ProbeRecorder(context: Context) {
         fun onProbeState(state: ProbeUiState)
     }
 
+    private data class Subscription(val identity: WindowIdentity, val listener: Listener)
+
     private val appContext = context.applicationContext
     private val lock = Any()
     // A single worker serializes codec queries and AtomicFile writes. Refresh and
     // save requests are coalesced so repeated input cannot grow its task queue.
     private val worker = ScheduledThreadPoolExecutor(1).apply { removeOnCancelPolicy = true }
     private val main = Handler(Looper.getMainLooper())
-    private val listeners = CopyOnWriteArraySet<Listener>()
-    private val history = BoundedHistory<JSONObject>(128)
+    private val listeners = ListenerRegistry<Subscription>()
+    private val ledger = WindowLedger()
     private val processStartedAt = Instant.now().toString()
-    private var revision = 0L
     private var savedRevision = -1L
     private var collecting = false
     private var requestedInitial = false
@@ -46,16 +49,23 @@ internal class ProbeRecorder(context: Context) {
     private var build = JSONObject().put("status", "not-collected")
     private var inputs = JSONObject().put("status", "not-collected")
     private var decoders = JSONObject().put("status", "not-collected")
-    private var window = JSONObject().put("status", "not-yet-attached")
     private var lastCollectionAt: String? = null
 
-    fun addListener(listener: Listener) {
-        listeners.add(listener)
+    fun addListener(identity: WindowIdentity, listener: Listener) {
+        listeners.add(Subscription(identity, listener))
         publishUi()
     }
 
     fun removeListener(listener: Listener) {
-        listeners.remove(listener)
+        listeners.removeMatching { it.listener == listener }
+    }
+
+    fun register(identity: WindowIdentity, restored: RestoredWindow) {
+        synchronized(lock) {
+            ledger.register(identity, restored, SystemClock.elapsedRealtime())
+            scheduleSaveLocked()
+        }
+        publishUi()
     }
 
     fun ensureInitialCollection() {
@@ -66,11 +76,12 @@ internal class ProbeRecorder(context: Context) {
         refresh()
     }
 
-    fun refresh() {
+    fun refresh(requester: WindowIdentity? = null) {
         synchronized(lock) {
             if (collecting) return
             collecting = true
-            appendEventLocked("refresh-started", "")
+            requester?.let { ledger.event(it, "refresh-requested", "Device metadata is shared by the process.", SystemClock.elapsedRealtime()) }
+            ledger.globalEvent("refresh-started", "", SystemClock.elapsedRealtime())
         }
         publishUi()
         worker.execute {
@@ -83,37 +94,41 @@ internal class ProbeRecorder(context: Context) {
                 decoders = newDecoders
                 collecting = false
                 lastCollectionAt = Instant.now().toString()
-                appendEventLocked("refresh-finished", "Inspect section errors; completion is not qualification.")
+                ledger.globalEvent("refresh-finished", "Inspect section errors; completion is not qualification.", SystemClock.elapsedRealtime())
                 scheduleSaveLocked()
             }
             publishUi()
         }
     }
 
-    fun event(kind: String, detail: String = "") {
+    fun event(identity: WindowIdentity, kind: String, detail: String = "", close: Boolean = false) {
         synchronized(lock) {
-            appendEventLocked(kind, detail)
+            ledger.event(identity, kind, detail, SystemClock.elapsedRealtime(), close)
             scheduleSaveLocked()
         }
         publishUi()
     }
 
-    fun window(value: JSONObject) {
+    fun changeState(identity: WindowIdentity, state: WindowLocalState) {
         synchronized(lock) {
-            // Only retain changed snapshots; resize/inset callbacks can repeat.
-            if (window.toString() == value.toString()) return
-            window = value
-            appendEventLocked("window-observed", "")
+            ledger.changeState(identity, state, SystemClock.elapsedRealtime())
             scheduleSaveLocked()
         }
         publishUi()
     }
 
-    private fun appendEventLocked(kind: String, detail: String) {
-        revision++
-        history.add(JSONObject().put("sequence", revision)
-            .put("elapsedRealtimeMs", SystemClock.elapsedRealtime())
-            .put("kind", kind.take(80)).put("detail", detail.take(160)))
+    fun window(identity: WindowIdentity, value: JSONObject) {
+        val raw = value.toString()
+        val bounded = if (raw.toByteArray(Charsets.UTF_8).size <= 32 * 1024) raw else {
+            JSONObject().put("status", "error").put("errorType", "WindowSnapshotExceeded32KiB").toString()
+        }
+        synchronized(lock) {
+            // Identical geometry does not generate events, avoiding a UI-summary
+            // update -> layout -> observation -> summary feedback cycle.
+            if (!ledger.observe(identity, bounded, SystemClock.elapsedRealtime())) return
+            scheduleSaveLocked()
+        }
+        publishUi()
     }
 
     private fun scheduleSaveLocked() {
@@ -123,19 +138,19 @@ internal class ProbeRecorder(context: Context) {
     }
 
     private fun snapshotLocked(): JSONObject = JSONObject()
-        .put("schemaVersion", 1)
-        .put("probeVersion", "0.1.0")
-        .put("scope", "P0-S1 reported Android metadata; no feature or performance qualification")
+        .put("schemaVersion", 2)
+        .put("probeVersion", "0.2.0")
+        .put("scope", "P0 diagnostic metadata and task/window observations; no product or performance qualification")
         .put("processStartedAtDeviceUtc", processStartedAt)
         .put("snapshotAtDeviceUtc", Instant.now().toString())
-        .put("revision", revision)
+        .put("revision", ledger.revision)
         .put("collectionInProgress", collecting)
         .put("lastCollectionAtDeviceUtc", lastCollectionAt ?: JSONObject.NULL)
         .put("build", build).put("inputDevices", inputs)
-        .put("videoDecoders", decoders).put("window", window)
-        .put("events", JSONArray(history.snapshot()))
-        .put("droppedEventCount", history.droppedCount)
-        .put("retention", "Current process; latest 128 events. Process death can prevent final callbacks or pending writes.")
+        .put("videoDecoders", decoders)
+        .put("windows", JSONArray(ledger.records().map(::windowJson)))
+        .put("events", JSONArray(ledger.events().map(::eventJson)))
+        .put("retention", retentionJson())
 
     private fun saveReport() {
         val report: JSONObject
@@ -143,7 +158,7 @@ internal class ProbeRecorder(context: Context) {
         synchronized(lock) {
             saveScheduled = false
             report = snapshotLocked()
-            reportRevision = revision
+            reportRevision = ledger.revision
         }
         try {
             val bytes = report.toString(2).toByteArray(Charsets.UTF_8)
@@ -178,24 +193,63 @@ internal class ProbeRecorder(context: Context) {
         // Read at delivery time: a worker must not enqueue an obsolete saved state
         // after the main thread has already published a newer pending revision.
         main.post {
-            val state = synchronized(lock) {
-                val summary = JSONObject()
-                    .put("revision", revision).put("savedRevision", savedRevision)
-                    .put("build", build).put("inputDevices", inputs).put("window", window)
-                    .put("videoDecoderSummary", JSONObject()
-                        .put("status", decoders.optString("status"))
-                        .put("reportedCount", decoders.opt("reportedVideoDecoderCount") ?: JSONObject.NULL)
-                        .put("recordedCount", decoders.opt("recordedDecoderCount") ?: JSONObject.NULL)
-                        .put("omittedCount", decoders.opt("omittedDecoderCount") ?: JSONObject.NULL))
-                    .put("recentEvents", JSONArray(history.snapshot().takeLast(10)))
-                ProbeUiState(collecting, savedRevision == revision, saveError,
-                    containsError(build) || containsError(inputs) || containsError(decoders) || containsError(window),
-                    summary.toString(2))
+            // Subscriptions contain observation identities, never state to restore.
+            // Removed Activities are not captured by already queued deliveries.
+            listeners.snapshot().forEach { subscription ->
+                val state = synchronized(lock) { uiStateLocked(subscription.identity) }
+                subscription.listener.onProbeState(state)
             }
-            // Consult current listeners so stopped Activities are not retained.
-            listeners.forEach { it.onProbeState(state) }
         }
     }
+
+    private fun uiStateLocked(identity: WindowIdentity): ProbeUiState {
+        val record = ledger.record(identity)
+        val window = record?.let(::windowJson) ?: JSONObject().put("status", "not-retained")
+        val summary = JSONObject()
+            .put("revision", ledger.revision).put("savedRevision", savedRevision)
+            .put("thisWindow", window).put("retention", retentionJson())
+            .put("build", build).put("inputDevices", inputs)
+            .put("videoDecoderSummary", JSONObject()
+                .put("status", decoders.optString("status"))
+                .put("reportedCount", decoders.opt("reportedVideoDecoderCount") ?: JSONObject.NULL)
+                .put("recordedCount", decoders.opt("recordedDecoderCount") ?: JSONObject.NULL)
+                .put("omittedCount", decoders.opt("omittedDecoderCount") ?: JSONObject.NULL))
+            .put("recentEvents", JSONArray(ledger.events().filter {
+                it.identity == null || it.identity.logicalWindowId == identity.logicalWindowId
+            }.takeLast(10).map(::eventJson)))
+        return ProbeUiState(collecting, savedRevision == ledger.revision, saveError,
+            containsError(build) || containsError(inputs) || containsError(decoders) || containsError(window),
+            summary.toString(2), ledger.attribution(identity), ledger.aliveCount, ledger.capacity)
+    }
+
+    private fun identityJson(identity: WindowIdentity): JSONObject = JSONObject()
+        .put("logicalWindowId", identity.logicalWindowId).put("taskIdObserved", identity.taskId)
+        .put("activityGenerationId", identity.generationId)
+
+    private fun stateJson(state: WindowLocalState): JSONObject = JSONObject()
+        .put("marker", state.marker).put("markerIndex", state.markerIndex).put("changeCount", state.changeCount)
+
+    private fun windowJson(record: WindowRecord): JSONObject = JSONObject()
+        .put("identity", identityJson(record.identity)).put("localState", stateJson(record.localState))
+        .put("restorationSource", record.restorationSource).put("activityAliveObserved", record.activityAlive)
+        .put("observation", record.observationJson?.let(::JSONObject)
+            ?: JSONObject().put("status", "not-yet-observed"))
+
+    private fun eventJson(event: ProbeEvent): JSONObject = JSONObject()
+        .put("sequence", event.sequence).put("elapsedRealtimeMs", event.elapsedRealtimeMs)
+        .put("identity", event.identity?.let(::identityJson) ?: JSONObject.NULL)
+        .put("kind", event.kind).put("detail", event.detail).put("attribution", event.attribution)
+        .put("localState", event.localState?.let(::stateJson) ?: JSONObject.NULL)
+
+    private fun retentionJson(): JSONObject = JSONObject()
+        .put("windowRecordLimit", ledger.capacity).put("retainedWindowCount", ledger.records().size)
+        .put("activityAliveCountObserved", ledger.aliveCount).put("evictedClosedWindowCount", ledger.evictedWindowCount)
+        .put("rejectedRegistrationCount", ledger.rejectedRegistrationCount)
+        .put("rejectedCallbackCount", ledger.rejectedCallbackCount)
+        .put("supersededGenerationCount", ledger.supersededGenerationCount)
+        .put("eventLimit", 128).put("droppedEventCount", ledger.droppedEventCount)
+        .put("windowSnapshotByteLimit", 32 * 1024)
+        .put("policy", "Current process only. Evict oldest closed record, never a live generation; reject excess registration. Latest geometry per generation and latest 128 correlated events. Stopped is still alive. This is a diagnostic retention limit, not an OS task limit. Process death may omit final callbacks/writes.")
 
     private fun containsError(value: Any?): Boolean = when (value) {
         is JSONObject -> value.optString("status") == "error" ||

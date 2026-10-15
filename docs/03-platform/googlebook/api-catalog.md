@@ -27,8 +27,8 @@ Use the API reference's spelling `requestFullscreenMode`; a guide link may rende
 | API10 | [Storage Access Framework](https://developer.android.com/training/data-storage/shared/documents-files): `ACTION_OPEN_DOCUMENT`, `ACTION_CREATE_DOCUMENT`, persistable URI grants | User-selected imports/exports; a URI is not a host filesystem path; query supported operations | P2-S4 / P3-S3 |
 | API11 | [`DocumentsProvider`](https://developer.android.com/guide/topics/providers/create-document-provider): `queryRoots`, `queryDocument`, `queryChildDocuments`, `openDocument` | Advertise only supported flags; explicit cache/version/conflict semantics | P5-S3 |
 | API12 | [`UsbManager`, `UsbDevice`, `UsbDeviceConnection`](https://developer.android.com/develop/connectivity/usb/host) | Android permission/discovery/access; not a promise of general USB virtualization | P0-S5 |
-| API13 | [`Service.onTimeout(int,int)` and foreground-service duration rules](https://developer.android.com/develop/background-work/services/fgs/timeout) | API 35 callback; relevant dataSync/mediaProcessing background limits need operation-specific handling | P0-S2 / P1-S3 |
-| API14 | [Foreground-service types and prerequisites](https://developer.android.com/develop/background-work/services/fgs/service-types) | Determine valid strategy for SSH, transfers, stream, and connected devices independently | P1-S3 |
+| API13 | [`Service.onTimeout(int,int)` and foreground-service duration rules](https://developer.android.com/develop/background-work/services/fgs/timeout) | API 35 callback; runtime 35+ with target 35+ imposes per-app, per-type background budgets for dataSync/mediaProcessing. Persist before interruption and stop promptly; real timeout experiments remain pending | P0-S2 / P1-S3 |
+| API14 | [Foreground-service types and prerequisites](https://developer.android.com/develop/background-work/services/fgs/service-types) | [Operation-specific research](p0-s2-operation-lifetimes.md) separates SSH, transfers, actual USB ownership and video/audio. Continuous-session type choice and distribution approval remain unresolved | P0-S2 research / P1-S3 |
 | API15 | [Android Keystore](https://developer.android.com/privacy-and-security/keystore): `AndroidKeyStore`, `KeyGenParameterSpec` | Per-app credential protection; exact algorithm/security level tested | P1-S3 |
 | API16 | [Notification runtime permission](https://developer.android.com/develop/ui/compose/notifications/notification-permission): `POST_NOTIFICATIONS` | Android 13+ permission behavior; keep activity view when denied | P4-S2 |
 | API17 | [`MediaCodec`, codec capabilities](https://developer.android.com/reference/android/media/MediaCodec) | Enumerate and actually decode chosen stream; no hardware capability inference by SKU | P0-S4 / P5-S2 |
@@ -77,3 +77,20 @@ The [real diagnostic run](../../../qualification/results/P0-S1/2026-10-15-device
 | API36 | [Activity lifecycle/focus/top-resumed](https://developer.android.com/reference/android/app/Activity) | Top-resumed API29; older lifecycle/focus callbacks retain their own introduction levels. ADB background/return was observed; recreation/death/operation recovery remain separate. |
 
 The minimum levels of these bundled records reflect their newest listed method, not a claim that every method was introduced together. Reported metadata does not satisfy the full qualification experiment. No fixed caption height or assumed physical-input behavior should be derived from one run.
+
+## P0-S2 task and restoration experiment
+
+[The window probe contract](p0-s2-window-probe-contract.md) maps API37's explicit document-task creation and API38's Activity recreation to actual two-window, independent-state and lifecycle experiments. Minimum SDK 35 covers their API 21 and API 11 boundaries. Neither launch flags nor a process-global recorder establish saved-state restoration; actual task IDs, logical identity and fresh Activity generations must agree with device evidence. All feature readiness remains pending.
+
+[The Linux VM investigation](p0-s2-linux-vm-boundary.md) retains API22's unestablished public attach/control interface and API23's roadmap status. Documented Terminal user workflows do not select a private integration path.
+
+## P0-S2 operation lifetimes
+
+The [operation-lifetime note](p0-s2-operation-lifetimes.md) links API13/API14 research to sources G15/G16 and G59–G68. It is a proposed strategy and experiment plan, not evidence of service implementation, policy approval or background reliability. No permissions are added merely to satisfy a service type. Local USB permission and remote consumer ownership remain separate; the actual provider owns its lifecycle.
+
+| ID | Official contract | Availability, fallback and qualification boundary |
+| --- | --- | --- |
+| API39 | [User-initiated data transfer jobs](https://developer.android.com/develop/background-work/background-tasks/uidt): `JobInfo.Builder.setUserInitiated`, `JobScheduler.schedule`, `JobService.setNotification` | UIDT and notification API 34; older scheduler/callback methods predate this bundle. Candidate for long explicitly requested SFTP transfers. Schedule only under allowed conditions, notify within ten seconds on every run, journal continuously, and reconcile interrupted publication. Below API 34, select a separately reviewed route or visible-only work. Untested. |
+| API40 | [Android 17 background audio](https://developer.android.com/about/versions/17/changes/bg-audio): `AudioTrack.write`, `AudioManager.requestAudioFocus`, volume APIs and FGS lifecycle | Runtime 37 requires visible Activity or non-short FGS for all apps; target 37 additionally requires background FGS while-in-use capability. The methods predate API 37, so tracker `minimumApi` is null and behavior guards are explicit. Keep visible-session audio as the proposed baseline; any continued background playback needs independent qualification. Untested. |
+
+OS eligibility, correct operation classification and Play distribution review are distinct checks. A permitted background start alone does not establish while-in-use capability, and a successful playback call does not prove audible output. The note's timeout/process-loss, UIDT interruption and actual USB/provider experiments remain pending; none changes CAP-PLATFORM or a product gate.

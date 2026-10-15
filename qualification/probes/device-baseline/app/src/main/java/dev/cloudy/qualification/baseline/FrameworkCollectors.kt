@@ -147,6 +147,7 @@ internal object FrameworkCollectors {
                 ?: JSONObject().put("status", "not-yet-dispatched"))
             .put("decorWidthPx", activity.window.decorView.width)
             .put("decorHeightPx", activity.window.decorView.height)
+            .put("taskRootObserved", activity.isTaskRoot)
             .put("multiWindow", activity.isInMultiWindowMode)
             .put("windowFocus", activity.hasWindowFocus())
             .put("configuration", JSONObject()

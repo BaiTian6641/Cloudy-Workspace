@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Cloudy device baseline probe</string>
-    <string name="probe_heading">Device baseline · qualification only</string>
-    <string name="probe_scope">Reads reported Android capabilities. It does not decode video, test input latency, or implement Console or Desktop. No network or USB access.</string>
+    <string name="probe_heading">Window probe · qualification only</string>
+    <string name="probe_scope">Real task windows and Bundle-restored markers, plus reported Android capabilities. No Console/Desktop implementation, video decoding, input latency test, network or USB access.</string>
+    <string name="new_window">New window</string>
+    <string name="change_marker">Change marker</string>
+    <string name="recreate_window">Recreate this window</string>
+    <string name="window_title">Probe · %1$s · %2$d</string>
+    <string name="window_identity">Logical window: %1$s\nObserved task: %2$d\nActivity generation: %3$s\nMarker: %4$s · changes: %5$d\nState source: %6$s</string>
+    <string name="tracking_state">Window tracking: %1$s. Observed live Activities: %2$d. Tracking capacity: %3$d. New window is disabled when this window is untracked or the diagnostic registry is full. This is not an OS task limit.</string>
+    <string name="launch_requested">Launch request returned. Verify a separate task/window; the OS chooses placement.</string>
+    <string name="launch_failed">Window launch failed: %1$s.</string>
     <string name="refresh">Refresh diagnostics</string>
     <string name="status_collecting">Collecting actual framework reports…</string>
     <string name="status_saved">Private report saved. %1$s</string>

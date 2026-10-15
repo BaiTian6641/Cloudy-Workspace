@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="new_window" type="id" />
+    <item name="change_marker" type="id" />
+    <item name="recreate_window" type="id" />
+    <item name="refresh_diagnostics" type="id" />
+    <item name="window_state" type="id" />
+    <item name="window_tracking" type="id" />
+    <item name="action_status" type="id" />
+    <item name="save_status" type="id" />
+    <item name="diagnostics_summary" type="id" />
+</resources>

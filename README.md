@@ -4,7 +4,7 @@ An integrated workspace for a Googlebook: **Cloudy Console** for terminals and c
 
 **Rule 0:** desktop/laptop Googlebook applications built on Android's app and package model. Keyboard, mouse/trackpad, native windows and desktop productivity define the design. Phone/tablet optimization is outside scope; narrow tiled desktop windows remain supported. Read the [platform rule](docs/00-project/platform-rule-zero.md).
 
-**Project state:** implementation goal active; **P0-S1 qualification setup is complete; P0-S2 is ready** on the USB-connected HP Googlebook. A real native diagnostic APK is implemented and installed; Console, Desktop and the host agent are not implemented yet. Research updated **15 October 2026, America/Chicago**. ADB install/launch and bounded diagnostic observations are recorded in the [device run](qualification/results/P0-S1/2026-10-15-device-probe.md); product/hardware compatibility remains unqualified.
+**Project state:** implementation goal active; **P0-S1 qualification setup is complete; P0-S2 is in progress** on the USB-connected HP Googlebook. A real native diagnostic APK is implemented and installed; Console, Desktop and the host agent are not implemented yet. Research updated **15 October 2026, America/Chicago**. ADB install/launch and bounded diagnostic observations are recorded in the [device run](qualification/results/P0-S1/2026-10-15-device-probe.md); product/hardware compatibility remains unqualified.
 
 Repository: [BaiTian6641/Cloudy-Workspace](https://github.com/BaiTian6641/Cloudy-Workspace) · SSH remote: `git@github.com:BaiTian6641/Cloudy-Workspace.git`
 
