@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "runId": "P0-S1-2026-10-15-setup-closeout",
+  "recordedAt": "2026-10-15T05:45:37.669928+00:00",
+  "stage": "P0-S1",
+  "scope": "inventory and reproducible setup only; no product capability acceptance",
+  "sourceCheckpoint": "3dfd0705155ef5481e6d40c773ffdbfcb17ade86",
+  "deviceProbeRun": "qualification/results/P0-S1/2026-10-15-device-probe.json",
+  "client": {
+    "label": "googlebook-primary",
+    "model": "HP Googlebook 14",
+    "build": "CL3B.260622.276.R2",
+    "api": 37,
+    "abi": "arm64-v8a",
+    "sku": "unreported by queried ro.boot.hardware.sku",
+    "memTotalKiB": 15852148,
+    "tailscaleVersion": "1.104.1-t7f4efe814-g6d75bd403"
+  },
+  "host": {
+    "label": "linux-primary",
+    "model": "HP ZBook Ultra G1a 14 inch Mobile Workstation PC",
+    "vendor": "HP",
+    "os": "Ubuntu 26.04.1 LTS",
+    "kernel": "7.0.0-38-generic",
+    "session": "KDE Wayland",
+    "compositor": "KWin/Plasma 6.5.5",
+    "gpu": "AMD 1002:1586 / amdgpu",
+    "mesa": "26.0.8",
+    "memTotalKiB": 98628860,
+    "tailscaleVersion": "1.104.1-t7f4efe814-g8da26756c",
+    "tailscaleBackendState": "Running"
+  },
+  "workload": {
+    "selection": "dedicated ignored fixture directory within this Cloudy workspace, under the existing local login",
+    "readiness": "selected and created; no SSH account/service readiness inferred"
+  },
+  "network": {
+    "primary": "local LAN",
+    "sameSubnetHostCandidates": 1,
+    "lanShellIcmp": {
+      "sent": 2,
+      "received": 2,
+      "exitCode": 0
+    },
+    "tailnetShellIcmp": {
+      "sent": 2,
+      "received": 0,
+      "exitCode": 1
+    },
+    "tailnetShellRoute": "wlan0 under shell UID 2000; app VPN route not established by this test",
+    "sshPort22Listener": false,
+    "directOrRelay": "unmeasured",
+    "latencyQualification": "none"
+  },
+  "usb": {
+    "userSelection": "deliberately undecided; limited available hardware",
+    "implementationScope": "full generic forwarding and enrolled plug-and-play retained",
+    "physicalQualification": "pending representative hardware",
+    "fallback": "defined untested lab-side provider on Linux; does not satisfy Googlebook-local USB forwarding"
+  },
+  "unavailableTargets": {
+    "Windows": "desired; no selected test target",
+    "macOS": "no selected test target",
+    "USB": "deliberately undecided by user; full generic scope retained"
+  },
+  "privateEvidence": {
+    "path": "qualification/results/private/setup-inventory/observations.json",
+    "sha256": "48214bd3efe2e39548bb9474d05adc2ccffc1ed11194728d074d9c4194b0871c",
+    "inventoryPath": "qualification/inventory.local.json",
+    "inventoryPermissions": "0600",
+    "publicPrivacy": "no addresses, account names, transport serials or network peer list"
+  },
+  "ci": [
+    {
+      "workflow": "Repository checks",
+      "runId": 38688126844,
+      "conclusion": "success"
+    },
+    {
+      "workflow": "Android qualification probe",
+      "runId": 38688126993,
+      "conclusion": "success"
+    }
+  ],
+  "verdict": "pass for P0-S1 setup scope with explicit unavailable and unverified inventory fields",
+  "capabilityOutcome": "all eight feature gates remain pending",
+  "next": "P0-S2 platform/window/lifecycle probes; establish actual app route and SSH server before protocol qualification"
+}

@@ -1322,6 +1322,30 @@
       "sourceUpdatedOn": null,
       "note": "Upstream finishWrite can log sync/close/rename failures instead of throwing; reviewed to justify bounded readback before marking a report saved. Moving upstream implementation, not an exact OEM source claim.",
       "refresh": "Recheck exact public contract and implementation when updating the persistence/input path."
+    },
+    {
+      "id": "G53",
+      "title": "Android per-app VPN routing",
+      "url": "https://developer.android.com/develop/connectivity/vpn",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "VPN policy can allow or exclude apps; one active VPN per user/profile. ADB-shell ICMP cannot certify the later app route. Cloudy consumes system networking; no own VPN service selected.",
+      "refresh": "Before application route qualification or changing VPN policy; do not infer app connectivity from a shell route."
+    },
+    {
+      "id": "R50",
+      "title": "Tailscale Android app-based split tunneling",
+      "url": "https://tailscale.com/docs/features/client/android-app-split-tunneling",
+      "publisher": "Tailscale",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-01-05",
+      "note": "Client 1.70+ supports app exclusions and managed inclusion policy. Confirm the intended app route and VPN state before diagnosing a backend from shell-only ping.",
+      "refresh": "Before application route qualification or changing VPN policy; do not infer app connectivity from a shell route."
     }
   ]
 }

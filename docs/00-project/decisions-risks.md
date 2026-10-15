@@ -47,3 +47,7 @@ Update this table when evidence changes; link the run, installed version, and af
 ## 2026-10-15 — USB hardware availability
 
 The user retained full general-purpose USB forwarding and enrolled plug-and-play scope, but left the board/debug probe undecided because little hardware is available. Keep discovery, enrollment, exclusive ownership, permission loss, detach/reattach and reconciliation in the implementation scope. Record missing physical coverage explicitly; it is not permission to claim every USB class/device works. P0-S5/CAP-USB must distinguish reviewed provider/API/software evidence from actual attach/reset/programming tests. P0-S1 may record an unavailable target rather than invent one; unrelated Android and Linux-host work continues.
+
+## P0-S1 route observation, 2026-10-15
+
+The [setup closeout](../../qualification/results/P0-S1/2026-10-15-setup-closeout.md) selects local LAN for the first Linux qualification lane after a bounded shell ICMP success. Tailnet clients are installed, but the selected-host tailnet shell probe received no replies. Actual Android app routing, VPN policy and later protocol readiness remain unresolved; do not call this a diagnosed Tailscale defect or change VPN settings automatically. Platform P0-S2 can proceed independently; remote protocol experiments must establish their actual route and server first.

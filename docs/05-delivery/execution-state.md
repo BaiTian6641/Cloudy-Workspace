@@ -1,6 +1,6 @@
 # Current execution state
 
-**Updated:** 2026-10-15, America/Chicago. **Goal:** active in Codex; implement and qualify the approved P0–P6 scope. **Current stage:** P0-S1, inventory and reproducible qualification setup. **Application state:** real native diagnostic APK installed and exercised; no Console, Desktop or host implementation yet.
+**Updated:** 2026-10-15, America/Chicago. **Goal:** active in Codex; implement and qualify the approved P0–P6 scope. **Current stage:** P0-S1 complete; P0-S2 ready for platform/window/lifecycle qualification. **Application state:** real native diagnostic APK installed and exercised; no Console, Desktop or host implementation yet.
 
 ## Decisions to carry forward
 
@@ -15,7 +15,7 @@
 ## Verified setup so far
 
 - One HP Googlebook 14 is authorized over USB ADB. Its reported OS is Android 17 / API 37, ABI arm64-v8a. Exact non-secret build observations are in the [P0-S1 baseline](../../qualification/results/P0-S1/2026-10-15-usb-baseline.md).
-- This host reports Ubuntu 26.04.1 LTS and a Wayland session. No TCP listener was found on port 22 in the initial check; a ready SSH server is not established.
+- The primary host reports HP ZBook Ultra G1a 14 inch Mobile Workstation PC, Ubuntu 26.04.1 LTS and KDE Wayland. The [setup closeout](../../qualification/results/P0-S1/2026-10-15-setup-closeout.md) records the private login/fixture selection, local-LAN ICMP success and tailnet shell ICMP failure. No TCP port 22 listener is observed; SSH server readiness and the eventual app route remain unqualified.
 - Three official Android skills were installed from a pinned revision, with hashes checked and upstream licenses retained. Use the [skill register](../07-reference/development-skills.md) and project overrides.
 - Python AST/Ruff checks and nine planning regressions pass. The real [probe](../../qualification/probes/device-baseline/README.md) compiles, passes Android Lint and its three JVM tests. Its selected [toolchain](../03-platform/googlebook/probe-toolchain.md) has a verified wrapper, dependency locks and checksum metadata.
 - [Device run](../../qualification/results/P0-S1/2026-10-15-device-probe.md): actual APK installation/cold launch, API report export, Refresh button and ADB HOME/return passed on the identified build. The framework reported ten input entries and 36 video-decoder entries, with no collector errors. Counts include system/virtual/alias/special entries and imply no physical input or decoding performance qualification.
@@ -25,10 +25,14 @@
 
 ## Next concrete work
 
-1. Finish clean-cache/hosted Android CI verification. Initial pushed source `cf6630b6ff98ea8131ced1ef7ebaef36a33494af` passed repository CI, but its Android job failed; a fresh-cache local run exposed missing transitive metadata checksums. Five metadata checksums were checked against canonical artifacts and added. A clean checkout/cache build then passed all 49 tasks with strict verification; hosted confirmation for the correction is next.
-2. Complete remaining P0-S1 primary Linux route/project inventory and record unavailable peripherals. The USB board is deliberately undecided; no repeat selection is needed until hardware becomes available. Preserve full generic implementation scope and physical qualification limits.
-3. Prepare the selected Linux SSH/SFTP and desktop backend prerequisites in bounded experiments. Keep later protocol acceptance separate from inventory/setup; Windows-specific results await a target.
-4. Proceed to P0-S2 only when its prerequisites are met; qualify API/window/lifecycle/input behavior before activating product implementation stages.
+1. Start P0-S2 from its ready backlog state. Read the exact API records, desktop application contract and existing probe code. Scope real resize/multi-instance/caption/focus, state recreation and operation-specific lifetime experiments; no production feature may inherit a probe-only pass.
+2. Keep the selected local LAN as the first Linux protocol route. The shell ICMP smoke passed, while the tailnet shell test did not; verify the actual Android app route and VPN policy before diagnosing a remote backend. Do not change system routing or VPN configuration based on package presence alone.
+3. Prepare selected Linux SSH/SFTP and desktop backend prerequisites in bounded later experiments, with explicit listener/authentication/trust settings. Windows-specific results await a target.
+4. Continue USB API/provider/licensing investigation independently. The board is deliberately undecided; do not ask again until hardware is available. Full generic implementation remains required, and physical attach/reset/programming evidence remains pending.
+
+## Latest reviewed delivery
+
+Source/probe checkpoint `cf6630b6ff98ea8131ced1ef7ebaef36a33494af` was pushed and physically exercised. Its first Android CI job failed on incomplete verification metadata. Correction `3dfd0705155ef5481e6d40c773ffdbfcb17ade86` added five independently checked metadata hashes and passed the clean local build, hosted [Repository checks](https://github.com/BaiTian6641/Cloudy-Workspace/actions/runs/38688126844) and hosted [Android qualification probe](https://github.com/BaiTian6641/Cloudy-Workspace/actions/runs/38688126993). Local and remote branch SHAs matched after that push. The subsequent documentation checkpoint records the inventory closeout without altering APK source or capability outcomes; check Git for its final identity.
 
 ## Evidence boundaries
 

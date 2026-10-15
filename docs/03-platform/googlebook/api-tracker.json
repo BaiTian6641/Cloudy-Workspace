@@ -366,17 +366,20 @@
         "NetworkCapabilities"
       ],
       "sourceIds": [
-        "G21"
+        "G21",
+        "G53",
+        "R50"
       ],
       "minimumApi": null,
       "libraryVersion": null,
       "availability": "documented-entrypoint",
       "qualification": "untested",
-      "checkedOn": "2026-10-14",
+      "checkedOn": "2026-10-15",
       "owner": "Android/platform developer",
       "stage": "P0-S6",
       "fallback": "Unknown path and explicit user metered preference",
-      "experiment": "Network switch and counter provenance"
+      "experiment": "Network switch and counter provenance; verify actual app-to-selected-host connectivity and applicable VPN policy independently of shell ICMP, with direct/relay path still separately measured.",
+      "routingBoundary": "Android and Tailscale allow per-app VPN policy. ADB-shell routes/ICMP do not qualify the application route; this does not select an app-owned VPN service or add new API availability claims."
     },
     {
       "id": "API19",

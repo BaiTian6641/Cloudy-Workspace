@@ -1,6 +1,6 @@
 # Delivery plan index
 
-The execution-reviewed plan has seven phases and 40 stages under [Rule 0](../00-project/platform-rule-zero.md). P0-S1 qualification setup is in progress; application implementation remains planned. Read the [engineering workflow](engineering-workflow.md) and [execution state](execution-state.md) before continuing. No phone/tablet workstream is included.
+The execution-reviewed plan has seven phases and 40 stages under [Rule 0](../00-project/platform-rule-zero.md). P0-S1 qualification setup is complete; P0-S2 is ready. Product application implementation remains planned. Read the [engineering workflow](engineering-workflow.md) and [execution state](execution-state.md) before continuing. No phone/tablet workstream is included.
 
 | Phase | Stage count | Detail |
 | --- | ---: | --- |

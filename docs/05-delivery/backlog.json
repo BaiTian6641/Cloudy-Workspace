@@ -75,7 +75,7 @@
       "id": "P0-S1",
       "phase": "P0",
       "title": "Inventory and reproducible qualification setup",
-      "status": "in-progress",
+      "status": "done",
       "effortDays": {
         "low": 1,
         "high": 2
@@ -103,13 +103,18 @@
       "acceptanceCases": [
         "Q-P01"
       ],
-      "evidenceDirectory": "qualification/results/P0-S1/"
+      "evidenceDirectory": "qualification/results/P0-S1/",
+      "completionEvidencePaths": [
+        "qualification/results/P0-S1/2026-10-15-setup-closeout.md",
+        "qualification/results/P0-S1/2026-10-15-device-probe.md",
+        "docs/06-validation/2026-10-15-device-probe-review.md"
+      ]
     },
     {
       "id": "P0-S2",
       "phase": "P0",
       "title": "Platform API, lifecycle, and capability probes",
-      "status": "planned",
+      "status": "ready",
       "effortDays": {
         "low": 1,
         "high": 2

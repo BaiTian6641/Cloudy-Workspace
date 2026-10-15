@@ -17,7 +17,7 @@ The numbered folders describe one development program. Read project decisions be
 | Decisions | [ADR index](adr/README.md) |
 | Intake | [Original plan and provenance](intake/README.md) |
 
-The [desktop workflow design](04-design/desktop-workflows.md) expands the visual system for S13–S17; the offline specimen remains the initial subset. Cross-links are repository-relative for GitHub/local use. P0-S1 qualification setup is **in progress**, with a real USB ADB baseline; all application stages remain planned. No application or host backend is implemented yet.
+The [desktop workflow design](04-design/desktop-workflows.md) expands the visual system for S13–S17; the offline specimen remains the initial subset. Cross-links are repository-relative for GitHub/local use. P0-S1 qualification setup is **complete**, with a real diagnostic APK, device run and explicit inventory gaps; P0-S2 is ready. Console, Desktop and host implementation remain planned. See the [setup closeout](../qualification/results/P0-S1/2026-10-15-setup-closeout.md).
 
 ## Active qualification references
 

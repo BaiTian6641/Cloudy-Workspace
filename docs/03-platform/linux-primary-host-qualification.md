@@ -1,6 +1,6 @@
 # Primary Linux host: qualification prerequisites
 
-**Checked:** 2026-10-15, America/Chicago. **Stage:** P0-S1, in progress. The user selected the current Ubuntu/Wayland workstation as the primary host. This report contains sanitized version observations and a proposed test sequence. It does not qualify SSH/SFTP, RDP/VNC, streaming, X11 or USB forwarding. Windows remains an optional test lane pending an identified host; Parsec is an accepted temporary Windows access route.
+**Checked:** 2026-10-15, America/Chicago. **Stage:** P0-S1 inspection; setup subsequently completed in the [closeout](../../qualification/results/P0-S1/2026-10-15-setup-closeout.md). The user selected the current Ubuntu/Wayland workstation as the primary host. This report contains sanitized version observations and a proposed test sequence. It does not qualify SSH/SFTP, RDP/VNC, streaming, X11 or USB forwarding. Windows remains an optional test lane pending an identified host; Parsec is an accepted temporary Windows access route.
 
 ## Observed environment
 
@@ -43,4 +43,4 @@ KWin/Plasma version commands emitted Qt/EGL initialization warnings in this exec
 4. Identify the actual board/probe and native host programming workflow before USB qualification. Preserve ownership and ambiguous-completion rules; never automatically retry flashing after a disconnect.
 5. Store actual run manifests under [qualification/results](../../qualification/results/README.md), tied to code/package hashes, hardware/build/backend versions and acceptance cases. Reconcile with the [P0 phase](../05-delivery/phases/p0-qualification.md) and [capability gates](../05-delivery/feasibility-gates.md).
 
-P0-S1 setup progress is tracked in the execution state. The user has left the USB board/probe undecided and requested full general-purpose implementation scope; record this as an inventory gap. Later protocol/device qualification stays in its own stages and must not be added as a prerequisite for finishing setup. This report does not promote any capability, install a backend, open a listener, or change the public source/API registers.
+The later closeout adds the observed HP ZBook model, selected test login/fixture directory, local-LAN ICMP smoke and unresolved tailnet shell result. P0-S1 is complete; subsequent protocol qualification remains separate. The user has left the USB board/probe undecided and requested full general-purpose implementation scope; record this as an inventory gap. Later protocol/device qualification stays in its own stages and must not be added as a prerequisite for finishing setup. This report does not promote any capability, install a backend, open a listener, or change the public source/API registers.

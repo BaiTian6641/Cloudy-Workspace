@@ -1,6 +1,6 @@
 # P0 — Qualification and decisions
 
-**Status:** in progress at P0-S1. **Active effort:** 15–28 person-days before contingency. **Purpose:** Resolve Googlebook desktop API/input/engine/window/protocol/device boundaries using scoped capability outcomes. Independent branches do not inherit an X11 phase-wide blocker.
+**Status:** P0-S1 complete; P0-S2 ready. **Active effort:** 15–28 person-days before contingency. **Purpose:** Resolve Googlebook desktop API/input/engine/window/protocol/device boundaries using scoped capability outcomes. Independent branches do not inherit an X11 phase-wide blocker.
 
 The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-project/platform-rule-zero.md) defines desktop scope. Follow [capability outcomes](../feasibility-gates.md) and [independent release gates](../release-gates.md). Estimates are active effort, not elapsed time; re-estimate after physical evidence. Revision 02 moved the former P5-S1 decision to P1-S5; other stage IDs retain their identity.
 
@@ -16,9 +16,9 @@ The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-p
 
 ## P0-S1 — Inventory and reproducible qualification setup
 
-**Owner:** Device/QA owner. **Prerequisites:** None. **Status:** in-progress.
+**Owner:** Device/QA owner. **Prerequisites:** None. **Status:** done for setup scope.
 
-Initial [USB baseline](../../../qualification/results/P0-S1/2026-10-15-usb-baseline.md) records authorization and reported build properties. The [real diagnostic APK run](../../../qualification/results/P0-S1/2026-10-15-device-probe.md) now proves build/install/launch and bounded API observations. Remaining primary route/project inventory and explicit unavailable-hardware classification keep the stage in progress; feature qualification stays in its own later stages.
+Initial [USB baseline](../../../qualification/results/P0-S1/2026-10-15-usb-baseline.md) records authorization and reported build properties. The [real diagnostic APK run](../../../qualification/results/P0-S1/2026-10-15-device-probe.md) now proves build/install/launch and bounded API observations. The [setup closeout](../../../qualification/results/P0-S1/2026-10-15-setup-closeout.md) completes primary route/project inventory and unavailable-hardware classification, with both hosted check workflows passed. Feature qualification stays in its own later stages.
 
 Work:
 
@@ -41,7 +41,7 @@ Record evidence under `qualification/results/P0-S1/` using the [run template](..
 
 ## P0-S2 — Platform API, lifecycle, and capability probes
 
-**Owner:** Android/platform developer. **Prerequisites:** P0-S1. **Status:** planned.
+**Owner:** Android/platform developer. **Prerequisites:** P0-S1 complete. **Status:** ready.
 
 Work:
 
