@@ -60,12 +60,12 @@ class TerminalAssetTests(unittest.TestCase):
         # The small archives use production package identities and paths, with
         # independent content/digests. They never stand in for an upstream audit.
         selections = [
-            ("xterm", "6.0.0", [
+            ("xterm", "6.1.0-beta.315", [
                 ("package/lib/xterm.js", "terminal/vendor/xterm.js"),
                 ("package/css/xterm.css", "terminal/vendor/xterm.css"),
                 ("package/LICENSE", "terminal/notices/xterm-LICENSE.txt"),
             ]),
-            ("addon-fit", "0.11.0", [
+            ("addon-fit", "0.12.0-beta.311", [
                 ("package/lib/addon-fit.js", "terminal/vendor/addon-fit.js"),
                 ("package/LICENSE", "terminal/notices/addon-fit-LICENSE.txt"),
             ]),
@@ -219,7 +219,7 @@ class TerminalAssetTests(unittest.TestCase):
                 ASSETS.validate_manifest(manifest)
 
     def test_package_metadata_cannot_introduce_runtime_dependencies(self):
-        metadata = json.dumps({"name": "@xterm/xterm", "version": "6.0.0", "license": "MIT",
+        metadata = json.dumps({"name": "@xterm/xterm", "version": "6.1.0-beta.315", "license": "MIT",
                                "dependencies": {"unreviewed": "*"}}).encode()
         entries = [(name, metadata if name == "package/package.json" else body, kind)
                    for name, body, kind in self.entries["xterm"]]

@@ -874,9 +874,9 @@
       "publisher": "LibVNC project",
       "category": "maintenance",
       "reviewStatus": "reviewed",
-      "checkedOn": "2026-10-14",
+      "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Review advisory fixes and release/commit patch coverage before selecting the VNC engine.",
+      "note": "Review advisory fixes and release/commit patch coverage before selecting the VNC engine. 2026-10-15 reviewed client advisories require exact fix coverage before the P0-S4 network probe; latest tag alone is insufficient.",
       "refresh": "Before engine selection, after relevant upstream change, and before release qualification."
     },
     {
@@ -2303,7 +2303,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Reviewed 2.0.17 and 2.0.18\u20132.0.20 release notes; final diagnostic selects matched API/NOP 2.0.20. Exact source and embedded licenses are preserved.",
+      "note": "Reviewed 2.0.17 and 2.0.18–2.0.20 release notes; final diagnostic selects matched API/NOP 2.0.20. Exact source and embedded licenses are preserved.",
       "refresh": "Before SSH diagnostic dependency/provider changes, after relevant upstream security updates, and before product adoption."
     },
     {
@@ -3074,7 +3074,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected beta package identifies gitHead 991857a1b1cacf06f9531ba74a6e927a7a6398bb. Its 1,115,072-byte tarball has SHA-256 342dfd1e9a5642081b83debd12ef5338b87b59dd9f1a61cb2aad1fba2be1c08e and matches npm SHA-512 integrity. The 12,132-byte CompositionHelper source has SHA-256 1e935e66830ca171456466987cb45ed0a270553901729f11dfa91f6b702e0845 and matches pinned upstream. Relevant artifact/API/fit/distribution delta review and focused actual-library/device integration checks remain required; no prerelease adoption. Owner Terminal developer, P0-S3.",
+      "note": "Inspected beta package identifies gitHead 991857a1b1cacf06f9531ba74a6e927a7a6398bb. Its 1,115,072-byte tarball has SHA-256 342dfd1e9a5642081b83debd12ef5338b87b59dd9f1a61cb2aad1fba2be1c08e and matches npm SHA-512 integrity. The 12,132-byte CompositionHelper source has SHA-256 1e935e66830ca171456466987cb45ed0a270553901729f11dfa91f6b702e0845 and matches pinned upstream. Relevant artifact/API/fit/distribution delta review and focused actual-library/device integration checks remain required; no prerelease adoption. Owner Terminal developer, P0-S3. Subsequent exact artifact/API/fit review selected core beta315 with fit beta311 for diagnostic0.7.2; product and actual-device repair acceptance remain pending.",
       "refresh": "Before renderer candidate selection, on upstream fix/release changes, and before claiming input qualification."
     },
     {
@@ -3172,6 +3172,174 @@
       "sourceUpdatedOn": null,
       "note": "Inspected registered enabledProviders/disabledProviders settings; source-discovery IDs are distinct from the explicitly selected kimi-code model backend. Use a per-run overlay, not a global config edit. Owner integration leader, P0–P6.",
       "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
+    },
+    {
+      "id": "R130",
+      "title": "xterm fit 0.12.0-beta.311 matching package",
+      "url": "https://registry.npmjs.org/@xterm%2faddon-fit/0.12.0-beta.311",
+      "publisher": "xterm.js maintainers / npm",
+      "category": "protocol",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Peer ^6.1.0-beta.315, same gitHead 991857a1b1cacf06f9531ba74a6e927a7a6398bb, no runtime dependencies. Actual 5658-byte archive verified against SHA-512 and selected byte hashes. P0-S3 diagnostic candidate only, not product adoption.",
+      "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
+    },
+    {
+      "id": "R131",
+      "title": "xterm candidate public API declarations",
+      "url": "https://github.com/xtermjs/xterm.js/blob/991857a1b1cacf06f9531ba74a6e927a7a6398bb/typings/xterm.d.ts",
+      "publisher": "xterm.js maintainers",
+      "category": "protocol",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Public input/selection/paste API and existing Cloudy bridge API inspected at immutable candidate. attachCustomKeyEventHandler false prevents xterm processing; paste preserves renderer paste path. P0-S3/P2-S2 integration and physical desktop behavior unqualified.",
+      "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
+    },
+    {
+      "id": "R132",
+      "title": "xterm candidate Microsoft scrollbar provenance",
+      "url": "https://raw.githubusercontent.com/xtermjs/xterm.js/991857a1b1cacf06f9531ba74a6e927a7a6398bb/src/browser/scrollable/scrollableElement.ts",
+      "publisher": "xterm.js maintainers / Microsoft",
+      "category": "protocol",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Microsoft-copyrighted implementation moved from src/vs to src/browser/scrollable. Preserve supplementary MIT notice; license-text tag does not identify implementation revision. P0-S3 packaging.",
+      "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
+    },
+    {
+      "id": "R133",
+      "title": "FreeRDP 3.32.2 release",
+      "url": "https://github.com/FreeRDP/FreeRDP/releases/tag/3.32.2",
+      "publisher": "FreeRDP",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-10-12",
+      "note": "Security/regression release at 97eff6ddfbbfaa8e42a126d362686bd001ff8bdc; selected for first reduced Android arm64 build investigation. Not built/device-qualified. Owner Desktop, P0-S4/P1-S4.",
+      "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
+    },
+    {
+      "id": "R134",
+      "title": "FreeRDP 3.32.2 Android core build",
+      "url": "https://github.com/FreeRDP/FreeRDP/blob/3.32.2/client/Android/Studio/freeRDPCore/build.gradle",
+      "publisher": "FreeRDP",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Reviewed Android toolchain/qa build source with associated tag CMake dependency files. Actual tool availability, resolved dependency graph, build and native adapter remain pending. First display route GDI to Bitmap to View, not demonstrated zero-copy Surface. P0-S4.",
+      "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
+    },
+    {
+      "id": "R135",
+      "title": "LibVNC client advisory GHSA-v9pm-47h4-jcq8",
+      "url": "https://github.com/LibVNC/libvncserver/security/advisories/GHSA-v9pm-47h4-jcq8",
+      "publisher": "LibVNC",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Tight decoder attacker-controlled out-of-bounds write. Released 0.9.15 predates advisory; exact upstream fix coverage is a P0-S4 pre-network gate. No claim that observed master is certified patched; reuse upstream fixes/regressions under D12.",
+      "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
+    },
+    {
+      "id": "R136",
+      "title": "LibVNC client advisory GHSA-jcc5-8wj4-7c58",
+      "url": "https://github.com/LibVNC/libvncserver/security/advisories/GHSA-jcc5-8wj4-7c58",
+      "publisher": "LibVNC",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Tight Gradient malicious-server memory corruption. Released 0.9.15 predates advisory; exact upstream fix coverage is a P0-S4 pre-network gate. No claim that observed master is certified patched; reuse upstream fixes/regressions under D12.",
+      "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
+    },
+    {
+      "id": "R137",
+      "title": "LibVNC client advisory GHSA-87q7-v983-qwcj",
+      "url": "https://github.com/LibVNC/libvncserver/security/advisories/GHSA-87q7-v983-qwcj",
+      "publisher": "LibVNC",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "UltraZip unchecked subrectangle count out-of-bounds read. Released 0.9.15 predates advisory; exact upstream fix coverage is a P0-S4 pre-network gate. No claim that observed master is certified patched; reuse upstream fixes/regressions under D12.",
+      "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
+    },
+    {
+      "id": "R138",
+      "title": "Termux official terminal manual",
+      "url": "https://github.com/termux/termux-tools/blob/master/doc/termux.1.md.in",
+      "publisher": "Termux",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Manual identifies app0.117/September2021; documents hardware Ctrl+Alt+V paste, Ctrl+Alt+M menu, session shortcuts and long-press access. Reference behavior, not Cloudy adoption or current device compatibility. D14 desktop contract; P0-S3/P2-S2.",
+      "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
+    },
+    {
+      "id": "R139",
+      "title": "Termux terminal hardware key routing",
+      "url": "https://github.com/termux/termux-app/blob/master/app/src/main/java/com/termux/app/terminal/TermuxTerminalViewClient.java",
+      "publisher": "Termux",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Moving upstream onKeyDown implements Ctrl+Alt menu/paste via showContextMenu/doPaste. Component source is not a Cloudy UX specification or selected dependency/license decision. P0-S3/P2-S2.",
+      "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
+    },
+    {
+      "id": "G122",
+      "title": "Compose keyboard actions and editing defaults",
+      "url": "https://developer.android.com/develop/ui/compose/touch-input/keyboard-input/commands",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-10-13",
+      "note": "Native TextField/BasicTextField editing shortcuts and focus-scoped onKeyEvent/onPreviewKeyEvent handling; return true consumes. Preserve terminal/native-field distinction. Owner native shell, P1-S2/P2-S2.",
+      "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
+    },
+    {
+      "id": "G123",
+      "title": "Android native ClipboardManager",
+      "url": "https://developer.android.com/reference/android/content/ClipboardManager",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "getPrimaryClip/setPrimaryClip/hasPrimaryClip API11; reads may return null without input focus; clearPrimaryClip API28. Explicit native copy/paste only, no background polling; API42 qualification pending. P1-S2/P2-S2.",
+      "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
+    },
+    {
+      "id": "G124",
+      "title": "Android clipboard content description",
+      "url": "https://developer.android.com/reference/android/content/ClipDescription",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "EXTRA_IS_SENSITIVE API33 marks preview sensitivity; does not make clipboard private. Guard before optional use and do not claim secure erasure. API42/P1-S2.",
+      "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
+    },
+    {
+      "id": "G125",
+      "title": "Android copy and paste guide",
+      "url": "https://developer.android.com/develop/ui/views/touch-and-input/copy-paste",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Native ClipData/MIME handling and sensitive clipboard guidance. D14 explicit per-surface clipboard operations; no implicit remote clipboard bridge. P1-S2/P2-S2.",
+      "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
     }
   ]
 }

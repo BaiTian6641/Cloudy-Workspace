@@ -12,7 +12,7 @@ The interface should feel calm at first glance and precise during work: pale min
 2. [Foundations](foundations.md): exact color/type/spacing/shape/motion rules.
 3. [Layout](layout.md): windows, pane geometry, density, and responsive behavior.
 4. [Components](components.md): anatomy, states, sizing, actions, and accessibility.
-5. [Interaction](interaction.md): focus, keyboard, pointer, IME, errors, and reconnect.
+5. [Interaction](interaction.md): focus, keyboard, pointer, IME, errors, and reconnect. Read the [desktop terminal interaction contract](desktop-terminal-interaction-contract.md) for clipboard, shortcuts, selection and per-surface acceptance.
 6. [Screen specifications](screen-specs.md): both products and important edge states.
 7. [Accessibility](accessibility.md): contrast pairs, input access, scaling, and test gates.
 8. [Implementation mapping](implementation-map.md): native components, renderer boundary, and token ownership.

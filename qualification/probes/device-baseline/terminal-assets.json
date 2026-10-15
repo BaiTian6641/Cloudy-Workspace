@@ -1,31 +1,31 @@
 {
   "schemaVersion": 1,
   "checkedDate": "2026-10-15",
-  "purpose": "Pinned generated assets for the isolated P0-S3 terminal qualification probe; no runtime downloads or upstream implementation tracked in Git.",
-  "upstreamCommit": "f447274f430fd22513f6adbf9862d19524471c04",
+  "purpose": "Pinned official prerelease assets for the isolated P0-S3 rapid-input repair candidate; not stable/product adoption. No runtime downloads or upstream implementation tracked in Git.",
+  "upstreamCommit": "991857a1b1cacf06f9531ba74a6e927a7a6398bb",
   "packages": [
     {
       "name": "@xterm/xterm",
-      "version": "6.0.0",
+      "version": "6.1.0-beta.315",
       "license": "MIT",
-      "registryUrl": "https://registry.npmjs.org/@xterm%2fxterm/6.0.0",
-      "archiveUrl": "https://registry.npmjs.org/@xterm/xterm/-/xterm-6.0.0.tgz",
-      "integrity": "sha512-TQwDdQGtwwDt+2cgKDLn0IRaSxYu1tSUjgKarSDkUM0ZNiSRXFpjxEsvc/Zgc5kq5omJ+V0a8/kIM2WD3sMOYg==",
-      "archiveBytes": 1418562,
-      "archiveSha256": "908e66e04af6c8dc6b00dd3b54de088e2e81e5ed866284fd6c2fb3c2d1c7a3f6",
-      "cacheFile": "xterm-6.0.0.tgz",
+      "registryUrl": "https://registry.npmjs.org/@xterm%2fxterm/6.1.0-beta.315",
+      "archiveUrl": "https://registry.npmjs.org/@xterm/xterm/-/xterm-6.1.0-beta.315.tgz",
+      "integrity": "sha512-w7MeKxi6vbxE3IOFRiwgugkM6FZonE9gF9KyJ0OiE5HbYZOm38bz+CTGZg3+wqA6porJnHfjzX1KaihInP+iWg==",
+      "archiveBytes": 1115072,
+      "archiveSha256": "342dfd1e9a5642081b83debd12ef5338b87b59dd9f1a61cb2aad1fba2be1c08e",
+      "cacheFile": "xterm-6.1.0-beta.315.tgz",
       "files": [
         {
           "archivePath": "package/lib/xterm.js",
           "outputPath": "terminal/vendor/xterm.js",
-          "bytes": 488663,
-          "sha256": "14903579ff54664cd72f8e8699e6961a6272c21863ec1c3b118cdc8af5d4a972"
+          "bytes": 391048,
+          "sha256": "74ef2ba7df4859dfff0310317726ef5646d1cb5cac271f66446e900c8d2d6333"
         },
         {
           "archivePath": "package/css/xterm.css",
           "outputPath": "terminal/vendor/xterm.css",
-          "bytes": 7112,
-          "sha256": "854a7c0fb70e8b1a083c16797ab827299fb18744f5ad34f227b48337e33293c6"
+          "bytes": 7862,
+          "sha256": "4d9a1d50808997f097ccc6040a5da6f6cb06b14e5ee2402df5196a218bba838f"
         },
         {
           "archivePath": "package/LICENSE",
@@ -34,26 +34,26 @@
           "sha256": "b569f629d00f2626a8100df2a1798210535621e42164dfd426a6fe5aac7b0ccd"
         }
       ],
-      "archiveMemberCount": 161,
-      "archiveFileBytes": 5921599,
-      "packageJsonSha256": "f5a0dde40a146d6c7a86b22daf6e5740517e5d708ec1d162197e0445431d8f4f"
+      "archiveMemberCount": 122,
+      "archiveFileBytes": 4734596,
+      "packageJsonSha256": "a5b4dfd07ee3162e80bb8c0c39b224c0145081ae9c2ed02916cc8d9d52c889e3"
     },
     {
       "name": "@xterm/addon-fit",
-      "version": "0.11.0",
+      "version": "0.12.0-beta.311",
       "license": "MIT",
-      "registryUrl": "https://registry.npmjs.org/@xterm%2faddon-fit/0.11.0",
-      "archiveUrl": "https://registry.npmjs.org/@xterm/addon-fit/-/addon-fit-0.11.0.tgz",
-      "integrity": "sha512-jYcgT6xtVYhnhgxh3QgYDnnNMYTcf8ElbxxFzX0IZo+vabQqSPAjC3c1wJrKB5E19VwQei89QCiZZP86DCPF7g==",
-      "archiveBytes": 5488,
-      "archiveSha256": "26003b4517a132b64e4ff228fd88a5fda3fff5e606c76093f6dcff772e9ecec0",
-      "cacheFile": "addon-fit-0.11.0.tgz",
+      "registryUrl": "https://registry.npmjs.org/@xterm%2faddon-fit/0.12.0-beta.311",
+      "archiveUrl": "https://registry.npmjs.org/@xterm/addon-fit/-/addon-fit-0.12.0-beta.311.tgz",
+      "integrity": "sha512-M40mAWDoAVKz+0zs5ipmBJ+tNilw8CzUbbGIX05NANmTiw0MS47FYeJ4d2El4zdvFphDJjtVLrxTKXuz2wUM6Q==",
+      "archiveBytes": 5658,
+      "archiveSha256": "7a0509a72149812f95ceb019ab7aaf3400d0bdae420060b760f6648bbe9c77b2",
+      "cacheFile": "addon-fit-0.12.0-beta.311.tgz",
       "files": [
         {
           "archivePath": "package/lib/addon-fit.js",
           "outputPath": "terminal/vendor/addon-fit.js",
-          "bytes": 1521,
-          "sha256": "ba3ea256ce0620a0992a197d6c9baea64823fc93d8da07a9e366ca9943c18527"
+          "bytes": 1564,
+          "sha256": "acc70dbdb41ff8e6cb8b37ad888dabd2285267e97f79f2e72ab864fd6337df1c"
         },
         {
           "archivePath": "package/LICENSE",
@@ -63,8 +63,8 @@
         }
       ],
       "archiveMemberCount": 9,
-      "archiveFileBytes": 20727,
-      "packageJsonSha256": "2f1016c5683f76ac1250c466afc29164bc82da7c2ef224c7d5ab83397edf1637"
+      "archiveFileBytes": 21421,
+      "packageJsonSha256": "4cbe971eaf71e5f02ca97438e13f695420daa54f365ec4d019321f80cff0b58e"
     }
   ],
   "additionalNotices": [
@@ -74,8 +74,8 @@
       "sourceUrl": "https://raw.githubusercontent.com/microsoft/vscode/1.106.3/LICENSE.txt",
       "bytes": 1088,
       "sha256": "9480271317925265e806a9a196aaa33410a962fa9d4d1e248a4a5187bc8c9df9",
-      "reason": "The core archive includes Microsoft-copyrighted src/vs/base sources. Preserve the upstream MIT text and attribution separately because the minified JS and package LICENSE omit Microsoft. This license-text source tag is not a claim about the vendored implementation revision.",
-      "implementationProvenanceUrl": "https://raw.githubusercontent.com/xtermjs/xterm.js/f447274f430fd22513f6adbf9862d19524471c04/src/vs/README.md"
+      "reason": "The core archive includes Microsoft-copyrighted src/browser/scrollable implementations. Preserve the upstream MIT text and attribution separately because the minified JS and package LICENSE omit Microsoft. This license-text source tag is not a claim about the vendored implementation revision.",
+      "implementationProvenanceUrl": "https://raw.githubusercontent.com/xtermjs/xterm.js/991857a1b1cacf06f9531ba74a6e927a7a6398bb/src/browser/scrollable/scrollableElement.ts"
     }
   ]
 }

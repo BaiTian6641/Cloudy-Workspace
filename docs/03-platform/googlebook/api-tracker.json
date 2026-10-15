@@ -147,7 +147,8 @@
         "G02",
         "G24",
         "G25",
-        "G117"
+        "G117",
+        "G122"
       ],
       "minimumApi": null,
       "libraryVersion": null,
@@ -157,7 +158,7 @@
       "owner": "Android/platform developer",
       "stage": "P0-S3",
       "fallback": "Menus and command palette remain. If the initial native request is rejected, show a separate tap-terminal hint without masking SSH status or aborting the connection; later focus stays under normal user/framework control.",
-      "experiment": "Retain the actual paced injected-input focus result; investigate the unresolved rapid ADB input duplication separately. Qualify physical keyboard focus transitions, native IME/preedit/commit bytes, Ctrl+C, selection, bulk paste and reserved shortcuts independently.",
+      "experiment": "Retain the actual paced injected-input focus result; investigate the unresolved rapid ADB input duplication separately. Qualify physical keyboard focus transitions, native IME/preedit/commit bytes, Ctrl+C, selection, bulk paste and reserved shortcuts independently. Apply D14 desktop interaction contract: focused native-field shortcuts, terminal Ctrl+C versus Ctrl+Shift+C/V, direct selection/context menus and discoverable/remappable local actions without touch-only prerequisites.",
       "versionNotes": "The native focus subset setFocusable(boolean), setFocusableInTouchMode(boolean), isFocusableInTouchMode(), requestFocus(), hasFocus() and Activity.getCurrentFocus() is API1. Probe minSdk35 needs no extra guard for this subset. The existing keyboard/shortcut scope retains its separate per-method and physical qualification.",
       "runtimeGuard": "Call View methods on the UI thread. Explicit Connect adds the WebView, renders native controls, then calls requestFocus() once before renderer.start(). Check the boolean result; do not refocus from READY/open/render/resume or intercept all keys. getCurrentFocus()/hasFocus() diagnostics describe native focus, not DOM focus, window focus or IME readiness.",
       "implementationEvidence": "docs/06-validation/2026-10-15-terminal-focus-review.md",
@@ -492,7 +493,10 @@
         "R121",
         "R122",
         "R123",
-        "R124"
+        "R124",
+        "R130",
+        "R131",
+        "R132"
       ],
       "minimumApi": 26,
       "libraryVersion": "androidx.webkit:webkit:1.17.1 (diagnostics 0.7.0/0.7.1; bounded device observations recorded, full qualification pending)",
@@ -502,7 +506,7 @@
       "owner": "Android/platform developer",
       "stage": "P0-S3",
       "fallback": "Expose renderer-unavailable or interrupted state; retain independent native SSH/SFTP. No broad JSON/evaluate-JavaScript fallback. A native renderer is a separate unqualified investigation.",
-      "experiment": "P0-S3 real visible native SSH shell with local xterm core 6.0.0/fit 0.11.0 candidate: exact input/output bytes, real resize/TUI, bounded output acknowledgments, stale-origin/generation rejection, renderer-loss abort, physical CJK IME/preedit and TalkBack. Tests and adoption review precede any capability claim. For the unresolved rapid-input defect, use the finite own-target passive diagnostic in docs/07-reference/2026-10-15-terminal-input-diagnostics.md: controlled host byte capture plus scoped textarea events, with native/document focus checks and explicit cleanup. Actual scoped DOM/host traces are recorded separately in qualification/results/P0-S3/2026-10-15-terminal-input-trace.md. The upstream candidate and 39-case exact-method experiment are in docs/07-reference/2026-10-15-xterm-input-fix-candidate.md; no full-library or device repair is established.",
+      "experiment": "P0-S3 real visible native SSH shell with local xterm core 6.0.0/fit 0.11.0 candidate: exact input/output bytes, real resize/TUI, bounded output acknowledgments, stale-origin/generation rejection, renderer-loss abort, physical CJK IME/preedit and TalkBack. Tests and adoption review precede any capability claim. For the unresolved rapid-input defect, use the finite own-target passive diagnostic in docs/07-reference/2026-10-15-terminal-input-diagnostics.md: controlled host byte capture plus scoped textarea events, with native/document focus checks and explicit cleanup. Actual scoped DOM/host traces are recorded separately in qualification/results/P0-S3/2026-10-15-terminal-input-trace.md. The upstream candidate and 39-case exact-method experiment are in docs/07-reference/2026-10-15-xterm-input-fix-candidate.md; no full-library or device repair is established. Diagnostic0.7.2 selects official core6.1.0-beta.315/fit0.12.0-beta.311 for bounded rapid-input repair; full-library synthetic results are distinct from pending actual-device, native IME and accessibility acceptance.",
       "versionNotes": "AssetLoader WebKit1.1.0; listener1.3.0; binary message/reply1.8.0. Actual1.17.1 AAR minSdk24/minCompileSdk33/minAGP7.2 inspected; full callback route needs API26 and probe min35 covers it. Actual graph/assets reviewed for the diagnostic. xterm Unicode6 default; no Unicode11/grapheme adoption. Device/provider/IME/TalkBack qualification remains pending. Development diagnostics only: G118 documents automatic WebView debugging for debuggable apps from provider 113.0.5656.0, despite conflicting G119/G120 guidance. The Android API 19 debug-enabling symbol is not a new production call and does not lower this renderer route's minimum API. Own-process CDP and experimental protocol options require runtime verification.",
       "runtimeGuard": "Check WEB_MESSAGE_LISTENER and WEB_MESSAGE_ARRAY_BUFFER on the actual provider before admission. Exact HTTPS local origin plus sourceOrigin/isMainFrame/current attachment checks; no wildcard/file/content page. UI-thread message callbacks only validate/enqueue; native I/O owns SSH. Missing support or renderer loss stops input without replay. Keep native LAN permission/admission separate.",
       "researchEvidence": "docs/03-platform/googlebook/p0-s3-terminal-renderer-increment.md",
@@ -751,18 +755,21 @@
         "R21",
         "R22",
         "R23",
-        "R31"
+        "R31",
+        "R133",
+        "R134"
       ],
       "minimumApi": null,
-      "libraryVersion": null,
+      "libraryVersion": "FreeRDP3.32.2 build candidate, 97eff6ddfbbfaa8e42a126d362686bd001ff8bdc",
       "interfaceKind": "upstream-client-and-standard",
       "availability": "Android client documented; 3.27.1 adds RAIL; selected build/optional channels unqualified",
       "qualification": "untested",
-      "checkedOn": "2026-10-14",
+      "checkedOn": "2026-10-15",
       "owner": "Android/integration developer",
       "stage": "P3-S7",
       "fallback": "Explicit engine remediation; external viewer is partial and cannot complete the integrated RDP requirement",
-      "experiment": "Build pinned engine, verify certificate/NLA/input/IME/session/UDP-TCP behavior; RemoteApp requires actual published app and separate evidence"
+      "experiment": "Build pinned engine, verify certificate/NLA/input/IME/session/UDP-TCP behavior; RemoteApp requires actual published app and separate evidence P0-S4 begins with reduced arm64 native GDI/Bitmap/View build and explicit trust/input/cancel integration; tool availability/build remain unverified.",
+      "researchEvidence": "docs/03-platform/googlebook/p0-s4-native-desktop-entry.md"
     },
     {
       "id": "API31",
@@ -780,18 +787,22 @@
         "R25",
         "R26",
         "R27",
-        "R32"
+        "R32",
+        "R135",
+        "R136",
+        "R137"
       ],
       "minimumApi": null,
       "libraryVersion": null,
       "interfaceKind": "upstream-client-and-standard",
       "availability": "LibVNCClient candidate API; license/security/build selection pending",
       "qualification": "untested",
-      "checkedOn": "2026-10-14",
+      "checkedOn": "2026-10-15",
       "owner": "Android/integration developer",
       "stage": "P3-S8",
       "fallback": "Choose a maintained compatible engine; external viewer is a labeled partial workflow",
-      "experiment": "Pin patched engine and qualify security/encoding/resize/input/recovery with primary servers; no implicit file-transfer extension"
+      "experiment": "Pin patched engine and qualify security/encoding/resize/input/recovery with primary servers; no implicit file-transfer extension Before opening a server connection, resolve exact client advisory fix coverage; bare0.9.15 is not the probe pin. GPL distribution decision remains separate.",
+      "researchEvidence": "docs/03-platform/googlebook/p0-s4-native-desktop-entry.md"
     },
     {
       "id": "API32",
@@ -905,9 +916,9 @@
       "experiment": "Compare actual view/metrics insets while resizing and moving between displays.",
       "partialObservation": {
         "evidence": "qualification/results/P0-S2/2026-10-15-window-probe.md",
-        "note": "Actual maximize/restore, corner resize to 638 \u00d7 612 px and tiled divider resize to a 653 px wide window observed at density 1.625 / font scale 1.0. Activity recreation preserved local state. Attached-decor versus metrics inset source differences retained. No physical-input, larger-font or external-display claim.",
+        "note": "Actual maximize/restore, corner resize to 638 × 612 px and tiled divider resize to a 653 px wide window observed at density 1.625 / font scale 1.0. Activity recreation preserved local state. Attached-decor versus metrics inset source differences retained. No physical-input, larger-font or external-display claim.",
         "fontScaleEvidence": "qualification/results/P0-S2/2026-10-15-font-scale.md",
-        "fontScaleNote": "Separate 0.2.0 run: 130%/200% actual font configurations, reachable controls by scrolling in 648\u00d7600px window, actual Refresh completion and independent saved marker state; original1.0 restored. No full accessibility/physical input qualification."
+        "fontScaleNote": "Separate 0.2.0 run: 130%/200% actual font configurations, reachable controls by scrolling in 648×600px window, actual Refresh completion and independent saved marker state; original1.0 restored. No full accessibility/physical input qualification."
       }
     },
     {
@@ -1005,7 +1016,7 @@
         "note": "Explicit recreate preserved A logical ID/task/marker/count in a fresh generation with unchanged process and B state. Resize-triggered recreations retained state. The separate background-kill run verified old PID absence, then restored B logical ID/task/C2 from Bundle in a new generation and process via existing Recents task. No force-stop, reboot, natural low-memory or operation durability claim.",
         "processRestorationEvidence": "qualification/results/P0-S2/2026-10-15-process-restoration.md",
         "fontScaleEvidence": "qualification/results/P0-S2/2026-10-15-font-scale.md",
-        "fontScaleNote": "Separate 0.2.0 run: 130%/200% actual font configurations, reachable controls by scrolling in 648\u00d7600px window, actual Refresh completion and independent saved marker state; original1.0 restored. No full accessibility/physical input qualification."
+        "fontScaleNote": "Separate 0.2.0 run: 130%/200% actual font configurations, reachable controls by scrolling in 648×600px window, actual Refresh completion and independent saved marker state; original1.0 restored. No full accessibility/physical input qualification."
       }
     },
     {
@@ -1164,6 +1175,33 @@
         "followupEvidence": "qualification/results/P0-S2/2026-10-15-transfer-followup.md",
         "followupNote": "Accepted separate 0.4.1 batch: trusted CA with wrong hostname rejected with SSLPeerUnverifiedException before payload; active native task closure/return retained one exact 64 MiB download. Current-user shell stop test caused process loss followed by automatic process return before explicit relaunch, interruption reconciliation and no new HTTP request. Restart cause and actual Task Manager UI behavior remain unqualified. Direct-LAN denied-socket enforcement, revocation and assigned-network changes remain untested."
       }
+    },
+    {
+      "id": "API42",
+      "feature": "Explicit desktop clipboard operations",
+      "symbols": [
+        "ClipboardManager.getPrimaryClip",
+        "ClipboardManager.setPrimaryClip",
+        "ClipboardManager.hasPrimaryClip",
+        "ClipboardManager.clearPrimaryClip",
+        "ClipDescription.EXTRA_IS_SENSITIVE"
+      ],
+      "sourceIds": [
+        "G123",
+        "G124",
+        "G125"
+      ],
+      "minimumApi": 11,
+      "libraryVersion": null,
+      "availability": "documented-not-implemented",
+      "qualification": "untested",
+      "checkedOn": "2026-10-15",
+      "owner": "Native shell/terminal developer",
+      "stage": "P2-S2",
+      "fallback": "Visible unavailable/no-selection/unsupported-type state; native picker or composer as applicable. Never background-poll, replay or fabricate clipboard input.",
+      "experiment": "D14: explicit shortcuts and Edit/context actions, native field editing, exact selected text and paste bytes, focused recipient/attachment invalidation, clipboard unavailable/MIME/lifecycle behavior and no content logging.",
+      "versionNotes": "Core clipboard methods API11; clearPrimaryClip API28; EXTRA_IS_SENSITIVE API33. Runtime guards if below these levels. Clipboard sensitivity does not imply secrecy or erasure.",
+      "researchEvidence": "docs/04-design/desktop-terminal-interaction-contract.md"
     }
   ],
   "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."

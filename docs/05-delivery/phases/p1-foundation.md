@@ -39,6 +39,8 @@ Record evidence under `qualification/results/P1-S1/` using the [run template](..
 
 ## P1-S2 — Cloudy design system and native shell
 
+Apply [D14 desktop interaction](../../04-design/desktop-terminal-interaction-contract.md): keyboard shortcuts, ordinary native editing, direct pointer selection and context menus remain required regardless of the reused engine. No long-press or mobile key row is a prerequisite.
+
 **Owner:** Design/Android developer. **Prerequisites:** P1-S1. **Status:** planned.
 
 **Required supported capabilities:** CAP-PLATFORM.

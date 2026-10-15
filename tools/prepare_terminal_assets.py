@@ -36,12 +36,12 @@ MAX_MEMBER_BYTES = 8 * 1024 * 1024
 MAX_MEMBERS = 512
 MANIFEST_LIMIT = 32 * 1024
 EXPECTED = {
-    "@xterm/xterm": ("6.0.0", {
+    "@xterm/xterm": ("6.1.0-beta.315", {
         "package/lib/xterm.js": "terminal/vendor/xterm.js",
         "package/css/xterm.css": "terminal/vendor/xterm.css",
         "package/LICENSE": "terminal/notices/xterm-LICENSE.txt",
     }),
-    "@xterm/addon-fit": ("0.11.0", {
+    "@xterm/addon-fit": ("0.12.0-beta.311", {
         "package/lib/addon-fit.js": "terminal/vendor/addon-fit.js",
         "package/LICENSE": "terminal/notices/addon-fit-LICENSE.txt",
     }),

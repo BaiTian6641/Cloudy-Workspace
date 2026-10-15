@@ -73,6 +73,8 @@ Record evidence under `qualification/results/P2-S8/` using the [run template](..
 
 ## P2-S2 — Interactive terminal correctness and bounded data path
 
+Apply [D14 desktop interaction](../../04-design/desktop-terminal-interaction-contract.md): keyboard shortcuts, ordinary native editing, direct pointer selection and context menus remain required regardless of the reused engine. No long-press or mobile key row is a prerequisite.
+
 **Owner:** Terminal/input developer. **Prerequisites:** P2-S1. **Status:** planned.
 
 **Required supported capabilities:** CAP-TERMINAL.

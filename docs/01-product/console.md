@@ -18,7 +18,7 @@ Do not merge host, environment, workspace, and session into one overloaded name.
 | C02 | Trust | Show key algorithm/fingerprint on first use; explain changed keys and stop connection pending deliberate resolution | R1 / P2-S1 |
 | C03 | Authentication | Keys and agent/library-supported methods selected in P0; password/keyboard-interactive only with native prompt handling | R1 / P2-S1 |
 | C04 | PTY | Negotiated TERM, exact byte stream, resize, alternate screen, bracketed paste, UTF-8 and bounded backpressure | R1 / P2-S2 |
-| C05 | Input | Ctrl+C interrupt; explicit copy/paste shortcuts; system IME; visible focus; never submit a paste without the configured user action | R1 / P2-S2 |
+| C05 | Input | Desktop keyboard/mouse/trackpad input, Ctrl+C terminal semantics, Ctrl+Shift+C/V copy/paste, direct selection, discoverable context/Edit menus and native field shortcuts; system IME and visible focus. Follow the [desktop interaction contract](../04-design/desktop-terminal-interaction-contract.md); no touch-only prerequisite or paste submission outside configured policy | R1 / P2-S2 |
 | C06 | Layout | Tabs, vertical/horizontal splits, pane focus, zoom active pane, saved layout, independent windows | R1 / P2-S3 |
 | C07 | Persistence | Attach to named tmux sessions where configured; label ordinary Windows SSH non-persistent; no command replay | R1 / P2-S3 |
 | C08 | SFTP attachments | Pick/drop/paste file or image, choose host/project destination, verify upload, insert appropriate remote path | R1 / P2-S4 |

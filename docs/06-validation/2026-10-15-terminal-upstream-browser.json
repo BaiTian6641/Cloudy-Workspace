@@ -1,0 +1,854 @@
+{
+  "schemaVersion": 1,
+  "checkedOn": "2026-10-15",
+  "scope": "Actual official JS bundles and authored bridge/CSS in desktop Chrome with synthetic DOM input and test-only native endpoint. No physical keyboard, Android WebView, CSP, SSH or accessibility qualification.",
+  "reports": {
+    "stable": {
+      "scope": "Synthetic DOM -> actual xterm + fit -> authored Cloudy bridge -> test native endpoint; no physical IME/WebView/SSH qualification",
+      "chrome": "Google Chrome 155.0.8059.39",
+      "hashes": {
+        "core": {
+          "path": ".cache/terminal-input-browser/stable/vendor/xterm.js",
+          "sha256": "14903579ff54664cd72f8e8699e6961a6272c21863ec1c3b118cdc8af5d4a972"
+        },
+        "fit": {
+          "path": ".cache/terminal-input-browser/stable/vendor/addon-fit.js",
+          "sha256": "ba3ea256ce0620a0992a197d6c9baea64823fc93d8da07a9e366ca9943c18527"
+        },
+        "css": {
+          "path": ".cache/terminal-input-browser/stable/vendor/xterm.css",
+          "sha256": "854a7c0fb70e8b1a083c16797ab827299fb18744f5ad34f227b48337e33293c6"
+        },
+        "authoredCss": {
+          "path": "qualification/probes/device-baseline/app/src/main/assets/terminal/terminal.css",
+          "sha256": "3fbe8ee77acc974fe2c0f9a74d43e66e347410e4bbf58ea3a060eab9b49bf92d"
+        },
+        "bridge": {
+          "path": "qualification/probes/device-baseline/app/src/main/assets/terminal/terminal.js",
+          "sha256": "67737d931eb233eb16a15e71781ffdf3e37fca942320e91d16829a5b0bb88177"
+        },
+        "runner": {
+          "path": "tests/test_terminal_input_browser.cjs",
+          "sha256": "95e799709f62b9317c26aeb72a9722219058b7b5d1efceb391dd78f91bba60ec"
+        },
+        "fixture": {
+          "path": "tests/fixtures/terminal_input_browser.js",
+          "sha256": "bb9a42c6511d4affe746bbd7c1ff0133e3f1abf6c08d1106faec619e0aa67d84"
+        }
+      },
+      "smoke": {
+        "name": "startup-fit-output",
+        "scope": "startup/fit/output parser only; resize requires real-device check",
+        "readyGeometry": {
+          "columns": 91,
+          "rows": 17
+        },
+        "outputAck": {
+          "sequence": 1,
+          "length": 7
+        },
+        "errors": [],
+        "regressionMatched": true
+      },
+      "cases": [
+        {
+          "name": "rapid-stty",
+          "bytes": [
+            115,
+            116,
+            116,
+            121,
+            116,
+            116,
+            121,
+            116,
+            121,
+            121
+          ],
+          "chunks": [
+            [
+              115,
+              116,
+              116,
+              121
+            ],
+            [
+              116,
+              116,
+              121
+            ],
+            [
+              116,
+              121
+            ],
+            [
+              121
+            ]
+          ],
+          "errors": [],
+          "expectedBytes": [
+            115,
+            116,
+            116,
+            121,
+            116,
+            116,
+            121,
+            116,
+            121,
+            121
+          ],
+          "desiredBytes": [
+            115,
+            116,
+            116,
+            121
+          ],
+          "regressionMatched": true,
+          "inputIntegrity": false
+        },
+        {
+          "name": "paced-stty",
+          "bytes": [
+            115,
+            116,
+            116,
+            121
+          ],
+          "chunks": [
+            [
+              115
+            ],
+            [
+              116
+            ],
+            [
+              116
+            ],
+            [
+              121
+            ]
+          ],
+          "errors": [],
+          "expectedBytes": [
+            115,
+            116,
+            116,
+            121
+          ],
+          "desiredBytes": [
+            115,
+            116,
+            116,
+            121
+          ],
+          "regressionMatched": true,
+          "inputIntegrity": true
+        },
+        {
+          "name": "rapid-repeated",
+          "bytes": [
+            116,
+            116,
+            116,
+            116,
+            116,
+            116,
+            116,
+            116,
+            116,
+            116
+          ],
+          "chunks": [
+            [
+              116,
+              116,
+              116,
+              116
+            ],
+            [
+              116,
+              116,
+              116
+            ],
+            [
+              116,
+              116
+            ],
+            [
+              116
+            ]
+          ],
+          "errors": [],
+          "expectedBytes": [
+            116,
+            116,
+            116,
+            116,
+            116,
+            116,
+            116,
+            116,
+            116,
+            116
+          ],
+          "desiredBytes": [
+            116,
+            116,
+            116,
+            116
+          ],
+          "regressionMatched": true,
+          "inputIntegrity": false
+        },
+        {
+          "name": "paced-repeated",
+          "bytes": [
+            116,
+            116,
+            116,
+            116
+          ],
+          "chunks": [
+            [
+              116
+            ],
+            [
+              116
+            ],
+            [
+              116
+            ],
+            [
+              116
+            ]
+          ],
+          "errors": [],
+          "expectedBytes": [
+            116,
+            116,
+            116,
+            116
+          ],
+          "desiredBytes": [
+            116,
+            116,
+            116,
+            116
+          ],
+          "regressionMatched": true,
+          "inputIntegrity": true
+        },
+        {
+          "name": "single-delete",
+          "bytes": [
+            127
+          ],
+          "chunks": [
+            [
+              127
+            ]
+          ],
+          "errors": [],
+          "expectedBytes": [
+            127
+          ],
+          "desiredBytes": [
+            127
+          ],
+          "regressionMatched": true,
+          "inputIntegrity": true
+        },
+        {
+          "name": "coalesced-delete",
+          "bytes": [
+            127,
+            127,
+            127,
+            127
+          ],
+          "chunks": [
+            [
+              127
+            ],
+            [
+              127
+            ],
+            [
+              127
+            ],
+            [
+              127
+            ]
+          ],
+          "errors": [],
+          "expectedBytes": [
+            127,
+            127,
+            127,
+            127
+          ],
+          "desiredBytes": [
+            127,
+            127,
+            127,
+            127
+          ],
+          "regressionMatched": true,
+          "inputIntegrity": true
+        },
+        {
+          "name": "equal-length-replacement",
+          "bytes": [
+            97,
+            120
+          ],
+          "chunks": [
+            [
+              97,
+              120
+            ]
+          ],
+          "errors": [],
+          "expectedBytes": [
+            97,
+            120
+          ],
+          "desiredBytes": [
+            127,
+            120
+          ],
+          "regressionMatched": true,
+          "inputIntegrity": false
+        },
+        {
+          "name": "composition-commit",
+          "bytes": [
+            228,
+            184,
+            173
+          ],
+          "chunks": [
+            [
+              228,
+              184,
+              173
+            ]
+          ],
+          "errors": [],
+          "expectedBytes": [
+            228,
+            184,
+            173
+          ],
+          "desiredBytes": [
+            228,
+            184,
+            173
+          ],
+          "regressionMatched": true,
+          "inputIntegrity": true
+        },
+        {
+          "name": "composition-cancel",
+          "bytes": [],
+          "chunks": [],
+          "errors": [],
+          "expectedBytes": [],
+          "desiredBytes": [],
+          "regressionMatched": true,
+          "inputIntegrity": true
+        },
+        {
+          "name": "composition-enter",
+          "bytes": [
+            228,
+            184,
+            173,
+            13
+          ],
+          "chunks": [
+            [
+              228,
+              184,
+              173
+            ],
+            [
+              13
+            ]
+          ],
+          "errors": [],
+          "expectedBytes": [
+            228,
+            184,
+            173,
+            13
+          ],
+          "desiredBytes": [
+            228,
+            184,
+            173,
+            13
+          ],
+          "regressionMatched": true,
+          "inputIntegrity": true
+        },
+        {
+          "name": "key-controls",
+          "bytes": [
+            3,
+            127,
+            13
+          ],
+          "chunks": [
+            [
+              3
+            ],
+            [
+              127
+            ],
+            [
+              13
+            ]
+          ],
+          "errors": [],
+          "expectedBytes": [
+            3,
+            127,
+            13
+          ],
+          "desiredBytes": [
+            3,
+            127,
+            13
+          ],
+          "regressionMatched": true,
+          "inputIntegrity": true
+        }
+      ],
+      "allInputIntegrity": false,
+      "privateReport": {
+        "path": ".cache/terminal-input-browser/stable-accepted.json",
+        "bytes": 7636,
+        "sha256": "c906245e0f79059bd1daeef1aa3c8468b8871d56b219af42f731c4654bd2c9b7"
+      }
+    },
+    "candidate": {
+      "scope": "Synthetic DOM -> actual xterm + fit -> authored Cloudy bridge -> test native endpoint; no physical IME/WebView/SSH qualification",
+      "chrome": "Google Chrome 155.0.8059.39",
+      "hashes": {
+        "core": {
+          "path": "qualification/probes/device-baseline/app/build/generated/terminalAssets/terminal/vendor/xterm.js",
+          "sha256": "74ef2ba7df4859dfff0310317726ef5646d1cb5cac271f66446e900c8d2d6333"
+        },
+        "fit": {
+          "path": "qualification/probes/device-baseline/app/build/generated/terminalAssets/terminal/vendor/addon-fit.js",
+          "sha256": "acc70dbdb41ff8e6cb8b37ad888dabd2285267e97f79f2e72ab864fd6337df1c"
+        },
+        "css": {
+          "path": "qualification/probes/device-baseline/app/build/generated/terminalAssets/terminal/vendor/xterm.css",
+          "sha256": "4d9a1d50808997f097ccc6040a5da6f6cb06b14e5ee2402df5196a218bba838f"
+        },
+        "authoredCss": {
+          "path": "qualification/probes/device-baseline/app/src/main/assets/terminal/terminal.css",
+          "sha256": "3fbe8ee77acc974fe2c0f9a74d43e66e347410e4bbf58ea3a060eab9b49bf92d"
+        },
+        "bridge": {
+          "path": "qualification/probes/device-baseline/app/src/main/assets/terminal/terminal.js",
+          "sha256": "67737d931eb233eb16a15e71781ffdf3e37fca942320e91d16829a5b0bb88177"
+        },
+        "runner": {
+          "path": "tests/test_terminal_input_browser.cjs",
+          "sha256": "95e799709f62b9317c26aeb72a9722219058b7b5d1efceb391dd78f91bba60ec"
+        },
+        "fixture": {
+          "path": "tests/fixtures/terminal_input_browser.js",
+          "sha256": "bb9a42c6511d4affe746bbd7c1ff0133e3f1abf6c08d1106faec619e0aa67d84"
+        }
+      },
+      "smoke": {
+        "name": "startup-fit-output",
+        "scope": "startup/fit/output parser only; resize requires real-device check",
+        "readyGeometry": {
+          "columns": 91,
+          "rows": 17
+        },
+        "outputAck": {
+          "sequence": 1,
+          "length": 7
+        },
+        "errors": [],
+        "regressionMatched": true
+      },
+      "cases": [
+        {
+          "name": "rapid-stty",
+          "bytes": [
+            115,
+            116,
+            116,
+            121
+          ],
+          "chunks": [
+            [
+              115,
+              116,
+              116,
+              121
+            ]
+          ],
+          "errors": [],
+          "expectedBytes": [
+            115,
+            116,
+            116,
+            121
+          ],
+          "desiredBytes": [
+            115,
+            116,
+            116,
+            121
+          ],
+          "regressionMatched": true,
+          "inputIntegrity": true
+        },
+        {
+          "name": "paced-stty",
+          "bytes": [
+            115,
+            116,
+            116,
+            121
+          ],
+          "chunks": [
+            [
+              115
+            ],
+            [
+              116
+            ],
+            [
+              116
+            ],
+            [
+              121
+            ]
+          ],
+          "errors": [],
+          "expectedBytes": [
+            115,
+            116,
+            116,
+            121
+          ],
+          "desiredBytes": [
+            115,
+            116,
+            116,
+            121
+          ],
+          "regressionMatched": true,
+          "inputIntegrity": true
+        },
+        {
+          "name": "rapid-repeated",
+          "bytes": [
+            116,
+            116,
+            116,
+            116
+          ],
+          "chunks": [
+            [
+              116,
+              116,
+              116,
+              116
+            ]
+          ],
+          "errors": [],
+          "expectedBytes": [
+            116,
+            116,
+            116,
+            116
+          ],
+          "desiredBytes": [
+            116,
+            116,
+            116,
+            116
+          ],
+          "regressionMatched": true,
+          "inputIntegrity": true
+        },
+        {
+          "name": "paced-repeated",
+          "bytes": [
+            116,
+            116,
+            116,
+            116
+          ],
+          "chunks": [
+            [
+              116
+            ],
+            [
+              116
+            ],
+            [
+              116
+            ],
+            [
+              116
+            ]
+          ],
+          "errors": [],
+          "expectedBytes": [
+            116,
+            116,
+            116,
+            116
+          ],
+          "desiredBytes": [
+            116,
+            116,
+            116,
+            116
+          ],
+          "regressionMatched": true,
+          "inputIntegrity": true
+        },
+        {
+          "name": "single-delete",
+          "bytes": [
+            127
+          ],
+          "chunks": [
+            [
+              127
+            ]
+          ],
+          "errors": [],
+          "expectedBytes": [
+            127
+          ],
+          "desiredBytes": [
+            127
+          ],
+          "regressionMatched": true,
+          "inputIntegrity": true
+        },
+        {
+          "name": "coalesced-delete",
+          "bytes": [
+            127
+          ],
+          "chunks": [
+            [
+              127
+            ]
+          ],
+          "errors": [],
+          "expectedBytes": [
+            127
+          ],
+          "desiredBytes": [
+            127,
+            127,
+            127,
+            127
+          ],
+          "regressionMatched": true,
+          "inputIntegrity": false
+        },
+        {
+          "name": "equal-length-replacement",
+          "bytes": [
+            97,
+            120
+          ],
+          "chunks": [
+            [
+              97,
+              120
+            ]
+          ],
+          "errors": [],
+          "expectedBytes": [
+            97,
+            120
+          ],
+          "desiredBytes": [
+            127,
+            120
+          ],
+          "regressionMatched": true,
+          "inputIntegrity": false
+        },
+        {
+          "name": "composition-commit",
+          "bytes": [
+            228,
+            184,
+            173
+          ],
+          "chunks": [
+            [
+              228,
+              184,
+              173
+            ]
+          ],
+          "errors": [],
+          "expectedBytes": [
+            228,
+            184,
+            173
+          ],
+          "desiredBytes": [
+            228,
+            184,
+            173
+          ],
+          "regressionMatched": true,
+          "inputIntegrity": true
+        },
+        {
+          "name": "composition-cancel",
+          "bytes": [],
+          "chunks": [],
+          "errors": [],
+          "expectedBytes": [],
+          "desiredBytes": [],
+          "regressionMatched": true,
+          "inputIntegrity": true
+        },
+        {
+          "name": "composition-enter",
+          "bytes": [
+            228,
+            184,
+            173,
+            13
+          ],
+          "chunks": [
+            [
+              228,
+              184,
+              173
+            ],
+            [
+              13
+            ]
+          ],
+          "errors": [],
+          "expectedBytes": [
+            228,
+            184,
+            173,
+            13
+          ],
+          "desiredBytes": [
+            228,
+            184,
+            173,
+            13
+          ],
+          "regressionMatched": true,
+          "inputIntegrity": true
+        },
+        {
+          "name": "key-controls",
+          "bytes": [
+            3,
+            127,
+            13
+          ],
+          "chunks": [
+            [
+              3
+            ],
+            [
+              127
+            ],
+            [
+              13
+            ]
+          ],
+          "errors": [],
+          "expectedBytes": [
+            3,
+            127,
+            13
+          ],
+          "desiredBytes": [
+            3,
+            127,
+            13
+          ],
+          "regressionMatched": true,
+          "inputIntegrity": true
+        }
+      ],
+      "allInputIntegrity": false,
+      "privateReport": {
+        "path": ".cache/terminal-input-browser/candidate-accepted.json",
+        "bytes": 6972,
+        "sha256": "925292923eceb7ab6542a62394e5146914b8330800e84adfc25540a766fd3f3e"
+      }
+    }
+  },
+  "retainedEarlierRuns": [
+    {
+      "path": ".cache/terminal-input-browser/candidate-final-02.json",
+      "bytes": 2550,
+      "sha256": "71bf143aded32700223b918220159f2366e31c9542f80c9b659637ee5d82eb8b",
+      "error": "Error: startup-fit-resize-output timed out",
+      "completedCases": 0
+    },
+    {
+      "path": ".cache/terminal-input-browser/candidate-report-02.json",
+      "bytes": 5983,
+      "sha256": "ca227f9ce03302e610b2f8116ffae566c49197783e4970728d863186dc00bacf",
+      "error": null,
+      "completedCases": 11
+    },
+    {
+      "path": ".cache/terminal-input-browser/candidate-report.json",
+      "bytes": 1310,
+      "sha256": "37701abe90930db97feb3c8f8af2a981d6413ab3798452c168029c3fa4992b43",
+      "error": "Error: paced-stty timed out",
+      "completedCases": 0
+    },
+    {
+      "path": ".cache/terminal-input-browser/stable-final-02.json",
+      "bytes": 2418,
+      "sha256": "2c521dda305df4a9730a73e8cf4d9940b6e064f48a23dcc2fcf9a41fe237a1f6",
+      "error": "Error: startup-fit-resize-output timed out",
+      "completedCases": 0
+    },
+    {
+      "path": ".cache/terminal-input-browser/stable-final.json",
+      "bytes": 2026,
+      "sha256": "0b9ee10d5a3087df2ce75b3a08eb72cdffc24fb2a9fc53d96272838b20b263c5",
+      "error": "Error: Error: real ResizeObserver/fit changed geometry not observed",
+      "completedCases": 0
+    },
+    {
+      "path": ".cache/terminal-input-browser/stable-report.json",
+      "bytes": 6647,
+      "sha256": "88cffcab063f93a86732fb80fa1ec3156810f1c8ef93aa1f29446e75213ecd31",
+      "error": null,
+      "completedCases": 11
+    }
+  ],
+  "knownLimits": [
+    "Candidate coalesced synthetic deletion emits one DEL for four modeled deletions.",
+    "Equal-length synthetic replacement emits ax rather than DEL plus x in both candidates.",
+    "Virtual-clock resize experiment timed out for both stable and candidate; removed from accepted smoke, retained as actual-device work.",
+    "Characterization success is not all-input-integrity acceptance."
+  ]
+}

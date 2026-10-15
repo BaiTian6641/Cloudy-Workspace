@@ -80,3 +80,18 @@ Only the exact `cloudy-exec-probe-v1` exec request or an empty-command PTY reque
 Each invocation exclusively creates a private bounded JSONL audit with fsynced events. An uncertain write/sync permanently prevents further append. A missing terminal event is inconclusive; `intendedExitCode` is not independent proof that the process disappeared. The controller must also observe exit and listener closure. Canonical input checks completed lines available at that point; uncompleted or future bytes after process exit are outside that observation.
 
 The twenty software tests use real pipes/PTYs and subprocesses to check bytes, actual resize, terminal modes, rejected input, EOF/hangup/signals, deadlines and audit failures. The [signal-test review](../docs/06-validation/2026-10-15-ssh-fixture-signal-test-review.md) distinguishes clean input-wait interruption from a signal during audit sync. These tests do not replace OpenSSH interoperability or Googlebook qualification. The [source review](../docs/06-validation/2026-10-15-ssh-pty-probe-review.md) records the separate host preflight; the [device run](../qualification/results/P0-S3/2026-10-15-ssh-pty-probe.md) records actual Googlebook observations.
+
+## Focused actual-library terminal check
+
+After preparing the pinned assets, run the optional local browser regression with installed Chrome and a disposable profile:
+
+```bash
+python3 tools/prepare_terminal_assets.py
+node tests/test_terminal_input_browser.cjs \
+  --assets "$PWD/qualification/probes/device-baseline/app/build/generated/terminalAssets/terminal" \
+  --expect-rapid fixed
+```
+
+The harness executes the actual selected core/fit bundles, authored bridge and stylesheet with synthetic DOM events and a test-only native endpoint. It requires an absolute asset directory and supports `--chrome` for an installed executable. It installs nothing, starts no server and preserves the browser sandbox. Eleven input cases and one startup/fit/output parser smoke remain bounded. Exit zero means declared **characterizations** match; inspect `allInputIntegrity` and each `inputIntegrity` separately. The current candidate retains coalesced-deletion and equal-length-replacement failures. Neither virtual-clock timing nor parser ACK proves input latency or painted pixels. Actual resize, APK CSP, WebView, physical input, native IME and accessibility require their own device checks. CI parses both harness files but does not claim to execute this local browser check.
+
+The [candidate review](../docs/06-validation/2026-10-15-terminal-upstream-review.md) records the exact executed pair, failure limits and retained earlier harness runs. To compare an older retained bundle directory, select its documented `--expect-rapid duplicated` characterization; never label its expected defect as input correctness.

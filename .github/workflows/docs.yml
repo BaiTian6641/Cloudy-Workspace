@@ -47,4 +47,6 @@ jobs:
       - name: Verify authored terminal byte bridge
         run: |
           node --check qualification/probes/device-baseline/app/src/main/assets/terminal/terminal.js
+          node --check tests/test_terminal_input_browser.cjs
+          node --check tests/fixtures/terminal_input_browser.js
           node --test tests/test_terminal_bridge.cjs

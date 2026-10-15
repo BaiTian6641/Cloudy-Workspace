@@ -1,5 +1,7 @@
 # Interaction, input, and recovery
 
+Desktop requirements are explicit in the [terminal interaction contract](desktop-terminal-interaction-contract.md). Reusing a mobile-oriented app component does not make long-press or on-screen key rows acceptable prerequisites. Preserve supported native editing and adapt the terminal boundary through documented APIs.
+
 ## Focus ownership
 
 Each window has one focused surface: chrome, terminal pane, stream surface, drawer, or modal. Show focus visibly on that surface/control. Moving pointer hover does not move keyboard focus. Opening a dialog/palette places focus in its first relevant control; dismissing returns it to the exact initiating control or active pane when that control no longer exists.
@@ -30,7 +32,7 @@ The release-capture shortcut is configurable and always displayed while capture 
 
 ## Pointer and selection
 
-Use text, resize, default, and remote tool cursors appropriately. Right-click opens a context menu by default; right-click paste is optional and explicit. Shift+drag provides local terminal selection when remote mouse reporting is active. Double/triple click selects word/line with documented word boundaries. Files support additive and range selection.
+Use text, resize, default, and remote tool cursors appropriately. In the terminal's default local policy, right-click opens a context menu; right-click paste is optional and explicit. An explicit remote-mouse mode assigns secondary clicks to the remote TUI and keeps a local-menu override. RDP/VNC and X11 surfaces normally send secondary clicks to the remote application; no event may also trigger a local action. Shift+drag provides local terminal selection when remote mouse reporting is active. Double/triple click selects word/line with documented word boundaries. Files support additive and range selection.
 
 Pointer capture begins after a user action on a focused native stream view and releases on focus loss, disconnect, user release, or stream termination. Clear remote held modifiers/buttons when leaving capture. Physical trackpad and mouse are separate qualification inputs; a touchscreen trackpad simulation is not evidence for either.
 
