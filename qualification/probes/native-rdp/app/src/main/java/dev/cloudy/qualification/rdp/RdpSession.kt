@@ -292,8 +292,8 @@ class RdpSession(context: Context) : LibFreeRDP.Sink {
     }
     fun text(value: String) {
         if (!liveConnected || stopping.get()) return
-        if (value.isEmpty() || value.length > 256 || '\u0000' in value) {
-            change { it.copy(detail = "Text must contain 1–256 UTF-16 units without NUL") }; return
+        if (!RdpTextPolicy.accepts(value)) {
+            change { it.copy(detail = "Text must contain 1–256 well-formed UTF-16 units without NUL") }; return
         }
         input {
             check(LibFreeRDP.freerdp_is_unicode_input_supported(handle)) { "remote-unicode-input-unavailable" }

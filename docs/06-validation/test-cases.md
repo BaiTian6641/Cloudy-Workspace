@@ -40,6 +40,15 @@ These are procedures to implement/run during the linked stages. They are not res
 | Q-R02 | Promote each app only after its own functional, signed package/update/recovery, dependency/support and ten-working-day candidate checklist passes with the other app absent | An unrelated renderer/X11/stream/host-adapter blocker does not hold an unaffected app; shared SSH/transfer defects still trigger affected regressions; suite milestone remains separate | P2-S5, P3-S5, P6-S1 |
 | Q-A02 | Review the representative native workspace with two hosts, terminal/SFTP, X11 owned modal, RDP/VNC input release and a device permission/ownership interruption | Distinguish synthetic layout evidence from real engines/permissions; freeze only demonstrated native geometry/behavior under scaling, tiling, themes and keyboard/IME | P1-S2; affected feature stages |
 
+## RDP desktop and credential cases added by D15
+
+| ID | Case | Required failure boundaries | Stages |
+| --- | --- | --- | --- |
+| Q-D09 | Physical mouse/trackpad capture, standard negotiated relative RDP events and actual 3D orbit/look beyond screen edges; middle/secondary/modifier chords, wheel, absolute/relative switch and native keyboard/IME | Capture denial/loss, missing server capability, signed-delta bounds/order, local release chord/menu, focus/task/disconnect, no stale drag/replay or absolute-as-relative pass; record exact client/server/3D app and host OS | P0-S4, P3-S7, P6-S1 |
+| Q-S02 | App-owned Keystore vault saving/using/deleting; foreground local authorization, endpoint/account binding, native auth lifetime, actual key backing and backup/transfer exclusion | Wrong/changed/expired cert before credential release, tampered ciphertext/AAD, prompt cancel/stale generation, missing/invalidated key, lock/restart/reconnect, logs/exports/redirection and gateway identity; no plaintext/downgrade fallback | P1-S3, P3-S7, P6-S1 |
+
+Follow the [RDP interaction](../04-design/desktop-rdp-interaction-contract.md) and [security](../02-architecture/rdp-authentication-security.md) contracts. These are required cases, not recorded passes.
+
 ## Measurement details
 
 Use a monotonic clock for durations and record wall-clock timestamps for correlation. Note whether RTT/encode/decode/input timing comes from a backend, local instrumentation, or external capture. Hash artifacts with SHA-256 where relevant. Do not expose credentials, private terminal transcripts, or device identifiers in public evidence.

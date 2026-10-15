@@ -113,21 +113,30 @@
       "feature": "Relative pointer capture",
       "symbols": [
         "View.requestPointerCapture",
+        "View.hasPointerCapture",
+        "View.onPointerCaptureChange",
         "View.onCapturedPointerEvent",
-        "View.releasePointerCapture"
+        "View.releasePointerCapture",
+        "MotionEvent.AXIS_RELATIVE_X",
+        "MotionEvent.AXIS_RELATIVE_Y",
+        "MotionEvent.getHistoricalAxisValue"
       ],
       "sourceIds": [
-        "G09"
+        "G09",
+        "G25",
+        "G132"
       ],
       "minimumApi": 26,
       "libraryVersion": null,
-      "availability": "documented",
+      "availability": "documented-not-implemented",
       "qualification": "untested",
-      "checkedOn": "2026-10-14",
+      "checkedOn": "2026-10-15",
       "owner": "Android/platform developer",
       "stage": "P0-S4",
-      "fallback": "Absolute mode or qualified external mouse",
-      "experiment": "Physical trackpad CAD and guaranteed capture release"
+      "fallback": "Explicit absolute mode or separately qualified external mouse/backend; none is a relative 3D pass.",
+      "experiment": "Q-D09: physical mouse/trackpad capture, actual negotiated RDP relative route (API45), continuous3D beyond edges, signed delta/order, focus/disconnect/local escape release. No current relative adapter or device evidence.",
+      "versionNotes": "Capture methods API26; relative axes API24. Captured getX/getY deltas and explicit relative axes are alternative representations, not additive. Historical samples matter.",
+      "researchEvidence": "docs/04-design/desktop-rdp-interaction-contract.md"
     },
     {
       "id": "API07",
@@ -352,20 +361,37 @@
       "feature": "Credential protection",
       "symbols": [
         "AndroidKeyStore",
-        "KeyGenParameterSpec"
+        "KeyGenParameterSpec.Builder",
+        "KeyGenParameterSpec.Builder.setUserAuthenticationRequired",
+        "KeyGenParameterSpec.Builder.setUserAuthenticationParameters",
+        "KeyGenParameterSpec.Builder.setIsStrongBoxBacked",
+        "KeyInfo.getSecurityLevel",
+        "KeyInfo.isInsideSecureHardware",
+        "Context.getNoBackupFilesDir",
+        "BiometricPrompt",
+        "BiometricManager.canAuthenticate",
+        "android:dataExtractionRules"
       ],
       "sourceIds": [
-        "G18"
+        "G18",
+        "G133",
+        "G134",
+        "G135",
+        "G136",
+        "G137",
+        "G138"
       ],
-      "minimumApi": null,
+      "minimumApi": 30,
       "libraryVersion": null,
-      "availability": "documented-entrypoint",
+      "availability": "documented-proposed-vault-not-implemented",
       "qualification": "untested",
-      "checkedOn": "2026-10-14",
+      "checkedOn": "2026-10-15",
       "owner": "Android/platform developer",
       "stage": "P1-S3",
-      "fallback": "Qualified wrapped-key storage",
-      "experiment": "Algorithm support, revoke, lock state and no secret exports"
+      "fallback": "Per-session native entry when chosen authentication/backing/storage policy cannot be met; invalidated keys require re-enrollment. Never plaintext persistence or silent hardware-policy downgrade.",
+      "experiment": "Q-S02: actual AES-GCM record authentication/tamper rejection, local prompt cancellation/generation ownership, key backing/invalidation/lock, backup and device-transfer exclusions, independent app handles, no secrets in exports/native logs; no product vault pass from diagnostic config.",
+      "versionNotes": "Selected vault policy API30+; AndroidKeyStore provider18, noBackup21, symmetricKeyGenParameterSpec/userauth23, StrongBox28, authparameters30, KeyInfo.getSecurityLevel31 (guard/fallbackboolean23). AndroidX version must be pinned at implementation. API31+ backup rules; older fullBackupContent separately.",
+      "researchEvidence": "docs/02-architecture/rdp-authentication-security.md"
     },
     {
       "id": "API16",
@@ -769,7 +795,16 @@
         "R153",
         "R154",
         "R155",
-        "G131"
+        "G131",
+        "G25",
+        "G132",
+        "R169",
+        "R170",
+        "R42",
+        "R161",
+        "R163",
+        "R159",
+        "R160"
       ],
       "minimumApi": null,
       "libraryVersion": "FreeRDP3.32.2 native build, 97eff6ddfbbfaa8e42a126d362686bd001ff8bdc",
@@ -780,10 +815,10 @@
       "owner": "Android/integration developer",
       "stage": "P3-S7",
       "fallback": "Explicit engine remediation; external viewer is partial and cannot complete the integrated RDP requirement",
-      "experiment": "Carry forward pin/NLA, first-failure diagnostics and actual changing framebuffer/explicit cleanup evidence. Next use a controlled input target for pointer/keyboard/focus-release and cancellation, then scoped performance and server cases. RemoteApp remains untested.",
+      "experiment": "0.1.3 has 5331frame updates and79acceptedJNI inputs but zero controlled-target input. Preserve seven closed/original six unchanged and actualjoin/free; no local positive control/wire trace. Resolve KRdp FakeInput auth prerequisite via normal portal consent or exact isolated backport, then actualinput/focus/release. D15 relative and vault remain pending; Windows/macOS/RemoteApp unqualified.",
       "researchEvidence": "docs/03-platform/googlebook/p0-s4-native-desktop-entry.md",
-      "compileEvidence": "qualification/results/P0-S4/2026-10-15-rdp-apk-load.md",
-      "deviceEvidence": "qualification/results/P0-S4/2026-10-15-rdp-framebuffer.md"
+      "compileEvidence": "qualification/results/P0-S4/2026-10-15-rdp-input-boundary.md",
+      "deviceEvidence": "qualification/results/P0-S4/2026-10-15-rdp-input-boundary.md"
     },
     {
       "id": "API31",
@@ -1278,6 +1313,41 @@
       "researchEvidence": "qualification/results/P0-S4/2026-10-15-rdp-framebuffer.md",
       "compileEvidence": "qualification/results/P0-S4/2026-10-15-rdp-framebuffer.md",
       "deviceEvidence": "qualification/results/P0-S4/2026-10-15-rdp-framebuffer.md"
+    },
+    {
+      "id": "API45",
+      "feature": "Standard negotiated RDP relative mouse for 3D",
+      "symbols": [
+        "INPUT_FLAG_MOUSE_RELATIVE",
+        "RNS_UD_CS_RELATIVE_MOUSE_INPUT",
+        "TS_RELPOINTER_EVENT",
+        "TS_FP_RELPOINTER_EVENT",
+        "FreeRDP_HasRelativeMouseEvent",
+        "freerdp_input_send_rel_mouse_event",
+        "rdpInput.RelMouseEvent"
+      ],
+      "sourceIds": [
+        "R156",
+        "R157",
+        "R158",
+        "R164",
+        "R165",
+        "R166",
+        "R167",
+        "R168"
+      ],
+      "minimumApi": 26,
+      "libraryVersion": "FreeRDP3.32.2 at97eff6ddfbbfaa8e42a126d362686bd001ff8bdc; AndroidJNI adapter not implemented",
+      "interfaceKind": "standard-rdp-through-upstream-native-client",
+      "availability": "documented-core-present-adapter-missing",
+      "qualification": "untested",
+      "checkedOn": "2026-10-15",
+      "owner": "Desktop/native developer",
+      "stage": "P0-S4",
+      "fallback": "Offer explicit absolute mode or separately qualified backend; AINPUT is a distinct extension, and accumulated absolute helper fallback is never standard relative or3D proof.",
+      "experiment": "Q-D09: bounded typed signed-delta JNI/queue route; negotiated standard capability plus Android capture; actual host 3D beyond edges and release acrossfocus/disconnect, external mouse/trackpad separate. Qualify exactserver including Linux/Windows/macOS rows.",
+      "versionNotes": "RDP relative capability0x80 plus earlyclient0x10 andprotocol>=0x00080011; events signedINT16. minimumApi26 is Android capture prerequisite, not an RDP protocol OS level. Currentjniabsolute only.",
+      "researchEvidence": "docs/04-design/desktop-rdp-interaction-contract.md"
     }
   ],
   "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."

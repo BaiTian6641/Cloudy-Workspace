@@ -213,3 +213,9 @@ Record evidence under `qualification/results/P0-S6/` using the [run template](..
 ## Gate and failure route
 
 An investigation may complete with a blocked capability record. Only a scoped supported outcome activates its dependent product work. Full Console still needs X11; Desktop can qualify independently. Re-estimate after evidence. Every done stage links actual evidence; a documentation check does not qualify a device.
+
+## D15 RDP input and host clarification
+
+The [0.1.3 input result](../../../qualification/results/P0-S4/2026-10-15-rdp-input-boundary.md) is a retained failed host-input case with continued video and correct explicit native cleanup. Resolve the documented KDE authentication prerequisite through normal portal consent or an isolated upstream backport, and establish a positive host-target control. The [LibVNC host build](../../../qualification/results/P0-S4/2026-10-15-vnc-host-build.md) is compilation only.
+
+P0-S4 now explicitly applies [D15](../../04-design/desktop-rdp-interaction-contract.md): standard RDP server compatibility across target Linux/Windows/macOS rows, desktop mouse/keyboard/IME and actual negotiated relative mouse for 3D. Q-D09 qualifies capture, protocol and application consumption separately. P1-S3 owns the [Googlebook credential vault](../../02-architecture/rdp-authentication-security.md), with Q-S02 integrated at P3-S7. Missing host hardware/server capability is recorded per row; it neither certifies that lane nor prevents Linux work. Stage dependencies and capability gates remain unchanged.

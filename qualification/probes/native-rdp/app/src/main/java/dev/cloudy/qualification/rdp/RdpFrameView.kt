@@ -26,7 +26,7 @@ class RdpFrameView(context: Context, private val session: RdpSession) : View(con
         textSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14f, resources.displayMetrics)
     }
     private val forwardedKeys = mutableSetOf<Int>()
-    private var mouseButtons = 0
+    private val mouseButtons = RdpPointerButtons()
     private var touchHeld = false
     private var lastX = 0
     private var lastY = 0
@@ -80,13 +80,15 @@ class RdpFrameView(context: Context, private val session: RdpSession) : View(con
     }
 
     override fun dispatchKeyEvent(event: KeyEvent): Boolean {
-        if (!hasFocus() || !snapshot.connected) return super.dispatchKeyEvent(event)
         val code = event.keyCode
         // Complete remote releases even if Meta was pressed after the remote key-down.
         if (event.action == KeyEvent.ACTION_UP && forwardedKeys.remove(code)) {
             session.key(code, false)
             return true
         }
+        // A view can retain focus while its window is inactive. Releases above must
+        // still complete, but no new remote down may acquire ownership there.
+        if (!hasFocus() || !hasWindowFocus() || !snapshot.connected) return super.dispatchKeyEvent(event)
         // Meta chords belong to the OS; a keyCode-only map cannot enforce this guard.
         if (event.isMetaPressed) return super.dispatchKeyEvent(event)
         // Tab without a held remote modifier remains native keyboard focus traversal.
@@ -130,24 +132,29 @@ class RdpFrameView(context: Context, private val session: RdpSession) : View(con
             return false
         }
         val mouse = event.isFromSource(InputDevice.SOURCE_MOUSE)
-        if (!position(event, mouseButtons != 0 || touchHeld)) return false
+        if (!position(event, mouseButtons.hasOwnedButtons() || touchHeld)) return false
         when (event.actionMasked) {
             MotionEvent.ACTION_DOWN -> {
                 requestFocus()
                 parent?.requestDisallowInterceptTouchEvent(true)
-                if (mouse) syncMouseButtons(event.buttonState) else {
+                if (mouse) {
+                    releaseMouseButtons(event.buttonState)
+                    // Generic BUTTON_PRESS identifies additional chord buttons. The
+                    // initial touch-stream DOWN owns only the primary button.
+                    pressMouseButton(MotionEvent.BUTTON_PRIMARY, event.buttonState)
+                } else {
                     touchHeld = true
                     session.pointer(lastX, lastY, BUTTON1 or DOWN)
                 }
                 return true
             }
             MotionEvent.ACTION_MOVE -> {
-                if (mouse) syncMouseButtons(event.buttonState)
+                if (mouse) releaseMouseButtons(event.buttonState)
                 session.pointer(lastX, lastY, MOVE)
                 return true
             }
             MotionEvent.ACTION_UP -> {
-                if (mouse) syncMouseButtons(event.buttonState) else if (touchHeld) {
+                if (mouse) releaseMouseButtons(event.buttonState) else if (touchHeld) {
                     session.pointer(lastX, lastY, BUTTON1)
                     touchHeld = false
                 }
@@ -166,7 +173,7 @@ class RdpFrameView(context: Context, private val session: RdpSession) : View(con
             return true
         }
         if (!hasWindowFocus() || !snapshot.connected || !event.isFromSource(InputDevice.SOURCE_CLASS_POINTER) ||
-            !position(event, mouseButtons != 0)) {
+            !position(event, mouseButtons.hasOwnedButtons())) {
             return super.onGenericMotionEvent(event)
         }
         when (event.actionMasked) {
@@ -174,9 +181,16 @@ class RdpFrameView(context: Context, private val session: RdpSession) : View(con
                 session.pointer(lastX, lastY, MOVE)
                 return true
             }
-            MotionEvent.ACTION_BUTTON_PRESS, MotionEvent.ACTION_BUTTON_RELEASE -> {
+            MotionEvent.ACTION_BUTTON_PRESS -> {
                 requestFocus()
-                syncMouseButtons(event.buttonState)
+                releaseMouseButtons(event.buttonState)
+                // actionButton distinguishes a fresh secondary press from an old
+                // primary that remained physically held while focus was elsewhere.
+                pressMouseButton(event.actionButton, event.buttonState)
+                return true
+            }
+            MotionEvent.ACTION_BUTTON_RELEASE -> {
+                releaseMouseButtons(event.buttonState)
                 return true
             }
             MotionEvent.ACTION_SCROLL -> {
@@ -190,13 +204,24 @@ class RdpFrameView(context: Context, private val session: RdpSession) : View(con
         return super.onGenericMotionEvent(event)
     }
 
-    private fun syncMouseButtons(next: Int) {
-        for ((androidButton, remoteButton) in BUTTONS) {
-            if ((mouseButtons xor next) and androidButton != 0) {
-                session.pointer(lastX, lastY, remoteButton or if (next and androidButton != 0) DOWN else 0)
+    private fun pressMouseButton(button: Int, physical: Int) {
+        sendButtonTransitions(mouseButtons.press(button, physical))
+    }
+
+    private fun releaseMouseButtons(physical: Int) {
+        sendButtonTransitions(mouseButtons.release(physical))
+    }
+
+    private fun sendButtonTransitions(changes: List<Pair<Int, Boolean>>) {
+        for ((androidButton, down) in changes) {
+            val remoteButton = when (androidButton) {
+                MotionEvent.BUTTON_PRIMARY -> BUTTON1
+                MotionEvent.BUTTON_SECONDARY -> 0x2000
+                MotionEvent.BUTTON_TERTIARY -> 0x4000
+                else -> continue
             }
+            session.pointer(lastX, lastY, remoteButton or if (down) DOWN else 0)
         }
-        mouseButtons = next
     }
 
     override fun performClick(): Boolean {
@@ -208,7 +233,7 @@ class RdpFrameView(context: Context, private val session: RdpSession) : View(con
     fun releaseInput() {
         session.releaseInput()
         forwardedKeys.clear()
-        mouseButtons = 0
+        mouseButtons.clear()
         touchHeld = false
         parent?.requestDisallowInterceptTouchEvent(false)
     }
@@ -230,7 +255,5 @@ class RdpFrameView(context: Context, private val session: RdpSession) : View(con
         private const val BUTTON1 = 0x1000
         private const val WHEEL = 0x0200
         private const val NEGATIVE = 0x0100
-        private val BUTTONS = arrayOf(MotionEvent.BUTTON_PRIMARY to BUTTON1,
-            MotionEvent.BUTTON_SECONDARY to 0x2000, MotionEvent.BUTTON_TERTIARY to 0x4000)
     }
 }

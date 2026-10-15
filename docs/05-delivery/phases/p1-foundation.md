@@ -147,3 +147,7 @@ Record evidence under `qualification/results/P1-S4/` using the [run template](..
 ## Gate and failure route
 
 Resolve each engine's license/security/build and capability gates before integration. P1-S5 runs early but does not become a prerequisite for unrelated Console/RDP/VNC work. Freeze only demonstrated native UI behavior. Every done stage links actual evidence; a documentation check does not qualify a device.
+
+## RDP credential implementation detail
+
+P1-S3 implements the [RDP authentication/vault contract](../../02-architecture/rdp-authentication-security.md) and Q-S02: explicit per-app saved credentials protected by Android Keystore and local authorization, backup/transfer exclusions, key invalidation, bound session access and secret-free exports/logs. Native trust/provider review remains P1-S4; actual RDP session integration is P3-S7. The temporary P0 diagnostic file does not satisfy the vault gate.

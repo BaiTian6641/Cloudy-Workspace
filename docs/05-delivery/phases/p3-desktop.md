@@ -148,8 +148,8 @@ Record evidence under `qualification/results/P3-S6/` using the [run template](..
 Work:
 
 1. Embed the qualified maintained RDP engine behind the native surface/input interface with explicit profile, server identity and credential handling.
-2. Support required certificate/NLA authentication, desktop rendering, keyboard/IME, pointer/wheel, scaling/resize, clipboard policy and capture release.
-3. Expose negotiated transport/graphics/capabilities and connection/session recovery; qualify UDP/TCP conditions and primary Windows/compatible server behavior.
+2. Support verified certificate/NLA authentication and the P1-S3 on-Googlebook vault, desktop keyboard/IME/buttons/wheel, genuinely negotiated relative mouse for qualified 3D, scaling/resize, explicit clipboard policy and local capture release.
+3. Expose actual negotiated transport/graphics/input capabilities and recovery; qualify UDP/TCP conditions and Linux/Windows/macOS server-specific host rows. macOS requires a selected compatible RDP server; VNC is a separate profile.
 4. Record optional RemoteApp/gateway/redirection support separately; test with Console and the custom host agent absent.
 
 Deliverables:
@@ -162,7 +162,7 @@ Exit evidence:
 - A native RDP session passes identity/auth/input/render/recovery cases on the primary supported server; external launch alone is insufficient.
 - No silent security downgrade, protocol switch, duplicated input or unsupported session/RemoteApp claim.
 
-Record evidence under `qualification/results/P3-S7/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-D07, Q-D02, Q-N02, Q-N03, Q-S01. Official/upstream source IDs: R21, R22, R23, R31, G09, G10; resolve them in the [source register](../../07-reference/source-register.md).
+Record evidence under `qualification/results/P3-S7/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-D07, Q-D09, Q-D02, Q-N02, Q-N03, Q-S01, Q-S02. Official/upstream source IDs: R21, R22, R23, R31, G09, G10; resolve them in the [source register](../../07-reference/source-register.md).
 
 ## P3-S8 — Native integrated VNC client
 
@@ -239,3 +239,12 @@ Record evidence under `qualification/results/P3-S9/` using the [run template](..
 ## Gate and failure route
 
 P3-S5 is the independent Desktop R2 gate. P3-S9 is the combined suite milestone and cannot delay an otherwise qualified standalone release. Native RDP/VNC and enrolled USB remain required R2 scope. Every done stage links actual evidence; a documentation check does not qualify a device.
+
+## D15 standard RDP, relative input and credential gate
+
+P3-S7 follows the [desktop RDP interaction contract](../../04-design/desktop-rdp-interaction-contract.md) and [authentication/vault contract](../../02-architecture/rdp-authentication-security.md). Reuse the maintained standard RDP engine and reviewed open-source client patterns. Qualify Linux/Windows/macOS per actual server; retain macOS RDP hosting as unresolved until a maintained compatible server is selected. Windows/macOS absence does not promote them from Linux results.
+
+Add Q-D09 for actual physical capture, negotiated relative deltas,3D behavior and local/focus-loss release; an absolute fallback does not pass it. Add Q-S02 for the P1-S3 vault, local authorization, trust/backup/invalidation and native secret lifetime. Ordinary direct pointer/keyboard/IME must follow desktop interaction with no touch-only prerequisite. P3-S7's existing foundation dependency supplies P1-S3; no new Console/host-agent dependency is introduced. Publish capability limits, including unqualified hardware/host rows. Native RDP and vault gates are still unmet.
+
+
+The existing effort range remains a provisional planning hypothesis. Re-estimate the relative-input adapter, vault and additional server rows after P0/P1 evidence; no new host or security promise is represented as completed within that range.

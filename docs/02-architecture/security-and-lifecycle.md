@@ -10,6 +10,8 @@ This specification defines implementation boundaries for ordinary development wo
 4. Keep profiles exported between apps or files non-secret. Explicit import should show field changes and references to credentials that require separate enrollment.
 5. Treat renderer output, filenames, notifications, host metadata, and repository-generated pages as untrusted display content.
 
+The [RDP authentication and credential contract](rdp-authentication-security.md) specifies per-session entry, explicit local saving, Keystore AES-GCM envelopes, local authorization, target/gateway trust separation, backup/transfer exclusions, native secret lifetime and redirection consent. Its temporary diagnostic provisioning route is not the product vault. Q-S02 is required for P1-S3/P3-S7; no security or vault capability is currently qualified.
+
 ## Renderer boundary
 
 Bundle terminal assets locally, restrict navigations/origins, validate every bridge message, bound message sizes, and open external links/previews in the normal browser. Never give the renderer a generic `exec`, filesystem, credential-export, or host-RPC function. Native code owns the SSH engine and secrets. Google's [WebView bridge guidance](https://developer.android.com/privacy-and-security/risks/insecure-webview-native-bridges) motivates this boundary; the exact implementation is tested in P1/P2.

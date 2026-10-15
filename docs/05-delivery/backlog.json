@@ -223,12 +223,13 @@
         "P0-S2"
       ],
       "tasks": [
-        "Pin Sunshine/Moonlight and prove external handoff; select buildable RDP/VNC engine candidates and record actual server/encoding/security negotiation. Use the reviewed native entry brief: FreeRDP3.32.2 arm64 MediaCodec diagnostic APK builds/loads on the HP Googlebook; actual wrong-pin rejection/NLA connection and failure cleanup are observed; first-failure context identifies the resize guard; 0.1.2 displays changing 2880x1800 pixels and explicitly joins/frees on disconnect; next qualify controlled input/focus/cancel and sustained resource/performance behavior; LibVNC 98aaee0560baa0332339b2ef464ea96ed9b9b28c contains the three identified fixes, with focused advisory regressions and Android build/integration before its network probe.",
+        "Pin Sunshine/Moonlight and prove external handoff; select buildable RDP/VNC engine candidates and record actual server/encoding/security negotiation. Use the reviewed native entry brief: FreeRDP 3.32.2 arm64 MediaCodec diagnostic APK builds/loads on the HP Googlebook; actual wrong-pin rejection/NLA connection and failure cleanup are observed; first-failure context identifies the resize guard; 0.1.2 displays changing 2880x1800 pixels and explicitly joins/frees on disconnect; 0.1.3 records 79JNI input submissions but zero controlled-target input; resolve the source-supported KRdp FakeInput authentication prerequisite using normal portal consent or an isolated upstream backport, then qualify controlled input/focus/cancel and sustained resource/performance behavior; LibVNC 98aaee0560baa0332339b2ef464ea96ed9b9b28c contains the three identified fixes, with focused advisory regressions and Android build/integration before its network probe.",
         "Exercise trackpad and external mouse in real CAD and text/desktop workloads; verify focus-loss release and native IME/keyboard paths.",
         "Enumerate codecs and optional API-30 low-latency support; measure native decode/pacing/text quality, power and input-to-photon baseline.",
         "Test primary host sessions, lock/headless/permissions, RDP certificate/NLA requirements and protected VNC routes; record unsupported cases and dependencies.",
         "Record separate CAP-RDP, CAP-VNC and stream-feasibility outcomes; document native surface/input and integration blockers independently of external launch success.",
-        "Ratify provisional native-stream and protocol-specific responsiveness budgets from the primary-lane probes; missing USB or X11 evidence does not block this decision."
+        "Ratify provisional native-stream and protocol-specific responsiveness budgets from the primary-lane probes; missing USB or X11 evidence does not block this decision.",
+        "D15: qualify genuine negotiated RDP relative mouse through public Android capture and an actual 3D application, separately for physical mouse/trackpad and exact Linux/Windows/macOS server rows. Current Android JNI is absolute-only. macOS RDP server selection remains unresolved; built-in Apple VNC is a separate lane."
       ],
       "deliverables": [
         "Pinned stream/RDP/VNC engine and server feasibility matrix",
@@ -275,7 +276,22 @@
         "G128",
         "G129",
         "G130",
-        "G131"
+        "G131",
+        "G132",
+        "R156",
+        "R157",
+        "R158",
+        "R164",
+        "R165",
+        "R168",
+        "R169",
+        "R170",
+        "R42",
+        "R161",
+        "R163",
+        "R171",
+        "R173",
+        "R175"
       ],
       "acceptanceCases": [
         "Q-D01",
@@ -283,7 +299,8 @@
         "Q-D07",
         "Q-D08",
         "Q-N02",
-        "Q-P02"
+        "Q-P02",
+        "Q-D09"
       ],
       "evidenceDirectory": "qualification/results/P0-S4/"
     },
@@ -539,7 +556,7 @@
         "P0-S2"
       ],
       "tasks": [
-        "Implement per-app protected credential handles, known-host trust storage, enrollment cancellation, and revocation.",
+        "Implement per-app protected credential handles, known-host trust storage, enrollment cancellation, and revocation. Apply the RDP security contract: explicit saving, per-record AndroidKeyStore AES-GCM and local authorization, independent app handles, no backup/transfer/diagnostic secret export, invalidation and no plaintext fallback.",
         "Implement signature-protected explicit IPC with bounded versioned resource envelopes, caller validation, expiration, and receiver-side resource resolution.",
         "Add persisted session/layout metadata, transfer journals, typed errors, and bounded redacted diagnostics.",
         "Implement the qualified foreground/background strategy, timeout handlers, focus-loss cleanup, and reconnect metadata.",
@@ -557,12 +574,19 @@
         "G15",
         "G16",
         "G17",
-        "G18"
+        "G18",
+        "G133",
+        "G134",
+        "G135",
+        "G136",
+        "G137",
+        "G138"
       ],
       "acceptanceCases": [
         "Q-X01",
         "Q-X02",
-        "Q-S01"
+        "Q-S01",
+        "Q-S02"
       ],
       "evidenceDirectory": "qualification/results/P1-S3/",
       "requiresCapabilities": [
@@ -1241,8 +1265,8 @@
       ],
       "tasks": [
         "Embed the qualified maintained RDP engine behind the native surface/input interface with explicit profile, server identity and credential handling.",
-        "Support required certificate/NLA authentication, desktop rendering, keyboard/IME, pointer/wheel, scaling/resize, clipboard policy and capture release.",
-        "Expose negotiated transport/graphics/capabilities and connection/session recovery; qualify UDP/TCP conditions and primary Windows/compatible server behavior.",
+        "Support verified certificate/NLA authentication and the P1-S3 on-Googlebook vault, desktop physical keyboard/IME/buttons/wheel, absolute and genuinely negotiated relative mouse for qualified3D, scaling/resize, explicit clipboard policy and reliable local capture release.",
+        "Expose actual negotiated transport/graphics/input capabilities and recovery; qualify UDP/TCP conditions and Linux/Windows/macOS server-specific host rows. macOS requires a selected compatible RDP server; VNC is a separately labeled route. No absolute-fallback claim of relative 3D support.",
         "Record optional RemoteApp/gateway/redirection support separately; test with Console and the custom host agent absent."
       ],
       "deliverables": [
@@ -1251,7 +1275,8 @@
       ],
       "exitCriteria": [
         "A native RDP session passes identity/auth/input/render/recovery cases on the primary supported server; external launch alone is insufficient.",
-        "No silent security downgrade, protocol switch, duplicated input or unsupported session/RemoteApp claim."
+        "No silent security downgrade, protocol switch, duplicated input or unsupported session/RemoteApp claim.",
+        "Actual relative 3D/capture/release and protected saved-credential cases pass for each claimed combination; unsupported host/auth/input modes remain explicit. No mobile-only gesture requirement or diagnostic plaintext vault substitute."
       ],
       "sourceIds": [
         "R21",
@@ -1259,14 +1284,30 @@
         "R23",
         "R31",
         "G09",
-        "G10"
+        "G10",
+        "G132",
+        "R156",
+        "R157",
+        "R168",
+        "R161",
+        "R163",
+        "R159",
+        "R160",
+        "G18",
+        "G133",
+        "G134",
+        "G135",
+        "G136",
+        "G137"
       ],
       "acceptanceCases": [
         "Q-D07",
         "Q-D02",
         "Q-N02",
         "Q-N03",
-        "Q-S01"
+        "Q-S01",
+        "Q-D09",
+        "Q-S02"
       ],
       "evidenceDirectory": "qualification/results/P3-S7/",
       "requiresCapabilities": [
@@ -2053,6 +2094,12 @@
       "status": "user-selected",
       "selection": "Require desktop keyboard, pointer, copy/paste, selection and context-menu workflows independently of reused Android/terminal components; no touch-only prerequisite. Termius is the user-selected SSH/SFTP product and UX reference; Termux remains a separate technical candidate where relevant.",
       "record": "docs/04-design/desktop-terminal-interaction-contract.md"
+    },
+    {
+      "id": "D15",
+      "status": "user-selected",
+      "selection": "Standard RDP desktop/laptop client using established engines; Linux/Windows/macOS server-specific host targets; genuine negotiated relative mouse for qualified3D and secure Googlebook app-owned authentication storage",
+      "record": "docs/04-design/desktop-rdp-interaction-contract.md"
     }
   ],
   "dependencyConstraints": [

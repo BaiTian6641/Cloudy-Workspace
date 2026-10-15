@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-15",
+  "stage": "P0-S4",
+  "result": "host-static-build-only",
+  "sourceRevision": "98aaee0560baa0332339b2ef464ea96ed9b9b28c",
+  "tlsEnabled": false,
+  "sanitizerRuntimeExecuted": false,
+  "networkProbeExecuted": false,
+  "privateEvidence": [
+    {
+      "path": "qualification/results/private/vnc/2026-10-15-host-build/source.json",
+      "bytes": 268,
+      "sha256": "8d0e9134319d0fb799d5d30c4cf071e3934bb0293435bdc7ae9982431d1dffc7"
+    },
+    {
+      "path": "qualification/results/private/vnc/2026-10-15-host-build/configure.json",
+      "bytes": 906,
+      "sha256": "0f600ff787c86e925f73b21264a6c106790deb17d8806ece69b01632f501a306"
+    },
+    {
+      "path": "qualification/results/private/vnc/2026-10-15-host-build/configure.log",
+      "bytes": 3357,
+      "sha256": "96fdd7ec7a92c93abf1c249dd2ac4f0fb31fdb5667f01d0162c74e5e59e4ce1a"
+    },
+    {
+      "path": "qualification/results/private/vnc/2026-10-15-host-build/build.json",
+      "bytes": 221,
+      "sha256": "99b8d73bb14989fed93b0d44b7ea6f022818149abf2ca4da04003ecb4944dcf4"
+    },
+    {
+      "path": "qualification/results/private/vnc/2026-10-15-host-build/build.log",
+      "bytes": 971,
+      "sha256": "0eb93c348ed19c3205ccc423f91b7145282f258add53f84b825198a0f49c429b"
+    },
+    {
+      "path": "qualification/results/private/vnc/2026-10-15-host-build/libvncclient.a",
+      "bytes": 5056126,
+      "sha256": "294daf8e2bb7e13750cd58a6bdb108e8e6a0d857274ab8d5603cb431bda09ffe"
+    }
+  ]
+}

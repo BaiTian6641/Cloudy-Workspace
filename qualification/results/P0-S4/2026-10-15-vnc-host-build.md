@@ -1,0 +1,9 @@
+# P0-S4 — LibVNCClient host build entry
+
+**Date:** 2026-10-15. **Result:** a static workstation client library compiled; no runtime or Android qualification. The [manifest](2026-10-15-vnc-host-build.json) binds retained private configure/build logs and output. This is a small independent increment under D12, not CAP-VNC promotion.
+
+The [reviewed candidate](../../../docs/07-reference/2026-10-15-vnc-patched-source-selection.md) at `98aaee0560baa0332339b2ef464ea96ed9b9b28c` was acquired from its exact upstream archive (612,494 bytes; SHA256 `e4aba30e25cd7bcc743794ccaf4a9b7c3236d15945b9e8b8bb059b0ae1d2f1bb`). CMake configuration and all 13 Ninja steps for `vncclient` exited zero with GNU C 15.2.0. The static library is 5,056,126 bytes, SHA256 `294daf8e2bb7e13750cd58a6bdb108e8e6a0d857274ab8d5603cb431bda09ffe`.
+
+Configuration enables AddressSanitizer/UndefinedBehaviorSanitizer compiler instrumentation, zlib and JPEG; the upstream built-in miniLZO path remains. TLS, examples, server, upstream tests and desktop integrations are disabled in this isolated host build. **No executable harness was built or run, and no sanitizer runtime result exists.** The worker stopped before writing the proposed harness; the leader inspected actual configuration/build logs and verified the retained library hash. No network listener, remote connection, system install or device operation was performed.
+
+The three specifically identified advisory regressions with valid-decode controls remain pending. Android cross-compilation, selected TLS dependencies, native adapter integration, protected server input/render/recovery and GPL distribution decisions also remain pending. This host configuration is not a shipping security configuration and must not be reused as a plaintext network-client default. Carry the build result forward; resume only the missing focused checks rather than rerunning unchanged compilation.
