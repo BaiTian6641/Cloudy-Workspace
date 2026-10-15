@@ -2868,6 +2868,42 @@
       "note": "Supports latest Chrome/Edge/Firefox/Safari and advertises CJK/IME/optional accessibility; it is a terminal component, not a shell/application. This does not establish Android WebView, Googlebook or physical-input compatibility.",
       "refresh": "Before P0-S3 renderer implementation, on renderer/WebView changes or relevant advisories, and before adoption or qualification claims.",
       "sha256": "8d13cccb508887ad99aafad944bc80233ed4ca579fff4cbd0ed815c892dc0cce"
+    },
+    {
+      "id": "G114",
+      "title": "AGP 9.4 SourceDirectories API",
+      "url": "https://developer.android.google.cn/reference/tools/gradle-api/9.4/com/android/build/api/variant/SourceDirectories",
+      "publisher": "Google / Android Open Source Project",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Already prepared external assets use addStaticSourceDirectory; task-generated sources use addGeneratedSourceDirectory. Inspected the official Google mirror after the canonical page was unavailable to the research tool. No SourceSet Provider opt-out is needed.",
+      "refresh": "Before implementation or dependency updates; recheck qualification separately."
+    },
+    {
+      "id": "G115",
+      "title": "Handle Android WebView termination",
+      "url": "https://developer.android.com/develop/ui/views/layout/webapps/handle-termination",
+      "publisher": "Google / Android Open Source Project",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Override onRenderProcessGone, remove/destroy the dead WebView and return true; use a new instance for recovery. Cloudy reconnect remains explicit and does not restore or replay terminal input.",
+      "refresh": "Before implementation or dependency updates; recheck qualification separately."
+    },
+    {
+      "id": "G116",
+      "title": "AndroidX Kotlin renderer-loss lint correction",
+      "url": "https://github.com/androidx/androidx/commit/8003b908c7bfaecd6636512ad5cb1720a142ad51",
+      "publisher": "Google / Android Open Source Project",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Upstream fixes false MissingOnRenderProcessGone reports for Kotlin supertype/delegation constructor calls. Inspected WebKit1.17.1 lint.jar lacks this guard. One factory-scoped suppression retains the actual handler; recheck/remove on dependency update.",
+      "refresh": "Before implementation or dependency updates; recheck qualification separately."
     }
   ]
 }

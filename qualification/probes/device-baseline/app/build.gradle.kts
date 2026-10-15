@@ -15,10 +15,10 @@ android {
         applicationId = "dev.cloudy.qualification.baseline"
         minSdk = 35
         targetSdk = 37
-        versionCode = 8
-        versionName = "0.6.0"
+        versionCode = 9
+        versionName = "0.7.0"
         // Stable source build reference; the external run manifest binds its commit and exact APK.
-        buildConfigField("String", "QUALIFICATION_BUILD_REF", "\"49607be8-a053-4f7f-8d22-3764b7e63136\"")
+        buildConfigField("String", "QUALIFICATION_BUILD_REF", "\"7b55cd23-0988-46b7-8fc1-1da8a197842d\"")
     }
 
     buildFeatures { buildConfig = true }
@@ -58,6 +58,7 @@ dependencies {
     // Preserve the alpha's audited Core runtime; review upgrades as a separate increment.
     //noinspection GradleDependency
     implementation("androidx.core:core:1.8.0")
+    implementation("androidx.webkit:webkit:1.17.1")
     // P0-S3 diagnostic adoption only; all three BC modules are deliberately aligned.
     implementation("com.hierynomus:sshj:0.41.2")
     implementation("org.bouncycastle:bcprov-jdk18on:1.86")
@@ -72,3 +73,16 @@ dependencies {
 dependencyLocking {
     lockAllConfigurations()
 }
+
+// These files are prepared outside Gradle, then verified without mutation below.
+androidComponents.onVariants { variant ->
+    variant.sources.assets?.addStaticSourceDirectory(layout.buildDirectory.dir("generated/terminalAssets").get().asFile.absolutePath)
+}
+
+val verifyTerminalAssets = tasks.register<Exec>("verifyTerminalAssets") {
+    val repository = rootProject.layout.projectDirectory.dir("../../..")
+    workingDir(repository)
+    commandLine("python3", repository.file("tools/prepare_terminal_assets.py").asFile, "--check")
+    // This gate is deliberately read-only/offline and always runs, including incremental builds.
+}
+tasks.named("preBuild").configure { dependsOn(verifyTerminalAssets) }

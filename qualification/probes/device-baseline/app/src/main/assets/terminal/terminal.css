@@ -1,0 +1,11 @@
+/* Cloudy dark terminal and ANSI tokens; fonts remain locally supplied system fallbacks. */
+:root { color-scheme: dark; --font-scale: 1; background: #0c1519; color: #dce9ed; }
+html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; }
+body { display: flex; flex-direction: column; font: calc(14px * var(--font-scale))/1.5 system-ui, sans-serif; }
+#feedback { display: flex; align-items: center; gap: 8px; flex: none; padding: 4px 8px; background: #17262b; color: #aec3c9; }
+#feedback[data-warning="true"] { color: #ffb4ac; }
+#status { flex: 1; min-width: 0; }
+button { font: inherit; color: #b1f2de; background: #164c43; border: 1px solid #79959e; border-radius: 6px; padding: 4px 8px; }
+button:focus-visible { outline: 2px solid #bac8ff; outline-offset: 2px; }
+#terminal { flex: 1; min-height: 0; min-width: 0; padding: 4px 8px; overflow: hidden; }
+.xterm { height: 100%; }

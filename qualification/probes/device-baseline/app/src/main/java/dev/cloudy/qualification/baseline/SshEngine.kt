@@ -4,11 +4,6 @@ import java.io.File
 import java.io.IOException
 import java.net.InetAddress
 import java.net.Socket
-import java.nio.ByteBuffer
-import java.nio.charset.CodingErrorAction
-import java.nio.file.Files
-import java.nio.file.LinkOption
-import java.nio.file.attribute.BasicFileAttributes
 import java.security.MessageDigest
 import java.security.PublicKey
 import java.util.Base64
@@ -20,7 +15,6 @@ import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicInteger
 import java.util.concurrent.atomic.AtomicReference
 import javax.net.SocketFactory
-import net.schmizz.sshj.DefaultSecurityProviderConfig
 import net.schmizz.sshj.SSHClient
 import net.schmizz.sshj.common.Buffer
 import net.schmizz.sshj.connection.channel.direct.PTYMode
@@ -117,7 +111,7 @@ internal class SshEngine {
             if (trustedHostKey != null && trustedHostKey != config.expectedHostKeySha256) {
                 throw SshProbeFailure("trusted-reference-mismatch")
             }
-            val policy = modernConfig()
+            val policy = SshConnectionPolicy.create()
             val ssh = SSHClient(policy)
             client = ssh
             ssh.connectTimeout = IO_TIMEOUT_MILLIS
@@ -172,7 +166,7 @@ internal class SshEngine {
                 throw SshProbeFailure("host-key-verification-missing")
             }
             observe("host-key-verified")
-            val keyText = readPrivateKey(privateKey)
+            val keyText = SshKeyFile.read(privateKey)
             checkActive()
             val provider = ssh.loadKeys(keyText, null, null)
             ssh.authPublickey(config.username, provider)
@@ -418,51 +412,6 @@ internal class SshEngine {
         }
     }
 
-    private fun readPrivateKey(file: File): String {
-        val attributes = Files.readAttributes(file.toPath(), BasicFileAttributes::class.java,
-            LinkOption.NOFOLLOW_LINKS)
-        if (!attributes.isRegularFile || attributes.size() !in 1..MAX_PRIVATE_KEY_BYTES.toLong()) {
-            throw SshProbeFailure("private-key-type-or-size-out-of-bounds")
-        }
-        val buffer = ByteArray(MAX_PRIVATE_KEY_BYTES + 1)
-        try {
-            val size = file.inputStream().use { input ->
-                var size = 0
-                while (size < buffer.size) {
-                    val count = input.read(buffer, size, buffer.size - size)
-                    if (count == -1) break
-                    if (count == 0) throw SshProbeFailure("private-key-no-progress")
-                    size += count
-                }
-                size
-            }
-            if (size !in 1..MAX_PRIVATE_KEY_BYTES) throw SshProbeFailure("private-key-size-out-of-bounds")
-            // SSHJ's public content API retains a String; do not claim complete secret zeroization.
-            val text = Charsets.UTF_8.newDecoder().onMalformedInput(CodingErrorAction.REPORT)
-                .onUnmappableCharacter(CodingErrorAction.REPORT).decode(ByteBuffer.wrap(buffer, 0, size)).toString()
-            return SshPrivateKeyPem.validate(text)
-        } finally {
-            buffer.fill(0)
-        }
-    }
-
-    private fun modernConfig(): DefaultSecurityProviderConfig = DefaultSecurityProviderConfig().apply {
-        // Initialize this class before SSHClient. It disables SSHJ auto-registration, not Android providers.
-        keyExchangeFactories = keyExchangeFactories.filter { it.name == KEX || it.name == "ext-info-c" }
-        keyAlgorithms = keyAlgorithms.filter { it.name == HOST_SIGNATURE }
-        cipherFactories = cipherFactories.filter { it.name == CIPHER }
-        setMACFactories(getMACFactories().filter { it.name == MAC })
-        compressionFactories = compressionFactories.filter { it.name == "none" }
-        if (keyExchangeFactories.none { it.name == KEX } || keyAlgorithms.isEmpty() ||
-            cipherFactories.isEmpty() || getMACFactories().isEmpty() || compressionFactories.isEmpty()) {
-            throw SshProbeFailure("modern-algorithm-unavailable")
-        }
-        timeoutMs = IO_TIMEOUT_MILLIS
-        channelReadTimeoutMs = IO_TIMEOUT_MILLIS
-        channelErrorReadTimeoutMs = IO_TIMEOUT_MILLIS
-        maxCircularBufferSize = 1_048_576
-    }
-
     private fun closeSocket() {
         try {
             activeSocket.getAndSet(null)?.close()
@@ -498,13 +447,12 @@ internal class SshEngine {
     }
 
     private companion object {
-        const val IO_TIMEOUT_MILLIS = 10_000
+        const val IO_TIMEOUT_MILLIS = SshConnectionPolicy.IO_TIMEOUT_MILLIS
         const val PTY_READ_TIMEOUT_MILLIS = 120_000
-        const val MAX_PRIVATE_KEY_BYTES = 16_384
-        const val KEX = "ecdh-sha2-nistp256"
-        const val HOST_SIGNATURE = "ecdsa-sha2-nistp256"
-        const val CIPHER = "aes128-gcm@openssh.com"
-        const val MAC = "hmac-sha2-256"
+        const val KEX = SshConnectionPolicy.KEX
+        const val HOST_SIGNATURE = SshConnectionPolicy.HOST_SIGNATURE
+        const val CIPHER = SshConnectionPolicy.CIPHER
+        const val MAC = SshConnectionPolicy.MAC
     }
 }
 

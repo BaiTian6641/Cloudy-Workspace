@@ -55,6 +55,8 @@ jobs:
                       raise SystemExit(f'SDK drift in {relative}: {key} must be {value}')
           print('SDK platform/build-tool revision pins verified')
           PY
+      - name: Prepare integrity-pinned terminal assets
+        run: python3 tools/prepare_terminal_assets.py
       - name: Compile, lint, and test the real probe
         working-directory: qualification/probes/device-baseline
         run: ./gradlew :app:assembleDebug :app:lintDebug :app:testDebugUnitTest --no-daemon --console=plain

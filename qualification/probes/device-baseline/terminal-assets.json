@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "checkedDate": "2026-10-15",
+  "purpose": "Pinned generated assets for the isolated P0-S3 terminal qualification probe; no runtime downloads or upstream implementation tracked in Git.",
+  "upstreamCommit": "f447274f430fd22513f6adbf9862d19524471c04",
+  "packages": [
+    {
+      "name": "@xterm/xterm",
+      "version": "6.0.0",
+      "license": "MIT",
+      "registryUrl": "https://registry.npmjs.org/@xterm%2fxterm/6.0.0",
+      "archiveUrl": "https://registry.npmjs.org/@xterm/xterm/-/xterm-6.0.0.tgz",
+      "integrity": "sha512-TQwDdQGtwwDt+2cgKDLn0IRaSxYu1tSUjgKarSDkUM0ZNiSRXFpjxEsvc/Zgc5kq5omJ+V0a8/kIM2WD3sMOYg==",
+      "archiveBytes": 1418562,
+      "archiveSha256": "908e66e04af6c8dc6b00dd3b54de088e2e81e5ed866284fd6c2fb3c2d1c7a3f6",
+      "cacheFile": "xterm-6.0.0.tgz",
+      "files": [
+        {
+          "archivePath": "package/lib/xterm.js",
+          "outputPath": "terminal/vendor/xterm.js",
+          "bytes": 488663,
+          "sha256": "14903579ff54664cd72f8e8699e6961a6272c21863ec1c3b118cdc8af5d4a972"
+        },
+        {
+          "archivePath": "package/css/xterm.css",
+          "outputPath": "terminal/vendor/xterm.css",
+          "bytes": 7112,
+          "sha256": "854a7c0fb70e8b1a083c16797ab827299fb18744f5ad34f227b48337e33293c6"
+        },
+        {
+          "archivePath": "package/LICENSE",
+          "outputPath": "terminal/notices/xterm-LICENSE.txt",
+          "bytes": 1261,
+          "sha256": "b569f629d00f2626a8100df2a1798210535621e42164dfd426a6fe5aac7b0ccd"
+        }
+      ],
+      "archiveMemberCount": 161,
+      "archiveFileBytes": 5921599,
+      "packageJsonSha256": "f5a0dde40a146d6c7a86b22daf6e5740517e5d708ec1d162197e0445431d8f4f"
+    },
+    {
+      "name": "@xterm/addon-fit",
+      "version": "0.11.0",
+      "license": "MIT",
+      "registryUrl": "https://registry.npmjs.org/@xterm%2faddon-fit/0.11.0",
+      "archiveUrl": "https://registry.npmjs.org/@xterm/addon-fit/-/addon-fit-0.11.0.tgz",
+      "integrity": "sha512-jYcgT6xtVYhnhgxh3QgYDnnNMYTcf8ElbxxFzX0IZo+vabQqSPAjC3c1wJrKB5E19VwQei89QCiZZP86DCPF7g==",
+      "archiveBytes": 5488,
+      "archiveSha256": "26003b4517a132b64e4ff228fd88a5fda3fff5e606c76093f6dcff772e9ecec0",
+      "cacheFile": "addon-fit-0.11.0.tgz",
+      "files": [
+        {
+          "archivePath": "package/lib/addon-fit.js",
+          "outputPath": "terminal/vendor/addon-fit.js",
+          "bytes": 1521,
+          "sha256": "ba3ea256ce0620a0992a197d6c9baea64823fc93d8da07a9e366ca9943c18527"
+        },
+        {
+          "archivePath": "package/LICENSE",
+          "outputPath": "terminal/notices/addon-fit-LICENSE.txt",
+          "bytes": 1103,
+          "sha256": "e256f01188af527e4d06d21d06fbf785ae9c50d4b328bf03cbe0ba7f0aa4228f"
+        }
+      ],
+      "archiveMemberCount": 9,
+      "archiveFileBytes": 20727,
+      "packageJsonSha256": "2f1016c5683f76ac1250c466afc29164bc82da7c2ef224c7d5ab83397edf1637"
+    }
+  ],
+  "additionalNotices": [
+    {
+      "sourceFile": "qualification/probes/device-baseline/app/src/main/assets/third_party_notices/terminal/microsoft-MIT.txt",
+      "assetPath": "third_party_notices/terminal/microsoft-MIT.txt",
+      "sourceUrl": "https://raw.githubusercontent.com/microsoft/vscode/1.106.3/LICENSE.txt",
+      "bytes": 1088,
+      "sha256": "9480271317925265e806a9a196aaa33410a962fa9d4d1e248a4a5187bc8c9df9",
+      "reason": "The core archive includes Microsoft-copyrighted src/vs/base sources. Preserve the upstream MIT text and attribution separately because the minified JS and package LICENSE omit Microsoft. This license-text source tag is not a claim about the vendored implementation revision.",
+      "implementationProvenanceUrl": "https://raw.githubusercontent.com/xtermjs/xterm.js/f447274f430fd22513f6adbf9862d19524471c04/src/vs/README.md"
+    }
+  ]
+}

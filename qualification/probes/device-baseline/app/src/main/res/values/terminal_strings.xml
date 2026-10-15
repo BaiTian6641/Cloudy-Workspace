@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="open_terminal_probe">Open interactive terminal qualification</string>
+    <string name="terminal_heading">Interactive SSH terminal qualification</string>
+    <string name="terminal_scope">Real shell input and output through native SSH. One controlling window; hiding, recreation or renderer loss interrupts the session. Reconnect is always explicit.</string>
+    <string name="terminal_empty">No terminal session. Connect prepares the local renderer and contacts the configured host. Unknown keys require separate native trust confirmation.</string>
+    <string name="terminal_lan">Local network access</string>
+    <string name="terminal_connect">Connect</string>
+    <string name="terminal_trust">Review host trust</string>
+    <string name="terminal_trust_confirm">Trust matching host key</string>
+    <string name="terminal_disconnect">Disconnect</string>
+    <string name="terminal_details">Session details</string>
+    <string name="terminal_refresh">Refresh configuration</string>
+    <string name="terminal_recreate">Recreate terminal window</string>
+</resources>

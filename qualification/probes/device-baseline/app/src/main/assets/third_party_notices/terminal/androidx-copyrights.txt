@@ -1,0 +1,50 @@
+Cloudy terminal diagnostic - additional AndroidX runtime attribution
+Checked: 2026-10-15
+
+This increment covers androidx.webkit:webkit:1.17.1 and
+androidx.annotation:annotation-experimental:1.3.0. It supplements the
+historical 0.3.0 notice inventory without rewriting that inventory.
+Only copyright and license text is reproduced here; no implementation source
+is included. Source comment delimiters are removed and duplicate copyright
+lines within each component are collapsed. Exact source archive URLs, hashes
+and file mappings are recorded in androidx-provenance.json.
+
+Apache-2.0 terms: ../Apache-2.0.txt and ../upstream/androidx-LICENSE.txt.
+WebKit's embedded Apache license is byte-identical to the latter file.
+Chromium boundary-interface BSD-3-Clause terms: chromium-LICENSE.txt.
+The BSD license is retained separately because WebKit's source archive has
+Chromium BSD headers and its runtime classes include those boundary types.
+
+androidx.annotation:annotation-jvm:1.8.1 is an audited compile-only artifact
+in this graph. It is not newly bundled runtime code. The existing runtime
+annotation-jvm:1.9.1 attribution remains in the historical runtime inventory.
+Build-only lint detector JARs are not included in this runtime attribution.
+
+androidx.webkit:webkit:1.17.1
+-----------------------------
+Copyright (C) 2018 The Android Open Source Project
+Copyright 2018 The Android Open Source Project
+Copyright 2018 The Chromium Authors
+Copyright 2019 The Android Open Source Project
+Copyright 2019 The Chromium Authors
+Copyright 2020 The Android Open Source Project
+Copyright 2020 The Chromium Authors
+Copyright 2022 The Android Open Source Project
+Copyright 2022 The Chromium Authors
+Copyright 2023 The Android Open Source Project
+Copyright 2023 The Chromium Authors
+Copyright 2024 The Android Open Source Project
+Copyright 2024 The Chromium Authors
+Copyright 2025 The Android Open Source Project
+Copyright 2025 The Chromium Authors
+Copyright 2026 The Android Open Source Project
+Copyright 2026 The Chromium Authors
+
+androidx.annotation:annotation-experimental:1.3.0
+-------------------------------------------------
+Copyright 2019 The Android Open Source Project
+Copyright 2020 The Android Open Source Project
+
+No separate NOTICE file was found in these two source archives, their AARs,
+or their nested runtime classes.jar files. This observation does not
+replace the license and source-header inspection documented above.

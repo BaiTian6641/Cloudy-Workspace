@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="open_terminal_probe" type="id" />
+    <item name="terminal_lan" type="id" />
+    <item name="terminal_connect" type="id" />
+    <item name="terminal_trust" type="id" />
+    <item name="terminal_disconnect" type="id" />
+    <item name="terminal_details" type="id" />
+    <item name="terminal_refresh" type="id" />
+    <item name="terminal_recreate" type="id" />
+    <item name="terminal_status" type="id" />
+    <item name="terminal_surface" type="id" />
+</resources>

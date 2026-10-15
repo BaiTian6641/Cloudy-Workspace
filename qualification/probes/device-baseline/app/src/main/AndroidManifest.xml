@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Network access serves explicit HTTPS and finite SSH/SFTP experiments. -->
+    <!-- Network access serves explicit HTTPS, SSH/SFTP and visible terminal experiments. -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_LOCAL_NETWORK" />
@@ -21,6 +21,10 @@
             android:name=".TransferJobService"
             android:exported="false"
             android:permission="android.permission.BIND_JOB_SERVICE" />
+        <activity
+            android:name=".TerminalActivity"
+            android:exported="false"
+            android:resizeableActivity="true" />
         <activity
             android:name=".SshActivity"
             android:exported="false"

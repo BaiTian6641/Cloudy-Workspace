@@ -2,7 +2,7 @@
 <resources>
     <string name="open_ssh_probe">Open SSH transport qualification</string>
     <string name="ssh_heading">SSH transport qualification</string>
-    <string name="ssh_scope">Finite native SSH/SFTP or exec/PTY experiment. PTY controls send fixed test tokens to a dedicated fixture. Unknown servers stop before authentication. Confirm the displayed key against the independent fixture reference, then press Run again. Files are retained; existing paths are never replaced. All windows observe one owner. Closing or hiding the last window cancels work; recreation preserves it.</string>
+    <string name="ssh_scope">Finite native SSH/SFTP or exec/PTY experiment. PTY controls send fixed test tokens to a dedicated fixture. Unknown servers stop before authentication. Confirm the displayed key against the independent fixture reference, then press Run again. Files are retained; existing paths are never replaced. All windows observe one owner. Closing or hiding the last window requests cancellation; recreation preserves work in a live process. Process loss can leave an unfinished record that the next process marks interrupted.</string>
     <string name="ssh_window_identity">Activity %1$s · task %2$d</string>
     <string name="ssh_request_lan">Request local network access</string>
     <string name="ssh_run">Run SSH/SFTP check</string>

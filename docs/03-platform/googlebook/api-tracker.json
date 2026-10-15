@@ -458,20 +458,23 @@
         "R106",
         "R107",
         "R109",
-        "R111"
+        "R111",
+        "G115",
+        "G116"
       ],
       "minimumApi": 26,
-      "libraryVersion": "androidx.webkit:webkit:1.17.1 (candidate; not adopted)",
-      "availability": "architecture-proposed",
+      "libraryVersion": "androidx.webkit:webkit:1.17.1 (diagnostic 0.7.0 only; device qualification pending)",
+      "availability": "published-stable-compiled-device-unqualified",
       "qualification": "untested",
       "checkedOn": "2026-10-15",
       "owner": "Android/platform developer",
       "stage": "P0-S3",
       "fallback": "Expose renderer-unavailable or interrupted state; retain independent native SSH/SFTP. No broad JSON/evaluate-JavaScript fallback. A native renderer is a separate unqualified investigation.",
       "experiment": "P0-S3 real visible native SSH shell with local xterm core 6.0.0/fit 0.11.0 candidate: exact input/output bytes, real resize/TUI, bounded output acknowledgments, stale-origin/generation rejection, renderer-loss abort, physical CJK IME/preedit and TalkBack. Tests and adoption review precede any capability claim.",
-      "versionNotes": "AssetLoader WebKit 1.1.0; message listener 1.3.0; byte-array WebMessageCompat/reply proxy 1.8.0. Selected WebKit release notes specify library floor 24 since 1.16; this proposed complete route requires API 26 onRenderProcessGone and current probe min35 covers it. Actual AAR manifest/graph/assets remain uninspected. xterm Unicode 6 default; Unicode 11 comparison needs proposed-API opt-in.",
+      "versionNotes": "AssetLoader WebKit1.1.0; listener1.3.0; binary message/reply1.8.0. Actual1.17.1 AAR minSdk24/minCompileSdk33/minAGP7.2 inspected; full callback route needs API26 and probe min35 covers it. Actual graph/assets reviewed for the diagnostic. xterm Unicode6 default; no Unicode11/grapheme adoption. Device/provider/IME/TalkBack qualification remains pending.",
       "runtimeGuard": "Check WEB_MESSAGE_LISTENER and WEB_MESSAGE_ARRAY_BUFFER on the actual provider before admission. Exact HTTPS local origin plus sourceOrigin/isMainFrame/current attachment checks; no wildcard/file/content page. UI-thread message callbacks only validate/enqueue; native I/O owns SSH. Missing support or renderer loss stops input without replay. Keep native LAN permission/admission separate.",
-      "researchEvidence": "docs/03-platform/googlebook/p0-s3-terminal-renderer-increment.md"
+      "researchEvidence": "docs/03-platform/googlebook/p0-s3-terminal-renderer-increment.md",
+      "implementationEvidence": "docs/06-validation/2026-10-15-terminal-implementation-review.md"
     },
     {
       "id": "API20",

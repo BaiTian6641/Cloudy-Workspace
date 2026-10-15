@@ -44,3 +44,7 @@ jobs:
         run: .venv/bin/python tools/validate_project.py --schemas
       - name: Check specimen JavaScript syntax
         run: node --check docs/04-design/preview.js
+      - name: Verify authored terminal byte bridge
+        run: |
+          node --check qualification/probes/device-baseline/app/src/main/assets/terminal/terminal.js
+          node --test tests/test_terminal_bridge.cjs
