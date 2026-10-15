@@ -24,5 +24,6 @@ The [desktop workflow design](04-design/desktop-workflows.md) expands the visual
 - [P0 diagnostic toolchain](03-platform/googlebook/probe-toolchain.md) and [real device-baseline probe](../qualification/probes/device-baseline/README.md).
 - [P0-S2 platform decision](03-platform/googlebook/p0-s2-platform-decision.md) and [operation lifetimes](03-platform/googlebook/p0-s2-operation-lifetimes.md): accepted finite UIDT/window evidence, unresolved continuous-session classification and required physical-input/backend cases.
 - [P0-S3 SSH/SFTP engine brief](03-platform/googlebook/p0-s3-ssh-engine-qualification.md) and [real host preflight](../qualification/results/P0-S3/2026-10-15-ssh-host-preflight.md).
+- Actual [SSH/SFTP](../qualification/results/P0-S3/2026-10-15-ssh-sftp-probe.md), [exec/PTY ownership](../qualification/results/P0-S3/2026-10-15-ssh-pty-probe.md), [archive/restoration](../qualification/results/P0-S3/2026-10-15-ssh-batch-rotation.md) and [lifecycle/recovery](../qualification/results/P0-S3/2026-10-15-ssh-lifecycle.md) evidence; the [real terminal increment](03-platform/googlebook/p0-s3-terminal-renderer-increment.md) is the next implementation.
 - [Primary Linux host prerequisites](03-platform/linux-primary-host-qualification.md).
 - [Sunshine release/master source divergence](07-reference/2026-10-15-sunshine-source-drift.md).
