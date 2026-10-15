@@ -93,6 +93,8 @@ Exit evidence:
 - First-trust/changed-key, SSH/SFTP and terminal-input probes have separate actual-hardware verdicts; an unsuccessful route is blocked or a bounded experiment and cannot inherit another route's pass.
 - Unresolved accessibility/IME failures block terminal renderer adoption, not a separately supported SSH/SFTP approach or completion of the investigation record.
 
+The [0.5.0 SSH/SFTP run](../../../qualification/results/P0-S3/2026-10-15-ssh-sftp-probe.md) supplies the first real Android/backend trust, key-authentication and exclusive-create integrity evidence. It retains five attempts and qualifies only the finite diagnostic route; active cancellation/process loss, exec/PTY, renderer/IME and physical input remain pending. Idle observer-window behavior does not satisfy active session ownership. CAP-SSH/CAP-TERMINAL remain pending.
+
 Record evidence under `qualification/results/P0-S3/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-C01, Q-C02, Q-A01, Q-F02. Official/upstream source IDs: G09, G10, G17, R09, R10; resolve them in the [source register](../../07-reference/source-register.md).
 
 ## P0-S4 — Streaming, RDP/VNC, physical input and decoder qualification

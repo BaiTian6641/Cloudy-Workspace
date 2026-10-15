@@ -701,14 +701,14 @@
     },
     {
       "id": "R18",
-      "title": "OpenSSH server configuration: X11",
+      "title": "OpenSSH server configuration: X11 and restricted sessions",
       "url": "https://man.openbsd.org/sshd_config",
       "publisher": "OpenBSD / OpenSSH",
       "category": "protocol",
       "reviewStatus": "reviewed",
-      "checkedOn": "2026-10-14",
+      "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "X11Forwarding, X11UseLocalhost and XAuthLocation server prerequisites.",
+      "note": "X11Forwarding, X11UseLocalhost and XAuthLocation prerequisites; re-reviewed ForceCommand overriding shell/exec/subsystem, PermitTTY, DisableForwarding and PermitUserRC for the separate P0-S3 finite PTY fixture. Current manual semantics require effective-configuration/runtime checks with the selected backend.",
       "refresh": "Before engine selection, after relevant upstream change, and before release qualification."
     },
     {
@@ -2518,6 +2518,83 @@
       "note": "String-only EST constructor calls the unsafe helper. No EST or BCJSSE route is permitted in this diagnostic; changed dependencies or reachability require renewed review.",
       "refresh": "Before SSH diagnostic dependency/provider changes, after relevant upstream security updates, and before product adoption.",
       "sha256": "5336b190a5030edc839e79f1068474a9ccc379a3422264ffc4e59067607da63d"
+    },
+    {
+      "id": "R93",
+      "title": "SSHJ 0.41.2 session exec and PTY interfaces",
+      "url": "https://raw.githubusercontent.com/hierynomus/sshj/6fad160fe36605a68847ac8a527750c615b4bd04/src/main/java/net/schmizz/sshj/connection/channel/direct/Session.java",
+      "publisher": "SSHJ upstream",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Session.exec/allocatePTY/startShell and Shell.changeWindowDimensions present at pinned 0.41.2; session single-use, Command exit status after close, no Shell exit-status getter. Library symbols, not Android SDK API levels. Owner P0-S3 probe maintainer; reject unsupported operation without fabricated fallback.",
+      "refresh": "Before P0-S3 exec/PTY implementation, on SSHJ or OpenSSH policy changes, and before qualification claims.",
+      "sha256": "5ee4ddb7eed564eafecf48322038655d902d52121d7e938d5506fc3cc7000cce"
+    },
+    {
+      "id": "R94",
+      "title": "SSHJ 0.41.2 channel stream and lifetime interfaces",
+      "url": "https://raw.githubusercontent.com/hierynomus/sshj/6fad160fe36605a68847ac8a527750c615b4bd04/src/main/java/net/schmizz/sshj/connection/channel/Channel.java",
+      "publisher": "SSHJ upstream",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Channel input/output streams, bounded join(timeout,TimeUnit), close and EOF observation inspected at pinned 0.41.2. Drain bounded exec streams and verify terminal outcome separately. Owner P0-S3 probe maintainer; transport errors remain explicit failures, not Android qualification.",
+      "refresh": "Before P0-S3 exec/PTY implementation, on SSHJ or OpenSSH policy changes, and before qualification claims.",
+      "sha256": "9c0511e86af88ea4c5c6699b77fb6b96683f6d12ad6eadb68a289d1389898d61"
+    },
+    {
+      "id": "R95",
+      "title": "SSHJ 0.41.2 session request implementation",
+      "url": "https://raw.githubusercontent.com/hierynomus/sshj/6fad160fe36605a68847ac8a527750c615b4bd04/src/main/java/net/schmizz/sshj/connection/channel/direct/SessionChannel.java",
+      "publisher": "SSHJ upstream",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Pinned implementation sends window-change with want-reply false, so server-observed resize is required. allocateDefaultPTY passes an empty mode map despite interface echo wording; use explicit verified modes. Single-use guard inspected. Owner P0-S3 probe maintainer; no implementation cast or fabricated size fallback.",
+      "refresh": "Before P0-S3 exec/PTY implementation, on SSHJ or OpenSSH policy changes, and before qualification claims.",
+      "sha256": "43c538d8868e1327da0617ba16310abef72ebe718fd1573b62b51f09be4135fc"
+    },
+    {
+      "id": "R96",
+      "title": "SSHJ 0.41.2 PTY mode symbols",
+      "url": "https://raw.githubusercontent.com/hierynomus/sshj/6fad160fe36605a68847ac8a527750c615b4bd04/src/main/java/net/schmizz/sshj/connection/channel/direct/PTYMode.java",
+      "publisher": "SSHJ upstream",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Pinned ECHO/ECHONL/ICANON/ONLCR mode symbols and encoding inspected. Select finite fixture echo/newline behavior explicitly and verify actual bytes. Upstream library availability, not Android SDK API levels; owner P0-S3 probe maintainer, unsupported behavior remains unqualified.",
+      "refresh": "Before P0-S3 exec/PTY implementation, on SSHJ or OpenSSH policy changes, and before qualification claims.",
+      "sha256": "4cc61197605297120450e6f3e492275519f3311583229a6696072f506e8d2282"
+    },
+    {
+      "id": "R97",
+      "title": "OpenSSH authorized-key restrictions and PTY exception",
+      "url": "https://man.openbsd.org/sshd",
+      "publisher": "OpenBSD / OpenSSH",
+      "category": "protocol",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Current official authorized_keys manual: restrict disables PTY, forwarding and user rc; restrict,pty restores only PTY. Forced command applies to shell/exec/subsystem and SSH_ORIGINAL_COMMAND must not be evaluated as arbitrary input. Owner P0-S3 fixture maintainer; verify actual extracted backend config or retain SFTP-only scope.",
+      "refresh": "Before P0-S3 exec/PTY implementation, on SSHJ or OpenSSH policy changes, and before qualification claims."
+    },
+    {
+      "id": "R98",
+      "title": "SSHJ 0.41.2 authenticated session factory",
+      "url": "https://raw.githubusercontent.com/hierynomus/sshj/6fad160fe36605a68847ac8a527750c615b4bd04/src/main/java/net/schmizz/sshj/SSHClient.java",
+      "publisher": "SSHJ upstream",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Pinned SSHClient.startSession checks connected/authenticated state, opens a SessionChannel and returns the public Session interface. Session creation is a library surface, not Android API availability or backend qualification. Owner P0-S3 probe maintainer; connection/authentication/open failures remain explicit.",
+      "refresh": "Before P0-S3 exec/PTY implementation, on SSHJ or OpenSSH policy changes, and before qualification claims.",
+      "sha256": "fff16bf8eeee7d5b6b3011c8fb3ac304a5c2949c7f7c654ab24115b9dfb79fb0"
     }
   ]
 }

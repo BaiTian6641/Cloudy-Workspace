@@ -29,3 +29,9 @@ Two earlier failures remain in ignored build logs: duplicate BC license resource
 ## Next physical acceptance
 
 Commit and push this source before installation, record the exact source/APK and device/backend identity, then test unknown trust, deliberate enrollment, actual key authentication, sentinel/payload hashes, exclusive-create collision and wrong/changed keys. Keep endpoint/user names, private keys, raw logs and UI private. Independently inspect the resulting evidence and actual host file before publishing a pass. Exec/PTY, live cancellation/lifecycle, direct channels, X11, renderer/input and product integration remain distinct requirements under the [engine brief](../03-platform/googlebook/p0-s3-ssh-engine-qualification.md).
+
+## Source delivery and subsequent device evidence
+
+This source was committed and pushed as [dd07d94](https://github.com/BaiTian6641/Cloudy-Workspace/commit/dd07d9447007a9ce8bdea33cbc3802be8e2cfab2), with the remote branch SHA verified before installation. Both exact-source hosted workflows passed: [Repository checks](https://github.com/BaiTian6641/Cloudy-Workspace/actions/runs/38719808801) and [Android qualification probe](https://github.com/BaiTian6641/Cloudy-Workspace/actions/runs/38719808793). Three exact-path Git attributes preserve upstream CRLF, separator and trailing notice bytes without changing source/APK hashes; normal authored-file whitespace checks remain enabled.
+
+The subsequent [device run](../../qualification/results/P0-S3/2026-10-15-ssh-sftp-probe.md) separately records five actual trust/authentication/SFTP attempts on the identified HP Googlebook and scoped Ubuntu OpenSSH fixture. Its results do not retrospectively change the source-only boundary of the local validation above.
