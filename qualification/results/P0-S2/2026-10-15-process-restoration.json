@@ -1,0 +1,602 @@
+{
+  "schemaVersion": 1,
+  "runId": "P0-S2-process-restoration-2026-10-15",
+  "stage": "P0-S2",
+  "stageStatus": "in-progress",
+  "verdict": "pass within the stated ADB-injected background-process-kill scope",
+  "scope": "Shell-triggered background process death on the real Googlebook, followed by restoration of the existing document task from Android saved instance state. Not natural low-memory killing.",
+  "sourceCommit": "13dce23dd4052163f22703752b16438ec81c8306",
+  "apk": {
+    "package": "dev.cloudy.qualification.baseline",
+    "versionName": "0.2.0",
+    "versionCode": 2,
+    "variant": "debug",
+    "reportSchemaVersion": 2,
+    "sha256": "4a7a47df18b8d48541ce7f1d7ed347c0d6e48c2f79898c8e65064199d1596b32"
+  },
+  "device": {
+    "manufacturer": "HP",
+    "model": "HP Googlebook 14",
+    "buildId": "CL3B.260622.276.R2",
+    "release": "17",
+    "sdkInt": 37,
+    "securityPatch": "2026-09-01",
+    "incremental": "16560795",
+    "supportedAbis": [
+      "arm64-v8a"
+    ]
+  },
+  "buildChecksReference": "qualification/results/P0-S2/2026-10-15-window-probe.json",
+  "buildBoundary": "Same reviewed source/APK and 17-test build as the earlier window experiment; this evidence task performed no build or device action.",
+  "time": {
+    "recordingTimezone": "UTC",
+    "localTimezone": "America/Chicago",
+    "firstAttemptRecordedAtHostUtc": "2026-10-15T06:27:01.570247+00:00",
+    "restorationVerifiedAtHostUtc": "2026-10-15T06:37:14.695786+00:00",
+    "clockBoundary": "Host command-record times and device wall-clock observations are retained separately; no cross-clock latency inference."
+  },
+  "actionProvenance": "Primary agent used explicitly targeted ADB/official Android CLI input on the real device. Native minimize and the existing own-app Recents task were selected from fresh UI observations. No raw command, UID, transport serial, layout or screenshot is published.",
+  "initialAttempt": {
+    "verdict": "process death not achieved",
+    "backgroundAction": "HOME",
+    "backgroundActionRecordedAtHostUtc": "2026-10-15T06:27:01.570247+00:00",
+    "killAction": "One package-scoped shell activity-manager background-kill request",
+    "killActionRecordedAtHostUtc": "2026-10-15T06:27:02.454180+00:00",
+    "killCommandExitCode": 0,
+    "originalProcessPresentInAllFiveQueries": true,
+    "processQueries": [
+      {
+        "recordedAtHostUtc": "2026-10-15T06:27:02.791879+00:00",
+        "queryExitCode": 0,
+        "originalProcessStillPresent": true
+      },
+      {
+        "recordedAtHostUtc": "2026-10-15T06:27:03.122497+00:00",
+        "queryExitCode": 0,
+        "originalProcessStillPresent": true
+      },
+      {
+        "recordedAtHostUtc": "2026-10-15T06:27:03.459720+00:00",
+        "queryExitCode": 0,
+        "originalProcessStillPresent": true
+      },
+      {
+        "recordedAtHostUtc": "2026-10-15T06:27:03.792467+00:00",
+        "queryExitCode": 0,
+        "originalProcessStillPresent": true
+      },
+      {
+        "recordedAtHostUtc": "2026-10-15T06:27:04.121571+00:00",
+        "queryExitCode": 0,
+        "originalProcessStillPresent": true
+      }
+    ],
+    "laterDiagnosticObservation": {
+      "recordedAtHostUtc": "2026-10-15T06:28:03.149512+00:00",
+      "processStateNumberObserved": 7,
+      "cachedObserved": false,
+      "oomAdjustmentObserved": 225,
+      "processStateLabel": "IMPORTANT_BACKGROUND"
+    },
+    "interpretation": "Command success alone was insufficient. The original process remained alive; this attempt supplies no process-death restoration pass. The later state observation describes this build, not a continuously sampled transition."
+  },
+  "successfulAttempt": {
+    "verdict": "process absence and new-process restoration observed",
+    "backgroundAction": "Native caption minimize",
+    "backgroundActionRecordedAtHostUtc": "2026-10-15T06:28:46.584793+00:00",
+    "laterDiagnosticObservation": {
+      "recordedAtHostUtc": "2026-10-15T06:36:28.740408+00:00",
+      "processStateNumberObserved": 15,
+      "cachedObserved": false,
+      "oomAdjustmentObserved": 700,
+      "processStateLabel": "LAST_ACTIVITY"
+    },
+    "secondsFromMinimizeCommandRecordToLaterDiagnosticRecord": 462.155615,
+    "delayBoundary": "Elapsed observation spacing only; not a required wait, measured eligibility threshold or time guarantee.",
+    "killAction": "One later package-scoped shell activity-manager background-kill request",
+    "killActionRecordedAtHostUtc": "2026-10-15T06:36:44.074389+00:00",
+    "killCommandExitCode": 0,
+    "processAbsence": {
+      "recordedAtHostUtc": "2026-10-15T06:36:44.407185+00:00",
+      "queryExitCode": 1,
+      "queryOutputEmpty": true,
+      "oldProcessAbsent": true
+    },
+    "restoreAction": "Select the existing probe task in Recents using its freshly inspected snapshot bounds",
+    "restoreActionRecordedAtHostUtc": "2026-10-15T06:37:13.642963+00:00",
+    "verificationRecordedAtHostUtc": "2026-10-15T06:37:14.695786+00:00",
+    "differentProcessIdConfirmedPrivately": true,
+    "processIdsPublished": false
+  },
+  "before": {
+    "privateReport": "qualification/results/private/process-lifecycle/p2-hidden-before-kill.json",
+    "processStartedAtDeviceUtc": "2026-10-15T06:15:28.034452Z",
+    "snapshotAtDeviceUtc": "2026-10-15T06:28:46.302878Z",
+    "revision": 168,
+    "identity": {
+      "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+      "taskIdObserved": 1000150,
+      "activityGenerationId": "ba5ed942-401d-4433-9854-b81b5d25cabd"
+    },
+    "localState": {
+      "marker": "C",
+      "markerIndex": 2,
+      "changeCount": 2
+    },
+    "restorationSource": "restored-bundle",
+    "activityAliveObserved": true,
+    "taskRootObserved": true,
+    "retainedWindowCount": 2,
+    "droppedEventCount": 40
+  },
+  "after": {
+    "privateReport": "qualification/results/private/process-lifecycle/p2-restored.json",
+    "processStartedAtDeviceUtc": "2026-10-15T06:37:12.976557Z",
+    "snapshotAtDeviceUtc": "2026-10-15T06:37:13.390310Z",
+    "revision": 8,
+    "identity": {
+      "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+      "taskIdObserved": 1000150,
+      "activityGenerationId": "46262590-7f70-41b8-a421-ab99c4e15ba1"
+    },
+    "localState": {
+      "marker": "C",
+      "markerIndex": 2,
+      "changeCount": 2
+    },
+    "restorationSource": "restored-bundle",
+    "activityAliveObserved": true,
+    "taskRootObserved": true,
+    "retainedWindowCount": 1,
+    "droppedEventCount": 0
+  },
+  "preserved": {
+    "logicalWindowId": true,
+    "observedTaskId": true,
+    "marker": true,
+    "changeCount": true
+  },
+  "changed": {
+    "processRun": true,
+    "activityGeneration": true
+  },
+  "selectedOldProcessEvents": [
+    {
+      "sequence": 161,
+      "elapsedRealtimeMs": 43959256,
+      "identity": {
+        "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+        "taskIdObserved": 1000150,
+        "activityGenerationId": "ba5ed942-401d-4433-9854-b81b5d25cabd"
+      },
+      "kind": "window-focus",
+      "detail": "focused=true",
+      "attribution": "current",
+      "localState": {
+        "marker": "C",
+        "markerIndex": 2,
+        "changeCount": 2
+      }
+    },
+    {
+      "sequence": 162,
+      "elapsedRealtimeMs": 43959387,
+      "identity": {
+        "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+        "taskIdObserved": 1000150,
+        "activityGenerationId": "ba5ed942-401d-4433-9854-b81b5d25cabd"
+      },
+      "kind": "window-observed",
+      "detail": "",
+      "attribution": "current",
+      "localState": {
+        "marker": "C",
+        "markerIndex": 2,
+        "changeCount": 2
+      }
+    },
+    {
+      "sequence": 163,
+      "elapsedRealtimeMs": 43962650,
+      "identity": {
+        "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+        "taskIdObserved": 1000150,
+        "activityGenerationId": "ba5ed942-401d-4433-9854-b81b5d25cabd"
+      },
+      "kind": "activity-top-resumed",
+      "detail": "topResumed=false",
+      "attribution": "current",
+      "localState": {
+        "marker": "C",
+        "markerIndex": 2,
+        "changeCount": 2
+      }
+    },
+    {
+      "sequence": 164,
+      "elapsedRealtimeMs": 43962651,
+      "identity": {
+        "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+        "taskIdObserved": 1000150,
+        "activityGenerationId": "ba5ed942-401d-4433-9854-b81b5d25cabd"
+      },
+      "kind": "activity-paused",
+      "detail": "",
+      "attribution": "current",
+      "localState": {
+        "marker": "C",
+        "markerIndex": 2,
+        "changeCount": 2
+      }
+    },
+    {
+      "sequence": 165,
+      "elapsedRealtimeMs": 43962680,
+      "identity": {
+        "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+        "taskIdObserved": 1000150,
+        "activityGenerationId": "ba5ed942-401d-4433-9854-b81b5d25cabd"
+      },
+      "kind": "window-focus",
+      "detail": "focused=false",
+      "attribution": "current",
+      "localState": {
+        "marker": "C",
+        "markerIndex": 2,
+        "changeCount": 2
+      }
+    },
+    {
+      "sequence": 166,
+      "elapsedRealtimeMs": 43962802,
+      "identity": {
+        "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+        "taskIdObserved": 1000150,
+        "activityGenerationId": "ba5ed942-401d-4433-9854-b81b5d25cabd"
+      },
+      "kind": "window-observed",
+      "detail": "",
+      "attribution": "current",
+      "localState": {
+        "marker": "C",
+        "markerIndex": 2,
+        "changeCount": 2
+      }
+    },
+    {
+      "sequence": 167,
+      "elapsedRealtimeMs": 43962957,
+      "identity": {
+        "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+        "taskIdObserved": 1000150,
+        "activityGenerationId": "ba5ed942-401d-4433-9854-b81b5d25cabd"
+      },
+      "kind": "activity-stopped",
+      "detail": "",
+      "attribution": "current",
+      "localState": {
+        "marker": "C",
+        "markerIndex": 2,
+        "changeCount": 2
+      }
+    },
+    {
+      "sequence": 168,
+      "elapsedRealtimeMs": 43962957,
+      "identity": {
+        "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+        "taskIdObserved": 1000150,
+        "activityGenerationId": "ba5ed942-401d-4433-9854-b81b5d25cabd"
+      },
+      "kind": "activity-save-instance-state",
+      "detail": "",
+      "attribution": "current",
+      "localState": {
+        "marker": "C",
+        "markerIndex": 2,
+        "changeCount": 2
+      }
+    }
+  ],
+  "newProcessEvents": [
+    {
+      "sequence": 1,
+      "elapsedRealtimeMs": 44469781,
+      "identity": {
+        "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+        "taskIdObserved": 1000150,
+        "activityGenerationId": "46262590-7f70-41b8-a421-ab99c4e15ba1"
+      },
+      "kind": "activity-created",
+      "detail": "restored-bundle",
+      "attribution": "current",
+      "localState": {
+        "marker": "C",
+        "markerIndex": 2,
+        "changeCount": 2
+      }
+    },
+    {
+      "sequence": 2,
+      "elapsedRealtimeMs": 44469794,
+      "identity": null,
+      "kind": "refresh-started",
+      "detail": "",
+      "attribution": "process",
+      "localState": null
+    },
+    {
+      "sequence": 3,
+      "elapsedRealtimeMs": 44469794,
+      "identity": {
+        "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+        "taskIdObserved": 1000150,
+        "activityGenerationId": "46262590-7f70-41b8-a421-ab99c4e15ba1"
+      },
+      "kind": "activity-started",
+      "detail": "",
+      "attribution": "current",
+      "localState": {
+        "marker": "C",
+        "markerIndex": 2,
+        "changeCount": 2
+      }
+    },
+    {
+      "sequence": 4,
+      "elapsedRealtimeMs": 44469796,
+      "identity": {
+        "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+        "taskIdObserved": 1000150,
+        "activityGenerationId": "46262590-7f70-41b8-a421-ab99c4e15ba1"
+      },
+      "kind": "activity-resumed",
+      "detail": "",
+      "attribution": "current",
+      "localState": {
+        "marker": "C",
+        "markerIndex": 2,
+        "changeCount": 2
+      }
+    },
+    {
+      "sequence": 5,
+      "elapsedRealtimeMs": 44469801,
+      "identity": {
+        "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+        "taskIdObserved": 1000150,
+        "activityGenerationId": "46262590-7f70-41b8-a421-ab99c4e15ba1"
+      },
+      "kind": "activity-top-resumed",
+      "detail": "topResumed=true",
+      "attribution": "current",
+      "localState": {
+        "marker": "C",
+        "markerIndex": 2,
+        "changeCount": 2
+      }
+    },
+    {
+      "sequence": 6,
+      "elapsedRealtimeMs": 44469851,
+      "identity": null,
+      "kind": "refresh-finished",
+      "detail": "Inspect section errors; completion is not qualification.",
+      "attribution": "process",
+      "localState": null
+    },
+    {
+      "sequence": 7,
+      "elapsedRealtimeMs": 44469921,
+      "identity": {
+        "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+        "taskIdObserved": 1000150,
+        "activityGenerationId": "46262590-7f70-41b8-a421-ab99c4e15ba1"
+      },
+      "kind": "window-focus",
+      "detail": "focused=true",
+      "attribution": "current",
+      "localState": {
+        "marker": "C",
+        "markerIndex": 2,
+        "changeCount": 2
+      }
+    },
+    {
+      "sequence": 8,
+      "elapsedRealtimeMs": 44470044,
+      "identity": {
+        "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+        "taskIdObserved": 1000150,
+        "activityGenerationId": "46262590-7f70-41b8-a421-ab99c4e15ba1"
+      },
+      "kind": "window-observed",
+      "detail": "",
+      "attribution": "current",
+      "localState": {
+        "marker": "C",
+        "markerIndex": 2,
+        "changeCount": 2
+      }
+    }
+  ],
+  "primaryAgentVisualObservation": {
+    "privateImage": "qualification/results/private/process-lifecycle/p2-restored.png",
+    "inspectedImmediatelyAfterRestore": true,
+    "observedTaskId": 1000150,
+    "marker": "C",
+    "changeCount": 2,
+    "stateSource": "restored-bundle",
+    "uiRevision": 8,
+    "uiSavedRevision": 8,
+    "evidenceAuthorBoundary": "The primary agent inspected the screen; this writer cross-checked JSON and verification artifacts without publishing the image."
+  },
+  "interpretation": "The new process started with a fresh recorder and revision 8 while the same existing task restored C/2 through its Activity Bundle. The pre-kill generation differs from the final generation in the earlier window report because an intervening same-process recreation occurred; the exact pre-kill generation is recorded here.",
+  "notEstablished": [
+    "Natural low-memory killer behavior",
+    "A cached=true process at the successful kill",
+    "Force-stop or user-dismissal restoration",
+    "Reboot, suspend or power-loss durability",
+    "SSH/network/terminal session survival",
+    "Transfer or streaming continuity",
+    "USB ownership recovery",
+    "Foreground-service or background-execution permission/timeout behavior",
+    "Other apps, tasks, devices or OS builds",
+    "Completion of P0-S2 or activation of CAP-PLATFORM"
+  ],
+  "capabilityDecision": {
+    "gate": "CAP-PLATFORM",
+    "outcome": "pending",
+    "reason": "This is a plain diagnostic Activity/Bundle process-restoration observation; operation-specific lifecycle and final platform acceptance remain pending."
+  },
+  "privateEvidence": [
+    {
+      "path": "qualification/results/private/process-lifecycle/p1-hidden-before-kill.json",
+      "sha256": "8ac0bb41aaff4df386452904ee32efecbce4e2a0e612a7f55383126a90c8fed9",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/process-lifecycle/p1-home-command.json",
+      "sha256": "450e04cad75cc919d35df4e762adac680d39fcb1d3c42604facfa2ba67cf2841",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/process-lifecycle/p1-kill-background-command.json",
+      "sha256": "d1c55ab577893217a216bfe51bcf9a526350d48742bf76e10044c53b6d1a9efb",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/process-lifecycle/p1-pid-after-kill-0.json",
+      "sha256": "ef3a2ba8de76ead7d95170e0d1750b07f06763388dd3741b518242109139ba88",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/process-lifecycle/p1-pid-after-kill-1.json",
+      "sha256": "009e680c16bcf61e1f01f015f95fedc01fb42ee7eef716259fa78aae24972381",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/process-lifecycle/p1-pid-after-kill-2.json",
+      "sha256": "5f02fa4cb40a38fa6c7ef3314ec65f837456b5e23510ba01a0f3942680a99a92",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/process-lifecycle/p1-pid-after-kill-3.json",
+      "sha256": "30539f4f344e8aae8c6f87a27355a49c7b7c289ebe597c68b058ccee2dc3e39e",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/process-lifecycle/p1-pid-after-kill-4.json",
+      "sha256": "acad67b3c33e9f4ae9f569aaa0453021059da2dbe1d599595b7cb8722eba6589",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/process-lifecycle/p1-pid-before.json",
+      "sha256": "cbe87b320f004a17e5f48dcc83d58b47dd3589dd4d979dd04a43d47fcd96f4a7",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/process-lifecycle/p1-process-diagnostic-command.json",
+      "sha256": "e7f1b51079757a96a6488ea471044840c260d23178f02e8d58f6afa4f7cd0971",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/process-lifecycle/p1-uid-state-command.json",
+      "sha256": "bd55a24d7c6e52cc0fc6c9c0c35beb78c73befa64383563d15d34768d949b278",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/process-lifecycle/p1-visible-before.json",
+      "sha256": "4e6b38a2d240abcef2e4da6405bce937779402ecbd50652409a57367a260019b",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/process-lifecycle/p2-delayed-process-state-command.json",
+      "sha256": "ac965c3325bd48bfdb8f2bdb648f9a1b25789467a48dff0389479ed0f6087506",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/process-lifecycle/p2-delayed-uid-state-command.json",
+      "sha256": "906a63522510fa6cfe6845237f70ce1e68cc6eb664f31800ecd896138df792b3",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/process-lifecycle/p2-hidden-before-kill.json",
+      "sha256": "130a370358946bd050fcb34b073a2ffc7928f66f14b7a02ac450a6ceb404b090",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/process-lifecycle/p2-kill-background-command.json",
+      "sha256": "43d209bc40eb717dfd37e747ee179c88f6cb62ee9a55e492f19bdf3a2e9d6cbb",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/process-lifecycle/p2-kill-verification.json",
+      "sha256": "93545fbe7cfc57852bcaa8962ab29fec5e5c0b0351bdc1b93b13a97a2db8bdb0",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/process-lifecycle/p2-minimized.json",
+      "sha256": "130a370358946bd050fcb34b073a2ffc7928f66f14b7a02ac450a6ceb404b090",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/process-lifecycle/p2-native-minimize-command.json",
+      "sha256": "f981ee03e3c7d0c85565ed0a95d63361b378f66590f87cf28ffd35d45c4fec95",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/process-lifecycle/p2-open-recents-command.json",
+      "sha256": "082cabb55c5be38a6bf7d9e2576875ed8336039e26d4c373c32c9bf12e8996aa",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/process-lifecycle/p2-pid-after-kill-0.json",
+      "sha256": "7b47748b45655c11eeb4bd59875cddab855d1ab9add7a65e7be338791cb75e1e",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/process-lifecycle/p2-pid-before.json",
+      "sha256": "4fd6ec8485afd93625b58b44a91f4f7d060b4b61e9ef9516c527802722cc1c29",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/process-lifecycle/p2-recents-layout.json",
+      "sha256": "ce3aaa5a6415d39ae2b49795513dd46dce00a9de7b547d3c79e51020d2a9dda8",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/process-lifecycle/p2-restoration-verification.json",
+      "sha256": "509b2fd2d18adbc75a46f4b92177f91c8400f81d51a33cd0ecdc9d34b28d9421",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/process-lifecycle/p2-restored.json",
+      "sha256": "a059932bbc1f9d84829cc7d78c241031ef2979657b1c09f6b88cde10ed365552",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/process-lifecycle/p2-restored.png",
+      "sha256": "6e40b7a2f88097b5d8739aec3544f8110763f8083f22caca66e8871cd4fd798a",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/process-lifecycle/p2-select-existing-recents-task-command.json",
+      "sha256": "d1d4fc696899647158e760019de1b36a314f49e0ab427155f3d59add01d4f125",
+      "publication": "Hash/path only; raw contents remain private"
+    }
+  ],
+  "sanitization": {
+    "included": "Exact probe build; reported device build; diagnostic logical/task/generation identities and marker/counter; process-run timestamps, selected process-state classifications and absence/change booleans; correlated lifecycle events; revisions and evidence hashes.",
+    "excluded": [
+      "raw process IDs",
+      "UIDs",
+      "command arguments/stdout/stderr",
+      "device transport identifiers",
+      "machine inventories",
+      "raw UI layouts",
+      "screenshots",
+      "unrelated Recents or desktop content"
+    ]
+  }
+}

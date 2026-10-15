@@ -67,9 +67,9 @@ No key text, clipboard data, input-device identifiers, accounts, host inventorie
 
 ## Remaining P0-S2 work and open observations
 
-This increment leaves system-initiated process-death restoration, per-operation foreground-service/timeout strategies, precise engagement APIs, and the final CAP-PLATFORM decision pending. The separate [Linux VM investigation](p0-s2-linux-vm-boundary.md) records that no public attach/control contract was established; it qualifies no VM backend. Physical keyboard, IME, trackpad, mouse, external-display, and text-scale coverage require distinct recorded actions. Two plain probe tasks do not qualify X11 window ownership, terminal IME, streaming input, or independent production app lifetimes.
+The subsequent [window run](../../../qualification/results/P0-S2/2026-10-15-window-probe.md) records the bounded W01–W06 observations. A separate [process-restoration run](../../../qualification/results/P0-S2/2026-10-15-process-restoration.md) verified saved-state restoration after an injected background-process kill; it does not establish natural low-memory killing or remote-operation durability. Per-operation foreground-service/timeout strategies, precise engagement APIs, and the final CAP-PLATFORM decision remain pending. The separate [Linux VM investigation](p0-s2-linux-vm-boundary.md) records that no public attach/control contract was established; it qualifies no VM backend. Physical keyboard, IME, trackpad, mouse, external-display, and text-scale coverage require distinct recorded actions. Two plain probe tasks do not qualify X11 window ownership, terminal IME, streaming input, or independent production app lifetimes.
 
-The device experiments must determine whether this build exposes the optional SystemUI multi-instance affordance, how caption observations change across resize/maximize, and whether callbacks/state isolation behave correctly. Missing hardware or an unexercised path stays unknown; this document supplies no device verdict.
+The optional SystemUI multi-instance affordance remains unexercised. Caption behavior through resize/maximize and correlated callback/state observations are recorded in the window run, with source differences preserved. Missing hardware or an unexercised path stays unknown; this contract does not extend the scope of either result.
 
 ## Official source provenance
 

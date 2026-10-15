@@ -147,3 +147,26 @@ The [operation-lifetime note](../03-platform/googlebook/p0-s2-operation-lifetime
 | G66 | [JobService notification and lifecycle reference](https://developer.android.com/reference/android/app/job/JobService) | reviewed | API34 setNotification is required within ten seconds of onStartJob for user-initiated jobs; report real work/progress on every run. Missing deadline can cause ANR/job stop. |
 | G67 | [Service timeout callback reference](https://developer.android.com/reference/android/app/Service) | reviewed | onTimeout(int,int) API35 versus short-service onTimeout(int) API34. Callback cleanup is not process-loss durability; stop selected work promptly and persist state before interruption. |
 | G68 | [Google Play foreground-service declarations](https://support.google.com/googleplay/android-developer/answer/13392821) | reviewed | Target34+ Play declarations include functionality, interruption impact and demonstration videos. All FGS types are reviewed; specialUse is not automatic approval and APK installation does not remove OS restrictions. |
+
+## P0-S2 process-loss investigation
+
+The [process-lifecycle method](../03-platform/googlebook/p0-s2-process-lifecycle-method.md) separates public Android guidance from a pinned upstream explanation for an initially ineffective background kill. G69–G71 describe Android 16 source, not the HP Android 17 implementation or an application API. Runtime state and verified process absence decide the experiment.
+
+| ID | Official reference | Review status | Development use |
+| --- | --- | --- | --- |
+| G69 | [Pinned AOSP OomAdjuster](https://android.googlesource.com/platform/frameworks/base/+/99b01a65cc4c104933788b3143285ab6bae65827/services/core/java/com/android/server/am/OomAdjuster.java) | reviewed | Recently stopped task priority and uptime-based perceptible-task interval; diagnostic explanation only. |
+| G70 | [Pinned AOSP ActivityManagerService](https://android.googlesource.com/platform/frameworks/base/+/99b01a65cc4c104933788b3143285ab6bae65827/services/core/java/com/android/server/am/ActivityManagerService.java) | reviewed | Background package-kill adjustment threshold; successful shell return does not prove process death. |
+| G71 | [Pinned AOSP ProcessList](https://android.googlesource.com/platform/frameworks/base/+/99b01a65cc4c104933788b3143285ab6bae65827/services/core/java/com/android/server/am/ProcessList.java) | reviewed | Adjustment constants and process filtering; expired priority need not mean cached state. |
+| G72 | [Android processes and app lifecycle](https://developer.android.com/guide/components/activities/process-lifecycle) | reviewed | Component/dependency importance, saved-state restoration and lack of a guaranteed destruction callback before process death. |
+
+## P0-S2 engagement candidate
+
+The [engagement contract](../03-platform/googlebook/p0-s2-engagement-probe-contract.md) pins a proposed diagnostic alpha and preserves the manual density fallback. No dependency is added by this research.
+
+| ID | Official reference | Review status | Development use |
+| --- | --- | --- | --- |
+| G73 | [AndroidX WindowManager releases](https://developer.android.com/jetpack/androidx/releases/window) | reviewed | Stable1.5.1 versus alpha1.6.0-alpha05; June17,2026 alpha adds PRECISE_POINTER/windowEngagementInfo. No product adoption. |
+| G74 | [WindowManager alpha05 published source](https://dl.google.com/dl/android/maven2/androidx/window/window/1.6.0-alpha05/window-1.6.0-alpha05-sources.jar) | reviewed | Exact public engagement callbacks and compatibility implementation; no engagement extension opt-in requirement. Meaningful precise-pointer computation API30+, lower compatibility result TOUCH. |
+| G75 | [WindowManager alpha05 AAR metadata](https://dl.google.com/dl/android/maven2/androidx/window/window/1.6.0-alpha05/window-1.6.0-alpha05.aar) | reviewed | Manifest minSdk23; metadata minCompileSdk34, minAGP8.1.1, extension0. Artifact inspected, not installed or device-qualified. |
+| G76 | [WindowManager alpha05 POM](https://dl.google.com/dl/android/maven2/androidx/window/window/1.6.0-alpha05/window-1.6.0-alpha05.pom) | reviewed | Declared transitive dependencies and Apache2 license; resolved graph/checksums remain required before diagnostic adoption. |
+| G77 | [WindowManager alpha05 module metadata](https://dl.google.com/dl/android/maven2/androidx/window/window/1.6.0-alpha05/window-1.6.0-alpha05.module) | reviewed | Published variant metadata; release publication status does not make an alpha version stable. |

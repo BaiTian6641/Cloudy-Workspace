@@ -1,0 +1,2067 @@
+{
+  "schemaVersion": 1,
+  "runId": "P0-S2-window-probe-2026-10-15",
+  "stage": "P0-S2",
+  "stageStatus": "in-progress",
+  "scope": "Bounded real two-task/window, Activity-recreation, native resize/tile/focus/close, short quiet and save-failure/recovery evidence; no product support claim",
+  "sourceCommit": "13dce23dd4052163f22703752b16438ec81c8306",
+  "apk": {
+    "package": "dev.cloudy.qualification.baseline",
+    "versionName": "0.2.0",
+    "versionCode": 2,
+    "variant": "debug",
+    "reportSchemaVersion": 2,
+    "sha256": "4a7a47df18b8d48541ce7f1d7ed347c0d6e48c2f79898c8e65064199d1596b32"
+  },
+  "device": {
+    "manufacturer": "HP",
+    "model": "HP Googlebook 14",
+    "buildId": "CL3B.260622.276.R2",
+    "release": "17",
+    "sdkInt": 37,
+    "securityPatch": "2026-09-01",
+    "incremental": "16560795",
+    "supportedAbis": [
+      "arm64-v8a"
+    ]
+  },
+  "time": {
+    "deviceProcessStartedAtUtc": "2026-10-15T06:15:28.034452Z",
+    "firstReportAtDeviceUtc": "2026-10-15T06:15:28.380341Z",
+    "lastReportAtDeviceUtc": "2026-10-15T06:23:17.536779Z",
+    "recordingTimezone": "UTC",
+    "localTimezone": "America/Chicago",
+    "clockQualification": "Reported device clock and host capture timestamps; clocks not independently synchronized or qualified"
+  },
+  "execution": {
+    "operator": "Primary agent on the explicitly selected authorized USB target",
+    "stimulus": "ADB/official Android CLI injected input and Activity launch commands; fresh UI inspection and native caption controls; not physical human input qualification",
+    "visualReview": "Primary agent inspected private screenshots for two windows, native captions, resize/tile layout, scroll-reachable controls and surviving B. Raw screens include unrelated desktop content and remain private.",
+    "fontScaleObserved": 1.0
+  },
+  "checks": {
+    "local": {
+      "compilerAndAssemble": "passed",
+      "androidLint": "passed with warnings as errors and existing wrapper-version-only exception",
+      "jvmTests": {
+        "passed": 17,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "provenance": "Parent-run source checks and independent code review; this report generation performed no build or device actions"
+    },
+    "ci": [
+      {
+        "name": "Repository checks",
+        "runId": 38691345990,
+        "headSha": "13dce23dd4052163f22703752b16438ec81c8306",
+        "conclusion": "success",
+        "url": "https://github.com/BaiTian6641/Cloudy-Workspace/actions/runs/38691345990"
+      },
+      {
+        "name": "Android qualification probe",
+        "runId": 38691346070,
+        "headSha": "13dce23dd4052163f22703752b16438ec81c8306",
+        "conclusion": "success",
+        "url": "https://github.com/BaiTian6641/Cloudy-Workspace/actions/runs/38691346070"
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "W01",
+      "verdict": "pass",
+      "scope": "Two actual native document tasks and bidirectional marker isolation",
+      "revisions": [
+        9,
+        21,
+        23,
+        112
+      ],
+      "evidence": "At revision 21, A is B/1 while fresh B is A/0; at revision 23, B is C/2 while A remains B/1; at revision 112, A is D/3 while B remains C/2."
+    },
+    {
+      "id": "W02",
+      "verdict": "pass",
+      "scope": "Explicit same-process Activity recreation and actual saved Bundle",
+      "revisions": [
+        23,
+        40
+      ],
+      "eventSequences": [
+        30,
+        33,
+        34,
+        35,
+        36,
+        40
+      ],
+      "evidence": "A logical/task identity and B/1 preserved, A1 replaced by A2 with restored-bundle; B unchanged",
+      "notEstablished": "System-initiated process-death restoration"
+    },
+    {
+      "id": "W03",
+      "verdict": "pass",
+      "scope": "Observed native maximize/restore, short/narrow corner resize, tiling/divider and scroll reachability at fontScale1",
+      "revisions": [
+        46,
+        58,
+        71,
+        87,
+        105
+      ],
+      "notEstablished": "100\u2013200% font-scale range, external displays, every desktop arrangement"
+    },
+    {
+      "id": "W04",
+      "verdict": "pass",
+      "scope": "Injected focus alternation and HOME/explicit return with correlated callbacks",
+      "revisions": [
+        112,
+        121,
+        128
+      ],
+      "notEstablished": "Physical keyboard, trackpad, mouse or IME behavior"
+    },
+    {
+      "id": "W05",
+      "verdict": "pass",
+      "scope": "Native close of A with finishing=true; B unchanged and usable through actual Refresh",
+      "revisions": [
+        136,
+        139
+      ],
+      "eventSequences": [
+        135,
+        137,
+        139
+      ]
+    },
+    {
+      "id": "W06",
+      "verdict": "pass",
+      "scope": "Deterministic JVM capacity/stale-callback policy plus observed short quiet period and actual save failure/recovery",
+      "deviceCoverage": [
+        "four settled samples over 4.127373 seconds",
+        "event ring reported 11 dropped entries after 139 events",
+        "IOException left saved revision 40 while current revision was 41",
+        "restored permissions and Refresh recovered revision 44"
+      ],
+      "notRun": [
+        "runtime ninth-window capacity rejection",
+        "sustained quiet soak",
+        "physical stale-callback injection",
+        "power-loss durability"
+      ]
+    }
+  ],
+  "windowIdentities": {
+    "A": {
+      "logicalWindowId": "56d75add-e286-415a-a006-017c4f903127",
+      "observedTaskIds": [
+        1000144
+      ],
+      "generations": [
+        {
+          "reference": "A1",
+          "activityGenerationId": "49d5326a-d84c-4ac2-a2be-0af450df4178",
+          "firstObservedEventSequence": 1
+        },
+        {
+          "reference": "A2",
+          "activityGenerationId": "7a591608-b446-4c66-b7bf-1d87a5f24918",
+          "firstObservedEventSequence": 36
+        },
+        {
+          "reference": "A3",
+          "activityGenerationId": "53af0596-1b41-4082-8a80-91ad3cce7ba7",
+          "firstObservedEventSequence": 54
+        },
+        {
+          "reference": "A4",
+          "activityGenerationId": "a0ff13a7-8c89-48da-8e34-beebe757aac2",
+          "firstObservedEventSequence": 67
+        },
+        {
+          "reference": "A5",
+          "activityGenerationId": "ef8e2b7c-3ea2-49b9-9b1c-342675ee15d2",
+          "firstObservedEventSequence": 101
+        }
+      ]
+    },
+    "B": {
+      "logicalWindowId": "778b3054-7854-4046-afcb-a5afb8edbed3",
+      "observedTaskIds": [
+        1000150
+      ],
+      "generations": [
+        {
+          "reference": "B1",
+          "activityGenerationId": "f456a968-b115-4725-a2d9-10202ee2b7b2",
+          "firstObservedEventSequence": 14
+        },
+        {
+          "reference": "B2",
+          "activityGenerationId": "8598b363-72e9-4df4-95ec-fc5b4fe2b970",
+          "firstObservedEventSequence": 83
+        },
+        {
+          "reference": "B3",
+          "activityGenerationId": "04ba32d8-3c53-42b3-886c-b29f09c357ff",
+          "firstObservedEventSequence": 93
+        }
+      ]
+    }
+  },
+  "identityNote": "A/B and generation references are report aliases only; all actual logical/task/generation IDs are preserved above. Task IDs are opaque observations, not permanent document identities.",
+  "snapshotNote": "Each window contains its last retained geometry, not a simultaneous fresh measurement. Closed A geometry and its last windowFocus value are historical, not live focus. Caption rectangles are relative to the inset frame. Geometry references deduplicate equal retained values across checkpoints; they are report aliases, not extra measurements.",
+  "snapshots": [
+    {
+      "label": "initial-A",
+      "privateReport": "qualification/results/private/window-probe/s2-a-initial.json",
+      "revision": 9,
+      "snapshotAtDeviceUtc": "2026-10-15T06:15:28.380341Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "window": "A",
+          "generation": "A1",
+          "marker": "A",
+          "changeCount": 0,
+          "restorationSource": "fresh-no-bundle",
+          "activityAliveObserved": true,
+          "taskRootObserved": true,
+          "lastGeometryWindowFocus": true,
+          "geometryReference": "G1"
+        }
+      ],
+      "retention": {
+        "activityAliveCountObserved": 1,
+        "droppedEventCount": 0,
+        "supersededGenerationCount": 0
+      }
+    },
+    {
+      "label": "new-B",
+      "privateReport": "qualification/results/private/window-probe/s2-b-initial.json",
+      "revision": 21,
+      "snapshotAtDeviceUtc": "2026-10-15T06:16:42.326962Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "window": "A",
+          "generation": "A1",
+          "marker": "B",
+          "changeCount": 1,
+          "restorationSource": "fresh-no-bundle",
+          "activityAliveObserved": true,
+          "taskRootObserved": true,
+          "lastGeometryWindowFocus": false,
+          "geometryReference": "G1"
+        },
+        {
+          "window": "B",
+          "generation": "B1",
+          "marker": "A",
+          "changeCount": 0,
+          "restorationSource": "fresh-no-bundle",
+          "activityAliveObserved": true,
+          "taskRootObserved": true,
+          "lastGeometryWindowFocus": true,
+          "geometryReference": "G2"
+        }
+      ],
+      "retention": {
+        "activityAliveCountObserved": 2,
+        "droppedEventCount": 0,
+        "supersededGenerationCount": 0
+      }
+    },
+    {
+      "label": "independent-markers",
+      "privateReport": "qualification/results/private/window-probe/s2-two-markers.json",
+      "revision": 23,
+      "snapshotAtDeviceUtc": "2026-10-15T06:16:55.035172Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "window": "A",
+          "generation": "A1",
+          "marker": "B",
+          "changeCount": 1,
+          "restorationSource": "fresh-no-bundle",
+          "activityAliveObserved": true,
+          "taskRootObserved": true,
+          "lastGeometryWindowFocus": false,
+          "geometryReference": "G1"
+        },
+        {
+          "window": "B",
+          "generation": "B1",
+          "marker": "C",
+          "changeCount": 2,
+          "restorationSource": "fresh-no-bundle",
+          "activityAliveObserved": true,
+          "taskRootObserved": true,
+          "lastGeometryWindowFocus": true,
+          "geometryReference": "G2"
+        }
+      ],
+      "retention": {
+        "activityAliveCountObserved": 2,
+        "droppedEventCount": 0,
+        "supersededGenerationCount": 0
+      }
+    },
+    {
+      "label": "A-recreated",
+      "privateReport": "qualification/results/private/window-probe/s2-a-restored.json",
+      "revision": 40,
+      "snapshotAtDeviceUtc": "2026-10-15T06:17:42.580610Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "window": "A",
+          "generation": "A2",
+          "marker": "B",
+          "changeCount": 1,
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "taskRootObserved": true,
+          "lastGeometryWindowFocus": true,
+          "geometryReference": "G1"
+        },
+        {
+          "window": "B",
+          "generation": "B1",
+          "marker": "C",
+          "changeCount": 2,
+          "restorationSource": "fresh-no-bundle",
+          "activityAliveObserved": true,
+          "taskRootObserved": true,
+          "lastGeometryWindowFocus": false,
+          "geometryReference": "G2"
+        }
+      ],
+      "retention": {
+        "activityAliveCountObserved": 2,
+        "droppedEventCount": 0,
+        "supersededGenerationCount": 1
+      }
+    },
+    {
+      "label": "save-recovered",
+      "privateReport": "qualification/results/private/window-probe/s2-fault-recovered.json",
+      "revision": 44,
+      "snapshotAtDeviceUtc": "2026-10-15T06:19:12.020320Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "window": "A",
+          "generation": "A2",
+          "marker": "C",
+          "changeCount": 2,
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "taskRootObserved": true,
+          "lastGeometryWindowFocus": true,
+          "geometryReference": "G1"
+        },
+        {
+          "window": "B",
+          "generation": "B1",
+          "marker": "C",
+          "changeCount": 2,
+          "restorationSource": "fresh-no-bundle",
+          "activityAliveObserved": true,
+          "taskRootObserved": true,
+          "lastGeometryWindowFocus": false,
+          "geometryReference": "G2"
+        }
+      ],
+      "retention": {
+        "activityAliveCountObserved": 2,
+        "droppedEventCount": 0,
+        "supersededGenerationCount": 1
+      }
+    },
+    {
+      "label": "A-maximized",
+      "privateReport": "qualification/results/private/window-probe/s2-a-maximized.json",
+      "revision": 46,
+      "snapshotAtDeviceUtc": "2026-10-15T06:19:23.800549Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "window": "A",
+          "generation": "A2",
+          "marker": "C",
+          "changeCount": 2,
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "taskRootObserved": true,
+          "lastGeometryWindowFocus": true,
+          "geometryReference": "G3"
+        },
+        {
+          "window": "B",
+          "generation": "B1",
+          "marker": "C",
+          "changeCount": 2,
+          "restorationSource": "fresh-no-bundle",
+          "activityAliveObserved": true,
+          "taskRootObserved": true,
+          "lastGeometryWindowFocus": false,
+          "geometryReference": "G2"
+        }
+      ],
+      "retention": {
+        "activityAliveCountObserved": 2,
+        "droppedEventCount": 0,
+        "supersededGenerationCount": 1
+      }
+    },
+    {
+      "label": "A-short-narrow",
+      "privateReport": "qualification/results/private/window-probe/s2-a-narrow.json",
+      "revision": 58,
+      "snapshotAtDeviceUtc": "2026-10-15T06:19:54.182793Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "window": "A",
+          "generation": "A3",
+          "marker": "C",
+          "changeCount": 2,
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "taskRootObserved": true,
+          "lastGeometryWindowFocus": true,
+          "geometryReference": "G4"
+        },
+        {
+          "window": "B",
+          "generation": "B1",
+          "marker": "C",
+          "changeCount": 2,
+          "restorationSource": "fresh-no-bundle",
+          "activityAliveObserved": true,
+          "taskRootObserved": true,
+          "lastGeometryWindowFocus": false,
+          "geometryReference": "G2"
+        }
+      ],
+      "retention": {
+        "activityAliveCountObserved": 2,
+        "droppedEventCount": 0,
+        "supersededGenerationCount": 2
+      }
+    },
+    {
+      "label": "A-left-tile",
+      "privateReport": "qualification/results/private/window-probe/s2-a-left-tile.json",
+      "revision": 71,
+      "snapshotAtDeviceUtc": "2026-10-15T06:21:01.820187Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "window": "A",
+          "generation": "A4",
+          "marker": "C",
+          "changeCount": 2,
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "taskRootObserved": true,
+          "lastGeometryWindowFocus": true,
+          "geometryReference": "G5"
+        },
+        {
+          "window": "B",
+          "generation": "B1",
+          "marker": "C",
+          "changeCount": 2,
+          "restorationSource": "fresh-no-bundle",
+          "activityAliveObserved": true,
+          "taskRootObserved": true,
+          "lastGeometryWindowFocus": false,
+          "geometryReference": "G2"
+        }
+      ],
+      "retention": {
+        "activityAliveCountObserved": 2,
+        "droppedEventCount": 0,
+        "supersededGenerationCount": 3
+      }
+    },
+    {
+      "label": "B-right-tile",
+      "privateReport": "qualification/results/private/window-probe/s2-b-right-tile.json",
+      "revision": 87,
+      "snapshotAtDeviceUtc": "2026-10-15T06:21:17.499548Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "window": "A",
+          "generation": "A4",
+          "marker": "C",
+          "changeCount": 2,
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "taskRootObserved": true,
+          "lastGeometryWindowFocus": false,
+          "geometryReference": "G5"
+        },
+        {
+          "window": "B",
+          "generation": "B2",
+          "marker": "C",
+          "changeCount": 2,
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "taskRootObserved": true,
+          "lastGeometryWindowFocus": true,
+          "geometryReference": "G6"
+        }
+      ],
+      "retention": {
+        "activityAliveCountObserved": 2,
+        "droppedEventCount": 0,
+        "supersededGenerationCount": 4
+      }
+    },
+    {
+      "label": "narrow-divider",
+      "privateReport": "qualification/results/private/window-probe/s2-narrow-tile.json",
+      "revision": 105,
+      "snapshotAtDeviceUtc": "2026-10-15T06:21:43.324690Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "window": "A",
+          "generation": "A5",
+          "marker": "C",
+          "changeCount": 2,
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "taskRootObserved": true,
+          "lastGeometryWindowFocus": false,
+          "geometryReference": "G7"
+        },
+        {
+          "window": "B",
+          "generation": "B3",
+          "marker": "C",
+          "changeCount": 2,
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "taskRootObserved": true,
+          "lastGeometryWindowFocus": true,
+          "geometryReference": "G8"
+        }
+      ],
+      "retention": {
+        "activityAliveCountObserved": 2,
+        "droppedEventCount": 0,
+        "supersededGenerationCount": 6
+      }
+    },
+    {
+      "label": "before-HOME",
+      "privateReport": "qualification/results/private/window-probe/s2-before-home.json",
+      "revision": 112,
+      "snapshotAtDeviceUtc": "2026-10-15T06:22:44.466007Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "window": "A",
+          "generation": "A5",
+          "marker": "D",
+          "changeCount": 3,
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "taskRootObserved": true,
+          "lastGeometryWindowFocus": true,
+          "geometryReference": "G7"
+        },
+        {
+          "window": "B",
+          "generation": "B3",
+          "marker": "C",
+          "changeCount": 2,
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "taskRootObserved": true,
+          "lastGeometryWindowFocus": false,
+          "geometryReference": "G8"
+        }
+      ],
+      "retention": {
+        "activityAliveCountObserved": 2,
+        "droppedEventCount": 0,
+        "supersededGenerationCount": 6
+      }
+    },
+    {
+      "label": "hidden",
+      "privateReport": "qualification/results/private/window-probe/s2-hidden.json",
+      "revision": 121,
+      "snapshotAtDeviceUtc": "2026-10-15T06:22:49.390628Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "window": "A",
+          "generation": "A5",
+          "marker": "D",
+          "changeCount": 3,
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "taskRootObserved": true,
+          "lastGeometryWindowFocus": false,
+          "geometryReference": "G7"
+        },
+        {
+          "window": "B",
+          "generation": "B3",
+          "marker": "C",
+          "changeCount": 2,
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "taskRootObserved": true,
+          "lastGeometryWindowFocus": false,
+          "geometryReference": "G8"
+        }
+      ],
+      "retention": {
+        "activityAliveCountObserved": 2,
+        "droppedEventCount": 0,
+        "supersededGenerationCount": 6
+      }
+    },
+    {
+      "label": "returned",
+      "privateReport": "qualification/results/private/window-probe/s2-returned.json",
+      "revision": 128,
+      "snapshotAtDeviceUtc": "2026-10-15T06:22:50.041340Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "window": "A",
+          "generation": "A5",
+          "marker": "D",
+          "changeCount": 3,
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "taskRootObserved": true,
+          "lastGeometryWindowFocus": true,
+          "geometryReference": "G7"
+        },
+        {
+          "window": "B",
+          "generation": "B3",
+          "marker": "C",
+          "changeCount": 2,
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "taskRootObserved": true,
+          "lastGeometryWindowFocus": false,
+          "geometryReference": "G8"
+        }
+      ],
+      "retention": {
+        "activityAliveCountObserved": 2,
+        "droppedEventCount": 0,
+        "supersededGenerationCount": 6
+      }
+    },
+    {
+      "label": "A-native-close",
+      "privateReport": "qualification/results/private/window-probe/s2-b-after-close.json",
+      "revision": 136,
+      "snapshotAtDeviceUtc": "2026-10-15T06:23:14.623346Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "window": "A",
+          "generation": "A5",
+          "marker": "D",
+          "changeCount": 3,
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": false,
+          "taskRootObserved": true,
+          "lastGeometryWindowFocus": true,
+          "geometryReference": "G7"
+        },
+        {
+          "window": "B",
+          "generation": "B3",
+          "marker": "C",
+          "changeCount": 2,
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "taskRootObserved": true,
+          "lastGeometryWindowFocus": true,
+          "geometryReference": "G8"
+        }
+      ],
+      "retention": {
+        "activityAliveCountObserved": 1,
+        "droppedEventCount": 8,
+        "supersededGenerationCount": 6
+      }
+    },
+    {
+      "label": "B-refresh-after-close",
+      "privateReport": "qualification/results/private/window-probe/s2-final.json",
+      "revision": 139,
+      "snapshotAtDeviceUtc": "2026-10-15T06:23:17.536779Z",
+      "collectionInProgress": false,
+      "windows": [
+        {
+          "window": "A",
+          "generation": "A5",
+          "marker": "D",
+          "changeCount": 3,
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": false,
+          "taskRootObserved": true,
+          "lastGeometryWindowFocus": true,
+          "geometryReference": "G7"
+        },
+        {
+          "window": "B",
+          "generation": "B3",
+          "marker": "C",
+          "changeCount": 2,
+          "restorationSource": "restored-bundle",
+          "activityAliveObserved": true,
+          "taskRootObserved": true,
+          "lastGeometryWindowFocus": true,
+          "geometryReference": "G8"
+        }
+      ],
+      "retention": {
+        "activityAliveCountObserved": 1,
+        "droppedEventCount": 11,
+        "supersededGenerationCount": 6
+      }
+    }
+  ],
+  "selectedLifecycleEvents": [
+    {
+      "sequence": 10,
+      "elapsedRealtimeMs": 43236042,
+      "window": "A",
+      "generation": "A1",
+      "kind": "marker-changed",
+      "detail": "",
+      "attribution": "current",
+      "marker": "B",
+      "changeCount": 1
+    },
+    {
+      "sequence": 11,
+      "elapsedRealtimeMs": 43238757,
+      "window": "A",
+      "generation": "A1",
+      "kind": "new-window-launch-requested",
+      "detail": "",
+      "attribution": "current",
+      "marker": "B",
+      "changeCount": 1
+    },
+    {
+      "sequence": 12,
+      "elapsedRealtimeMs": 43238763,
+      "window": "A",
+      "generation": "A1",
+      "kind": "new-window-launch-returned",
+      "detail": "Inspect the new task/window; return is not qualification.",
+      "attribution": "current",
+      "marker": "B",
+      "changeCount": 1
+    },
+    {
+      "sequence": 14,
+      "elapsedRealtimeMs": 43238780,
+      "window": "B",
+      "generation": "B1",
+      "kind": "activity-created",
+      "detail": "fresh-no-bundle",
+      "attribution": "current",
+      "marker": "A",
+      "changeCount": 0
+    },
+    {
+      "sequence": 22,
+      "elapsedRealtimeMs": 43248964,
+      "window": "B",
+      "generation": "B1",
+      "kind": "marker-changed",
+      "detail": "",
+      "attribution": "current",
+      "marker": "B",
+      "changeCount": 1
+    },
+    {
+      "sequence": 23,
+      "elapsedRealtimeMs": 43251689,
+      "window": "B",
+      "generation": "B1",
+      "kind": "marker-changed",
+      "detail": "",
+      "attribution": "current",
+      "marker": "C",
+      "changeCount": 2
+    },
+    {
+      "sequence": 24,
+      "elapsedRealtimeMs": 43271199,
+      "window": "B",
+      "generation": "B1",
+      "kind": "activity-top-resumed",
+      "detail": "topResumed=false",
+      "attribution": "current",
+      "marker": "C",
+      "changeCount": 2
+    },
+    {
+      "sequence": 25,
+      "elapsedRealtimeMs": 43271224,
+      "window": "A",
+      "generation": "A1",
+      "kind": "activity-top-resumed",
+      "detail": "topResumed=true",
+      "attribution": "current",
+      "marker": "B",
+      "changeCount": 1
+    },
+    {
+      "sequence": 26,
+      "elapsedRealtimeMs": 43271248,
+      "window": "B",
+      "generation": "B1",
+      "kind": "window-focus",
+      "detail": "focused=false",
+      "attribution": "current",
+      "marker": "C",
+      "changeCount": 2
+    },
+    {
+      "sequence": 27,
+      "elapsedRealtimeMs": 43271248,
+      "window": "A",
+      "generation": "A1",
+      "kind": "window-focus",
+      "detail": "focused=true",
+      "attribution": "current",
+      "marker": "B",
+      "changeCount": 1
+    },
+    {
+      "sequence": 30,
+      "elapsedRealtimeMs": 43299072,
+      "window": "A",
+      "generation": "A1",
+      "kind": "recreate-requested",
+      "detail": "",
+      "attribution": "current",
+      "marker": "B",
+      "changeCount": 1
+    },
+    {
+      "sequence": 33,
+      "elapsedRealtimeMs": 43299104,
+      "window": "A",
+      "generation": "A1",
+      "kind": "activity-stopped",
+      "detail": "",
+      "attribution": "current",
+      "marker": "B",
+      "changeCount": 1
+    },
+    {
+      "sequence": 34,
+      "elapsedRealtimeMs": 43299104,
+      "window": "A",
+      "generation": "A1",
+      "kind": "activity-save-instance-state",
+      "detail": "",
+      "attribution": "current",
+      "marker": "B",
+      "changeCount": 1
+    },
+    {
+      "sequence": 35,
+      "elapsedRealtimeMs": 43299104,
+      "window": "A",
+      "generation": "A1",
+      "kind": "activity-destroyed",
+      "detail": "changingConfigurations=true;finishing=false",
+      "attribution": "current",
+      "marker": "B",
+      "changeCount": 1
+    },
+    {
+      "sequence": 36,
+      "elapsedRealtimeMs": 43299105,
+      "window": "A",
+      "generation": "A2",
+      "kind": "activity-created",
+      "detail": "restored-bundle",
+      "attribution": "current",
+      "marker": "B",
+      "changeCount": 1
+    },
+    {
+      "sequence": 37,
+      "elapsedRealtimeMs": 43299106,
+      "window": "A",
+      "generation": "A2",
+      "kind": "activity-started",
+      "detail": "",
+      "attribution": "current",
+      "marker": "B",
+      "changeCount": 1
+    },
+    {
+      "sequence": 38,
+      "elapsedRealtimeMs": 43299107,
+      "window": "A",
+      "generation": "A2",
+      "kind": "activity-resumed",
+      "detail": "",
+      "attribution": "current",
+      "marker": "B",
+      "changeCount": 1
+    },
+    {
+      "sequence": 40,
+      "elapsedRealtimeMs": 43299232,
+      "window": "A",
+      "generation": "A2",
+      "kind": "window-observed",
+      "detail": "",
+      "attribution": "current",
+      "marker": "B",
+      "changeCount": 1
+    },
+    {
+      "sequence": 41,
+      "elapsedRealtimeMs": 43353673,
+      "window": "A",
+      "generation": "A2",
+      "kind": "marker-changed",
+      "detail": "",
+      "attribution": "current",
+      "marker": "C",
+      "changeCount": 2
+    },
+    {
+      "sequence": 112,
+      "elapsedRealtimeMs": 43601120,
+      "window": "A",
+      "generation": "A5",
+      "kind": "marker-changed",
+      "detail": "",
+      "attribution": "current",
+      "marker": "D",
+      "changeCount": 3
+    },
+    {
+      "sequence": 113,
+      "elapsedRealtimeMs": 43605643,
+      "window": "A",
+      "generation": "A5",
+      "kind": "activity-top-resumed",
+      "detail": "topResumed=false",
+      "attribution": "current",
+      "marker": "D",
+      "changeCount": 3
+    },
+    {
+      "sequence": 114,
+      "elapsedRealtimeMs": 43605647,
+      "window": "A",
+      "generation": "A5",
+      "kind": "activity-paused",
+      "detail": "",
+      "attribution": "current",
+      "marker": "D",
+      "changeCount": 3
+    },
+    {
+      "sequence": 115,
+      "elapsedRealtimeMs": 43605649,
+      "window": "B",
+      "generation": "B3",
+      "kind": "activity-paused",
+      "detail": "",
+      "attribution": "current",
+      "marker": "C",
+      "changeCount": 2
+    },
+    {
+      "sequence": 116,
+      "elapsedRealtimeMs": 43605699,
+      "window": "A",
+      "generation": "A5",
+      "kind": "window-focus",
+      "detail": "focused=false",
+      "attribution": "current",
+      "marker": "D",
+      "changeCount": 3
+    },
+    {
+      "sequence": 118,
+      "elapsedRealtimeMs": 43606045,
+      "window": "A",
+      "generation": "A5",
+      "kind": "activity-stopped",
+      "detail": "",
+      "attribution": "current",
+      "marker": "D",
+      "changeCount": 3
+    },
+    {
+      "sequence": 119,
+      "elapsedRealtimeMs": 43606045,
+      "window": "A",
+      "generation": "A5",
+      "kind": "activity-save-instance-state",
+      "detail": "",
+      "attribution": "current",
+      "marker": "D",
+      "changeCount": 3
+    },
+    {
+      "sequence": 120,
+      "elapsedRealtimeMs": 43606047,
+      "window": "B",
+      "generation": "B3",
+      "kind": "activity-stopped",
+      "detail": "",
+      "attribution": "current",
+      "marker": "C",
+      "changeCount": 2
+    },
+    {
+      "sequence": 121,
+      "elapsedRealtimeMs": 43606047,
+      "window": "B",
+      "generation": "B3",
+      "kind": "activity-save-instance-state",
+      "detail": "",
+      "attribution": "current",
+      "marker": "C",
+      "changeCount": 2
+    },
+    {
+      "sequence": 122,
+      "elapsedRealtimeMs": 43606513,
+      "window": "A",
+      "generation": "A5",
+      "kind": "activity-started",
+      "detail": "",
+      "attribution": "current",
+      "marker": "D",
+      "changeCount": 3
+    },
+    {
+      "sequence": 123,
+      "elapsedRealtimeMs": 43606513,
+      "window": "A",
+      "generation": "A5",
+      "kind": "activity-resumed",
+      "detail": "",
+      "attribution": "current",
+      "marker": "D",
+      "changeCount": 3
+    },
+    {
+      "sequence": 125,
+      "elapsedRealtimeMs": 43606558,
+      "window": "B",
+      "generation": "B3",
+      "kind": "activity-started",
+      "detail": "",
+      "attribution": "current",
+      "marker": "C",
+      "changeCount": 2
+    },
+    {
+      "sequence": 126,
+      "elapsedRealtimeMs": 43606559,
+      "window": "B",
+      "generation": "B3",
+      "kind": "activity-resumed",
+      "detail": "",
+      "attribution": "current",
+      "marker": "C",
+      "changeCount": 2
+    },
+    {
+      "sequence": 127,
+      "elapsedRealtimeMs": 43606695,
+      "window": "A",
+      "generation": "A5",
+      "kind": "window-focus",
+      "detail": "focused=true",
+      "attribution": "current",
+      "marker": "D",
+      "changeCount": 3
+    },
+    {
+      "sequence": 129,
+      "elapsedRealtimeMs": 43631086,
+      "window": "A",
+      "generation": "A5",
+      "kind": "activity-top-resumed",
+      "detail": "topResumed=false",
+      "attribution": "current",
+      "marker": "D",
+      "changeCount": 3
+    },
+    {
+      "sequence": 130,
+      "elapsedRealtimeMs": 43631086,
+      "window": "A",
+      "generation": "A5",
+      "kind": "activity-paused",
+      "detail": "",
+      "attribution": "current",
+      "marker": "D",
+      "changeCount": 3
+    },
+    {
+      "sequence": 131,
+      "elapsedRealtimeMs": 43631123,
+      "window": "B",
+      "generation": "B3",
+      "kind": "activity-top-resumed",
+      "detail": "topResumed=true",
+      "attribution": "current",
+      "marker": "C",
+      "changeCount": 2
+    },
+    {
+      "sequence": 132,
+      "elapsedRealtimeMs": 43631154,
+      "window": "A",
+      "generation": "A5",
+      "kind": "window-focus",
+      "detail": "focused=false",
+      "attribution": "current",
+      "marker": "D",
+      "changeCount": 3
+    },
+    {
+      "sequence": 133,
+      "elapsedRealtimeMs": 43631154,
+      "window": "B",
+      "generation": "B3",
+      "kind": "window-focus",
+      "detail": "focused=true",
+      "attribution": "current",
+      "marker": "C",
+      "changeCount": 2
+    },
+    {
+      "sequence": 134,
+      "elapsedRealtimeMs": 43631223,
+      "window": "A",
+      "generation": "A5",
+      "kind": "activity-stopped",
+      "detail": "",
+      "attribution": "current",
+      "marker": "D",
+      "changeCount": 3
+    },
+    {
+      "sequence": 135,
+      "elapsedRealtimeMs": 43631223,
+      "window": "A",
+      "generation": "A5",
+      "kind": "activity-destroyed",
+      "detail": "changingConfigurations=false;finishing=true",
+      "attribution": "current",
+      "marker": "D",
+      "changeCount": 3
+    },
+    {
+      "sequence": 137,
+      "elapsedRealtimeMs": 43634189,
+      "window": "B",
+      "generation": "B3",
+      "kind": "refresh-requested",
+      "detail": "Device metadata is shared by the process.",
+      "attribution": "current",
+      "marker": "C",
+      "changeCount": 2
+    },
+    {
+      "sequence": 138,
+      "elapsedRealtimeMs": 43634189,
+      "window": null,
+      "generation": null,
+      "kind": "refresh-started",
+      "detail": "",
+      "attribution": "process"
+    },
+    {
+      "sequence": 139,
+      "elapsedRealtimeMs": 43634191,
+      "window": null,
+      "generation": null,
+      "kind": "refresh-finished",
+      "detail": "Inspect section errors; completion is not qualification.",
+      "attribution": "process"
+    }
+  ],
+  "eventSelectionNote": "Selected exact events from consistent overlapping report exports. All 139 sequence values were available across exports; the final report retains 128 and records 11 dropped events. This public record intentionally includes only milestone events.",
+  "saveFault": {
+    "target": "probe-private files directory",
+    "originalMode": "771",
+    "faultMode": "551",
+    "restoredMode": "771",
+    "before": {
+      "revision": 40,
+      "savedRevision": 40
+    },
+    "during": {
+      "revision": 41,
+      "savedRevision": 40,
+      "errorType": "IOException",
+      "uiReportedCurrentSaved": false
+    },
+    "retainedReportUnchanged": true,
+    "retainedReportSha256": "1b8136243d1db39e2f03ee374fd219444a905546af0b484760752009ff77249a",
+    "recovery": {
+      "trigger": "Refresh diagnostics after permissions restored",
+      "revision": 44,
+      "savedRevision": 44,
+      "uiReportedSaved": true,
+      "privateReport": "qualification/results/private/window-probe/s2-fault-recovered.json"
+    },
+    "harnessDeviation": "Host assertion expected the word failed; actual correct UI said could not be saved. The assertion mismatch interrupted the harness, not the app. Cleanup restored mode 771 from 551; the operator verified restoration and explicitly retried Refresh.",
+    "durabilityBoundary": "This was a private-directory write-permission fault, not power loss, out-of-space or an injected AtomicFile rename failure."
+  },
+  "quietSampling": {
+    "immediateAfterMarker": {
+      "revisions": [
+        111,
+        112,
+        112,
+        112
+      ],
+      "allSampledRevisionsEqual": false,
+      "requestedIntervalsSeconds": [
+        0,
+        0.5,
+        0.5,
+        3
+      ],
+      "hostCaptureTimesUtc": [
+        "2026-10-15T06:22:45.157016+00:00",
+        "2026-10-15T06:22:45.701384+00:00",
+        "2026-10-15T06:22:46.245655+00:00",
+        "2026-10-15T06:22:49.288214+00:00"
+      ],
+      "hostCaptureSpanSeconds": 4.131198
+    },
+    "afterSettling": {
+      "revisions": [
+        128,
+        128,
+        128,
+        128
+      ],
+      "allSampledRevisionsEqual": true,
+      "requestedIntervalsSeconds": [
+        0,
+        0.5,
+        0.5,
+        3
+      ],
+      "hostCaptureTimesUtc": [
+        "2026-10-15T06:23:09.724189+00:00",
+        "2026-10-15T06:23:10.259414+00:00",
+        "2026-10-15T06:23:10.796566+00:00",
+        "2026-10-15T06:23:13.851562+00:00"
+      ],
+      "hostCaptureSpanSeconds": 4.127373
+    },
+    "interpretation": "First read preceded the marker save (111\u2192112); later settled samples all remained at revision 128. No continuing revision churn observed over the short settled span; not a soak test."
+  },
+  "harnessNotes": [
+    "s2-a-marker.json was a pre-save export still at revision 9; later revisions 21/23 establish the marker action.",
+    "The UI helper adapted flat/nested layout shapes and reacquired visible control bounds; a preliminary helper failure is not an app recreation failure. Successful recreation is established by events 30\u201340."
+  ],
+  "capabilityDecision": {
+    "gate": "CAP-PLATFORM",
+    "outcome": "pending",
+    "reason": "This increment covers plain probe windows only; P0-S2 operation lifetimes, system process-death, engagement and final platform decision remain incomplete. All product capability gates remain pending."
+  },
+  "notQualified": [
+    "System-initiated process-death restoration",
+    "Operation-specific foreground service and timeout behavior",
+    "SystemUI New window affordance itself",
+    "Physical keyboard, IME, mouse or trackpad",
+    "Font scales above100%",
+    "External displays",
+    "SSH/SFTP, RDP/VNC, X11, streaming, USB forwarding",
+    "Video decode performance, latency, suspend or power-loss durability",
+    "Console/Desktop independent production app lifetimes"
+  ],
+  "privateEvidence": [
+    {
+      "path": "qualification/results/private/window-probe/s2-a-initial.json",
+      "sha256": "29ba4c072ff4c3b0ddf7bafaf6f1470a98fd417278d01dfcc7f06508e2ed9250",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-a-left-tile.json",
+      "sha256": "0b2305b452ab635f32fb27470c990850313c87647c3b717189a5989e0d1322a6",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-a-marker.json",
+      "sha256": "29ba4c072ff4c3b0ddf7bafaf6f1470a98fd417278d01dfcc7f06508e2ed9250",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-a-maximized.json",
+      "sha256": "b34952b40f0285f3c788f78ca317c88f74e751a915aa5f3933f02fbd5cca7b92",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-a-narrow.json",
+      "sha256": "7c74aee02b976cbc18e93e7749a53f8ec80c04089a47527c2203a79c539fcf7a",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-a-restored.json",
+      "sha256": "1b8136243d1db39e2f03ee374fd219444a905546af0b484760752009ff77249a",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-b-after-close.json",
+      "sha256": "9c6e561ed491723d70fc7bae468514e97ff77cabfea28127dbce9ca221866180",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-b-initial.json",
+      "sha256": "efd0bf8627af8471120409566f4b6105be2688591a7e51de9b25c6c6ac48e459",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-b-right-tile.json",
+      "sha256": "b045044f3cdd8926f26cb4e3bf280a52e15566e2672f91dc43897bc3a568b247",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-before-home.json",
+      "sha256": "0b62198fef12118a4a5c5b6a0c347ef993f63851eb8a11b6b47ebc69e788580b",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-fault-before.json",
+      "sha256": "1b8136243d1db39e2f03ee374fd219444a905546af0b484760752009ff77249a",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-fault-mode-active-command.json",
+      "sha256": "9a7e408decaa5863b2aa18139014e36ae454ba6adcae3094df9b2803f6e0d417",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-fault-mode-before-command.json",
+      "sha256": "d523ff8c9c13c22ec9834febd2fe30c84e0f1a525190182851e1166e7fa41ca8",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-fault-mode-restored-command.json",
+      "sha256": "a3a2b11f2c11ae1e9c699ddfd8b6e5a606effc58fc7d88f3ab2bd68abdb17f92",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-fault-old-bytes-command.json",
+      "sha256": "6863368f2f81d42e5c7b590096d018be9fc5ba8f3b14462e5bf914bd7b3335ea",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-fault-recovered.json",
+      "sha256": "781204605064db28a2b077c40a51a5c31a61d08beeac9544c007aa287db12124",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-fault-recovery.json",
+      "sha256": "cd186c8f9af2e73925f6088385880460bd8cc64b8b41efb167fc625d08fef5b2",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-fault-restored-status-layout.json",
+      "sha256": "158e327e821441b0108e7dbbde8752f90b4b550ed0ba9a74ba6aa2bba08c04e4",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-fault-result.json",
+      "sha256": "65f6d4268afdd18efdd436deb6665bd72ae233a84fea05491f7c491c498a43d0",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-fault-retained-bytes-command.json",
+      "sha256": "d257938919aab9278cdd348ef6d34c4117bac460da764d18586c62e5f91e8b87",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-final.json",
+      "sha256": "4e6b38a2d240abcef2e4da6405bce937779402ecbd50652409a57367a260019b",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-hidden.json",
+      "sha256": "b9247f9fe958c76fd356ebc8c2d5b19d8e67670f5713ee6afdbd549de7c01a0a",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-install-deployment.json",
+      "sha256": "d6a03ffa8efd28ae770b05529fc51d113b09bfdc7cb23a60c964d07e977e3098",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-narrow-tile.json",
+      "sha256": "7f88b9f3b234a31421889cec88b1467843b97e1a278f97013da09bd16904a968",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-recreate-a-helper-error.json",
+      "sha256": "82ce9508cc42fb187e12b395f00cb7c0031777513ed9ae76b2200561c18335ac",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-returned.json",
+      "sha256": "05b5fabeb0ff92d48dfa6ebbeef5e96b5e90e005d0ceb24c13f9b45a28a09f1c",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-two-markers.json",
+      "sha256": "8e7acf16cfaedaec3f0630c51e88a18be4316f7b8b602992a664be955ee0ed3e",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-two-window-quiet-0-command.json",
+      "sha256": "d54b516e3b5d1578e3ced2c61c26560a00595946018009a747f8106d9b6312bc",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-two-window-quiet-0.json",
+      "sha256": "620efff24d337acf2e15a5380bc00767577e5777b8e5294eec16c096601a7d3f",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-two-window-quiet-1-command.json",
+      "sha256": "618ec044eb93b35dcd27777b89f9758fe8f9e6ff63885c620691ddb3ffe8425a",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-two-window-quiet-1.json",
+      "sha256": "0b62198fef12118a4a5c5b6a0c347ef993f63851eb8a11b6b47ebc69e788580b",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-two-window-quiet-2-command.json",
+      "sha256": "d413e939c57e1e2824c1486ff2bef227443456a3214046c3171eed84377fb370",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-two-window-quiet-2.json",
+      "sha256": "0b62198fef12118a4a5c5b6a0c347ef993f63851eb8a11b6b47ebc69e788580b",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-two-window-quiet-3-command.json",
+      "sha256": "521f11d5f051b0a0425128505b8953ed850d6c6c6158dd8245b033efe0e81966",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-two-window-quiet-3.json",
+      "sha256": "0b62198fef12118a4a5c5b6a0c347ef993f63851eb8a11b6b47ebc69e788580b",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-two-window-quiet-settling.json",
+      "sha256": "fcf526b0aab936759ce35cd41d514c887015847d8982f39b682ab38b6efe467e",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-two-window-settled-0-command.json",
+      "sha256": "9e45427931cf933f0381a3f889e3d128002e7c8a5b16b9e1a7546f520ece0bb5",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-two-window-settled-0.json",
+      "sha256": "05b5fabeb0ff92d48dfa6ebbeef5e96b5e90e005d0ceb24c13f9b45a28a09f1c",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-two-window-settled-1-command.json",
+      "sha256": "fcfdb1a2fc0b857019d2de3b8a101f3db6974dbae8c0681de971d32a8008b382",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-two-window-settled-1.json",
+      "sha256": "05b5fabeb0ff92d48dfa6ebbeef5e96b5e90e005d0ceb24c13f9b45a28a09f1c",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-two-window-settled-2-command.json",
+      "sha256": "9adb021538d38ab862226c344d6927638257dfa566f67999912e1f5036931782",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-two-window-settled-2.json",
+      "sha256": "05b5fabeb0ff92d48dfa6ebbeef5e96b5e90e005d0ceb24c13f9b45a28a09f1c",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-two-window-settled-3-command.json",
+      "sha256": "c7302e982b989674b57d0eee56ba9ffcf14956c91635157f21b351385d09d2b5",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-two-window-settled-3.json",
+      "sha256": "05b5fabeb0ff92d48dfa6ebbeef5e96b5e90e005d0ceb24c13f9b45a28a09f1c",
+      "publication": "Hash/path only; raw contents remain private"
+    },
+    {
+      "path": "qualification/results/private/window-probe/s2-two-window-settled-settling.json",
+      "sha256": "835267103eb7850d418a8f5783ca66909f3c89ddbec8b263d744e92d16a87227",
+      "publication": "Hash/path only; raw contents remain private"
+    }
+  ],
+  "sanitization": {
+    "method": "Explicit allowlist projection of build/version, diagnostic identity/state, window geometry/insets/density, selected correlated events, revisions, retention, timestamps and hashes.",
+    "excluded": [
+      "ADB serials",
+      "machine inventories",
+      "command args/stdout/stderr",
+      "raw UI layouts",
+      "screenshots",
+      "accounts",
+      "unrelated desktop content",
+      "input-device identifiers",
+      "codec inventory"
+    ]
+  },
+  "geometryProfiles": {
+    "G1": {
+      "boundsPx": {
+        "left": 501,
+        "top": 289,
+        "right": 2574,
+        "bottom": 1585
+      },
+      "sizePx": {
+        "width": 2073,
+        "height": 1296
+      },
+      "density": 1.625,
+      "fontScale": 1,
+      "multiWindowObserved": true,
+      "attachedDecorInsets": {
+        "systemBarsPx": {
+          "left": 0,
+          "top": 65,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionPx": {
+          "left": 0,
+          "top": 65,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionVisible": true,
+        "captionBoundingRectsPx": [
+          {
+            "left": 0,
+            "top": 0,
+            "right": 130,
+            "bottom": 65
+          },
+          {
+            "left": 1753,
+            "top": 0,
+            "right": 2073,
+            "bottom": 65
+          }
+        ],
+        "insetFrameWidthPx": 2073,
+        "insetFrameHeightPx": 1296
+      },
+      "currentMetricsInsets": {
+        "systemBarsPx": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionPx": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionVisible": false,
+        "captionBoundingRectsPx": []
+      }
+    },
+    "G2": {
+      "boundsPx": {
+        "left": 403,
+        "top": 191,
+        "right": 2476,
+        "bottom": 1487
+      },
+      "sizePx": {
+        "width": 2073,
+        "height": 1296
+      },
+      "density": 1.625,
+      "fontScale": 1,
+      "multiWindowObserved": true,
+      "attachedDecorInsets": {
+        "systemBarsPx": {
+          "left": 0,
+          "top": 65,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionPx": {
+          "left": 0,
+          "top": 65,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionVisible": true,
+        "captionBoundingRectsPx": [
+          {
+            "left": 0,
+            "top": 0,
+            "right": 130,
+            "bottom": 65
+          },
+          {
+            "left": 1753,
+            "top": 0,
+            "right": 2073,
+            "bottom": 65
+          }
+        ],
+        "insetFrameWidthPx": 2073,
+        "insetFrameHeightPx": 1296
+      },
+      "currentMetricsInsets": {
+        "systemBarsPx": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionPx": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionVisible": false,
+        "captionBoundingRectsPx": []
+      }
+    },
+    "G3": {
+      "boundsPx": {
+        "left": 0,
+        "top": 59,
+        "right": 2880,
+        "bottom": 1709
+      },
+      "sizePx": {
+        "width": 2880,
+        "height": 1650
+      },
+      "density": 1.625,
+      "fontScale": 1,
+      "multiWindowObserved": true,
+      "attachedDecorInsets": {
+        "systemBarsPx": {
+          "left": 0,
+          "top": 65,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionPx": {
+          "left": 0,
+          "top": 65,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionVisible": true,
+        "captionBoundingRectsPx": [
+          {
+            "left": 0,
+            "top": 0,
+            "right": 130,
+            "bottom": 65
+          },
+          {
+            "left": 2560,
+            "top": 0,
+            "right": 2880,
+            "bottom": 65
+          }
+        ],
+        "insetFrameWidthPx": 2880,
+        "insetFrameHeightPx": 1650
+      },
+      "currentMetricsInsets": {
+        "systemBarsPx": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionPx": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionVisible": false,
+        "captionBoundingRectsPx": []
+      }
+    },
+    "G4": {
+      "boundsPx": {
+        "left": 501,
+        "top": 289,
+        "right": 1139,
+        "bottom": 901
+      },
+      "sizePx": {
+        "width": 638,
+        "height": 612
+      },
+      "density": 1.625,
+      "fontScale": 1,
+      "multiWindowObserved": true,
+      "attachedDecorInsets": {
+        "systemBarsPx": {
+          "left": 0,
+          "top": 65,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionPx": {
+          "left": 0,
+          "top": 65,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionVisible": true,
+        "captionBoundingRectsPx": [
+          {
+            "left": 0,
+            "top": 0,
+            "right": 130,
+            "bottom": 65
+          },
+          {
+            "left": 318,
+            "top": 0,
+            "right": 638,
+            "bottom": 65
+          }
+        ],
+        "insetFrameWidthPx": 638,
+        "insetFrameHeightPx": 612
+      },
+      "currentMetricsInsets": {
+        "systemBarsPx": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionPx": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionVisible": false,
+        "captionBoundingRectsPx": []
+      }
+    },
+    "G5": {
+      "boundsPx": {
+        "left": 0,
+        "top": 59,
+        "right": 1432,
+        "bottom": 1709
+      },
+      "sizePx": {
+        "width": 1432,
+        "height": 1650
+      },
+      "density": 1.625,
+      "fontScale": 1,
+      "multiWindowObserved": true,
+      "attachedDecorInsets": {
+        "systemBarsPx": {
+          "left": 0,
+          "top": 65,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionPx": {
+          "left": 0,
+          "top": 65,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionVisible": true,
+        "captionBoundingRectsPx": [
+          {
+            "left": 0,
+            "top": 0,
+            "right": 130,
+            "bottom": 65
+          },
+          {
+            "left": 1112,
+            "top": 0,
+            "right": 1432,
+            "bottom": 65
+          }
+        ],
+        "insetFrameWidthPx": 1432,
+        "insetFrameHeightPx": 1650
+      },
+      "currentMetricsInsets": {
+        "systemBarsPx": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionPx": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionVisible": false,
+        "captionBoundingRectsPx": []
+      }
+    },
+    "G6": {
+      "boundsPx": {
+        "left": 1448,
+        "top": 59,
+        "right": 2880,
+        "bottom": 1709
+      },
+      "sizePx": {
+        "width": 1432,
+        "height": 1650
+      },
+      "density": 1.625,
+      "fontScale": 1,
+      "multiWindowObserved": true,
+      "attachedDecorInsets": {
+        "systemBarsPx": {
+          "left": 0,
+          "top": 65,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionPx": {
+          "left": 0,
+          "top": 65,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionVisible": true,
+        "captionBoundingRectsPx": [
+          {
+            "left": 0,
+            "top": 0,
+            "right": 130,
+            "bottom": 65
+          },
+          {
+            "left": 1112,
+            "top": 0,
+            "right": 1432,
+            "bottom": 65
+          }
+        ],
+        "insetFrameWidthPx": 1432,
+        "insetFrameHeightPx": 1650
+      },
+      "currentMetricsInsets": {
+        "systemBarsPx": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionPx": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionVisible": false,
+        "captionBoundingRectsPx": []
+      }
+    },
+    "G7": {
+      "boundsPx": {
+        "left": 0,
+        "top": 59,
+        "right": 653,
+        "bottom": 1709
+      },
+      "sizePx": {
+        "width": 653,
+        "height": 1650
+      },
+      "density": 1.625,
+      "fontScale": 1,
+      "multiWindowObserved": true,
+      "attachedDecorInsets": {
+        "systemBarsPx": {
+          "left": 0,
+          "top": 65,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionPx": {
+          "left": 0,
+          "top": 65,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionVisible": true,
+        "captionBoundingRectsPx": [
+          {
+            "left": 0,
+            "top": 0,
+            "right": 130,
+            "bottom": 65
+          },
+          {
+            "left": 333,
+            "top": 0,
+            "right": 653,
+            "bottom": 65
+          }
+        ],
+        "insetFrameWidthPx": 653,
+        "insetFrameHeightPx": 1650
+      },
+      "currentMetricsInsets": {
+        "systemBarsPx": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionPx": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionVisible": false,
+        "captionBoundingRectsPx": []
+      }
+    },
+    "G8": {
+      "boundsPx": {
+        "left": 669,
+        "top": 59,
+        "right": 2880,
+        "bottom": 1709
+      },
+      "sizePx": {
+        "width": 2211,
+        "height": 1650
+      },
+      "density": 1.625,
+      "fontScale": 1,
+      "multiWindowObserved": true,
+      "attachedDecorInsets": {
+        "systemBarsPx": {
+          "left": 0,
+          "top": 65,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionPx": {
+          "left": 0,
+          "top": 65,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionVisible": true,
+        "captionBoundingRectsPx": [
+          {
+            "left": 0,
+            "top": 0,
+            "right": 130,
+            "bottom": 65
+          },
+          {
+            "left": 1891,
+            "top": 0,
+            "right": 2211,
+            "bottom": 65
+          }
+        ],
+        "insetFrameWidthPx": 2211,
+        "insetFrameHeightPx": 1650
+      },
+      "currentMetricsInsets": {
+        "systemBarsPx": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionPx": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionVisible": false,
+        "captionBoundingRectsPx": []
+      }
+    }
+  },
+  "retentionAtFinal": {
+    "windowRecordLimit": 8,
+    "retainedWindowCount": 2,
+    "activityAliveCountObserved": 1,
+    "evictedClosedWindowCount": 0,
+    "rejectedRegistrationCount": 0,
+    "rejectedCallbackCount": 0,
+    "supersededGenerationCount": 6,
+    "eventLimit": 128,
+    "droppedEventCount": 11,
+    "windowSnapshotByteLimit": 32768
+  }
+}

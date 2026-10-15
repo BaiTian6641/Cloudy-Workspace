@@ -64,8 +64,8 @@
       "fallback": "Separate toolbar and standard insets",
       "experiment": "No control overlap while resizing or changing displays",
       "partialObservation": {
-        "evidence": "qualification/results/P0-S1/2026-10-15-device-probe.md",
-        "note": "Compiled and invoked on API37/min35 diagnostic. Attached decor reported caption rectangles, while currentWindowMetrics insets reported no caption at the same observation. Resize/fullscreen/external-display control-overlap experiment remains unqualified."
+        "evidence": "qualification/results/P0-S2/2026-10-15-window-probe.md",
+        "note": "The 0.2.0 probe recorded attached-decor caption top 65 px/two occupied rectangles through freeform, narrow and tiled layouts on the identified HP API37 build. currentWindowMetrics separately reported zero/empty caption data. Text scaling, external-display and product control-overlap coverage remain unqualified."
       }
     },
     {
@@ -175,20 +175,30 @@
       "feature": "Precision-pointer engagement",
       "symbols": [
         "WindowInfoTracker.windowEngagementInfo",
-        "WindowEngagementInfo.EngagementMode.PRECISE_POINTER"
+        "WindowEngagementInfo.EngagementMode.PRECISE_POINTER",
+        "WindowInfoTracker.registerWindowEngagementInfoListener",
+        "WindowInfoTracker.unregisterWindowEngagementInfoListener"
       ],
       "sourceIds": [
-        "G03"
+        "G03",
+        "G73",
+        "G74",
+        "G75",
+        "G76",
+        "G77"
       ],
       "minimumApi": null,
-      "libraryVersion": null,
-      "availability": "guide-example-version-unpinned",
+      "libraryVersion": "androidx.window:window:1.6.0-alpha05 (candidate only)",
+      "availability": "published-alpha-compile-and-device-pending",
       "qualification": "untested",
-      "checkedOn": "2026-10-14",
+      "checkedOn": "2026-10-15",
       "owner": "Android/platform developer",
       "stage": "P0-S2",
       "fallback": "Explicit user density preference",
-      "experiment": "Artifact/annotations/availability compile probe"
+      "experiment": "Resolve/verify candidate dependencies, compile exact public callbacks, then record E01–E05 on the selected device; physical transitions remain separate.",
+      "researchEvidence": "docs/03-platform/googlebook/p0-s2-engagement-probe-contract.md",
+      "libraryMinSdk": 23,
+      "runtimeGuard": "This candidate computes precise-pointer engagement on API30+; below30 its compatibility backend reports TOUCH. No engagement-specific WindowSdkExtension requirement. No product minimum or dependency selected."
     },
     {
       "id": "API10",
@@ -809,8 +819,8 @@
       "fallback": "Preserve native caption and defer layout until attached insets; do not fabricate zero insets.",
       "experiment": "Compare actual view/metrics insets while resizing and moving between displays.",
       "partialObservation": {
-        "evidence": "qualification/results/P0-S1/2026-10-15-device-probe.md",
-        "note": "Metrics and decor insets differ in the first window; attached decor caption geometry observed, full transitions unqualified."
+        "evidence": "qualification/results/P0-S2/2026-10-15-window-probe.md",
+        "note": "Actual maximize/restore, corner resize to 638 × 612 px and tiled divider resize to a 653 px wide window observed at density 1.625 / font scale 1.0. Activity recreation preserved local state. Attached-decor versus metrics inset source differences retained. No physical-input, larger-font or external-display claim."
       }
     },
     {
@@ -837,9 +847,11 @@
       "fallback": "Persist bounded state and reconnect explicitly; resumed alone never implies input focus.",
       "experiment": "Observe multi-window focus, recreation, background, process death and operation-specific recovery.",
       "partialObservation": {
-        "evidence": "qualification/results/P0-S1/2026-10-15-device-probe.md",
-        "note": "ADB HOME/return produced distinct focus/top-resumed/lifecycle callbacks; physical interactions, recreation and process death unqualified."
-      }
+        "evidence": "qualification/results/P0-S2/2026-10-15-window-probe.md",
+        "note": "Correlated actual focus/top-resumed, HOME/return, configuration and explicit recreation, and native close events observed on two document tasks. Closed records retain historical geometry and must be read with activityAliveObserved. A separate injected background-process kill restored the existing task in a new process; no natural low-memory, service or operation-recovery claim.",
+        "processRestorationEvidence": "qualification/results/P0-S2/2026-10-15-process-restoration.md"
+      },
+      "researchEvidence": "docs/03-platform/googlebook/p0-s2-process-lifecycle-method.md"
     },
     {
       "id": "API37",
@@ -866,7 +878,11 @@
       "stage": "P0-S2",
       "fallback": "Surface a failed launch; keep existing task usable and no claim of another window until observed.",
       "experiment": "P0-S2 W01/W04/W05: two native task windows, independent state, focus and close isolation.",
-      "researchEvidence": "docs/03-platform/googlebook/p0-s2-window-probe-contract.md"
+      "researchEvidence": "docs/03-platform/googlebook/p0-s2-window-probe-contract.md",
+      "partialObservation": {
+        "evidence": "qualification/results/P0-S2/2026-10-15-window-probe.md",
+        "note": "Explicit in-app document launch produced tasks 1000144/1000150 with distinct logical IDs and independent state; both reported taskRootObserved true. Closing one through native SystemUI left the other usable. No SystemUI menu-affordance, production X11 broker or task-limit claim."
+      }
     },
     {
       "id": "API38",
@@ -878,7 +894,8 @@
       ],
       "sourceIds": [
         "G24",
-        "G58"
+        "G58",
+        "G72"
       ],
       "minimumApi": 11,
       "libraryVersion": null,
@@ -888,8 +905,13 @@
       "owner": "Android/platform developer",
       "stage": "P0-S2",
       "fallback": "Missing or invalid Bundle yields an explicitly fresh diagnostic state; no claim of restored state or process survival.",
-      "experiment": "P0-S2 W02: same logical window/task and marker restored into a fresh Activity generation; separate actual process-death test remains required.",
-      "researchEvidence": "docs/03-platform/googlebook/p0-s2-window-probe-contract.md"
+      "experiment": "P0-S2 W02: same logical window/task and marker restored into a fresh Activity generation; separately verify process identity changes and saved-state restoration after actual background-process death.",
+      "researchEvidence": "docs/03-platform/googlebook/p0-s2-window-probe-contract.md",
+      "partialObservation": {
+        "evidence": "qualification/results/P0-S2/2026-10-15-window-probe.md",
+        "note": "Explicit recreate preserved A logical ID/task/marker/count in a fresh generation with unchanged process and B state. Resize-triggered recreations retained state. The separate background-kill run verified old PID absence, then restored B logical ID/task/C2 from Bundle in a new generation and process via existing Recents task. No force-stop, reboot, natural low-memory or operation durability claim.",
+        "processRestorationEvidence": "qualification/results/P0-S2/2026-10-15-process-restoration.md"
+      }
     },
     {
       "id": "API39",
