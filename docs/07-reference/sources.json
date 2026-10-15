@@ -1274,6 +1274,54 @@
       "sourceUpdatedOn": null,
       "note": "Pinned stable KWin/wlroots/KMS/X11 categories; selected build and compositor still require runtime qualification.",
       "refresh": "Before adopting or updating the selected tool/backend."
+    },
+    {
+      "id": "G49",
+      "title": "InputManager device enumeration",
+      "url": "https://developer.android.com/reference/android/hardware/input/InputManager",
+      "publisher": "Google / AOSP",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "InputManager enumeration/query API16; handle devices removed during query; public reports omit transient IDs.",
+      "refresh": "Recheck exact public contract and implementation when updating the persistence/input path."
+    },
+    {
+      "id": "G50",
+      "title": "AtomicFile public contract",
+      "url": "https://developer.android.com/reference/android/util/AtomicFile",
+      "publisher": "Google / AOSP",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Single-owner private snapshot writes; AtomicFile is not a locking primitive and report readback is separate from power-loss durability.",
+      "refresh": "Recheck exact public contract and implementation when updating the persistence/input path."
+    },
+    {
+      "id": "G51",
+      "title": "InputStream bounded read API",
+      "url": "https://developer.android.com/reference/java/io/InputStream",
+      "publisher": "Google / AOSP",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "readNBytes(int) API33; probe min35 covers bounded expected-size-plus-one readback.",
+      "refresh": "Recheck exact public contract and implementation when updating the persistence/input path."
+    },
+    {
+      "id": "G52",
+      "title": "AOSP AtomicFile implementation",
+      "url": "https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/util/AtomicFile.java",
+      "publisher": "Google / AOSP",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Upstream finishWrite can log sync/close/rename failures instead of throwing; reviewed to justify bounded readback before marking a report saved. Moving upstream implementation, not an exact OEM source claim.",
+      "refresh": "Recheck exact public contract and implementation when updating the persistence/input path."
     }
   ]
 }

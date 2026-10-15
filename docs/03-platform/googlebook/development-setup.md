@@ -34,14 +34,14 @@ Record the Android Studio channel/build, SDK platform/build tools, JDK, AGP, Kot
 
 ### Verified candidate compatibility, 2026-10-15
 
-The following is a researched candidate, not a selected or installed Cloudy build. The official [AGP 9.4 release notes](https://developer.android.com/build/releases/agp-9-4-0-release-notes) list this compatibility table (G35):
+The following compatibility research led to the selected and installed [P0 probe toolchain](probe-toolchain.md). It does not freeze the product stack. The official [AGP 9.4 release notes](https://developer.android.com/build/releases/agp-9-4-0-release-notes) list this compatibility table (G35):
 
 | Component | Documented value | Qualification decision |
 | --- | --- | --- |
-| Android Gradle Plugin | 9.4.0; maximum supported API 37 | Candidate to test before version freeze |
-| Gradle | Minimum/default 9.6.0 | Pin a matching wrapper and verify its distribution checksum |
+| Android Gradle Plugin | 9.4.0; maximum supported API 37 | Selected for the real P0 diagnostic build |
+| Gradle | Minimum/default 9.6.0 | 9.6.0 wrapper selected and checksum verified |
 | JDK for AGP | Minimum/default 17 | Select and record the actual Gradle runtime; this is not a claim that only JDK 17 works |
-| SDK Build Tools | Minimum/default 36.0.0 | Resolve the selected package with the chosen SDK/build before freeze |
+| SDK Build Tools | Minimum/default 36.0.0 | 36.0.0 selected and actual build passed |
 | NDK | Default 28.2.13676358 | Relevant only to a selected native probe/backend; do not install merely because it appears in the table |
 
 The [Android 17 setup guide](https://developer.android.com/about/versions/17/setup-sdk) specifies `compileSdk = 37` for Android 17 APIs and a separate, deliberate `targetSdk = 37` change for target-dependent behavior (G36). Its manual package instructions still mention a preview label and Build Tools 37, while the versioned AGP table lists 36.0.0 as minimum/default. Record the actual resolved SDK packages and successful build; do not turn either example into an untested requirement. This documentation update does not choose `minSdk`, `targetSdk`, Kotlin, Compose, or an NDK for the product.

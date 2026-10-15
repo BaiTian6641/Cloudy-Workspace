@@ -1,6 +1,6 @@
 # Official API catalog for development
 
-**Snapshot:** 2026-10-14. Machine-readable records: [api-tracker.json](api-tracker.json). Source IDs resolve in the [source register](../../07-reference/source-register.md). “API N” is a verified platform introduction level only where stated. Library availability and Cloudy's min/target SDK remain P0/P1 decisions.
+**Snapshot:** 2026-10-15. Machine-readable records: [api-tracker.json](api-tracker.json). Source IDs resolve in the [source register](../../07-reference/source-register.md). “API N” is a verified platform introduction level only where stated. Library availability and Cloudy's min/target SDK remain P0/P1 decisions.
 
 The target is the [Googlebook desktop application contract](desktop-application-contract.md) under [Rule 0](../../00-project/platform-rule-zero.md). Records include official Android APIs, upstream standards/engines and proposed Cloudy integration boundaries; provenance is explicit. None is device-qualified by this catalog.
 
@@ -65,3 +65,15 @@ Revision 02 adds **API33**, the upstream SFTP file-publication boundary: `SSH_FX
 ## How to keep the catalog useful
 
 For an implementation change: find the tracker entry, inspect the official signature and release notes, fill the exact SDK/library version, compile a minimal probe, record device evidence, and update the linked stage. Use distinct statuses for documented, experimental, roadmap, unavailable, and unknown. No successful HTTP response can promote an API to device-qualified.
+
+## P0-S1 compiled and observed API subset
+
+The [real diagnostic run](../../../qualification/results/P0-S1/2026-10-15-device-probe.md) adds partial observations without promoting the full experiments above. API03 caption bounds, API17 enumeration, API27 feature flags and API32 diagnostic installation have specific evidence notes in the tracker. Native decoding, product package distribution and complete window/input behavior remain unqualified.
+
+| ID | Official surface | Availability, fallback and next experiment |
+| --- | --- | --- |
+| API34 | [InputDevice](https://developer.android.com/reference/android/view/InputDevice) and [InputManager](https://developer.android.com/reference/android/hardware/input/InputManager) source enumeration | Selected bundle needs API29 for external flag; API16 InputManager enumeration/query. No names/descriptors/IDs retained; detach is explicit. Physical input still requires tests. |
+| API35 | [WindowMetrics](https://developer.android.com/reference/android/view/WindowMetrics), [WindowInsets](https://developer.android.com/reference/android/view/WindowInsets) and attached View insets | Metrics API30, density API34, caption rectangles/frame API35. The probe min35 covers the bundle; preserve native caption and handle unavailable insets. |
+| API36 | [Activity lifecycle/focus/top-resumed](https://developer.android.com/reference/android/app/Activity) | Top-resumed API29; older lifecycle/focus callbacks retain their own introduction levels. ADB background/return was observed; recreation/death/operation recovery remain separate. |
+
+The minimum levels of these bundled records reflect their newest listed method, not a claim that every method was introduced together. Reported metadata does not satisfy the full qualification experiment. No fixed caption height or assumed physical-input behavior should be derived from one run.

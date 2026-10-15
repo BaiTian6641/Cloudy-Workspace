@@ -18,7 +18,7 @@ The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-p
 
 **Owner:** Device/QA owner. **Prerequisites:** None. **Status:** in-progress.
 
-Initial [USB baseline](../../../qualification/results/P0-S1/2026-10-15-usb-baseline.md) records authorization and reported build properties. Remaining inventory and a real development APK installation/launch are pending; this partial evidence does not complete the stage.
+Initial [USB baseline](../../../qualification/results/P0-S1/2026-10-15-usb-baseline.md) records authorization and reported build properties. The [real diagnostic APK run](../../../qualification/results/P0-S1/2026-10-15-device-probe.md) now proves build/install/launch and bounded API observations. Remaining primary route/project inventory and explicit unavailable-hardware classification keep the stage in progress; feature qualification stays in its own later stages.
 
 Work:
 

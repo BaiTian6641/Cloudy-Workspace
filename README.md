@@ -4,7 +4,7 @@ An integrated workspace for a Googlebook: **Cloudy Console** for terminals and c
 
 **Rule 0:** desktop/laptop Googlebook applications built on Android's app and package model. Keyboard, mouse/trackpad, native windows and desktop productivity define the design. Phone/tablet optimization is outside scope; narrow tiled desktop windows remain supported. Read the [platform rule](docs/00-project/platform-rule-zero.md).
 
-**Project state:** implementation goal active; **P0-S1 qualification setup is in progress** on the USB-connected HP Googlebook. No Android application or host agent is implemented yet. Research updated **15 October 2026, America/Chicago**. ADB access is observed; product/hardware compatibility remains unqualified.
+**Project state:** implementation goal active; **P0-S1 qualification setup is in progress** on the USB-connected HP Googlebook. A real native diagnostic APK is implemented and installed; Console, Desktop and the host agent are not implemented yet. Research updated **15 October 2026, America/Chicago**. ADB install/launch and bounded diagnostic observations are recorded in the [device run](qualification/results/P0-S1/2026-10-15-device-probe.md); product/hardware compatibility remains unqualified.
 
 Repository: [BaiTian6641/Cloudy-Workspace](https://github.com/BaiTian6641/Cloudy-Workspace) · SSH remote: `git@github.com:BaiTian6641/Cloudy-Workspace.git`
 
@@ -46,7 +46,7 @@ python3 -m http.server 8765 --bind 127.0.0.1
 
 Open `http://127.0.0.1:8765/docs/04-design/preview.html` to inspect the specimen. Its session data is illustrative and its controls make no network connections. It is a design reference, not a functioning terminal or remote desktop client.
 
-Optional schema validation is documented in [tools](tools/README.md). The initial CI checks documentation and planning data; Android builds and device tests enter during P1.
+Optional schema validation is documented in [tools](tools/README.md). CI checks repository AST/lint/planning data and the real P0 diagnostic APK with Kotlin compilation, Android Lint and JVM tests. Actual Googlebook evidence is recorded separately; hosted CI has no physical target.
 
 ## Planning conventions
 

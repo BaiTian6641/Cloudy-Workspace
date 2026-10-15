@@ -1,0 +1,589 @@
+{
+  "schemaVersion": 1,
+  "runId": "P0-S1-device-probe-2026-10-15",
+  "scope": "Real diagnostic APK build/install/launch, framework inventory and ADB-driven refresh/background-resume smoke only",
+  "sourceCommit": "cf6630b6ff98ea8131ced1ef7ebaef36a33494af",
+  "apk": {
+    "package": "dev.cloudy.qualification.baseline",
+    "versionName": "0.1.0",
+    "versionCode": 1,
+    "variant": "debug",
+    "sha256": "653dd35130a06453d6795b0893ead384152516bf0104fcfa6efd655ac90d00df"
+  },
+  "device": {
+    "label": "googlebook-primary",
+    "manufacturer": "HP",
+    "model": "HP Googlebook 14",
+    "os": "Android17",
+    "api": 37,
+    "abi": "arm64-v8a",
+    "buildId": "CL3B.260622.276.R2",
+    "incremental": "16560795",
+    "securityPatch": "2026-09-01"
+  },
+  "toolchain": {
+    "agp": "9.4.0",
+    "gradle": "9.6.0",
+    "jdk": "Oracle21.0.9",
+    "kotlin": "2.2.10",
+    "sdkPlatform": "37.0",
+    "sdkRevision": 2,
+    "baseExtension": 22,
+    "buildTools": "36.0.0",
+    "targetSdk": 37,
+    "minSdk": 35
+  },
+  "deployment": [
+    {
+      "action": "install",
+      "exitCode": 0,
+      "stdout": "Performing Streamed Install\nSuccess\n",
+      "stderr": "",
+      "at": "2026-10-15T05:26:26.356045+00:00"
+    },
+    {
+      "action": "launch",
+      "exitCode": 0,
+      "stdout": "Starting: Intent { cmp=dev.cloudy.qualification.baseline/.BaselineActivity }\nStatus: ok\nLaunchState: COLD\nActivity: dev.cloudy.qualification.baseline/.BaselineActivity\nTotalTime: 188\nWaitTime: 189\nComplete\n",
+      "stderr": "",
+      "at": "2026-10-15T05:26:26.572692+00:00"
+    }
+  ],
+  "interaction": {
+    "observedAt": "2026-10-15T05:27:43.001275+00:00",
+    "method": "ADB-injected tap at freshly observed probe button bounds, HOME, explicit launcher Activity; not physical keyboard/mouse qualification",
+    "revisions": [
+      8,
+      10,
+      16,
+      21
+    ]
+  },
+  "observations": {
+    "collectorErrorCount": 0,
+    "inputEntries": 10,
+    "inputEntriesOmitted": 0,
+    "inputSourceClassEntryCounts": {
+      "keyboard": 7,
+      "touchscreen": 1,
+      "mouse": 2,
+      "touchpad": 1
+    },
+    "videoDecoderEntries": 36,
+    "videoDecoderEntriesOmitted": 0,
+    "videoDecoderAliasEntries": 15,
+    "uniqueCanonicalDecoderNames": 21,
+    "decoderMimeSummary": {
+      "video/avc": {
+        "entries": 8,
+        "hardwareAcceleratedReportedEntries": 6,
+        "lowLatencyReportedEntries": 4,
+        "lowLatencyRequiredReportedEntries": 0,
+        "secureRequiredReportedEntries": 2,
+        "tunneledRequiredReportedEntries": 0
+      },
+      "video/hevc": {
+        "entries": 8,
+        "hardwareAcceleratedReportedEntries": 6,
+        "lowLatencyReportedEntries": 4,
+        "lowLatencyRequiredReportedEntries": 0,
+        "secureRequiredReportedEntries": 2,
+        "tunneledRequiredReportedEntries": 0
+      },
+      "video/x-vnd.on2.vp9": {
+        "entries": 8,
+        "hardwareAcceleratedReportedEntries": 6,
+        "lowLatencyReportedEntries": 4,
+        "lowLatencyRequiredReportedEntries": 0,
+        "secureRequiredReportedEntries": 2,
+        "tunneledRequiredReportedEntries": 0
+      },
+      "video/av01": {
+        "entries": 5,
+        "hardwareAcceleratedReportedEntries": 3,
+        "lowLatencyReportedEntries": 4,
+        "lowLatencyRequiredReportedEntries": 0,
+        "secureRequiredReportedEntries": 1,
+        "tunneledRequiredReportedEntries": 0
+      },
+      "video/apv": {
+        "entries": 1,
+        "hardwareAcceleratedReportedEntries": 0,
+        "lowLatencyReportedEntries": 0,
+        "lowLatencyRequiredReportedEntries": 0,
+        "secureRequiredReportedEntries": 0,
+        "tunneledRequiredReportedEntries": 0
+      },
+      "video/3gpp": {
+        "entries": 2,
+        "hardwareAcceleratedReportedEntries": 0,
+        "lowLatencyReportedEntries": 0,
+        "lowLatencyRequiredReportedEntries": 0,
+        "secureRequiredReportedEntries": 0,
+        "tunneledRequiredReportedEntries": 0
+      },
+      "video/mp4v-es": {
+        "entries": 2,
+        "hardwareAcceleratedReportedEntries": 0,
+        "lowLatencyReportedEntries": 0,
+        "lowLatencyRequiredReportedEntries": 0,
+        "secureRequiredReportedEntries": 0,
+        "tunneledRequiredReportedEntries": 0
+      },
+      "video/x-vnd.on2.vp8": {
+        "entries": 2,
+        "hardwareAcceleratedReportedEntries": 0,
+        "lowLatencyReportedEntries": 0,
+        "lowLatencyRequiredReportedEntries": 0,
+        "secureRequiredReportedEntries": 0,
+        "tunneledRequiredReportedEntries": 0
+      }
+    },
+    "initialWindow": {
+      "currentMetrics": {
+        "boundsPx": {
+          "left": 403,
+          "top": 191,
+          "right": 2476,
+          "bottom": 1487
+        },
+        "density": 1.625,
+        "insets": {
+          "systemBarsPx": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "displayCutoutPx": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "imePx": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "imeVisible": false,
+          "captionPx": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "captionVisible": false,
+          "captionBoundingRectsPx": [],
+          "omittedCaptionRects": 0,
+          "boundingRectCoordinates": "Relative to the inset frame, not screen coordinates; frame can differ from final layout.",
+          "insetFrameWidthPx": 2073,
+          "insetFrameHeightPx": 1296
+        }
+      },
+      "maximumMetrics": {
+        "boundsPx": {
+          "left": 0,
+          "top": 0,
+          "right": 2880,
+          "bottom": 1800
+        },
+        "density": 1.625,
+        "insets": {
+          "systemBarsPx": {
+            "left": 0,
+            "top": 59,
+            "right": 0,
+            "bottom": 91
+          },
+          "displayCutoutPx": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "imePx": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "imeVisible": false,
+          "captionPx": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "captionVisible": false,
+          "captionBoundingRectsPx": [],
+          "omittedCaptionRects": 0,
+          "boundingRectCoordinates": "Relative to the inset frame, not screen coordinates; frame can differ from final layout.",
+          "insetFrameWidthPx": 2880,
+          "insetFrameHeightPx": 1800
+        }
+      },
+      "decorInsets": {
+        "systemBarsPx": {
+          "left": 0,
+          "top": 65,
+          "right": 0,
+          "bottom": 0
+        },
+        "displayCutoutPx": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "imePx": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "imeVisible": false,
+        "captionPx": {
+          "left": 0,
+          "top": 65,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionVisible": true,
+        "captionBoundingRectsPx": [
+          {
+            "left": 0,
+            "top": 0,
+            "right": 130,
+            "bottom": 65
+          },
+          {
+            "left": 1753,
+            "top": 0,
+            "right": 2073,
+            "bottom": 65
+          }
+        ],
+        "omittedCaptionRects": 0,
+        "boundingRectCoordinates": "Relative to the inset frame, not screen coordinates; frame can differ from final layout.",
+        "insetFrameWidthPx": 2073,
+        "insetFrameHeightPx": 1296
+      },
+      "decorWidthPx": 2073,
+      "decorHeightPx": 1296,
+      "multiWindow": true,
+      "windowFocus": true,
+      "configuration": {
+        "densityDpi": 260,
+        "fontScale": 1,
+        "screenWidthDp": 1276,
+        "screenHeightDp": 798,
+        "orientation": 2,
+        "keyboard": 2,
+        "hardKeyboardHidden": 1
+      },
+      "display": {
+        "status": "reported",
+        "currentModePhysicalWidthPx": 2880,
+        "currentModePhysicalHeightPx": 1800,
+        "refreshRateReportedHz": 120.000175,
+        "rotation": 0
+      },
+      "status": "reported"
+    },
+    "finalWindow": {
+      "currentMetrics": {
+        "boundsPx": {
+          "left": 501,
+          "top": 289,
+          "right": 2574,
+          "bottom": 1585
+        },
+        "density": 1.625,
+        "insets": {
+          "systemBarsPx": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "displayCutoutPx": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "imePx": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "imeVisible": false,
+          "captionPx": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "captionVisible": false,
+          "captionBoundingRectsPx": [],
+          "omittedCaptionRects": 0,
+          "boundingRectCoordinates": "Relative to the inset frame, not screen coordinates; frame can differ from final layout.",
+          "insetFrameWidthPx": 2073,
+          "insetFrameHeightPx": 1296
+        }
+      },
+      "maximumMetrics": {
+        "boundsPx": {
+          "left": 0,
+          "top": 0,
+          "right": 2880,
+          "bottom": 1800
+        },
+        "density": 1.625,
+        "insets": {
+          "systemBarsPx": {
+            "left": 0,
+            "top": 59,
+            "right": 0,
+            "bottom": 91
+          },
+          "displayCutoutPx": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "imePx": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "imeVisible": false,
+          "captionPx": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "captionVisible": false,
+          "captionBoundingRectsPx": [],
+          "omittedCaptionRects": 0,
+          "boundingRectCoordinates": "Relative to the inset frame, not screen coordinates; frame can differ from final layout.",
+          "insetFrameWidthPx": 2880,
+          "insetFrameHeightPx": 1800
+        }
+      },
+      "decorInsets": {
+        "systemBarsPx": {
+          "left": 0,
+          "top": 65,
+          "right": 0,
+          "bottom": 0
+        },
+        "displayCutoutPx": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "imePx": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0
+        },
+        "imeVisible": false,
+        "captionPx": {
+          "left": 0,
+          "top": 65,
+          "right": 0,
+          "bottom": 0
+        },
+        "captionVisible": true,
+        "captionBoundingRectsPx": [
+          {
+            "left": 0,
+            "top": 0,
+            "right": 130,
+            "bottom": 65
+          },
+          {
+            "left": 1753,
+            "top": 0,
+            "right": 2073,
+            "bottom": 65
+          }
+        ],
+        "omittedCaptionRects": 0,
+        "boundingRectCoordinates": "Relative to the inset frame, not screen coordinates; frame can differ from final layout.",
+        "insetFrameWidthPx": 2073,
+        "insetFrameHeightPx": 1296
+      },
+      "decorWidthPx": 2073,
+      "decorHeightPx": 1296,
+      "multiWindow": true,
+      "windowFocus": true,
+      "configuration": {
+        "densityDpi": 260,
+        "fontScale": 1,
+        "screenWidthDp": 1276,
+        "screenHeightDp": 798,
+        "orientation": 2,
+        "keyboard": 2,
+        "hardKeyboardHidden": 1
+      },
+      "display": {
+        "status": "reported",
+        "currentModePhysicalWidthPx": 2880,
+        "currentModePhysicalHeightPx": 1800,
+        "refreshRateReportedHz": 120.000175,
+        "rotation": 0
+      },
+      "status": "reported"
+    },
+    "eventSequence": [
+      {
+        "sequence": 1,
+        "kind": "activity-created",
+        "detail": "savedInstanceStatePresent=false"
+      },
+      {
+        "sequence": 2,
+        "kind": "refresh-started",
+        "detail": ""
+      },
+      {
+        "sequence": 3,
+        "kind": "activity-started",
+        "detail": ""
+      },
+      {
+        "sequence": 4,
+        "kind": "activity-resumed",
+        "detail": ""
+      },
+      {
+        "sequence": 5,
+        "kind": "activity-top-resumed",
+        "detail": "topResumed=true"
+      },
+      {
+        "sequence": 6,
+        "kind": "refresh-finished",
+        "detail": "Inspect section errors; completion is not qualification."
+      },
+      {
+        "sequence": 7,
+        "kind": "window-focus",
+        "detail": "focused=true"
+      },
+      {
+        "sequence": 8,
+        "kind": "window-observed",
+        "detail": ""
+      },
+      {
+        "sequence": 9,
+        "kind": "refresh-started",
+        "detail": ""
+      },
+      {
+        "sequence": 10,
+        "kind": "refresh-finished",
+        "detail": "Inspect section errors; completion is not qualification."
+      },
+      {
+        "sequence": 11,
+        "kind": "activity-top-resumed",
+        "detail": "topResumed=false"
+      },
+      {
+        "sequence": 12,
+        "kind": "activity-paused",
+        "detail": ""
+      },
+      {
+        "sequence": 13,
+        "kind": "window-focus",
+        "detail": "focused=false"
+      },
+      {
+        "sequence": 14,
+        "kind": "window-observed",
+        "detail": ""
+      },
+      {
+        "sequence": 15,
+        "kind": "activity-stopped",
+        "detail": ""
+      },
+      {
+        "sequence": 16,
+        "kind": "activity-save-instance-state",
+        "detail": ""
+      },
+      {
+        "sequence": 17,
+        "kind": "activity-started",
+        "detail": ""
+      },
+      {
+        "sequence": 18,
+        "kind": "activity-resumed",
+        "detail": ""
+      },
+      {
+        "sequence": 19,
+        "kind": "activity-top-resumed",
+        "detail": "topResumed=true"
+      },
+      {
+        "sequence": 20,
+        "kind": "window-focus",
+        "detail": "focused=true"
+      },
+      {
+        "sequence": 21,
+        "kind": "window-observed",
+        "detail": ""
+      }
+    ],
+    "droppedEvents": 0
+  },
+  "checks": {
+    "kotlinCompile": "passed; warnings are errors",
+    "androidLint": "passed; no issues; intentional wrapper-version-only advisory exclusion",
+    "jvmTests": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "dependencyVerification": "passed normal build without metadata/lock regeneration",
+    "repositoryPythonAst": "passed",
+    "repositoryRuff": "passed",
+    "repositoryRegressionTests": 9
+  },
+  "privateRawEvidenceSha256": {
+    "background.json": "59279c0bd8d3596137a1566fcff7502ddfd2e526e77409694c1901be869c5471",
+    "deployment.json": "1f59450d58025ca2c39df21c34b9d5fb8934706cbb98ffe08e108d435900f51e",
+    "initial.json": "6056ea58fb9aae559367aa2b2b200fcb6ae1759475925f888141c0905fef1018",
+    "interaction.json": "a5a88fd3f40eb191a1c0c97d446c003dd3eb3dec5b49f76902fb1d396260d6aa",
+    "refreshed.json": "946dd824ba7601c5068acd1a4626f0dda8ada118c85e940ca995fb1ba5b05d23",
+    "resumed.json": "5f8e2bdb993937f3f4ce7e09ffda4c05cbcb048fba4ad39b931632d802d375b5"
+  },
+  "verdict": "bounded smoke passed; overall P0-S1 in progress; capability gates remain pending",
+  "notQualified": [
+    "physical keyboard/mouse/trackpad or IME behavior",
+    "window resize/fullscreen/external display workflows",
+    "activity recreation, process death or power-loss durability",
+    "actual video decoding, sustained performance or latency",
+    "SSH/SFTP/RDP/VNC/stream/X11 backends",
+    "USB forwarding, reset, enrollment or programming",
+    "Windows/macOS support"
+  ]
+}

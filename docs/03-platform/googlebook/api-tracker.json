@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "snapshotDate": "2026-10-14",
+  "snapshotDate": "2026-10-15",
   "timezone": "America/Chicago",
   "apis": [
     {
@@ -58,11 +58,15 @@
       "libraryVersion": null,
       "availability": "documented",
       "qualification": "untested",
-      "checkedOn": "2026-10-14",
+      "checkedOn": "2026-10-15",
       "owner": "Android/platform developer",
       "stage": "P1-S2",
       "fallback": "Separate toolbar and standard insets",
-      "experiment": "No control overlap while resizing or changing displays"
+      "experiment": "No control overlap while resizing or changing displays",
+      "partialObservation": {
+        "evidence": "qualification/results/P0-S1/2026-10-15-device-probe.md",
+        "note": "Compiled and invoked on API37/min35 diagnostic. Attached decor reported caption rectangles, while currentWindowMetrics insets reported no caption at the same observation. Resize/fullscreen/external-display control-overlap experiment remains unqualified."
+      }
     },
     {
       "id": "API04",
@@ -336,17 +340,23 @@
         "MediaCodecList"
       ],
       "sourceIds": [
-        "G20"
+        "G20",
+        "G40",
+        "G41"
       ],
       "minimumApi": null,
       "libraryVersion": null,
       "availability": "documented-entrypoint",
       "qualification": "untested",
-      "checkedOn": "2026-10-14",
+      "checkedOn": "2026-10-15",
       "owner": "Android/platform developer",
       "stage": "P0-S4",
       "fallback": "Qualified compatibility codec/profile",
-      "experiment": "Enumerate, sustained decode, thermal and frame pacing"
+      "experiment": "Enumerate, sustained decode, thermal and frame pacing",
+      "partialObservation": {
+        "evidence": "qualification/results/P0-S1/2026-10-15-device-probe.md",
+        "note": "MediaCodecList video enumeration compiled and returned 36 entries (including aliases/special codecs). No MediaCodec instance or actual decoding was exercised."
+      }
     },
     {
       "id": "API18",
@@ -556,11 +566,15 @@
       "interfaceKind": "android-sdk",
       "availability": "documented optional decoder feature; not all codecs support it",
       "qualification": "untested",
-      "checkedOn": "2026-10-14",
+      "checkedOn": "2026-10-15",
       "owner": "Android/integration developer",
       "stage": "P0-S4",
       "fallback": "Normal supported decoder/profile with measured latency and explicit limits",
-      "experiment": "Enumerate exact codec/profile, guard API/capability, compare queue/decode/input-to-photon and thermal behavior with mode on/off"
+      "experiment": "Enumerate exact codec/profile, guard API/capability, compare queue/decode/input-to-photon and thermal behavior with mode on/off",
+      "partialObservation": {
+        "evidence": "qualification/results/P0-S1/2026-10-15-device-probe.md",
+        "note": "Optional supported/required low-latency flags were queried per video MIME; actual KEY_LOW_LATENCY configuration, decode or latency was not exercised."
+      }
     },
     {
       "id": "API28",
@@ -686,11 +700,15 @@
       "interfaceKind": "android-tooling-and-packaging",
       "availability": "documented Android package model; distribution channel/targeting pending",
       "qualification": "untested",
-      "checkedOn": "2026-10-14",
+      "checkedOn": "2026-10-15",
       "owner": "Android/integration developer",
       "stage": "P1-S1",
       "fallback": "Signed direct APK route if qualified; channel limitations explicitly documented",
-      "experiment": "Install/update/uninstall each app independently, inspect package/signature/ABI and verify actual channel device targeting without a guessed Googlebook flag"
+      "experiment": "Install/update/uninstall each app independently, inspect package/signature/ABI and verify actual channel device targeting without a guessed Googlebook flag",
+      "partialObservation": {
+        "evidence": "qualification/results/P0-S1/2026-10-15-device-probe.md",
+        "note": "Dedicated diagnostic APK installed/launched on the identified Googlebook. This does not qualify either product package, signed update or distribution channel."
+      }
     },
     {
       "id": "API33",
@@ -717,6 +735,94 @@
       "stage": "P2-S8",
       "fallback": "Ask before every remote overwrite on non-conditional backends, offer save-copy/cancel and retain staging; never infer conditional replacement from stat plus rename",
       "experiment": "Test per-save generation-bound consent, canceled/obsolete autosaves, a second writer between final check and publication, exclusive-name collision, ambiguous rename and process-loss recovery; record actual server/engine/extensions; rerun app-specific integration cases at P2-S7, P3-S3 and P5-S3"
+    },
+    {
+      "id": "API34",
+      "feature": "Private input capability inventory",
+      "symbols": [
+        "InputManager.getInputDeviceIds",
+        "InputManager.getInputDevice",
+        "InputDevice.getSources",
+        "InputDevice.getKeyboardType",
+        "InputDevice.isVirtual",
+        "InputDevice.isExternal"
+      ],
+      "sourceIds": [
+        "G42",
+        "G49"
+      ],
+      "minimumApi": 29,
+      "libraryVersion": null,
+      "availability": "documented",
+      "qualification": "untested",
+      "checkedOn": "2026-10-15",
+      "owner": "Android/platform developer",
+      "stage": "P0-S2",
+      "fallback": "Unavailable/detached entries remain explicit; do not retain names, descriptors or IDs.",
+      "experiment": "Enumerate current sources, then separately test actual physical input behavior.",
+      "partialObservation": {
+        "evidence": "qualification/results/P0-S1/2026-10-15-device-probe.md",
+        "note": "Ten reported entries observed; no physical keyboard/mouse/IME behavior qualified."
+      }
+    },
+    {
+      "id": "API35",
+      "feature": "Activity window metrics and attached caption insets",
+      "symbols": [
+        "WindowManager.getCurrentWindowMetrics",
+        "WindowMetrics.getBounds",
+        "WindowMetrics.getDensity",
+        "View.getRootWindowInsets",
+        "WindowInsets.getFrame",
+        "WindowInsets.getBoundingRects"
+      ],
+      "sourceIds": [
+        "G43",
+        "G27",
+        "G44",
+        "G03"
+      ],
+      "minimumApi": 35,
+      "libraryVersion": null,
+      "availability": "documented",
+      "qualification": "untested",
+      "checkedOn": "2026-10-15",
+      "owner": "Android/platform developer",
+      "stage": "P0-S2",
+      "fallback": "Preserve native caption and defer layout until attached insets; do not fabricate zero insets.",
+      "experiment": "Compare actual view/metrics insets while resizing and moving between displays.",
+      "partialObservation": {
+        "evidence": "qualification/results/P0-S1/2026-10-15-device-probe.md",
+        "note": "Metrics and decor insets differ in the first window; attached decor caption geometry observed, full transitions unqualified."
+      }
+    },
+    {
+      "id": "API36",
+      "feature": "Separate lifecycle, focus and top-resumed observation",
+      "symbols": [
+        "Activity.onWindowFocusChanged",
+        "Activity.onTopResumedActivityChanged",
+        "Activity.onStart",
+        "Activity.onResume",
+        "Activity.onPause",
+        "Activity.onStop"
+      ],
+      "sourceIds": [
+        "G24"
+      ],
+      "minimumApi": 29,
+      "libraryVersion": null,
+      "availability": "documented",
+      "qualification": "untested",
+      "checkedOn": "2026-10-15",
+      "owner": "Android/platform developer",
+      "stage": "P0-S2",
+      "fallback": "Persist bounded state and reconnect explicitly; resumed alone never implies input focus.",
+      "experiment": "Observe multi-window focus, recreation, background, process death and operation-specific recovery.",
+      "partialObservation": {
+        "evidence": "qualification/results/P0-S1/2026-10-15-device-probe.md",
+        "note": "ADB HOME/return produced distinct focus/top-resumed/lifecycle callbacks; physical interactions, recreation and process death unqualified."
+      }
     }
   ],
   "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."
