@@ -1,0 +1,782 @@
+{
+  "schemaVersion": 1,
+  "runId": "P0-S2-transfer-preflight-2026-10-15",
+  "stage": "P0-S2",
+  "stageStatus": "in-progress",
+  "verdict": "Bounded configuration/permission and queued-job cancellation observations; no running worker or transferred payload",
+  "sourceCommit": "2bdaf423fb280630fb38c103a7427f4d31805b72",
+  "apk": {
+    "package": "dev.cloudy.qualification.baseline",
+    "versionName": "0.4.0",
+    "versionCode": 4,
+    "variant": "debug",
+    "sha256": "134cb6bc0d54eb69a3ba9956d6820c07913344022dd164977cf8453837683686",
+    "bytes": 7113925
+  },
+  "device": {
+    "manufacturer": "HP",
+    "model": "HP Googlebook 14",
+    "buildId": "CL3B.260622.276.R2",
+    "release": "17",
+    "sdkInt": 37,
+    "incremental": "16560795",
+    "securityPatch": "2026-09-01",
+    "supportedAbis": [
+      "arm64-v8a"
+    ],
+    "identityEvidence": "qualification/results/P0-S1/2026-10-15-usb-baseline.md"
+  },
+  "deploymentRecordedAtHostUtc": "2026-10-15T08:27:20.606746+00:00",
+  "buildEvidence": {
+    "reviewAtSourceCommit": "https://github.com/BaiTian6641/Cloudy-Workspace/blob/2bdaf423fb280630fb38c103a7427f4d31805b72/docs/06-validation/2026-10-15-transfer-probe-review.md",
+    "packageAudit": "docs/06-validation/2026-10-15-transfer-package-audit.json",
+    "jvmTests": 61,
+    "androidLintIssues": 0,
+    "boundary": "Results from separately reviewed source/build record; this evidence author ran no Android build or device action."
+  },
+  "time": {
+    "recordingTimezone": "UTC",
+    "localTimezone": "America/Chicago",
+    "processStartedAtDeviceUtc": "2026-10-15T08:27:29.964684Z",
+    "boundary": "Host action/export timestamps and device UTC/elapsed realtime are separate clocks; no latency inference."
+  },
+  "fixture": {
+    "fixtureId": "cloudy-uidt-sha256-blocks-v1",
+    "expectedLengthBytes": 67108864,
+    "expectedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+    "bytesPerSecond": 524288,
+    "privateConfigurationSha256": "fddcc32dfd8ce0adf99a2c00c4679138e90b2a4e0e828cd26fe2d1e2b88b27b3",
+    "importRecordedAtHostUtc": "2026-10-15T08:28:56.869018+00:00",
+    "httpRequestEventsObserved": 0,
+    "serverLogContainsStartupMessageOnly": true,
+    "serverShutdown": {
+      "checkedAtHostUtc": "2026-10-15T08:36:33.048537+00:00",
+      "fixturePortListening": false,
+      "privateArtifact": "qualification/results/private/transfer-probe/fixture-01/server-01-stopped.json",
+      "stimulus": "Primary agent identified the exact remaining fixture process, sent it SIGINT, and verified the listener closed.",
+      "harnessLimit": "The terminal Ctrl-C command returned exit 1 but left the fixture listening; command termination alone did not prove cleanup. This was a host harness cleanup issue, separate from Android behavior."
+    },
+    "boundary": "Generated fixture setup and host-loopback tests do not prove Android TLS or receipt."
+  },
+  "actions": [
+    {
+      "action": "Install audited APK",
+      "privateArtifact": "qualification/results/private/transfer-probe/transfer-04-install-command.json",
+      "recordedAtHostUtc": "2026-10-15T08:27:20.407308+00:00",
+      "exitCode": 0
+    },
+    {
+      "action": "Launch diagnostic",
+      "privateArtifact": "qualification/results/private/transfer-probe/transfer-04-launch-command.json",
+      "recordedAtHostUtc": "2026-10-15T08:27:20.604165+00:00",
+      "exitCode": 0
+    },
+    {
+      "action": "Open transfer screen",
+      "privateArtifact": "qualification/results/private/transfer-probe/open-transfer-tap-command.json",
+      "recordedAtHostUtc": "2026-10-15T08:27:30.702885+00:00",
+      "exitCode": 0
+    },
+    {
+      "action": "Refresh after malformed configuration",
+      "privateArtifact": "qualification/results/private/transfer-probe/malformed-refresh-tap-command.json",
+      "recordedAtHostUtc": "2026-10-15T08:28:38.478516+00:00",
+      "exitCode": 0,
+      "privateInspectedLayout": "qualification/results/private/transfer-probe/malformed-refresh-layout.json",
+      "control": "Refresh transfer state",
+      "matchedFreshOwnControl": true
+    },
+    {
+      "action": "Refresh after valid configuration",
+      "privateArtifact": "qualification/results/private/transfer-probe/valid-refresh-tap-command.json",
+      "recordedAtHostUtc": "2026-10-15T08:28:58.046292+00:00",
+      "exitCode": 0,
+      "privateInspectedLayout": "qualification/results/private/transfer-probe/valid-refresh-layout.json",
+      "control": "Refresh transfer state",
+      "matchedFreshOwnControl": true
+    },
+    {
+      "action": "Deny local-network permission",
+      "privateArtifact": "qualification/results/private/transfer-probe/lan-denied-input-command.json",
+      "recordedAtHostUtc": "2026-10-15T08:29:08.373500+00:00",
+      "exitCode": 0
+    },
+    {
+      "action": "Tap unavailable Download while LAN denied",
+      "privateArtifact": "qualification/results/private/transfer-probe/denied-download-tap-command.json",
+      "recordedAtHostUtc": "2026-10-15T08:29:09.983593+00:00",
+      "exitCode": 0,
+      "privateInspectedLayout": "qualification/results/private/transfer-probe/denied-download-layout.json",
+      "control": "Download test fixture",
+      "matchedFreshOwnControl": true
+    },
+    {
+      "action": "Grant local-network permission",
+      "privateArtifact": "qualification/results/private/transfer-probe/lan-granted-input-command.json",
+      "recordedAtHostUtc": "2026-10-15T08:29:32.137983+00:00",
+      "exitCode": 0
+    },
+    {
+      "action": "Deny notification permission",
+      "privateArtifact": "qualification/results/private/transfer-probe/notifications-denied-input-command.json",
+      "recordedAtHostUtc": "2026-10-15T08:29:42.877380+00:00",
+      "exitCode": 0
+    },
+    {
+      "action": "Explicitly queue first attempt",
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-01-start-tap-command.json",
+      "recordedAtHostUtc": "2026-10-15T08:29:52.638270+00:00",
+      "exitCode": 0,
+      "privateInspectedLayout": "qualification/results/private/transfer-probe/attempt-01-start-layout.json",
+      "control": "Download test fixture",
+      "matchedFreshOwnControl": true
+    },
+    {
+      "action": "Recreate transfer Activity while queued",
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-01-recreate-tap-command.json",
+      "recordedAtHostUtc": "2026-10-15T08:29:58.631049+00:00",
+      "exitCode": 0,
+      "privateInspectedLayout": "qualification/results/private/transfer-probe/attempt-01-recreate-layout.json",
+      "control": "Recreate transfer window",
+      "matchedFreshOwnControl": true
+    },
+    {
+      "action": "Cancel queued attempt",
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-01-cancel-queued-tap-command.json",
+      "recordedAtHostUtc": "2026-10-15T08:30:49.261630+00:00",
+      "exitCode": 0,
+      "privateInspectedLayout": "qualification/results/private/transfer-probe/attempt-01-cancel-queued-layout.json",
+      "control": "Cancel transfer",
+      "matchedFreshOwnControl": true
+    }
+  ],
+  "uiObservations": [
+    {
+      "privateLayout": "qualification/results/private/transfer-probe/no-config-maximized-layout.json",
+      "activityInstanceId": "295a1a0f-5668-4930-b6f3-d23bcc408d74",
+      "taskIdObserved": 1000153,
+      "processInstanceId": "805a4de7-0c7b-47be-976f-edf357f17db6",
+      "processStartedAtDeviceUtc": "2026-10-15T08:27:29.964684Z",
+      "configuration": "unavailable-FileNotFoundException",
+      "journalRevision": 0,
+      "savedRevision": 0,
+      "retainedAttemptCount": 0,
+      "localNetworkGranted": false,
+      "notificationPermissionGranted": false,
+      "packageNotificationsEnabled": false
+    },
+    {
+      "privateLayout": "qualification/results/private/transfer-probe/malformed-result-layout.json",
+      "activityInstanceId": "295a1a0f-5668-4930-b6f3-d23bcc408d74",
+      "taskIdObserved": 1000153,
+      "processInstanceId": "805a4de7-0c7b-47be-976f-edf357f17db6",
+      "processStartedAtDeviceUtc": "2026-10-15T08:27:29.964684Z",
+      "configuration": "unavailable-JSONException",
+      "journalRevision": 0,
+      "savedRevision": 0,
+      "retainedAttemptCount": 0,
+      "localNetworkGranted": false,
+      "notificationPermissionGranted": false,
+      "packageNotificationsEnabled": false
+    },
+    {
+      "privateLayout": "qualification/results/private/transfer-probe/denied-download-layout.json",
+      "activityInstanceId": "295a1a0f-5668-4930-b6f3-d23bcc408d74",
+      "taskIdObserved": 1000153,
+      "processInstanceId": "805a4de7-0c7b-47be-976f-edf357f17db6",
+      "processStartedAtDeviceUtc": "2026-10-15T08:27:29.964684Z",
+      "configuration": "validated-private-fixture",
+      "journalRevision": 0,
+      "savedRevision": 0,
+      "retainedAttemptCount": 0,
+      "localNetworkGranted": false,
+      "notificationPermissionGranted": false,
+      "packageNotificationsEnabled": false
+    },
+    {
+      "privateLayout": "qualification/results/private/transfer-probe/permission-ready-layout.json",
+      "activityInstanceId": "295a1a0f-5668-4930-b6f3-d23bcc408d74",
+      "taskIdObserved": 1000153,
+      "processInstanceId": "805a4de7-0c7b-47be-976f-edf357f17db6",
+      "processStartedAtDeviceUtc": "2026-10-15T08:27:29.964684Z",
+      "configuration": "validated-private-fixture",
+      "journalRevision": 0,
+      "savedRevision": 0,
+      "retainedAttemptCount": 0,
+      "localNetworkGranted": true,
+      "notificationPermissionGranted": false,
+      "packageNotificationsEnabled": false
+    },
+    {
+      "privateLayout": "qualification/results/private/transfer-probe/attempt-01-recreate-layout.json",
+      "activityInstanceId": "295a1a0f-5668-4930-b6f3-d23bcc408d74",
+      "taskIdObserved": 1000153,
+      "processInstanceId": "805a4de7-0c7b-47be-976f-edf357f17db6",
+      "processStartedAtDeviceUtc": "2026-10-15T08:27:29.964684Z",
+      "configuration": "validated-private-fixture",
+      "journalRevision": 1,
+      "savedRevision": 1,
+      "retainedAttemptCount": 1,
+      "localNetworkGranted": true,
+      "notificationPermissionGranted": false,
+      "packageNotificationsEnabled": false
+    },
+    {
+      "privateLayout": "qualification/results/private/transfer-probe/attempt-01-recreated-layout.json",
+      "activityInstanceId": "49e0985c-55be-4b6e-8eee-d7cc532e7c0b",
+      "taskIdObserved": 1000153,
+      "processInstanceId": "805a4de7-0c7b-47be-976f-edf357f17db6",
+      "processStartedAtDeviceUtc": "2026-10-15T08:27:29.964684Z",
+      "configuration": "validated-private-fixture",
+      "journalRevision": 1,
+      "savedRevision": 1,
+      "retainedAttemptCount": 1,
+      "localNetworkGranted": true,
+      "notificationPermissionGranted": false,
+      "packageNotificationsEnabled": false
+    },
+    {
+      "privateLayout": "qualification/results/private/transfer-probe/queued-cancel-readback-layout.json",
+      "activityInstanceId": "49e0985c-55be-4b6e-8eee-d7cc532e7c0b",
+      "taskIdObserved": 1000153,
+      "processInstanceId": "805a4de7-0c7b-47be-976f-edf357f17db6",
+      "processStartedAtDeviceUtc": "2026-10-15T08:27:29.964684Z",
+      "configuration": "validated-private-fixture",
+      "journalRevision": 3,
+      "savedRevision": 3,
+      "retainedAttemptCount": 1,
+      "localNetworkGranted": true,
+      "notificationPermissionGranted": false,
+      "packageNotificationsEnabled": false
+    }
+  ],
+  "journalSnapshots": [
+    {
+      "schemaVersion": 1,
+      "probeVersion": "0.4.0",
+      "recordingProcessInstanceId": "805a4de7-0c7b-47be-976f-edf357f17db6",
+      "processStartedAtDeviceUtc": "2026-10-15T08:27:29.964684Z",
+      "snapshotAtDeviceUtc": "2026-10-15T08:29:51.871639Z",
+      "revision": 1,
+      "fixtureId": "cloudy-uidt-sha256-blocks-v1",
+      "jobId": 7352,
+      "attemptLimit": 8,
+      "eventLimitPerAttempt": 24,
+      "payloadByteLimitPerAttempt": 268435456,
+      "privateReport": "qualification/results/private/transfer-probe/attempt-01-initial.json",
+      "exportedAtHostUtc": "2026-10-15T08:29:52.715110+00:00",
+      "exportExitCode": 0,
+      "attempts": [
+        {
+          "attemptId": "b2d397ab-be93-4e41-bb99-fa14eac31a82",
+          "originProcessInstanceId": "805a4de7-0c7b-47be-976f-edf357f17db6",
+          "expectedLengthBytes": 67108864,
+          "expectedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+          "status": "queued",
+          "bytesWritten": 0,
+          "claimed": false,
+          "verifiedLengthBytes": null,
+          "verifiedSha256": null,
+          "reason": null,
+          "stopReason": null,
+          "stopOutcome": null,
+          "events": [
+            {
+              "status": "queued",
+              "deviceUtc": "2026-10-15T08:29:51.871232Z",
+              "elapsedRealtimeMs": 51228675,
+              "reason": null
+            }
+          ],
+          "droppedEventCount": 0
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "probeVersion": "0.4.0",
+      "recordingProcessInstanceId": "805a4de7-0c7b-47be-976f-edf357f17db6",
+      "processStartedAtDeviceUtc": "2026-10-15T08:27:29.964684Z",
+      "snapshotAtDeviceUtc": "2026-10-15T08:29:51.871639Z",
+      "revision": 1,
+      "fixtureId": "cloudy-uidt-sha256-blocks-v1",
+      "jobId": 7352,
+      "attemptLimit": 8,
+      "eventLimitPerAttempt": 24,
+      "payloadByteLimitPerAttempt": 268435456,
+      "privateReport": "qualification/results/private/transfer-probe/attempt-01-progress.json",
+      "exportedAtHostUtc": "2026-10-15T08:29:57.564401+00:00",
+      "exportExitCode": 0,
+      "attempts": [
+        {
+          "attemptId": "b2d397ab-be93-4e41-bb99-fa14eac31a82",
+          "originProcessInstanceId": "805a4de7-0c7b-47be-976f-edf357f17db6",
+          "expectedLengthBytes": 67108864,
+          "expectedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+          "status": "queued",
+          "bytesWritten": 0,
+          "claimed": false,
+          "verifiedLengthBytes": null,
+          "verifiedSha256": null,
+          "reason": null,
+          "stopReason": null,
+          "stopOutcome": null,
+          "events": [
+            {
+              "status": "queued",
+              "deviceUtc": "2026-10-15T08:29:51.871232Z",
+              "elapsedRealtimeMs": 51228675,
+              "reason": null
+            }
+          ],
+          "droppedEventCount": 0
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "probeVersion": "0.4.0",
+      "recordingProcessInstanceId": "805a4de7-0c7b-47be-976f-edf357f17db6",
+      "processStartedAtDeviceUtc": "2026-10-15T08:27:29.964684Z",
+      "snapshotAtDeviceUtc": "2026-10-15T08:29:51.871639Z",
+      "revision": 1,
+      "fixtureId": "cloudy-uidt-sha256-blocks-v1",
+      "jobId": 7352,
+      "attemptLimit": 8,
+      "eventLimitPerAttempt": 24,
+      "payloadByteLimitPerAttempt": 268435456,
+      "privateReport": "qualification/results/private/transfer-probe/attempt-01-still-queued.json",
+      "exportedAtHostUtc": "2026-10-15T08:30:48.195491+00:00",
+      "exportExitCode": 0,
+      "attempts": [
+        {
+          "attemptId": "b2d397ab-be93-4e41-bb99-fa14eac31a82",
+          "originProcessInstanceId": "805a4de7-0c7b-47be-976f-edf357f17db6",
+          "expectedLengthBytes": 67108864,
+          "expectedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+          "status": "queued",
+          "bytesWritten": 0,
+          "claimed": false,
+          "verifiedLengthBytes": null,
+          "verifiedSha256": null,
+          "reason": null,
+          "stopReason": null,
+          "stopOutcome": null,
+          "events": [
+            {
+              "status": "queued",
+              "deviceUtc": "2026-10-15T08:29:51.871232Z",
+              "elapsedRealtimeMs": 51228675,
+              "reason": null
+            }
+          ],
+          "droppedEventCount": 0
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "probeVersion": "0.4.0",
+      "recordingProcessInstanceId": "805a4de7-0c7b-47be-976f-edf357f17db6",
+      "processStartedAtDeviceUtc": "2026-10-15T08:27:29.964684Z",
+      "snapshotAtDeviceUtc": "2026-10-15T08:30:48.472342Z",
+      "revision": 3,
+      "fixtureId": "cloudy-uidt-sha256-blocks-v1",
+      "jobId": 7352,
+      "attemptLimit": 8,
+      "eventLimitPerAttempt": 24,
+      "payloadByteLimitPerAttempt": 268435456,
+      "privateReport": "qualification/results/private/transfer-probe/attempt-01-cancelled.json",
+      "exportedAtHostUtc": "2026-10-15T08:30:49.333778+00:00",
+      "exportExitCode": 0,
+      "attempts": [
+        {
+          "attemptId": "b2d397ab-be93-4e41-bb99-fa14eac31a82",
+          "originProcessInstanceId": "805a4de7-0c7b-47be-976f-edf357f17db6",
+          "expectedLengthBytes": 67108864,
+          "expectedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+          "status": "cancelled",
+          "bytesWritten": 0,
+          "claimed": false,
+          "verifiedLengthBytes": null,
+          "verifiedSha256": null,
+          "reason": "user-cancelled",
+          "stopReason": null,
+          "stopOutcome": "cancelled",
+          "events": [
+            {
+              "status": "queued",
+              "deviceUtc": "2026-10-15T08:29:51.871232Z",
+              "elapsedRealtimeMs": 51228675,
+              "reason": null
+            },
+            {
+              "status": "cancel-requested",
+              "deviceUtc": "2026-10-15T08:30:48.471698Z",
+              "elapsedRealtimeMs": 51285276,
+              "reason": "user-cancelled"
+            },
+            {
+              "status": "cancelled",
+              "deviceUtc": "2026-10-15T08:30:48.471933Z",
+              "elapsedRealtimeMs": 51285276,
+              "reason": "user-cancelled"
+            }
+          ],
+          "droppedEventCount": 0
+        }
+      ]
+    }
+  ],
+  "scheduling": {
+    "requiredConstraints": [
+      "CONNECTIVITY"
+    ],
+    "unsatisfiedConstraintsObserved": [
+      "CONNECTIVITY",
+      "FLEXIBILITY"
+    ],
+    "requestedTransports": [
+      "WIFI",
+      "ETHERNET"
+    ],
+    "requestedCapabilities": [
+      "NOT_RESTRICTED",
+      "TRUSTED",
+      "NOT_VPN",
+      "NOT_VCN_MANAGED",
+      "NOT_BANDWIDTH_CONSTRAINED"
+    ],
+    "assignedNetworkTransports": [
+      "WIFI",
+      "VPN"
+    ],
+    "assignedNetworkCapabilities": [
+      "NOT_METERED",
+      "INTERNET",
+      "NOT_RESTRICTED",
+      "TRUSTED",
+      "VALIDATED",
+      "NOT_ROAMING",
+      "FOREGROUND",
+      "NOT_CONGESTED",
+      "NOT_SUSPENDED",
+      "NOT_VCN_MANAGED",
+      "NOT_BANDWIDTH_CONSTRAINED"
+    ],
+    "interpretation": "Required NOT_VPN is absent from the OS-selected Wi-Fi/VPN network, consistent with unsatisfied connectivity. No network request was forced or rerouted by this evidence author.",
+    "workerClaimed": false,
+    "probeJobPresentAfterCancel": false,
+    "privateDiagnostics": [
+      "qualification/results/private/transfer-probe/attempt-01-jobscheduler.txt",
+      "qualification/results/private/transfer-probe/attempt-01-after-cancel-jobscheduler.txt"
+    ]
+  },
+  "recreation": {
+    "scope": "Activity recreation while one attempt remained queued; same process and task, different Activity instance",
+    "activeTransferBytesObserved": 0,
+    "processDeathObserved": false,
+    "boundary": "Does not establish running-worker survival or file-transfer continuity."
+  },
+  "configurationImportBoundary": {
+    "missingConfig": "unavailable-FileNotFoundException",
+    "malformedConfigAfterExplicitRefresh": "unavailable-JSONException",
+    "validConfigReadback": "validated-private-fixture",
+    "sameProcessObserved": true,
+    "initialMalformedImport": "Primary agent interrupted an exec-out/tee command that did not terminate; not counted as a successful import. Subsequent explicit refresh and successful valid import/readback supply the recorded observations.",
+    "validRefreshLayoutBoundary": "valid-refresh-layout.json is inspected before its tap and still shows the malformed state; later denied-download and permission-ready layouts establish valid readback."
+  },
+  "knownVersionLabelIssue": {
+    "description": "Primary source review found a stale hardcoded 0.3.0 baseline-recorder label in the 0.4.0 source. Transfer journal reports 0.4.0. Deployment identity is taken from the audited APK/source, not that stale baseline field.",
+    "followUp": "0.4.1 correction is separate source/device evidence; this manifest retains the original 0.4.0 identity.",
+    "privateArtifact": "qualification/results/private/transfer-probe/transfer-04-baseline-label.json",
+    "observedBaselineProbeVersion": "0.3.0"
+  },
+  "visualReview": {
+    "privateScreenshot": "qualification/results/private/transfer-probe/denied-ready.png",
+    "evidenceAuthorInspectedPixels": true,
+    "observation": "Download and Cancel appear disabled; LAN is not granted, configuration is validated, journal revision and retained attempts are zero. Layout omission of enabled state is not treated as an enabled-state API result."
+  },
+  "notEstablished": [
+    "Android HTTPS connection or TLS validation",
+    "App-route connectivity to the fixture",
+    "Running UIDT worker",
+    "Payload receipt, byte/hash verification or completion",
+    "Cancellation of an active or blocked worker",
+    "Notification delivery during an active job",
+    "LAN permission revocation during work",
+    "Task Manager stop, process-loss recovery or resumed transfer",
+    "SFTP/SSH, USB, desktop protocols or production capability"
+  ],
+  "capabilityDecision": {
+    "API39": "bounded queued-job observations only; full experiment remains unqualified",
+    "API41": "permission UI grant/denial observed; actual app-route and revocation cases remain unqualified",
+    "CAP-PLATFORM": "pending"
+  },
+  "privateEvidence": {
+    "hashAlgorithm": "SHA-256",
+    "artifactCount": 41,
+    "artifacts": [
+      {
+        "path": "qualification/results/private/transfer-probe/transfer-04-deployment.json",
+        "sha256": "1cbd3b4c3a57af3825e692afa381290b3470cb6a78d2cb0a224d50063daf0bad",
+        "bytes": 192,
+        "purpose": "Exact deployed source/APK binding"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/transfer-04-install-command.json",
+        "sha256": "0b7ff46ede02984a4b9c45137eb1c5763abfd99f0306ab7a7e0abfba9d3ff667",
+        "bytes": 354,
+        "purpose": "Install audited APK action record; raw arguments/output omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/transfer-04-launch-command.json",
+        "sha256": "d5f62ad212c498c43825ef5cc71d471cd9b957ccdd6cd7dd948ddccc6f3e2afb",
+        "bytes": 486,
+        "purpose": "Launch diagnostic action record; raw arguments/output omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/open-transfer-tap-command.json",
+        "sha256": "5029a44b035bf93357dafe692a37e8bf8dd4fba0fb507156696e35950050e36e",
+        "bytes": 217,
+        "purpose": "Open transfer screen action record; raw arguments/output omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/malformed-refresh-tap-command.json",
+        "sha256": "7f56253759484792067879fdb67cd92a96664cb117c7dc05b3a0ca951456a316",
+        "bytes": 218,
+        "purpose": "Refresh after malformed configuration action record; raw arguments/output omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/malformed-refresh-layout.json",
+        "sha256": "d083e019b27ceb805a85d1eaeff5a2e6142e880dd89badc884828f48d129d8da",
+        "bytes": 10852,
+        "purpose": "Own transfer-window UI observation; unrelated desktop content omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/valid-refresh-tap-command.json",
+        "sha256": "21477ba80c65b7c73a0ca20b44316e0eedf151d73cd4b23e3de7c595dc7f6211",
+        "bytes": 218,
+        "purpose": "Refresh after valid configuration action record; raw arguments/output omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/valid-refresh-layout.json",
+        "sha256": "9a8021438145c9dec7de56276887ea08db3ceff13c9d91237d9ba40490f1e7d8",
+        "bytes": 10844,
+        "purpose": "Own transfer-window UI observation; unrelated desktop content omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/lan-denied-input-command.json",
+        "sha256": "69fb918d95375f4955fa98bffdffe08cd44710d5f82fd8a1ebc06a40614a2893",
+        "bytes": 219,
+        "purpose": "Deny local-network permission action record; raw arguments/output omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/denied-download-tap-command.json",
+        "sha256": "f9e58aaf552eba6f087a8be4b4f86d777dc0c9e479a30f0ee557f4fd2d53b7c7",
+        "bytes": 218,
+        "purpose": "Tap unavailable Download while LAN denied action record; raw arguments/output omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/denied-download-layout.json",
+        "sha256": "3036f9e769dcc64e29e04b29b6e8431b8a8e487c047d4aead417d117c18e3f12",
+        "bytes": 10844,
+        "purpose": "Own transfer-window UI observation; unrelated desktop content omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/lan-granted-input-command.json",
+        "sha256": "4952b72b5e98a8f974b3a7a52b4dc02314bf93f4eae84a6571713045749579d0",
+        "bytes": 218,
+        "purpose": "Grant local-network permission action record; raw arguments/output omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/notifications-denied-input-command.json",
+        "sha256": "488d63e30f01109a6fb34c7bb7bcddaa2d278c99050fd8629e5f5f264281010a",
+        "bytes": 219,
+        "purpose": "Deny notification permission action record; raw arguments/output omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-01-start-tap-command.json",
+        "sha256": "555664b9b420047311bdc06aeb953a80c893fd3af24177af2fef9b0930dc5a3e",
+        "bytes": 218,
+        "purpose": "Explicitly queue first attempt action record; raw arguments/output omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-01-start-layout.json",
+        "sha256": "c030388943bc67392c1562268b922ce2fbb56b5e17fcc9832714fa0576871ff7",
+        "bytes": 10840,
+        "purpose": "Own transfer-window UI observation; unrelated desktop content omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-01-recreate-tap-command.json",
+        "sha256": "0f4aae78146ec466b4b337dae535a658bebecf0b7308314250beb747a75875eb",
+        "bytes": 218,
+        "purpose": "Recreate transfer Activity while queued action record; raw arguments/output omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-01-recreate-layout.json",
+        "sha256": "4d99aed6c50e104e9a27e1ea415ca92493b2365dd0e55615f3288743e66bb843",
+        "bytes": 11096,
+        "purpose": "Own transfer-window UI observation; unrelated desktop content omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-01-cancel-queued-tap-command.json",
+        "sha256": "f0c9092fd9038a831d7edf9c0b82adad36ec3b12c445ae0cbd677f94fa732a8a",
+        "bytes": 218,
+        "purpose": "Cancel queued attempt action record; raw arguments/output omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-01-cancel-queued-layout.json",
+        "sha256": "ede1a013d1fe527b458243c9b16f744d485e4b6501b80a34de374e93afa2f24f",
+        "bytes": 11096,
+        "purpose": "Own transfer-window UI observation; unrelated desktop content omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-01-initial.json",
+        "sha256": "3e742b736a6754506900adcc8d731b0e66b52d4b7089d9db8621b39d6c2c3260",
+        "bytes": 1597,
+        "purpose": "Transfer-journal snapshot"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-01-initial-command.json",
+        "sha256": "9f0c6ade25d5fcbdadb8db0daa74fe7a6716923375a8337c2f769e906bf8fe32",
+        "bytes": 2002,
+        "purpose": "Export timestamp/exit result; raw command omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-01-progress.json",
+        "sha256": "3e742b736a6754506900adcc8d731b0e66b52d4b7089d9db8621b39d6c2c3260",
+        "bytes": 1597,
+        "purpose": "Transfer-journal snapshot"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-01-progress-command.json",
+        "sha256": "d1e0dd8be8c7f81db0c101f636e44114f9337070a79ab9079a2104ac85463ab2",
+        "bytes": 2002,
+        "purpose": "Export timestamp/exit result; raw command omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-01-still-queued.json",
+        "sha256": "3e742b736a6754506900adcc8d731b0e66b52d4b7089d9db8621b39d6c2c3260",
+        "bytes": 1597,
+        "purpose": "Transfer-journal snapshot"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-01-still-queued-command.json",
+        "sha256": "575f865e53dd798e1c2d5c39b08bd069382954fb77a71048896b6ac770e9b3b4",
+        "bytes": 2002,
+        "purpose": "Export timestamp/exit result; raw command omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-01-cancelled.json",
+        "sha256": "97e55cb180d0e9d858e6723d9c8f07f42279194271a6bbb3a88f0a62928480fb",
+        "bytes": 1998,
+        "purpose": "Transfer-journal snapshot"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-01-cancelled-command.json",
+        "sha256": "b319991e6ab99495de3f10a3a728cc0bf119c9845cf317dd3ac679525e4f6fe9",
+        "bytes": 2447,
+        "purpose": "Export timestamp/exit result; raw command omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/no-config-maximized-layout.json",
+        "sha256": "bd895aff181d1a31e3df9969b0007d31b00a306a3adcdf6ecd6f9d9876f3598b",
+        "bytes": 10852,
+        "purpose": "Own transfer-window UI observation; unrelated desktop content omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/malformed-result-layout.json",
+        "sha256": "9a8021438145c9dec7de56276887ea08db3ceff13c9d91237d9ba40490f1e7d8",
+        "bytes": 10844,
+        "purpose": "Own transfer-window UI observation; unrelated desktop content omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/permission-ready-layout.json",
+        "sha256": "c030388943bc67392c1562268b922ce2fbb56b5e17fcc9832714fa0576871ff7",
+        "bytes": 10840,
+        "purpose": "Own transfer-window UI observation; unrelated desktop content omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-01-recreated-layout.json",
+        "sha256": "31bcab6dc5a120a245c116d44323f37ad6f52117b5aeaa3a7c8f2297198a3568",
+        "bytes": 11096,
+        "purpose": "Own transfer-window UI observation; unrelated desktop content omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/queued-cancel-readback-layout.json",
+        "sha256": "346cd098ef0494252f6a26df4581cf016fcb610ee2b5ce5646b75846e4ebdca0",
+        "bytes": 11112,
+        "purpose": "Own transfer-window UI observation; unrelated desktop content omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/denied-ready.png",
+        "sha256": "5e3dc9d52cfa6f3b5e744ef2e3bf930e27dd85ade3d138eb46c962f0624c5e68",
+        "bytes": 230975,
+        "purpose": "Pixels inspected: disabled-looking Download/Cancel, LAN not granted, valid config and zero attempts"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/valid-config-config-import.json",
+        "sha256": "6373197ba55dd1d4210ca6cb0ae74593272fea69af79c34bc0f288a8b006a6dd",
+        "bytes": 256,
+        "purpose": "Successful valid private configuration import digest and fixture size/hash"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/fixture-01/android-config.json",
+        "sha256": "fddcc32dfd8ce0adf99a2c00c4679138e90b2a4e0e828cd26fe2d1e2b88b27b3",
+        "bytes": 1469,
+        "purpose": "Private configuration digest checked; endpoint/CA not projected"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/fixture-01/host-config.json",
+        "sha256": "342048f7f78b7df60b2fbacb3954729b7aaeb64f1fdaa9c993fb989809fe18e2",
+        "bytes": 124,
+        "purpose": "Fixture throttle/finite byte length only; endpoint omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/fixture-01/server-01.log",
+        "sha256": "75049ee13969ee7f5669b10e0348729faca0b1d8fa6a2285270cea69c62fe169",
+        "bytes": 50,
+        "purpose": "Fixture startup log; no request events present"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-01-jobscheduler.txt",
+        "sha256": "9e46571bd4d27a06228c81337c0593084b8959657d4da9982805838848fbec67",
+        "bytes": 450264,
+        "purpose": "Sanitized specific-job connectivity constraints and selected network capabilities"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-01-after-cancel-jobscheduler.txt",
+        "sha256": "56dbc11a2ab393d4df5f1d1301f070702390cf39ac148921772b54b34ae7b54d",
+        "bytes": 446845,
+        "purpose": "Probe job absent after queued cancellation"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/transfer-04-baseline-label.json",
+        "sha256": "a23b1279a9bfc7754deeb31966335b5a31976d5af95e1c064f536ea67e09c1ed",
+        "bytes": 74669,
+        "purpose": "Baseline report stale-version-field observation; other baseline data not projected"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/fixture-01/server-01-stopped.json",
+        "sha256": "9b74f387136b928c18db0e620e44ecf6b270ed0a9bebf90af9dcd38c6010c928",
+        "bytes": 284,
+        "purpose": "Explicit final host fixture listener-closure verification"
+      }
+    ],
+    "selection": "Only files used to support this report; no globbed private inventory or TLS key material."
+  },
+  "sanitization": {
+    "omitted": [
+      "LAN/VPN addresses and routes",
+      "hostnames and user names",
+      "device transport serials and process IDs",
+      "certificate/key contents",
+      "raw UI trees and screenshots",
+      "unrelated apps/network requests",
+      "raw shell commands and diagnostic dumps"
+    ],
+    "retainedIdentifiers": "Random probe process/Activity/attempt identities and task/job IDs are scoped observation keys, not device serials."
+  },
+  "reviewStatus": "Accepted by primary and independent reviewer: all 41 private hash/size pairs, selected journal/UI/action projections, six control-coordinate matches, provenance, scheduling and cleanup checked. No actionable finding; later 0.4.1 payload results excluded."
+}
