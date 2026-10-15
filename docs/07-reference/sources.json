@@ -1769,7 +1769,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": "2026-08-03",
-      "note": "NET_CAPABILITY_LOCAL_NETWORK API35/U extension12 describes a network where the device advertises addresses, such as tethering; it is not a generic requirement for connecting to an ordinary LAN server. NOT_VPN excludes VPN networks even when they also advertise WIFI. Reviewed 0.4.1 drops that requirement without bypassing the user VPN; actual route reachability remains untested.",
+      "note": "NET_CAPABILITY_LOCAL_NETWORK API35/U extension12 describes a network where the device advertises addresses, such as tethering; it is not a generic requirement for connecting to an ordinary LAN server. NOT_VPN excludes VPN networks even when they also advertise WIFI. Reviewed 0.4.1 drops that requirement without bypassing the user VPN; The selected fixture has bounded 0.4.1 reachability evidence; general route support remains unqualified.",
       "refresh": "Before transfer-probe implementation, target SDK changes or recovery-policy changes."
     },
     {

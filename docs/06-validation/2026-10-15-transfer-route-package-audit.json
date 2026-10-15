@@ -1,0 +1,42 @@
+{
+  "versionCode": "5",
+  "versionName": "0.4.1",
+  "apkSha256": "704546e5d6a24167c7c982cf3be0e4ab27e2a1fe86221e69aa68f7a1f42d2396",
+  "apkBytes": 6858313,
+  "noticeAssetCount": 11,
+  "noticeAssetsMatch": true,
+  "permissions": [
+    "android.permission.INTERNET",
+    "android.permission.ACCESS_NETWORK_STATE",
+    "android.permission.ACCESS_LOCAL_NETWORK",
+    "android.permission.RUN_USER_INITIATED_JOBS",
+    "android.permission.POST_NOTIFICATIONS"
+  ],
+  "components": [
+    {
+      "type": "receiver",
+      "name": "dev.cloudy.qualification.baseline.TransferCancelReceiver",
+      "exported": "false",
+      "permission": null
+    },
+    {
+      "type": "service",
+      "name": "dev.cloudy.qualification.baseline.TransferJobService",
+      "exported": "false",
+      "permission": "android.permission.BIND_JOB_SERVICE"
+    },
+    {
+      "type": "activity",
+      "name": "dev.cloudy.qualification.baseline.TransferActivity",
+      "exported": "false",
+      "permission": null
+    },
+    {
+      "type": "activity",
+      "name": "dev.cloudy.qualification.baseline.BaselineActivity",
+      "exported": "true",
+      "permission": null
+    }
+  ],
+  "scope": "Local 0.4.1 package audit; no added dependencies. Device observations separately bound to source a2b3e33."
+}

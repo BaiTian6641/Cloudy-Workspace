@@ -1,0 +1,2322 @@
+{
+  "schemaVersion": 1,
+  "runId": "P0-S2-transfer-lifecycle-2026-10-15",
+  "stage": "P0-S2",
+  "stageStatus": "in-progress",
+  "verdict": "Two real finite HTTPS completions, same-process recreation/minimize continuity, active UI/notification cancellation, wrong-CA rejection, host-interruption failure and bounded injected-process-loss reconciliation; capability gates remain pending",
+  "sourceCommit": "a2b3e33d3ba4dabf40bdd1730e1eaf582c84527d",
+  "apk": {
+    "package": "dev.cloudy.qualification.baseline",
+    "versionName": "0.4.1",
+    "versionCode": 5,
+    "variant": "debug",
+    "sha256": "704546e5d6a24167c7c982cf3be0e4ab27e2a1fe86221e69aa68f7a1f42d2396",
+    "bytes": 6858313
+  },
+  "device": {
+    "manufacturer": "HP",
+    "model": "HP Googlebook 14",
+    "buildId": "CL3B.260622.276.R2",
+    "release": "17",
+    "sdkInt": 37,
+    "incremental": "16560795",
+    "securityPatch": "2026-09-01",
+    "supportedAbis": [
+      "arm64-v8a"
+    ],
+    "identityEvidence": "qualification/results/P0-S1/2026-10-15-usb-baseline.md"
+  },
+  "deploymentRecordedAtHostUtc": "2026-10-15T08:37:47.833961+00:00",
+  "baselineReadback": {
+    "schemaVersion": 3,
+    "probeVersion": "0.4.1"
+  },
+  "buildEvidence": {
+    "reviewAtSourceCommit": "https://github.com/BaiTian6641/Cloudy-Workspace/blob/a2b3e33d3ba4dabf40bdd1730e1eaf582c84527d/docs/06-validation/2026-10-15-transfer-probe-review.md",
+    "packageAudit": "docs/06-validation/2026-10-15-transfer-route-package-audit.json",
+    "jvmTests": 61,
+    "androidLintIssues": 0,
+    "hostedChecks": [
+      {
+        "runId": 38707024426,
+        "conclusion": "success"
+      },
+      {
+        "runId": 38707024363,
+        "conclusion": "success"
+      }
+    ],
+    "boundary": "Separate reviewed build and primary-agent hosted-check records; evidence author performed no build or device action."
+  },
+  "time": {
+    "recordingTimezone": "UTC",
+    "localTimezone": "America/Chicago",
+    "boundary": "Host/device UTC and device elapsed-realtime fields are separate clocks; no latency inference."
+  },
+  "fixture": {
+    "fixtureId": "cloudy-uidt-sha256-blocks-v1",
+    "expectedLengthBytes": 67108864,
+    "expectedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+    "bytesPerSecond": 524288,
+    "boundary": "Deliberately throttled generated payload; no throughput benchmark, production protocol, or physical packet-route qualification."
+  },
+  "journalSnapshots": [
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-02-progress.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.4.1",
+      "recordingProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "processStartedAtDeviceUtc": "2026-10-15T08:37:49.421229Z",
+      "snapshotAtDeviceUtc": "2026-10-15T08:38:22.765568Z",
+      "revision": 546,
+      "attemptCount": 2,
+      "latest": {
+        "attemptId": "2b601e48-de60-4d7d-9e0c-f38d7dc85111",
+        "originProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+        "expectedLengthBytes": 67108864,
+        "expectedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+        "status": "running",
+        "bytesWritten": 4456448,
+        "claimed": true,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": null,
+        "stopReason": null,
+        "stopOutcome": null,
+        "events": [
+          {
+            "status": "queued",
+            "deviceUtc": "2026-10-15T08:38:13.967485Z",
+            "elapsedRealtimeMs": 51730772,
+            "reason": null
+          },
+          {
+            "status": "running",
+            "deviceUtc": "2026-10-15T08:38:14.042958Z",
+            "elapsedRealtimeMs": 51730847,
+            "reason": null
+          }
+        ]
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-02-minimized-progress.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.4.1",
+      "recordingProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "processStartedAtDeviceUtc": "2026-10-15T08:37:49.421229Z",
+      "snapshotAtDeviceUtc": "2026-10-15T08:39:24.264540Z",
+      "revision": 4482,
+      "attemptCount": 2,
+      "latest": {
+        "attemptId": "2b601e48-de60-4d7d-9e0c-f38d7dc85111",
+        "originProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+        "expectedLengthBytes": 67108864,
+        "expectedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+        "status": "running",
+        "bytesWritten": 36700160,
+        "claimed": true,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": null,
+        "stopReason": null,
+        "stopOutcome": null,
+        "events": [
+          {
+            "status": "queued",
+            "deviceUtc": "2026-10-15T08:38:13.967485Z",
+            "elapsedRealtimeMs": 51730772,
+            "reason": null
+          },
+          {
+            "status": "running",
+            "deviceUtc": "2026-10-15T08:38:14.042958Z",
+            "elapsedRealtimeMs": 51730847,
+            "reason": null
+          }
+        ]
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-02-completion-journal.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.4.1",
+      "recordingProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "processStartedAtDeviceUtc": "2026-10-15T08:37:49.421229Z",
+      "snapshotAtDeviceUtc": "2026-10-15T08:40:22.365088Z",
+      "revision": 8196,
+      "attemptCount": 2,
+      "latest": {
+        "attemptId": "2b601e48-de60-4d7d-9e0c-f38d7dc85111",
+        "originProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+        "expectedLengthBytes": 67108864,
+        "expectedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+        "status": "completed",
+        "bytesWritten": 67108864,
+        "claimed": true,
+        "verifiedLengthBytes": 67108864,
+        "verifiedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+        "reason": null,
+        "stopReason": null,
+        "stopOutcome": null,
+        "events": [
+          {
+            "status": "queued",
+            "deviceUtc": "2026-10-15T08:38:13.967485Z",
+            "elapsedRealtimeMs": 51730772,
+            "reason": null
+          },
+          {
+            "status": "running",
+            "deviceUtc": "2026-10-15T08:38:14.042958Z",
+            "elapsedRealtimeMs": 51730847,
+            "reason": null
+          },
+          {
+            "status": "verifying",
+            "deviceUtc": "2026-10-15T08:40:22.317724Z",
+            "elapsedRealtimeMs": 51859122,
+            "reason": null
+          },
+          {
+            "status": "completed",
+            "deviceUtc": "2026-10-15T08:40:22.363319Z",
+            "elapsedRealtimeMs": 51859167,
+            "reason": null
+          }
+        ]
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-03-after-cancel-journal.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.4.1",
+      "recordingProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "processStartedAtDeviceUtc": "2026-10-15T08:37:49.421229Z",
+      "snapshotAtDeviceUtc": "2026-10-15T08:40:43.667269Z",
+      "revision": 8792,
+      "attemptCount": 3,
+      "latest": {
+        "attemptId": "0cbc01df-d15f-4466-b13b-eefde4fad0d7",
+        "originProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+        "expectedLengthBytes": 67108864,
+        "expectedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+        "status": "cancelled",
+        "bytesWritten": 4849664,
+        "claimed": true,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": "user-cancelled",
+        "stopReason": null,
+        "stopOutcome": "cancelled",
+        "events": [
+          {
+            "status": "queued",
+            "deviceUtc": "2026-10-15T08:40:34.222731Z",
+            "elapsedRealtimeMs": 51871027,
+            "reason": null
+          },
+          {
+            "status": "running",
+            "deviceUtc": "2026-10-15T08:40:34.264147Z",
+            "elapsedRealtimeMs": 51871068,
+            "reason": null
+          },
+          {
+            "status": "cancel-requested",
+            "deviceUtc": "2026-10-15T08:40:43.657411Z",
+            "elapsedRealtimeMs": 51880462,
+            "reason": "user-cancelled"
+          },
+          {
+            "status": "cancelled",
+            "deviceUtc": "2026-10-15T08:40:43.667222Z",
+            "elapsedRealtimeMs": 51880471,
+            "reason": "user-cancelled"
+          }
+        ]
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-03-stable-journal.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.4.1",
+      "recordingProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "processStartedAtDeviceUtc": "2026-10-15T08:37:49.421229Z",
+      "snapshotAtDeviceUtc": "2026-10-15T08:40:43.667269Z",
+      "revision": 8792,
+      "attemptCount": 3,
+      "latest": {
+        "attemptId": "0cbc01df-d15f-4466-b13b-eefde4fad0d7",
+        "originProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+        "expectedLengthBytes": 67108864,
+        "expectedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+        "status": "cancelled",
+        "bytesWritten": 4849664,
+        "claimed": true,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": "user-cancelled",
+        "stopReason": null,
+        "stopOutcome": "cancelled",
+        "events": [
+          {
+            "status": "queued",
+            "deviceUtc": "2026-10-15T08:40:34.222731Z",
+            "elapsedRealtimeMs": 51871027,
+            "reason": null
+          },
+          {
+            "status": "running",
+            "deviceUtc": "2026-10-15T08:40:34.264147Z",
+            "elapsedRealtimeMs": 51871068,
+            "reason": null
+          },
+          {
+            "status": "cancel-requested",
+            "deviceUtc": "2026-10-15T08:40:43.657411Z",
+            "elapsedRealtimeMs": 51880462,
+            "reason": "user-cancelled"
+          },
+          {
+            "status": "cancelled",
+            "deviceUtc": "2026-10-15T08:40:43.667222Z",
+            "elapsedRealtimeMs": 51880471,
+            "reason": "user-cancelled"
+          }
+        ]
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-04-progress-journal.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.4.1",
+      "recordingProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "processStartedAtDeviceUtc": "2026-10-15T08:37:49.421229Z",
+      "snapshotAtDeviceUtc": "2026-10-15T08:41:27.562284Z",
+      "revision": 9986,
+      "attemptCount": 4,
+      "latest": {
+        "attemptId": "57d50a87-5970-4c10-a8f0-6933c0dd3e55",
+        "originProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+        "expectedLengthBytes": 67108864,
+        "expectedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+        "status": "running",
+        "bytesWritten": 9764864,
+        "claimed": true,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": null,
+        "stopReason": null,
+        "stopOutcome": null,
+        "events": [
+          {
+            "status": "queued",
+            "deviceUtc": "2026-10-15T08:41:08.672360Z",
+            "elapsedRealtimeMs": 51905477,
+            "reason": null
+          },
+          {
+            "status": "running",
+            "deviceUtc": "2026-10-15T08:41:08.705591Z",
+            "elapsedRealtimeMs": 51905510,
+            "reason": null
+          }
+        ]
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-04-cancelled-journal.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.4.1",
+      "recordingProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "processStartedAtDeviceUtc": "2026-10-15T08:37:49.421229Z",
+      "snapshotAtDeviceUtc": "2026-10-15T08:42:09.954111Z",
+      "revision": 12700,
+      "attemptCount": 4,
+      "latest": {
+        "attemptId": "57d50a87-5970-4c10-a8f0-6933c0dd3e55",
+        "originProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+        "expectedLengthBytes": 67108864,
+        "expectedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+        "status": "cancelled",
+        "bytesWritten": 31981568,
+        "claimed": true,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": "user-cancelled",
+        "stopReason": null,
+        "stopOutcome": "cancelled",
+        "events": [
+          {
+            "status": "queued",
+            "deviceUtc": "2026-10-15T08:41:08.672360Z",
+            "elapsedRealtimeMs": 51905477,
+            "reason": null
+          },
+          {
+            "status": "running",
+            "deviceUtc": "2026-10-15T08:41:08.705591Z",
+            "elapsedRealtimeMs": 51905510,
+            "reason": null
+          },
+          {
+            "status": "cancel-requested",
+            "deviceUtc": "2026-10-15T08:42:09.939232Z",
+            "elapsedRealtimeMs": 51966743,
+            "reason": "user-cancelled"
+          },
+          {
+            "status": "cancelled",
+            "deviceUtc": "2026-10-15T08:42:09.953999Z",
+            "elapsedRealtimeMs": 51966758,
+            "reason": "user-cancelled"
+          }
+        ]
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-04-stable-journal.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.4.1",
+      "recordingProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "processStartedAtDeviceUtc": "2026-10-15T08:37:49.421229Z",
+      "snapshotAtDeviceUtc": "2026-10-15T08:42:09.954111Z",
+      "revision": 12700,
+      "attemptCount": 4,
+      "latest": {
+        "attemptId": "57d50a87-5970-4c10-a8f0-6933c0dd3e55",
+        "originProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+        "expectedLengthBytes": 67108864,
+        "expectedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+        "status": "cancelled",
+        "bytesWritten": 31981568,
+        "claimed": true,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": "user-cancelled",
+        "stopReason": null,
+        "stopOutcome": "cancelled",
+        "events": [
+          {
+            "status": "queued",
+            "deviceUtc": "2026-10-15T08:41:08.672360Z",
+            "elapsedRealtimeMs": 51905477,
+            "reason": null
+          },
+          {
+            "status": "running",
+            "deviceUtc": "2026-10-15T08:41:08.705591Z",
+            "elapsedRealtimeMs": 51905510,
+            "reason": null
+          },
+          {
+            "status": "cancel-requested",
+            "deviceUtc": "2026-10-15T08:42:09.939232Z",
+            "elapsedRealtimeMs": 51966743,
+            "reason": "user-cancelled"
+          },
+          {
+            "status": "cancelled",
+            "deviceUtc": "2026-10-15T08:42:09.953999Z",
+            "elapsedRealtimeMs": 51966758,
+            "reason": "user-cancelled"
+          }
+        ]
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-05-result-journal.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.4.1",
+      "recordingProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "processStartedAtDeviceUtc": "2026-10-15T08:37:49.421229Z",
+      "snapshotAtDeviceUtc": "2026-10-15T08:43:26.553874Z",
+      "revision": 12703,
+      "attemptCount": 5,
+      "latest": {
+        "attemptId": "9d8367c3-70b7-41e0-b490-360e2ad80eb8",
+        "originProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+        "expectedLengthBytes": 67108864,
+        "expectedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+        "status": "failed",
+        "bytesWritten": 0,
+        "claimed": true,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": "SSLHandshakeException",
+        "stopReason": null,
+        "stopOutcome": null,
+        "events": [
+          {
+            "status": "queued",
+            "deviceUtc": "2026-10-15T08:43:26.488935Z",
+            "elapsedRealtimeMs": 52043293,
+            "reason": null
+          },
+          {
+            "status": "running",
+            "deviceUtc": "2026-10-15T08:43:26.513976Z",
+            "elapsedRealtimeMs": 52043318,
+            "reason": null
+          },
+          {
+            "status": "failed",
+            "deviceUtc": "2026-10-15T08:43:26.553664Z",
+            "elapsedRealtimeMs": 52043358,
+            "reason": "SSLHandshakeException"
+          }
+        ]
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-06-before-host-stop-journal.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.4.1",
+      "recordingProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "processStartedAtDeviceUtc": "2026-10-15T08:37:49.421229Z",
+      "snapshotAtDeviceUtc": "2026-10-15T08:44:02.646496Z",
+      "revision": 13185,
+      "attemptCount": 6,
+      "latest": {
+        "attemptId": "5aebc288-b4f8-4b56-b564-e6b608c49832",
+        "originProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+        "expectedLengthBytes": 67108864,
+        "expectedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+        "status": "running",
+        "bytesWritten": 3932160,
+        "claimed": true,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": null,
+        "stopReason": null,
+        "stopOutcome": null,
+        "events": [
+          {
+            "status": "queued",
+            "deviceUtc": "2026-10-15T08:43:55.034426Z",
+            "elapsedRealtimeMs": 52071839,
+            "reason": null
+          },
+          {
+            "status": "running",
+            "deviceUtc": "2026-10-15T08:43:55.065848Z",
+            "elapsedRealtimeMs": 52071870,
+            "reason": null
+          }
+        ]
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-06-after-host-stop-journal.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.4.1",
+      "recordingProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "processStartedAtDeviceUtc": "2026-10-15T08:37:49.421229Z",
+      "snapshotAtDeviceUtc": "2026-10-15T08:44:03.055554Z",
+      "revision": 13210,
+      "attemptCount": 6,
+      "latest": {
+        "attemptId": "5aebc288-b4f8-4b56-b564-e6b608c49832",
+        "originProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+        "expectedLengthBytes": 67108864,
+        "expectedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+        "status": "failed",
+        "bytesWritten": 4128768,
+        "claimed": true,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": "ProtocolException",
+        "stopReason": null,
+        "stopOutcome": null,
+        "events": [
+          {
+            "status": "queued",
+            "deviceUtc": "2026-10-15T08:43:55.034426Z",
+            "elapsedRealtimeMs": 52071839,
+            "reason": null
+          },
+          {
+            "status": "running",
+            "deviceUtc": "2026-10-15T08:43:55.065848Z",
+            "elapsedRealtimeMs": 52071870,
+            "reason": null
+          },
+          {
+            "status": "failed",
+            "deviceUtc": "2026-10-15T08:44:03.055192Z",
+            "elapsedRealtimeMs": 52079859,
+            "reason": "ProtocolException"
+          }
+        ]
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-06-restored-server-no-retry-journal.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.4.1",
+      "recordingProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "processStartedAtDeviceUtc": "2026-10-15T08:37:49.421229Z",
+      "snapshotAtDeviceUtc": "2026-10-15T08:44:03.055554Z",
+      "revision": 13210,
+      "attemptCount": 6,
+      "latest": {
+        "attemptId": "5aebc288-b4f8-4b56-b564-e6b608c49832",
+        "originProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+        "expectedLengthBytes": 67108864,
+        "expectedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+        "status": "failed",
+        "bytesWritten": 4128768,
+        "claimed": true,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": "ProtocolException",
+        "stopReason": null,
+        "stopOutcome": null,
+        "events": [
+          {
+            "status": "queued",
+            "deviceUtc": "2026-10-15T08:43:55.034426Z",
+            "elapsedRealtimeMs": 52071839,
+            "reason": null
+          },
+          {
+            "status": "running",
+            "deviceUtc": "2026-10-15T08:43:55.065848Z",
+            "elapsedRealtimeMs": 52071870,
+            "reason": null
+          },
+          {
+            "status": "failed",
+            "deviceUtc": "2026-10-15T08:44:03.055192Z",
+            "elapsedRealtimeMs": 52079859,
+            "reason": "ProtocolException"
+          }
+        ]
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-07-final-journal.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.4.1",
+      "recordingProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "processStartedAtDeviceUtc": "2026-10-15T08:37:49.421229Z",
+      "snapshotAtDeviceUtc": "2026-10-15T08:47:26.844262Z",
+      "revision": 21406,
+      "attemptCount": 7,
+      "latest": {
+        "attemptId": "4e27bdbc-535b-49bf-82f4-782e4a78e1b0",
+        "originProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+        "expectedLengthBytes": 67108864,
+        "expectedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+        "status": "completed",
+        "bytesWritten": 67108864,
+        "claimed": true,
+        "verifiedLengthBytes": 67108864,
+        "verifiedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+        "reason": null,
+        "stopReason": null,
+        "stopOutcome": null,
+        "events": [
+          {
+            "status": "queued",
+            "deviceUtc": "2026-10-15T08:45:18.640862Z",
+            "elapsedRealtimeMs": 52155445,
+            "reason": null
+          },
+          {
+            "status": "running",
+            "deviceUtc": "2026-10-15T08:45:18.678852Z",
+            "elapsedRealtimeMs": 52155483,
+            "reason": null
+          },
+          {
+            "status": "verifying",
+            "deviceUtc": "2026-10-15T08:47:26.797747Z",
+            "elapsedRealtimeMs": 52283602,
+            "reason": null
+          },
+          {
+            "status": "completed",
+            "deviceUtc": "2026-10-15T08:47:26.842283Z",
+            "elapsedRealtimeMs": 52283646,
+            "reason": null
+          }
+        ]
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-08-before-loss-journal.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.4.1",
+      "recordingProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "processStartedAtDeviceUtc": "2026-10-15T08:37:49.421229Z",
+      "snapshotAtDeviceUtc": "2026-10-15T08:48:04.645934Z",
+      "revision": 22008,
+      "attemptCount": 8,
+      "latest": {
+        "attemptId": "8404f03d-fbb9-4674-9fcd-460473859c2e",
+        "originProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+        "expectedLengthBytes": 67108864,
+        "expectedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+        "status": "running",
+        "bytesWritten": 4915200,
+        "claimed": true,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": null,
+        "stopReason": null,
+        "stopOutcome": null,
+        "events": [
+          {
+            "status": "queued",
+            "deviceUtc": "2026-10-15T08:47:55.120566Z",
+            "elapsedRealtimeMs": 52311925,
+            "reason": null
+          },
+          {
+            "status": "running",
+            "deviceUtc": "2026-10-15T08:47:55.157797Z",
+            "elapsedRealtimeMs": 52311962,
+            "reason": null
+          }
+        ]
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-08-after-loss-journal.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.4.1",
+      "recordingProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "processStartedAtDeviceUtc": "2026-10-15T08:37:49.421229Z",
+      "snapshotAtDeviceUtc": "2026-10-15T08:48:04.645934Z",
+      "revision": 22008,
+      "attemptCount": 8,
+      "latest": {
+        "attemptId": "8404f03d-fbb9-4674-9fcd-460473859c2e",
+        "originProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+        "expectedLengthBytes": 67108864,
+        "expectedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+        "status": "running",
+        "bytesWritten": 4915200,
+        "claimed": true,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": null,
+        "stopReason": null,
+        "stopOutcome": null,
+        "events": [
+          {
+            "status": "queued",
+            "deviceUtc": "2026-10-15T08:47:55.120566Z",
+            "elapsedRealtimeMs": 52311925,
+            "reason": null
+          },
+          {
+            "status": "running",
+            "deviceUtc": "2026-10-15T08:47:55.157797Z",
+            "elapsedRealtimeMs": 52311962,
+            "reason": null
+          }
+        ]
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-08-recovered-journal.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.4.1",
+      "recordingProcessInstanceId": "8dc3c9fc-386f-4063-b4e9-ab2b8d91e106",
+      "processStartedAtDeviceUtc": "2026-10-15T08:48:20.755823Z",
+      "snapshotAtDeviceUtc": "2026-10-15T08:48:20.875884Z",
+      "revision": 3,
+      "attemptCount": 8,
+      "latest": {
+        "attemptId": "8404f03d-fbb9-4674-9fcd-460473859c2e",
+        "originProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+        "expectedLengthBytes": 67108864,
+        "expectedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+        "status": "interrupted",
+        "bytesWritten": 4915200,
+        "claimed": true,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": "new-process-unfinished-attempt",
+        "stopReason": null,
+        "stopOutcome": null,
+        "events": [
+          {
+            "status": "queued",
+            "deviceUtc": "2026-10-15T08:47:55.120566Z",
+            "elapsedRealtimeMs": 52311925,
+            "reason": null
+          },
+          {
+            "status": "running",
+            "deviceUtc": "2026-10-15T08:47:55.157797Z",
+            "elapsedRealtimeMs": 52311962,
+            "reason": null
+          },
+          {
+            "status": "interrupted",
+            "deviceUtc": "2026-10-15T08:48:20.773212Z",
+            "elapsedRealtimeMs": 52337577,
+            "reason": "new-process-unfinished-attempt"
+          }
+        ]
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-08-recovered-stable-journal.json",
+      "schemaVersion": 1,
+      "probeVersion": "0.4.1",
+      "recordingProcessInstanceId": "8dc3c9fc-386f-4063-b4e9-ab2b8d91e106",
+      "processStartedAtDeviceUtc": "2026-10-15T08:48:20.755823Z",
+      "snapshotAtDeviceUtc": "2026-10-15T08:48:20.875884Z",
+      "revision": 3,
+      "attemptCount": 8,
+      "latest": {
+        "attemptId": "8404f03d-fbb9-4674-9fcd-460473859c2e",
+        "originProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+        "expectedLengthBytes": 67108864,
+        "expectedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+        "status": "interrupted",
+        "bytesWritten": 4915200,
+        "claimed": true,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": "new-process-unfinished-attempt",
+        "stopReason": null,
+        "stopOutcome": null,
+        "events": [
+          {
+            "status": "queued",
+            "deviceUtc": "2026-10-15T08:47:55.120566Z",
+            "elapsedRealtimeMs": 52311925,
+            "reason": null
+          },
+          {
+            "status": "running",
+            "deviceUtc": "2026-10-15T08:47:55.157797Z",
+            "elapsedRealtimeMs": 52311962,
+            "reason": null
+          },
+          {
+            "status": "interrupted",
+            "deviceUtc": "2026-10-15T08:48:20.773212Z",
+            "elapsedRealtimeMs": 52337577,
+            "reason": "new-process-unfinished-attempt"
+          }
+        ]
+      }
+    }
+  ],
+  "hostObservations": [
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-02-completion-observation.json",
+      "observedAtUtc": "2026-10-15T08:40:25.368569+00:00",
+      "recordingProcess": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "revision": 8196,
+      "attemptCount": 2,
+      "latest": {
+        "attemptId": "2b601e48-de60-4d7d-9e0c-f38d7dc85111",
+        "status": "completed",
+        "bytesWritten": 67108864,
+        "claimed": true,
+        "reason": null,
+        "verifiedLengthBytes": 67108864,
+        "verifiedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f"
+      },
+      "independentFile": {
+        "bytes": 67108864,
+        "sha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+        "matchesExpected": true
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-03-after-cancel-observation.json",
+      "observedAtUtc": "2026-10-15T08:40:44.523288+00:00",
+      "recordingProcess": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "revision": 8792,
+      "attemptCount": 3,
+      "latest": {
+        "attemptId": "0cbc01df-d15f-4466-b13b-eefde4fad0d7",
+        "status": "cancelled",
+        "bytesWritten": 4849664,
+        "claimed": true,
+        "reason": "user-cancelled",
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null
+      },
+      "independentFile": {
+        "bytes": 4849664,
+        "sha256": "d369753ba1c6350c583d2d990232d05789e7250f33909f1a11f299fc4978709d",
+        "matchesExpected": false
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-03-stable-observation.json",
+      "observedAtUtc": "2026-10-15T08:41:08.183779+00:00",
+      "recordingProcess": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "revision": 8792,
+      "attemptCount": 3,
+      "latest": {
+        "attemptId": "0cbc01df-d15f-4466-b13b-eefde4fad0d7",
+        "status": "cancelled",
+        "bytesWritten": 4849664,
+        "claimed": true,
+        "reason": "user-cancelled",
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null
+      },
+      "independentFile": {
+        "bytes": 4849664,
+        "sha256": "d369753ba1c6350c583d2d990232d05789e7250f33909f1a11f299fc4978709d",
+        "matchesExpected": false
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-04-cancelled-observation.json",
+      "observedAtUtc": "2026-10-15T08:42:10.790041+00:00",
+      "recordingProcess": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "revision": 12700,
+      "attemptCount": 4,
+      "latest": {
+        "attemptId": "57d50a87-5970-4c10-a8f0-6933c0dd3e55",
+        "status": "cancelled",
+        "bytesWritten": 31981568,
+        "claimed": true,
+        "reason": "user-cancelled",
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null
+      },
+      "independentFile": {
+        "bytes": 31981568,
+        "sha256": "b800edac9b0e8cdc93d13f3b436a1d80e01a399da10c568fd556f4a2271047e9",
+        "matchesExpected": false
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-04-stable-observation.json",
+      "observedAtUtc": "2026-10-15T08:43:22.817276+00:00",
+      "recordingProcess": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "revision": 12700,
+      "attemptCount": 4,
+      "latest": {
+        "attemptId": "57d50a87-5970-4c10-a8f0-6933c0dd3e55",
+        "status": "cancelled",
+        "bytesWritten": 31981568,
+        "claimed": true,
+        "reason": "user-cancelled",
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null
+      },
+      "independentFile": {
+        "bytes": 31981568,
+        "sha256": "b800edac9b0e8cdc93d13f3b436a1d80e01a399da10c568fd556f4a2271047e9",
+        "matchesExpected": false
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-05-result-observation.json",
+      "observedAtUtc": "2026-10-15T08:43:31.674774+00:00",
+      "recordingProcess": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "revision": 12703,
+      "attemptCount": 5,
+      "latest": {
+        "attemptId": "9d8367c3-70b7-41e0-b490-360e2ad80eb8",
+        "status": "failed",
+        "bytesWritten": 0,
+        "claimed": true,
+        "reason": "SSLHandshakeException",
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-06-after-host-stop-observation.json",
+      "observedAtUtc": "2026-10-15T08:44:13.857733+00:00",
+      "recordingProcess": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "revision": 13210,
+      "attemptCount": 6,
+      "latest": {
+        "attemptId": "5aebc288-b4f8-4b56-b564-e6b608c49832",
+        "status": "failed",
+        "bytesWritten": 4128768,
+        "claimed": true,
+        "reason": "ProtocolException",
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null
+      },
+      "independentFile": {
+        "bytes": 4128768,
+        "sha256": "91664bf35bdfb03fa0fb8881389c5b801047d45b37ca174b56dc6656d901177a",
+        "matchesExpected": false
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-06-no-retry-observation.json",
+      "observedAtUtc": "2026-10-15T08:44:58.874287+00:00",
+      "recordingProcess": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "revision": 13210,
+      "attemptCount": 6,
+      "latest": {
+        "attemptId": "5aebc288-b4f8-4b56-b564-e6b608c49832",
+        "status": "failed",
+        "bytesWritten": 4128768,
+        "claimed": true,
+        "reason": "ProtocolException",
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null
+      },
+      "independentFile": {
+        "bytes": 4128768,
+        "sha256": "91664bf35bdfb03fa0fb8881389c5b801047d45b37ca174b56dc6656d901177a",
+        "matchesExpected": false
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-06-restored-server-no-retry-observation.json",
+      "observedAtUtc": "2026-10-15T08:45:18.331575+00:00",
+      "recordingProcess": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "revision": 13210,
+      "attemptCount": 6,
+      "latest": {
+        "attemptId": "5aebc288-b4f8-4b56-b564-e6b608c49832",
+        "status": "failed",
+        "bytesWritten": 4128768,
+        "claimed": true,
+        "reason": "ProtocolException",
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-07-final-observation.json",
+      "observedAtUtc": "2026-10-15T08:47:45.508599+00:00",
+      "recordingProcess": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "revision": 21406,
+      "attemptCount": 7,
+      "latest": {
+        "attemptId": "4e27bdbc-535b-49bf-82f4-782e4a78e1b0",
+        "status": "completed",
+        "bytesWritten": 67108864,
+        "claimed": true,
+        "reason": null,
+        "verifiedLengthBytes": 67108864,
+        "verifiedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f"
+      },
+      "independentFile": {
+        "bytes": 67108864,
+        "sha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+        "matchesExpected": true
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-08-before-loss-observation.json",
+      "observedAtUtc": "2026-10-15T08:48:05.530935+00:00",
+      "recordingProcess": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "revision": 22008,
+      "attemptCount": 8,
+      "latest": {
+        "attemptId": "8404f03d-fbb9-4674-9fcd-460473859c2e",
+        "status": "running",
+        "bytesWritten": 4915200,
+        "claimed": true,
+        "reason": null,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null
+      },
+      "independentFile": {
+        "bytes": 5046272,
+        "sha256": "2cc4ffaddea947b92e800b054b434119f3ddf4f2e7d6466fec57b4d0cc87e1f4",
+        "matchesExpected": false
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-08-after-loss-observation.json",
+      "observedAtUtc": "2026-10-15T08:48:08.845275+00:00",
+      "recordingProcess": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "revision": 22008,
+      "attemptCount": 8,
+      "latest": {
+        "attemptId": "8404f03d-fbb9-4674-9fcd-460473859c2e",
+        "status": "running",
+        "bytesWritten": 4915200,
+        "claimed": true,
+        "reason": null,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null
+      },
+      "independentFile": {
+        "bytes": 5177344,
+        "sha256": "e8cdd3a7b9868d4cbded3d7cd571b5e965f94b3ab2fd489e92a30605f038b549",
+        "matchesExpected": false
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-08-recovered-observation.json",
+      "observedAtUtc": "2026-10-15T08:48:22.709141+00:00",
+      "recordingProcess": "8dc3c9fc-386f-4063-b4e9-ab2b8d91e106",
+      "revision": 3,
+      "attemptCount": 8,
+      "latest": {
+        "attemptId": "8404f03d-fbb9-4674-9fcd-460473859c2e",
+        "status": "interrupted",
+        "bytesWritten": 4915200,
+        "claimed": true,
+        "reason": "new-process-unfinished-attempt",
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null
+      },
+      "independentFile": {
+        "bytes": 5177344,
+        "sha256": "e8cdd3a7b9868d4cbded3d7cd571b5e965f94b3ab2fd489e92a30605f038b549",
+        "matchesExpected": false
+      }
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-08-recovered-stable-observation.json",
+      "observedAtUtc": "2026-10-15T08:49:27.290356+00:00",
+      "recordingProcess": "8dc3c9fc-386f-4063-b4e9-ab2b8d91e106",
+      "revision": 3,
+      "attemptCount": 8,
+      "latest": {
+        "attemptId": "8404f03d-fbb9-4674-9fcd-460473859c2e",
+        "status": "interrupted",
+        "bytesWritten": 4915200,
+        "claimed": true,
+        "reason": "new-process-unfinished-attempt",
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null
+      },
+      "independentFile": {
+        "bytes": 5177344,
+        "sha256": "e8cdd3a7b9868d4cbded3d7cd571b5e965f94b3ab2fd489e92a30605f038b549",
+        "matchesExpected": false
+      }
+    }
+  ],
+  "uiObservations": [
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-02-recreate-layout.json",
+      "transferWindowPresent": true,
+      "activityInstanceId": "75f124d0-8cb3-4140-a70f-7aa4e01ee67d",
+      "taskId": 1000153,
+      "localNetworkAccessGranted": true,
+      "notificationPermissionGranted": false,
+      "packageNotificationsEnabled": false,
+      "recordingProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "revision": 3162,
+      "savedRevision": 3162,
+      "retainedAttemptCount": 2,
+      "bytesWritten": 25886720,
+      "attemptId": "2b601e48-de60-4d7d-9e0c-f38d7dc85111",
+      "phase": "running"
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-02-after-recreate-layout.json",
+      "transferWindowPresent": true,
+      "activityInstanceId": "a7ec48e7-11f6-40da-b55f-67fe7fd4378c",
+      "taskId": 1000153,
+      "localNetworkAccessGranted": true,
+      "notificationPermissionGranted": false,
+      "packageNotificationsEnabled": false,
+      "recordingProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "revision": 3186,
+      "savedRevision": 3162,
+      "retainedAttemptCount": 2,
+      "bytesWritten": 26083328,
+      "attemptId": "2b601e48-de60-4d7d-9e0c-f38d7dc85111",
+      "phase": "running"
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-02-minimized-layout.json",
+      "transferWindowPresent": false
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-02-restored-layout.json",
+      "transferWindowPresent": true,
+      "activityInstanceId": "a7ec48e7-11f6-40da-b55f-67fe7fd4378c",
+      "taskId": 1000153,
+      "localNetworkAccessGranted": true,
+      "notificationPermissionGranted": false,
+      "packageNotificationsEnabled": false,
+      "recordingProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "revision": 4834,
+      "savedRevision": 4810,
+      "retainedAttemptCount": 2,
+      "bytesWritten": 39583744,
+      "attemptId": "2b601e48-de60-4d7d-9e0c-f38d7dc85111",
+      "phase": "running"
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-03-cancel-layout.json",
+      "transferWindowPresent": true,
+      "activityInstanceId": "a7ec48e7-11f6-40da-b55f-67fe7fd4378c",
+      "taskId": 1000153,
+      "localNetworkAccessGranted": true,
+      "notificationPermissionGranted": false,
+      "packageNotificationsEnabled": false,
+      "recordingProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "revision": 8742,
+      "savedRevision": 8734,
+      "retainedAttemptCount": 3,
+      "bytesWritten": 4456448,
+      "attemptId": "0cbc01df-d15f-4466-b13b-eefde4fad0d7",
+      "phase": "running"
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-04-start-layout.json",
+      "transferWindowPresent": true,
+      "activityInstanceId": "a7ec48e7-11f6-40da-b55f-67fe7fd4378c",
+      "taskId": 1000153,
+      "localNetworkAccessGranted": true,
+      "notificationPermissionGranted": true,
+      "packageNotificationsEnabled": true,
+      "recordingProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "revision": 8792,
+      "savedRevision": 8792,
+      "retainedAttemptCount": 3,
+      "bytesWritten": 4849664,
+      "attemptId": "0cbc01df-d15f-4466-b13b-eefde4fad0d7",
+      "phase": "cancelled"
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-07-explicit-retry-layout.json",
+      "transferWindowPresent": true,
+      "activityInstanceId": "a7ec48e7-11f6-40da-b55f-67fe7fd4378c",
+      "taskId": 1000153,
+      "localNetworkAccessGranted": true,
+      "notificationPermissionGranted": true,
+      "packageNotificationsEnabled": true,
+      "recordingProcessInstanceId": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+      "revision": 13210,
+      "savedRevision": 13210,
+      "retainedAttemptCount": 6,
+      "bytesWritten": 4128768,
+      "attemptId": "5aebc288-b4f8-4b56-b564-e6b608c49832",
+      "phase": "failed"
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-08-recovered-visible-layout.json",
+      "transferWindowPresent": true,
+      "activityInstanceId": "4b3bbc89-06ac-4c24-88bf-6b53bfdb39b2",
+      "taskId": 1000153,
+      "localNetworkAccessGranted": true,
+      "notificationPermissionGranted": true,
+      "packageNotificationsEnabled": true,
+      "recordingProcessInstanceId": "8dc3c9fc-386f-4063-b4e9-ab2b8d91e106",
+      "revision": 3,
+      "savedRevision": 3,
+      "retainedAttemptCount": 8,
+      "bytesWritten": 4915200,
+      "attemptId": "8404f03d-fbb9-4674-9fcd-460473859c2e",
+      "phase": "interrupted"
+    }
+  ],
+  "actions": [
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/transfer-041-install-command.json",
+      "action": "Install audited APK",
+      "at": "2026-10-15T08:37:47.789765+00:00",
+      "exitCode": 0
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/transfer-041-launch-command.json",
+      "action": "Launch diagnostic",
+      "at": "2026-10-15T08:37:47.831927+00:00",
+      "exitCode": 0
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-02-start-tap-command.json",
+      "action": "Explicit Download",
+      "at": "2026-10-15T08:38:14.756894+00:00",
+      "exitCode": 0,
+      "injectedTap": [
+        1440,
+        473
+      ],
+      "control": "Download test fixture",
+      "controlBounds": "[19,434][2861,512]",
+      "tapWithinInspectedBounds": true,
+      "layoutPrivateArtifact": "qualification/results/private/transfer-probe/attempt-02-start-layout.json"
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-02-recreate-tap-command.json",
+      "action": "Recreate running transfer window",
+      "at": "2026-10-15T08:39:04.878588+00:00",
+      "exitCode": 0,
+      "injectedTap": [
+        1440,
+        629
+      ],
+      "control": "Recreate transfer window",
+      "controlBounds": "[19,590][2861,668]",
+      "tapWithinInspectedBounds": true,
+      "layoutPrivateArtifact": "qualification/results/private/transfer-probe/attempt-02-recreate-layout.json"
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-02-minimize-tap-command.json",
+      "action": "Native caption minimize",
+      "at": "2026-10-15T08:39:07.008035+00:00",
+      "exitCode": 0,
+      "injectedTap": [
+        2651,
+        91
+      ],
+      "control": "com.android.systemui:id/minimize_window",
+      "controlBounds": "[2625,65][2677,117]",
+      "tapWithinInspectedBounds": true,
+      "layoutPrivateArtifact": "qualification/results/private/transfer-probe/attempt-02-minimize-layout.json"
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-02-restore-input-command.json",
+      "action": "Return existing task",
+      "at": "2026-10-15T08:39:30.578617+00:00",
+      "exitCode": 0,
+      "injectedTap": [
+        2382,
+        1754
+      ]
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-03-cancel-tap-command.json",
+      "action": "Cancel active transfer from window",
+      "at": "2026-10-15T08:40:44.458572+00:00",
+      "exitCode": 0,
+      "injectedTap": [
+        1440,
+        551
+      ],
+      "control": "Cancel transfer",
+      "controlBounds": "[19,512][2861,590]",
+      "tapWithinInspectedBounds": true,
+      "layoutPrivateArtifact": "qualification/results/private/transfer-probe/attempt-03-cancel-layout.json"
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-04-minimize-tap-command.json",
+      "action": "Native caption minimize",
+      "at": "2026-10-15T08:41:10.558719+00:00",
+      "exitCode": 0,
+      "injectedTap": [
+        2651,
+        91
+      ],
+      "control": "com.android.systemui:id/minimize_window",
+      "controlBounds": "[2625,65][2677,117]",
+      "tapWithinInspectedBounds": true,
+      "layoutPrivateArtifact": "qualification/results/private/transfer-probe/attempt-04-minimize-layout.json"
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-04-notification-cancel-input-command.json",
+      "action": "Cancel active transfer from actual expanded Cloudy notification",
+      "at": "2026-10-15T08:42:10.730587+00:00",
+      "exitCode": 0,
+      "injectedTap": [
+        2462,
+        888
+      ],
+      "control": "Cancel transfer",
+      "controlBounds": "[2354,849][2571,927]",
+      "tapWithinInspectedBounds": true,
+      "layoutPrivateArtifact": "qualification/results/private/transfer-probe/attempt-04-expanded-layout.json"
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-07-explicit-retry-tap-command.json",
+      "action": "Explicit new Download after failed attempt and restored server",
+      "at": "2026-10-15T08:45:19.427372+00:00",
+      "exitCode": 0,
+      "injectedTap": [
+        1440,
+        473
+      ],
+      "control": "Download test fixture",
+      "controlBounds": "[19,434][2861,512]",
+      "tapWithinInspectedBounds": true,
+      "layoutPrivateArtifact": "qualification/results/private/transfer-probe/attempt-07-explicit-retry-layout.json"
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-08-start-tap-command.json",
+      "action": "Explicit Download before injected process loss",
+      "at": "2026-10-15T08:47:55.903404+00:00",
+      "exitCode": 0,
+      "injectedTap": [
+        1440,
+        473
+      ],
+      "control": "Download test fixture",
+      "controlBounds": "[19,434][2861,512]",
+      "tapWithinInspectedBounds": true,
+      "layoutPrivateArtifact": "qualification/results/private/transfer-probe/attempt-08-start-layout.json"
+    },
+    {
+      "privateArtifact": "qualification/results/private/transfer-probe/attempt-08-minimize-tap-command.json",
+      "action": "Native caption minimize before injected process loss",
+      "at": "2026-10-15T08:47:56.981497+00:00",
+      "exitCode": 0,
+      "injectedTap": [
+        2651,
+        91
+      ],
+      "control": "com.android.systemui:id/minimize_window",
+      "controlBounds": "[2625,65][2677,117]",
+      "tapWithinInspectedBounds": true,
+      "layoutPrivateArtifact": "qualification/results/private/transfer-probe/attempt-08-minimize-layout.json"
+    }
+  ],
+  "notificationCancellation": {
+    "title": "Cloudy test transfer",
+    "body": "Downloading a generated qualification fixture",
+    "cancelAction": {
+      "text": "Cancel transfer",
+      "resource-id": "android:id/action0",
+      "bounds": "[2354,849][2571,927]"
+    },
+    "cloudyRowPresentAfterCancel": false,
+    "otherNotificationsPublished": false
+  },
+  "exportedPayloads": [
+    {
+      "path": "qualification/results/private/transfer-probe/attempt-02-completion-payload.bin",
+      "bytes": 67108864,
+      "sha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f"
+    },
+    {
+      "path": "qualification/results/private/transfer-probe/attempt-03-after-cancel-payload.bin",
+      "bytes": 4849664,
+      "sha256": "d369753ba1c6350c583d2d990232d05789e7250f33909f1a11f299fc4978709d"
+    },
+    {
+      "path": "qualification/results/private/transfer-probe/attempt-03-stable-payload.bin",
+      "bytes": 4849664,
+      "sha256": "d369753ba1c6350c583d2d990232d05789e7250f33909f1a11f299fc4978709d"
+    },
+    {
+      "path": "qualification/results/private/transfer-probe/attempt-04-cancelled-payload.bin",
+      "bytes": 31981568,
+      "sha256": "b800edac9b0e8cdc93d13f3b436a1d80e01a399da10c568fd556f4a2271047e9"
+    },
+    {
+      "path": "qualification/results/private/transfer-probe/attempt-04-stable-payload.bin",
+      "bytes": 31981568,
+      "sha256": "b800edac9b0e8cdc93d13f3b436a1d80e01a399da10c568fd556f4a2271047e9"
+    },
+    {
+      "path": "qualification/results/private/transfer-probe/attempt-06-after-host-stop-payload.bin",
+      "bytes": 4128768,
+      "sha256": "91664bf35bdfb03fa0fb8881389c5b801047d45b37ca174b56dc6656d901177a"
+    },
+    {
+      "path": "qualification/results/private/transfer-probe/attempt-06-no-retry-payload.bin",
+      "bytes": 4128768,
+      "sha256": "91664bf35bdfb03fa0fb8881389c5b801047d45b37ca174b56dc6656d901177a"
+    },
+    {
+      "path": "qualification/results/private/transfer-probe/attempt-07-final-payload.bin",
+      "bytes": 67108864,
+      "sha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f"
+    },
+    {
+      "path": "qualification/results/private/transfer-probe/attempt-08-before-loss-payload.bin",
+      "bytes": 5046272,
+      "sha256": "2cc4ffaddea947b92e800b054b434119f3ddf4f2e7d6466fec57b4d0cc87e1f4"
+    },
+    {
+      "path": "qualification/results/private/transfer-probe/attempt-08-after-loss-payload.bin",
+      "bytes": 5177344,
+      "sha256": "e8cdd3a7b9868d4cbded3d7cd571b5e965f94b3ab2fd489e92a30605f038b549"
+    },
+    {
+      "path": "qualification/results/private/transfer-probe/attempt-08-recovered-payload.bin",
+      "bytes": 5177344,
+      "sha256": "e8cdd3a7b9868d4cbded3d7cd571b5e965f94b3ab2fd489e92a30605f038b549"
+    },
+    {
+      "path": "qualification/results/private/transfer-probe/attempt-08-recovered-stable-payload.bin",
+      "bytes": 5177344,
+      "sha256": "e8cdd3a7b9868d4cbded3d7cd571b5e965f94b3ab2fd489e92a30605f038b549"
+    }
+  ],
+  "trustNegative": {
+    "observedAtUtc": "2026-10-15T08:43:53.600075+00:00",
+    "changedConfigFields": [
+      "caCertificatePem"
+    ],
+    "payloadFileExists": false,
+    "payloadExistenceExitCode": 1,
+    "wrongCAIsDistinct": true
+  },
+  "fixtureServers": [
+    {
+      "instance": "server-02",
+      "events": [
+        {
+          "event": "request_started",
+          "requestId": "f764ae1fad0aefca8d2a925f29930a08",
+          "atUtc": "2026-10-15T08:38:15.046Z",
+          "expectedLengthBytes": 67108864
+        },
+        {
+          "event": "stream_written",
+          "requestId": "f764ae1fad0aefca8d2a925f29930a08",
+          "atUtc": "2026-10-15T08:40:23.046Z",
+          "bytesWritten": 67108864
+        },
+        {
+          "event": "request_started",
+          "requestId": "8301c9b9489e505bee679acf92614349",
+          "atUtc": "2026-10-15T08:40:35.155Z",
+          "expectedLengthBytes": 67108864
+        },
+        {
+          "event": "connection_interrupted",
+          "requestId": "8301c9b9489e505bee679acf92614349",
+          "atUtc": "2026-10-15T08:40:44.655Z",
+          "bytesWritten": 4915200
+        },
+        {
+          "event": "request_started",
+          "requestId": "e9e84f756e0023498582bedd679c415e",
+          "atUtc": "2026-10-15T08:41:09.721Z",
+          "expectedLengthBytes": 67108864
+        },
+        {
+          "event": "connection_interrupted",
+          "requestId": "e9e84f756e0023498582bedd679c415e",
+          "atUtc": "2026-10-15T08:42:10.972Z",
+          "bytesWritten": 32047104
+        },
+        {
+          "event": "connection_error",
+          "atUtc": "2026-10-15T08:43:27.360Z",
+          "error": "SSLError"
+        },
+        {
+          "event": "request_started",
+          "requestId": "f0eba5dee617a46f37e8ce90af87945a",
+          "atUtc": "2026-10-15T08:43:55.923Z",
+          "expectedLengthBytes": 67108864
+        },
+        {
+          "event": "interrupted",
+          "requestId": "f0eba5dee617a46f37e8ce90af87945a",
+          "atUtc": "2026-10-15T08:44:03.839Z",
+          "bytesWritten": 4128768
+        }
+      ],
+      "requestCount": 4,
+      "spawned": {
+        "atUtc": "2026-10-15T08:38:08.185649+00:00",
+        "event": "spawned",
+        "exitCode": null
+      },
+      "stopped": {
+        "atUtc": "2026-10-15T08:44:03.854445+00:00",
+        "event": "stopped",
+        "exitCode": 0
+      },
+      "port-closed": {
+        "checkedAtUtc": "2026-10-15T08:44:14.096982+00:00",
+        "fixturePortListening": false,
+        "scope": "Dedicated fixture port only"
+      }
+    },
+    {
+      "instance": "server-03",
+      "events": [
+        {
+          "event": "request_started",
+          "requestId": "b76bf4ca46dcd9e75bff72b3de064c94",
+          "atUtc": "2026-10-15T08:45:19.576Z",
+          "expectedLengthBytes": 67108864
+        },
+        {
+          "event": "stream_written",
+          "requestId": "b76bf4ca46dcd9e75bff72b3de064c94",
+          "atUtc": "2026-10-15T08:47:27.576Z",
+          "bytesWritten": 67108864
+        },
+        {
+          "event": "request_started",
+          "requestId": "88d8e4269a3bbcf920b0dd3d124d9ab5",
+          "atUtc": "2026-10-15T08:47:56.055Z",
+          "expectedLengthBytes": 67108864
+        },
+        {
+          "event": "connection_interrupted",
+          "requestId": "88d8e4269a3bbcf920b0dd3d124d9ab5",
+          "atUtc": "2026-10-15T08:48:16.690Z",
+          "bytesWritten": 5505024
+        }
+      ],
+      "requestCount": 2,
+      "spawned": {
+        "atUtc": "2026-10-15T08:44:57.662353+00:00",
+        "event": "spawned",
+        "exitCode": null
+      },
+      "stopped": {
+        "atUtc": "2026-10-15T08:49:27.584359+00:00",
+        "event": "stopped",
+        "exitCode": 0
+      },
+      "port-closed": {
+        "checkedAtUtc": "2026-10-15T08:49:43.140884+00:00",
+        "fixturePortListening": false,
+        "scope": "Dedicated fixture port only"
+      }
+    }
+  ],
+  "beforeExplicitRetry": {
+    "atUtc": "2026-10-15T08:45:18.357455+00:00",
+    "httpRequestCount": 0,
+    "scope": "Restored fixture before explicit Download"
+  },
+  "finalServerObservation": {
+    "atUtc": "2026-10-15T08:49:27.558270+00:00",
+    "requestCount": 2,
+    "events": [
+      {
+        "event": "request_started",
+        "requestId": "b76bf4ca46dcd9e75bff72b3de064c94",
+        "atUtc": "2026-10-15T08:45:19.576Z",
+        "expectedLengthBytes": 67108864
+      },
+      {
+        "event": "stream_written",
+        "requestId": "b76bf4ca46dcd9e75bff72b3de064c94",
+        "atUtc": "2026-10-15T08:47:27.576Z",
+        "bytesWritten": 67108864
+      },
+      {
+        "event": "request_started",
+        "requestId": "88d8e4269a3bbcf920b0dd3d124d9ab5",
+        "atUtc": "2026-10-15T08:47:56.055Z",
+        "expectedLengthBytes": 67108864
+      },
+      {
+        "event": "connection_interrupted",
+        "requestId": "88d8e4269a3bbcf920b0dd3d124d9ab5",
+        "atUtc": "2026-10-15T08:48:16.690Z",
+        "bytesWritten": 5505024
+      }
+    ],
+    "scope": "Server03 explicit retry and process-loss attempt only; no later request observed before shutdown"
+  },
+  "processLoss": {
+    "beforeAtUtc": "2026-10-15T08:48:05.975937+00:00",
+    "targetCommandMatched": true,
+    "attemptId": "8404f03d-fbb9-4674-9fcd-460473859c2e",
+    "recordingProcess": "fd7711c4-3e3c-44d0-a7f3-c28c08ac8352",
+    "savedRevisionBefore": 22008,
+    "bytesBefore": 4915200,
+    "stimulus": "run-as own package kill -9 exact validated PID; not force-stop, Task Manager stop or task removal",
+    "signalCommandExit": 0,
+    "signalSentAtUtc": "2026-10-15T08:48:06.025834+00:00",
+    "processAbsenceObservations": [
+      {
+        "atUtc": "2026-10-15T08:48:06.057958+00:00",
+        "exitCode": 1,
+        "matchingProcessCount": 0
+      },
+      {
+        "atUtc": "2026-10-15T08:48:06.195630+00:00",
+        "exitCode": 1,
+        "matchingProcessCount": 0
+      },
+      {
+        "atUtc": "2026-10-15T08:48:06.721142+00:00",
+        "exitCode": 1,
+        "matchingProcessCount": 0
+      },
+      {
+        "atUtc": "2026-10-15T08:48:08.762025+00:00",
+        "exitCode": 1,
+        "matchingProcessCount": 0
+      }
+    ],
+    "relaunch": {
+      "atUtc": "2026-10-15T08:48:21.615247+00:00",
+      "action": "am start -W own BaselineActivity",
+      "exitCode": 0
+    },
+    "runtimeCheck": {
+      "probeJobBlockPresent": false,
+      "observedAtUtc": "2026-10-15T08:48:46.235559+00:00"
+    },
+    "retainedAttemptsAfterRecovery": [
+      {
+        "ordinal": 1,
+        "attemptId": "b2d397ab-be93-4e41-bb99-fa14eac31a82",
+        "status": "cancelled",
+        "bytesWritten": 0,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": "user-cancelled"
+      },
+      {
+        "ordinal": 2,
+        "attemptId": "2b601e48-de60-4d7d-9e0c-f38d7dc85111",
+        "status": "completed",
+        "bytesWritten": 67108864,
+        "verifiedLengthBytes": 67108864,
+        "verifiedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+        "reason": "new-process-file-reverified"
+      },
+      {
+        "ordinal": 3,
+        "attemptId": "0cbc01df-d15f-4466-b13b-eefde4fad0d7",
+        "status": "cancelled",
+        "bytesWritten": 4849664,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": "user-cancelled"
+      },
+      {
+        "ordinal": 4,
+        "attemptId": "57d50a87-5970-4c10-a8f0-6933c0dd3e55",
+        "status": "cancelled",
+        "bytesWritten": 31981568,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": "user-cancelled"
+      },
+      {
+        "ordinal": 5,
+        "attemptId": "9d8367c3-70b7-41e0-b490-360e2ad80eb8",
+        "status": "failed",
+        "bytesWritten": 0,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": "SSLHandshakeException"
+      },
+      {
+        "ordinal": 6,
+        "attemptId": "5aebc288-b4f8-4b56-b564-e6b608c49832",
+        "status": "failed",
+        "bytesWritten": 4128768,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": "ProtocolException"
+      },
+      {
+        "ordinal": 7,
+        "attemptId": "4e27bdbc-535b-49bf-82f4-782e4a78e1b0",
+        "status": "completed",
+        "bytesWritten": 67108864,
+        "verifiedLengthBytes": 67108864,
+        "verifiedSha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+        "reason": "new-process-file-reverified"
+      },
+      {
+        "ordinal": 8,
+        "attemptId": "8404f03d-fbb9-4674-9fcd-460473859c2e",
+        "status": "interrupted",
+        "bytesWritten": 4915200,
+        "verifiedLengthBytes": null,
+        "verifiedSha256": null,
+        "reason": "new-process-unfinished-attempt"
+      }
+    ],
+    "stableObservationSeconds": 64.581215,
+    "boundary": "Injected SIGKILL of the exact own-package process after active progress; not force-stop, task removal, Task Manager stop, natural low-memory kill, or resumed transfer. Revision numbers are scoped to process instances."
+  },
+  "artifactNamingBoundary": {
+    "attempt-07-completed": "Early sample despite name: status still running; not accepted as completion. Final journal/export supply terminal proof.",
+    "historicalAttempt1": "Retained 0.4.0 queued-only preflight; not an 0.4.1 transfer result.",
+    "recoveredOpenAction": "Relaunch already displayed the transfer Activity; attempted extra open control was unavailable. Recovery readback, not that failed helper action, supplies evidence."
+  },
+  "notEstablished": [
+    "Wrong-hostname/IP-SAN rejection on Android",
+    "LAN permission revocation during work",
+    "Task Manager stop and OS stop-reason callbacks",
+    "System timeout/quota cases",
+    "Natural low-memory kill or reboot recovery",
+    "Resumable transfer",
+    "Physical packet route or every network backend",
+    "SFTP/SSH, USB, RDP/VNC, sustained media or product readiness",
+    "Physical keyboard/pointer/touch input"
+  ],
+  "capabilityDecision": {
+    "API39": "Bounded real UIDT observations; remaining stop/timeout cases unqualified",
+    "API41": "Actual granted-permission app connection and earlier grant/denial observations; revocation and route diversity unqualified",
+    "CAP-PLATFORM": "pending"
+  },
+  "sanitization": {
+    "omitted": [
+      "LAN/VPN addresses and routes",
+      "hostnames and usernames",
+      "device transport serials and operating-system PIDs",
+      "certificate/key contents",
+      "raw UI trees and screenshots",
+      "unrelated notification/app contents",
+      "raw shell commands and diagnostic dumps"
+    ],
+    "retainedIdentifiers": "Random probe process/Activity/attempt/request identities and task/job IDs are scoped observation keys, not device serials."
+  },
+  "reviewStatus": "Accepted by primary and independent reviewers. All 93 artifact hash/size pairs verified; independent review checked 17 journal projections, 14 host observations, 8 own-app UI projections, 12 actions with 9 control-bound matches, 12 payload hashes/sizes, 13 fixture events and 2 request counts, actual APK/source binding, CA-only change, process absence/recovery, capacity caveat and public privacy. Own-app cancellation/recovery screenshots inspected. No remaining actionable finding.",
+  "privateEvidence": {
+    "hashAlgorithm": "SHA-256",
+    "artifactCount": 93,
+    "artifacts": [
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-02-progress.json",
+        "sha256": "e8d30aa7ec4ef700821616f26f7012c4ce2407514d9f3d8ef1c792493fad0969",
+        "bytes": 2984,
+        "purpose": "Persisted journal snapshot with latest-attempt projection"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-02-minimized-progress.json",
+        "sha256": "119d379fcadab458da0ad543be45f8ff463c3c168b9dae5108112794fd25f037",
+        "bytes": 2986,
+        "purpose": "Persisted journal snapshot with latest-attempt projection"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-02-completion-journal.json",
+        "sha256": "9ec5a6b6a6aa323056e3c596df3cd48bfe514d011b93556b91e80ac8fbf45143",
+        "bytes": 3403,
+        "purpose": "Persisted journal snapshot with latest-attempt projection"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-03-after-cancel-journal.json",
+        "sha256": "e366dadd616f33be5199f8e3565ba3ed21eced6299086b24984503cf79b084d5",
+        "bytes": 4788,
+        "purpose": "Persisted journal snapshot with latest-attempt projection"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-03-stable-journal.json",
+        "sha256": "e366dadd616f33be5199f8e3565ba3ed21eced6299086b24984503cf79b084d5",
+        "bytes": 4788,
+        "purpose": "Persisted journal snapshot with latest-attempt projection"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-04-progress-journal.json",
+        "sha256": "e109fdfce330d733572fc3bb7e8dfa9bfdb4d1821f08b59ebbffaf9e6fe5b5de",
+        "bytes": 5773,
+        "purpose": "Persisted journal snapshot with latest-attempt projection"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-04-cancelled-journal.json",
+        "sha256": "aaed3e69b8f97616f2d7836d6f979a9496cf433285d46d333c609ad8873ead9a",
+        "bytes": 6175,
+        "purpose": "Persisted journal snapshot with latest-attempt projection"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-04-stable-journal.json",
+        "sha256": "aaed3e69b8f97616f2d7836d6f979a9496cf433285d46d333c609ad8873ead9a",
+        "bytes": 6175,
+        "purpose": "Persisted journal snapshot with latest-attempt projection"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-05-result-journal.json",
+        "sha256": "75aef7b9079d6c26cdfa4ca5b1b23a564b6052efc36a2ce52d8c6e6d74e154d2",
+        "bytes": 7362,
+        "purpose": "Persisted journal snapshot with latest-attempt projection"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-06-before-host-stop-journal.json",
+        "sha256": "4395602ad37165f32356e99b778f34e6ccb1f4d64d57fcbe9665db0a59b8a668",
+        "bytes": 8347,
+        "purpose": "Persisted journal snapshot with latest-attempt projection"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-06-after-host-stop-journal.json",
+        "sha256": "fe179c1e7442a9640ea1503709298561b16830059428666ee4b1fafe07c4c2c6",
+        "bytes": 8547,
+        "purpose": "Persisted journal snapshot with latest-attempt projection"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-06-restored-server-no-retry-journal.json",
+        "sha256": "fe179c1e7442a9640ea1503709298561b16830059428666ee4b1fafe07c4c2c6",
+        "bytes": 8547,
+        "purpose": "Persisted journal snapshot with latest-attempt projection"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-07-final-journal.json",
+        "sha256": "474e2af5e5c58aa5ed9c20389e8acbc75002522a5d91a941de7bd85858ef84b8",
+        "bytes": 9949,
+        "purpose": "Persisted journal snapshot with latest-attempt projection"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-08-before-loss-journal.json",
+        "sha256": "6aedb61efe1b07536ad74478bc804de43c91ee5f527e01706c73f1e3151bb70f",
+        "bytes": 10934,
+        "purpose": "Persisted journal snapshot with latest-attempt projection"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-08-after-loss-journal.json",
+        "sha256": "6aedb61efe1b07536ad74478bc804de43c91ee5f527e01706c73f1e3151bb70f",
+        "bytes": 10934,
+        "purpose": "Persisted journal snapshot with latest-attempt projection"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-08-recovered-journal.json",
+        "sha256": "343fbda40009c501cae0e0787d012b9e4949a33bbf1b2c064185289d08959d58",
+        "bytes": 11614,
+        "purpose": "Persisted journal snapshot with latest-attempt projection"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-08-recovered-stable-journal.json",
+        "sha256": "343fbda40009c501cae0e0787d012b9e4949a33bbf1b2c064185289d08959d58",
+        "bytes": 11614,
+        "purpose": "Stable recovery and audit of all retained attempts"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-02-completion-observation.json",
+        "sha256": "496a6fd663473596ac7425657cc169f13c022368a4831285208014745347e980",
+        "bytes": 622,
+        "purpose": "Host-timestamped journal/export observation"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-03-after-cancel-observation.json",
+        "sha256": "62e3df77a5df01bd78a2201db0b19bab2a3a9ee1393b9ba15b73989cdbda1152",
+        "bytes": 567,
+        "purpose": "Host-timestamped journal/export observation"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-03-stable-observation.json",
+        "sha256": "4f467ecd4ef596ca36f023bf72f40bc3f6b2189517b9d7a85bcf88bea69447ac",
+        "bytes": 567,
+        "purpose": "Host-timestamped journal/export observation"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-04-cancelled-observation.json",
+        "sha256": "89b3249857d39b9e2bd7fe6cb2dab8f039ee4bde72aeb2decc6efc50199c9af8",
+        "bytes": 570,
+        "purpose": "Host-timestamped journal/export observation"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-04-stable-observation.json",
+        "sha256": "0688a5f4f52a4111c312a4084a6ffd4fe9e61daec6489e5fec6e066ec56681f6",
+        "bytes": 570,
+        "purpose": "Host-timestamped journal/export observation"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-05-result-observation.json",
+        "sha256": "4594bafdcef281c0f584cb4da3450d7be5cd8285c4b8b02a2a76badd1d3496b5",
+        "bytes": 405,
+        "purpose": "Host-timestamped journal/export observation"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-06-after-host-stop-observation.json",
+        "sha256": "d1dc8ef317ea3f5f0bf2d2ee46f57424ac198513ea97b58bffe9616fc235540e",
+        "bytes": 568,
+        "purpose": "Host-timestamped journal/export observation"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-06-no-retry-observation.json",
+        "sha256": "4f604d60bc06366446ec42f844769a1e8f849a4c34eabeadf2d0d4d7cd07c447",
+        "bytes": 568,
+        "purpose": "Host-timestamped journal/export observation"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-06-restored-server-no-retry-observation.json",
+        "sha256": "6b22f0157b025ed3fe610bca1d543fcacf1782eab412c0f39d013480b3a35764",
+        "bytes": 407,
+        "purpose": "Host-timestamped journal/export observation"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-07-final-observation.json",
+        "sha256": "2999f17605a22d20299a69b5f5d6b0b18846d15e1a5620328359861101b3e794",
+        "bytes": 623,
+        "purpose": "Host-timestamped journal/export observation"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-08-before-loss-observation.json",
+        "sha256": "69de54efe53456c574b48e2fa33b8b3387650a77530c4c3512cec0a48219893b",
+        "bytes": 554,
+        "purpose": "Host-timestamped journal/export observation"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-08-after-loss-observation.json",
+        "sha256": "6554803dc753802f3be9d6146564ab51c2dfd89a089cdff7e60db48c45e16d14",
+        "bytes": 554,
+        "purpose": "Host-timestamped journal/export observation"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-08-recovered-observation.json",
+        "sha256": "fab9bf0753ddf2c5475a358d2249d26ea2a369475d16df6524fe3a591e5f7386",
+        "bytes": 582,
+        "purpose": "Host-timestamped journal/export observation"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-08-recovered-stable-observation.json",
+        "sha256": "cbad50b894b61b0bc2ca5c89d9ac819d1f9ebb392ae3cc969f4a34faf01947fe",
+        "bytes": 582,
+        "purpose": "Host-timestamped journal/export observation"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-02-recreate-layout.json",
+        "sha256": "5347ffff2830f3b91ae2f81dc7f1f3013a84fbd6281063fb8aed8cdb62a9b11b",
+        "bytes": 11111,
+        "purpose": "Control bounds used to audit injected action"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-02-after-recreate-layout.json",
+        "sha256": "db65694d9ee6e36ed2a797e8b565496d56f7e401fa1e08650eb2f60dffe63064",
+        "bytes": 11111,
+        "purpose": "Own transfer window projection; unrelated window contents omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-02-minimized-layout.json",
+        "sha256": "ce2ee933078ecc81e6cf685a2019a4105c76fa313624c91d490ea13e38245750",
+        "bytes": 16335,
+        "purpose": "Own transfer window projection; unrelated window contents omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-02-restored-layout.json",
+        "sha256": "1c6bf1458a8d76b3978190a76e2d6c41097af0c3fd9a18f28da1155562c4772b",
+        "bytes": 11111,
+        "purpose": "Own transfer window projection; unrelated window contents omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-03-cancel-layout.json",
+        "sha256": "adf57245c71863268ee41deff176232cde61753addd2ad1690679b76ee846b35",
+        "bytes": 11111,
+        "purpose": "Control bounds used to audit injected action"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-04-start-layout.json",
+        "sha256": "7dc8836b5983e727efe9912142c2155eb2f756e08dfc73230263689d6558d55d",
+        "bytes": 11120,
+        "purpose": "Own transfer window projection; unrelated window contents omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-07-explicit-retry-layout.json",
+        "sha256": "d25cabf31321422faedea3a0f841e6c3fce41a019a381e2570033d8e68b7601d",
+        "bytes": 11119,
+        "purpose": "Control bounds used to audit injected action"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-08-recovered-visible-layout.json",
+        "sha256": "374be8648fc3ea750de5a1205cbdc8a386994d49391483fad9c852c07fdfe6f9",
+        "bytes": 11134,
+        "purpose": "Own transfer window projection; unrelated window contents omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/transfer-041-install-command.json",
+        "sha256": "4d51d0cce1720213d808cae4e4592bc2eeb28ff8749b820a6ff687d0b2e899fe",
+        "bytes": 354,
+        "purpose": "Action exit/time and scoped control coordinate; raw command arguments omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/transfer-041-launch-command.json",
+        "sha256": "2e6ef008b8dc711ae172233e5c59b14bb1d8065b6b2502ecaa07cd4dee8ef841",
+        "bytes": 614,
+        "purpose": "Action exit/time and scoped control coordinate; raw command arguments omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-02-start-tap-command.json",
+        "sha256": "315c0ccbc338fa872a767efe2cd970fcb3cef4b51bd855feb52f59eceeeae277",
+        "bytes": 218,
+        "purpose": "Action exit/time and scoped control coordinate; raw command arguments omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-02-start-layout.json",
+        "sha256": "0b821262fca54b7c5ab3deb104886bfececf7b97ff2a91b9a038c97789eda3f3",
+        "bytes": 11112,
+        "purpose": "Control bounds used to audit injected action"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-02-recreate-tap-command.json",
+        "sha256": "4715552b1065eca6ffc184f18340a0369d46a68af606b4817cfa0f62875e856d",
+        "bytes": 218,
+        "purpose": "Action exit/time and scoped control coordinate; raw command arguments omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-02-minimize-tap-command.json",
+        "sha256": "17b0bee72c8e428a78bb81703228c6cb0ec82e4169f346dc65bc6fef74d5dcba",
+        "bytes": 217,
+        "purpose": "Action exit/time and scoped control coordinate; raw command arguments omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-02-minimize-layout.json",
+        "sha256": "483b498805ea4141bbe40d2aa5eee74de68c88db62460bc11d4f0b3a8586e49b",
+        "bytes": 11111,
+        "purpose": "Control bounds used to audit injected action"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-02-restore-input-command.json",
+        "sha256": "7a71139c60b243cfdbe405886f3db46dc33eda55ea8ae8508be53fb6b3e0e9e2",
+        "bytes": 219,
+        "purpose": "Action exit/time and scoped control coordinate; raw command arguments omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-03-cancel-tap-command.json",
+        "sha256": "810ff3bd11ac4d51b6ca31eb50b900bf0ed4783327930734a4e9bb2debc3da93",
+        "bytes": 218,
+        "purpose": "Action exit/time and scoped control coordinate; raw command arguments omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-04-minimize-tap-command.json",
+        "sha256": "eb468447cd73a8b2e673d5cb5302972d006e333382004ed5b54c6a4cc31abd6b",
+        "bytes": 217,
+        "purpose": "Action exit/time and scoped control coordinate; raw command arguments omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-04-minimize-layout.json",
+        "sha256": "8b31ae3f9d8cff32fd2cb70e41f7932ec73c942b1bd6d7c63e281afcf72a5cfa",
+        "bytes": 11104,
+        "purpose": "Control bounds used to audit injected action"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-04-notification-cancel-input-command.json",
+        "sha256": "ed17346b269a3c9b5af4d676bfde095a0cbe66d2abeadae7713203a8a0476516",
+        "bytes": 218,
+        "purpose": "Action exit/time and scoped control coordinate; raw command arguments omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-04-expanded-layout.json",
+        "sha256": "f62f1fb71e79238e4401ffa26425781b40a481c8477317081f4b33ef72bc9983",
+        "bytes": 28027,
+        "purpose": "Actual expanded Cloudy notification and Cancel action"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-07-explicit-retry-tap-command.json",
+        "sha256": "5a1ae97f268610f9bd02ececbeca8331c6cacd5052632990a679ac030e3896d7",
+        "bytes": 218,
+        "purpose": "Action exit/time and scoped control coordinate; raw command arguments omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-08-start-tap-command.json",
+        "sha256": "21544fb55cb56ee6d6b065103c2fe1104612a88ff8edcfa61c58ec4708de056b",
+        "bytes": 218,
+        "purpose": "Action exit/time and scoped control coordinate; raw command arguments omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-08-start-layout.json",
+        "sha256": "f0c6b994b5cceef5692356cefe972500bba4cb9c5b40dc27d6890c1d7a983129",
+        "bytes": 11161,
+        "purpose": "Control bounds used to audit injected action"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-08-minimize-tap-command.json",
+        "sha256": "0b0f495e721b928bcc3930e72fffe6b80112decdc89624138fd720704454082c",
+        "bytes": 217,
+        "purpose": "Action exit/time and scoped control coordinate; raw command arguments omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-08-minimize-layout.json",
+        "sha256": "86b166a7ceaf7c82d9a383d3d90f66e613ebd9e9bdd3bd36798c93426dc35b9a",
+        "bytes": 11106,
+        "purpose": "Control bounds used to audit injected action"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-04-after-notification-layout.json",
+        "sha256": "c187a310a86e774890a34f2df7098a0dd28e5d66566c0ffd40934cac947cda83",
+        "bytes": 16336,
+        "purpose": "Post-cancel notification observation; only Cloudy row presence projected"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-04-restored-screen.png",
+        "sha256": "c2884c0878b1456949df14b03c827594805de49c458952f4171b525faea04ca6",
+        "bytes": 269838,
+        "purpose": "Evidence-author visual check: canceled state, Download available, Cancel disabled"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-02-completion-payload.bin",
+        "sha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+        "bytes": 67108864,
+        "purpose": "Independent hash and length of exported app-private payload"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-03-after-cancel-payload.bin",
+        "sha256": "d369753ba1c6350c583d2d990232d05789e7250f33909f1a11f299fc4978709d",
+        "bytes": 4849664,
+        "purpose": "Independent hash and length of exported app-private payload"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-03-stable-payload.bin",
+        "sha256": "d369753ba1c6350c583d2d990232d05789e7250f33909f1a11f299fc4978709d",
+        "bytes": 4849664,
+        "purpose": "Independent hash and length of exported app-private payload"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-04-cancelled-payload.bin",
+        "sha256": "b800edac9b0e8cdc93d13f3b436a1d80e01a399da10c568fd556f4a2271047e9",
+        "bytes": 31981568,
+        "purpose": "Independent hash and length of exported app-private payload"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-04-stable-payload.bin",
+        "sha256": "b800edac9b0e8cdc93d13f3b436a1d80e01a399da10c568fd556f4a2271047e9",
+        "bytes": 31981568,
+        "purpose": "Independent hash and length of exported app-private payload"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-06-after-host-stop-payload.bin",
+        "sha256": "91664bf35bdfb03fa0fb8881389c5b801047d45b37ca174b56dc6656d901177a",
+        "bytes": 4128768,
+        "purpose": "Independent hash and length of exported app-private payload"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-06-no-retry-payload.bin",
+        "sha256": "91664bf35bdfb03fa0fb8881389c5b801047d45b37ca174b56dc6656d901177a",
+        "bytes": 4128768,
+        "purpose": "Independent hash and length of exported app-private payload"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-07-final-payload.bin",
+        "sha256": "5302fb4146dff35d2ed3784bc3c8f005e2d89c19c2c722387a1f265a8236ee1f",
+        "bytes": 67108864,
+        "purpose": "Independent hash and length of exported app-private payload"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-08-before-loss-payload.bin",
+        "sha256": "2cc4ffaddea947b92e800b054b434119f3ddf4f2e7d6466fec57b4d0cc87e1f4",
+        "bytes": 5046272,
+        "purpose": "Independent hash and length of exported app-private payload"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-08-after-loss-payload.bin",
+        "sha256": "e8cdd3a7b9868d4cbded3d7cd571b5e965f94b3ab2fd489e92a30605f038b549",
+        "bytes": 5177344,
+        "purpose": "Independent hash and length of exported app-private payload"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-08-recovered-payload.bin",
+        "sha256": "e8cdd3a7b9868d4cbded3d7cd571b5e965f94b3ab2fd489e92a30605f038b549",
+        "bytes": 5177344,
+        "purpose": "Independent hash and length of exported app-private payload"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-08-recovered-stable-payload.bin",
+        "sha256": "e8cdd3a7b9868d4cbded3d7cd571b5e965f94b3ab2fd489e92a30605f038b549",
+        "bytes": 5177344,
+        "purpose": "Independent hash and length of exported app-private payload"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/fixture-01/android-config.json",
+        "sha256": "fddcc32dfd8ce0adf99a2c00c4679138e90b2a4e0e828cd26fe2d1e2b88b27b3",
+        "bytes": 1469,
+        "purpose": "Private original fixture identity/expected content; endpoint and certificate omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/fixture-wrong-ca/android-config.json",
+        "sha256": "3a7764409a38fc93f4a45090271cb57874b7ca5ef490fc6618fbc6ce557a197a",
+        "bytes": 1469,
+        "purpose": "Private negative-trust config; endpoint and certificate omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-05-trust-negative.json",
+        "sha256": "a3f57b4b7e170001c23ff3941af4e3ed1254fe2d02a5ab9812bf8dee4ad23785",
+        "bytes": 205,
+        "purpose": "Wrong CA field comparison and payload absence observation"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/fixture-01/server-02.log",
+        "sha256": "a1eb6ddbebc5bf004fd916d49d69828a4653ca9520dce8dae9f5976e7678eb06",
+        "bytes": 1301,
+        "purpose": "Frozen privacy-safe fixture events"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/fixture-01/server-02-spawned.json",
+        "sha256": "d23196d29dc4d96632682f17ec3cd80de85edcee38949c09a84ef2d99e20ebb3",
+        "bytes": 92,
+        "purpose": "Fixture lifecycle and explicit dedicated-port closure check"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/fixture-01/server-02-stopped.json",
+        "sha256": "4521c56a1bd1b2059cf96dd9fce99a45c3cfcd13aaf4dba0d2cbca69e62f0eb5",
+        "bytes": 89,
+        "purpose": "Fixture lifecycle and explicit dedicated-port closure check"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/fixture-01/server-02-port-closed.json",
+        "sha256": "3b1274e8a9f4680a3bf451d17ed0fe20faed2b426ca7a4e612ceab46c7b8dba4",
+        "bytes": 132,
+        "purpose": "Fixture lifecycle and explicit dedicated-port closure check"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/fixture-01/server-03.log",
+        "sha256": "23a1c23e069698efb1845b907051de386ed1130f97792c3c249f0a6eed53dcd3",
+        "bytes": 633,
+        "purpose": "Frozen privacy-safe fixture events"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/fixture-01/server-03-spawned.json",
+        "sha256": "d044857dc6a43e3bee02e67b346070e794a481cec994dd27b6a2006e2a5e1ff8",
+        "bytes": 92,
+        "purpose": "Fixture lifecycle and explicit dedicated-port closure check"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/fixture-01/server-03-stopped.json",
+        "sha256": "b20782915c2d5153fe24ef7c620af44a1240c65c26fbc1b75dfa778fdd3f051a",
+        "bytes": 89,
+        "purpose": "Fixture lifecycle and explicit dedicated-port closure check"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/fixture-01/server-03-port-closed.json",
+        "sha256": "90a9d06f578282c0b7d5b5d6021f48622420201671647a392e17066f8dab8020",
+        "bytes": 132,
+        "purpose": "Fixture lifecycle and explicit dedicated-port closure check"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/fixture-01/server-03-before-explicit-retry.json",
+        "sha256": "26e3e641cf860c1c901587e120ff322d697199d8a0b50c9fa719c8e605926f6c",
+        "bytes": 131,
+        "purpose": "Restored fixture had no request before explicit retry"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/fixture-01/server-03-final-observation.json",
+        "sha256": "43a17770d59699b5730c4e4485f79ae7ddecbc8bcc98ebe41ffa83273e763261",
+        "bytes": 923,
+        "purpose": "Final request count excludes automatic replay after process restart"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-08-process-loss.json",
+        "sha256": "5903edf2c4caaa7fd708647873ea35e66121a189323c7bc4ac8d2b15f4372010",
+        "bytes": 922,
+        "purpose": "Exact package-scoped injected SIGKILL and repeated process-absence checks; OS PID omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-08-relaunch.json",
+        "sha256": "29bb30f16b2545a562c7107c38fa37852401ad574cf1a0dac52fb5a827049797",
+        "bytes": 439,
+        "purpose": "Explicit relaunch after proven process absence; raw output omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-08-recovered-runtime-check.json",
+        "sha256": "8655eb8ed0d15dc2071e4df414c3d16aca631fd93bc4e67e42a0352fe2e861cd",
+        "bytes": 91,
+        "purpose": "Package-scoped scheduler projection after recovery"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-08-recovered-jobscheduler.txt",
+        "sha256": "b1e542fb14c5ab4766d4b11329db3b5fa258ddda8e9298bccdfc95bb49c3c00d",
+        "bytes": 464357,
+        "purpose": "Private raw scheduler support for no probe-job block; unrelated jobs omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/transfer-041-baseline.json",
+        "sha256": "70d588ee1402f820778db6dd8c127791563642e449f9ac7ba1127aa20f0af4cf",
+        "bytes": 74677,
+        "purpose": "Corrected baseline schema/version readback; all other device inventory fields omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/transfer-041-deployment.json",
+        "sha256": "722f1be53311c7754d4e52c00678e16714ec1f71b33a903093083b669e662d64",
+        "bytes": 192,
+        "purpose": "Exact deployed source/APK identity"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-08-open-recovered-helper-error.json",
+        "sha256": "82ce9508cc42fb187e12b395f00cb7c0031777513ed9ae76b2200561c18335ac",
+        "bytes": 90,
+        "purpose": "Redundant launcher-control helper failed after successful direct transfer-task return; raw detail omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-08-open-recovered-layout.json",
+        "sha256": "374be8648fc3ea750de5a1205cbdc8a386994d49391483fad9c852c07fdfe6f9",
+        "bytes": 11134,
+        "purpose": "Existing transfer Activity was already visible after relaunch; raw UI omitted"
+      },
+      {
+        "path": "qualification/results/private/transfer-probe/attempt-07-completed-observation.json",
+        "sha256": "8d01c3a57c25b6003361a28861c02d769afb12e20e817d46ebb301d359c8c355",
+        "bytes": 556,
+        "purpose": "Early sample proves completed-named artifact is still running and incomplete; not accepted as completion"
+      }
+    ]
+  }
+}
