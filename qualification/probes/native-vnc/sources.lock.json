@@ -1,0 +1,1734 @@
+{
+  "schemaVersion": 1,
+  "checkedOn": "2026-10-15",
+  "purpose": "Android arm64 TLS/JPEG native build entry only; no JNI/app/runtime or protected-server qualification",
+  "buildRef": "vnc-android-tls-jpeg-2026-10-15",
+  "source": {
+    "revision": "98aaee0560baa0332339b2ef464ea96ed9b9b28c",
+    "url": "https://codeload.github.com/LibVNC/libvncserver/tar.gz/98aaee0560baa0332339b2ef464ea96ed9b9b28c",
+    "archive": "libvncserver-98aaee0560baa0332339b2ef464ea96ed9b9b28c.tar.gz",
+    "root": "libvncserver-98aaee0560baa0332339b2ef464ea96ed9b9b28c",
+    "bytes": 612494,
+    "sha256": "e4aba30e25cd7bcc743794ccaf4a9b7c3236d15945b9e8b8bb059b0ae1d2f1bb"
+  },
+  "jpeg": {
+    "version": "3.2.0",
+    "url": "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/3.2.0/libjpeg-turbo-3.2.0.tar.gz",
+    "archive": "libjpeg-turbo-3.2.0.tar.gz",
+    "root": "libjpeg-turbo-3.2.0",
+    "bytes": 2537858,
+    "sha256": "6f30092cef9fb839779646608f4ee14ae3cbac989c47fa05e841b0841f09878e"
+  },
+  "openssl": {
+    "version": "4.0.1",
+    "reuse": "Accepted FreeRDP Android API29 arm64 shared build; import exact receipt/libraries/generated headers without rebuilding or modifying original",
+    "receipt": {
+      "bytes": 2014,
+      "sha256": "5a55a3cb8e203bcc9d855257ed8319af9bd1257d0af50828c9c37dfecac5de5e"
+    },
+    "source": {
+      "archive": "openssl-4.0.1.tar.gz",
+      "root": "openssl-4.0.1",
+      "url": "https://github.com/openssl/openssl/releases/download/openssl-4.0.1/openssl-4.0.1.tar.gz",
+      "bytes": 55079428,
+      "sha256": "2db3f3a0d6ea4b59e1f094ace2c8cd536dffb87cdc39084c5afa1e6f7f37dd09"
+    },
+    "libraries": {
+      "libssl.so": {
+        "bytes": 1205848,
+        "sha256": "66288be31a05675f6a319632d6abb137eb38b07f10eea302a8b128bd6ed7d5c0"
+      },
+      "libcrypto.so": {
+        "bytes": 6020992,
+        "sha256": "46c0eb8c3c601f3c9d8746e051aefe61e7a324bf152a535feac3f97472deb2d8"
+      }
+    },
+    "headers": {
+      "cjson/cJSON.h": {
+        "bytes": 16394,
+        "sha256": "25b0145150d500498e4d209cec69c18c42cf818bffcc54690be3b895a2a16dee"
+      },
+      "freerdp3/freerdp/addin.h": {
+        "bytes": 3285,
+        "sha256": "98800ede47329c562b64759720304d24bfb4d58e65f9423b63eb3a5ec152368f"
+      },
+      "freerdp3/freerdp/altsec.h": {
+        "bytes": 6152,
+        "sha256": "54725793f37bd9032f82c49a1b3a4503d1982076e46b509bd619931f06b65d90"
+      },
+      "freerdp3/freerdp/api.h": {
+        "bytes": 4108,
+        "sha256": "c672b77f85eabb31af7388a5f02cc3dd70d8c536235af0c6bd4908eb4a2a785c"
+      },
+      "freerdp3/freerdp/assistance.h": {
+        "bytes": 3256,
+        "sha256": "764dd84609a4f14e32df3640f25e159916326160788749c7f39bbb994f7332e2"
+      },
+      "freerdp3/freerdp/autodetect.h": {
+        "bytes": 6823,
+        "sha256": "13947b302da7da3fbc00b9d410321b1d04761219353f6de4724e55efb5fdfe68"
+      },
+      "freerdp3/freerdp/build-config.h": {
+        "bytes": 866,
+        "sha256": "c1334b2f276a9fe61209a314603e4b482cf314280ed0ae333bcd32d4d51132b8"
+      },
+      "freerdp3/freerdp/buildflags.h": {
+        "bytes": 4786,
+        "sha256": "f8e4b1c476588837ba054944c113de98284e5328976e1cd602222c47a5059cb2"
+      },
+      "freerdp3/freerdp/cache/persistent.h": {
+        "bytes": 2675,
+        "sha256": "56ff969c53f6463549197859c2fdd0e255e151831a788a93142ef3c444a0ea39"
+      },
+      "freerdp3/freerdp/channels/ainput.h": {
+        "bytes": 1778,
+        "sha256": "1ba73ced7fa9fcf7d89a842c5fbea70a1bb30c2b7d6659373a844450efc25534"
+      },
+      "freerdp3/freerdp/channels/audin.h": {
+        "bytes": 2979,
+        "sha256": "26337a4af7090163109e5af60b22fb66ff0fb8d7f6370a25f23c8c3d7a8eee2c"
+      },
+      "freerdp3/freerdp/channels/channels.h": {
+        "bytes": 6284,
+        "sha256": "d68a0e6c2f11f7a4fbb27404e84d5ab1876432e47c4f2601626750d8748646a5"
+      },
+      "freerdp3/freerdp/channels/cliprdr.h": {
+        "bytes": 4377,
+        "sha256": "f1f5c5b576125b8ba0496027a6a930801c65fa5539ea22bc117a8ccf7268a278"
+      },
+      "freerdp3/freerdp/channels/disp.h": {
+        "bytes": 2206,
+        "sha256": "25470dcb147099f8db3051a8af49c425238d401774f79d50e000c29b94abb8fb"
+      },
+      "freerdp3/freerdp/channels/drdynvc.h": {
+        "bytes": 1863,
+        "sha256": "31e5b2cdffacd8890bd46b6e11c3f6925b31d5972da021408c4d10c818ce761a"
+      },
+      "freerdp3/freerdp/channels/echo.h": {
+        "bytes": 1151,
+        "sha256": "cf369c175b4d3f613e6d84e4f44481c1407229bb15e75e330336710d33f20762"
+      },
+      "freerdp3/freerdp/channels/encomsp.h": {
+        "bytes": 3905,
+        "sha256": "45ea51096ca8caa2e33d4c2f59d2a68ddaf2683b5b7466603f1c8396e0204b76"
+      },
+      "freerdp3/freerdp/channels/geometry.h": {
+        "bytes": 1637,
+        "sha256": "c5ddb4e616220f30ff732988eb5d385946f9ee8843b11ad30685ecc7534b33a8"
+      },
+      "freerdp3/freerdp/channels/gfxredir.h": {
+        "bytes": 4299,
+        "sha256": "266e7ffb102009df9524f4c1b0ba8c8618e01aa952e097c2b517db5d7b2e9b25"
+      },
+      "freerdp3/freerdp/channels/location.h": {
+        "bytes": 2950,
+        "sha256": "d471e992c3564ce23d97937ec42567bc756f3719b820df5e73f06876946dee30"
+      },
+      "freerdp3/freerdp/channels/log.h": {
+        "bytes": 971,
+        "sha256": "0e7277b0d536713f9e0e21da71642f4b705fcca1eb73952831db6445e681ff85"
+      },
+      "freerdp3/freerdp/channels/rail.h": {
+        "bytes": 886,
+        "sha256": "5833f6e7d5941c775fb9d74b4ed1356f3737ef876ef14eb3fb296f8da8cf658a"
+      },
+      "freerdp3/freerdp/channels/rdp2tcp.h": {
+        "bytes": 1053,
+        "sha256": "6fe62f9654ea65c81f33e31fcfc4e26eb739a1926c483fc4ff3cb69b390f97b6"
+      },
+      "freerdp3/freerdp/channels/rdpdr.h": {
+        "bytes": 10645,
+        "sha256": "76a6bad6b34a65a44305a61e3049b9ea02baec08c3271e17f7ca480a5d187a2d"
+      },
+      "freerdp3/freerdp/channels/rdpear.h": {
+        "bytes": 1090,
+        "sha256": "b1a704cec5a5b930be9d5b60c097e98aab59db6738f0563131847535b049ef30"
+      },
+      "freerdp3/freerdp/channels/rdpecam.h": {
+        "bytes": 8243,
+        "sha256": "89386390fbe9f04eed9644a420b4f5fda33dd76685e5b564d59b5ebaf38de137"
+      },
+      "freerdp3/freerdp/channels/rdpei.h": {
+        "bytes": 5136,
+        "sha256": "4a9b97030fd7cfe5d044a1f593233cf0f82d31557b86559dfd465eb47ff78953"
+      },
+      "freerdp3/freerdp/channels/rdpemsc.h": {
+        "bytes": 3553,
+        "sha256": "829126cca1c5bcca0b3bee1c39082d98671c5581ef756f45487d76c69da721d3"
+      },
+      "freerdp3/freerdp/channels/rdpewa.h": {
+        "bytes": 1183,
+        "sha256": "a8bb8458f152a0d12f7892432a08fa4c2987c86209936c07c237daa666374ea9"
+      },
+      "freerdp3/freerdp/channels/rdpgfx.h": {
+        "bytes": 10289,
+        "sha256": "78a45b26804291fe1b8e093f4a336783dafca92d246c5d146d45d456cf5bad33"
+      },
+      "freerdp3/freerdp/channels/rdpsnd.h": {
+        "bytes": 1025,
+        "sha256": "5041a68b3a6592ef69583788b519974785289685a0e6791d48fa489870d63c07"
+      },
+      "freerdp3/freerdp/channels/remdesk.h": {
+        "bytes": 4524,
+        "sha256": "ec212b56086612a70e45a47041477a926fd878eecf139cab2d0e9afe8fd394bf"
+      },
+      "freerdp3/freerdp/channels/scard.h": {
+        "bytes": 12805,
+        "sha256": "67a464b94cbea508c81117703d6c6e305e1993a1d4759738f4fc6774fc2862ea"
+      },
+      "freerdp3/freerdp/channels/telemetry.h": {
+        "bytes": 1373,
+        "sha256": "3d15e54c7986f631c4d8eb6948101c37e2ffe913d0f9ced15b71421b512af99b"
+      },
+      "freerdp3/freerdp/channels/tsmf.h": {
+        "bytes": 1283,
+        "sha256": "9c921f424d7a559dd24ffe3b04f8937a5e7dcc0f2a61062a32a0ed2d46fbd03e"
+      },
+      "freerdp3/freerdp/channels/urbdrc.h": {
+        "bytes": 1099,
+        "sha256": "f6dc3bcbf9576ab31fcd2fd79adb6f2139a1c7ffc07f088a6ffd7b16e92c6cf9"
+      },
+      "freerdp3/freerdp/channels/video.h": {
+        "bytes": 3132,
+        "sha256": "1746ce2d678d5f14fb89cfccc332f311ecb18681773f84d9381f4f3c742d295f"
+      },
+      "freerdp3/freerdp/channels/wtsvc.h": {
+        "bytes": 4271,
+        "sha256": "4cb4e1de01e0ab9f2f7205ae82f9f8a6033644701e77d28f7bb4d44e86fadd26"
+      },
+      "freerdp3/freerdp/client/aad_helper.h": {
+        "bytes": 4774,
+        "sha256": "8ab198d59352e430038e658ae3280fb001654b9a4bcd833811fb58d263787b3d"
+      },
+      "freerdp3/freerdp/client/ainput.h": {
+        "bytes": 1417,
+        "sha256": "a87586376323259b5007a09eb8c92fe0d095d26d86aab707ee442504db7c5a34"
+      },
+      "freerdp3/freerdp/client/audin.h": {
+        "bytes": 2512,
+        "sha256": "83ec94f07009e9288996ce33a6ba2e7c3f7d3c5375e622de9834467e668c0aa6"
+      },
+      "freerdp3/freerdp/client/channels.h": {
+        "bytes": 3409,
+        "sha256": "6c78a8896421495230bea71ec57afd1f9942e539782e7e84c7e3bcb1e0cd1e95"
+      },
+      "freerdp3/freerdp/client/client_cliprdr_file.h": {
+        "bytes": 4195,
+        "sha256": "b92b15676ca11e8fd039326991aa24ce616b32051523710b4b410315a0be4ba2"
+      },
+      "freerdp3/freerdp/client/cliprdr.h": {
+        "bytes": 7219,
+        "sha256": "cfbd6084e319a090cbcb1c1a4a300b6bef9f0c4aef2379dcfceae24e5a7d33c5"
+      },
+      "freerdp3/freerdp/client/cmdline.h": {
+        "bytes": 8186,
+        "sha256": "e6eaa20c0840ae0331fe9b69c8c7191f56c082392fc416f3c2a3cf2c705c09cd"
+      },
+      "freerdp3/freerdp/client/disp.h": {
+        "bytes": 1685,
+        "sha256": "d3bab8d22c1ebc465fb9a0efa8fdc2c15c45586022194cf82f703d92a28ea179"
+      },
+      "freerdp3/freerdp/client/drdynvc.h": {
+        "bytes": 3623,
+        "sha256": "5ba973cf2e64d7b2fcac01212792767582eed18040fa53d09c98ebd541fb4fb9"
+      },
+      "freerdp3/freerdp/client/encomsp.h": {
+        "bytes": 3757,
+        "sha256": "22aa47b265919e8770bba474dba9d1f67f7a3fbe1175822b5a01f7eb16e75583"
+      },
+      "freerdp3/freerdp/client/file.h": {
+        "bytes": 4677,
+        "sha256": "0db760478b4804cabf1dbf113299f04185106bcf0eb36af69a3fcd4206bc65e3"
+      },
+      "freerdp3/freerdp/client/geometry.h": {
+        "bytes": 2266,
+        "sha256": "b9ad9ebf4c8b2c20437a5e14cc9ed28f26c4613cbfbb00c48d87f18343f6bf73"
+      },
+      "freerdp3/freerdp/client/location.h": {
+        "bytes": 3549,
+        "sha256": "b120a4a4e972d33798e85c67875c13e2ebffd8cee0db77f95866e792e282545b"
+      },
+      "freerdp3/freerdp/client/printer.h": {
+        "bytes": 3191,
+        "sha256": "753471c4302e868bab2f3fd595701db7697bec2033508b602b2af63a59f95f4d"
+      },
+      "freerdp3/freerdp/client/rail.h": {
+        "bytes": 8867,
+        "sha256": "be45ad633f6e5b5b4acf5a2029ba4dc405fb97c6587a5cbdada9d30b2a18c5c3"
+      },
+      "freerdp3/freerdp/client/rdpdr.h": {
+        "bytes": 3144,
+        "sha256": "f51500716fa5afa2d49605addb87c1cf8b4b60c512c73ed311b9d3607d06fd34"
+      },
+      "freerdp3/freerdp/client/rdpei.h": {
+        "bytes": 4200,
+        "sha256": "7b8024ffdf3a09941efbcfe68f85559c386a940185015f2b99eb0c78daadf94e"
+      },
+      "freerdp3/freerdp/client/rdpgfx.h": {
+        "bytes": 10435,
+        "sha256": "863df5d60cc341ba54daf275cc92f88f09cbd5f5f65f6d94bf67488b14c52d43"
+      },
+      "freerdp3/freerdp/client/rdpsnd.h": {
+        "bytes": 3314,
+        "sha256": "3b7dbe5a003a510955748a8926ade3a54e8cac58783992f7c76d3aa4513d36e2"
+      },
+      "freerdp3/freerdp/client/remdesk.h": {
+        "bytes": 1095,
+        "sha256": "adb17244261b9bd50582e0026b0dd90ebf3ef3c61d613b0a468debd44760d2f0"
+      },
+      "freerdp3/freerdp/client/sshagent.h": {
+        "bytes": 2364,
+        "sha256": "116da271caf15eb0ec7a30e9d95701db6d954ccd12e86921fb08d4440dbbe4bd"
+      },
+      "freerdp3/freerdp/client/tsmf.h": {
+        "bytes": 1907,
+        "sha256": "f4c0b8ceb6fc3fc53ccd77e6f960bc5e364e1e59d4a73e244461d7d7fe3fcdc5"
+      },
+      "freerdp3/freerdp/client/utils/smartcard_cli.h": {
+        "bytes": 1052,
+        "sha256": "47b970f5f3417284e56f1f5d21c073decdac0e7f2d07b01631e630ec0cb4c324"
+      },
+      "freerdp3/freerdp/client/video.h": {
+        "bytes": 2594,
+        "sha256": "de6b3f1ed250b156505ec6ae5f03e547fd79a7bded0f59855b2ef4e7b5562e40"
+      },
+      "freerdp3/freerdp/client.h": {
+        "bytes": 17400,
+        "sha256": "4451a097a7af306a6eaa0c6e9cbabe17f53393d44b8cde6c367ae7f9104e9b95"
+      },
+      "freerdp3/freerdp/codec/audio.h": {
+        "bytes": 7565,
+        "sha256": "3c16b859565443bca51d602085e18e59ec5aa8539e52ef080f6a7f3b78958558"
+      },
+      "freerdp3/freerdp/codec/av1.h": {
+        "bytes": 3381,
+        "sha256": "be2c24e6e55f8dfb50cbae387e0ad5e434001fc1ddbf4ad15e10a127cebc2abc"
+      },
+      "freerdp3/freerdp/codec/bitmap.h": {
+        "bytes": 1385,
+        "sha256": "6ba75da7e5ec1958786e28aaaa8ee1ccd165a5d58be23d60b6422ef680fda0a2"
+      },
+      "freerdp3/freerdp/codec/bulk.h": {
+        "bytes": 1139,
+        "sha256": "b983ab3e01c8e019e6cf87c4496e28f7d520a6d3614a2aa7b53c82e3abaa8bbe"
+      },
+      "freerdp3/freerdp/codec/clear.h": {
+        "bytes": 4238,
+        "sha256": "2db12c25d2852eea0375a5a45b72a4679f884938ded83e5fef099a627cc90119"
+      },
+      "freerdp3/freerdp/codec/color.h": {
+        "bytes": 21860,
+        "sha256": "e0963c11542107ef0a0782d352af51a8b73c8cda85a8cd2e81b86bea4c8b7d7c"
+      },
+      "freerdp3/freerdp/codec/dsp.h": {
+        "bytes": 2332,
+        "sha256": "4e047893d8253d9e167d2ff2d617dc6d1b9b753bc3284ef6f2aab148d9c85101"
+      },
+      "freerdp3/freerdp/codec/h264.h": {
+        "bytes": 5641,
+        "sha256": "b621940f989ec0956cd85a1f7dee83d0d1957f0fac0c02bf50f8600d7e7de85e"
+      },
+      "freerdp3/freerdp/codec/interleaved.h": {
+        "bytes": 2751,
+        "sha256": "7335faf725bd9a731acedf53dbb636bf09ebaddde3a4f02a6176f04ea8a8013a"
+      },
+      "freerdp3/freerdp/codec/jpeg.h": {
+        "bytes": 1074,
+        "sha256": "f57351a0b4465c38c1089513928ab9096501893f2c55469d50b866b8c53857be"
+      },
+      "freerdp3/freerdp/codec/nsc.h": {
+        "bytes": 6111,
+        "sha256": "71532d2b76ac18de001f1046094aa7f144e40522e809aab39a4cca111df2a87f"
+      },
+      "freerdp3/freerdp/codec/planar.h": {
+        "bytes": 3635,
+        "sha256": "71a9a93bc0cedc1592002cbf31e9b02a67b66388c84a936e2bd5f90af6abbacc"
+      },
+      "freerdp3/freerdp/codec/progressive.h": {
+        "bytes": 3820,
+        "sha256": "757a9527e1a1a0aca6adf3b572ed105bf748fb1e2be4b045742782abb773f313"
+      },
+      "freerdp3/freerdp/codec/region.h": {
+        "bytes": 6665,
+        "sha256": "df85f69f2e870e55602bd38b85a0d66a7f4d75ae4610aadd14e3263e2255723f"
+      },
+      "freerdp3/freerdp/codec/rfx.h": {
+        "bytes": 7336,
+        "sha256": "4cf6120d28a589a5b3ef26c3db4c0b4f1d964013d433e51879284b62087ba199"
+      },
+      "freerdp3/freerdp/codec/video.h": {
+        "bytes": 6250,
+        "sha256": "df34d5b26f3a7e7f26fa6f470af19cd9e662391fd74bb5a19875330b8e3118ec"
+      },
+      "freerdp3/freerdp/codec/yuv.h": {
+        "bytes": 3205,
+        "sha256": "52b7f89e4c6d6e7d01764e85ddfcadc340a76a68c146d1dedc08b060b59424a8"
+      },
+      "freerdp3/freerdp/codec/zgfx.h": {
+        "bytes": 2451,
+        "sha256": "ba8c7b4206191e679b9d169485b8ff69c588693aedfd6e8e9c57a93352abb5d9"
+      },
+      "freerdp3/freerdp/codecs.h": {
+        "bytes": 3658,
+        "sha256": "b21060d73a23c015eda04925aa2b657de572a1e81612d8ee19fcc0efc1fdb0a8"
+      },
+      "freerdp3/freerdp/config.h": {
+        "bytes": 6864,
+        "sha256": "b338ef31e8964e38344f50b6e58fbdf2c7e31a3a60ed30d4aebe77baf98c59ee"
+      },
+      "freerdp3/freerdp/constants.h": {
+        "bytes": 1958,
+        "sha256": "a005f41849890a236a819f849aabaa0d4606f5c06592299379dc04b47f207dbb"
+      },
+      "freerdp3/freerdp/crypto/ber.h": {
+        "bytes": 5184,
+        "sha256": "8ac18a129c438ff9e2def01990f7813052bdb0c3f49596e29beb773afbb8bc6b"
+      },
+      "freerdp3/freerdp/crypto/certificate.h": {
+        "bytes": 5937,
+        "sha256": "25499ae298dbb32a98a53d66c9eb6f32f518018d07748c3296fb4415c1da2ffb"
+      },
+      "freerdp3/freerdp/crypto/certificate_data.h": {
+        "bytes": 3466,
+        "sha256": "0d1ed3bedc2f47690d5626018c34958e528632ce99aabf02a0ffa307d53f2432"
+      },
+      "freerdp3/freerdp/crypto/certificate_store.h": {
+        "bytes": 3085,
+        "sha256": "98e099da6facb58ace1394631f4a5e92fdbfb08bbe18865d280de382c8083dc6"
+      },
+      "freerdp3/freerdp/crypto/crypto.h": {
+        "bytes": 4862,
+        "sha256": "6f870e438d5bae476b7c79a88b2ecc3c3fe08f03b533dee8fa65b7ac928641c9"
+      },
+      "freerdp3/freerdp/crypto/der.h": {
+        "bytes": 2140,
+        "sha256": "f88d705cd081933736d125e84cb5e9377edb6aed6b82495643dd66ee57d015ec"
+      },
+      "freerdp3/freerdp/crypto/er.h": {
+        "bytes": 6025,
+        "sha256": "89ab3463d0d6c385c7e2f39cc5db594ddc2a15265d7c54ae4740580ebab7033b"
+      },
+      "freerdp3/freerdp/crypto/per.h": {
+        "bytes": 3201,
+        "sha256": "399c2d6d792e5412ba6959d4542c197ca982f2f60860d3a9275ef61fed65fa3e"
+      },
+      "freerdp3/freerdp/crypto/privatekey.h": {
+        "bytes": 3424,
+        "sha256": "392fc5cf2691c9995bc61e5432bf01b4bb071fdfeaabe20d74bf990fd12dd566"
+      },
+      "freerdp3/freerdp/display.h": {
+        "bytes": 1164,
+        "sha256": "c62ba0645c656a8eee728822e2c06265b867094ab7e700006b38e0517dd786db"
+      },
+      "freerdp3/freerdp/dvc.h": {
+        "bytes": 7055,
+        "sha256": "71b8f519808b4d470088fbcafe456f16401c0b1bf02eaf0aa6f0c934b40a2186"
+      },
+      "freerdp3/freerdp/emulate/scard/smartcard_emulate.h": {
+        "bytes": 23397,
+        "sha256": "95381b75034715603f43211e73f6e33c70c262500272331a20121d25f825631a"
+      },
+      "freerdp3/freerdp/error.h": {
+        "bytes": 16218,
+        "sha256": "376b942011417cd22bd5e27d0ed62439c7a69b5b121e0a508464ff3f41adc1ad"
+      },
+      "freerdp3/freerdp/event.h": {
+        "bytes": 4082,
+        "sha256": "1b04b07d71db344fe1de66ed9f628cf6d7a3bf3d69770e9935d5b42b437a1a09"
+      },
+      "freerdp3/freerdp/extension.h": {
+        "bytes": 2180,
+        "sha256": "165ef883a7a9a5e29a2c561b7d22866c0f54f33327255391e575300bfcbd7f5b"
+      },
+      "freerdp3/freerdp/freerdp.h": {
+        "bytes": 42392,
+        "sha256": "bd513ec4890a8ead21fb347bf283ddaed52e71005ad7648cf8a5831929752b16"
+      },
+      "freerdp3/freerdp/gdi/bitmap.h": {
+        "bytes": 2256,
+        "sha256": "69eda1762a498161e0c375fd3d43f89a8ea92f320092a37f4babbca0771adff0"
+      },
+      "freerdp3/freerdp/gdi/dc.h": {
+        "bytes": 1432,
+        "sha256": "274af5bcea2bea6d5a18aa99f7ff29afd5bcac0dc8453dcec85f2e6d4bf60f82"
+      },
+      "freerdp3/freerdp/gdi/gdi.h": {
+        "bytes": 14668,
+        "sha256": "9ffbbb608fa11b840fb0f298c78ef480ff352717638a0a45463d04e81d9e95f4"
+      },
+      "freerdp3/freerdp/gdi/gfx.h": {
+        "bytes": 2239,
+        "sha256": "ca508b4fd6bcbe991dc1ab4b4a6ebdaedd1c3b553add1722396c7325415ed2c7"
+      },
+      "freerdp3/freerdp/gdi/pen.h": {
+        "bytes": 1199,
+        "sha256": "c0320e6889930463b0566b0983660f1ead4b7bd199ac39e1fb419b38d254905a"
+      },
+      "freerdp3/freerdp/gdi/region.h": {
+        "bytes": 3430,
+        "sha256": "d0431ee5823b523f7fba4ab7dab12a8f6ab0bec8babed9d45816fd196b0cf390"
+      },
+      "freerdp3/freerdp/gdi/shape.h": {
+        "bytes": 1608,
+        "sha256": "47aa6e20b761583d6dab4809ff9a5edc0a1839245a92b447821240c6957ba503"
+      },
+      "freerdp3/freerdp/gdi/video.h": {
+        "bytes": 1798,
+        "sha256": "aa4c160da641ad4579bbed59af645b49c1770ab3188e54835ac72b8818ff3a05"
+      },
+      "freerdp3/freerdp/graphics.h": {
+        "bytes": 6799,
+        "sha256": "ff464e2a800d2b18691b5faeed9e0d6afc92eac2539ad57feebd904d3597b4f2"
+      },
+      "freerdp3/freerdp/heartbeat.h": {
+        "bytes": 1338,
+        "sha256": "ae048a7e44790e91eb5e40ff70a79b9ed55d6d7358b23061f3ee47ec860d9adc"
+      },
+      "freerdp3/freerdp/input.h": {
+        "bytes": 6632,
+        "sha256": "6a353027b7ed0695bb92d78ec83500c2b3de23e11885e123a349a49f6ca918ed"
+      },
+      "freerdp3/freerdp/license.h": {
+        "bytes": 1706,
+        "sha256": "1ea049187a5916780e098cf2f620eb18587f6f5cbccd1af1980d60baf3f4908e"
+      },
+      "freerdp3/freerdp/listener.h": {
+        "bytes": 2981,
+        "sha256": "3c8e11e95391b6825f5fb9004a8194f35c851ec162d5844389a41ea9efeda748"
+      },
+      "freerdp3/freerdp/locale/keyboard.h": {
+        "bytes": 12894,
+        "sha256": "0dae3c0c57eef903e077bd17bc6fbb81476d81814c0d8d463fe29974e654b892"
+      },
+      "freerdp3/freerdp/locale/locale.h": {
+        "bytes": 9069,
+        "sha256": "15ff9e24512c6e7d5c4581576be6e70c35fb90c6ec5b2ac5cc9c30f723fcc473"
+      },
+      "freerdp3/freerdp/log.h": {
+        "bytes": 952,
+        "sha256": "a98f7d9cc5c06933553a6f4ebab434522f65b7e46cd9d1fb69b2a380339c337b"
+      },
+      "freerdp3/freerdp/message.h": {
+        "bytes": 16575,
+        "sha256": "bb25e9ddac3a78d81a93be2495809299b78e8cdc7ea312d4512fa6d096982712"
+      },
+      "freerdp3/freerdp/metrics.h": {
+        "bytes": 1476,
+        "sha256": "741b5e954f6a92513170a206fb061c04d7d14b84610fdd4d1090350f9fbab31d"
+      },
+      "freerdp3/freerdp/peer.h": {
+        "bytes": 10887,
+        "sha256": "b93bee9ce811bb64d6fb77fe75f1b51791943e43b66c66d1b020e4a51acbdbd6"
+      },
+      "freerdp3/freerdp/pointer.h": {
+        "bytes": 3267,
+        "sha256": "a53d5841d4c83adce580afc72d9dfd201d772941e2ad44e7b286fe426e2e5bb4"
+      },
+      "freerdp3/freerdp/primary.h": {
+        "bytes": 10438,
+        "sha256": "54056ac0a6d80b5648d63111d1ff1918f24ae057bf63d7f8a393677a35fac49f"
+      },
+      "freerdp3/freerdp/primitives.h": {
+        "bytes": 18433,
+        "sha256": "4b452cb52778dfeb10b642e7fc05d0c3b115bf390c75d4a5abf7d6b3796ffabf"
+      },
+      "freerdp3/freerdp/private/proxy_client.h": {
+        "bytes": 2554,
+        "sha256": "0e8ba2c53ac6faeea668d02232330fd433566019c529774565599b4b9d8066dd"
+      },
+      "freerdp3/freerdp/private/proxy_server.h": {
+        "bytes": 1425,
+        "sha256": "d99b2bc8a5f81c4da0beea85f3e27c5e28231b4835ebb56664589815a4501c13"
+      },
+      "freerdp3/freerdp/rail.h": {
+        "bytes": 20486,
+        "sha256": "2c88dc8db6b60a2df9e487dd2fe90b81b428879ee9fbe1ab11618c0c1f386fed"
+      },
+      "freerdp3/freerdp/redirection.h": {
+        "bytes": 3158,
+        "sha256": "4af419fbdb67bed02c15e91017735a642bcd9d055648a0eba4f3ce9379fa2208"
+      },
+      "freerdp3/freerdp/scancode.h": {
+        "bytes": 15723,
+        "sha256": "1e8f63ff2aef283802017d56e04e1e45a2cc1f71b15dc8d1e4eddada32fc629f"
+      },
+      "freerdp3/freerdp/secondary.h": {
+        "bytes": 5070,
+        "sha256": "56456b80431b18525016c3b69fa9aedeae42f75d0ab181f5fd1c78d70ea7f212"
+      },
+      "freerdp3/freerdp/server/ainput.h": {
+        "bytes": 3872,
+        "sha256": "5cfb44c4e3622c53e80cc2ce326dd45ccbba1f75454ba73003ff055dc5d022dc"
+      },
+      "freerdp3/freerdp/server/audin.h": {
+        "bytes": 5539,
+        "sha256": "22aa78f62524256892d4ed66806249b8f553573337f6879bf14aabb3cb9057e8"
+      },
+      "freerdp3/freerdp/server/channels.h": {
+        "bytes": 841,
+        "sha256": "3ca48e991b108c4af31eeeb231a266e758c01a2fbaae5d692cd886c1f3a72812"
+      },
+      "freerdp3/freerdp/server/cliprdr.h": {
+        "bytes": 7219,
+        "sha256": "483db2a62acacb2b7c80a10e720b9c927068009c3be0c7cdf90b86dbb9d30d3d"
+      },
+      "freerdp3/freerdp/server/disp.h": {
+        "bytes": 2319,
+        "sha256": "02055944e2b2c3bda2f82a017556b7f3021f67b7b29c349908105fa46711af7f"
+      },
+      "freerdp3/freerdp/server/drdynvc.h": {
+        "bytes": 1827,
+        "sha256": "0a472c328e6b7c5ac5941dccfd632e05294bdf17a4a471b6bb946fd54b6771cc"
+      },
+      "freerdp3/freerdp/server/echo.h": {
+        "bytes": 3012,
+        "sha256": "209a2058ad0d6bf9e69307ecca053606436318709e8fa10fe1862e36bb738ada"
+      },
+      "freerdp3/freerdp/server/encomsp.h": {
+        "bytes": 4288,
+        "sha256": "6fc8ac6d101f268be86bd0eb2dab23f19c6cbb26208610e757e01b5118edebe9"
+      },
+      "freerdp3/freerdp/server/gfxredir.h": {
+        "bytes": 4012,
+        "sha256": "00d5bb1dbf6e54b1af287109400d80b6ee53e6b7e0f54684c6eb5a0785864fe7"
+      },
+      "freerdp3/freerdp/server/location.h": {
+        "bytes": 4555,
+        "sha256": "7a3a97b27a15eb206937399f7d8067172cfa4b1a444b0d278c3e7b4e1e03f5ee"
+      },
+      "freerdp3/freerdp/server/proxy/proxy_config.h": {
+        "bytes": 9223,
+        "sha256": "9ffe3334ee1c98558cbfef3fe9b05dbef8e847eacd83e672e0aa1fafbfa21735"
+      },
+      "freerdp3/freerdp/server/proxy/proxy_context.h": {
+        "bytes": 4997,
+        "sha256": "7dbf1e794ba28d8e904219b58488854689ba08d3c2b373ccd416453abd022d57"
+      },
+      "freerdp3/freerdp/server/proxy/proxy_log.h": {
+        "bytes": 2161,
+        "sha256": "acb91686c11dc941e7618dd34777c7d6792c4d3a4b4cc9991af387bf15f4551f"
+      },
+      "freerdp3/freerdp/server/proxy/proxy_modules_api.h": {
+        "bytes": 8554,
+        "sha256": "2d804bb0f28e0a272942344520b2eaff0b496f142752786fa8c8efd4827374a8"
+      },
+      "freerdp3/freerdp/server/proxy/proxy_server.h": {
+        "bytes": 3883,
+        "sha256": "1baa3ab0d925f5d654e74b64d0c91d6ed8d992c5e754ead1b0449ccb37797d41"
+      },
+      "freerdp3/freerdp/server/proxy/proxy_types.h": {
+        "bytes": 1761,
+        "sha256": "012d640b1c99c93d8fda96d82d88ab98b6cbba1a8b691bcec57fb4e085cfd3eb"
+      },
+      "freerdp3/freerdp/server/rail.h": {
+        "bytes": 8194,
+        "sha256": "45ee34cf048904b901b7c97d27660e57c5953bc57edf2f605722874cc0eaa0a8"
+      },
+      "freerdp3/freerdp/server/rdpdr.h": {
+        "bytes": 33647,
+        "sha256": "166dcc450cc116c5c7dedf4259c4fb6a9ad08b0f56ad0c7498d50878af549f47"
+      },
+      "freerdp3/freerdp/server/rdpecam-enumerator.h": {
+        "bytes": 4727,
+        "sha256": "485c97bd5fb614605529f84020d6f7f4561364b0f8682e1e20e0f96abd8c8af9"
+      },
+      "freerdp3/freerdp/server/rdpecam.h": {
+        "bytes": 10102,
+        "sha256": "c5183e45dcc0c78b739c6266d4760d77b3f27bbe01a7e9f7f502eb0d7a6a521b"
+      },
+      "freerdp3/freerdp/server/rdpei.h": {
+        "bytes": 3592,
+        "sha256": "7953e2be87514447283213f53d4ea035900179bac57d6a95257015f69a0c0cc9"
+      },
+      "freerdp3/freerdp/server/rdpemsc.h": {
+        "bytes": 4173,
+        "sha256": "ba13db354d0f0a04a45cd191ddd00ba1a17039d73164dc6a260c54c2cd2fadd5"
+      },
+      "freerdp3/freerdp/server/rdpgfx.h": {
+        "bytes": 7894,
+        "sha256": "0d59390917c5914bbeb0e6e14c3a154c4f389800d3ec8f6aabab29cf340e3e1b"
+      },
+      "freerdp3/freerdp/server/rdpsnd.h": {
+        "bytes": 7044,
+        "sha256": "479d457ca87d206240f5020664c617e78d3894f2843a73be68414d4040a3abc5"
+      },
+      "freerdp3/freerdp/server/remdesk.h": {
+        "bytes": 1906,
+        "sha256": "f239b67c1f66a9c1af338be38bc19f2ac2f318b24d3c026d6565618090f9bb0b"
+      },
+      "freerdp3/freerdp/server/server-common.h": {
+        "bytes": 1449,
+        "sha256": "9b9a5c839d935099e9266e85341c4b3afa849fb42a0c2e55d463db424a86c323"
+      },
+      "freerdp3/freerdp/server/shadow.h": {
+        "bytes": 15016,
+        "sha256": "7d4d35ade178c1d85eea8997591ac02362dfc3584877bff9da3ba01e1b4e8fc0"
+      },
+      "freerdp3/freerdp/server/telemetry.h": {
+        "bytes": 3460,
+        "sha256": "372de67e1c809e09f7c9b7111c4bff8e9218e8bceef4274f9b908f02f6290ac6"
+      },
+      "freerdp3/freerdp/session.h": {
+        "bytes": 2460,
+        "sha256": "3fb1731707439d358e2d6ae39aad9dc383a047d6e3dd2c4f7ce1903da9ee2876"
+      },
+      "freerdp3/freerdp/settings.h": {
+        "bytes": 37427,
+        "sha256": "ab679fe6f462670645e735ba0d9d37ed92cc1cd3dd962f6a3d2856e99dcf3cde"
+      },
+      "freerdp3/freerdp/settings_keys.h": {
+        "bytes": 19611,
+        "sha256": "c4095dd97d6900d6066b92caa0387cd5b58a57182dd6f84233b18674f2638d25"
+      },
+      "freerdp3/freerdp/settings_types.h": {
+        "bytes": 15207,
+        "sha256": "3169573a50feb22c1b5c7ce0a38db07ab1833af2e6d07737639f7ae12e318eec"
+      },
+      "freerdp3/freerdp/settings_types_private.h": {
+        "bytes": 50649,
+        "sha256": "44a6c6b1dc05f6e06e66d21473d03811e65502ef1e4f2f19eb8db41f08f523bc"
+      },
+      "freerdp3/freerdp/streamdump.h": {
+        "bytes": 1885,
+        "sha256": "d5baaac01754f22327bc515b70ffd106aa0f5914787beb3b9f63ea3078d64c81"
+      },
+      "freerdp3/freerdp/svc.h": {
+        "bytes": 2546,
+        "sha256": "3a63b593adddd2a099a393fde1f7678f0eb489390f76a0eb07f03190835db23b"
+      },
+      "freerdp3/freerdp/timer.h": {
+        "bytes": 4175,
+        "sha256": "fc132437b746ce6c2719766c72e6bf65e6ac00ec5ce2117234b7106fc0405f62"
+      },
+      "freerdp3/freerdp/transport_io.h": {
+        "bytes": 7430,
+        "sha256": "b9ef749bbfbb80a13fccfc2a0b000608f82ed926bbe8bfbeb8aa70af5dad6908"
+      },
+      "freerdp3/freerdp/types.h": {
+        "bytes": 3425,
+        "sha256": "ab3cde5b81d78b35047f96ee5fde9f3979848b74e6237bccb430853943163acd"
+      },
+      "freerdp3/freerdp/update.h": {
+        "bytes": 8741,
+        "sha256": "c58c4d9d2e3435ff7f905e5173e228a97c1cea49a29f7f269892fcef33035d39"
+      },
+      "freerdp3/freerdp/utils/aad.h": {
+        "bytes": 5562,
+        "sha256": "3da15d4d695eb6f217f06df459d05a28aa525ecbdd1fe0cb63ed66affcf9407e"
+      },
+      "freerdp3/freerdp/utils/channel_pdu_tracker.h": {
+        "bytes": 1897,
+        "sha256": "8783822f82036f0154d22e6f4409a28d28a190fa820c1902e92db7e724e1b616"
+      },
+      "freerdp3/freerdp/utils/cliprdr_utils.h": {
+        "bytes": 2140,
+        "sha256": "0a8f340e0fe36f059dc3a98d5bf997154fadfee64c456b668e117d5d1cade23d"
+      },
+      "freerdp3/freerdp/utils/drdynvc.h": {
+        "bytes": 1067,
+        "sha256": "ff87d9caa6c449b6f69de48c8239fe33fc1082459c4a8190f23b87d93cc5368e"
+      },
+      "freerdp3/freerdp/utils/encoded_types.h": {
+        "bytes": 3422,
+        "sha256": "6972ae308eac3ea4526adc83569e14dbe03852d7fe8da631dee6d0a935f0ed18"
+      },
+      "freerdp3/freerdp/utils/gfx.h": {
+        "bytes": 2340,
+        "sha256": "68e18303c360e2aa1116984ac18d82501eddd698bc1511566e8ad182827de36d"
+      },
+      "freerdp3/freerdp/utils/helpers.h": {
+        "bytes": 5335,
+        "sha256": "9f75fd06efcba61dd50aebd77989a92948d9cd4c8fd92f9e2bb68f93d1f231ab"
+      },
+      "freerdp3/freerdp/utils/http.h": {
+        "bytes": 2719,
+        "sha256": "51a434217c8a686afb33843d73308ad90ae4d34af10827aacb2030b31b9fec55"
+      },
+      "freerdp3/freerdp/utils/passphrase.h": {
+        "bytes": 4534,
+        "sha256": "bf997600a8f1c1bcd5764eccc90eb73b739cc18048280d4603425a685b7e81f1"
+      },
+      "freerdp3/freerdp/utils/pcap.h": {
+        "bytes": 2505,
+        "sha256": "a8e99350741bf4a892c744d15c722d9ed4bf1e48daa5c54692809911e5564a6f"
+      },
+      "freerdp3/freerdp/utils/pod_arrays.h": {
+        "bytes": 10280,
+        "sha256": "eb9803403f86f010d9e694e732dcd36f7f6d74ae9f59fa274372863b39685473"
+      },
+      "freerdp3/freerdp/utils/profiler.h": {
+        "bytes": 2913,
+        "sha256": "cfe021844e57f0f1c04a32c9330a70bbdaa6a2061ab3d05b8d413050b7f8da87"
+      },
+      "freerdp3/freerdp/utils/proxy_utils.h": {
+        "bytes": 1356,
+        "sha256": "d1e64a0eb2698773f4eb0b458fdacdb53c93c1324211250529efd9bcc9fc7f2f"
+      },
+      "freerdp3/freerdp/utils/rdpdr_utils.h": {
+        "bytes": 4537,
+        "sha256": "4234fa1659c7feb862ab5faf52bc1a1d872668fdf187f7036176cae9c661eb57"
+      },
+      "freerdp3/freerdp/utils/ringbuffer.h": {
+        "bytes": 4425,
+        "sha256": "302153ef44a31548043de2f609cefd89b4c88ffabf2a252cd8b46b0e89cd8999"
+      },
+      "freerdp3/freerdp/utils/signal.h": {
+        "bytes": 2108,
+        "sha256": "79701bd69c032ba9eec55320405c735ef7a53bb72feee1965d1216eacda210cb"
+      },
+      "freerdp3/freerdp/utils/smartcard_call.h": {
+        "bytes": 3435,
+        "sha256": "80af795970dd40a0eae500dee0629ebcdaf6c71e02d51786c7aa844948369607"
+      },
+      "freerdp3/freerdp/utils/smartcard_operations.h": {
+        "bytes": 6758,
+        "sha256": "747fd632ade7f33c736c5751b322aeab6fe1a2ee3648fa986b2e3c41c92124cf"
+      },
+      "freerdp3/freerdp/utils/smartcard_pack.h": {
+        "bytes": 37330,
+        "sha256": "2b07a08435538db9559da1e6f8e8f3aea6d9425aba4667090432bee23e505ced"
+      },
+      "freerdp3/freerdp/utils/smartcardlogon.h": {
+        "bytes": 1961,
+        "sha256": "d20b819a46dd9f54f306d7f638d229dade71abf11b7354e018430755e3d877f8"
+      },
+      "freerdp3/freerdp/utils/stopwatch.h": {
+        "bytes": 1609,
+        "sha256": "b57b0df4e4438774f38ee525cbeb656269321d8bb576db9c454e7e32ea6e33e7"
+      },
+      "freerdp3/freerdp/utils/string.h": {
+        "bytes": 2967,
+        "sha256": "462e1f0c43a08ef3b1fa7e2be7d833c28d38d0fb1467ee9685b67db632e9baaa"
+      },
+      "freerdp3/freerdp/utils/warnings.h": {
+        "bytes": 1928,
+        "sha256": "2f2164290daed4e6b5b311ab9e3aad6326b91a084714fca841337159e019264b"
+      },
+      "freerdp3/freerdp/version.h": {
+        "bytes": 1224,
+        "sha256": "638f2c86d1b6f13898a8bdc1613d461eabb130c6c7c662183464f8f1606a4ebd"
+      },
+      "freerdp3/freerdp/window.h": {
+        "bytes": 9949,
+        "sha256": "c2145eb4ef785d4553051401345bbb1cf74f258fd0a713113f802aa36616fa67"
+      },
+      "openssl/aes.h": {
+        "bytes": 3257,
+        "sha256": "b4e8309034ffbcb66b026c8f96589b56840aa06a2abc2affc91799f5d4de1fd2"
+      },
+      "openssl/asn1.h": {
+        "bytes": 58195,
+        "sha256": "d3eb00d7a6513104ec322ca06005afa453a995aad0b529a9f6de81c45f237e48"
+      },
+      "openssl/asn1err.h": {
+        "bytes": 5169,
+        "sha256": "9d60638b3d0c52170d390fe566c0b96a6381590590cc3dd71339eb85140fe1d6"
+      },
+      "openssl/asn1t.h": {
+        "bytes": 38889,
+        "sha256": "6ca210a990b89970abe787dffc84df8aa2eba258c08456367a63d0c1d5520635"
+      },
+      "openssl/async.h": {
+        "bytes": 3019,
+        "sha256": "708d52ecd7bb5ca83d243ddecb132db0693b0809f65c093eabda549156934030"
+      },
+      "openssl/asyncerr.h": {
+        "bytes": 739,
+        "sha256": "eb6ea0f0389aa7846ea5b8f5b7b8d2a82a7b52e7dbfa105bc137e52be1399a69"
+      },
+      "openssl/bio.h": {
+        "bytes": 42075,
+        "sha256": "15fecb7dd1226e49d4a0525a77118c54671ba3e3c7bcc1429125c02a4e719434"
+      },
+      "openssl/bioerr.h": {
+        "bytes": 2355,
+        "sha256": "fe1bf57251e4eaab30d2a6aa2048ee93deb1f0f15ef6634f61093b4d405586c6"
+      },
+      "openssl/blowfish.h": {
+        "bytes": 2137,
+        "sha256": "02c7b22c8f1ba9281c083e06ce9efd7d007045142063410ec7e4220e28dab41a"
+      },
+      "openssl/bn.h": {
+        "bytes": 22312,
+        "sha256": "059ee82f9a5f3a96d87a54db19c1be02ccec03cec9d773005b566848ecb2200c"
+      },
+      "openssl/bnerr.h": {
+        "bytes": 1329,
+        "sha256": "beeb78746fbcc2c09e1f833f4c2ea72e845e757390aad7dc8699f7787b580204"
+      },
+      "openssl/buffer.h": {
+        "bytes": 1591,
+        "sha256": "c7b9803f89bb492176a1e2738999dad86195ab8048a26e8ec9ef6948b8882e8a"
+      },
+      "openssl/buffererr.h": {
+        "bytes": 587,
+        "sha256": "4dea6e8ec7f09bfbdaa85fa3e75572b95d2ea62a813e7420a04f5f56ee7ccdfd"
+      },
+      "openssl/byteorder.h": {
+        "bytes": 8444,
+        "sha256": "f062018f5fbe9f8459967dffaaa8e27f34596fb0da21fc011d0d556384a0305c"
+      },
+      "openssl/camellia.h": {
+        "bytes": 3230,
+        "sha256": "faa7c97194c12562b354505fe63fd9b3387fcfc93a2da8cb34f57aea3576d7f1"
+      },
+      "openssl/cast.h": {
+        "bytes": 1881,
+        "sha256": "cc353281d792cb2bd90544f5fc7c6cccd422ee850c71ee2ad43cc4357a00bbb2"
+      },
+      "openssl/cmac.h": {
+        "bytes": 1472,
+        "sha256": "543f1ec749c2959aba01ff451dc835e9f234506051104a9ad47acd2ec842b707"
+      },
+      "openssl/cmp.h": {
+        "bytes": 49399,
+        "sha256": "d13826b994d47bb19e563dc7349f58216518c050b3fd7bd1a0ba65db50befff2"
+      },
+      "openssl/cmp_util.h": {
+        "bytes": 1627,
+        "sha256": "16c51c48c83c930b018ff711553e107f1870f1cedd32d94c06f15709b080c321"
+      },
+      "openssl/cmperr.h": {
+        "bytes": 4821,
+        "sha256": "220d1a903b66e25fa1de92f3ee8b3f5ef27de6dface0a4ea68e683a19e3549a7"
+      },
+      "openssl/cms.h": {
+        "bytes": 32642,
+        "sha256": "a7d1ef315dac8373d48f0d687041d77a6359c178f1d56939a654a0ddd4a849bd"
+      },
+      "openssl/cmserr.h": {
+        "bytes": 4657,
+        "sha256": "9faf0de7e75f3f14ef712186ee81770fe95631fc1000b2e96d2f1da289252db1"
+      },
+      "openssl/comp.h": {
+        "bytes": 4856,
+        "sha256": "20448f8d5243c1a25959b359c297911ef6b0b21c296b1be3f32d2103069f616e"
+      },
+      "openssl/comperr.h": {
+        "bytes": 1002,
+        "sha256": "03faa7ac9cf7ec99350a55758a685056dae8f75992887e0411c23b0d8c5d83b0"
+      },
+      "openssl/conf.h": {
+        "bytes": 10675,
+        "sha256": "687120fe5ac31ed93371e4059dc1239d4ad2a4b42995506fe428108d4507a82a"
+      },
+      "openssl/conf_api.h": {
+        "bytes": 1328,
+        "sha256": "38dce9e9e0a438fcaf1d173c26e61c821bfd3756e221e3be76cf010580ac52f7"
+      },
+      "openssl/conferr.h": {
+        "bytes": 1697,
+        "sha256": "ea9346e399d5dd1fbcca4f34078e1acb5039333602ecaf72faa04e32cdd55484"
+      },
+      "openssl/configuration.h": {
+        "bytes": 5505,
+        "sha256": "b23100eb9304ad7acbcb04ef71edd4eb7c4fef0fc5b7c98313ad526ab8de1047"
+      },
+      "openssl/conftypes.h": {
+        "bytes": 1176,
+        "sha256": "496997cc0f4c32b840677eeefd3ecb488453254be6e228b8cd34d4a4061a9e28"
+      },
+      "openssl/core.h": {
+        "bytes": 7820,
+        "sha256": "4d4e63e2e01d06530515adbbe3c93601c5f0f5e1a96754d34d3470bccfcbdbc3"
+      },
+      "openssl/core_dispatch.h": {
+        "bytes": 47891,
+        "sha256": "cc14001a7800ad13e6e2b5a651b773e4a81d55165039b3f7487c979c4b7323ce"
+      },
+      "openssl/core_names.h": {
+        "bytes": 30715,
+        "sha256": "e8e7ce3051fda555125028fb1ddb6776f8cdabe3aa7d7506862836b4c3952e44"
+      },
+      "openssl/core_object.h": {
+        "bytes": 1091,
+        "sha256": "813ac831d2da6a0e75062709813994c3606cd34731fe9d197360f7082a9c9a51"
+      },
+      "openssl/crmf.h": {
+        "bytes": 20352,
+        "sha256": "4e436e7160ac1a4c2500044ab6effd9a54ee6b303bb86314248390bf84611e4b"
+      },
+      "openssl/crmferr.h": {
+        "bytes": 1896,
+        "sha256": "4b8537ce5cdd958a704921c9cbab4e058a9ab6898b8876f403c825d775a4562d"
+      },
+      "openssl/crypto.h": {
+        "bytes": 24837,
+        "sha256": "9537a338cebc3e90abbe564542cb147dbd549f8d136058398b5a39f4ebcd333e"
+      },
+      "openssl/cryptoerr.h": {
+        "bytes": 1986,
+        "sha256": "c457c0591449551657a69ff9727784a79cc1afd899ac733c682c1a41fefdaa19"
+      },
+      "openssl/cryptoerr_legacy.h": {
+        "bytes": 49303,
+        "sha256": "942694d116d9a2c30a6f7bc441f2c27f2ad1b38662932d36bc077337187a0f65"
+      },
+      "openssl/ct.h": {
+        "bytes": 22656,
+        "sha256": "4c4ca6e44307ea29355bee41fbfc3b5ab0f858611d8e36bd63711cfd0bc9165b"
+      },
+      "openssl/cterr.h": {
+        "bytes": 1241,
+        "sha256": "26d971ab2166ba4473864506dcd933290fa6c321956ef46220eb61fb33a04c89"
+      },
+      "openssl/decoder.h": {
+        "bytes": 4907,
+        "sha256": "72dbf52e4dc4efbfaddbf31ab6f2bec3e9a5c22eed865d057b960a014a4b9ec8"
+      },
+      "openssl/decodererr.h": {
+        "bytes": 740,
+        "sha256": "c6818c667bdf8c37c5423580e0551359c69efc884198d28675db23e9fc70946e"
+      },
+      "openssl/des.h": {
+        "bytes": 7764,
+        "sha256": "420afefcf27f28046912c5f156bc9e93d71a2c8a47bf0f605695a13f391cd5f9"
+      },
+      "openssl/dh.h": {
+        "bytes": 12991,
+        "sha256": "6d8663a0ab985e620f2cee3b2efb7cd392f72184d8e8823030b6e30bc0f233a9"
+      },
+      "openssl/dherr.h": {
+        "bytes": 1702,
+        "sha256": "70f9e260865a9aae4c5f9a72d42d878e4dc216c906709245a8da2cceb79c3a14"
+      },
+      "openssl/dsa.h": {
+        "bytes": 10946,
+        "sha256": "8c9d7a952e5e6a5ab6815f1130ce2362d73ffad82dc881f28a28f5dc302cd87c"
+      },
+      "openssl/dsaerr.h": {
+        "bytes": 1164,
+        "sha256": "b8fb8dae664d18298ae4b0c5444378e3f5c5d095256acb50764230159b1a15d6"
+      },
+      "openssl/dtls1.h": {
+        "bytes": 1239,
+        "sha256": "3477022a712ecbb2bfb61b297c57026f1c354d52c638dfb22292183bd68d2e8f"
+      },
+      "openssl/e_os2.h": {
+        "bytes": 8032,
+        "sha256": "347d258868079249ed6c66d8d929b590a8ca207432497dda6ebb147932979527"
+      },
+      "openssl/e_ostime.h": {
+        "bytes": 1147,
+        "sha256": "0528cffa1548778b3ad52d4abb527e5f31590fb1bab4b0f55aad391efd79fd68"
+      },
+      "openssl/ebcdic.h": {
+        "bytes": 1025,
+        "sha256": "f50d3c91cb24772cf3155fe6464d811219b8f7c65ea3d4f974f58c03c3f27ab5"
+      },
+      "openssl/ec.h": {
+        "bytes": 62434,
+        "sha256": "910b15046414058b8b57c27d607b0b2d540c0a26da1b3570e46365ed4f46fb8b"
+      },
+      "openssl/ecdh.h": {
+        "bytes": 361,
+        "sha256": "5b99fdd1dfea38640ed8a506fb9b66db381cc26a1254448a81cc6b161e41850f"
+      },
+      "openssl/ecdsa.h": {
+        "bytes": 361,
+        "sha256": "5b99fdd1dfea38640ed8a506fb9b66db381cc26a1254448a81cc6b161e41850f"
+      },
+      "openssl/ecerr.h": {
+        "bytes": 3359,
+        "sha256": "c072432649cd1e4bd1eb8c1f636bc2b57045d6f620d69d61c85f589d1c6b63e3"
+      },
+      "openssl/ech.h": {
+        "bytes": 5475,
+        "sha256": "462f13481d46fcfb63daa4063d911ad74c5d437ee9db8e9adb5ceda181cb3e14"
+      },
+      "openssl/encoder.h": {
+        "bytes": 4666,
+        "sha256": "de5651098301ceb1e88bbce0041a843654bf348be308a439c496ab4352bae5ad"
+      },
+      "openssl/encodererr.h": {
+        "bytes": 838,
+        "sha256": "ef86eb7ffe3c1e0fef5f941b86bda9e0641d848dacd8572595364a0c7b8eb7d4"
+      },
+      "openssl/engine.h": {
+        "bytes": 50770,
+        "sha256": "c27153b47cb7a0aecd2a4105334b966a1fd7421dead8b554e9395b00ba1b2779"
+      },
+      "openssl/engineerr.h": {
+        "bytes": 558,
+        "sha256": "16879b470dca312db8856233d77e834251ea394bd6f38136f26041717dbd19e5"
+      },
+      "openssl/err.h": {
+        "bytes": 18923,
+        "sha256": "e8ccd29f965d02a039b46e93f81d57f7ae577d18656dffaa4ed6eabf22425258"
+      },
+      "openssl/ess.h": {
+        "bytes": 9386,
+        "sha256": "1678aee4e521141ec33b76eb2826136b9b2a600d71837a3bed9b5e7d6a6aa4bc"
+      },
+      "openssl/esserr.h": {
+        "bytes": 982,
+        "sha256": "9ab984787cce1224e1426be57987e7726d8c5d38651dd96802a7d433c5288ae4"
+      },
+      "openssl/evp.h": {
+        "bytes": 78721,
+        "sha256": "f69f984ed8ba816b911ab5b8085d84a27cee18fa96fec2cc152469a9891dccd1"
+      },
+      "openssl/evperr.h": {
+        "bytes": 5620,
+        "sha256": "b0709c188c25c816a14e03943bb5af5571c00b777512649b4baf0ad560bd5262"
+      },
+      "openssl/fips_names.h": {
+        "bytes": 1856,
+        "sha256": "f779a00fd1cd19cab09aee90f3993c981ad9f7a9061c027adc5f6ac57bb60c39"
+      },
+      "openssl/fipskey.h": {
+        "bytes": 1372,
+        "sha256": "3396f99f903d91f8fc9d12e0f5f1793cde1b6187becc3407530d72df5c8a3e6f"
+      },
+      "openssl/hmac.h": {
+        "bytes": 1915,
+        "sha256": "a7b3eb80b914aeacbda946893f1ad505c291fa01af949821391ca27ba9e302af"
+      },
+      "openssl/hpke.h": {
+        "bytes": 6081,
+        "sha256": "58f81dab37eddc03b86db9dd640980fca872ddf19f4477482826a64f20454cb9"
+      },
+      "openssl/http.h": {
+        "bytes": 4717,
+        "sha256": "1f8d65d9633d54a74e8477396f2e3d34f5cdafc753fa8d56a5ee31753f5b734f"
+      },
+      "openssl/httperr.h": {
+        "bytes": 1892,
+        "sha256": "56b740a25198f30d19c8ed57b36679bbb32f8f2d97291155d4b3091c347ae423"
+      },
+      "openssl/idea.h": {
+        "bytes": 2285,
+        "sha256": "d114cb69e2e820008c508b7ad9002586806d82e3006e88162bd4a7c2dcd1e801"
+      },
+      "openssl/indicator.h": {
+        "bytes": 818,
+        "sha256": "4be987d4fe4a4b39feac27c2ee85000e1b6ca7188d8ca9f75689a8205c2b4563"
+      },
+      "openssl/kdf.h": {
+        "bytes": 5184,
+        "sha256": "c704d177a651fed1c617ddf3bed2eb8c9e35f453ac7b1187dc6f02c88b76fe3b"
+      },
+      "openssl/kdferr.h": {
+        "bytes": 480,
+        "sha256": "cbf4bd667f0a53459163f546920c2c98ce6d10b0db99176c779d8bf32f04e8b7"
+      },
+      "openssl/lhash.h": {
+        "bytes": 33375,
+        "sha256": "ba50a0dc4caa9662e138f913566c44454a68f6e59c405c761c1f387f58855af4"
+      },
+      "openssl/macros.h": {
+        "bytes": 12520,
+        "sha256": "8ff42d0cc29c8899c95d1c17cfcdf8d64493224e68d58afbe285ad1c6a0e0f95"
+      },
+      "openssl/md2.h": {
+        "bytes": 1336,
+        "sha256": "a8eb0a1cdd0ced053d0f5dc5d1f63fe67f96a83c1cc37b6bf7adde85a567a631"
+      },
+      "openssl/md4.h": {
+        "bytes": 1611,
+        "sha256": "cf9e793b495fac339029113ed42e19bcb7b5fe40579baf8b7402206d756f0099"
+      },
+      "openssl/md5.h": {
+        "bytes": 1609,
+        "sha256": "7006f65670efcf573662db20e5b8aafa351a69509db4ccc203369a1f51bdd9c5"
+      },
+      "openssl/mdc2.h": {
+        "bytes": 1312,
+        "sha256": "740c2361d9b0ab5330ae0054e368f573416c401cb3855b72323967b29232421f"
+      },
+      "openssl/ml_kem.h": {
+        "bytes": 959,
+        "sha256": "58ecec9d4d95ab5172290a4c5725b7b6940149ecdbff5a33b93cc67ede1b25f7"
+      },
+      "openssl/modes.h": {
+        "bytes": 8135,
+        "sha256": "8ea97ace0601cdce6a12d0e1e92aefec062c299d0fcb5ff6477e3d752a9b9763"
+      },
+      "openssl/obj_mac.h": {
+        "bytes": 292496,
+        "sha256": "22a501a150f9994d1624ba5a163682e0c1203b1bab7e4d3955db77609831fe66"
+      },
+      "openssl/objects.h": {
+        "bytes": 7567,
+        "sha256": "b6227db488aa39ed20a29e67d48fe8fefb2f649a1afcc3149cba22ac26510057"
+      },
+      "openssl/objectserr.h": {
+        "bytes": 686,
+        "sha256": "fc14e6c9e71fb550363394f912cb72e6078dd11e300bdddfdd17ec118c88dc4b"
+      },
+      "openssl/ocsp.h": {
+        "bytes": 28750,
+        "sha256": "e41e90db32b76a3abf1b8b8f5c569026c7c42bc0c71bc5cfca45d080498fd3f0"
+      },
+      "openssl/ocsperr.h": {
+        "bytes": 1636,
+        "sha256": "51b319980fb406b70ff0aee9c145c260553f4ff6516305b9c2864643096cc30c"
+      },
+      "openssl/opensslconf.h": {
+        "bytes": 510,
+        "sha256": "7f4b522c049d0bd0d651e6f6ebe71d6df0c37231a94e32524da3f4642ebda3be"
+      },
+      "openssl/opensslv.h": {
+        "bytes": 3569,
+        "sha256": "8e8c8a612da93720f8a62252497aa696b01ef52a718066d13beae4e61f5cbae1"
+      },
+      "openssl/ossl_typ.h": {
+        "bytes": 561,
+        "sha256": "8d430751bbcd1d9695f3dd85b16958fd6255dfbf55775207923f67cba1754548"
+      },
+      "openssl/param_build.h": {
+        "bytes": 2363,
+        "sha256": "f078c5549e172b49da9993ef68c7b7fedafd66b05255c9bf8a37154f0a40bdb7"
+      },
+      "openssl/params.h": {
+        "bytes": 7192,
+        "sha256": "43b3c9bdc46a04244808f9741beb8a429e9fabcb4bce40fcaf3c4261e2e7dbb1"
+      },
+      "openssl/pem.h": {
+        "bytes": 22708,
+        "sha256": "66f01300ee54876de7c166f6bff0df3402b85e49b97086654ccbad68af90b7ec"
+      },
+      "openssl/pem2.h": {
+        "bytes": 523,
+        "sha256": "5bd104c872bbfee2d16f5af88c01b0aeee9f177ecc88c0dd237c9c9948eeedc6"
+      },
+      "openssl/pemerr.h": {
+        "bytes": 1836,
+        "sha256": "18c1dbdde2452416b1d49c7512b7c4b8bf26ac7b83f5c0ee5e27e9bec454d2fb"
+      },
+      "openssl/pkcs12.h": {
+        "bytes": 17450,
+        "sha256": "0c844922cb270721fd47f55b0a482a917bddc6d5201e79c878c86c7133be6501"
+      },
+      "openssl/pkcs12err.h": {
+        "bytes": 1468,
+        "sha256": "f45075e2a613655c56be5e6ff25f0959f7c6d84f7ff529aec18126a46aafd7fd"
+      },
+      "openssl/pkcs7.h": {
+        "bytes": 22563,
+        "sha256": "f09052a5fc2bea5baf71a4ccf933be77e8ddce2991fcd8b393434ab0446ca447"
+      },
+      "openssl/pkcs7err.h": {
+        "bytes": 2242,
+        "sha256": "717e017e7d0981928b33820660e19d5c264a06a5e824b94194036a8be92be07c"
+      },
+      "openssl/posix_time.h": {
+        "bytes": 1506,
+        "sha256": "eb1a102d934f50457624beb09640b87bb8ec6656cd69a37e946bd4f0c8c62a37"
+      },
+      "openssl/prov_ssl.h": {
+        "bytes": 969,
+        "sha256": "23b96759ae94e17c7c0e7ee32a531676be2a276a6d9802828e80268e20f224fd"
+      },
+      "openssl/proverr.h": {
+        "bytes": 6708,
+        "sha256": "429005b94e6efeb8a11b4bcf8a50324d9af413fc1239feac442f55353cacd9a3"
+      },
+      "openssl/provider.h": {
+        "bytes": 3383,
+        "sha256": "dac4bfad226a8e5513cecf472e41e0b7ed93c95374a0ec3fd56f7b046e0aeff1"
+      },
+      "openssl/quic.h": {
+        "bytes": 2207,
+        "sha256": "5bc29758d1beda7805acbac92e5daa83a277414ceb78d09b621102ac3a780f39"
+      },
+      "openssl/rand.h": {
+        "bytes": 3961,
+        "sha256": "00a4c1791b3cb24234ba05e4416f4922a2b8aaf0664c2e93f063d3008a979006"
+      },
+      "openssl/randerr.h": {
+        "bytes": 2486,
+        "sha256": "a6acbb47da2f26fe5e572f232eb9d9ebcd65bb7c01d5984ab26229e5bf0bd45e"
+      },
+      "openssl/rc2.h": {
+        "bytes": 1771,
+        "sha256": "b86a429de0c73aca6e0504b8833c1dcd9e8c7cdf65c2b31b38d0d0c7b19cc5e9"
+      },
+      "openssl/rc4.h": {
+        "bytes": 1075,
+        "sha256": "1bb4fa9d14861cdcf0a721d8d1026be80ce019da459ffdd8b5c1d12365110e78"
+      },
+      "openssl/rc5.h": {
+        "bytes": 2147,
+        "sha256": "7da021eead98513e4e066d2fc68019c09aa90d55bfdf7c17e6ea5aa7d2f6c63e"
+      },
+      "openssl/ripemd.h": {
+        "bytes": 1538,
+        "sha256": "fc253a5d4e29758a4af54453b4e895283920f6ed7d0e0ee2fe5e05b7132c46ec"
+      },
+      "openssl/rsa.h": {
+        "bytes": 22233,
+        "sha256": "71500401b8005ab0220ef47df09b9566a83762ad886b4d90fd7d8305648e6b9f"
+      },
+      "openssl/rsaerr.h": {
+        "bytes": 3821,
+        "sha256": "3b942b173e0b010ad896afbe8e734024f785f8853fc87dfaa1969fb314dade11"
+      },
+      "openssl/safestack.h": {
+        "bytes": 35911,
+        "sha256": "77929c448e9b55eb90f49c37b845a58e70c378270175c5d514f3719b8fa7f6f9"
+      },
+      "openssl/seed.h": {
+        "bytes": 3611,
+        "sha256": "75a00b017f40beba051fdaad04876e18d3c80d1b1f1c21d78fafc69ae8e3b034"
+      },
+      "openssl/self_test.h": {
+        "bytes": 4962,
+        "sha256": "c0af5a9440ef8e29ef35b856bee2095bd5e2b79e2b5f82f1c4e6adc4881740d7"
+      },
+      "openssl/sha.h": {
+        "bytes": 4668,
+        "sha256": "7c1dd91d456ba8eb13cd0ab06b8c7e0041947ab975ed6cc393628de5b65071d8"
+      },
+      "openssl/srp.h": {
+        "bytes": 15779,
+        "sha256": "066ce0fae466c9514bf8283e7cadefc1111d9f7168008f9bbc6b2a6958f01a34"
+      },
+      "openssl/srtp.h": {
+        "bytes": 1888,
+        "sha256": "6efa8edb1f040ba35cb05a671efc74c1494b9d4badc32d47cd5bb99e1a9cda38"
+      },
+      "openssl/ssl.h": {
+        "bytes": 122363,
+        "sha256": "91063e8d9cdfcaeb399aec2ee5c2d3ae6f9a556e8791faea34106e5f9ce87207"
+      },
+      "openssl/ssl2.h": {
+        "bytes": 625,
+        "sha256": "d33dc2afbcdee20f20ffcdd5cda6777c5e49a7cc37d513e4618b71a99129af20"
+      },
+      "openssl/ssl3.h": {
+        "bytes": 12748,
+        "sha256": "f98e0eb1702bf99614e92e2d09f1af5b59309e156441e40ab711df7d661536aa"
+      },
+      "openssl/sslerr.h": {
+        "bytes": 15392,
+        "sha256": "1eb54bf79bc20f221ca1a632e24c2e4a0b8408f3f926f38448e202b83c3691ba"
+      },
+      "openssl/sslerr_legacy.h": {
+        "bytes": 19056,
+        "sha256": "1b596c088959ea7933a35941561783183bec827c2dfc9a1707cc84a97514e31b"
+      },
+      "openssl/stack.h": {
+        "bytes": 3450,
+        "sha256": "8f2093dc40ca0fed08b46bb29ea3ca3f547fc6dbee271ce320e990386ccc9acd"
+      },
+      "openssl/store.h": {
+        "bytes": 14223,
+        "sha256": "8915e568026b56506e9bacdaec244bc2dd4a4c05d1cc1794d59f4053541e8a91"
+      },
+      "openssl/storeerr.h": {
+        "bytes": 1747,
+        "sha256": "2f6640c3c013bdddcb7542008c44a53a3a841047c2e8f502e5aaa279c40c0421"
+      },
+      "openssl/symhacks.h": {
+        "bytes": 1102,
+        "sha256": "2b54552189bfbf4204c28c6a421b21702a3cd3dba37570dbcdadb7ee648f155b"
+      },
+      "openssl/thread.h": {
+        "bytes": 865,
+        "sha256": "583716b74d6aa0596c1d1b06cb16f657d4d9fb9c13cf30505ec0327046af6baf"
+      },
+      "openssl/tls1.h": {
+        "bytes": 64148,
+        "sha256": "1e507f22a8a4f6a5357008b54e1fabac1b04b810cc151648f7918d5e23e72df1"
+      },
+      "openssl/trace.h": {
+        "bytes": 10731,
+        "sha256": "6c7b770cbad1949079f5b5a3c874a674f2cf4c7fdec75c471cc1f16e9882f95a"
+      },
+      "openssl/ts.h": {
+        "bytes": 19266,
+        "sha256": "69d98aba8fce17fa35834f530f8369880f078c2d79a2d03f79a5d2bd2aabccae"
+      },
+      "openssl/tserr.h": {
+        "bytes": 2077,
+        "sha256": "27e66bf494926dea06d8c3800823f2485cf1a7f8f41f5628ff4a443f9bcceb87"
+      },
+      "openssl/txt_db.h": {
+        "bytes": 1635,
+        "sha256": "cbd03be764d6d12e12895703756fbe5f2b7611d4cd55d343837d48e8e6e60523"
+      },
+      "openssl/types.h": {
+        "bytes": 7408,
+        "sha256": "3447b618fb6f1a96a697749b7713e23d0cca5ae3805a5b3a93275be486956163"
+      },
+      "openssl/ui.h": {
+        "bytes": 18797,
+        "sha256": "64ed33440e5dec5bf4cda434fb9eeb617e3e37ebc4dc1aa954dd98a816b337c6"
+      },
+      "openssl/uierr.h": {
+        "bytes": 1062,
+        "sha256": "a21be118ee97343a03dc28256370839e5751c82a2a7bcb4c60fcbd97a9e2bef5"
+      },
+      "openssl/whrlpool.h": {
+        "bytes": 1681,
+        "sha256": "d38ef40783400956d571e442d4f459e9c611239d719eb128e19bc64982d01922"
+      },
+      "openssl/x509.h": {
+        "bytes": 69847,
+        "sha256": "c11cbfbdd06e0c080df896203cf1c02210166d5a676f535dd8c4c18ac4aaefb3"
+      },
+      "openssl/x509_acert.h": {
+        "bytes": 22858,
+        "sha256": "74de397c21cac1873511f4a88c37cc8c44d99b86952eb603ed918836eae3465d"
+      },
+      "openssl/x509_vfy.h": {
+        "bytes": 50081,
+        "sha256": "047e51ebee6c215c3bf1c7e89a29fd1c585dd18999c442f21d807a4fbc96c38f"
+      },
+      "openssl/x509err.h": {
+        "bytes": 2353,
+        "sha256": "337892615c394da64e3101dafca38e4e46e2283fec744f7129bcee6ddc751eb2"
+      },
+      "openssl/x509v3.h": {
+        "bytes": 134336,
+        "sha256": "c3631024adf47885d0f55fcf397ec603e0f8867e900b69bd222e81634c84a4a3"
+      },
+      "openssl/x509v3err.h": {
+        "bytes": 3578,
+        "sha256": "b9be8b0429bfaefb973531e81d598e40779b3788e129c4cc9e33651d2308b990"
+      },
+      "uriparser/Uri.h": {
+        "bytes": 86173,
+        "sha256": "01d7ea78c6c7b61057eb117e4ecc0e6529126d6255c59ae30b850d4003c133f4"
+      },
+      "uriparser/UriBase.h": {
+        "bytes": 15170,
+        "sha256": "65e82cf768ee16449738e66a05047c88679fc930fa5bbc69b3d8a7cf50a36038"
+      },
+      "uriparser/UriDefsAnsi.h": {
+        "bytes": 2579,
+        "sha256": "d4262acd6b5e09863aae420954b0a9010e127e75d13468094e34ff5ffbb51aca"
+      },
+      "uriparser/UriDefsConfig.h": {
+        "bytes": 3364,
+        "sha256": "b3471b1e954a431b299f714fab628a4e3f62fbe3311845a5b79391fed24dd5b2"
+      },
+      "uriparser/UriDefsUnicode.h": {
+        "bytes": 2596,
+        "sha256": "fc98cffbfa90df8664aef6cb990b8a44a106bb63d2da826209f55817f8970934"
+      },
+      "uriparser/UriIp4.h": {
+        "bytes": 3735,
+        "sha256": "79a236c84df63f75d39ad25c23aff5a4be11475d364da18b2918db908728a176"
+      },
+      "winpr3/winpr/Pathcch.h": {
+        "bytes": 13438,
+        "sha256": "cd15cc88989bf454954f24f5785d91279a687583770d456b7968dfc0339ce9a5"
+      },
+      "winpr3/winpr/asn1.h": {
+        "bytes": 11488,
+        "sha256": "f7944faf90525f618af7434ba471f745d4b17bacac99ef3838274a04cbc9c2a0"
+      },
+      "winpr3/winpr/assert-api.h": {
+        "bytes": 4145,
+        "sha256": "380d5b9a2949a7b552449e5a1b980c4e6eb47baf8d9adc9a2adabb5399627e6c"
+      },
+      "winpr3/winpr/assert.h": {
+        "bytes": 1007,
+        "sha256": "639aab13d7491fc5b37a56c8e3516d20fea6cdc4750ffdb4991894674f0fb98c"
+      },
+      "winpr3/winpr/atexit.h": {
+        "bytes": 1185,
+        "sha256": "7d06c8267b4c93cf89df2296f58c3513e20ca2f1a269348bf84c35f5a034be2e"
+      },
+      "winpr3/winpr/bcrypt.h": {
+        "bytes": 11608,
+        "sha256": "7a06185d1ab2d2a379acd57b024dd29a2a61882b61be03d66c4ab87d768c64af"
+      },
+      "winpr3/winpr/bitstream.h": {
+        "bytes": 5267,
+        "sha256": "7af4258d49a4d1ae954aaedafc0ff5d8d6a8b7f38679751466e9b96827d49b4e"
+      },
+      "winpr3/winpr/build-config.h": {
+        "bytes": 786,
+        "sha256": "c5d65208a7375bb267e9c860ce470132295fa1749a2598b635161cf7e98ebd04"
+      },
+      "winpr3/winpr/buildflags.h": {
+        "bytes": 1417,
+        "sha256": "b9834c41d39d0a622cb7403e1ee253c431931b7c44ef204bcec3c9c9daa1c201"
+      },
+      "winpr3/winpr/cast.h": {
+        "bytes": 7675,
+        "sha256": "2d52a5067c36f7bd968a42b895990e5ed29deb9e8668fd41fd624212113615ae"
+      },
+      "winpr3/winpr/clipboard.h": {
+        "bytes": 4776,
+        "sha256": "25bab98803a66ccf072e4a990c86f1dab2c92dca4e71b0d939772a2a89faafec"
+      },
+      "winpr3/winpr/cmdline.h": {
+        "bytes": 6756,
+        "sha256": "7b4347a7f2a8c2afd7de243e653d6eb662ff87bc9862d3023152ff21d24195d9"
+      },
+      "winpr3/winpr/collections.h": {
+        "bytes": 35029,
+        "sha256": "db769aee4276480b3ba85e2535d3072d2c7054f6ed02d47e623fc53d43f82e69"
+      },
+      "winpr3/winpr/comm.h": {
+        "bytes": 16520,
+        "sha256": "497cd60d5b8bcd65f3c9c3dcae26eb87278a3a0a9ab0578bac55442bc23ac7fb"
+      },
+      "winpr3/winpr/config.h": {
+        "bytes": 1878,
+        "sha256": "d05c8c46a9932cd526d58606d50c90a24b1a73c2de4b72c4fa13a60c296bdf47"
+      },
+      "winpr3/winpr/cred.h": {
+        "bytes": 4209,
+        "sha256": "81fb21da738702416dcaaf0c430112beee878022e64f75ab933d125528f03392"
+      },
+      "winpr3/winpr/crt.h": {
+        "bytes": 7704,
+        "sha256": "d8f424fe621940f2a2ec9b6cb82d11446f4ff462380fdb3b2b7edbb517cafc1f"
+      },
+      "winpr3/winpr/crypto.h": {
+        "bytes": 839,
+        "sha256": "676051fbcf83726491aa1bddfe2de8dad2c2525f596f697303f2c720fc3b5284"
+      },
+      "winpr3/winpr/custom-crypto.h": {
+        "bytes": 10271,
+        "sha256": "7f81f576f842ca73a1fc19e70bc2ba5d0df927c83619855ea510e70e09b20bac"
+      },
+      "winpr3/winpr/debug.h": {
+        "bytes": 1810,
+        "sha256": "32fa4e8fb89b3497b3212b2ccb39f28117e8e8a0db01bc64a1c5adbdf7dada81"
+      },
+      "winpr3/winpr/dsparse.h": {
+        "bytes": 2938,
+        "sha256": "a7838280d8973dc09e875252f238954c785d85f6af523e672f3b2f3bb2590873"
+      },
+      "winpr3/winpr/endian.h": {
+        "bytes": 11054,
+        "sha256": "5101a5065038f23a09df9d675312a10f739253e65d8ae8ab7449e7d5ab624899"
+      },
+      "winpr3/winpr/environment.h": {
+        "bytes": 5387,
+        "sha256": "fda18a89bfb8b63968d5f7ccec825e3ac6173ed26380457492a4b791f9abc5a2"
+      },
+      "winpr3/winpr/error.h": {
+        "bytes": 143374,
+        "sha256": "3a446e98cc53fc9b847e1e09e9aec794824028105407e1b46bc828e88e93b35e"
+      },
+      "winpr3/winpr/file.h": {
+        "bytes": 22729,
+        "sha256": "338824a873b43cc7a5613085e9aefd68e4fe27e90cfc4911f32ba16561ffaa00"
+      },
+      "winpr3/winpr/handle.h": {
+        "bytes": 3416,
+        "sha256": "61120abe4c6c112765741d9b0a488d4f58667976a33c148273ffed07df1d48b3"
+      },
+      "winpr3/winpr/image.h": {
+        "bytes": 5471,
+        "sha256": "2acf10d845fd8fe149bb2035f6c026c8224663c77d1d3ba0df9cd3e1161c8d2c"
+      },
+      "winpr3/winpr/ini.h": {
+        "bytes": 5781,
+        "sha256": "a6763673ba4058a7b7d98bad788e338d5b0559bf98e1a3bc4c417e67e7ad753b"
+      },
+      "winpr3/winpr/input.h": {
+        "bytes": 31245,
+        "sha256": "c0144c95c369a5a8131104bb47dccfcdfbb025599ff9fb15c95651302c6c6bdd"
+      },
+      "winpr3/winpr/interlocked.h": {
+        "bytes": 8526,
+        "sha256": "9509ac6f8691c30ddf391e49ccb9e67b7e397689a4bdd3f79c14f84d61ac16c7"
+      },
+      "winpr3/winpr/intrin.h": {
+        "bytes": 2136,
+        "sha256": "05fd7baca758a6af60a1a4ea673a4b979d6cac47bc1c44fa3a40d26a87a54027"
+      },
+      "winpr3/winpr/io.h": {
+        "bytes": 9714,
+        "sha256": "0871c0a17e0cee1b52de63783e42bdd26b8a02216ab1b5033d068743ba22b129"
+      },
+      "winpr3/winpr/json.h": {
+        "bytes": 13896,
+        "sha256": "b42f6f126973373c25c5a75bb58f4e202e201ee4c31c7d328f132580b5fd3eeb"
+      },
+      "winpr3/winpr/library.h": {
+        "bytes": 4044,
+        "sha256": "58fe54a6f15f39fc09726ef2ccd0b9e83bca7cc8958e19335cfaf468951f8dcf"
+      },
+      "winpr3/winpr/memory.h": {
+        "bytes": 2751,
+        "sha256": "d1b1235b89653afab4dfebf9e47868cfe5d561dbc4c1c21ea45031b7706a6f3f"
+      },
+      "winpr3/winpr/ncrypt.h": {
+        "bytes": 10832,
+        "sha256": "f2bc39cfeaf5516da8b7979ca96641396418bf205b35379877e61380947eba1b"
+      },
+      "winpr3/winpr/nt.h": {
+        "bytes": 91047,
+        "sha256": "bf60f10b8be01c0e26288d9402c98f9e2ea7888dd8876f72bec2debd286adb49"
+      },
+      "winpr3/winpr/ntlm.h": {
+        "bytes": 2735,
+        "sha256": "a58b33807319a12e0bb4bf749ec49837a0823505e3af58dda6fa45f9cdf10eb2"
+      },
+      "winpr3/winpr/pack.h": {
+        "bytes": 2064,
+        "sha256": "0bb57d0b3069871adf432793ce0e4ab5afa4b661ed3f2de4fe810c7d8ffa5bcb"
+      },
+      "winpr3/winpr/path.h": {
+        "bytes": 14329,
+        "sha256": "f7b3493caf963224f6629504e21e0918f44ba248cc67d3565be06d9a1b5eaeea"
+      },
+      "winpr3/winpr/pipe.h": {
+        "bytes": 4640,
+        "sha256": "f3ad5c2b27e63fc2cf63700ed2523cfc1e799c2440d858bf577ea67e14cd828f"
+      },
+      "winpr3/winpr/platform.h": {
+        "bytes": 25555,
+        "sha256": "14b6e1a4ce832f3aa9860890cbfdd8474a9cf132ac1b1f043916d8539b6ce39c"
+      },
+      "winpr3/winpr/pool.h": {
+        "bytes": 10704,
+        "sha256": "0effb74eac1282202ed512d86d853eb4ba4055b4661d0de9e2a8478aa339da7e"
+      },
+      "winpr3/winpr/print.h": {
+        "bytes": 1789,
+        "sha256": "41ae748153b06c81a5f781380d356ef552046aa508016ecbf79f9777a39dcca1"
+      },
+      "winpr3/winpr/registry.h": {
+        "bytes": 14740,
+        "sha256": "f1cb8636eed32f231190225e5067c6c027e5e22ec5b846165fe0676e32ac05f2"
+      },
+      "winpr3/winpr/rpc.h": {
+        "bytes": 35112,
+        "sha256": "26b100efeb7f3afb5c72ca98e6b4d7882229f37cb6b4ebceab5b4c3c1b80af7f"
+      },
+      "winpr3/winpr/sam.h": {
+        "bytes": 1818,
+        "sha256": "cc14d10da75ab3bfb23f489a4f75ec80b86b2630420cc6365e3eff404b5aac59"
+      },
+      "winpr3/winpr/schannel.h": {
+        "bytes": 8524,
+        "sha256": "1edd37abac52466899e410c2004c7ce9464457eac6108272c9da0c3e1b00ea47"
+      },
+      "winpr3/winpr/secapi.h": {
+        "bytes": 3054,
+        "sha256": "f2f3195a608746b7861b1fb38786eacc0b84375c6544c8994bb869d8586ecaeb"
+      },
+      "winpr3/winpr/security.h": {
+        "bytes": 12629,
+        "sha256": "43cee3838ffeade965993cc649619dbd7c58d03260484cb7e2762b691c0f377d"
+      },
+      "winpr3/winpr/shell.h": {
+        "bytes": 2517,
+        "sha256": "beb42e3167bec18e303ab94728363591a7ef393d69e1e6fec553063dbd68c7f2"
+      },
+      "winpr3/winpr/smartcard.h": {
+        "bytes": 59985,
+        "sha256": "2391d1307b3cb1971f07cd966725beda5307965a55c3bc8b037b75c3f10fc95b"
+      },
+      "winpr3/winpr/spec.h": {
+        "bytes": 32960,
+        "sha256": "b86007f44f4cd3494166a5cc1d7eaca0079841ec57c894625a99fee76208727d"
+      },
+      "winpr3/winpr/ssl.h": {
+        "bytes": 1359,
+        "sha256": "93d5cd8f3283b61bebdfebea2eda2edd00f80d0f2c81ffe64c68f221a847ac0c"
+      },
+      "winpr3/winpr/sspi.h": {
+        "bytes": 63708,
+        "sha256": "3f078bb9bd5a27f70e8aba0c78f0f5f79b98cdc412b416888c3525cfb4677190"
+      },
+      "winpr3/winpr/sspicli.h": {
+        "bytes": 4752,
+        "sha256": "f06b8c958a46c7d421a429f13b11c7ffc1585c9b1e8f7b113808451936133f5f"
+      },
+      "winpr3/winpr/stream.h": {
+        "bytes": 46466,
+        "sha256": "e32092d99544783fec682cb6adb8fb062a4663325eed1c8f903b7265e7323a38"
+      },
+      "winpr3/winpr/string.h": {
+        "bytes": 19654,
+        "sha256": "ce86f1a645139dfd1f45ea87d6fd93964be038db57cd4c6cfc592dd778c6cc14"
+      },
+      "winpr3/winpr/strlst.h": {
+        "bytes": 1216,
+        "sha256": "623d3e931b82657ec1d224bd6045f2aa1c3669a8c0a6c4627bb64ab81a393f50"
+      },
+      "winpr3/winpr/synch.h": {
+        "bytes": 17020,
+        "sha256": "e51ee58717bd05eefb64f3bf7a262b145638367ec432e7457f43c89d233e8477"
+      },
+      "winpr3/winpr/sysinfo.h": {
+        "bytes": 14266,
+        "sha256": "b31c37426d43e928f73a777be1b45ae2a2e453288c4f4625ae8a4962c011ac16"
+      },
+      "winpr3/winpr/tchar.h": {
+        "bytes": 1695,
+        "sha256": "ca944f2d608749abaae5c3e0c023d83f5778a8936149b7f134ed09d2b3fba714"
+      },
+      "winpr3/winpr/thread.h": {
+        "bytes": 14564,
+        "sha256": "3c0cb31adccd64f7e1b5f7e5e94172ff20b181ad562d7d8b063348eaeebadfb6"
+      },
+      "winpr3/winpr/timezone.h": {
+        "bytes": 4621,
+        "sha256": "ae9637beb9530e0d966c20ba6973aefce3807fbbeef6818614d70ab522fac503"
+      },
+      "winpr3/winpr/tools/makecert.h": {
+        "bytes": 1767,
+        "sha256": "5988330a0c5143aa6b8a7d513833909282085512866fccf90fa8801cdf3e8ee1"
+      },
+      "winpr3/winpr/user.h": {
+        "bytes": 5919,
+        "sha256": "b22ec43479886809e18d6b5f9221602e7913c5b5338755e0eb5398b156203b76"
+      },
+      "winpr3/winpr/version.h": {
+        "bytes": 1092,
+        "sha256": "63b64784251b1952c03eaf1e4defd4470ea65fc521416df2c2410b933f343174"
+      },
+      "winpr3/winpr/wincrypt.h": {
+        "bytes": 29400,
+        "sha256": "c4c8cd9d0a616e394355afe7c22c4a18fc84bc835f9d151a8640f6746e333476"
+      },
+      "winpr3/winpr/windows.h": {
+        "bytes": 4051,
+        "sha256": "4f40ab2bf341e47375b7ab58ef2c74ecc05236447e93773344cbd29aa18c661e"
+      },
+      "winpr3/winpr/winpr.h": {
+        "bytes": 3276,
+        "sha256": "9e8129bf7bc7654ec1468f736c298fffc0f33007c251da0bba9662d3f52ea749"
+      },
+      "winpr3/winpr/winsock.h": {
+        "bytes": 12080,
+        "sha256": "ab2377028d5a310b6c4e98966d74c040c03bbff651ff4a15408f0e97bb7530b5"
+      },
+      "winpr3/winpr/wlog.h": {
+        "bytes": 16976,
+        "sha256": "ef83961e66c1af186a0197c8e4c08f9d247d25aad26e2d90f447d50f870afe95"
+      },
+      "winpr3/winpr/wtsapi.h": {
+        "bytes": 62008,
+        "sha256": "ca67f4f93385251b7e1bb3efcf81a46ec25fbc2bb5bdc23a208a8a684ddb64f6"
+      },
+      "winpr3/winpr/wtypes.h": {
+        "bytes": 10234,
+        "sha256": "a1c9d1bb4d844538d66a925faa3068906914670043980e268d0f37ec504b76df"
+      }
+    }
+  },
+  "toolchain": {
+    "ndk": "29.0.14206865",
+    "cmake": "4.1.2",
+    "abi": "arm64-v8a",
+    "androidPlatform": 29,
+    "jobs": 4,
+    "timeoutSeconds": 240,
+    "maximumLogBytes": 8388608
+  },
+  "patches": [],
+  "compression": {
+    "zlib": "Android OS-owned libz.so via locked NDK API29 stub and headers; device implementation version is not bundled/pinned",
+    "miniLzo": "Bundled pinned LibVNCClient source with LZO_CFG_NO_UNALIGNED=1",
+    "jpeg": "PIC static libjpeg-turbo3.2.0, compiled with Android arm64 SIMD, linked into client",
+    "png": false
+  },
+  "officialReferences": [
+    "https://raw.githubusercontent.com/LibVNC/libvncserver/98aaee0560baa0332339b2ef464ea96ed9b9b28c/CMakeLists.txt",
+    "https://raw.githubusercontent.com/libjpeg-turbo/libjpeg-turbo/3.2.0/BUILDING.md",
+    "https://cmake.org/cmake/help/v4.1/module/FindOpenSSL.html"
+  ]
+}

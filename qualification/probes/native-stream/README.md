@@ -1,6 +1,6 @@
-# Moonlight native core build feasibility
+# Moonlight native core and local Android loading probe
 
-This directory contains a **source lock and native preparation recipe**, not an Android app scaffold. No Activity, Gradle package, stream, Surface or device result is implemented here. It is the first concrete build increment from the [native streaming entry](../../../docs/03-platform/googlebook/native-stream-adoption-entry.md), using actual maintained Moonlight code under the [established-library policy](../../../docs/05-delivery/library-reuse-policy.md).
+This directory contains a **source lock, native preparation recipe and real Android local ABI diagnostic**. The actual separately named APK has loaded the native core on Googlebook; pairing, a stream and Surface output remain unimplemented/unqualified. It advances the [native streaming entry](../../../docs/03-platform/googlebook/native-stream-adoption-entry.md), using actual maintained Moonlight code under the [established-library policy](../../../docs/05-delivery/library-reuse-policy.md).
 
 The selected baseline is Moonlight Android **v12.2**, commit `b48494cb96bff23d8886c4775cc4f39a1075495d`, plus exact common-C, ENet and nanors submodules. [sources.lock.json](sources.lock.json) records all four official archive URLs, sizes, SHA256 values and insertion paths; the native patch set is currently empty. The real arm64 static inputs are upstream-bundled Opus 1.6.1/OpenSSL 4.0.2, with their measured hashes and exact source/build provenance recorded separately. No implementation was copied into tracked project source.
 
@@ -51,6 +51,32 @@ Strict authored Python AST and Ruff checks passed. Six focused preparation check
 
 ## Next boundary and licensing
 
-No Java ABI loading, MediaCodec output, Android compilation/Lint, APK notice/signature/alignment result, pairing, stream or hardware performance is established. Those require a separate uniquely named qualification APK using actual upstream Java/resource dependencies, an owned `LimelightCryptoProvider`, `NvConnection`, `MediaCodecDecoderRenderer`/Surface and parent-controlled host/device evidence. Preserve process-global engine ownership and finite HTTP/native cancellation; no placeholder decoder, fake session or another app's private keys may stand in for that integration.
+The [APK loading result](../../results/P0-S4/2026-10-15-native-stream-apk-load.md) establishes real Android assembly, scoped Lint, selected notices/signature/alignment and one local JNI call. MediaCodec output, pairing, streaming and hardware performance remain unqualified. Next use the reviewed [app-owned key provider](../../../docs/03-platform/googlebook/native-stream-key-provider-entry.md), `NvConnection`, `MediaCodecDecoderRenderer`/Surface and parent-controlled host/device evidence. Preserve process-global engine ownership and finite HTTP/native cancellation; no placeholder decoder, fake session or another app's private keys may stand in for that integration.
 
 Moonlight Android and common-C carry GPLv3 license text; ENet/nanors and the bundled static dependencies retain their own terms. The user selected open-source Desktop with compatible licensing and required source/notices in [ADR0010](../../../docs/adr/0010-desktop-open-source-distribution.md). This permits continued private integration; it does not complete the exact dependency/license/source closure required before distribution. The preparation notice directory carries the four source archives and identified license/build materials for private feasibility. It is neither the final APK asset/source-distribution layout nor a complete corresponding source bundle for the bundled Opus/OpenSSL static libraries; their exact source provenance is pinned, but their complete source/build delivery remains a release gate. Ordinary SSH and native RDP/VNC retain independent delivery and qualification gates; this build introduces no custom Cloudy host adapter.
+
+
+## Android staging, build and actual local loading
+
+The owned overlay is `android/`; actual pinned upstream Java/resources are staged privately, not copied into tracked source. With accepted native `entry-02` already available, run from repository root with the existing JDK21/SDK37 and checksum-pinned Gradle9.7.1 wrapper:
+
+```bash
+python3 tools/prepare_stream_android.py --prepare --stage entry-05 --native-run entry-02
+python3 tools/prepare_stream_android.py --check --stage entry-05
+repository_root="$(pwd)"
+cd .cache/native-stream-android/entry-05
+./gradlew --no-daemon -PcloudyRepositoryRoot="$repository_root" \
+  :app:assembleDebug :app:lintDebug :app:recordCloudyRuntimeDependencies
+```
+
+Preparation requires a fresh stage; use another name when `entry-05` exists. Offline check verifies retained sources without rebuilding. Pre-build verification reconstructs 633 actual source/overlay/native inputs from accepted archives and rejects changed or extra build/source payloads. Android native import reuses the exact accepted library; Gradle does not invoke another native build. The resolved debug-runtime dependency task records fourteen actual artifacts and hashes for this accepted stage; it is not a final source/license SBOM.
+
+Application ID `dev.cloudy.qualification.stream`, namespace `com.limelight`, **0.1.0/code1**, build reference `04cf72ef-ece2-4e15-b072-ef6e73dd203c`: minimum35, compile37, **target36 inherited from upstream**. Target37 is a later behavior review. Entry05 APK is **21,713,253 bytes**, SHA256 `b674ab7c55e4775ed3f79941b3ec95fa6acb20cd26e864d6f483f3146ca0958a`; actual packaged core bytes match native entry02. Signature and 16 KiB native ZIP alignment pass. The final manifest has one owned Activity and zero permissions/providers/services/receivers. Explicit merger removals prevent dependency-added INTERNET and AndroidX initialization from becoming runtime capability.
+
+The owned native Views screen performs real `MoonBridge` class/native initialization and `getLaunchUrlQueryParameters` on a worker, then atomically records bounded evidence. It does not construct upstream discovery/pairing/key/session objects. On the identified Googlebook, the sole local record reports `native-load-and-metadata-passed`, metadata `&corever=1`, zero host connections and zero decoded frames. Its 2,813,594ns duration is one first local observation, not a latency benchmark. Success UI was observed, no screenshot captured; the app is now stopped with its APK retained. Read the [result/manifest](../../results/P0-S4/2026-10-15-native-stream-apk-load.md) and [build/review](../../../docs/06-validation/2026-10-15-native-stream-apk-load.md).
+
+The final Lint gate has zero new errors, 337 warnings and one baseline hint. Exactly 27 original errors in inactive pinned upstream paths are baselined, with no owned code included. Retire affected entries before enabling their network/controller/Activity paths. Existing upstream translation exceptions remain separate. The node-local MissingClass ignore applies only to the removed initializer marker and was independently reviewed against the actual runtime manifest; it does not hide a missing runtime component. Five focused Android-preparation tests pass; no stream test is implied.
+
+Retain Android entry01 (compiled, Lint27errors), entry02 (baseline path failure), entry03 (prepared-only/superseded) and entry04 (removal-marker Lint false positive). Entry05 passed with the reviewed narrow marker annotation. The initially failing device layout predicate expected a nonempty window title; the corrected unique-heading/focused-component check required no app repair. These Android attempts are distinct from native entry01/02 history.
+
+Selected native notice text is packaged, plus dependency public-suffix data; full source archives/build materials stay in the native evidence bundle. Complete transitive notices, source/build delivery and the final compatible license expression remain required under D16/ADR0010 before distribution. Next implement real non-exportable app-owned identity and pairing authorization/cancellation, then actual decoder/audio/Surface streaming. There is no placeholder stream button or borrowed Moonlight/Console key, and no CAP-STREAM, vault, hardware decode, latency or 3D pass.

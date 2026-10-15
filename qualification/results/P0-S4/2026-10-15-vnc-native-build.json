@@ -1,0 +1,403 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-15",
+  "stage": "P0-S4",
+  "scope": "actual Android arm64 TLS/JPEG native compilation and offline source/output/ELF integrity only; no APK/JNI runtime/server qualification",
+  "buildRef": "vnc-android-tls-jpeg-2026-10-15",
+  "status": "native-build-and-offline-check-passed",
+  "sourcesLock": {
+    "path": "qualification/probes/native-vnc/sources.lock.json",
+    "bytes": 66674,
+    "sha256": "ecb4efbfc19dbaf6104a47eb6339243a87ed66691c173c16cc202ac5c93d1ea8"
+  },
+  "sourceRevision": "98aaee0560baa0332339b2ef464ea96ed9b9b28c",
+  "archives": {
+    "vnc": {
+      "revision": "98aaee0560baa0332339b2ef464ea96ed9b9b28c",
+      "url": "https://codeload.github.com/LibVNC/libvncserver/tar.gz/98aaee0560baa0332339b2ef464ea96ed9b9b28c",
+      "archive": "libvncserver-98aaee0560baa0332339b2ef464ea96ed9b9b28c.tar.gz",
+      "bytes": 612494,
+      "sha256": "e4aba30e25cd7bcc743794ccaf4a9b7c3236d15945b9e8b8bb059b0ae1d2f1bb"
+    },
+    "jpeg": {
+      "version": "3.2.0",
+      "url": "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/3.2.0/libjpeg-turbo-3.2.0.tar.gz",
+      "archive": "libjpeg-turbo-3.2.0.tar.gz",
+      "bytes": 2537858,
+      "sha256": "6f30092cef9fb839779646608f4ee14ae3cbac989c47fa05e841b0841f09878e"
+    },
+    "openssl": {
+      "archive": "openssl-4.0.1.tar.gz",
+      "url": "https://github.com/openssl/openssl/releases/download/openssl-4.0.1/openssl-4.0.1.tar.gz",
+      "bytes": 55079428,
+      "sha256": "2db3f3a0d6ea4b59e1f094ace2c8cd536dffb87cdc39084c5afa1e6f7f37dd09"
+    }
+  },
+  "inputs": {
+    "qualification/probes/native-vnc/sources.lock.json": "ecb4efbfc19dbaf6104a47eb6339243a87ed66691c173c16cc202ac5c93d1ea8",
+    "tools/prepare_vnc_native.py": "1ef998d18e9f008b99491bbfe0d662c1ce4bd0c085c6e26dd46a36e8d59925e0",
+    "tools/build_rdp_native.py": "07ed0db14c8f68d5eaebd810c812631baedcabc59998f5d596046bb486fd3fd1",
+    "tools/prepare_rdp_native.py": "63105726cac73f8c6fd7519962a67bf1bac789666846fc73355f3b842e63d1ed"
+  },
+  "sourceInputs": [
+    {
+      "path": "qualification/probes/native-vnc/sources.lock.json",
+      "bytes": 66674,
+      "sha256": "ecb4efbfc19dbaf6104a47eb6339243a87ed66691c173c16cc202ac5c93d1ea8"
+    },
+    {
+      "path": "tools/prepare_vnc_native.py",
+      "bytes": 20679,
+      "sha256": "1ef998d18e9f008b99491bbfe0d662c1ce4bd0c085c6e26dd46a36e8d59925e0"
+    },
+    {
+      "path": "tools/build_rdp_native.py",
+      "bytes": 4742,
+      "sha256": "07ed0db14c8f68d5eaebd810c812631baedcabc59998f5d596046bb486fd3fd1"
+    },
+    {
+      "path": "tools/prepare_rdp_native.py",
+      "bytes": 25825,
+      "sha256": "63105726cac73f8c6fd7519962a67bf1bac789666846fc73355f3b842e63d1ed"
+    },
+    {
+      "path": "tests/test_prepare_vnc_native.py",
+      "bytes": 7401,
+      "sha256": "563d62eb76ff6c2dba9f6de5e20aae12f7faf0fd2737302bf2714db1294ae8c6"
+    },
+    {
+      "path": "qualification/probes/native-vnc/README.md",
+      "bytes": 7572,
+      "sha256": "e6a2366fedb87f9fe24ef7d1ceb153c03ff11c0ac5e478c16f9d6a9beba0555b"
+    },
+    {
+      "path": "qualification/probes/native-vnc/patches/README.md",
+      "bytes": 661,
+      "sha256": "7cbd552d03920650f6d0eac648093f936eadd96ef4552a336d731f775a396fe1"
+    },
+    {
+      "path": "qualification/results/P0-S4/2026-10-15-vnc-native-build.md",
+      "bytes": 4411,
+      "sha256": "f87e82c70bbb3f321504d2a9bae3eedbc17f6532d6cf6ebf5cc894cc9d1547d2"
+    },
+    {
+      "path": "docs/06-validation/2026-10-15-vnc-native-build.md",
+      "bytes": 6507,
+      "sha256": "e79f74b7934f1b47c2ca2afb0c9a40ce62ae6f0d8e336c053f7a9d0de45ca2dd"
+    }
+  ],
+  "toolchain": {
+    "ndk": "29.0.14206865",
+    "cmake": "4.1.2",
+    "clang": "21.0.0",
+    "abi": "arm64-v8a",
+    "androidPlatform": 29,
+    "buildType": "RelWithDebInfo",
+    "jobs": 4,
+    "timeoutSecondsPerStep": 240,
+    "maximumLogBytes": 8388608,
+    "files": {
+      "ndk.properties": "716f3518a923198cfab037abb32dc3f1b1f7e9a9dcdcda6b66be5906215d2658",
+      "cmake": "7f9c6c6df5774621b6dbd749402f27d5404bc47ad6eb4fdc855aceb66f1d05ef",
+      "ninja": "f5d6ae74f53c3714734d0bde7f6ede82c926c84bec06120677bad0c9c331952a",
+      "clang": "d326ed4fc4f71e5315b9ce388fc23ec792f81652ca7b29e66294de6ed2520844",
+      "zlib.h": "9fddc625028f43db3b278cf3af562b29c00fadd91cb893b2223120a330d5bb8f",
+      "zconf.h": "acaaecda655cb34fc24100f5b55a75c8b3e4d684a45d110c0776106124ab05e5",
+      "libz.so": "2a67eb70731e0f7ba11ed3ec8d34adce5e77de6b88ff330357d2d586b2b39e57"
+    }
+  },
+  "features": {
+    "tls": "actual tls_openssl.c and crypto_openssl.c compiled; TLS-none source excluded",
+    "jpeg": "actual PIC static libjpeg-turbo3.2.0 with ARM64 SIMD linked into client",
+    "zlib": "Android OS-owned libz.so; NDK stub/header identity recorded, not device implementation version",
+    "miniLzo": "bundled pinned source; LZO_CFG_NO_UNALIGNED=1",
+    "png": false,
+    "upstreamPatches": 0
+  },
+  "libraries": {
+    "libvncclient.so": {
+      "sha256": "ab5b7d38ab507dd6058be52356c9a7ac2bd4353ec7e5b3a54a030e0ecf4544d4",
+      "bytes": 3797968,
+      "elf": {
+        "needed": [
+          "libc.so",
+          "libcrypto.so",
+          "libdl.so",
+          "libm.so",
+          "libssl.so",
+          "libz.so"
+        ],
+        "soname": "libvncclient.so",
+        "machine": "AArch64",
+        "minimumLoadAlignment": 16384
+      }
+    },
+    "libssl.so": {
+      "sha256": "66288be31a05675f6a319632d6abb137eb38b07f10eea302a8b128bd6ed7d5c0",
+      "bytes": 1205848,
+      "elf": {
+        "needed": [
+          "libc.so",
+          "libcrypto.so",
+          "libdl.so"
+        ],
+        "soname": "libssl.so",
+        "machine": "AArch64",
+        "minimumLoadAlignment": 16384
+      }
+    },
+    "libcrypto.so": {
+      "sha256": "46c0eb8c3c601f3c9d8746e051aefe61e7a324bf152a535feac3f97472deb2d8",
+      "bytes": 6020992,
+      "elf": {
+        "needed": [
+          "libc.so",
+          "libdl.so"
+        ],
+        "soname": "libcrypto.so",
+        "machine": "AArch64",
+        "minimumLoadAlignment": 16384
+      }
+    }
+  },
+  "sourceFileCount": 174,
+  "jpegSourceFileCount": 613,
+  "preparedFileCount": 436,
+  "evidence": [
+    {
+      "path": ".cache/native-vnc/entry-03/receipt.json",
+      "bytes": 140731,
+      "sha256": "f0b959764d666569e76bc11feaeb27d4167c6c19d94d0b9c94df20f1929574c9"
+    },
+    {
+      "path": ".cache/native-vnc/entry-03/inputs.json",
+      "bytes": 427,
+      "sha256": "9ddc29a12a48c938cc9fbf08caa4bbf8fc350c7d9ba9b2ba4c1a5d304ab9c873"
+    },
+    {
+      "path": ".cache/native-vnc/entry-03/jpeg-build.json",
+      "bytes": 302,
+      "sha256": "b8e72917cf715c8e915c397e8d64b463dbbf2b31be6c0936952e0affc5c088c0"
+    },
+    {
+      "path": ".cache/native-vnc/entry-03/jpeg-build.log",
+      "bytes": 9109,
+      "sha256": "7a42763bb60a6347a09cad7be347d0426f278fbcacc579bd963157cfd57431da"
+    },
+    {
+      "path": ".cache/native-vnc/entry-03/jpeg-configure.json",
+      "bytes": 878,
+      "sha256": "018c47657eb2f3896f32cadc4841d0f7487772c2bd7909381bedfc7230c90fad"
+    },
+    {
+      "path": ".cache/native-vnc/entry-03/jpeg-configure.log",
+      "bytes": 3380,
+      "sha256": "2b351b92bbec8bf4e22abc44a61d6ea834e19281132e5f71cc2889a63772a5ab"
+    },
+    {
+      "path": ".cache/native-vnc/entry-03/vnc-build.json",
+      "bytes": 300,
+      "sha256": "68782736488427b1edd27370dcd7b8aefbfae4d782d8c80a7254dfcc715b03f3"
+    },
+    {
+      "path": ".cache/native-vnc/entry-03/vnc-build.log",
+      "bytes": 12158,
+      "sha256": "649797f877147efb7d29076a9342fa7be970bb4f59d197f1329ab486a6f2fa8c"
+    },
+    {
+      "path": ".cache/native-vnc/entry-03/vnc-compile-commands.json",
+      "bytes": 13807,
+      "sha256": "b416e27d160b4584ca1dac022f62bf2069533bd1582d668a0b53b12056f9b2e1"
+    },
+    {
+      "path": ".cache/native-vnc/entry-03/vnc-configure.json",
+      "bytes": 1839,
+      "sha256": "19f0e1f20ed8192a3f1e5a9935e4f21d46ed0b1beeb85ca733532f3b83680378"
+    },
+    {
+      "path": ".cache/native-vnc/entry-03/vnc-configure.log",
+      "bytes": 3955,
+      "sha256": "3cda75283d02069fa070a7b48b7ca35f52ee27862f69adaf0a230a509bb83828"
+    },
+    {
+      "path": ".cache/native-vnc/checks.json",
+      "bytes": 1822,
+      "sha256": "a5aa966b15afba0f30aa39e88ddb46d8a69fb3befb9064ed7d3371b3a7db9aab"
+    }
+  ],
+  "preparedEvidence": [
+    {
+      "path": ".cache/native-vnc/entry-03/prepared/nativeLibraries/arm64-v8a/libcrypto.so",
+      "bytes": 6020992,
+      "sha256": "46c0eb8c3c601f3c9d8746e051aefe61e7a324bf152a535feac3f97472deb2d8"
+    },
+    {
+      "path": ".cache/native-vnc/entry-03/prepared/nativeLibraries/arm64-v8a/libssl.so",
+      "bytes": 1205848,
+      "sha256": "66288be31a05675f6a319632d6abb137eb38b07f10eea302a8b128bd6ed7d5c0"
+    },
+    {
+      "path": ".cache/native-vnc/entry-03/prepared/nativeLibraries/arm64-v8a/libvncclient.so",
+      "bytes": 3797968,
+      "sha256": "ab5b7d38ab507dd6058be52356c9a7ac2bd4353ec7e5b3a54a030e0ecf4544d4"
+    },
+    {
+      "path": ".cache/native-vnc/entry-03/prepared/nativeNotices/NOTICE.txt",
+      "bytes": 635,
+      "sha256": "0fbbd491a6f73c6200bc2efba0d5b15161aa772a180040023f6e95d2c5119c69"
+    },
+    {
+      "path": ".cache/native-vnc/entry-03/prepared/nativeNotices/libjpeg-android-pic.a",
+      "bytes": 6720522,
+      "sha256": "8ca91eb438524f99d5cdb258cb3ea32dc96cc7cb42916fe816bcb3fecdf8da4b"
+    },
+    {
+      "path": ".cache/native-vnc/entry-03/prepared/nativeNotices/openssl-import/accepted-receipt.json",
+      "bytes": 2014,
+      "sha256": "5a55a3cb8e203bcc9d855257ed8319af9bd1257d0af50828c9c37dfecac5de5e"
+    },
+    {
+      "path": ".cache/native-vnc/entry-03/prepared/nativeNotices/vnc-rfbconfig.h",
+      "bytes": 6099,
+      "sha256": "9b6d6072e13ce10a87305d3cb4d57e5a0509a4ad06b54eff29301401c9da5d25"
+    }
+  ],
+  "earlierAttempts": [
+    {
+      "run": "entry-01",
+      "status": "preparation-failed-no-accepted-receipt",
+      "reason": "JPEG compilation completed; helper assumed headers at archive root instead ofsrc/. No accepted receipt; complete authored pre-build snapshot was not yet implemented.",
+      "evidence": [
+        {
+          "path": ".cache/native-vnc/entry-01/failure.json",
+          "bytes": 183,
+          "sha256": "c1923ebb438253d0566c28b003238fcf016779a922bb3ecaf1642e80e23df14a"
+        },
+        {
+          "path": ".cache/native-vnc/entry-01/jpeg-build.json",
+          "bytes": 303,
+          "sha256": "4340ff2f97745cfe8b2dee8454be36e4ccd8c60af9fe4c271d76577a7f607c53"
+        },
+        {
+          "path": ".cache/native-vnc/entry-01/jpeg-build.log",
+          "bytes": 9109,
+          "sha256": "c0364ebc85b20cc209342d343bf412b3bbfd4ce2eee8c1eac5d602408c64f9d2"
+        },
+        {
+          "path": ".cache/native-vnc/entry-01/jpeg-configure.json",
+          "bytes": 878,
+          "sha256": "aa47bbf5048cec3fa484a555210c1c47ab40996ae1ba72062377273b1a9cf5e1"
+        },
+        {
+          "path": ".cache/native-vnc/entry-01/jpeg-configure.log",
+          "bytes": 3380,
+          "sha256": "f7329bd8ad9a0e8f498d9d1664247f72437f1d2063331380d1f1d442d0d02978"
+        }
+      ]
+    },
+    {
+      "run": "entry-02",
+      "status": "preparation-failed-no-accepted-receipt",
+      "reason": "Dependencies found/configured; helper incorrectly required single whitespace in generated zlib macro. No accepted receipt; authored snapshot retained.",
+      "evidence": [
+        {
+          "path": ".cache/native-vnc/entry-02/failure.json",
+          "bytes": 138,
+          "sha256": "d33a4e770bc1656d380a810501d40055e327332c755677e3109aaaaf6d714194"
+        },
+        {
+          "path": ".cache/native-vnc/entry-02/input-snapshot/qualification/probes/native-vnc/sources.lock.json",
+          "bytes": 66674,
+          "sha256": "ecb4efbfc19dbaf6104a47eb6339243a87ed66691c173c16cc202ac5c93d1ea8"
+        },
+        {
+          "path": ".cache/native-vnc/entry-02/input-snapshot/tools/build_rdp_native.py",
+          "bytes": 4742,
+          "sha256": "07ed0db14c8f68d5eaebd810c812631baedcabc59998f5d596046bb486fd3fd1"
+        },
+        {
+          "path": ".cache/native-vnc/entry-02/input-snapshot/tools/prepare_rdp_native.py",
+          "bytes": 25825,
+          "sha256": "63105726cac73f8c6fd7519962a67bf1bac789666846fc73355f3b842e63d1ed"
+        },
+        {
+          "path": ".cache/native-vnc/entry-02/input-snapshot/tools/prepare_vnc_native.py",
+          "bytes": 20646,
+          "sha256": "394cc19460cef620df21a7c4874544e1420d45e70bd815e6630aa0115f1ffb31"
+        },
+        {
+          "path": ".cache/native-vnc/entry-02/inputs.json",
+          "bytes": 427,
+          "sha256": "27a053ae1c67bf44f7c4dae67cc3630cd4b6e2d05900ef47bdebb2d025a21660"
+        },
+        {
+          "path": ".cache/native-vnc/entry-02/jpeg-build.json",
+          "bytes": 302,
+          "sha256": "44c073510f6d4d971e7d55691451ece567cc42068ba7cc5061553ebc4af95e56"
+        },
+        {
+          "path": ".cache/native-vnc/entry-02/jpeg-build.log",
+          "bytes": 9109,
+          "sha256": "a626188c13b4432aa38b36d9e8581ce6829276bed4e3006a30eb5b62292f3b29"
+        },
+        {
+          "path": ".cache/native-vnc/entry-02/jpeg-configure.json",
+          "bytes": 877,
+          "sha256": "3a5d28719de0c4f39d153589d41538ca5c5b2ebea1e8da8a090492b60c5540d7"
+        },
+        {
+          "path": ".cache/native-vnc/entry-02/jpeg-configure.log",
+          "bytes": 3380,
+          "sha256": "93e5e173e488c821c75d13992ead69c6d2f7809f844f5dd9278fab26b63de95f"
+        },
+        {
+          "path": ".cache/native-vnc/entry-02/vnc-configure.json",
+          "bytes": 1839,
+          "sha256": "b6a3d2ef36f0909c6ba6e82e239f00654225b0e67d9ff6cabdae19434209d47f"
+        },
+        {
+          "path": ".cache/native-vnc/entry-02/vnc-configure.log",
+          "bytes": 3955,
+          "sha256": "efb89ffd6796116ac3ed25626f64643be4cf7dd59c9c76802921fcb8238c869e"
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "actualNativeBuild": "passed:118 JPEG steps and11 VNC steps",
+    "offlineVerify": "passed with nonexistent SDK path; no compiler/download/runtime execution",
+    "focusedPythonTests": {
+      "count": 10,
+      "failures": 0,
+      "command": "python3 -m unittest discover -s tests -p test_prepare_vnc_native.py -v"
+    },
+    "authoredAst": {
+      "passed": true,
+      "checkedFiles": 23
+    },
+    "focusedRuff": {
+      "passed": true
+    },
+    "projectValidation": {
+      "passed": true,
+      "scope": "planning-assets-only"
+    },
+    "compilerDiagnostics": {
+      "warnings": 13,
+      "kind": "upstream OpenSSL deprecated APIs",
+      "suppressed": false,
+      "errors": 0
+    },
+    "independentReview": "parent integration and independent direct Codex reviewer accepted bounded source/build evidence; no blockers"
+  },
+  "limitations": [
+    "No APK, JNI or Android loader/runtime execution",
+    "No security negotiation, certificate/endpoint verification or protected-server connection",
+    "No Android sanitizer runtime pass; host27-case result carried forward without rerun",
+    "No device rendering/input/lifecycle/performance or CAP-VNC promotion",
+    "No byte-reproducibility claim for reused debug-bearing OpenSSL binaries",
+    "Private notices/source preparation is not final distribution/source/build/license approval",
+    "ELF16KiB load alignment is not APK zip alignment/runtime proof"
+  ],
+  "capVnc": "pending"
+}

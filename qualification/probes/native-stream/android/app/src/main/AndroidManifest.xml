@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!-- OkHttp's AAR declares network access and AndroidX auto-initialization.
+         This local ABI probe must not acquire either through manifest merging. -->
+    <uses-permission android:name="android.permission.INTERNET" tools:node="remove" />
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
+    <uses-feature android:name="android.hardware.faketouch" android:required="false" />
+    <application android:allowBackup="false" android:fullBackupContent="@xml/cloudy_backup"
+        android:dataExtractionRules="@xml/cloudy_extraction" android:usesCleartextTraffic="false"
+        android:label="@string/cloudy_stream_name" android:icon="@drawable/cloudy_stream_icon"
+        android:theme="@android:style/Theme.Material.Light.NoActionBar" android:supportsRtl="true">
+        <!-- Lint resolves this removal marker against compile classpaths even
+             though startup is runtime-only and absent from the merged manifest. -->
+        <provider android:name="androidx.startup.InitializationProvider"
+            tools:node="remove" tools:ignore="MissingClass" />
+        <!-- Only the owned diagnostic is reachable. Upstream discovery, pairing,
+             USB and credential-owning components are deliberately not registered. -->
+        <activity android:name="dev.cloudy.qualification.stream.StreamProbeActivity"
+            android:exported="true" android:resizeableActivity="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

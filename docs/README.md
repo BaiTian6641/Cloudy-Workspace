@@ -34,3 +34,5 @@ The [desktop workflow design](04-design/desktop-workflows.md) expands the visual
 - [RDP0.1.3 controlled input result](../qualification/results/P0-S4/2026-10-15-rdp-input-boundary.md): continued real frames, zero target input, upstream KDE prerequisite and retained failure/cleanup evidence. [LibVNC host build entry](../qualification/results/P0-S4/2026-10-15-vnc-host-build.md) is compilation only; focused runtime/Android/TLS/license gates remain.
 
 - [RDP0.1.5 cursor repair review](06-validation/2026-10-15-rdp-cursor-repair-review.md) and [physical follow-up](../qualification/results/P0-S4/2026-10-15-rdp-cursor-repair.md): user-confirmed captured host-trail/cursor movement and local release; exact evidence and remaining latency/3D/input-device limits.
+
+- [VNC Android TLS/JPEG native build](../qualification/results/P0-S4/2026-10-15-vnc-native-build.md), [stream Android package/native-load result](../qualification/results/P0-S4/2026-10-15-native-stream-apk-load.md), and [opaque streaming client identity entry](03-platform/googlebook/native-stream-key-provider-entry.md): real engine integration evidence and the next security/session boundaries.

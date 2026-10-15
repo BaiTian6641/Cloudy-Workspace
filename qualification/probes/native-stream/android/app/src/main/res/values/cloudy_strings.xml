@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cloudy_stream_name">Cloudy stream qualification</string>
+    <string name="cloudy_stream_title">Native streaming engine qualification</string>
+    <string name="cloudy_stream_scope">Real Moonlight native bridge loading only. This diagnostic does not connect, pair, decode video or store host credentials.</string>
+    <string name="cloudy_stream_load">Load native engine</string>
+    <string name="cloudy_stream_ready">Ready for a local native ABI check.</string>
+    <string name="cloudy_stream_running">Loading the actual native library…</string>
+    <string name="cloudy_stream_success">Native library initialization and metadata call passed. No host connection or video decoding was performed.</string>
+    <string name="cloudy_stream_failed">Native check or evidence write failed: %1$s</string>
+    <string name="cloudy_stream_close">Close diagnostic</string>
+</resources>

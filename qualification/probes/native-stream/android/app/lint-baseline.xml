@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='utf-8'?>
+<issues format="6" by="lint 9.4.0" type="baseline" client="gradle" dependencies="false" name="AGP (9.4.0)" variant="debug" version="9.4.0">
+  <!-- Only 27 reviewed errors in pinned, inactive upstream source. No owned source is baselined. Retire affected entries before enabling those paths. -->
+  <issue id="MissingPermission" message="Missing permissions required by ConnectivityManager.getAllNetworks: android.permission.ACCESS_NETWORK_STATE" errorLine1="            Network[] networks = connMgr.getAllNetworks();" errorLine2="                                 ~~~~~~~~~~~~~~~~~~~~~~~~">
+    <location file="src/main/java/com/limelight/computers/ComputerManagerService.java" line="347" column="34" />
+  </issue>
+  <issue id="MissingPermission" message="Missing permissions required by ConnectivityManager.getNetworkCapabilities: android.permission.ACCESS_NETWORK_STATE" errorLine1="                NetworkCapabilities netCaps = connMgr.getNetworkCapabilities(net);" errorLine2="                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+    <location file="src/main/java/com/limelight/computers/ComputerManagerService.java" line="349" column="47" />
+  </issue>
+  <issue id="MissingPermission" message="Missing permissions required by ConnectivityManager.registerDefaultNetworkCallback: android.permission.ACCESS_NETWORK_STATE" errorLine1="            connMgr.registerDefaultNetworkCallback(networkCallback);" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+    <location file="src/main/java/com/limelight/computers/ComputerManagerService.java" line="772" column="13" />
+  </issue>
+  <issue id="MissingPermission" message="Missing permissions required by Vibrator.cancel: android.permission.VIBRATE" errorLine1="        deviceVibrator.cancel();" errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~">
+    <location file="src/main/java/com/limelight/binding/input/ControllerHandler.java" line="292" column="9" />
+  </issue>
+  <issue id="MissingPermission" message="Missing permissions required by VibratorManager.cancel: android.permission.VIBRATE" errorLine1="            vm.cancel();" errorLine2="            ~~~~~~~~~~~">
+    <location file="src/main/java/com/limelight/binding/input/ControllerHandler.java" line="1904" column="13" />
+  </issue>
+  <issue id="MissingPermission" message="Missing permissions required by VibratorManager.vibrate: android.permission.VIBRATE" errorLine1="        vm.vibrate(combo.combine(), vibrationAttributes.build());" errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+    <location file="src/main/java/com/limelight/binding/input/ControllerHandler.java" line="1930" column="9" />
+  </issue>
+  <issue id="MissingPermission" message="Missing permissions required by VibratorManager.cancel: android.permission.VIBRATE" errorLine1="            vm.cancel();" errorLine2="            ~~~~~~~~~~~">
+    <location file="src/main/java/com/limelight/binding/input/ControllerHandler.java" line="1963" column="13" />
+  </issue>
+  <issue id="MissingPermission" message="Missing permissions required by VibratorManager.vibrate: android.permission.VIBRATE" errorLine1="        vm.vibrate(combo.combine(), vibrationAttributes.build());" errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+    <location file="src/main/java/com/limelight/binding/input/ControllerHandler.java" line="1988" column="9" />
+  </issue>
+  <issue id="MissingPermission" message="Missing permissions required by Vibrator.cancel: android.permission.VIBRATE" errorLine1="            vibrator.cancel();" errorLine2="            ~~~~~~~~~~~~~~~~~">
+    <location file="src/main/java/com/limelight/binding/input/ControllerHandler.java" line="2004" column="13" />
+  </issue>
+  <issue id="MissingPermission" message="Missing permissions required by Vibrator.vibrate: android.permission.VIBRATE" errorLine1="                    vibrator.vibrate(effect, vibrationAttributes);" errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+    <location file="src/main/java/com/limelight/binding/input/ControllerHandler.java" line="2017" column="21" />
+  </issue>
+  <issue id="MissingPermission" message="Missing permissions required by Vibrator.vibrate: android.permission.VIBRATE" errorLine1="                    vibrator.vibrate(effect, audioAttributes);" errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+    <location file="src/main/java/com/limelight/binding/input/ControllerHandler.java" line="2023" column="21" />
+  </issue>
+  <issue id="MissingPermission" message="Missing permissions required by Vibrator.vibrate: android.permission.VIBRATE" errorLine1="            vibrator.vibrate(VibrationEffect.createWaveform(new long[]{0, onTime, offTime}, 0), vibrationAttributes);" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+    <location file="src/main/java/com/limelight/binding/input/ControllerHandler.java" line="2038" column="13" />
+  </issue>
+  <issue id="MissingPermission" message="Missing permissions required by Vibrator.vibrate: android.permission.VIBRATE" errorLine1="            vibrator.vibrate(new long[]{0, onTime, offTime}, 0, audioAttributes);" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+    <location file="src/main/java/com/limelight/binding/input/ControllerHandler.java" line="2044" column="13" />
+  </issue>
+  <issue id="MissingPermission" message="Missing permissions required by VibratorManager.cancel: android.permission.VIBRATE" errorLine1="                vibratorManager.cancel();" errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~">
+    <location file="src/main/java/com/limelight/binding/input/ControllerHandler.java" line="3064" column="17" />
+  </issue>
+  <issue id="MissingPermission" message="Missing permissions required by Vibrator.cancel: android.permission.VIBRATE" errorLine1="                vibrator.cancel();" errorLine2="                ~~~~~~~~~~~~~~~~~">
+    <location file="src/main/java/com/limelight/binding/input/ControllerHandler.java" line="3067" column="17" />
+  </issue>
+  <issue id="MissingPermission" message="Missing permissions required by ConnectivityManager.isActiveNetworkMetered: android.permission.ACCESS_NETWORK_STATE" errorLine1="        if (connMgr.isActiveNetworkMetered()) {" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+    <location file="src/main/java/com/limelight/Game.java" line="288" column="13" />
+  </issue>
+  <issue id="MissingPermission" message="Missing permissions required by ConnectivityManager.isActiveNetworkMetered: android.permission.ACCESS_NETWORK_STATE" errorLine1="                connMgr.isActiveNetworkMetered()," errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+    <location file="src/main/java/com/limelight/Game.java" line="391" column="17" />
+  </issue>
+  <issue id="MissingPermission" message="Missing permissions required by LayoutParams.setKeyboardCaptureEnabled: android.permission.CAPTURE_KEYBOARD" errorLine1="            windowLayoutParams.setKeyboardCaptureEnabled(enabled);" errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+    <location file="src/main/java/com/limelight/Game.java" line="679" column="13" />
+  </issue>
+  <issue id="MissingPermission" message="Missing permissions required by ConnectivityManager.getActiveNetwork: android.permission.ACCESS_NETWORK_STATE" errorLine1="            Network activeNetwork = connMgr.getActiveNetwork();" errorLine2="                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+    <location file="src/main/java/com/limelight/utils/NetHelper.java" line="14" column="37" />
+  </issue>
+  <issue id="MissingPermission" message="Missing permissions required by ConnectivityManager.getNetworkCapabilities: android.permission.ACCESS_NETWORK_STATE" errorLine1="                NetworkCapabilities netCaps = connMgr.getNetworkCapabilities(activeNetwork);" errorLine2="                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+    <location file="src/main/java/com/limelight/utils/NetHelper.java" line="16" column="47" />
+  </issue>
+  <issue id="MissingPermission" message="Missing permissions required by ConnectivityManager.getActiveNetworkInfo: android.permission.ACCESS_NETWORK_STATE" errorLine1="            NetworkInfo activeNetworkInfo = connMgr.getActiveNetworkInfo();" errorLine2="                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+    <location file="src/main/java/com/limelight/utils/NetHelper.java" line="24" column="45" />
+  </issue>
+  <issue id="MissingPermission" message="Missing permissions required by ConnectivityManager.getActiveNetwork: android.permission.ACCESS_NETWORK_STATE" errorLine1="            Network activeNetwork = connMgr.getActiveNetwork();" errorLine2="                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+    <location file="src/main/java/com/limelight/nvstream/NvConnection.java" line="130" column="37" />
+  </issue>
+  <issue id="MissingPermission" message="Missing permissions required by ConnectivityManager.getNetworkCapabilities: android.permission.ACCESS_NETWORK_STATE" errorLine1="                NetworkCapabilities netCaps = connMgr.getNetworkCapabilities(activeNetwork);" errorLine2="                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+    <location file="src/main/java/com/limelight/nvstream/NvConnection.java" line="132" column="47" />
+  </issue>
+  <issue id="MissingPermission" message="Missing permissions required by ConnectivityManager.getLinkProperties: android.permission.ACCESS_NETWORK_STATE" errorLine1="                LinkProperties linkProperties = connMgr.getLinkProperties(activeNetwork);" errorLine2="                                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+    <location file="src/main/java/com/limelight/nvstream/NvConnection.java" line="147" column="49" />
+  </issue>
+  <issue id="MissingPermission" message="Missing permissions required by ConnectivityManager.getActiveNetworkInfo: android.permission.ACCESS_NETWORK_STATE" errorLine1="            NetworkInfo activeNetworkInfo = connMgr.getActiveNetworkInfo();" errorLine2="                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+    <location file="src/main/java/com/limelight/nvstream/NvConnection.java" line="202" column="45" />
+  </issue>
+  <issue id="GestureBackNavigation" message="`onBackPressed` is no longer called for back gestures; migrate to AndroidX's backward compatible `OnBackPressedDispatcher`" errorLine1="    public void onBackPressed() {" errorLine2="                ~~~~~~~~~~~~~">
+    <location file="src/main/java/com/limelight/HelpActivity.java" line="106" column="17" />
+  </issue>
+  <issue id="GestureBackNavigation" message="`onBackPressed` is no longer called for back gestures; migrate to AndroidX's backward compatible `OnBackPressedDispatcher`" errorLine1="    public void onBackPressed() {" errorLine2="                ~~~~~~~~~~~~~">
+    <location file="src/main/java/com/limelight/preferences/StreamSettings.java" line="108" column="17" />
+  </issue>
+</issues>

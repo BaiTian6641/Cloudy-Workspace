@@ -1,0 +1,84 @@
+plugins { id 'com.android.application' }
+
+android {
+    namespace 'com.limelight'
+    compileSdk 37
+    defaultConfig {
+        applicationId 'dev.cloudy.qualification.stream'
+        minSdk 35
+        // Preserve the exact upstream target baseline for this no-host increment.
+        // A target37 network/session increment has its own behavior review.
+        targetSdk 36
+        versionCode 1
+        versionName '0.1.0'
+        ndk { abiFilters 'arm64-v8a' }
+        buildConfigField 'boolean', 'ROOT_BUILD', 'false'
+        buildConfigField 'String', 'QUALIFICATION_BUILD_REF', '"04cf72ef-ece2-4e15-b072-ef6e73dd203c"'
+        buildConfigField 'String', 'NATIVE_BUILD_REF', '"f336e245-805d-4aad-bc1a-9208df8db318"'
+    }
+    buildFeatures { buildConfig = true; resValues = true }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+        coreLibraryDesugaringEnabled true
+    }
+    sourceSets {
+        main {
+            // Real upstream nonRoot sources remain compile inputs, without their components.
+            java.srcDir 'src/nonRoot/java'
+            jniLibs.srcDir 'build/generated/cloudy/nativeLibraries'
+            assets.srcDir 'build/generated/cloudy/nativeNotices'
+        }
+    }
+    lint {
+        // Carried from the pinned multilingual upstream source baseline.
+        disable 'MissingTranslation'
+        lintConfig file('lint.xml')
+        // Exact inactive upstream findings only. New owned code stays checked;
+        // enabling those paths requires removing their baseline and qualifying permissions/back.
+        baseline file('lint-baseline.xml')
+    }
+    buildTypes {
+        debug {
+            resValue 'string', 'app_label', 'Cloudy stream qualification'
+            resValue 'string', 'app_label_root', 'Cloudy stream qualification'
+        }
+    }
+    packaging { resources { excludes += '/META-INF/*.md' } }
+}
+
+dependencies {
+    // Keep the actual upstream Java dependency closure; manifest exclusions are
+    // not permission to replace referenced classes with stubs.
+    implementation 'org.bouncycastle:bcprov-jdk18on:1.85.2'
+    implementation 'org.bouncycastle:bcpkix-jdk18on:1.85'
+    implementation 'org.jcodec:jcodec:0.2.5'
+    implementation 'com.squareup.okhttp3:okhttp:5.5.0'
+    implementation 'org.jmdns:jmdns:3.6.3'
+    implementation 'com.github.cgutman:ShieldControllerExtensions:1.0.1'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.5'
+}
+
+def verifiedRepository = providers.gradleProperty('cloudyRepositoryRoot')
+def verifyCloudyInputs = tasks.register('verifyCloudyInputs', Exec) {
+    commandLine 'python3', new File(verifiedRepository.get(), 'tools/prepare_stream_android.py'),
+            '--check', '--stage', rootProject.projectDir.name
+}
+tasks.named('preBuild').configure { dependsOn verifyCloudyInputs }
+
+// Record the resolved runtime closure actually consumed by this diagnostic.
+// This is build evidence, not a substitute for release license/source review.
+tasks.register('recordCloudyRuntimeDependencies') {
+    dependsOn verifyCloudyInputs
+    doLast {
+        def records = configurations.debugRuntimeClasspath.incoming.artifacts.artifacts.collect { artifact ->
+            def bytes = artifact.file.bytes
+            [component: artifact.id.componentIdentifier.displayName, file: artifact.file.name,
+             bytes: bytes.length,
+             sha256: java.security.MessageDigest.getInstance('SHA-256').digest(bytes).encodeHex().toString()]
+        }.sort { a, b -> a.component <=> b.component ?: a.file <=> b.file }
+        def target = layout.buildDirectory.file('reports/cloudy-runtime-dependencies.json').get().asFile
+        target.parentFile.mkdirs()
+        target.text = groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(records)) + '\n'
+    }
+}

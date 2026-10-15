@@ -223,7 +223,7 @@
         "P0-S2"
       ],
       "tasks": [
-        "Pin Sunshine/Moonlight and prove external handoff; select buildable RDP/VNC engine candidates and record actual server/encoding/security negotiation. Use the reviewed native entry brief: FreeRDP 3.32.2 arm64 MediaCodec diagnostic APK builds/loads on the HP Googlebook; actual wrong-pin rejection/NLA connection and failure cleanup are observed; first-failure context identifies the resize guard; 0.1.2 displays changing 2880x1800 pixels and explicitly joins/frees on disconnect; retain the failed 0.1.3 Plasma attempt with 79 JNI submissions and zero target input; a separate normal-consent portal session delivers the controlled keyboard marker with one case mismatch. The 0.1.4 standard relative adapter compiles with Android Lint and 36 JVM tests passing; actual native queue device test passes, standard relative negotiation and framework capture are observed, the user confirms release works but captured remote cursor movement fails on KRdp6.4.5;3D, broader release cases and sustained resource/performance remain pending; LibVNC 98aaee0560baa0332339b2ef464ea96ed9b9b28c contains the three identified fixes, with focused advisory regressions and Android build/integration before its network probe. The earlier private harness stopped during miniLZO initialization. A new unchanged-source portable miniLZO host build passes27 focused cases with nine valid controls and full ASan/UBSan; carry that result forward. Android/TLS/real-server integration remains pending.",
+        "Pin Sunshine/Moonlight and prove external handoff; select buildable RDP/VNC engine candidates and record actual server/encoding/security negotiation. Use the reviewed native entry brief: FreeRDP 3.32.2 arm64 MediaCodec diagnostic APK builds/loads on the HP Googlebook; actual wrong-pin rejection/NLA connection and failure cleanup are observed; first-failure context identifies the resize guard; 0.1.2 displays changing 2880x1800 pixels and explicitly joins/frees on disconnect; retain the failed 0.1.3 Plasma attempt with 79 JNI submissions and zero target input; a separate normal-consent portal session delivers the controlled keyboard marker with one case mismatch. The 0.1.4 standard relative adapter compiles with Android Lint and 36 JVM tests passing; actual native queue device test passes, standard relative negotiation and framework capture are observed, the user confirms release works but captured remote cursor movement fails on KRdp6.4.5;3D, broader release cases and sustained resource/performance remain pending; LibVNC 98aaee0560baa0332339b2ef464ea96ed9b9b28c contains the three identified fixes, with focused advisory regressions and Android build/integration before its network probe. The earlier private harness stopped during miniLZO initialization. A new unchanged-source portable miniLZO host build passes27 focused cases with nine valid controls and full ASan/UBSan; carry that result forward. Actual arm64 TLS/JPEG native entry03 now passes with OpenSSL4.0.1 and libjpeg-turbo3.2.0; JNI/session/security policy and Android protected-server integration remain pending.",
         "Exercise trackpad and external mouse in real CAD and text/desktop workloads; verify focus-loss release and native IME/keyboard paths.",
         "Enumerate codecs and optional API-30 low-latency support; measure native decode/pacing/text quality, power and input-to-photon baseline.",
         "Test primary host sessions, lock/headless/permissions, RDP certificate/NLA requirements and protected VNC routes; record unsupported cases and dependencies.",
@@ -232,7 +232,7 @@
         "D15: qualify genuine negotiated RDP relative mouse through public Android capture and an actual3D application, separately for physical mouse/trackpad and exact Linux/Windows/macOS server rows. Diagnostic0.1.5 adds a user-confirmed captured host-trail/cursor/release result on GRD50.2, preserving earlier KRdp/0.1.4 failures. Input subtype was not supplied;3D/broader release and performance remain unqualified. macOS RDP server selection remains unresolved; built-in Apple VNC is a separate lane.",
         "Carry forward the reviewed0.1.5 cursor repair and attempt13 physical result: user confirms captured host trail/cursor movement and release; eight capture edges and real host-painted motion are retained. Prediction stays presentation-only and the standard relative wire route is unchanged. Input subtype, actual3D and measured latency remain unqualified; investigate the earlier lag with bounded client/host measurements and explicit software-fixture limitations.",
         "Review the bounded0.1.6 status/control optimization and same four-gesture device sample: p95 Android frame time remains11ms with one janky frame per sample. No measured lag improvement, end-to-end latency or new physical capture result. Next isolate measured draw/monitor/host costs; do not infer latency from framework counters.",
-        "Use exact Moonlightv12.2 recursive inputs and actual NvConnection/MediaCodec source seams from the native-stream adoption entry. Carry forward the accepted nonRoot arm64 native build; implement the real Android decoder/Surface package, app-owned pairing/key/cancel ownership and actual stream qualification. D16 selects open-source Desktop; actual compatible closure/source/notices/build materials remain release work."
+        "Carry forward the accepted Moonlightv12.2 nonRoot arm64 core and diagnostic0.1.0 APK/JNI initialization/metadata on HP Googlebook. The maintained Java/resource closure compiles;27 exact inactive-upstream Lint errors are baselined with337 warnings retained. No host, key, decoder or stream was exercised. Implement the source-compatible app-owned Keystore identity, actual authorization/signing/TLS, finite HTTP cancellation and attempt ownership, then Surface/MediaCodec streaming. Retire affected baseline entries before enabling upstream paths. D16 selects open-source Desktop; exact compatible closure/source/notices/build materials remain release work."
       ],
       "deliverables": [
         "Pinned stream/RDP/VNC engine and server feasibility matrix",
@@ -307,7 +307,16 @@
         "R210",
         "R211",
         "G141",
-        "G142"
+        "G142",
+        "R212",
+        "R213",
+        "R214",
+        "R215",
+        "R216",
+        "R217",
+        "R218",
+        "G143",
+        "G144"
       ],
       "acceptanceCases": [
         "Q-D01",

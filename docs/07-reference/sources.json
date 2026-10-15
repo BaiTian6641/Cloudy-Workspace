@@ -4408,6 +4408,114 @@
       "sourceUpdatedOn": null,
       "note": "FrameMetrics API24; DEADLINE API31. Unavailable/overlapping values require careful treatment; local window timing is not remote input-to-photon. P0-S4 future bounded instrumentation, not implemented by status-only candidate.",
       "refresh": "Before changing the selected dependency, integration or measurement boundary."
+    },
+    {
+      "id": "R212",
+      "title": "Pinned Moonlight client crypto interface",
+      "url": "https://github.com/moonlight-stream/moonlight-android/blob/b48494cb96bff23d8886c4775cc4f39a1075495d/app/src/main/java/com/limelight/nvstream/http/LimelightCryptoProvider.java",
+      "publisher": "Moonlight",
+      "category": "security",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "getClientCertificate/getClientPrivateKey/getPemEncodedClientCertificate/encodeBase64String; opaque PrivateKey accepted by source interface, not TLS qualification.",
+      "refresh": "Before adapter implementation or changed dependency/provider; actual runtime qualification remains separate."
+    },
+    {
+      "id": "R213",
+      "title": "Pinned Moonlight persisted software identity",
+      "url": "https://github.com/moonlight-stream/moonlight-android/blob/b48494cb96bff23d8886c4775cc4f39a1075495d/app/src/main/java/com/limelight/binding/crypto/AndroidCryptoProvider.java",
+      "publisher": "Moonlight",
+      "category": "security",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "RSA/certificate/PEM reference only; encoded private-key persistence and explicit BC signing are not the app-owned Keystore adapter.",
+      "refresh": "Before adapter implementation or changed dependency/provider; actual runtime qualification remains separate."
+    },
+    {
+      "id": "R214",
+      "title": "Conscrypt opaque RSA Java signing upcalls",
+      "url": "https://github.com/google/conscrypt/blob/master/common/src/main/java/org/conscrypt/CryptoUpcalls.java",
+      "publisher": "Google",
+      "category": "security",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "rsaSignDigestWithPrivateKey uses Cipher.ENCRYPT_MODE, PKCS1Padding or NoPadding; source compatibility rationale only. Moving master is not installed Googlebook implementation.",
+      "refresh": "Before adapter implementation or changed dependency/provider; actual runtime qualification remains separate."
+    },
+    {
+      "id": "R215",
+      "title": "Conscrypt native RSA raw signing bridge",
+      "url": "https://github.com/google/conscrypt/blob/master/common/src/jni/main/cpp/conscrypt/native_crypto.cc",
+      "publisher": "Google",
+      "category": "security",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "RsaMethodSignRaw accepts RSA_PKCS1_PADDING or RSA_NO_PADDING; inspected official raw source. Moving master, not installed provider identity or TLS proof.",
+      "refresh": "Before adapter implementation or changed dependency/provider; actual runtime qualification remains separate."
+    },
+    {
+      "id": "R216",
+      "title": "AOSP Keystore RSA private cipher signing mapping",
+      "url": "https://github.com/aosp-mirror/platform_frameworks_base/blob/main/keystore/java/android/security/keystore2/AndroidKeyStoreRSACipherSpi.java",
+      "publisher": "Android Open Source Project",
+      "category": "security",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Private-key operations map to KM_PURPOSE_SIGN and PKCS1 signing padding; supports proposed SIGN-only raw TLS authorization. Private implementation explanation, never app API; main not device pin.",
+      "refresh": "Before adapter implementation or changed dependency/provider; actual runtime qualification remains separate."
+    },
+    {
+      "id": "R217",
+      "title": "Bouncy Castle provider-neutral certificate content signer",
+      "url": "https://github.com/bcgit/bc-java/blob/main/pkix/src/main/java/org/bouncycastle/operator/jcajce/JcaContentSignerBuilder.java",
+      "publisher": "Bouncy Castle",
+      "category": "security",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "JcaContentSignerBuilder.build(PrivateKey) creates Signature and initSign; avoid forcing BC provider for opaque AndroidKeyStore key. Moving source candidate; verify resolved version and actual signing.",
+      "refresh": "Before adapter implementation or changed dependency/provider; actual runtime qualification remains separate."
+    },
+    {
+      "id": "R218",
+      "title": "libjpeg-turbo 3.2.0 official source release",
+      "url": "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/tag/3.2.0",
+      "publisher": "libjpeg-turbo",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Official libjpeg-turbo-3.2.0.tar.gz selected, not unsupported automatic source assets. Exact archive SHA6f30092cef9fb839779646608f4ee14ae3cbac989c47fa05e841b0841f09878e; real arm64 PIC static JPEG built into accepted VNC entry03, no runtime pass.",
+      "refresh": "Before adapter implementation or changed dependency/provider; actual runtime qualification remains separate."
+    },
+    {
+      "id": "G143",
+      "title": "Android generated key certificate restrictions",
+      "url": "https://developer.android.com/reference/android/security/keystore/KeyGenParameterSpec",
+      "publisher": "Google",
+      "category": "security",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "API23. Authentication-bound generated keys may have invalid initial certificate self-signature; retain auth and create/verify stable public certificate after authorization. No key generation/TLS result.",
+      "refresh": "Before adapter implementation or changed dependency/provider; actual runtime qualification remains separate."
+    },
+    {
+      "id": "G144",
+      "title": "Android provider-neutral cryptography guidance",
+      "url": "https://developer.android.com/privacy-and-security/cryptography",
+      "publisher": "Google",
+      "category": "security",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Select AndroidKeyStore for key generation; use provider-neutral signing operations for opaque keys. Adapter proposal requires actual Googlebook sign/TLS validation.",
+      "refresh": "Before adapter implementation or changed dependency/provider; actual runtime qualification remains separate."
     }
   ]
 }
