@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream
 import java.io.File
 import java.io.IOException
 import java.io.RandomAccessFile
+import java.nio.file.Files
 import java.security.MessageDigest
 import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
@@ -187,6 +188,59 @@ class TransferIntegrityTest {
         }
         assertEquals(3, checks)
         assertArrayEquals(bytes, file.readBytes())
+    }
+
+    @Test
+    fun missingSavedFileIsUnavailableAndAnExplicitLaterAuditCanSucceed() {
+        val bytes = payload(17)
+        val file = part()
+        assertTrue(TransferIntegrity.auditSaved(file, 17, hash(bytes), {}) is TransferAuditResult.Unavailable)
+        assertFalse(file.exists())
+        file.writeBytes(bytes)
+        assertEquals(TransferAuditResult.Verified, TransferIntegrity.auditSaved(file, 17, hash(bytes), {}))
+        assertArrayEquals(bytes, file.readBytes())
+    }
+
+    @Test
+    fun aSavedPathThatCannotBeReadAsAFileIsUnavailableRatherThanCorrupt() {
+        val directory = temporary.newFolder("unreadable-as-file")
+        // Size metadata succeeds, but opening a directory as a payload is a
+        // real filesystem read failure; no stream or Android stub is substituted.
+        val metadataLength = Files.size(directory.toPath())
+        assertTrue(metadataLength in 1..TransferConfigSpec.MAX_BYTES)
+        assertTrue(TransferIntegrity.auditSaved(directory, metadataLength, "a".repeat(64), {}) is TransferAuditResult.Unavailable)
+        assertTrue(directory.isDirectory)
+    }
+
+    @Test
+    fun incompleteSavedFileAuditNeverInventsAMismatchAndCanBeRetried() {
+        val bytes = payload(131072)
+        val file = part().apply { writeBytes(bytes) }
+        val expectedHash = hash(bytes)
+        var checks = 0
+        val timedOut = TransferIntegrity.auditSaved(file, bytes.size.toLong(), expectedHash) {
+            if (++checks == 2) throw TransferFailure("startup-audit-time-limit")
+        }
+        assertEquals(TransferAuditResult.Unavailable("startup-audit-time-limit"), timedOut)
+        assertEquals(2, checks)
+        val readFailed = TransferIntegrity.auditSaved(file, bytes.size.toLong(), expectedHash) {
+            throw IOException("test-only transient audit failure")
+        }
+        assertEquals(TransferAuditResult.Unavailable("IOException"), readFailed)
+        assertArrayEquals(bytes, file.readBytes())
+        assertEquals(TransferAuditResult.Verified,
+            TransferIntegrity.auditSaved(file, bytes.size.toLong(), expectedHash, {}))
+    }
+
+    @Test
+    fun measuredSavedLengthOrDigestDifferencesRemainMismatches() {
+        val bytes = payload(17)
+        val file = part().apply { writeBytes(bytes) }
+        assertEquals(TransferAuditResult.Mismatch, TransferIntegrity.auditSaved(file, 18, hash(bytes), {}))
+        val corrupt = bytes.copyOf().apply { this[5] = (this[5].toInt() xor 1).toByte() }
+        file.writeBytes(corrupt)
+        assertEquals(TransferAuditResult.Mismatch, TransferIntegrity.auditSaved(file, 17, hash(bytes), {}))
+        assertArrayEquals(corrupt, file.readBytes())
     }
 
     @Test

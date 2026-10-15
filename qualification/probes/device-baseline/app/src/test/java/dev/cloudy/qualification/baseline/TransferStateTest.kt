@@ -195,13 +195,13 @@ class TransferStateTest {
         assertTrue(original.complete(attempt.id, TransferDigest(4, hash), time()))
         val restored = TransferState("process-b", original.snapshot())
         assertFalse(restored.recover(time()))
-        restored.auditSavedCompletion(attempt.id, true, time())
+        restored.auditSavedCompletion(attempt.id, TransferAuditResult.Verified, time())
         val reverified = requireNotNull(restored.current())
         assertEquals("completed", reverified.status)
         assertEquals(4L, requireNotNull(reverified.verifiedLengthBytes))
         assertEquals(hash, reverified.verifiedSha256)
         assertEquals("new-process-file-reverified", reverified.reason)
-        restored.auditSavedCompletion(attempt.id, false, time())
+        restored.auditSavedCompletion(attempt.id, TransferAuditResult.Mismatch, time())
         assertEquals("failed", restored.current()?.status)
         assertEquals("saved-completion-file-mismatch", restored.current()?.reason)
         assertNull(restored.current()?.verifiedLengthBytes)
@@ -210,12 +210,35 @@ class TransferStateTest {
     }
 
     @Test
+    fun unavailableAuditPreservesHistoricalCompletionUntilAnActualRetryResult() {
+        val original = TransferState("process-a")
+        val attempt = verifying(original)
+        assertTrue(original.complete(attempt.id, TransferDigest(4, hash), time()))
+        val restored = TransferState("process-b", original.snapshot())
+        val history = restored.snapshot()
+        val revision = restored.revision
+        listOf("IOException", "NoSuchFileException", "startup-audit-time-limit").forEach { reason ->
+            restored.auditSavedCompletion(attempt.id, TransferAuditResult.Unavailable(reason), time())
+            assertEquals(history, restored.snapshot())
+            assertEquals(revision, restored.revision)
+        }
+        restored.auditSavedCompletion(attempt.id, TransferAuditResult.Verified, time())
+        val retried = requireNotNull(restored.current())
+        assertEquals("completed", retried.status)
+        assertEquals(hash, retried.verifiedSha256)
+        assertEquals(4L, requireNotNull(retried.verifiedLengthBytes))
+        assertEquals(history.single().events.size + 1, retried.events.size)
+        assertEquals("new-process-file-reverified", retried.reason)
+        assertEquals(revision + 1, restored.revision)
+    }
+
+    @Test
     fun auditHistoryIsBoundedAndSnapshotsDoNotChangeRetroactively() {
         val state = TransferState("process-a")
         val attempt = verifying(state)
         assertTrue(state.complete(attempt.id, TransferDigest(4, hash), time()))
         val captured = requireNotNull(state.current())
-        repeat(40) { state.auditSavedCompletion(attempt.id, true, time()) }
+        repeat(40) { state.auditSavedCompletion(attempt.id, TransferAuditResult.Verified, time()) }
         val current = requireNotNull(state.current())
         assertEquals(TransferState.EVENT_LIMIT, current.events.size)
         assertEquals(captured.events.size + 40L - TransferState.EVENT_LIMIT, current.droppedEvents)

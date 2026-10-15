@@ -1,0 +1,42 @@
+{
+  "versionCode": "6",
+  "versionName": "0.4.2",
+  "apkSha256": "b52ebabeb8a6e84801425b3c0bad813a67d189be902c3dbfa69ebbca9448b77b",
+  "apkBytes": 6863589,
+  "noticeAssetCount": 11,
+  "noticeAssetsMatch": true,
+  "permissions": [
+    "android.permission.INTERNET",
+    "android.permission.ACCESS_NETWORK_STATE",
+    "android.permission.ACCESS_LOCAL_NETWORK",
+    "android.permission.RUN_USER_INITIATED_JOBS",
+    "android.permission.POST_NOTIFICATIONS"
+  ],
+  "components": [
+    {
+      "type": "receiver",
+      "name": "dev.cloudy.qualification.baseline.TransferCancelReceiver",
+      "exported": "false",
+      "permission": null
+    },
+    {
+      "type": "service",
+      "name": "dev.cloudy.qualification.baseline.TransferJobService",
+      "exported": "false",
+      "permission": "android.permission.BIND_JOB_SERVICE"
+    },
+    {
+      "type": "activity",
+      "name": "dev.cloudy.qualification.baseline.TransferActivity",
+      "exported": "false",
+      "permission": null
+    },
+    {
+      "type": "activity",
+      "name": "dev.cloudy.qualification.baseline.BaselineActivity",
+      "exported": "true",
+      "permission": null
+    }
+  ],
+  "scope": "Local 0.4.2 package audit; no dependency or manifest permission change. Physical audit-fault/recovery evidence remains separate."
+}

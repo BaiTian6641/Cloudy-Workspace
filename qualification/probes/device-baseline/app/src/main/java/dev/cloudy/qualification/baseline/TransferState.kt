@@ -50,12 +50,16 @@ internal class TransferState(private val processId: String, restored: List<Trans
         return changed
     }
 
-    fun auditSavedCompletion(id: String, fileMatches: Boolean, time: TransferTime) {
+    fun auditSavedCompletion(id: String, result: TransferAuditResult, time: TransferTime) {
         val index = attempts.indexOfFirst { it.id == id }
         if (index < 0 || attempts[index].status != "completed") return
         val old = attempts[index]
-        attempts[index] = if (fileMatches) transition(old, "completed", time, "new-process-file-reverified")
-            else transition(old.copy(verifiedLengthBytes = null, verifiedSha256 = null), "failed", time, "saved-completion-file-mismatch")
+        attempts[index] = when (result) {
+            TransferAuditResult.Verified -> transition(old, "completed", time, "new-process-file-reverified")
+            TransferAuditResult.Mismatch -> transition(old.copy(verifiedLengthBytes = null, verifiedSha256 = null),
+                "failed", time, "saved-completion-file-mismatch")
+            is TransferAuditResult.Unavailable -> return
+        }
     }
 
     fun begin(length: Long, hash: String, time: TransferTime): TransferAttempt? {

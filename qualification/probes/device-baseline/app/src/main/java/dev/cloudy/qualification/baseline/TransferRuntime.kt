@@ -85,6 +85,7 @@ internal class TransferRuntime(context: Context) {
     private var configStatus = "not-loaded"
     private var ready = false
     private var setupError: String? = null
+    private var auditUnavailable: String? = null
     private var persistenceError: String? = null
     private var controlError: String? = null
     private var savedRevision = -1L
@@ -95,36 +96,53 @@ internal class TransferRuntime(context: Context) {
     private val cancelReceipts = mutableListOf<CancelReceipt>() // main only; bounded broadcast acknowledgments
 
     init {
-        io.execute {
-            try {
-                val restored = journal.read()
-                val recovered = TransferState(processId, restored)
-                recovered.recover(now())
-                val deadline = SystemClock.elapsedRealtime() + TOTAL_LIMIT_MS
-                restored.filter { it.status == "completed" }.forEach { attempt ->
-                    val matches = try {
-                        TransferIntegrity.verify(partFile(attempt.id), attempt.expectedLengthBytes, attempt.expectedSha256) {
-                            if (SystemClock.elapsedRealtime() >= deadline) throw TransferFailure("startup-audit-time-limit")
-                        }
-                        true
-                    } catch (_: IOException) { false }
-                    recovered.auditSavedCompletion(attempt.id, matches, now())
+        io.execute { initializeFromJournal() }
+    }
+
+    /** IO executor only. An inconclusive audit leaves the committed journal
+     * untouched; Refresh may retry initialization after the underlying fault ends.
+     */
+    private fun initializeFromJournal() {
+        synchronized(lock) { auditUnavailable = null; setupError = null; savedRevision = -1 }
+        var committed = false
+        try {
+            val restored = journal.read()
+            val deadline = SystemClock.elapsedRealtime() + TOTAL_LIMIT_MS
+            val audits = mutableListOf<Pair<String, TransferAuditResult>>()
+            restored.filter { it.status == "completed" }.forEach { attempt ->
+                val result = TransferIntegrity.auditSaved(partFile(attempt.id), attempt.expectedLengthBytes, attempt.expectedSha256) {
+                    if (SystemClock.elapsedRealtime() >= deadline) throw TransferFailure("startup-audit-time-limit")
                 }
-                synchronized(lock) { state = recovered }
-                loadConfig()
-                val committed = persistLatest()
-                main.post {
-                    // A process restart never resumes the old scheduler request,
-                    // even if the OS redelivers a job after process death.
-                    try { scheduler?.cancel(JOB_ID) } catch (failure: RuntimeException) {
-                        synchronized(lock) { setupError = "scheduler-cancel-${failure.javaClass.simpleName}" }
+                if (result is TransferAuditResult.Unavailable) {
+                    synchronized(lock) {
+                        state = TransferState(processId, restored)
+                        auditUnavailable = result.reason
+                        ready = false
                     }
-                    synchronized(lock) { ready = committed && setupError == null }
                     publish()
+                    return
                 }
-            } catch (failure: IOException) { failSetup(failure) }
-            catch (failure: JSONException) { failSetup(failure) }
-            catch (failure: RuntimeException) { failSetup(failure) }
+                audits.add(attempt.id to result)
+            }
+            val recovered = TransferState(processId, restored)
+            recovered.recover(now())
+            audits.forEach { (id, result) -> recovered.auditSavedCompletion(id, result, now()) }
+            synchronized(lock) { state = recovered }
+            loadConfig()
+            committed = persistLatest()
+        } catch (failure: IOException) { failSetup(failure) }
+        catch (failure: JSONException) { failSetup(failure) }
+        catch (failure: RuntimeException) { failSetup(failure) }
+        finally {
+            main.post {
+                // Cancel stale scheduler work even when an audit is unavailable.
+                // Until initialization commits, callbacks cannot mutate history.
+                try { scheduler?.cancel(JOB_ID) } catch (failure: RuntimeException) {
+                    synchronized(lock) { setupError = "scheduler-cancel-${failure.javaClass.simpleName}" }
+                }
+                synchronized(lock) { ready = committed && setupError == null && auditUnavailable == null }
+                publish()
+            }
         }
     }
 
@@ -132,15 +150,19 @@ internal class TransferRuntime(context: Context) {
     fun removeListener(listener: Listener) { listeners.removeMatching { it === listener } }
 
     fun refresh() {
-        synchronized(lock) {
-            if (!ready || refreshQueued) { publish(); return }
+        val retryAudit = synchronized(lock) {
+            if (refreshQueued || (!ready && auditUnavailable == null)) { publish(); return }
             refreshQueued = true
+            !ready
         }
         io.execute {
             try {
-                val reload = synchronized(lock) { state.current()?.terminal != false && run == null }
-                if (reload) loadConfig()
-                if (synchronized(lock) { persistenceError != null }) persistLatest()
+                if (retryAudit) initializeFromJournal()
+                else {
+                    val reload = synchronized(lock) { state.current()?.terminal != false && run == null }
+                    if (reload) loadConfig()
+                    if (synchronized(lock) { persistenceError != null }) persistLatest()
+                }
             } finally {
                 synchronized(lock) { refreshQueued = false }
                 publish()
@@ -293,7 +315,10 @@ internal class TransferRuntime(context: Context) {
                 receipt.revision = synchronized(lock) { state.revision }
             }
             val finished = synchronized(lock) {
-                setupError != null || persistenceError != null ||
+                if (!ready && auditUnavailable != null && receipt.revision == null) {
+                    controlError = "cancel-not-applied-state-unavailable"
+                }
+                setupError != null || auditUnavailable != null || persistenceError != null ||
                     (receipt.revision?.let { savedRevision >= it } == true)
             }
             if (finished && cancelReceipts.remove(receipt)) {
@@ -307,6 +332,7 @@ internal class TransferRuntime(context: Context) {
         checkMain()
         val binding: Run?
         synchronized(lock) {
+            if (!ready) return
             if (!state.stop(id, outcome, reason, stopReason, now())) return
             binding = run?.takeIf { it.id == id }
             binding?.cancelled?.set(true)
@@ -406,6 +432,7 @@ internal class TransferRuntime(context: Context) {
 
     private fun failAttempt(id: String, reason: String) {
         synchronized(lock) {
+            if (!ready) return
             state.fail(id, reason.take(100), now())
             queuePersistLocked()
         }
@@ -413,7 +440,7 @@ internal class TransferRuntime(context: Context) {
     }
 
     private fun queuePersistLocked() {
-        if (persistQueued) return
+        if (!ready || persistQueued) return
         persistQueued = true
         io.execute { persistLatest() }
     }
@@ -504,6 +531,7 @@ internal class TransferRuntime(context: Context) {
                 val pending = savedRevision != state.revision
                 val phase = when {
                     setupError != null -> "initialization-failed"
+                    auditUnavailable != null -> "saved-file-audit-unavailable"
                     persistenceError != null -> "persistence-failed"
                     !ready -> "loading-private-state"
                     attempt == null -> "idle"
@@ -516,6 +544,9 @@ internal class TransferRuntime(context: Context) {
                     appendLine("Configuration: $configStatus")
                     appendLine("Journal revision: ${state.revision}; saved: $savedRevision")
                     appendLine("Journal error: ${persistenceError ?: "none"}; setup error: ${setupError ?: "none"}")
+                    if (auditUnavailable != null) {
+                        appendLine("Saved-file audit unavailable: $auditUnavailable. Displayed attempts are historical journal evidence; new work is blocked. Refresh retries the audit.")
+                    }
                     appendLine("Control error: ${controlError ?: "none"}")
                     appendLine("Retained attempts: ${state.snapshot().size}/${TransferState.ATTEMPT_LIMIT}; no automatic deletion")
                     if (attempt != null) {

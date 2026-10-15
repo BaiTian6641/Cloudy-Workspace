@@ -4,10 +4,16 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.io.InputStream
+import java.nio.file.Files
 import java.security.MessageDigest
 
 internal data class TransferDigest(val lengthBytes: Long, val sha256: String)
 internal class TransferFailure(val code: String) : IOException(code)
+internal sealed interface TransferAuditResult {
+    data object Verified : TransferAuditResult
+    data object Mismatch : TransferAuditResult
+    data class Unavailable(val reason: String) : TransferAuditResult
+}
 
 /** The download is bounded before every write. Verification separately rereads
  * the closed private file; a network byte count alone can never complete a job.
@@ -39,7 +45,9 @@ internal object TransferIntegrity {
 
     fun verify(file: File, expected: Long, expectedHash: String, checkContinue: () -> Unit): TransferDigest {
         require(expected in 1..TransferConfigSpec.MAX_BYTES)
-        if (file.length() != expected) throw TransferFailure("file-size-mismatch")
+        // File.length() returns zero for some failed metadata reads. A throwing
+        // size read keeps an unavailable file distinct from a proven mismatch.
+        if (Files.size(file.toPath()) != expected) throw TransferFailure("file-size-mismatch")
         val digest = MessageDigest.getInstance("SHA-256")
         var count = 0L
         file.inputStream().use { input ->
@@ -59,5 +67,20 @@ internal object TransferIntegrity {
         val hash = digest.digest().joinToString("") { "%02x".format(it.toInt() and 0xff) }
         if (hash != expectedHash) throw TransferFailure("sha256-mismatch")
         return TransferDigest(count, hash)
+    }
+
+    /** A prior completion is evidence, not permission to invent a new audit
+     * result. Only measured length/hash differences invalidate that record.
+     */
+    fun auditSaved(file: File, expected: Long, expectedHash: String, checkContinue: () -> Unit): TransferAuditResult = try {
+        verify(file, expected, expectedHash, checkContinue)
+        TransferAuditResult.Verified
+    } catch (failure: TransferFailure) {
+        when (failure.code) {
+            "file-size-mismatch", "verification-size-exceeded", "verification-size-mismatch", "sha256-mismatch" -> TransferAuditResult.Mismatch
+            else -> TransferAuditResult.Unavailable(failure.code)
+        }
+    } catch (failure: IOException) {
+        TransferAuditResult.Unavailable(failure.javaClass.simpleName)
     }
 }
