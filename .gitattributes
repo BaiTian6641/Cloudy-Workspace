@@ -1,3 +1,7 @@
 # Keep generated launchers portable while storing normalized text in Git.
 **/gradlew text eol=lf
 **/gradlew.bat text eol=crlf
+# Preserve reviewed notice bytes and their recorded/APK hashes, including their
+# final separator lines. All other whitespace checks remain enabled.
+qualification/probes/device-baseline/app/src/main/assets/third_party_notices/upstream/androidx-LICENSE.txt whitespace=-blank-at-eof
+qualification/probes/device-baseline/app/src/main/assets/third_party_notices/runtime-copyrights.txt whitespace=-blank-at-eof

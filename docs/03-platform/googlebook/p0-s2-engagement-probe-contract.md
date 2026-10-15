@@ -1,6 +1,6 @@
 # P0-S2 engagement probe contract
 
-**Owner:** Android/platform developer. **Stage:** P0-S2 / API09. **Checked:** 2026-10-15, America/Chicago. **Status:** researched proposal for isolated diagnostic adoption; dependency resolution, compilation and device acceptance remain pending. This note selects no product dependency and promotes no capability gate.
+**Owner:** Android/platform developer. **Stage:** P0-S2 / API09. **Checked:** 2026-10-15, America/Chicago. **Status:** isolated diagnostic 0.3.0 implemented and accepted for device experiments after dependency, compiler, lint and 31-test review; actual callback/device acceptance remains pending. See the [source review](../../06-validation/2026-10-15-engagement-probe-review.md). This note selects no product dependency and promotes no capability gate.
 
 Read the [desktop application contract](desktop-application-contract.md), [P0 stage](../../05-delivery/phases/p0-qualification.md), [API tracker](api-tracker.json) and [window probe contract](p0-s2-window-probe-contract.md). The intended observation is an actual platform-library engagement callback. It does not qualify physical keyboard/trackpad behavior, perform remote operations, or change Cloudy's desktop scope or density.
 
@@ -38,7 +38,7 @@ No artificial density adjustment belongs in this experiment. A `TOUCH` result mu
 
 ## Smallest real diagnostic increment
 
-Propose the pinned alpha only within the qualification probe. The direct callback API permits the existing platform-Views Activity to remain in place; it does not require adding Compose, ComponentActivity or a Lifecycle dependency. Preserve the baseline toolchain unless the resolved dependency/compiler checks establish a concrete incompatibility.
+Propose the pinned alpha only within the qualification probe. The direct callback API permits the existing platform-Views Activity to remain in place; it does not require adding Compose, ComponentActivity or direct Lifecycle integration. Core brings Lifecycle runtime transitively; the resolved graph must retain that distinction. Preserve the baseline toolchain unless the resolved dependency/compiler checks establish a concrete incompatibility.
 
 Register while the Activity is started and unregister when it stops. Use a process-owned `HandlerThread` and a `Handler`-backed executor to serialize registration, removal, input scans and callback delivery. This thread must have a live Looper: the inspected alpha delegates `InputManager.registerInputDeviceListener` with a null Handler, whose public contract selects the calling thread's Looper. The existing plain scheduled executor is therefore unsuitable for registration. The alpha helper comment says main Looper, but its delegated framework contract governs this choice. [InputManager reference, G49](https://developer.android.com/reference/android/hardware/input/InputManager)
 
@@ -53,7 +53,7 @@ The independent pre-implementation review adds these constraints from the pinned
 - Copy immutable modes/time/identity/epoch in the callback and enqueue delivery. Do not re-enter tracker methods, block waiting for another thread, or hold the recorder lock across library calls.
 - The interface's default engagement methods throw `NotImplementedError`, while normal concrete trackers override them. Record an API-boundary failure's phase and class; do not label a default-method or dependency failure as absence of HP hardware capability. After a failed registration, attempt cleanup on the same tracker/Consumer because partial state may already be retained. If cleanup fails, record that failure instead of claiming successful removal.
 
-These are candidate-integration requirements, not changes to the running 0.2.0 probe. The real implementation must prove lifecycle cleanup with its own tests and observations.
+These requirements are implemented in the 0.3.0 diagnostic and exercised by its lifecycle tests. Device observations remain separate; the earlier 0.2.0 runs contain no engagement collector.
 
 Report the artifact version, subscription state, observation time, actual mode set and errors. The initial input scan is asynchronous and may produce an initial `TOUCH` value before a discovered precise-pointer mode; preserve the sequence and bounded settling evidence instead of treating the first callback as final. The combined callback also waits for both layout and input values, so an observed no-value state must remain pending. Bound per-subscription callback counters and retained history, and deduplicate unchanged report state. Do not add service declarations, permissions, reflection or private APIs for engagement.
 
@@ -65,8 +65,8 @@ Report the artifact version, subscription state, observation time, actual mode s
 | E04 — Lifecycle/quietness | Background/return and recreate an Activity, demonstrate fresh subscription and old-listener cleanup, then verify revisions settle without continuing report-driven churn. Model tests cover stop-before-register, late callbacks after stop/restart, recreation, two-window/first-owner stop, partial-registration cleanup failure, no callback, repeated values and history overflow; device evidence covers actual framework/library delivery. |
 | E05 — Honest fallback | Pending/error observations remain distinguishable from reported `TOUCH`. Desktop controls, user density and font scaling remain unchanged by this diagnostic. |
 
-Physical keyboard/mouse/trackpad transitions, external-display moves and hotplug require separate recorded actions; ADB-injected clicks cannot satisfy them. A successful single-device callback is a partial API observation, not full API09 qualification or CAP-PLATFORM support.
+The inspected alpha caches qualified input-device sets while no listener is registered; a later initial scan does not independently prove that every previously observed device remains connected. Preserve the reported library hint without duplicating its heuristic. Physical keyboard/mouse/trackpad transitions, external-display moves and hotplug require separate recorded actions; ADB-injected clicks cannot satisfy them. A successful single-device callback is a partial API observation, not full API09 qualification or CAP-PLATFORM support.
 
 ## Next experiment
 
-Review the proposed dependency addition and its resolved graph, implement the bounded callback collector, run compiler/lint/tests, then record E02–E05 on the real device. Reconcile API09 with the eventual compiler/device evidence; its registered candidate is not a selected product dependency. Preserve an explicit pending outcome if the alpha fails build or runtime acceptance. Larger-font layout checks and the operation-specific service/timeout work remain separate P0-S2 deliverables; this experiment cannot close them.
+The dependency/source increment now passes E01 build and policy tests. Record E02–E05 on the real device using the exact reviewed source and APK. Reconcile API09 with the eventual compiler/device evidence; its registered candidate is not a selected product dependency. Preserve an explicit pending outcome if the alpha fails build or runtime acceptance. Larger-font layout checks and the operation-specific service/timeout work remain separate P0-S2 deliverables; this experiment cannot close them.

@@ -18,6 +18,7 @@ import java.util.UUID
 /** Each task owns its Bundle-restored state; the recorder is observation-only. */
 class BaselineActivity : Activity() {
     private lateinit var recorder: ProbeRecorder
+    private lateinit var engagement: EngagementController<Activity>
     private lateinit var identity: WindowIdentity
     private lateinit var localState: WindowLocalState
     private lateinit var restorationSource: String
@@ -42,8 +43,15 @@ class BaselineActivity : Activity() {
         localState = restored.state
         restorationSource = restored.source
         identity = WindowIdentity(localState.logicalWindowId, taskId, UUID.randomUUID().toString())
-        recorder = (application as ProbeApplication).recorder
+        val probeApplication = application as ProbeApplication
+        recorder = probeApplication.recorder
         recorder.register(identity, restored)
+        // The report sink captures process data/identity, never this Activity.
+        val reportRecorder = recorder
+        val reportIdentity = identity
+        engagement = probeApplication.engagement.controller { update ->
+            reportRecorder.engagement(reportIdentity, update)
+        }
 
         val content = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
         content.addView(TextView(this).apply {
@@ -70,6 +78,7 @@ class BaselineActivity : Activity() {
         content.addView(recreateButton)
         refreshButton = button(R.id.refresh_diagnostics, R.string.refresh) {
             observeWindowSoon()
+            engagement.refresh()
             recorder.refresh(identity)
         }
         content.addView(refreshButton)
@@ -118,6 +127,7 @@ class BaselineActivity : Activity() {
         super.onStart()
         recorder.addListener(identity, probeListener)
         recorder.event(identity, "activity-started")
+        engagement.start(this, recorder.tracks(identity))
     }
 
     override fun onResume() {
@@ -139,12 +149,14 @@ class BaselineActivity : Activity() {
     }
 
     override fun onStop() {
+        engagement.stop()
         recorder.event(identity, "activity-stopped")
         recorder.removeListener(probeListener)
         super.onStop()
     }
 
     override fun onDestroy() {
+        engagement.destroy()
         main.removeCallbacks(captureWindow)
         recorder.removeListener(probeListener)
         recorder.event(identity, "activity-destroyed",

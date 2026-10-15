@@ -46,6 +46,9 @@ internal class ProbeRecorder(context: Context) {
     private var requestedInitial = false
     private var saveScheduled = false
     private var saveError: String? = null
+    private var uiPublishQueued = false
+    private val engagementCleanupFailures = BoundedHistory<Pair<WindowIdentity, EngagementEvent>>(8)
+    private var engagementCleanupFailureCount = 0L
     private var build = JSONObject().put("status", "not-collected")
     private var inputs = JSONObject().put("status", "not-collected")
     private var decoders = JSONObject().put("status", "not-collected")
@@ -63,6 +66,24 @@ internal class ProbeRecorder(context: Context) {
     fun register(identity: WindowIdentity, restored: RestoredWindow) {
         synchronized(lock) {
             ledger.register(identity, restored, SystemClock.elapsedRealtime())
+            scheduleSaveLocked()
+        }
+        publishUi()
+    }
+
+    fun tracks(identity: WindowIdentity): Boolean = synchronized(lock) { ledger.attribution(identity) == "current" }
+
+    fun engagement(identity: WindowIdentity, update: EngagementUpdate) {
+        synchronized(lock) {
+            val changed = ledger.engagement(identity, update.snapshot, SystemClock.elapsedRealtime())
+            update.newCleanupFailures.forEach { failure ->
+                engagementCleanupFailures.add(identity to failure)
+                engagementCleanupFailureCount++
+                ledger.globalEvent("engagement-cleanup-failed",
+                    "generation=${identity.generationId};epoch=${failure.epoch};error=${failure.errorType}",
+                    failure.time.elapsedRealtimeMs)
+            }
+            if (!changed && update.newCleanupFailures.isEmpty()) return
             scheduleSaveLocked()
         }
         publishUi()
@@ -138,8 +159,8 @@ internal class ProbeRecorder(context: Context) {
     }
 
     private fun snapshotLocked(): JSONObject = JSONObject()
-        .put("schemaVersion", 2)
-        .put("probeVersion", "0.2.0")
+        .put("schemaVersion", 3)
+        .put("probeVersion", "0.3.0")
         .put("scope", "P0 diagnostic metadata and task/window observations; no product or performance qualification")
         .put("processStartedAtDeviceUtc", processStartedAt)
         .put("snapshotAtDeviceUtc", Instant.now().toString())
@@ -150,6 +171,7 @@ internal class ProbeRecorder(context: Context) {
         .put("videoDecoders", decoders)
         .put("windows", JSONArray(ledger.records().map(::windowJson)))
         .put("events", JSONArray(ledger.events().map(::eventJson)))
+        .put("engagementCleanup", engagementCleanupJson())
         .put("retention", retentionJson())
 
     private fun saveReport() {
@@ -190,9 +212,14 @@ internal class ProbeRecorder(context: Context) {
     }
 
     private fun publishUi() {
+        synchronized(lock) {
+            if (uiPublishQueued) return
+            uiPublishQueued = true
+        }
         // Read at delivery time: a worker must not enqueue an obsolete saved state
         // after the main thread has already published a newer pending revision.
         main.post {
+            synchronized(lock) { uiPublishQueued = false }
             // Subscriptions contain observation identities, never state to restore.
             // Removed Activities are not captured by already queued deliveries.
             listeners.snapshot().forEach { subscription ->
@@ -208,6 +235,7 @@ internal class ProbeRecorder(context: Context) {
         val summary = JSONObject()
             .put("revision", ledger.revision).put("savedRevision", savedRevision)
             .put("thisWindow", window).put("retention", retentionJson())
+            .put("engagementCleanup", engagementCleanupJson())
             .put("build", build).put("inputDevices", inputs)
             .put("videoDecoderSummary", JSONObject()
                 .put("status", decoders.optString("status"))
@@ -218,7 +246,8 @@ internal class ProbeRecorder(context: Context) {
                 it.identity == null || it.identity.logicalWindowId == identity.logicalWindowId
             }.takeLast(10).map(::eventJson)))
         return ProbeUiState(collecting, savedRevision == ledger.revision, saveError,
-            containsError(build) || containsError(inputs) || containsError(decoders) || containsError(window),
+            containsError(build) || containsError(inputs) || containsError(decoders) || containsError(window) ||
+                engagementCleanupFailureCount > 0,
             summary.toString(2), ledger.attribution(identity), ledger.aliveCount, ledger.capacity)
     }
 
@@ -234,6 +263,44 @@ internal class ProbeRecorder(context: Context) {
         .put("restorationSource", record.restorationSource).put("activityAliveObserved", record.activityAlive)
         .put("observation", record.observationJson?.let(::JSONObject)
             ?: JSONObject().put("status", "not-yet-observed"))
+        .put("engagement", record.engagement?.let(::engagementJson)
+            ?: JSONObject().put("status", "not-started"))
+
+    private fun engagementJson(snapshot: EngagementSnapshot): JSONObject = JSONObject()
+        .put("status", snapshot.status).put("subscriptionEpoch", snapshot.epoch)
+        .put("activeSubscriptionEpoch", snapshot.active).put("registrationState", snapshot.registrationState)
+        .put("library", "androidx.window:window:1.6.0-alpha05")
+        .put("modes", snapshot.modes?.let(::engagementModesJson) ?: JSONObject.NULL)
+        .put("lastCallbackTime", snapshot.lastCallbackTime?.let(::engagementTimeJson) ?: JSONObject.NULL)
+        .put("callbackCount", snapshot.callbackCount).put("currentEpochCallbackCount", snapshot.currentEpochCallbackCount)
+        .put("repeatedCallbackCount", snapshot.repeatedCallbackCount)
+        .put("rejectedLateCallbackCount", snapshot.rejectedLateCallbackCount)
+        .put("cleanupFailureCount", snapshot.cleanupFailureCount)
+        .put("errorType", snapshot.errorType ?: JSONObject.NULL)
+        .put("events", JSONArray(snapshot.events.map(::engagementEventJson)))
+        .put("droppedEventCount", snapshot.droppedEventCount)
+        .put("scope", "Reported engagement hints, not physical-input qualification. Null modes means no callback for this epoch. Stopped/closed records are historical. Repeated and rejected callback counters are sampled on transition or Refresh.")
+
+    private fun engagementModesJson(modes: EngagementModes): JSONObject = JSONObject()
+        .put("names", JSONArray(modes.names)).put("omittedModeCount", modes.omittedCount)
+        .put("truncatedNameCount", modes.truncatedNameCount)
+
+    private fun engagementTimeJson(time: EngagementTime): JSONObject = JSONObject()
+        .put("deviceUtc", time.deviceUtc).put("elapsedRealtimeMs", time.elapsedRealtimeMs)
+
+    private fun engagementEventJson(event: EngagementEvent): JSONObject = JSONObject()
+        .put("subscriptionEpoch", event.epoch).put("kind", event.kind).put("time", engagementTimeJson(event.time))
+        .put("modes", event.modes?.let(::engagementModesJson) ?: JSONObject.NULL)
+        .put("errorType", event.errorType ?: JSONObject.NULL)
+
+    private fun engagementCleanupJson(): JSONObject = JSONObject()
+        .put("status", if (engagementCleanupFailureCount == 0L) "no-failure-observed" else "error")
+        .put("failureCount", engagementCleanupFailureCount)
+        .put("failures", JSONArray(engagementCleanupFailures.snapshot().map { (identity, event) ->
+            JSONObject().put("identity", identityJson(identity)).put("failure", engagementEventJson(event))
+        }))
+        .put("droppedFailureCount", engagementCleanupFailures.droppedCount)
+        .put("scope", "Failed cleanup may retain library/backend resources until process death. Its admission slot remains reserved; no retry is treated as proven cleanup.")
 
     private fun eventJson(event: ProbeEvent): JSONObject = JSONObject()
         .put("sequence", event.sequence).put("elapsedRealtimeMs", event.elapsedRealtimeMs)
@@ -249,6 +316,8 @@ internal class ProbeRecorder(context: Context) {
         .put("supersededGenerationCount", ledger.supersededGenerationCount)
         .put("eventLimit", 128).put("droppedEventCount", ledger.droppedEventCount)
         .put("windowSnapshotByteLimit", 32 * 1024)
+        .put("engagementEventLimitPerGeneration", 32).put("engagementRegistrationLimit", 8)
+        .put("engagementModeLimit", 16).put("engagementModeNameCharacterLimit", 80)
         .put("policy", "Current process only. Evict oldest closed record, never a live generation; reject excess registration. Latest geometry per generation and latest 128 correlated events. Stopped is still alive. This is a diagnostic retention limit, not an OS task limit. Process death may omit final callbacks/writes.")
 
     private fun containsError(value: Any?): Boolean = when (value) {

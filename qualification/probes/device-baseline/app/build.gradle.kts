@@ -15,8 +15,8 @@ android {
         applicationId = "dev.cloudy.qualification.baseline"
         minSdk = 35
         targetSdk = 37
-        versionCode = 2
-        versionName = "0.2.0"
+        versionCode = 3
+        versionName = "0.3.0"
     }
 
     compileOptions {
@@ -41,6 +41,12 @@ kotlin {
 }
 
 dependencies {
+    // Isolated qualification candidate; the product stack is not selected here.
+    implementation("androidx.window:window:1.6.0-alpha05")
+    // Window's public callback uses Core Consumer but publishes Core at runtime scope.
+    // Preserve the alpha's audited Core runtime; review upgrades as a separate increment.
+    //noinspection GradleDependency
+    implementation("androidx.core:core:1.8.0")
     testImplementation("junit:junit:4.13.2")
 }
 

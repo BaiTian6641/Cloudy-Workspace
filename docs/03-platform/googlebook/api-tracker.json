@@ -190,17 +190,18 @@
       ],
       "minimumApi": null,
       "libraryVersion": "androidx.window:window:1.6.0-alpha05 (candidate only)",
-      "availability": "published-alpha-compile-and-device-pending",
+      "availability": "published-alpha-compiled-device-pending",
       "qualification": "untested",
       "checkedOn": "2026-10-15",
       "owner": "Android/platform developer",
       "stage": "P0-S2",
       "fallback": "Explicit user density preference",
-      "experiment": "Resolve/verify candidate dependencies, compile exact public callbacks, then record E01–E05 on the selected device; physical transitions remain separate.",
+      "experiment": "E01 accepted: verified dependency resolution, actual public API compilation, lint and 31 JVM tests. Next record E02–E05 on the selected device; physical transitions remain separate.",
       "researchEvidence": "docs/03-platform/googlebook/p0-s2-engagement-probe-contract.md",
       "libraryMinSdk": 23,
       "runtimeGuard": "This candidate computes precise-pointer engagement on API30+; below30 its compatibility backend reports TOUCH. No engagement-specific WindowSdkExtension requirement. No product minimum or dependency selected.",
-      "registrationConstraint": "Pinned alpha input listener registration delegates a null Handler to InputManager. Use a live Looper-backed registration thread and serialized cleanup; the existing plain scheduled executor is not suitable."
+      "registrationConstraint": "Pinned alpha input listener registration delegates a null Handler to InputManager. Use a live Looper-backed registration thread and serialized cleanup; the existing plain scheduled executor is not suitable.",
+      "buildEvidence": "docs/06-validation/2026-10-15-engagement-probe-review.md"
     },
     {
       "id": "API10",

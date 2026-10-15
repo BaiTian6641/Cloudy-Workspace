@@ -4,4 +4,5 @@ import android.app.Application
 
 class ProbeApplication : Application() {
     internal val recorder: ProbeRecorder by lazy { ProbeRecorder(this) }
+    internal val engagement: AndroidEngagementRuntime by lazy { AndroidEngagementRuntime() }
 }

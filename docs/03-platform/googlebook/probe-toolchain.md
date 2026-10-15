@@ -15,7 +15,8 @@
 | SDK Build Tools | 36.0.0 | AGP 9.4 documented minimum/default, explicitly selected |
 | SDK command-line tools | 22.0, archive build 15859902 | Official archive G47; verified before extraction |
 | Test dependency | JUnit 4.13.2 | JVM tests of bounded event-history behavior; no device emulation or product success claims |
-| Native / Compose stack | None | No NDK, Compose, Hilt or AndroidX dependency required for this probe |
+| Engagement diagnostic candidate | AndroidX WindowManager 1.6.0-alpha05; Core 1.8.0 | Version 0.3.0 diagnostic; direct Core exposes the public Consumer callback type. No product adoption. |
+| Native / Compose stack | None | No NDK, Compose or Hilt; AndroidX Lifecycle 2.3.1 is transitive through Core, without direct lifecycle integration |
 
 ## Integrity and provenance
 
@@ -48,3 +49,11 @@ Run the commands in the probe README and [Android probe workflow](../../../.gith
 The first Android Lint run reported only the Gradle update advisory: 9.8.1 is available while the selected AGP 9.4 compatibility baseline is 9.6.0. The probe keeps that intentional pin, with a file-specific `AndroidGradlePluginVersion` exclusion for the wrapper properties. All other lint findings remain errors. Revisit the pin deliberately when updating the toolchain rather than silently downloading the newest release.
 
 A clean-cache build exposed five transitive metadata entries omitted by the initial warm-cache generation: Guava parent 33.4.0-jre, JUnit BOM 5.10.2/5.11.0-M2 module metadata, coroutines BOM 1.8.0 and Groovy BOM 4.0.29. Each added SHA-256 was checked against a separate canonical Maven Central download and the clean Gradle cache. The clean checkout then passed all 49 assemble/lint/test tasks with verification enforced; application dependencies and source were unchanged.
+
+## Engagement dependency increment under review
+
+The 0.3.0 diagnostic adds the pinned WindowManager alpha and explicit Core 1.8.0 because the alpha publishes Core at runtime scope while using its Consumer type in public signatures. Dependency resolution, AAR metadata and merged-main-manifest checks passed. All 350 pre-existing artifact digests were preserved, and 39 new artifact digests matched independent canonical Google Maven/Maven Central downloads. A separate empty dependency cache resolved successfully with verification enforced. The subsequent compiler/lint/31-test build and exact APK notice checks passed; see the [source review](../../06-validation/2026-10-15-engagement-probe-review.md). Actual callback evidence remains a separate device gate.
+
+The first 0.3.0 compiler/test run passed; lint reported only the newer-Core advisory (1.19.1 versus the audited 1.8.0 runtime selected by the alpha). A declaration-local `GradleDependency` suppression preserves this explicit diagnostic pin. All other update advisories and source/resource checks remain enabled; dependency upgrades require a separate compatibility and provenance review. This is not a general product dependency recommendation. See the official [lint configuration guidance](https://developer.android.com/studio/write/lint).
+
+The merged-main manifest retains minSdk 35/targetSdk 37 and adds CoreComponentFactory plus optional androidx.window.extensions/sidecar uses-library entries. It adds no permissions, services, providers or receivers. Use the newly generated manifest for this increment; an older output directory can still contain the previous version until the full build refreshes it. Exact transitive choices are recorded in app/gradle.lockfile; POM declaration versions are not substitutes for that resolved graph.

@@ -1,0 +1,141 @@
+Runtime source copyright notices
+
+The following copyright lines are transcribed from the matching official
+source archives. Repeated identical lines within a component are listed once;
+source comment delimiters are removed. The provenance manifest records source
+hashes and representative entries. The coroutines author notice is retained
+separately in upstream/coroutines-NOTICE.txt.
+
+androidx.annotation:annotation-experimental:1.1.0
+Source: https://dl.google.com/dl/android/maven2/androidx/annotation/annotation-experimental/1.1.0/annotation-experimental-1.1.0-sources.jar
+Copyright 2019 The Android Open Source Project
+Copyright 2020 The Android Open Source Project
+
+androidx.annotation:annotation-jvm:1.9.1
+Source: https://dl.google.com/dl/android/maven2/androidx/annotation/annotation-jvm/1.9.1/annotation-jvm-1.9.1-sources.jar
+Copyright (C) 2014 The Android Open Source Project
+Copyright (C) 2015 The Android Open Source Project
+Copyright (C) 2020 The Android Open Source Project
+Copyright 2019 The Android Open Source Project
+Copyright (C) 2022 The Android Open Source Project
+Copyright (C) 2016 The Android Open Source Project
+Copyright 2021 The Android Open Source Project
+Copyright (C) 2017 The Android Open Source Project
+Copyright (C) 2013 The Android Open Source Project
+Copyright 2024 The Android Open Source Project
+Copyright (C) 2021 The Android Open Source Project
+Copyright 2023 The Android Open Source Project
+Copyright 2018 The Android Open Source Project
+
+androidx.arch.core:core-common:2.1.0
+Source: https://dl.google.com/dl/android/maven2/androidx/arch/core/core-common/2.1.0/core-common-2.1.0-sources.jar
+Copyright 2018 The Android Open Source Project
+
+androidx.arch.core:core-runtime:2.1.0
+Source: https://dl.google.com/dl/android/maven2/androidx/arch/core/core-runtime/2.1.0/core-runtime-2.1.0-sources.jar
+Copyright (C) 2017 The Android Open Source Project
+
+androidx.collection:collection-jvm:1.4.2
+Source: https://dl.google.com/dl/android/maven2/androidx/collection/collection-jvm/1.4.2/collection-jvm-1.4.2-sources.jar
+Copyright (C) 2017 The Android Open Source Project
+Copyright 2022 The Android Open Source Project
+Copyright 2018 The Android Open Source Project
+Copyright (C) 2019 The Android Open Source Project
+Copyright 2023 The Android Open Source Project
+Copyright 2020 The Android Open Source Project
+
+androidx.concurrent:concurrent-futures:1.0.0
+Source: https://dl.google.com/dl/android/maven2/androidx/concurrent/concurrent-futures/1.0.0/concurrent-futures-1.0.0-sources.jar
+Copyright 2018 The Android Open Source Project
+
+androidx.core:core:1.8.0
+Source: https://dl.google.com/dl/android/maven2/androidx/core/core/1.8.0/core-1.8.0-sources.jar
+Copyright 2018 The Android Open Source Project
+Copyright (C) 2011 The Android Open Source Project
+Copyright (C) 2014 The Android Open Source Project
+Copyright (C) 2012 The Android Open Source Project
+Copyright 2019 The Android Open Source Project
+Copyright (C) 2016 The Android Open Source Project
+Copyright (C) 2015 The Android Open Source Project
+Copyright (C) 2018 The Android Open Source Project
+Copyright (C) 2017 The Android Open Source Project
+Copyright 2022 The Android Open Source Project
+Copyright 2020 The Android Open Source Project
+Copyright 2021 The Android Open Source Project
+Copyright (C) 2013 The Android Open Source Project
+Copyright (C) 2019 The Android Open Source Project
+Copyright 2015 The Android Open Source Project
+Copyright 2017 The Android Open Source Project
+Copyright (C) 2009 The Android Open Source Project
+Copyright (C) 2021 The Android Open Source Project
+
+androidx.lifecycle:lifecycle-common:2.3.1
+Source: https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-common/2.3.1/lifecycle-common-2.3.1-sources.jar
+Copyright (C) 2017 The Android Open Source Project
+Copyright 2018 The Android Open Source Project
+
+androidx.lifecycle:lifecycle-runtime:2.3.1
+Source: https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-runtime/2.3.1/lifecycle-runtime-2.3.1-sources.jar
+Copyright (C) 2017 The Android Open Source Project
+Copyright 2019 The Android Open Source Project
+
+androidx.versionedparcelable:versionedparcelable:1.1.1
+Source: https://dl.google.com/dl/android/maven2/androidx/versionedparcelable/versionedparcelable/1.1.1/versionedparcelable-1.1.1-sources.jar
+Copyright 2018 The Android Open Source Project
+
+androidx.window:window-core-android:1.6.0-alpha05
+Source: https://dl.google.com/dl/android/maven2/androidx/window/window-core-android/1.6.0-alpha05/window-core-android-1.6.0-alpha05-sources.jar
+Copyright 2021 The Android Open Source Project
+Copyright 2022 The Android Open Source Project
+Copyright 2025 The Android Open Source Project
+Copyright 2024 The Android Open Source Project
+
+androidx.window:window:1.6.0-alpha05
+Source: https://dl.google.com/dl/android/maven2/androidx/window/window/1.6.0-alpha05/window-1.6.0-alpha05-sources.jar
+Copyright 2023 The Android Open Source Project
+Copyright 2022 The Android Open Source Project
+Copyright 2021 The Android Open Source Project
+Copyright 2025 The Android Open Source Project
+Copyright 2024 The Android Open Source Project
+Copyright (C) 2024 The Android Open Source Project
+Copyright 2026 The Android Open Source Project
+
+com.google.guava:listenablefuture:1.0
+Source: https://repo.maven.apache.org/maven2/com/google/guava/listenablefuture/1.0/listenablefuture-1.0-sources.jar
+Copyright (C) 2007 The Guava Authors
+
+org.jetbrains.kotlin:kotlin-stdlib:2.2.10
+Source: https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/2.2.10/kotlin-stdlib-2.2.10-sources.jar
+Copyright 2010-2025 JetBrains s.r.o. and Kotlin Programming Language contributors.
+Copyright 2010-2023 JetBrains s.r.o. and Kotlin Programming Language contributors.
+Copyright 2010-2020 JetBrains s.r.o. and Kotlin Programming Language contributors.
+Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+Copyright 2010-2021 JetBrains s.r.o. and Kotlin Programming Language contributors.
+Copyright 2010-2022 JetBrains s.r.o. and Kotlin Programming Language contributors.
+Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+Copyright 2007 Google Inc.
+Copyright 2010-2019 JetBrains s.r.o. and Kotlin Programming Language contributors.
+Copyright 2010-2018 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license
+Copyright (c) 2007-present, Stephen Colebourne & Michael Nascimento Santos
+Copyright 2010-2015 JetBrains s.r.o.
+Copyright 2010-2016 JetBrains s.r.o.
+Copyright 2010-2017 JetBrains s.r.o.
+
+org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0
+Source: https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-android/1.9.0/kotlinx-coroutines-android-1.9.0-sources.jar
+See upstream/coroutines-NOTICE.txt for the upstream copyright notice.
+
+org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.9.0
+Source: https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.9.0/kotlinx-coroutines-core-jvm-1.9.0-sources.jar
+See upstream/coroutines-NOTICE.txt for the upstream copyright notice.
+
+org.jetbrains:annotations:23.0.0
+Source: https://repo.maven.apache.org/maven2/org/jetbrains/annotations/23.0.0/annotations-23.0.0-sources.jar
+Copyright 2000-2021 JetBrains s.r.o.
+Copyright 2000-2020 JetBrains s.r.o.
+
+org.jspecify:jspecify:1.0.0
+Source: https://repo.maven.apache.org/maven2/org/jspecify/jspecify/1.0.0/jspecify-1.0.0-sources.jar
+Copyright 2022 The JSpecify Authors.
+Copyright 2018-2020 The JSpecify Authors.
+

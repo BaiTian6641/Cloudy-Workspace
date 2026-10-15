@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "checkedOn": "2026-10-15",
+  "scope": "Source review increment; no device acceptance. Containing Git commit identifies this source.",
+  "dependencyDigestsPreserved": 350,
+  "newDependencyDigestsIndependentlyMatched": 39,
+  "apkSha256": "1c6959501df43e712a5a90c227b91577c954f8b67c0124127ac9b94759667b16",
+  "package": "dev.cloudy.qualification.baseline",
+  "versionName": "0.3.0",
+  "versionCode": 3,
+  "tests": {
+    "tests": 31,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "lintIssueCount": 0,
+  "noticeAssets": [
+    {
+      "entry": "assets/third_party_notices/Apache-2.0.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "entry": "assets/third_party_notices/README.txt",
+      "sha256": "87436147e46d71d096fcd1f4f88c05dd173131de88c16a179cafe8e8d2f79a88"
+    },
+    {
+      "entry": "assets/third_party_notices/kotlin-stdlib-attributions.txt",
+      "sha256": "acbf0fb40551980e88adeaf38af20691395f792256ec5e90f212b8848ca116f9"
+    },
+    {
+      "entry": "assets/third_party_notices/provenance.json",
+      "sha256": "825b78c8366291db698369e1e3f531814ed123a9b5f4b7b5156c757c36b0bc6a"
+    },
+    {
+      "entry": "assets/third_party_notices/runtime-copyrights.txt",
+      "sha256": "9b2c6954f31064cc01f1986f72fbb44fbc06a8b026dbd8af05ffd2f4939d8b22"
+    },
+    {
+      "entry": "assets/third_party_notices/upstream/androidx-LICENSE.txt",
+      "sha256": "809fa1ed21450f59827d1e9aec720bbc4b687434fa22283c6cb5dd82a47ab9c0"
+    },
+    {
+      "entry": "assets/third_party_notices/upstream/coroutines-LICENSE.txt",
+      "sha256": "b1febe6399dffb10d19d35e7663ab16300c93cb0476a94115df1cc0097a8ffd8"
+    },
+    {
+      "entry": "assets/third_party_notices/upstream/coroutines-NOTICE.txt",
+      "sha256": "421d45acbd92670b4131621a28fcbb41ba0b747d3a336cb13fca38c0685426c4"
+    },
+    {
+      "entry": "assets/third_party_notices/upstream/kotlin-COPYRIGHT.txt",
+      "sha256": "8f1a1700adb5490604c6094fb137bf73f6c28d3ee554b58f3ff8ef975a79672d"
+    },
+    {
+      "entry": "assets/third_party_notices/upstream/kotlin-boost-LICENSE.txt",
+      "sha256": "8d8291caf1cee26d23acf3eb67c9f9a2d58f1c681b16a4fbe8cbfb9e3c0b5a9b"
+    },
+    {
+      "entry": "assets/third_party_notices/upstream/kotlin-threetenbp-LICENSE.txt",
+      "sha256": "d1bc53b493a3ab387b42717ed5c4b1976a5048996f81154278100bff86d39331"
+    }
+  ],
+  "manifestNoPermissionsServicesReceiversProviders": true
+}

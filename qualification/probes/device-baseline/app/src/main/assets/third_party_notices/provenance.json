@@ -1,0 +1,1183 @@
+{
+  "formatVersion": 1,
+  "checkedOn": "2026-10-15",
+  "scope": "Cloudy Android diagnostic 0.3.0 debug/release runtime dependency notices; final APK packaging checked separately",
+  "selection": "app/gradle.lockfile debugRuntimeClasspath and releaseRuntimeClasspath have identical 23-coordinate sets; 18 binary artifacts match Gradle verification metadata; 5 coordinates are metadata-only",
+  "runtimeBinaryCount": 18,
+  "components": [
+    {
+      "coordinate": "androidx.annotation:annotation-experimental:1.1.0",
+      "binaryArtifacts": [
+        {
+          "verificationName": "annotation-experimental-1.1.0.aar",
+          "url": "https://dl.google.com/dl/android/maven2/androidx/annotation/annotation-experimental/1.1.0/annotation-experimental-1.1.0.aar",
+          "sha256": "0157de61a2064047896a058080f3fd67ba57ad9a94857b3f7a363660243e3f90",
+          "notices": []
+        }
+      ],
+      "pom": {
+        "url": "https://dl.google.com/dl/android/maven2/androidx/annotation/annotation-experimental/1.1.0/annotation-experimental-1.1.0.pom",
+        "sha256": "550a6601e1af47cf99501cc6cc15d1ebe9cef17b51e5dd58b6ab6c23568ef7a9",
+        "declaredLicenses": [
+          {
+            "name": "The Apache Software License, Version 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+          }
+        ],
+        "licenseParent": null
+      },
+      "sourceArchive": {
+        "coordinate": "androidx.annotation:annotation-experimental:1.1.0",
+        "url": "https://dl.google.com/dl/android/maven2/androidx/annotation/annotation-experimental/1.1.0/annotation-experimental-1.1.0-sources.jar",
+        "sha256": "7ea8c98ebd649ee4c0a74b19e1e81ac5f4469be5a12555f288083f1efd4f29d9",
+        "copyrights": [
+          {
+            "text": "Copyright 2019 The Android Open Source Project",
+            "representativeEntry": "androidx/annotation/OptIn.kt",
+            "matchingSourceFileCount": 3
+          },
+          {
+            "text": "Copyright 2020 The Android Open Source Project",
+            "representativeEntry": "androidx/annotation/RequiresOptIn.kt",
+            "matchingSourceFileCount": 1
+          }
+        ],
+        "notices": []
+      },
+      "bundledNoticeFiles": [
+        "Apache-2.0.txt",
+        "runtime-copyrights.txt",
+        "upstream/androidx-LICENSE.txt"
+      ],
+      "additionalEmbeddedTerms": []
+    },
+    {
+      "coordinate": "androidx.annotation:annotation-jvm:1.9.1",
+      "binaryArtifacts": [
+        {
+          "verificationName": "annotation-jvm-1.9.1.jar",
+          "url": "https://dl.google.com/dl/android/maven2/androidx/annotation/annotation-jvm/1.9.1/annotation-jvm-1.9.1.jar",
+          "sha256": "1e343917ebf27ba96fe4dc52b1cad7fd32b738fbc6355bb6cd5b3b305d7212d0",
+          "notices": [
+            {
+              "entry": "META-INF/androidx/annotation/annotation/LICENSE.txt",
+              "sha256": "809fa1ed21450f59827d1e9aec720bbc4b687434fa22283c6cb5dd82a47ab9c0",
+              "bytes": 10175
+            }
+          ]
+        }
+      ],
+      "pom": {
+        "url": "https://dl.google.com/dl/android/maven2/androidx/annotation/annotation-jvm/1.9.1/annotation-jvm-1.9.1.pom",
+        "sha256": "89b99c218d60019316b50aab79816707bc21696c896a030e1b1ae038961bcb8e",
+        "declaredLicenses": [
+          {
+            "name": "The Apache Software License, Version 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+          }
+        ],
+        "licenseParent": null
+      },
+      "sourceArchive": {
+        "coordinate": "androidx.annotation:annotation-jvm:1.9.1",
+        "url": "https://dl.google.com/dl/android/maven2/androidx/annotation/annotation-jvm/1.9.1/annotation-jvm-1.9.1-sources.jar",
+        "sha256": "c6ae897fbfb73ca09d4ae31a24bfff85c652097ad10644cdbb738488728cb39b",
+        "copyrights": [
+          {
+            "text": "Copyright (C) 2014 The Android Open Source Project",
+            "representativeEntry": "jvmMain/androidx/annotation/AnimRes.jvm.kt",
+            "matchingSourceFileCount": 23
+          },
+          {
+            "text": "Copyright (C) 2015 The Android Open Source Project",
+            "representativeEntry": "jvmMain/androidx/annotation/BinderThread.jvm.kt",
+            "matchingSourceFileCount": 14
+          },
+          {
+            "text": "Copyright (C) 2020 The Android Open Source Project",
+            "representativeEntry": "jvmMain/androidx/annotation/ChecksSdkIntAtLeast.jvm.kt",
+            "matchingSourceFileCount": 2
+          },
+          {
+            "text": "Copyright 2019 The Android Open Source Project",
+            "representativeEntry": "jvmMain/androidx/annotation/ContentView.jvm.kt",
+            "matchingSourceFileCount": 2
+          },
+          {
+            "text": "Copyright (C) 2022 The Android Open Source Project",
+            "representativeEntry": "jvmMain/androidx/annotation/DeprecatedSinceApi.jvm.kt",
+            "matchingSourceFileCount": 5
+          },
+          {
+            "text": "Copyright (C) 2016 The Android Open Source Project",
+            "representativeEntry": "jvmMain/androidx/annotation/Dimension.jvm.kt",
+            "matchingSourceFileCount": 9
+          },
+          {
+            "text": "Copyright 2021 The Android Open Source Project",
+            "representativeEntry": "jvmMain/androidx/annotation/DisplayContext.jvm.kt",
+            "matchingSourceFileCount": 4
+          },
+          {
+            "text": "Copyright (C) 2017 The Android Open Source Project",
+            "representativeEntry": "jvmMain/androidx/annotation/FontRes.jvm.kt",
+            "matchingSourceFileCount": 5
+          },
+          {
+            "text": "Copyright (C) 2013 The Android Open Source Project",
+            "representativeEntry": "jvmMain/androidx/annotation/NonNull.jvm.kt",
+            "matchingSourceFileCount": 2
+          },
+          {
+            "text": "Copyright 2024 The Android Open Source Project",
+            "representativeEntry": "jvmMain/androidx/annotation/ReplaceWith.jvm.kt",
+            "matchingSourceFileCount": 1
+          },
+          {
+            "text": "Copyright (C) 2021 The Android Open Source Project",
+            "representativeEntry": "commonMain/androidx/annotation/Discouraged.kt",
+            "matchingSourceFileCount": 1
+          },
+          {
+            "text": "Copyright 2023 The Android Open Source Project",
+            "representativeEntry": "commonMain/androidx/annotation/RequiresApi.kt",
+            "matchingSourceFileCount": 1
+          },
+          {
+            "text": "Copyright 2018 The Android Open Source Project",
+            "representativeEntry": "commonMain/androidx/annotation/RequiresFeature.kt",
+            "matchingSourceFileCount": 1
+          }
+        ],
+        "notices": [
+          {
+            "entry": "META-INF/androidx/annotation/annotation/LICENSE.txt",
+            "sha256": "809fa1ed21450f59827d1e9aec720bbc4b687434fa22283c6cb5dd82a47ab9c0"
+          }
+        ]
+      },
+      "bundledNoticeFiles": [
+        "Apache-2.0.txt",
+        "runtime-copyrights.txt",
+        "upstream/androidx-LICENSE.txt"
+      ],
+      "additionalEmbeddedTerms": []
+    },
+    {
+      "coordinate": "androidx.arch.core:core-common:2.1.0",
+      "binaryArtifacts": [
+        {
+          "verificationName": "core-common-2.1.0.jar",
+          "url": "https://dl.google.com/dl/android/maven2/androidx/arch/core/core-common/2.1.0/core-common-2.1.0.jar",
+          "sha256": "fe1237bf029d063e7f29fe39aeaf73ef74c8b0a3658486fc29d3c54326653889",
+          "notices": []
+        }
+      ],
+      "pom": {
+        "url": "https://dl.google.com/dl/android/maven2/androidx/arch/core/core-common/2.1.0/core-common-2.1.0.pom",
+        "sha256": "83bbb3960eaabc600ac366c94cb59414e441532a1d6aa9388b0b8bfface5cf01",
+        "declaredLicenses": [
+          {
+            "name": "The Apache Software License, Version 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+          }
+        ],
+        "licenseParent": null
+      },
+      "sourceArchive": {
+        "coordinate": "androidx.arch.core:core-common:2.1.0",
+        "url": "https://dl.google.com/dl/android/maven2/androidx/arch/core/core-common/2.1.0/core-common-2.1.0-sources.jar",
+        "sha256": "01ef2736c9b688658d7446e8396099ff0c598d9a7e753131d566f953270c5878",
+        "copyrights": [
+          {
+            "text": "Copyright 2018 The Android Open Source Project",
+            "representativeEntry": "androidx/arch/core/internal/FastSafeIterableMap.java",
+            "matchingSourceFileCount": 3
+          }
+        ],
+        "notices": []
+      },
+      "bundledNoticeFiles": [
+        "Apache-2.0.txt",
+        "runtime-copyrights.txt",
+        "upstream/androidx-LICENSE.txt"
+      ],
+      "additionalEmbeddedTerms": []
+    },
+    {
+      "coordinate": "androidx.arch.core:core-runtime:2.1.0",
+      "binaryArtifacts": [
+        {
+          "verificationName": "core-runtime-2.1.0.aar",
+          "url": "https://dl.google.com/dl/android/maven2/androidx/arch/core/core-runtime/2.1.0/core-runtime-2.1.0.aar",
+          "sha256": "dd77615bd3dd275afb11b62df25bae46b10b4a117cd37943af45bdcbf8755852",
+          "notices": []
+        }
+      ],
+      "pom": {
+        "url": "https://dl.google.com/dl/android/maven2/androidx/arch/core/core-runtime/2.1.0/core-runtime-2.1.0.pom",
+        "sha256": "c0c4ed0160cd2ca18390015de8b392b697c173327c6b2c0947d4e62f6958c05d",
+        "declaredLicenses": [
+          {
+            "name": "The Apache Software License, Version 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+          }
+        ],
+        "licenseParent": null
+      },
+      "sourceArchive": {
+        "coordinate": "androidx.arch.core:core-runtime:2.1.0",
+        "url": "https://dl.google.com/dl/android/maven2/androidx/arch/core/core-runtime/2.1.0/core-runtime-2.1.0-sources.jar",
+        "sha256": "913acdee357814e814745466a46a793e8ad7410086ba4548458b83cd6a98424b",
+        "copyrights": [
+          {
+            "text": "Copyright (C) 2017 The Android Open Source Project",
+            "representativeEntry": "androidx/arch/core/executor/ArchTaskExecutor.java",
+            "matchingSourceFileCount": 3
+          }
+        ],
+        "notices": []
+      },
+      "bundledNoticeFiles": [
+        "Apache-2.0.txt",
+        "runtime-copyrights.txt",
+        "upstream/androidx-LICENSE.txt"
+      ],
+      "additionalEmbeddedTerms": []
+    },
+    {
+      "coordinate": "androidx.collection:collection-jvm:1.4.2",
+      "binaryArtifacts": [
+        {
+          "verificationName": "collection-jvm-1.4.2.jar",
+          "url": "https://dl.google.com/dl/android/maven2/androidx/collection/collection-jvm/1.4.2/collection-jvm-1.4.2.jar",
+          "sha256": "984ce9bd780055eafb8a105aca3f514686bf7b1b6272ec7c645a98ce40fc7db4",
+          "notices": []
+        }
+      ],
+      "pom": {
+        "url": "https://dl.google.com/dl/android/maven2/androidx/collection/collection-jvm/1.4.2/collection-jvm-1.4.2.pom",
+        "sha256": "adbb379e2b160f08e63e341ad04bbcc7033f6d868ec51ac11e4334642a4e39ef",
+        "declaredLicenses": [
+          {
+            "name": "The Apache Software License, Version 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+          }
+        ],
+        "licenseParent": null
+      },
+      "sourceArchive": {
+        "coordinate": "androidx.collection:collection-jvm:1.4.2",
+        "url": "https://dl.google.com/dl/android/maven2/androidx/collection/collection-jvm/1.4.2/collection-jvm-1.4.2-sources.jar",
+        "sha256": "9cdb219ee75724515c232ae2bb04403c1fd1b40208c61d92aaa6452836d943c5",
+        "copyrights": [
+          {
+            "text": "Copyright (C) 2017 The Android Open Source Project",
+            "representativeEntry": "jvmMain/androidx/collection/ArrayMap.kt",
+            "matchingSourceFileCount": 1
+          },
+          {
+            "text": "Copyright 2022 The Android Open Source Project",
+            "representativeEntry": "jvmMain/androidx/collection/ArraySet.jvm.kt",
+            "matchingSourceFileCount": 16
+          },
+          {
+            "text": "Copyright 2018 The Android Open Source Project",
+            "representativeEntry": "jvmMain/androidx/collection/LongSparseArray.jvm.kt",
+            "matchingSourceFileCount": 5
+          },
+          {
+            "text": "Copyright (C) 2019 The Android Open Source Project",
+            "representativeEntry": "jvmMain/androidx/collection/package-info.java",
+            "matchingSourceFileCount": 1
+          },
+          {
+            "text": "Copyright 2023 The Android Open Source Project",
+            "representativeEntry": "jvmMain/androidx/collection/internal/PackingHelpers.jvm.kt",
+            "matchingSourceFileCount": 30
+          },
+          {
+            "text": "Copyright 2020 The Android Open Source Project",
+            "representativeEntry": "commonMain/androidx/collection/IndexBasedArrayIterator.kt",
+            "matchingSourceFileCount": 1
+          }
+        ],
+        "notices": []
+      },
+      "bundledNoticeFiles": [
+        "Apache-2.0.txt",
+        "runtime-copyrights.txt",
+        "upstream/androidx-LICENSE.txt"
+      ],
+      "additionalEmbeddedTerms": []
+    },
+    {
+      "coordinate": "androidx.concurrent:concurrent-futures:1.0.0",
+      "binaryArtifacts": [
+        {
+          "verificationName": "concurrent-futures-1.0.0.jar",
+          "url": "https://dl.google.com/dl/android/maven2/androidx/concurrent/concurrent-futures/1.0.0/concurrent-futures-1.0.0.jar",
+          "sha256": "5595a40e278a7b39fa78a09490e3d7f3faa95c7b01447148bd38b5ade0605c35",
+          "notices": []
+        }
+      ],
+      "pom": {
+        "url": "https://dl.google.com/dl/android/maven2/androidx/concurrent/concurrent-futures/1.0.0/concurrent-futures-1.0.0.pom",
+        "sha256": "4505b9a5e30a9418b59a9ad6702c3e4193aea6e691a3d03cf220c7640ad083e2",
+        "declaredLicenses": [
+          {
+            "name": "The Apache Software License, Version 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+          }
+        ],
+        "licenseParent": null
+      },
+      "sourceArchive": {
+        "coordinate": "androidx.concurrent:concurrent-futures:1.0.0",
+        "url": "https://dl.google.com/dl/android/maven2/androidx/concurrent/concurrent-futures/1.0.0/concurrent-futures-1.0.0-sources.jar",
+        "sha256": "510037347fda5081179db4e72a1699df61f290692a439092b281c27ea2b16c17",
+        "copyrights": [
+          {
+            "text": "Copyright 2018 The Android Open Source Project",
+            "representativeEntry": "androidx/concurrent/futures/AbstractResolvableFuture.java",
+            "matchingSourceFileCount": 4
+          }
+        ],
+        "notices": []
+      },
+      "bundledNoticeFiles": [
+        "Apache-2.0.txt",
+        "runtime-copyrights.txt",
+        "upstream/androidx-LICENSE.txt"
+      ],
+      "additionalEmbeddedTerms": []
+    },
+    {
+      "coordinate": "androidx.core:core:1.8.0",
+      "binaryArtifacts": [
+        {
+          "verificationName": "core-1.8.0.aar",
+          "url": "https://dl.google.com/dl/android/maven2/androidx/core/core/1.8.0/core-1.8.0.aar",
+          "sha256": "48c64a15ec3eb11bfb33339e5ceb70ec7f821bd2dfa2eb8675ebd5353317e792",
+          "notices": []
+        }
+      ],
+      "pom": {
+        "url": "https://dl.google.com/dl/android/maven2/androidx/core/core/1.8.0/core-1.8.0.pom",
+        "sha256": "79ecc797a5d200c4be3f6756d2cbb6fa46fe582192304377e8a6410f6066eb3e",
+        "declaredLicenses": [
+          {
+            "name": "The Apache Software License, Version 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+          }
+        ],
+        "licenseParent": null
+      },
+      "sourceArchive": {
+        "coordinate": "androidx.core:core:1.8.0",
+        "url": "https://dl.google.com/dl/android/maven2/androidx/core/core/1.8.0/core-1.8.0-sources.jar",
+        "sha256": "8af6ec5a930ab3df22faa055ae2bf028264ee65d758b95ed4d62b39f02f43ae9",
+        "copyrights": [
+          {
+            "text": "Copyright 2018 The Android Open Source Project",
+            "representativeEntry": "android/support/v4/os/ResultReceiver.java",
+            "matchingSourceFileCount": 65
+          },
+          {
+            "text": "Copyright (C) 2011 The Android Open Source Project",
+            "representativeEntry": "androidx/core/accessibilityservice/AccessibilityServiceInfoCompat.java",
+            "matchingSourceFileCount": 19
+          },
+          {
+            "text": "Copyright (C) 2014 The Android Open Source Project",
+            "representativeEntry": "androidx/core/app/ActivityManagerCompat.java",
+            "matchingSourceFileCount": 11
+          },
+          {
+            "text": "Copyright (C) 2012 The Android Open Source Project",
+            "representativeEntry": "androidx/core/app/ActivityOptionsCompat.java",
+            "matchingSourceFileCount": 11
+          },
+          {
+            "text": "Copyright 2019 The Android Open Source Project",
+            "representativeEntry": "androidx/core/app/ActivityRecreator.java",
+            "matchingSourceFileCount": 12
+          },
+          {
+            "text": "Copyright (C) 2016 The Android Open Source Project",
+            "representativeEntry": "androidx/core/app/AlarmManagerCompat.java",
+            "matchingSourceFileCount": 16
+          },
+          {
+            "text": "Copyright (C) 2015 The Android Open Source Project",
+            "representativeEntry": "androidx/core/app/AppOpsManagerCompat.java",
+            "matchingSourceFileCount": 20
+          },
+          {
+            "text": "Copyright (C) 2018 The Android Open Source Project",
+            "representativeEntry": "androidx/core/app/DialogCompat.java",
+            "matchingSourceFileCount": 6
+          },
+          {
+            "text": "Copyright (C) 2017 The Android Open Source Project",
+            "representativeEntry": "androidx/core/app/FrameMetricsAggregator.java",
+            "matchingSourceFileCount": 27
+          },
+          {
+            "text": "Copyright 2022 The Android Open Source Project",
+            "representativeEntry": "androidx/core/app/MultiWindowModeChangedInfo.java",
+            "matchingSourceFileCount": 2
+          },
+          {
+            "text": "Copyright 2020 The Android Open Source Project",
+            "representativeEntry": "androidx/core/app/NotificationChannelCompat.java",
+            "matchingSourceFileCount": 14
+          },
+          {
+            "text": "Copyright 2021 The Android Open Source Project",
+            "representativeEntry": "androidx/core/app/OnMultiWindowModeChangedProvider.java",
+            "matchingSourceFileCount": 30
+          },
+          {
+            "text": "Copyright (C) 2013 The Android Open Source Project",
+            "representativeEntry": "androidx/core/content/ContentResolverCompat.java",
+            "matchingSourceFileCount": 20
+          },
+          {
+            "text": "Copyright (C) 2019 The Android Open Source Project",
+            "representativeEntry": "androidx/core/graphics/BlendModeCompat.java",
+            "matchingSourceFileCount": 1
+          },
+          {
+            "text": "Copyright 2015 The Android Open Source Project",
+            "representativeEntry": "androidx/core/graphics/ColorUtils.java",
+            "matchingSourceFileCount": 1
+          },
+          {
+            "text": "Copyright 2017 The Android Open Source Project",
+            "representativeEntry": "androidx/core/graphics/TypefaceCompatApi28Impl.java",
+            "matchingSourceFileCount": 1
+          },
+          {
+            "text": "Copyright (C) 2009 The Android Open Source Project",
+            "representativeEntry": "androidx/core/util/AtomicFile.java",
+            "matchingSourceFileCount": 2
+          },
+          {
+            "text": "Copyright (C) 2021 The Android Open Source Project",
+            "representativeEntry": "androidx/core/widget/CheckedTextViewCompat.java",
+            "matchingSourceFileCount": 2
+          }
+        ],
+        "notices": []
+      },
+      "bundledNoticeFiles": [
+        "Apache-2.0.txt",
+        "runtime-copyrights.txt",
+        "upstream/androidx-LICENSE.txt"
+      ],
+      "additionalEmbeddedTerms": []
+    },
+    {
+      "coordinate": "androidx.lifecycle:lifecycle-common:2.3.1",
+      "binaryArtifacts": [
+        {
+          "verificationName": "lifecycle-common-2.3.1.jar",
+          "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-common/2.3.1/lifecycle-common-2.3.1.jar",
+          "sha256": "15848fb56db32f4c7cdc72b324003183d52a4884d6bf09be708ac7f587d139b5",
+          "notices": []
+        }
+      ],
+      "pom": {
+        "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-common/2.3.1/lifecycle-common-2.3.1.pom",
+        "sha256": "8cd23d889a14095c6ce16840d29b1a6388fa5e115144c1309d4d6d469c1bc351",
+        "declaredLicenses": [
+          {
+            "name": "The Apache Software License, Version 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+          }
+        ],
+        "licenseParent": null
+      },
+      "sourceArchive": {
+        "coordinate": "androidx.lifecycle:lifecycle-common:2.3.1",
+        "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-common/2.3.1/lifecycle-common-2.3.1-sources.jar",
+        "sha256": "68ad8199336509f3daa27a9dedb61f6b770d5f0b712f064e02fefa1a2aafad6a",
+        "copyrights": [
+          {
+            "text": "Copyright (C) 2017 The Android Open Source Project",
+            "representativeEntry": "androidx/lifecycle/ClassesInfoCache.java",
+            "matchingSourceFileCount": 14
+          },
+          {
+            "text": "Copyright 2018 The Android Open Source Project",
+            "representativeEntry": "androidx/lifecycle/LifecycleEventObserver.java",
+            "matchingSourceFileCount": 1
+          }
+        ],
+        "notices": []
+      },
+      "bundledNoticeFiles": [
+        "Apache-2.0.txt",
+        "runtime-copyrights.txt",
+        "upstream/androidx-LICENSE.txt"
+      ],
+      "additionalEmbeddedTerms": []
+    },
+    {
+      "coordinate": "androidx.lifecycle:lifecycle-runtime:2.3.1",
+      "binaryArtifacts": [
+        {
+          "verificationName": "lifecycle-runtime-2.3.1.aar",
+          "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-runtime/2.3.1/lifecycle-runtime-2.3.1.aar",
+          "sha256": "dd294f4a689c71ff877fd41f3b67a3a62f7760d44ce420e6130f1fc3569d8f00",
+          "notices": []
+        }
+      ],
+      "pom": {
+        "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-runtime/2.3.1/lifecycle-runtime-2.3.1.pom",
+        "sha256": "b4442a84fc397edb2e908a1fdf713c6ae7d3a87641a09ee13d10ec8ee10b331f",
+        "declaredLicenses": [
+          {
+            "name": "The Apache Software License, Version 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+          }
+        ],
+        "licenseParent": null
+      },
+      "sourceArchive": {
+        "coordinate": "androidx.lifecycle:lifecycle-runtime:2.3.1",
+        "url": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-runtime/2.3.1/lifecycle-runtime-2.3.1-sources.jar",
+        "sha256": "a1757f478939a9ae47e3a005f5c3ce051e50859d54478e3b931fdb06738269a9",
+        "copyrights": [
+          {
+            "text": "Copyright (C) 2017 The Android Open Source Project",
+            "representativeEntry": "androidx/lifecycle/LifecycleRegistry.java",
+            "matchingSourceFileCount": 3
+          },
+          {
+            "text": "Copyright 2019 The Android Open Source Project",
+            "representativeEntry": "androidx/lifecycle/ViewTreeLifecycleOwner.java",
+            "matchingSourceFileCount": 1
+          }
+        ],
+        "notices": []
+      },
+      "bundledNoticeFiles": [
+        "Apache-2.0.txt",
+        "runtime-copyrights.txt",
+        "upstream/androidx-LICENSE.txt"
+      ],
+      "additionalEmbeddedTerms": []
+    },
+    {
+      "coordinate": "androidx.versionedparcelable:versionedparcelable:1.1.1",
+      "binaryArtifacts": [
+        {
+          "verificationName": "versionedparcelable-1.1.1.aar",
+          "url": "https://dl.google.com/dl/android/maven2/androidx/versionedparcelable/versionedparcelable/1.1.1/versionedparcelable-1.1.1.aar",
+          "sha256": "57e8d93260d18d5b9007c9eed3c64ad159de90c8609ebfc74a347cbd514535a4",
+          "notices": []
+        }
+      ],
+      "pom": {
+        "url": "https://dl.google.com/dl/android/maven2/androidx/versionedparcelable/versionedparcelable/1.1.1/versionedparcelable-1.1.1.pom",
+        "sha256": "5f51e65873ca612de3838fa90d2ee95b8d040efd31b9c390a19bf94d615cdb2f",
+        "declaredLicenses": [
+          {
+            "name": "The Apache Software License, Version 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+          }
+        ],
+        "licenseParent": null
+      },
+      "sourceArchive": {
+        "coordinate": "androidx.versionedparcelable:versionedparcelable:1.1.1",
+        "url": "https://dl.google.com/dl/android/maven2/androidx/versionedparcelable/versionedparcelable/1.1.1/versionedparcelable-1.1.1-sources.jar",
+        "sha256": "135016af471acf4cd9583d36ceb779710c6b46812ccaaef7c526d5d60eae6b0b",
+        "copyrights": [
+          {
+            "text": "Copyright 2018 The Android Open Source Project",
+            "representativeEntry": "androidx/versionedparcelable/CustomVersionedParcelable.java",
+            "matchingSourceFileCount": 10
+          }
+        ],
+        "notices": []
+      },
+      "bundledNoticeFiles": [
+        "Apache-2.0.txt",
+        "runtime-copyrights.txt",
+        "upstream/androidx-LICENSE.txt"
+      ],
+      "additionalEmbeddedTerms": []
+    },
+    {
+      "coordinate": "androidx.window:window-core-android:1.6.0-alpha05",
+      "binaryArtifacts": [
+        {
+          "verificationName": "window-core.aar",
+          "url": "https://dl.google.com/dl/android/maven2/androidx/window/window-core-android/1.6.0-alpha05/window-core-android-1.6.0-alpha05.aar",
+          "sha256": "8bd97b64af9d4c0d22833f49ac489e9b364f272d6d2b87fe8c0efacb09ec351a",
+          "notices": [
+            {
+              "entry": "META-INF/androidx/window/window-core/LICENSE.txt",
+              "sha256": "809fa1ed21450f59827d1e9aec720bbc4b687434fa22283c6cb5dd82a47ab9c0",
+              "bytes": 10175
+            }
+          ]
+        }
+      ],
+      "pom": {
+        "url": "https://dl.google.com/dl/android/maven2/androidx/window/window-core-android/1.6.0-alpha05/window-core-android-1.6.0-alpha05.pom",
+        "sha256": "638bc458faf72c5c6e473c251d18f2592d81fd17de1ce03900ce42fab225098f",
+        "declaredLicenses": [
+          {
+            "name": "The Apache Software License, Version 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+          }
+        ],
+        "licenseParent": null
+      },
+      "sourceArchive": {
+        "coordinate": "androidx.window:window-core-android:1.6.0-alpha05",
+        "url": "https://dl.google.com/dl/android/maven2/androidx/window/window-core-android/1.6.0-alpha05/window-core-android-1.6.0-alpha05-sources.jar",
+        "sha256": "f9ee088a467bb3a9a252b7fe4272b906212e2f56d4aeb3cc6cd96f89950badb2",
+        "copyrights": [
+          {
+            "text": "Copyright 2021 The Android Open Source Project",
+            "representativeEntry": "commonMain/androidx/window/core/ExperimentalWindowCoreApi.kt",
+            "matchingSourceFileCount": 1
+          },
+          {
+            "text": "Copyright 2022 The Android Open Source Project",
+            "representativeEntry": "commonMain/androidx/window/core/layout/WindowHeightSizeClass.kt",
+            "matchingSourceFileCount": 3
+          },
+          {
+            "text": "Copyright 2025 The Android Open Source Project",
+            "representativeEntry": "commonMain/androidx/window/core/layout/WindowSizeClassGridCreator.kt",
+            "matchingSourceFileCount": 1
+          },
+          {
+            "text": "Copyright 2024 The Android Open Source Project",
+            "representativeEntry": "commonMain/androidx/window/core/layout/WindowSizeClassSelectors.kt",
+            "matchingSourceFileCount": 1
+          }
+        ],
+        "notices": [
+          {
+            "entry": "META-INF/androidx/window/window-core/LICENSE.txt",
+            "sha256": "809fa1ed21450f59827d1e9aec720bbc4b687434fa22283c6cb5dd82a47ab9c0"
+          }
+        ]
+      },
+      "bundledNoticeFiles": [
+        "Apache-2.0.txt",
+        "runtime-copyrights.txt",
+        "upstream/androidx-LICENSE.txt"
+      ],
+      "additionalEmbeddedTerms": []
+    },
+    {
+      "coordinate": "androidx.window:window:1.6.0-alpha05",
+      "binaryArtifacts": [
+        {
+          "verificationName": "window-1.6.0-alpha05.aar",
+          "url": "https://dl.google.com/dl/android/maven2/androidx/window/window/1.6.0-alpha05/window-1.6.0-alpha05.aar",
+          "sha256": "13cb300f56c1f047c3114df8eb5ce7f65c41576af265e895f5e495254107fb9d",
+          "notices": [
+            {
+              "entry": "META-INF/androidx/window/window/LICENSE.txt",
+              "sha256": "809fa1ed21450f59827d1e9aec720bbc4b687434fa22283c6cb5dd82a47ab9c0",
+              "bytes": 10175
+            }
+          ]
+        }
+      ],
+      "pom": {
+        "url": "https://dl.google.com/dl/android/maven2/androidx/window/window/1.6.0-alpha05/window-1.6.0-alpha05.pom",
+        "sha256": "7a7e7eff28bc02137c05ba4eba856b5ec0cb5cb5cc948075a40718d208d127f1",
+        "declaredLicenses": [
+          {
+            "name": "The Apache Software License, Version 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+          }
+        ],
+        "licenseParent": null
+      },
+      "sourceArchive": {
+        "coordinate": "androidx.window:window:1.6.0-alpha05",
+        "url": "https://dl.google.com/dl/android/maven2/androidx/window/window/1.6.0-alpha05/window-1.6.0-alpha05-sources.jar",
+        "sha256": "c9a13a30939e93f6c99e69fba22c37a5718f1a42e5c3d23fb21694337eb1dfc9",
+        "copyrights": [
+          {
+            "text": "Copyright 2023 The Android Open Source Project",
+            "representativeEntry": "androidx/window/RequiresWindowSdkExtension.kt",
+            "matchingSourceFileCount": 32
+          },
+          {
+            "text": "Copyright 2022 The Android Open Source Project",
+            "representativeEntry": "androidx/window/WindowProperties.kt",
+            "matchingSourceFileCount": 15
+          },
+          {
+            "text": "Copyright 2021 The Android Open Source Project",
+            "representativeEntry": "androidx/window/area/EmptyWindowAreaControllerImpl.kt",
+            "matchingSourceFileCount": 43
+          },
+          {
+            "text": "Copyright 2025 The Android Open Source Project",
+            "representativeEntry": "androidx/window/area/WindowAreaToken.kt",
+            "matchingSourceFileCount": 3
+          },
+          {
+            "text": "Copyright 2024 The Android Open Source Project",
+            "representativeEntry": "androidx/window/area/adapter/WindowAreaAdapter.kt",
+            "matchingSourceFileCount": 19
+          },
+          {
+            "text": "Copyright (C) 2024 The Android Open Source Project",
+            "representativeEntry": "androidx/window/embedding/OverlayInfo.kt",
+            "matchingSourceFileCount": 1
+          },
+          {
+            "text": "Copyright 2026 The Android Open Source Project",
+            "representativeEntry": "androidx/window/layout/VisualStateRequest.kt",
+            "matchingSourceFileCount": 13
+          }
+        ],
+        "notices": [
+          {
+            "entry": "META-INF/androidx/window/window/LICENSE.txt",
+            "sha256": "809fa1ed21450f59827d1e9aec720bbc4b687434fa22283c6cb5dd82a47ab9c0"
+          }
+        ]
+      },
+      "bundledNoticeFiles": [
+        "Apache-2.0.txt",
+        "runtime-copyrights.txt",
+        "upstream/androidx-LICENSE.txt"
+      ],
+      "additionalEmbeddedTerms": []
+    },
+    {
+      "coordinate": "com.google.guava:listenablefuture:1.0",
+      "binaryArtifacts": [
+        {
+          "verificationName": "listenablefuture-1.0.jar",
+          "url": "https://repo.maven.apache.org/maven2/com/google/guava/listenablefuture/1.0/listenablefuture-1.0.jar",
+          "sha256": "e4ad7607e5c0477c6f890ef26a49cb8d1bb4dffb650bab4502afee64644e3069",
+          "notices": []
+        }
+      ],
+      "pom": {
+        "url": "https://repo.maven.apache.org/maven2/com/google/guava/listenablefuture/1.0/listenablefuture-1.0.pom",
+        "sha256": "53873caf26bc1ed8a567ea6c939ab2aaa3f47a5e32d5cade95ddf5080d23238a",
+        "declaredLicenses": [
+          {
+            "name": "The Apache Software License, Version 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+          }
+        ],
+        "licenseParent": {
+          "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava-parent/26.0-android/guava-parent-26.0-android.pom",
+          "sha256": "f8698ab46ca996ce889c1afc8ca4f25eb8ac6b034dc898d4583742360016cc04"
+        }
+      },
+      "sourceArchive": {
+        "coordinate": "com.google.guava:listenablefuture:1.0",
+        "url": "https://repo.maven.apache.org/maven2/com/google/guava/listenablefuture/1.0/listenablefuture-1.0-sources.jar",
+        "sha256": "3d1bd8d4a39b293612a40e547ec51d9ce34fa638d7adeae83871cdbe2923b161",
+        "copyrights": [
+          {
+            "text": "Copyright (C) 2007 The Guava Authors",
+            "representativeEntry": "com/google/common/util/concurrent/ListenableFuture.java",
+            "matchingSourceFileCount": 1
+          }
+        ],
+        "notices": []
+      },
+      "bundledNoticeFiles": [
+        "Apache-2.0.txt",
+        "runtime-copyrights.txt"
+      ],
+      "additionalEmbeddedTerms": []
+    },
+    {
+      "coordinate": "org.jetbrains.kotlin:kotlin-stdlib:2.2.10",
+      "binaryArtifacts": [
+        {
+          "verificationName": "kotlin-stdlib-2.2.10.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/2.2.10/kotlin-stdlib-2.2.10.jar",
+          "sha256": "9c67cc79efd6b9215b49d2a4308f5f3433537376c7c88e89bdd6729bd096e61a",
+          "notices": []
+        }
+      ],
+      "pom": {
+        "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/2.2.10/kotlin-stdlib-2.2.10.pom",
+        "sha256": "454ba507a3d36b4ac253df6df96f8739bd26ea19df3f332b10b13f2c5715f787",
+        "declaredLicenses": [
+          {
+            "name": "The Apache License, Version 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+          }
+        ],
+        "licenseParent": null
+      },
+      "sourceArchive": {
+        "coordinate": "org.jetbrains.kotlin:kotlin-stdlib:2.2.10",
+        "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/2.2.10/kotlin-stdlib-2.2.10-sources.jar",
+        "sha256": "2983f21e626325f256bc4443c7fe45a83912bba077be119142f68210c0548173",
+        "copyrights": [
+          {
+            "text": "Copyright 2010-2025 JetBrains s.r.o. and Kotlin Programming Language contributors.",
+            "representativeEntry": "commonMain/generated/_Arrays.kt",
+            "matchingSourceFileCount": 33
+          },
+          {
+            "text": "Copyright 2010-2023 JetBrains s.r.o. and Kotlin Programming Language contributors.",
+            "representativeEntry": "commonMain/generated/_OneToManyTitlecaseMappings.kt",
+            "matchingSourceFileCount": 22
+          },
+          {
+            "text": "Copyright 2010-2020 JetBrains s.r.o. and Kotlin Programming Language contributors.",
+            "representativeEntry": "commonMain/kotlin/Comparator.kt",
+            "matchingSourceFileCount": 46
+          },
+          {
+            "text": "Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.",
+            "representativeEntry": "commonMain/kotlin/JsAnnotationsH.kt",
+            "matchingSourceFileCount": 141
+          },
+          {
+            "text": "Copyright 2010-2021 JetBrains s.r.o. and Kotlin Programming Language contributors.",
+            "representativeEntry": "commonMain/kotlin/JvmAnnotationsH.kt",
+            "matchingSourceFileCount": 30
+          },
+          {
+            "text": "Copyright 2010-2022 JetBrains s.r.o. and Kotlin Programming Language contributors.",
+            "representativeEntry": "commonMain/kotlin/MathH.kt",
+            "matchingSourceFileCount": 26
+          },
+          {
+            "text": "Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.",
+            "representativeEntry": "commonMain/kotlin/TextH.kt",
+            "matchingSourceFileCount": 79
+          },
+          {
+            "text": "Copyright 2007 Google Inc.",
+            "representativeEntry": "commonMain/kotlin/collections/AbstractList.kt",
+            "matchingSourceFileCount": 2
+          },
+          {
+            "text": "Copyright 2010-2019 JetBrains s.r.o. and Kotlin Programming Language contributors.",
+            "representativeEntry": "commonMain/kotlin/collections/ArrayDeque.kt",
+            "matchingSourceFileCount": 20
+          },
+          {
+            "text": "Copyright 2010-2018 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license",
+            "representativeEntry": "commonMain/kotlin/experimental/ExperimentalNativeApi.kt",
+            "matchingSourceFileCount": 1
+          },
+          {
+            "text": "Copyright (c) 2007-present, Stephen Colebourne & Michael Nascimento Santos",
+            "representativeEntry": "commonMain/kotlin/time/Instant.kt",
+            "matchingSourceFileCount": 1
+          },
+          {
+            "text": "Copyright 2010-2015 JetBrains s.r.o.",
+            "representativeEntry": "jvmMain/kotlin/reflect/KDeclarationContainer.kt",
+            "matchingSourceFileCount": 2
+          },
+          {
+            "text": "Copyright 2010-2016 JetBrains s.r.o.",
+            "representativeEntry": "jvmMain/kotlin/reflect/KVisibility.kt",
+            "matchingSourceFileCount": 1
+          },
+          {
+            "text": "Copyright 2010-2017 JetBrains s.r.o.",
+            "representativeEntry": "jvmMain/jdk8/kotlin/collections/Collections.kt",
+            "matchingSourceFileCount": 3
+          }
+        ],
+        "notices": []
+      },
+      "bundledNoticeFiles": [
+        "Apache-2.0.txt",
+        "runtime-copyrights.txt",
+        "upstream/kotlin-COPYRIGHT.txt",
+        "kotlin-stdlib-attributions.txt",
+        "upstream/kotlin-threetenbp-LICENSE.txt",
+        "upstream/kotlin-boost-LICENSE.txt"
+      ],
+      "additionalEmbeddedTerms": [
+        "BSD-3-Clause (ThreeTenBP)",
+        "BSL-1.0 (Boost)"
+      ]
+    },
+    {
+      "coordinate": "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0",
+      "binaryArtifacts": [
+        {
+          "verificationName": "kotlinx-coroutines-android-1.9.0.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-android/1.9.0/kotlinx-coroutines-android-1.9.0.jar",
+          "sha256": "bd783acd2f9738845d58380f46f45b5cde95d0cb03027d56725338b26bfc4d72",
+          "notices": []
+        }
+      ],
+      "pom": {
+        "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-android/1.9.0/kotlinx-coroutines-android-1.9.0.pom",
+        "sha256": "be86020cd5b93b8a68ca43185a049b9b0baa345fd1be1fdaa014fdaef92d6e7c",
+        "declaredLicenses": [
+          {
+            "name": "The Apache Software License, Version 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.txt"
+          }
+        ],
+        "licenseParent": null
+      },
+      "sourceArchive": {
+        "coordinate": "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0",
+        "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-android/1.9.0/kotlinx-coroutines-android-1.9.0-sources.jar",
+        "sha256": "dd4d70dbc424eb0492126446b4035821d40d255664a8a36091d357f11390bc50",
+        "copyrights": [],
+        "notices": []
+      },
+      "bundledNoticeFiles": [
+        "Apache-2.0.txt",
+        "runtime-copyrights.txt",
+        "upstream/coroutines-LICENSE.txt",
+        "upstream/coroutines-NOTICE.txt"
+      ],
+      "additionalEmbeddedTerms": []
+    },
+    {
+      "coordinate": "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.9.0",
+      "binaryArtifacts": [
+        {
+          "verificationName": "kotlinx-coroutines-core-jvm-1.9.0.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.9.0/kotlinx-coroutines-core-jvm-1.9.0.jar",
+          "sha256": "ad89c2892235e670f222d819cb3d81188143cb19a05b59df9889ae4269f5c70a",
+          "notices": []
+        }
+      ],
+      "pom": {
+        "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.9.0/kotlinx-coroutines-core-jvm-1.9.0.pom",
+        "sha256": "19c4889941b3aa098bd57cc64f02f9adacc654d571a12a956de4b5bb148c6499",
+        "declaredLicenses": [
+          {
+            "name": "The Apache Software License, Version 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.txt"
+          }
+        ],
+        "licenseParent": null
+      },
+      "sourceArchive": {
+        "coordinate": "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.9.0",
+        "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.9.0/kotlinx-coroutines-core-jvm-1.9.0-sources.jar",
+        "sha256": "01e0f26a274d8f2f2ae702b161bc0980cea817bfcaf66ca4944434ea7b601771",
+        "copyrights": [],
+        "notices": []
+      },
+      "bundledNoticeFiles": [
+        "Apache-2.0.txt",
+        "runtime-copyrights.txt",
+        "upstream/coroutines-LICENSE.txt",
+        "upstream/coroutines-NOTICE.txt"
+      ],
+      "additionalEmbeddedTerms": []
+    },
+    {
+      "coordinate": "org.jetbrains:annotations:23.0.0",
+      "binaryArtifacts": [
+        {
+          "verificationName": "annotations-23.0.0.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/jetbrains/annotations/23.0.0/annotations-23.0.0.jar",
+          "sha256": "7b0f19724082cbfcbc66e5abea2b9bc92cf08a1ea11e191933ed43801eb3cd05",
+          "notices": []
+        }
+      ],
+      "pom": {
+        "url": "https://repo.maven.apache.org/maven2/org/jetbrains/annotations/23.0.0/annotations-23.0.0.pom",
+        "sha256": "c9490f655132328df2cfbcfdf743f53fc3916d6c1d10437175a6ca6e3a67771c",
+        "declaredLicenses": [
+          {
+            "name": "The Apache Software License, Version 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.txt"
+          }
+        ],
+        "licenseParent": null
+      },
+      "sourceArchive": {
+        "coordinate": "org.jetbrains:annotations:23.0.0",
+        "url": "https://repo.maven.apache.org/maven2/org/jetbrains/annotations/23.0.0/annotations-23.0.0-sources.jar",
+        "sha256": "ff2309b42f7584520497bb48bc609aca04c9886cf48708f14be83f00423ec144",
+        "copyrights": [
+          {
+            "text": "Copyright 2000-2021 JetBrains s.r.o.",
+            "representativeEntry": "org/jetbrains/annotations/BlockingExecutor.java",
+            "matchingSourceFileCount": 29
+          },
+          {
+            "text": "Copyright 2000-2020 JetBrains s.r.o.",
+            "representativeEntry": "META-INF/versions/9/module-info.java",
+            "matchingSourceFileCount": 1
+          }
+        ],
+        "notices": []
+      },
+      "bundledNoticeFiles": [
+        "Apache-2.0.txt",
+        "runtime-copyrights.txt"
+      ],
+      "additionalEmbeddedTerms": []
+    },
+    {
+      "coordinate": "org.jspecify:jspecify:1.0.0",
+      "binaryArtifacts": [
+        {
+          "verificationName": "jspecify-1.0.0.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar",
+          "sha256": "1fad6e6be7557781e4d33729d49ae1cdc8fdda6fe477bb0cc68ce351eafdfbab",
+          "notices": []
+        }
+      ],
+      "pom": {
+        "url": "https://repo.maven.apache.org/maven2/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.pom",
+        "sha256": "cdab929a3b95211f43d2090c5e2d0dfe8465960e378bc32b35841dab324433a6",
+        "declaredLicenses": [
+          {
+            "name": "The Apache License, Version 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+          }
+        ],
+        "licenseParent": null
+      },
+      "sourceArchive": {
+        "coordinate": "org.jspecify:jspecify:1.0.0",
+        "url": "https://repo.maven.apache.org/maven2/org/jspecify/jspecify/1.0.0/jspecify-1.0.0-sources.jar",
+        "sha256": "adf0898191d55937fb3192ba971826f4f294292c4a960740f3c27310e7b70296",
+        "copyrights": [
+          {
+            "text": "Copyright 2022 The JSpecify Authors.",
+            "representativeEntry": "org/jspecify/annotations/NonNull.java",
+            "matchingSourceFileCount": 3
+          },
+          {
+            "text": "Copyright 2018-2020 The JSpecify Authors.",
+            "representativeEntry": "org/jspecify/annotations/NullMarked.java",
+            "matchingSourceFileCount": 2
+          }
+        ],
+        "notices": []
+      },
+      "bundledNoticeFiles": [
+        "Apache-2.0.txt",
+        "runtime-copyrights.txt"
+      ],
+      "additionalEmbeddedTerms": []
+    }
+  ],
+  "metadataOnlyCoordinates": [
+    "androidx.annotation:annotation:1.9.1",
+    "androidx.collection:collection:1.4.2",
+    "androidx.window:window-core:1.6.0-alpha05",
+    "org.jetbrains.kotlinx:kotlinx-coroutines-bom:1.9.0",
+    "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0"
+  ],
+  "upstreamRevisions": {
+    "JetBrains/kotlin": "c448af19ded1b1a4e96e9af6412cd9acb100ce1a (v2.2.10)",
+    "Kotlin/kotlinx.coroutines": "d8d6f8f37978b8e202d93b34f23f101df9c5724d (1.9.0)"
+  },
+  "sharedApacheSourceEquivalence": {
+    "Apache-2.0.txt": [
+      "license/LICENSE.txt",
+      "license/third_party/gwt_license.txt",
+      "license/third_party/guava_license.txt"
+    ],
+    "repository": "JetBrains/kotlin",
+    "revision": "c448af19ded1b1a4e96e9af6412cd9acb100ce1a",
+    "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  "files": [
+    {
+      "file": "upstream/kotlin-threetenbp-LICENSE.txt",
+      "sha256": "d1bc53b493a3ab387b42717ed5c4b1976a5048996f81154278100bff86d39331",
+      "bytes": 1520,
+      "method": "verbatim upstream file",
+      "url": "https://raw.githubusercontent.com/JetBrains/kotlin/c448af19ded1b1a4e96e9af6412cd9acb100ce1a/license/third_party/threetenbp_license.txt"
+    },
+    {
+      "file": "upstream/kotlin-boost-LICENSE.txt",
+      "sha256": "8d8291caf1cee26d23acf3eb67c9f9a2d58f1c681b16a4fbe8cbfb9e3c0b5a9b",
+      "bytes": 1337,
+      "method": "verbatim upstream file",
+      "url": "https://raw.githubusercontent.com/JetBrains/kotlin/c448af19ded1b1a4e96e9af6412cd9acb100ce1a/license/third_party/boost_LICENSE.txt"
+    },
+    {
+      "file": "Apache-2.0.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "bytes": 11358,
+      "method": "verbatim upstream file",
+      "url": "https://raw.githubusercontent.com/JetBrains/kotlin/c448af19ded1b1a4e96e9af6412cd9acb100ce1a/license/LICENSE.txt"
+    },
+    {
+      "file": "upstream/coroutines-NOTICE.txt",
+      "sha256": "421d45acbd92670b4131621a28fcbb41ba0b747d3a336cb13fca38c0685426c4",
+      "bytes": 452,
+      "method": "verbatim upstream file",
+      "url": "https://raw.githubusercontent.com/Kotlin/kotlinx.coroutines/d8d6f8f37978b8e202d93b34f23f101df9c5724d/license/NOTICE.txt"
+    },
+    {
+      "file": "upstream/kotlin-COPYRIGHT.txt",
+      "sha256": "8f1a1700adb5490604c6094fb137bf73f6c28d3ee554b58f3ff8ef975a79672d",
+      "bytes": 647,
+      "method": "verbatim upstream file",
+      "url": "https://raw.githubusercontent.com/JetBrains/kotlin/c448af19ded1b1a4e96e9af6412cd9acb100ce1a/license/COPYRIGHT.txt"
+    },
+    {
+      "file": "upstream/coroutines-LICENSE.txt",
+      "sha256": "b1febe6399dffb10d19d35e7663ab16300c93cb0476a94115df1cc0097a8ffd8",
+      "bytes": 11398,
+      "method": "verbatim upstream file",
+      "url": "https://raw.githubusercontent.com/Kotlin/kotlinx.coroutines/d8d6f8f37978b8e202d93b34f23f101df9c5724d/LICENSE.txt"
+    },
+    {
+      "file": "upstream/androidx-LICENSE.txt",
+      "sha256": "809fa1ed21450f59827d1e9aec720bbc4b687434fa22283c6cb5dd82a47ab9c0",
+      "bytes": 10175,
+      "method": "verbatim archive entry; identical license entries deduplicated",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/window/window/1.6.0-alpha05/window-1.6.0-alpha05.aar",
+      "archiveSha256": "13cb300f56c1f047c3114df8eb5ce7f65c41576af265e895f5e495254107fb9d",
+      "entry": "META-INF/androidx/window/window/LICENSE.txt"
+    },
+    {
+      "file": "kotlin-stdlib-attributions.txt",
+      "sha256": "acbf0fb40551980e88adeaf38af20691395f792256ec5e90f212b8848ca116f9",
+      "bytes": 1335,
+      "method": "verbatim selected runtime path blocks with explanatory heading",
+      "url": "https://raw.githubusercontent.com/JetBrains/kotlin/c448af19ded1b1a4e96e9af6412cd9acb100ce1a/license/README.md",
+      "sourceSha256": "8cba83fcded6d166fc4398eb8cb9c1a12ad8b87ff624a404956242d22231fbc9",
+      "selectedPaths": [
+        "libraries/stdlib/src/kotlin/collections",
+        "libraries/stdlib/src/kotlin/time",
+        "libraries/stdlib/jvm/src/kotlin/util/UnsignedJVM.kt",
+        "libraries/stdlib/jvm/src/kotlin/util/MathJVM.kt"
+      ]
+    },
+    {
+      "file": "runtime-copyrights.txt",
+      "sha256": "9b2c6954f31064cc01f1986f72fbb44fbc06a8b026dbd8af05ffd2f4939d8b22",
+      "bytes": 7526,
+      "method": "deduplicated copyright lines from exact-version source archive headers"
+    },
+    {
+      "file": "README.txt",
+      "sha256": "87436147e46d71d096fcd1f4f88c05dd173131de88c16a179cafe8e8d2f79a88",
+      "bytes": 2564,
+      "method": "Cloudy explanatory index; upstream notices retained in linked files"
+    }
+  ],
+  "excluded": "No compiler, Gradle/AGP, JUnit, host SDK, JS/Wasm/native runtime, or third-party implementation source is bundled here. Kotlin compiler-specific NOTICE is excluded because the compiler is not an app runtime dependency.",
+  "packagingStatus": "pending exact final APK inspection"
+}

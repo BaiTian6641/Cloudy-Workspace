@@ -6,6 +6,7 @@ internal data class WindowRecord(
     val restorationSource: String,
     val activityAlive: Boolean = true,
     val observationJson: String? = null,
+    val engagement: EngagementSnapshot? = null,
 )
 
 internal data class ProbeEvent(
@@ -111,6 +112,23 @@ internal class WindowLedger(val capacity: Int = 8, eventCapacity: Int = 128) {
 
     fun globalEvent(kind: String, detail: String, elapsedMs: Long) {
         append(null, kind, detail, "process", null, elapsedMs)
+    }
+
+    fun engagement(identity: WindowIdentity, snapshot: EngagementSnapshot, elapsedMs: Long): Boolean {
+        val current = record(identity)
+        // Cleanup may finish after onDestroy. Retain that historical result only
+        // for the exact generation, never revive it or overwrite its successor.
+        val accepted = current != null && (current.activityAlive || !snapshot.active) &&
+            snapshot.epoch >= (current.engagement?.epoch ?: 0)
+        if (accepted && current?.engagement == snapshot) return false
+        if (accepted) {
+            records[identity.logicalWindowId] = requireNotNull(current).copy(engagement = snapshot)
+        } else {
+            rejectedCallbackCount++
+        }
+        append(identity, "engagement-state", "epoch=${snapshot.epoch};status=${snapshot.status};registration=${snapshot.registrationState}",
+            if (accepted) attribution(identity) else "rejected-engagement-generation-or-epoch", current?.localState, elapsedMs)
+        return true
     }
 
     private fun append(identity: WindowIdentity?, kind: String, detail: String, attribution: String,
