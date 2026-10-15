@@ -316,10 +316,18 @@ class SshChannelFixtureTests(unittest.TestCase):
                 exit_code, 129,
                 f"master hangup: observedExitCode={exit_code}; finalAudit={outcome!r}"[:512],
             )
+        prior_run_ids = {rows[0]["runId"] for rows in self.audits()}
         with self.terminal() as child:
             self.ready(child)
             child.process.send_signal(signal.SIGHUP)
-            self.assertEqual(child.process.wait(timeout=2), 129)
+            exit_code = child.process.wait(timeout=2)
+            events = [rows for rows in self.audits() if rows[0]["runId"] not in prior_run_ids]
+            final = events[0][-1] if events else {}
+            outcome = {key: final.get(key) for key in ("event", "reason", "intendedExitCode")}
+            self.assertEqual(
+                exit_code, 129,
+                f"explicit SIGHUP: observedExitCode={exit_code}; finalAudit={outcome!r}"[:512],
+            )
         self.assertEqual({events[-1]["reason"] for events in self.audits()},
                          {"terminal-hangup", "signal-hup"})
 
