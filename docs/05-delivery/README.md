@@ -15,3 +15,5 @@ The execution-reviewed plan has seven phases and 40 stages under [Rule 0](../00-
 Read [roadmap.md](roadmap.md) for dependencies, estimates, release gates, and the first ten working days. [backlog.json](backlog.json) is the canonical stage data; phase documents expand the same tasks and exit criteria into reviewable work packages. No remote issues or project boards are created by this planning foundation.
 
 The [capability outcome protocol](feasibility-gates.md) controls when implementation becomes ready. [Independent release gates](release-gates.md) distinguish Console, Desktop, the combined journey and full-suite qualification. The former P5-S1 adoption decision is now P1-S5.
+
+The [established-library policy](library-reuse-policy.md) records the user's instruction to reuse solid upstream engines and avoid excessive repeated verification. The [general progress table](execution-state.md#general-progress) separates completed investigations, diagnostic behavior and unfinished product subsystems.

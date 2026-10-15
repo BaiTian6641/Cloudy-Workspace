@@ -17,7 +17,8 @@ Repository: [BaiTian6641/Cloudy-Workspace](https://github.com/BaiTian6641/Cloudy
 | [Revision 01: integrated workflows](docs/00-project/revision-01-integrated-workflows.md) | X11 windows, SFTP/drop, RDP/VNC, USB plug-and-play and desktop scope |
 | [Revision 02: final-review decisions](docs/00-project/revision-02-final-review.md) | Per-save overwrite consent, independent app release gates and early native-stream adoption |
 | [Engineering workflow](docs/05-delivery/engineering-workflow.md) | Real implementations, stage reviews, AST/lint, delegation, Git and context rules |
-| [Execution state](docs/05-delivery/execution-state.md) and [history](docs/00-project/history.md) | Current work, evidence, reviewed milestones and next steps |
+| [Execution state](docs/05-delivery/execution-state.md) and [history](docs/00-project/history.md) | General progress, current work, evidence, reviewed milestones and next steps |
+| [Established-library policy](docs/05-delivery/library-reuse-policy.md) | Reuse upstream engines and validation; focus checks on Cloudy integration and concrete risks |
 | [Reviewed development skills](docs/07-reference/development-skills.md) | Official skill pins, provenance and project-specific boundaries |
 | [Product scope](docs/00-project/vision-scope.md) | Console/Desktop boundaries and release scope |
 | [Repository map](docs/00-project/repository-map.md) | Code ownership, dependencies, and planned modules |

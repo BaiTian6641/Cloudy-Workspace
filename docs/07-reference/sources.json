@@ -3074,7 +3074,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected beta package identifies gitHead 991857a1b1cacf06f9531ba74a6e927a7a6398bb. Its 1,115,072-byte tarball has SHA-256 342dfd1e9a5642081b83debd12ef5338b87b59dd9f1a61cb2aad1fba2be1c08e and matches npm SHA-512 integrity. The 12,132-byte CompositionHelper source has SHA-256 1e935e66830ca171456466987cb45ed0a270553901729f11dfa91f6b702e0845 and matches pinned upstream. Full runtime/API/fit/license delta review and device checks remain required; no prerelease adoption. Owner Terminal developer, P0-S3.",
+      "note": "Inspected beta package identifies gitHead 991857a1b1cacf06f9531ba74a6e927a7a6398bb. Its 1,115,072-byte tarball has SHA-256 342dfd1e9a5642081b83debd12ef5338b87b59dd9f1a61cb2aad1fba2be1c08e and matches npm SHA-512 integrity. The 12,132-byte CompositionHelper source has SHA-256 1e935e66830ca171456466987cb45ed0a270553901729f11dfa91f6b702e0845 and matches pinned upstream. Relevant artifact/API/fit/distribution delta review and focused actual-library/device integration checks remain required; no prerelease adoption. Owner Terminal developer, P0-S3.",
       "refresh": "Before renderer candidate selection, on upstream fix/release changes, and before claiming input qualification."
     },
     {
@@ -3098,7 +3098,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Upstream issue describes a separate input-event gate that can lose characters when an IME reports key code 229 broadly. Do not infer that the pending-timer change fixes this route; include full-library composition/event-order cases. Owner Terminal developer, P0-S3.",
+      "note": "Upstream issue describes a separate input-event gate that can lose characters when an IME reports key code 229 broadly. Do not infer that the pending-timer change fixes this route; use focused actual-library composition/input integration cases under D12. Owner Terminal developer, P0-S3.",
       "refresh": "Before renderer candidate selection, on upstream fix/release changes, and before claiming input qualification."
     },
     {
@@ -3112,6 +3112,66 @@
       "sourceUpdatedOn": null,
       "note": "Upstream report describes retained textarea content and later whole-value re-emission/replacement hazards. This is a candidate test requirement, not Cloudy device qualification; keep exact source and event-order evidence distinct. Owner Terminal developer, P0-S3.",
       "refresh": "Before renderer candidate selection, on upstream fix/release changes, and before claiming input qualification."
+    },
+    {
+      "id": "R125",
+      "title": "OMP 18.7.0 official overview",
+      "url": "https://github.com/can1357/oh-my-pi/blob/v18.7.0/README.md",
+      "publisher": "oh-my-pi maintainers / Stencil Labs",
+      "category": "tooling",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Inspected CLI/tool-control guidance: no-tools disables built-ins while custom tool modules have a separate discovery surface. Use explicit model selectors, bounded assignments and reviewed results; no sandbox or worker-success guarantee. Owner integration leader, P0–P6.",
+      "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
+    },
+    {
+      "id": "R126",
+      "title": "OMP 18.7.0 configuration discovery",
+      "url": "https://github.com/can1357/oh-my-pi/blob/v18.7.0/docs/config-usage.md",
+      "publisher": "oh-my-pi maintainers / Stencil Labs",
+      "category": "tooling",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Inspected config roots, profiles, discovery precedence and custom-tool/MCP integration. Empty cwd and a prompt alone do not isolate user/global or foreign configuration. Use per-run controls without altering global auth/settings. Owner integration leader, P0–P6.",
+      "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
+    },
+    {
+      "id": "R127",
+      "title": "OMP 18.7.0 custom tool discovery",
+      "url": "https://github.com/can1357/oh-my-pi/blob/v18.7.0/packages/coding-agent/src/extensibility/custom-tools/loader.ts",
+      "publisher": "oh-my-pi maintainers / Stencil Labs",
+      "category": "tooling",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Inspected separate direct getAllPluginToolPaths(cwd) enumeration after capability discovery. disabledProviders is not a complete custom-tool loading switch; the accepted CLI trial additionally had absent native/project plugin roots. Owner integration leader, P0–P6.",
+      "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
+    },
+    {
+      "id": "R128",
+      "title": "OMP 18.7.0 native plugin enumeration",
+      "url": "https://github.com/can1357/oh-my-pi/blob/v18.7.0/packages/coding-agent/src/extensibility/plugins/loader.ts",
+      "publisher": "oh-my-pi maintainers / Stencil Labs",
+      "category": "tooling",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Inspected plugin-root enumeration: node_modules absence yields an empty plugin list. The trial uses observed root absence, not a general sandbox or global no-discovery claim. Owner integration leader, P0–P6.",
+      "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
+    },
+    {
+      "id": "R129",
+      "title": "OMP 18.7.0 provider settings",
+      "url": "https://github.com/can1357/oh-my-pi/blob/v18.7.0/packages/coding-agent/src/config/model-settings.ts",
+      "publisher": "oh-my-pi maintainers / Stencil Labs",
+      "category": "tooling",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Inspected registered enabledProviders/disabledProviders settings; source-discovery IDs are distinct from the explicitly selected kimi-code model backend. Use a per-run overlay, not a global config edit. Owner integration leader, P0–P6.",
+      "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
     }
   ]
 }

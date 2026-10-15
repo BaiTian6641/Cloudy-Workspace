@@ -363,7 +363,7 @@ The [diagnostic research note](2026-10-15-terminal-input-diagnostics.md) defines
 
 ## Upstream terminal input fix candidate
 
-The [candidate comparison](2026-10-15-xterm-input-fix-candidate.md) records the actual release boundary and exact-source method experiment. Neither the prerelease nor a backport is adopted. Full-library deletion, replacement, composition and physical-input checks remain required.
+The [candidate comparison](2026-10-15-xterm-input-fix-candidate.md) records the actual release boundary and exact-source method experiment. Neither the prerelease nor a backport is adopted. Focused deletion/replacement/composition integration checks with the actual library and physical-input checks remain required under the [reuse policy](../05-delivery/library-reuse-policy.md).
 
 | ID | Primary reference | Use and limit |
 | --- | --- | --- |
@@ -373,3 +373,15 @@ The [candidate comparison](2026-10-15-xterm-input-fix-candidate.md) records the 
 | R122 | [Deferred-difference issue 6045](https://github.com/xtermjs/xterm.js/issues/6045) | Different event order; regression lead rather than Googlebook evidence. |
 | R123 | [Input-event gate issue 5887](https://github.com/xtermjs/xterm.js/issues/5887) | Distinct lost-input path remains outside a timer-only claim. |
 | R124 | [Whole-value issue 6078](https://github.com/xtermjs/xterm.js/issues/6078) | Retained textarea/replacement hazards require broader checks. |
+
+## Local worker orchestration references
+
+These tooling references support the project-local [worker skill](../../skills/cloudy-parallel-workers/SKILL.md), not Android capability claims. Local CLI help/catalog and actual trial results are recorded separately.
+
+| ID | Official reference | Use and limit |
+| --- | --- | --- |
+| R125 | [OMP v18.7.0 overview](https://github.com/can1357/oh-my-pi/blob/v18.7.0/README.md) | CLI/model delegation and tool/discovery boundaries; disabling built-ins alone is not an OS sandbox or a custom-tool restriction. |
+| R126 | [OMP v18.7.0 configuration discovery](https://github.com/can1357/oh-my-pi/blob/v18.7.0/docs/config-usage.md) | Profile, user/project and foreign-tool discovery; use explicit bounded context and per-run configuration. |
+| R127 | [OMP custom-tool discovery](https://github.com/can1357/oh-my-pi/blob/v18.7.0/packages/coding-agent/src/extensibility/custom-tools/loader.ts) | Plugin tool paths have a separate direct enumeration; source-discovery controls alone do not prove no custom tools. |
+| R128 | [OMP plugin loader](https://github.com/can1357/oh-my-pi/blob/v18.7.0/packages/coding-agent/src/extensibility/plugins/loader.ts) | Absent native/project plugin roots support this trial's observed no-tool boundary. |
+| R129 | [OMP provider settings](https://github.com/can1357/oh-my-pi/blob/v18.7.0/packages/coding-agent/src/config/model-settings.ts) | Per-run source-discovery provider controls; preserve the explicitly selected model backend. |

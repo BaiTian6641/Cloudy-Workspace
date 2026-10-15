@@ -4,6 +4,8 @@
 
 ## Effort and release gates
 
+The user-directed [established-library policy](library-reuse-policy.md) applies across all phases: adopt maintained engines, reuse their upstream validation and spend verification effort on Cloudy integration and demonstrated risks. Dependencies and release scope remain unchanged. The effort ranges below remain planning hypotheses until engine choices and remaining integration work justify a revised estimate.
+
 | Phase | Stages | Active effort, person-days | Outcome / exit gate |
 | --- | ---: | ---: | --- |
 | [P0](phases/p0-qualification.md) | 7 | 15–28 | Scoped Android/input, SSH/X11, protocol/media, USB and network evidence; capability outcomes control dependent work |
@@ -108,7 +110,7 @@ Complete every P0 investigation record before declaring the entire phase done. A
 
 Each stage records prerequisites, owner, effort, tasks, deliverables, exit criteria, sources, cases and evidence directory. Status is `planned → ready → in-progress → review → done`; blocked names the concrete reason. [Capability outcomes](feasibility-gates.md) separately use `pending`, `supported`, `experiment` and `blocked`.
 
-An investigation may finish with a blocked capability decision. Dependent product work requires a supported outcome and completed prerequisites. Bounded experiments record a hypothesis, owner, effort cap, stop condition and expected evidence. All initial outcomes are pending, and all implementation stages remain planned.
+An investigation may finish with a blocked capability decision. Dependent product work requires a supported outcome and completed prerequisites. Bounded experiments record a hypothesis, owner, effort cap, stop condition and expected evidence. At the current checkpoint, CAP-PLATFORM is an experiment, seven other outcomes are pending, and all product implementation stages remain planned. See the [execution state](execution-state.md#general-progress) for progress beyond the initial plan.
 
 A fallback that changes requested behavior requires an explicit scope decision, qualification and re-estimation. A single full X desktop cannot pass separate X11 windows; an external RDP/VNC viewer cannot pass native-client gates; a lab-side USB provider does not certify local Googlebook plug-and-play. Documentation checks never establish hardware results.
 

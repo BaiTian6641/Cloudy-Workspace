@@ -4,6 +4,8 @@ Validation proceeds from contracts and synthetic fixtures to physical device wor
 
 Qualification targets the Googlebook desktop ecosystem under [Rule 0](../00-project/platform-rule-zero.md). Phone/tablet optimization/testing has no delivery lane. Use the [desktop application contract](../03-platform/googlebook/desktop-application-contract.md) to record applicable official quality tests alongside Cloudy cases; a narrow desktop window is still required.
 
+Apply the user-directed [established-library policy](../05-delivery/library-reuse-policy.md). Use upstream validation for unchanged engine internals and concentrate Cloudy checks on adapters, configuration, changed behavior and real platform boundaries. A representative integration run plus applicable failure cases is the default; exhaustive upstream protocol/parser/codec retesting is not a prerequisite. An observed defect, relevant change/advisory or uncovered consequential risk must justify extra investigation. Existing physical-input, trust, data-integrity, permissions and release requirements retain their scope.
+
 ## Layers
 
 | Layer | Proves | Does not prove |
@@ -37,12 +39,12 @@ Record run ID/date, tester role, stage/case IDs, commit/package hashes, device/O
 
 Use pass, fail, blocked, or inconclusive; avoid “works” without a case. Store sanitized evidence in `qualification/results/<stage>/<run>/`. Private logs and raw identifiers stay in the ignored private directory or a separately controlled store.
 
-The separate [capability outcome protocol](../05-delivery/feasibility-gates.md) controls readiness. An investigation may finish with a blocked or bounded-experiment result; its dependent product stage remains planned or blocked until a scoped supported outcome exists. All initial capability records are pending with empty evidence paths.
+The separate [capability outcome protocol](../05-delivery/feasibility-gates.md) controls readiness. An investigation may finish with a blocked or bounded-experiment result; its dependent product stage remains planned or blocked until a scoped supported outcome exists. At the current checkpoint, CAP-PLATFORM is an experiment and the other seven capability records are pending; none is supported. Read the [execution state](../05-delivery/execution-state.md) and canonical backlog for current evidence.
 
 ## Release gates
 
 R1 and R2 each pass their own [release checklist](../05-delivery/release-gates.md), including signed package/update/recovery, required functional cases, support/dependency material and ten working days of candidate observation. R1 includes X11 and session SFTP/drop with Desktop absent. R2 includes native RDP/VNC, files, enrolled USB and the external stream lane with Console absent. P3-S9 separately validates the combined build/upload/handoff/program/inspect journey; it does not hold either standalone release.
 
-R3 covers host event/adapters and offline/gap/expiry evidence. R4 covers native-stream latency/stability, provider publication and metered/contention behavior independently of R3. R5 adds full-suite failure, migration, distribution and dogfood evidence. Reuse earlier results only for applicable exact builds/cases. An external-only stream scope change remains explicit. All hardware/backend rows remain unqualified until recorded runs pass.
+R3 covers host event/adapters and offline/gap/expiry evidence. R4 covers native-stream latency/stability, provider publication and metered/contention behavior independently of R3. R5 adds full-suite failure, migration, distribution and dogfood evidence. Reuse accepted component evidence when its version, configuration and platform applicability remain unchanged; check the affected integration delta when assembling a new build. Keep each original result bound to the build/case it actually tested, and record new release-build evidence for required release cases. An external-only stream scope change remains explicit. All hardware/backend rows remain unqualified until recorded runs pass.
 
 Re-run affected gates after meaningful changes, failures, or newly discovered concerns. Do not repeatedly broaden checks after a stable passing result without a reason. Keep upstream/backend versions pinned in every support claim.

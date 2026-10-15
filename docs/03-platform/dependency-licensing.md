@@ -2,6 +2,8 @@
 
 This is an engineering due-diligence register. Final distribution terms require review against the actual chosen code/version and project license; the table is not a legal conclusion.
 
+Use the [established-library policy](../05-delivery/library-reuse-policy.md) when selecting and integrating these engines. Reuse the recorded version/license/provenance review until relevant inputs change; focus new verification on Cloudy's integration and observed defects. The actual SSH diagnostic now uses SSHJ 0.41.2 under its [adoption record](../06-validation/2026-10-15-ssh-dependency-adoption.md); the generic candidate rows below retain product-selection scope.
+
 | Candidate | Intended role | Initial integration | Decision gate |
 | --- | --- | --- | --- |
 | Kotlin / Compose / AndroidX | Native app shell and platform behavior | Pin compatible artifacts after P0 | P1-S1 |

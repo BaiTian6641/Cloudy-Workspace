@@ -1999,6 +1999,18 @@
       "status": "user-selected",
       "selection": "Resolve native streaming feasibility/distribution in P0/P1 and integrate independently of optional host adapters",
       "record": "docs/00-project/revision-02-final-review.md"
+    },
+    {
+      "id": "D12",
+      "status": "user-selected",
+      "selection": "Reuse established libraries and upstream validation; focus verification on Cloudy integration, changed behavior and concrete risks",
+      "record": "docs/05-delivery/library-reuse-policy.md"
+    },
+    {
+      "id": "D13",
+      "status": "user-selected",
+      "selection": "Preserve parent Codex leadership across context recovery; use GPT6.1-Sol directly through Codex collaboration for subagents; OMP accesses Kimi K3 only, with explicit context, isolated ownership and leader review; GLM inactive pending user update",
+      "record": "docs/05-delivery/engineering-workflow.md"
     }
   ],
   "dependencyConstraints": [
