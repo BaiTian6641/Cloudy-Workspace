@@ -131,24 +131,41 @@
     },
     {
       "id": "API07",
-      "feature": "Keyboard and shortcuts",
+      "feature": "Keyboard, shortcuts and native terminal focus",
       "symbols": [
         "KeyEvent",
-        "Activity.onProvideKeyboardShortcuts"
+        "Activity.onProvideKeyboardShortcuts",
+        "View.setFocusable(boolean)",
+        "View.setFocusableInTouchMode(boolean)",
+        "View.isFocusableInTouchMode",
+        "View.requestFocus()",
+        "View.hasFocus",
+        "Activity.getCurrentFocus"
       ],
       "sourceIds": [
         "G10",
-        "G02"
+        "G02",
+        "G24",
+        "G25",
+        "G117"
       ],
       "minimumApi": null,
       "libraryVersion": null,
-      "availability": "documented-entrypoint",
+      "availability": "documented-entrypoint-focus-subset-compiled-partially-observed",
       "qualification": "untested",
-      "checkedOn": "2026-10-14",
+      "checkedOn": "2026-10-15",
       "owner": "Android/platform developer",
       "stage": "P0-S3",
-      "fallback": "Menus and command palette",
-      "experiment": "IME commit bytes, Ctrl+C, selection and reserved shortcuts"
+      "fallback": "Menus and command palette remain. If the initial native request is rejected, show a separate tap-terminal hint without masking SSH status or aborting the connection; later focus stays under normal user/framework control.",
+      "experiment": "Retain the actual paced injected-input focus result; investigate the unresolved rapid ADB input duplication separately. Qualify physical keyboard focus transitions, native IME/preedit/commit bytes, Ctrl+C, selection, bulk paste and reserved shortcuts independently.",
+      "versionNotes": "The native focus subset setFocusable(boolean), setFocusableInTouchMode(boolean), isFocusableInTouchMode(), requestFocus(), hasFocus() and Activity.getCurrentFocus() is API1. Probe minSdk35 needs no extra guard for this subset. The existing keyboard/shortcut scope retains its separate per-method and physical qualification.",
+      "runtimeGuard": "Call View methods on the UI thread. Explicit Connect adds the WebView, renders native controls, then calls requestFocus() once before renderer.start(). Check the boolean result; do not refocus from READY/open/render/resume or intercept all keys. getCurrentFocus()/hasFocus() diagnostics describe native focus, not DOM focus, window focus or IME readiness.",
+      "implementationEvidence": "docs/06-validation/2026-10-15-terminal-focus-review.md",
+      "partialObservation": {
+        "evidence": "qualification/results/P0-S3/2026-10-15-terminal-probe.md",
+        "manifest": "qualification/results/P0-S3/2026-10-15-terminal-probe-manifest.json",
+        "note": "Diagnostic 0.7.1/code10, buildRef60908d62-c573-4c4b-8b0e-910e5863197e: paced injected echo/control bytes worked after Connect without a terminal tap. This is a scoped native-focus routing observation, not physical-keyboard, native-IME, bulk-input or full terminal qualification. Earlier 0.7.0 focus-routing failure and rapid ADB input duplication are retained; the focus correction does not resolve that input-integrity failure."
+      }
     },
     {
       "id": "API08",

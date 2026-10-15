@@ -12,7 +12,7 @@ Statuses: **adopted for planning**, **proposed pending spike**, **unknown**, **q
 | R01 | Physical trackpad relative capture/CAD behavior | Unknown, high impact | Device owner | P0-S4 | Absolute mode or qualified external mouse; do not claim trackpad CAD readiness |
 | R02 | Primary USB probe reset/reenumeration over Android provider | Unknown, critical | Device/embedded | P0-S5 | Lab-side Linux provider or vendor hardware server |
 | R03 | SSH engine compatibility and modern algorithms on ARM64 | Unknown, high | Terminal | P0-S3 | Compare maintained engines; do not implement cryptography |
-| R04 | System IME + WebView terminal composition | Unknown, high | Terminal/QA | P0-S3 | Renderer alternative or corrected native input boundary |
+| R04 | System IME + WebView terminal composition | Rapid injected-input failure observed; physical IME unqualified, high | Terminal/QA | P0-S3 | [0.7.1 run](../../qualification/results/P0-S3/2026-10-15-terminal-probe.md): native Connect focus corrected, bulk `stty` received as `sttytyy`; trace the actual event path before remediation or renderer substitution |
 | R05 | Background service type and timeout fitness | Unknown, high | Android | P0-S2 / P6-S1 | Persist metadata, host-side durable sessions, explicit reconnect |
 | R06 | Linux VM public attach/control API | Unknown; roadmap dependencies | Platform | P0-S2 | No local-VM feature commitment |
 | R07 | Wayland capture/input/lock support | Unknown per compositor | Linux | P0-S4 | Qualified matrix and explicit unsupported states |

@@ -12,4 +12,9 @@
     <string name="terminal_details">Session details</string>
     <string name="terminal_refresh">Refresh configuration</string>
     <string name="terminal_recreate">Recreate terminal window</string>
+    <string name="terminal_native_focus_hint">Initial keyboard focus was not acquired. Tap the terminal before typing.</string>
+    <string name="terminal_native_focus_surface">terminal surface</string>
+    <string name="terminal_native_focus_none">none</string>
+    <string name="terminal_native_focus_other">another native view</string>
+    <string name="terminal_details_with_native_focus">%1$s\n\nNative focus before this dialog: %2$s</string>
 </resources>

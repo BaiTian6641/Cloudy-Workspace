@@ -1,0 +1,15 @@
+# Terminal Connect focus correction and device evidence
+
+**Scope:** P0-S3 diagnostic 0.7.1/code10, following the real 0.7.0 ordinary-shell experiment. This is a bounded source/device milestone; full terminal adoption and product stages remain gated.
+
+The 0.7.0 Connect action mounted the WebView and started the renderer while native keyboard focus remained on header controls. In the actual failed attempt, spaces activated Disconnect and Enter opened Session details; the SSH journal recorded zero input bytes despite receiving the shell prompt. A focused DOM/accessibility input did not establish native WebView focus.
+
+The correction explicitly makes the WebView focusable, including touch mode, and requests native focus once from the user's Connect action, after mounting it and updating the buttons and before renderer startup. A false return shows a separate hint. There is no delayed retry or focus request from READY, open, render or lifecycle callbacks, so later native controls/dialogs retain their ordinary focus behavior. Session details samples native focus before opening its dialog. Comments explain this ordering; all new labels use string resources.
+
+Primary review inspected the delegated patch and ordering. A separate reviewer accepted it without actionable findings. Official source mapping extends API07 using G24/G25/G117 in the [API catalog](../03-platform/googlebook/api-catalog.md). Public API availability does not establish installed-provider behavior; that is supplied by the separate [device run](../../qualification/results/P0-S3/2026-10-15-terminal-probe.md).
+
+The first build found three `SetTextI18n` errors. Moving the added text into five resources corrected them without new suppressions. The successful compiler/assemble, Android Lint and **198 JVM tests / 28 suites** bind the exact source and APK in the [package audit](2026-10-15-terminal-focus-package.json). APK SHA-256 is `629b71bf4cd006889252d578106fc494d09593381738e5a3e240d8f78c2a4611`, 16,636,002 bytes, build reference `60908d62-c573-4c4b-8b0e-910e5863197e`. Runtime dependencies, permissions and components are unchanged; all 33 packaged notice/terminal assets match. This focus correction changes no SSH protocol, credential boundary or queue policy.
+
+On the HP Googlebook build CL3B.260622.276.R2 with WebView 149.0.7827.5, the eighth attempt pressed Connect and sent paced injected text without tapping the terminal. The shell visibly answered the controlled command, the host captured the expected twelve control-input bytes, and explicit shell exit closed the transport. Earlier SSH/transfer journals and the first seven terminal rows remain preserved. The fixture stopped cleanly and its listener is closed.
+
+Rapid injected text still produces duplicated bytes. The focus correction does not resolve that separate defect. Pinned upstream composition handling is a research hypothesis pending actual event tracing. Physical keyboard, IME, accessibility, paste, sustained output/backpressure and renderer-loss qualification remain open. The full terminal journal needs reviewed preservation before another attempt; CAP-SSH and CAP-TERMINAL remain pending.

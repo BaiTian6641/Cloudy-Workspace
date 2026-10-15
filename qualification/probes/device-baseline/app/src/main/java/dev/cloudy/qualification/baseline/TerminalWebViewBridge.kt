@@ -100,6 +100,9 @@ internal class TerminalWebViewBridge(
             setSupportZoom(false)
         }
         view.contentDescription = "Cloudy SSH terminal; local renderer"
+        // DOM textarea focus alone does not give Android keyboard focus to the WebView.
+        view.isFocusable = true
+        view.isFocusableInTouchMode = true
         view.setDownloadListener { _, _, _, _, _ -> fail("renderer-download-blocked") }
         view.webChromeClient = object : WebChromeClient() {
             override fun onConsoleMessage(consoleMessage: ConsoleMessage): Boolean = true // Never log remote bytes.

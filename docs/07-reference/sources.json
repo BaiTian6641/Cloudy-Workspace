@@ -286,9 +286,9 @@
       "publisher": "Google",
       "category": "api",
       "reviewStatus": "reviewed",
-      "checkedOn": "2026-10-14",
+      "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "requestFullscreenMode signature, API 34, and callback/rejection constraints.",
+      "note": "requestFullscreenMode signature, API 34, and callback/rejection constraints. Re-reviewed getCurrentFocus(): API 1, currently focused native View or null; observational only, not DOM focus or an IME/keyboard success signal.",
       "refresh": "Before implementation against this surface; weekly during active platform qualification."
     },
     {
@@ -298,9 +298,9 @@
       "publisher": "Google",
       "category": "api",
       "reviewStatus": "reviewed",
-      "checkedOn": "2026-10-14",
+      "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "API 35 cross-instance drag flags; other View methods need per-method review.",
+      "note": "API 35 cross-instance drag flags. Re-reviewed API 1 requestFocus(), setFocusable(boolean), setFocusableInTouchMode(boolean), isFocusableInTouchMode() and hasFocus(); boolean request result is checked, and hasFocus includes descendants. Exact method sections fetched from the canonical official page after browser-tool retrieval failed. Remaining View methods still require individual review.",
       "refresh": "Before implementation against this surface; weekly during active platform qualification."
     },
     {
@@ -708,7 +708,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "X11Forwarding, X11UseLocalhost and XAuthLocation prerequisites; re-reviewed ForceCommand overriding shell/exec/subsystem, PermitTTY, DisableForwarding and PermitUserRC for the separate P0-S3 finite PTY fixture. Current manual semantics require effective-configuration/runtime checks with the selected backend.",
+      "note": "X11Forwarding, X11UseLocalhost and XAuthLocation prerequisites; ForceCommand overrides shell/exec/subsystem through the account login shell -c and does not itself disable forwarding. Re-reviewed PermitTTY, DisableForwarding and PermitUserRC for the separate P0-S3 fixtures. Inner Bash startup flags cannot suppress the earlier outer shell; verify selected-backend startup and effective configuration separately.",
       "refresh": "Before engine selection, after relevant upstream change, and before release qualification."
     },
     {
@@ -2580,7 +2580,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Current official authorized_keys manual: restrict disables PTY, forwarding and user rc; restrict,pty restores only PTY. Forced command applies to shell/exec/subsystem and SSH_ORIGINAL_COMMAND must not be evaluated as arbitrary input. Owner P0-S3 fixture maintainer; verify actual extracted backend config or retain SFTP-only scope.",
+      "note": "Current official authorized_keys manual: restrict disables PTY, forwarding and user rc; restrict,pty restores only PTY. Never evaluate SSH_ORIGINAL_COMMAND. PermitUserRC no does not suppress the separate system sshrc route. Owner P0-S3 fixture maintainer; verify the selected backend and actual startup files before the ordinary-shell experiment; no sandbox or Android qualification claim.",
       "refresh": "Before P0-S3 exec/PTY implementation, on SSHJ or OpenSSH policy changes, and before qualification claims."
     },
     {
@@ -2904,6 +2904,42 @@
       "sourceUpdatedOn": null,
       "note": "Upstream fixes false MissingOnRenderProcessGone reports for Kotlin supertype/delegation constructor calls. Inspected WebKit1.17.1 lint.jar lacks this guard. One factory-scoped suppression retains the actual handler; recheck/remove on dependency update.",
       "refresh": "Before implementation or dependency updates; recheck qualification separately."
+    },
+    {
+      "id": "R113",
+      "title": "GNU Bash startup files and remote-shell detection",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Bash-Startup-Files.html",
+      "publisher": "GNU Project / Free Software Foundation",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Official startup section inspected through the search index after direct retrieval timed out. Remote noninteractive Bash can read ~/.bashrc; --norc suppresses startup only for the Bash invocation receiving it, and --noprofile governs login profiles. Inference with R18/R114: fixed inner-shell flags cannot undo the outer login-shell startup that already ran. Owner P0-S3 fixture maintainer; inspect host startup behavior or stop the fixture, without changing personal startup files. No containment or device claim.",
+      "refresh": "Before ordinary-shell qualification and when host shell, startup files, OpenSSH route or fixture policy changes."
+    },
+    {
+      "id": "R114",
+      "title": "OpenSSH 10.2p1 session startup and forced-command implementation",
+      "url": "https://raw.githubusercontent.com/openssh/openssh-portable/V_10_2_P1/session.c",
+      "publisher": "OpenBSD / OpenSSH",
+      "category": "protocol",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Versioned V_10_2_P1 source inspected: do_exec retains the original command, do_setup_env sets SSH_ORIGINAL_COMMAND only when non-null, do_rc_files can run the system sshrc despite an admin forced command, and do_child invokes the account shell with -c. An ordinary shell request has no original command; an explicitly empty exec request still has one. Owner P0-S3 fixture maintainer; reject exec requests and verify selected package/runtime behavior separately. This upstream source is not proof of a downstream package or device result.",
+      "refresh": "Before ordinary-shell qualification and on extracted OpenSSH package, forced-command route or launcher changes."
+    },
+    {
+      "id": "G117",
+      "title": "Android input events and native focus handling",
+      "url": "https://developer.android.com/develop/ui/views/touch-and-input/input-events#HandlingFocus",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Handling focus and touch-mode sections reviewed. Hardware key routing follows native View focus; DOM textarea focus is a separate layer. API28+ activities require an explicit initial-focus request when desired. Cloudy requests native terminal focus once for Connect, checks the boolean result, and leaves later focus movement to the user/framework. Owner Android/platform developer, P0-S3; physical keyboard and native IME qualification remain separate.",
+      "refresh": "Before keyboard/focus changes, on relevant Android or WebView updates, and before terminal qualification claims."
     }
   ]
 }

@@ -1,0 +1,3722 @@
+{
+  "schemaVersion": 1,
+  "runId": "2026-10-15-terminal-probe",
+  "stage": "P0-S3",
+  "stageStatus": "in-progress",
+  "reviewStatus": "Accepted by primary and independent review:408 private artifacts,8 attempts/48 events,13 journal checkpoints,18 host projections,9 exercise files,11 thread samples,both APK/asset/source bindings and privacy boundaries verified.",
+  "verdict": "bounded-ordinary-shell-observations-focus-corrected-bulk-input-failure-retained",
+  "applications": [
+    {
+      "versionName": "0.7.0",
+      "versionCode": 9,
+      "buildRef": "7b55cd23-0988-46b7-8fc1-1da8a197842d",
+      "apkSha256": "6401d7c4deadb57fa55b484bede394255b77d5454c339b57543375387f3fd008",
+      "apkBytes": 16623338,
+      "tests": {
+        "tests": 198,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "jvmSuiteCount": 28,
+      "packageAudit": "docs/06-validation/2026-10-15-terminal-probe-package.json",
+      "sourceCommit": "ff21366a880723dc7b6b8ff680c76c724cc071fa",
+      "sourceBinding": "Exact source hashes in package audit; 0.7.1 commit is the containing reviewed checkpoint."
+    },
+    {
+      "versionName": "0.7.1",
+      "versionCode": 10,
+      "buildRef": "60908d62-c573-4c4b-8b0e-910e5863197e",
+      "apkSha256": "629b71bf4cd006889252d578106fc494d09593381738e5a3e240d8f78c2a4611",
+      "apkBytes": 16636002,
+      "tests": {
+        "tests": 198,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "jvmSuiteCount": 28,
+      "packageAudit": "docs/06-validation/2026-10-15-terminal-focus-package.json",
+      "sourceCommit": null,
+      "sourceBinding": "Exact source hashes in package audit; 0.7.1 commit is the containing reviewed checkpoint."
+    }
+  ],
+  "device": {
+    "model": "HP Googlebook 14",
+    "os": "Android 17",
+    "api": 37,
+    "abi": "arm64-v8a",
+    "build": "CL3B.260622.276.R2",
+    "incremental": "16560795",
+    "securityPatch": "2026-09-01",
+    "webViewPackage": "com.google.android.webview",
+    "webViewVersion": "149.0.7827.5",
+    "inputStimulus": "ADB-injected text/key events; no physical keyboard or IME qualification."
+  },
+  "backend": {
+    "os": "Ubuntu 26.04",
+    "desktop": "KDE Wayland",
+    "server": "OpenSSH_10.2p1 Ubuntu-2ubuntu3.8",
+    "crypto": "OpenSSL 3.5.5",
+    "shell": "/bin/bash --noprofile --norc -i +o history",
+    "scope": "Same-user temporary generated-key ordinary PTY/shell fixture. Not a sandbox or custom product host agent."
+  },
+  "hostPreflight": {
+    "atUtc": "2026-10-15T13:28:45.137549+00:00",
+    "scope": "Host SSH client over actual ordinary shell; not Android input/rendering evidence",
+    "passed": true,
+    "execRejectedExit": 74,
+    "shellClientExit": 0,
+    "initialSize": [
+      80,
+      24
+    ],
+    "resizedSize": [
+      132,
+      43
+    ],
+    "expectedEnvironmentObserved": true,
+    "transcriptBytes": 896,
+    "transcriptSha256": "da357382a95e12e3309eceea3864600d7bef4278ea0ea2b3cfa6f72eda059827"
+  },
+  "attempts": [
+    {
+      "sessionId": "14371b09-8f76-4415-9655-3019ac48cc77",
+      "buildIdentity": {
+        "versionName": "0.7.0",
+        "versionCode": 9,
+        "buildRef": "7b55cd23-0988-46b7-8fc1-1da8a197842d"
+      },
+      "status": "trust-required",
+      "reason": "independent-host-key-matched",
+      "authenticated": false,
+      "droppedEvents": 0,
+      "events": [
+        {
+          "status": "connecting",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:28:51.928926Z",
+          "elapsedRealtimeMs": 69168733
+        },
+        {
+          "status": "connecting",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:28:51.952408Z",
+          "elapsedRealtimeMs": 69168757
+        },
+        {
+          "status": "trust-required",
+          "reason": "independent-host-key-matched",
+          "deviceUtc": "2026-10-15T13:28:52.050348Z",
+          "elapsedRealtimeMs": 69168855
+        }
+      ],
+      "ordinal": 1,
+      "details": {
+        "rendererProvider": "com.google.android.webview",
+        "rendererVersion": "149.0.7827.5",
+        "rendererMessageListener": "true",
+        "rendererArrayBuffer": "true",
+        "hostVerificationCount": "1",
+        "inputBytes": "0",
+        "stdoutBytes": "0",
+        "stderrBytes": "0",
+        "kex": "ecdh-sha2-nistp256",
+        "hostSignature": "ecdsa-sha2-nistp256",
+        "cipherC2S": "aes128-gcm@openssh.com",
+        "cipherS2C": "aes128-gcm@openssh.com",
+        "macC2S": "hmac-sha2-256",
+        "macS2C": "hmac-sha2-256",
+        "compressionC2S": "none",
+        "compressionS2C": "none"
+      }
+    },
+    {
+      "sessionId": "d7d1d16e-7b6e-4c90-a16f-177a5b941e89",
+      "buildIdentity": {
+        "versionName": "0.7.0",
+        "versionCode": 9,
+        "buildRef": "7b55cd23-0988-46b7-8fc1-1da8a197842d"
+      },
+      "status": "closed",
+      "reason": "user-disconnect",
+      "authenticated": true,
+      "droppedEvents": 0,
+      "events": [
+        {
+          "status": "connecting",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:29:40.740608Z",
+          "elapsedRealtimeMs": 69217545
+        },
+        {
+          "status": "connecting",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:29:40.745760Z",
+          "elapsedRealtimeMs": 69217550
+        },
+        {
+          "status": "host-key-verified",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:29:40.870244Z",
+          "elapsedRealtimeMs": 69217674
+        },
+        {
+          "status": "authenticated",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:29:40.990492Z",
+          "elapsedRealtimeMs": 69217795
+        },
+        {
+          "status": "open",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:29:41.024738Z",
+          "elapsedRealtimeMs": 69217829
+        },
+        {
+          "status": "closed",
+          "reason": "user-disconnect",
+          "deviceUtc": "2026-10-15T13:29:59.871810Z",
+          "elapsedRealtimeMs": 69236676
+        }
+      ],
+      "ordinal": 2,
+      "details": {
+        "rendererProvider": "com.google.android.webview",
+        "rendererVersion": "149.0.7827.5",
+        "rendererMessageListener": "true",
+        "rendererArrayBuffer": "true",
+        "hostVerificationCount": "1",
+        "inputBytes": "0",
+        "stdoutBytes": "16",
+        "stderrBytes": "0",
+        "kex": "ecdh-sha2-nistp256",
+        "hostSignature": "ecdsa-sha2-nistp256",
+        "cipherC2S": "aes128-gcm@openssh.com",
+        "cipherS2C": "aes128-gcm@openssh.com",
+        "macC2S": "hmac-sha2-256",
+        "macS2C": "hmac-sha2-256",
+        "compressionC2S": "none",
+        "compressionS2C": "none",
+        "ptyInitialCols": "205",
+        "ptyInitialRows": "32",
+        "ptyLastCols": "205",
+        "ptyLastRows": "32"
+      }
+    },
+    {
+      "sessionId": "47aaff1f-f2e4-4267-81d4-612fb3a58fe8",
+      "buildIdentity": {
+        "versionName": "0.7.0",
+        "versionCode": 9,
+        "buildRef": "7b55cd23-0988-46b7-8fc1-1da8a197842d"
+      },
+      "status": "closed",
+      "reason": "remote-eof",
+      "authenticated": true,
+      "droppedEvents": 0,
+      "events": [
+        {
+          "status": "connecting",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:33:23.142938Z",
+          "elapsedRealtimeMs": 69439947
+        },
+        {
+          "status": "connecting",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:33:23.148256Z",
+          "elapsedRealtimeMs": 69439952
+        },
+        {
+          "status": "host-key-verified",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:33:23.301640Z",
+          "elapsedRealtimeMs": 69440106
+        },
+        {
+          "status": "authenticated",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:33:23.424266Z",
+          "elapsedRealtimeMs": 69440228
+        },
+        {
+          "status": "open",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:33:23.467092Z",
+          "elapsedRealtimeMs": 69440271
+        },
+        {
+          "status": "closing",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:37:10.059695Z",
+          "elapsedRealtimeMs": 69666864
+        },
+        {
+          "status": "closed",
+          "reason": "remote-eof",
+          "deviceUtc": "2026-10-15T13:37:10.069080Z",
+          "elapsedRealtimeMs": 69666873
+        }
+      ],
+      "ordinal": 3,
+      "details": {
+        "rendererProvider": "com.google.android.webview",
+        "rendererVersion": "149.0.7827.5",
+        "rendererMessageListener": "true",
+        "rendererArrayBuffer": "true",
+        "hostVerificationCount": "1",
+        "inputBytes": "723",
+        "stdoutBytes": "2206",
+        "stderrBytes": "0",
+        "kex": "ecdh-sha2-nistp256",
+        "hostSignature": "ecdsa-sha2-nistp256",
+        "cipherC2S": "aes128-gcm@openssh.com",
+        "cipherS2C": "aes128-gcm@openssh.com",
+        "macC2S": "hmac-sha2-256",
+        "macS2C": "hmac-sha2-256",
+        "compressionC2S": "none",
+        "compressionS2C": "none",
+        "ptyInitialCols": "205",
+        "ptyInitialRows": "32",
+        "ptyLastCols": "146",
+        "ptyLastRows": "23"
+      }
+    },
+    {
+      "sessionId": "4e881252-c186-4f61-98c3-180b361e64c2",
+      "buildIdentity": {
+        "versionName": "0.7.0",
+        "versionCode": 9,
+        "buildRef": "7b55cd23-0988-46b7-8fc1-1da8a197842d"
+      },
+      "status": "closed",
+      "reason": "user-disconnect",
+      "authenticated": true,
+      "droppedEvents": 0,
+      "events": [
+        {
+          "status": "connecting",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:37:44.782766Z",
+          "elapsedRealtimeMs": 69701587
+        },
+        {
+          "status": "connecting",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:37:44.788979Z",
+          "elapsedRealtimeMs": 69701593
+        },
+        {
+          "status": "host-key-verified",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:37:44.870105Z",
+          "elapsedRealtimeMs": 69701674
+        },
+        {
+          "status": "authenticated",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:37:44.985391Z",
+          "elapsedRealtimeMs": 69701790
+        },
+        {
+          "status": "open",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:37:45.020819Z",
+          "elapsedRealtimeMs": 69701825
+        },
+        {
+          "status": "closed",
+          "reason": "user-disconnect",
+          "deviceUtc": "2026-10-15T13:38:13.234532Z",
+          "elapsedRealtimeMs": 69730039
+        }
+      ],
+      "ordinal": 4,
+      "details": {
+        "rendererProvider": "com.google.android.webview",
+        "rendererVersion": "149.0.7827.5",
+        "rendererMessageListener": "true",
+        "rendererArrayBuffer": "true",
+        "hostVerificationCount": "1",
+        "inputBytes": "4",
+        "stdoutBytes": "52",
+        "stderrBytes": "0",
+        "kex": "ecdh-sha2-nistp256",
+        "hostSignature": "ecdsa-sha2-nistp256",
+        "cipherC2S": "aes128-gcm@openssh.com",
+        "cipherS2C": "aes128-gcm@openssh.com",
+        "macC2S": "hmac-sha2-256",
+        "macS2C": "hmac-sha2-256",
+        "compressionC2S": "none",
+        "compressionS2C": "none",
+        "ptyInitialCols": "146",
+        "ptyInitialRows": "23",
+        "ptyLastCols": "146",
+        "ptyLastRows": "23"
+      }
+    },
+    {
+      "sessionId": "99207e3e-2929-43a6-b20e-5da399e0be93",
+      "buildIdentity": {
+        "versionName": "0.7.0",
+        "versionCode": 9,
+        "buildRef": "7b55cd23-0988-46b7-8fc1-1da8a197842d"
+      },
+      "status": "interrupted",
+      "reason": "activity-recreated",
+      "authenticated": true,
+      "droppedEvents": 0,
+      "events": [
+        {
+          "status": "connecting",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:38:30.806908Z",
+          "elapsedRealtimeMs": 69747611
+        },
+        {
+          "status": "connecting",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:38:30.811511Z",
+          "elapsedRealtimeMs": 69747616
+        },
+        {
+          "status": "host-key-verified",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:38:30.900254Z",
+          "elapsedRealtimeMs": 69747704
+        },
+        {
+          "status": "authenticated",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:38:31.020756Z",
+          "elapsedRealtimeMs": 69747825
+        },
+        {
+          "status": "open",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:38:31.059988Z",
+          "elapsedRealtimeMs": 69747864
+        },
+        {
+          "status": "interrupted",
+          "reason": "activity-recreated",
+          "deviceUtc": "2026-10-15T13:38:34.898009Z",
+          "elapsedRealtimeMs": 69751702
+        }
+      ],
+      "ordinal": 5,
+      "details": {
+        "rendererProvider": "com.google.android.webview",
+        "rendererVersion": "149.0.7827.5",
+        "rendererMessageListener": "true",
+        "rendererArrayBuffer": "true",
+        "hostVerificationCount": "1",
+        "inputBytes": "0",
+        "stdoutBytes": "16",
+        "stderrBytes": "0",
+        "kex": "ecdh-sha2-nistp256",
+        "hostSignature": "ecdsa-sha2-nistp256",
+        "cipherC2S": "aes128-gcm@openssh.com",
+        "cipherS2C": "aes128-gcm@openssh.com",
+        "macC2S": "hmac-sha2-256",
+        "macS2C": "hmac-sha2-256",
+        "compressionC2S": "none",
+        "compressionS2C": "none",
+        "ptyInitialCols": "146",
+        "ptyInitialRows": "23",
+        "ptyLastCols": "146",
+        "ptyLastRows": "23"
+      }
+    },
+    {
+      "sessionId": "961c65b5-58ad-4183-b145-e60a3601d163",
+      "buildIdentity": {
+        "versionName": "0.7.0",
+        "versionCode": 9,
+        "buildRef": "7b55cd23-0988-46b7-8fc1-1da8a197842d"
+      },
+      "status": "interrupted",
+      "reason": "new-process-unfinished-session",
+      "authenticated": true,
+      "droppedEvents": 0,
+      "events": [
+        {
+          "status": "connecting",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:39:14.286104Z",
+          "elapsedRealtimeMs": 69791090
+        },
+        {
+          "status": "connecting",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:39:14.294497Z",
+          "elapsedRealtimeMs": 69791099
+        },
+        {
+          "status": "host-key-verified",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:39:14.446525Z",
+          "elapsedRealtimeMs": 69791251
+        },
+        {
+          "status": "authenticated",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:39:14.574006Z",
+          "elapsedRealtimeMs": 69791378
+        },
+        {
+          "status": "open",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:39:14.609336Z",
+          "elapsedRealtimeMs": 69791414
+        },
+        {
+          "status": "interrupted",
+          "reason": "new-process-unfinished-session",
+          "deviceUtc": "2026-10-15T13:39:43.371320Z",
+          "elapsedRealtimeMs": 69820175
+        }
+      ],
+      "ordinal": 6,
+      "details": {
+        "rendererProvider": "com.google.android.webview",
+        "rendererVersion": "149.0.7827.5",
+        "rendererMessageListener": "true",
+        "rendererArrayBuffer": "true",
+        "hostVerificationCount": "1",
+        "inputBytes": "0",
+        "stdoutBytes": "0",
+        "stderrBytes": "0",
+        "kex": "ecdh-sha2-nistp256",
+        "hostSignature": "ecdsa-sha2-nistp256",
+        "cipherC2S": "aes128-gcm@openssh.com",
+        "cipherS2C": "aes128-gcm@openssh.com",
+        "macC2S": "hmac-sha2-256",
+        "macS2C": "hmac-sha2-256",
+        "compressionC2S": "none",
+        "compressionS2C": "none",
+        "ptyInitialCols": "146",
+        "ptyInitialRows": "23",
+        "ptyLastCols": "146",
+        "ptyLastRows": "23"
+      }
+    },
+    {
+      "sessionId": "0f13fcad-7d5c-4480-b04c-1e3f79fccad9",
+      "buildIdentity": {
+        "versionName": "0.7.0",
+        "versionCode": 9,
+        "buildRef": "7b55cd23-0988-46b7-8fc1-1da8a197842d"
+      },
+      "status": "closed",
+      "reason": "remote-eof",
+      "authenticated": true,
+      "droppedEvents": 0,
+      "events": [
+        {
+          "status": "connecting",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:40:55.775871Z",
+          "elapsedRealtimeMs": 69892580
+        },
+        {
+          "status": "connecting",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:40:55.796607Z",
+          "elapsedRealtimeMs": 69892601
+        },
+        {
+          "status": "host-key-verified",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:40:55.916167Z",
+          "elapsedRealtimeMs": 69892720
+        },
+        {
+          "status": "authenticated",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:40:56.036012Z",
+          "elapsedRealtimeMs": 69892840
+        },
+        {
+          "status": "open",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:40:56.069608Z",
+          "elapsedRealtimeMs": 69892874
+        },
+        {
+          "status": "closing",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:43:37.914121Z",
+          "elapsedRealtimeMs": 70054718
+        },
+        {
+          "status": "closed",
+          "reason": "remote-eof",
+          "deviceUtc": "2026-10-15T13:43:37.932728Z",
+          "elapsedRealtimeMs": 70054737
+        }
+      ],
+      "ordinal": 7,
+      "details": {
+        "rendererProvider": "com.google.android.webview",
+        "rendererVersion": "149.0.7827.5",
+        "rendererMessageListener": "true",
+        "rendererArrayBuffer": "true",
+        "hostVerificationCount": "1",
+        "inputBytes": "34",
+        "stdoutBytes": "270",
+        "stderrBytes": "0",
+        "kex": "ecdh-sha2-nistp256",
+        "hostSignature": "ecdsa-sha2-nistp256",
+        "cipherC2S": "aes128-gcm@openssh.com",
+        "cipherS2C": "aes128-gcm@openssh.com",
+        "macC2S": "hmac-sha2-256",
+        "macS2C": "hmac-sha2-256",
+        "compressionC2S": "none",
+        "compressionS2C": "none",
+        "ptyInitialCols": "146",
+        "ptyInitialRows": "23",
+        "ptyLastCols": "146",
+        "ptyLastRows": "23"
+      }
+    },
+    {
+      "sessionId": "38244da7-f3b9-421d-87fa-fbdafd344b0a",
+      "buildIdentity": {
+        "versionName": "0.7.1",
+        "versionCode": 10,
+        "buildRef": "60908d62-c573-4c4b-8b0e-910e5863197e"
+      },
+      "status": "closed",
+      "reason": "remote-eof",
+      "authenticated": true,
+      "droppedEvents": 0,
+      "events": [
+        {
+          "status": "connecting",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:45:22.020057Z",
+          "elapsedRealtimeMs": 70158824
+        },
+        {
+          "status": "connecting",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:45:22.041170Z",
+          "elapsedRealtimeMs": 70158845
+        },
+        {
+          "status": "host-key-verified",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:45:22.152940Z",
+          "elapsedRealtimeMs": 70158957
+        },
+        {
+          "status": "authenticated",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:45:22.278661Z",
+          "elapsedRealtimeMs": 70159083
+        },
+        {
+          "status": "open",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:45:22.316054Z",
+          "elapsedRealtimeMs": 70159120
+        },
+        {
+          "status": "closing",
+          "reason": null,
+          "deviceUtc": "2026-10-15T13:46:43.344004Z",
+          "elapsedRealtimeMs": 70240148
+        },
+        {
+          "status": "closed",
+          "reason": "remote-eof",
+          "deviceUtc": "2026-10-15T13:46:43.364138Z",
+          "elapsedRealtimeMs": 70240168
+        }
+      ],
+      "ordinal": 8,
+      "details": {
+        "rendererProvider": "com.google.android.webview",
+        "rendererVersion": "149.0.7827.5",
+        "rendererMessageListener": "true",
+        "rendererArrayBuffer": "true",
+        "hostVerificationCount": "1",
+        "inputBytes": "35",
+        "stdoutBytes": "139",
+        "stderrBytes": "0",
+        "kex": "ecdh-sha2-nistp256",
+        "hostSignature": "ecdsa-sha2-nistp256",
+        "cipherC2S": "aes128-gcm@openssh.com",
+        "cipherS2C": "aes128-gcm@openssh.com",
+        "macC2S": "hmac-sha2-256",
+        "macS2C": "hmac-sha2-256",
+        "compressionC2S": "none",
+        "compressionS2C": "none",
+        "ptyInitialCols": "146",
+        "ptyInitialRows": "23",
+        "ptyLastCols": "146",
+        "ptyLastRows": "23"
+      }
+    }
+  ],
+  "journalCheckpoints": [
+    {
+      "source": "qualification/results/private/terminal-probe/device-01/after-trust-journal.json",
+      "revision": 6,
+      "atDeviceUtc": "2026-10-15T13:29:26.934945Z",
+      "attempts": [
+        {
+          "sessionId": "14371b09-8f76-4415-9655-3019ac48cc77",
+          "status": "trust-required",
+          "reason": "independent-host-key-matched"
+        }
+      ]
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/device-01/disconnect-case-final-journal.json",
+      "revision": 25,
+      "atDeviceUtc": "2026-10-15T13:38:13.235982Z",
+      "attempts": [
+        {
+          "sessionId": "14371b09-8f76-4415-9655-3019ac48cc77",
+          "status": "trust-required",
+          "reason": "independent-host-key-matched"
+        },
+        {
+          "sessionId": "d7d1d16e-7b6e-4c90-a16f-177a5b941e89",
+          "status": "closed",
+          "reason": "user-disconnect"
+        },
+        {
+          "sessionId": "47aaff1f-f2e4-4267-81d4-612fb3a58fe8",
+          "status": "closed",
+          "reason": "remote-eof"
+        },
+        {
+          "sessionId": "4e881252-c186-4f61-98c3-180b361e64c2",
+          "status": "closed",
+          "reason": "user-disconnect"
+        }
+      ]
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/device-01/focus071-closed-journal.json",
+      "revision": 8,
+      "atDeviceUtc": "2026-10-15T13:46:43.365533Z",
+      "attempts": [
+        {
+          "sessionId": "14371b09-8f76-4415-9655-3019ac48cc77",
+          "status": "trust-required",
+          "reason": "independent-host-key-matched"
+        },
+        {
+          "sessionId": "d7d1d16e-7b6e-4c90-a16f-177a5b941e89",
+          "status": "closed",
+          "reason": "user-disconnect"
+        },
+        {
+          "sessionId": "47aaff1f-f2e4-4267-81d4-612fb3a58fe8",
+          "status": "closed",
+          "reason": "remote-eof"
+        },
+        {
+          "sessionId": "4e881252-c186-4f61-98c3-180b361e64c2",
+          "status": "closed",
+          "reason": "user-disconnect"
+        },
+        {
+          "sessionId": "99207e3e-2929-43a6-b20e-5da399e0be93",
+          "status": "interrupted",
+          "reason": "activity-recreated"
+        },
+        {
+          "sessionId": "961c65b5-58ad-4183-b145-e60a3601d163",
+          "status": "interrupted",
+          "reason": "new-process-unfinished-session"
+        },
+        {
+          "sessionId": "0f13fcad-7d5c-4480-b04c-1e3f79fccad9",
+          "status": "closed",
+          "reason": "remote-eof"
+        },
+        {
+          "sessionId": "38244da7-f3b9-421d-87fa-fbdafd344b0a",
+          "status": "closed",
+          "reason": "remote-eof"
+        }
+      ]
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/device-01/processloss-before-journal.json",
+      "revision": 36,
+      "atDeviceUtc": "2026-10-15T13:39:14.610174Z",
+      "attempts": [
+        {
+          "sessionId": "14371b09-8f76-4415-9655-3019ac48cc77",
+          "status": "trust-required",
+          "reason": "independent-host-key-matched"
+        },
+        {
+          "sessionId": "d7d1d16e-7b6e-4c90-a16f-177a5b941e89",
+          "status": "closed",
+          "reason": "user-disconnect"
+        },
+        {
+          "sessionId": "47aaff1f-f2e4-4267-81d4-612fb3a58fe8",
+          "status": "closed",
+          "reason": "remote-eof"
+        },
+        {
+          "sessionId": "4e881252-c186-4f61-98c3-180b361e64c2",
+          "status": "closed",
+          "reason": "user-disconnect"
+        },
+        {
+          "sessionId": "99207e3e-2929-43a6-b20e-5da399e0be93",
+          "status": "interrupted",
+          "reason": "activity-recreated"
+        },
+        {
+          "sessionId": "961c65b5-58ad-4183-b145-e60a3601d163",
+          "status": "open",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/device-01/processloss-disk-before-recovery-journal.json",
+      "revision": 36,
+      "atDeviceUtc": "2026-10-15T13:39:14.610174Z",
+      "attempts": [
+        {
+          "sessionId": "14371b09-8f76-4415-9655-3019ac48cc77",
+          "status": "trust-required",
+          "reason": "independent-host-key-matched"
+        },
+        {
+          "sessionId": "d7d1d16e-7b6e-4c90-a16f-177a5b941e89",
+          "status": "closed",
+          "reason": "user-disconnect"
+        },
+        {
+          "sessionId": "47aaff1f-f2e4-4267-81d4-612fb3a58fe8",
+          "status": "closed",
+          "reason": "remote-eof"
+        },
+        {
+          "sessionId": "4e881252-c186-4f61-98c3-180b361e64c2",
+          "status": "closed",
+          "reason": "user-disconnect"
+        },
+        {
+          "sessionId": "99207e3e-2929-43a6-b20e-5da399e0be93",
+          "status": "interrupted",
+          "reason": "activity-recreated"
+        },
+        {
+          "sessionId": "961c65b5-58ad-4183-b145-e60a3601d163",
+          "status": "open",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/device-01/processloss-recovered-journal.json",
+      "revision": 1,
+      "atDeviceUtc": "2026-10-15T13:39:43.371849Z",
+      "attempts": [
+        {
+          "sessionId": "14371b09-8f76-4415-9655-3019ac48cc77",
+          "status": "trust-required",
+          "reason": "independent-host-key-matched"
+        },
+        {
+          "sessionId": "d7d1d16e-7b6e-4c90-a16f-177a5b941e89",
+          "status": "closed",
+          "reason": "user-disconnect"
+        },
+        {
+          "sessionId": "47aaff1f-f2e4-4267-81d4-612fb3a58fe8",
+          "status": "closed",
+          "reason": "remote-eof"
+        },
+        {
+          "sessionId": "4e881252-c186-4f61-98c3-180b361e64c2",
+          "status": "closed",
+          "reason": "user-disconnect"
+        },
+        {
+          "sessionId": "99207e3e-2929-43a6-b20e-5da399e0be93",
+          "status": "interrupted",
+          "reason": "activity-recreated"
+        },
+        {
+          "sessionId": "961c65b5-58ad-4183-b145-e60a3601d163",
+          "status": "interrupted",
+          "reason": "new-process-unfinished-session"
+        }
+      ]
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/device-01/recovery7-closed-journal.json",
+      "revision": 8,
+      "atDeviceUtc": "2026-10-15T13:43:37.933722Z",
+      "attempts": [
+        {
+          "sessionId": "14371b09-8f76-4415-9655-3019ac48cc77",
+          "status": "trust-required",
+          "reason": "independent-host-key-matched"
+        },
+        {
+          "sessionId": "d7d1d16e-7b6e-4c90-a16f-177a5b941e89",
+          "status": "closed",
+          "reason": "user-disconnect"
+        },
+        {
+          "sessionId": "47aaff1f-f2e4-4267-81d4-612fb3a58fe8",
+          "status": "closed",
+          "reason": "remote-eof"
+        },
+        {
+          "sessionId": "4e881252-c186-4f61-98c3-180b361e64c2",
+          "status": "closed",
+          "reason": "user-disconnect"
+        },
+        {
+          "sessionId": "99207e3e-2929-43a6-b20e-5da399e0be93",
+          "status": "interrupted",
+          "reason": "activity-recreated"
+        },
+        {
+          "sessionId": "961c65b5-58ad-4183-b145-e60a3601d163",
+          "status": "interrupted",
+          "reason": "new-process-unfinished-session"
+        },
+        {
+          "sessionId": "0f13fcad-7d5c-4480-b04c-1e3f79fccad9",
+          "status": "closed",
+          "reason": "remote-eof"
+        }
+      ]
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/device-01/recovery7-final-journal.json",
+      "revision": 6,
+      "atDeviceUtc": "2026-10-15T13:40:56.070822Z",
+      "attempts": [
+        {
+          "sessionId": "14371b09-8f76-4415-9655-3019ac48cc77",
+          "status": "trust-required",
+          "reason": "independent-host-key-matched"
+        },
+        {
+          "sessionId": "d7d1d16e-7b6e-4c90-a16f-177a5b941e89",
+          "status": "closed",
+          "reason": "user-disconnect"
+        },
+        {
+          "sessionId": "47aaff1f-f2e4-4267-81d4-612fb3a58fe8",
+          "status": "closed",
+          "reason": "remote-eof"
+        },
+        {
+          "sessionId": "4e881252-c186-4f61-98c3-180b361e64c2",
+          "status": "closed",
+          "reason": "user-disconnect"
+        },
+        {
+          "sessionId": "99207e3e-2929-43a6-b20e-5da399e0be93",
+          "status": "interrupted",
+          "reason": "activity-recreated"
+        },
+        {
+          "sessionId": "961c65b5-58ad-4183-b145-e60a3601d163",
+          "status": "interrupted",
+          "reason": "new-process-unfinished-session"
+        },
+        {
+          "sessionId": "0f13fcad-7d5c-4480-b04c-1e3f79fccad9",
+          "status": "open",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/device-01/recreate-final-journal.json",
+      "revision": 31,
+      "atDeviceUtc": "2026-10-15T13:38:34.898776Z",
+      "attempts": [
+        {
+          "sessionId": "14371b09-8f76-4415-9655-3019ac48cc77",
+          "status": "trust-required",
+          "reason": "independent-host-key-matched"
+        },
+        {
+          "sessionId": "d7d1d16e-7b6e-4c90-a16f-177a5b941e89",
+          "status": "closed",
+          "reason": "user-disconnect"
+        },
+        {
+          "sessionId": "47aaff1f-f2e4-4267-81d4-612fb3a58fe8",
+          "status": "closed",
+          "reason": "remote-eof"
+        },
+        {
+          "sessionId": "4e881252-c186-4f61-98c3-180b361e64c2",
+          "status": "closed",
+          "reason": "user-disconnect"
+        },
+        {
+          "sessionId": "99207e3e-2929-43a6-b20e-5da399e0be93",
+          "status": "interrupted",
+          "reason": "activity-recreated"
+        }
+      ]
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/device-01/recreate-open-journal.json",
+      "revision": 26,
+      "atDeviceUtc": "2026-10-15T13:38:30.807155Z",
+      "attempts": [
+        {
+          "sessionId": "14371b09-8f76-4415-9655-3019ac48cc77",
+          "status": "trust-required",
+          "reason": "independent-host-key-matched"
+        },
+        {
+          "sessionId": "d7d1d16e-7b6e-4c90-a16f-177a5b941e89",
+          "status": "closed",
+          "reason": "user-disconnect"
+        },
+        {
+          "sessionId": "47aaff1f-f2e4-4267-81d4-612fb3a58fe8",
+          "status": "closed",
+          "reason": "remote-eof"
+        },
+        {
+          "sessionId": "4e881252-c186-4f61-98c3-180b361e64c2",
+          "status": "closed",
+          "reason": "user-disconnect"
+        },
+        {
+          "sessionId": "99207e3e-2929-43a6-b20e-5da399e0be93",
+          "status": "connecting",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/device-01/shell-input-failure-journal.json",
+      "revision": 12,
+      "atDeviceUtc": "2026-10-15T13:29:59.872428Z",
+      "attempts": [
+        {
+          "sessionId": "14371b09-8f76-4415-9655-3019ac48cc77",
+          "status": "trust-required",
+          "reason": "independent-host-key-matched"
+        },
+        {
+          "sessionId": "d7d1d16e-7b6e-4c90-a16f-177a5b941e89",
+          "status": "closed",
+          "reason": "user-disconnect"
+        }
+      ]
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/device-01/shell3-final-journal.json",
+      "revision": 19,
+      "atDeviceUtc": "2026-10-15T13:37:10.070044Z",
+      "attempts": [
+        {
+          "sessionId": "14371b09-8f76-4415-9655-3019ac48cc77",
+          "status": "trust-required",
+          "reason": "independent-host-key-matched"
+        },
+        {
+          "sessionId": "d7d1d16e-7b6e-4c90-a16f-177a5b941e89",
+          "status": "closed",
+          "reason": "user-disconnect"
+        },
+        {
+          "sessionId": "47aaff1f-f2e4-4267-81d4-612fb3a58fe8",
+          "status": "closed",
+          "reason": "remote-eof"
+        }
+      ]
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/device-01/unknown-trust-journal.json",
+      "revision": 5,
+      "atDeviceUtc": "2026-10-15T13:28:52.050836Z",
+      "attempts": [
+        {
+          "sessionId": "14371b09-8f76-4415-9655-3019ac48cc77",
+          "status": "trust-required",
+          "reason": "independent-host-key-matched"
+        }
+      ]
+    }
+  ],
+  "hostObservations": [
+    {
+      "source": "qualification/results/private/terminal-probe/host-01/after-enrollment-snapshot.json",
+      "atUtc": "2026-10-15T13:29:27.923516+00:00",
+      "connections": 3,
+      "acceptedPublickey": 2,
+      "startedSession": 2,
+      "closedSession": 1,
+      "logBytes": 3032,
+      "logSha256": "bda4312abfe6fac82dc5d215e1888a57a4602514bdf1687d45f9607ad5926ca4",
+      "launcherRecords": 1,
+      "exerciseRecords": 1
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/host-01/batch02-snapshot-00.json",
+      "atUtc": "2026-10-15T13:37:14.404067+00:00",
+      "observedCount": 16,
+      "activeObservedProcessCount": 1
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/host-01/batch02-snapshot-01.json",
+      "atUtc": "2026-10-15T13:37:59.454685+00:00",
+      "observedCount": 21,
+      "activeObservedProcessCount": 5
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/host-01/batch02-snapshot-02.json",
+      "atUtc": "2026-10-15T13:38:16.693516+00:00",
+      "observedCount": 21,
+      "activeObservedProcessCount": 1
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/host-01/batch02-snapshot-03.json",
+      "atUtc": "2026-10-15T13:38:51.073454+00:00",
+      "observedCount": 25,
+      "activeObservedProcessCount": 1
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/host-01/batch02-snapshot-04.json",
+      "atUtc": "2026-10-15T13:39:34.477381+00:00",
+      "observedCount": 28,
+      "activeObservedProcessCount": 1
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/host-01/batch02-snapshot-05.json",
+      "atUtc": "2026-10-15T13:43:25.882983+00:00",
+      "observedCount": 34,
+      "activeObservedProcessCount": 4
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/host-01/batch02-snapshot-06.json",
+      "atUtc": "2026-10-15T13:43:41.369448+00:00",
+      "observedCount": 34,
+      "activeObservedProcessCount": 1
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/host-01/before-enrollment-snapshot.json",
+      "atUtc": "2026-10-15T13:29:26.729786+00:00",
+      "connections": 3,
+      "acceptedPublickey": 2,
+      "startedSession": 2,
+      "closedSession": 1,
+      "logBytes": 3032,
+      "logSha256": "bda4312abfe6fac82dc5d215e1888a57a4602514bdf1687d45f9607ad5926ca4",
+      "launcherRecords": 1,
+      "exerciseRecords": 1
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/host-01/focus071-closed-snapshot.json",
+      "atUtc": "2026-10-15T13:46:45.269934+00:00",
+      "connections": 10,
+      "acceptedPublickey": 9,
+      "startedSession": 9,
+      "closedSession": 7,
+      "logBytes": 12329,
+      "logSha256": "4deb6e868b24b2ae255141d143e5c41869c2265b3137c3519571a30b3ced0308",
+      "launcherRecords": 8,
+      "exerciseRecords": 9
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/host-01/processloss-before-recovery-snapshot.json",
+      "atUtc": "2026-10-15T13:39:32.792420+00:00",
+      "connections": 8,
+      "acceptedPublickey": 7,
+      "startedSession": 7,
+      "closedSession": 5,
+      "logBytes": 9639,
+      "logSha256": "676668f21166077662c24b18134195115adc1bdd283841f42f9fc490af44ebf6",
+      "launcherRecords": 6,
+      "exerciseRecords": 5
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/host-01/processloss-recovered-snapshot.json",
+      "atUtc": "2026-10-15T13:39:44.803532+00:00",
+      "connections": 8,
+      "acceptedPublickey": 7,
+      "startedSession": 7,
+      "closedSession": 5,
+      "logBytes": 9639,
+      "logSha256": "676668f21166077662c24b18134195115adc1bdd283841f42f9fc490af44ebf6",
+      "launcherRecords": 6,
+      "exerciseRecords": 5
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/host-01/recovery7-closed-snapshot.json",
+      "atUtc": "2026-10-15T13:43:39.917645+00:00",
+      "connections": 9,
+      "acceptedPublickey": 8,
+      "startedSession": 8,
+      "closedSession": 6,
+      "logBytes": 10984,
+      "logSha256": "62c877eb75dfeaa13ab38924832e24e6b79b068673ea7e70e4e5c829241597af",
+      "launcherRecords": 7,
+      "exerciseRecords": 8
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/host-01/recovery7-final-snapshot.json",
+      "atUtc": "2026-10-15T13:43:24.404099+00:00",
+      "connections": 9,
+      "acceptedPublickey": 8,
+      "startedSession": 8,
+      "closedSession": 5,
+      "logBytes": 10728,
+      "logSha256": "7e11f18c18648b13e3d4a9aaf8ca1079eecc3925b1e50dac820a2789d778708e",
+      "launcherRecords": 7,
+      "exerciseRecords": 8
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/host-01/recreate-after-snapshot.json",
+      "atUtc": "2026-10-15T13:38:36.933644+00:00",
+      "connections": 7,
+      "acceptedPublickey": 6,
+      "startedSession": 6,
+      "closedSession": 5,
+      "logBytes": 8412,
+      "logSha256": "7f43452b258bf21bea4d3fed1f4866536d99dc66aa680e44120f7a2a446fa447",
+      "launcherRecords": 5,
+      "exerciseRecords": 5
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/host-01/recreated-idle-snapshot.json",
+      "atUtc": "2026-10-15T13:38:49.639197+00:00",
+      "connections": 7,
+      "acceptedPublickey": 6,
+      "startedSession": 6,
+      "closedSession": 5,
+      "logBytes": 8412,
+      "logSha256": "7f43452b258bf21bea4d3fed1f4866536d99dc66aa680e44120f7a2a446fa447",
+      "launcherRecords": 5,
+      "exerciseRecords": 5
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/host-01/shell-input-failure-snapshot.json",
+      "atUtc": "2026-10-15T13:30:33.010234+00:00",
+      "connections": 4,
+      "acceptedPublickey": 3,
+      "startedSession": 3,
+      "closedSession": 2,
+      "logBytes": 4377,
+      "logSha256": "4e33dd5832496055f2d0c7b80e01c1479542a22341c820a4a4a290e547c3bbc1",
+      "launcherRecords": 2,
+      "exerciseRecords": 1
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/host-01/shell3-final-snapshot.json",
+      "atUtc": "2026-10-15T13:37:11.063193+00:00",
+      "connections": 5,
+      "acceptedPublickey": 4,
+      "startedSession": 4,
+      "closedSession": 3,
+      "logBytes": 5722,
+      "logSha256": "896ccdeab9def7c892a276a7e65eafedf2c1dd4b15f430abd94f3f4e18c1bd01",
+      "launcherRecords": 3,
+      "exerciseRecords": 4
+    }
+  ],
+  "controlledExercises": [
+    {
+      "source": "qualification/results/private/terminal-probe/host-01/work/exercise-245dfc36-bea8-4717-b291-63a860dc7784.json",
+      "schemaVersion": 1,
+      "runId": "245dfc36-bea8-4717-b291-63a860dc7784",
+      "mode": "capture",
+      "startedAtUtc": "2026-10-15T13:46:16.261706+00:00",
+      "timeoutSeconds": 90.0,
+      "maxBytes": 12,
+      "inputOrigin": "Unclassified: operator must separately identify physical, IME or injected stimulus.",
+      "capturedBytes": 12,
+      "capturedHex": "4142430d031b091b5b417879",
+      "capturedSha256": "932962fc605b2e55671c1b1a7b9bdc2ea2bb2d3acd7639f2f6fbfeeef6e0d7b3",
+      "pendingInputDiscardedOnRestore": true,
+      "termination": "capture-byte-limit",
+      "finishedAtUtc": "2026-10-15T13:46:32.257264+00:00",
+      "elapsedMs": 15995.57,
+      "intendedExitCode": 0
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/host-01/work/exercise-3f6e7899-36d4-422b-ad90-f1909704f126.json",
+      "schemaVersion": 1,
+      "runId": "3f6e7899-36d4-422b-ad90-f1909704f126",
+      "mode": "capture",
+      "startedAtUtc": "2026-10-15T13:42:34.540043+00:00",
+      "timeoutSeconds": 30.0,
+      "maxBytes": 64,
+      "inputOrigin": "Unclassified: operator must separately identify physical, IME or injected stimulus.",
+      "capturedBytes": 4,
+      "capturedHex": "73747479",
+      "capturedSha256": "d6e2a42f436d3f01aaff8a5602213b3ada0206721097c2d4591cc1ef6c752a0d",
+      "pendingInputDiscardedOnRestore": true,
+      "termination": "capture-timeout",
+      "finishedAtUtc": "2026-10-15T13:43:04.550711+00:00",
+      "elapsedMs": 30010.668,
+      "intendedExitCode": 0
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/host-01/work/exercise-534beae9-cf2b-418f-b6df-eb580f5af91b.json",
+      "verdict": "empty-partial-record-after-disconnect"
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/host-01/work/exercise-53decef7-0172-4547-a3aa-59ff90b50c4f.json",
+      "schemaVersion": 1,
+      "runId": "53decef7-0172-4547-a3aa-59ff90b50c4f",
+      "mode": "capture",
+      "startedAtUtc": "2026-10-15T13:41:00.992427+00:00",
+      "timeoutSeconds": 10.0,
+      "maxBytes": 64,
+      "inputOrigin": "Unclassified: operator must separately identify physical, IME or injected stimulus.",
+      "capturedBytes": 7,
+      "capturedHex": "73747479747979",
+      "capturedSha256": "7b050fe6d9a6d6dfd62d0a32c1b5e0301ca633ea0cbbb64558602369a17498eb",
+      "pendingInputDiscardedOnRestore": true,
+      "termination": "capture-timeout",
+      "finishedAtUtc": "2026-10-15T13:41:10.993576+00:00",
+      "elapsedMs": 10001.157,
+      "intendedExitCode": 0
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/host-01/work/exercise-58d1a8cb-5bfe-476f-9c66-bf5ab4cff0c3.json",
+      "schemaVersion": 1,
+      "runId": "58d1a8cb-5bfe-476f-9c66-bf5ab4cff0c3",
+      "mode": "ansi",
+      "startedAtUtc": "2026-10-15T13:35:16.920006+00:00",
+      "timeoutSeconds": 30,
+      "expectedOutputBytes": 488,
+      "expectedOutputSha256": "760c9e66310026305b9434d85c974a4f701c63bb1c3eab2ece55ca7ab03effe9",
+      "writtenBytes": 488,
+      "scope": "Generated output; rendering and glyph quality require independent observation.",
+      "termination": "output-written",
+      "finishedAtUtc": "2026-10-15T13:35:16.920271+00:00",
+      "elapsedMs": 0.248,
+      "intendedExitCode": 0
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/host-01/work/exercise-709d386e-2df1-4112-a8cd-841914270ea7.json",
+      "schemaVersion": 1,
+      "runId": "709d386e-2df1-4112-a8cd-841914270ea7",
+      "mode": "tui",
+      "startedAtUtc": "2026-10-15T13:35:36.278744+00:00",
+      "timeoutSeconds": 120.0,
+      "events": [
+        {
+          "kind": "key-code",
+          "code": 410
+        },
+        {
+          "kind": "key-code",
+          "code": 261
+        },
+        {
+          "kind": "key-code",
+          "code": 258
+        },
+        {
+          "kind": "unicode",
+          "value": "q"
+        }
+      ],
+      "inputOrigin": "Unclassified: curses events are actual reads, not physical-input proof.",
+      "lastSize": {
+        "columns": 146,
+        "rows": 23
+      },
+      "position": {
+        "x": 1,
+        "y": 1
+      },
+      "termination": "tui-quit",
+      "finishedAtUtc": "2026-10-15T13:36:21.556336+00:00",
+      "elapsedMs": 45277.596,
+      "intendedExitCode": 0
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/host-01/work/exercise-9068e7e2-343e-4e9f-a800-17c93c220fa3.json",
+      "schemaVersion": 1,
+      "runId": "9068e7e2-343e-4e9f-a800-17c93c220fa3",
+      "mode": "ansi",
+      "startedAtUtc": "2026-10-15T13:28:45.122706+00:00",
+      "timeoutSeconds": 30,
+      "expectedOutputBytes": 488,
+      "expectedOutputSha256": "760c9e66310026305b9434d85c974a4f701c63bb1c3eab2ece55ca7ab03effe9",
+      "writtenBytes": 488,
+      "scope": "Generated output; rendering and glyph quality require independent observation.",
+      "termination": "output-written",
+      "finishedAtUtc": "2026-10-15T13:28:45.123026+00:00",
+      "elapsedMs": 0.307,
+      "intendedExitCode": 0
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/host-01/work/exercise-abc0d27b-1632-43c6-8b1c-5484d7a25ccf.json",
+      "schemaVersion": 1,
+      "runId": "abc0d27b-1632-43c6-8b1c-5484d7a25ccf",
+      "mode": "capture",
+      "startedAtUtc": "2026-10-15T13:36:37.411204+00:00",
+      "timeoutSeconds": 90.0,
+      "maxBytes": 12,
+      "inputOrigin": "Unclassified: operator must separately identify physical, IME or injected stimulus.",
+      "capturedBytes": 12,
+      "capturedHex": "4142430d031b091b5b417879",
+      "capturedSha256": "932962fc605b2e55671c1b1a7b9bdc2ea2bb2d3acd7639f2f6fbfeeef6e0d7b3",
+      "pendingInputDiscardedOnRestore": true,
+      "termination": "capture-byte-limit",
+      "finishedAtUtc": "2026-10-15T13:36:53.542917+00:00",
+      "elapsedMs": 16131.723,
+      "intendedExitCode": 0
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/host-01/work/exercise-d4ea527c-882f-4afb-805c-fe2c5a362feb.json",
+      "schemaVersion": 1,
+      "runId": "d4ea527c-882f-4afb-805c-fe2c5a362feb",
+      "mode": "capture",
+      "startedAtUtc": "2026-10-15T13:41:46.554577+00:00",
+      "timeoutSeconds": 10.0,
+      "maxBytes": 64,
+      "inputOrigin": "Unclassified: operator must separately identify physical, IME or injected stimulus.",
+      "capturedBytes": 0,
+      "capturedHex": "",
+      "capturedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "pendingInputDiscardedOnRestore": true,
+      "termination": "capture-timeout",
+      "finishedAtUtc": "2026-10-15T13:41:56.559186+00:00",
+      "elapsedMs": 10004.61,
+      "intendedExitCode": 0
+    }
+  ],
+  "initialDevicePty": {
+    "atUtc": "2026-10-15T13:35:07.059776+00:00",
+    "columns": 205,
+    "rows": 32,
+    "term": "xterm-256color",
+    "locale": "C.UTF-8"
+  },
+  "noAutomaticConnectionLogComparisons": [
+    {
+      "before": "qualification/results/private/terminal-probe/host-01/before-enrollment-server.log",
+      "after": "qualification/results/private/terminal-probe/host-01/after-enrollment-server.log",
+      "byteEqual": true,
+      "sha256": "bda4312abfe6fac82dc5d215e1888a57a4602514bdf1687d45f9607ad5926ca4"
+    },
+    {
+      "before": "qualification/results/private/terminal-probe/host-01/recreate-after-server.log",
+      "after": "qualification/results/private/terminal-probe/host-01/recreated-idle-server.log",
+      "byteEqual": true,
+      "sha256": "7f43452b258bf21bea4d3fed1f4866536d99dc66aa680e44120f7a2a446fa447"
+    },
+    {
+      "before": "qualification/results/private/terminal-probe/host-01/processloss-before-recovery-server.log",
+      "after": "qualification/results/private/terminal-probe/host-01/processloss-recovered-server.log",
+      "byteEqual": true,
+      "sha256": "676668f21166077662c24b18134195115adc1bdd283841f42f9fc490af44ebf6"
+    }
+  ],
+  "threadObservations": [
+    {
+      "source": "qualification/results/private/terminal-probe/device-01/before-shell-observation.json",
+      "atUtc": "2026-10-15T13:25:12.061632+00:00",
+      "allReadsSucceeded": true,
+      "namedTerminalThreads": 0
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/device-01/disconnect-case-final-observation.json",
+      "atUtc": "2026-10-15T13:38:14.238946+00:00",
+      "allReadsSucceeded": true,
+      "namedTerminalThreads": 0
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/device-01/focus071-closed-observation.json",
+      "atUtc": "2026-10-15T13:46:44.349900+00:00",
+      "allReadsSucceeded": true,
+      "namedTerminalThreads": 0
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/device-01/processloss-before-observation.json",
+      "atUtc": "2026-10-15T13:39:18.280034+00:00",
+      "allReadsSucceeded": true,
+      "namedTerminalThreads": 2
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/device-01/processloss-recovered-observation.json",
+      "atUtc": "2026-10-15T13:39:44.344797+00:00",
+      "allReadsSucceeded": true,
+      "namedTerminalThreads": 0
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/device-01/recovery7-closed-observation.json",
+      "atUtc": "2026-10-15T13:43:38.948799+00:00",
+      "allReadsSucceeded": true,
+      "namedTerminalThreads": 0
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/device-01/recovery7-final-observation.json",
+      "atUtc": "2026-10-15T13:43:23.401109+00:00",
+      "allReadsSucceeded": true,
+      "namedTerminalThreads": 2
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/device-01/recreate-after-observation.json",
+      "atUtc": "2026-10-15T13:38:35.912972+00:00",
+      "allReadsSucceeded": true,
+      "namedTerminalThreads": 0
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/device-01/recreate-before-observation.json",
+      "atUtc": "2026-10-15T13:38:31.764704+00:00",
+      "allReadsSucceeded": true,
+      "namedTerminalThreads": 0
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/device-01/recreated-idle-observation.json",
+      "atUtc": "2026-10-15T13:38:48.628619+00:00",
+      "allReadsSucceeded": true,
+      "namedTerminalThreads": 0
+    },
+    {
+      "source": "qualification/results/private/terminal-probe/device-01/shell3-final-observation.json",
+      "atUtc": "2026-10-15T13:37:11.099137+00:00",
+      "allReadsSucceeded": true,
+      "namedTerminalThreads": 0
+    }
+  ],
+  "threadObservationScope": "Sampled own process /proc comm names; cloudy-terminal is truncated to 15 characters. Not proof that all app threads stop.",
+  "upgrade070": {
+    "allPriorOperationJournalsUnchanged": true,
+    "journals": [
+      {
+        "devicePath": "files/transfer-journal.json",
+        "sha256": "39962f7dc2c17a0e23d64557f9896fa941b7f1e8a245eabecd08bef1d0205160",
+        "bytes": 5034,
+        "unchanged": true
+      },
+      {
+        "devicePath": "files/ssh-journal.json",
+        "sha256": "8118d0feb3ec33da6068d25296562a1a6d4077d511ddb30b694f54134b91826f",
+        "bytes": 14657,
+        "unchanged": true
+      },
+      {
+        "devicePath": "files/ssh-archive-20261015-01/ssh-journal.json",
+        "sha256": "49b888efcf0c91ebabe7b1044ed22b5c7b99bcb0e175026a01c1f71afa99d664",
+        "bytes": 23309,
+        "unchanged": true
+      },
+      {
+        "devicePath": "files/transfer-archives/run-20261015-01/transfer-journal.json",
+        "sha256": "343fbda40009c501cae0e0787d012b9e4949a33bbf1b2c064185289d08959d58",
+        "bytes": 11614,
+        "unchanged": true
+      }
+    ],
+    "baselineChangesExpected": "Installer launches fresh BaselineActivity; runtime baseline.json changes, before copy retained."
+  },
+  "upgrade071": {
+    "upgrade": "0.7.0 to 0.7.1",
+    "allPriorOperationJournalsUnchanged": true,
+    "journals": [
+      {
+        "devicePath": "files/transfer-journal.json",
+        "bytes": 5034,
+        "sha256": "39962f7dc2c17a0e23d64557f9896fa941b7f1e8a245eabecd08bef1d0205160",
+        "byteEqual": true
+      },
+      {
+        "devicePath": "files/terminal-journal.json",
+        "bytes": 18006,
+        "sha256": "64e9378fb98e51514d6f2a77ee14c287f5ff23643241ce2c0e9d85dac487bad7",
+        "byteEqual": true
+      },
+      {
+        "devicePath": "files/ssh-journal.json",
+        "bytes": 14657,
+        "sha256": "8118d0feb3ec33da6068d25296562a1a6d4077d511ddb30b694f54134b91826f",
+        "byteEqual": true
+      },
+      {
+        "devicePath": "files/ssh-archive-20261015-01/ssh-journal.json",
+        "bytes": 23309,
+        "sha256": "49b888efcf0c91ebabe7b1044ed22b5c7b99bcb0e175026a01c1f71afa99d664",
+        "byteEqual": true
+      },
+      {
+        "devicePath": "files/transfer-archives/run-20261015-01/transfer-journal.json",
+        "bytes": 11614,
+        "sha256": "343fbda40009c501cae0e0787d012b9e4949a33bbf1b2c064185289d08959d58",
+        "byteEqual": true
+      }
+    ],
+    "baselineChangesExpected": true
+  },
+  "localHelperTests": {
+    "scope": "Synthetic local host PTY helper tests only; no SSH, Android, physical input or IME qualification.",
+    "results": [
+      {
+        "case": "ordinary-bash-clean-env-home-preserved-history-disabled-private-cwd",
+        "passed": true
+      },
+      {
+        "case": "launcher-rejects-original-command",
+        "passed": true
+      },
+      {
+        "case": "launcher-rejects-bad-term",
+        "passed": true
+      },
+      {
+        "case": "ansi-unicode-actual-output-bytes-hash",
+        "passed": true,
+        "bytes": 488
+      },
+      {
+        "case": "raw-control-unicode-escape-bytes-and-termios-restore",
+        "passed": true,
+        "bytes": 35
+      },
+      {
+        "case": "capture-limit-discards-queued-tail-before-shell-return",
+        "passed": true
+      },
+      {
+        "case": "empty-capture-bounded-timeout-no-invented-input",
+        "passed": true
+      },
+      {
+        "case": "raw-capture-signal-restores-terminal",
+        "passed": true
+      },
+      {
+        "case": "real-curses-alternate-screen-arrow-unicode-resize-restoration",
+        "passed": true,
+        "events": 5
+      },
+      {
+        "case": "non-tty-shell-launch-refused",
+        "passed": true
+      },
+      {
+        "case": "terminal_fixture_launcher-private-directory-rejects-mode-symlink-relative-parent-missing",
+        "passed": true
+      },
+      {
+        "case": "terminal_exercise-private-directory-rejects-mode-symlink-relative-parent-missing",
+        "passed": true
+      }
+    ],
+    "sourceHashes": {
+      "terminal_fixture_launcher.py": "502659895b4db8db3d45c6e1fe544762d966c2fda803d2321e4ad2f5c4165d2a",
+      "terminal_exercise.py": "e5e29b213356b78d75a3e560ed0f7c9119e6d6282cc385f031bcbba2c16fa406"
+    }
+  },
+  "independentHelperChecks": {
+    "scope": "Local injected PTY helper checks only.",
+    "results": [
+      {
+        "case": "exact-raw-bytes-and-termios-restore",
+        "passed": true
+      },
+      {
+        "case": "queued-excess-is-absent-after-restore",
+        "passed": true
+      },
+      {
+        "case": "signal-restores-termios",
+        "passed": true
+      }
+    ],
+    "helperSha256": "e5e29b213356b78d75a3e560ed0f7c9119e6d6282cc385f031bcbba2c16fa406",
+    "harnessSha256": "0fc06c7ffc773ab7e257c66db0d47c5254c79a62b9ba299aa086d0a28a20d4aa"
+  },
+  "cleanup": {
+    "atUtc": "2026-10-15T13:46:48.341517+00:00",
+    "serverExitCode": 0,
+    "listenerClosed": true,
+    "listenerConnectErrno": 111,
+    "descendantScope": "Observed identities under controlled foreground-only commands; no arbitrary daemon containment claim",
+    "remainingOwnedProcesses": [],
+    "forcedKillPids": [],
+    "observedCount": 39
+  },
+  "counterScope": "Native input counts writes/flushes, not remote acknowledgment; stdout counts reads, not visible pixels. Active journal counters are phase snapshots. GCM has integrated authentication; mac fields retain proposal values.",
+  "limits": [
+    "Eight-attempt journal is full; preserve and review rotation before another connection.",
+    "Rapid injected stty yielded sttytyy; paced stty yielded exact four bytes. No bulk-input repair is claimed.",
+    "The xterm keyCode229 deferred textarea path is a source-informed hypothesis; no DOM trace proves causation.",
+    "Physical keyboard, CJK IME/preedit, TalkBack, clipboard/paste, latency, sustained output, renderer loss and broader display/font cases remain pending.",
+    "Remote EOF and successful local parser acknowledgments do not prove arbitrary command success or displayed pixels.",
+    "CAP-SSH and CAP-TERMINAL remain pending; no product or USB support is promoted."
+  ],
+  "privacy": {
+    "rawPersonalContentPublished": false,
+    "endpointsUsersSerialsKeysFingerprintsPublished": false,
+    "numericProcessAndUserIdentitiesPublished": false,
+    "privateEvidenceRetained": true
+  },
+  "privateArtifacts": [
+    {
+      "path": ".cache/bootstrap/terminal-input-research.md",
+      "bytes": 9361,
+      "sha256": "9f69617dc06a1f476eb2eea4cbff9c965fdb54b05a973fd694906a6cff4d9afd"
+    },
+    {
+      "path": ".cache/bootstrap/terminal-journey-review.md",
+      "bytes": 10693,
+      "sha256": "48a06d06c23386320030899d6bde4d91b44a34f397e458a09698f8d183c51f51"
+    },
+    {
+      "path": ".cache/bootstrap/terminal_device.py",
+      "bytes": 8070,
+      "sha256": "2237474082bd95a9bc5c7d36f8f8b44c983ba7379b174989c3012c31d7f77f12"
+    },
+    {
+      "path": ".cache/bootstrap/terminal_exercise.py",
+      "bytes": 11558,
+      "sha256": "e5e29b213356b78d75a3e560ed0f7c9119e6d6282cc385f031bcbba2c16fa406"
+    },
+    {
+      "path": ".cache/bootstrap/terminal_fixture_controller.py",
+      "bytes": 4628,
+      "sha256": "e445e3e5fdf22805f87ba7af2a8c6dadce8ac2c68470ba21435419d172973d70"
+    },
+    {
+      "path": ".cache/bootstrap/terminal_fixture_launcher.py",
+      "bytes": 4759,
+      "sha256": "502659895b4db8db3d45c6e1fe544762d966c2fda803d2321e4ad2f5c4165d2a"
+    },
+    {
+      "path": ".cache/bootstrap/terminal_host_snapshot.py",
+      "bytes": 831,
+      "sha256": "94e62c355be6b406ea3e8ee54ba23853ed04d3d94fac7f46e141a26b77fe0d88"
+    },
+    {
+      "path": ".cache/bootstrap/terminal_observe.py",
+      "bytes": 1563,
+      "sha256": "5248918f3bb16b107b6467b812f6464efd1afea2ab0091151a30477d898b8b29"
+    },
+    {
+      "path": ".cache/bootstrap/terminal_preflight.py",
+      "bytes": 3558,
+      "sha256": "25ce6dfde7564d95b36f95e2c342b0adfc89e774b740e78c46f562c0324b6f82"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/accept-trust-layout-command.json",
+      "bytes": 593,
+      "sha256": "1d6e58444b0ff82d2a0dd786a02001c1ef79b52041f884d0c761adac49d746bc"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/accept-trust-layout.json",
+      "bytes": 7654,
+      "sha256": "8325a94fe4ca9a9877394bb49040f40d579fae19f56cbf2bd2ef9a55fb9c6261"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/accept-trust-tap-command.json",
+      "bytes": 211,
+      "sha256": "3e8527e53471b2a4e4249a11041006259dc865636226737ac7ccf1acf11f6b4f"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/after-cancel-line-layout-command.json",
+      "bytes": 603,
+      "sha256": "f271fd75aa92e3a052ad7cd1f7bed340ed66aef4fee88e235c2c4c816365f82c"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/after-cancel-line-layout.json",
+      "bytes": 13825,
+      "sha256": "33a478f6d6176b51eaf22596a4f7c26c569c5dd057ce15b4c0decf356c8eccc2"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/after-dismiss-2-layout-command.json",
+      "bytes": 599,
+      "sha256": "1a26dea6ceabe9476f5834b84ea4f288f07393293725d3be9e242327e2117e57"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/after-dismiss-2-layout.json",
+      "bytes": 7859,
+      "sha256": "eaf6c4302e2134528cb850b807f6daac93dcc21cbbc3ece3e5691d90c78a974e"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/after-dismiss-3-layout-command.json",
+      "bytes": 599,
+      "sha256": "56205a2982dfa333780f95c4af382fc31ff6f2877aaa5fcf6b3e0a995ffc65d3"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/after-dismiss-3-layout.json",
+      "bytes": 13213,
+      "sha256": "18db758f50da8626aedeb6c991ef3c7881e074d6b565d5abefd1c0572675c21d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/after-dismiss-attempts-screen-command.json",
+      "bytes": 599,
+      "sha256": "ea230ea023d93a5b48d5124bde5c102fcd5bacdfe5ab156a4a2ae2feda94a22d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/after-dismiss-attempts.png",
+      "bytes": 212031,
+      "sha256": "fd98b84a3b2727df02e3901768648b5797c03fa331a106c5490c82478050ee02"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/after-escape-details-layout-command.json",
+      "bytes": 609,
+      "sha256": "285f2c06cb5e5445a8e44034706da8e52f16e9678a05ea8f559b0fbda171212c"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/after-escape-details-layout.json",
+      "bytes": 7838,
+      "sha256": "a175c5aabd4742c3d84d220b47b0457f0dcc84b33770bc1b02ecefe699d7196d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/after-mouse-dismiss-layout-command.json",
+      "bytes": 607,
+      "sha256": "54fe07c6d8707554c9ad18cbdff1caa08ea49f1a04e6f7099d9b8bb76decc704"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/after-mouse-dismiss-layout.json",
+      "bytes": 7838,
+      "sha256": "2f0a79e544c2f97917f6fd5e42cb1742d0cfdadf75a99a5157ca2ecc25cbaeda"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/after-trust-command.json",
+      "bytes": 3180,
+      "sha256": "9818292dd36ea0e05357e64c025dbfdbfba0fa039d4d724d1e9d7cf8ee9f2bc5"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/after-trust-journal.json",
+      "bytes": 2627,
+      "sha256": "88f5e349bf0d98f05a0973e452b6be2c3246e96a28b6828487ed0d7e3fd6921d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/after070-files-command.json",
+      "bytes": 1311,
+      "sha256": "ca772806ed3faf5566a84b2a36ffd15536f7c609c9fa383a473e6c1bc89bd8d8"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/after070-package-command.json",
+      "bytes": 7572,
+      "sha256": "a01ead0ca774c88e69bd5d48d9b3ea9a5cd27b8d2f460e2f3c742379e3cfc1bc"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/after070-preservation.json",
+      "bytes": 1286,
+      "sha256": "a0c15cbc3cc98b984ff647ef0f3d26826f275cfe784dc8fc1fd0c21b2bfe6fd6"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/after070-properties-command.json",
+      "bytes": 39743,
+      "sha256": "06e245d7f222c2044f718842a9fc17adb266b6e4d33559b905f0b5d85597144f"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/after071-files-command.json",
+      "bytes": 1395,
+      "sha256": "fd165888e2d1e30622d106162ee54e2c17a3959f47c0327a5b4e4bc199a7dbca"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/after071-package-command.json",
+      "bytes": 7573,
+      "sha256": "8c17afa14d33ee87d73711734aab3771962fe42e3f8f95f53def6fe12114f3cf"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/after071-preservation.json",
+      "bytes": 1603,
+      "sha256": "277582841ca289cc133037065225b8f14db71ce2c5bb25d93e2ed214a51a9dc2"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/after071-properties-command.json",
+      "bytes": 39743,
+      "sha256": "2676a9df537d85d1c5235a59c37faf0bdebb82252b0f25267c0dcb2de4d2893d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/ansi3-0-text-command.json",
+      "bytes": 204,
+      "sha256": "591588aed990bd8bd8959e4dfbcea4caf22aa5171c6e98979cf1a26b1541fff7"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/ansi3-1-text-command.json",
+      "bytes": 204,
+      "sha256": "beef32e521b95fab87d4cf08667e03d03f097ff78e7e0b6d967c2d057f72817d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/ansi3-2-text-command.json",
+      "bytes": 204,
+      "sha256": "6d5236cc2e74cc0b4cdcc61930410a8654cdf2eae4d665c730366ee376615f86"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/ansi3-enter-input-command.json",
+      "bytes": 209,
+      "sha256": "453d691ae8eb2b791e184d118e3b92813c8c9a579a8d4ae6023436bac2201446"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/ansi3-result-screen-command.json",
+      "bytes": 579,
+      "sha256": "daf2dded2b65e19354ea59ce02ae34296f560eb74e4e44321871bbfaa852cc39"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/ansi3-result.png",
+      "bytes": 297998,
+      "sha256": "f10d5112b9adf3ead67b2d72873b84bfc00799f2dabbfe7e59c309ec0a9c3748"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/before-shell-observation.json",
+      "bytes": 94369,
+      "sha256": "7f0e26ee5780992b03b2f21510b6ce16af69b83307a643af700b0a1b03d5af9f"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/before070-files-command.json",
+      "bytes": 1311,
+      "sha256": "367022159e0687b905c8144f17c015783f784ae8a274b6b18c8e3a8b77e3eb4e"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/before070-package-command.json",
+      "bytes": 7663,
+      "sha256": "deb41e3e4961208b47fcca71d78baf7fa4a9e4b1a0fb1834c551fb1648284ebd"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/before070-preservation.json",
+      "bytes": 1291,
+      "sha256": "23cf7fbe8be85e40427d13c6fbc8ea4ad6bb5f6cc65ccea539c79577dd0627a4"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/before070-properties-command.json",
+      "bytes": 39743,
+      "sha256": "df663ffe618b7ba603639dcd707423bf0b6d504ead6a14b808d03bcb9b34e7db"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/before071-files-command.json",
+      "bytes": 1395,
+      "sha256": "9437147cdc0ce2f6bc99db91233f495e40364d297817241782fbacbcc64a6fc8"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/before071-package-command.json",
+      "bytes": 7802,
+      "sha256": "6e094342d7786120658b6f6adf02e78748d303279891029fea35db2923e6042e"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/before071-preservation.json",
+      "bytes": 1608,
+      "sha256": "a53e15e84beceb6301c9b83884629080d9c3bb7f13307ca21e485335895b09fc"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/before071-properties-command.json",
+      "bytes": 39743,
+      "sha256": "e8e929d53d77d96c048766ae0a9ef174dfbb3e68b1fb51269ae4aa77c8c133d1"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/bulk7-after-layout-command.json",
+      "bytes": 591,
+      "sha256": "e3278b00a0d4b7c7a08d4e926f72d51b0a5dc79e168aae933ee3f8bf057a8785"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/bulk7-after-layout.json",
+      "bytes": 19907,
+      "sha256": "bb51bdbed402b865c37c2dabcfb0d5f640b57dbe312d3b5e3a043cbb4d81df27"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/bulk7-launch-0-text-command.json",
+      "bytes": 204,
+      "sha256": "ec26304b873c5a2394ed566aa13784e135da6b0dac9b81be6174312f06baf975"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/bulk7-launch-1-text-command.json",
+      "bytes": 204,
+      "sha256": "a42311a27b3b22edc7048c6c7688f3220f1f70b5bcbe8f2278576f434c7da1cd"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/bulk7-launch-2-text-command.json",
+      "bytes": 204,
+      "sha256": "d3430a6653f1b448d2c624fb7a3a30f02e31ce85f118c931dbff1f6bdba08c4f"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/bulk7-launch-enter-input-command.json",
+      "bytes": 209,
+      "sha256": "bd287b58e54c6e5f20221289bafc9a549857a0da5ae5a8a76dd24430174f6157"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/bulk7-ready-layout-command.json",
+      "bytes": 591,
+      "sha256": "ed2468b822ca81bfa2eebe5188e36214ec2783476a763c3ad9c88f3163419ac3"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/bulk7-ready-layout.json",
+      "bytes": 19875,
+      "sha256": "b3125b85e6b00ebf6d6f8720a7dcdf18b5a4e8257d558490d7588477f1e61918"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/bulk7-stimulus-text-command.json",
+      "bytes": 207,
+      "sha256": "badd8a3a1ac8ac27d69d7c10189faec1868672c1401f05675a610a9f1721c0a3"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/cancel-late-paced-input-command.json",
+      "bytes": 219,
+      "sha256": "96d4ff99583c96a64f7020f14b4584226377a95ecb66d9903ea6151a06bbcdf1"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/cancel-malformed-line-input-command.json",
+      "bytes": 219,
+      "sha256": "6693895cc4c2f78810637710685731c0072a42c53e80199514f699f1d521edfe"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/capture3-0-text-command.json",
+      "bytes": 204,
+      "sha256": "4ba1b542fd0af794fc902237b17561daebbf9a37792bec571f70eeeff10c2719"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/capture3-1-text-command.json",
+      "bytes": 204,
+      "sha256": "0748cd56d0d388b87b8234482516d5b87d609331277ab1c1ff4a2d32d9de1394"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/capture3-2-text-command.json",
+      "bytes": 204,
+      "sha256": "22474d82f98711197ca8b49e7b0cb953dca7678ab46cba64d712e3622e6995a1"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/capture3-enter-input-command.json",
+      "bytes": 209,
+      "sha256": "f2cb1aecae9c11f53dd44be2dec61d476b9759f99700542ab43fea6f0c34b440"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/capture3-ready-layout-command.json",
+      "bytes": 597,
+      "sha256": "066bb2bd394ac1626e1d44c865af462a345519926fb4711d7a734e4e0d63889f"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/capture3-ready-layout.json",
+      "bytes": 21122,
+      "sha256": "dc901e8f453fff2ab46aad1f64d76d0b991d0b2ce92bfafa76c948b95ff6c1ef"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/disconnect-case-connect-layout-command.json",
+      "bytes": 615,
+      "sha256": "7513f0aee6ec114385fa45b7f0c2e7c2709f4c2ec138a176d7c91f217b723910"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/disconnect-case-connect-layout.json",
+      "bytes": 20998,
+      "sha256": "296269992ef151c79e47f01138a56727d7ad775a4cb986c48d19c89d07b287a5"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/disconnect-case-connect-tap-command.json",
+      "bytes": 209,
+      "sha256": "d3fe54401197c39f520f95c26d8c77e72f2487ad30bbe6097275eac6aa590b78"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/disconnect-case-final-command.json",
+      "bytes": 11699,
+      "sha256": "6addefc966d7387a9211c0607304edd883ea1ab414afe0fc55dfb75501978add"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/disconnect-case-final-journal.json",
+      "bytes": 10291,
+      "sha256": "773d2f196c2be61eb8175e76c44a21fab7ab5247a78940ea9422d8171b39306d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/disconnect-case-final-observation.json",
+      "bytes": 95104,
+      "sha256": "5dab1ecf9854f36f28df007fc5afd1d9ff27b9d50d684d95c3447644d1fc9a03"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/disconnect-case-focus-layout-command.json",
+      "bytes": 611,
+      "sha256": "c693b04dfb85d914a0a0398ae57c7e54d79125c4a485e68331bbc791598e196a"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/disconnect-case-focus-layout.json",
+      "bytes": 17297,
+      "sha256": "cf5236284e84911b913ec1e68b8c78c405b17360e11aac4639c460dee7eb49f8"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/disconnect-case-focus-tap-command.json",
+      "bytes": 210,
+      "sha256": "ed2e6781cbf3c094576047c52967a894291c1d6baea02b2c95345e0a843376b4"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/disconnect-case-stop-layout-command.json",
+      "bytes": 609,
+      "sha256": "3c0ecba0d3016de083a8f690982658ed89ae2f86bb3c9407963d672132e70593"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/disconnect-case-stop-layout.json",
+      "bytes": 19875,
+      "sha256": "1eae350385066e6d226cca3822ee83bf06cea7be90291614e32e352814bde193"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/disconnect-case-stop-tap-command.json",
+      "bytes": 210,
+      "sha256": "e88e755264206447a286e49f397e3e1e0ff6c9eea0a9fb4acf1b46c34bff5e0a"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/disconnect-wait-0-text-command.json",
+      "bytes": 204,
+      "sha256": "9710de7276b85971af6f30ed0bfc928bda1c1359eacca41289aaf0d59bd1cec1"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/disconnect-wait-1-text-command.json",
+      "bytes": 204,
+      "sha256": "8f34acdd9c9aa6e508a901ada325648a96d21fc6511d9166835bdaad2367e7fe"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/disconnect-wait-2-text-command.json",
+      "bytes": 204,
+      "sha256": "7d17212a54383867372418cf896e70654f890123bb055f93f9ffc87f7779d217"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/disconnect-wait-enter-input-command.json",
+      "bytes": 209,
+      "sha256": "db1fcc7b32830fb746c5cb1c85a03e6eb537c22edec083d221863ef223126cf2"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/disconnect-wait-ready-layout-command.json",
+      "bytes": 611,
+      "sha256": "42233684f9daea8a109f86d0ef0e2cc9cc72e11c8611332a23c1f5da06318f6a"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/disconnect-wait-ready-layout.json",
+      "bytes": 19875,
+      "sha256": "34099f39bcc5030cada0cfc5f0f85774a5502269ede4b5cad3070aec33ad8022"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/dismiss-details-2-layout-command.json",
+      "bytes": 603,
+      "sha256": "1951874a89dcea67ea7447999b4fea8f14705a8eed994f2c6f2dbec16b7a5baa"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/dismiss-details-2-layout.json",
+      "bytes": 7838,
+      "sha256": "a175c5aabd4742c3d84d220b47b0457f0dcc84b33770bc1b02ecefe699d7196d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/dismiss-details-2-tap-command.json",
+      "bytes": 211,
+      "sha256": "24615c48afd884454f6d300108a0241a380fafdf7eebd6515de7454e7c091882"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/dismiss-details-3-layout-command.json",
+      "bytes": 603,
+      "sha256": "717119efa79b6bdef6358fadd9a4ee1cc926196d09453dfae5a601e88aa35838"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/dismiss-details-3-layout.json",
+      "bytes": 7859,
+      "sha256": "679778ed7e68ae0ad397364a3a70db7b562921f61f560d411bd07c13ceca0f6d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/dismiss-details-3-tap-command.json",
+      "bytes": 211,
+      "sha256": "a622558fbceeb5fdf1b3cff6ab4a144b878561e0ba52c8851b04d6391ccc4435"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/dismiss-details-layout-command.json",
+      "bytes": 599,
+      "sha256": "e54657d29461b2c258c5722197ce2edeb2f8568c47368011f1a2ca1ac234f0d3"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/dismiss-details-layout.json",
+      "bytes": 7898,
+      "sha256": "758c427b10b76371872535b21d4924e1147358e3e2663a9ff8bd0cb0e6adac2d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/dismiss-details-mouse-input-command.json",
+      "bytes": 217,
+      "sha256": "e57f15bf60764ba243b31bf81239c0cc89c84beaefcfe7735d29754c4e2a0276"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/dismiss-details-tap-command.json",
+      "bytes": 211,
+      "sha256": "fc63f895f37be28925d41fe9a4a46532a8b27bb20a7b56cec29cdaf7b5797b16"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/escape-details-input-command.json",
+      "bytes": 210,
+      "sha256": "cedf4b6f972b17b5c4d82e1b131c2921d3bef9d041405d0a897ef00546b04c4a"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/exit3-0-text-command.json",
+      "bytes": 204,
+      "sha256": "8832988b2cdf5bda01fbec2ca6bebdeae0fbc3cffe1fc1e0a713c79ef4e24b1d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/exit3-1-text-command.json",
+      "bytes": 204,
+      "sha256": "a35cf96c415a2ca914e8f5f9f4ce628135d9f76a6b029b85ae471b0d6fa2c910"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/exit3-2-text-command.json",
+      "bytes": 204,
+      "sha256": "27fe989bf956be64856db92c4c64cb1a5099e5e50223bbf61ed198b4fefbbd26"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/exit3-3-text-command.json",
+      "bytes": 204,
+      "sha256": "0fc6bb3699ccd8540c0a90fef2b5eb0d415a5d25f05ed1da5069e629ab23829c"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/exit3-enter-input-command.json",
+      "bytes": 209,
+      "sha256": "418668e2b133d5c136c1bfcd961f1bda9707f7f307cc6fc6741e68e43eb67735"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/first-connect-layout-command.json",
+      "bytes": 595,
+      "sha256": "19ab745053d15eb2b56d3e96f83ad422c1bc3725b90eaaa7a0d84248bdcfd2cc"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/first-connect-layout.json",
+      "bytes": 4221,
+      "sha256": "83d93520abaf430dd783f441f78ee8186ba616e42db8fab55f1bc1cef79667ff"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/first-connect-result-layout-command.json",
+      "bytes": 609,
+      "sha256": "9324ba259adb585a24580954784d54da5e60aaebd34aa547c4c466891b23766d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/first-connect-result-layout.json",
+      "bytes": 13401,
+      "sha256": "200e39343342dd8761b8d0c799976e7b6bccb3d431f99affcf0bdaff317d97eb"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/first-connect-tap-command.json",
+      "bytes": 209,
+      "sha256": "fad67ed54c3d86e91d79d2e3a9003625864bce8f872c4c72d25a70a43f16a453"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-before-input-layout-command.json",
+      "bytes": 611,
+      "sha256": "b0abf591136a9da7c8e93fc2b011576562bf3a52426bb6c0cf2c7c4ccae77657"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-before-input-layout.json",
+      "bytes": 20058,
+      "sha256": "929b46385e697b6b3d55684820ca615018410884b8d4aa8bfb410683669997ad"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-closed-command.json",
+      "bytes": 23230,
+      "sha256": "1f94a8e99aa3b2db895fbcce8b6528eeac4f86fed67668761fbcfa18510aebba"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-closed-journal.json",
+      "bytes": 20670,
+      "sha256": "8d35a416f8b1669c0ad9b841fd7e275a5b9c9d226eea8ea636d4059b23513441"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-closed-observation.json",
+      "bytes": 95422,
+      "sha256": "55a022ff5e85222445b338ddfb0d62205733566ce39ee95eeb2ae9d81d12d4d3"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-command-0-text-command.json",
+      "bytes": 204,
+      "sha256": "e493b0f6ae9058dbf9f502e8fea137fcb5b16eeddef1212ca772442a540c3e9a"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-command-1-text-command.json",
+      "bytes": 204,
+      "sha256": "100a55875922d35f67a0702766f0b16e1701efd18581a792f885e213f9d816c6"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-command-10-text-command.json",
+      "bytes": 204,
+      "sha256": "37a5992f79f52d621732d2da975461d3960019d9d255afc1c9bf947514b3d837"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-command-11-text-command.json",
+      "bytes": 204,
+      "sha256": "6c531e5e7004f9437583f5e8d008d2597f5413cebc30c833ade46647862a62fa"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-command-2-text-command.json",
+      "bytes": 204,
+      "sha256": "8c71685fcd39b30c574ddab60ed649e8001cfa84b7b541093df0bdf694bffd45"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-command-3-text-command.json",
+      "bytes": 205,
+      "sha256": "ce3d922b0c2f808f7816dfb8e774ce7a7a1ee785288a5044ebe039c007f2a4e0"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-command-4-text-command.json",
+      "bytes": 204,
+      "sha256": "d9549c515326376494f8750f6016a2c7cfaca7831b58ca8f84299718b52d27e9"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-command-5-text-command.json",
+      "bytes": 204,
+      "sha256": "bcdfe85aed66f823effd44cfe6ce0af774af393ad701c85cb8b4f1d04add2996"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-command-6-text-command.json",
+      "bytes": 204,
+      "sha256": "7b059a243af7db1d640412a0b76ffa0349b4cae92ed13d0d9712230aedd556f9"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-command-7-text-command.json",
+      "bytes": 204,
+      "sha256": "96c8bc2c9e3a590cbbce2a1cc76e87b3c453780fdc7271350b82e5035b9e6d8d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-command-8-text-command.json",
+      "bytes": 204,
+      "sha256": "5362456065ca8e08e82f398c0e44f51cb576dc43f03048cd25bb78e8cca095b4"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-command-9-text-command.json",
+      "bytes": 204,
+      "sha256": "57ada1bfc8db47f97dc52660676e98f143e6512409254e0808e20201a828afcd"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-command-enter-input-command.json",
+      "bytes": 209,
+      "sha256": "8a2cc0b8ec6086e64cdc45d8f4917ce5dca5c6c7ef2369b6ec3e94f8b5e5df4a"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-command-result-screen-command.json",
+      "bytes": 601,
+      "sha256": "305d96d26326dec05517817db6e425fd70acb75460af7cedbe5d3c2ec70221cb"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-command-result.png",
+      "bytes": 275165,
+      "sha256": "e903a5cfe7b9110833c6bbc012b625b9f346655494fa6000f2451f7366d52dbd"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-connect-layout-command.json",
+      "bytes": 601,
+      "sha256": "a7ac9607b8879c9712947d8fb16d799e1ce9d78dac92c8f4e91988f56b3f45ea"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-connect-layout.json",
+      "bytes": 17014,
+      "sha256": "900672b7c09bda3d1faee8086a875fa7fe5fbf0305f02076cabc12769693cd64"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-connect-tap-command.json",
+      "bytes": 209,
+      "sha256": "cd2bb9ef0ff7202fb43eb2fad87a88a56123cb8093be5c173d8f2b4976b2b38d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-exit-0-text-command.json",
+      "bytes": 204,
+      "sha256": "faed1ff627272e969c5fec67438d2290a884fbb23a32cec199dba766caf1352a"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-exit-1-text-command.json",
+      "bytes": 204,
+      "sha256": "6b6148e53172ef880322bbed11b64c333a9572f48e4a7536bcba2e7cff526fd3"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-exit-2-text-command.json",
+      "bytes": 204,
+      "sha256": "064c4928f8a4e2a2e1a41f9bc577427ecebe4b5d7b1d0dddacc9f01d43ec7e7e"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-exit-3-text-command.json",
+      "bytes": 204,
+      "sha256": "5802b9fca17644c1b12cb19bae7a4d91b1cc3d58b5b619cb7278a5afb957b4e6"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-exit-enter-input-command.json",
+      "bytes": 209,
+      "sha256": "7297945c5697d6c0acc6ea10606110a45965e3dd922dade3b1942762922bc841"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-first-character-layout-command.json",
+      "bytes": 617,
+      "sha256": "217928e3eaee954eae7406b7d7e71d8b8b8e211ed1d81054b92120407575510c"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-first-character-layout.json",
+      "bytes": 19854,
+      "sha256": "aa55d66ce23f6a546943dc214c9794ed008c464a39506c2989ee9fe465a2d8ce"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-first-character-text-command.json",
+      "bytes": 204,
+      "sha256": "052fce7c4c032ed8bb8dca3f0dc5666d6f6050ec070b924542e4ae6918bf8d3b"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-open-terminal-layout-command.json",
+      "bytes": 613,
+      "sha256": "2a30f978915bc8ff667a8f3b5ba56fdf5621bf34ea5c69b3b6b6a5a372b2acb3"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-open-terminal-layout.json",
+      "bytes": 20212,
+      "sha256": "e96de0ede20fd3b0afb16815aaa05e0fbe46e0816b721ceabbf73c8f3d1356ef"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-open-terminal-tap-command.json",
+      "bytes": 210,
+      "sha256": "c534c742d40d185358997500faa6037b3312f99d878d3c009ba3717d2ea3527c"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-raw-0-text-command.json",
+      "bytes": 204,
+      "sha256": "3468e88ebfe0c9bd9b763799450c21ffb3e5f5ceaedd14aaca56a6d9152071b7"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-raw-1-text-command.json",
+      "bytes": 204,
+      "sha256": "3e01adfd3dabcec77e7fbb1ee8319409395eed1e4c7f2b618773e107981f97ea"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-raw-2-text-command.json",
+      "bytes": 204,
+      "sha256": "88ca93c542b7d7b83354251f557856afc4f958ffb897112d34b99c97194d3a82"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-raw-ctrlc-input-command.json",
+      "bytes": 219,
+      "sha256": "e6d5bf7c7e7cd56e1dbe52793a6f80d5630da1980cbb5723fedd0013fabe5ad4"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-raw-enter-input-command.json",
+      "bytes": 209,
+      "sha256": "03b311f0a6b1ad635b8cd5804e5da7a757b5116db653c7e937966b66000221c1"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-raw-escape-input-command.json",
+      "bytes": 210,
+      "sha256": "fd7bbacea415443aa4646fd2e33618e6fc333bfa3ecb3a843b26f29f8fe2e59f"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-raw-launch-0-text-command.json",
+      "bytes": 204,
+      "sha256": "83ac76386199b201b119ef649d0fe5ea1c3bdfc7807b2065664b4f4f6b3cbdfd"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-raw-launch-1-text-command.json",
+      "bytes": 204,
+      "sha256": "c99bdbfbdddcb15842c57671aeff17b1aba979fba5ca1d1f6f930c79b5c0a34f"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-raw-launch-2-text-command.json",
+      "bytes": 204,
+      "sha256": "b91ca3ca63352938ab49fdacdf254d7999304a5546b116fb4dc7e548e68f93bc"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-raw-launch-enter-input-command.json",
+      "bytes": 209,
+      "sha256": "3df895a1718ac2f2a0f6fd6c9d380151900ff25cd6e1750f1a3ad1cd7e88215f"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-raw-ready-layout-command.json",
+      "bytes": 605,
+      "sha256": "cfe13d76c5bc15322658240e336b1dd7e2654d1b579ed320fe91dd8526314be9"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-raw-ready-layout.json",
+      "bytes": 19924,
+      "sha256": "c225d412196a3d014a15364704d8a5b0703f69a49cf60b3cab336b59ca42200d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-raw-tab-input-command.json",
+      "bytes": 209,
+      "sha256": "cde439bbc719d08d2d099b35ca81b56b051718b110cda16a250a00bbb225c557"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-raw-tail-0-text-command.json",
+      "bytes": 204,
+      "sha256": "83accf8ff31aa61b799b46b7a9cd2c5e58889add447574ddb931fa55f72feab0"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-raw-tail-1-text-command.json",
+      "bytes": 204,
+      "sha256": "2d255cfffe8f8ac29a5a5464e3f8b54fbf9689f7096dd738637e5268ceec96d9"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/focus071-raw-up-input-command.json",
+      "bytes": 209,
+      "sha256": "ccb4c10ffc683d58ecb12f21b156d046ceaaa81225fe772c60c5fbaf18d9d950"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/initial-terminal-layout-command.json",
+      "bytes": 601,
+      "sha256": "25454f7d79d7894f513f91e50ffcd55ce7de6b0ff591c09cd0a3aec63d9c93b2"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/initial-terminal-layout.json",
+      "bytes": 9321,
+      "sha256": "c766421f46e0e3c449dfda0e836d7c0c5c0a093f21051c4e8b54df0e9e6bbfed"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/open-terminal-layout-command.json",
+      "bytes": 595,
+      "sha256": "68739f7c5d86b83a9237f0563dea6d1fb8991821ee27dabac7c68cd1c87b67b6"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/open-terminal-layout.json",
+      "bytes": 26469,
+      "sha256": "4a82c2ca793f70020491907328e34035ad1d50baae84cb44c85738db7c536060"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/open-terminal-tap-command.json",
+      "bytes": 210,
+      "sha256": "f6a6d7f5ca9fe2dc3f6bec1077b45b72a07ac07814ec4fb7fa5351a7377d3a17"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/paced-0-text-command.json",
+      "bytes": 204,
+      "sha256": "10dea92005a7ddf407cfbf045ad22e063abae220adadddce0bcf34eca64a15fb"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/paced-1-text-command.json",
+      "bytes": 204,
+      "sha256": "e4d0f23b5a779c99181b30b40df89a146dfc187bb8192209875525b0e48b9a31"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/paced-2-text-command.json",
+      "bytes": 204,
+      "sha256": "1c4caf128b226425f77c6eb8013e54d1ce2efea684148f6bf23c3c8c3e091ff3"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/paced-3-text-command.json",
+      "bytes": 204,
+      "sha256": "d56fd540e2962aa0ce6fa031e9efb23ebcb390e56c5ee047d0677771129a57ea"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/paced-4-text-command.json",
+      "bytes": 205,
+      "sha256": "691cb84de8bdcc404b61f9095f8b096329828c3e59b60396c296ec96aebc9994"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/paced-5-text-command.json",
+      "bytes": 204,
+      "sha256": "de256cb1cedb0f20a692d87cab5c55c2692ac2514cc6aabf24001cf1bb8125e1"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/paced-before-enter-layout-command.json",
+      "bytes": 605,
+      "sha256": "704d40f7f2e7e37cc5efc80e06a43588ea79a88817644cfb24c13b88a5982254"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/paced-before-enter-layout.json",
+      "bytes": 13848,
+      "sha256": "e507e21653358f4e9b44f62f27501ac49a1e4ae7fb0c04599e3e31acef54c4d4"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/paced-echo-enter-input-command.json",
+      "bytes": 209,
+      "sha256": "675d2ae7568285592e10efbd38cfc6824c19f7b38fa28a29b87285c751557a8c"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/paced7-launch-0-text-command.json",
+      "bytes": 204,
+      "sha256": "86598002ff431bf0016084985275aac79d68770ee79ff4aa2279018e7488726d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/paced7-launch-1-text-command.json",
+      "bytes": 204,
+      "sha256": "cc6341ad5d40cfef95bd08bb1f4fc69635b8554f57cabe0899c7f2d91a2920a1"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/paced7-launch-2-text-command.json",
+      "bytes": 204,
+      "sha256": "dd3c49ae49828ab62cb2f635d66f49f961b59bce9532e5375232bf41bd2e1835"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/paced7-launch-enter-input-command.json",
+      "bytes": 209,
+      "sha256": "f98d66fd7026fecd58108a48e89728a3bf033062ae4d1bb6426110ce0ff19c34"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/paced7-ready-layout-command.json",
+      "bytes": 593,
+      "sha256": "c7cc35bc9889c9b4baa14ffc098635d481553bdf7de17b73c88e973dfe2309d1"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/paced7-ready-layout.json",
+      "bytes": 19926,
+      "sha256": "9bb1ed8431ce34ec40add12ac060c81616556fa01e3ef20eb1e2bc08a8765eae"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/paced7-stimulus-0-text-command.json",
+      "bytes": 204,
+      "sha256": "279c22df7f8d7c67aee5f1e632b1691c7c5700de59636b25604c5f9fa72f6e74"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/paced7-stimulus-1-text-command.json",
+      "bytes": 204,
+      "sha256": "8db2cbc175523b2a943d437e1866084d025d3d9603f97d94e6c179569df02c88"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/paced7-stimulus-2-text-command.json",
+      "bytes": 204,
+      "sha256": "c241ab04f5897aa62b9f013886cf3ca793fb7ebaac82a5113a9c459ec0c0dce0"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/paced7-stimulus-3-text-command.json",
+      "bytes": 204,
+      "sha256": "49a82f0bb7ab858ef36ee0c630680ebe7ed447ff5b927a89b3dff88e784665d1"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/paced7b-launch-0-text-command.json",
+      "bytes": 204,
+      "sha256": "70fbb1bff4668f069ac4129a9be7f95044b98da794982667b3dce2009b6af5ed"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/paced7b-launch-1-text-command.json",
+      "bytes": 204,
+      "sha256": "bf9f38511854d56b0b6282c692f184990d41210edafa714a74df40f9dbde694d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/paced7b-launch-2-text-command.json",
+      "bytes": 204,
+      "sha256": "7ceef95fee5e190e704a75fa6ccebe3f1b4e064b100d38bc81478f575e9dc513"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/paced7b-launch-enter-input-command.json",
+      "bytes": 209,
+      "sha256": "9299f9af3cfdde7ea46cb3bbe4999d42784c9383ee577e8c96b2bcc6ea876784"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/paced7b-ready-layout-command.json",
+      "bytes": 595,
+      "sha256": "b50a1836766140e811087de903f4f0705e9d9d96882ba2642fbae38c170382ee"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/paced7b-ready-layout.json",
+      "bytes": 20001,
+      "sha256": "41c071ef185156a01e34ddb6cb8e29946d4b11d8c5513d316fcc1688de276812"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/paced7b-stimulus-0-text-command.json",
+      "bytes": 204,
+      "sha256": "c57d858a4adc274f6c151cfa63cd62e3d10226e14de6ea2ac03fc7d284fdc3ac"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/paced7b-stimulus-1-text-command.json",
+      "bytes": 204,
+      "sha256": "26d690a83155c69c4fd01343f5d07218d829984b700bcfd18ab29c1da34f986b"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/paced7b-stimulus-2-text-command.json",
+      "bytes": 204,
+      "sha256": "4c953830f2f96aa33a1f137e8616296c8e09f65d5a3aecd8ea2c42cd94fc19fd"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/paced7b-stimulus-3-text-command.json",
+      "bytes": 204,
+      "sha256": "1feeda77f1e94add37f28f2a84fba5c5960213a0fd8594df70762060fe48e258"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/processloss-after-stop-observation.json",
+      "bytes": 93711,
+      "sha256": "679e34ca1590d8a24e7e9f7e419fb189e86b7be7915c88a5a23230d120248c74"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/processloss-before-command.json",
+      "bytes": 17049,
+      "sha256": "06c5788944bcd75db79f1af1d3a87581154605a004e94a642c79d82e0be99f77"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/processloss-before-journal.json",
+      "bytes": 15105,
+      "sha256": "8e3b076231e8143144fc97cd6968870ecc42d18ccda63c20324e21b57c496007"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/processloss-before-observation.json",
+      "bytes": 95261,
+      "sha256": "bfb38c41b5f7e91e4d5248ced0418c7c7ccdc802fcdf9ebb0b1c0dcd8dc686c5"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/processloss-connect-layout-command.json",
+      "bytes": 607,
+      "sha256": "c9e86e4fc257d9b0fe3eed674a08e9642e50d790b0492965859613155603f7e5"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/processloss-connect-layout.json",
+      "bytes": 17019,
+      "sha256": "b9fc320743f1f528515b22939eaed2d0cf9376af3cab00a5a3758151ff2a89a1"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/processloss-connect-tap-command.json",
+      "bytes": 209,
+      "sha256": "6529f176b38e65cab88f69ee5ad527937260b7acdde4450e8001bcd65b7a0f65"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/processloss-disk-before-recovery-command.json",
+      "bytes": 17049,
+      "sha256": "f07967ec42b824b90a171f184ebb254f0eb32bbc170ae97ac46f4123a68a5a09"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/processloss-disk-before-recovery-journal.json",
+      "bytes": 15105,
+      "sha256": "8e3b076231e8143144fc97cd6968870ecc42d18ccda63c20324e21b57c496007"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/processloss-force-stop-command.json",
+      "bytes": 208,
+      "sha256": "ec2a5e7cc81798f1638fa01c673d2702fac9e2fb974253227644fdf12f8055df"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/processloss-open-layout-command.json",
+      "bytes": 601,
+      "sha256": "a15628196c3298948b536a7fd558d431ddde05e01a1a71a4f32fa21701a766b9"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/processloss-open-layout.json",
+      "bytes": 20038,
+      "sha256": "b0e6e58055d8831bbe4e7283fa97710b8b606d17621fbd8b4499933641eba352"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/processloss-open-terminal-layout-command.json",
+      "bytes": 619,
+      "sha256": "5b9327737dc4b129dee4e54d69a9cdf58a2c30d3918e5daa489a5cef2745e21b"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/processloss-open-terminal-layout.json",
+      "bytes": 34185,
+      "sha256": "8d735c091302b2c45758b6475b93f9a23f5710a4c2bebd9f8e02ae92f6acf456"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/processloss-open-terminal-tap-command.json",
+      "bytes": 210,
+      "sha256": "23b8f26a102ed3c317c4316ef8c62ab37d1861fa8ec5a1e5f996c1e9cb338738"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/processloss-recovered-command.json",
+      "bytes": 17309,
+      "sha256": "3d135d54b94f929651f33c41b5b34d7cb16225778916c789afcf8a352f06612e"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/processloss-recovered-journal.json",
+      "bytes": 15343,
+      "sha256": "6e14c625939da9ffe1180de7d64c9b849eb9426c8bc8051abe826c9c4b696a47"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/processloss-recovered-observation.json",
+      "bytes": 95046,
+      "sha256": "b031a56a253f7ea47e7daaafcc0c0a162ffc5a8a744d4efb57ccd7763dc4da3f"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/processloss-relaunch-launch-command.json",
+      "bytes": 471,
+      "sha256": "cbaff3e0d1572722349af0368b8d56b9527ca2484693dea46181c607573a31a9"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/raw3-0-text-command.json",
+      "bytes": 204,
+      "sha256": "6485f2c3cf98b2d87924a3fcd8a10cf2f193f5b3397639edda008c90ee1275cc"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/raw3-1-text-command.json",
+      "bytes": 204,
+      "sha256": "d9ad926e93ea77ac5ecee4b3d7d49b60da3e050639f32147880189690e4345a3"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/raw3-2-text-command.json",
+      "bytes": 204,
+      "sha256": "aed4bbae53f532e2ef46b4c505f3ef46acb3abdd3fd6ef6b54626617aa3a6a77"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/raw3-ctrlc-input-command.json",
+      "bytes": 219,
+      "sha256": "f93d7d00983c24678b79c18a23bebee0f225860b328fb9d3326beedb81fe6d4f"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/raw3-enter-input-command.json",
+      "bytes": 209,
+      "sha256": "8f40e3bb5cfb15d9a667145553d58df88f509dfb7bee90f41029cf8300761a2c"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/raw3-escape-input-command.json",
+      "bytes": 210,
+      "sha256": "8eaad37beab8da3c90d169cf76fcbccf2f7b7a67f7969becebbb7648687f06e2"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/raw3-tab-input-command.json",
+      "bytes": 209,
+      "sha256": "3d4aa062049661ddbccbc0e9122ae968963ab51703e1884bc9a2abd4f322e155"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/raw3-tail-0-text-command.json",
+      "bytes": 204,
+      "sha256": "43c2e8d5ea175b5bcc85b9f85a9ee39c2d1211fb81a4ee74ff6daeaa38801b4a"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/raw3-tail-1-text-command.json",
+      "bytes": 204,
+      "sha256": "f9b591283da1f9fd3ed8260afb6f03f35dee9fba186735e77b0e0816aeedfd16"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/raw3-up-input-command.json",
+      "bytes": 209,
+      "sha256": "86ff31456c43b8ad496d3aed8f8c2ec595a58c5f15d8c9304b8d48def5cc004e"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/ready-config-layout-command.json",
+      "bytes": 593,
+      "sha256": "d493f9055aa3c39398057d13d1698576fe56e10bcd3c3bde45566eb2e370254c"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/ready-config-layout.json",
+      "bytes": 9307,
+      "sha256": "367b4602dbafacdf451c923d98999e020524ac0ccb2f49b3a046cbb40ebee73c"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recovery7-closed-command.json",
+      "bytes": 20269,
+      "sha256": "7699e2f025fb0cbc911e4e48da169544b0e770131622948a20be72cdcc297b26"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recovery7-closed-journal.json",
+      "bytes": 18006,
+      "sha256": "64e9378fb98e51514d6f2a77ee14c287f5ff23643241ce2c0e9d85dac487bad7"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recovery7-closed-observation.json",
+      "bytes": 95355,
+      "sha256": "b20194c77fb8c771f317c1a1fc110421167f03a755442730d889eceba8530bbf"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recovery7-connect-layout-command.json",
+      "bytes": 603,
+      "sha256": "5bf474fb37f07fd72cc54179cb3309c647089904926ac889a9f13a48b6edb1d4"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recovery7-connect-layout.json",
+      "bytes": 17019,
+      "sha256": "6c5a935e699dc446ed7bc23c51b992f8f9b5e03f5abf5a6c509db07924d63960"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recovery7-connect-tap-command.json",
+      "bytes": 209,
+      "sha256": "d2bd16d1809af9e698d416188ece6f566a6f8be452154fb443d8f8c374251244"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recovery7-exit-enter-input-command.json",
+      "bytes": 209,
+      "sha256": "3500975e54d842b891a9b4ef6e3bffddc2b538c23fd7aa38fcb638a7409d8807"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recovery7-final-command.json",
+      "bytes": 19865,
+      "sha256": "c2b51d89e2e8c9600e692bd14390a3f6b2638b741a2c05f1631016d042934bee"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recovery7-final-journal.json",
+      "bytes": 17642,
+      "sha256": "6a0ec82c02a37cf384dd27732406a6318777ca54fe4d4b089f5389c5ab1ec225"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recovery7-final-observation.json",
+      "bytes": 95664,
+      "sha256": "abda8b628e33641de9294313fe17bc4243f4be171eaeae560d4da4a106c71dbd"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recovery7-focus-layout-command.json",
+      "bytes": 599,
+      "sha256": "9f72129ce4d34fdd08d98ce850ca9c24d5d291bfe24578cf3e2d12315f28dba7"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recovery7-focus-layout.json",
+      "bytes": 17456,
+      "sha256": "bf2b056327aba9ec356feae3a2e5fb802535d7b858be9571e5cd6f6d0f06604d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recovery7-focus-tap-command.json",
+      "bytes": 210,
+      "sha256": "20f1c62abd8f3f60c2a93cc6ff7338bcccb2f1f57b0fe94fafe8115a25e8c7af"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recovery7-real-exit-0-text-command.json",
+      "bytes": 204,
+      "sha256": "308728125b2957b4f2396b3821d73ca92bc3b201afe46004c078d560d5023d85"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recovery7-real-exit-1-text-command.json",
+      "bytes": 204,
+      "sha256": "389ac324de3bbce03317059858e4ab655f3cf0fd1ddf3e2f1c14591dc3c49171"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recovery7-real-exit-2-text-command.json",
+      "bytes": 204,
+      "sha256": "dfd933e50ca2ba1c44d9a92ee112b38288b2ad4fa31e39602f503376d9292ca2"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recovery7-real-exit-3-text-command.json",
+      "bytes": 204,
+      "sha256": "8ae568e019bd8bba1224ebd5fe4fa145c224416eef38c759a7faf669de2535ed"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recovery7-real-exit-enter-input-command.json",
+      "bytes": 209,
+      "sha256": "d0e967fb9759a69d806f19c7f0c29025c658bbdf90fa06399c6c01612da32426"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recreate-action-layout-command.json",
+      "bytes": 599,
+      "sha256": "2714aacee19a5acfb3d03677d5ffd7b772301e4ed987c4deb2c9f1d1a3e0ef79"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recreate-action-layout.json",
+      "bytes": 19879,
+      "sha256": "4ff32637b905088dd9f8fa047a414267c9f3765f6f56a274780a68f265c206d7"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recreate-action-tap-command.json",
+      "bytes": 210,
+      "sha256": "1333db28fbc4e7116fc28a2ad3b4f2ef5c41f3fc59c9eeeff3ece8eab9c8ad41"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recreate-after-observation.json",
+      "bytes": 95212,
+      "sha256": "0a2cf3c1575875552a22f42a349e5804b28d375632a06784b8e56864a31b1c61"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recreate-before-observation.json",
+      "bytes": 95124,
+      "sha256": "097d62182c9a5ba8a92d8d875a3e8c22345c0bd306f5a5f9ef5a0239b53ee9a0"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recreate-connect-layout-command.json",
+      "bytes": 601,
+      "sha256": "d822c224c73efcedeebfcb2b5ea09e239dc5dd865482021d80c4221b156a1ab6"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recreate-connect-layout.json",
+      "bytes": 20041,
+      "sha256": "539717ef58984804db0e521d499c22b21927e048e6cfe450ec761612973870fd"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recreate-connect-tap-command.json",
+      "bytes": 209,
+      "sha256": "6056828fa74da168e64e85d8da305a34dad50eed385025cce1fd836db62dd742"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recreate-final-command.json",
+      "bytes": 14493,
+      "sha256": "7e27a8dac6b5ddecabe471b46aee3d7342a7ddb0f3402420cd5b743356f949dc"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recreate-final-journal.json",
+      "bytes": 12806,
+      "sha256": "1dcd64418e8a06b1f0f70f91e1999690ce4d9a4c58d694f9a0c0849cc3977a26"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recreate-open-command.json",
+      "bytes": 12792,
+      "sha256": "34435e40e589732392c4da42cca3ccd85d518a00a7489afc4236edcf0ba6346c"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recreate-open-journal.json",
+      "bytes": 11282,
+      "sha256": "ac90efbe9eb6bf1cd032363f8b5a38cbcb114606004e399e974d16770b707e9b"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recreated-idle-layout-command.json",
+      "bytes": 597,
+      "sha256": "eae098e8299c8c2391e7763393a2056037b1b9283c937eca92b3e6108c134b40"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recreated-idle-layout.json",
+      "bytes": 17019,
+      "sha256": "bbda465ebac32b3d00c416b56166cb5bb7132dbd08a00acd51ac956c8b074d5b"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/recreated-idle-observation.json",
+      "bytes": 95211,
+      "sha256": "b3606087c14154826baf7b2c5b474ccad863ba247709a5bb59aa4ba72b691c46"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/refresh-terminal-layout-command.json",
+      "bytes": 601,
+      "sha256": "1fede82a01b376c34c5a2650b2005aafa00ce4afc3dcea0e7d9324ceb58d537a"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/refresh-terminal-layout.json",
+      "bytes": 9321,
+      "sha256": "765ed53effad1ee3d1eb2b8a474e579af278176c7b66f98df39d0f4768c32000"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/refresh-terminal-tap-command.json",
+      "bytes": 210,
+      "sha256": "52b337a6589131a83c803b43f049a63015a320577f3b2c1c40198c8d55019026"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/restore-window-layout-command.json",
+      "bytes": 597,
+      "sha256": "2532523e42d87ec5e21d38cbd2f842599e6fa31be32f1cb3c964742df1432a67"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/restore-window-layout.json",
+      "bytes": 13300,
+      "sha256": "1258804b53bc28dc5a856559a495e0573c65646fb15c99f9f23412d3baedfc27"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/restore-window-tap-command.json",
+      "bytes": 209,
+      "sha256": "1d118b06c9560ffc5b6b0215614177865ae7391f84c7d72d87ddc762828068ea"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/review-trust-layout-command.json",
+      "bytes": 593,
+      "sha256": "d5d416808cf7c4964fb984d30e2ff7b738da287c739263c6f3276fb9ddf34aa6"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/review-trust-layout.json",
+      "bytes": 13205,
+      "sha256": "e8652074459e23d0fdef86efb778bf7585a7e0a31da6df7310f4e86ad60935d3"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/review-trust-tap-command.json",
+      "bytes": 209,
+      "sha256": "f1ac9d0c1dd2e2f67675c7834c530763a0caae51a90a609cf404688a6278c6df"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/shell-ansi-command-text-command.json",
+      "bytes": 351,
+      "sha256": "6336eab468bb7f5f3a68c87a2409a19155b3077f2f9eb0c72ffbf27b227e4741"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/shell-ansi-enter-input-command.json",
+      "bytes": 209,
+      "sha256": "46b41bed2215a0927c9eef0e7c436bb746937c48cf4126879778696526db83da"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/shell-ansi-focused-screen-command.json",
+      "bytes": 591,
+      "sha256": "5a9523a8174b388d21dc2105d5c0cc9f81dfcec553a1fc2b9cc8688e5484188b"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/shell-ansi-focused.png",
+      "bytes": 200350,
+      "sha256": "72dc301c316491613b4ed8b856cf32111f566c13bd190108da48214f3e52f9df"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/shell-ansi-screen-command.json",
+      "bytes": 575,
+      "sha256": "6f6bfddab4992781d15acc117c1c8a70c1ee3f9da736333e5ffea74e8a31e48a"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/shell-ansi.png",
+      "bytes": 214123,
+      "sha256": "e5ca7018709fce23181089c326d14eb7ec7accf29d37ce145ab5c5ad46e02274"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/shell-connect-layout-command.json",
+      "bytes": 595,
+      "sha256": "4cf74bcdf174c4d62de588739abfd077915936d4934c30a86e085e27a4b0a9d5"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/shell-connect-layout.json",
+      "bytes": 13205,
+      "sha256": "e8652074459e23d0fdef86efb778bf7585a7e0a31da6df7310f4e86ad60935d3"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/shell-connect-retry-layout-command.json",
+      "bytes": 607,
+      "sha256": "2a4ff81883fba3828c7e51f32d43d3496d5fd75ad92c274c62d478af8a642f96"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/shell-connect-retry-layout.json",
+      "bytes": 7858,
+      "sha256": "59cca754f18b8ba11b4b74e7cabf9e2dc1e4659375ac3b41da8a7c1d7ba370d9"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/shell-connect-tap-command.json",
+      "bytes": 209,
+      "sha256": "023f5af837954622911a65a22993531134767d87cf4cb7a7c1c2bc70ab957a61"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/shell-explicit-focus-layout-command.json",
+      "bytes": 609,
+      "sha256": "f0e3ed18b9f1e871a69c1cd80ae402bfe9799be86bb06889aea64c142731cb85"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/shell-explicit-focus-layout.json",
+      "bytes": 7858,
+      "sha256": "59cca754f18b8ba11b4b74e7cabf9e2dc1e4659375ac3b41da8a7c1d7ba370d9"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/shell-explicit-focus-observation-layout-command.json",
+      "bytes": 633,
+      "sha256": "677daf8e04ed48fb4a3b5a5d6d337ba3ffc19c4fe72ea017290721a36c65e089"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/shell-explicit-focus-observation-layout.json",
+      "bytes": 7858,
+      "sha256": "59cca754f18b8ba11b4b74e7cabf9e2dc1e4659375ac3b41da8a7c1d7ba370d9"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/shell-focus3-layout-command.json",
+      "bytes": 593,
+      "sha256": "4855056bb9fab732e4aadaf80f348396f9e97aa0f6120ee93d315f74178958f0"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/shell-focus3-layout.json",
+      "bytes": 13244,
+      "sha256": "6290ad61f8877e49dcec52a1c168c0b888a907c4ea08bcb5a349dfe0ec9dbd27"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/shell-focus3-observed-layout-command.json",
+      "bytes": 611,
+      "sha256": "660a5435abc57e28942db2a55904da40e83622347da2aa8ab6a3a933e8b6fec1"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/shell-focus3-observed-layout.json",
+      "bytes": 13048,
+      "sha256": "eb3b66911c4b11ffb1bb5035c493396f9fa52ef5dfaa89da42e510fbcf65a5b6"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/shell-focus3-tap-command.json",
+      "bytes": 211,
+      "sha256": "336ef5291653628d383a70248109ee864b86575cf727b5832574fd90e690fb8f"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/shell-input-failure-command.json",
+      "bytes": 5959,
+      "sha256": "bb13e2609908a0a435b863ec9c6307093e8aeade33522225d7512aab7d182a9f"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/shell-input-failure-journal.json",
+      "bytes": 5127,
+      "sha256": "5c6dde17d4e6e7bec68bb2ad34e88638ef57666c9ecc9b60bb0725ba72acc970"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/shell-open-layout-command.json",
+      "bytes": 589,
+      "sha256": "b11c25bf250f1fb83e6ddcb7b7d2d75b3b4429873b5524247b5857cb02c0cd68"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/shell-open-layout.json",
+      "bytes": 13244,
+      "sha256": "802c3eccc549aa896907a493a39465195bcb36beb0741a0db1a2eba14155d575"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/shell-probe-command-text-command.json",
+      "bytes": 351,
+      "sha256": "60e033ef69f347f664bf0bb912b712d3c6138ebc62b58ecb63bfe00f4df23d99"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/shell-probe-enter-input-command.json",
+      "bytes": 209,
+      "sha256": "a2888ced39e18ebdf164cb200ae546b4eb490fdec38894d147b45e5a679ba7fa"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/shell-retry3-layout-command.json",
+      "bytes": 593,
+      "sha256": "d58d736b2ac5381d7844e2a23a7e76b99c7d58e20733d97e4426f2d51ffff6b8"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/shell-retry3-layout.json",
+      "bytes": 13213,
+      "sha256": "18db758f50da8626aedeb6c991ef3c7881e074d6b565d5abefd1c0572675c21d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/shell-retry3-tap-command.json",
+      "bytes": 209,
+      "sha256": "b763eebea7baf2181bcc2e5364edb6e08d33c5f6744c13156ca213edd5063128"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/shell3-final-command.json",
+      "bytes": 8921,
+      "sha256": "07741fa3da92d62ff697f31272c7a27bb76291498651812df4d4009ccf98f718"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/shell3-final-journal.json",
+      "bytes": 7792,
+      "sha256": "5519adaf848ecac2eeeb4bf88c22a960746fb94ed1efb2d5e693facd0101c93f"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/shell3-final-observation.json",
+      "bytes": 95105,
+      "sha256": "f29a7be2a32e56d810bd4c6fda631e53c2022c838c78d9e67f1abf673814e5d3"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/size1-0-text-command.json",
+      "bytes": 204,
+      "sha256": "4a042e50aa52fd1ebc492576728b4034fd6fcebeca37c68e3450927b3593e957"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/size1-1-text-command.json",
+      "bytes": 204,
+      "sha256": "26c0f1207da187d224cb7094ea9544d46bb12c09c77660c94dd1d0de96ba6af2"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/size1-2-text-command.json",
+      "bytes": 204,
+      "sha256": "e224f242b04c9941987cdb65b7bb00df28772fca769f8885fbe832f4c43129cb"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/size1-enter-input-command.json",
+      "bytes": 209,
+      "sha256": "689b107237b0f3355a541522ea423841ec511f22c3e68cbe3d1624ebb6452e56"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/terminal070-terminal-client-key-exists-command.json",
+      "bytes": 266,
+      "sha256": "c0ce43b12fcdb8f964b37957b6bc8969754e610dd6ccd4cbf881a39faa79ac68"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/terminal070-terminal-client-key-import-command.json",
+      "bytes": 494,
+      "sha256": "0f0bf14001bb95bc783e2b2b3f4d94ed36022b8b11c7363b5d0ffe4feb595f00"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/terminal070-terminal-client-key-mode-command.json",
+      "bytes": 268,
+      "sha256": "319ce8b9c4e997e96992b239e8833f9902de91aad9af23cd540119e00780ab56"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/terminal070-terminal-client-key-readback-command.json",
+      "bytes": 494,
+      "sha256": "a7a77b8449cdde34121621ab7a8184e70cdcf5d05fcfde8c2609a470ea2b74a3"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/terminal070-terminal-config.json-exists-command.json",
+      "bytes": 267,
+      "sha256": "c18480104b3f9743d2b054283cda5b5421c057699b7190ac4c1295bf21b5846c"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/terminal070-terminal-config.json-import-command.json",
+      "bytes": 459,
+      "sha256": "57431c219053ae3dfa5588ce7762fb0d8dfb28fe800940a1b15ac18b12b4f4de"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/terminal070-terminal-config.json-mode-command.json",
+      "bytes": 269,
+      "sha256": "47dc3eb8a45952b48fad58f74f28df3567181e30dc2c936133d274d34d029e32"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/terminal070-terminal-config.json-readback-command.json",
+      "bytes": 459,
+      "sha256": "7891aa3bec4a14f9d48bdf20753a1c9677cccebf733f7a65cd32e823a1221ab1"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/trust-dialog-layout-command.json",
+      "bytes": 593,
+      "sha256": "1fc41a96a954b0d0d96535a8d6afd361eb631ac7133d96839718d0be547218fa"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/trust-dialog-layout.json",
+      "bytes": 7654,
+      "sha256": "8325a94fe4ca9a9877394bb49040f40d579fae19f56cbf2bd2ef9a55fb9c6261"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/tui3-0-text-command.json",
+      "bytes": 204,
+      "sha256": "5bca12a767fc58b461c3bd855ef2b0f6fb4e7a11fdc0030275000fe12ed88f12"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/tui3-1-text-command.json",
+      "bytes": 204,
+      "sha256": "ef3bce537d4c4307705e6c09268167063d9257f368886f057ff0cd073a53c2e5"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/tui3-2-text-command.json",
+      "bytes": 204,
+      "sha256": "76d83dc86b938d9669830f86876da71c9901752e5ffd2531b4456f56d01aafd4"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/tui3-down-input-command.json",
+      "bytes": 209,
+      "sha256": "41744d2a93dbd3d0a60468a2923c8b9dcf5e93b97386ddc518a8c42f99949d72"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/tui3-enter-input-command.json",
+      "bytes": 209,
+      "sha256": "3699ae80329045ca92e099e5eb53b8bd6881a3de00fb08103be0803c0a00c2e8"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/tui3-layout-layout-command.json",
+      "bytes": 591,
+      "sha256": "2352b563e181aa37a8ea0eaae50e0f20e7f4f05ed269ac56c80158e8864291b4"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/tui3-layout-layout.json",
+      "bytes": 20088,
+      "sha256": "23184777782093ae1fdd2680bb053fdcdaebbcba0c90d66bd1e63027dbe81834"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/tui3-quit-text-command.json",
+      "bytes": 204,
+      "sha256": "97d59ce5159e728445013e60253de5aa5ca411e767e7dc878f539a6c160877ab"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/tui3-restored-screen-command.json",
+      "bytes": 581,
+      "sha256": "eeab00a4cde00fc4e3b9045b85a74d6c3e331991173c003b710a58d0fdf71213"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/tui3-restored.png",
+      "bytes": 302830,
+      "sha256": "bf899bb9eab564cdf0bc768d048ebba348a0685c89790a5163c906acd4bfb8b1"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/tui3-right-input-command.json",
+      "bytes": 209,
+      "sha256": "7c7f5ca5fa144e3669506cc416fac98fb7280ffd8e17fb87743db1d3823ec36e"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/unknown-trust-command.json",
+      "bytes": 3044,
+      "sha256": "1860690162b79314912714daf6042fe52fb80b69f9e94f12ddd186a5fbbe345d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/unknown-trust-journal.json",
+      "bytes": 2498,
+      "sha256": "b1952839e3a79682f859a93aafbca305dd069122a50bbccbfc96d55e25b82476"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/upgrade-preservation-verification.json",
+      "bytes": 1020,
+      "sha256": "fe154a9efe818ab5ce9092dddcb2f370d440cf2752e816421604a86fcec399ee"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-01/upgrade071-preservation-verification.json",
+      "bytes": 1152,
+      "sha256": "c81d16c407b51f1e917de0e20dfd88080de0505ddf1462c7c636b9c5afaf0ead"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/helper-tests-01/case-0/launcher-de704965-e4f0-4c8c-9e7c-e6eeb28adcde.json",
+      "bytes": 378,
+      "sha256": "5472e13fa63239c5f5df88b1dd592b557fb7caf90eeb6e22d8f7b1be691b4897"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/helper-tests-01/case-3/exercise-5953870e-211b-4505-b83b-d576386e23a4.json",
+      "bytes": 497,
+      "sha256": "60c64dd11ad725b1463c82a7efc0bcb9e004618b8ae978284cf48bfd5acd9a7c"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/helper-tests-01/case-4/exercise-9946a14a-9b0e-4372-8424-c8b7f37f419d.json",
+      "bytes": 622,
+      "sha256": "588c4cda7132660d3133e0cac9ea9da59a5ef7f81fe13f4d60ebfcbbf47dae91"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/helper-tests-01/case-5/exercise-82f3163c-c84e-4306-a040-be5fb9cab2ff.json",
+      "bytes": 560,
+      "sha256": "2c9ba4b1e50b973880a748bf143dd2c2738a6b6db63bfd9e02c0540a6ebc0c2b"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/helper-tests-01/case-6/exercise-56a0d6d9-72df-4dba-8bdb-b81a8dd0ebc2.json",
+      "bytes": 552,
+      "sha256": "2f3af81bb385be2ac3bbbd2ada19e09121f820e73039ad334dbf6ac4106c8e59"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/helper-tests-01/case-7/exercise-35740bc0-0149-49f2-afca-249c9326c957.json",
+      "bytes": 546,
+      "sha256": "5d039cc2df832d6b6787d0a87d0e6d2adcac534a59e10bc8186b78c9a6ad8c9d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/helper-tests-01/case-8/exercise-e2315f13-a099-4e3e-b7d8-c9317d470d05.json",
+      "bytes": 587,
+      "sha256": "5be78df87264e6f7fb7845f742fb8c8ec36c84b5c035ccca6cec5f13df4756b1"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/helper-tests-01/review-capture-results.json",
+      "bytes": 499,
+      "sha256": "d1e328bc0bfe74f3cf6796ed24d197b7b52e5c3d4dfa65bc270429b23f89d089"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/helper-tests-01/review_capture_checks.py",
+      "bytes": 4646,
+      "sha256": "0fc06c7ffc773ab7e257c66db0d47c5254c79a62b9ba299aa086d0a28a20d4aa"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/helper-tests-01/summary.json",
+      "bytes": 1648,
+      "sha256": "dbcfd8c7bb52ebef20bbd020b67cd2ec18546b7b692b95967e49d71a74922419"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/after-enrollment-server.log",
+      "bytes": 3032,
+      "sha256": "bda4312abfe6fac82dc5d215e1888a57a4602514bdf1687d45f9607ad5926ca4"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/after-enrollment-snapshot.json",
+      "bytes": 292,
+      "sha256": "bb49a8aeda1d28dbf6b92a5f0607077af7138acce3ec926e8a20a506480b3dd9"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/android-config.json",
+      "bytes": 173,
+      "sha256": "24d7f0972c811595a2dcd8d01cc6ec954c94bd9ef3644cfbc47d76377de6dc6d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/batch01-process-events.json",
+      "bytes": 167,
+      "sha256": "e82a0c182e3845f5e9cf4f4fdf06757a16d3139fba2371b1145d48156bc26b75"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/batch01-server.log",
+      "bytes": 2110,
+      "sha256": "eabc49f3ac16aefb5853314044a7466cab77418464c0f06886824b6a1c95cc79"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/batch01-started.json",
+      "bytes": 161,
+      "sha256": "20f59337750104d36a00caebaa41a4669e300e03703a75f40b4e0f4806f4169c"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/batch01-stopped.json",
+      "bytes": 334,
+      "sha256": "efe031af2868581ac61c2e88efef1e18e131c59f95eca5ad0d852ca46e7044a1"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/batch02-process-events.json",
+      "bytes": 6867,
+      "sha256": "4ea78bb2c6edf2543884cb8d5a12fcd909e2cdfb7ddc04a6f3452879e4a69e2f"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/batch02-server.log",
+      "bytes": 12363,
+      "sha256": "c57ecd9f8adb992adad46716dc627f8fcd88c732af42656493e981a7f709c3e1"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/batch02-snapshot-00.json",
+      "bytes": 198,
+      "sha256": "9f2fa1e546c0e1e64ddcd82a957d75ba350c63a7d34cdeeb6e726d3890f14fd2"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/batch02-snapshot-01.json",
+      "bytes": 626,
+      "sha256": "2a91284b4e85f77bf95c3b70e8cb0f68d30f76267b81a26dc24f838a8c202741"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/batch02-snapshot-02.json",
+      "bytes": 198,
+      "sha256": "81d1e681f23b1c51e35c1f4ca0d9ccc862881c309200e5b36d764c16ab4c9b13"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/batch02-snapshot-03.json",
+      "bytes": 198,
+      "sha256": "ac14fa09104e8871ee22956ad900598903343db2eaefa7d2061a0062a96226f7"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/batch02-snapshot-04.json",
+      "bytes": 198,
+      "sha256": "ae0337e9a0ac4786ae4aeab535a02f7ee904b8ebc1c17134765698077971aa73"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/batch02-snapshot-05.json",
+      "bytes": 519,
+      "sha256": "effdf1313a0c01e4acd0800dbe3d9b498eb9b00440cda3af13143196742a6e2e"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/batch02-snapshot-06.json",
+      "bytes": 198,
+      "sha256": "1e468a765d390cb83d27be00d5a162a82ee1cdf140983ee4c009db879358db7d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/batch02-started.json",
+      "bytes": 167,
+      "sha256": "c08a48150576c8a21e3ee5acdeeade7985739e322cdfa763d259b93d966d59bb"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/batch02-stopped.json",
+      "bytes": 335,
+      "sha256": "16bc01668c786617e2771315a42946b7d8d00e53023fa06814a2cedd7c04cfd8"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/before-enrollment-server.log",
+      "bytes": 3032,
+      "sha256": "bda4312abfe6fac82dc5d215e1888a57a4602514bdf1687d45f9607ad5926ca4"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/before-enrollment-snapshot.json",
+      "bytes": 292,
+      "sha256": "f0794beccdb4329ae121c685349c898c77452fc5d7636e97c592039782f3b50b"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/effective.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/effective.stdout",
+      "bytes": 4219,
+      "sha256": "066859d422d008e10b105cfa938e05912541836e48e2b2fe6a3c3e6a06b6c0f5"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/focus071-closed-server.log",
+      "bytes": 12329,
+      "sha256": "4deb6e868b24b2ae255141d143e5c41869c2265b3137c3519571a30b3ced0308"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/focus071-closed-snapshot.json",
+      "bytes": 294,
+      "sha256": "463a833ce87b416eccc3f8c79c1224fa2c1a4a93ee2ddb60926252295ca54d60"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/preflight-exec.stderr",
+      "bytes": 49,
+      "sha256": "11cf4e49431740861468dfcd0c355279295732258ce112802401da7b38d02adc"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/preflight-exec.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/preflight-result.json",
+      "bytes": 447,
+      "sha256": "75e4aa290afe130168c6b4260e775d5b7d5a902620e9a2dce08aceec9fc5ffdb"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/preflight-shell.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/preflight-shell.stdout",
+      "bytes": 896,
+      "sha256": "da357382a95e12e3309eceea3864600d7bef4278ea0ea2b3cfa6f72eda059827"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/prepared.json",
+      "bytes": 538,
+      "sha256": "5ad35fe362c26dc950f75a111fbb272387460f699b8f4de25e35efd2428d404e"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/processloss-before-recovery-server.log",
+      "bytes": 9639,
+      "sha256": "676668f21166077662c24b18134195115adc1bdd283841f42f9fc490af44ebf6"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/processloss-before-recovery-snapshot.json",
+      "bytes": 292,
+      "sha256": "68e1d6ca5eb323108e3f6e259c5edcc60502e338cf0bc9d0531a75988b9aaf0f"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/processloss-recovered-server.log",
+      "bytes": 9639,
+      "sha256": "676668f21166077662c24b18134195115adc1bdd283841f42f9fc490af44ebf6"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/processloss-recovered-snapshot.json",
+      "bytes": 292,
+      "sha256": "eb51731ad71528df8472fe8c2a447be8886b55be53d1cae04144c0d6d19f631b"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/recovery7-closed-server.log",
+      "bytes": 10984,
+      "sha256": "62c877eb75dfeaa13ab38924832e24e6b79b068673ea7e70e4e5c829241597af"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/recovery7-closed-snapshot.json",
+      "bytes": 293,
+      "sha256": "f0fef82299f8226efe6c603613e72caf4a744338b697080d5b76d1285331377e"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/recovery7-final-server.log",
+      "bytes": 10728,
+      "sha256": "7e11f18c18648b13e3d4a9aaf8ca1079eecc3925b1e50dac820a2789d778708e"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/recovery7-final-snapshot.json",
+      "bytes": 293,
+      "sha256": "fc38a49ab134f48c3c23acb343881c39cddf450fece7132a2b6ed76ea6bfd28b"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/recreate-after-server.log",
+      "bytes": 8412,
+      "sha256": "7f43452b258bf21bea4d3fed1f4866536d99dc66aa680e44120f7a2a446fa447"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/recreate-after-snapshot.json",
+      "bytes": 292,
+      "sha256": "6f061dd63a9a855e40f2f79884d167ac28c57c2bd10f2edb7c65027c5c2d6a9c"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/recreated-idle-server.log",
+      "bytes": 8412,
+      "sha256": "7f43452b258bf21bea4d3fed1f4866536d99dc66aa680e44120f7a2a446fa447"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/recreated-idle-snapshot.json",
+      "bytes": 292,
+      "sha256": "a7e3ccaac02a938aece3a50568b4c1ebe4684ffc2cc2c4751b1b99c2b970ce74"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/sandbox-preflight-failed/preflight-exec.stderr",
+      "bytes": 49,
+      "sha256": "11cf4e49431740861468dfcd0c355279295732258ce112802401da7b38d02adc"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/sandbox-preflight-failed/preflight-exec.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/sandbox-preflight-failed/preflight-shell.stderr",
+      "bytes": 52,
+      "sha256": "fc0b1456e846765b35bcaaca3edaf2c54031a4aaa09c8a6644f97d6f193b8760"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/sandbox-preflight-failed/preflight-shell.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/shell-input-failure-server.log",
+      "bytes": 4377,
+      "sha256": "4e33dd5832496055f2d0c7b80e01c1479542a22341c820a4a4a290e547c3bbc1"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/shell-input-failure-snapshot.json",
+      "bytes": 292,
+      "sha256": "901ebbed8afc1966d1185de9cefa0dafda7de521e839f16a6fc5424a6d30b103"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/shell3-final-server.log",
+      "bytes": 5722,
+      "sha256": "896ccdeab9def7c892a276a7e65eafedf2c1dd4b15f430abd94f3f4e18c1bd01"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/shell3-final-snapshot.json",
+      "bytes": 292,
+      "sha256": "7d79414b3e7de4d6b79e55fe4d8cd200555a84c8f32ac9f31cdf193de971b27d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/syntax.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/syntax.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/device-size-5be206eb-6a84-48bc-8ce8-bf6ece61c385.json",
+      "bytes": 120,
+      "sha256": "9c265960e56ff9af7a55f2e32a99be5dfee70d9487634a132b79413a91e1b53d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/exercise-245dfc36-bea8-4717-b291-63a860dc7784.json",
+      "bytes": 580,
+      "sha256": "18edf3eb7da09c47895c6d8949039da2c5290bf1ba984e8e0d6fee669285c6f5"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/exercise-3f6e7899-36d4-422b-ad90-f1909704f126.json",
+      "bytes": 561,
+      "sha256": "635844f8e69f2b7ce5153e25ebec4aae3280f157142fc240dd259485e2224f67"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/exercise-534beae9-cf2b-418f-b6df-eb580f5af91b.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/exercise-53decef7-0172-4547-a3aa-59ff90b50c4f.json",
+      "bytes": 567,
+      "sha256": "916b54f7068cb4cf77f5818fdc9d52c11b7b60367ab29dd517edb9a6d3bdf113"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/exercise-58d1a8cb-5bfe-476f-9c66-bf5ab4cff0c3.json",
+      "bytes": 496,
+      "sha256": "d3958f75fd2440ab945d4b63032db0b43eca2077166d08ef431f491f48d1d101"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/exercise-709d386e-2df1-4112-a8cd-841914270ea7.json",
+      "bytes": 557,
+      "sha256": "bd925c466d5d73bafa9bcfe12685a1df58e010044dd29e0fd6175c2f0eda73e7"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/exercise-9068e7e2-343e-4e9f-a800-17c93c220fa3.json",
+      "bytes": 496,
+      "sha256": "dcbea3aaf3339ace30009addaf23c678a8a8aa2c9d4509677d0c61d53d07e7e4"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/exercise-abc0d27b-1632-43c6-8b1c-5484d7a25ccf.json",
+      "bytes": 581,
+      "sha256": "147d467afdd0822ae04d4bed6abb55cb49439246eca9bf76fd822ed01bfec298"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/exercise-d4ea527c-882f-4afb-805c-fe2c5a362feb.json",
+      "bytes": 552,
+      "sha256": "2ff5018d1b77024941824aac8a2f6c4b99a1c5b0926fd9f887e7595d6a0fa1d6"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/launcher-0f7da77c-088b-416e-8013-db0987ce1c93.json",
+      "bytes": 378,
+      "sha256": "3d8f3b31b3fed7bd5c995714225b66eab61635fa5440373a1fdcb1340d1e2bca"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/launcher-307c0862-69d4-4d55-9ea7-da47554f29a2.json",
+      "bytes": 378,
+      "sha256": "8ba5ad0f256b867f3c17c2e6342775b5fb8c44d7e4af296d3b581cf3c9446c5c"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/launcher-31c04206-c881-4ce4-b7e4-2b5b51a6f1b4.json",
+      "bytes": 378,
+      "sha256": "07d3d8cacdb80c05927fbb9b042cec8fe034424f11cb490d8f7c37eebc680344"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/launcher-650a9325-30ac-4f3d-899f-1d30092bf8f2.json",
+      "bytes": 378,
+      "sha256": "766890c7e936a68aa2e8150425bd934db51a0ab2d0300b290ee04963824d573f"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/launcher-ad419241-6c09-4566-bf0e-415e602f860b.json",
+      "bytes": 378,
+      "sha256": "2ca49966724e62778f559c667f84d36cc80d15655e05004ba04e23e6416f4c92"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/launcher-ecba8056-fadf-48b2-9b0d-4aa1e0d858ac.json",
+      "bytes": 378,
+      "sha256": "bef2b9f1747fa7bd2e1bf3f27a8f2eddb94537030a58ae443d5ebd02e9e8ba3a"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/launcher-ecfae1f1-42f6-47b2-90e2-a98b0e7d7a8a.json",
+      "bytes": 378,
+      "sha256": "3fd7506e91f906cabeeff268ba59d6174fa324744044a078320b74b459c91153"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/launcher-fb0dd04e-96c1-46d5-a814-b3c12a907ca9.json",
+      "bytes": 378,
+      "sha256": "da178a74ee3b344b4c6839901b0f8d6e73421ccb4f9d29c1555ff1165580cefd"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/source-070/ci-acceptance.json",
+      "bytes": 743,
+      "sha256": "4e47381abf0ff48827aa92ecaebeb612b924d7ed2cda3d4eb724b7185a831920"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/source-070/cloudy-baseline-0.7.0-code9.apk",
+      "bytes": 16623338,
+      "sha256": "6401d7c4deadb57fa55b484bede394255b77d5454c339b57543375387f3fd008"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/source-070/source-binding.json",
+      "bytes": 364,
+      "sha256": "3283625bb2f6c312f54eca30c8cb8bcb0a8c8b102de784edf68c5e291446f861"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/source-071/cloudy-baseline-0.7.1-code10.apk",
+      "bytes": 16636002,
+      "sha256": "629b71bf4cd006889252d578106fc494d09593381738e5a3e240d8f78c2a4611"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/source-071/preinstall-binding.json",
+      "bytes": 28202,
+      "sha256": "b40c13c51f75f8a6ae92c56f2f3c3004e5fcd665484722b094556c059f32eae4"
+    }
+  ],
+  "counts": {
+    "attempts": 8,
+    "attemptEvents": 48,
+    "journalCheckpoints": 13,
+    "hostObservations": 18,
+    "controlledExerciseFiles": 9,
+    "privateArtifacts": 408
+  }
+}

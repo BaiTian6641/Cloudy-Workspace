@@ -25,6 +25,7 @@ class TerminalActivity : Activity() {
     private lateinit var trust: Button
     private lateinit var lan: Button
     private lateinit var status: TextView
+    private lateinit var nativeFocusHint: TextView
     private lateinit var surface: FrameLayout
     private var latest: TerminalUiState? = null
     private var bridge: TerminalWebViewBridge? = null
@@ -80,6 +81,11 @@ class TerminalActivity : Activity() {
             id = R.id.terminal_status; accessibilityLiveRegion = View.ACCESSIBILITY_LIVE_REGION_POLITE
         }
         header.addView(status)
+        nativeFocusHint = TextView(this).apply {
+            setText(R.string.terminal_native_focus_hint)
+            visibility = View.GONE
+        }
+        header.addView(nativeFocusHint)
         val headerScroll = ScrollView(this).apply { addView(header) }
         root.addView(headerScroll, LinearLayout.LayoutParams(-1, dp(140)))
         surface = FrameLayout(this).apply { id = R.id.terminal_surface }
@@ -125,6 +131,7 @@ class TerminalActivity : Activity() {
         val next = TerminalIdentity(UUID.randomUUID().toString(), UUID.randomUUID().toString())
         val capturedEpoch = epoch; val owner = WeakReference(this)
         identity = next; pending = next; localFailure = null
+        nativeFocusHint.visibility = View.GONE
         val renderer = try { TerminalWebViewBridge(this, next, object : TerminalWebViewBridge.Listener {
             override fun onReady(size: TerminalSize) {
                 val activity = owner.get() ?: return
@@ -164,6 +171,9 @@ class TerminalActivity : Activity() {
         bridge = renderer
         surface.addView(renderer.view, FrameLayout.LayoutParams(-1, -1))
         latest?.let(::render)
+        // Transfer native focus only for the user's Connect action, after button state settles.
+        // Later renderer/lifecycle callbacks must not steal focus from native controls or dialogs.
+        nativeFocusHint.visibility = if (renderer.view.requestFocus()) View.GONE else View.VISIBLE
         renderer.start()
     }
 
@@ -176,9 +186,17 @@ class TerminalActivity : Activity() {
         lan.isEnabled = Build.VERSION.SDK_INT >= 37 && !hasLanPermission()
     }
     private fun details() {
+        val nativeFocus = when {
+            bridge?.view?.hasFocus() == true -> R.string.terminal_native_focus_surface
+            currentFocus == null -> R.string.terminal_native_focus_none
+            else -> R.string.terminal_native_focus_other
+        }
         val text = latest?.let { "${it.trustSummary}\n\n${it.summary}\n\n${bridge?.providerSummary ?: "Renderer not prepared"}" }
             ?: "Terminal state is loading."
-        val value = TextView(this).apply { this.text = text; setTextIsSelectable(true); setPadding(dp(16), dp(12), dp(16), dp(12)) }
+        val value = TextView(this).apply {
+            this.text = getString(R.string.terminal_details_with_native_focus, text, getString(nativeFocus))
+            setTextIsSelectable(true); setPadding(dp(16), dp(12), dp(16), dp(12))
+        }
         AlertDialog.Builder(this).setTitle(R.string.terminal_details)
             .setView(ScrollView(this).apply { addView(value) }).setPositiveButton(android.R.string.ok, null).show()
     }
