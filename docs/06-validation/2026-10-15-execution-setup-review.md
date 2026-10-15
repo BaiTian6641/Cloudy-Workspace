@@ -31,4 +31,6 @@ The sanitized baseline JSON has SHA-256 `38c6ec34ad3073468620eb1e6ba496507c31ef7
 
 ## Outstanding qualification
 
+Remote verification: commit `ebb827861b4970b3695a929da4dd8e8674791efd` was pushed to `origin/codex/project-foundation`, with its SHA confirmed by `git ls-remote`. [GitHub Actions run 38685129757](https://github.com/BaiTian6641/Cloudy-Workspace/actions/runs/38685129757) passed all steps on that exact commit. Staged whitespace checking passed before commit, and the private transport identifier was absent from every tracked/unignored publication candidate. Raw inventory remained ignored.
+
 A real diagnostic APK/toolchain remains the next step. Native window/input/IME, protocol clients, decoders, USB forwarding and performance remain unqualified. The user selected the local Linux/Wayland host; Windows and a board/probe require actual identified targets. Source lookup, AST/lint success and ADB access do not establish product support.

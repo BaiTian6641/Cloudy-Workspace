@@ -19,14 +19,14 @@
 - Three official Android skills were installed from a pinned revision, with hashes checked and upstream licenses retained. Use the [skill register](../07-reference/development-skills.md) and project overrides.
 - Python AST and lint gates are now part of repository verification. Android compilation/lint has not run because no Android module exists yet.
 - Git remote access succeeds with a command-local SSH config override for a host SSH configuration permission error. Host-key checking remains enabled. Check the latest history and remote SHA before assuming a push succeeded.
+- Reviewed setup commit `ebb827861b4970b3695a929da4dd8e8674791efd` was pushed to `origin/codex/project-foundation`, and the remote SHA was verified. [GitHub Actions run 38685129757](https://github.com/BaiTian6641/Cloudy-Workspace/actions/runs/38685129757) passed every repository check for that exact commit. Subsequent documentation commits do not replace that recorded code-check identity.
 
 ## Next concrete work
 
-1. Finish the reviewed setup checkpoint and verify its pushed branch SHA.
-2. Select and pin a mutually compatible SDK/AGP/Gradle/JDK toolchain from official documentation, accounting for the device's API 37 and the installed SDK inventory.
-3. Build a real diagnostic APK, run compiler/Android Lint checks, install/launch it on the selected device and record its hash and actual output. No simulated product functions.
-4. Complete remaining P0-S1 inventory and qualify the primary Linux backend prerequisites. Obtain the board/probe identity before programming tests; keep Windows-specific results pending until a target exists.
-5. Proceed to P0-S2 only when its prerequisites are met; qualify API/window/lifecycle/input behavior before activating product implementation stages.
+1. Select and pin a mutually compatible SDK/AGP/Gradle/JDK toolchain from official documentation, accounting for the device's API 37 and the installed SDK inventory.
+2. Build a real diagnostic APK, run compiler/Android Lint checks, install/launch it on the selected device and record its hash and actual output. No simulated product functions.
+3. Complete remaining P0-S1 inventory and qualify the primary Linux backend prerequisites. Obtain the board/probe identity before programming tests; keep Windows-specific results pending until a target exists.
+4. Proceed to P0-S2 only when its prerequisites are met; qualify API/window/lifecycle/input behavior before activating product implementation stages.
 
 ## Evidence boundaries
 
