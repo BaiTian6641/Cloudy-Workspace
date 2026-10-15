@@ -936,15 +936,44 @@
       "feature": "User-initiated network transfer jobs",
       "symbols": [
         "JobInfo.Builder.setUserInitiated",
+        "JobInfo.Builder.setRequiredNetwork",
+        "JobInfo.Builder.setEstimatedNetworkBytes",
+        "JobScheduler.canRunUserInitiatedJobs",
         "JobScheduler.schedule",
+        "JobScheduler.cancel",
+        "JobParameters.getNetwork",
+        "JobParameters.getStopReason",
+        "JobService.onStartJob",
         "JobService.setNotification",
+        "JobService.onNetworkChanged",
         "JobService.onStopJob",
-        "JobService.jobFinished"
+        "JobService.jobFinished",
+        "Network.openConnection",
+        "NotificationManager.createNotificationChannel",
+        "NotificationManager.areNotificationsEnabled",
+        "NotificationManager.getNotificationChannel",
+        "PendingIntent.getBroadcast",
+        "PendingIntent.FLAG_IMMUTABLE",
+        "BroadcastReceiver.goAsync",
+        "Manifest.permission.RUN_USER_INITIATED_JOBS",
+        "Manifest.permission.ACCESS_NETWORK_STATE",
+        "Manifest.permission.POST_NOTIFICATIONS"
       ],
       "sourceIds": [
         "G59",
         "G61",
-        "G66"
+        "G66",
+        "G21",
+        "G22",
+        "G82",
+        "G83",
+        "G84",
+        "G85",
+        "G86",
+        "G87",
+        "G90",
+        "G91",
+        "G94"
       ],
       "minimumApi": 34,
       "libraryVersion": null,
@@ -953,10 +982,11 @@
       "checkedOn": "2026-10-15",
       "owner": "Android/platform developer",
       "stage": "P0-S2",
-      "fallback": "Keep work queued or visible; below API34 select a separately reviewed transfer route. Journal partial state and reconcile publication before retry.",
-      "experiment": "P0-S2 classification/P1-S3 and P2-S7 implementation: user-triggered SFTP UIDT scheduling and network constraints, notification deadline, cancellation, loss without callback and safe publication recovery.",
-      "researchEvidence": "docs/03-platform/googlebook/p0-s2-operation-lifetimes.md",
-      "versionNotes": "API34 is the UIDT/setNotification bundle boundary; JobScheduler and older JobService callbacks predate it. Required UIDT notification is due within ten seconds of onStartJob on each execution. Job quotas and user-stop behavior do not imply uninterrupted lifetime."
+      "fallback": "Expose pending/denied/schedule-failed/interrupted states; preserve private staged bytes and durable attempt state. This probe never retries automatically, including repeated scheduler starts after process loss. Below API34 use a separately reviewed route; continuous SSH/desktop service classification remains unresolved.",
+      "experiment": "P0-S2 finite generated HTTPS download: explicit visible-user schedule, assigned LAN network, timely notification, byte/disk-hash validation, in-app/notification cancellation, stop/recreation/process-loss recovery and permission denial. Source implementation is in progress; no compile or device pass. SFTP/publication semantics remain later P1-S3/P2-S7 work.",
+      "researchEvidence": "docs/03-platform/googlebook/p0-s2-transfer-probe-contract.md",
+      "versionNotes": "UIDT/setNotification/onNetworkChanged/canRunUserInitiatedJobs API34; setRequiredNetwork/getNetwork API28; getStopReason API31; older scheduler/service callbacks API21. API34+ network scheduling requires ACCESS_NETWORK_STATE. Notification permission API33, package notification query API24, channel APIs26, immutable PendingIntent API23. BIND_JOB_SERVICE protects an exported=false service. canRunUserInitiatedJobs does not establish visibility eligibility.",
+      "runtimeGuard": "Probe min35 covers UIDT APIs. Request actual LAN permission under API41 on runtime37/target37. Notification denial is displayed and requested separately; it does not block scheduling in this probe. Always supply required job notification; keep native-screen Cancel available and qualify actual notification-action visibility. Null or changed assigned network interrupts without default-route fallback. Task Manager can kill the process without onStopJob; durable claimed-attempt checks prevent automatic replay."
     },
     {
       "id": "API40",
@@ -991,12 +1021,34 @@
         "Manifest.permission.ACCESS_LOCAL_NETWORK",
         "Context.checkSelfPermission",
         "Activity.requestPermissions",
-        "Activity.onRequestPermissionsResult"
+        "Activity.onRequestPermissionsResult",
+        "Manifest.permission.INTERNET",
+        "Manifest.permission.ACCESS_NETWORK_STATE",
+        "Network.openConnection",
+        "HttpsURLConnection.setSSLSocketFactory",
+        "HttpsURLConnection.getDefaultHostnameVerifier",
+        "TrustManagerFactory.getDefaultAlgorithm",
+        "TrustManagerFactory.getInstance",
+        "TrustManagerFactory.init",
+        "TrustManagerFactory.getTrustManagers",
+        "SSLContext.getInstance",
+        "SSLContext.init",
+        "SSLContext.getSocketFactory"
       ],
       "sourceIds": [
         "G79",
         "G80",
-        "G81"
+        "G81",
+        "G21",
+        "G82",
+        "G83",
+        "G85",
+        "G86",
+        "G87",
+        "G88",
+        "G89",
+        "G92",
+        "G93"
       ],
       "minimumApi": 37,
       "libraryVersion": null,
@@ -1006,9 +1058,10 @@
       "owner": "Android/platform developer",
       "stage": "P0-S2",
       "fallback": "Expose local-access denial and preserve the pending operation; explicit retry after user grant. System-mediated service selection is a separate candidate, not a bypass.",
-      "experiment": "Before a real LAN transfer, qualify actual target37 permission request/denial/revocation and selected app HTTPS route. Shell ICMP and SDK constant presence do not prove app access.",
-      "runtimeGuard": "Enforced for runtime37 and target37+. Earlier-runtime behavior requires separate guards; Android16 opt-in used a different permission. Current0.3.0 probe adds no network permission.",
-      "researchEvidence": "docs/03-platform/googlebook/p0-s2-operation-lifetimes.md"
+      "experiment": "P0-S2 finite HTTPS fixture: actual target37 permission denial/grant/revocation, scheduler-assigned direct-LAN route, accepted fixture CA chain and matching hostname, wrong trust/hostname rejection, byte and disk-hash validation. Source implementation is in progress; SDK presence and shell ICMP do not prove app access.",
+      "runtimeGuard": "ACCESS_LOCAL_NETWORK is enforced for runtime37/target37+; check before scheduling and again before I/O. Earlier runtimes need a guard, not a request for this nonexistent permission. Do not request unrelated Nearby Devices grants. Network.openConnection API21 and TLS trust/hostname methods API1 predate this record minimum37. Preserve denial/revocation state separately from TLS, route and scheduler failure.",
+      "researchEvidence": "docs/03-platform/googlebook/p0-s2-transfer-probe-contract.md",
+      "versionNotes": "SDK37.0 android.jar inspected for permission constants and UIDT/network signatures. Default NetworkRequest excludes VPN; the proposed Wi-Fi/Ethernet request omits INTERNET/VALIDATED/NOT_METERED and does not use NET_CAPABILITY_LOCAL_NETWORK as a generic LAN capability. Use scoped fixture-CA trust and unchanged platform hostname verification; no global TLS overrides, accept-all verifier or production pinning decision."
     }
   ],
   "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."

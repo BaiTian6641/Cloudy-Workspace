@@ -249,10 +249,10 @@
       "url": "https://developer.android.com/develop/connectivity/network-ops/reading-network-state",
       "publisher": "Google",
       "category": "platform",
-      "reviewStatus": "located",
-      "checkedOn": "2026-10-14",
-      "sourceUpdatedOn": null,
-      "note": "NetworkCallback and capabilities; not tailnet path telemetry.",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-10-01",
+      "note": "NetworkRequest defaults include NOT_RESTRICTED, TRUSTED and NOT_VPN; INTERNET/VALIDATED describe internet needs, not ordinary LAN reachability. Callback availability is not usable-route or tailnet evidence. Direct LAN and VPN remain separately qualified.",
       "refresh": "Before implementation against this surface; weekly during active platform qualification."
     },
     {
@@ -261,10 +261,10 @@
       "url": "https://developer.android.com/develop/ui/compose/notifications/notification-permission",
       "publisher": "Google",
       "category": "platform",
-      "reviewStatus": "located",
-      "checkedOn": "2026-10-14",
-      "sourceUpdatedOn": null,
-      "note": "Permission handling and denied-state fallback.",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-10-01",
+      "note": "POST_NOTIFICATIONS runtime permission API33; request in feature context and expose denial separately. The probe permits UIDT scheduling when denied, still calls required setNotification, and retains native-screen Cancel. Notification-action visibility requires actual observation; no denied-UIDT scheduling claim.",
       "refresh": "Before implementation against this surface; weekly during active platform qualification."
     },
     {
@@ -1500,7 +1500,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": "2026-09-16",
-      "note": "API34 setNotification is required within ten seconds of onStartJob for user-initiated jobs; report real work/progress on every run. Missing deadline can cause ANR/job stop.",
+      "note": "JobService protected by BIND_JOB_SERVICE. onStartJob/onStopJob run on main; offload I/O and return promptly. API34 setNotification is due within ten seconds on every UIDT run; onNetworkChanged provides a new assigned route. Stop invalidates work; do not finish a stopped execution again.",
       "refresh": "Before operation-lifetime implementation, target SDK changes or distribution review."
     },
     {
@@ -1699,6 +1699,162 @@
       "sourceUpdatedOn": null,
       "note": "Manifest.permission.ACCESS_LOCAL_NETWORK addedAPI37, dangerous; value android.permission.ACCESS_LOCAL_NETWORK. Reference defines local network on broadcast-capable Wi-Fi/Ethernet and excludes cellular/VPN; do not generalize LAN results to VPN routes. Constant presence/value independently checked in selected SDK37.0 android.jar; no app grant/device pass.",
       "refresh": "Before network probe implementation and each target SDK update."
+    },
+    {
+      "id": "G82",
+      "title": "JobInfo.Builder UIDT and network constraints",
+      "url": "https://developer.android.com/reference/android/app/job/JobInfo.Builder",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-08-28",
+      "note": "setUserInitiated API34 requires RUN_USER_INITIATED_JOBS and eligible user initiation; setRequiredNetwork API28 requires ACCESS_NETWORK_STATE on API34+. Set actual transfer estimate. Builder/scheduling acceptance is not network success.",
+      "refresh": "Before transfer-probe implementation, target SDK changes or recovery-policy changes."
+    },
+    {
+      "id": "G83",
+      "title": "JobParameters assigned network and stop reason",
+      "url": "https://developer.android.com/reference/android/app/job/JobParameters",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-08-03",
+      "note": "getNetwork API28 supplies the job route; never silently use the default route when null. getStopReason API31 is diagnostic, not a durable recovery decision. Assigned network must be used for actual I/O.",
+      "refresh": "Before transfer-probe implementation, target SDK changes or recovery-policy changes."
+    },
+    {
+      "id": "G84",
+      "title": "JobScheduler eligibility and cancellation",
+      "url": "https://developer.android.com/reference/android/app/job/JobScheduler",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-08-03",
+      "note": "schedule/cancel API21; canRunUserInitiatedJobs API34 checks RUN_USER_INITIATED_JOBS, not current visibility eligibility. cancel stops an executing job and ignores its reschedule return. Reusing an ID can replace prior work; correlate attempts separately.",
+      "refresh": "Before transfer-probe implementation, target SDK changes or recovery-policy changes."
+    },
+    {
+      "id": "G85",
+      "title": "Network-bound HTTP and HTTPS connections",
+      "url": "https://developer.android.com/reference/android/net/Network",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-08-03",
+      "note": "Network.openConnection(URL) API21 sends HTTP/HTTPS over that Network. Use JobParameters network for the finite LAN experiment; no process-global network binding or default-route fallback. Availability does not prove reachability or TLS trust.",
+      "refresh": "Before transfer-probe implementation, target SDK changes or recovery-policy changes."
+    },
+    {
+      "id": "G86",
+      "title": "NetworkRequest builder transports and capabilities",
+      "url": "https://developer.android.com/reference/android/net/NetworkRequest.Builder",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-08-03",
+      "note": "addTransportType/addCapability/removeCapability API21; requested transports are alternatives and requested capabilities must all match. Direct-LAN fixture can require Wi-Fi or Ethernet without INTERNET/VALIDATED. clearCapabilities API30 also removes defaults; do not clear them blindly.",
+      "refresh": "Before transfer-probe implementation, target SDK changes or recovery-policy changes."
+    },
+    {
+      "id": "G87",
+      "title": "NetworkCapabilities local-network meaning",
+      "url": "https://developer.android.com/reference/android/net/NetworkCapabilities",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-08-03",
+      "note": "NET_CAPABILITY_LOCAL_NETWORK API35/U extension12 describes a network where the device advertises addresses, such as tethering; it is not a generic requirement for connecting to an ordinary LAN server. Default NOT_VPN excludes VPN scope.",
+      "refresh": "Before transfer-probe implementation, target SDK changes or recovery-policy changes."
+    },
+    {
+      "id": "G88",
+      "title": "HttpsURLConnection scoped trust and hostname validation",
+      "url": "https://developer.android.com/reference/javax/net/ssl/HttpsURLConnection",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-08-03",
+      "note": "setSSLSocketFactory and getDefaultHostnameVerifier API1. A per-connection factory can use the fixture trust manager while unchanged platform hostname validation checks the URL host. Do not replace global defaults or accept-all verifiers. Runtime negative TLS tests remain required.",
+      "refresh": "Before transfer-probe implementation, target SDK changes or recovery-policy changes."
+    },
+    {
+      "id": "G89",
+      "title": "Android TLS and certificate-chain security",
+      "url": "https://developer.android.com/privacy-and-security/security-ssl",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2025-06-29",
+      "note": "Validate the issuing CA and supplied chain; never use a no-op TrustManager, even for testing. Custom fixture-CA trust is separate from hostname validation and is not a production certificate-pinning decision. Missing intermediates and hostname mismatch require explicit failures.",
+      "refresh": "Before transfer-probe implementation, target SDK changes or recovery-policy changes."
+    },
+    {
+      "id": "G90",
+      "title": "NotificationManager availability and channels",
+      "url": "https://developer.android.com/reference/android/app/NotificationManager",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-08-03",
+      "note": "areNotificationsEnabled API24; createNotificationChannel/getNotificationChannel API26. Record package/channel state without blocking UIDT scheduling. Required job notification is supplied regardless of notification consent; native-screen Cancel remains available if its notification action is hidden.",
+      "refresh": "Before transfer-probe implementation, target SDK changes or recovery-policy changes."
+    },
+    {
+      "id": "G91",
+      "title": "PendingIntent cancellation identity",
+      "url": "https://developer.android.com/reference/android/app/PendingIntent",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-08-03",
+      "note": "getBroadcast API1 and FLAG_IMMUTABLE API23 support an explicit own-app Cancel action. Extras alone do not distinguish intents; FLAG_UPDATE_CURRENT can change extras despite immutability. Unique attempt identity and stale-action rejection prevent cancelling later work.",
+      "refresh": "Before transfer-probe implementation, target SDK changes or recovery-policy changes."
+    },
+    {
+      "id": "G92",
+      "title": "TrustManagerFactory certificate-authority trust",
+      "url": "https://developer.android.com/reference/javax/net/ssl/TrustManagerFactory",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-08-03",
+      "note": "getDefaultAlgorithm/getInstance/init(KeyStore)/getTrustManagers API1. Initialize the platform factory from an isolated fixture CA trust store; retain normal chain validation and report initialization failure. No custom accept-all trust manager.",
+      "refresh": "Before transfer-probe implementation, target SDK changes or recovery-policy changes."
+    },
+    {
+      "id": "G93",
+      "title": "SSLContext per-connection factory initialization",
+      "url": "https://developer.android.com/reference/javax/net/ssl/SSLContext",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-08-03",
+      "note": "getInstance/init/getSocketFactory API1 supplies a scoped TLS factory from explicit trust managers. Use on the individual HttpsURLConnection and retain its default hostname verifier. Official page inspected directly after browser retrieval errors; SDK signatures also inspected.",
+      "refresh": "Before transfer-probe implementation, target SDK changes or recovery-policy changes."
+    },
+    {
+      "id": "G94",
+      "title": "Broadcast receiver lifetime and asynchronous completion",
+      "url": "https://developer.android.com/develop/background-work/background-tasks/broadcasts",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-10-08",
+      "note": "Explicit nonexported own-app receiver handles notification Cancel without exporting control. onReceive is short-lived; goAsync permits bounded off-main completion but not a long worker lifetime. Finish the pending result promptly; the guide recommends under ten seconds.",
+      "refresh": "Before transfer-probe implementation, target SDK changes or recovery-policy changes."
     }
   ]
 }

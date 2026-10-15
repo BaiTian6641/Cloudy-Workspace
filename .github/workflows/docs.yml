@@ -22,7 +22,7 @@ jobs:
         run: .venv/bin/python tools/check_ast.py
       - name: Lint Python
         run: .venv/bin/ruff check . --output-format github
-      - name: Verify planning policy regressions
+      - name: Verify repository behavior and fixture regressions
         run: .venv/bin/python -m unittest discover -s tests -v
       - name: Check documentation, planning data, tokens, and schemas
         run: .venv/bin/python tools/validate_project.py --schemas
