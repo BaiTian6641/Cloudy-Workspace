@@ -477,18 +477,33 @@
         "R109",
         "R111",
         "G115",
-        "G116"
+        "G116",
+        "G31",
+        "G118",
+        "G119",
+        "G120",
+        "G121",
+        "R115",
+        "R116",
+        "R117",
+        "R118",
+        "R119",
+        "R120",
+        "R121",
+        "R122",
+        "R123",
+        "R124"
       ],
       "minimumApi": 26,
-      "libraryVersion": "androidx.webkit:webkit:1.17.1 (diagnostic 0.7.0 only; device qualification pending)",
+      "libraryVersion": "androidx.webkit:webkit:1.17.1 (diagnostics 0.7.0/0.7.1; bounded device observations recorded, full qualification pending)",
       "availability": "published-stable-compiled-device-unqualified",
       "qualification": "untested",
       "checkedOn": "2026-10-15",
       "owner": "Android/platform developer",
       "stage": "P0-S3",
       "fallback": "Expose renderer-unavailable or interrupted state; retain independent native SSH/SFTP. No broad JSON/evaluate-JavaScript fallback. A native renderer is a separate unqualified investigation.",
-      "experiment": "P0-S3 real visible native SSH shell with local xterm core 6.0.0/fit 0.11.0 candidate: exact input/output bytes, real resize/TUI, bounded output acknowledgments, stale-origin/generation rejection, renderer-loss abort, physical CJK IME/preedit and TalkBack. Tests and adoption review precede any capability claim.",
-      "versionNotes": "AssetLoader WebKit1.1.0; listener1.3.0; binary message/reply1.8.0. Actual1.17.1 AAR minSdk24/minCompileSdk33/minAGP7.2 inspected; full callback route needs API26 and probe min35 covers it. Actual graph/assets reviewed for the diagnostic. xterm Unicode6 default; no Unicode11/grapheme adoption. Device/provider/IME/TalkBack qualification remains pending.",
+      "experiment": "P0-S3 real visible native SSH shell with local xterm core 6.0.0/fit 0.11.0 candidate: exact input/output bytes, real resize/TUI, bounded output acknowledgments, stale-origin/generation rejection, renderer-loss abort, physical CJK IME/preedit and TalkBack. Tests and adoption review precede any capability claim. For the unresolved rapid-input defect, use the finite own-target passive diagnostic in docs/07-reference/2026-10-15-terminal-input-diagnostics.md: controlled host byte capture plus scoped textarea events, with native/document focus checks and explicit cleanup. Actual scoped DOM/host traces are recorded separately in qualification/results/P0-S3/2026-10-15-terminal-input-trace.md. The upstream candidate and 39-case exact-method experiment are in docs/07-reference/2026-10-15-xterm-input-fix-candidate.md; no full-library or device repair is established.",
+      "versionNotes": "AssetLoader WebKit1.1.0; listener1.3.0; binary message/reply1.8.0. Actual1.17.1 AAR minSdk24/minCompileSdk33/minAGP7.2 inspected; full callback route needs API26 and probe min35 covers it. Actual graph/assets reviewed for the diagnostic. xterm Unicode6 default; no Unicode11/grapheme adoption. Device/provider/IME/TalkBack qualification remains pending. Development diagnostics only: G118 documents automatic WebView debugging for debuggable apps from provider 113.0.5656.0, despite conflicting G119/G120 guidance. The Android API 19 debug-enabling symbol is not a new production call and does not lower this renderer route's minimum API. Own-process CDP and experimental protocol options require runtime verification.",
       "runtimeGuard": "Check WEB_MESSAGE_LISTENER and WEB_MESSAGE_ARRAY_BUFFER on the actual provider before admission. Exact HTTPS local origin plus sourceOrigin/isMainFrame/current attachment checks; no wildcard/file/content page. UI-thread message callbacks only validate/enqueue; native I/O owns SSH. Missing support or renderer loss stops input without replay. Keep native LAN permission/admission separate.",
       "researchEvidence": "docs/03-platform/googlebook/p0-s3-terminal-renderer-increment.md",
       "implementationEvidence": "docs/06-validation/2026-10-15-terminal-implementation-review.md"
@@ -890,9 +905,9 @@
       "experiment": "Compare actual view/metrics insets while resizing and moving between displays.",
       "partialObservation": {
         "evidence": "qualification/results/P0-S2/2026-10-15-window-probe.md",
-        "note": "Actual maximize/restore, corner resize to 638 × 612 px and tiled divider resize to a 653 px wide window observed at density 1.625 / font scale 1.0. Activity recreation preserved local state. Attached-decor versus metrics inset source differences retained. No physical-input, larger-font or external-display claim.",
+        "note": "Actual maximize/restore, corner resize to 638 \u00d7 612 px and tiled divider resize to a 653 px wide window observed at density 1.625 / font scale 1.0. Activity recreation preserved local state. Attached-decor versus metrics inset source differences retained. No physical-input, larger-font or external-display claim.",
         "fontScaleEvidence": "qualification/results/P0-S2/2026-10-15-font-scale.md",
-        "fontScaleNote": "Separate 0.2.0 run: 130%/200% actual font configurations, reachable controls by scrolling in 648×600px window, actual Refresh completion and independent saved marker state; original1.0 restored. No full accessibility/physical input qualification."
+        "fontScaleNote": "Separate 0.2.0 run: 130%/200% actual font configurations, reachable controls by scrolling in 648\u00d7600px window, actual Refresh completion and independent saved marker state; original1.0 restored. No full accessibility/physical input qualification."
       }
     },
     {
@@ -990,7 +1005,7 @@
         "note": "Explicit recreate preserved A logical ID/task/marker/count in a fresh generation with unchanged process and B state. Resize-triggered recreations retained state. The separate background-kill run verified old PID absence, then restored B logical ID/task/C2 from Bundle in a new generation and process via existing Recents task. No force-stop, reboot, natural low-memory or operation durability claim.",
         "processRestorationEvidence": "qualification/results/P0-S2/2026-10-15-process-restoration.md",
         "fontScaleEvidence": "qualification/results/P0-S2/2026-10-15-font-scale.md",
-        "fontScaleNote": "Separate 0.2.0 run: 130%/200% actual font configurations, reachable controls by scrolling in 648×600px window, actual Refresh completion and independent saved marker state; original1.0 restored. No full accessibility/physical input qualification."
+        "fontScaleNote": "Separate 0.2.0 run: 130%/200% actual font configurations, reachable controls by scrolling in 648\u00d7600px window, actual Refresh completion and independent saved marker state; original1.0 restored. No full accessibility/physical input qualification."
       }
     },
     {

@@ -345,3 +345,31 @@ These host references support the P0-S3 ordinary-shell preflight. They do not es
 | ID | Official reference | Review status | Development use |
 | --- | --- | --- | --- |
 | G117 | [Android input events: handling focus](https://developer.android.com/develop/ui/views/touch-and-input/input-events#HandlingFocus) | reviewed | Native View focus determines hardware-key routing. Touch-mode eligibility and explicit initial focus are distinct from DOM focus. P0-S3 requests focus only during Connect, with a tap hint on rejection; later lifecycle/renderer callbacks do not refocus. Physical keyboard and IME remain separate tests. |
+
+## Bounded terminal input diagnostics
+
+The [diagnostic research note](2026-10-15-terminal-input-diagnostics.md) defines an own-app, controlled-fixture investigation. These references document development tools and browser semantics; they add no production bridge operation or qualification result. Reuse G31 for ADB forwarding and R106 for the pinned composition implementation.
+
+| ID | Official reference | Review status | Development use |
+| --- | --- | --- | --- |
+| G118 | [WebView debugging API](https://developer.android.com/reference/android/webkit/WebView#setWebContentsDebuggingEnabled(boolean)) | reviewed | Debug-enabling symbol is Android API 19. WebView 113.0.5656.0+ automatically enables debugging for manifest-debuggable apps; verify the exact own target. This does not lower the renderer route's API requirement or select a production debug call. |
+| G119 | [Android DevTools guide](https://developer.android.com/develop/ui/views/layout/webapps/debug-chrome-devtools) | reviewed | Updated 2026-02-26, but repeats the manifest-flag-independent default that conflicts with G118. Prefer the explicit provider-version rule and actual runtime availability. |
+| G120 | [Historical Chrome WebView guide](https://developer.chrome.com/docs/devtools/remote-debugging/webviews) | reviewed | Updated 2015-04-13. Own-WebView inspection guidance is useful; debugging-default wording predates and conflicts with G118. No production debugging expansion. |
+| G121 | [Pinned Chromium WebView DevTools socket](https://chromium.googlesource.com/chromium/src/+/9120d433b45e13d916ca105edba4f94734981db7/android_webview/browser/aw_devtools_server.cc) | reviewed | Commit 9120d433… uses the own PID in an authenticated abstract socket. Its hash is in the canonical record; upstream code does not identify installed-provider bytes. |
+| R115 | [Pinned CDP Runtime schema](https://raw.githubusercontent.com/ChromeDevTools/devtools-protocol/dfad77069330a9188771bb64a32d18853a10b012/json/js_protocol.json) | reviewed | Commit dfad7706… defines evaluation, remote-object lifetime and by-value export. Timeout/CSP options require actual endpoint acceptance. No xterm/native bridge wrappers or device-pass inference. |
+| R116 | [Pinned CDP Page schema](https://raw.githubusercontent.com/ChromeDevTools/devtools-protocol/dfad77069330a9188771bb64a32d18853a10b012/json/browser_protocol.json) | reviewed | getFrameTree checks the exact terminal main frame and absence of child frames. Frame.url omits the fragment; optional experimental urlFragment includes #. Validate base/attachment separately without loosening identity admission. No navigation or future-document injection. |
+| R117 | [DOM listener and abort semantics](https://dom.spec.whatwg.org/#dom-eventtarget-addeventlistener) | reviewed | Passive capture listeners plus AbortSignal removal preserve default handling; they still add timing overhead. Bound event/text retention and remove only owned listeners. |
+| R118 | [HTML document focus](https://html.spec.whatwg.org/multipage/interaction.html#dom-document-hasfocus) | reviewed | hasFocus and activeElement are distinct checks. Require both plus fresh native own-window focus before injected input; this is not physical keyboard/IME qualification. |
+
+## Upstream terminal input fix candidate
+
+The [candidate comparison](2026-10-15-xterm-input-fix-candidate.md) records the actual release boundary and exact-source method experiment. Neither the prerelease nor a backport is adopted. Full-library deletion, replacement, composition and physical-input checks remain required.
+
+| ID | Primary reference | Use and limit |
+| --- | --- | --- |
+| R119 | [Immutable timer-guard source](https://raw.githubusercontent.com/xtermjs/xterm.js/d03416467d35c18c510a3b1853d875ecf0b3a57a/src/browser/input/CompositionHelper.ts) | Official mechanism candidate; source hash and narrow experiment recorded. |
+| R120 | [PR 5439](https://github.com/xtermjs/xterm.js/pull/5439) | Merged after stable 6.0.0; commit timestamp alone does not establish release inclusion. |
+| R121 | [6.1.0-beta.315 metadata](https://registry.npmjs.org/@xterm%2fxterm/6.1.0-beta.315) | Actual inspected archive contains the change; prerelease runtime is not adopted or device-qualified. |
+| R122 | [Deferred-difference issue 6045](https://github.com/xtermjs/xterm.js/issues/6045) | Different event order; regression lead rather than Googlebook evidence. |
+| R123 | [Input-event gate issue 5887](https://github.com/xtermjs/xterm.js/issues/5887) | Distinct lost-input path remains outside a timer-only claim. |
+| R124 | [Whole-value issue 6078](https://github.com/xtermjs/xterm.js/issues/6078) | Retained textarea/replacement hazards require broader checks. |

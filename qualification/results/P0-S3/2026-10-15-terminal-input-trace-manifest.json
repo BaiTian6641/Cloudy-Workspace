@@ -1,0 +1,1520 @@
+{
+  "schemaVersion": 1,
+  "runId": "2026-10-15-terminal-input-trace",
+  "stage": "P0-S3",
+  "stageStatus": "in-progress",
+  "reviewStatus": "Accepted by primary and independent reviewers; exact selected artifacts, source binding, projections, cleanup and privacy verified.",
+  "result": "Bounded DOM/host comparison retains rapid-input integrity failure, with no repair or capability promotion.",
+  "application": {
+    "package": "dev.cloudy.qualification.baseline",
+    "versionName": "0.7.1",
+    "versionCode": 10,
+    "buildRef": "60908d62-c573-4c4b-8b0e-910e5863197e",
+    "sourceCommit": "130b238e0077fe0bf0d7ab668c38771c51224243",
+    "apkBytes": 16636002,
+    "apkSha256": "629b71bf4cd006889252d578106fc494d09593381738e5a3e240d8f78c2a4611",
+    "sourceHashCount": 119,
+    "allCurrentSourceHashesMatched": true,
+    "newBuildForTrace": false,
+    "packageAudit": "docs/06-validation/2026-10-15-terminal-focus-package.json"
+  },
+  "device": {
+    "model": "HP Googlebook 14",
+    "os": "Android 17",
+    "api": 37,
+    "abi": "arm64-v8a",
+    "build": "CL3B.260622.276.R2",
+    "incremental": "16560795",
+    "securityPatch": "2026-09-01",
+    "webViewPackage": "com.google.android.webview",
+    "webViewVersion": "149.0.7827.5",
+    "inputOrigin": "ADB injection, not physical keyboard or native IME.",
+    "identityProvenance": "Hardware/build carried from accepted terminal probe; current journal confirms renderer/build identity."
+  },
+  "backend": {
+    "os": "Ubuntu 26.04.1 LTS",
+    "kernel": "Linux 7.0.0-38-generic",
+    "abi": "x86_64",
+    "desktop": "KDE Wayland",
+    "server": "OpenSSH_10.2p1 Ubuntu-2ubuntu3.8",
+    "crypto": "OpenSSL 3.5.5",
+    "scope": "Carried identity; same-user temporary ordinary Bash fixture, not sandbox or product host agent."
+  },
+  "references": [
+    "qualification/results/P0-S3/2026-10-15-terminal-probe.md",
+    "qualification/results/P0-S3/2026-10-15-terminal-batch-rotation.md",
+    "docs/07-reference/2026-10-15-terminal-input-diagnostics.md"
+  ],
+  "method": {
+    "scope": "Exact own app main frame, selected user/process, session and attachment; no child frames.",
+    "maxEvents": 128,
+    "maxTextCodeUnits": 64,
+    "durationLimitMs": 15000,
+    "fixtureAlphabet": "sty",
+    "passiveCaptureListeners": true,
+    "nativeAndDomFocusGuardBeforeTracedStimuli": true,
+    "noPageGlobalController": true,
+    "runtimeEvaluationFlags": {
+      "silent": true,
+      "userGesture": false,
+      "includeCommandLineAPI": false,
+      "allowUnsafeEvalBlockedByCSP": false
+    },
+    "flagsVerifiedFromExecutedSourceNotEchoedByProtocol": true,
+    "noCallbackBridgeOrInputHandlingWrappers": true,
+    "xtermOnDataObserved": false,
+    "nativeFramesObserved": false,
+    "observerEffectExcluded": false,
+    "helpers": [
+      {
+        "path": "qualification/results/private/terminal-probe/device-02/terminal_cdp_before_frame_fix.mjs",
+        "bytes": 12123,
+        "sha256": "ca707bc5bf6a884d60ae98021c90c1ec0dd0559f8d918fed6bd95f8923d2ba28"
+      },
+      {
+        "path": "qualification/results/private/terminal-probe/device-02/terminal_cdp.mjs",
+        "bytes": 12357,
+        "sha256": "d43bd66a6d47f1c4efd05d646737ece6a7cc20458e7e5ee96a5281ba1d23ff9d"
+      },
+      {
+        "path": "qualification/results/private/terminal-probe/device-02/terminal_trace_expression.js",
+        "bytes": 6479,
+        "sha256": "e167cb14964fc89a2e0e24d8c8d8bf7ba5e22eaccd7231ee14b83b41ccd2f039"
+      }
+    ]
+  },
+  "routes": [
+    {
+      "artifact": "qualification/results/private/terminal-probe/device-02/route-01-cdp.json",
+      "atHostUtc": "2026-10-15T14:35:53.276Z",
+      "action": "inspect",
+      "completed": false,
+      "forwardRemoved": true,
+      "calls": [
+        "Page.getFrameTree",
+        "Runtime.releaseObjectGroup"
+      ],
+      "mainFrameBaseAndFragmentMatched": true,
+      "noChildFrames": true,
+      "journalIdentityMatched": true,
+      "successfulScopeCheckCount": 0,
+      "error": {
+        "name": "Error",
+        "message": "Main frame scope changed"
+      }
+    },
+    {
+      "artifact": "qualification/results/private/terminal-probe/device-02/route-02-cdp.json",
+      "atHostUtc": "2026-10-15T14:36:42.613Z",
+      "action": "inspect",
+      "completed": true,
+      "forwardRemoved": true,
+      "calls": [
+        "Page.getFrameTree",
+        "Runtime.evaluate",
+        "Runtime.releaseObjectGroup"
+      ],
+      "mainFrameBaseAndFragmentMatched": true,
+      "noChildFrames": true,
+      "journalIdentityMatched": true,
+      "successfulScopeCheckCount": 1,
+      "error": null
+    },
+    {
+      "artifact": "qualification/results/private/terminal-probe/device-02/bulk-01-cdp.json",
+      "atHostUtc": "2026-10-15T14:37:04.500Z",
+      "action": "trace-bulk",
+      "completed": true,
+      "forwardRemoved": true,
+      "calls": [
+        "Page.getFrameTree",
+        "Runtime.evaluate",
+        "Runtime.evaluate",
+        "Runtime.callFunctionOn",
+        "Runtime.callFunctionOn",
+        "Runtime.evaluate",
+        "Runtime.callFunctionOn",
+        "Runtime.callFunctionOn",
+        "Runtime.releaseObjectGroup"
+      ],
+      "mainFrameBaseAndFragmentMatched": true,
+      "noChildFrames": true,
+      "journalIdentityMatched": true,
+      "successfulScopeCheckCount": 2,
+      "error": null
+    },
+    {
+      "artifact": "qualification/results/private/terminal-probe/device-02/paced-01-cdp.json",
+      "atHostUtc": "2026-10-15T14:38:05.089Z",
+      "action": "trace-paced",
+      "completed": true,
+      "forwardRemoved": true,
+      "calls": [
+        "Page.getFrameTree",
+        "Runtime.evaluate",
+        "Runtime.evaluate",
+        "Runtime.callFunctionOn",
+        "Runtime.callFunctionOn",
+        "Runtime.evaluate",
+        "Runtime.evaluate",
+        "Runtime.evaluate",
+        "Runtime.evaluate",
+        "Runtime.callFunctionOn",
+        "Runtime.callFunctionOn",
+        "Runtime.releaseObjectGroup"
+      ],
+      "mainFrameBaseAndFragmentMatched": true,
+      "noChildFrames": true,
+      "journalIdentityMatched": true,
+      "successfulScopeCheckCount": 5,
+      "error": null
+    }
+  ],
+  "traces": [
+    {
+      "schemaVersion": 1,
+      "mode": "bulk",
+      "armed": false,
+      "termination": "operator-stop",
+      "eventCount": 20,
+      "maxEvents": 128,
+      "maximumTextCodeUnits": 64,
+      "durationLimitMs": 15000,
+      "elapsedMs": 438.19999999552965,
+      "listenerPhase": "passive-capture-on-owned-textarea",
+      "textScope": "ASCII-sty-only",
+      "artifact": "qualification/results/private/terminal-probe/device-02/bulk-01-cdp.json",
+      "finalSnapshotsEqual": true,
+      "eventTypes": {
+        "keydown": 4,
+        "beforeinput": 4,
+        "input": 4,
+        "keyup": 8
+      },
+      "allFixtureFieldsAllowed": true,
+      "allNonComposing": true,
+      "nativeFocusGuardCount": 1,
+      "nativeFocusMatchedOwnUserAndActivity": true,
+      "inputEventSpanMs": 6.6,
+      "inputEventGapsMs": [
+        4.3,
+        1.2,
+        1.1
+      ],
+      "events": [
+        {
+          "sequence": 1,
+          "type": "keydown",
+          "elapsedMs": 70.5,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "Unidentified",
+          "code": "",
+          "keyCode": 229,
+          "inputType": "",
+          "data": null,
+          "value": "",
+          "selectionStart": 0,
+          "selectionEnd": 0,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 2,
+          "type": "beforeinput",
+          "elapsedMs": 71.10000000149012,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "",
+          "code": "",
+          "keyCode": null,
+          "inputType": "insertText",
+          "data": "s",
+          "value": "",
+          "selectionStart": 0,
+          "selectionEnd": 0,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 3,
+          "type": "input",
+          "elapsedMs": 72.10000000149012,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "",
+          "code": "",
+          "keyCode": null,
+          "inputType": "insertText",
+          "data": "s",
+          "value": "s",
+          "selectionStart": 1,
+          "selectionEnd": 1,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 4,
+          "type": "keyup",
+          "elapsedMs": 72.29999999701977,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "Unidentified",
+          "code": "",
+          "keyCode": 229,
+          "inputType": "",
+          "data": null,
+          "value": "s",
+          "selectionStart": 1,
+          "selectionEnd": 1,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 5,
+          "type": "keyup",
+          "elapsedMs": 73.10000000149012,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "s",
+          "code": "",
+          "keyCode": 83,
+          "inputType": "",
+          "data": null,
+          "value": "s",
+          "selectionStart": 1,
+          "selectionEnd": 1,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 6,
+          "type": "keydown",
+          "elapsedMs": 76,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "Unidentified",
+          "code": "",
+          "keyCode": 229,
+          "inputType": "",
+          "data": null,
+          "value": "s",
+          "selectionStart": 1,
+          "selectionEnd": 1,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 7,
+          "type": "beforeinput",
+          "elapsedMs": 76.10000000149012,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "",
+          "code": "",
+          "keyCode": null,
+          "inputType": "insertText",
+          "data": "t",
+          "value": "s",
+          "selectionStart": 1,
+          "selectionEnd": 1,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 8,
+          "type": "input",
+          "elapsedMs": 76.39999999850988,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "",
+          "code": "",
+          "keyCode": null,
+          "inputType": "insertText",
+          "data": "t",
+          "value": "st",
+          "selectionStart": 2,
+          "selectionEnd": 2,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 9,
+          "type": "keyup",
+          "elapsedMs": 76.39999999850988,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "Unidentified",
+          "code": "",
+          "keyCode": 229,
+          "inputType": "",
+          "data": null,
+          "value": "st",
+          "selectionStart": 2,
+          "selectionEnd": 2,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 10,
+          "type": "keyup",
+          "elapsedMs": 76.5,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "t",
+          "code": "",
+          "keyCode": 84,
+          "inputType": "",
+          "data": null,
+          "value": "st",
+          "selectionStart": 2,
+          "selectionEnd": 2,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 11,
+          "type": "keydown",
+          "elapsedMs": 77.10000000149012,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "Unidentified",
+          "code": "",
+          "keyCode": 229,
+          "inputType": "",
+          "data": null,
+          "value": "st",
+          "selectionStart": 2,
+          "selectionEnd": 2,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 12,
+          "type": "beforeinput",
+          "elapsedMs": 77.29999999701977,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "",
+          "code": "",
+          "keyCode": null,
+          "inputType": "insertText",
+          "data": "t",
+          "value": "st",
+          "selectionStart": 2,
+          "selectionEnd": 2,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 13,
+          "type": "input",
+          "elapsedMs": 77.60000000149012,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "",
+          "code": "",
+          "keyCode": null,
+          "inputType": "insertText",
+          "data": "t",
+          "value": "stt",
+          "selectionStart": 3,
+          "selectionEnd": 3,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 14,
+          "type": "keyup",
+          "elapsedMs": 77.60000000149012,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "Unidentified",
+          "code": "",
+          "keyCode": 229,
+          "inputType": "",
+          "data": null,
+          "value": "stt",
+          "selectionStart": 3,
+          "selectionEnd": 3,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 15,
+          "type": "keyup",
+          "elapsedMs": 77.79999999701977,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "t",
+          "code": "",
+          "keyCode": 84,
+          "inputType": "",
+          "data": null,
+          "value": "stt",
+          "selectionStart": 3,
+          "selectionEnd": 3,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 16,
+          "type": "keydown",
+          "elapsedMs": 78.5,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "Unidentified",
+          "code": "",
+          "keyCode": 229,
+          "inputType": "",
+          "data": null,
+          "value": "stt",
+          "selectionStart": 3,
+          "selectionEnd": 3,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 17,
+          "type": "beforeinput",
+          "elapsedMs": 78.5,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "",
+          "code": "",
+          "keyCode": null,
+          "inputType": "insertText",
+          "data": "y",
+          "value": "stt",
+          "selectionStart": 3,
+          "selectionEnd": 3,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 18,
+          "type": "input",
+          "elapsedMs": 78.69999999552965,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "",
+          "code": "",
+          "keyCode": null,
+          "inputType": "insertText",
+          "data": "y",
+          "value": "stty",
+          "selectionStart": 4,
+          "selectionEnd": 4,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 19,
+          "type": "keyup",
+          "elapsedMs": 78.69999999552965,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "Unidentified",
+          "code": "",
+          "keyCode": 229,
+          "inputType": "",
+          "data": null,
+          "value": "stty",
+          "selectionStart": 4,
+          "selectionEnd": 4,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 20,
+          "type": "keyup",
+          "elapsedMs": 78.79999999701977,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "y",
+          "code": "",
+          "keyCode": 89,
+          "inputType": "",
+          "data": null,
+          "value": "stty",
+          "selectionStart": 4,
+          "selectionEnd": 4,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "mode": "paced",
+      "armed": false,
+      "termination": "operator-stop",
+      "eventCount": 20,
+      "maxEvents": 128,
+      "maximumTextCodeUnits": 64,
+      "durationLimitMs": 15000,
+      "elapsedMs": 1289.1000000014901,
+      "listenerPhase": "passive-capture-on-owned-textarea",
+      "textScope": "ASCII-sty-only",
+      "artifact": "qualification/results/private/terminal-probe/device-02/paced-01-cdp.json",
+      "finalSnapshotsEqual": true,
+      "eventTypes": {
+        "keydown": 4,
+        "beforeinput": 4,
+        "input": 4,
+        "keyup": 8
+      },
+      "allFixtureFieldsAllowed": true,
+      "allNonComposing": true,
+      "nativeFocusGuardCount": 4,
+      "nativeFocusMatchedOwnUserAndActivity": true,
+      "inputEventSpanMs": 708.9,
+      "inputEventGapsMs": [
+        237.4,
+        232.1,
+        239.4
+      ],
+      "events": [
+        {
+          "sequence": 1,
+          "type": "keydown",
+          "elapsedMs": 72.89999999850988,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "Unidentified",
+          "code": "",
+          "keyCode": 229,
+          "inputType": "",
+          "data": null,
+          "value": "",
+          "selectionStart": 0,
+          "selectionEnd": 0,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 2,
+          "type": "beforeinput",
+          "elapsedMs": 73.10000000149012,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "",
+          "code": "",
+          "keyCode": null,
+          "inputType": "insertText",
+          "data": "s",
+          "value": "",
+          "selectionStart": 0,
+          "selectionEnd": 0,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 3,
+          "type": "input",
+          "elapsedMs": 73.89999999850988,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "",
+          "code": "",
+          "keyCode": null,
+          "inputType": "insertText",
+          "data": "s",
+          "value": "s",
+          "selectionStart": 1,
+          "selectionEnd": 1,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 4,
+          "type": "keyup",
+          "elapsedMs": 74.5,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "Unidentified",
+          "code": "",
+          "keyCode": 229,
+          "inputType": "",
+          "data": null,
+          "value": "s",
+          "selectionStart": 1,
+          "selectionEnd": 1,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 5,
+          "type": "keyup",
+          "elapsedMs": 74.69999999552965,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "s",
+          "code": "",
+          "keyCode": 83,
+          "inputType": "",
+          "data": null,
+          "value": "s",
+          "selectionStart": 1,
+          "selectionEnd": 1,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 6,
+          "type": "keydown",
+          "elapsedMs": 310.6000000014901,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "Unidentified",
+          "code": "",
+          "keyCode": 229,
+          "inputType": "",
+          "data": null,
+          "value": "s",
+          "selectionStart": 1,
+          "selectionEnd": 1,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 7,
+          "type": "beforeinput",
+          "elapsedMs": 310.79999999701977,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "",
+          "code": "",
+          "keyCode": null,
+          "inputType": "insertText",
+          "data": "t",
+          "value": "s",
+          "selectionStart": 1,
+          "selectionEnd": 1,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 8,
+          "type": "input",
+          "elapsedMs": 311.29999999701977,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "",
+          "code": "",
+          "keyCode": null,
+          "inputType": "insertText",
+          "data": "t",
+          "value": "st",
+          "selectionStart": 2,
+          "selectionEnd": 2,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 9,
+          "type": "keyup",
+          "elapsedMs": 311.5,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "Unidentified",
+          "code": "",
+          "keyCode": 229,
+          "inputType": "",
+          "data": null,
+          "value": "st",
+          "selectionStart": 2,
+          "selectionEnd": 2,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 10,
+          "type": "keyup",
+          "elapsedMs": 311.5,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "t",
+          "code": "",
+          "keyCode": 84,
+          "inputType": "",
+          "data": null,
+          "value": "st",
+          "selectionStart": 2,
+          "selectionEnd": 2,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 11,
+          "type": "keydown",
+          "elapsedMs": 542.2999999970198,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "Unidentified",
+          "code": "",
+          "keyCode": 229,
+          "inputType": "",
+          "data": null,
+          "value": "st",
+          "selectionStart": 2,
+          "selectionEnd": 2,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 12,
+          "type": "beforeinput",
+          "elapsedMs": 542.6000000014901,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "",
+          "code": "",
+          "keyCode": null,
+          "inputType": "insertText",
+          "data": "t",
+          "value": "st",
+          "selectionStart": 2,
+          "selectionEnd": 2,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 13,
+          "type": "input",
+          "elapsedMs": 543.3999999985099,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "",
+          "code": "",
+          "keyCode": null,
+          "inputType": "insertText",
+          "data": "t",
+          "value": "stt",
+          "selectionStart": 3,
+          "selectionEnd": 3,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 14,
+          "type": "keyup",
+          "elapsedMs": 543.5,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "Unidentified",
+          "code": "",
+          "keyCode": 229,
+          "inputType": "",
+          "data": null,
+          "value": "stt",
+          "selectionStart": 3,
+          "selectionEnd": 3,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 15,
+          "type": "keyup",
+          "elapsedMs": 543.6000000014901,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "t",
+          "code": "",
+          "keyCode": 84,
+          "inputType": "",
+          "data": null,
+          "value": "stt",
+          "selectionStart": 3,
+          "selectionEnd": 3,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 16,
+          "type": "keydown",
+          "elapsedMs": 782.1999999955297,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "Unidentified",
+          "code": "",
+          "keyCode": 229,
+          "inputType": "",
+          "data": null,
+          "value": "stt",
+          "selectionStart": 3,
+          "selectionEnd": 3,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 17,
+          "type": "beforeinput",
+          "elapsedMs": 782.3999999985099,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "",
+          "code": "",
+          "keyCode": null,
+          "inputType": "insertText",
+          "data": "y",
+          "value": "stt",
+          "selectionStart": 3,
+          "selectionEnd": 3,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 18,
+          "type": "input",
+          "elapsedMs": 782.7999999970198,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "",
+          "code": "",
+          "keyCode": null,
+          "inputType": "insertText",
+          "data": "y",
+          "value": "stty",
+          "selectionStart": 4,
+          "selectionEnd": 4,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 19,
+          "type": "keyup",
+          "elapsedMs": 782.8999999985099,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "Unidentified",
+          "code": "",
+          "keyCode": 229,
+          "inputType": "",
+          "data": null,
+          "value": "stty",
+          "selectionStart": 4,
+          "selectionEnd": 4,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        },
+        {
+          "sequence": 20,
+          "type": "keyup",
+          "elapsedMs": 783,
+          "eventPhase": 2,
+          "isTrusted": true,
+          "isComposing": false,
+          "key": "y",
+          "code": "",
+          "keyCode": 89,
+          "inputType": "",
+          "data": null,
+          "value": "stty",
+          "selectionStart": 4,
+          "selectionEnd": 4,
+          "defaultPreventedAtObservation": false,
+          "fixtureFieldsAllowed": true
+        }
+      ]
+    }
+  ],
+  "captures": [
+    {
+      "mode": "bulk",
+      "passiveDomObserverAttached": true,
+      "artifact": "qualification/results/private/terminal-probe/host-01/work/exercise-e8a3644f-d1f7-4e37-9bfd-c2cb68358586.json",
+      "startedAtHostUtc": "2026-10-15T14:36:56.651548+00:00",
+      "finishedAtHostUtc": "2026-10-15T14:37:26.672812+00:00",
+      "timeoutSeconds": 30.0,
+      "maxBytes": 64,
+      "captureReadyMarkerInPrivateLayout": true,
+      "stimuli": [
+        {
+          "atUtc": "2026-10-15T14:37:04.941Z",
+          "completedAtUtc": "2026-10-15T14:37:04.990Z",
+          "text": "stty",
+          "exitCode": 0
+        }
+      ],
+      "allStimulusReceiptsInsideCaptureWindow": true,
+      "expectedBytes": 4,
+      "expectedHex": "73747479",
+      "capturedBytes": 10,
+      "capturedHex": "73747479747479747979",
+      "capturedAscii": "sttyttytyy",
+      "capturedSha256": "7048f020d1609d6ac3bc3212377409d63d748cbaf56d482677626ac9f1ea0bb0",
+      "hashAndLengthIndependentlyVerified": true,
+      "exactExpectedBytes": false,
+      "termination": "capture-timeout",
+      "intendedExitCode": 0,
+      "pendingInputDiscardedOnRestore": true
+    },
+    {
+      "mode": "paced",
+      "passiveDomObserverAttached": true,
+      "artifact": "qualification/results/private/terminal-probe/host-01/work/exercise-fb53829c-9f96-4eb4-a107-5dc4efd5100f.json",
+      "startedAtHostUtc": "2026-10-15T14:37:56.140405+00:00",
+      "finishedAtHostUtc": "2026-10-15T14:38:26.148595+00:00",
+      "timeoutSeconds": 30.0,
+      "maxBytes": 64,
+      "captureReadyMarkerInPrivateLayout": true,
+      "stimuli": [
+        {
+          "atUtc": "2026-10-15T14:38:05.528Z",
+          "completedAtUtc": "2026-10-15T14:38:05.571Z",
+          "text": "s",
+          "exitCode": 0
+        },
+        {
+          "atUtc": "2026-10-15T14:38:05.759Z",
+          "completedAtUtc": "2026-10-15T14:38:05.808Z",
+          "text": "t",
+          "exitCode": 0
+        },
+        {
+          "atUtc": "2026-10-15T14:38:05.996Z",
+          "completedAtUtc": "2026-10-15T14:38:06.041Z",
+          "text": "t",
+          "exitCode": 0
+        },
+        {
+          "atUtc": "2026-10-15T14:38:06.229Z",
+          "completedAtUtc": "2026-10-15T14:38:06.279Z",
+          "text": "y",
+          "exitCode": 0
+        }
+      ],
+      "allStimulusReceiptsInsideCaptureWindow": true,
+      "expectedBytes": 4,
+      "expectedHex": "73747479",
+      "capturedBytes": 4,
+      "capturedHex": "73747479",
+      "capturedAscii": "stty",
+      "capturedSha256": "d6e2a42f436d3f01aaff8a5602213b3ada0206721097c2d4591cc1ef6c752a0d",
+      "hashAndLengthIndependentlyVerified": true,
+      "exactExpectedBytes": true,
+      "termination": "capture-timeout",
+      "intendedExitCode": 0,
+      "pendingInputDiscardedOnRestore": true
+    },
+    {
+      "mode": "untraced",
+      "passiveDomObserverAttached": false,
+      "artifact": "qualification/results/private/terminal-probe/host-01/work/exercise-5c9f55f0-1bbb-4da2-aa05-e95e5e585d12.json",
+      "startedAtHostUtc": "2026-10-15T14:38:57.537660+00:00",
+      "finishedAtHostUtc": "2026-10-15T14:39:27.560513+00:00",
+      "timeoutSeconds": 30.0,
+      "maxBytes": 64,
+      "captureReadyMarkerInPrivateLayout": true,
+      "stimuli": [
+        {
+          "atUtc": "2026-10-15T14:39:04.662467+00:00",
+          "text": "stty",
+          "exitCode": 0,
+          "timestampMeaning": "Command receipt; no separate start/completion timestamp retained."
+        }
+      ],
+      "allStimulusReceiptsInsideCaptureWindow": true,
+      "expectedBytes": 4,
+      "expectedHex": "73747479",
+      "capturedBytes": 10,
+      "capturedHex": "73747479747479747979",
+      "capturedAscii": "sttyttytyy",
+      "capturedSha256": "7048f020d1609d6ac3bc3212377409d63d748cbaf56d482677626ac9f1ea0bb0",
+      "hashAndLengthIndependentlyVerified": true,
+      "exactExpectedBytes": false,
+      "termination": "capture-timeout",
+      "intendedExitCode": 0,
+      "pendingInputDiscardedOnRestore": true
+    }
+  ],
+  "connectionAction": {
+    "controlResourceId": "dev.cloudy.qualification.baseline:id/terminal_connect",
+    "controlText": "Connect",
+    "bounds": [
+      678,
+      340,
+      821,
+      418
+    ],
+    "tap": [
+      749,
+      379
+    ],
+    "tapWithinBounds": true,
+    "exitCode": 0,
+    "hostCommandReceiptUtc": "2026-10-15T14:35:45.567299+00:00"
+  },
+  "journal": {
+    "openRevision": 6,
+    "openSnapshotAtDeviceUtc": "2026-10-15T14:35:45.131765Z",
+    "closedRevision": 8,
+    "closedSnapshotAtDeviceUtc": "2026-10-15T14:40:05.518861Z",
+    "attemptCount": 1,
+    "eventCount": 7,
+    "status": "closed",
+    "reason": "remote-eof",
+    "authenticated": true,
+    "details": {
+      "rendererProvider": "com.google.android.webview",
+      "rendererVersion": "149.0.7827.5",
+      "rendererMessageListener": "true",
+      "rendererArrayBuffer": "true",
+      "hostVerificationCount": "1",
+      "inputBytes": "41",
+      "stdoutBytes": "193",
+      "stderrBytes": "0",
+      "kex": "ecdh-sha2-nistp256",
+      "hostSignature": "ecdsa-sha2-nistp256",
+      "cipherC2S": "aes128-gcm@openssh.com",
+      "cipherS2C": "aes128-gcm@openssh.com",
+      "macC2S": "hmac-sha2-256",
+      "macS2C": "hmac-sha2-256",
+      "compressionC2S": "none",
+      "compressionS2C": "none",
+      "ptyInitialCols": "146",
+      "ptyInitialRows": "23",
+      "ptyLastCols": "146",
+      "ptyLastRows": "23"
+    },
+    "events": [
+      {
+        "status": "connecting",
+        "reason": null,
+        "deviceUtc": "2026-10-15T14:35:44.842245Z",
+        "elapsedRealtimeMs": 73181646
+      },
+      {
+        "status": "connecting",
+        "reason": null,
+        "deviceUtc": "2026-10-15T14:35:44.865269Z",
+        "elapsedRealtimeMs": 73181669
+      },
+      {
+        "status": "host-key-verified",
+        "reason": null,
+        "deviceUtc": "2026-10-15T14:35:44.976213Z",
+        "elapsedRealtimeMs": 73181780
+      },
+      {
+        "status": "authenticated",
+        "reason": null,
+        "deviceUtc": "2026-10-15T14:35:45.094095Z",
+        "elapsedRealtimeMs": 73181898
+      },
+      {
+        "status": "open",
+        "reason": null,
+        "deviceUtc": "2026-10-15T14:35:45.130602Z",
+        "elapsedRealtimeMs": 73181935
+      },
+      {
+        "status": "closing",
+        "reason": null,
+        "deviceUtc": "2026-10-15T14:40:05.508704Z",
+        "elapsedRealtimeMs": 73442313
+      },
+      {
+        "status": "closed",
+        "reason": "remote-eof",
+        "deviceUtc": "2026-10-15T14:40:05.517846Z",
+        "elapsedRealtimeMs": 73442322
+      }
+    ],
+    "droppedEvents": 0,
+    "sameSessionAttachmentAndProcess": true,
+    "firstFiveEventsPreserved": true,
+    "trustedHostCount": 1,
+    "trustUnchanged": true,
+    "providerOrderUnchanged": true,
+    "counterMeaning": "Input counts successful local SSH writes/flushes, not remote acknowledgment; output counts native bytes read, not pixels."
+  },
+  "cleanup": {
+    "appObservationAtHostUtc": "2026-10-15T14:40:11.960973+00:00",
+    "namedTerminalThreadCount": 0,
+    "threadObservationExitCode": 0,
+    "hostSnapshotAtUtc": "2026-10-15T14:40:12.956852+00:00",
+    "connections": 1,
+    "acceptedPublickey": 1,
+    "startedSession": 1,
+    "closedSession": 1,
+    "serverLogSnapshotPrefixBytes": 1392,
+    "serverLogSnapshotPrefixSha256": "b98cd000bb3036ff58c6aa705f3bbe7672b2aa73820534d582bb768eca3930e9",
+    "serverLogSnapshotPrefixVerified": true,
+    "finalServerLogBytes": 1426,
+    "controllerStartedAtHostUtc": "2026-10-15T14:35:39.152038+00:00",
+    "systemServiceChanged": false,
+    "controllerStoppedAtHostUtc": "2026-10-15T14:40:18.380430+00:00",
+    "serverExitCode": 0,
+    "listenerClosed": true,
+    "listenerConnectErrno": 111,
+    "remainingOwnedProcessCount": 0,
+    "forcedKillCount": 0,
+    "observedForegroundIdentityCount": 8,
+    "processScope": "Only tracked fixture foreground family.",
+    "forwardRemovalReceiptCount": 4,
+    "finalPreservationAtHostUtc": "2026-10-15T14:41:27.951215+00:00",
+    "protectedFileCount": 10,
+    "protectedFilesUnchanged": true,
+    "archiveBytes": 20670,
+    "archiveUnchanged": true,
+    "createdForwardsAbsent": true,
+    "selectedDeviceRemainingForwardCount": 0,
+    "retainedReadOnlyHarnessFailure": "First local check rejected a blank adb forward-list line before writing receipt. No device mutation; this retry ignores blank lines."
+  },
+  "limits": [
+    "One traced bulk, one traced paced and one untraced bulk capture on one provider.",
+    "No observed xterm deferred callbacks/onData, encoded frames or per-frame native writes.",
+    "Source scheduling explanation remains a hypothesis; no root cause or patch qualification.",
+    "Browser-relative spans and host/device timestamps are not network latency measurements.",
+    "No physical keyboard, native CJK IME, TalkBack, sustained throughput or full terminal acceptance.",
+    "No production debugging expansion or capability gate promotion."
+  ],
+  "privateArtifacts": [
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/bulk-01-cdp.json",
+      "bytes": 51837,
+      "sha256": "7ef56392da898eaacb465d2403c004124ae0ff37421ac1d5d76f4f9d4c29c332"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/bulk-capture-command-0-text-command.json",
+      "bytes": 204,
+      "sha256": "1a56b8b0868318b4128dc82ff891bf5ff79903705f9c62d73d742c2b9e1ed0e3"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/bulk-capture-command-1-text-command.json",
+      "bytes": 204,
+      "sha256": "6db56dee8b3cbf86c7e804c0caa0f24c6bca323fb1b2133b84b07f883bd201d1"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/bulk-capture-command-2-text-command.json",
+      "bytes": 204,
+      "sha256": "979a0c94ade8da777b36993970fd1bff51957f0b1b2dcd7da614a43b6eea018a"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/bulk-capture-enter-input-command.json",
+      "bytes": 209,
+      "sha256": "67d8e3c978e34b6a4307350415f844c624f8aa442478ad786b74e0d0cab75336"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/bulk-capture-ready-layout-command.json",
+      "bytes": 605,
+      "sha256": "40394670a3c5e9214777e00ad45d6c36d3f974dce4ec133dc3ec9db4d6b75796"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/bulk-capture-ready-layout.json",
+      "bytes": 19994,
+      "sha256": "50b1d5e7ee6758cf5fa8d7d6c981129d22fe130390505e224b5601d9177dd311"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/bulk-finished-layout-command.json",
+      "bytes": 595,
+      "sha256": "9c19b141e86c25b6e23ac557e364c5bb7be3f6773a14f9b3ba9b4d39602331a0"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/bulk-finished-layout.json",
+      "bytes": 20026,
+      "sha256": "acd322d719c0e88b5fe2715b8f4ef33c8517ce1f316074a91498ba01d2e14f7b"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/current-source-check.json",
+      "bytes": 275,
+      "sha256": "9fa088e8b71407ec6370b381ec536afe3304a8a5183e90e257045f64fce2d032"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/final-preservation.json",
+      "bytes": 572,
+      "sha256": "cc2952b9435e0847c72862b26063851c7aa7e82f54d76b3647e0c25318c96494"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/independent-trace-review.json",
+      "bytes": 8163,
+      "sha256": "98850b0f8c8720066357c909c8f0df476dcd8fb972e74066b5439ba8193f6e79"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/paced-01-cdp.json",
+      "bytes": 54763,
+      "sha256": "49675414c1be9f8b864c8833f2942dd059cef68e79de1bc1838d5d7902ab8b91"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/paced-capture-command-0-text-command.json",
+      "bytes": 204,
+      "sha256": "de3a96cde4e8a582bd709203f46dc5539882d5c02cac364685b69e97864cf73a"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/paced-capture-command-1-text-command.json",
+      "bytes": 204,
+      "sha256": "55e2c3636560826303019e6cceba8abb21fbf3dbdf887b0c01b841b422afc610"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/paced-capture-command-2-text-command.json",
+      "bytes": 204,
+      "sha256": "96674012337e13432059dc1b4909258fb55e73d2f8e922bca9bec6b8c8426050"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/paced-capture-enter-input-command.json",
+      "bytes": 209,
+      "sha256": "0857872f65d4f90a72d55627822ef1c3a2971603490fdccb4a9b801a98d7ccd8"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/paced-capture-ready-layout-command.json",
+      "bytes": 607,
+      "sha256": "2ce5b5a3ae3499dca5710e95b09479914e9bd4fcaedc3135aaf32b0ff8864116"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/paced-capture-ready-layout.json",
+      "bytes": 20045,
+      "sha256": "70882cd35dc49a62b7c61c97bb838633d2c78163d477d72aaf7a352da5094976"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/paced-finished-layout-command.json",
+      "bytes": 597,
+      "sha256": "57187cf5f536f866f71510c524a2e57e964b9b17f960157946879d67fddb89bd"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/paced-finished-layout.json",
+      "bytes": 20077,
+      "sha256": "44c3085466065c6a9ae77873f92211dd196d3097641974b26b4c3fe2da0490aa"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/route-01-cdp.json",
+      "bytes": 1720,
+      "sha256": "27a74da08ba21d0011b1303e153cf5ffc99a10b44560eb22db3b1903c00c2b61"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/route-02-cdp.json",
+      "bytes": 2252,
+      "sha256": "b8f11235e0367598ddb8108365e335fbf18dbc636b110d4d0fdb82709da973f0"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/terminal_cdp.mjs",
+      "bytes": 12357,
+      "sha256": "d43bd66a6d47f1c4efd05d646737ece6a7cc20458e7e5ee96a5281ba1d23ff9d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/terminal_cdp_before_frame_fix.mjs",
+      "bytes": 12123,
+      "sha256": "ca707bc5bf6a884d60ae98021c90c1ec0dd0559f8d918fed6bd95f8923d2ba28"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/terminal_trace_expression.js",
+      "bytes": 6479,
+      "sha256": "e167cb14964fc89a2e0e24d8c8d8bf7ba5e22eaccd7231ee14b83b41ccd2f039"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/trace-closed-command.json",
+      "bytes": 4048,
+      "sha256": "3a9d8a69ec166b29eb531025f734f417ebf4382d30223c61379a9e09a10e317c"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/trace-closed-journal.json",
+      "bytes": 3403,
+      "sha256": "cb5ab148c5ca95a92fdfc34c7ab84dbd2075aaee681af80e622135aada9a1e9c"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/trace-closed-observation.json",
+      "bytes": 95308,
+      "sha256": "c4981a62264eef3b4613fd736b38b50dfba12cfc7e4e65a744e241d623da9f01"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/trace-connect-layout-command.json",
+      "bytes": 595,
+      "sha256": "b4d8ca9321b41919e21dfc2c8d3f69f3a0f894c4e0392c7195efd4bb476cd96f"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/trace-connect-layout.json",
+      "bytes": 17132,
+      "sha256": "3a55b0042bcc8d7aba7c7718fc69320229466b183ff3502ebec950cf26236f2e"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/trace-connect-tap-command.json",
+      "bytes": 209,
+      "sha256": "439e2a0047e3c2e60d5e9b9f2c3f85743b377fb3942b120d875b24579d1ed2bc"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/trace-exit-0-text-command.json",
+      "bytes": 204,
+      "sha256": "1bd6e1cdf317b21168b26bb88c531dd48a1bf4a4e86104cc6adba88df4c57684"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/trace-exit-1-text-command.json",
+      "bytes": 204,
+      "sha256": "3ed1a7e8cf963115bcacd78391dcdfec966078ed3ce2d2415b44d7390d992fc4"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/trace-exit-2-text-command.json",
+      "bytes": 204,
+      "sha256": "9a1514af09f8c90bacf72310f3cdf07d474a2133160f21980f4fed4788509696"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/trace-exit-3-text-command.json",
+      "bytes": 204,
+      "sha256": "c278176382b46a658a653800a7b68e3535be36fdc7c56ed8797fdef860ef7222"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/trace-exit-enter-input-command.json",
+      "bytes": 209,
+      "sha256": "e6766d26e34ffe206d905b9bb8f41ce2a2856df51201af71ed98e4e8b607caf7"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/trace-open-command.json",
+      "bytes": 3644,
+      "sha256": "71f4831df5f0060c2782f493a721bd496dc8ad3624d2e80d88f961372012bb4e"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/trace-open-journal.json",
+      "bytes": 3039,
+      "sha256": "0e217ef0d89591a6f0f1f003fbf52d2686298a4889b71ba15bfdc4da624d5190"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/trace-open-layout-command.json",
+      "bytes": 589,
+      "sha256": "8a3747fb7f61dbd32ce0e7466fdc81e890649eaddcb1e49292f7608231bd5f9d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/trace-open-layout.json",
+      "bytes": 20177,
+      "sha256": "1a93516a67a729c39ba29eb441ae513cd206a990bf0d87e73c24e273921f3887"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/untraced-bulk-stimulus-text-command.json",
+      "bytes": 207,
+      "sha256": "3d3b8ec0b543be3585d8f04a90233dfe465703e3bbf8eca0118e8fab3aa73b8a"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/untraced-capture-command-0-text-command.json",
+      "bytes": 204,
+      "sha256": "d87daad80e05a52925767480ecee49bf1271460378e225d8bf3ce42e4e6fe292"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/untraced-capture-command-1-text-command.json",
+      "bytes": 204,
+      "sha256": "e0e747cd8ed85ae89515dc6c4e02b4fe2b2c04468491f124d56e887549455531"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/untraced-capture-command-2-text-command.json",
+      "bytes": 204,
+      "sha256": "d000f45053313992b100f11c117dbe3471b5b63ef19b0ae21bd243fcbd244888"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/untraced-capture-enter-input-command.json",
+      "bytes": 209,
+      "sha256": "92def3198dc642dea2db77f73cb3de3a31c3c8d0b4cf307209d10b49a0d15564"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/untraced-capture-ready-layout-command.json",
+      "bytes": 613,
+      "sha256": "089792a30838ed97b7a429da23c22bede1bfa02d7f3d9dc0dd496e820d6cc4b6"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/untraced-capture-ready-layout.json",
+      "bytes": 20096,
+      "sha256": "a64fb52f1e3a10ad61756003781a9696f48ebe55e6bd2b9f70780fb61043c13e"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/untraced-finished-layout-command.json",
+      "bytes": 603,
+      "sha256": "504c2626f2d518188bd93f9be54c270d7a3df6c719b825dd8bae212a5c1589ff"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/untraced-finished-layout.json",
+      "bytes": 20128,
+      "sha256": "683527b61bc830cf0fe3b7a4a2607fffce613982b9233bd67f5a0a18c6760675"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/batch03-process-events.json",
+      "bytes": 1411,
+      "sha256": "e2a8a4dd7ffcc768ef1a3b5a5586b4357ee03b2d07777d0e37586ca43a2c12e6"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/batch03-server.log",
+      "bytes": 1426,
+      "sha256": "66b2618829d078cac9614be6e5766d8c14bcf3fe4d36892dc432377abef173f5"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/batch03-snapshot-00.json",
+      "bytes": 518,
+      "sha256": "942cb0b0474cb4ea4197ba2efdf1fd33b0637bf40f049b1a981f8e9a0bd5ee40"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/batch03-started.json",
+      "bytes": 167,
+      "sha256": "63216e3bdf0180ab77ab667a5c027e1d29c396e8f37de0efd9afdf66b1967284"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/batch03-stopped.json",
+      "bytes": 334,
+      "sha256": "7a7f657b6b76707dde39ee0c8cb743687ff75993e10af7644f0a8fb224b1cd94"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/trace-closed-snapshot.json",
+      "bytes": 293,
+      "sha256": "1163ab4c390ab733c06ffb16855c385e2a41e1e37a171132b088eca08f4eadf6"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/exercise-5c9f55f0-1bbb-4da2-aa05-e95e5e585d12.json",
+      "bytes": 574,
+      "sha256": "22cb7392cfeb961555a757db725a62ace4a0c62fec4e96d4a0818c1b7535dfed"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/exercise-e8a3644f-d1f7-4e37-9bfd-c2cb68358586.json",
+      "bytes": 574,
+      "sha256": "297052a573caf54deed0a532e1400ccc102d4221758fb1cfcdff8cfa589345c6"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-01/work/exercise-fb53829c-9f96-4eb4-a107-5dc4efd5100f.json",
+      "bytes": 561,
+      "sha256": "cade20db2fa5d821fdd16111b6f009863c09e5baa15e3ce94a11422994ae4ee6"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/source-071/commit-binding.json",
+      "bytes": 402,
+      "sha256": "2e1090b8869bafd8b464208c217c4f254f5badc36012637e0da746febbd03a00"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/source-071/preinstall-binding.json",
+      "bytes": 28202,
+      "sha256": "b40c13c51f75f8a6ae92c56f2f3c3004e5fcd665484722b094556c059f32eae4"
+    }
+  ]
+}

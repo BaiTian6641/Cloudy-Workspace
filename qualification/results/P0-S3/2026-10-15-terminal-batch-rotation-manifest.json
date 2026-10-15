@@ -1,0 +1,1784 @@
+{
+  "schemaVersion": 1,
+  "runId": "P0-S3-terminal-batch-rotation-2026-10-15",
+  "stage": "P0-S3",
+  "recordType": "operator-performed stopped-package qualification maintenance",
+  "reviewStatus": {
+    "primary": "accepted; exact source, checkpoints, restored rows and all 146 selected artifacts reviewed",
+    "independentRawEvidence": "accepted; seven checkpoints, 448 command receipts, ten archive readbacks, exact restored history/trust and three startups",
+    "independentPublicReport": "accepted; source/evidence projections, receipt ledgers and privacy verified"
+  },
+  "verdict": "Original eight-attempt/48-event terminal journal archived and actually restored with exact rows and trust, then replaced by an explicitly provisioned zero-attempt batch; no product feature or capability promotion.",
+  "application": {
+    "package": "dev.cloudy.qualification.baseline",
+    "versionName": "0.7.1",
+    "versionCode": 10,
+    "buildRef": "60908d62-c573-4c4b-8b0e-910e5863197e",
+    "sourceCommit": "130b238e0077fe0bf0d7ab668c38771c51224243",
+    "apkSha256": "629b71bf4cd006889252d578106fc494d09593381738e5a3e240d8f78c2a4611",
+    "apkBytes": 16636002,
+    "preservedApkPath": "qualification/results/private/terminal-probe/source-071/cloudy-baseline-0.7.1-code10.apk",
+    "sourceIdentityReference": "qualification/results/P0-S3/2026-10-15-terminal-probe-manifest.json"
+  },
+  "deviceIdentityReference": "qualification/results/P0-S3/2026-10-15-terminal-probe-manifest.json",
+  "priorEvidence": [
+    "qualification/results/P0-S3/2026-10-15-terminal-probe.md",
+    "qualification/results/P0-S3/2026-10-15-ssh-batch-rotation.md"
+  ],
+  "recordedCompletedAtHostUtc": "2026-10-15T14:33:43.013743+00:00",
+  "timeBoundary": "Host command/read-completion timestamps differ from Android snapshot clocks. Sample spans are bounded observations, not continuous monitoring or latency.",
+  "executedHelper": {
+    "path": "qualification/results/private/terminal-probe/batch-02-maintenance/terminal_batch_maintenance.py",
+    "bytes": 24494,
+    "sha256": "eae69be12b3d0b248f32e200c621928fbe12d008099fcd3ccc51bbe446608416"
+  },
+  "independentRawReviewArtifact": "qualification/results/private/terminal-probe/batch-02-maintenance/independent-review.json",
+  "initialFailure": {
+    "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/archive/failure.json",
+    "atUtc": "2026-10-15T14:25:17.209641+00:00",
+    "type": "MaintenanceError",
+    "reason": "process-rows",
+    "automaticRollback": false,
+    "commandReceiptCount": 56,
+    "finalCommandArtifact": "qualification/results/private/terminal-probe/batch-02-maintenance/archive/056-before-stop-ps.json",
+    "beforeForceStopOrArchiveMutation": true,
+    "originalJournalUnchanged": true,
+    "deviceArchiveAbsentOnRecoveryReadback": true,
+    "tenProtectedFilesUnchanged": true,
+    "failedBaselinePreservedWithoutPublishingDigests": true,
+    "retryDirectory": "qualification/results/private/terminal-probe/batch-02-maintenance/archive-retry",
+    "correction": "Toybox ps -A -n -o UID,PID,NAME; split each row with maxsplit=2, retaining numeric UID/PID checks and exact selected-user/package matching."
+  },
+  "checkpoints": [
+    {
+      "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/archive-complete.json",
+      "status": "complete",
+      "action": "archive",
+      "runLabel": "archive-retry",
+      "atUtc": "2026-10-15T14:32:13.057941+00:00",
+      "originalSha256": "8d35a416f8b1669c0ad9b841fd7e275a5b9c9d226eea8ea636d4059b23513441",
+      "apkSha256": "629b71bf4cd006889252d578106fc494d09593381738e5a3e240d8f78c2a4611",
+      "sourceCommit": "130b238e0077fe0bf0d7ab668c38771c51224243",
+      "helperSha256": "eae69be12b3d0b248f32e200c621928fbe12d008099fcd3ccc51bbe446608416",
+      "attemptCount": 8,
+      "eventCount": 48,
+      "originalBytes": 20670,
+      "seedSha256": "1f76c54135ff1c061f0763aba49a5c2e0662bdd5c7cf1bf519cedd0a3ebdc68e",
+      "seedProvenance": "Historical metadata copied unchanged; only attempts emptied. Not a new runtime observation."
+    },
+    {
+      "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-first-complete.json",
+      "status": "complete",
+      "action": "seed-first",
+      "runLabel": "seed-first",
+      "atUtc": "2026-10-15T14:32:22.696365+00:00",
+      "originalSha256": "8d35a416f8b1669c0ad9b841fd7e275a5b9c9d226eea8ea636d4059b23513441",
+      "apkSha256": "629b71bf4cd006889252d578106fc494d09593381738e5a3e240d8f78c2a4611",
+      "sourceCommit": "130b238e0077fe0bf0d7ab668c38771c51224243",
+      "helperSha256": "eae69be12b3d0b248f32e200c621928fbe12d008099fcd3ccc51bbe446608416",
+      "attemptCount": 0,
+      "beforeProcessInstanceId": "8ba4a5b0-16c9-4d4d-86d6-6a0e353a8ad8",
+      "oldSha256": "8d35a416f8b1669c0ad9b841fd7e275a5b9c9d226eea8ea636d4059b23513441",
+      "installedSha256": "1f76c54135ff1c061f0763aba49a5c2e0662bdd5c7cf1bf519cedd0a3ebdc68e",
+      "packageStopped": true,
+      "powerLossDurabilityClaimed": false,
+      "predecessorSha256": "9a9e9e1c8ee683ebeb07d4dd5d02a756008b78395b6cd315d030095e527b1370"
+    },
+    {
+      "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-first-complete.json",
+      "status": "complete",
+      "action": "observe-first",
+      "runLabel": "observe-first",
+      "atUtc": "2026-10-15T14:32:38.720408+00:00",
+      "originalSha256": "8d35a416f8b1669c0ad9b841fd7e275a5b9c9d226eea8ea636d4059b23513441",
+      "apkSha256": "629b71bf4cd006889252d578106fc494d09593381738e5a3e240d8f78c2a4611",
+      "sourceCommit": "130b238e0077fe0bf0d7ab668c38771c51224243",
+      "helperSha256": "eae69be12b3d0b248f32e200c621928fbe12d008099fcd3ccc51bbe446608416",
+      "attemptCount": 0,
+      "eventCount": 0,
+      "processInstanceId": "20868cc1-c1e2-4fbb-905f-3df25de5dcc6",
+      "journalSha256": "b961a13627983a5028ec25655ca8694974b23257ad51a66901d10eb30625c368",
+      "predecessorSha256": "db69d135bcd251fbb8693ea28351c41c0644771e65459a064192b8d57609cd38"
+    },
+    {
+      "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/restore-complete.json",
+      "status": "complete",
+      "action": "restore",
+      "runLabel": "restore",
+      "atUtc": "2026-10-15T14:32:50.891848+00:00",
+      "originalSha256": "8d35a416f8b1669c0ad9b841fd7e275a5b9c9d226eea8ea636d4059b23513441",
+      "apkSha256": "629b71bf4cd006889252d578106fc494d09593381738e5a3e240d8f78c2a4611",
+      "sourceCommit": "130b238e0077fe0bf0d7ab668c38771c51224243",
+      "helperSha256": "eae69be12b3d0b248f32e200c621928fbe12d008099fcd3ccc51bbe446608416",
+      "attemptCount": 8,
+      "beforeProcessInstanceId": "20868cc1-c1e2-4fbb-905f-3df25de5dcc6",
+      "oldSha256": "b961a13627983a5028ec25655ca8694974b23257ad51a66901d10eb30625c368",
+      "installedSha256": "8d35a416f8b1669c0ad9b841fd7e275a5b9c9d226eea8ea636d4059b23513441",
+      "packageStopped": true,
+      "powerLossDurabilityClaimed": false,
+      "predecessorSha256": "db69d135bcd251fbb8693ea28351c41c0644771e65459a064192b8d57609cd38"
+    },
+    {
+      "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-restored-complete.json",
+      "status": "complete",
+      "action": "observe-restored",
+      "runLabel": "observe-restored",
+      "atUtc": "2026-10-15T14:33:07.760960+00:00",
+      "originalSha256": "8d35a416f8b1669c0ad9b841fd7e275a5b9c9d226eea8ea636d4059b23513441",
+      "apkSha256": "629b71bf4cd006889252d578106fc494d09593381738e5a3e240d8f78c2a4611",
+      "sourceCommit": "130b238e0077fe0bf0d7ab668c38771c51224243",
+      "helperSha256": "eae69be12b3d0b248f32e200c621928fbe12d008099fcd3ccc51bbe446608416",
+      "attemptCount": 8,
+      "eventCount": 48,
+      "processInstanceId": "e3c14606-3bfb-4230-b20c-8f5e5d826353",
+      "journalSha256": "7b259000a2ddb0b882a4088fd89003ef8b2ca74242776e38c79631e6670ef7ed",
+      "predecessorSha256": "f72598660f0af67447496e49d703cc384039595fd1f166751ee3f265ae5c441f"
+    },
+    {
+      "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-final-complete.json",
+      "status": "complete",
+      "action": "seed-final",
+      "runLabel": "seed-final",
+      "atUtc": "2026-10-15T14:33:23.249735+00:00",
+      "originalSha256": "8d35a416f8b1669c0ad9b841fd7e275a5b9c9d226eea8ea636d4059b23513441",
+      "apkSha256": "629b71bf4cd006889252d578106fc494d09593381738e5a3e240d8f78c2a4611",
+      "sourceCommit": "130b238e0077fe0bf0d7ab668c38771c51224243",
+      "helperSha256": "eae69be12b3d0b248f32e200c621928fbe12d008099fcd3ccc51bbe446608416",
+      "attemptCount": 0,
+      "beforeProcessInstanceId": "e3c14606-3bfb-4230-b20c-8f5e5d826353",
+      "oldSha256": "7b259000a2ddb0b882a4088fd89003ef8b2ca74242776e38c79631e6670ef7ed",
+      "installedSha256": "1f76c54135ff1c061f0763aba49a5c2e0662bdd5c7cf1bf519cedd0a3ebdc68e",
+      "packageStopped": true,
+      "powerLossDurabilityClaimed": false,
+      "predecessorSha256": "b39b8639070ec813bc21cd757b84105a37a9c8f235788aceb54f9a494046bb8d"
+    },
+    {
+      "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-final-complete.json",
+      "status": "complete",
+      "action": "observe-final",
+      "runLabel": "observe-final",
+      "atUtc": "2026-10-15T14:33:43.013743+00:00",
+      "originalSha256": "8d35a416f8b1669c0ad9b841fd7e275a5b9c9d226eea8ea636d4059b23513441",
+      "apkSha256": "629b71bf4cd006889252d578106fc494d09593381738e5a3e240d8f78c2a4611",
+      "sourceCommit": "130b238e0077fe0bf0d7ab668c38771c51224243",
+      "helperSha256": "eae69be12b3d0b248f32e200c621928fbe12d008099fcd3ccc51bbe446608416",
+      "attemptCount": 0,
+      "eventCount": 0,
+      "processInstanceId": "2b3e875c-fc30-455c-bf07-978f3ed46aa0",
+      "journalSha256": "6737b317099b8c3c8bbb2e3074cfd45c949d644c93b359512e19a7fbfa3eb1e5",
+      "predecessorSha256": "7cef3eb3939a1d4ef0522f60713c721ee0d4134d88db7feb726f3cacea2e0b8c"
+    }
+  ],
+  "commandTransport": {
+    "mechanism": "adb shell -T shell-v2; one quoted remote argv, actual remote status and distinct stdout/stderr",
+    "successfulCommandReceiptCount": 448,
+    "intentionalExit17Count": 7,
+    "exitZeroCount": 441,
+    "commandReceiptLedgerFormat": "UTF-8 sorted numbered receipt basenames: basename TAB bytes TAB sha256 LF; SHA-256 over concatenated lines. Raw receipt contents remain private.",
+    "commandBatches": [
+      {
+        "privateDirectory": "qualification/results/private/terminal-probe/batch-02-maintenance/archive-retry",
+        "commandCount": 92,
+        "streamProbeExitCode": 17,
+        "remainingExitCodes": [
+          0
+        ],
+        "firstRecordedAtHostUtc": "2026-10-15T14:32:07.296918+00:00",
+        "lastRecordedAtHostUtc": "2026-10-15T14:32:13.045151+00:00",
+        "commandReceiptLedgerSha256": "f5ea5eb639cd5fe74dcc4ae150c0c41cdd76fca069c0895f92fcf951e418472a"
+      },
+      {
+        "privateDirectory": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-first",
+        "commandCount": 78,
+        "streamProbeExitCode": 17,
+        "remainingExitCodes": [
+          0
+        ],
+        "firstRecordedAtHostUtc": "2026-10-15T14:32:17.761423+00:00",
+        "lastRecordedAtHostUtc": "2026-10-15T14:32:22.683306+00:00",
+        "commandReceiptLedgerSha256": "8d4846d33ded26be807d38312073299047dd5c3799b5740b272a19ed99b388ac"
+      },
+      {
+        "privateDirectory": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-first",
+        "commandCount": 40,
+        "streamProbeExitCode": 17,
+        "remainingExitCodes": [
+          0
+        ],
+        "firstRecordedAtHostUtc": "2026-10-15T14:32:35.018264+00:00",
+        "lastRecordedAtHostUtc": "2026-10-15T14:32:38.701826+00:00",
+        "commandReceiptLedgerSha256": "59206d546119297031726829d347b45cadbd84e6f513c009029424aba42a6b1b"
+      },
+      {
+        "privateDirectory": "qualification/results/private/terminal-probe/batch-02-maintenance/restore",
+        "commandCount": 79,
+        "streamProbeExitCode": 17,
+        "remainingExitCodes": [
+          0
+        ],
+        "firstRecordedAtHostUtc": "2026-10-15T14:32:45.961581+00:00",
+        "lastRecordedAtHostUtc": "2026-10-15T14:32:50.878450+00:00",
+        "commandReceiptLedgerSha256": "112bc803d558474eb8e907b552d04d77b7dec2e1e9f8ca134e076d1c9b7cea50"
+      },
+      {
+        "privateDirectory": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-restored",
+        "commandCount": 40,
+        "streamProbeExitCode": 17,
+        "remainingExitCodes": [
+          0
+        ],
+        "firstRecordedAtHostUtc": "2026-10-15T14:33:04.128542+00:00",
+        "lastRecordedAtHostUtc": "2026-10-15T14:33:07.741820+00:00",
+        "commandReceiptLedgerSha256": "b0058481afde754cb8fc897bc17df1f3b9fbb364e8ea4024a8132053208dd3ab"
+      },
+      {
+        "privateDirectory": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-final",
+        "commandCount": 79,
+        "streamProbeExitCode": 17,
+        "remainingExitCodes": [
+          0
+        ],
+        "firstRecordedAtHostUtc": "2026-10-15T14:33:18.214910+00:00",
+        "lastRecordedAtHostUtc": "2026-10-15T14:33:23.235961+00:00",
+        "commandReceiptLedgerSha256": "5672cc305fb2a73441453d598f110fadeabc8e0520f3c0e9805cfb982e566d0a"
+      },
+      {
+        "privateDirectory": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-final",
+        "commandCount": 40,
+        "streamProbeExitCode": 17,
+        "remainingExitCodes": [
+          0
+        ],
+        "firstRecordedAtHostUtc": "2026-10-15T14:33:39.248733+00:00",
+        "lastRecordedAtHostUtc": "2026-10-15T14:33:42.965923+00:00",
+        "commandReceiptLedgerSha256": "901af1c0be49010d4d6c753dd7637c3ab01a2ba06eb3bb429c526de185d59c20"
+      }
+    ]
+  },
+  "codecPreflight": {
+    "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/codec-preflight/result.json",
+    "compileExitCode": 0,
+    "executeExitCode": 0,
+    "candidateSeedSha256": "1f76c54135ff1c061f0763aba49a5c2e0662bdd5c7cf1bf519cedd0a3ebdc68e",
+    "originalJournalSha256": "8d35a416f8b1669c0ad9b841fd7e275a5b9c9d226eea8ea636d4059b23513441",
+    "compiledParserSha256": "d8fda96c55a74d79f042ebae39cda21e04159307ada456571cf40451bb6d34cd",
+    "compiledCodecSha256": "3bcdcdb7161f6340c44348d680da31686e617b8365891270e7bdf453c0530e11",
+    "scope": "Actual compiled JVM parser/codec accepted exact original and six-field seed, preserved trust and historical process/revision/time, and rejected missing required metadata. Android storage/runtime tested separately."
+  },
+  "archive": {
+    "originalJournal": {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/batch-01-journal.json",
+      "bytes": 20670,
+      "sha256": "8d35a416f8b1669c0ad9b841fd7e275a5b9c9d226eea8ea636d4059b23513441"
+    },
+    "deviceRelativePath": "files/terminal-archive-20261015-01/terminal-journal.json",
+    "attemptCount": 8,
+    "eventCount": 48,
+    "trustEntryCount": 1,
+    "twoCopiesByteMatched": true,
+    "originalProcessInstanceId": "8ba4a5b0-16c9-4d4d-86d6-6a0e353a8ad8",
+    "originalRevision": 8,
+    "attempts": [
+      {
+        "sessionId": "14371b09-8f76-4415-9655-3019ac48cc77",
+        "status": "trust-required",
+        "reason": "independent-host-key-matched",
+        "authenticated": false,
+        "buildIdentity": {
+          "versionName": "0.7.0",
+          "versionCode": 9,
+          "buildRef": "7b55cd23-0988-46b7-8fc1-1da8a197842d"
+        },
+        "droppedEvents": 0,
+        "eventCount": 3,
+        "exactDecodedRowPreservedOnRestore": true
+      },
+      {
+        "sessionId": "d7d1d16e-7b6e-4c90-a16f-177a5b941e89",
+        "status": "closed",
+        "reason": "user-disconnect",
+        "authenticated": true,
+        "buildIdentity": {
+          "versionName": "0.7.0",
+          "versionCode": 9,
+          "buildRef": "7b55cd23-0988-46b7-8fc1-1da8a197842d"
+        },
+        "droppedEvents": 0,
+        "eventCount": 6,
+        "exactDecodedRowPreservedOnRestore": true
+      },
+      {
+        "sessionId": "47aaff1f-f2e4-4267-81d4-612fb3a58fe8",
+        "status": "closed",
+        "reason": "remote-eof",
+        "authenticated": true,
+        "buildIdentity": {
+          "versionName": "0.7.0",
+          "versionCode": 9,
+          "buildRef": "7b55cd23-0988-46b7-8fc1-1da8a197842d"
+        },
+        "droppedEvents": 0,
+        "eventCount": 7,
+        "exactDecodedRowPreservedOnRestore": true
+      },
+      {
+        "sessionId": "4e881252-c186-4f61-98c3-180b361e64c2",
+        "status": "closed",
+        "reason": "user-disconnect",
+        "authenticated": true,
+        "buildIdentity": {
+          "versionName": "0.7.0",
+          "versionCode": 9,
+          "buildRef": "7b55cd23-0988-46b7-8fc1-1da8a197842d"
+        },
+        "droppedEvents": 0,
+        "eventCount": 6,
+        "exactDecodedRowPreservedOnRestore": true
+      },
+      {
+        "sessionId": "99207e3e-2929-43a6-b20e-5da399e0be93",
+        "status": "interrupted",
+        "reason": "activity-recreated",
+        "authenticated": true,
+        "buildIdentity": {
+          "versionName": "0.7.0",
+          "versionCode": 9,
+          "buildRef": "7b55cd23-0988-46b7-8fc1-1da8a197842d"
+        },
+        "droppedEvents": 0,
+        "eventCount": 6,
+        "exactDecodedRowPreservedOnRestore": true
+      },
+      {
+        "sessionId": "961c65b5-58ad-4183-b145-e60a3601d163",
+        "status": "interrupted",
+        "reason": "new-process-unfinished-session",
+        "authenticated": true,
+        "buildIdentity": {
+          "versionName": "0.7.0",
+          "versionCode": 9,
+          "buildRef": "7b55cd23-0988-46b7-8fc1-1da8a197842d"
+        },
+        "droppedEvents": 0,
+        "eventCount": 6,
+        "exactDecodedRowPreservedOnRestore": true
+      },
+      {
+        "sessionId": "0f13fcad-7d5c-4480-b04c-1e3f79fccad9",
+        "status": "closed",
+        "reason": "remote-eof",
+        "authenticated": true,
+        "buildIdentity": {
+          "versionName": "0.7.0",
+          "versionCode": 9,
+          "buildRef": "7b55cd23-0988-46b7-8fc1-1da8a197842d"
+        },
+        "droppedEvents": 0,
+        "eventCount": 7,
+        "exactDecodedRowPreservedOnRestore": true
+      },
+      {
+        "sessionId": "38244da7-f3b9-421d-87fa-fbdafd344b0a",
+        "status": "closed",
+        "reason": "remote-eof",
+        "authenticated": true,
+        "buildIdentity": {
+          "versionName": "0.7.1",
+          "versionCode": 10,
+          "buildRef": "60908d62-c573-4c4b-8b0e-910e5863197e"
+        },
+        "droppedEvents": 0,
+        "eventCount": 7,
+        "exactDecodedRowPreservedOnRestore": true
+      }
+    ],
+    "deviceArchiveReadbacks": [
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/archive-retry/067-archive-read.json",
+        "atHostUtc": "2026-10-15T14:32:11.717413+00:00",
+        "bytes": 20670,
+        "sha256": "8d35a416f8b1669c0ad9b841fd7e275a5b9c9d226eea8ea636d4059b23513441",
+        "matchesOriginal": true
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-first/038-archive-read.json",
+        "atHostUtc": "2026-10-15T14:32:20.512042+00:00",
+        "bytes": 20670,
+        "sha256": "8d35a416f8b1669c0ad9b841fd7e275a5b9c9d226eea8ea636d4059b23513441",
+        "matchesOriginal": true
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-first/053-archive-after-replace-read.json",
+        "atHostUtc": "2026-10-15T14:32:21.379121+00:00",
+        "bytes": 20670,
+        "sha256": "8d35a416f8b1669c0ad9b841fd7e275a5b9c9d226eea8ea636d4059b23513441",
+        "matchesOriginal": true
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-first/007-archive-read.json",
+        "atHostUtc": "2026-10-15T14:32:35.341190+00:00",
+        "bytes": 20670,
+        "sha256": "8d35a416f8b1669c0ad9b841fd7e275a5b9c9d226eea8ea636d4059b23513441",
+        "matchesOriginal": true
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/restore/039-archive-read.json",
+        "atHostUtc": "2026-10-15T14:32:48.716881+00:00",
+        "bytes": 20670,
+        "sha256": "8d35a416f8b1669c0ad9b841fd7e275a5b9c9d226eea8ea636d4059b23513441",
+        "matchesOriginal": true
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/restore/054-archive-after-replace-read.json",
+        "atHostUtc": "2026-10-15T14:32:49.574517+00:00",
+        "bytes": 20670,
+        "sha256": "8d35a416f8b1669c0ad9b841fd7e275a5b9c9d226eea8ea636d4059b23513441",
+        "matchesOriginal": true
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-restored/007-archive-read.json",
+        "atHostUtc": "2026-10-15T14:33:04.458457+00:00",
+        "bytes": 20670,
+        "sha256": "8d35a416f8b1669c0ad9b841fd7e275a5b9c9d226eea8ea636d4059b23513441",
+        "matchesOriginal": true
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-final/039-archive-read.json",
+        "atHostUtc": "2026-10-15T14:33:20.978466+00:00",
+        "bytes": 20670,
+        "sha256": "8d35a416f8b1669c0ad9b841fd7e275a5b9c9d226eea8ea636d4059b23513441",
+        "matchesOriginal": true
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-final/054-archive-after-replace-read.json",
+        "atHostUtc": "2026-10-15T14:33:21.868932+00:00",
+        "bytes": 20670,
+        "sha256": "8d35a416f8b1669c0ad9b841fd7e275a5b9c9d226eea8ea636d4059b23513441",
+        "matchesOriginal": true
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-final/007-archive-read.json",
+        "atHostUtc": "2026-10-15T14:33:39.578474+00:00",
+        "bytes": 20670,
+        "sha256": "8d35a416f8b1669c0ad9b841fd7e275a5b9c9d226eea8ea636d4059b23513441",
+        "matchesOriginal": true
+      }
+    ]
+  },
+  "seed": {
+    "artifact": {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/operator-seed.json",
+      "bytes": 329,
+      "sha256": "1f76c54135ff1c061f0763aba49a5c2e0662bdd5c7cf1bf519cedd0a3ebdc68e"
+    },
+    "schemaVersion": 1,
+    "fieldNames": [
+      "schemaVersion",
+      "processInstanceId",
+      "revision",
+      "snapshotAtDeviceUtc",
+      "trustedHosts",
+      "attempts"
+    ],
+    "attemptCount": 0,
+    "exactOriginalTrust": true,
+    "historicalMetadataCopiedExactly": [
+      "processInstanceId",
+      "revision",
+      "snapshotAtDeviceUtc"
+    ],
+    "providerObservationsOmitted": true,
+    "provenance": "Externally provisioned bytes. Required process/revision/time copied from historical journal; these are not a new runtime observation."
+  },
+  "stoppedReplacement": {
+    "packageUserScope": "Actual selected Android user checked against prior evidence; only this package/user force-stopped. Numeric UID/PID and device serial remain private.",
+    "forceStopCount": 4,
+    "postStopAndReplacementAbsenceProjectionCount": 23,
+    "absenceProjections": [
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/archive-retry/archive-complete-processes.json",
+        "atHostUtc": "2026-10-15T14:32:13.051691+00:00",
+        "selectedUserPackageProcessCount": 0
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/archive-retry/before-archive-processes.json",
+        "atHostUtc": "2026-10-15T14:32:11.505181+00:00",
+        "selectedUserPackageProcessCount": 0
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/archive-retry/stopped-0-processes.json",
+        "atHostUtc": "2026-10-15T14:32:10.495434+00:00",
+        "selectedUserPackageProcessCount": 0
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/archive-retry/stopped-1-processes.json",
+        "atHostUtc": "2026-10-15T14:32:10.760556+00:00",
+        "selectedUserPackageProcessCount": 0
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/archive-retry/stopped-2-processes.json",
+        "atHostUtc": "2026-10-15T14:32:11.336570+00:00",
+        "selectedUserPackageProcessCount": 0
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-first/after-replace-processes.json",
+        "atHostUtc": "2026-10-15T14:32:22.689940+00:00",
+        "selectedUserPackageProcessCount": 0
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-first/before-rename-processes.json",
+        "atHostUtc": "2026-10-15T14:32:20.916139+00:00",
+        "selectedUserPackageProcessCount": 0
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-first/before-staging-processes.json",
+        "atHostUtc": "2026-10-15T14:32:20.670224+00:00",
+        "selectedUserPackageProcessCount": 0
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-first/stopped-0-processes.json",
+        "atHostUtc": "2026-10-15T14:32:19.562673+00:00",
+        "selectedUserPackageProcessCount": 0
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-first/stopped-1-processes.json",
+        "atHostUtc": "2026-10-15T14:32:19.833085+00:00",
+        "selectedUserPackageProcessCount": 0
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-first/stopped-2-processes.json",
+        "atHostUtc": "2026-10-15T14:32:20.398577+00:00",
+        "selectedUserPackageProcessCount": 0
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/restore/after-replace-processes.json",
+        "atHostUtc": "2026-10-15T14:32:50.885526+00:00",
+        "selectedUserPackageProcessCount": 0
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/restore/before-rename-processes.json",
+        "atHostUtc": "2026-10-15T14:32:49.126018+00:00",
+        "selectedUserPackageProcessCount": 0
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/restore/before-staging-processes.json",
+        "atHostUtc": "2026-10-15T14:32:48.890236+00:00",
+        "selectedUserPackageProcessCount": 0
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/restore/stopped-0-processes.json",
+        "atHostUtc": "2026-10-15T14:32:47.776175+00:00",
+        "selectedUserPackageProcessCount": 0
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/restore/stopped-1-processes.json",
+        "atHostUtc": "2026-10-15T14:32:48.037495+00:00",
+        "selectedUserPackageProcessCount": 0
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/restore/stopped-2-processes.json",
+        "atHostUtc": "2026-10-15T14:32:48.609336+00:00",
+        "selectedUserPackageProcessCount": 0
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-final/after-replace-processes.json",
+        "atHostUtc": "2026-10-15T14:33:23.242890+00:00",
+        "selectedUserPackageProcessCount": 0
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-final/before-rename-processes.json",
+        "atHostUtc": "2026-10-15T14:33:21.408910+00:00",
+        "selectedUserPackageProcessCount": 0
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-final/before-staging-processes.json",
+        "atHostUtc": "2026-10-15T14:33:21.146183+00:00",
+        "selectedUserPackageProcessCount": 0
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-final/stopped-0-processes.json",
+        "atHostUtc": "2026-10-15T14:33:20.044500+00:00",
+        "selectedUserPackageProcessCount": 0
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-final/stopped-1-processes.json",
+        "atHostUtc": "2026-10-15T14:33:20.315666+00:00",
+        "selectedUserPackageProcessCount": 0
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-final/stopped-2-processes.json",
+        "atHostUtc": "2026-10-15T14:33:20.883861+00:00",
+        "selectedUserPackageProcessCount": 0
+      }
+    ],
+    "sidecarsRegularFilesAndReadbacksChecked": true,
+    "powerLossDurabilityClaimed": false
+  },
+  "startupObservations": [
+    {
+      "phase": "observe-first",
+      "observationArtifact": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-first/observations.json",
+      "samples": [
+        {
+          "atHostUtc": "2026-10-15T14:32:35.522863+00:00",
+          "sha256": "b961a13627983a5028ec25655ca8694974b23257ad51a66901d10eb30625c368",
+          "processInstanceId": "20868cc1-c1e2-4fbb-905f-3df25de5dcc6",
+          "revision": 1,
+          "snapshotAtDeviceUtc": "2026-10-15T14:32:28.871026Z"
+        },
+        {
+          "atHostUtc": "2026-10-15T14:32:36.211553+00:00",
+          "sha256": "b961a13627983a5028ec25655ca8694974b23257ad51a66901d10eb30625c368",
+          "processInstanceId": "20868cc1-c1e2-4fbb-905f-3df25de5dcc6",
+          "revision": 1,
+          "snapshotAtDeviceUtc": "2026-10-15T14:32:28.871026Z"
+        },
+        {
+          "atHostUtc": "2026-10-15T14:32:37.400586+00:00",
+          "sha256": "b961a13627983a5028ec25655ca8694974b23257ad51a66901d10eb30625c368",
+          "processInstanceId": "20868cc1-c1e2-4fbb-905f-3df25de5dcc6",
+          "revision": 1,
+          "snapshotAtDeviceUtc": "2026-10-15T14:32:28.871026Z"
+        }
+      ],
+      "settledHostObservationSpanSeconds": 1.877723,
+      "journals": [
+        {
+          "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-first/observed-0-journal.json",
+          "processInstanceId": "20868cc1-c1e2-4fbb-905f-3df25de5dcc6",
+          "revision": 1,
+          "snapshotAtDeviceUtc": "2026-10-15T14:32:28.871026Z",
+          "providerOrderUnchanged": true,
+          "attemptCount": 0,
+          "eventCount": 0,
+          "trustEntryCount": 1,
+          "exactOriginalTrust": true,
+          "exactExpectedAttempts": true
+        },
+        {
+          "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-first/observed-1-journal.json",
+          "processInstanceId": "20868cc1-c1e2-4fbb-905f-3df25de5dcc6",
+          "revision": 1,
+          "snapshotAtDeviceUtc": "2026-10-15T14:32:28.871026Z",
+          "providerOrderUnchanged": true,
+          "attemptCount": 0,
+          "eventCount": 0,
+          "trustEntryCount": 1,
+          "exactOriginalTrust": true,
+          "exactExpectedAttempts": true
+        },
+        {
+          "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-first/observed-2-journal.json",
+          "processInstanceId": "20868cc1-c1e2-4fbb-905f-3df25de5dcc6",
+          "revision": 1,
+          "snapshotAtDeviceUtc": "2026-10-15T14:32:28.871026Z",
+          "providerOrderUnchanged": true,
+          "attemptCount": 0,
+          "eventCount": 0,
+          "trustEntryCount": 1,
+          "exactOriginalTrust": true,
+          "exactExpectedAttempts": true
+        }
+      ]
+    },
+    {
+      "phase": "observe-restored",
+      "observationArtifact": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-restored/observations.json",
+      "samples": [
+        {
+          "atHostUtc": "2026-10-15T14:33:04.632226+00:00",
+          "sha256": "7b259000a2ddb0b882a4088fd89003ef8b2ca74242776e38c79631e6670ef7ed",
+          "processInstanceId": "e3c14606-3bfb-4230-b20c-8f5e5d826353",
+          "revision": 1,
+          "snapshotAtDeviceUtc": "2026-10-15T14:32:56.187297Z"
+        },
+        {
+          "atHostUtc": "2026-10-15T14:33:05.329704+00:00",
+          "sha256": "7b259000a2ddb0b882a4088fd89003ef8b2ca74242776e38c79631e6670ef7ed",
+          "processInstanceId": "e3c14606-3bfb-4230-b20c-8f5e5d826353",
+          "revision": 1,
+          "snapshotAtDeviceUtc": "2026-10-15T14:32:56.187297Z"
+        },
+        {
+          "atHostUtc": "2026-10-15T14:33:06.521580+00:00",
+          "sha256": "7b259000a2ddb0b882a4088fd89003ef8b2ca74242776e38c79631e6670ef7ed",
+          "processInstanceId": "e3c14606-3bfb-4230-b20c-8f5e5d826353",
+          "revision": 1,
+          "snapshotAtDeviceUtc": "2026-10-15T14:32:56.187297Z"
+        }
+      ],
+      "settledHostObservationSpanSeconds": 1.889354,
+      "journals": [
+        {
+          "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-restored/observed-0-journal.json",
+          "processInstanceId": "e3c14606-3bfb-4230-b20c-8f5e5d826353",
+          "revision": 1,
+          "snapshotAtDeviceUtc": "2026-10-15T14:32:56.187297Z",
+          "providerOrderUnchanged": true,
+          "attemptCount": 8,
+          "eventCount": 48,
+          "trustEntryCount": 1,
+          "exactOriginalTrust": true,
+          "exactExpectedAttempts": true
+        },
+        {
+          "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-restored/observed-1-journal.json",
+          "processInstanceId": "e3c14606-3bfb-4230-b20c-8f5e5d826353",
+          "revision": 1,
+          "snapshotAtDeviceUtc": "2026-10-15T14:32:56.187297Z",
+          "providerOrderUnchanged": true,
+          "attemptCount": 8,
+          "eventCount": 48,
+          "trustEntryCount": 1,
+          "exactOriginalTrust": true,
+          "exactExpectedAttempts": true
+        },
+        {
+          "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-restored/observed-2-journal.json",
+          "processInstanceId": "e3c14606-3bfb-4230-b20c-8f5e5d826353",
+          "revision": 1,
+          "snapshotAtDeviceUtc": "2026-10-15T14:32:56.187297Z",
+          "providerOrderUnchanged": true,
+          "attemptCount": 8,
+          "eventCount": 48,
+          "trustEntryCount": 1,
+          "exactOriginalTrust": true,
+          "exactExpectedAttempts": true
+        }
+      ]
+    },
+    {
+      "phase": "observe-final",
+      "observationArtifact": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-final/observations.json",
+      "samples": [
+        {
+          "atHostUtc": "2026-10-15T14:33:39.746563+00:00",
+          "sha256": "6737b317099b8c3c8bbb2e3074cfd45c949d644c93b359512e19a7fbfa3eb1e5",
+          "processInstanceId": "2b3e875c-fc30-455c-bf07-978f3ed46aa0",
+          "revision": 1,
+          "snapshotAtDeviceUtc": "2026-10-15T14:33:28.120545Z"
+        },
+        {
+          "atHostUtc": "2026-10-15T14:33:40.432865+00:00",
+          "sha256": "6737b317099b8c3c8bbb2e3074cfd45c949d644c93b359512e19a7fbfa3eb1e5",
+          "processInstanceId": "2b3e875c-fc30-455c-bf07-978f3ed46aa0",
+          "revision": 1,
+          "snapshotAtDeviceUtc": "2026-10-15T14:33:28.120545Z"
+        },
+        {
+          "atHostUtc": "2026-10-15T14:33:41.614310+00:00",
+          "sha256": "6737b317099b8c3c8bbb2e3074cfd45c949d644c93b359512e19a7fbfa3eb1e5",
+          "processInstanceId": "2b3e875c-fc30-455c-bf07-978f3ed46aa0",
+          "revision": 1,
+          "snapshotAtDeviceUtc": "2026-10-15T14:33:28.120545Z"
+        }
+      ],
+      "settledHostObservationSpanSeconds": 1.867747,
+      "journals": [
+        {
+          "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-final/observed-0-journal.json",
+          "processInstanceId": "2b3e875c-fc30-455c-bf07-978f3ed46aa0",
+          "revision": 1,
+          "snapshotAtDeviceUtc": "2026-10-15T14:33:28.120545Z",
+          "providerOrderUnchanged": true,
+          "attemptCount": 0,
+          "eventCount": 0,
+          "trustEntryCount": 1,
+          "exactOriginalTrust": true,
+          "exactExpectedAttempts": true
+        },
+        {
+          "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-final/observed-1-journal.json",
+          "processInstanceId": "2b3e875c-fc30-455c-bf07-978f3ed46aa0",
+          "revision": 1,
+          "snapshotAtDeviceUtc": "2026-10-15T14:33:28.120545Z",
+          "providerOrderUnchanged": true,
+          "attemptCount": 0,
+          "eventCount": 0,
+          "trustEntryCount": 1,
+          "exactOriginalTrust": true,
+          "exactExpectedAttempts": true
+        },
+        {
+          "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-final/observed-2-journal.json",
+          "processInstanceId": "2b3e875c-fc30-455c-bf07-978f3ed46aa0",
+          "revision": 1,
+          "snapshotAtDeviceUtc": "2026-10-15T14:33:28.120545Z",
+          "providerOrderUnchanged": true,
+          "attemptCount": 0,
+          "eventCount": 0,
+          "trustEntryCount": 1,
+          "exactOriginalTrust": true,
+          "exactExpectedAttempts": true
+        }
+      ]
+    }
+  ],
+  "freshDistinctProcessInstances": 3,
+  "privateFilePreservation": {
+    "protectedFileCount": 10,
+    "successfulPathHashReadCount": 120,
+    "allProtectedBytesUnchanged": true,
+    "initialFailedBaselineMatchesSuccessfulBaseline": true,
+    "scope": "Terminal/SSH/transfer configuration and keys, other-lane journals and earlier archives. No private credential/configuration contents or their digests are published.",
+    "comparisonRecords": [
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/archive-retry/archive-after-comparison.json",
+        "atUtc": "2026-10-15T14:32:13.000171+00:00",
+        "protectedFileCount": 10,
+        "unchanged": true
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/archive-retry/archive-baseline-comparison.json",
+        "atUtc": "2026-10-15T14:32:08.819866+00:00",
+        "protectedFileCount": 10,
+        "unchanged": false
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/archive-retry/before-stop-protected-comparison.json",
+        "atUtc": "2026-10-15T14:32:10.277873+00:00",
+        "protectedFileCount": 10,
+        "unchanged": true
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-first/after-replace-protected-comparison.json",
+        "atUtc": "2026-10-15T14:32:22.635195+00:00",
+        "protectedFileCount": 10,
+        "unchanged": true
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-first/before-stop-protected-comparison.json",
+        "atUtc": "2026-10-15T14:32:19.396274+00:00",
+        "protectedFileCount": 10,
+        "unchanged": true
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-first/observed-protected-comparison.json",
+        "atUtc": "2026-10-15T14:32:38.708350+00:00",
+        "protectedFileCount": 10,
+        "unchanged": true
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/restore/after-replace-protected-comparison.json",
+        "atUtc": "2026-10-15T14:32:50.826857+00:00",
+        "protectedFileCount": 10,
+        "unchanged": true
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/restore/before-stop-protected-comparison.json",
+        "atUtc": "2026-10-15T14:32:47.562979+00:00",
+        "protectedFileCount": 10,
+        "unchanged": true
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-restored/observed-protected-comparison.json",
+        "atUtc": "2026-10-15T14:33:07.748917+00:00",
+        "protectedFileCount": 10,
+        "unchanged": true
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-final/after-replace-protected-comparison.json",
+        "atUtc": "2026-10-15T14:33:23.180272+00:00",
+        "protectedFileCount": 10,
+        "unchanged": true
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-final/before-stop-protected-comparison.json",
+        "atUtc": "2026-10-15T14:33:19.812863+00:00",
+        "protectedFileCount": 10,
+        "unchanged": true
+      },
+      {
+        "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-final/observed-protected-comparison.json",
+        "atUtc": "2026-10-15T14:33:42.988060+00:00",
+        "protectedFileCount": 10,
+        "unchanged": true
+      }
+    ]
+  },
+  "hostIdleObservations": [
+    {
+      "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/archive-retry/listener-check.json",
+      "atUtc": "2026-10-15T14:32:07.507980+00:00",
+      "connectEx": 111,
+      "connectionRefused": true
+    },
+    {
+      "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-first/listener-check.json",
+      "atUtc": "2026-10-15T14:32:17.972108+00:00",
+      "connectEx": 111,
+      "connectionRefused": true
+    },
+    {
+      "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-first/listener-check.json",
+      "atUtc": "2026-10-15T14:32:35.231660+00:00",
+      "connectEx": 111,
+      "connectionRefused": true
+    },
+    {
+      "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/restore/listener-check.json",
+      "atUtc": "2026-10-15T14:32:46.174564+00:00",
+      "connectEx": 111,
+      "connectionRefused": true
+    },
+    {
+      "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-restored/listener-check.json",
+      "atUtc": "2026-10-15T14:33:04.339337+00:00",
+      "connectEx": 111,
+      "connectionRefused": true
+    },
+    {
+      "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-final/listener-check.json",
+      "atUtc": "2026-10-15T14:33:18.424641+00:00",
+      "connectEx": 111,
+      "connectionRefused": true
+    },
+    {
+      "artifact": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-final/listener-check.json",
+      "atUtc": "2026-10-15T14:33:39.459228+00:00",
+      "connectEx": 111,
+      "connectionRefused": true
+    }
+  ],
+  "nativeOpenActions": [
+    {
+      "layoutArtifact": "qualification/results/private/terminal-probe/device-02/seed-first-open-layout.json",
+      "captureCommand": "qualification/results/private/terminal-probe/device-02/seed-first-open-layout-command.json",
+      "launchCommand": "qualification/results/private/terminal-probe/device-02/seed-first-launch-command.json",
+      "tapCommand": "qualification/results/private/terminal-probe/device-02/seed-first-open-tap-command.json",
+      "atHostUtc": "2026-10-15T14:32:29.781339+00:00",
+      "resourceId": "dev.cloudy.qualification.baseline:id/open_terminal_probe",
+      "label": "Open interactive terminal qualification",
+      "boundsPx": [
+        422,
+        534,
+        2457,
+        612
+      ],
+      "tapPx": [
+        1439,
+        573
+      ],
+      "commandExitCode": 0,
+      "tapInsideCapturedControl": true,
+      "launchStatusObserved": "ok",
+      "launchStateObserved": "COLD"
+    },
+    {
+      "layoutArtifact": "qualification/results/private/terminal-probe/device-02/restored-open-layout.json",
+      "captureCommand": "qualification/results/private/terminal-probe/device-02/restored-open-layout-command.json",
+      "launchCommand": "qualification/results/private/terminal-probe/device-02/restored-launch-command.json",
+      "tapCommand": "qualification/results/private/terminal-probe/device-02/restored-open-tap-command.json",
+      "atHostUtc": "2026-10-15T14:32:57.080204+00:00",
+      "resourceId": "dev.cloudy.qualification.baseline:id/open_terminal_probe",
+      "label": "Open interactive terminal qualification",
+      "boundsPx": [
+        422,
+        534,
+        2457,
+        612
+      ],
+      "tapPx": [
+        1439,
+        573
+      ],
+      "commandExitCode": 0,
+      "tapInsideCapturedControl": true,
+      "launchStatusObserved": "ok",
+      "launchStateObserved": "COLD"
+    },
+    {
+      "layoutArtifact": "qualification/results/private/terminal-probe/device-02/seed-final-open-layout.json",
+      "captureCommand": "qualification/results/private/terminal-probe/device-02/seed-final-open-layout-command.json",
+      "launchCommand": "qualification/results/private/terminal-probe/device-02/seed-final-launch-command.json",
+      "tapCommand": "qualification/results/private/terminal-probe/device-02/seed-final-open-tap-command.json",
+      "atHostUtc": "2026-10-15T14:33:29.032034+00:00",
+      "resourceId": "dev.cloudy.qualification.baseline:id/open_terminal_probe",
+      "label": "Open interactive terminal qualification",
+      "boundsPx": [
+        422,
+        534,
+        2457,
+        612
+      ],
+      "tapPx": [
+        1439,
+        573
+      ],
+      "commandExitCode": 0,
+      "tapInsideCapturedControl": true,
+      "launchStatusObserved": "ok",
+      "launchStateObserved": "COLD"
+    }
+  ],
+  "nativeStatusObservations": [
+    {
+      "layoutArtifact": "qualification/results/private/terminal-probe/device-02/restored-visible-layout.json",
+      "captureCommand": "qualification/results/private/terminal-probe/device-02/restored-visible-layout-command.json",
+      "atHostUtc": "2026-10-15T14:33:13.622092+00:00",
+      "resourceId": "dev.cloudy.qualification.baseline:id/terminal_status",
+      "text": "closed",
+      "boundsPx": [
+        416,
+        418,
+        2463,
+        450
+      ]
+    },
+    {
+      "layoutArtifact": "qualification/results/private/terminal-probe/device-02/seed-final-visible-layout.json",
+      "captureCommand": "qualification/results/private/terminal-probe/device-02/seed-final-visible-layout-command.json",
+      "atHostUtc": "2026-10-15T14:34:35.481396+00:00",
+      "resourceId": "dev.cloudy.qualification.baseline:id/terminal_status",
+      "text": "ready",
+      "boundsPx": [
+        416,
+        418,
+        2463,
+        450
+      ]
+    }
+  ],
+  "scopeLimits": [
+    "Diagnostic operator maintenance, not a product history-management feature.",
+    "No Connect action occurs in the reviewed controls and no new attempt appears; listener refusal is not packet-level proof of no attempted connection.",
+    "Full restored row equality covers events, details, identity and build provenance. Rewritten runtime envelope is intentionally not byte-identical to the archive.",
+    "Injected native taps do not qualify physical keyboard/mouse, native IME, accessibility, terminal bulk input or a TUI.",
+    "Same-filesystem rename/readback and sampled package absence do not establish power-loss durability, multi-file atomicity or absence of every system WebView process.",
+    "P0-S3 remains in progress; CAP-SSH and CAP-TERMINAL remain pending. Later operations in device-02 are outside this frozen evidence set."
+  ],
+  "artifactHashAlgorithm": "SHA-256",
+  "privateArtifacts": [
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/archive/056-before-stop-ps.json",
+      "bytes": 234,
+      "sha256": "4370182f72bdbb67c18ba8b05ba5aa33e2316c8861bc300d8f2a7252597e90e1"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/archive/before-stop-journal.json",
+      "bytes": 20670,
+      "sha256": "8d35a416f8b1669c0ad9b841fd7e275a5b9c9d226eea8ea636d4059b23513441"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/archive/failure.json",
+      "bytes": 138,
+      "sha256": "9fcf6e77fff26a4cff9fae5247d2e5ca0ea0d52a649853a3af43048dc8bb8f95"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/archive-complete.json",
+      "bytes": 713,
+      "sha256": "9a9e9e1c8ee683ebeb07d4dd5d02a756008b78395b6cd315d030095e527b1370"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/archive-retry/001-shell-v2-probe.json",
+      "bytes": 292,
+      "sha256": "cfccac8aee48cf522eaef0e361ad44ae67cd4d72ac9d3ebee539e2ed1610c447"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/archive-retry/005-installed-apk-sha.json",
+      "bytes": 439,
+      "sha256": "9a110e3b84f23987667382202645c2bbd5235994772eb6c8c9e03d43aeb2d5b3"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/archive-retry/058-force-stop-selected-user.json",
+      "bytes": 226,
+      "sha256": "958b0404434eec46e3cf3822a0c14330be073fd9b360ec5893bd7bbd7712620c"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/archive-retry/067-archive-read.json",
+      "bytes": 23239,
+      "sha256": "a2a90a895ea5b90be13580a6fd4d0d6593a1c911496d2dd8c209a58ee692870c"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/archive-retry/archive-after-comparison.json",
+      "bytes": 99,
+      "sha256": "6aa44dd2c4daaaf8e5d7c3d44f0d5194af1ccc67c71b485c78ac98559a6295cd"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/archive-retry/archive-baseline-comparison.json",
+      "bytes": 100,
+      "sha256": "392194d6d406a6337ffe627a28f50319a2efe46ef3c198f1deb5c52676368ecd"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/archive-retry/archive-complete-processes.json",
+      "bytes": 88,
+      "sha256": "f021ccd3ce16ff1aade208f7d3594c01718e4a8da3cf3ca4a1c54f9f34145d17"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/archive-retry/before-archive-processes.json",
+      "bytes": 88,
+      "sha256": "fc04bd4bf668ca95c48446b3fc7cafe64f90625eab35d811ee4e59daf9f1a0c7"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/archive-retry/before-stop-journal.json",
+      "bytes": 20670,
+      "sha256": "8d35a416f8b1669c0ad9b841fd7e275a5b9c9d226eea8ea636d4059b23513441"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/archive-retry/before-stop-processes.json",
+      "bytes": 176,
+      "sha256": "52d15983ae8e1e042d2f13e90e02775277db9deb6ceca7f4564d4b8119778b6c"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/archive-retry/before-stop-protected-comparison.json",
+      "bytes": 99,
+      "sha256": "b24f5caf2712151729b4edf85971749b238fbd14b16fa6697874c1a1f1a44035"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/archive-retry/listener-check.json",
+      "bytes": 99,
+      "sha256": "e3b3021b2d5961d890ec20215c7c562041849538e0253c750813c9b7c039111d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/archive-retry/stopped-0-processes.json",
+      "bytes": 88,
+      "sha256": "35f52ed344b92389aefbf05e4501e05106ce6e0498799e0c5c9ebba67f42ffaa"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/archive-retry/stopped-1-processes.json",
+      "bytes": 88,
+      "sha256": "e23df5aa00d23ab440c6a31d9ccfdfdad81fb037a8e0e5d76e8a2f268f50ce57"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/archive-retry/stopped-2-processes.json",
+      "bytes": 88,
+      "sha256": "a74414ba2fd3bc31fd9c8a1c2b273267771f6e0c66272014c0bde225f97db11c"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/archive-retry/stopped-original-journal.json",
+      "bytes": 20670,
+      "sha256": "8d35a416f8b1669c0ad9b841fd7e275a5b9c9d226eea8ea636d4059b23513441"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/batch-01-journal.json",
+      "bytes": 20670,
+      "sha256": "8d35a416f8b1669c0ad9b841fd7e275a5b9c9d226eea8ea636d4059b23513441"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/codec-preflight/TerminalSeedCheck.class",
+      "bytes": 2520,
+      "sha256": "9b6e7765eb1399559d45633896746c0c567313a2daec0ac4aa8069c53fe287dc"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/codec-preflight/TerminalSeedCheck.java",
+      "bytes": 1230,
+      "sha256": "9a2f5196d374ed4164cb34384a90ca663500942cc38b9f192af404ad8f4a8973"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/codec-preflight/candidate-seed.json",
+      "bytes": 329,
+      "sha256": "1f76c54135ff1c061f0763aba49a5c2e0662bdd5c7cf1bf519cedd0a3ebdc68e"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/codec-preflight/result.json",
+      "bytes": 2597,
+      "sha256": "163242d53d152cdee1d4401b94f565d476cb5570e03ed37493833ac0a3e10d71"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/independent-review.json",
+      "bytes": 2473,
+      "sha256": "b728f0203831ba9a5de6bca1edb01e022a70b04e92cfd67633df5e36164f23f8"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-final/001-shell-v2-probe.json",
+      "bytes": 292,
+      "sha256": "89841de0b5a25ac2448ff94279f0af79da53affd5da8e2358b8bd7781697efee"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-final/005-installed-apk-sha.json",
+      "bytes": 439,
+      "sha256": "0a74b5a5f0d6d9948a5cc8992efeef4df7a0e351b23a86e089fc616e79d18e21"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-final/007-archive-read.json",
+      "bytes": 23239,
+      "sha256": "d0e04c5e25b853e45846c284312f0e0e1368b08576eede7f74c3696d23aaa449"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-final/listener-check.json",
+      "bytes": 99,
+      "sha256": "1f4f0d8e026ecd15de2f2d2daed1a5ed8fc8fbc4d4c26ca43c1bda64ff4ee04c"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-final/observations.json",
+      "bytes": 1049,
+      "sha256": "365d8e3eb2764482b11d3a5fd8b69e60577d4caad2cd61399ddb56e7db8b42b5"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-final/observed-0-journal.json",
+      "bytes": 737,
+      "sha256": "6737b317099b8c3c8bbb2e3074cfd45c949d644c93b359512e19a7fbfa3eb1e5"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-final/observed-0-processes.json",
+      "bytes": 177,
+      "sha256": "2ff9bac7bf46951f5af976c3d5ea06a4ad916b189979971d2774819c540e8e34"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-final/observed-1-journal.json",
+      "bytes": 737,
+      "sha256": "6737b317099b8c3c8bbb2e3074cfd45c949d644c93b359512e19a7fbfa3eb1e5"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-final/observed-1-processes.json",
+      "bytes": 177,
+      "sha256": "8dd3a7a0bc1c2a74994f06b1ef93f367b60b7bb75d771797ea939d6e04af7925"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-final/observed-2-journal.json",
+      "bytes": 737,
+      "sha256": "6737b317099b8c3c8bbb2e3074cfd45c949d644c93b359512e19a7fbfa3eb1e5"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-final/observed-2-processes.json",
+      "bytes": 177,
+      "sha256": "807c470509911d5e56d65bbaa9a8f4bcc546fb3d076b0065ed407ca967d83d64"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-final/observed-protected-comparison.json",
+      "bytes": 99,
+      "sha256": "f1287d0604083295694c458c60275f9131a368f2b4acd6112252fd41a3375fdd"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-final-complete.json",
+      "bytes": 734,
+      "sha256": "8b9d8b659d83720805574bd5900c65e4d40b0cc49e9287e27b9e54fc6b778d2c"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-first/001-shell-v2-probe.json",
+      "bytes": 292,
+      "sha256": "86594ec2650d3e1fc774cb7441fc0bf87c8765bdb5b0a8d2281f2544781c83f2"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-first/005-installed-apk-sha.json",
+      "bytes": 439,
+      "sha256": "1387dd2bc00fcad84878171f07416e07adac99f7b349f2c9a49261275d9a584d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-first/007-archive-read.json",
+      "bytes": 23239,
+      "sha256": "4a6411c0c8b897e8ca4d9313a0ede7e9e88cc5222316e463eec91d767cf32651"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-first/listener-check.json",
+      "bytes": 99,
+      "sha256": "cf197c549316245b0533481ef7496fc77d58bb71ade4056b9b5af98bb9de31a6"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-first/observations.json",
+      "bytes": 1049,
+      "sha256": "969907168dd8f75df57c6f826de9678c3ef926fb0025e38f68ec1d26b1b07049"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-first/observed-0-journal.json",
+      "bytes": 737,
+      "sha256": "b961a13627983a5028ec25655ca8694974b23257ad51a66901d10eb30625c368"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-first/observed-0-processes.json",
+      "bytes": 177,
+      "sha256": "9363c64ae40e344ca580a7036a070dca804f7e5b483bbcec879166b896eceaf5"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-first/observed-1-journal.json",
+      "bytes": 737,
+      "sha256": "b961a13627983a5028ec25655ca8694974b23257ad51a66901d10eb30625c368"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-first/observed-1-processes.json",
+      "bytes": 177,
+      "sha256": "1bfd03636683a425451a7e5ba9bd270453baf5c6fa7e16fcda2da6880d5e4da6"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-first/observed-2-journal.json",
+      "bytes": 737,
+      "sha256": "b961a13627983a5028ec25655ca8694974b23257ad51a66901d10eb30625c368"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-first/observed-2-processes.json",
+      "bytes": 177,
+      "sha256": "7c2c28e6150e552ac7390d1571964f733935796b692ae11f9c99b11571c6bab7"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-first/observed-protected-comparison.json",
+      "bytes": 99,
+      "sha256": "26b8a80856c12c1f485afa47c69e886a62fa43d5899d0699dd224133aa32f793"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-first-complete.json",
+      "bytes": 734,
+      "sha256": "760fb6aab7441cc9a82d99c4264bee0cdb1784c50d85d9b5ce66b8190f8c493b"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-restored/001-shell-v2-probe.json",
+      "bytes": 292,
+      "sha256": "1fafdd2628e2a34603074222c2f7c2869ce533d50262e0135382dac139102317"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-restored/005-installed-apk-sha.json",
+      "bytes": 439,
+      "sha256": "7a8a968837cf910a5758707763ac08f19736516d8bf95884661435d850f462ea"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-restored/007-archive-read.json",
+      "bytes": 23239,
+      "sha256": "0a76839c0313adfaeb273551f60796b4e6f593d167d4213e77b15a5d538eebb8"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-restored/listener-check.json",
+      "bytes": 99,
+      "sha256": "6af8a81c9a639f7fc61114b3310178c09050871c473e5e30f7b4145171e1aebb"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-restored/observations.json",
+      "bytes": 1049,
+      "sha256": "82ed77511b4387e781f9b796a1c867c55b882f7b235babb7696b6e83ac7db278"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-restored/observed-0-journal.json",
+      "bytes": 20670,
+      "sha256": "7b259000a2ddb0b882a4088fd89003ef8b2ca74242776e38c79631e6670ef7ed"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-restored/observed-0-processes.json",
+      "bytes": 177,
+      "sha256": "4f8f0f8a829f90d6fa5983d4ac17aa4cf144253a2a8246bbe7f21739d8d198a4"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-restored/observed-1-journal.json",
+      "bytes": 20670,
+      "sha256": "7b259000a2ddb0b882a4088fd89003ef8b2ca74242776e38c79631e6670ef7ed"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-restored/observed-1-processes.json",
+      "bytes": 177,
+      "sha256": "8efa7c701ae90f9bd3945b3246b9a9bc7226e83d4cde0d488981c5b0e66f11d0"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-restored/observed-2-journal.json",
+      "bytes": 20670,
+      "sha256": "7b259000a2ddb0b882a4088fd89003ef8b2ca74242776e38c79631e6670ef7ed"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-restored/observed-2-processes.json",
+      "bytes": 177,
+      "sha256": "4671e301af77c49e00991a049a4a344b849c6ee1c87f2f06265786ed44131b9b"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-restored/observed-protected-comparison.json",
+      "bytes": 99,
+      "sha256": "dd57fe7a75dd9f098a860df1013757cb7cd64993c8f18795a2803cebeb95e260"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/observe-restored-complete.json",
+      "bytes": 741,
+      "sha256": "b39b8639070ec813bc21cd757b84105a37a9c8f235788aceb54f9a494046bb8d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/operator-seed.json",
+      "bytes": 329,
+      "sha256": "1f76c54135ff1c061f0763aba49a5c2e0662bdd5c7cf1bf519cedd0a3ebdc68e"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/ps-help.txt",
+      "bytes": 1073,
+      "sha256": "31967a99cb131ee155b105351ac91615248fffaa9caeba206c9257eb89a374ec"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/ps-numeric.json",
+      "bytes": 206,
+      "sha256": "b25f06796288679be424cc04c442945279d613e3e7b5d9cb0097d3ea2d618bd3"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/restore/001-shell-v2-probe.json",
+      "bytes": 292,
+      "sha256": "ec70b10a57bcd8c711f5632736bca2063f7cc919f686fda996db49c35e2be43c"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/restore/005-installed-apk-sha.json",
+      "bytes": 439,
+      "sha256": "8f2ada3620a92335c486a29d6b4580d8e5540a5a1bc8d103fb5f71d3f3ed570c"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/restore/034-force-stop-selected-user.json",
+      "bytes": 226,
+      "sha256": "72982306f9e76baafcc2b59e2cdb1848c36baa9b3f3b6ecda91ad2f587746920"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/restore/039-archive-read.json",
+      "bytes": 23239,
+      "sha256": "7443df5f9d62f7b6d8c835b5d63cd204d697385b6ec0876f6b3213e7c597320d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/restore/054-archive-after-replace-read.json",
+      "bytes": 23239,
+      "sha256": "f5c918425e70289964f2d6da9a4d2f50fb27cae0effc9fc725f61738d37aa3d7"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/restore/after-replace-processes.json",
+      "bytes": 88,
+      "sha256": "c5163dfc6c68f52707ac01985a47f1adf8ba0f68b212b8049725089c22646732"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/restore/after-replace-protected-comparison.json",
+      "bytes": 99,
+      "sha256": "04a3b98c3c6cbb4453614bc33c57b746c99e83d04d06ffb2405ddeee288b3689"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/restore/before-rename-processes.json",
+      "bytes": 88,
+      "sha256": "48005c02f21fd4d0a3480992a698cd80d4d3a9e2e81e6201af5d0a9b139c0d53"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/restore/before-replace-journal.json",
+      "bytes": 737,
+      "sha256": "b961a13627983a5028ec25655ca8694974b23257ad51a66901d10eb30625c368"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/restore/before-staging-processes.json",
+      "bytes": 88,
+      "sha256": "f8c190c4e3c69c52e3fca597e3ebfa303d7d8daaa558c2e29a771637482747e2"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/restore/before-stop-journal.json",
+      "bytes": 737,
+      "sha256": "b961a13627983a5028ec25655ca8694974b23257ad51a66901d10eb30625c368"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/restore/before-stop-processes.json",
+      "bytes": 177,
+      "sha256": "cb31f410ab03fde2bdbc96c5ffc7999160b8cd0208ef1435b1586bcb27ad4b42"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/restore/before-stop-protected-comparison.json",
+      "bytes": 99,
+      "sha256": "2b8050e1009b34f5198976595bb5085b855152c814295cc676f652a75ad31e13"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/restore/installed-journal.json",
+      "bytes": 20670,
+      "sha256": "8d35a416f8b1669c0ad9b841fd7e275a5b9c9d226eea8ea636d4059b23513441"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/restore/listener-check.json",
+      "bytes": 99,
+      "sha256": "9020c24e4ee0bb469a49cfe9df0048837742de04db95ee2b04e0dc7d70000951"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/restore/stopped-0-processes.json",
+      "bytes": 88,
+      "sha256": "2ffcc23cb453994f16d117419ef8de834c04b13598f2de9538fd2aed40324dd6"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/restore/stopped-1-processes.json",
+      "bytes": 88,
+      "sha256": "d52f57c9442ac72540d3925ec9e5d0dfcdeb9c6e2a3881596f86c8d6a57b3c5a"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/restore/stopped-2-processes.json",
+      "bytes": 88,
+      "sha256": "2e2d99b0f160642887ac35269107b7279427a6af011a5d3c6b1b87bc4adc33a5"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/restore-complete.json",
+      "bytes": 859,
+      "sha256": "f72598660f0af67447496e49d703cc384039595fd1f166751ee3f265ae5c441f"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/retry-preparation/033-archive-absence.json",
+      "bytes": 309,
+      "sha256": "e3341438aab435c3a864ffe0199879fe799b1d77ede0d112f4e5e3bcf0958960"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/retry-preparation/baseline-preservation.json",
+      "bytes": 332,
+      "sha256": "24bd3fb995e7b08bb32bacf1cb604b039094bf1d3be17c4828ec5d60c8374a65"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/retry-preparation/recovery-original-journal.json",
+      "bytes": 20670,
+      "sha256": "8d35a416f8b1669c0ad9b841fd7e275a5b9c9d226eea8ea636d4059b23513441"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/retry-preparation/recovery-readiness.json",
+      "bytes": 171,
+      "sha256": "68a209cd7124107770f031515c295b3f09b1caa859854093734b031dc1df6d9e"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-final/001-shell-v2-probe.json",
+      "bytes": 292,
+      "sha256": "0a34f57431c374814fb969c605a761bced1f1b552750de3d7c9ff9e5b0a9adcb"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-final/005-installed-apk-sha.json",
+      "bytes": 439,
+      "sha256": "8f36fa09d36994969256e6a4d6b7ca2b3a19ca90a198bb468733f613b5a9b71c"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-final/034-force-stop-selected-user.json",
+      "bytes": 226,
+      "sha256": "3f71beb0624ed6265ebcd2d2ae1c3ce45ed816850bdca6cbe01811b1b26b6797"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-final/039-archive-read.json",
+      "bytes": 23239,
+      "sha256": "434d9922740ca656be4e0c06286645a5d9e067401d06f8ccfd93b4f4b3ec113d"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-final/054-archive-after-replace-read.json",
+      "bytes": 23239,
+      "sha256": "bf5232dab37430302cfbb36282e9229b8fa2ece1d622635801b7e2ffb8b0e1dc"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-final/after-replace-processes.json",
+      "bytes": 88,
+      "sha256": "2c797b5485d4307fef2d96f7897a58f63fab8b685f7470b3f6794eb3900bf195"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-final/after-replace-protected-comparison.json",
+      "bytes": 99,
+      "sha256": "4235e3d25271da0027852fead39c2c1dc1e27f0a86f9902a6f5651d4d0de1c63"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-final/before-rename-processes.json",
+      "bytes": 88,
+      "sha256": "53c1efc735eeb82d8fa4e0a0bc9ac1128e5fa5f55eda6ff2f74f4c4f86674504"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-final/before-replace-journal.json",
+      "bytes": 20670,
+      "sha256": "7b259000a2ddb0b882a4088fd89003ef8b2ca74242776e38c79631e6670ef7ed"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-final/before-staging-processes.json",
+      "bytes": 88,
+      "sha256": "ca22f93c33798c156e681c66f0262f1cc37960550347661a0c2b984e8c0d4624"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-final/before-stop-journal.json",
+      "bytes": 20670,
+      "sha256": "7b259000a2ddb0b882a4088fd89003ef8b2ca74242776e38c79631e6670ef7ed"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-final/before-stop-processes.json",
+      "bytes": 177,
+      "sha256": "720532162b23ae6af427ad0ebd21d3431f41d2b3e259ca2d37051bdb82b00835"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-final/before-stop-protected-comparison.json",
+      "bytes": 99,
+      "sha256": "f57c519b6ac39118b8dff41bd7520bbdd40f15f68a468b006fc44f8ddb830a94"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-final/installed-journal.json",
+      "bytes": 329,
+      "sha256": "1f76c54135ff1c061f0763aba49a5c2e0662bdd5c7cf1bf519cedd0a3ebdc68e"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-final/listener-check.json",
+      "bytes": 99,
+      "sha256": "78500fd201635425749b30e0339869871773446dd7bb8f7ae5732d266ba38dba"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-final/stopped-0-processes.json",
+      "bytes": 88,
+      "sha256": "a24e470d6d2708a8afe7f54143b69d0339d76d05dd1268318d136461c24c1c46"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-final/stopped-1-processes.json",
+      "bytes": 88,
+      "sha256": "336742594baaa64114d33a2eeff1c4085b983be9a45f0c55acdf622da5765bd0"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-final/stopped-2-processes.json",
+      "bytes": 88,
+      "sha256": "a6a21d65530e9cb25bdd7325b203fff253efc4499c4634e55e6985fa8758fbc2"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-final-complete.json",
+      "bytes": 865,
+      "sha256": "7cef3eb3939a1d4ef0522f60713c721ee0d4134d88db7feb726f3cacea2e0b8c"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-first/001-shell-v2-probe.json",
+      "bytes": 292,
+      "sha256": "16bd4095ca084ae0b6538335ed9746886ee89f8ec30202ea47ed07df8eb98e0a"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-first/005-installed-apk-sha.json",
+      "bytes": 439,
+      "sha256": "7e2e10347982fcf6e9d4778281b6105013d7c9ca5f884d500e5ead51d798d916"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-first/033-force-stop-selected-user.json",
+      "bytes": 226,
+      "sha256": "f71cf3ba050fea8ac49f17f0965e85a0703b1e0f2e5c601ad353efa08d7bb474"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-first/038-archive-read.json",
+      "bytes": 23239,
+      "sha256": "9dcfe866494a0a6b8fe88714ca8f4f25907c6cec2598e41f806c6883f79bd56f"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-first/053-archive-after-replace-read.json",
+      "bytes": 23239,
+      "sha256": "ba2edb4578d656c814de0a4c9bf10419baa7311cc38f81e38c393aace49784a5"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-first/after-replace-processes.json",
+      "bytes": 88,
+      "sha256": "22a7a65e5cd2a002110a8ef39a3214223590cc853356e12a82c30c06f40b68a8"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-first/after-replace-protected-comparison.json",
+      "bytes": 99,
+      "sha256": "4558c3e31cac3aa28f4a087b7ce981ea275e8801e69c26c4e9ff512826f8066f"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-first/before-rename-processes.json",
+      "bytes": 88,
+      "sha256": "0cf81b8f9c49e84af22068f00f3c92adf6a593a20217c7722d4a725e34d266c9"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-first/before-replace-journal.json",
+      "bytes": 20670,
+      "sha256": "8d35a416f8b1669c0ad9b841fd7e275a5b9c9d226eea8ea636d4059b23513441"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-first/before-staging-processes.json",
+      "bytes": 88,
+      "sha256": "57862cc6bd7f3d98c585e0b149bfcab2563ba09f655fcd8c1f08d0a0ab6c42a8"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-first/before-stop-journal.json",
+      "bytes": 20670,
+      "sha256": "8d35a416f8b1669c0ad9b841fd7e275a5b9c9d226eea8ea636d4059b23513441"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-first/before-stop-processes.json",
+      "bytes": 88,
+      "sha256": "87c708af3061bd6f688b5b40098b05ecd72f0fd8ceca57d5bef55c28ae5ec190"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-first/before-stop-protected-comparison.json",
+      "bytes": 99,
+      "sha256": "e4d88d3ee6dc204ffeee620a6d852d1dcce62d20f4a475b163cfc416f2e88d82"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-first/installed-journal.json",
+      "bytes": 329,
+      "sha256": "1f76c54135ff1c061f0763aba49a5c2e0662bdd5c7cf1bf519cedd0a3ebdc68e"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-first/listener-check.json",
+      "bytes": 99,
+      "sha256": "b7983a053e484d8769a4eeb20f59e92c03f2c7fac8ad92f792cb6173b6e1ca89"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-first/stopped-0-processes.json",
+      "bytes": 88,
+      "sha256": "2036fa8fac6908d2f9b71e31bd9114a791408e51c26794230945b8769e91f3d0"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-first/stopped-1-processes.json",
+      "bytes": 88,
+      "sha256": "50bb5d3fe6ea2bba3016fd19941283dfc53ffa367335c23872545a9920fb69c2"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-first/stopped-2-processes.json",
+      "bytes": 88,
+      "sha256": "b93eae1181c2010464ea378fbe80463bdad1b5d58fd4a0bb6e1e4a8d70243a91"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/seed-first-complete.json",
+      "bytes": 865,
+      "sha256": "db69d135bcd251fbb8693ea28351c41c0644771e65459a064192b8d57609cd38"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/batch-02-maintenance/terminal_batch_maintenance.py",
+      "bytes": 24494,
+      "sha256": "eae69be12b3d0b248f32e200c621928fbe12d008099fcd3ccc51bbe446608416"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/restored-launch-command.json",
+      "bytes": 471,
+      "sha256": "4658a33f0b11814aa8bd5a16168da7951abca8ee6144f14a82f926a2d9331096"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/restored-open-layout-command.json",
+      "bytes": 595,
+      "sha256": "714735751c9c4d19251930a09d2cc38308f92408afc2c1b4533ea2e017446953"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/restored-open-layout.json",
+      "bytes": 34541,
+      "sha256": "99671ef738ef5facb36781583e9099b0d8a823496f4e180ea937f9ce0840ed84"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/restored-open-tap-command.json",
+      "bytes": 210,
+      "sha256": "e07e8273a0c475d17e1bb0268c0de9b18022fde21da9219dff19092c7c9bf28e"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/restored-visible-layout-command.json",
+      "bytes": 601,
+      "sha256": "b480342e2792a187acaaa0266e701d470483a32423406d855505f26f351268d1"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/restored-visible-layout.json",
+      "bytes": 17133,
+      "sha256": "9580381ffa2444abf07c310fde8e044f2f91e5fa2e5795ebe305f0edb7ff4b56"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/seed-final-launch-command.json",
+      "bytes": 471,
+      "sha256": "dc051c61b2931f5322d13bb52fa9daf008595141d2271d49c7370cc604597b87"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/seed-final-open-layout-command.json",
+      "bytes": 599,
+      "sha256": "c5deaf223ecb7e3034b21adde019b4134f66bda1e8630bf05d391a40993b8569"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/seed-final-open-layout.json",
+      "bytes": 34541,
+      "sha256": "d20e82ac7aa154557d95bb6b1a875bc6f682e0201f47ba4fb6a7fbad83b98430"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/seed-final-open-tap-command.json",
+      "bytes": 210,
+      "sha256": "69b12d91af803624148fc45b09bb5824be6d70fc703b0e8b89c89b6e5481ba1f"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/seed-final-visible-layout-command.json",
+      "bytes": 605,
+      "sha256": "af5b7385793fcee5108646239e9b4782bfe3e1394466fff0e656c9ffad232790"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/seed-final-visible-layout.json",
+      "bytes": 17132,
+      "sha256": "ff574e9807061fcb0a59e4b62e38fa652d7d021ced9e805e7e61f89594ca1d22"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/seed-first-launch-command.json",
+      "bytes": 471,
+      "sha256": "771c02ce011cae4b83ab2370a9de31cff7aaace02e2a6bf86c81d5abc2b589aa"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/seed-first-open-layout-command.json",
+      "bytes": 599,
+      "sha256": "dfaadfa393cf7d585c591372efa71d21c8fdee73e76151cab87d43e91d122bb5"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/seed-first-open-layout.json",
+      "bytes": 29703,
+      "sha256": "d6ece1061c926ad3708054bdc68b9239c7fd3f2ace0d2c6daaa4301ace336891"
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-02/seed-first-open-tap-command.json",
+      "bytes": 210,
+      "sha256": "fceaf52a2f3a01dc9f359a1d587c3734f38d09c61ed422750ec2b9dec43db4a8"
+    }
+  ],
+  "selectedPrivateArtifactCount": 146
+}
