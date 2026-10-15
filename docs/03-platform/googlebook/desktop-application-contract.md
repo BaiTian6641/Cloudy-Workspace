@@ -1,6 +1,6 @@
 # Googlebook desktop application contract
 
-**Checked:** 2026-10-14. **Product authority:** [Rule 0](../../00-project/platform-rule-zero.md). **Implementation state:** proposed; all device/API experiments remain untested.
+**Guidance checked:** 2026-10-14. **Status updated:** 2026-10-15. **Product authority:** [Rule 0](../../00-project/platform-rule-zero.md). **Implementation state:** product contract proposed. The [P0-S1 diagnostic run](../../../qualification/results/P0-S1/2026-10-15-device-probe.md) records partial API/lifecycle observations; full desktop workflows and feature capabilities remain unqualified.
 
 The two clients are Android packages for the Googlebook desktop ecosystem. Use Android Studio/SDK, Compose for native application chrome, and NDK components for qualified protocol/rendering engines. Build and install each package independently. Select minSdk, targetSdk, ABI, SDK extensions, and AndroidX versions after P0 inspection; the existence of one API does not set the whole application's minimum version.
 
