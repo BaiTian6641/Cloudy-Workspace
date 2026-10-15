@@ -1,0 +1,46 @@
+{
+  "tests": 61,
+  "failures": 0,
+  "errors": 0,
+  "suites": 9,
+  "apkSha256": "134cb6bc0d54eb69a3ba9956d6820c07913344022dd164977cf8453837683686",
+  "apkBytes": 7113925,
+  "noticeAssetsMatch": true,
+  "noticeAssetCount": 11,
+  "permissions": [
+    "android.permission.INTERNET",
+    "android.permission.ACCESS_NETWORK_STATE",
+    "android.permission.ACCESS_LOCAL_NETWORK",
+    "android.permission.RUN_USER_INITIATED_JOBS",
+    "android.permission.POST_NOTIFICATIONS"
+  ],
+  "components": [
+    {
+      "type": "receiver",
+      "name": "dev.cloudy.qualification.baseline.TransferCancelReceiver",
+      "exported": "false",
+      "permission": null
+    },
+    {
+      "type": "service",
+      "name": "dev.cloudy.qualification.baseline.TransferJobService",
+      "exported": "false",
+      "permission": "android.permission.BIND_JOB_SERVICE"
+    },
+    {
+      "type": "activity",
+      "name": "dev.cloudy.qualification.baseline.TransferActivity",
+      "exported": "false",
+      "permission": null
+    },
+    {
+      "type": "activity",
+      "name": "dev.cloudy.qualification.baseline.BaselineActivity",
+      "exported": "true",
+      "permission": null
+    }
+  ],
+  "versionCode": "4",
+  "versionName": "0.4.0",
+  "scope": "Locally built 0.4.0 source/package checks only; no device claim. No new dependencies; 11 retained notice assets match source bytes."
+}

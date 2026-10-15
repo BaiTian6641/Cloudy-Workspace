@@ -187,7 +187,7 @@ The [engagement contract](../03-platform/googlebook/p0-s2-engagement-probe-contr
 
 ## P0-S2 finite HTTPS transfer prerequisites
 
-The [transfer probe contract](../03-platform/googlebook/p0-s2-transfer-probe-contract.md) uses these exact public surfaces. Source implementation is in progress; compiler and device results remain untested. G21/G22 are re-reviewed for network defaults and notification denial. UIDT eligibility, LAN permission, TLS identity and completed bytes are separate checks.
+The [transfer probe contract](../03-platform/googlebook/p0-s2-transfer-probe-contract.md) uses these exact public surfaces. The 0.4.0 source compiles and passes lint/JVM tests; device results remain untested. G21/G22 are re-reviewed for network defaults and notification denial. UIDT eligibility, LAN permission, TLS identity and completed bytes are separate checks.
 
 | ID | Official reference | Review status | Development use |
 | --- | --- | --- | --- |

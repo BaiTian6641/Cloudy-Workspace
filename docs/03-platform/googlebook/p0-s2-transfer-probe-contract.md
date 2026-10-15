@@ -1,6 +1,6 @@
 # P0-S2 — Real UIDT transfer experiment
 
-**Checked:** 2026-10-15. **Owner:** Android/platform developer. **Status:** implementation in progress; no compiled or device pass yet. This is a diagnostic extension, not Console SFTP, a remote editor, a production transfer engine or a completed platform gate. Preserve [operation lifetimes](p0-s2-operation-lifetimes.md), [Rule 0](../../00-project/platform-rule-zero.md) and [publication recovery](../../02-architecture/file-publication.md).
+**Checked:** 2026-10-15. **Owner:** Android/platform developer. **Status:** 0.4.0 implementation compiled, linted and independently reviewed; device cases pending. This is a diagnostic extension, not Console SFTP, a remote editor, a production transfer engine or a completed platform gate. Preserve [operation lifetimes](p0-s2-operation-lifetimes.md), [Rule 0](../../00-project/platform-rule-zero.md) and [publication recovery](../../02-architecture/file-publication.md).
 
 ## Actual operation and scope
 
@@ -35,7 +35,7 @@ Reject oversized/invalid configuration before scheduling. Build a dedicated `Key
 6. A new process reconciles unfinished durable state to interrupted/unknown. It does not replay a download automatically. An explicit subsequent attempt starts from zero; HTTP Range resume and remote publication are outside this experiment. Preserve prior attempt evidence separately before an operator resets the fixture.
 7. User cancel, network failure, `onStopJob`, task removal, Task Manager stop and abrupt process loss are distinct stimuli. Android need not deliver a shutdown callback; a previously saved report is historical, not proof of a live worker.
 
-These invariants are review requirements. Tests and device evidence must establish what the implementation actually satisfies. The official [UIDT guide](https://developer.android.com/develop/background-work/background-tasks/uidt), [network API](https://developer.android.com/reference/android/net/Network) and [TLS guidance](https://developer.android.com/privacy-and-security/security-ssl) provide the public contracts; exact symbols and availability are maintained in [API39/API41](api-tracker.json).
+These invariants were checked in the [source review](../../06-validation/2026-10-15-transfer-probe-review.md). Compiler/JVM evidence and actual device cases remain distinct. The official [UIDT guide](https://developer.android.com/develop/background-work/background-tasks/uidt), [network API](https://developer.android.com/reference/android/net/Network) and [TLS guidance](https://developer.android.com/privacy-and-security/security-ssl) provide the public contracts; exact symbols and availability are maintained in [API39/API41](api-tracker.json).
 
 ## Planned acceptance cases
 

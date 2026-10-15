@@ -2,7 +2,8 @@
 <resources>
     <string name="app_name">Cloudy device baseline probe</string>
     <string name="probe_heading">Window probe · qualification only</string>
-    <string name="probe_scope">Real task windows and Bundle-restored markers, plus reported Android capabilities. No Console/Desktop implementation, video decoding, input latency test, network or USB access.</string>
+    <string name="probe_scope">Real task windows and Bundle-restored markers, plus reported Android capabilities. The separate transfer probe downloads a test file over HTTPS. No Console/Desktop implementation, video decoding, input latency test or USB access.</string>
+    <string name="open_transfer_probe">Open transfer experiment</string>
     <string name="new_window">New window</string>
     <string name="change_marker">Change marker</string>
     <string name="recreate_window">Recreate this window</string>

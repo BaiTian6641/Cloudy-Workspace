@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="transfer_heading">Transfer experiment</string>
+    <string name="transfer_scope">Qualification only: download a finite generated HTTPS fixture using an Android user-initiated transfer job. Private configuration is required. No automatic retry or resume. Recreating this window only reattaches to existing work.</string>
+    <string name="transfer_window_identity">Activity instance: %1$s\nObserved task: %2$d</string>
+    <string name="transfer_request_lan">Request local network access</string>
+    <string name="transfer_request_notifications">Request progress notifications</string>
+    <string name="transfer_start">Download test fixture</string>
+    <string name="transfer_cancel">Cancel transfer</string>
+    <string name="transfer_recreate">Recreate transfer window</string>
+    <string name="transfer_refresh">Refresh transfer state</string>
+    <string name="transfer_initializing">Reading private transfer state…</string>
+    <string name="transfer_granted">granted</string>
+    <string name="transfer_denied">not granted</string>
+    <string name="transfer_permission_state">Local network access: %1$s\nNotification permission: %2$s\nPackage notifications enabled: %3$s\nNotification denial does not block this experiment. Cancel remains available in this window. A grant never starts work automatically; press Download explicitly.</string>
+    <string name="transfer_channel">Qualification transfers</string>
+    <string name="transfer_title">Cloudy test transfer</string>
+    <string name="transfer_notification_scope">Downloading a generated qualification fixture</string>
+</resources>

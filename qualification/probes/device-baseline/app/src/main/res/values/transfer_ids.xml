@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="transfer_window_identity" type="id" />
+    <item name="transfer_request_lan" type="id" />
+    <item name="transfer_request_notifications" type="id" />
+    <item name="transfer_start" type="id" />
+    <item name="transfer_cancel_button" type="id" />
+    <item name="transfer_recreate" type="id" />
+    <item name="transfer_refresh" type="id" />
+    <item name="transfer_permissions" type="id" />
+    <item name="transfer_status" type="id" />
+    <item name="transfer_summary" type="id" />
+</resources>

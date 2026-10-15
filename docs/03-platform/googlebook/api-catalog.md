@@ -98,7 +98,7 @@ OS eligibility, correct operation classification and Play distribution review ar
 
 ## P0-S2 finite HTTPS transfer experiment
 
-The [transfer contract](p0-s2-transfer-probe-contract.md) refines API39/API41 using G82–G94 and re-reviewed G21/G22. The implementation is in progress; neither compile nor runtime success is claimed. Both API records remain **untested**, and capability gates remain pending.
+The [transfer contract](p0-s2-transfer-probe-contract.md) refines API39/API41 using G82–G94 and re-reviewed G21/G22. The 0.4.0 implementation compiles and passes Android Lint and 61 JVM tests; see the [review](../../06-validation/2026-10-15-transfer-probe-review.md). Device cases are pending. Both API records remain **untested**, and capability gates remain pending.
 
 - **Scheduling and ownership:** API34 UIDT uses a nonexported `JobService` protected by `BIND_JOB_SERVICE`, with `RUN_USER_INITIATED_JOBS`; network constraints additionally require `ACCESS_NETWORK_STATE` on API34+. `canRunUserInitiatedJobs()` checks permission, not visibility. Start only through the visible explicit action and inspect `schedule()` result/exception. Persist a claimed attempt before network I/O; reject automatic replay after process loss.
 - **Assigned route:** use API28 `JobParameters.getNetwork()` with API21 `Network.openConnection(URL)`. The direct Wi-Fi/Ethernet experiment omits INTERNET/VALIDATED/NOT_METERED requirements, keeps its direct-LAN scope and treats a null/changed network as interruption. API35 `NET_CAPABILITY_LOCAL_NETWORK` describes address-advertising networks, not ordinary LAN-server reachability.

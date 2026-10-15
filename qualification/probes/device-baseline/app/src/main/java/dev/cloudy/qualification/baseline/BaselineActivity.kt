@@ -60,6 +60,9 @@ class BaselineActivity : Activity() {
             isAccessibilityHeading = true
         })
         content.addView(TextView(this).apply { setText(R.string.probe_scope) })
+        content.addView(button(R.id.open_transfer_probe, R.string.open_transfer_probe) {
+            startActivity(Intent(this, TransferActivity::class.java))
+        })
         windowLabel = TextView(this).apply { id = R.id.window_state; setTextIsSelectable(true) }
         content.addView(windowLabel)
         newWindowButton = button(R.id.new_window, R.string.new_window) { launchWindow() }

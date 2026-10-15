@@ -1,6 +1,8 @@
 # Device baseline and window qualification probe
 
-This is a dedicated **P0 diagnostic Android APK**, not Cloudy Console or Cloudy Desktop. Version **0.3.0** adds real AndroidX window-engagement callbacks to the existing document-task windows, per-window markers and explicit Activity recreation. Its controls invoke actual Android APIs. **Refresh diagnostics** re-reads shared build/input/video-decoder reports, captures the requesting window and samples its engagement counters. Installing, compiling or running this probe does not establish remote-protocol, USB, physical-input, decoder-performance or desktop-product support, and this increment does not complete P0-S2.
+This is a dedicated **P0 diagnostic Android APK**, not Cloudy Console or Cloudy Desktop. Version **0.4.0** adds a separate real HTTPS/Android user-initiated transfer experiment to the existing window/engagement probe. **Refresh diagnostics** still re-reads shared build/input/video-decoder reports, captures the requesting window and samples its engagement counters. Installing, compiling or running this probe does not establish remote-protocol, USB, physical-input, decoder-performance or desktop-product support, and this increment does not complete P0-S2. The baseline report retains schema 3; transfer state uses its own private journal.
+
+The [transfer contract](../../../docs/03-platform/googlebook/p0-s2-transfer-probe-contract.md) defines the finite generated fixture, scoped CA trust, assigned LAN network, explicit user start, cancellation and recovery cases. The manifest now declares network, UIDT, LAN and notification permissions only for that experiment; it has no foreground service. Missing private configuration or denied permission is an unavailable operation, never a generated success result. Exact build/review and physical evidence must be recorded separately before claiming any case passed.
 
 ## Build and check
 
@@ -77,6 +79,18 @@ Removal is attempted once with the original tracker/Consumer, including after a 
 
 ## Observations and limits
 
+### Finite transfer experiment
+
+Prepare the private Linux fixture using [the host helper](../../../tools/README.md#temporary-https-transfer-fixture). Import only its `android-config.json` into the debuggable app's `files/transfer-config.json`, preserving private command/export logs and verifying byte-for-byte readback. Never import the server or CA private key, add a system certificate, disable hostname verification, or grant unrelated permissions. Configuration reload occurs through **Refresh transfer state** while no attempt is active.
+
+From a baseline window, **Open transfer experiment** launches the nonexported native screen. **Request local network access** invokes the actual runtime37 permission prompt; **Request progress notifications** is a separate optional notification request. Neither grant starts a transfer. Press **Download test fixture** while visible. The app uses a real UIDT `JobService`, the assigned Wi-Fi/Ethernet network, and its scoped HTTPS factory. **Cancel transfer** stops that exact attempt; a notification action must not affect a later attempt. **Recreate transfer window** changes the visible Activity UUID while the process/attempt identities remain independently observable.
+
+The separate `files/transfer-journal.json` schema1 records up to eight attempts and their bounded transition histories. Payloads remain at `files/transfer-payloads/<attempt UUID>.part`, including failed/canceled partials and verified completed content. There is no remote publication or rename. The runtime refuses further starts at the attempt limit; it never silently evicts evidence. Preserve the journal and payloads before any deliberate operator reset. A new process reconciles unfinished attempts to interrupted and rechecks saved completed files; no work resumes automatically.
+
+Network I/O, file copying/hashing and journal writes run outside the Activity/main thread. The probe uses ten-second connection/read timeouts and a ten-minute cooperative transfer deadline; a framework call must return before a cooperative check can run. Progress records describe bytes written, not a separate per-chunk power-loss guarantee. Completion requires file sync/close, an independent reread of exact length/SHA-256, and a journal write/readback. Android process loss, disk faults and actual durability still require the recorded physical cases; a successful API return does not prove those broader properties.
+
+The framework-Views screen keeps every control in its native scroll view and respects system/caption insets. Diagnostic prose and internal state labels are not the product design system. No new UI/network/test library is introduced by this experiment.
+
 | Surface | Collected facts | Limits |
 | --- | --- | --- |
 | Build | Manufacturer/model/product/device/hardware, OS build ID/display/fingerprint, release/API/security patch/incremental and supported ABI list | The fingerprint identifies an OS build; no serial, Android ID, account, network identity or hardware unique identifier is requested |
@@ -95,7 +109,7 @@ The recorder retains at most **eight** logical-window records. A stopped or unfo
 
 Limits are explicit: at most 64 input entries, 128 video decoder entries, eight video MIME types per decoder, 16 profile/level pairs per type, 32 caption rectangles, and a 256 KiB codec-record budget. There are at most eight retained geometry snapshots of 32 KiB each and 128 shared correlated events. Engagement adds at most 32 transition/history entries per retained generation, 16 mode names per observation, 80 characters per name, and eight process cleanup-failure records. Histories drop their oldest entries with explicit counters; name/count omissions are reported. An oversized geometry snapshot becomes an explicit collector error. The full saved report remains limited to 512 KiB; combined maximum sections need not fit, and exceeding the total reports a save error and keeps the previous file. Vendor codec enumeration can block in framework code, so it runs off the UI thread; the probe does not claim a hard timeout on that framework call.
 
-The manifest requests no permissions, disables backup, and excludes probe files from backup/device-transfer rules. It does not register receivers, services, external file providers or network/USB access. The ordinary exported launcher Activity ignores external payloads and performs only these local diagnostic reads.
+The baseline collector performs local diagnostic reads and needs no permission. Version 0.4.0 adds INTERNET, ACCESS_NETWORK_STATE, ACCESS_LOCAL_NETWORK, RUN_USER_INITIATED_JOBS and POST_NOTIFICATIONS for the explicit transfer experiment, with a nonexported transfer Activity/cancellation receiver and a nonexported JobService protected by BIND_JOB_SERVICE. Backup remains disabled and probe files are excluded from backup/device-transfer rules. No external file provider or USB access is registered. The exported launcher ignores external payloads; opening the transfer screen does not schedule a download.
 
 ## Official reference and test review
 
