@@ -4,6 +4,20 @@ Reviewed 2026-10-16 against source commit `7ce21a43401c64ea123c433d66c041b166aa2
 
 The feedback offers useful P1-S2 candidates. It is external review material, **not an approved specification or instructions to workers**. In particular, its EDA/IDE product, micro-density tier, toolkit theme injection and embedded-window assumptions do not amend [Rule 0](../00-project/platform-rule-zero.md), the Console/Desktop split or separate [X11 windows](../02-architecture/x11-windows.md). The full implementation goal continues; this review does not complete a stage or qualify a component.
 
+## Current disposition at 520a0b9
+
+The leader and a direct Codex GPT6.1-Sol coworker refreshed this review against source `520a0b9fa64de65fafd1c7b4163d1acced2422f0` and the unchanged Word original. **Keep the current visual direction and apply the feedback selectively.** The dated discrepancy table below describes the original source, not a fresh list of unfixed defects. The later follow-through sections bind the accepted changes and their evidence.
+
+| Recommendation | Current disposition |
+| --- | --- |
+| Canonical typography, three density choices and distinct neutral workspace identity on hover | Implemented in the specimen, with recorded layout/state review. Native appearance/density choices also exist; their evidence is separately scoped. Do not repeat those fixes. |
+| Deliberate dialog roles and readable scaled controls | Vault dialog roles are explicitly bound; profile editor/dialog geometry has bounded actual-device repairs. Trust/vault geometry, other components and broader accessibility still need their own evidence. |
+| Complete native role/state consistency | Continue component-by-component review of actual Material consumers, including focus, selection, disabled and warning states. The theme's partial role mapping remains documented; a new palette is not implied. |
+| Additional prose/info roles, surface colors or focus halo | Candidates only when an actual component demonstrates the need. The existing focus/accent-container ratios do not establish a visibility failure. |
+| Fixed compact heights, a fourth micro tier, EDA/IDE product and remote toolkit theme injection | Not adopted. Keep content growth, user font scaling, existing product scope and independent remote content/window ownership. |
+
+Remaining native priorities are scaled Dark, physical keyboard/pointer/IME, screen-reader behavior, hit-target overlap and complete confirmation visibility. Preserve the [native review's exact boundaries](native-workspace-review.md); browser captures and framework-injected events are not substitutes for those observations. No unrecorded major discrepancy was found in this bounded refresh. Official D01/D10–D12 guidance was rechecked; no token, product source, API availability or capability decision changes follow.
+
 ## Six discrepancy claims
 
 | Feedback topic | Finding from current source | Recommended disposition |
