@@ -2224,6 +2224,82 @@
       "researchEvidence": "docs/02-architecture/ssh-native-files.md",
       "compileEvidence": "qualification/results/P1-S3/2026-10-16-ssh-files-ui-build.json",
       "deviceEvidence": "qualification/results/P1-S3/2026-10-16-ssh-files-ui.md"
+    },
+    {
+      "id": "API64",
+      "feature": "Protected receiver-owned file-location handoff construction",
+      "symbols": [
+        "AIDL generated Stub",
+        "android.app.Service.onBind",
+        "android.content.Context.enforceCallingPermission",
+        "android.os.Binder.getCallingUidOrThrow",
+        "android.content.Context.BIND_ALLOW_ACTIVITY_STARTS"
+      ],
+      "sourceIds": [
+        "G239",
+        "G240",
+        "G241",
+        "G242",
+        "G243",
+        "G195",
+        "G196",
+        "G137",
+        "G198",
+        "G199",
+        "G200",
+        "G201"
+      ],
+      "minimumApi": 34,
+      "libraryVersion": "Existing Android framework and AGP toolchain; productmin35/target37. No endpoint or additional runtime dependency yet.",
+      "availability": "documented",
+      "qualification": "untested",
+      "checkedOn": "2026-10-16",
+      "owner": "Platform/security developer",
+      "stage": "P1-S3",
+      "runtimeGuard": "Planned receiver-owned signature permission and every-transaction exact counterpart identity; explicit SHARED location, current profile/trust/account, replay reservation, final authorization and private one-use destination. Registry domain/storage has separate scoped evidence; UI/IPC not implemented.",
+      "fallback": "Unknown/stale/revoked tuples deny without creating registration. Possible committed delivery remains unconfirmed, with no automatic retry; no Activity-start bypass. Ordinary standalone SSH/files stays independent.",
+      "experiment": "Next construction: real metadata store first, then genuine listing-bound registration and receiver-owned destination, followed by both-direction signed IPC, negative callers and target37 visible-binding/lifecycle cases. Existing storage/codec evidence is not positive endpoint evidence.",
+      "researchEvidence": "docs/02-architecture/files-resource-registration.md"
+    },
+    {
+      "id": "API65",
+      "feature": "Receiver-owned file-location metadata storage",
+      "symbols": [
+        "android.database.sqlite.SQLiteDatabase.openDatabase",
+        "android.database.sqlite.SQLiteDatabase.beginTransaction",
+        "android.database.sqlite.SQLiteDatabase.setTransactionSuccessful",
+        "android.database.sqlite.SQLiteDatabase.endTransaction",
+        "android.database.sqlite.SQLiteDatabase.setMaximumSize",
+        "android.database.sqlite.SQLiteDatabase.OpenParams.Builder",
+        "java.nio.channels.FileChannel.tryLock",
+        "android.content.Context.getNoBackupFilesDir",
+        "android.content.Context.isDeviceProtectedStorage",
+        "android.app.Application.getProcessName"
+      ],
+      "sourceIds": [
+        "G137",
+        "G198",
+        "G199",
+        "G200",
+        "G201",
+        "G202",
+        "G204",
+        "G228",
+        "R266"
+      ],
+      "minimumApi": 28,
+      "libraryVersion": "Existing Android SQLite/files APIs, productmin35; no new dependency.",
+      "availability": "documented",
+      "qualification": "partial",
+      "checkedOn": "2026-10-16",
+      "owner": "Platform/security developer",
+      "stage": "P1-S3",
+      "runtimeGuard": "CE/defaultprocess/owningUID guards, exact immutable account/profile/trust/tuple metadata, shared coordination then store/file/SQLite lock order, revision/generation CAS and permanent revoked tuples. Store metadata does not establish completed-listing or user-consent authority.",
+      "fallback": "Busy on contention, failclosed on stale/corrupt/missing established state or capacity, CompletionUnknown after possible writes. No reset/delete/reactivation or automatic retry.",
+      "experiment": "Strict build01 and four zero-finding Lint reports;12 new domain JVM and20 actual isolated Android SQLite cases with20 separate cleanup receipts. Real profile/trust mutation, same-key reacceptance, CAS/concurrentwriters/corruption/uncertainwrite tested. ProductAPKs built-only; positive owning-product store use, separate-process persistence, power loss, enrollment UI/liveleases/IPC remain unqualified.",
+      "researchEvidence": "docs/02-architecture/files-resource-registration.md",
+      "compileEvidence": "qualification/results/P1-S3/2026-10-16-files-resource-storage-build.json",
+      "deviceEvidence": "qualification/results/P1-S3/2026-10-16-files-resource-storage.md"
     }
   ],
   "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."

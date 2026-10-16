@@ -6604,6 +6604,66 @@
       "sourceUpdatedOn": null,
       "note": "Inspected current upstream stopActivity/startEmptyActivitySync uses applicationContext with FLAG_ACTIVITY_NEW_TASK; it does not directly invoke target onStop. Narrow bytecode inspection confirms the selected core1.7.0 AAR, SHA256 f4dacd8edceeec48e0c76ecf28339b28f4b4f6b74f8e34e9e59b472c27d9eb81. Googlebook device03 remained resumed during this failed request. Use a genuine same-task opaque cover and observed Stop/return for this case; retain failed helper attempt. Main source is explanatory, not an immutable selected source pin or universal vendor behavior. P1-S3 qualification owner.",
       "refresh": "Before changing desktop lifecycle test routes or AndroidX Test versions; observe actual target callbacks, never infer hidden state from helper launch."
+    },
+    {
+      "id": "G239",
+      "title": "Android generated AIDL and synchronous transaction contract",
+      "url": "https://developer.android.com/develop/background-work/services/aidl",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Remote calls can run concurrently on Binder pool threads; local calls run on caller thread. Off-main synchronous sender, explicit stable method transaction IDs, primitive bounded payloads and standard SDK generation selected for P1-S3. Endpoint/discovery codec not yet implemented or qualified.",
+      "refresh": "Before exposing or changing the protected handoff endpoint; preserve API availability versus actual package/BAL evidence."
+    },
+    {
+      "id": "G240",
+      "title": "Android bound-service lifecycle and cached Binder",
+      "url": "https://developer.android.com/develop/background-work/services/bound-services",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "System caches the returned IBinder and shares it across later bound clients; onBind is not a per-transaction identity gate. Bound-only service chosen without startService. Unbinding is not proof of cancellation of an already-running transaction or per-window visibility.",
+      "refresh": "Before exposing or changing the protected handoff endpoint; preserve API availability versus actual package/BAL evidence."
+    },
+    {
+      "id": "G241",
+      "title": "Context visible-binding Activity-start opt-in",
+      "url": "https://developer.android.com/reference/android/content/Context#BIND_ALLOW_ACTIVITY_STARTS",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "BIND_ALLOW_ACTIVITY_STARTS is public API34 and permits a visible binding app to grant the bound service background Activity-start eligibility. Existing min35 covers symbol; target37 actual launch/visibility remains untested for the proposed handoff. No returned startActivity call proves visible navigation.",
+      "refresh": "Before exposing or changing the protected handoff endpoint; preserve API availability versus actual package/BAL evidence."
+    },
+    {
+      "id": "G242",
+      "title": "Context enforceCallingPermission per incoming transaction",
+      "url": "https://developer.android.com/reference/android/content/Context#enforceCallingPermission(java.lang.String,%20java.lang.String)",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Public API1; enforces actual incoming IPC caller permission and throws outside IPC. Select per-method receiver-owned signature enforcement plus exact-package Binder policy. Do not substitute enforceCallingOrSelfPermission or onBind-only checking.",
+      "refresh": "Before exposing or changing the protected handoff endpoint; preserve API availability versus actual package/BAL evidence."
+    },
+    {
+      "id": "G243",
+      "title": "Binder transaction-only calling UID capture",
+      "url": "https://developer.android.com/reference/android/os/Binder#getCallingUidOrThrow()",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "getCallingUidOrThrow public API29 requires actual incoming transaction identity. Proposed capture before dispatch/clearIdentity, followed by exact counterpart package/signature and later snapshot revalidation. No payload UID/package or worker-thread self UID is caller authority; successful cross-app use not yet qualified.",
+      "refresh": "Before exposing or changing the protected handoff endpoint; preserve API availability versus actual package/BAL evidence."
     }
   ]
 }

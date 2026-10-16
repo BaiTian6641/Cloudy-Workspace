@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "stage": "P1-S3",
+  "scope": "Receiver-owned file-location metadata domain and actual isolated Android SQLite storage; no registration UI or protected IPC acceptance",
+  "baseCommit": "a4693516aa6e7a28667f627f4a4425ae5b215746",
+  "sourceChangesUncommitted": true,
+  "buildReceipt": "qualification/results/P1-S3/2026-10-16-files-resource-storage-build.json",
+  "buildReceiptSha256": "73eb105f6ee1355e73beda7ad1bedb583237f277fe5618deef4ebc7c56fee215",
+  "frozenBuildResultSha256": "b543d041cfe763e3868d27dc030361cc724a01456586f0140638cd65cd8b5995",
+  "sourceCount": 175,
+  "lintFindings": {
+    "desktop-lint-results-debug.xml": 0,
+    "console-lint-results-debug.xml": 0,
+    "design-system-lint-results-debug.xml": 0,
+    "platform-lint-results-debug.xml": 0
+  },
+  "newJvmTests": {
+    "class": "FilesResourceRegistrationTest",
+    "passed": 12,
+    "failed": 0,
+    "skipped": 0
+  },
+  "device": {
+    "model": "HP Googlebook 14",
+    "api": "37",
+    "build": "CL3B.260622.276.R2",
+    "incremental": "16560795",
+    "abi": "arm64-v8a"
+  },
+  "deviceTestPackage": "io.github.baitian6641.cloudy.platform.test",
+  "deviceTestApkSha256": "26742a42891494cf1500193faef3d33517c3c668254962fed1f984e50d0ee825",
+  "deviceTestResult": {
+    "actualPassed": 20,
+    "uniquePassed": 20,
+    "skipped": 0,
+    "failed": 0,
+    "cleanupReceipts": 20,
+    "cleanupStatuses": [
+      "REMOVED",
+      "REMOVED",
+      "REMOVED",
+      "REMOVED",
+      "REMOVED",
+      "REMOVED",
+      "REMOVED",
+      "REMOVED",
+      "REMOVED",
+      "REMOVED",
+      "REMOVED",
+      "REMOVED",
+      "REMOVED",
+      "REMOVED",
+      "REMOVED",
+      "REMOVED",
+      "REMOVED",
+      "REMOVED",
+      "REMOVED",
+      "REMOVED"
+    ],
+    "completedMethods": [
+      "missingEstablishedDatabaseAndMarkerAreNeverRecreated",
+      "exactFourIdsAreRequiredAndNoNamespaceIdsAreReused",
+      "interruptedBootstrapAndDifferentMarkerNeverResetTheStore",
+      "actualRejectedInsertIsCompletionUnknownAndDoesNotAutoRetry",
+      "actualProfileDeletionAndProtocolChangeDoNotRemainBindings",
+      "tombstonesCountTowardCapacityAndNoUpsertOccurs",
+      "noncanonicalRowsAndWrongTypesAreNotAccepted",
+      "corruptBytesArePreservedAndNeverAutoDeleted",
+      "actualProfileEditBlocksCreateShareResolveButNotRevocation",
+      "newerSchemaAndWrongMetadataFailClosed",
+      "staleGenerationAndStaleRevisionCannotMutateOrResurrect",
+      "permanentFileAndCoordinationLocksFailBusyWithoutMutation",
+      "overflowDoesNotWriteOrWrap",
+      "actualTrustReplacementAndRevocationInvalidateExactRevision",
+      "missingPermanentAnchorDeniesWithoutReplacement",
+      "privateCreationShareResolveAndRetainedRevocationSurviveReopen",
+      "competingRealConnectionsCannotBothAdvanceSameVersion",
+      "mainThreadDeviceProtectedOwnerAndProcessRejectBeforeStoreCreation",
+      "sameKeyReacceptedAtNewTrustRevisionDoesNotReviveOldRegistration",
+      "catalogAndResultRemainRedactedAndCatalogCannotBeMutated"
+    ],
+    "runnerFinished": true,
+    "passed": true
+  },
+  "instrumentationSeconds": 1.58,
+  "privateEvidencePath": "qualification/results/private/foundation/2026-10-16-files-resource-device-01",
+  "privateResultSha256": "f13f0e720624da8c296218dc3255bbf3792731fc79b35600330ea07d9047db4b",
+  "runnerPath": ".cache/files-resource-01/run_device_02.py",
+  "runnerSha256": "e578550c454be103bdb56b2e9d6039ed97bd66a058645c7fffcd84f4886fa8b5",
+  "preservation": {
+    "productsDataPreferencesSettingsAndBootUnchanged": true,
+    "reverseBaselineUnchanged": true,
+    "sourceArtifactBindingsUnchanged": true,
+    "ownedFixtureRootsAbsent": true,
+    "ownedPlatformTestPackageUninstalled": true,
+    "allThreeTestPackagesAbsent": true,
+    "cleanupErrors": [],
+    "runnerPassed": true
+  },
+  "installedProducts": {
+    "versionName": "0.1.10",
+    "versionCode": 11,
+    "unchangedAcceptedBaseline": "qualification/results/P1-S3/2026-10-16-ssh-files-ui-build.json"
+  },
+  "operationBounds": {
+    "noProductInstallLaunchOrForceStop": true,
+    "noNetworkListenerPermissionOrAuthenticationPrompt": true,
+    "testRootPrefix": "files-resources-test-"
+  },
+  "review": {
+    "directCodexSourceReview": ".cache/files-resource-01/source-review.md",
+    "sourceReviewSha256": "e8e5287e24d725f568bdd66755d29e34af8b4590607110255144759dc8441330",
+    "ompSecurityReview": {
+      "task": "FILES-RESOURCE-SEC-001",
+      "providerModel": "zai/glm-5.3",
+      "exitCode": 1,
+      "elapsedSeconds": 120.345,
+      "tools": 0,
+      "outcome": "deadline-aborted; no completed assistant review; not accepted; no automatic retry"
+    }
+  },
+  "notQualified": [
+    "actual completed-listing enrollment and sharing consent",
+    "resource-bound live-session revocation",
+    "protected sibling discovery/submit and actual destination",
+    "same-signature/wrong-signature/delegated caller paths",
+    "visible-binding/BAL and lifecycle behavior",
+    "separate-process storage persistence or power loss",
+    "positive owning-product resource store use",
+    "full P1/P2 or capability/release acceptance"
+  ]
+}
