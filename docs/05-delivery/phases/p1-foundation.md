@@ -88,6 +88,8 @@ Work:
 
 The [handoff codec increment](../../../qualification/results/P1-S3/2026-10-16-handoff-codec.md) implements bounded v1 serialization/domain validation, with strict compilation/Lint and scoped actual Android tests. The [runtime profile](../../02-architecture/handoff-runtime-profile.md) records its limits. Work item2 remains incomplete until signed-caller transport, receiver-owned resource resolution and replay/lifecycle admission are implemented and tested.
 
+The subsequent [caller/replay increment](../../../qualification/results/P1-S3/2026-10-16-handoff-admission.md) implements exact counterpart policy and a real app-private SQLite request ledger. Nineteen Android cases and two distinct-process phases pass; caller tests establish local denial only. Endpoint permissions/transport, real resource registration, signed sibling acceptance/denial and effect/lifecycle integration remain open. A local profile or generic window must not substitute for the requested terminal, desktop or file destination.
+
 Deliverables:
 
 - Identity/IPC/lifecycle library and schema fixtures

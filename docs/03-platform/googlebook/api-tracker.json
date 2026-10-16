@@ -1641,6 +1641,79 @@
       "researchEvidence": "docs/02-architecture/handoff-runtime-profile.md",
       "compileEvidence": "qualification/results/P1-S3/2026-10-16-handoff-codec-build.json",
       "deviceEvidence": "qualification/results/P1-S3/2026-10-16-handoff-codec.md"
+    },
+    {
+      "availability": "documented",
+      "qualification": "partial",
+      "checkedOn": "2026-10-16",
+      "owner": "Platform/security developer",
+      "stage": "P1-S3",
+      "researchEvidence": "docs/02-architecture/handoff-admission.md",
+      "compileEvidence": "qualification/results/P1-S3/2026-10-16-handoff-admission-build.json",
+      "deviceEvidence": "qualification/results/P1-S3/2026-10-16-handoff-admission.md",
+      "id": "API50",
+      "feature": "Exact counterpart Binder caller verification",
+      "symbols": [
+        "Binder.getCallingUid",
+        "Process.myUid",
+        "PackageManager.getPackageInfo",
+        "PackageManager.getPackagesForUid",
+        "PackageManager.checkSignatures",
+        "PackageInfo.sharedUserId",
+        "ApplicationInfo.enabled"
+      ],
+      "sourceIds": [
+        "G195",
+        "G196",
+        "G197",
+        "G203"
+      ],
+      "minimumApi": 33,
+      "libraryVersion": "Android framework; flags API33, signature UID overload API5; existing productmin35",
+      "fallback": "Deny missing, invisible, ambiguous, self or mismatched callers; standalone apps remain usable.",
+      "experiment": "Five actual standalone Android cases pass for local denial/PackageManager reads. No endpoint exists; same-signed counterpart acceptance, wrong-signature IPC, delegated handles, visibility and package replacement remain integration gates."
+    },
+    {
+      "availability": "documented",
+      "qualification": "partial",
+      "checkedOn": "2026-10-16",
+      "owner": "Platform/security developer",
+      "stage": "P1-S3",
+      "researchEvidence": "docs/02-architecture/handoff-admission.md",
+      "compileEvidence": "qualification/results/P1-S3/2026-10-16-handoff-admission-build.json",
+      "deviceEvidence": "qualification/results/P1-S3/2026-10-16-handoff-admission.md",
+      "id": "API51",
+      "feature": "App-owned persistent handoff replay admission",
+      "symbols": [
+        "SQLiteDatabase.openDatabase",
+        "SQLiteDatabase.beginTransaction",
+        "SQLiteDatabase.setTransactionSuccessful",
+        "SQLiteDatabase.endTransaction",
+        "SQLiteDatabase.OpenParams.Builder.setJournalMode",
+        "SQLiteDatabase.OpenParams.Builder.setSynchronousMode",
+        "FileChannel.tryLock",
+        "Context.getNoBackupFilesDir",
+        "Context.isDeviceProtectedStorage",
+        "Os.open",
+        "Os.fstat",
+        "Os.fsync",
+        "Os.close",
+        "OsConstants.S_ISDIR"
+      ],
+      "sourceIds": [
+        "G137",
+        "G198",
+        "G199",
+        "G200",
+        "G201",
+        "G202",
+        "G204",
+        "R266"
+      ],
+      "minimumApi": 28,
+      "libraryVersion": "Android framework SQLite/Java files/time; journal/sync parameters API28; existing productmin35",
+      "fallback": "Fail closed on rollback, capacity, corrupt/lost state or contention; no reset, missing-store recreation or effect replay.",
+      "experiment": "Fourteen actual SQLite/filesystem cases plus two explicit distinct-process phases pass, with independent seed-stop and cleanup. Controlled receiver clocks do not change device clock. Default phase skips. Simultaneous separate-process contention, real endpoint/resource effects and physical power-cut behavior remain unqualified."
     }
   ],
   "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."

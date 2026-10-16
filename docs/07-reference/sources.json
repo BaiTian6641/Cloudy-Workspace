@@ -5728,6 +5728,138 @@
       "sourceUpdatedOn": null,
       "note": "Sections7/8: string escapes, control characters and UTF8. Supports bounded guard around Android reader, not a new general JSON implementation. P1-S3.",
       "refresh": "When handoff schema, selected platform/parser or receiver policy changes."
+    },
+    {
+      "id": "G195",
+      "title": "Android Binder calling identity",
+      "url": "https://developer.android.com/reference/android/os/Binder#getCallingUid()",
+      "publisher": "Google",
+      "category": "security",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "API1 getCallingUid; capture inside incoming transaction before clearing identity or dispatch. Local calls return own UID; not caller-supplied package attribution. Owner: platform/security; P1-S3 API50/API51.",
+      "refresh": "Before changing handoff caller, storage, replay or compatibility policy."
+    },
+    {
+      "id": "G196",
+      "title": "Android PackageManager UID and signature checks",
+      "url": "https://developer.android.com/reference/android/content/pm/PackageManager",
+      "publisher": "Google",
+      "category": "security",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "getPackagesForUid API1; checkSignatures(int,int) API5; getPackageInfo(String,PackageInfoFlags) API33. Exact receiving-app counterpart only; visibility/missing lookup fails closed. Public UID overload verified, no checkUidSignatures substitution. Owner: platform/security; P1-S3 API50/API51.",
+      "refresh": "Before changing handoff caller, storage, replay or compatibility policy."
+    },
+    {
+      "id": "G197",
+      "title": "Android PackageInfo shared UID field",
+      "url": "https://developer.android.com/reference/android/content/pm/PackageInfo#sharedUserId",
+      "publisher": "Google",
+      "category": "security",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "API3 sharedUserId describes manifest shared UID; no field retrieval flag requirement. Reject shared declarations even when UID package visibility may be filtered. Owner: platform/security; P1-S3 API50/API51.",
+      "refresh": "Before changing handoff caller, storage, replay or compatibility policy."
+    },
+    {
+      "id": "G198",
+      "title": "Android SQLite transactions and existing database open",
+      "url": "https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase",
+      "publisher": "Google",
+      "category": "security",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Transactions commit only at successful endTransaction; existing ledger opens READWRITE without CREATE_IF_NECESSARY. Custom corruption handler denies rather than recreating replay state; page maximum bounds main database, not total filesystem overhead. Owner: platform/security; P1-S3 API50/API51.",
+      "refresh": "Before changing handoff caller, storage, replay or compatibility policy."
+    },
+    {
+      "id": "G199",
+      "title": "Android SQLite journal and synchronization parameters",
+      "url": "https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.OpenParams.Builder",
+      "publisher": "Google",
+      "category": "security",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "OpenParams API27; setJournalMode/setSynchronousMode API28. Explicit DELETE+EXTRA avoids device-varying defaults and includes rollback-journal deletion directory sync; mode is checked after open. Owner: platform/security; P1-S3 API50/API51.",
+      "refresh": "Before changing handoff caller, storage, replay or compatibility policy."
+    },
+    {
+      "id": "G200",
+      "title": "Android FileChannel nonblocking lock",
+      "url": "https://developer.android.com/reference/java/nio/channels/FileChannel#tryLock()",
+      "publisher": "Google",
+      "category": "security",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "API1 tryLock returns null for external contention and can throw overlapping-lock exception for same-process contention. Permanent never-replaced lock inode; no unbounded lock wait. Owner: platform/security; P1-S3 API50/API51.",
+      "refresh": "Before changing handoff caller, storage, replay or compatibility policy."
+    },
+    {
+      "id": "G201",
+      "title": "Android checked file descriptor synchronization",
+      "url": "https://developer.android.com/reference/android/system/Os",
+      "publisher": "Google",
+      "category": "security",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "API21 open/fstat/fsync/close. Ledger checks directory descriptor type and propagates initialization sync failure as denial. Public SDK does not expose O_DIRECTORY; do not insert a private constant. Owner: platform/security; P1-S3 API50/API51.",
+      "refresh": "Before changing handoff caller, storage, replay or compatibility policy."
+    },
+    {
+      "id": "G202",
+      "title": "Android file type predicate",
+      "url": "https://developer.android.com/reference/android/system/OsConstants#S_ISDIR(int)",
+      "publisher": "Google",
+      "category": "security",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "API21 S_ISDIR checks fstat.st_mode before syncing the opened private directory. O_RDONLY is public; actual selected SDK compilation verifies used symbols. Owner: platform/security; P1-S3 API50/API51.",
+      "refresh": "Before changing handoff caller, storage, replay or compatibility policy."
+    },
+    {
+      "id": "G203",
+      "title": "Pinned AOSP PackageInfo shared UID population",
+      "url": "https://android.googlesource.com/platform/frameworks/base/+/ff4060f5a59b787139570d733712fae34283ed6c/core/java/android/content/pm/parsing/PackageInfoWithoutStateUtils.java",
+      "publisher": "AOSP / Google",
+      "category": "security",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "generateWithoutComponentsUnchecked assigns pi.sharedUserId unconditionally, before optional GET_GIDS/GET_CONFIGURATIONS guards. Explanatory pinned upstream source, not installed framework identity or device result. Rejects speculative request for cross-user/uninstalled lookup. Owner: platform/security; P1-S3 API50/API51.",
+      "refresh": "Before changing handoff caller, storage, replay or compatibility policy."
+    },
+    {
+      "id": "G204",
+      "title": "Android device-protected storage context",
+      "url": "https://developer.android.com/reference/android/content/Context#createDeviceProtectedStorageContext()",
+      "publisher": "Google",
+      "category": "security",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "API24 context-specific device-protected storage. Check original supplied context before applicationContext normalization; ledger uses credential-encrypted no-backup storage only. Owner: platform/security; P1-S3 API50/API51.",
+      "refresh": "Before changing handoff caller, storage, replay or compatibility policy."
+    },
+    {
+      "id": "R266",
+      "title": "SQLite synchronous durability modes",
+      "url": "https://www.sqlite.org/pragma.html#pragma_synchronous",
+      "publisher": "SQLite",
+      "category": "security",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "EXTRA adds directory sync after DELETE journal unlink; FULL rollback mode can lose latest transaction after power loss. Cloudy selects EXTRA but makes no physical power-cut qualification claim. Owner: platform/security; P1-S3 API50/API51.",
+      "refresh": "Before changing handoff caller, storage, replay or compatibility policy."
     }
   ]
 }

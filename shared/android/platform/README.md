@@ -14,6 +14,12 @@ The [native foundation report](../../../qualification/results/P1-S1/2026-10-16-n
 
 This qualifies only the tested local-window metadata/editor/restoration boundary. P1-S1 is complete with actual Desktop New/Close and both package replacement/uninstall receipts; later product requirements remain open. Physical keyboard/native IME, process-death restoration, broader geometry/accessibility and remote functionality are not established by Activity recreation or Compose test stimulus.
 
+## Handoff admission primitives
+
+`HandoffJson`/`HandoffEnvelope` validate the bounded resource envelope. `HandoffCaller.verifyIncoming` captures actual Binder identity and checks the expected exact counterpart; only `VERIFIED` is a positive caller result. `HandoffReplayLedger.reserve` durably consumes a UUID off-main before any effect, with nonblocking contention, capacity, expiry, clock-rollback and lost/corrupt-store denial. It performs no resource lookup or navigation. Read the [admission contract](../../../docs/02-architecture/handoff-admission.md) before endpoint integration.
+
+The [actual result](../../../qualification/results/P1-S3/2026-10-16-handoff-admission.md) passes19 caller/storage cases and two separate-process phases. Caller acceptance from another app remains untested; no endpoint is exposed. Only the standalone test APK is installed/removed; new product APKs remain built-only. Generic local window and vault metadata are not an enrolled-resource registry.
+
 ## Local credential-management candidate
 
 `CloudyVaultActivity` is a real shared FragmentActivity/Compose implementation, instantiated within each owning APK. It provides explicit Save on this device, Check saved credential, confirmed local deletion, Refresh, Cancel authorization and Finish local cleanup. Check performs actual scoped vault decryption/decoding without displaying secrets or pretending to connect. A selected profile/binding is immutable before authorization; deletion identifies the opaque local record, with endpoint metadata explicitly described as context rather than proof.

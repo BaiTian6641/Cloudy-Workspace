@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "baseCommit": "931cd27680bc534f8a1c8227abb58a221a4681c6",
+  "sourceChangesUncommittedAtBuild": true,
+  "sources": [
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/HandoffCaller.kt",
+      "bytes": 3979,
+      "sha256": "6e43ba4a851090b1f2c43a11bac39b9dc505f7ed6fa03b165608ecf31df12699"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/HandoffReplayLedger.kt",
+      "bytes": 11875,
+      "sha256": "fa22695ae2b25afb58c3bf1323c184d36b0fec94576a196b589ca114887019c0"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/HandoffCallerTest.kt",
+      "bytes": 3073,
+      "sha256": "b190a2517971332a002303c3d2b83c447ec0d4d39f9c20863421e01749161c05"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/HandoffReplayLedgerTest.kt",
+      "bytes": 10697,
+      "sha256": "834401656d724779556d81985d1a0d0aa18df9bd79fd8324682c12b6c10e50e8"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/HandoffReplayProcessTest.kt",
+      "bytes": 3530,
+      "sha256": "1bb6994b187b5f772be7c97e8eb0a0d78b6d3fcdebb0144f4624d6eb5f605d14"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "apps/console/build/outputs/apk/debug/console-debug.apk",
+      "bytes": 31710724,
+      "sha256": "dac202937edf45a9f22f2f181f4cc241ebad7fb9e95d4bc5e76e00937720485a"
+    },
+    {
+      "path": "apps/desktop/build/outputs/apk/debug/desktop-debug.apk",
+      "bytes": 31710728,
+      "sha256": "bb1d1b2c4f029ae0fb91f7a262077e8cd750d3b67eef02d21cef04862755b633"
+    },
+    {
+      "path": "shared/android/platform/build/outputs/apk/androidTest/debug/platform-debug-androidTest.apk",
+      "bytes": 32323803,
+      "sha256": "b34baef1223505688b8d6dfb6c61108b79a41527adc23fb17169e2019dba05db"
+    }
+  ],
+  "checks": [
+    {
+      "path": ".cache/handoff-admission-01/build-04/console-lint-results-debug.xml",
+      "lintIssues": 0
+    },
+    {
+      "path": ".cache/handoff-admission-01/build-04/desktop-lint-results-debug.xml",
+      "lintIssues": 0
+    },
+    {
+      "path": ".cache/handoff-admission-01/build-04/platform-lint-results-debug.xml",
+      "lintIssues": 0
+    }
+  ],
+  "build": "Strict Gradle build04 passed; failures01-03 retained",
+  "androidTests": {
+    "caller": 5,
+    "replayLedger": 14,
+    "processSeed": 1,
+    "processVerify": 1,
+    "defaultProcessAssumptionSkip": 1
+  },
+  "deviceEvidence": "qualification/results/P1-S3/2026-10-16-handoff-admission.md",
+  "scope": "Caller rejection and durable replay primitives; no endpoint or resource navigation; only standalone test APK installed then removed"
+}

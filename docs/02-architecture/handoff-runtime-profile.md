@@ -1,6 +1,6 @@
 # Resource handoff runtime profile
 
-Reviewed 2026-10-16 for P1-S3. The [v1 schema](../../protocol/schemas/handoff.schema.json) describes the wire shape; the implemented [domain model](../../shared/android/domain/src/main/kotlin/io/github/baitian6641/cloudy/domain/HandoffEnvelope.kt) and [Android codec](../../shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/HandoffJson.kt) add bounded parsing and semantic validation. Their [scoped build/device result](../../qualification/results/P1-S3/2026-10-16-handoff-codec.md) does not implement or qualify cross-app navigation. The authenticated IPC receiver, request ledger and receiver-owned resource registry remain required work under [ADR0004](../adr/0004-resource-handoff-and-trust.md).
+Reviewed 2026-10-16 for P1-S3. The [v1 schema](../../protocol/schemas/handoff.schema.json) describes the wire shape; the implemented [domain model](../../shared/android/domain/src/main/kotlin/io/github/baitian6641/cloudy/domain/HandoffEnvelope.kt) and [Android codec](../../shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/HandoffJson.kt) add bounded parsing and semantic validation. Their [scoped build/device result](../../qualification/results/P1-S3/2026-10-16-handoff-codec.md) does not implement or qualify cross-app navigation. The later [caller/replay primitives](handoff-admission.md) add actual caller policy and persistent request consumption with bounded device evidence. Their integration into an authenticated IPC receiver with receiver-owned resource resolution remains required under [ADR0004](../adr/0004-resource-handoff-and-trust.md).
 
 ## Accepted representation
 
@@ -24,7 +24,7 @@ The timestamp profile intentionally accepts a subset of RFC3339, which also perm
 
 ## Receiver work still required
 
-The decoder deliberately performs no launch, enrollment, network call, file access or remote operation. Before exposing an IPC endpoint:
+The decoder deliberately performs no launch, enrollment, network call, file access or remote operation. Caller and replay primitives are now available separately; their tests do not expose an endpoint. Before exposing an IPC endpoint:
 
 1. Use explicit counterpart IPC protected by a receiver-owned signature permission; validate the actual Binder calling UID and expected signed package in the incoming transaction. A valid envelope, same network or shared source module is not caller identity.
 2. Resolve all IDs through the receiving app's enrolled resources and verify their host/environment/workspace relationship. Unknown resources must fail honestly; do not invent a registry entry or connect from sender-supplied strings.
