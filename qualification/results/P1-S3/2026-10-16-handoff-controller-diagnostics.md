@@ -1,0 +1,22 @@
+# Standalone handoff-controller first-failure diagnostics
+
+**2026-10-16; test-only source/build accepted; three actual Googlebook privacy methods passed.** The [manifest](2026-10-16-handoff-controller-diagnostics.json) binds the exact changed source, build, five frozen APKs and independent review. Both products remain **0.1.14/code15**. The earlier receiver diagnostic and failed attempts remain preserved; this increment does not establish a successful ordinary handoff or the cause of the controller failure.
+
+The external controller previously replaced any exception with a generic failure. It now preserves a fixed operation stage, allowlisted error category and the first exact project source frame's bounded line number. Original messages, causes, suppressed exceptions, arbitrary class/file names, selector arguments and credentials are excluded. A previously sanitized failure retains its original identity and stage through outer handling.
+
+The complete private-config reader and `Controls` implementation are byte-identical. There is still exactly one ordinary Open call. No selector, retry, trust check, product operation, observer or failure-cleanup policy changes. The selected-card assertion is a hypothesis for the previous failure, not a demonstrated defect; standard UI hierarchy XML alone does not establish Android's heading property.
+
+Strict build01 succeeds in19 seconds, with all232 input hashes unchanged, five archived APKs verified and four raw debug Lint reports containing zero issues. Both product APKs and both owning-app test APKs are byte-identical to receiver diagnostic build01; only the standalone platform-test APK changes. Three new instrumentation methods compile and cover hostile details/frames, exact source-frame selection and preservation of the first sanitized failure. These three methods were compiled at this construction checkpoint; their subsequent actual execution is recorded below. Existing up-to-date test tasks are not presented as newly executed behavioral coverage.
+
+Independent direct Codex GPT-6.1 Sol review and parent inspection match the actual source diff, all232 inputs, five artifacts, raw build/Lint output and unchanged selector body. There are no unresolved source-review findings. The parent owns any test-package replacement and device run, with fresh installed-artifact and retained-state checks. This is a diagnostic repair; normal Open/BAL, receiver authentication/list/read, original-operation retirement, both-direction coverage and full P1-S3 acceptance remain required.
+
+
+## Actual Googlebook privacy execution
+
+The reviewed finite helper replaced only the standalone platform-test APK, preserving both0.1.14 products and both owning-app test APKs. Three actual `FilesHandoffControllerDiagnosticTest` methods pass with zero skips/failures, empty stderr and the expected terminal. The tests construct hostile synthetic throwables and inspect the real sanitizer; they never acquire UI automation, launch an Activity, authenticate, start a host or attempt normal Open.
+
+The complete product baseline equals the successful attempt04 recovery, including original rows/replay, preserved failed evidence and the two documented framework cache updates. Both products remain stopped and all three test packages remain installed. Controller UID and every private file hash also remain unchanged in this run.
+
+Parent review corrected an unrun helper proposal that would have required ProfileVerifier's startup cache to update immediately after package replacement. The final helper accepts only the exact retained cache bytes or the pinned24-byte format correlated to the current Package Manager timestamp, at its second precision. It preserves all other files and introduces no delay, Activity launch or forced cache write. The actual run takes the retained-cache branch: the marker stays byte-identical before replacement, afterward and after the three tests. Earlier unrun proposals remain retained. Source/build and actual privacy evidence remain distinct from the still-failed ordinary handoff attempt.
+
+Independent actual-runtime review matches the raw three method starts/passes, final code, empty stderr, all fifteen before/after/final installed APK hash observations and exact product/controller baselines. It confirms the retained-cache branch without rerunning the operation. Parent accepts this finite privacy result; no normal Open or selector repair is inferred.

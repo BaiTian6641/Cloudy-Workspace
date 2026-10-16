@@ -27,7 +27,7 @@ import org.junit.runner.RunWith
 
 /** External controller only. Neither product is instrumented by this test; parent
  * proves that condition, exact APKs, host attempts and old-operation retirement.
- * No UI tree, editable value, exception detail or credential is emitted. */
+ * No UI tree, editable value, raw exception detail or credential is emitted. */
 @RunWith(AndroidJUnit4::class)
 class FilesHandoffPositiveControllerTest {
     @Test fun consoleToDesktop() = exercise("console-to-desktop")
@@ -39,15 +39,18 @@ class FilesHandoffPositiveControllerTest {
         val run = args.getString("cloudyFilesPositiveRun")
         assumeTrue("Explicit positive-controller run/direction only", run != null &&
             args.getString("cloudyFilesPositiveDirection") == direction)
+        var stage = ControllerStage.PREFLIGHT
         try {
             check(UUID.matches(checkNotNull(run)))
             check(args.getString("cloudyFilesPositiveParentPreflight") == "reviewed-normal-products")
             val context = instrumentation.targetContext
             check(context.packageName !in PRODUCTS && context.applicationInfo.uid == Process.myUid() &&
                 !context.isDeviceProtectedStorage && android.app.Application.getProcessName() == context.packageName)
+            stage = ControllerStage.PRIVATE_CONFIG
             val config = privateConfig(context.noBackupFilesDir, run, direction)
             val sender = if (direction == "console-to-desktop") PRODUCTS[0] else PRODUCTS[1]
             val receiver = PRODUCTS.single { it != sender }
+            stage = ControllerStage.UI_AUTOMATION
             val ui = instrumentation.getUiAutomation(UiAutomation.FLAG_DONT_SUPPRESS_ACCESSIBILITY_SERVICES)
             ui.serviceInfo = ui.serviceInfo.apply {
                 flags = flags or AccessibilityServiceInfo.FLAG_RETRIEVE_INTERACTIVE_WINDOWS
@@ -61,51 +64,79 @@ class FilesHandoffPositiveControllerTest {
             })
             // Only the sender's exported MAIN/LAUNCHER entry is navigated explicitly.
             // Receiver visibility must result from the genuine ordinary Open operation.
+            stage = ControllerStage.SENDER_LAUNCH
             context.startActivity(Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER)
                 .setComponent(ComponentName(sender, "$sender.WorkspaceActivity"))
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+            stage = ControllerStage.SENDER_LOCATIONS
             controls.click(sender, "Saved file locations", scroll = true)
+            stage = ControllerStage.SENDER_DISCOVERY
             controls.click(sender, "Locations in the other app", scroll = true)
+            stage = ControllerStage.REFRESH_PAGE
             controls.click(sender, "Refresh first page")
             val label = "Location $run A"
+            stage = ControllerStage.SELECT_ROW
             controls.rowAction(sender, label, "Select")
+            stage = ControllerStage.ASSERT_SELECTED_CARD
             controls.requireSectionText(sender, "Selected shared location", label, scroll = true)
+            stage = ControllerStage.BEFORE_OPEN_STATUS
             phase("BEFORE_SINGLE_OPEN")
             // Exactly one action; a false result/timeout never retries or rolls back admission.
+            stage = ControllerStage.SINGLE_OPEN
             controls.click(sender, "Request Open in counterpart")
+            stage = ControllerStage.RECEIVER_TITLE
             controls.requireText(receiver, "Remote files over SSH")
+            stage = ControllerStage.RECEIVER_PROFILE
             controls.requireSectionText(receiver, "Selected endpoint",
                 "Files ${receiver.substringAfterLast('.')} $run handoff-receiver", scroll = true)
+            stage = ControllerStage.RECEIVER_RESOURCE
             controls.requireSectionText(receiver, "Selected endpoint", "Registered location: $label")
+            stage = ControllerStage.RECEIVER_ROOT
             controls.requireSectionText(receiver, "Selected endpoint", "Starting directory: ./nested")
+            stage = ControllerStage.RECEIVER_ACCOUNT
             controls.requireFixedAccount(receiver, config.getValue("username"))
             phase("RECEIVER_AUTHENTICATION_VISIBLE")
+            stage = ControllerStage.RECEIVER_PASSWORD
             controls.password(receiver, config.getValue("password"))
+            stage = ControllerStage.RECEIVER_CONNECT
             controls.click(receiver, "Connect to remote files", scroll = true)
+            stage = ControllerStage.RECEIVER_CONNECTED
             controls.requireText(receiver, "Connected to remote files", scroll = true)
             phase("CONNECTED_UI_VISIBLE")
+            stage = ControllerStage.NESTED_READ
             controls.rowAction(receiver, "nested.txt", "Read preview")
+            stage = ControllerStage.ASSERT_PREVIEW
             controls.requireText(receiver, "Cloudy registered nested SFTP\n", scroll = true)
             phase("NESTED_PREVIEW_VISIBLE")
+            stage = ControllerStage.DISCONNECT
             controls.click(receiver, "Disconnect")
+            stage = ControllerStage.RECEIVER_IDLE
             controls.requireText(receiver, "Ready to connect", scroll = true)
             phase("DISCONNECT_UI_IDLE_HOST_RETIREMENT_PENDING")
             phase("BEFORE_PLANNED_RECEIVER_CLOSE")
+            stage = ControllerStage.RECEIVER_CLOSE
             controls.click(receiver, "Close")
             // Closing the newly dispatched task should reveal the existing sender.
             // Never launch another sender document to manufacture a cleanup result.
+            stage = ControllerStage.SENDER_RETURN
             controls.requireText(sender, "Shared locations in the other app")
+            stage = ControllerStage.SENDER_REFRESH_ENABLED
             controls.requireActionable(sender, "Refresh first page", scroll = true)
             phase("SENDER_RETURNED_REFRESH_ENABLED_BEFORE_PLANNED_CLOSE")
+            stage = ControllerStage.DISCOVERY_CLOSE
             controls.click(sender, "Close")
+            stage = ControllerStage.SENDER_LOCATIONS_RETURN
             controls.requireText(sender, "Saved file locations")
+            stage = ControllerStage.LOCATIONS_CLOSE
             controls.click(sender, "Close")
+            stage = ControllerStage.WORKSPACE_CLOSE
             controls.click(sender, "Close window", scroll = true)
+            stage = ControllerStage.FINAL_STATUS
             phase("CONTROLLER_FINISHED_PARENT_SETTLEMENT_REQUIRED")
-        } catch (_: Throwable) {
+        } catch (error: Throwable) {
             // Preserve uncertain products/admission/config. Parent reviews the first failure;
             // no finally disconnect, second Open, process kill or credential-bearing diagnostic.
-            throw AssertionError("FILES_POSITIVE_CONTROLLER_FAILED_PRESERVE_STATE")
+            throw ControllerFailure.capture(stage, error)
         }
     }
 
@@ -271,5 +302,38 @@ class FilesHandoffPositiveControllerTest {
     companion object {
         private val PRODUCTS = listOf("io.github.baitian6641.cloudy.console", "io.github.baitian6641.cloudy.desktop")
         private val UUID = Regex("[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}")
+    }
+}
+
+/** Fixed diagnostic vocabulary; never serialize selector arguments or original causes. */
+internal enum class ControllerStage {
+    PREFLIGHT, PRIVATE_CONFIG, UI_AUTOMATION, SENDER_LAUNCH, SENDER_LOCATIONS, SENDER_DISCOVERY, REFRESH_PAGE,
+    SELECT_ROW, ASSERT_SELECTED_CARD, BEFORE_OPEN_STATUS, SINGLE_OPEN, RECEIVER_TITLE, RECEIVER_PROFILE,
+    RECEIVER_RESOURCE, RECEIVER_ROOT, RECEIVER_ACCOUNT, RECEIVER_PASSWORD, RECEIVER_CONNECT, RECEIVER_CONNECTED,
+    NESTED_READ, ASSERT_PREVIEW, DISCONNECT, RECEIVER_IDLE, RECEIVER_CLOSE, SENDER_RETURN,
+    SENDER_REFRESH_ENABLED, SENDER_LOCATIONS_RETURN, WORKSPACE_CLOSE, FINAL_STATUS, DISCOVERY_CLOSE,
+    LOCATIONS_CLOSE
+}
+internal class ControllerFailure private constructor(message: String) : AssertionError(message) {
+    companion object {
+        fun capture(stage: ControllerStage, error: Throwable): ControllerFailure {
+            if (error is ControllerFailure) return error
+            val category = when (error) {
+                is SecurityException -> "SECURITY"
+                is java.io.IOException -> "IO"
+                is IllegalArgumentException -> "ARGUMENT"
+                is IllegalStateException -> "STATE"
+                is AssertionError -> "ASSERTION"
+                else -> "OTHER"
+            }
+            val frame = error.stackTrace.firstOrNull {
+                (it.className == "io.github.baitian6641.cloudy.platform.FilesHandoffPositiveControllerTest" ||
+                    it.className.startsWith("io.github.baitian6641.cloudy.platform.FilesHandoffPositiveControllerTest\$")) &&
+                    it.fileName == "FilesHandoffPositiveControllerTest.kt" && it.lineNumber in 1..100_000
+            }
+            val source = if (frame == null) "UNKNOWN" else "CONTROLLER"
+            return ControllerFailure("FILES_POSITIVE_CONTROLLER_FAILED_PRESERVE_STATE:CONTROLLER:" +
+                "${stage.name}:$category:$source:${frame?.lineNumber ?: 0}")
+        }
     }
 }

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "Test-only standalone handoff-controller first-failure diagnostic construction",
+  "acceptance": "Parent/independent source/build review and three actual Googlebook sanitizer privacy methods passed; no normal handoff pass",
+  "productVersionUnchanged": "0.1.14",
+  "productVersionCodeUnchanged": 15,
+  "sources": [
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/FilesHandoffPositiveControllerTest.kt",
+      "sha256": "fb1ed3fe5f22be3cf9d44b1031a8230604450f9f4031b7d72105032506e02bf0"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/FilesHandoffControllerDiagnosticTest.kt",
+      "sha256": "b76512b5910017e2eb74d1ef9b799d391aa8daecb4e0e18fcbec14b457e34fad"
+    }
+  ],
+  "sourceFreeze": {
+    "path": ".cache/files-handoff-02/controller-diagnostic-01/freeze-01.json",
+    "sha256": "619180005ace484ac70581cd61a49b12e589d24b5b97f0c6c9afb20b9d966cee"
+  },
+  "build": {
+    "path": ".cache/files-handoff-02/controller-diagnostic-01/build-01/result.json",
+    "sha256": "ad27448c2f9bb4ef4d28466a0f903b4805eb0f45bccc5ca5aa7406614eb8ee82"
+  },
+  "independentReview": {
+    "path": ".cache/integration-20261016-host-client-01/controller-diagnostic-source-review-01.json",
+    "sha256": "ffd159c3917616199e52ec9f08012b5a94f7225fb9f3632a57d11bcac1089ceb"
+  },
+  "sourceCount": 232,
+  "sourceUnchangedDuringBuild": true,
+  "artifacts": [
+    {
+      "path": "apps/console/build/outputs/apk/androidTest/debug/console-debug-androidTest.apk",
+      "bytes": 4593117,
+      "sha256": "c2e64fdf93fd96dc247ceb20eab4cbd078d97a4ae6aa41cc67c0275087ef5971"
+    },
+    {
+      "path": "apps/console/build/outputs/apk/debug/console-debug.apk",
+      "bytes": 41382877,
+      "sha256": "3127c84f789577c0d5d0fff1dc9e2169a9ce9bd29eec883d0d0ff76094fc1e0c"
+    },
+    {
+      "path": "apps/desktop/build/outputs/apk/androidTest/debug/desktop-debug-androidTest.apk",
+      "bytes": 4593113,
+      "sha256": "b9f0a17916a232f7633e2551e5cbd267743dd28a6d9560d47e09dfd6108b9b24"
+    },
+    {
+      "path": "apps/desktop/build/outputs/apk/debug/desktop-debug.apk",
+      "bytes": 41382885,
+      "sha256": "af4eb3702ead629f0a23945d2571b22b656fecfa7a96a5ca3ee2957f3c76c452"
+    },
+    {
+      "path": "shared/android/platform/build/outputs/apk/androidTest/debug/platform-debug-androidTest.apk",
+      "bytes": 45059272,
+      "sha256": "08aec67533c6946f887c4efaa45766a63ef2fb889879d60a8b52ce2a260ea4a8"
+    }
+  ],
+  "privateConfigAndControlsUnchanged": true,
+  "ordinaryOpenCallCount": 1,
+  "rawLintZeroIssueReportCount": 4,
+  "newPrivacyMethodsCompiled": 3,
+  "newPrivacyMethodsExecuted": 3,
+  "onlyPlatformTestAPKChanged": true,
+  "productAndOwningTestAPKBytesPreserved": true,
+  "failureCauseEstablished": false,
+  "normalPositiveHandoffPassed": false,
+  "capabilityOrStagePromoted": false,
+  "device": {
+    "model": "HP Googlebook 14",
+    "androidRelease": "17",
+    "api": 37,
+    "build": "CL3B.260622.276.R2",
+    "incremental": "16560795",
+    "abi": "arm64-v8a"
+  },
+  "runtime": {
+    "helper": {
+      "path": ".cache/files-handoff-02/controller-diagnostic-01/refresh_and_privacy_03.py",
+      "sha256": "1168e17072adcbcf001b1d21389b6889c9412d1d77c524cc98e150f8b758bed0"
+    },
+    "freeze": {
+      "path": ".cache/files-handoff-02/controller-diagnostic-01/privacy-freeze-04.json",
+      "sha256": "095ce6a11e8c1d3f648a1a38b40a6ef077104f1c5f0a5b42812a07de4818d034"
+    },
+    "methodNames": [
+      "hostileExceptionDetailsAndUntrustedFramesStayPrivate",
+      "onlyFirstExactProjectFrameSuppliesBoundedLine",
+      "alreadySanitizedFailureKeepsOriginalIdentityAndStage"
+    ],
+    "starts": 3,
+    "passes": 3,
+    "skips": 0,
+    "failures": 0,
+    "instrumentationFinalCode": -1,
+    "stderrBytes": 0,
+    "onlyPlatformTestAPKReplaced": true,
+    "productRecoveredBaselineExact": true,
+    "allControllerPrivateHashesAndUIDPreserved": true,
+    "controllerProfileVerifierCacheStayedByteIdentical": true,
+    "productOrOwningTestAPKReplacement": false,
+    "activityOrUiAutomationOrAuthenticationStarted": false,
+    "hostFixtureStarted": false,
+    "bothProductsInstalledAndStopped": true,
+    "threeTestAPKsInstalled": true,
+    "setupBaselineSource": "Successful attempt04 recovery with preserved evidence and exact documented framework cache changes",
+    "independentReview": {
+      "path": ".cache/integration-20261016-host-client-01/controller-privacy-runtime-review-01.json",
+      "sha256": "86a90041174ae29fe3fd4873c42c703d89337d9accb1c04277b05bbeba9da441"
+    }
+  },
+  "privateEvidenceDigests": [
+    {
+      "label": "terminal",
+      "sha256": "321a9a47c35f0ae12f92eed43bc5bd91e9e0afbf576a2144231a2379b36ebed7"
+    },
+    {
+      "label": "instrumentation-stdout",
+      "sha256": "6ae6207a9e1781d66e0c23d2fdc501192937a21d7f87120aa3e4a3b3fcaee0d5"
+    },
+    {
+      "label": "instrumentation-stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "final-product-private-snapshot",
+      "sha256": "4d75c31e017cefcc5d047d1c4b3d0ebb91763e8ba8287f0b4c7e760d8feb6ddb"
+    }
+  ]
+}

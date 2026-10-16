@@ -1,0 +1,215 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "Console-to-Desktop attempt04: real receiver PREPARE passed, ordinary controller failed before Open, original-checkpoint recovery verified",
+  "acceptance": "Preparation and scoped failed-attempt recovery only; normal positive handoff remains failed/unqualified",
+  "device": {
+    "model": "HP Googlebook 14",
+    "androidRelease": "17",
+    "api": 37,
+    "build": "CL3B.260622.276.R2",
+    "incremental": "16560795",
+    "abi": "arm64-v8a"
+  },
+  "productVersion": {
+    "name": "0.1.14",
+    "code": 15,
+    "newProductInstallInAttempt": false
+  },
+  "installedBuild": {
+    "path": ".cache/files-handoff-02/receiver-diagnostic-01/build-01/result.json",
+    "sha256": "24ba71bcb7de1597a4e16dd17dce77efef8602348af76c92a8c572dd0862394f"
+  },
+  "installedArtifacts": [
+    {
+      "name": "console-debug-androidTest.apk",
+      "bytes": 4593117,
+      "sha256": "c2e64fdf93fd96dc247ceb20eab4cbd078d97a4ae6aa41cc67c0275087ef5971",
+      "installedBytesChecked": true
+    },
+    {
+      "name": "console-debug.apk",
+      "bytes": 41382877,
+      "sha256": "3127c84f789577c0d5d0fff1dc9e2169a9ce9bd29eec883d0d0ff76094fc1e0c",
+      "installedBytesChecked": true
+    },
+    {
+      "name": "desktop-debug-androidTest.apk",
+      "bytes": 4593113,
+      "sha256": "b9f0a17916a232f7633e2551e5cbd267743dd28a6d9560d47e09dfd6108b9b24",
+      "installedBytesChecked": true
+    },
+    {
+      "name": "desktop-debug.apk",
+      "bytes": 41382885,
+      "sha256": "af4eb3702ead629f0a23945d2571b22b656fecfa7a96a5ca3ee2957f3c76c452",
+      "installedBytesChecked": true
+    },
+    {
+      "name": "platform-debug-androidTest.apk",
+      "bytes": 45059272,
+      "sha256": "b881382fb7bd840dca38018b78084b9083ed20103051ec73fc3fcf8c85fc217b",
+      "installedBytesChecked": true
+    }
+  ],
+  "hostFixtureBuild": {
+    "path": ".cache/files-handoff-02/host-path-observer/build-02/result.json",
+    "sha256": "097ce0c14c255c3cd140ef9dddabe41980040a2cfc3e022569b8f47cf837bad4"
+  },
+  "repairedPropertiesParser": {
+    "path": ".cache/files-handoff-02/property-parser-01/freeze-01.json",
+    "sha256": "bae89d26f75d6f5e319251270f98f6d37267f86dbc2027f977944b56b89e1ab3"
+  },
+  "parserIndependentReview": {
+    "path": ".cache/integration-20261016-host-client-01/properties-repair-review-01.json",
+    "sha256": "6d577a9af11994acbd554468bb531f8e637f8863e1bc64fb81cdf0ccd9281718"
+  },
+  "parserControls": {
+    "syntheticCasesPassed": 14,
+    "actualJDK21PropertiesStoreControlPassed": true,
+    "controlsAreNotDeviceEvidence": true
+  },
+  "helpers": [
+    {
+      "path": ".cache/files-handoff-02/positive-device-03/run_positive_08.py",
+      "sha256": "1fa6fd450057e44a5e820eb163d6ddbe2dedd4ee4c9fc2482082923715c147f8"
+    },
+    {
+      "path": ".cache/files-handoff-02/positive-bootstrap-01/install_06.py",
+      "sha256": "33ad94c8c2564f4513ad2ae16d74b52c2409812f5ae603f55309b852242abf00"
+    },
+    {
+      "path": ".cache/files-handoff-02/positive-bootstrap-01/bootstrap_04.py",
+      "sha256": "e5a0b95ef799d095ad006c8a855ea079352f605c8cfa90e7c774b51b84ef3a2c"
+    },
+    {
+      "path": ".cache/files-handoff-02/positive-bootstrap-01/close_failed_ui_04.py",
+      "sha256": "bd1644c8d6d4cf0a031416c2964e2ed05feac0976838fbafe97b3f719d666b89"
+    },
+    {
+      "path": ".cache/files-handoff-02/positive-bootstrap-01/reconcile_failed_04.py",
+      "sha256": "410ac7cf035dc2b27ef79779622e48f4d7742852e587ddaa86803ffc403f5edb"
+    },
+    {
+      "path": ".cache/files-handoff-02/positive-bootstrap-01/reconcile_failed_04b.py",
+      "sha256": "204c05797e2b813f8bc1fc21b8d2b1198a3bbf38e2ae412dab66a06a53c4878f"
+    }
+  ],
+  "actualPreparation": {
+    "methodPasses": 1,
+    "skips": 0,
+    "failures": 0,
+    "terminalPhase": "PREPARED_RETIRED",
+    "hostSessions": 1,
+    "hostAuthentications": 1,
+    "hostSftpChannels": 2,
+    "hostSessionClosed": true,
+    "retainedStoreRowCount": 3
+  },
+  "actualController": {
+    "starts": 1,
+    "passes": 0,
+    "failures": 1,
+    "statusCodes": [
+      1,
+      -2
+    ],
+    "instrumentationFinalCode": -1,
+    "positivePhaseStatuses": 0,
+    "ordinaryOpenReached": false,
+    "failureCode": "ONE_REAL_METHOD_NOT_PASSED",
+    "exactPredicateEstablished": false,
+    "selectedLocationPageObserved": true,
+    "headingPropertyInferredFromXML": false
+  },
+  "recovery": {
+    "ordinaryCloseActions": 3,
+    "firstReconciliation": "Preflight refused before mutation: two changed framework cache hashes",
+    "markerFormat": "Pinned AndroidX ProfileVerifier.Cache 1.4.0; exactly24 big-endian bytes",
+    "markerWriteClaim": "Current records are consistent with framework cache format and package update times; exact earlier write not traced",
+    "markerPackageTimeCorrelationPrecision": "seconds from PM; exact new cache bytes separately hashed",
+    "verifyMethodPasses": 1,
+    "verifyPhase": "VERIFIED_RETAINED",
+    "cleanupMethodPasses": 1,
+    "cleanupStatuses": [
+      "REMOVAL_PLANNED_2",
+      "REMOVAL_CONFIRMED_2",
+      "REMOVAL_PLANNED_1",
+      "REMOVAL_CONFIRMED_1",
+      "REMOVAL_PLANNED_0",
+      "REMOVAL_CONFIRMED_0",
+      "CLEANED_EXACT"
+    ],
+    "originalRowsMetadataGenerationsAndReplayRestored": true,
+    "typedPreferencesAndUnrelatedFilesPreserved": true,
+    "frameworkCacheFilesPreservedAtReviewedNewHashes": true,
+    "frameworkCacheFilesRestoredOrDeleted": false,
+    "originalCheckpointAndFailedObserverAndJournalsPreserved": true,
+    "exactOwnedConfigsRemoved": 4,
+    "exactOwnedReverseRemoved": 1,
+    "fullOriginalFileByteEqualityClaimed": false,
+    "bothProductsInstalledAndStopped": true,
+    "threeOldTestAPKsRemainInstalled": true,
+    "originalHostExitCode": null
+  },
+  "review": {
+    "path": ".cache/integration-20261016-host-client-01/reconcile04-runtime-review-01.json",
+    "sha256": "1b200a4980f358df191004d9600e41c6621a0b28844af49efcdf265a73fd1aee"
+  },
+  "frameworkSourceReview": {
+    "path": ".cache/integration-20261016-host-client-01/profileinstaller-01/independent-review-01.json",
+    "sha256": "3bbc07cd2b8d7fc3947938d99758c714906770b9369158d0bc946516b7a484b3"
+  },
+  "privateEvidenceDigests": [
+    {
+      "label": "failed-supervisor",
+      "sha256": "dbb20780ee229afd5328c363b8e98485b2f7bada854f82756cd811d9647ec425"
+    },
+    {
+      "label": "failed-controller-result",
+      "sha256": "189ac7e01d9423991a790f8cc5c5bd5cb5d96cac96e905c808e6c4cbef225490"
+    },
+    {
+      "label": "preparation-stdout",
+      "sha256": "18ad81755bb46d5e3da8b05190b84a0189d983d233f6c2604145da67b990a1f1"
+    },
+    {
+      "label": "controller-stdout",
+      "sha256": "7f243828b8461b945c595be09f6d7dea2fe35e1a1572485f85900b9c9f55f1d0"
+    },
+    {
+      "label": "original-checkpoint",
+      "sha256": "5600f398da990ab8b1cd4e1c09295c375e59cc07b745c4c61ea78422e9d03ff7"
+    },
+    {
+      "label": "ordinary-window-close",
+      "sha256": "a8edf10ac01cb3df8833c89a3e73646bb8e20250b7595d9ca14fb9bb260f82cf"
+    },
+    {
+      "label": "recovery-preflight-refusal",
+      "sha256": "b3cef78d06071068dc906894d3542658b539db28fb70c49a0597509f2fb77fd8"
+    },
+    {
+      "label": "marker-inspection",
+      "sha256": "71bdddecba42b567b6731e3fbd1fa58e30107c3b38d7c01a10ac63068809df5b"
+    },
+    {
+      "label": "accepted-recovery-terminal",
+      "sha256": "b6a3b0dfa92dcc11e857c75571c8f763f7e5a738a43797b46b1f093308feb4bb"
+    },
+    {
+      "label": "verify-stdout",
+      "sha256": "3671a72b722ff6736a4c0b3ad27303f62c31bc9000182ed601e521a1c386abcf"
+    },
+    {
+      "label": "cleanup-stdout",
+      "sha256": "604692d24db208aa108615c95443cb408d03792e94dcd2a53f020d5e14d9a87a"
+    },
+    {
+      "label": "final-private-snapshot",
+      "sha256": "4d75c31e017cefcc5d047d1c4b3d0ebb91763e8ba8287f0b4c7e760d8feb6ddb"
+    }
+  ],
+  "normalPositiveHandoffPassed": false,
+  "capabilityOrStagePromoted": false
+}

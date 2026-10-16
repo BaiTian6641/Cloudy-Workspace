@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "stage": "P1-S3",
+  "scope": "Actual positive-handoff attempt03 receiver PREPARE failure and exact parent reconciliation; properties decoding defect in private harness",
+  "status": "failed-attempt-preserved-cause-correlated-baseline-restored",
+  "passed": false,
+  "appVersion": "0.1.14",
+  "appVersionCode": 15,
+  "direction": "console-to-desktop",
+  "buildReceipt": {
+    "path": ".cache/files-handoff-02/receiver-diagnostic-01/build-01/result.json",
+    "sha256": "24ba71bcb7de1597a4e16dd17dce77efef8602348af76c92a8c572dd0862394f"
+  },
+  "unchangedProductDebugAPKs": true,
+  "diagnostic": {
+    "safeAssertion": "HANDOFF_RECEIVER_FAILED_PRESERVE_STATE:PREPARE:FILES_FIXTURE_OPEN:ARGUMENT:FILES_FIXTURE:64",
+    "phase": "PREPARE",
+    "stage": "FILES_FIXTURE_OPEN",
+    "category": "ARGUMENT",
+    "sourceKey": "FILES_FIXTURE",
+    "line": 64
+  },
+  "actualInstrumentation": {
+    "owningTarget": "Desktop",
+    "method": "DesktopSshFilesActivityTest#actualHandoffReceiverPhase",
+    "starts": 1,
+    "failures": 1,
+    "passes": 0,
+    "skips": 0,
+    "statusCodes": [
+      1,
+      -2
+    ],
+    "finalCode": -1,
+    "finalCodeIsMethodPass": false
+  },
+  "cause": {
+    "scope": "Attempt03 only; earlier generic failures are not reclassified",
+    "fixtureProducer": "java.util.Properties.store(OutputStream,String)",
+    "consumerDefect": "Both private bootstrap and runner split lines at first equals without Properties escape decoding",
+    "serializedFingerprintLength": 51,
+    "canonicalFingerprintLength": 50,
+    "escapedColonCopiedIntoJson": true,
+    "payloadEqualsHashConfirmedArchivedConfig": true,
+    "canonicalValueCorrelatedWithActualFixtureReadiness": true,
+    "canonicalBase64ShapeVerified": true,
+    "domainValidationUnchanged": "Requires SHA256 colon prefix, total length50 and canonical32byte unpadded base64",
+    "responsibility": "Qualification harness serialization adapter; no product guard relaxation justified"
+  },
+  "operationBoundary": {
+    "receiverPrepareInvoked": true,
+    "checkpointSealed": false,
+    "qualificationReceiptCreated": false,
+    "receiverAuthenticationExecuted": false,
+    "hostEvents": 0,
+    "normalSenderOpenExecuted": false,
+    "observerContinuityQualified": false,
+    "positiveHandoffPassed": false,
+    "verifyOrCleanupPhaseExecuted": false
+  },
+  "sources": [
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/SshFilesFixture.kt",
+      "sha256": "2ccd6a0ccd8ab69470444c25fea55fff643f0cb82aba308124004c21f96f8abc"
+    },
+    {
+      "path": "shared/android/domain/src/main/kotlin/io/github/baitian6641/cloudy/domain/SshHostTrust.kt",
+      "sha256": "1e3a81ede9d8640bae75be5aa2da12f998168c2c92979bcb7ede962025047d5d"
+    },
+    {
+      "path": "qualification/fixtures/ssh-session/src/CloudySshSessionFixture.java",
+      "sha256": "2e1bb44b58a40a581efa359c19f8a7241298a7cfe04ce4e6fbd52597f982221f"
+    }
+  ],
+  "helpers": [
+    {
+      "path": ".cache/files-handoff-02/positive-device-03/run_positive_07.py",
+      "sha256": "23c4e01cbcaa52d4fd1e99a6ed24def025c8254a3352f32db7980afb9b455892"
+    },
+    {
+      "path": ".cache/files-handoff-02/positive-bootstrap-01/bootstrap_03.py",
+      "sha256": "aa93fb6afe17058d9e5a53f7115837e3990b8e1e00cc5b3c76b638bda4577d70"
+    },
+    {
+      "path": ".cache/files-handoff-02/positive-bootstrap-01/install_05.py",
+      "sha256": "7cef7dced22dcf42495c41fca39870096a54bcdc0e3ddac52d9c1c3eb76b2c6d"
+    },
+    {
+      "path": ".cache/files-handoff-02/positive-bootstrap-01/reconcile_failed_03.py",
+      "sha256": "f73dd85c0bf841e365f99d9863ced75a157d2463860df078dad82851455624a1"
+    }
+  ],
+  "officialReference": {
+    "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Properties.html",
+    "checkedDate": "2026-10-16",
+    "purpose": "Properties.store output requires Properties escape decoding; colon escaping and ISO8859-1 stream format"
+  },
+  "reconciliation": {
+    "passed": true,
+    "fullBaselineRestored": true,
+    "baselineExceptExactOwnedConfigAndReverseEqualBeforeMutation": true,
+    "exactArchivedConfigHashCheckedBeforeRemoval": true,
+    "attemptedMutations": [
+      "remove-exact-archived-config",
+      "remove-exact-owned-reverse",
+      "restore-desktop-package-stopped-bit"
+    ],
+    "productProcessesAndInstrumentationAlreadyAbsent": true,
+    "privateFilesStoresReplayTypedPreferencesUIDsPreserved": true,
+    "deviceBootSettingsAndPriorReversesPreserved": true,
+    "fiveInstalledAPKsChecked": true,
+    "productInstallOrDataReset": false,
+    "stoppedFlagRestorationIsOperationRetirementProof": false,
+    "originalHostExitCode": null,
+    "hostPIDAbsentAndListenerClosedAtRecovery": true,
+    "originalHostExitReconstructed": false
+  },
+  "privateEvidenceDigests": [
+    {
+      "label": "failed-bootstrap",
+      "sha256": "30b295b4f118dff03526a11dfc8c52b8403559f2a8efdef027954e31f472614c"
+    },
+    {
+      "label": "failed-device-result",
+      "sha256": "2dd1318100f8e00d7c2b4a16cc357e48407ce6fea4e1270cfc4e05745851caac"
+    },
+    {
+      "label": "prepare-instrumentation-stdout",
+      "sha256": "97902b338bc406068cc4e96cf47b51d5f484aaf515aad14ba7567635db4bf4a4"
+    },
+    {
+      "label": "prepare-instrumentation-stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "fixture-properties",
+      "sha256": "f6f90e9c346e5dca34c28bdd17ca987796cfad7be1be59d61e1c826beed97256"
+    },
+    {
+      "label": "fixture-input-payload",
+      "sha256": "cda006172d3b056cf664d57dc0f7b97704fe93edf9593c4ac40f8c097ec9473d"
+    },
+    {
+      "label": "fixture-readiness-log",
+      "sha256": "7abc2931b566f1888bf68456463990265c2ba9d5f104d9fae7847bb3d360f73c"
+    },
+    {
+      "label": "archived-owned-config",
+      "sha256": "cda006172d3b056cf664d57dc0f7b97704fe93edf9593c4ac40f8c097ec9473d"
+    },
+    {
+      "label": "host-summary",
+      "sha256": "5c6c661a549ee5f8d637194f2f40d7f65197d31d845f982e71d29a36dc069ba5"
+    },
+    {
+      "label": "parent-reconciliation",
+      "sha256": "069684d1a9c03699b0c730082e51a06af9f3c53b2443ac0c9d5cc514e75b3368"
+    },
+    {
+      "label": "before-private-snapshot",
+      "sha256": "2a0407923ff99a9c5b569e1fe59b509f87e30b9b03f065ff3b91dc0fba8edc15"
+    },
+    {
+      "label": "final-private-snapshot",
+      "sha256": "d902706fa418cbee323ab22325e90a622638d65350f4a3104b6dca82040c00ab"
+    },
+    {
+      "label": "after-stopped-bit-private-snapshot",
+      "sha256": "d902706fa418cbee323ab22325e90a622638d65350f4a3104b6dca82040c00ab"
+    },
+    {
+      "label": "full-final-baseline",
+      "sha256": "66016dddefec552b4a3600411cc39f12c14ada6c9801548a1572d06fa41c8f4d"
+    },
+    {
+      "label": "accepted-setup",
+      "sha256": "fd18d9ecc8d0f204f95dfe7020626522826659455f40bbe0bb321773afbd355a"
+    }
+  ],
+  "repairStatus": "Parser/helper repair separately under review; no repaired actual PREPARE or new retry claimed",
+  "limits": [
+    "Earlier failed attempts remain preserved with their original evidence and diagnosis",
+    "The safe diagnostic privacy pass is a separate result and is not overwritten",
+    "Full receiver preparation, normal visible Open/BAL, fresh exact-account nested list/read and observer continuity remain unqualified by this attempt",
+    "Current process/listener absence and metadata stopped flags do not recover original fixture exit or establish operation retirement",
+    "No credentials, actual fingerprint, account, UID, serial, port, private filename or inventory path is published"
+  ],
+  "capabilityOrStagePromotion": false
+}

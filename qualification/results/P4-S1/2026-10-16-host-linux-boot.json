@@ -1,0 +1,258 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "HOST-LINUX-BOOT01 internal read-only caller-procfs boot UUID observation",
+  "acceptance": "Parent and independent source/evidence review accept the scoped finite Linux implementation; no stage/capability promotion",
+  "hostExecutableVersionUnchanged": "0.1.2",
+  "sources": [
+    {
+      "path": "host/core/internal/bootidentity/boot_linux.go",
+      "sha256": "63e317107b0e42781456b7756326463366f81a7faf21315b5cbbf003ffd20698"
+    },
+    {
+      "path": "host/core/internal/bootidentity/boot_linux_test.go",
+      "sha256": "7a5365d5daef1c59cbcafde8ce7892867e291a462f8c3cb5074fcbd1a1f0fcfc"
+    }
+  ],
+  "modules": [
+    {
+      "path": "host/core/go.mod",
+      "sha256": "8895e55963e4447a05abb84709092a640834f471dcb2ea6515c6d8dfac6613eb"
+    },
+    {
+      "path": "host/core/go.sum",
+      "sha256": "cde7b21c6627bd3cfc042453150e8eaf8b6c80aa2df25d96f48b038050945f03"
+    }
+  ],
+  "verification": {
+    "path": ".cache/host-next-01/boot01/verification01/result.json",
+    "sha256": "ff7e3e434afedb0a274437ee68934c45e3e9c6ea835a351fb563c2f9420a8c1e"
+  },
+  "sourceUnchangedDuringVerification": true,
+  "moduleUnchanged": true,
+  "runtime": {
+    "os": "Linux",
+    "kernel": "7.0.0-38-generic",
+    "architecture": "x86_64",
+    "selectedGo": "1.27.2",
+    "scope": "Two finite read-only calls on fixed trusted procfs path; identifier not emitted"
+  },
+  "checks": [
+    {
+      "label": "compiler",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "env",
+        "GOVERSION"
+      ],
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "format",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/gofmt",
+        "-l",
+        "${REPO}/host/core/internal/bootidentity"
+      ],
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "vet",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "vet",
+        "-mod=readonly",
+        "./internal/bootidentity"
+      ],
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "race",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "test",
+        "-race",
+        "-count=1",
+        "-json",
+        "-timeout=15s",
+        "-mod=readonly",
+        "./internal/bootidentity"
+      ],
+      "exitCode": 0,
+      "passed": true
+    }
+  ],
+  "actualLinuxTests": {
+    "topLevelMethods": 6,
+    "aggregateNamedPasses": 27,
+    "aggregateIncludesTopLevelAndSubtests": true,
+    "skips": 0,
+    "failures": 0,
+    "raceEnabled": true,
+    "count": 1,
+    "timeoutSeconds": 15,
+    "methods": [
+      "TestReadActualStable",
+      "TestCanonicalAndZero",
+      "TestRejectMalformed",
+      "TestReadAndCloseFailures",
+      "TestBoundedRead",
+      "TestOpenFailures"
+    ],
+    "realOperation": "Read fixed procfs boot_id twice; assert valid and equal without printing value",
+    "otherCases": "Synthetic parser/data/error/close/byte-bound ownership tests; not kernel fault injection"
+  },
+  "review": {
+    "parentSourceRead": "No blocker reported for bounded read/parser/checked owner/private errors",
+    "independentStatus": "SCOPED_ACCEPTANCE_NO_ACTIONABLE_FINDINGS",
+    "independent": {
+      "path": ".cache/host-next-01/boot01/independent-review-01.json",
+      "sha256": "21043b884c5c70c0cde2b9ca742b59f167e6c500776e5e8dc5af4e6a63f24859"
+    },
+    "independentText": {
+      "path": ".cache/host-next-01/boot01/independent-review-01.md",
+      "sha256": "c707674cdc0b761c1ab83a5adf0233803aaf83a8da5656eacfcff09c8252eb6d"
+    },
+    "findings": [],
+    "reviewerReranChecks": false
+  },
+  "evidenceFiles": [
+    {
+      "path": ".cache/host-next-01/boot01/freeze01.json",
+      "sha256": "bc5b5c58e60be05c23ff75b0ff7a6ac649418d3ec0ffdc6d396ae8a04cc1cee2"
+    },
+    {
+      "path": ".cache/host-next-01/boot01/source01.patch",
+      "sha256": "71433c3b463ebb57de166d27b04aa2242730ec38996a8ea663aeedd90b95fc70"
+    },
+    {
+      "path": ".cache/host-next-01/boot01/official-references.json",
+      "sha256": "2d9f691179e72732e33bbbdcb61656ad8e5f6070e577ab952e0182f3ca767d55"
+    },
+    {
+      "path": ".cache/host-next-01/boot01/verification01/format.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-next-01/boot01/verification01/format.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-next-01/boot01/verification01/race.stdout",
+      "sha256": "ea8214853c8cab5533abb087c6ea2b068c1e1d8213c2b0ac7b6d4c68f6e4ce1f"
+    },
+    {
+      "path": ".cache/host-next-01/boot01/verification01/compiler.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-next-01/boot01/verification01/compiler.stdout",
+      "sha256": "c7b759af077e0a308fea285fdf452706e84e9b93cc33b2200a07a0c816642b0a"
+    },
+    {
+      "path": ".cache/host-next-01/boot01/verification01/vet.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-next-01/boot01/verification01/vet.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-next-01/boot01/verification01/race.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "officialReferences": {
+    "checkedDate": "2026-10-16",
+    "tag": "v6.18",
+    "tagObject": "f7b88edb52c8dd01b7e576390d658ae6eef0e134",
+    "commit": "7d0a66e4bb9081d75c82ec4957c50034cb0ea449",
+    "sourceHashes": [
+      {
+        "url": "https://raw.githubusercontent.com/torvalds/linux/7d0a66e4bb9081d75c82ec4957c50034cb0ea449/Documentation/admin-guide/sysctl/kernel.rst",
+        "sha256": "9e8015e22779619f341cb76dd1e59ab47da8d8bc5fd2148d73003b489807e6da",
+        "bytes": 57686,
+        "symbol": "boot_id"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/torvalds/linux/7d0a66e4bb9081d75c82ec4957c50034cb0ea449/drivers/char/random.c",
+        "sha256": "6e8d61bf2ca3851f0aac44c8dbd737b23d5ed38efe7cb79d2e81dafabdc7fc96",
+        "bytes": 53935,
+        "symbol": "proc_do_uuid"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/torvalds/linux/7d0a66e4bb9081d75c82ec4957c50034cb0ea449/lib/uuid.c",
+        "sha256": "1fa7365fa9b82336f1a62d6b7e7f9248b12545e0367f2668b33ebe12f1998d0a",
+        "bytes": 2991,
+        "symbol": "generate_random_uuid"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/torvalds/linux/7d0a66e4bb9081d75c82ec4957c50034cb0ea449/kernel/sysctl.c",
+        "sha256": "04a9dcd95cce423c0da125ca9bd4cb2311b2da23a9662b89f200bce5124361c5",
+        "bytes": 37726,
+        "symbol": "static int _proc_do_string"
+      }
+    ],
+    "qualification": "Pinned upstream format/lifetime semantics plus actual current-host observation; not claim of running selected kernelversion"
+  },
+  "dependency": {
+    "go": "1.27.2",
+    "xSys": "v0.49.0 unchanged and not imported by this library",
+    "newModuleOrUpgrade": false
+  },
+  "macOSFeasibility": {
+    "scope": "Separate public-reference context-only design research; no platform adoption",
+    "outcome": "No inspected maintained public route demonstrated existing strong descendant containment/retirement contract; no universal impossibility claim",
+    "model": "kimi-code/k3",
+    "providerObserved": "kimi-code",
+    "modelObserved": "k3",
+    "elapsedSeconds": 86.087,
+    "exitCode": 0,
+    "stopReason": "stop",
+    "observedToolCalls": 0,
+    "packet": {
+      "path": ".cache/host-next-01/macos-feasibility01/packet.md",
+      "sha256": "86f54810726ca4fb3f2937199bb07145cec1ba5f15e70787c6266270226f2290"
+    },
+    "assignment": {
+      "path": ".cache/host-next-01/macos-feasibility01/runtime-01/assignment.json",
+      "sha256": "29ca0a087578b624d41e43fb7f8c5375c7845c709b422641b759daf47df33ea1"
+    },
+    "finalOnly": {
+      "path": ".cache/host-next-01/macos-feasibility01/final-proposal.md",
+      "sha256": "c2997c0ac8b12482d4a56324a998f2c6b2239aa216070f1329198d2ae471a76d"
+    },
+    "routeReview": {
+      "path": ".cache/host-next-01/macos-feasibility01/route-review.json",
+      "sha256": "4fe3c7ec2c64490b97fe9cc6ee15af795bfab7c015100ee8f2f950bdec0ac8a9"
+    },
+    "coordinatorReview": {
+      "path": ".cache/host-next-01/macos-feasibility01/review.md",
+      "sha256": "2615804e9a0c057ddee644cee15fb241928a42cff3699a2dd6865d6f81439e7c"
+    },
+    "summary": {
+      "path": ".cache/host-next-01/macos-feasibility01/summary.json",
+      "sha256": "1a70a3b40324e5fd19114eb855c90f7a37c4f80a4d87a0520b81352ec6187d75"
+    },
+    "newCandidate": "Apple es_new_descendants_client DocC introducedAt27.0; beta-labeled, entitlement required, explicitly no root/TCC; no inspected atomic subtree termination/exact-empty semantics",
+    "corrections": [
+      "Authorization events do not establish kill-all ownership",
+      "Queue marker delivery including destruction/null is not exact-empty proof",
+      "Uncertain cleanup retains owner; proposed cleanup is not confirmed retirement"
+    ],
+    "nativeMacOSExecuted": false,
+    "darwinBackendImplemented": false
+  },
+  "limits": [
+    "Caller trusts its procfs view; no mount verification or container/global host authentication",
+    "38-byte cap is not hostile mount I/O deadline",
+    "No generated, substituted or cached identity",
+    "No reboot or namespace/mount/account changes; no cross-container/session/installation qualification",
+    "No CLI/capability/event/service/pairing integration or P4 prerequisite promotion",
+    "No other OS stub or managed-job execution",
+    "No new hosted CI or unrelated upstream tests"
+  ]
+}
