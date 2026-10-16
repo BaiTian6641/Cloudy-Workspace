@@ -1,0 +1,207 @@
+{
+  "schemaVersion": 1,
+  "stage": "P1-S3",
+  "recordedOn": "2026-10-16",
+  "scope": "Test-only retained receiver checkpoint, standalone ordinary-process controller and eight isolated Android parser/SQLite methods; positive handoff not executed",
+  "productVersion": "0.1.13",
+  "productVersionCode": 14,
+  "productSourceChanged": false,
+  "device": {
+    "model": "HP Googlebook 14",
+    "os": "Android 17",
+    "api": 37,
+    "abi": "arm64-v8a",
+    "build": "CL3B.260622.276.R2",
+    "incremental": "16560795"
+  },
+  "sources": [
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/SshFilesFixture.kt",
+      "sha256": "2ccd6a0ccd8ab69470444c25fea55fff643f0cb82aba308124004c21f96f8abc"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/FilesLocationsFixture.kt",
+      "sha256": "aaf9e09edd0b9f4c25ec616de84104bae84a2287bde18af8cdede20c56f80ffa"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/SshObserveTrustFixture.kt",
+      "sha256": "ce472b42761be2f1683d0478a3a8fa24e84ba6a9f3430be28e13075fee9c5a0a"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/FilesHandoffReceiverCheckpoint.kt",
+      "sha256": "fb1f4a7663dfcd929f7daa2ac49df318ef60f4bc6482046dc714b52c59892ce4"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/FilesHandoffReceiverCheckpointCodecTest.kt",
+      "sha256": "e2d093beeed942264ea329425aa14a0eea74b36bcaafed59480f6fd4e729a28a"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/FilesHandoffRetainedCleanupTest.kt",
+      "sha256": "e16a4076e3329bc38b6b581e1c1a507b4a29952426f77072cc1fb390071c1952"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/SshFilesActivityContract.kt",
+      "sha256": "8052f4ad3acfa1179f232bdd2aba644ec7e9c5f0909342786f578ec2ee94ce9b"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/FilesHandoffPositiveControllerTest.kt",
+      "sha256": "e447d103c39567ea17255b17f3185fc20fe5d091e744a5b683f4dc55543bb460"
+    }
+  ],
+  "builds": [
+    {
+      "name": "receiverPhase04",
+      "receipt": ".cache/files-handoff-02/receiver-phase-build/build-04/result.json",
+      "receiptSha256": "fefe161e205296388416e1750ac8ba444942fa1fbe7bff14f879c4d04b22e814",
+      "exitCode": 0,
+      "sourceUnchangedDuringBuild": true,
+      "boundInputs": 227,
+      "artifacts": [
+        {
+          "path": "apps/console/build/outputs/apk/androidTest/debug/console-debug-androidTest.apk",
+          "bytes": 4583601,
+          "sha256": "b86ee61231d5963f62d29db0180edae23275611d43d98811fb45616f0d9bf1e1"
+        },
+        {
+          "path": "apps/console/build/outputs/apk/debug/console-debug.apk",
+          "bytes": 41350109,
+          "sha256": "6b3c3e570046d76d107344d0bece0918e517053a842e70c33f5fe2a625dd6f37"
+        },
+        {
+          "path": "apps/desktop/build/outputs/apk/androidTest/debug/desktop-debug-androidTest.apk",
+          "bytes": 4583597,
+          "sha256": "e99034f4156bd069fb94a0dbe2e6cfb840a162d6b07b19e3c7eb4edba136fea3"
+        },
+        {
+          "path": "apps/desktop/build/outputs/apk/debug/desktop-debug.apk",
+          "bytes": 41350113,
+          "sha256": "22ff1e25ee3a90ea7ed6eb3b8cb475787be41cbc511e019cb90378bc61179cf4"
+        },
+        {
+          "path": "shared/android/platform/build/outputs/apk/androidTest/debug/platform-debug-androidTest.apk",
+          "bytes": 45030764,
+          "sha256": "80e4afa706d1289246949c0f3ef112fd636877dde1059d00cf3fb73afa4a7c83"
+        }
+      ],
+      "lintReports": 4,
+      "lintIssues": 0,
+      "jvmExecution": "up-to-date; no new execution in this build"
+    },
+    {
+      "name": "standaloneController03",
+      "receipt": ".cache/files-handoff-02/controller-build/build-03/result.json",
+      "receiptSha256": "fe431fa69ea15d9cf3882c4d2185c382d9547ac266cd1b91e7bbc90489969452",
+      "exitCode": 0,
+      "sourceUnchangedDuringBuild": true,
+      "boundInputs": 228,
+      "artifacts": [
+        {
+          "path": "apps/console/build/outputs/apk/androidTest/debug/console-debug-androidTest.apk",
+          "bytes": 4583601,
+          "sha256": "b86ee61231d5963f62d29db0180edae23275611d43d98811fb45616f0d9bf1e1"
+        },
+        {
+          "path": "apps/console/build/outputs/apk/debug/console-debug.apk",
+          "bytes": 41350109,
+          "sha256": "6b3c3e570046d76d107344d0bece0918e517053a842e70c33f5fe2a625dd6f37"
+        },
+        {
+          "path": "apps/desktop/build/outputs/apk/androidTest/debug/desktop-debug-androidTest.apk",
+          "bytes": 4583597,
+          "sha256": "e99034f4156bd069fb94a0dbe2e6cfb840a162d6b07b19e3c7eb4edba136fea3"
+        },
+        {
+          "path": "apps/desktop/build/outputs/apk/debug/desktop-debug.apk",
+          "bytes": 41350113,
+          "sha256": "22ff1e25ee3a90ea7ed6eb3b8cb475787be41cbc511e019cb90378bc61179cf4"
+        },
+        {
+          "path": "shared/android/platform/build/outputs/apk/androidTest/debug/platform-debug-androidTest.apk",
+          "bytes": 45030764,
+          "sha256": "d9ecf93b3c524f492df6799f7651e5f75ddfd0e065cdf9666951ce651c7d7274"
+        }
+      ],
+      "lintReports": 4,
+      "lintIssues": 0,
+      "jvmExecution": "up-to-date; no new execution in this build"
+    }
+  ],
+  "actualAndroidRun": {
+    "privateEvidence": "qualification/results/private/foundation/2026-10-16-handoff-isolated-eight-device-02",
+    "resultSha256": "d45f7911ffb27750c808db0f23599f0b7db5fedba7edfc038063c2f0b1bf800e",
+    "instrumentationSha256": "7043bd27f05b4d86b272539e2568a118dd5cc240802600667c6155bb3462ac32",
+    "runnerSha256": "86c54d0dfb5256cc47239d9bbb2343c615ca5ab87540ae57ec60c31c4686b373",
+    "startedAt": "2026-10-16T18:27:45.613703+00:00",
+    "endedAt": "2026-10-16T18:27:52.600053+00:00",
+    "passed": 8,
+    "failed": 0,
+    "skipped": 0,
+    "methods": [
+      {
+        "class": "io.github.baitian6641.cloudy.testing.FilesHandoffReceiverCheckpointCodecTest",
+        "method": "preparationMetadataRejectsWrongIdentityCaseAndImpossibleTime",
+        "terminalCode": 0
+      },
+      {
+        "class": "io.github.baitian6641.cloudy.testing.FilesHandoffReceiverCheckpointCodecTest",
+        "method": "duplicateKeysCoercionTrailingAndMalformedUtf8AreRejected",
+        "terminalCode": 0
+      },
+      {
+        "class": "io.github.baitian6641.cloudy.testing.FilesHandoffReceiverCheckpointCodecTest",
+        "method": "exactIntegersAndEscapedStringsRemainTyped",
+        "terminalCode": 0
+      },
+      {
+        "class": "io.github.baitian6641.cloudy.testing.FilesHandoffReceiverCheckpointCodecTest",
+        "method": "depthAndFieldLengthAreBounded",
+        "terminalCode": 0
+      },
+      {
+        "class": "io.github.baitian6641.cloudy.testing.FilesHandoffReceiverCheckpointCodecTest",
+        "method": "fixedPreparationMetadataAcceptsCompletedSameBootSnapshot",
+        "terminalCode": 0
+      },
+      {
+        "class": "io.github.baitian6641.cloudy.testing.FilesHandoffRetainedCleanupTest",
+        "method": "partialPriorCleanupIsRejectedRatherThanRecreated",
+        "terminalCode": 0
+      },
+      {
+        "class": "io.github.baitian6641.cloudy.testing.FilesHandoffRetainedCleanupTest",
+        "method": "exactOwnedRowsAreRemovedWithoutDeletingBaselineRows",
+        "terminalCode": 0
+      },
+      {
+        "class": "io.github.baitian6641.cloudy.testing.FilesHandoffRetainedCleanupTest",
+        "method": "changedOwnedTupleOrExtraRowIsRejectedWithoutMutation",
+        "terminalCode": 0
+      }
+    ],
+    "productApksInstalled": false,
+    "testPackageInstalledAndRemoved": "io.github.baitian6641.cloudy.console.test",
+    "preAndFinalPersistentStateEqual": true,
+    "productsStopped": true,
+    "allThreeTestPackagesAbsent": true,
+    "systemBootAndReverseUnchanged": true
+  },
+  "preservedPreflightRefusal": {
+    "privateEvidence": "qualification/results/private/foundation/2026-10-16-handoff-isolated-eight-device-01",
+    "outcome": "UNREVIEWED_PRIVATE_ROOT_PRESERVE",
+    "testsExecuted": 0,
+    "packagesInstalled": 0,
+    "deviceMutation": false
+  },
+  "reviews": [
+    ".cache/files-handoff-02/receiver-phase-independent-review-04.md",
+    ".cache/files-handoff-02/controller-build/independent-review-03.md",
+    ".cache/files-handoff-02/cleanup-device-prep/independent-review-03.md"
+  ],
+  "unrun": [
+    "Retained receiver PREPARE/VERIFY/CLEANUP",
+    "Coordinated three-store preflight/cleanup runtime",
+    "Positive Console-to-Desktop and Desktop-to-Console Open/BAL",
+    "Fresh receiver authentication/list/read and same-operation retirement",
+    "Physical input and complete P1-S3 acceptance"
+  ]
+}

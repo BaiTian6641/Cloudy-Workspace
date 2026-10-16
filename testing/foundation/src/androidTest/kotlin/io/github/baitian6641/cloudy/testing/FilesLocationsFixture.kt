@@ -52,6 +52,12 @@ internal class FilesLocationsFixture(private val context: Context, private val o
         })
         save("BASELINE")
     }
+    fun retainedHandoffRow(): List<Any> {
+        assertExpected()
+        val row = owned.values.single()
+        check(row.state == FilesResourceState.SHARED && row.revision == 2L && row.navigationRoot == NESTED_ROOT)
+        return values(row)
+    }
     fun plan(label: String, profile: SshObservationProfile, pin: SshTrustSnapshot, path: String, account: String) {
         assertExpected()
         planned = FilesResourceDraft.create(owner, label, profile, pin, path, account)
@@ -197,6 +203,15 @@ internal class FilesLocationsFixture(private val context: Context, private val o
         } finally { coordination.unlock() }
     }
     companion object {
+        internal fun removeRetainedHandoffRow(db: SQLiteDatabase, baseline: List<List<Any>>, owned: List<Any>) {
+            val columns = FilesHandoffReceiverCheckpoint.COLUMNS[2]
+            val before = FilesHandoffReceiverCheckpoint.rows(db, "SELECT $columns FROM resources ORDER BY resource_id")
+            check(owned.size == 20 && owned[4] == 2L && owned[5] == "SHARED" && owned[18] == NESTED_ROOT)
+            check(owned !in baseline && before.size == baseline.size + 1 && before.toSet() == (baseline + listOf(owned)).toSet())
+            check(db.delete("resources", columns.split(',').joinToString(" AND ") { "$it=?" }, owned.map { it.toString() }.toTypedArray()) == 1)
+            check(FilesHandoffReceiverCheckpoint.rows(db, "SELECT $columns FROM resources ORDER BY resource_id") == baseline)
+        }
+
         const val NESTED_ROOT = "./nested"
         const val NESTED_NAME = "nested.txt"
         const val NESTED_TEXT = "Cloudy registered nested SFTP\n"

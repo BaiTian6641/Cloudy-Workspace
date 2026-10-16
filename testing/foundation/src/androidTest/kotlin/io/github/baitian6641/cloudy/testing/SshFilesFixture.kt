@@ -99,6 +99,17 @@ internal class SshFilesFixture private constructor(
         })
     }
 
+    fun retainedHandoffRows(): List<List<Any>> {
+        check(case == "handoff-receiver")
+        assertUnchanged()
+        val profile = checkNotNull(expectedProfile)
+        val key = (plannedPin.status as SshTrustStatus.Accepted).key
+        return listOf(listOf(profile.id, profile.revision, profile.owner.wireId, profile.label,
+            profile.protocol.wireId, profile.host, profile.port.toLong()),
+            listOf(plannedPin.peer.host, plannedPin.peer.port.toLong(), plannedPin.peer.route.wireId,
+                owner.wireId, plannedPin.revision, 0L, key.keyFormat, key.fingerprint))
+    }
+
     fun seed() {
         val label = "Files ${owner.wireId} $run $case"
         receipt.put("plannedLabel", label).put("plannedHost", peer.host).put("plannedPort", peer.port)
@@ -226,6 +237,16 @@ internal class SshFilesFixture private constructor(
     }
 
     companion object {
+        internal fun removeRetainedHandoffProfile(db: android.database.sqlite.SQLiteDatabase,
+                                                baseline: List<List<Any>>, owned: List<Any>) {
+            val columns = FilesHandoffReceiverCheckpoint.COLUMNS[0]
+            val before = FilesHandoffReceiverCheckpoint.rows(db, "SELECT $columns FROM profiles ORDER BY id")
+            check(owned.size == 7 && owned[1] == 1L && owned[4] == "ssh" && owned[5] == "127.0.0.1")
+            check(owned !in baseline && before.size == baseline.size + 1 && before.toSet() == (baseline + listOf(owned)).toSet())
+            check(db.delete("profiles", columns.split(',').joinToString(" AND ") { "$it=?" }, owned.map { it.toString() }.toTypedArray()) == 1)
+            check(FilesHandoffReceiverCheckpoint.rows(db, "SELECT $columns FROM profiles ORDER BY id") == baseline)
+        }
+
         const val HELLO_NAME = "hello.txt"
         const val HELLO_TEXT = "Cloudy retained SFTP\n"
 
@@ -237,7 +258,7 @@ internal class SshFilesFixture private constructor(
             check(context.packageName == "io.github.baitian6641.cloudy.${owner.wireId}" &&
                 context.applicationInfo.uid == Process.myUid() && !context.isDeviceProtectedStorage)
             check(Regex("[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}").matches(run))
-            check(case in setOf("basic", "recreate", "hide", "focus", "profile", "hold", "register", "registration-focus", "registered-location"))
+            check(case in setOf("basic", "recreate", "hide", "focus", "profile", "hold", "register", "registration-focus", "registered-location", "handoff-receiver"))
             val directory = File(context.noBackupFilesDir, "ssh-files-fixture")
             val info = Os.lstat(directory.path)
             check(!Files.isSymbolicLink(directory.toPath()) && OsConstants.S_ISDIR(info.st_mode) &&

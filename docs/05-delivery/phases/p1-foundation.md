@@ -104,6 +104,8 @@ The [0.1.11 native locations follow-up](../../../qualification/results/P1-S3/202
 
 The [0.1.12 protected files handoff result](../../../qualification/results/P1-S3/2026-10-16-files-handoff-transport.md) adds generated AIDL, signature/actual-caller enforcement, bounded discovery/replies, SHARED resolution/replay/ticket admission and native sender composition. Fourteen genuine both-direction discovery/denial cases and14 separate binding retirements pass; corrected build03 has224 source bindings/five APKs/four zero-finding Lint reports, with seven focused Parcel cases and the prior54-case platform run scoped separately. First failed transport/recovery evidence remains retained. Positive normal Open/BAL/fresh receiver authentication/list/read, broader negative callers and lifecycle remain required; work item2 and P1-S3 stay incomplete. Predecessor native-location commit `1b968613ea30455f0804cb04d5d502f10a75b258` has seven passing hosted lanes; current source needs its own CI.
 
+The [positive handoff test foundation](../../../qualification/results/P1-S3/2026-10-16-handoff-test-foundation.md) adds immutable retained receiver phases and a standalone ordinary-process controller, with strict builds and eight actual isolated Googlebook parser/SQLite passes. Full phase sequencing, host-path/retirement observation and both-direction normal Open remain required. Product APKs stay0.1.13; this test-only increment does not complete work item2 or promote P1-S3.
+
 Deliverables:
 
 - Identity/IPC/lifecycle library and schema fixtures

@@ -59,6 +59,35 @@ abstract class SshFilesActivityContract(private val expectedOwner: WindowOwner) 
     @Test fun registrationFocusLossCancelsFrozenProposalWithoutMutation() = exerciseLocations("registration-focus")
     @Test fun registeredLocationUsesFreshAccountAndInitialDirectoryThenRevocationRetires() = exerciseLocations("registered-location")
 
+    @Test fun actualHandoffReceiverPhase() {
+        val args = InstrumentationRegistry.getArguments()
+        val phase = args.getString("cloudyFilesHandoffReceiverPhase")
+        assumeTrue("Explicit retained receiver phase only", phase != null)
+        try {
+            val run = checkNotNull(args.getString("cloudySshFilesRun"))
+            val direction = checkNotNull(args.getString("cloudyFilesHandoffDirection"))
+            check(direction == if (expectedOwner == WindowOwner.CONSOLE) "desktop-to-console" else "console-to-desktop")
+            when (phase) {
+                "prepare" -> {
+                    check(args.getString("cloudyFilesHandoffCheckpointSha256") == null)
+                    exerciseLocations("handoff-receiver")
+                }
+                "verify", "cleanup" -> {
+                    // This is parent authorization to start inspection, never proof that the
+                    // previous ordinary process/host actually retired. Parent records that outside.
+                    check(args.getString("cloudyFilesHandoffExternalRetirement") == "parent-verified")
+                    val checkpoint = FilesHandoffReceiverCheckpoint.resume(
+                        InstrumentationRegistry.getInstrumentation().targetContext, expectedOwner, run, direction,
+                        checkNotNull(args.getString("cloudyFilesHandoffCheckpointSha256")))
+                    if (phase == "verify") checkpoint.verify() else checkpoint.cleanup()
+                }
+                else -> error("UNSUPPORTED_RECEIVER_PHASE")
+            }
+        } catch (_: Throwable) {
+            throw AssertionError("HANDOFF_RECEIVER_PHASE_FAILED_PRESERVE_STATE")
+        }
+    }
+
     private fun exercise(case: String) {
         val run = InstrumentationRegistry.getArguments().getString("cloudySshFilesRun")
         // The empty Compose rule launches nothing: skip precedes private/store/Activity access.
@@ -264,6 +293,7 @@ abstract class SshFilesActivityContract(private val expectedOwner: WindowOwner) 
         val app = context.applicationContext as Application
         var fixture: SshFilesFixture? = null
         var locations: FilesLocationsFixture? = null
+        var checkpoint: FilesHandoffReceiverCheckpoint? = null
         val scenarios = mutableListOf<ActivityScenario<CloudySshFilesActivity>>()
         var manager: ActivityScenario<CloudyFilesLocationsActivity>? = null
         val windows = OwnedLocationWindows(checkNotNull(run), context.packageName)
@@ -277,6 +307,10 @@ abstract class SshFilesActivityContract(private val expectedOwner: WindowOwner) 
         }
         app.registerActivityLifecycleCallbacks(windows)
         try {
+            if (case == "handoff-receiver") {
+                checkpoint = FilesHandoffReceiverCheckpoint.begin(context, expectedOwner, run,
+                    checkNotNull(InstrumentationRegistry.getArguments().getString("cloudyFilesHandoffDirection")))
+            }
             val owned = SshFilesFixture.open(context, expectedOwner, run, case)
             fixture = owned
             owned.seed()
@@ -325,7 +359,21 @@ abstract class SshFilesActivityContract(private val expectedOwner: WindowOwner) 
                 stage = "REGISTER_ACTUAL_LISTING"
                 val firstRow = registerLocation(owned, resource, "Location $run A")
                 owned.phase("REAL_PRIVATE_REGISTRATION_CONFIRMED")
-                if (case == "register") {
+                if (case == "handoff-receiver") {
+                    stage = "RETIRE_PREPARATION_CONNECTION"
+                    disconnect()
+                    SshFilesFixture.settle()
+                    first.close()
+                    stage = "SHARE_ACTUAL_REGISTERED_LOCATION"
+                    manager = launchManager(context, run)
+                    inspectLocation(firstRow)
+                    val shared = resource.expectChange(firstRow, true)
+                    managerClick("locations_share")
+                    managerClick("locations_confirm")
+                    waitManagerRevision(shared.revision)
+                    resource.confirmChange(shared)
+                    owned.phase("RETAINED_SHARED_RESOURCE_CONFIRMED")
+                } else if (case == "register") {
                     stage = "ORDINARY_RESOURCE_INDEPENDENCE"
                     val shared = resource.changeThroughStore(firstRow, true)
                     resource.changeThroughStore(shared, false)
@@ -427,8 +475,21 @@ abstract class SshFilesActivityContract(private val expectedOwner: WindowOwner) 
             saves?.let { observer -> app.unregisterActivityLifecycleCallbacks(observer); observer.dispose() }
             try {
                 check(closed)
-                locations?.restore() // Resources before their exact profile/trust parents.
-                fixture?.restore(!failed)
+                if (case == "handoff-receiver") {
+                    // Any failure retains original receipts and exact rows, including partially
+                    // prepared state. A later process must import the immutable checkpoint.
+                    check(!failed)
+                    val hash = checkNotNull(checkpoint).seal(checkNotNull(fixture), checkNotNull(locations))
+                    instrumentation.sendStatus(0, Bundle().apply {
+                        putString("cloudyFilesHandoffReceiverPhase", "PREPARED_RETIRED")
+                        putString("cloudyFilesHandoffCheckpointSha256", hash)
+                        putString("cloudyFilesHandoffRun", run)
+                        putString("cloudyFilesHandoffReceiverPackage", context.packageName)
+                    })
+                } else {
+                    locations?.restore() // Resources before their exact profile/trust parents.
+                    fixture?.restore(!failed)
+                }
             } catch (error: Throwable) { failure(error, "RESTORE_PRESERVE_FIXTURE") }
             app.unregisterActivityLifecycleCallbacks(windows)
             windows.dispose()

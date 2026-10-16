@@ -150,5 +150,14 @@ internal class SshObserveTrustFixture(
 
     companion object {
         private const val EXACT_ROW = "host=? AND port=? AND route=? AND owner=? AND revision=? AND state=? AND key_format=? AND fingerprint=?"
+        internal fun removeRetainedHandoffPin(db: SQLiteDatabase, baseline: List<List<Any>>, owned: List<Any>) {
+            val columns = FilesHandoffReceiverCheckpoint.COLUMNS[1]
+            val before = FilesHandoffReceiverCheckpoint.rows(db, "SELECT $columns FROM pins ORDER BY host,port,route")
+            check(owned.size == 8 && owned[2] == "direct" && owned[4] == 1L && owned[5] == 0L)
+            check(owned !in baseline && before.size == baseline.size + 1 && before.toSet() == (baseline + listOf(owned)).toSet())
+            check(db.delete("pins", columns.split(',').joinToString(" AND ") { "$it=?" }, owned.map { it.toString() }.toTypedArray()) == 1)
+            check(FilesHandoffReceiverCheckpoint.rows(db, "SELECT $columns FROM pins ORDER BY host,port,route") == baseline)
+        }
     }
+
 }
