@@ -61,6 +61,7 @@ class CloudySshFilesActivity : ComponentActivity() {
                 return SshFilesSessionModel(application) as T
             }
         })[SshFilesSessionModel::class.java]
+        FilesPositiveObservation.start(this, FilesPositiveObservation.Event.RECEIVER_CREATED, this, model)
         // Existing ViewModel state is the actual live owner on configuration recreation. A new
         // model after process loss receives only an interruption notice, never a restored command.
         if (created) {
@@ -199,7 +200,11 @@ class CloudySshFilesActivity : ComponentActivity() {
         }
         super.onSaveInstanceState(outState)
     }
-    override fun onDestroy() { clearFields(); super.onDestroy() }
+    override fun onDestroy() {
+        if (::model.isInitialized) FilesPositiveObservation.record(
+            FilesPositiveObservation.Event.RECEIVER_DESTROYED, this, model)
+        clearFields(); super.onDestroy()
+    }
 
     // Recheck framework focus at action admission, even if a previously enabled UI callback queues.
     private fun canEdit() = interactive && hasWindowFocus() && !isFinishing && !model.state.registrationPending &&

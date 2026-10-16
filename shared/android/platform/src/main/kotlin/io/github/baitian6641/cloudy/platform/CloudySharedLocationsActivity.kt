@@ -35,6 +35,7 @@ class CloudySharedLocationsActivity : ComponentActivity() {
             "io.github.baitian6641.cloudy.desktop" -> WindowOwner.DESKTOP
             else -> { finish(); return }
         }
+        FilesPositiveObservation.start(this, FilesPositiveObservation.Event.SENDER_CREATED, this)
         if (savedInstanceState != null) {
             val restored = try {
                 val value = savedInstanceState.getBundle(STATE)
@@ -83,7 +84,10 @@ class CloudySharedLocationsActivity : ComponentActivity() {
         })
         super.onSaveInstanceState(outState)
     }
-    override fun onDestroy() { disposed = true; depart(); super.onDestroy() }
+    override fun onDestroy() {
+        FilesPositiveObservation.record(FilesPositiveObservation.Event.SENDER_DESTROYED, this)
+        disposed = true; depart(); super.onDestroy()
+    }
 
     private fun canInteractNow(): Boolean = resumed && hasWindowFocus() && !disposed && !isFinishing
     private fun canStart(): Boolean = canInteractNow() && !busy

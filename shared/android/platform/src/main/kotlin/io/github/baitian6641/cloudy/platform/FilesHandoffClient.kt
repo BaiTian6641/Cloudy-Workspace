@@ -70,6 +70,8 @@ internal class FilesHandoffClient(
             return false
         }
         current = call
+        if (call.bytes != null) FilesPositiveObservation.record(
+            FilesPositiveObservation.Event.SUBMIT_ACCEPTED, activity, call)
         main.postDelayed({
             if (current === call && call.active.get() && !call.finished.get()) {
                 call.deactivate()
@@ -145,12 +147,16 @@ internal class FilesHandoffClient(
             result = FilesClientResult.Failure(FilesClientCode.UNCONFIRMED, call.submitted.get())
         } finally {
             call.finished.set(true)
+            if (call.bytes != null) FilesPositiveObservation.record(
+                FilesPositiveObservation.Event.CALL_FINISHED, call)
             val finalResult = result
             // Capacity returns only after the actual call and owning binding retire. If main no
             // longer runs or unbinding cannot be established, retain capacity until process exit.
             main.post {
                 if (unbind(call)) {
                     occupied.set(false)
+                    if (call.bytes != null) FilesPositiveObservation.record(
+                        FilesPositiveObservation.Event.CALL_RETIRED, call)
                     if (current === call) {
                         current = null
                         report(if (call.active.get()) finalResult else

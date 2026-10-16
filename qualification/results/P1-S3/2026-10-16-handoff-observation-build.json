@@ -1,0 +1,276 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "Debug qualification observation and release exclusion; source/build evidence only",
+  "productVersion": {
+    "name": "0.1.14",
+    "code": 15,
+    "installedInThisPacket": false,
+    "lastInstalledVersion": "0.1.13/code14"
+  },
+  "buildReceipt": {
+    "path": ".cache/files-handoff-02/controller-retirement/build-02/result.json",
+    "sha256": "4104610f526ec872dbafb9ce8123af11a53abf6cccb4882a664d2f6912ff1fb9"
+  },
+  "sourceUnchangedDuringBuild": true,
+  "boundBuildInputCount": 231,
+  "changedSources": [
+    {
+      "path": "apps/console/build.gradle.kts",
+      "bytes": 2353,
+      "sha256": "ea1fe92eca893eacb9e0ec3bdf895632a1ea2ea0edf2bfe54da8a537ad6bb351"
+    },
+    {
+      "path": "apps/desktop/build.gradle.kts",
+      "bytes": 2353,
+      "sha256": "43ceab4f8a1778d65020ddea0c52a326151f00fe932c078e882685a3671fb52c"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/FilesHandoffPositiveControllerTest.kt",
+      "bytes": 16119,
+      "sha256": "0a4c0563437d98b9de1a2433d127a9150ec93ef645bc8726a56f180932aa461a"
+    },
+    {
+      "path": "shared/android/platform/src/debug/kotlin/io/github/baitian6641/cloudy/platform/FilesPositiveObservation.kt",
+      "bytes": 14050,
+      "sha256": "c8d03eee8c6f31e083c33275ad128780337f0cf725024ac26641f06ab4a2e8b5"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudySharedLocationsActivity.kt",
+      "bytes": 11267,
+      "sha256": "15402ce6863002cb39fcde4e9b351c98d411f5241464ae8b12f146116b69d76f"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudySshFilesActivity.kt",
+      "bytes": 13693,
+      "sha256": "6a64ed09a581d5ce7eca51cfc5ae2ff0c6d80c0d2d0dd843c1da88e950b42aa4"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/FilesHandoffClient.kt",
+      "bytes": 10409,
+      "sha256": "0e30b03f14bb27fa5d429a794e4213b876415622d960a57870408766d5022e05"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/FilesHandoffReceiver.kt",
+      "bytes": 8946,
+      "sha256": "379345069d95f8d9adac7aad0e532ec1391322dd7f3890c4a546f8ed47dfaf2b"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/SshFilesSessionModel.kt",
+      "bytes": 36423,
+      "sha256": "f44899bb7905bef6ef9b2a723347b496352e3071bd48315b2b6d2ef9b39ea3ef"
+    },
+    {
+      "path": "shared/android/platform/src/release/kotlin/io/github/baitian6641/cloudy/platform/FilesPositiveObservation.kt",
+      "bytes": 740,
+      "sha256": "ff35b67e0a04c4bddea0e2aae02a655c751e13cba58a8d4a8136903712f5c65e"
+    },
+    {
+      "path": "shared/android/platform/src/testDebug/kotlin/io/github/baitian6641/cloudy/platform/FilesPositiveObservationTest.kt",
+      "bytes": 9612,
+      "sha256": "a121003e183c45a13ceaa68b56803a7bede7427a9907914a3f1357595435ead5"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "apps/console/build/outputs/apk/androidTest/debug/console-debug-androidTest.apk",
+      "bytes": 4583601,
+      "sha256": "b86ee61231d5963f62d29db0180edae23275611d43d98811fb45616f0d9bf1e1"
+    },
+    {
+      "path": "apps/console/build/outputs/apk/debug/console-debug.apk",
+      "bytes": 41382877,
+      "sha256": "3127c84f789577c0d5d0fff1dc9e2169a9ce9bd29eec883d0d0ff76094fc1e0c"
+    },
+    {
+      "path": "apps/console/build/outputs/apk/release/console-release-unsigned.apk",
+      "bytes": 33150340,
+      "sha256": "8d25f85081275ee056557d70c10e13cea2b3e20b1afde0b63349ac6886e5b3a9"
+    },
+    {
+      "path": "apps/desktop/build/outputs/apk/androidTest/debug/desktop-debug-androidTest.apk",
+      "bytes": 4583597,
+      "sha256": "e99034f4156bd069fb94a0dbe2e6cfb840a162d6b07b19e3c7eb4edba136fea3"
+    },
+    {
+      "path": "apps/desktop/build/outputs/apk/debug/desktop-debug.apk",
+      "bytes": 41382885,
+      "sha256": "af4eb3702ead629f0a23945d2571b22b656fecfa7a96a5ca3ee2957f3c76c452"
+    },
+    {
+      "path": "apps/desktop/build/outputs/apk/release/desktop-release-unsigned.apk",
+      "bytes": 33150340,
+      "sha256": "11bc50ad5b203268f7d6c6a622ceda43bee1e565183f7dfc1ea0791d4b9ef051"
+    },
+    {
+      "path": "shared/android/platform/build/outputs/apk/androidTest/debug/platform-debug-androidTest.apk",
+      "bytes": 45059272,
+      "sha256": "b881382fb7bd840dca38018b78084b9083ed20103051ec73fc3fcf8c85fc217b"
+    }
+  ],
+  "strictBuild": {
+    "exitCode": 0,
+    "command": [
+      "./gradlew",
+      ":domain:test",
+      ":platform:testDebugUnitTest",
+      ":design-system:testDebugUnitTest",
+      ":console:assembleDebug",
+      ":desktop:assembleDebug",
+      ":console:lintDebug",
+      ":desktop:lintDebug",
+      ":platform:lintDebug",
+      ":design-system:lintDebug",
+      ":platform:assembleDebugAndroidTest",
+      ":platform:compileReleaseKotlin",
+      ":console:assembleRelease",
+      ":desktop:assembleRelease",
+      ":console:lintRelease",
+      ":desktop:lintRelease",
+      ":platform:lintRelease",
+      ":console:assembleDebugAndroidTest",
+      ":desktop:assembleDebugAndroidTest",
+      "--dependency-verification=strict",
+      "--no-daemon",
+      "--console=plain",
+      "--max-workers=4"
+    ]
+  },
+  "platformJvm": {
+    "executed": 16,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "observerMethods": 9,
+    "suites": [
+      {
+        "name": "io.github.baitian6641.cloudy.platform.FilesDispatchStateTest",
+        "tests": "5",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0"
+      },
+      {
+        "name": "io.github.baitian6641.cloudy.platform.FilesPositiveObservationTest",
+        "tests": "9",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0"
+      },
+      {
+        "name": "io.github.baitian6641.cloudy.platform.SshLocalNetworkPolicyTest",
+        "tests": "2",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0"
+      }
+    ],
+    "unrelatedUpToDateSuitesNotCounted": true
+  },
+  "lintReports": [
+    {
+      "file": "console-lint-results-debug.xml",
+      "issues": 0,
+      "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f"
+    },
+    {
+      "file": "console-lint-results-release.xml",
+      "issues": 0,
+      "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f"
+    },
+    {
+      "file": "design-system-lint-results-debug.xml",
+      "issues": 0,
+      "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f"
+    },
+    {
+      "file": "desktop-lint-results-debug.xml",
+      "issues": 0,
+      "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f"
+    },
+    {
+      "file": "desktop-lint-results-release.xml",
+      "issues": 0,
+      "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f"
+    },
+    {
+      "file": "platform-lint-results-debug.xml",
+      "issues": 0,
+      "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f"
+    },
+    {
+      "file": "platform-lint-results-release.xml",
+      "issues": 0,
+      "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f"
+    }
+  ],
+  "releaseExclusion": {
+    "debugOnlyTypesAbsent": true,
+    "noIoWorkerIdentityContainers": true,
+    "apkChecks": [
+      {
+        "artifact": "console-debug.apk",
+        "sha256": "3127c84f789577c0d5d0fff1dc9e2169a9ce9bd29eec883d0d0ff76094fc1e0c",
+        "collectorLiteralPresent": true,
+        "exclusionMatchesVariant": true,
+        "badging": "package: name='io.github.baitian6641.cloudy.console' versionCode='15' versionName='0.1.14' platformBuildVersionName='17' platformBuildVersionCode='37' compileSdkVersion='37' compileSdkVersionCodename='17'",
+        "versionMatches": true
+      },
+      {
+        "artifact": "console-release-unsigned.apk",
+        "sha256": "8d25f85081275ee056557d70c10e13cea2b3e20b1afde0b63349ac6886e5b3a9",
+        "collectorLiteralPresent": false,
+        "exclusionMatchesVariant": true,
+        "badging": "package: name='io.github.baitian6641.cloudy.console' versionCode='15' versionName='0.1.14' platformBuildVersionName='17' platformBuildVersionCode='37' compileSdkVersion='37' compileSdkVersionCodename='17'",
+        "versionMatches": true
+      },
+      {
+        "artifact": "desktop-debug.apk",
+        "sha256": "af4eb3702ead629f0a23945d2571b22b656fecfa7a96a5ca3ee2957f3c76c452",
+        "collectorLiteralPresent": true,
+        "exclusionMatchesVariant": true,
+        "badging": "package: name='io.github.baitian6641.cloudy.desktop' versionCode='15' versionName='0.1.14' platformBuildVersionName='17' platformBuildVersionCode='37' compileSdkVersion='37' compileSdkVersionCodename='17'",
+        "versionMatches": true
+      },
+      {
+        "artifact": "desktop-release-unsigned.apk",
+        "sha256": "11bc50ad5b203268f7d6c6a622ceda43bee1e565183f7dfc1ea0791d4b9ef051",
+        "collectorLiteralPresent": false,
+        "exclusionMatchesVariant": true,
+        "badging": "package: name='io.github.baitian6641.cloudy.desktop' versionCode='15' versionName='0.1.14' platformBuildVersionName='17' platformBuildVersionCode='37' compileSdkVersion='37' compileSdkVersionCodename='17'",
+        "versionMatches": true
+      }
+    ],
+    "inspection": {
+      "path": ".cache/files-handoff-02/controller-retirement/build-02/inspection.json",
+      "sha256": "79dfa283ae26c4e5f4cc26a055f51943b6a654b74a3776ed8a887941eaca50e4"
+    }
+  },
+  "reviews": {
+    "independent01": {
+      "path": ".cache/files-handoff-02/controller-retirement/independent-review-01.json",
+      "sha256": "bba6c374fb0cac1d36eac3f5f39a8cdcfa9ba0d8549be6b90f619d92b6fdbb0c"
+    },
+    "independent02": {
+      "path": ".cache/files-handoff-02/controller-retirement/independent-review-02.json",
+      "sha256": "06054c7966977ee0081c88aefc8015422400148571dfe2215a538d9ce87296bc"
+    },
+    "parent": {
+      "path": ".cache/files-handoff-02/controller-retirement/parent-inspection02.json",
+      "sha256": "36ee2ad3fbabf9ba17b03094e28cf72abf485c0af54ecc4281849fb4d0b7c713"
+    },
+    "resolvedFindings": [
+      "R1/P2 checked publication precedes no required fallible action",
+      "R2/P3 exact JSON whitespace"
+    ],
+    "unresolvedBlockers": []
+  },
+  "runtime": {
+    "deviceExecuted": false,
+    "androidFileApiExecuted": false,
+    "ordinaryPositiveHandoffExecuted": false,
+    "receiverPhasesExecuted": false,
+    "hostFixtureExecuted": false
+  },
+  "capabilityOrStagePromotion": false
+}

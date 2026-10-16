@@ -83,16 +83,20 @@ class FilesHandoffPositiveControllerTest {
             controls.password(receiver, config.getValue("password"))
             controls.click(receiver, "Connect to remote files", scroll = true)
             controls.requireText(receiver, "Connected to remote files", scroll = true)
+            phase("CONNECTED_UI_VISIBLE")
             controls.rowAction(receiver, "nested.txt", "Read preview")
             controls.requireText(receiver, "Cloudy registered nested SFTP\n", scroll = true)
             phase("NESTED_PREVIEW_VISIBLE")
             controls.click(receiver, "Disconnect")
             controls.requireText(receiver, "Ready to connect", scroll = true)
             phase("DISCONNECT_UI_IDLE_HOST_RETIREMENT_PENDING")
+            phase("BEFORE_PLANNED_RECEIVER_CLOSE")
             controls.click(receiver, "Close")
             // Closing the newly dispatched task should reveal the existing sender.
             // Never launch another sender document to manufacture a cleanup result.
             controls.requireText(sender, "Shared locations in the other app")
+            controls.requireActionable(sender, "Refresh first page", scroll = true)
+            phase("SENDER_RETURNED_REFRESH_ENABLED_BEFORE_PLANNED_CLOSE")
             controls.click(sender, "Close")
             controls.requireText(sender, "Saved file locations")
             controls.click(sender, "Close")
@@ -225,6 +229,9 @@ class FilesHandoffPositiveControllerTest {
                 candidate = current.parent
             }
             return null
+        }
+        fun requireActionable(packageName: String, text: String, scroll: Boolean = false) {
+            await(packageName, scroll) { all -> unique(all) { matches(it, text) }?.let(::actionable) }
         }
         fun click(packageName: String, text: String, scroll: Boolean = false) {
             val action = await(packageName, scroll) { all ->

@@ -5810,7 +5810,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-16",
       "sourceUpdatedOn": null,
-      "note": "API21 open/fstat/fsync/close. Ledger checks directory descriptor type and propagates initialization sync failure as denial. Public SDK does not expose O_DIRECTORY; do not insert a private constant. Owner: platform/security; P1-S3 API50/API51.",
+      "note": "API21 open/fstat/fsync/close. Ledger checks directory descriptor type and propagates initialization sync failure as denial. Public SDK does not expose O_DIRECTORY; do not insert a private constant. Owner: platform/security; P1-S3 API50/API51. API67 also uses checked fchmod/fstat/open/close/rename for a debug-only private receipt; rename is the final publication action, not a directory/power-loss durability claim.",
       "refresh": "Before changing handoff caller, storage, replay or compatibility policy."
     },
     {
@@ -7084,6 +7084,30 @@
       "sourceUpdatedOn": null,
       "note": "RootedFileSystem.getRoot and absolute RootedPath identity bind finite synthetic nested path classes to the trusted root. Mapping is not additional access control or runtime qualification.",
       "refresh": "Before changing the pinned SSHD fixture or path observation; real callback and Googlebook handoff evidence remain separate."
+    },
+    {
+      "id": "G249",
+      "title": "Android process start elapsed-time identity",
+      "url": "https://developer.android.com/reference/android/os/Process#getStartElapsedRealtime()",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Public API24 getStartElapsedRealtime returns process start in elapsedRealtime time base, before application code. Used only for debug observation correlation alongside PID and parent boot/build checks; not authentication or runtime qualification. Owner: platform qualification; P1-S3 API67.",
+      "refresh": "Before changing process-correlation semantics or selected Android SDK."
+    },
+    {
+      "id": "G250",
+      "title": "Android checked FileDescriptor synchronization",
+      "url": "https://developer.android.com/reference/java/io/FileDescriptor#sync()",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Public API1 sync throws SyncFailedException on failure. API67 checks file synchronization before close and final rename of its private debug receipt; directory and power-loss durability are not inferred. JVM sequence tests are distinct from Android runtime evidence.",
+      "refresh": "Before changing receipt publication or selected Android SDK."
     }
   ]
 }

@@ -2373,6 +2373,43 @@
       "researchEvidence": "docs/02-architecture/files-resource-registration.md",
       "compileEvidence": "qualification/results/P1-S3/2026-10-16-files-location-ui-build.json",
       "deviceEvidence": "qualification/results/P1-S3/2026-10-16-files-location-ui.md"
+    },
+    {
+      "id": "API67",
+      "feature": "Passive debug observation of original files handoff and session retirement",
+      "symbols": [
+        "android.os.Process.getStartElapsedRealtime",
+        "android.os.Process.myPid",
+        "android.os.SystemClock.elapsedRealtime",
+        "android.content.Context.getNoBackupFilesDir",
+        "android.system.Os.open",
+        "android.system.Os.lstat",
+        "android.system.Os.fstat",
+        "android.system.Os.fchmod",
+        "android.system.Os.close",
+        "android.system.Os.rename",
+        "java.io.FileDescriptor.sync",
+        "android.system.OsConstants.O_EXCL",
+        "android.system.OsConstants.O_NOFOLLOW"
+      ],
+      "sourceIds": [
+        "G201",
+        "G202",
+        "G249",
+        "G250"
+      ],
+      "minimumApi": 24,
+      "libraryVersion": "Public Android SDK; existing productmin35/target37; debug variant only, no added dependency.",
+      "availability": "documented",
+      "qualification": "unverified",
+      "checkedOn": "2026-10-16",
+      "owner": "Android/platform qualification developer and integration leader",
+      "stage": "P1-S3",
+      "runtimeGuard": "Parent-controlled private0700 directory/0600 strict bounded config; fresh finite nonce exclusively claimed without reset; one debug worker,32events/12identities/16KiB and<=5min. Actual original Activity/call/model/session hooks; checked staging mode/write/sync/close then final rename. Release contains no collector or file access. Parent correlates sealed valid original chain with exact build/boot/process/controller phases and genuine host evidence.",
+      "fallback": "Missing/invalid/expired/partial/uncertain receipt invalidates qualification without changing the product operation. No automatic retry, replay, credential or launch authority. Preserve uncertain staging/claims and historical evidence; no directory or power-loss durability promise.",
+      "experiment": "Final0.1.14/code15 build02 binds231 unchanged inputs/seven APKs. Strict debug/release compilation and seven zero-issue Lint reports pass; platform16JVM cases/zero failures/errors/skips include nine observer methods. Independent and parent source/hash review close publication/whitespace findings. Actual Android file/lifecycle behavior, ordinary positive Open and receiver phases remain unrun.",
+      "researchEvidence": "docs/06-validation/files-handoff-observation.md",
+      "compileEvidence": "qualification/results/P1-S3/2026-10-16-handoff-observation-build.json"
     }
   ],
   "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."

@@ -354,6 +354,7 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
         }
         val version = ++generation
         session = token
+        FilesPositiveObservation.record(FilesPositiveObservation.Event.SESSION_CLAIMED, this, token)
         token.stopping = {
             FilesRuntime.main.post {
                 if (!cleared && session === token && generation == version)
@@ -369,6 +370,8 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
                         entries = emptyList(), preview = null, fingerprint = null,
                         code = if (certain) code else "CLEANUP_UNCERTAIN",
                         permissionNeeded = certain && code == "PERMISSION_REQUIRED")
+                    if (code == null && certain) FilesPositiveObservation.record(
+                        FilesPositiveObservation.Event.SAME_SESSION_IDLE, this, token)
                 }
             }
         }
@@ -438,6 +441,7 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
                         }
                         is SshTransportOpenResult.Connected -> {
                             token.transport.set(result.transport)
+                            FilesPositiveObservation.record(FilesPositiveObservation.Event.TRANSPORT_ESTABLISHED, token)
                             if (!token.active()) { result.transport.requestClose(); return }
                             // Authentication has promoted, but the initial directory operation
                             // still owns the worker. Publish its busy state before enabling browsing.
@@ -555,6 +559,7 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
     }
 
     override fun onCleared() {
+        FilesPositiveObservation.record(FilesPositiveObservation.Event.MODEL_CLEARED, this)
         cleared = true
         ownerToken = null
         synchronized(registrationGate) { registrationOwner = null; registrationForeground = false }
@@ -634,18 +639,27 @@ private class FilesSession(val profile: SshObservationProfile, credentials: SshP
     }
     fun retire() {
         var certain = true
+        var observedTransportRetired = false
         try {
             if (!setup.await(18, TimeUnit.SECONDS)) certain = false
             // This lane is never the engine's notification publisher or main thread.
             val connected = transport.get()
             connected?.requestClose()
-            if (connected != null && connected.awaitClosed(3_000) != SshTransportCloseResult.Retired) certain = false
+            if (connected != null) {
+                val closed = connected.awaitClosed(3_000)
+                observedTransportRetired = closed == SshTransportCloseResult.Retired
+                if (!observedTransportRetired) certain = false
+            }
             if (handle.get()?.cancellation?.isCancelled == false) handle.get()?.close()
         } catch (_: InterruptedException) { Thread.currentThread().interrupt(); certain = false }
         catch (_: Exception) { certain = false }
         certain = certain && !uncertain.get()
-        if (!certain) FilesRuntime.quarantined.set(true)
-        else FilesRuntime.current.compareAndSet(this, null)
+        val released = if (!certain) { FilesRuntime.quarantined.set(true); false }
+            else FilesRuntime.current.compareAndSet(this, null)
+        // Observation success requires the original published transport and actual capacity release.
+        // The observer result never changes product certainty or quarantine semantics.
+        FilesPositiveObservation.record(if (certain && observedTransportRetired && released)
+            FilesPositiveObservation.Event.TRANSPORT_RETIRED else FilesPositiveObservation.Event.RETIREMENT_UNCERTAIN, this)
         finished?.invoke(if (intentional.get()) null else reason.get(), certain)
     }
 }

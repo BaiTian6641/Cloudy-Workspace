@@ -99,11 +99,16 @@ internal class FilesHandoffReceiver(context: Context) {
             }
             token = issuedToken
             val retired = AtomicBoolean(false)
+            val observation = Any()
+            FilesPositiveObservation.start(application, FilesPositiveObservation.Event.DISPATCH_STARTED, observation)
             // Dispatch owns the permit until its actual main-thread work retires, even if its
             // acknowledgment times out. It may retire synchronously before returning.
             transferred = true
             val status = FilesHandoffDispatch.dispatch(application, issuedToken, envelope) {
-                if (retired.compareAndSet(false, true)) permit.release()
+                if (retired.compareAndSet(false, true)) {
+                    permit.release()
+                    FilesPositiveObservation.record(FilesPositiveObservation.Event.DISPATCH_RETIRED, observation)
+                }
             }
             return reply(status)
         } catch (_: Exception) {
