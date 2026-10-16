@@ -63,3 +63,6 @@ These entries retain chronological checkpoints. Use the current execution state 
 - [VNC held-button release](../qualification/results/P0-S4/2026-10-15-vnc-held-button.md): host-observed focus release before helper UP, fourteen closed records, twelve unchanged predecessors and verified teardown. Physical mouse/trackpad remains separate.
 
 - [Finite SSH retention contract](03-platform/googlebook/p0-s3-ssh-retention-contract.md) and [0.8.0 build review](06-validation/2026-10-15-ssh-retention-build.md): actual service-owned exec/PTY candidate, 206 JVM tests and zero Lint; device retention and distribution acceptance pending.
+
+- [Scoped VNC investigation decision](03-platform/googlebook/p0-s4-vnc-investigation-decision.md): basic protected adapter and named recovery cases closed, with existing adoption/product gates retained.
+- [Finite SSH retention device cases](../qualification/results/P0-S3/2026-10-15-ssh-retention-cases.md): actual hide/return, notification Disconnect and process-loss reconciliation; eight terminal rows, unchanged predecessors and verified cleanup.

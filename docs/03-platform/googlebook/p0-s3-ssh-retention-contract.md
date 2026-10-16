@@ -1,6 +1,6 @@
 # P0-S3 finite SSH retention contract
 
-**Checked:** 2026-10-15, America/Chicago. **Candidate:** baseline diagnostic 0.8.0/code12, build reference `7aab1ccd-e90b-41e1-bd51-1183042c134a`. The [reviewed build](../../06-validation/2026-10-15-ssh-retention-build.md) passes compilation, 206 JVM tests and zero Android Lint. The [first device report](../../../qualification/results/P0-S3/2026-10-15-ssh-retention-device.md) confirms installation, a failed host-PTY attempt and a separately observed device reboot; none of the three retained cases was exercised. Device retention and Play acceptance remain unqualified. Read [Rule 0](../../00-project/platform-rule-zero.md), [operation lifetimes](p0-s2-operation-lifetimes.md) and the [platform decision](p0-s2-platform-decision.md).
+**Checked:** 2026-10-15, America/Chicago. **Candidate:** baseline diagnostic 0.8.0/code12, build reference `7aab1ccd-e90b-41e1-bd51-1183042c134a`. The [reviewed build](../../06-validation/2026-10-15-ssh-retention-build.md) passes compilation, 206 JVM tests and zero Android Lint. The [first device report](../../../qualification/results/P0-S3/2026-10-15-ssh-retention-device.md) confirms installation, a failed host-PTY attempt and a separately observed device reboot; none of the three retained cases was exercised. The subsequent [three-case run](../../../qualification/results/P0-S3/2026-10-15-ssh-retention-cases.md) now passes the finite hide/return, notification-cancel and process-loss/reconciliation cases on the unchanged APK. Continuous lifetime and Play acceptance remain unqualified. Read [Rule 0](../../00-project/platform-rule-zero.md), [operation lifetimes](p0-s2-operation-lifetimes.md) and the [platform decision](p0-s2-platform-decision.md).
 
 ## Operation and classification
 
@@ -24,7 +24,7 @@ Notification stop actions and pending intents identify the exact attempt; a stal
 
 ## Finite qualification and evidence tiers
 
-The next device packet uses at most three retained attempts after confirming capacity and preserving every historical row. Follow the existing [SSH batch archive/restore contract](p0-s3-journal-batch-handoff.md) if rotation is needed; do not run an old hardcoded helper against a new batch or erase history without its verified restoration drill.
+The completed device packet used exactly three retained attempts after fresh checks. All eight rows are now terminal and the journal is full; preserve/archive/restore before any further attempt. The following case definitions remain the acceptance contract, not a command to repeat the passing runs. Follow the existing [SSH batch archive/restore contract](p0-s3-journal-batch-handoff.md) if rotation is needed; do not run an old hardcoded helper against a new batch or erase history without its verified restoration drill.
 
 1. **Hide/return:** reach actual PTY readiness, hide the last UI observer, observe finite continuation, then return without Start. Correlate the same attempt/process/engine with host authentication and channel counts; require no second connection. Complete through existing explicit controls.
 2. **Notification cancel:** reach readiness, hide, cancel the exact attempt from its notification. Require actual helper disappearance, joined/retired ownership and a durable terminal journal. Reopening must not replay.

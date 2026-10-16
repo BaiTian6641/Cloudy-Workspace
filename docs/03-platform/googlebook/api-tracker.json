@@ -365,12 +365,12 @@
       "minimumApi": null,
       "libraryVersion": null,
       "availability": "operation-policy-unresolved",
-      "qualification": "untested",
+      "qualification": "partial",
       "checkedOn": "2026-10-15",
       "owner": "Android/platform developer",
       "stage": "P1-S3",
       "fallback": "Visible user work, honest background disconnection, journaled recovery and host-side durability; no unrelated permissions or invented provider ownership.",
-      "experiment": "Finite baseline0.8.0 retained exec/PTY candidate compiles with provisional specialUse, visible one-use admission, actual promotion before engine entry and notification Disconnect. Device hide/return, notification stop and process-loss cases are pending. Existing ordinary operations remain visible-only. This does not qualify continuous product sessions, USB/streaming routes or Play distribution.",
+      "experiment": "Finite baseline0.8.0 retained exec/PTY uses provisional specialUse, one-use visible admission, actual foreground promotion and attempt-scoped notification Disconnect. Three actual Googlebook cases pass: same-operation hide/return, notification cancellation with real retirement, and controlled process-loss reconciliation on explicit reopen without reconnecting. Ordinary operations remain visible-only. Continuous product sessions, USB/streaming service routes, timed-type callbacks and Play distribution remain unqualified.",
       "researchEvidence": "docs/03-platform/googlebook/p0-s3-ssh-retention-contract.md",
       "versionNotes": "connectedDevice/dataSync constants API29; specialUse API34. Target31+ background starts and target34+ types/prerequisites apply on relevant runtimes. API level for this mixed policy record remains null. Candidate min35/target37 covers Context.startForegroundService(API26), typed Service.startForeground(API29) and specialUse(API34); no permission or runtime guard is inferred from a successful build.",
       "decisionEvidence": "docs/03-platform/googlebook/p0-s2-platform-decision.md",
@@ -378,6 +378,10 @@
       "runtimeAttemptEvidence": {
         "evidence": "qualification/results/P0-S3/2026-10-15-ssh-retention-device.md",
         "note": "0.8.0 installed; authenticated fixed exec then host PTY failure. No retained hide/return, notification-stop or controlled process-loss case exercised. Subsequent real device reboot has kernel hard-lockup evidence without established cause; not a runtime qualification pass."
+      },
+      "runtimeEvidence": {
+        "evidence": "qualification/results/P0-S3/2026-10-15-ssh-retention-cases.md",
+        "note": "Exact unchanged0.8.0 APK and recorded Googlebook/server only. Eight terminal rows/five prior rows unchanged; no extra authentication on return/reopen. Earlier failed PTY/reboot evidence remains separately preserved."
       }
     },
     {

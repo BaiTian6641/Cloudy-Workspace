@@ -2012,7 +2012,8 @@
         "qualification/results/P0-S2/2026-10-15-font-scale.md",
         "qualification/results/P0-S2/2026-10-15-engagement-probe.md",
         "qualification/results/P0-S2/2026-10-15-transfer-preflight.md",
-        "qualification/results/P0-S2/2026-10-15-transfer-lifecycle.md"
+        "qualification/results/P0-S2/2026-10-15-transfer-lifecycle.md",
+        "qualification/results/P0-S3/2026-10-15-ssh-retention-cases.md"
       ],
       "nextExperiment": {
         "hypothesis": "A reviewed native SSH engine can own an actual ordinary-SSH session independently of renderer and Activity generation on the selected Linux host; any hidden-session lifetime can be evaluated under a separately justified service classification without unrelated permissions or automatic input replay.",
@@ -2021,7 +2022,7 @@
         "stopCondition": "Stop the candidate at an unsupported API/type/prerequisite, private-API or unrelated-permission requirement, lost ownership, unexpected authentication/input replay, unbounded resources or two engineer-days. Preserve failures and record blocked/inconclusive scope; no silent cap extension or relabelled service.",
         "expectedEvidence": "Exact source/APK/engine/server/build/route and reviewed compile/lint/tests; real SSH trust/authentication and independent SFTP hash round trip; visible/recreation/two-window owner correlation; justified FGS declaration/prerequisites plus actual notification, hidden/return, stop and process-loss observations or an explicit classification blocker; no input replay; separate distribution assessment. Retain required physical keyboard, trackpad/mouse, native IME/preedit/exact committed bytes, focus-loss modifier/pointer release, keyboard navigation/accessibility and remaining Q-P02 fullscreen/external-display cases. ADB injection and engagement hints do not satisfy physical cases. Full requirements remain pending when unavailable."
       },
-      "decisionNote": "docs/03-platform/googlebook/p0-s2-platform-decision.md: P0-S2 investigation closes with partial Q-P01/Q-P02 and accepted bounded window/engagement/finite HTTPS evidence; continuous SSH/desktop FGS, physical input, remaining geometry and operation-specific failure cases stay unresolved. No supported scope or product readiness. P0-S3 investigation may proceed; P1-S1/P1-S2/P1-S3 remain planned."
+      "decisionNote": "docs/03-platform/googlebook/p0-s2-platform-decision.md: P0-S2 investigation closes with partial Q-P01/Q-P02 and accepted bounded window/engagement/finite HTTPS evidence; continuous SSH/desktop FGS, physical input, remaining geometry and operation-specific failure cases stay unresolved. No supported scope or product readiness. P0-S3 investigation may proceed; P1-S1/P1-S2/P1-S3 remain planned. The unchanged0.8.0 finite retention follow-up now passes hide/return, notification Disconnect and controlled process-loss reconciliation without reconnecting. Carry accepted results forward; no indefinite lifetime, Play or product admission follows."
     },
     {
       "id": "CAP-SSH",
@@ -2111,7 +2112,7 @@
         "qualification/results/P0-S4/2026-10-15-vnc-held-button.md"
       ],
       "nextExperiment": null,
-      "decisionNote": "Basic protected Android VNC integration is viable on the exact TigerVNC virtual-X fixture. Native/JNI/Android builds, trust/frames/basic input, framework-held key and button focus release, hidden retirement and protocol-initialization cancellation are evidenced. Both named bounded recovery cases pass. Next is scoped investigation/adoption closeout using these results. CAP-VNC remains pending; final P1-S4 engine/distribution adoption, broader servers, physical input/IME, product credentials, process recovery and latency remain open. Fourteen records are closed with twelve predecessors unchanged and one additional unattributed pre-native setup failure; all owned resources are cleaned. Current entry: docs/03-platform/googlebook/p0-s4-native-desktop-entry.md."
+      "decisionNote": "Basic protected Android VNC integration is viable on the exact TigerVNC virtual-X fixture. Native/JNI/Android builds, trust/frames/basic input, framework-held key and button focus release, hidden retirement and protocol-initialization cancellation are evidenced. Both named bounded recovery cases pass. The scoped basic adapter investigation is closed in docs/03-platform/googlebook/p0-s4-vnc-investigation-decision.md; existing P1-S4 adoption uses these accepted results. CAP-VNC remains pending; final P1-S4 engine/distribution adoption, broader servers, physical input/IME, product credentials, process recovery and latency remain open. Fourteen records are closed with twelve predecessors unchanged and one additional unattributed pre-native setup failure; all owned resources are cleaned. Current entry: docs/03-platform/googlebook/p0-s4-native-desktop-entry.md."
     },
     {
       "id": "CAP-STREAM",
