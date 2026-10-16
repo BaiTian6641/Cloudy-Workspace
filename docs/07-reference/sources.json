@@ -6856,6 +6856,30 @@
       "sourceUpdatedOn": null,
       "note": "Official search-extracted content supports fullscreen and collapse/expand; direct English body fetch failed, so full-body review not claimed.",
       "refresh": "Before changing the relevant host adapter, toolchain or remote-session UX; pin runtime/build evidence separately."
+    },
+    {
+      "id": "R307",
+      "title": "Git attributes checkout line endings",
+      "url": "https://git-scm.com/docs/gitattributes",
+      "publisher": "Git",
+      "note": "Reviewed text/eol checkout semantics for narrow host Go LF policy. Local autocrlf controls reproduce/fix formatting drift; no exact historical hosted root-cause claim.",
+      "category": "reference",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "refresh": "Before changing host formatting or checkout policy; confirm actual hosted results separately."
+    },
+    {
+      "id": "R308",
+      "title": "Go formatter command",
+      "url": "https://pkg.go.dev/cmd/gofmt",
+      "publisher": "Go",
+      "note": "Reviewed -l behavior: lists files differing from formatter output. CI separately preserves invocation exit status and prints listed paths.",
+      "category": "reference",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "refresh": "Before changing host formatting or checkout policy; confirm actual hosted results separately."
     }
   ]
 }

@@ -4,6 +4,8 @@
 
 The active goal already includes P4 host development. This record refines its execution and recovery instructions; it does not replace that goal with a smaller diagnostic objective. Completion still requires the approved feature and release evidence. A model's familiarity with an established OS helps implementation but does not establish its permission, session or hardware behavior.
 
+**Latest recovery reminder:** Parsec/TeamViewer logic applies only to the connected RDP/VNC/streaming experience; discovery, device lists and pre-connection flows remain Cloudy's own. Keep Googlebook probe and product foundations evidence-backed while host construction advances. Develop both lanes concurrently and commit/push each coherent reviewed milestone as it becomes ready; do not hold a passing host change for unrelated client work or vice versa. The parent serializes shared Git operations, so parallel delivery does not mean conflicting worker pushes.
+
 ## Work allocation
 
 | Lane | Current work and next bounded increment | Ownership and acceptance |
@@ -38,6 +40,12 @@ Client and host compilers may run concurrently with distinct caches and recorded
 Read the [worker visual contract](../04-design/worker-visual-acceptance.md) before any UI assignment. Current tokens and accepted external-feedback disposition control the design; the original Word feedback is not a replacement specification. The [remote-session presentation contract](../04-design/remote-session-presentation.md) controls fullscreen and local overlay behavior.
 
 Both Kimi and Flash have now received and described a single synthetic 1440×1000 Cloudy specimen through the exact OMP routes. This establishes bounded image input and useful visual observations. Flash overstated footer clipping; parent review rejects that claim. Neither model's confidence establishes a layout defect or a visual pass. Static HTML images do not qualify native app behavior. The reviewed route and evidence are recorded in the [worker checkpoint](../06-validation/2026-10-16-parallel-host-workers.md).
+
+## Googlebook foundation gate
+
+Use [foundation readiness](foundation-readiness.md), the official source/API registers and exact accepted probe evidence before assigning client integration. A solid foundation means known behavior and explicit remaining limits, not relabeling every experiment as supported. Carry forward unchanged accepted results; run focused checks for changed boundaries and unresolved consequential risks. Require source/build/engine/device/attempt attribution, compiler/Lint and relevant behavior evidence, with parent review and retained failures. A callback or counter alone does not establish visible playback, physical input or successful authorization.
+
+Keep native window/focus/lifecycle, physical keyboard/pointer release, app-owned credentials, actual render geometry, engine retirement and permission behavior in each relevant acceptance packet. The current pending positive vault use, normal cross-app Open/authenticated effect, accessibility/IME, fullscreen request and sustained performance gates remain explicit in the current state. Host compilation or service progress cannot close them. Missing hardware affects only its applicable lane; no unnecessary repeat of settled upstream or device checks is required.
 
 ## Checkpoints and context recovery
 

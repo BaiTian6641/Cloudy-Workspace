@@ -35,8 +35,15 @@ jobs:
           cache: false
       - name: Check selected compiler and formatting
         run: |
-          test "$(go env GOVERSION)" = 'go1.27.2'
-          test -z "$(gofmt -l .)"
+          compiler=$(go env GOVERSION)
+          printf 'Selected compiler: %s\n' "$compiler"
+          test "$compiler" = 'go1.27.2'
+          # Keep formatter failures observable, including a failed invocation.
+          formatting=$(gofmt -l .)
+          if [ -n "$formatting" ]; then
+            printf 'Files requiring gofmt:\n%s\n' "$formatting"
+            exit 1
+          fi
       - name: Compile, vet and execute contract tests
         run: |
           go vet ./...

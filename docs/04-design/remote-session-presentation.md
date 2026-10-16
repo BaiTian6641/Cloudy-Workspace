@@ -4,6 +4,8 @@
 
 Read [desktop workflows](desktop-workflows.md), [interaction](interaction.md), [screen specifications S07](screen-specs.md#s07--embedded-desktop-session), [RDP interaction](desktop-rdp-interaction-contract.md), [backend boundaries](../02-architecture/remote-desktop-backends.md) and the [Googlebook desktop contract](../03-platform/googlebook/desktop-application-contract.md). Their protocol, trust, capture and lifecycle requirements continue to apply. This document specifies the shared presentation decision and its acceptance cases.
 
+**Explicit scope clarification from the user:** Parsec/TeamViewer inform the interaction logic **only after a remote connection becomes ready**. Discovery, device lists, connection profiles, pre-connection navigation and authentication keep Cloudy's own information architecture and design language. The connection flow may disclose the selected fullscreen preference, but it does not adopt a competitor's device browser or dashboard. Connected controls also retain Cloudy's tokens and components; the reference is workflow logic, not a replacement visual theme.
+
 ## Connected means a usable session surface
 
 A deliberate Connect action defaults to **enter fullscreen when that connection becomes ready**, with a compact local session overlay. The connecting UI makes this presentation intent visible before activation. Ready requires the current engine attempt's authenticated/session-established state, an attached rendering surface and its first valid presented remote desktop frame; a socket, authentication callback, decoder counter or old retained frame alone is insufficient. View-only sessions can be ready while input is unavailable; label that distinction. Actual visible playback and input remain independently qualified.

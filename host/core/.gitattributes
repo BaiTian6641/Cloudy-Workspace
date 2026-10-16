@@ -1,0 +1,2 @@
+# Keep Go source equal to gofmt output even when Windows Git uses autocrlf.
+*.go text eol=lf
