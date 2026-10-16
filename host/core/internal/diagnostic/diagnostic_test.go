@@ -4,6 +4,9 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
+	"io"
+	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 	"time"
@@ -25,7 +28,7 @@ func TestInspectContract(t *testing.T) {
 	}
 	// An exact independently written contract catches accidental extra identity,
 	// environment or wire-manifest fields as well as false capability claims.
-	want := `{"localDiagnosticVersion":1,"agentVersion":"0.1.0","observedAt":"2026-10-16T17:30:15.123456789Z","runtime":{"os":"test-os","arch":"test-arch","goVersion":"test-go"},"features":{"pairing":{"state":"unavailable","reason":"not-implemented"},"remoteControl":{"state":"unavailable","reason":"not-implemented"},"jobs":{"state":"unavailable","reason":"not-implemented"},"events":{"state":"unavailable","reason":"not-implemented"},"sessionAdapters":{"state":"unavailable","reason":"not-implemented"}},"backends":{"remoteDesktop":{"state":"unknown","reason":"not-inspected"},"usb":{"state":"unknown","reason":"not-inspected"},"notifications":{"state":"unknown","reason":"not-inspected"}}}` + "\n"
+	want := `{"localDiagnosticVersion":1,"agentVersion":"0.1.1","observedAt":"2026-10-16T17:30:15.123456789Z","runtime":{"os":"test-os","arch":"test-arch","goVersion":"test-go"},"features":{"pairing":{"state":"unavailable","reason":"not-implemented"},"remoteControl":{"state":"unavailable","reason":"not-implemented"},"jobs":{"state":"unavailable","reason":"not-implemented"},"events":{"state":"unavailable","reason":"not-implemented"},"sessionAdapters":{"state":"unavailable","reason":"not-implemented"}},"backends":{"remoteDesktop":{"state":"unknown","reason":"not-inspected"},"usb":{"state":"unknown","reason":"not-inspected"},"notifications":{"state":"unknown","reason":"not-inspected"}}}` + "\n"
 	if out.String() != want {
 		t.Fatalf("unexpected diagnostic JSON: %s", out.String())
 	}
@@ -41,7 +44,7 @@ func forbiddenRuntime() Runtime { panic("unexpected runtime inspection") }
 func TestVersionDoesNotInspectRuntime(t *testing.T) {
 	var out, errOut bytes.Buffer
 	code := Run([]string{"version"}, &out, &errOut, forbiddenClock, forbiddenRuntime)
-	if code != 0 || out.String() != "0.1.0\n" || errOut.Len() != 0 {
+	if code != 0 || out.String() != "0.1.1\n" || errOut.Len() != 0 {
 		t.Fatalf("exit=%d stdout=%q stderr=%q", code, out.String(), errOut.String())
 	}
 }
@@ -51,7 +54,7 @@ func TestUsageRejectsUnknownAndExtraArguments(t *testing.T) {
 		t.Run(strings.Join(args, "/"), func(t *testing.T) {
 			var out, errOut bytes.Buffer
 			code := Run(args, &out, &errOut, forbiddenClock, forbiddenRuntime)
-			if code != 2 || out.Len() != 0 || errOut.String() != "usage: cloudy-host inspect | version\n" {
+			if code != 2 || out.Len() != 0 || errOut.String() != "usage: cloudy-host inspect | version | identity init|read --state-dir <existing-directory>\n" {
 				t.Fatalf("exit=%d stdout=%q stderr=%q", code, out.String(), errOut.String())
 			}
 		})
@@ -96,5 +99,59 @@ func TestShortOutputFails(t *testing.T) {
 		if code != 1 || errOut.String() != "cloudy-host: output failed\n" {
 			t.Fatalf("%s exit=%d stderr=%q", command, code, errOut.String())
 		}
+	}
+}
+
+func TestIdentityRejectsArgumentsBeforeIO(t *testing.T) {
+	for _, args := range [][]string{
+		{"identity"}, {"identity", "init"}, {"identity", "reset", "--state-dir", "private"},
+		{"identity", "init", "--state-dir", ""}, {"identity", "read", "--state-dir", "private", "extra"},
+		{"identity", "read", "--wrong", "private"},
+	} {
+		var out, errOut bytes.Buffer
+		code := Run(args, &out, &errOut, forbiddenClock, forbiddenRuntime)
+		if code != 2 || out.Len() != 0 || errOut.String() != usage {
+			t.Fatalf("args rejected incorrectly: exit%d stdout%q stderr%q", code, out.String(), errOut.String())
+		}
+	}
+}
+func TestIdentityMissingStateUsesSafeFailure(t *testing.T) {
+	var out, errOut bytes.Buffer
+	code := Run([]string{"identity", "read", "--state-dir", t.TempDir() + "/private-missing"}, &out, &errOut, forbiddenClock, forbiddenRuntime)
+	if code != 1 || out.Len() != 0 || errOut.String() != "cloudy-host: invalid-state-directory\n" {
+		t.Fatalf("exit%d stdout%q stderr%q", code, out.String(), errOut.String())
+	}
+}
+
+func TestIdentityReadOutputAndFailureRetainState(t *testing.T) {
+	dir := t.TempDir()
+	// The fixture is a strict pre-existing identity, not a simulated initialization.
+	// This tests presentation and output failure separately from native fsync behavior.
+	if err := os.Mkdir(filepath.Join(dir, "installation-identity-v1"), 0o700); err != nil {
+		t.Fatal(err)
+	}
+	record := filepath.Join(dir, "installation-identity-v1", "installation-identity.json")
+	data := []byte(`{"identityRecordVersion":1,"installationId":"12345678-1234-4234-8234-123456789abc"}` + "\n")
+	if err := os.WriteFile(record, data, 0o600); err != nil {
+		t.Fatal(err)
+	}
+	var out, errOut bytes.Buffer
+	args := []string{"identity", "read", "--state-dir", dir}
+	if code := Run(args, &out, &errOut, forbiddenClock, forbiddenRuntime); code != 0 {
+		t.Fatalf("read exit%d error%s", code, errOut.String())
+	}
+	want := `{"localIdentityVersion":1,"agentVersion":"0.1.1","operation":"read","installationId":"12345678-1234-4234-8234-123456789abc","durability":"not-assessed"}` + "\n"
+	if out.String() != want || errOut.Len() != 0 {
+		t.Fatalf("output%q error%q", out.String(), errOut.String())
+	}
+	for _, writer := range []io.Writer{failingWriter{}, shortWriter{}} {
+		errOut.Reset()
+		if code := Run(args, writer, &errOut, forbiddenClock, forbiddenRuntime); code != 1 || errOut.String() != "cloudy-host: identity output failed; existing state retained\n" {
+			t.Fatalf("output failure exit%d error%q", code, errOut.String())
+		}
+	}
+	after, err := os.ReadFile(record)
+	if err != nil || !bytes.Equal(after, data) {
+		t.Fatal("read/output failure changed identity")
 	}
 }

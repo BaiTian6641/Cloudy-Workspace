@@ -47,7 +47,8 @@ jobs:
       - name: Compile, vet and execute contract tests
         run: |
           go vet ./...
-          go test -mod=readonly ./...
+          # Print per-case skips so an unsupported platform operation is visible.
+          go test -v -mod=readonly ./...
           go build -mod=readonly -trimpath -buildvcs=false ./cmd/cloudy-host
       - name: Race checks on Linux
         if: runner.os == 'Linux'
@@ -55,5 +56,5 @@ jobs:
       # These are real hosted CLI executions, not desktop-session qualification.
       - name: Execute the local diagnostic
         run: |
-          test "$(go run ./cmd/cloudy-host version)" = '0.1.0'
+          test "$(go run ./cmd/cloudy-host version)" = '0.1.1'
           go run ./cmd/cloudy-host inspect

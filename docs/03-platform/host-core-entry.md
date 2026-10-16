@@ -1,10 +1,10 @@
 # Host core construction entry — HOST-EXP01
 
-**2026-10-16; bounded construction experiment for P4-S1.** The user requested parallel Windows/Linux/macOS host software while Googlebook client work continues. The experiment tests whether a small, separately versioned Go core builds portably and exposes truthful local diagnostics without choosing remote transport prematurely. Parent owns acceptance; direct Codex GPT-6.1 Sol owns source; OMP Kimi/Flash supply reviewed proposals. Scope cap: this finite command, its tests and three build targets; stop before adding identity persistence, listeners, jobs, services or OS permissions.
+**2026-10-16; bounded construction experiment for P4-S1.** The user requested parallel Windows/Linux/macOS host software while Googlebook client work continues. The initial experiment tested whether a small, separately versioned Go core builds portably and exposes truthful local diagnostics without choosing remote transport prematurely. Parent owns acceptance; direct Codex GPT-6.1 Sol owns source; OMP Kimi/Flash supply reviewed proposals. The initial scope cap excluded persistence; the separately reviewed [HOST-IDENTITY increment](host-installation-identity.md) now defines that operation. Listeners, jobs, services and OS permissions retain separate profiles and acceptance.
 
 ## Implemented local profile
 
-`host/core` contains a standard-library-only Go module and `cloudy-host` executable, version **0.1.0**. `inspect` reads the actual running binary's OS/architecture/toolchain and current UTC time. It emits `localDiagnosticVersion: 1`, `agentVersion`, `observedAt`, `runtime`, `features` and `backends`. `version` prints the executable version. Invalid or extra arguments return exit2; output failure returns exit1 with fixed safe text. A successful exit and complete JSON are both required; stdout is not an atomic publication mechanism.
+`host/core` contains a standard-library-only Go module and `cloudy-host` executable. The initial diagnostic was **0.1.0**; the installation-identity increment is **0.1.1**. `inspect` reads the actual running binary's OS/architecture/toolchain and current UTC time. It emits `localDiagnosticVersion: 1`, `agentVersion`, `observedAt`, `runtime`, `features` and `backends`. `version` prints the executable version. Invalid or extra arguments return exit2; output failure returns exit1 with fixed safe text. A successful exit and complete JSON are both required; stdout is not an atomic publication mechanism.
 
 Cloudy's unimplemented pairing, remote control, jobs, events and session adapters report **unavailable / not-implemented**. External desktop, USB and notification backends report **unknown / not-inspected**. The command neither probes those services nor claims they are absent. It does not collect hostname, account, environment, paths, credentials, machine inventory, installation/boot/session identifiers or backend output.
 
@@ -30,7 +30,7 @@ Local checks: formatting, `go vet`, compiled tests with Linux race instrumentati
 
 | Packet | Owned surface | Required outcome before integration |
 | --- | --- | --- |
-| HOST-IDENTITY | Core identity store plus platform identity adapters after the interface is frozen | Persist genuine installation identity; distinguish OS boot, user logon/session and process identity; corrupt/unwritable state fails honestly without replacement |
+| HOST-IDENTITY | [Explicit installation self-ID](host-installation-identity.md); later platform identity adapters remain separate | Init/read uses a permanent claim anchor and refuses silent repair/regeneration; OS boot, user logon/session and process identity remain unimplemented |
 | HOST-JOBS | Transport-neutral job ownership after its local execution profile review | Explicit executable/argv/cwd, bounded/redacted I/O, timeout/cancel, actual descendant ownership and waited retirement; no automatic replay |
 | HOST-EVENTS | Bounded persistence/cursor store after event profile review | Stable IDs, sequence/stream reset, retention gaps, snapshot reconciliation and crash windows; own-job events first |
 | HOST-WINDOWS | `host/windows` | Interactive helper and notification consent/packaging/API evidence; default service/session0 is not a user desktop |

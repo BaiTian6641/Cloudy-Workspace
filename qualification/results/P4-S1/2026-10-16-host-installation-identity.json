@@ -1,0 +1,171 @@
+{
+  "experiment": "HOST-IDENTITY",
+  "date": "2026-10-16",
+  "agentVersion": "0.1.1",
+  "goVersion": "go1.27.2",
+  "acceptance": "Scoped local construction accepted after independent and parent review; P4 stages remain planned",
+  "sourceHashes": {
+    "host/core/.gitattributes": "564fff46919bbdae8712fb60829e5e232c60bd48af3c6cee7520b21939ab2ac1",
+    "host/core/README.md": "b04e3d76052ba43ab60772228aba3169384587ce334301b06f5be2adaf698374",
+    "host/core/go.mod": "6fd07de50d4297a4ca131dd78921aeb09e239bd68b8c733bd1cc055b03cada3a",
+    "host/core/cmd/cloudy-host/main.go": "f1275665c1caf81851c199fea669ffd675156d0f67e80080c98885028d0c5b54",
+    "host/core/internal/diagnostic/diagnostic.go": "b02f389d3fbd177b5c94d1b82023fc22c7ac818b23c6da3399fddcad31db577c",
+    "host/core/internal/diagnostic/diagnostic_test.go": "e72d87ae8128c7c3aba07b1e111b4e4e152e1a9a8ab26057d9c1eb012bb947e2",
+    "host/core/internal/installation/store_test.go": "48ac794410a7f8eba9c081757acfdb424ba6ab6e630f03711b1a26ef9563f770",
+    "host/core/internal/installation/store.go": "374d4c91ee566ef8f05fee4c6f7477ec64755d02efbba7c7d0d2139b76fa1ea5",
+    "host/core/internal/installation/sync_other_test.go": "5f7844f64e5e7064c55dd9d5c71eedc7e4812839d9fdec32723a8e20de9af0d5",
+    "host/core/internal/installation/sync_windows_test.go": "5272602a808fca6b8d99e6342fb74a78d0936bd6c2f5bdb10cf92e231c54e02a"
+  },
+  "artifacts": {
+    "cloudy-host-windows.exe": {
+      "bytes": 4549120,
+      "sha256": "d4c6b4926e58ab45021327b9bed1eff69e45cf4b969716fd7d8a7766b88968fa"
+    },
+    "cloudy-host-macos": {
+      "bytes": 4198546,
+      "sha256": "0ce0972e2066931ee99e48f1eaa218f11f571913769fff8235d4d984b4cc6fd9"
+    },
+    "cloudy-host-linux": {
+      "bytes": 4414833,
+      "sha256": "2d82a18b325263884af8c1dc53e144530b43da8a6ff36a8fee2b6d207b4c9317"
+    }
+  },
+  "checks": [
+    {
+      "check": "version",
+      "exitCode": 0
+    },
+    {
+      "check": "format",
+      "exitCode": 0
+    },
+    {
+      "check": "vet",
+      "exitCode": 0
+    },
+    {
+      "check": "tests-race",
+      "exitCode": 0
+    },
+    {
+      "check": "build-linux",
+      "exitCode": 0
+    },
+    {
+      "check": "build-windows",
+      "exitCode": 0
+    },
+    {
+      "check": "build-darwin",
+      "exitCode": 0
+    },
+    {
+      "check": "test-compile-linux",
+      "exitCode": 0
+    },
+    {
+      "check": "test-compile-windows",
+      "exitCode": 0
+    },
+    {
+      "check": "test-compile-darwin",
+      "exitCode": 0
+    },
+    {
+      "check": "process-version",
+      "exitCode": 0
+    },
+    {
+      "check": "process-inspect",
+      "exitCode": 0
+    },
+    {
+      "check": "process-init",
+      "exitCode": 0
+    },
+    {
+      "check": "process-read",
+      "exitCode": 0
+    },
+    {
+      "check": "process-repeat-init",
+      "exitCode": 1,
+      "expectedFailure": true
+    },
+    {
+      "check": "process-missing-record-read",
+      "exitCode": 1,
+      "expectedFailure": true
+    },
+    {
+      "check": "process-missing-record-init",
+      "exitCode": 1,
+      "expectedFailure": true
+    },
+    {
+      "check": "process-corrupt-read",
+      "exitCode": 1,
+      "expectedFailure": true
+    },
+    {
+      "check": "process-corrupt-init",
+      "exitCode": 1,
+      "expectedFailure": true
+    },
+    {
+      "check": "process-missing-anchor-read",
+      "exitCode": 1,
+      "expectedFailure": true
+    },
+    {
+      "check": "process-extra-arg",
+      "exitCode": 2,
+      "expectedFailure": true
+    },
+    {
+      "check": "process-concurrent-read",
+      "exitCode": 0
+    },
+    {
+      "check": "concurrent-processes",
+      "contenders": 8,
+      "successes": 1,
+      "preservedWinner": true
+    },
+    {
+      "check": "process-after-output-failure-read",
+      "exitCode": 0
+    },
+    {
+      "check": "real-output-failure",
+      "exitCode": 1,
+      "publishedIdentityRetained": true
+    }
+  ],
+  "namedTestPassEvents": 42,
+  "namedTestFailEvents": 0,
+  "namedTestSkipEvents": 0,
+  "execution": {
+    "linux/amd64": "Actual library race tests and real CLI process cases",
+    "windows/amd64": "Product and installation-test binaries compiled locally; native identity operation not yet executed",
+    "darwin/arm64": "Product and installation-test binaries compiled locally; native identity operation not yet executed"
+  },
+  "evidence": {
+    ".cache/host-identity-01/verification03/verification.json": "7d5179bde7e5d7734a7c70dcca71b4d1dd9392dbc1655896dd6c06b779816fb3",
+    ".cache/host-identity-01/verification03/review-repair.json": "87e196286995b16082381c496d7ba23febdb058b46603e336fb3c6a39f9df5cb",
+    ".cache/host-identity-01/independent-review-03.md": "752ed3e0e008423775bfa5398eba9018b26e90c5bcec04390a8602968b69eda2",
+    ".cache/host-identity-01/omp-coordinator-review.json": "be19beba2869ac79446cd797c5230e60a75a5f92f1accf9ab5afb3645d4a0639"
+  },
+  "limitations": [
+    "No pairing, authenticated remote transport, jobs, events, services or OS session adapter",
+    "Windows required read-only directory Sync can retain an incomplete anchor and block initialization; skips never prove persistence support",
+    "Caller supplies an existing trusted app-owned directory; no hostile same-user race or Windows ACL privacy guarantee",
+    "No power-loss durability or recovery/reset qualification",
+    "Installation self-ID is nonsecret metadata, not authentication, hardware, boot or logon identity"
+  ],
+  "omp": {
+    "kimi-code/k3": "Design completed; implementation proposal rejected for placeholder/compile/parser/cleanup defects; no code integrated",
+    "zai/glm-5.3-flash": "Failure plan completed; useful scoped cases accepted with documented corrections; no tools or code integration",
+    "rotation": "Authorized on quota/unavailability; no actual rotation needed in these two successful runs"
+  }
+}

@@ -8,11 +8,13 @@ import (
 	"io"
 	"runtime"
 	"time"
+
+	"github.com/BaiTian6641/Cloudy-Workspace/host/core/internal/installation"
 )
 
-const AgentVersion = "0.1.0"
+const AgentVersion = "0.1.1"
 
-const usage = "usage: cloudy-host inspect | version\n"
+const usage = "usage: cloudy-host inspect | version | identity init|read --state-dir <existing-directory>\n"
 
 type Runtime struct {
 	OS        string `json:"os"`
@@ -73,6 +75,9 @@ func snapshot(now time.Time, facts Runtime) Snapshot {
 // deterministic tests; the executable supplies actual clock/runtime readers.
 // Writer errors are never displayed because their text may contain private data.
 func Run(args []string, out, errOut io.Writer, now func() time.Time, facts func() Runtime) int {
+	if len(args) > 0 && args[0] == "identity" {
+		return runIdentity(args, out, errOut)
+	}
 	if len(args) != 1 || (args[0] != "inspect" && args[0] != "version") {
 		_, _ = io.WriteString(errOut, usage)
 		return 2
@@ -100,4 +105,39 @@ func (w checkedWriter) Write(p []byte) (int, error) {
 		err = io.ErrShortWrite
 	}
 	return n, err
+}
+
+// identity is a separate explicit local profile; inspect never initializes or
+// advertises it as authenticated remote capability metadata.
+func runIdentity(args []string, out, errOut io.Writer) int {
+	if len(args) != 4 || (args[1] != "init" && args[1] != "read") || args[2] != "--state-dir" || args[3] == "" {
+		_, _ = io.WriteString(errOut, usage)
+		return 2
+	}
+	var result installation.Result
+	var err error
+	if args[1] == "init" {
+		result, err = installation.Init(args[3])
+	} else {
+		result, err = installation.Read(args[3])
+	}
+	if err != nil {
+		// Installation errors are finite safe codes, never raw path-bearing errors.
+		_, _ = io.WriteString(errOut, "cloudy-host: "+err.Error()+"\n")
+		return 1
+	}
+	response := struct {
+		LocalIdentityVersion int    `json:"localIdentityVersion"`
+		AgentVersion         string `json:"agentVersion"`
+		Operation            string `json:"operation"`
+		InstallationID       string `json:"installationId"`
+		Durability           string `json:"durability"`
+	}{1, AgentVersion, args[1], result.Record.InstallationID, result.Durability}
+	if err := json.NewEncoder(checkedWriter{out}).Encode(response); err != nil {
+		// Init effects are retained despite response loss. Neither this message nor
+		// a later read can certify power-loss durability or authorize regeneration.
+		_, _ = io.WriteString(errOut, "cloudy-host: identity output failed; existing state retained\n")
+		return 1
+	}
+	return 0
 }

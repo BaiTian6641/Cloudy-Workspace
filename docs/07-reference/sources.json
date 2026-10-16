@@ -6892,6 +6892,66 @@
       "sourceUpdatedOn": null,
       "note": "Official guidance supports polite live regions for important changing notices and cautions against frequent announcements. Cloudy applies it to the existing display outcome only. Actual semantics assertions and screen-reader speech remain distinct evidence. API56/P1-S2.",
       "refresh": "Before changing announcement ownership or upgrading the selected Compose UI dependency."
+    },
+    {
+      "id": "R309",
+      "title": "Go scoped filesystem operations",
+      "url": "https://pkg.go.dev/os",
+      "publisher": "Go",
+      "category": "reference",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Root/OpenRoot, Mkdir, Link, SameFile and File.Sync for HOST-IDENTITY. Root added in Go1.24; selected Go1.27.2 compiles actual calls. Trusted parent remains a precondition; links and filesystem boundaries do not establish hostile same-user safety or portable durability.",
+      "refresh": "Before changing host identity publication, filesystem adapters or selected Go version; actual OS qualification remains separate."
+    },
+    {
+      "id": "R310",
+      "title": "Go traversal-resistant file access",
+      "url": "https://go.dev/blog/osroot",
+      "publisher": "Go",
+      "category": "reference",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Official explanation of traversal and validation/open races; informs trusted parent and observed-handle checks, without a race-free no-follow claim.",
+      "refresh": "Before changing host identity publication, filesystem adapters or selected Go version; actual OS qualification remains separate."
+    },
+    {
+      "id": "R311",
+      "title": "Go cryptographic random reads",
+      "url": "https://pkg.go.dev/crypto/rand#Read",
+      "publisher": "Go",
+      "category": "reference",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Selected standard-library Read fills the buffer or terminates irrecoverably. UUID generation is actual crypto/rand; injected I/O tests are not entropy or kernel failure evidence.",
+      "refresh": "Before changing host identity publication, filesystem adapters or selected Go version; actual OS qualification remains separate."
+    },
+    {
+      "id": "R312",
+      "title": "UUID version 4 layout",
+      "url": "https://www.rfc-editor.org/rfc/rfc9562.html#section-5.4",
+      "publisher": "RFC Editor",
+      "category": "reference",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Section5.4 random UUIDv4 version/variant fields; Cloudy uses canonical lowercase self-identification, never authentication, hardware, boot or logon identity.",
+      "refresh": "Before changing host identity publication, filesystem adapters or selected Go version; actual OS qualification remains separate."
+    },
+    {
+      "id": "R313",
+      "title": "Windows FlushFileBuffers handle rights",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-flushfilebuffers",
+      "publisher": "Microsoft",
+      "category": "reference",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "FlushFileBuffers requires GENERIC_WRITE. Pinned Go File.Sync uses this call on Windows. A real isolated read-only directory probe and exact actual failure classify a limited test skip; no Windows identity usability or durability pass follows.",
+      "refresh": "Before changing host identity publication, filesystem adapters or selected Go version; actual OS qualification remains separate."
     }
   ]
 }
