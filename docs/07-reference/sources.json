@@ -5176,6 +5176,54 @@
       "sourceUpdatedOn": null,
       "note": "uptimeMillis API1 excludes deep sleep; elapsedRealtime API1 includes it. Fixture freshness/hold uses uptime, not wall-time guarantees. A same-clock inspection route is required before executing candidate02; no /proc/uptime, host clock or guessed substitute. VNC startup intervals use its recorded elapsedRealtime domain. Owner integration leader/P0-S4. Fallback fail closed without injecting; preserve evidence and unresolved qualification.",
       "refresh": "Before changing the helper, target SDK, input admission or timing interpretation."
+    },
+    {
+      "id": "R258",
+      "title": "Pinned AOSP UiAutomation connection state and active-root access",
+      "url": "https://github.com/aosp-mirror/platform_frameworks_base/blob/1cdfff555f4a21f71ccc978290e2e212e2f8b168/core/java/android/app/UiAutomation.java",
+      "publisher": "Android Open Source Project (official AOSP GitHub mirror)",
+      "category": "implementation",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "AOSP reference commit 1cdfff555f4a21f71ccc978290e2e212e2f8b168. connectWithTimeout, disconnect, getRootInActiveWindow: CONNECTING precedes remote registration and flags assignment; callback-wait timeout changes state to FAILED; disconnect rejects CONNECTING. Active-root retrieval remains a separate readiness observation. Internal implementation reference only, not callable hidden APIs or exact HP Android17 source. Owner: integration leader, P0-S4 test fixture only. Fallback: fail closed before input, retain primary/cleanup evidence and serialize owned automation; no product API or capability change. See docs/07-reference/2026-10-15-android-mouse-automation.md.",
+      "refresh": "Before changing helper lifecycle/admission or relying on these internals for another platform build; review exact relevant source delta, not a general framework audit."
+    },
+    {
+      "id": "R259",
+      "title": "Pinned AOSP Instrumentation UiAutomation acquisition and finish",
+      "url": "https://github.com/aosp-mirror/platform_frameworks_base/blob/1cdfff555f4a21f71ccc978290e2e212e2f8b168/core/java/android/app/Instrumentation.java",
+      "publisher": "Android Open Source Project (official AOSP GitHub mirror)",
+      "category": "implementation",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "AOSP reference commit 1cdfff555f4a21f71ccc978290e2e212e2f8b168. getUiAutomation(int), finish: modern-target acquisition catches TimeoutException; finish disconnects a live UiAutomation before completing instrumentation. A failed remote registration can therefore be followed by a masking teardown failure. This revision uses a 60000ms acquisition timeout, not a verified HP timeout. Owner: integration leader, P0-S4 test fixture only. Fallback: fail closed before input, retain primary/cleanup evidence and serialize owned automation; no product API or capability change. See docs/07-reference/2026-10-15-android-mouse-automation.md.",
+      "refresh": "Before changing helper lifecycle/admission or relying on these internals for another platform build; review exact relevant source delta, not a general framework audit."
+    },
+    {
+      "id": "R260",
+      "title": "Pinned AOSP single UiAutomation registration ownership",
+      "url": "https://github.com/aosp-mirror/platform_frameworks_base/blob/1cdfff555f4a21f71ccc978290e2e212e2f8b168/services/accessibility/java/com/android/server/accessibility/UiAutomationManager.java",
+      "publisher": "Android Open Source Project (official AOSP GitHub mirror)",
+      "category": "implementation",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "AOSP reference commit 1cdfff555f4a21f71ccc978290e2e212e2f8b168. registerUiTestAutomationServiceLocked admits one accessibility-backed automation service and rejects a second registration. Owned CLI instrumentation was observed registered during candidate03; isolated same-APK inspection later succeeded after retiring it. Source plus correlation supports a candidate, not a recovered primary exception. Owner: integration leader, P0-S4 test fixture only. Fallback: fail closed before input, retain primary/cleanup evidence and serialize owned automation; no product API or capability change. See docs/07-reference/2026-10-15-android-mouse-automation.md.",
+      "refresh": "Before changing helper lifecycle/admission or relying on these internals for another platform build; review exact relevant source delta, not a general framework audit."
+    },
+    {
+      "id": "R261",
+      "title": "Pinned AOSP accessibility window connection ID allocation",
+      "url": "https://github.com/aosp-mirror/platform_frameworks_base/blob/1cdfff555f4a21f71ccc978290e2e212e2f8b168/services/accessibility/java/com/android/server/accessibility/AccessibilityWindowManager.java",
+      "publisher": "Android Open Source Project (official AOSP GitHub mirror)",
+      "category": "implementation",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "AOSP reference commit 1cdfff555f4a21f71ccc978290e2e212e2f8b168. addAccessibilityInteractionConnection allocates windowId with sNextWindowId++; connection removal is separate. getId is diagnostic registration identity, not a durable app/Activity token. Observed separate helper registrations report99 then110 with identical bounds; exact vendor reassignment cause is unproven. Owner: integration leader, P0-S4 test fixture only. Fallback: fail closed before input, retain primary/cleanup evidence and serialize owned automation; no product API or capability change. See docs/07-reference/2026-10-15-android-mouse-automation.md.",
+      "refresh": "Before changing helper lifecycle/admission or relying on these internals for another platform build; review exact relevant source delta, not a general framework audit."
     }
   ]
 }

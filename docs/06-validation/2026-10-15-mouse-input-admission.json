@@ -1,0 +1,382 @@
+{
+  "scope": "Successor helper03/04 build, official lifecycle/source review and actual no-input inspection/admission evidence; actual held-button verdict belongs to linked VNC result.",
+  "checkedOn": "2026-10-15",
+  "supersedesReport": "docs/06-validation/2026-10-15-mouse-input-fixture.md",
+  "report": {
+    "path": "docs/06-validation/2026-10-15-mouse-input-admission.md",
+    "sha256": "b16c9423a0769a56603b8f151f9d5382e31250f4d1341534339c97d17907e011"
+  },
+  "candidates": [
+    {
+      "candidate": "03",
+      "versionName": "0.1.1",
+      "versionCode": 2,
+      "apk": {
+        "path": ".cache/android-input-fixture-01/candidate-03/project/app/build/outputs/apk/debug/app-debug.apk",
+        "sha256": "3535decba195f5b11aa47514607918c6d1f7827afe20c8cadbf2363926ba3845",
+        "bytes": 52807
+      },
+      "runtimeCoordinates": [],
+      "sourceBindings": [
+        {
+          "repositoryPath": "qualification/fixtures/android-input/README.md",
+          "builtCopyPath": ".cache/android-input-fixture-01/candidate-03/project/README.md",
+          "sha256": "9b1039cd0f65a01079720c574a12a78ac012bd7c0bf37fb3e55a7453091246fb",
+          "currentRepositoryComparison": "historical built copy verified; current source not asserted"
+        },
+        {
+          "repositoryPath": "qualification/fixtures/android-input/app/build.gradle.kts",
+          "builtCopyPath": ".cache/android-input-fixture-01/candidate-03/project/app/build.gradle.kts",
+          "sha256": "4f7570ab217a7006eb0bd667aee1eaf54d92865aa92132fb8857a45764c42c9d",
+          "currentRepositoryComparison": "historical built copy verified; current source not asserted"
+        },
+        {
+          "repositoryPath": "qualification/fixtures/android-input/app/src/main/AndroidManifest.xml",
+          "builtCopyPath": ".cache/android-input-fixture-01/candidate-03/project/app/src/main/AndroidManifest.xml",
+          "sha256": "9d0f553a53de1cbaf093d62d70fcb4b4c09538f454efdf2334ca2e64b8c5e483",
+          "currentRepositoryComparison": "historical built copy verified; current source not asserted"
+        },
+        {
+          "repositoryPath": "qualification/fixtures/android-input/app/src/main/java/dev/cloudy/qualification/input/HeldMouseInstrumentation.java",
+          "builtCopyPath": ".cache/android-input-fixture-01/candidate-03/project/app/src/main/java/dev/cloudy/qualification/input/HeldMouseInstrumentation.java",
+          "sha256": "6412704745a980780b0e890c12c1e8c5291dfc4279b145572d8dd4e63d520bc7",
+          "currentRepositoryComparison": "historical built copy verified; current source not asserted"
+        },
+        {
+          "repositoryPath": "qualification/fixtures/android-input/app/src/main/res/drawable/ic_fixture.xml",
+          "builtCopyPath": ".cache/android-input-fixture-01/candidate-03/project/app/src/main/res/drawable/ic_fixture.xml",
+          "sha256": "9e9228fbec55f283dd9c5e7357641e55467eadd1adb4ee4478e9c1f662146f7a",
+          "currentRepositoryComparison": "historical built copy verified; current source not asserted"
+        },
+        {
+          "repositoryPath": "qualification/fixtures/android-input/app/src/main/res/xml/data_extraction_rules.xml",
+          "builtCopyPath": ".cache/android-input-fixture-01/candidate-03/project/app/src/main/res/xml/data_extraction_rules.xml",
+          "sha256": "ec0f1c6431c2434ac85c7933dd0fe21c430e9601ec4db70d0112557cbebf9993",
+          "currentRepositoryComparison": "historical built copy verified; current source not asserted"
+        },
+        {
+          "repositoryPath": "qualification/fixtures/android-input/build.gradle.kts",
+          "builtCopyPath": ".cache/android-input-fixture-01/candidate-03/project/build.gradle.kts",
+          "sha256": "ed6ba3bdfc3cbdcd648d7213860ffa3b0d62da38c37915b731b08b4df6f9d209",
+          "currentRepositoryComparison": "historical built copy verified; current source not asserted"
+        },
+        {
+          "repositoryPath": "qualification/fixtures/android-input/settings.gradle.kts",
+          "builtCopyPath": ".cache/android-input-fixture-01/candidate-03/project/settings.gradle.kts",
+          "sha256": "e434bf76ec4c14678882de695379e73a4e221cb3ee210d111e139d6d2ab14dbe",
+          "currentRepositoryComparison": "historical built copy verified; current source not asserted"
+        }
+      ],
+      "evidence": [
+        {
+          "path": ".cache/android-input-fixture-01/candidate-03/receipt.json",
+          "sha256": "2cb03930f06b0b25c5607c6e45f6dcd2e6ce066b7cf7118a2d2f791468dc95b7",
+          "bytes": 1288
+        },
+        {
+          "path": ".cache/android-input-fixture-01/candidate-03/source-manifest.json",
+          "sha256": "c26f47b138d2a4a7e562d5bc0c0eb1c50e3df56e5756df8e3605edb2d623dce1",
+          "bytes": 1151
+        },
+        {
+          "path": ".cache/android-input-fixture-01/candidate-03/independent-review.md",
+          "sha256": "9da33ed9b03c279d4bccb4b995fafe2e10bbb5e4708058739403dba0257a5b9a",
+          "bytes": 1954
+        },
+        {
+          "path": ".cache/android-input-fixture-01/candidate-03/project/app/build/reports/lint-results-debug.txt",
+          "sha256": "a69ecb171bea9d40de22744c85220b4a4ea12f5a25ce7976d67f2c88c9195334",
+          "bytes": 17
+        },
+        {
+          "path": ".cache/android-input-fixture-01/candidate-03/build-final-and-closure.log",
+          "sha256": "aecfa1deaec8cbe1264a91d97e330b73782e25f8c1c56c639f852b01fabba9e3",
+          "bytes": 3711
+        },
+        {
+          "path": ".cache/android-input-fixture-01/candidate-03/audit-01/apksigner.txt",
+          "sha256": "b0a1af67205efcd284e5bbae691ebf4a0d296b4fcae02cd28e7e0509d0e0efbc",
+          "bytes": 343
+        },
+        {
+          "path": ".cache/android-input-fixture-01/candidate-03/audit-01/badging.txt",
+          "sha256": "f2d420a9249ebf938845bf27b8e3b560204f2d96d7be745a3bff5906dd947aad",
+          "bytes": 715
+        },
+        {
+          "path": ".cache/android-input-fixture-01/candidate-03/audit-01/manifest.txt",
+          "sha256": "3b160459c58eb4a797968e09cc9e3e3231b5a20bba64a79d60e94989cb9921e4",
+          "bytes": 1948
+        },
+        {
+          "path": ".cache/android-input-fixture-01/candidate-03/audit-01/project-validation.json",
+          "sha256": "f71ac09b9d2237febfddd04ed299df56b82945edb211382454897f533ad47d9f",
+          "bytes": 644
+        }
+      ]
+    },
+    {
+      "candidate": "04",
+      "versionName": "0.1.2",
+      "versionCode": 3,
+      "apk": {
+        "path": ".cache/android-input-fixture-01/candidate-04/project/app/build/outputs/apk/debug/app-debug.apk",
+        "sha256": "d3c3e186dc648608d36063a0a66766d402d78832e430a7d785efa788c451cf26",
+        "bytes": 44031
+      },
+      "runtimeCoordinates": [],
+      "sourceBindings": [
+        {
+          "repositoryPath": "qualification/fixtures/android-input/README.md",
+          "builtCopyPath": ".cache/android-input-fixture-01/candidate-04/project/README.md",
+          "sha256": "cf0f47ae803def463ef4d237113b7333ab31a95998b1786d3f29b3c7186fab9c",
+          "currentRepositoryComparison": "verified equal"
+        },
+        {
+          "repositoryPath": "qualification/fixtures/android-input/app/build.gradle.kts",
+          "builtCopyPath": ".cache/android-input-fixture-01/candidate-04/project/app/build.gradle.kts",
+          "sha256": "a52069aacf05feb82c3b914be86ea9c8f32f43f8c0ab2a7e7e7a410c2fa64f47",
+          "currentRepositoryComparison": "verified equal"
+        },
+        {
+          "repositoryPath": "qualification/fixtures/android-input/app/src/main/AndroidManifest.xml",
+          "builtCopyPath": ".cache/android-input-fixture-01/candidate-04/project/app/src/main/AndroidManifest.xml",
+          "sha256": "9d0f553a53de1cbaf093d62d70fcb4b4c09538f454efdf2334ca2e64b8c5e483",
+          "currentRepositoryComparison": "verified equal"
+        },
+        {
+          "repositoryPath": "qualification/fixtures/android-input/app/src/main/java/dev/cloudy/qualification/input/HeldMouseInstrumentation.java",
+          "builtCopyPath": ".cache/android-input-fixture-01/candidate-04/project/app/src/main/java/dev/cloudy/qualification/input/HeldMouseInstrumentation.java",
+          "sha256": "db1ad65fef7821f9e87a3773d325256fab6d092ce2d63d28992b755be1181ea3",
+          "currentRepositoryComparison": "verified equal"
+        },
+        {
+          "repositoryPath": "qualification/fixtures/android-input/app/src/main/res/drawable/ic_fixture.xml",
+          "builtCopyPath": ".cache/android-input-fixture-01/candidate-04/project/app/src/main/res/drawable/ic_fixture.xml",
+          "sha256": "9e9228fbec55f283dd9c5e7357641e55467eadd1adb4ee4478e9c1f662146f7a",
+          "currentRepositoryComparison": "verified equal"
+        },
+        {
+          "repositoryPath": "qualification/fixtures/android-input/app/src/main/res/xml/data_extraction_rules.xml",
+          "builtCopyPath": ".cache/android-input-fixture-01/candidate-04/project/app/src/main/res/xml/data_extraction_rules.xml",
+          "sha256": "ec0f1c6431c2434ac85c7933dd0fe21c430e9601ec4db70d0112557cbebf9993",
+          "currentRepositoryComparison": "verified equal"
+        },
+        {
+          "repositoryPath": "qualification/fixtures/android-input/build.gradle.kts",
+          "builtCopyPath": ".cache/android-input-fixture-01/candidate-04/project/build.gradle.kts",
+          "sha256": "ed6ba3bdfc3cbdcd648d7213860ffa3b0d62da38c37915b731b08b4df6f9d209",
+          "currentRepositoryComparison": "verified equal"
+        },
+        {
+          "repositoryPath": "qualification/fixtures/android-input/settings.gradle.kts",
+          "builtCopyPath": ".cache/android-input-fixture-01/candidate-04/project/settings.gradle.kts",
+          "sha256": "e434bf76ec4c14678882de695379e73a4e221cb3ee210d111e139d6d2ab14dbe",
+          "currentRepositoryComparison": "verified equal"
+        }
+      ],
+      "evidence": [
+        {
+          "path": ".cache/android-input-fixture-01/candidate-04/receipt.json",
+          "sha256": "ad7e689557e0581a8b57e6b10d710431be75fc071656d0f5975ed20ad0490a66",
+          "bytes": 2764
+        },
+        {
+          "path": ".cache/android-input-fixture-01/candidate-04/source-manifest.json",
+          "sha256": "184dc8442564de0d902e4f5c452ccf391be7720117d36c7d7782ec922c236d4f",
+          "bytes": 1151
+        },
+        {
+          "path": ".cache/android-input-fixture-01/candidate-04/independent-review.md",
+          "sha256": "58fcb6e7dd47ed950db542c7d62d914aa8d14c727df0af2aae702ed982c2699c",
+          "bytes": 1119
+        },
+        {
+          "path": ".cache/android-input-fixture-01/candidate-04/project/app/build/reports/lint-results-debug.txt",
+          "sha256": "a69ecb171bea9d40de22744c85220b4a4ea12f5a25ce7976d67f2c88c9195334",
+          "bytes": 17
+        },
+        {
+          "path": ".cache/android-input-fixture-01/candidate-04/build-and-closure.log",
+          "sha256": "613b902930417c8b018903ad50a90493e71196ff27c8f86a3951ab9f560be151",
+          "bytes": 3099
+        },
+        {
+          "path": ".cache/android-input-fixture-01/candidate-04/audit-01/apksigner.txt",
+          "sha256": "b0a1af67205efcd284e5bbae691ebf4a0d296b4fcae02cd28e7e0509d0e0efbc",
+          "bytes": 343
+        },
+        {
+          "path": ".cache/android-input-fixture-01/candidate-04/audit-01/badging.txt",
+          "sha256": "7783333fe6f365ff871e530f5cea2e82ef2b7cc8bb1d218de7c12e4b42170889",
+          "bytes": 715
+        },
+        {
+          "path": ".cache/android-input-fixture-01/candidate-04/audit-01/manifest.txt",
+          "sha256": "ad21e264a96b0873193af5c701da3bc008aff8c3e2b3282e96559347f42495c0",
+          "bytes": 1948
+        },
+        {
+          "path": ".cache/android-input-fixture-01/candidate-04/audit-01/project-validation.json",
+          "sha256": "f71ac09b9d2237febfddd04ed299df56b82945edb211382454897f533ad47d9f",
+          "bytes": 644
+        },
+        {
+          "path": ".cache/android-input-fixture-01/candidate-04/official-readiness-review.md",
+          "sha256": "e075c7515117f81c6324ab6520f9cbd6ab50893f52b41c5ec1b45e045c26b9ce",
+          "bytes": 2838
+        }
+      ]
+    }
+  ],
+  "deviceEvidence": [
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/installed-input-helper.apk",
+      "sha256": "3535decba195f5b11aa47514607918c6d1f7827afe20c8cadbf2363926ba3845",
+      "bytes": 52807
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/installed-input-helper-012.apk",
+      "sha256": "d3c3e186dc648608d36063a0a66766d402d78832e430a7d785efa788c451cf26",
+      "bytes": 44031
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/01-helper-install-command.json",
+      "sha256": "1d39b76b3a70a5655683ae99356aaeb2af9b1522831b4af363bd73fbcbb69528",
+      "bytes": 444
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/01-helper-package-command.json",
+      "sha256": "b9c994795edff31b6bdf6742b89e873f4ddde308facede9128eb38a36265ed7f",
+      "bytes": 4576
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/01-helper-pull-command.json",
+      "sha256": "c1e2e97f04a42a795c326a85b995f8128797041d52f1a5e042fa8f0a3da1e21a",
+      "bytes": 675
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/01-helper-missing-mode-command.json",
+      "sha256": "b811ef3a886bf87ae60fb7f88a62bcb31c22fce01172cb563570f9a44302a69e",
+      "bytes": 530
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/02-helper-inspect-command.json",
+      "sha256": "01ae078873fd80aa9ca222c46ee3f34d5f5672d540478dbc3caa3bdec44349c8",
+      "bytes": 441
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/03-helper-crash-log-command.json",
+      "sha256": "ae528c1bc90e587a476a5310ee6008db94149f53733fa23940ffba1bcfdbcb64",
+      "bytes": 1770
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/03-helper-exit-info-command.json",
+      "sha256": "c8ba43d4c5e2ab4e45d07853557dc587639a964711e05cc507994e9003bca738",
+      "bytes": 1381
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/05-retire-owned-cli-command.json",
+      "sha256": "c48af912a3941c44d5f4a3f59ee75455d8f3cb4e76513e2a62707a458b8df38a",
+      "bytes": 327
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/05-helper-inspect-command.json",
+      "sha256": "fd272481658d1ca29bc27809986a1c118242c110eb065d2d708e1d7127d824da",
+      "bytes": 952
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/06-helper-inspect-continuity-command.json",
+      "sha256": "79250b567405c84636c0962382e9b8e0853466d61706149caf42e85dd416cc56",
+      "bytes": 537
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/07-helper-inspect-command.json",
+      "sha256": "29d4baeb06af2a3db5c9f896e99359b4e2b657eb08cdd4d368c343e277a0a598",
+      "bytes": 537
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/08-helper-install-command.json",
+      "sha256": "93f0f0888c2b9387fbf7a3b998953ce1b5174fd5b0565bd2041f0853b66567a5",
+      "bytes": 454
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/08-helper-pull-command.json",
+      "sha256": "a171bbf5f5efaef8b3b08f60e5d6afdfc9b818d617829d5963eaff078b8cf3cb",
+      "bytes": 679
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/08-helper-inspect-command.json",
+      "sha256": "5e0f63998711089031a6f361efc6015b27833bf1c02dacf6d7af14e01b0c230a",
+      "bytes": 952
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/08-expired-inspection-reject-command.json",
+      "sha256": "719010a198424b7f27ee78c29c7f28ce76db1d10ab2fe2e458c5ede34afd0405",
+      "bytes": 1532
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/08-admission-result.json",
+      "sha256": "bba4f23d4c348afe7b889b90aa056eeca35e86cf7f54c958c7ea1c59b77d95e4",
+      "bytes": 436
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/10-result.json",
+      "sha256": "48d83ad9b174342ce3fd3912797aa337d017f7183085ec8083235190edb660ad",
+      "bytes": 1367
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/cleanup.json",
+      "sha256": "b0392fb49580f22c8a2113edb51aaccc9e92254ad9258cff90068aeb4b2e1942",
+      "bytes": 533
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-helper-pid-command.json",
+      "sha256": "e52617cae2e1c5941252102b7a020bdc87000062cd74653f9787fb3ffbf58d80",
+      "bytes": 309
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-cli-pid-command.json",
+      "sha256": "508b1bcad96f96fc9ddd7074ab098429802a44a2e75dd0e0bbe1c00e259fd79f",
+      "bytes": 319
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-accessibility-command.json",
+      "sha256": "deac5dca1054c7f84aa66257d8adfc414271da8b26e18dedb6604ddfcbee5a9a",
+      "bytes": 4766
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-new-records.json",
+      "sha256": "22985940bd74dab91d4b22acebf52349ac4c4914a6f50b17517f0544290d443c",
+      "bytes": 2963
+    }
+  ],
+  "deviceSummary": {
+    "candidate03InstalledPullMatches": true,
+    "candidate04InstalledPullMatches": true,
+    "candidate03MissingMode": "rejected without input",
+    "candidate03FirstInspect": "framework finish/disconnect crash; preceding primary error unknown",
+    "candidate03AfterOwnedCliRetirement": "one actual no-input inspect passed",
+    "candidate03LaterInspections": "two failures conflate absent root with wrong-package root; cause not proved",
+    "candidate04ActualInspect": "passed no input, window ID99",
+    "candidate04ExpiredHoldRequest": "ID110 same bounds; primary_failure expired inspection, no input",
+    "heldButtonResult": "qualification/results/P0-S4/2026-10-15-vnc-held-button.md",
+    "finalState": "helper0.1.2 installed/stopped; no automation registration;14closed VNC records,12predecessors unchanged"
+  },
+  "limitations": [
+    "Official current AOSP lifecycle sources are not the exact HP vendor build.",
+    "No exhaustive admission/device/lifecycle or physical input qualification.",
+    "Root bounds do not establish framebuffer containment; same boot/session and exclusive automation remain leader prerequisites.",
+    "Polling and uptime hold do not guarantee cleanup under OS stalls or suspend.",
+    "Historical built-copy source hashes must not be compared to changed current files as if those were the historical source."
+  ],
+  "checks": {
+    "candidate03And04BuiltCopyHashes": "verified",
+    "candidate04CurrentSourceHashes": "verified equal",
+    "builtAndInstalledApkHashes": "both verified equal",
+    "buildAndLint": "retained actual passing receipts; not rerun",
+    "debugRuntimeClosure": "no dependencies for both candidates",
+    "independentReviews": "retained source/delta reviews inspected",
+    "documentationValidation": "passed combined project validation; see parent checkpoint verification"
+  }
+}

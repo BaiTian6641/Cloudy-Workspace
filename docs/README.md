@@ -59,6 +59,7 @@ These entries retain chronological checkpoints. Use the current execution state 
 
 - [VNC focus/recovery result](../qualification/results/P0-S4/2026-10-15-vnc-focus-recovery.md): framework-held key release and hidden-session retirement; its eleven closed records preserve the previous nine.
 - [VNC protocol-initialization cancellation](../qualification/results/P0-S4/2026-10-15-vnc-initialization-cancel.md): actual native cancellation while the genuine server greeting is withheld,79ms Stop-to-join, twelve closed records and all eleven predecessors unchanged. TLS/authentication cancellation is not inferred.
-- [Standalone mouse fixture build](06-validation/2026-10-15-mouse-input-fixture.md): strict compilation/Lint, empty runtime closure and source/package review; not installed/executed. Resolve the same-clock inspection route before testing held-button focus release.
+- [Standalone mouse fixture build](06-validation/2026-10-15-mouse-input-fixture.md) preserves the historical candidate02 build-only checkpoint. The [0.1.2 admission follow-up](06-validation/2026-10-15-mouse-input-admission.md) supplies actual inspection, expired-input rejection and retained candidate03 failures.
+- [VNC held-button release](../qualification/results/P0-S4/2026-10-15-vnc-held-button.md): host-observed focus release before helper UP, fourteen closed records, twelve unchanged predecessors and verified teardown. Physical mouse/trackpad remains separate.
 
 - [Finite SSH retention contract](03-platform/googlebook/p0-s3-ssh-retention-contract.md) and [0.8.0 build review](06-validation/2026-10-15-ssh-retention-build.md): actual service-owned exec/PTY candidate, 206 JVM tests and zero Lint; device retention and distribution acceptance pending.

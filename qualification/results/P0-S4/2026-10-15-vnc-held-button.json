@@ -1,0 +1,1239 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-15",
+  "stage": "P0-S4",
+  "versionName": "0.1.3",
+  "versionCode": 4,
+  "buildRef": "478b0a46-2d02-4eeb-940b-e25e602f8aa1",
+  "device": {
+    "model": "HP Googlebook 14",
+    "release": "17",
+    "api": "37",
+    "build": "CL3B.260622.276.R2",
+    "incremental": "16560795",
+    "abi": "arm64-v8a"
+  },
+  "apkSha256": "97799b6a6495f3c6506df705d2cb5249f1a013d0bfe646b37dd2997a8b8d55f0",
+  "host": {
+    "os": "Ubuntu 26.04",
+    "server": "TigerVNC 1.15.0+dfsg-2build1",
+    "canvas": "Qt 6.9.2 canvas03",
+    "session": "isolated virtual X display; not Wayland desktop capture",
+    "rfbVersion": "3.8",
+    "serverBinarySha256": "e59b12d25e9a9341db3b54b2da365c0964faeb52b5b720fb50674631d3fcac84",
+    "canvasBinarySha256": "e8a7d269d39e4cbf04da327719c3c68b770a4df86f26aeb7f45d752c76d260be",
+    "configuredSecurity": "X509Plain / approved ephemeral leaf / normal PAM other; real authenticated session"
+  },
+  "scope": "framework-held-primary-button-focus-release",
+  "status": "bounded-pass",
+  "physicalInput": false,
+  "helper": {
+    "versionName": "0.1.2",
+    "versionCode": 3,
+    "candidate": "04",
+    "apkSha256": "d3c3e186dc648608d36063a0a66766d402d78832e430a7d785efa788c451cf26",
+    "admissionReport": "docs/06-validation/2026-10-15-mouse-input-admission.json"
+  },
+  "newAttempts": {
+    "a5b7f694-b6e8-401a-8205-8ed5bb4241ad.json": {
+      "schema": 1,
+      "attemptId": "a5b7f694-b6e8-401a-8205-8ed5bb4241ad",
+      "kind": "session",
+      "version": "0.1.3",
+      "buildRef": "478b0a46-2d02-4eeb-940b-e25e602f8aa1",
+      "nativeBuildRef": "vnc-adapter-x509plain-2026-10-15",
+      "startedElapsedMs": 3057879,
+      "state": "native-terminal",
+      "detail": "native-error-1",
+      "reason": "not-visible",
+      "closed": true,
+      "threadStarted": true,
+      "joined": true,
+      "freed": true,
+      "elapsedMs": 86531,
+      "connectionsInitialized": 1,
+      "nativeState": 3,
+      "nativeError": 1,
+      "nativeFrameCallbacks": 436,
+      "javaFrameCallbacks": 436,
+      "convertedFrames": 425,
+      "uniqueFrameDraws": 420,
+      "admittedInputs": 5,
+      "completedInputs": 5,
+      "successfulWrites": 5,
+      "width": 1280,
+      "height": 720,
+      "releaseResult": "written-not-host-confirmed",
+      "startupElapsedRealtimeMillis": {
+        "ACCEPTED": 3057879,
+        "WORKER": 3057879,
+        "NATIVE_START": 3057889,
+        "CONNECTED": 3078401,
+        "FRAME": 3078409,
+        "CONVERTED": 3078426,
+        "DRAWN": 3078499,
+        "STOP": 3144209,
+        "JOINED": 3144408
+      },
+      "f8FrameView": {
+        "DOWN_SEEN": 0,
+        "UP_SEEN": 0,
+        "UP_UNOWNED": 0,
+        "REJECT_FOCUS": 0,
+        "REJECT_WINDOW": 0,
+        "REJECT_CONNECTION": 0,
+        "REJECT_META": 0,
+        "DOWN_QUEUED": 0,
+        "UP_QUEUED": 0,
+        "QUEUE_REJECTED": 0
+      },
+      "f8WriteConfirmation": "unavailable-no-per-key-sequence-correlation"
+    },
+    "c8b82d25-14e5-4c70-9fd6-16c976a48afe.json": {
+      "schema": 1,
+      "attemptId": "c8b82d25-14e5-4c70-9fd6-16c976a48afe",
+      "kind": "session",
+      "version": "0.1.3",
+      "buildRef": "478b0a46-2d02-4eeb-940b-e25e602f8aa1",
+      "nativeBuildRef": "vnc-adapter-x509plain-2026-10-15",
+      "startedElapsedMs": 2946623,
+      "state": "failed",
+      "detail": "setup-failure",
+      "reason": "setup-failure",
+      "closed": true,
+      "threadStarted": false,
+      "joined": false,
+      "freed": false,
+      "elapsedMs": 21,
+      "connectionsInitialized": 0,
+      "nativeState": 0,
+      "nativeError": 0,
+      "nativeFrameCallbacks": 0,
+      "javaFrameCallbacks": 0,
+      "convertedFrames": 0,
+      "uniqueFrameDraws": 0,
+      "admittedInputs": 0,
+      "completedInputs": 0,
+      "successfulWrites": 0,
+      "width": 0,
+      "height": 0,
+      "releaseResult": "none",
+      "startupElapsedRealtimeMillis": {
+        "ACCEPTED": 2946623,
+        "WORKER": 2946623,
+        "NATIVE_START": null,
+        "CONNECTED": null,
+        "FRAME": null,
+        "CONVERTED": null,
+        "DRAWN": null,
+        "STOP": null,
+        "JOINED": null
+      },
+      "f8FrameView": {
+        "DOWN_SEEN": 0,
+        "UP_SEEN": 0,
+        "UP_UNOWNED": 0,
+        "REJECT_FOCUS": 0,
+        "REJECT_WINDOW": 0,
+        "REJECT_CONNECTION": 0,
+        "REJECT_META": 0,
+        "DOWN_QUEUED": 0,
+        "UP_QUEUED": 0,
+        "QUEUE_REJECTED": 0
+      },
+      "f8WriteConfirmation": "unavailable-no-per-key-sequence-correlation"
+    }
+  },
+  "hostObservedResult": {
+    "scope": "framework-held-primary-button-focus-release",
+    "physicalInput": false,
+    "verdict": "pass-host-release-before-helper-up",
+    "events": [
+      {
+        "event": "armed",
+        "hostMonotonicNs": 424215682851713
+      },
+      {
+        "event": "helper-spawned",
+        "hostMonotonicNs": 424260855390035,
+        "holdMs": 25000,
+        "spawnMonotonicNs": 424260854784226
+      },
+      {
+        "event": "host-button-down",
+        "hostMonotonicNs": 424261138082476,
+        "canvasEvent": {
+          "button": 1,
+          "buttons": 1,
+          "elapsedNanoseconds": "63813370259",
+          "event": "button-down",
+          "sequence": 3,
+          "x": 639,
+          "y": 360
+        }
+      },
+      {
+        "event": "shade-requested",
+        "hostMonotonicNs": 424261160266473
+      },
+      {
+        "event": "early-host-release",
+        "hostMonotonicNs": 424261241446302,
+        "canvasEvent": {
+          "button": 1,
+          "buttons": 0,
+          "elapsedNanoseconds": "63909294441",
+          "event": "button-up",
+          "sequence": 6,
+          "x": 639,
+          "y": 360
+        },
+        "sinceSpawnMs": 386.595871,
+        "helperRunning": true
+      },
+      {
+        "event": "helper-matching-up-completed",
+        "hostMonotonicNs": 424286223128920
+      }
+    ],
+    "startedAtUtc": "2026-10-16T04:13:43.656093+00:00",
+    "helperDownToUpUptimeMs": 25016,
+    "hostReleaseSinceSpawnMs": 386.595871
+  },
+  "timingMs": {
+    "acceptedToConnected": 20522,
+    "acceptedToDrawn": 20620,
+    "connectedToDrawn": 98,
+    "stopToJoined": 199
+  },
+  "cleanup": {
+    "records": 14,
+    "allClosed": true,
+    "allTwelvePredecessorsByteIdentical": true,
+    "allRecordsUnchangedAfterStop": true,
+    "sameBootAndCountAcrossRun": true,
+    "remainingSlots": 2,
+    "nativeVncApkUnchanged": true,
+    "vncStopped": true,
+    "helperStopped": true,
+    "ownedCliInstrumentationAbsent": true,
+    "uiAutomationRegistrationAbsent": true,
+    "profileRemoved": true,
+    "ownedReverseRemoved": true,
+    "hostAndCanvasExitZero": true,
+    "hostListenerXSocketLockAbsent": true,
+    "hostFinalButtons": 0,
+    "hostFinalHeldKeys": []
+  },
+  "retainedFailures": {
+    "additionalSetupFailure": "21ms pre-native; trigger unattributed; no thread, connection, input or join/free",
+    "cleanupObserver": "Initial one-new-row expectation failed; preserved, then both rows exported and verified closed",
+    "helper": "See separate admission report: candidate03 framework finish crash and ambiguous root-readiness failures retained"
+  },
+  "limitations": [
+    "Framework-generated mouse stimulus; physical mouse/trackpad remains unqualified.",
+    "Host UP observed 386.595871ms after spawning is a causal observation bound, not input-to-photon or intrinsic release latency.",
+    "Native generic releaseResult remains written-not-host-confirmed; this separate host journal confirms only the specific case.",
+    "Isolated virtual X session, not capture of the workstation Wayland desktop.",
+    "No new TLS/PAM cancellation, product credentials, process recovery, broad interoperability or capability promotion.",
+    "All fourteen records retained; only two slots remain subject to fresh inspection.",
+    "Same boot across this case does not resolve the earlier reboot cause."
+  ],
+  "evidenceFiles": [
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-abi-command.json",
+      "sha256": "55631dc52949af5703af83c90062e4fdd10de36eabc72cfab130578714775f51",
+      "bytes": 310
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-api-command.json",
+      "sha256": "98ef6f420f21d169dafaed43b49de8672064d154480cdda7f6b5f4187c0ce006",
+      "bytes": 305
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-apk-path-command.json",
+      "sha256": "8230bfc2ae6c811a8177612dcd98b67b98628e5658e7c2269352e7e2b647d1d8",
+      "bytes": 418
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-apk-pull-command.json",
+      "sha256": "fc503745c8bc9af1e9fd6957bf6317fa5fb0d889038698047e66bbcba97148f8",
+      "bytes": 666
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-before-1b452388-235c-4c56-bab6-20bba0435c87.json",
+      "sha256": "b7c3dbe1b7b811e4e35b1e3799831115579ecfd589382637821cb3868c99878c",
+      "bytes": 637
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-before-1b452388-235c-4c56-bab6-20bba0435c87.json-command.json",
+      "sha256": "28f28b52f0ae2171f8c03cd18c1f03b2ecb207430f31c3480e9c5fc9ea638917",
+      "bytes": 1097
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-before-39a6112a-3124-49f0-b89f-97de7c6631bb.json",
+      "sha256": "3cf7d4c24fbde47b432c0a826c51aee22ab81b02a72d3126ffce8a9b44fc4923",
+      "bytes": 1137
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-before-39a6112a-3124-49f0-b89f-97de7c6631bb.json-command.json",
+      "sha256": "35b7565b428833888f10556264c18311645b2099863a5794923e0528ca277de1",
+      "bytes": 1643
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-before-3e424a1f-d11b-4862-aa28-7cbdba43a4bb.json",
+      "sha256": "cb2dea5ab7b8c29951feeba7f847a31c8a399b47ef6a56bff0fa1638b3a102be",
+      "bytes": 1078
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-before-3e424a1f-d11b-4862-aa28-7cbdba43a4bb.json-command.json",
+      "sha256": "3c2dad7d182c435c3deb98760263b25c9674d2e1941d8bda674f93dce07aec10",
+      "bytes": 1584
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-before-4e3d23ab-2edd-4907-94c5-197703599707.json",
+      "sha256": "cdf332c6fa3031731835c79c9cbdeb9bf83756c7cce1a647928704e1d4cbfc6b",
+      "bytes": 1136
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-before-4e3d23ab-2edd-4907-94c5-197703599707.json-command.json",
+      "sha256": "a2c26873122051b0c467aaf7d066d5669ec409e9bab0c1e95c175c4e38adb910",
+      "bytes": 1642
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-before-52109479-3fd7-4f1e-bb27-fd51430f7015.json",
+      "sha256": "3a9cc5093f4b5008b0b9659a5607591025394207d1570ec73df20e3ed68138ca",
+      "bytes": 624
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-before-52109479-3fd7-4f1e-bb27-fd51430f7015.json-command.json",
+      "sha256": "a4fa00bd2820698c2566b07190bf2e6885ae7e932eaefec119c0823d99d9443c",
+      "bytes": 1084
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-before-6986e1e0-f035-4c52-b0f0-5d03a54a55af.json",
+      "sha256": "d9e934c350b66db7ca3b9b31353c49cb391d87c3d9d8ae3e81340d16270ec470",
+      "bytes": 653
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-before-6986e1e0-f035-4c52-b0f0-5d03a54a55af.json-command.json",
+      "sha256": "1d69d254b6f97572743ca029068ae8c540031e1da3650d075afc0442163a6b17",
+      "bytes": 1113
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-before-6b34c12f-1022-4530-91a1-fbe97c638903.json",
+      "sha256": "02524c02a074265754edb89aa4753c58420e2317ccca5f21d7422a905f3f84da",
+      "bytes": 1142
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-before-6b34c12f-1022-4530-91a1-fbe97c638903.json-command.json",
+      "sha256": "1849f1c51fa5f783b2a1275b1cd6097d45bca1618937f2c393691605d0d8ae58",
+      "bytes": 1648
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-before-7298b3c8-c043-4215-a794-cc829ffcd2f7.json",
+      "sha256": "eedc0349da5e337c43b2051899ae911c104f7ee819239bf290686b8450366f3d",
+      "bytes": 623
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-before-7298b3c8-c043-4215-a794-cc829ffcd2f7.json-command.json",
+      "sha256": "a9eb591aa1dd05c45a8969424faf43ed89947b33a9c06ade548d66f33e516b82",
+      "bytes": 1083
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-before-76a17618-7ac6-48da-b894-5bf439ef1a97.json",
+      "sha256": "e6bfabd897830ff6a63ef9131d130167a088479006df411ce6467887a01e15d5",
+      "bytes": 1062
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-before-76a17618-7ac6-48da-b894-5bf439ef1a97.json-command.json",
+      "sha256": "cbc5fc97ee0949231086a6f38b88010dc74dca0982e04e94f5422a73c6c3fda7",
+      "bytes": 1568
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-before-7ac4ad88-4ced-4dd6-afe9-97bd8f80231d.json",
+      "sha256": "23ba1ccc48981a511d1c5fb70f4a5138a04f0f21de4e0d64e5ce61d31e21bde9",
+      "bytes": 674
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-before-7ac4ad88-4ced-4dd6-afe9-97bd8f80231d.json-command.json",
+      "sha256": "e99bcf8f5ea01d55de24f861fa2f7fe2c8bab497aceb4e0cd744031f045ea15f",
+      "bytes": 1134
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-before-c3341b8d-b527-4300-b05b-66a75003cea4.json",
+      "sha256": "79bc01f44ef5b2c531d5c122a946774afa0b82d797776d2a005558cdc6176cc8",
+      "bytes": 642
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-before-c3341b8d-b527-4300-b05b-66a75003cea4.json-command.json",
+      "sha256": "147faefdb71490c124fb373ba0e95034e74f9ec593973364d136ee5a591a1aa1",
+      "bytes": 1102
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-before-eb3520d2-1ba4-42de-9f48-a706c3c23951.json",
+      "sha256": "bd718cbe8983f0b9e193abd1eb6a393fe7809606ad63ba70b2b06e49ae81a2c6",
+      "bytes": 642
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-before-eb3520d2-1ba4-42de-9f48-a706c3c23951.json-command.json",
+      "sha256": "bb745d991b3eb8e8a27f7319b8e6291f4bdf9c8c9e41a3ad2da659e4356d9dca",
+      "bytes": 1102
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-before-list-command.json",
+      "sha256": "e4fa07584a8aec910c831a0e6087234c2d2c4c765b60e846124b468c789c82a3",
+      "bytes": 845
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-boot-command.json",
+      "sha256": "6b1d4ad1326deccd7029997741ff2590b111483a57826613db7ceaeaff61f260",
+      "bytes": 464
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-build-command.json",
+      "sha256": "cd1bd78508b37c8bc7e524cb17bb5b9ba14a85ef9e9c622e2863abe130af305e",
+      "bytes": 312
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-files-command.json",
+      "sha256": "0d81e89bb9350ee95a515b151d83ef9201ae16d0321bf0eed2ee6ad43bc5046e",
+      "bytes": 330
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-incremental-command.json",
+      "sha256": "95de3afe4f5a39aacedb0b2b0fcf2ee7e8f02a4a101ff94ca2f33f9b33e0fc4a",
+      "bytes": 319
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-model-command.json",
+      "sha256": "4c32238c8c230e1d57e3fe663592f1ce5a2353b31f5e10884cb39b1fd2578d1c",
+      "bytes": 315
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-package-command.json",
+      "sha256": "b28a9bdb0f83fbacecf88d824d967424a8afbfb6eafecee1425e4975f0471757",
+      "bytes": 6770
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-pid-command.json",
+      "sha256": "70932c6307442fa4e5412301895ee22b1d343aad9e62d1d147a1f5dd995c0c1d",
+      "bytes": 307
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-release-command.json",
+      "sha256": "9dda8a221c6a59ba4100595ebaf9861bf170e6e966fdc1c6cf86b249e080b0ff",
+      "bytes": 309
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-reverse-command.json",
+      "sha256": "7142cd0e0c58bba72c6d758ba292e6ee1134f10bfa8c53bb13e51b295aa21af5",
+      "bytes": 273
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/00-transport-command.json",
+      "sha256": "9466a757878a67781c0290cf92fd8147ecdc67efa960d3933b332ae83dd87044",
+      "bytes": 267
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/01-helper-absent-command.json",
+      "sha256": "c26a92e9729f7cdef5741b9d56d81b26049038d53d5fbbdc683c61d72be49021",
+      "bytes": 311
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/01-helper-install-command.json",
+      "sha256": "1d39b76b3a70a5655683ae99356aaeb2af9b1522831b4af363bd73fbcbb69528",
+      "bytes": 444
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/01-helper-missing-mode-command.json",
+      "sha256": "b811ef3a886bf87ae60fb7f88a62bcb31c22fce01172cb563570f9a44302a69e",
+      "bytes": 530
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/01-helper-package-command.json",
+      "sha256": "b9c994795edff31b6bdf6742b89e873f4ddde308facede9128eb38a36265ed7f",
+      "bytes": 4576
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/01-helper-path-command.json",
+      "sha256": "06915f5efc02fb85c6715d1b3de9c1728a1917388fe05aaf5b096644b7f3e3d3",
+      "bytes": 422
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/01-helper-pull-command.json",
+      "sha256": "c1e2e97f04a42a795c326a85b995f8128797041d52f1a5e042fa8f0a3da1e21a",
+      "bytes": 675
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/01-observer-failure.json",
+      "sha256": "58e8d7d46cc041b56fc9c81cfc6a329e6904b58f2da5878e1d57ce2c93b43f6b",
+      "bytes": 339
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/01-open-vnc-command.json",
+      "sha256": "2f27ff57a4a11f1bea37aebf55494f0c8ca0cce149deb6a54e4f0ace159665a7",
+      "bytes": 522
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/01-vnc-visible-layout-command.json",
+      "sha256": "4958f897a061c6cdb7f80af27eb9db249a6ff5faf3118f185f3fbdb5ebc850eb",
+      "bytes": 621
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/01-vnc-visible-layout.json",
+      "sha256": "dd2b4e23c51cb1794f37d460dc81b7d2779c77f9fa32bc728a2433c19388b12a",
+      "bytes": 5748
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/02-helper-inspect-command.json",
+      "sha256": "01ae078873fd80aa9ca222c46ee3f34d5f5672d540478dbc3caa3bdec44349c8",
+      "bytes": 441
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/02-vnc-visible-layout-command.json",
+      "sha256": "50597760f3d4d2e9ff549b81d7581cb1ed3c2677a801dc7f77f9f54964c71fea",
+      "bytes": 621
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/02-vnc-visible-layout.json",
+      "sha256": "bde4ea7d370ff2c6cc98cd14ed3bd8e4bf19c85c06462731ef2fefc83cc59fc3",
+      "bytes": 14196
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/03-accessibility-command.json",
+      "sha256": "58001926a15c8523b46efca8cfffd1ce3e459a772887a50205a18d67cf3d64bd",
+      "bytes": 9742
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/03-boot-command.json",
+      "sha256": "32ac11f6772450a4e5df3d2f5ac46985d8f08cb50d153418632140a819d89165",
+      "bytes": 425
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/03-helper-crash-log-command.json",
+      "sha256": "ae528c1bc90e587a476a5310ee6008db94149f53733fa23940ffba1bcfdbcb64",
+      "bytes": 1770
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/03-helper-exit-info-command.json",
+      "sha256": "c8ba43d4c5e2ab4e45d07853557dc587639a964711e05cc507994e9003bca738",
+      "bytes": 1381
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/03-helper-pid-log-command.json",
+      "sha256": "279ced065895e0f96a96f95865dd2fec65998a40e14865cd67c4a714a47e8d3f",
+      "bytes": 3963
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/03-instrumentation-command.json",
+      "sha256": "2e8a20dba49ebbabca6be11ff72b5bbbc1b7ccaeff0eece9daf2cfb1da8898bf",
+      "bytes": 420
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/04-activity-processes-command.json",
+      "sha256": "e9b0e9dd2d7cd1a91c5b6591b3a260c72f18b06e59795818ee149ae3863878ba",
+      "bytes": 917616
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/04-cli-help-command.json",
+      "sha256": "07fe00da2cbaec060f93b5b3d109f68395bacae4b1f9f4ab0aefc2ff73f4ab0f",
+      "bytes": 3122
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/04-layout-help-command.json",
+      "sha256": "f4e904653a101ffa91d05e06419c415c5c0798a42c7fc2c94891987cc26e4446",
+      "bytes": 1256
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/04-process-users-command.json",
+      "sha256": "1f9ad8ef912426930b4b42cc044d018a9bf31a6991c79cc74976db65c7f0d996",
+      "bytes": 60539
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/04-processes-command.json",
+      "sha256": "105ca2c87b2dfa6f9af23a72267ce4c93f3432d013f7e9f1c0f31046961fa76e",
+      "bytes": 51489
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/05-accessibility-command.json",
+      "sha256": "5c91170b49d22a6fb675713d2a05ca4f7ab08fd23e4edad9d1b1b1a8071ffbb3",
+      "bytes": 4796
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/05-cli-pid-command.json",
+      "sha256": "25f52825502e67574b92d312cba3e91c6d3cdb39d10bc2b5ecee2be34ca752b3",
+      "bytes": 319
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/05-helper-inspect-command.json",
+      "sha256": "fd272481658d1ca29bc27809986a1c118242c110eb065d2d708e1d7127d824da",
+      "bytes": 952
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/05-inspection-outcome.json",
+      "sha256": "a3a103fe41a50e49e585ea36a73b72d271c6d6de08248360b32e6633edb5bb27",
+      "bytes": 187
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/05-retire-owned-cli-command.json",
+      "sha256": "c48af912a3941c44d5f4a3f59ee75455d8f3cb4e76513e2a62707a458b8df38a",
+      "bytes": 327
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/06-accessibility-command.json",
+      "sha256": "fcfca1c1d1af850f5615b049b23c09ae9a3e232d5c3bf7f4fddeb2542f78a73d",
+      "bytes": 4796
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/06-helper-inspect-continuity-command.json",
+      "sha256": "79250b567405c84636c0962382e9b8e0853466d61706149caf42e85dd416cc56",
+      "bytes": 537
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/06-window-focus-command.json",
+      "sha256": "3ddacf4740f86df2578170f12e024d5e38d410c93969f564241cd9694e4bd4e1",
+      "bytes": 55918
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/07-helper-inspect-command.json",
+      "sha256": "29d4baeb06af2a3db5c9f896e99359b4e2b657eb08cdd4d368c343e277a0a598",
+      "bytes": 537
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/08-admission-result.json",
+      "sha256": "bba4f23d4c348afe7b889b90aa056eeca35e86cf7f54c958c7ea1c59b77d95e4",
+      "bytes": 436
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/08-before-accessibility-command.json",
+      "sha256": "8b8a784bc7685ee788b31489bf3cdbe3b4306346060a7a2ba5a7791dd3502b29",
+      "bytes": 4796
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/08-before-cli-pid-command.json",
+      "sha256": "ff90e5afa6169719da1c01fde3c628b1ba2e89f201243418dd12d772421d1a07",
+      "bytes": 319
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/08-expired-inspection-reject-command.json",
+      "sha256": "719010a198424b7f27ee78c29c7f28ce76db1d10ab2fe2e458c5ede34afd0405",
+      "bytes": 1532
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/08-helper-inspect-command.json",
+      "sha256": "5e0f63998711089031a6f361efc6015b27833bf1c02dacf6d7af14e01b0c230a",
+      "bytes": 952
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/08-helper-install-command.json",
+      "sha256": "93f0f0888c2b9387fbf7a3b998953ce1b5174fd5b0565bd2041f0853b66567a5",
+      "bytes": 454
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/08-helper-path-command.json",
+      "sha256": "878e56ebfe0906708ee2069c9c08e83477e2173f4b8646693671f48aba749584",
+      "bytes": 422
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/08-helper-pull-command.json",
+      "sha256": "a171bbf5f5efaef8b3b08f60e5d6afdfc9b818d617829d5963eaff078b8cf3cb",
+      "bytes": 679
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/09-before-reverse-command.json",
+      "sha256": "7cf5a32ea401bc50254da1490986edde600695305f93e2ac8aae4aa46afeb194",
+      "bytes": 273
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/09-open-command.json",
+      "sha256": "15f035ccd3de9f7518d7090780c85b43106af7a685e21bf8ed83cab218324ffe",
+      "bytes": 623
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/09-profile-command.json",
+      "sha256": "caa77c3f672f92541303c9d81641c7d1077aa132fddbf9df0a534cd868976c2e",
+      "bytes": 355
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/09-profile-readback-command.json",
+      "sha256": "33d8e3b2584d2c9a51fc77fa99a2e6bee0ebfddbe86107f352184b10ca7ef7f7",
+      "bytes": 593
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/09-profile.json",
+      "sha256": "439d486379e7ede8b6b620116bae85f62d11049b398ad9ab7f391a192a8c4a41",
+      "bytes": 219
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/09-ready-layout-command.json",
+      "sha256": "c9736d2894f75dafda19bae80403003c769f7a582f18a39fdb347a0f19c92650",
+      "bytes": 609
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/09-ready-layout.json",
+      "sha256": "92fecee15c927d9fffa9913d02a68682e7adb46b5b82d117c3ff31a40f9d11b5",
+      "bytes": 5831
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/09-reverse-command.json",
+      "sha256": "aff52cfc0c33174e1ea0c6343972d5a9d7182efb6ce67167a1e938bbb648ac65",
+      "bytes": 298
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/10-before-accessibility-command.json",
+      "sha256": "1822d204fe9d20601fcc85b8601a9ad729421340746998e1e8732a26b7780609",
+      "bytes": 4796
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/10-cli-pid-command.json",
+      "sha256": "d8434ae4629ec80cfbba4a8670569a2cf692cf0ff62793b57dc4e4a097e5a527",
+      "bytes": 319
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/10-collapse-shade-command.json",
+      "sha256": "264bbd2d49c5e9327f66abe5737983707aef95f6c4f3277e65e840723bfd73b7",
+      "bytes": 295
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/10-connected-layout-command.json",
+      "sha256": "9b6998a1c15b0b77a60a06f131cc1a1a2014aede07a8a570bcc49e4b3ea0e205",
+      "bytes": 617
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/10-connected-layout.json",
+      "sha256": "83b4bc3d3a525d04d5bb4b402d06400426939b2d7e23169b80a3f7dbc41786fe",
+      "bytes": 14226
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/10-expand-shade-command.json",
+      "sha256": "36447dca908ccd30fe642ff5c665b7724995cad3315b1c39548ab5904bd96609",
+      "bytes": 307
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/10-hold.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/10-hold.stdout",
+      "sha256": "35b4aa416a91da06ea5c9d96087f7bbf7b1add187d34847a8729436e383e09e7",
+      "bytes": 1006
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/10-inspect-command.json",
+      "sha256": "249fb1c0fd8ed02cb46b200514fb8eaca9c3d87c69bd339bb88970299398c4e0",
+      "bytes": 953
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/10-progress.json",
+      "sha256": "48d83ad9b174342ce3fd3912797aa337d017f7183085ec8083235190edb660ad",
+      "bytes": 1367
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/10-result.json",
+      "sha256": "48d83ad9b174342ce3fd3912797aa337d017f7183085ec8083235190edb660ad",
+      "bytes": 1367
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/10-retire-owned-cli-command.json",
+      "sha256": "efbd069f147319ce714a5c18408e3ff8fd0fe8f6bc5b09d218a639736c9d9b62",
+      "bytes": 327
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/10-shade-focus-command.json",
+      "sha256": "300557ba3b4c9b4da2da2e1e2df52ea3d5a51be3815810f936c0c078f06f4a26",
+      "bytes": 63847
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/11-cleanup-observer-failure.json",
+      "sha256": "e9cfcfcfab541bbdd6fe5dad2041602d1196d14fa250dab94a399c0218d6ad16",
+      "bytes": 189
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/11-final-list-command.json",
+      "sha256": "21261645c570ce9cdf52dd0d2df1b5cf1b5fcfc9f8b02866ca38648d67d5d837",
+      "bytes": 931
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/11-hide-command.json",
+      "sha256": "3a933267fc894df0ea96edb2675101a046e098912b2b352472ef61de0171ce37",
+      "bytes": 300
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-export-1b452388-235c-4c56-bab6-20bba0435c87.json",
+      "sha256": "b7c3dbe1b7b811e4e35b1e3799831115579ecfd589382637821cb3868c99878c",
+      "bytes": 637
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-export-1b452388-235c-4c56-bab6-20bba0435c87.json-command.json",
+      "sha256": "e3bbe4718c3871f699ab87fe7243d5ff3673a0b00accc350e34620055f7609ec",
+      "bytes": 1097
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-export-39a6112a-3124-49f0-b89f-97de7c6631bb.json",
+      "sha256": "3cf7d4c24fbde47b432c0a826c51aee22ab81b02a72d3126ffce8a9b44fc4923",
+      "bytes": 1137
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-export-39a6112a-3124-49f0-b89f-97de7c6631bb.json-command.json",
+      "sha256": "65f4b69ae5c2d2f0501a8e370716bb13f9a6c42ddfb91be269da96476f618009",
+      "bytes": 1643
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-export-3e424a1f-d11b-4862-aa28-7cbdba43a4bb.json",
+      "sha256": "cb2dea5ab7b8c29951feeba7f847a31c8a399b47ef6a56bff0fa1638b3a102be",
+      "bytes": 1078
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-export-3e424a1f-d11b-4862-aa28-7cbdba43a4bb.json-command.json",
+      "sha256": "d5af14a861b92b98e35b3044e5615c3724c45242cec74f263f3b8477cc61d473",
+      "bytes": 1584
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-export-4e3d23ab-2edd-4907-94c5-197703599707.json",
+      "sha256": "cdf332c6fa3031731835c79c9cbdeb9bf83756c7cce1a647928704e1d4cbfc6b",
+      "bytes": 1136
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-export-4e3d23ab-2edd-4907-94c5-197703599707.json-command.json",
+      "sha256": "5fb72bab7f34266478eaac52b641a5727040e56a8a80615f66bdec721a52df83",
+      "bytes": 1642
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-export-52109479-3fd7-4f1e-bb27-fd51430f7015.json",
+      "sha256": "3a9cc5093f4b5008b0b9659a5607591025394207d1570ec73df20e3ed68138ca",
+      "bytes": 624
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-export-52109479-3fd7-4f1e-bb27-fd51430f7015.json-command.json",
+      "sha256": "164c8385e53182b4e004c23e155aa56bd011128256f46ca15cc2416fda3b13b6",
+      "bytes": 1084
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-export-6986e1e0-f035-4c52-b0f0-5d03a54a55af.json",
+      "sha256": "d9e934c350b66db7ca3b9b31353c49cb391d87c3d9d8ae3e81340d16270ec470",
+      "bytes": 653
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-export-6986e1e0-f035-4c52-b0f0-5d03a54a55af.json-command.json",
+      "sha256": "3d203bc9e8ba09c00a1518359a9a63e6e0a11753aff81ab864eb26a7c3365675",
+      "bytes": 1113
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-export-6b34c12f-1022-4530-91a1-fbe97c638903.json",
+      "sha256": "02524c02a074265754edb89aa4753c58420e2317ccca5f21d7422a905f3f84da",
+      "bytes": 1142
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-export-6b34c12f-1022-4530-91a1-fbe97c638903.json-command.json",
+      "sha256": "963cda229a491efc2ec3bf1e42df36293a5a391218f265d7bcb6d1855114d942",
+      "bytes": 1648
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-export-7298b3c8-c043-4215-a794-cc829ffcd2f7.json",
+      "sha256": "eedc0349da5e337c43b2051899ae911c104f7ee819239bf290686b8450366f3d",
+      "bytes": 623
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-export-7298b3c8-c043-4215-a794-cc829ffcd2f7.json-command.json",
+      "sha256": "35ee10dd6872cf40eb7e9917df9216e3dff48860053e6c9c85814374c4a2fdc0",
+      "bytes": 1083
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-export-76a17618-7ac6-48da-b894-5bf439ef1a97.json",
+      "sha256": "e6bfabd897830ff6a63ef9131d130167a088479006df411ce6467887a01e15d5",
+      "bytes": 1062
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-export-76a17618-7ac6-48da-b894-5bf439ef1a97.json-command.json",
+      "sha256": "dade2e7203d041981d80b23f3337510421d196b7890c35462f2351f288130fc6",
+      "bytes": 1568
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-export-7ac4ad88-4ced-4dd6-afe9-97bd8f80231d.json",
+      "sha256": "23ba1ccc48981a511d1c5fb70f4a5138a04f0f21de4e0d64e5ce61d31e21bde9",
+      "bytes": 674
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-export-7ac4ad88-4ced-4dd6-afe9-97bd8f80231d.json-command.json",
+      "sha256": "b44aa107e1919f4fa908169017636fe18e4c4e5f0cd8a52681b88ede863f02ff",
+      "bytes": 1134
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-export-a5b7f694-b6e8-401a-8205-8ed5bb4241ad.json",
+      "sha256": "6ed5713b7cfba8489a173b151a26bc801a8f0950de2a6a76c6de6bc28bbdbaf0",
+      "bytes": 1112
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-export-a5b7f694-b6e8-401a-8205-8ed5bb4241ad.json-command.json",
+      "sha256": "8bec8dcdf70d15ccdce7f800514513fd99ea157779df9f4ff74be9e4bd10f420",
+      "bytes": 1618
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-export-c3341b8d-b527-4300-b05b-66a75003cea4.json",
+      "sha256": "79bc01f44ef5b2c531d5c122a946774afa0b82d797776d2a005558cdc6176cc8",
+      "bytes": 642
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-export-c3341b8d-b527-4300-b05b-66a75003cea4.json-command.json",
+      "sha256": "f402c4c8b3c6463ad364eaf7e78e683c86d91df52ce7ef793daae98659ae42a0",
+      "bytes": 1102
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-export-c8b82d25-14e5-4c70-9fd6-16c976a48afe.json",
+      "sha256": "c03e4a75db5fc51fced00707cfe9450f95be92d5fb45e7d114e80e3893d6649a",
+      "bytes": 1048
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-export-c8b82d25-14e5-4c70-9fd6-16c976a48afe.json-command.json",
+      "sha256": "835388eb11d5b340fc5adacae1cbcf463a379eb69e47e290011ab56d437beb6e",
+      "bytes": 1554
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-export-eb3520d2-1ba4-42de-9f48-a706c3c23951.json",
+      "sha256": "bd718cbe8983f0b9e193abd1eb6a393fe7809606ad63ba70b2b06e49ae81a2c6",
+      "bytes": 642
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-export-eb3520d2-1ba4-42de-9f48-a706c3c23951.json-command.json",
+      "sha256": "eb385b98205a3e290f7d82c15972f66f04e7d43d9297b4e9669b15bc83f82938",
+      "bytes": 1102
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-export-list-command.json",
+      "sha256": "48cdb6e0362c08efc90393c355f9539b1b4d65322cf678a3ecf76228658e0b81",
+      "bytes": 931
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-final-manifest.json",
+      "sha256": "126ad6848b0b49575b47f00b557e278486b5db79becbe1b62680f27759dd6702",
+      "bytes": 2152
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-new-records.json",
+      "sha256": "22985940bd74dab91d4b22acebf52349ac4c4914a6f50b17517f0544290d443c",
+      "bytes": 2963
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-profile-check-command.json",
+      "sha256": "5bb8f1893bf48fd7a4ed70aff4ad8648874ac241b011eb30de1e3c8ca9d00966",
+      "bytes": 593
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-remove-profile-command.json",
+      "sha256": "be76b47c13967102b1f7afb1d9db809495e7b4bbfe29f36227a4d1bfee94014b",
+      "bytes": 333
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-remove-reverse-command.json",
+      "sha256": "9bfa2442175223ccc17cc17b3c6977942fae3f25d2c4c23ecb81e20c280787cb",
+      "bytes": 290
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-routes-before-command.json",
+      "sha256": "5eaf01676ff6d1fb020b81356a2416b908bfe859a3a87d7d27d7d3f82ccf4711",
+      "bytes": 301
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-stop-helper-command.json",
+      "sha256": "e168cc82c084c833a7b6db51da165724d44a567e0e8f840d29f264f9451d1a27",
+      "bytes": 317
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/12-stop-vnc-command.json",
+      "sha256": "ff874488e7cdd7d82de6be897868ca056b614ffae7036ef773513cd89109aa0f",
+      "bytes": 315
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-accessibility-command.json",
+      "sha256": "deac5dca1054c7f84aa66257d8adfc414271da8b26e18dedb6604ddfcbee5a9a",
+      "bytes": 4766
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-after-stop-1b452388-235c-4c56-bab6-20bba0435c87.json",
+      "sha256": "b7c3dbe1b7b811e4e35b1e3799831115579ecfd589382637821cb3868c99878c",
+      "bytes": 637
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-after-stop-1b452388-235c-4c56-bab6-20bba0435c87.json-command.json",
+      "sha256": "0dd64eac2dc56b95b13b42f535f241406ed9958b4ab978f9d78a84710837006c",
+      "bytes": 1097
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-after-stop-39a6112a-3124-49f0-b89f-97de7c6631bb.json",
+      "sha256": "3cf7d4c24fbde47b432c0a826c51aee22ab81b02a72d3126ffce8a9b44fc4923",
+      "bytes": 1137
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-after-stop-39a6112a-3124-49f0-b89f-97de7c6631bb.json-command.json",
+      "sha256": "a8adfde36aee9c45aeb201d49b0f9eab42cbecaeddc23fa294057760065edd2c",
+      "bytes": 1643
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-after-stop-3e424a1f-d11b-4862-aa28-7cbdba43a4bb.json",
+      "sha256": "cb2dea5ab7b8c29951feeba7f847a31c8a399b47ef6a56bff0fa1638b3a102be",
+      "bytes": 1078
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-after-stop-3e424a1f-d11b-4862-aa28-7cbdba43a4bb.json-command.json",
+      "sha256": "6dfc9d8ce4119fd659c15966e66e2e7b35810a00c78db250b66ddbbbdd1132fb",
+      "bytes": 1584
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-after-stop-4e3d23ab-2edd-4907-94c5-197703599707.json",
+      "sha256": "cdf332c6fa3031731835c79c9cbdeb9bf83756c7cce1a647928704e1d4cbfc6b",
+      "bytes": 1136
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-after-stop-4e3d23ab-2edd-4907-94c5-197703599707.json-command.json",
+      "sha256": "49d13dd554adcbe2498b6c55900a5786f77bbddfaff44da064742dd1f865ef73",
+      "bytes": 1642
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-after-stop-52109479-3fd7-4f1e-bb27-fd51430f7015.json",
+      "sha256": "3a9cc5093f4b5008b0b9659a5607591025394207d1570ec73df20e3ed68138ca",
+      "bytes": 624
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-after-stop-52109479-3fd7-4f1e-bb27-fd51430f7015.json-command.json",
+      "sha256": "fea6cb44ffc593a95560c12d021efb9139db88f1e51451aae3a88c02c5478d2e",
+      "bytes": 1084
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-after-stop-6986e1e0-f035-4c52-b0f0-5d03a54a55af.json",
+      "sha256": "d9e934c350b66db7ca3b9b31353c49cb391d87c3d9d8ae3e81340d16270ec470",
+      "bytes": 653
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-after-stop-6986e1e0-f035-4c52-b0f0-5d03a54a55af.json-command.json",
+      "sha256": "fad36aac76a1a1f8fa1d15270fbe106e229ae693fb2c93dbfb2077bbe6446f1e",
+      "bytes": 1113
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-after-stop-6b34c12f-1022-4530-91a1-fbe97c638903.json",
+      "sha256": "02524c02a074265754edb89aa4753c58420e2317ccca5f21d7422a905f3f84da",
+      "bytes": 1142
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-after-stop-6b34c12f-1022-4530-91a1-fbe97c638903.json-command.json",
+      "sha256": "ba2ec9f54564c08f2edea6741a23fedcb4ce184b984ba2f7f5353dc6d961cc82",
+      "bytes": 1648
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-after-stop-7298b3c8-c043-4215-a794-cc829ffcd2f7.json",
+      "sha256": "eedc0349da5e337c43b2051899ae911c104f7ee819239bf290686b8450366f3d",
+      "bytes": 623
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-after-stop-7298b3c8-c043-4215-a794-cc829ffcd2f7.json-command.json",
+      "sha256": "641d75cfe4fcb145647b6bd256b7400ede20d1059c4814ea57c86fb46783f46b",
+      "bytes": 1083
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-after-stop-76a17618-7ac6-48da-b894-5bf439ef1a97.json",
+      "sha256": "e6bfabd897830ff6a63ef9131d130167a088479006df411ce6467887a01e15d5",
+      "bytes": 1062
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-after-stop-76a17618-7ac6-48da-b894-5bf439ef1a97.json-command.json",
+      "sha256": "6d8859704b2fbc03337bcb2f8924376746a86a562d648abeac9d29748f99a4b4",
+      "bytes": 1568
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-after-stop-7ac4ad88-4ced-4dd6-afe9-97bd8f80231d.json",
+      "sha256": "23ba1ccc48981a511d1c5fb70f4a5138a04f0f21de4e0d64e5ce61d31e21bde9",
+      "bytes": 674
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-after-stop-7ac4ad88-4ced-4dd6-afe9-97bd8f80231d.json-command.json",
+      "sha256": "6fe234e295eb05fbd8f6f2bda66465a9675830e9472ca152f068eb21679289f3",
+      "bytes": 1134
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-after-stop-a5b7f694-b6e8-401a-8205-8ed5bb4241ad.json",
+      "sha256": "6ed5713b7cfba8489a173b151a26bc801a8f0950de2a6a76c6de6bc28bbdbaf0",
+      "bytes": 1112
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-after-stop-a5b7f694-b6e8-401a-8205-8ed5bb4241ad.json-command.json",
+      "sha256": "84d72b1677c35d8d2a3ec7127002c67dc7b074a94004cdfc44aa7e463340ed31",
+      "bytes": 1618
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-after-stop-c3341b8d-b527-4300-b05b-66a75003cea4.json",
+      "sha256": "79bc01f44ef5b2c531d5c122a946774afa0b82d797776d2a005558cdc6176cc8",
+      "bytes": 642
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-after-stop-c3341b8d-b527-4300-b05b-66a75003cea4.json-command.json",
+      "sha256": "0b9545a24b913975b0825bae0c59d68b891b3a9ca1d6896a2e35a0c6f7f22b02",
+      "bytes": 1102
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-after-stop-c8b82d25-14e5-4c70-9fd6-16c976a48afe.json",
+      "sha256": "c03e4a75db5fc51fced00707cfe9450f95be92d5fb45e7d114e80e3893d6649a",
+      "bytes": 1048
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-after-stop-c8b82d25-14e5-4c70-9fd6-16c976a48afe.json-command.json",
+      "sha256": "527c8eb92503284f8154b5dac709612a619df41f8ecf03b7dbed905ab974ef37",
+      "bytes": 1554
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-after-stop-eb3520d2-1ba4-42de-9f48-a706c3c23951.json",
+      "sha256": "bd718cbe8983f0b9e193abd1eb6a393fe7809606ad63ba70b2b06e49ae81a2c6",
+      "bytes": 642
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-after-stop-eb3520d2-1ba4-42de-9f48-a706c3c23951.json-command.json",
+      "sha256": "c46000756788083f4b858d4b8885a16c26814964ecb601b48589d78f71038bf7",
+      "bytes": 1102
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-after-stop-list-command.json",
+      "sha256": "5140893a775513b763fec5cfd38da56e118978289fe0cc8c60259b8fb5eab93e",
+      "bytes": 931
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-boot-command.json",
+      "sha256": "8a1b8661237578b2e236a655f94bb9032a5adf76665fe7fbd2a9a5f631db4c45",
+      "bytes": 464
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-cli-pid-command.json",
+      "sha256": "508b1bcad96f96fc9ddd7074ab098429802a44a2e75dd0e0bbe1c00e259fd79f",
+      "bytes": 319
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-files-command.json",
+      "sha256": "2cdff49eb13aa53c374548bd8c43b00b5517f08f390d714d84f38f4478a972bd",
+      "bytes": 330
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-helper-pid-command.json",
+      "sha256": "e52617cae2e1c5941252102b7a020bdc87000062cd74653f9787fb3ffbf58d80",
+      "bytes": 309
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-routes-command.json",
+      "sha256": "cf65c224a4b05075e79fd86c99aa972fd0380deee5b75d2fca2b57ebd3bad049",
+      "bytes": 273
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-vnc-apk-path-command.json",
+      "sha256": "2b5087d85d6a76e4b8fa9db5917997f19c264985e1387647f145806605647461",
+      "bytes": 418
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-vnc-apk-pull-command.json",
+      "sha256": "bff953ad787d425baaed811b179674b47bf64a5b3f669b0714a4667f7a6dcf2e",
+      "bytes": 672
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/13-vnc-pid-command.json",
+      "sha256": "9dba5c1dc34732bf702b4daf58b3347baf04e7fa3403548f81dcbdb63c6695ca",
+      "bytes": 307
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/before-manifest.json",
+      "sha256": "70ffdacc575dd09a58474007212e4887d25a823452e21d48625567aff250609a",
+      "bytes": 1844
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/cleanup.json",
+      "sha256": "b0392fb49580f22c8a2113edb51aaccc9e92254ad9258cff90068aeb4b2e1942",
+      "bytes": 533
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/device.json",
+      "sha256": "d755afec0fa9c0313b84b948fe521611e4dc6db143cb868a55bc970f60a1c0f3",
+      "bytes": 152
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/final-installed-vnc.apk",
+      "sha256": "97799b6a6495f3c6506df705d2cb5249f1a013d0bfe646b37dd2997a8b8d55f0",
+      "bytes": 10888183
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/final-manifest.json",
+      "sha256": "126ad6848b0b49575b47f00b557e278486b5db79becbe1b62680f27759dd6702",
+      "bytes": 2152
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/installed-input-helper-012.apk",
+      "sha256": "d3c3e186dc648608d36063a0a66766d402d78832e430a7d785efa788c451cf26",
+      "bytes": 44031
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/installed-input-helper.apk",
+      "sha256": "3535decba195f5b11aa47514607918c6d1f7827afe20c8cadbf2363926ba3845",
+      "bytes": 52807
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/installed-vnc.apk",
+      "sha256": "97799b6a6495f3c6506df705d2cb5249f1a013d0bfe646b37dd2997a8b8d55f0",
+      "bytes": 10888183
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-held-button-01/preflight.json",
+      "sha256": "6172aa3a7830e6052a99693cac2fa53cd3446d02fcb8c32515c46fdf69188e9d",
+      "bytes": 316
+    },
+    {
+      "path": ".cache/native-vnc-host/session-10/ready.json",
+      "sha256": "66d802d07f251f2e3280823336eeb1db68b66e6fab6f00b411cdbbb5266cefd2",
+      "bytes": 144
+    },
+    {
+      "path": ".cache/native-vnc-host/session-10/result.json",
+      "sha256": "df5735643f45d5421a275d517d134e3824f96f63347dd9741d3eb32a2c1b5341",
+      "bytes": 1137
+    },
+    {
+      "path": ".cache/native-vnc-host/session-10/server-command.json",
+      "sha256": "73b0e715a5839015a561034634942a56cc90134c20638fad7c7c56c3da44fd57",
+      "bytes": 940
+    },
+    {
+      "path": ".cache/native-vnc-host/session-10/server.log",
+      "sha256": "4b17ce6a35d4a26663cefd2fff32d09ef64f66e148a7c114fa6bd544232e4348",
+      "bytes": 2218
+    },
+    {
+      "path": ".cache/native-vnc-host/session-10/canvas.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".cache/native-vnc-host/session-10/canvas/events.jsonl",
+      "sha256": "62b3db92c919cf21772f797d3a67c7330ef569123c6cd002711fbda35e27bcbc",
+      "bytes": 1247
+    },
+    {
+      "path": ".cache/native-vnc-host/session_fixture_10.py",
+      "sha256": "0d66df46259630aa8e216835027330fc3ed357cfbaea149378eece40466a82b3",
+      "bytes": 6416
+    },
+    {
+      "path": ".cache/native-vnc-android/held_button_01.py",
+      "sha256": "3aa62be320f93344bcf5887014da9cdfb107e529259f5fc97a9b1f353c0c4597",
+      "bytes": 5429
+    },
+    {
+      "path": ".cache/native-vnc-android/held_button_02.py",
+      "sha256": "776b75a67159660be82fb1e2afe08b77c8c49bb549301725f285804bacc9bd36",
+      "bytes": 5458
+    },
+    {
+      "path": ".cache/native-vnc-android/execute_held_button_01.py",
+      "sha256": "fdd376226b178781abf69f4c56f7efd189239bfaff23f1ce5307a523ac13ef30",
+      "bytes": 6058
+    },
+    {
+      "path": "tools/vnc_input_target.cpp",
+      "sha256": "a3bdc7ca09f7e7375a66228879774733e97379e37efe3e70c6017f70d0b58e4c",
+      "bytes": 13135
+    }
+  ]
+}
