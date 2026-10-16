@@ -1,6 +1,6 @@
 # Product vault implementation entry
 
-**Checked:** 2026-10-16. **Status:** reviewed implementation entry; no product vault implemented or qualified. **Owner:** integration leader and Android security developer, P1-S3. Read with [RDP authentication security](../../02-architecture/rdp-authentication-security.md), [P1 foundation](../../05-delivery/phases/p1-foundation.md) and [API15](api-tracker.json). This is one P1-S3 increment, not completion of identity, IPC, trust, journals or lifecycle requirements.
+**Checked:** 2026-10-16. **Status:** implemented source and storage tests; actual product prompt/AES protection unqualified. **Owner:** integration leader and Android security developer, P1-S3. Read with [RDP authentication security](../../02-architecture/rdp-authentication-security.md), [P1 foundation](../../05-delivery/phases/p1-foundation.md) and [API15](api-tracker.json). This is one P1-S3 increment, not completion of identity, IPC, trust, journals or lifecycle requirements.
 
 ## Real bounded increment
 
@@ -24,7 +24,7 @@ Serialize disk/Keystore operations off-main through one owning worker. G50 [Atom
 
 Preserve the reviewed time-based policy: `setUserAuthenticationRequired(true)` (API23), `setUserAuthenticationParameters(30, AUTH_BIOMETRIC_STRONG | AUTH_DEVICE_CREDENTIAL)` (API30), and `setUnlockedDeviceRequired(true)` (API28). App min35 avoids the documented older unlocked-device bugs. Combined credential authorization does not promise invalidation on new biometric enrollment. [Builder reference](https://developer.android.com/reference/android/security/keystore/KeyGenParameterSpec.Builder).
 
-Use the existing AndroidX `BiometricPrompt` contract, initially the accepted device-credential route, without a per-use CryptoObject. Actual dependency selection and Activity integration require parent review; this entry neither selects an unverified version nor substitutes the platform prompt. [AndroidX prompt reference](https://developer.android.com/reference/androidx/biometric/BiometricPrompt).
+Use the existing AndroidX `BiometricPrompt` contract, initially the accepted device-credential route, without a per-use CryptoObject. The reviewed product graph selects stable Biometric1.1.0 and Fragment1.9.1; a dedicated non-exported FragmentActivity hosts the Compose management screen. The existing workspace Activity remains a ComponentActivity. See the [dependency review](../../07-reference/2026-10-16-vault-dependency-review.md). [AndroidX prompt reference](https://developer.android.com/reference/androidx/biometric/BiometricPrompt).
 
 Mint a one-use in-memory token only from the actual current prompt callback, binding window/attempt generation, operation, credential, immutable binding and monotonic callback deadline. Check cancellation, visibility and deadline before crypto and before scoped consumption. No authorization in saved state; process restoration never decrypts/replays. Backgrounding revokes admission and cancels pending prompts. Return `AUTH_REQUIRED` on authentication failure; never automatically re-prompt. Wipe mutable supplied/plaintext buffers on every path, without claiming complete JVM/native zeroization. Logs contain bounded codes, not secrets, account bodies, endpoints or credential material.
 
@@ -35,3 +35,9 @@ Reuse the [RSA credential-control result](../../../qualification/results/P0-S4/2
 Proposed disjoint ownership: security worker owns identity binding/envelope/key/store code and focused tests; UI worker owns explicit enrollment/use/delete and prompt coordination after API freeze; parent owns Gradle/dependency/manifests, graph wiring, review and device evidence.
 
 Test strict decoding/binding substitution, bounded work, stale/used/expired authorization, cancellation and interrupted create/delete recovery. Then qualify actual AES policy/backing, enrollment/readback, fresh authorized exact-byte use, tamper rejection, foreground cancellation, fresh-process no-replay, per-app isolation and deletion independence. Do not change the user's lock configuration merely to force invalidation. On unsupported policy or failed evidence, keep saved use unavailable and preserve per-session entry. Stop this increment after these boundaries; remote engines and remaining P1-S3 contracts retain separate gates.
+
+## Current implementation checkpoint
+
+The [source/build review](../../06-validation/2026-10-16-product-vault-review.md) records actual0.1.2/code3 source, strict builds,14 identity JVM cases and18 connected storage tests. Test crypto is software/fault injection; actual product prompt/AES/backing, per-app isolation and no-replay qualification remain pending. Both installed apps stay0.1.1/code2.
+
+DELETE authorizes an opaque local record ID and owner through a fresh grant. Its supplied endpoint binding is confirmation context, not stored cryptographic proof; USE authenticates expected AAD. Deletion requires a readable journal; corrupt journals/key-only orphans have no general cleanup route. An unused profile can be removed explicitly only after verifying that key/ciphertext/journal and AtomicFile remnants are absent, serialized with enrollment. No missing key is regenerated or adopted. The full P0–P6 goal continues after this bounded increment.

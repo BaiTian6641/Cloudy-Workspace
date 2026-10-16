@@ -56,6 +56,7 @@ abstract class CloudyWindowActivity : ComponentActivity() {
                     onRename = ::renameWindow,
                     onNewWindow = ::newWindow,
                     onClose = ::closeWindow,
+                    onCredentials = ::openCredentials,
                 )
             }
         }
@@ -117,5 +118,14 @@ abstract class CloudyWindowActivity : ComponentActivity() {
     private fun closeWindow() {
         // Task removal is scoped to an owned root, never an unexpected caller task.
         if (isTaskRoot) finishAndRemoveTask() else finish()
+    }
+
+    private fun openCredentials() {
+        try {
+            // Explicit app-private destination; no profile, secret or authorization extras.
+            startActivity(Intent(this, CloudyVaultActivity::class.java))
+        } catch (_: RuntimeException) {
+            notice = getString(R.string.cloudy_window_launch_failed)
+        }
     }
 }

@@ -45,6 +45,7 @@ fun WindowWorkspaceScreen(
     onRename: (String) -> String?,
     onNewWindow: () -> Unit,
     onClose: () -> Unit,
+    onCredentials: (() -> Unit)? = null,
 ) {
     // Inputs reset live composition, but rememberSaveable does not validate the
     // prior inputs on restoration. The envelope independently binds the accepted ID.
@@ -82,6 +83,11 @@ fun WindowWorkspaceScreen(
             Text(appName, style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant)
             if (notice != null) Text(notice, style = MaterialTheme.typography.bodyMedium)
+            if (onCredentials != null) {
+                OutlinedButton(onClick = onCredentials) {
+                    Text(stringResource(R.string.cloudy_saved_credentials))
+                }
+            }
             OutlinedTextField(
                 value = draft,
                 singleLine = true,

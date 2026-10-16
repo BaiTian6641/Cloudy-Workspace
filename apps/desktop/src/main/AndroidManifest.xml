@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Local foundation needs no network, storage or foreground-service permissions. -->
+    <!-- Local vault uses AndroidX authentication; no network, storage or foreground service. -->
     <application android:allowBackup="false" android:supportsRtl="true"
         android:usesCleartextTraffic="false" android:label="@string/app_name"
         android:theme="@style/Theme.CloudyWindow"
@@ -18,5 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="io.github.baitian6641.cloudy.platform.CloudyVaultActivity"
+            android:exported="false" android:resizeableActivity="true"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 </manifest>

@@ -1,6 +1,6 @@
 # P1 — Shared foundation and design
 
-**Status:** P1-S1 complete; P1-S2 native context/controls in progress; other stages planned. **Active effort:** 15–24 person-days before contingency. **Purpose:** Establish two independent Android desktop packages, shared design/lifecycle contracts and early engine/distribution decisions, including native streaming at P1-S5.
+**Status:** P1-S1 complete; P1-S2 native context/controls and P1-S3 protected identity in progress; other stages planned. **Active effort:** 15–24 person-days before contingency. **Purpose:** Establish two independent Android desktop packages, shared design/lifecycle contracts and early engine/distribution decisions, including native streaming at P1-S5.
 
 The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-project/platform-rule-zero.md) defines desktop scope. Follow [capability outcomes](../feasibility-gates.md) and [independent release gates](../release-gates.md). Estimates are active effort, not elapsed time; re-estimate after physical evidence. Revision 02 moved the former P5-S1 decision to P1-S5; other stage IDs retain their identity.
 
@@ -74,7 +74,7 @@ Record evidence under `qualification/results/P1-S2/` using the [run template](..
 
 ## P1-S3 — Identity, typed contracts, and lifecycle persistence
 
-**Owner:** Platform/security developer. **Prerequisites:** P1-S1, P0-S2. **Status:** planned.
+**Owner:** Platform/security developer. **Prerequisites:** P1-S1, P0-S2. **Status:** in progress. The [vault source review](../../06-validation/2026-10-16-product-vault-review.md) and [storage tests](../../../qualification/results/P1-S3/2026-10-16-vault-storage-tests.md) leave actual product authentication and all other exits open.
 
 **Required supported capabilities:** CAP-FOUNDATION.
 

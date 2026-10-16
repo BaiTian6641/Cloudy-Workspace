@@ -31,10 +31,15 @@ dependencies {
     implementation(platform(libs.compose.bom))
     implementation(project(":domain"))
     implementation(project(":design-system"))
+    implementation(project(":identity"))
+    api(libs.fragment)
     implementation(libs.activity.compose)
     // ComponentActivity is part of the public base Activity's inherited API.
     api(libs.activity)
     implementation(libs.compose.runtime)
+    implementation(libs.compose.ui)
+    implementation(libs.compose.foundation)
+    implementation(libs.compose.material3)
     testImplementation(libs.junit)
 }
 

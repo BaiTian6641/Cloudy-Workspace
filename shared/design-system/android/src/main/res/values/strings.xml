@@ -4,4 +4,5 @@
     <string name="cloudy_new_window">New window</string>
     <string name="cloudy_close_window">Close window</string>
     <string name="cloudy_name_too_long">Please use a shorter window name. The last edit was not accepted.</string>
+    <string name="cloudy_saved_credentials">Saved credentials</string>
 </resources>

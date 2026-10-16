@@ -1,17 +1,17 @@
 # App-owned identity
 
-**State:** planned module boundary; no application/library implementation yet. **Delivery stages:** P1-S3, P2-S1.
+**State:** real `:identity` implementation for the bounded P1-S3 vault increment; product authentication/AES qualification pending. Console and Desktop instantiate the shared source independently, with separate app storage, Keystore aliases and prompt authority. This is not a shared credential service or completed P1-S3.
 
-## Responsibility
+`VaultStorage` implements bounded enrollment, scoped use, inspection, deliberate deletion and interrupted-operation cleanup. `VaultBinding` authenticates the owning package, protocol, canonical logical endpoint/port, target-or-gateway role and opaque account identity. Account bodies and passwords are encrypted; profile metadata contains no raw account. `CredentialId` is opaque metadata, not authority to decrypt. Aliases derive from a validated internal namespace and record identity rather than an arbitrary file-supplied alias.
 
-Credential handles, known-host records, pairing identities, revocation, protected wrapping/signing adapters, and enrollment state.
+The production crypto adapter uses Android Keystore AES/GCM and timed authenticated key policy. No software-key fallback exists in production. `VaultGrant` is one-use, operation/record/binding scoped and revocable; storage rechecks the lease before crypto and plaintext consumption. `VaultPromptController` uses the selected AndroidX credential-only route, actual callback type and monotonic deadlines. It serializes framework sessions until terminal callbacks, rejects stale session callbacks, revokes on stop before cancellation and does not cancel on focus loss alone. Process restoration carries no authorization. A missing cancellation acknowledgement remains unavailable rather than fabricated retirement.
 
-## Boundary
+All storage/Keystore APIs are blocking and belong off-main. A process-wide store lock serializes AtomicFile operations; successful commits require bounded readback. CREATING, READY, DELETE_PENDING and DELETED distinguish incomplete work from usable credentials. Deletion authorizes the selected opaque record ID and owning app; endpoint metadata shown in confirmation is context, not cryptographic verification of a broken record. Tombstone cleanup cannot decrypt. `verifyAbsent` permits explicit unused-profile removal only after checking absence; malformed state is not an empty vault. No automatic re-prompt, overwrite, secret export or recovery-key substitution occurs.
 
-Keys/secrets remain in the owning app; raw key material never enters UI bridges, exported profiles, or ordinary logs.
+`VaultProfiles` stores bounded immutable expected-binding metadata with real AtomicFile readback. The owning UI uses one worker/admission gate for enrollment and metadata removal so a verified absence snapshot cannot race another UI create. Mutable payloads are closed on completion/cancellation; complete JVM/native memory erasure is not promised.
 
-## First implementation work
+## Evidence and remaining work
 
-Qualify Keystore algorithms and selected SSH engine integration rather than assuming hardware-backed direct SSH signing.
+The [storage test result](../../../qualification/results/P1-S3/2026-10-16-vault-storage-tests.md) records strict compilation, zero app/identity Lint and 14 passing identity JVM cases. Eighteen connected Android tests pass: 12 storage/fault cases using test-only software crypto, five profile tests using actual AtomicFile, and one alias case. These do **not** establish production prompt success, Android Keystore AES backing or real user enrollment. Product candidate 0.1.2/code3 is built; the installed product remains unchanged at 0.1.1 at this checkpoint.
 
-Read the [module map](../../../docs/02-architecture/module-boundaries.md), [phase plan](../../../docs/05-delivery/README.md), and [validation strategy](../../../docs/06-validation/strategy.md). Record exact implementation versions and evidence before promoting a capability.
+Read the [integration review](../../../docs/06-validation/2026-10-16-product-vault-review.md) and [vault entry](../../../docs/03-platform/googlebook/product-vault-entry.md). Real prompt/AES enrollment/use/deletion and lifecycle evidence remain pending. Known-host trust, SSH signing, signature-protected IPC, session/engine consumption and broader P1-S3 journals/lifetimes remain separate work. The accepted diagnostic RSA credential result supports its exact prompt route, not this AES vault. No capability or stage is promoted here.

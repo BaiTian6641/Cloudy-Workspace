@@ -2303,7 +2303,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Reviewed 2.0.17 and 2.0.18–2.0.20 release notes; final diagnostic selects matched API/NOP 2.0.20. Exact source and embedded licenses are preserved.",
+      "note": "Reviewed 2.0.17 and 2.0.18\u20132.0.20 release notes; final diagnostic selects matched API/NOP 2.0.20. Exact source and embedded licenses are preserved.",
       "refresh": "Before SSH diagnostic dependency/provider changes, after relevant upstream security updates, and before product adoption."
     },
     {
@@ -3122,7 +3122,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected CLI/tool-control guidance: no-tools disables built-ins while custom tool modules have a separate discovery surface. Use explicit model selectors, bounded assignments and reviewed results; no sandbox or worker-success guarantee. Owner integration leader, P0–P6.",
+      "note": "Inspected CLI/tool-control guidance: no-tools disables built-ins while custom tool modules have a separate discovery surface. Use explicit model selectors, bounded assignments and reviewed results; no sandbox or worker-success guarantee. Owner integration leader, P0\u2013P6.",
       "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
     },
     {
@@ -3134,7 +3134,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected config roots, profiles, discovery precedence and custom-tool/MCP integration. Empty cwd and a prompt alone do not isolate user/global or foreign configuration. Use per-run controls without altering global auth/settings. Owner integration leader, P0–P6.",
+      "note": "Inspected config roots, profiles, discovery precedence and custom-tool/MCP integration. Empty cwd and a prompt alone do not isolate user/global or foreign configuration. Use per-run controls without altering global auth/settings. Owner integration leader, P0\u2013P6.",
       "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
     },
     {
@@ -3146,7 +3146,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected separate direct getAllPluginToolPaths(cwd) enumeration after capability discovery. disabledProviders is not a complete custom-tool loading switch; the accepted CLI trial additionally had absent native/project plugin roots. Owner integration leader, P0–P6.",
+      "note": "Inspected separate direct getAllPluginToolPaths(cwd) enumeration after capability discovery. disabledProviders is not a complete custom-tool loading switch; the accepted CLI trial additionally had absent native/project plugin roots. Owner integration leader, P0\u2013P6.",
       "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
     },
     {
@@ -3158,7 +3158,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected plugin-root enumeration: node_modules absence yields an empty plugin list. The trial uses observed root absence, not a general sandbox or global no-discovery claim. Owner integration leader, P0–P6.",
+      "note": "Inspected plugin-root enumeration: node_modules absence yields an empty plugin list. The trial uses observed root absence, not a general sandbox or global no-discovery claim. Owner integration leader, P0\u2013P6.",
       "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
     },
     {
@@ -3170,7 +3170,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected registered enabledProviders/disabledProviders settings; source-discovery IDs are distinct from the explicitly selected kimi-code model backend. Use a per-run overlay, not a global config edit. Owner integration leader, P0–P6.",
+      "note": "Inspected registered enabledProviders/disabledProviders settings; source-discovery IDs are distinct from the explicitly selected kimi-code model backend. Use a per-run overlay, not a global config edit. Owner integration leader, P0\u2013P6.",
       "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
     },
     {
@@ -3638,7 +3638,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Method reference API31 controls guard; API23–30 older isInsideSecureHardware boolean cannot identify StrongBox. Actual Googlebook backing untested. Owner: Android/security; API15, P1-S3/P3-S7.",
+      "note": "Method reference API31 controls guard; API23\u201330 older isInsideSecureHardware boolean cannot identify StrongBox. Actual Googlebook backing untested. Owner: Android/security; API15, P1-S3/P3-S7.",
       "refresh": "Before changing the affected adapter, security policy or compatibility claim."
     },
     {
@@ -4584,7 +4584,7 @@
       "publisher": "Google",
       "category": "security",
       "reviewStatus": "reviewed",
-      "checkedOn": "2026-10-15",
+      "checkedOn": "2026-10-16",
       "sourceUpdatedOn": null,
       "note": "Pin stable1.1.0 for actual strong/device-credential timed-key prompt; alpha is not the selected stable API. Owner Android/security, P0-S4 thenP1-S3.",
       "refresh": "Before identity adapter or prompt lifecycle changes; device signing and TLS remain separate gates."
@@ -4596,7 +4596,7 @@
       "publisher": "Google",
       "category": "security",
       "reviewStatus": "reviewed",
-      "checkedOn": "2026-10-15",
+      "checkedOn": "2026-10-16",
       "sourceUpdatedOn": null,
       "note": "Construct each Activity recreation to reattach callback; explicit prompt initiation, strong/devicecredential authenticator combination, no CryptoObject for chosen timed-key route. Cancellation and late callback ownership belong to Cloudy. Owner Android/security, P0-S4 thenP1-S3.",
       "refresh": "Before identity adapter or prompt lifecycle changes; device signing and TLS remain separate gates."
@@ -4668,7 +4668,7 @@
       "publisher": "Google",
       "category": "security",
       "reviewStatus": "reviewed",
-      "checkedOn": "2026-10-15",
+      "checkedOn": "2026-10-16",
       "sourceUpdatedOn": null,
       "note": "setAllowedAuthenticators introduced Biometric1.1.0; DEVICE_CREDENTIAL alone supported API30+. No negative button with credential mode. Existing-key control requires actual authentication result type1; separate0.1.3 signing and0.1.5 pairing device records now observe it. Owner: Desktop/security, P0-S4.",
       "refresh": "Before changed prompt/AndroidX version or interpreting actual credential-control evidence."
@@ -4680,7 +4680,7 @@
       "publisher": "Google",
       "category": "security",
       "reviewStatus": "reviewed",
-      "checkedOn": "2026-10-15",
+      "checkedOn": "2026-10-16",
       "sourceUpdatedOn": null,
       "note": "Inspected AuthenticatorUtils credential-only support>=API30 and BiometricFragment forwarding allowed-authenticator mask to framework builder. Supports proposed API37 credential control without changing existing combined-auth timed key; no device outcome. Owner: Desktop/security, P0-S4.",
       "refresh": "Before changed prompt/AndroidX version or interpreting actual credential-control evidence."
@@ -5030,7 +5030,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected getPluginsDir/getPluginsNodeModules and profile/config/XDG path resolution. Production plugin root uses the data-category resolver; default without overrides is ~/.omp/plugins/node_modules. Recheck actual overrides and project ancestors per invocation; temporary cwd alone is not isolation. Used for the two finite GLM context-only trials; no OS sandbox claim. Owner integration leader, P0–P6.",
+      "note": "Inspected getPluginsDir/getPluginsNodeModules and profile/config/XDG path resolution. Production plugin root uses the data-category resolver; default without overrides is ~/.omp/plugins/node_modules. Recheck actual overrides and project ancestors per invocation; temporary cwd alone is not isolation. Used for the two finite GLM context-only trials; no OS sandbox claim. Owner integration leader, P0\u2013P6.",
       "refresh": "When changing installed CLI version, active profile, path environment or worker discovery controls."
     },
     {
@@ -5608,6 +5608,42 @@
       "sourceUpdatedOn": null,
       "note": "Reviewed immutable source for surfaceContainer, secondary, errorContainer and onErrorContainer roles; no built-in success/warning roles. Explanatory snapshot, not the selected dependency pin or device qualification. P1-S2 maps only admitted component roles; retain existing theme until reviewed. Current API page fetch exceeded tool size; upstream source inspected instead.",
       "refresh": "Before implementation against this surface; weekly during active platform qualification."
+    },
+    {
+      "id": "G187",
+      "title": "AndroidX Fragment stable releases",
+      "url": "https://developer.android.com/jetpack/androidx/releases/fragment",
+      "publisher": "Google / AndroidX",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Selected stable1.9.1 for product vault FragmentActivity; Biometric1.1.0 stable host contract. P1-S3, actual prompt qualification pending.",
+      "refresh": "Before changed vault prompt dependency or platform qualification."
+    },
+    {
+      "id": "G188",
+      "title": "Published Fragment1.9.1 POM",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/fragment/fragment/1.9.1/fragment-1.9.1.pom",
+      "publisher": "Google / AndroidX",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Lifecycle2.10.0/tracing2.0.0 dependencies and Apache2.0; actual runtime graph reviewed, not full release SBOM.",
+      "refresh": "Before changed vault prompt dependency or platform qualification."
+    },
+    {
+      "id": "G189",
+      "title": "Published Fragment1.9.1 AAR",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/fragment/fragment/1.9.1/fragment-1.9.1.aar",
+      "publisher": "Google / AndroidX",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Inspected minSdk23/minCompileSdk34/minAGP8.1.1; fits productmin35/compile37/AGP9.4. Actual strict compile passes; device prompt remains untested.",
+      "refresh": "Before changed vault prompt dependency or platform qualification."
     }
   ]
 }

@@ -1,0 +1,6 @@
+<resources>
+    <string name="cloudy_vault_save_title">Save credential on this device</string>
+    <string name="cloudy_vault_use_title">Use saved credential</string>
+    <string name="cloudy_vault_delete_title">Delete saved credential</string>
+    <string name="cloudy_vault_authorize_subtitle">Use your screen-lock credential to approve this operation.</string>
+</resources>

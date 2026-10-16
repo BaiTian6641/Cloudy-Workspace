@@ -67,6 +67,7 @@ jobs:
           ./gradlew :console:assembleDebug :desktop:assembleDebug \
             :console:lintDebug :desktop:lintDebug \
             :domain:test :design-system:testDebugUnitTest \
+            :identity:testDebugUnitTest :identity:lintDebug :identity:assembleDebugAndroidTest \
             :platform:assembleDebugAndroidTest :console:assembleDebugAndroidTest :desktop:assembleDebugAndroidTest \
             --dependency-verification=strict --no-daemon --console=plain --max-workers=4 \
             2>&1 | tee "$RUNNER_TEMP/cloudy-foundation-build.log"

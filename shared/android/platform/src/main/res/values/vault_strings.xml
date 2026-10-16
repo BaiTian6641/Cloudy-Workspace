@@ -1,0 +1,29 @@
+<resources>
+<string name="vault_heading">Saved credentials</string>
+<string name="vault_local_only">Local credential storage only. Check verifies decryption and decoding; it does not connect to a host. Refresh after an operation to read current storage state.</string>
+<string name="vault_target">Target</string>
+<string name="vault_gateway">Gateway</string>
+<string name="vault_host">Logical host</string>
+<string name="vault_port">Port</string>
+<string name="vault_username">Username</string>
+<string name="vault_domain">Domain</string>
+<string name="vault_password">Password</string>
+<string name="vault_save">Save on this device</string>
+<string name="vault_cancel">Cancel authorization</string>
+<string name="vault_refresh">Refresh</string>
+<string name="vault_check">Check saved credential</string>
+<string name="vault_delete">Delete local credential</string>
+<string name="vault_delete_warning">Remove the selected local credential. Endpoint metadata is context, not cryptographic proof of the record being deleted. Deletion does not revoke a remote account.</string>
+<string name="vault_keep">Keep credential</string>
+<string name="vault_remove_unused">Remove unused entry</string>
+<string name="vault_cleanup">Finish local cleanup</string>
+<string name="vault_busy">Another local credential operation is active.</string>
+<string name="vault_unavailable">Credential storage unavailable. No automatic retry was performed.</string>
+<string name="vault_refreshed">Local storage state refreshed.</string>
+<string name="vault_authorization_ended">Authorization ended. No new operation was started.</string>
+<string name="vault_invalid">Check the host, port and credential fields.</string>
+<string name="vault_too_long">The field is too long. The last edit was not accepted.</string>
+<string name="vault_missing_profile">Credential %1$s: expected profile missing; use unavailable.</string>
+<string name="vault_missing_record">Profile has no credential record; use unavailable.</string>
+<string name="vault_operation_result">Local operation result: %1$s</string>
+</resources>

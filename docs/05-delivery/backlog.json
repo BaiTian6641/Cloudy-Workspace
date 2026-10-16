@@ -613,7 +613,7 @@
       "id": "P1-S3",
       "phase": "P1",
       "title": "Identity, typed contracts, and lifecycle persistence",
-      "status": "planned",
+      "status": "in-progress",
       "effortDays": {
         "low": 3,
         "high": 5
