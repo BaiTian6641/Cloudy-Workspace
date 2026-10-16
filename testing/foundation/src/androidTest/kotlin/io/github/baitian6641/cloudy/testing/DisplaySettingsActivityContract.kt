@@ -5,7 +5,12 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Process
 import android.os.SystemClock
+import androidx.compose.ui.semantics.LiveRegionMode
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsSelected
+import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
@@ -46,6 +51,11 @@ abstract class DisplaySettingsActivityContract(private val expectedOwner: Window
                 compose.onNodeWithTag("display_density_${density.name}").assertIsSelected()
             }
             val latest = owner.confirmed()
+            // The preceding distinct density choices exercise a real completed write. Inspect
+            // its native semantics; this does not establish physical screen-reader speech.
+            compose.onNodeWithTag("display_message").performScrollTo()
+                .assertTextEquals(context.getString(io.github.baitian6641.cloudy.platform.R.string.display_saved))
+                .assert(SemanticsMatcher.expectValue(SemanticsProperties.LiveRegion, LiveRegionMode.Polite))
             compose.activityRule.scenario.recreate()
             compose.waitForIdle()
             assertEquals(latest, owner.confirmed())

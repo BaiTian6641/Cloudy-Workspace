@@ -6880,6 +6880,18 @@
       "checkedOn": "2026-10-16",
       "sourceUpdatedOn": null,
       "refresh": "Before changing host formatting or checkout policy; confirm actual hosted results separately."
+    },
+    {
+      "id": "G248",
+      "title": "Compose semantics and polite live-region alerts",
+      "url": "https://developer.android.com/develop/ui/compose/accessibility/semantics",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Official guidance supports polite live regions for important changing notices and cautions against frequent announcements. Cloudy applies it to the existing display outcome only. Actual semantics assertions and screen-reader speech remain distinct evidence. API56/P1-S2.",
+      "refresh": "Before changing announcement ownership or upgrading the selected Compose UI dependency."
     }
   ]
 }

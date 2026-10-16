@@ -26,8 +26,8 @@ android {
         applicationId = "io.github.baitian6641.cloudy.console"
         minSdk = 35
         targetSdk = 37
-        versionCode = 13
-        versionName = "0.1.12"
+        versionCode = 14
+        versionName = "0.1.13"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 }

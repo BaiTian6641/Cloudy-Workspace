@@ -1907,7 +1907,9 @@
         "androidx.activity.enableEdgeToEdge",
         "androidx.activity.SystemBarStyle.auto",
         "androidx.compose.foundation.selection.selectable",
-        "androidx.compose.foundation.selection.selectableGroup"
+        "androidx.compose.foundation.selection.selectableGroup",
+        "androidx.compose.ui.semantics.liveRegion",
+        "androidx.compose.ui.semantics.LiveRegionMode.Polite"
       ],
       "sourceIds": [
         "G213",
@@ -1915,7 +1917,8 @@
         "G215",
         "G216",
         "G217",
-        "D12"
+        "D12",
+        "G248"
       ],
       "minimumApi": null,
       "libraryVersion": "SharedPreferences/Editor.commit API1; device-protected context guard API24. SystemBarStyle.auto added Activity1.8.0; selected Activity/activity-compose1.13.0 unchanged. Pinned Compose BOM2026.09.00: runtime/UI/foundation1.12.1, Material3 1.4.0. Existing productmin35 unchanged; no new dependencies. UiModeManager.setApplicationNightMode API31 is reviewed but not adopted.",
@@ -1928,7 +1931,9 @@
       "experiment": "Strict build02 passes in24s (313tasks/49executed), with zero findings in four Lint reports. Domain38/design4 reports are up-to-date, not newly executed JVM cases. Twelve actual Android cases pass without skips on HP Googlebook14 Android17/API37 CL3B.260622.276.R2 incremental16560795: four storage plus two display and two regression cases per product. Console/Desktop0.1.6/code7 are installed/stopped and match build bytes; three test packages removed/absence checked. Boot, system font scale/density/night mode, profile/trust rows/generations and vault receipts are preserved. Four effective-preference restoration receipts do not prove byte-identical XML: both files are newly created with explicit defaults. Six actual Console Light/Dark by three-density viewport captures and metrics are retained; the leader inspected all six at font scale1.0, with observed button semantics heights48/40/36.31dp (not hit-target extents). Controlled disk-write failure, process-death durability, multiprocess use, physical keyboard/pointer, scaled/narrow geometry and full native catalog acceptance remain open. No Activity recreation requested by preference changes; no device-global night mode, credentials, network or engine operation.",
       "researchEvidence": "docs/04-design/native-display-settings.md",
       "compileEvidence": "qualification/results/P1-S2/2026-10-16-native-display-settings-build.json",
-      "deviceEvidence": "qualification/results/P1-S2/2026-10-16-native-display-settings.md"
+      "deviceEvidence": "qualification/results/P1-S2/2026-10-16-native-display-settings.md",
+      "outcomeSemanticsEvidence": "qualification/results/P1-S2/2026-10-16-display-outcome-accessibility.md",
+      "outcomeSemanticsNote": "Console/Desktop0.1.13/code14 strict build02 and two actual owning-app settings tests pass Saved text and Polite semantics after real commits, plus Activity recreation and explicit restoration. This establishes native semantics, not physical screen-reader speech. Existing dated display evidence retains its original scope."
     },
     {
       "id": "API57",

@@ -1,0 +1,224 @@
+{
+  "schemaVersion": 1,
+  "stage": "P1-S2",
+  "checkedOn": "2026-10-16",
+  "scope": "Display outcome Polite live-region semantics; not physical accessibility qualification",
+  "sourceBase": "b9490d56d73590ced4df02272ced2086ea63b6d7",
+  "sourceChangesUncommittedAtBuild": true,
+  "productVersion": "0.1.13",
+  "productVersionCode": 14,
+  "hardware": {
+    "model": "HP Googlebook 14",
+    "release": "17",
+    "api": "37",
+    "build": "CL3B.260622.276.R2",
+    "incremental": "16560795",
+    "abi": "arm64-v8a"
+  },
+  "startedAt": "2026-10-16T17:48:47.435672+00:00",
+  "endedAt": "2026-10-16T17:48:57.438388+00:00",
+  "sources": [
+    {
+      "path": "apps/console/build.gradle.kts",
+      "bytes": 2353,
+      "sha256": "5c13bce161d39eeb3047ce221deb9c6198faf455d71bd51974bdcf4c2548f273"
+    },
+    {
+      "path": "apps/desktop/build.gradle.kts",
+      "bytes": 2353,
+      "sha256": "459972e855e2fb80795c640f27fd0bb257a4bf8cd06852027a9b9869220f62b6"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/DisplaySettingsScreen.kt",
+      "bytes": 7366,
+      "sha256": "14ba83b1fd92ac5447c58a376654d6fa97cbe0ed4aa487c893fe1bf7944d6a8e"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/DisplaySettingsActivityContract.kt",
+      "bytes": 7789,
+      "sha256": "d4ff37dd937f678c8d2a3509b00b120d6233f2fbc9bd3e2cd1f5e815e8959208"
+    }
+  ],
+  "boundBuildInputs": 224,
+  "artifacts": [
+    {
+      "path": "apps/console/build/outputs/apk/androidTest/debug/console-debug-androidTest.apk",
+      "bytes": 4493057,
+      "sha256": "0d8aeb4600a193b0ca02b0006ffc8c8151446703d1981df9989ecc34eb06b12f"
+    },
+    {
+      "path": "apps/console/build/outputs/apk/debug/console-debug.apk",
+      "bytes": 41350109,
+      "sha256": "6b3c3e570046d76d107344d0bece0918e517053a842e70c33f5fe2a625dd6f37"
+    },
+    {
+      "path": "apps/desktop/build/outputs/apk/androidTest/debug/desktop-debug-androidTest.apk",
+      "bytes": 4493057,
+      "sha256": "322d539575ff094a1aea36c776167c388e96f65b90a9cf7c4b3a1193cec59a9e"
+    },
+    {
+      "path": "apps/desktop/build/outputs/apk/debug/desktop-debug.apk",
+      "bytes": 41350113,
+      "sha256": "22ff1e25ee3a90ea7ed6eb3b8cb475787be41cbc511e019cb90378bc61179cf4"
+    },
+    {
+      "path": "shared/android/platform/build/outputs/apk/androidTest/debug/platform-debug-androidTest.apk",
+      "bytes": 45030764,
+      "sha256": "80e4afa706d1289246949c0f3ef112fd636877dde1059d00cf3fb73afa4a7c83"
+    }
+  ],
+  "runnerSha256": "b2bc19f9d0ad782d5d3f625ef9925b02acbfdff734d77899d2f16ceabbd4f1c4",
+  "buildRunnerSha256": "c883422ca6addf6473a12c7e6c696bad8ebedca9546037143ccebf12570f86ff",
+  "actualDeviceCases": {
+    "passed": 2,
+    "failed": 0,
+    "skipped": 0,
+    "restorationReceipts": 2
+  },
+  "cases": [
+    {
+      "app": "console",
+      "actualPassed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "restorationConfirmed": true,
+      "runnerFinished": true,
+      "method": "everyNativeChoicePersistsAndSurvivesActivityRecreation",
+      "class": "io.github.baitian6641.cloudy.console.ConsoleDisplaySettingsActivityTest"
+    },
+    {
+      "app": "desktop",
+      "actualPassed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "restorationConfirmed": true,
+      "runnerFinished": true,
+      "method": "everyNativeChoicePersistsAndSurvivesActivityRecreation",
+      "class": "io.github.baitian6641.cloudy.desktop.DesktopDisplaySettingsActivityTest"
+    }
+  ],
+  "build": {
+    "strictVerification": true,
+    "sourcesUnchanged": true,
+    "exitCode": 0,
+    "lintReports": 4,
+    "lintIssues": 0,
+    "durationSecondsReported": 27,
+    "tasksExecuted": 32,
+    "tasksUpToDate": 290,
+    "jvmReportCounts": {
+      "domain": {
+        "tests": 64,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "platform": {
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "design": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "jvmTaskExecution": "build02 domain/platform/design tasks UP-TO-DATE; build01 platform task executed seven cases, domain/design carried forward"
+  },
+  "preservation": {
+    "otherPersistentFileHashesUnchanged": true,
+    "completeTypedDisplayPreferenceValuesRestored": true,
+    "systemAndBootUnchanged": true,
+    "reverseRoutesUnchanged": true,
+    "productsStopped": true,
+    "allThreeTestPackagesAbsent": true,
+    "appDataCleared": false,
+    "authenticationRequested": false
+  },
+  "review": {
+    "independentSourceAndEvidenceReview": true,
+    "sourceHashBindingsVerified": 224,
+    "frozenApkHashesVerified": 5,
+    "rawInstrumentationAndSnapshotsInspected": true,
+    "findings": [],
+    "runFailures": []
+  },
+  "evidence": [
+    {
+      "role": "device-run",
+      "sha256": "4581fc5e264bc61d61ba474017aa6e81c290dbafedf355db8658b63a1e359ed9",
+      "bytes": 1780,
+      "storage": "retained locally; private device material not published"
+    },
+    {
+      "role": "baseline-snapshot",
+      "sha256": "14a3f772799158be09ef931f4aab4bbf419df2848845995da68f114e00ed85fc",
+      "bytes": 7101,
+      "storage": "retained locally; private device material not published"
+    },
+    {
+      "role": "upgrade-snapshot",
+      "sha256": "14a3f772799158be09ef931f4aab4bbf419df2848845995da68f114e00ed85fc",
+      "bytes": 7101,
+      "storage": "retained locally; private device material not published"
+    },
+    {
+      "role": "settled-snapshot",
+      "sha256": "14a3f772799158be09ef931f4aab4bbf419df2848845995da68f114e00ed85fc",
+      "bytes": 7101,
+      "storage": "retained locally; private device material not published"
+    },
+    {
+      "role": "final-snapshot",
+      "sha256": "14a3f772799158be09ef931f4aab4bbf419df2848845995da68f114e00ed85fc",
+      "bytes": 7101,
+      "storage": "retained locally; private device material not published"
+    },
+    {
+      "role": "console-instrumentation",
+      "sha256": "02032f2668b13aab269bd5f2f0975735369c76a1eeeee2c1ed9d15aba9148946",
+      "bytes": 1613,
+      "storage": "retained locally; private device material not published"
+    },
+    {
+      "role": "desktop-instrumentation",
+      "sha256": "be8329f37df3bde77f645d4ef2137db4c393bce5e3a24815128b31e7cacc0cc1",
+      "bytes": 1613,
+      "storage": "retained locally; private device material not published"
+    },
+    {
+      "role": "candidate-build",
+      "sha256": "11abe6debb4e10be4327e994b1da2c45ad0c441096e6db9c158c45a265b5e051",
+      "bytes": 52433,
+      "storage": "frozen local build evidence"
+    },
+    {
+      "role": "candidate-gradle",
+      "sha256": "81d86bb946a44f3505207fe7502aa46ebfe342f1326f0ed3b58fb8868103369a",
+      "bytes": 21697,
+      "storage": "frozen local build evidence"
+    },
+    {
+      "role": "preceding-build",
+      "sha256": "4d928be0e71d6216c7c6d6fad3b2a4e5056ac6b227fec8728edfc79660b2d548",
+      "bytes": 52375,
+      "storage": "frozen local build evidence"
+    },
+    {
+      "role": "preceding-gradle",
+      "sha256": "96c6d1ba9450fb1d526b34098f749ef91766d3f7c2f05c064cc9e6f2c19c2661",
+      "bytes": 22158,
+      "storage": "frozen local build evidence"
+    }
+  ],
+  "limits": [
+    "No physical screen-reader speech or accessibility-service evidence",
+    "No new screenshots/render inspection: semantics-only production change",
+    "No physical keyboard/pointer or broad accessibility pass",
+    "No remote session or authentication operation",
+    "No phase or capability promotion; historical display evidence remains scoped"
+  ]
+}

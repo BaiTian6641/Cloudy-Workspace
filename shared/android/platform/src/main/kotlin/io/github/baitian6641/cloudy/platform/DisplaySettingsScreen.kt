@@ -27,8 +27,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import io.github.baitian6641.cloudy.design.CloudyAppearance
 import io.github.baitian6641.cloudy.design.CloudyControlMetrics
@@ -64,7 +66,10 @@ internal fun DisplaySettingsScreen(
                     CloudyDisplayNotice.UNAVAILABLE -> R.string.display_unavailable
                     CloudyDisplayNotice.BUSY -> R.string.display_busy
                 }
-                Text(stringResource(text), modifier = Modifier.testTag("display_message"))
+                // Only the outcome is live: progress and the persistent recovery explanation
+                // remain readable without generating competing announcements.
+                Text(stringResource(text), modifier = Modifier.testTag("display_message")
+                    .semantics { liveRegion = LiveRegionMode.Polite })
             }
             if (state.recoveredValues && state.notice != CloudyDisplayNotice.RECOVERED_VALUES) {
                 Text(stringResource(R.string.display_recovered))
