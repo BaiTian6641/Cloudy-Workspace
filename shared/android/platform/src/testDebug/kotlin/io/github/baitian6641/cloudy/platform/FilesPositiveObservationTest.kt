@@ -137,6 +137,61 @@ class FilesPositiveObservationTest {
         assertFalse(ledger("RECEIVER", *receiver, Triple("MODEL_CLEARED", 3, 0)).originalChainComplete())
         assertFalse(ledger("RECEIVER", *receiver.map { if (it.first == "DISPATCH_RETIRED") it.copy(second = 5) else it }.toTypedArray()).originalChainComplete())
     }
+    private fun receiverWithClear(position: Int = 7, model: Int = 3, second: Int = 0) =
+        receiver.toMutableList().apply { add(position, Triple("MODEL_CLEARED", model, second)) }.toTypedArray()
+    @Test fun originalModelTerminalClearCompletesOnlyWithDestruction() {
+        assertTrue(ledger("RECEIVER", *receiver).originalChainComplete())
+        assertTrue(ledger("RECEIVER", *receiverWithClear()).originalChainComplete())
+        // No-clear intermediate completion is historical behavior, independent of sealing.
+        assertTrue(ledger("RECEIVER", *receiver.dropLast(1).toTypedArray()).originalChainComplete())
+        assertFalse(ledger("RECEIVER", *receiverWithClear().dropLast(1).toTypedArray()).originalChainComplete())
+    }
+    @Test fun receiverRejectsPrematureOrMalformedModelClear() {
+        // Includes before establishment, between establishment/retirement and before IDLE.
+        for (position in 0..6) {
+            assertFalse("Premature clear at index $position", ledger("RECEIVER", *receiverWithClear(position)).originalChainComplete())
+        }
+        assertFalse(ledger("RECEIVER", *receiverWithClear(model = 5)).originalChainComplete())
+        assertFalse(ledger("RECEIVER", *receiverWithClear(second = 4)).originalChainComplete())
+    }
+    @Test fun receiverRejectsDuplicateAndAfterDestructionClear() {
+        val duplicate = receiverWithClear().toMutableList().apply { add(8, Triple("MODEL_CLEARED", 3, 0)) }
+        assertFalse(ledger("RECEIVER", *duplicate.toTypedArray()).originalChainComplete())
+        val differentModelDuplicate = receiverWithClear().toMutableList().apply { add(8, Triple("MODEL_CLEARED", 5, 0)) }
+        assertFalse(ledger("RECEIVER", *differentModelDuplicate.toTypedArray()).originalChainComplete())
+        assertFalse(ledger("RECEIVER", *receiverWithClear(position = 8)).originalChainComplete())
+    }
+    @Test fun terminalModelClearStillRequiresOriginalCertainRetirement() {
+        val complete = receiverWithClear()
+        assertFalse(ledger("RECEIVER", *complete.filter { it.first != "TRANSPORT_RETIRED" }.toTypedArray()).originalChainComplete())
+        val uncertain = ledger("RECEIVER", *complete.map {
+            if (it.first == "TRANSPORT_RETIRED") it.copy(first = "RETIREMENT_UNCERTAIN") else it
+        }.toTypedArray())
+        assertTrue(uncertain.invalid)
+        assertFalse(uncertain.originalChainComplete())
+        assertFalse(ledger("RECEIVER", *complete.map {
+            if (it.first == "TRANSPORT_RETIRED") it.copy(second = 5) else it
+        }.toTypedArray()).originalChainComplete())
+        assertFalse(ledger("RECEIVER", *complete.map {
+            if (it.first == "SAME_SESSION_IDLE") it.copy(third = 5) else it
+        }.toTypedArray()).originalChainComplete())
+    }
+    @Test fun receiverTerminalClearCompletionAndSealingStayIndependent() {
+        val complete = ledger("RECEIVER", *receiverWithClear())
+        val sealed = complete.encode(123, 50, run, sealed = true).toString(Charsets.UTF_8)
+        assertTrue(sealed.contains("\"sealed\":true"))
+        assertTrue(sealed.contains("\"invalid\":false"))
+        assertTrue(sealed.contains("\"originalOperationChainComplete\":true"))
+        val unsealed = complete.encode(123, 50, run).toString(Charsets.UTF_8)
+        assertTrue(unsealed.contains("\"sealed\":false"))
+        assertTrue(unsealed.contains("\"originalOperationChainComplete\":true"))
+        val noDestroy = ledger("RECEIVER", *receiverWithClear().dropLast(1).toTypedArray())
+            .encode(123, 50, run, sealed = true).toString(Charsets.UTF_8)
+        assertTrue(noDestroy.contains("\"sealed\":true"))
+        assertTrue(noDestroy.contains("\"originalOperationChainComplete\":false"))
+        complete.invalidate()
+        assertFalse(complete.originalChainComplete())
+    }
     @Test fun ledgerRejectsBoundsWrongRoleAndOutOfOrderTime() {
         val ledger = ledger("SENDER", sender[0])
         ledger.add(FilesPositiveRecord(3, 111, "SUBMIT_ACCEPTED", 1, 2)); assertTrue(ledger.invalid)

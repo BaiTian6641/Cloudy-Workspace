@@ -1,0 +1,249 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "Debug observer terminal-model-clear correction: focused JVM/compiler/Lint/package checks and actual preserved-state0.1.14-to0.1.15 upgrade; no corrected handoff run",
+  "acceptance": "Parent and independent source review accept bounded correction; parent accepts build/package inspection and actual upgrade preservation; future corrected observer runtime qualification remains open",
+  "candidateProductVersion": "0.1.15",
+  "candidateVersionCode": 16,
+  "sourceFreeze": {
+    "path": ".cache/files-handoff-02/observer-repair-01/freeze-01.json",
+    "sha256": "d1b4c5fbbed90e802d27008f3f5206afdfadc6c52d6d95fa3addc554f1803bac"
+  },
+  "independentSourceReview": {
+    "path": ".cache/files-handoff-02/observer-repair-01/independent-source-review-01.json",
+    "sha256": "45214437fc06721fc23d5f6694af069a2c96f27b9bcac11035c30718ad27c164"
+  },
+  "sourcesAtBuild": [
+    {
+      "path": "shared/android/platform/src/debug/kotlin/io/github/baitian6641/cloudy/platform/FilesPositiveObservation.kt",
+      "sha256": "f4724c310bf7b82285be7d6a5d0028920d4360339b212c0db0c4596641b79c3d",
+      "bytes": 14628
+    },
+    {
+      "path": "shared/android/platform/src/testDebug/kotlin/io/github/baitian6641/cloudy/platform/FilesPositiveObservationTest.kt",
+      "sha256": "cb24ca6652946a8e4bcdfc925e87038eb7c274a5b89c7c778a942be88419ecc3",
+      "bytes": 13417
+    }
+  ],
+  "contractDocumentationAfterBuild": {
+    "path": "docs/06-validation/files-handoff-observation.md",
+    "sha256": "302079339a77f769c9338cf48c1f14832fe91a381842dea3340d137e25317453"
+  },
+  "build": {
+    "path": ".cache/files-handoff-02/observer-repair-01/build-01/result.json",
+    "sha256": "c25b1ccd83745e85172da620017ca5d58131b1c6106d7b18e8d463641669c88b",
+    "sourceInputCount": 232,
+    "changedInputs": 4,
+    "sourceUnchangedDuringBuild": true,
+    "priorFrozenArtifactsUnchanged": true,
+    "strictDependencyVerification": true,
+    "durationReportedSeconds": 50,
+    "actionableTasks": 518,
+    "executedTasks": 85,
+    "jvm": {
+      "path": "TEST-io.github.baitian6641.cloudy.platform.FilesPositiveObservationTest.xml",
+      "sha256": "d87f26f804d798eb03e138929fc054e19d83b3ef6f2ff978678947b0e370f37c",
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "methods": [
+        "configStrictness",
+        "deadlineBounds",
+        "exactJsonWhitespaceOnly",
+        "publicationChecksAllStagesBeforeFinalRename",
+        "failedFinalStagePreservesUnsealedOutputAndUncertainStaging",
+        "senderActualChainAndFailures",
+        "receiverSameSessionAndReplacementFailures",
+        "originalModelTerminalClearCompletesOnlyWithDestruction",
+        "receiverRejectsPrematureOrMalformedModelClear",
+        "receiverRejectsDuplicateAndAfterDestructionClear",
+        "terminalModelClearStillRequiresOriginalCertainRetirement",
+        "receiverTerminalClearCompletionAndSealingStayIndependent",
+        "ledgerRejectsBoundsWrongRoleAndOutOfOrderTime",
+        "receiptIsBoundedTypedAndSealedSeparatelyFromChain"
+      ],
+      "taskExecuted": true,
+      "freshReport": true
+    },
+    "lint": [
+      {
+        "target": "console",
+        "variant": "debug",
+        "issues": 0,
+        "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f"
+      },
+      {
+        "target": "desktop",
+        "variant": "debug",
+        "issues": 0,
+        "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f"
+      },
+      {
+        "target": "platform",
+        "variant": "debug",
+        "issues": 0,
+        "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f"
+      },
+      {
+        "target": "design-system",
+        "variant": "debug",
+        "issues": 0,
+        "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f"
+      },
+      {
+        "target": "console",
+        "variant": "release",
+        "issues": 0,
+        "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f"
+      },
+      {
+        "target": "desktop",
+        "variant": "release",
+        "issues": 0,
+        "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f"
+      },
+      {
+        "target": "platform",
+        "variant": "release",
+        "issues": 0,
+        "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f"
+      }
+    ],
+    "artifacts": [
+      {
+        "path": "apps/console/build/outputs/apk/androidTest/debug/console-debug-androidTest.apk",
+        "bytes": 4593117,
+        "sha256": "c2e64fdf93fd96dc247ceb20eab4cbd078d97a4ae6aa41cc67c0275087ef5971"
+      },
+      {
+        "path": "apps/console/build/outputs/apk/debug/console-debug.apk",
+        "bytes": 41382877,
+        "sha256": "599839133bb430d579a81ec0276888f77606e594c3dd2d6a790bafa97c5bd773"
+      },
+      {
+        "path": "apps/console/build/outputs/apk/release/console-release-unsigned.apk",
+        "bytes": 33150344,
+        "sha256": "eb59db5b7bf3e9e71da102e630520b15c6052d0de535dadf5b3ef3197fba4752"
+      },
+      {
+        "path": "apps/desktop/build/outputs/apk/androidTest/debug/desktop-debug-androidTest.apk",
+        "bytes": 4593113,
+        "sha256": "b9f0a17916a232f7633e2551e5cbd267743dd28a6d9560d47e09dfd6108b9b24"
+      },
+      {
+        "path": "apps/desktop/build/outputs/apk/debug/desktop-debug.apk",
+        "bytes": 41382885,
+        "sha256": "4f883483e2b49c2bd3cff82652b338fe3bfc1e2b647f7553709995ae1d732944"
+      },
+      {
+        "path": "apps/desktop/build/outputs/apk/release/desktop-release-unsigned.apk",
+        "bytes": 33150340,
+        "sha256": "967d5f8fbeffc94495ff5820a47572b2efcecd96b5edc5f4bf7304c2f13da037"
+      },
+      {
+        "path": "shared/android/platform/build/outputs/apk/androidTest/debug/platform-debug-androidTest.apk",
+        "bytes": 45059468,
+        "sha256": "2dd0e9c52df9178b07cd5ea75746eb33025acbe965bb12a51c0898358eda8f74"
+      }
+    ],
+    "instrumentationExecuted": false
+  },
+  "releasePackageInspection": {
+    "path": ".cache/files-handoff-02/observer-repair-01/build-01/parent-package-inspection-01.json",
+    "sha256": "7da24c9f4130da524b1260c7c141bbcff3185e85efd354f966b0c75ae4a95dfc",
+    "passed": true,
+    "packages": [
+      {
+        "artifact": "console-debug.apk",
+        "debugObserverExpected": true,
+        "markers": {
+          "FilesPositiveLedger": true,
+          "FilesPositiveConfig": true,
+          "files-positive-observation": true
+        },
+        "version": "0.1.15",
+        "versionCode": 16,
+        "sha256": "599839133bb430d579a81ec0276888f77606e594c3dd2d6a790bafa97c5bd773"
+      },
+      {
+        "artifact": "console-release-unsigned.apk",
+        "debugObserverExpected": false,
+        "markers": {
+          "FilesPositiveLedger": false,
+          "FilesPositiveConfig": false,
+          "files-positive-observation": false
+        },
+        "version": "0.1.15",
+        "versionCode": 16,
+        "sha256": "eb59db5b7bf3e9e71da102e630520b15c6052d0de535dadf5b3ef3197fba4752"
+      },
+      {
+        "artifact": "desktop-debug.apk",
+        "debugObserverExpected": true,
+        "markers": {
+          "FilesPositiveLedger": true,
+          "FilesPositiveConfig": true,
+          "files-positive-observation": true
+        },
+        "version": "0.1.15",
+        "versionCode": 16,
+        "sha256": "4f883483e2b49c2bd3cff82652b338fe3bfc1e2b647f7553709995ae1d732944"
+      },
+      {
+        "artifact": "desktop-release-unsigned.apk",
+        "debugObserverExpected": false,
+        "markers": {
+          "FilesPositiveLedger": false,
+          "FilesPositiveConfig": false,
+          "files-positive-observation": false
+        },
+        "version": "0.1.15",
+        "versionCode": 16,
+        "sha256": "967d5f8fbeffc94495ff5820a47572b2efcecd96b5edc5f4bf7304c2f13da037"
+      }
+    ],
+    "scope": "Three debug observer DEX markers present in both debug product APKs and absent in both release product APKs; exact artifact/manifests bound; no broad release qualification"
+  },
+  "actualUpgrade": {
+    "receiptSha256": "7686c1b53228c4585caef2f31c7b0c32aea93cc2bd1507fe91a4555eb5711015",
+    "helperPath": ".cache/files-handoff-02/observer-repair-01/upgrade_preserved_01.py",
+    "helperSha256": "5a903c1c833ddd46f84ab408341c76396a2f1c92d8d64c0c3738b5a2da05270a",
+    "sourceFreezePath": ".cache/files-handoff-02/observer-repair-01/upgrade-freeze-01.json",
+    "sourceFreezeSha256": "71f639ff9df3e2e73bbd315db00eb9439c93a5c1517fff7cff1a1b345e9f25bd",
+    "passed": true,
+    "phase": "OBSERVER_015_UPGRADE_PRESERVED",
+    "priorRecoveryReceiptSha256": "8103af8a285e28741191f189e3537301b575dc7ea8df9d643b8ac396120b97c5",
+    "productReplacements": 2,
+    "standalonePlatformTestReplacement": 1,
+    "unchangedOwningTestsReinstalled": false,
+    "instrumentationMethodsExecuted": 0,
+    "uiLaunched": false,
+    "authenticationPromptStarted": false,
+    "hostFixtureStarted": false,
+    "fullBeforeAfterBaselineEqual": true,
+    "storesReplayPreferencesPreserved": true,
+    "finalReplayRowCounts": {
+      "console": 0,
+      "desktop": 1
+    },
+    "productFrameworkMarkerBytesRetained": {
+      "console": true,
+      "desktop": true
+    },
+    "productMarkersMatchNewPackageTime": {
+      "console": false,
+      "desktop": false
+    },
+    "normalHandoffPassed": false
+  },
+  "limits": [
+    "Historical attempt07 observer failure is unchanged and never reclassified by source/JVM/upgrade checks",
+    "Object-token identity tests are not wrong-ticket coverage; tickets/envelopes remain absent from passive ledger",
+    "Sealing and original-chain completion remain separate; cleared chain requires subsequent matching destruction",
+    "Parent controller planned-close phase correlation and all actual auth/path/replay/retirement guards remain required",
+    "Release inspection proves only scoped marker absence with debug positive controls, not full release behavior",
+    "Actual upgrade launches no UI/test/host; both retained product ProfileVerifier markers still predate new package timestamps",
+    "Future first ordinary startup may publish strict-current framework metadata; no blanket cache exemption or implicit retry is accepted"
+  ]
+}

@@ -223,12 +223,20 @@ internal class FilesPositiveLedger(private val config: FilesPositiveConfig) {
         val retired = one("TRANSPORT_RETIRED") ?: return false
         val idle = one("SAME_SESSION_IDLE") ?: return false
         val destroyed = one("RECEIVER_DESTROYED")
+        val clears = records.filter { it.event == "MODEL_CLEARED" }
+        val cleared = clears.singleOrNull()
+        // Clearing the original model is terminal teardown, never retirement evidence.
+        // A captured clear completes only after matching idle and subsequent destruction;
+        // the no-clear intermediate chain keeps its existing meaning until collection seals.
+        val terminalClearAllowed = clears.size <= 1 && (cleared == null ||
+            cleared.first == created.second && cleared.second == 0 && destroyed != null &&
+                ordered(idle, cleared, destroyed))
         return created.second != 0 && claimed.first == created.second && claimed.second != 0 &&
             established.first == claimed.second && retired.first == claimed.second &&
             idle.first == created.second && idle.second == claimed.second &&
             dispatchRetired.first == dispatch.first && ordered(dispatch, dispatchRetired) &&
             ordered(created, claimed, established, retired, idle) &&
-            records.none { it.event == "MODEL_CLEARED" } &&
+            terminalClearAllowed &&
             (destroyed == null || destroyed.first == created.first && destroyed.second == created.second &&
                 destroyed.sequence > idle.sequence) && records.count { it.event == "RECEIVER_DESTROYED" } <= 1
     }

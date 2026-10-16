@@ -2407,9 +2407,9 @@
       "stage": "P1-S3",
       "runtimeGuard": "Parent-controlled private0700 directory/0600 strict bounded config; fresh finite nonce exclusively claimed without reset; one debug worker,32events/12identities/16KiB and<=5min. Actual original Activity/call/model/session hooks; checked staging mode/write/sync/close then final rename. Release contains no collector or file access. Parent correlates sealed valid original chain with exact build/boot/process/controller phases and genuine host evidence.",
       "fallback": "Missing/invalid/expired/partial/uncertain receipt invalidates qualification without changing the product operation. No automatic retry, replay, credential or launch authority. Preserve uncertain staging/claims and historical evidence; no directory or power-loss durability promise.",
-      "experiment": "Final0.1.14/code15 build02 binds231 inputs/seven APKs with strict debug/release compilation, seven zero-issue Lint reports and16 platformJVM cases including nine observer methods. Later actual attempt07 seals valid sender and receiver receipts after all eight controller phases; receiver chain remains false because normal post-IDLE model clearing is universally rejected. Overall handoff remains failed. Recovery preserves original sealed evidence and legitimate replay. A narrow observer repair is proposed, not implemented or device-qualified.",
+      "experiment": "Historical0.1.14 attempt07 produced sealed valid receipts but receiver completion false after normal post-IDLE model clear; its failed result remains immutable. New0.1.15/code16 correction passes14 actual focused JVM methods, strict debug/release compilation, seven zero-issue Lint reports and scoped release-marker exclusion. Actual preserved-state product/platform-test upgrade passes with zero methods/UI and legitimate replay retained. Corrected ordinary lifecycle/BAL/network observation remains unrun.",
       "researchEvidence": "docs/06-validation/files-handoff-observation.md",
-      "compileEvidence": "qualification/results/P1-S3/2026-10-16-handoff-observation-build.json",
+      "compileEvidence": "qualification/results/P1-S3/2026-10-16-handoff-observer-terminal-clear-build.json",
       "deviceEvidence": "qualification/results/P1-S3/2026-10-16-handoff-postopen-observer-failure.md"
     },
     {
