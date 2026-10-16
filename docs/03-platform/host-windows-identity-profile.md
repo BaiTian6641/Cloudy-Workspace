@@ -22,7 +22,7 @@ The trusted directory/no hostile same-user mutation boundary remains essential. 
 
 ## Dependencies and official API mapping
 
-The selected compiler remains **Go1.27.2**. The first external module is **`golang.org/x/sys v0.49.0`**, used only by the Windows source for maintained public API wrappers. Its official origin/tag, authenticated module and go.mod sums, BSD-3-Clause license bytes and minimum Go1.26 requirement were inspected before adoption. `go.sum` and `THIRD_PARTY_NOTICES.txt` are tracked; third-party implementation is not vendored. The actual closure is checked with `go mod verify` and readonly builds. CI permits the exact download step, then returns module network access to off; this is not a general dependency/toolchain upgrade grant.
+The selected compiler remains **Go1.27.2**. The first external module is **`golang.org/x/sys v0.49.0`**, used by the Windows identity source for maintained public API wrappers. The later [Linux jobs profile](host-local-jobs.md) additionally reviews the same pinned module's Unix wrappers; this identity adapter and its Unix counterpart remain unchanged. Its official origin/tag, authenticated module and go.mod sums, BSD-3-Clause license bytes and minimum Go1.26 requirement were inspected before adoption. `go.sum` and `THIRD_PARTY_NOTICES.txt` are tracked; third-party implementation is not vendored. The actual closure is checked with `go mod verify` and readonly builds. CI permits the exact download step, then returns module network access to off; this is not a general dependency/toolchain upgrade grant.
 
 Checked2026-10-16. R314–R321 in the [source register](../07-reference/sources.json) supplement R309–R313. Host symbols do not change the Android API tracker.
 

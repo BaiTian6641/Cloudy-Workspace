@@ -1,0 +1,241 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "HOST-JOBS01 bounded internal Linux library; no CLI/remote authority or stage promotion",
+  "hostExecutableVersionUnchanged": "0.1.2",
+  "sources": [
+    {
+      "path": "host/core/internal/jobs/backend_linux.go",
+      "sha256": "78c5207afe74db4c3380c2092ed3f3c7962810fc8a7c563bbc89c84029688b11"
+    },
+    {
+      "path": "host/core/internal/jobs/backend_linux_test.go",
+      "sha256": "6fd8803e91aab55472c7db10f7597c12e147e73d4d4a18cb3070aaffb1361b4e"
+    },
+    {
+      "path": "host/core/internal/jobs/native_linux_test.go",
+      "sha256": "492b1dc494251bcbbde72144fd902328860734cac70e18c86ae88377d20ea3fd"
+    },
+    {
+      "path": "host/core/internal/jobs/types.go",
+      "sha256": "7942924a71b5812ebe8f52d2dde8dc7246ff8263117a83f0767a6f70bcbc50a4"
+    },
+    {
+      "path": "host/core/internal/jobs/types_test.go",
+      "sha256": "5395874eac293251e3bae4bdc900ce471f38522a11d41a70c91f1cc3735c7bfb"
+    }
+  ],
+  "verification": {
+    "path": ".cache/host-jobs-01/implementation/verification02/result.json",
+    "sha256": "01a45d48475b9ef3c09214ccad5a2320e229df7c5ef99850b372c8346167b158"
+  },
+  "verificationSourceUnchanged": true,
+  "checks": [
+    {
+      "label": "format",
+      "command": [
+        "/home/polar/Documents/ChatGPT/Cloudy Workspace/.cache/host-01/toolchain/go1.27.2/go/bin/gofmt",
+        "-l",
+        "/home/polar/Documents/ChatGPT/Cloudy Workspace/host/core/internal/jobs"
+      ],
+      "environmentOverride": {},
+      "exitCode": 0
+    },
+    {
+      "label": "module-verify",
+      "command": [
+        "/home/polar/Documents/ChatGPT/Cloudy Workspace/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "mod",
+        "verify"
+      ],
+      "environmentOverride": {},
+      "exitCode": 0
+    },
+    {
+      "label": "vet-linux",
+      "command": [
+        "/home/polar/Documents/ChatGPT/Cloudy Workspace/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "vet",
+        "-mod=readonly",
+        "./internal/jobs"
+      ],
+      "environmentOverride": {},
+      "exitCode": 0
+    },
+    {
+      "label": "test-linux-race",
+      "command": [
+        "/home/polar/Documents/ChatGPT/Cloudy Workspace/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "test",
+        "-race",
+        "-count=1",
+        "-json",
+        "-mod=readonly",
+        "-run",
+        "^Test(Validate|Collector|Failure|Coordinator|Observer|Retirement|Settlement|StartFailure|PreCanceled|Populated|PendingStart|IOAssessment)",
+        "./internal/jobs"
+      ],
+      "environmentOverride": {},
+      "exitCode": 0
+    },
+    {
+      "label": "compile-linux-harness",
+      "command": [
+        "/home/polar/Documents/ChatGPT/Cloudy Workspace/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "test",
+        "-c",
+        "-mod=readonly",
+        "-o",
+        "/home/polar/Documents/ChatGPT/Cloudy Workspace/.cache/host-jobs-01/implementation/verification02/jobs-linux.test",
+        "./internal/jobs"
+      ],
+      "environmentOverride": {},
+      "exitCode": 0
+    },
+    {
+      "label": "compile-windows",
+      "command": [
+        "/home/polar/Documents/ChatGPT/Cloudy Workspace/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "test",
+        "-c",
+        "-mod=readonly",
+        "-o",
+        "/home/polar/Documents/ChatGPT/Cloudy Workspace/.cache/host-jobs-01/implementation/verification02/jobs-windows.test",
+        "./internal/jobs"
+      ],
+      "environmentOverride": {
+        "GOOS": "windows",
+        "GOARCH": "amd64",
+        "CGO_ENABLED": "0"
+      },
+      "exitCode": 0
+    },
+    {
+      "label": "compile-darwin",
+      "command": [
+        "/home/polar/Documents/ChatGPT/Cloudy Workspace/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "test",
+        "-c",
+        "-mod=readonly",
+        "-o",
+        "/home/polar/Documents/ChatGPT/Cloudy Workspace/.cache/host-jobs-01/implementation/verification02/jobs-darwin.test",
+        "./internal/jobs"
+      ],
+      "environmentOverride": {
+        "GOOS": "darwin",
+        "GOARCH": "arm64",
+        "CGO_ENABLED": "0"
+      },
+      "exitCode": 0
+    }
+  ],
+  "artifacts": [
+    {
+      "path": ".cache/host-jobs-01/implementation/verification02/jobs-linux.test",
+      "sha256": "383dd32356b7a0585dda3b27d9a5257f389a4165f64576cd4fd8de6b75c7bbd8"
+    },
+    {
+      "path": ".cache/host-jobs-01/implementation/verification02/jobs-windows.test",
+      "sha256": "2cc0f9893590b8cf9f775c97ac9c896a6eb32d96313f68c27fe776000cabd34f"
+    },
+    {
+      "path": ".cache/host-jobs-01/implementation/verification02/jobs-darwin.test",
+      "sha256": "690632eb817f019988fa06d65cd62188ce9d8b8bc0ecfaaea1996235ffa1bf3f"
+    }
+  ],
+  "pureChecks": {
+    "namedPasses": 32,
+    "namedSkips": 0,
+    "failures": 0,
+    "kind": "Linux race validation/collector/lifecycle-double cases, including nested subtests; not real jobs",
+    "parentInspection": {
+      "path": ".cache/host-jobs-01/implementation/parent-inspection02.json",
+      "sha256": "0bae6d72cf9668156d319813e9c9b58bdd4698317cbd8a90c15369d208db7586"
+    }
+  },
+  "native": {
+    "runtime": {
+      "os": {
+        "NAME": "Ubuntu",
+        "VERSION_ID": "26.04",
+        "VERSION_CODENAME": "resolute"
+      },
+      "kernel": "7.0.0-38-generic",
+      "architecture": "x86_64",
+      "compiler": "Go1.27.2",
+      "xSys": "v0.49.0",
+      "scope": "Noninteractive local job fixture; no display/session adapter qualification"
+    },
+    "receipt": {
+      "path": ".cache/host-jobs-01/native-execution/run-41ac0f881adff41732f06ec08bcb05f5/result.json",
+      "sha256": "755741db41ea7dd38e3852816e3bb78a1fb1bc288d7f8136bb91e8d7b445b3ef"
+    },
+    "launcher": {
+      "path": ".cache/host-jobs-01/native-execution/run_native_01.py",
+      "sha256": "3e5cdbeee2986641a76174812ea8050177ef9bd0862deb66f397d9abb7df5168"
+    },
+    "stdout": {
+      "path": ".cache/host-jobs-01/native-execution/run-41ac0f881adff41732f06ec08bcb05f5/native.stdout",
+      "sha256": "c5fd4842922c17d971ab8b25f5f65329481ea4affa862aad74b61a8f78b444c3"
+    },
+    "stderr": {
+      "path": ".cache/host-jobs-01/native-execution/run-41ac0f881adff41732f06ec08bcb05f5/native.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "bootstrap": {
+      "path": ".cache/host-jobs-01/native-execution/run-41ac0f881adff41732f06ec08bcb05f5/bootstrap-admitted.json",
+      "sha256": "10b7384f3f1263cfa2362d9a93d5775a537eaf9475689eb8f9f12a5f7c1914c7"
+    },
+    "terminal": {
+      "path": ".cache/host-jobs-01/native-execution/run-41ac0f881adff41732f06ec08bcb05f5/bootstrap-terminal.json",
+      "sha256": "8c604862652db85c6407a60ab91a7f6aed2a07f9527764bf9ca268e56f8efb3d"
+    },
+    "passedSubtests": [
+      "missing-capability",
+      "exit0",
+      "exit3",
+      "pressure",
+      "descendant",
+      "deadline",
+      "cancel"
+    ],
+    "passedParentTests": 1,
+    "failed": 0,
+    "skipped": 0,
+    "launchedLibraryJobs": 6,
+    "scopeNote": "One real child-created grandchild additionally holds inherited pipes; missing-capability refuses before process launch. Output completeness classification is not asserted for every native role.",
+    "testExitCode": 0,
+    "nativeStderrBytes": 0,
+    "ownedUnitVerifiedBeforeGate": true,
+    "ownedGroupAbsentAtRetirement": true,
+    "ownedStopRequested": false,
+    "cleanupUncertain": false
+  },
+  "reviews": {
+    "initial": {
+      "path": ".cache/host-jobs-01/review/source-review-01.json",
+      "sha256": "d6615f55ed088a9afe176675258a2e444c5d96869e7aec421fc16156fa99ecd3"
+    },
+    "finalSource": {
+      "path": ".cache/host-jobs-01/review/source-review-02.json",
+      "sha256": "765ac6ecac75637654817331ecc3197d33b8b0ae93524fc2ff748226357bb054"
+    },
+    "native": {
+      "path": ".cache/host-jobs-01/review/native-review-01.json",
+      "sha256": "1c99a159be5c464160dcc05b9076eaa01d1fba7c094cd2a0c82e8b14c02689b8"
+    },
+    "launcher": {
+      "path": ".cache/host-jobs-01/implementation/native-launcher-review.md",
+      "sha256": "601fb34120e36fd20e6b36c087528478dd808bb6bec2241605a3f6c5c43fbde0"
+    }
+  },
+  "limits": [
+    "No Windows/macOS jobs implementation or native jobs result",
+    "Windows/macOS compile portable types/tests only",
+    "No supervisor-crash/restart recovery or hostile-user sandbox",
+    "No remote pairing/authentication/replay/events/service installation",
+    "Start/cancel race and forced failure states use synthetic controls",
+    "No promise of complete descendant-held output or prompt kernel termination"
+  ],
+  "capabilityOrStagePromotion": false
+}

@@ -7108,6 +7108,54 @@
       "sourceUpdatedOn": null,
       "note": "Public API1 sync throws SyncFailedException on failure. API67 checks file synchronization before close and final rename of its private debug receipt; directory and power-loss durability are not inferred. JVM sequence tests are distinct from Android runtime evidence.",
       "refresh": "Before changing receipt publication or selected Android SDK."
+    },
+    {
+      "id": "R325",
+      "title": "Go1.27.2 process execution and pipe retirement",
+      "url": "https://pkg.go.dev/os/exec@go1.27.2",
+      "publisher": "Go project",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Command uses explicit process execution; Wait and WaitDelay handle defined process/copy waits. Cloudy uses internal bounded collectors, one Wait and separate lifetime cancellation; ExitError can mask copy errors, so output completeness is separate. HOST-JOBS01/P4-S1.",
+      "refresh": "Before changing job admission, ownership, output/retirement policy, Go or selected x/sys version."
+    },
+    {
+      "id": "R326",
+      "title": "Go1.27.2 Linux creation-time cgroup placement",
+      "url": "https://github.com/golang/go/blob/go1.27.2/src/syscall/exec_linux.go",
+      "publisher": "Go project",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Pinned UseCgroupFD/CgroupFD selects clone3 CLONE_INTO_CGROUP; unavailable placement returns an error without outside-cgroup fallback. Source inspection is not local permission or native-placement qualification. HOST-JOBS01/P4-S1.",
+      "refresh": "Before changing job admission, ownership, output/retirement policy, Go or selected x/sys version."
+    },
+    {
+      "id": "R327",
+      "title": "Linux cgroup-v2 domain and subtree termination contract",
+      "url": "https://docs.kernel.org/admin-guide/cgroup-v2.html",
+      "publisher": "Linux kernel project",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "cgroup.type domain, cgroup.kill value1 and cgroup.events populated0 support finite owned-child containment. Empty membership is separate from reap/handle/I/O closure; delegation is not a hostile-user sandbox or crash recovery. Current upstream documentation, not exact local-kernel qualification. HOST-JOBS01/P4-S1.",
+      "refresh": "Before changing job admission, ownership, output/retirement policy, Go or selected x/sys version."
+    },
+    {
+      "id": "R328",
+      "title": "Go Unix system-call wrappers v0.49.0",
+      "url": "https://go.googlesource.com/sys/+/refs/tags/v0.49.0/unix/",
+      "publisher": "Go project",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Exact already-adopted x/sys module supplies FcntlInt/F_DUPFD_CLOEXEC, Fstat/Fstatfs, Mkdirat/Openat/Fstatat/Unlinkat and public cgroup constants. Pinned local module declarations inspected; Linux jobs expand reviewed API use without a module/version change. BSD-3-Clause closure retained. HOST-JOBS01/P4-S1.",
+      "refresh": "Before changing job admission, ownership, output/retirement policy, Go or selected x/sys version."
     }
   ]
 }

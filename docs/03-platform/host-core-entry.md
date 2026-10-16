@@ -4,9 +4,9 @@
 
 ## Implemented local profile
 
-`host/core` contains a separately versioned Go module and `cloudy-host` executable. The initial standard-library-only diagnostic was **0.1.0**, followed by installation identity **0.1.1**. Current **0.1.2** adds the [Windows permanent-file identity profile](host-windows-identity-profile.md) and the exact Windows-only `golang.org/x/sys v0.49.0` dependency. `inspect` reads the actual running binary's OS/architecture/toolchain and current UTC time. It emits `localDiagnosticVersion: 1`, `agentVersion`, `observedAt`, `runtime`, `features` and `backends`. `version` prints the executable version. Invalid or extra arguments return exit2; output failure returns exit1 with fixed safe text. A successful exit and complete JSON are both required; stdout is not an atomic publication mechanism.
+`host/core` contains a separately versioned Go module and `cloudy-host` executable. The initial standard-library-only diagnostic was **0.1.0**, followed by installation identity **0.1.1**. Current **0.1.2** adds the [Windows permanent-file identity profile](host-windows-identity-profile.md) and the exact `golang.org/x/sys v0.49.0` dependency, initially used by Windows identity and subsequently by the internal Linux jobs profile. `inspect` reads the actual running binary's OS/architecture/toolchain and current UTC time. It emits `localDiagnosticVersion: 1`, `agentVersion`, `observedAt`, `runtime`, `features` and `backends`. `version` prints the executable version. Invalid or extra arguments return exit2; output failure returns exit1 with fixed safe text. A successful exit and complete JSON are both required; stdout is not an atomic publication mechanism.
 
-Cloudy's unimplemented pairing, remote control, jobs, events and session adapters report **unavailable / not-implemented**. External desktop, USB and notification backends report **unknown / not-inspected**. The command neither probes those services nor claims they are absent. It does not collect hostname, account, environment, paths, credentials, machine inventory, installation/boot/session identifiers or backend output.
+The CLI's unimplemented pairing, remote control, remotely admitted jobs, events and session adapters report **unavailable / not-implemented**. External desktop, USB and notification backends report **unknown / not-inspected**. The command neither probes those services nor claims they are absent. It does not collect hostname, account, environment, paths, credentials, machine inventory, installation/boot/session identifiers or backend output.
 
 This is a **local diagnostic profile**, not `protocol/schemas/capabilities.schema.json`. That draft requires authoritative installation, boot and session identities that this experiment does not supply. Do not fill them with arbitrary UUIDs or map process startup to OS boot. Authenticated capabilities/version negotiation, registered roots, request authorization, idempotency, persistent events and cursor gaps remain P4-S1 work.
 
@@ -50,3 +50,8 @@ These are bounded packets inside the existing P4 plan, not extra completed stage
 | Linux `systemd.service`, user/graphical-session lifetime | Current web reference located but fetch failed; inspect pinned or installed manual before writing units (R302) | P4-S3 actual session lifecycle; no automatic root service or linger |
 
 Checked 2026-10-16. These references guide future adapters; HOST-EXP01 invokes none of those APIs. No P4 stage, backend or OS support claim is promoted.
+
+
+## Internal local-job follow-through
+
+[HOST-JOBS01](host-local-jobs.md) now implements a bounded Linux library using the same selected Go/x/sys versions, without changing the0.1.2 executable or claiming a remote jobs command. [Source and finite native evidence](../../qualification/results/P4-S1/2026-10-16-host-linux-jobs.md) cover ownership, placement, bounded output and actual retirement on the selected Linux fixture. This is independent parallel construction under the existing user mandate; remote pairing/admission, Windows/macOS jobs and full P4-S1 prerequisites remain unchanged.
