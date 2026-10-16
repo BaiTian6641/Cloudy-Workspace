@@ -1,6 +1,6 @@
 # Host core
 
-**State:** host CLI0.1.3 supplies finite diagnostics, explicit installation identity and Linux context observation; internal owned-job and Linux/macOS peer prerequisites also exist within their recorded scopes. Production host core remains incomplete. **Delivery stages:** P4-S1 construction experiment HOST-EXP01, with stage prerequisites retained.
+**State:** host CLI0.1.3 supplies finite diagnostics, explicit installation identity and Linux context observation; internal owned-job, bounded Linux job-status storage and Linux/macOS peer prerequisites also exist within their recorded scopes. Production host core remains incomplete. **Delivery stages:** P4-S1 construction experiment HOST-EXP01, with stage prerequisites retained.
 
 ## Responsibility
 
@@ -12,7 +12,7 @@ Do not implement OS capture/notification APIs directly in core or automatically 
 
 ## Local diagnostic
 
-Go1.27.2. The Windows identity adapter additionally pins `golang.org/x/sys/windows` from `golang.org/x/sys v0.49.0`; The internal Linux jobs library also uses the same module's `unix` wrappers; Linux/macOS identity paths remain standard-library based. See [third-party notices](THIRD_PARTY_NOTICES.txt) and the exact module checksums in `go.sum`. From this directory, using the selected compiler:
+Go1.27.2. The Windows identity adapter additionally pins `golang.org/x/sys/windows` from `golang.org/x/sys v0.49.0`; The internal Linux jobs library also uses the same module's `unix` wrappers; Linux/macOS identity paths remain standard-library based. The internal Linux job-event store additionally pins MIT-licensed `go.etcd.io/bbolt v1.5.0`. See [third-party notices](THIRD_PARTY_NOTICES.txt) and the exact module checksums in `go.sum`. From this directory, using the selected compiler:
 
 ```sh
 GOTOOLCHAIN=local go run ./cmd/cloudy-host inspect
@@ -24,7 +24,7 @@ GOTOOLCHAIN=local go test ./...
 
 `inspect` prints actual runtime/target facts and UTC observation time. Unimplemented Cloudy control features report unavailable; external backends remain unknown because they were not inspected. This command does not create identities, inspect accounts/environment, open a listener, install a service or execute a job. It is not the production capability wire manifest. Require successful process exit and complete JSON; failed stdout can contain a partial record.
 
-The [entry/toolchain record](../../docs/03-platform/host-core-entry.md) describes exact local archive verification and build commands. The [evidence](../../qualification/results/P4-S1/2026-10-16-host-baseline.md) distinguishes actual Linux CLI execution from Windows/macOS cross-builds. The new [explicit Linux context observation](../../docs/03-platform/host-context-observation.md) reads existing installation and boot IDs without initializing state. Remote transport, authenticated pairing, logon/session identity, persistent events, remote job admission and user-session adapters remain implementation work. Do not treat this diagnostic as a supported paired host service.
+The [entry/toolchain record](../../docs/03-platform/host-core-entry.md) describes exact local archive verification and build commands. The [evidence](../../qualification/results/P4-S1/2026-10-16-host-baseline.md) distinguishes actual Linux CLI execution from Windows/macOS cross-builds. The new [explicit Linux context observation](../../docs/03-platform/host-context-observation.md) reads existing installation and boot IDs without initializing state. Remote transport, authenticated pairing, logon/session identity, live event collection/delivery, remote job admission and user-session adapters remain implementation work. Do not treat this diagnostic as a supported paired host service.
 
 Read the [module map](../../docs/02-architecture/module-boundaries.md), [phase plan](../../docs/05-delivery/README.md), and [validation strategy](../../docs/06-validation/strategy.md). Record exact implementation versions and evidence before promoting a capability.
 
@@ -53,3 +53,10 @@ The [bounded local-job profile](../../docs/03-platform/host-local-jobs.md) adds 
 `cloudy-host context read --state-dir <existing-app-owned-directory>` calls installation Read then boot Read and emits localContextVersion1. It never initializes, repairs, generates or caches identity. Actual installation durability passes through unchanged; UTC observedAt follows both reads, and observationConsistency is `sequential-not-atomic`. Default inspect stays identifier-free. Explicit context output contains correlatable nonsecret IDs, so it belongs in its intended local diagnostic context. Require exit0 and complete JSON; output failure may leave partial stdout. Windows/Darwin return fixed unsupported before state access.
 
 The [contract](../../docs/03-platform/host-context-observation.md) and [result](../../qualification/results/P4-S1/2026-10-16-host-context.md) record eleven checks,14 top-level/25 aggregate Linux race passes with zero skips/failures, ten actual owned-fixture CLI commands and independent/parent review. Windows/Darwin only cross-built in this increment. Trusted state/procfs, sequential observation, no authentication/session authority and unqualified reboot/container boundaries remain explicit. No new hosted CI result or P4 completion is claimed.
+
+
+## Internal Linux job-status event store
+
+`internal/jobevents` now performs explicit Init/Open, atomic bounded status append, latest-state snapshots, cursor resume, lookup and checked Close through bbolt v1.5.0. It retains 256 events and at most 64 jobs in a database capped at 16 MiB. Missing or incomplete established state is never initialized or repaired. Commit uncertainty poisons further mutation; exact retries and lookup never invent a new durability assurance. The finite retained/latest identity horizon requires caller lifetime-unique event IDs beyond it.
+
+The [contract](../../docs/02-architecture/host-job-event-store.md) and [result](../../qualification/results/P4-S1/2026-10-16-host-job-event-store.md) bind parent/independent accepted source02, five checks, 11 top-level / 18 aggregate Linux race passes and two actual finite helper processes. Snapshots in storage tests are synthetic observations; no managed jobs are launched by this increment. Injected uncertainty checks are not power-loss or real OS sync-failure proof. Plaintext IDs/status remain correlatable; trusted-state and read-only-preflight/writable-reopen limitations apply. There is no jobs recorder CLI, live collector, remote event transport, consumer-ack store, service or Windows/Darwin event-store backend. Earlier hosted CI results do not certify this new source.

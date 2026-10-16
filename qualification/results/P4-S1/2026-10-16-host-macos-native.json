@@ -1,0 +1,244 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "Selected native macOS installation/localpeer/diagnostic cases on user-selected Mac Studio",
+  "acceptance": "Parent execution and independent retained-evidence review accepted selected native cases; no complete host support claim",
+  "hardware": {
+    "description": "Mac Studio (user-selected)",
+    "os": "macOS",
+    "version": "26.6.2",
+    "build": "25G83",
+    "architecture": "arm64"
+  },
+  "hostExecutableVersion": "0.1.3",
+  "compiler": "go1.27.2",
+  "raceEnabled": false,
+  "packetFreeze": {
+    "path": ".cache/host-macos-01/freeze-01.json",
+    "sha256": "b9d7429f3088ca13ecd27b1ba84bdf6124eb39e560059c1de4ec9306a4fc6bc6"
+  },
+  "manifest": {
+    "path": ".cache/host-macos-01/packet-01/manifest.json",
+    "sha256": "aa9f4fb589c0a0ac2a60f99d2b9eea2a02b755f3a34828d9ac009be7130f2641"
+  },
+  "runner": {
+    "path": ".cache/host-macos-01/packet-01/run_packet.py",
+    "sha256": "056ab3e1beeb7a78dc3c75fd25acd33a00daa5129a60c1235981994f02ab3a04"
+  },
+  "sourceBindings": {
+    "host/core/internal/installation/profile_other.go": "e11b2c0924241c088178f1bff11efdc518b47adb79254433c54fec68d2c7035c",
+    "host/core/internal/installation/store.go": "d061f32a7d10ab89cae77a2d8fb41c685f600a686bb37c5c8d7e2a89c1b5bd94",
+    "host/core/internal/installation/windows_record.go": "fddede14adfb842694be4c623271a2c65953cd89bc3408bde8f17dff446ab1a0",
+    "host/core/internal/installation/store_test.go": "4b3ddb3669e6c4c4c9c80fcbd6176407e6a65f74686ef7a73aca4ed909d49510",
+    "host/core/internal/installation/sync_other_test.go": "5f7844f64e5e7064c55dd9d5c71eedc7e4812839d9fdec32723a8e20de9af0d5",
+    "host/core/internal/installation/windows_record_test.go": "4b9470ccc904b3269e609afe013a5f32a8c51555f3828b72e0de4ab87e3a4bf0",
+    "host/core/internal/localpeer/peer_darwin.go": "8fc49a4691b4752f4548748947f29a575e682d7bda6a3706b0a3ebe61704d711",
+    "host/core/internal/localpeer/peer_darwin_test.go": "26f95dae319bd1fdd2fa8b6cc957feeedc6992b5b9c4a5f63ea2aa4646d29d1d",
+    "host/core/internal/diagnostic/context_other.go": "341af4180601c96f93a5268d212fa26c5ad4a3c5e6bcea1494096b9a2f873d1b",
+    "host/core/internal/diagnostic/diagnostic.go": "ae62a40dbb4bdfa1aaaa538fd6f9e3c7a81d56e8a41112629f3bfb324b25667a",
+    "host/core/internal/diagnostic/context_other_test.go": "ebdf154d821d873d85195d6a52311d6075444ffc5fe8c02950b9eb1833ab4af6",
+    "host/core/internal/diagnostic/diagnostic_test.go": "27fd5766b883047abc8e6bfcbe2eaf20c197e320ffdaa33a43c7acb6377556b2"
+  },
+  "moduleBindingsAtPacket": {
+    "host/core/go.mod": "216f549ff9871fea87351318ca6420efdfefeeaf1c0afa6a944ec41d2de70b4c",
+    "host/core/go.sum": "4e77c00cd0a32a85bd48f74790fc4f5fdb35d5e8e715d4b1fb131bcf7ce2d60a"
+  },
+  "dependencyScope": "Current modules include bbolt1.5.0 for separate work; selected3package dependency listing imports no bbolt/jobevents. xsys0.49 and Go1.27.2 unchanged.",
+  "artifactModuleProvenance": "Three reused artifacts retain original accepted old module receipt. Current modules add bbolt1.5.0 only; fresh Darwin selected-package dependency closure has no bbolt import. Existing selected package sources/Go1.27.2/xsys0.49 exact; no jobevents package compiled.",
+  "artifacts": {
+    "localpeer-darwin-arm64.test": {
+      "sha256": "a8fc10511ab264150fa85bc60f56fede535aedc6f1bc2c794ea808a28910229f",
+      "bytes": 4798754,
+      "origin": ".cache/host-jobs-macos-01/implementation/verification02/localpeer-darwin-arm64.test",
+      "originReceipt": ".cache/host-jobs-macos-01/implementation/verification02/result.json",
+      "originReceiptSha256": "83295e427c7c29265968dc86aa4e59ebdd60221c656d5ff8bba16c51a3515c44",
+      "reused": true
+    },
+    "diagnostic-darwin-arm64.test": {
+      "sha256": "fa2aa979298a3c2fff91e7e05d31a483bb9a9ba9f24ff9971bb37e818d657af4",
+      "bytes": 5669330,
+      "origin": ".cache/host-next-02/verification01/diagnostic-darwin-arm64.test",
+      "originReceipt": ".cache/host-next-02/verification01/result.json",
+      "originReceiptSha256": "6c3845312a040737c8bad41e99d4efcc2a2b264eed12f4ec001a9481de245462",
+      "reused": true
+    },
+    "cloudy-host-darwin-arm64": {
+      "sha256": "6c0771132121e0093bdd67f3a9916d79e041aaa0bf9bd5d91c9ed85002bf6bcd",
+      "bytes": 4549714,
+      "origin": ".cache/host-next-02/verification01/cloudy-host-darwin-arm64",
+      "originReceipt": ".cache/host-next-02/verification01/result.json",
+      "originReceiptSha256": "6c3845312a040737c8bad41e99d4efcc2a2b264eed12f4ec001a9481de245462",
+      "reused": true
+    },
+    "installation-darwin-arm64.test": {
+      "sha256": "cc986b81e9140178da0049978c2bd22be906d0d845a6f549e1aeb64d92e80d32",
+      "bytes": 5704210,
+      "origin": ".cache/host-macos-01/build-01/result.json",
+      "reused": false,
+      "originReceiptSha256": "ff3201d1762ac42a835f4a5c21648a74094c5129a9cd6552db7540e5ad4c983f"
+    }
+  },
+  "testSuites": {
+    "installation": {
+      "artifact": "installation-darwin-arm64.test",
+      "tests": [
+        "TestExplicitInitReadAndNoRegeneration",
+        "TestMissingReadDoesNotCreateAndBadParentRejected",
+        "TestExistingAnchorNeverReinitialized",
+        "TestConcurrentInitHasSingleClaimant",
+        "TestRecordReadFailuresPreserveBytes",
+        "TestObservedSymlinkAndNonregularRejected",
+        "TestInjectedFailureKeepsClaimAndPublicationBoundary"
+      ]
+    },
+    "localpeer": {
+      "artifact": "localpeer-darwin-arm64.test",
+      "tests": [
+        "TestRequireUIDKernelObservationAndBorrowedOwnership",
+        "TestRequireUIDRejectsDatagram",
+        "TestRequireUIDRejectsUnconnectedStream",
+        "TestRequireUIDRejectsNilAndClosedConnection"
+      ]
+    },
+    "diagnostic": {
+      "artifact": "diagnostic-darwin-arm64.test",
+      "tests": [
+        "TestIdentityReadOutputAndFailureRetainState",
+        "TestContextUnsupportedBeforeStateAccess"
+      ]
+    }
+  },
+  "actualNative": {
+    "topLevelPasses": 13,
+    "aggregateNamedPassesIncludingSubtests": 28,
+    "skips": 0,
+    "failures": 0,
+    "packages": {
+      "installation": {
+        "topLevelPassed": 7,
+        "aggregateNamedPassed": 22,
+        "skip": 0,
+        "fail": 0
+      },
+      "localpeer": {
+        "topLevelPassed": 4,
+        "aggregateNamedPassed": 4,
+        "skip": 0,
+        "fail": 0
+      },
+      "diagnostic": {
+        "topLevelPassed": 2,
+        "aggregateNamedPassed": 2,
+        "skip": 0,
+        "fail": 0
+      }
+    },
+    "cliCommands": 3,
+    "cliCases": [
+      "version0.1.3",
+      "actual darwin/arm64/go1.27.2 identifier-free inspect",
+      "context unsupported before state access; owned state empty"
+    ],
+    "temporaryDirectoriesEmpty": 3,
+    "contextStateEmpty": true,
+    "testTimeoutSeconds": 15,
+    "directProcessTimeoutSeconds": 20,
+    "peerIODeadlineSeconds": 2
+  },
+  "cleanup": {
+    "archivedFilesHashesMatched": 24,
+    "exactFilesRemoved": 24,
+    "exactEmptyDirectoriesRemoved": 4,
+    "exactOwnedRootAbsent": true,
+    "packetExecutableProcessesObserved": 0,
+    "cleanupStderrBytes": 0
+  },
+  "executedHelpers": [
+    {
+      "path": ".cache/host-macos-01/execute_remote_01.py",
+      "sha256": "42cd3afe0b19fe655152a0efc5abde0b2a5ef81f664c078444d29f51d1923903"
+    },
+    {
+      "path": ".cache/host-macos-01/archive_cleanup_01.py",
+      "sha256": "a6744190c5ba2866eed928057b85cbbff4d9f22902e15ea8547cab1486907b46"
+    }
+  ],
+  "helperCheckCaveat": {
+    "actualArchiveHelperRuff": "FAILED:2 PLW1510 missing explicit check flags; defaultsFalse with explicit return-code assertions",
+    "parentCommandChain": "Continued after lint failure; actual helper01 is preserved and remains runtime producer",
+    "correctedUnexecutedHelper": {
+      "path": ".cache/host-macos-01/archive_cleanup_02.py",
+      "sha256": "bcef11e0880c3cc9e598b2d4b51cb8476a249819e91835232595dec97ef62567",
+      "change": "Two explicit check=False additions only",
+      "checks": "Parent-reported AST/Ruff pass",
+      "executed": false
+    },
+    "allHelperLintPassClaimed": false
+  },
+  "independentReview": {
+    "path": ".cache/host-macos-01/native-independent-review-01.json",
+    "sha256": "03f36dae2877b96f8d1ee2df5e2e99babc7e7a179bd5e83873f50550c2b9fbd2"
+  },
+  "privateEvidenceDigests": [
+    {
+      "label": "parent-execution-receipt",
+      "sha256": "b771bc76b00223e223b1b45bb4c86edf082afd86be080185a9f5904dba19e30d"
+    },
+    {
+      "label": "retrieved-native-terminal",
+      "sha256": "9a540ce711315fe5555030ef3abe49394feb45e5fc9bed08332d8f5db6985a56"
+    },
+    {
+      "label": "archived-native-terminal",
+      "sha256": "9a540ce711315fe5555030ef3abe49394feb45e5fc9bed08332d8f5db6985a56"
+    },
+    {
+      "label": "cleanup-receipt",
+      "sha256": "b2760ce9512cbe4ef9cfdbcc7b33e0331f99c9f49f95e5b1f1ffd0e18d7809f7"
+    },
+    {
+      "label": "cleanup-stdout",
+      "sha256": "488f8ffff716df0ebc54164f2618e4f9c44d7df6eeef12166c6e49d7115eb4e9"
+    },
+    {
+      "label": "cleanup-stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "installation-tests-stdout",
+      "sha256": "0d0b8ef105582e4f6ae8013fe908817a6afbbdc7bc49881a482cfb939a6432f4"
+    },
+    {
+      "label": "installation-tests-stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "localpeer-tests-stdout",
+      "sha256": "417598d8111f49846cb6851ae7431c534e141627eeb31b2a3b59ea3b2faae313"
+    },
+    {
+      "label": "localpeer-tests-stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "diagnostic-tests-stdout",
+      "sha256": "f2cc67930c38dab97bb4bb62e8c4013b67d70a3476b5ebbb6c22dd9c4d72c47c"
+    },
+    {
+      "label": "diagnostic-tests-stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "historicalHostedRawArtifactsInspected": false,
+  "jobsBackendQualified": false,
+  "fullMacOSHostSupportQualified": false,
+  "capabilityOrStagePromoted": false,
+  "limits": [
+    "Selected cases on one actual Mac Studio/macOS build only; no race instrumentation",
+    "Same-user peer credentials plus intentionally mismatched expected numeric UID; no different-user process/application/session/code authentication",
+    "Installation fsync/claim/error/preservation cases are not power-loss/reboot/crash tests",
+    "Darwin context refuses honestly; no Darwin bootbackend/jobs/remoteadmission/pairing/service/capture support",
+    "Fresh actual result independent of historical CI artifact-access gap; no historical raw native CI outcomes inferred",
+    "No accounts/services/networklisteners/dependency installation/global configuration or existing persistent user state altered by selected packet"
+  ]
+}

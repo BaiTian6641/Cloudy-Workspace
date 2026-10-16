@@ -185,8 +185,13 @@ class FilesHandoffPositiveControllerTest {
     }
 
     private class Controls(private val ui: UiAutomation) {
+        // Public API34; minSdk35. Re-query after clearing cached dynamic Compose nodes.
+        private fun freshWindows(): List<AccessibilityWindowInfo> {
+            check(ui.clearCache())
+            return ui.windows
+        }
         private fun root(packageName: String): AccessibilityNodeInfo? {
-            val roots = ui.windows.filter { it.type == AccessibilityWindowInfo.TYPE_APPLICATION && it.isActive && it.isFocused }
+            val roots = freshWindows().filter { it.type == AccessibilityWindowInfo.TYPE_APPLICATION && it.isActive && it.isFocused }
                 .mapNotNull { it.root }.filter { it.packageName?.toString() == packageName && it.isVisibleToUser }
             check(roots.size <= 1)
             return roots.singleOrNull()
@@ -259,7 +264,7 @@ class FilesHandoffPositiveControllerTest {
         }
         /** One passive timeout sample. Selector arguments remain in memory only. */
         private fun sectionSnapshot(packageName: String, heading: String, text: String): ControllerSelectorSnapshot {
-            val windows = ui.windows
+            val windows = freshWindows()
             if (windows.size > 64) return ControllerSelectorSnapshot.unavailable()
             val application = windows.filter { it.type == AccessibilityWindowInfo.TYPE_APPLICATION }
             val expected = application.mapNotNull { window -> window.root?.let { window to it } }

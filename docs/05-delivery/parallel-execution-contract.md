@@ -6,6 +6,8 @@ The active goal already includes P4 host development. This record refines its ex
 
 **Latest recovery reminder:** Parsec/TeamViewer logic applies only to the connected RDP/VNC/streaming experience; discovery, device lists and pre-connection flows remain Cloudy's own. Keep Googlebook probe and product foundations evidence-backed while host construction advances. Develop both lanes concurrently and commit/push each coherent reviewed milestone as it becomes ready; do not hold a passing host change for unrelated client work or vice versa. The parent serializes shared Git operations, so parallel delivery does not mean conflicting worker pushes.
 
+**Real macOS target now available (user update, 2026-10-16):** the user configured SSH key access from the primary Linux workstation to a Mac Studio and authorized host testing. Parent verified a read-only connection with strict existing host-key checking. Connection/account details remain in ignored private evidence. Begin with exact source-bound native host primitives in an exclusively owned temporary directory; no global tool installation, service or screen/input permission is implied by this preflight. Native desktop/backend and lifecycle claims still require their actual cases. Windows hardware remains separate.
+
 ## Work allocation
 
 | Lane | Current work and next bounded increment | Ownership and acceptance |

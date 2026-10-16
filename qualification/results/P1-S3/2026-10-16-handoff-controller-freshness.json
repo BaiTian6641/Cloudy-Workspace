@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "Test-controller supported accessibility cache freshness candidate, strict Android build and actual standalone platform-test replacement only",
+  "acceptance": "Parent accepts measured source candidate and exact replacement preservation; normal operation behavioral effect unmeasured at this checkpoint",
+  "productVersionUnchanged": "0.1.14",
+  "productVersionCodeUnchanged": 15,
+  "device": {
+    "model": "HP Googlebook 14",
+    "release": "17",
+    "api": "37",
+    "build": "CL3B.260622.276.R2",
+    "incremental": "16560795",
+    "abi": "arm64-v8a"
+  },
+  "officialSources": [
+    "G253",
+    "G254"
+  ],
+  "apiTracker": "API68",
+  "build": {
+    "path": ".cache/files-handoff-02/controller-freshness-01/build-01/result.json",
+    "sha256": "26d8096641c8d78abb01a502fb7872a97b855af79879ad6e962bae59cd21d127",
+    "sourceCount": 232,
+    "strictDependencyVerification": true,
+    "sourceUnchangedDuringBuild": true,
+    "productAndOwningTestApksUnchanged": true,
+    "lintIssueCounts": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "artifacts": [
+      {
+        "path": "apps/console/build/outputs/apk/androidTest/debug/console-debug-androidTest.apk",
+        "bytes": 4593117,
+        "sha256": "c2e64fdf93fd96dc247ceb20eab4cbd078d97a4ae6aa41cc67c0275087ef5971"
+      },
+      {
+        "path": "apps/console/build/outputs/apk/debug/console-debug.apk",
+        "bytes": 41382877,
+        "sha256": "3127c84f789577c0d5d0fff1dc9e2169a9ce9bd29eec883d0d0ff76094fc1e0c"
+      },
+      {
+        "path": "apps/desktop/build/outputs/apk/androidTest/debug/desktop-debug-androidTest.apk",
+        "bytes": 4593113,
+        "sha256": "b9f0a17916a232f7633e2551e5cbd267743dd28a6d9560d47e09dfd6108b9b24"
+      },
+      {
+        "path": "apps/desktop/build/outputs/apk/debug/desktop-debug.apk",
+        "bytes": 41382885,
+        "sha256": "af4eb3702ead629f0a23945d2571b22b656fecfa7a96a5ca3ee2957f3c76c452"
+      },
+      {
+        "path": "shared/android/platform/build/outputs/apk/androidTest/debug/platform-debug-androidTest.apk",
+        "bytes": 45059272,
+        "sha256": "652075d56cb178caedd03550fd58be4c2f3287c2df16a10869968cc1722f9457"
+      }
+    ]
+  },
+  "sourcesAtBuild": [
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/FilesHandoffPositiveControllerTest.kt",
+      "bytes": 24878,
+      "sha256": "7ee1126dacf020ce3fd0910046cc6679db14cb71718cdd9fdc228f914c9eabd8"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/FilesHandoffControllerDiagnosticTest.kt",
+      "bytes": 5082,
+      "sha256": "3cc560ccd2f6979a4b8af75192ac85bea1523bdcb6807107ec2cbd74eb850b68"
+    }
+  ],
+  "sourceFreeze": {
+    "path": ".cache/files-handoff-02/controller-freshness-01/freeze-01.json",
+    "sha256": "bde22d230a3b17a77f809350d036ea93c30dd4b5f80c30cd2ba1305d7131e6f2"
+  },
+  "refreshHelper": {
+    "path": ".cache/files-handoff-02/controller-freshness-01/refresh_only_01.py",
+    "sha256": "7b9f11a9ec2e41dd033508dfc04555d10836ffab3f5331197c29819447ee9733"
+  },
+  "refreshFreeze": {
+    "path": ".cache/files-handoff-02/controller-freshness-01/refresh-freeze-01.json",
+    "sha256": "4444d788c580f374e47dfa35aeeeff1007fed73e32067bb8e142ae4df5b7dad2"
+  },
+  "actualRefresh": {
+    "receiptSha256": "0bc89da87a6ea1ead032da8203b851cc41a65171dad5dcf7d75a8c3a31851c46",
+    "phase": "PLATFORM_TEST_FRESHNESS_REFRESH_PRESERVED",
+    "passed": true,
+    "positiveHandoffPassed": false,
+    "baselineAuthorityRecoveryReceiptSha256": "198296464a41e30cec43866ae6626dbaa29d34253fe69e927b33309a218cb902",
+    "standalonePlatformTestReplacements": 1,
+    "instrumentationMethodsExecuted": 0,
+    "activitiesLaunched": 0,
+    "hostFixturesStarted": 0,
+    "authenticationPromptsStarted": 0,
+    "fullProductDeviceUidBootSettingsBaselineEqual": true,
+    "controllerNonmarkerFilesAndUidPreserved": true,
+    "controllerMarkerBytesRetained": true,
+    "controllerPostRefreshPackageTimestampStable": true,
+    "allFiveFinalInstalledApkHashesMatchBuild": true,
+    "rawInstallStderrEmpty": true,
+    "diagnosticClassMethodsUnchanged": 6
+  },
+  "privateEvidenceDigests": [
+    {
+      "label": "refresh-terminal",
+      "sha256": "0bc89da87a6ea1ead032da8203b851cc41a65171dad5dcf7d75a8c3a31851c46"
+    },
+    {
+      "label": "install-stdout",
+      "sha256": "781a31c82430c97897af612ece5e0ca2205e301cb5ff121ce2660541ea5182c7"
+    },
+    {
+      "label": "install-stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "recovery06-terminal",
+      "sha256": "198296464a41e30cec43866ae6626dbaa29d34253fe69e927b33309a218cb902"
+    }
+  ],
+  "constructionChecks": {
+    "focusedOfflineRefreshBoundariesPassed": 8,
+    "pythonAstPassed": true,
+    "ruffPassed": true,
+    "importWithProcessesForbiddenPassed": true
+  },
+  "limits": [
+    "Accessibility cache staleness remains a hypothesis; no retrospective cause inferred for attempts04 through06",
+    "Checked clearCache added only to test controller; no product source or success selector/action/deadline changed",
+    "Existing six privacy methods are unchanged and were not rerun or newly claimed passed",
+    "Compiler/Lint and package replacement do not execute UiAutomation or qualify the cache call at runtime",
+    "No ordinary Open/BAL/authentication/list/read/observer retirement or reverse-direction pass follows",
+    "Fresh measured attempt must bind actual replacement finalBaseline and exact artifacts; no automatic retry"
+  ]
+}

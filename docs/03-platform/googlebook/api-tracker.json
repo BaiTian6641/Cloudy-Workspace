@@ -2410,6 +2410,30 @@
       "experiment": "Final0.1.14/code15 build02 binds231 unchanged inputs/seven APKs. Strict debug/release compilation and seven zero-issue Lint reports pass; platform16JVM cases/zero failures/errors/skips include nine observer methods. Independent and parent source/hash review close publication/whitespace findings. Actual Android file/lifecycle behavior, ordinary positive Open and receiver phases remain unrun.",
       "researchEvidence": "docs/06-validation/files-handoff-observation.md",
       "compileEvidence": "qualification/results/P1-S3/2026-10-16-handoff-observation-build.json"
+    },
+    {
+      "id": "API68",
+      "feature": "Fresh accessibility observations for standalone handoff qualification",
+      "symbols": [
+        "android.app.UiAutomation.clearCache",
+        "android.app.UiAutomation.getWindows"
+      ],
+      "sourceIds": [
+        "G253",
+        "G254"
+      ],
+      "minimumApi": 34,
+      "libraryVersion": "Public Android SDK; standalone platform instrumentation minSdk35; no new dependency.",
+      "availability": "documented",
+      "qualification": "unverified",
+      "checkedOn": "2026-10-16",
+      "owner": "Android qualification developer and integration leader",
+      "stage": "P1-S3",
+      "runtimeGuard": "Standalone qualification only; require true from clearCache before each existing window query and final timeout sample. Exact app/active/focused/visible and heading/card selectors, bounded polling and one ordinary Open remain unchanged. No permission identity adoption.",
+      "fallback": "False or unavailable cache invalidation fails safely through fixed diagnostic output; never relax selectors, fabricate success or retry Open. Prior failures retain unknown root cause.",
+      "experiment": "Strict focused compilation and four zero-issue Lint reports pass; product/owning-test APK bytes remain unchanged. Actual platform-test-only preserved-state replacement passes, zero methods or UI launched. The next normal operation must qualify the freshness candidate; no callback-only or synthetic pass is inferred.",
+      "researchEvidence": "qualification/results/P1-S3/2026-10-16-handoff-controller-freshness.md",
+      "compileEvidence": "qualification/results/P1-S3/2026-10-16-handoff-controller-freshness.json"
     }
   ],
   "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."

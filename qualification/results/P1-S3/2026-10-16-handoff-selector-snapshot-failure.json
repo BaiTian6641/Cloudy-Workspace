@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "Fresh Console-to-Desktop diagnostic attempt06; fixed final selector snapshot before Open; exact original-checkpoint recovery",
+  "acceptance": "Failed normal handoff retained; actual PREPARE and original VERIFY/CLEANUP pass; parent accepts finite recovery; author inspected actual receipt and strict raw phase outputs",
+  "productVersionUnchanged": "0.1.14",
+  "productVersionCodeUnchanged": 15,
+  "device": {
+    "model": "HP Googlebook 14",
+    "androidRelease": "17",
+    "api": 37,
+    "build": "CL3B.260622.276.R2",
+    "incremental": "16560795",
+    "abi": "arm64-v8a"
+  },
+  "build": {
+    "path": ".cache/files-handoff-02/controller-diagnostic-02/build-01/result.json",
+    "sha256": "1bff5b192ff9d3ab02d2dd3247a875888b5d325f5a557b70741de48c1e167663"
+  },
+  "sourcesAtRun": [
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/FilesHandoffPositiveControllerTest.kt",
+      "sha256": "f1943d453d08936691f1f742230373b723220c95e5b50dc46ef708b22d5f7193"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/FilesHandoffControllerDiagnosticTest.kt",
+      "sha256": "3cc560ccd2f6979a4b8af75192ac85bea1523bdcb6807107ec2cbd74eb850b68"
+    }
+  ],
+  "helpers": [
+    {
+      "path": ".cache/files-handoff-02/positive-bootstrap-03/bootstrap_06.py",
+      "sha256": "95043b5774207b048b08f2705aa6f1cbc493de56dcfda05c54894d0ad8cedb84"
+    },
+    {
+      "path": ".cache/files-handoff-02/positive-bootstrap-03/run_positive_10.py",
+      "sha256": "9d9973b716aab57fac11137082249a848adedd2382a2a7d2fda2ecb4a316d5de"
+    },
+    {
+      "path": ".cache/files-handoff-02/positive-bootstrap-03/install_08.py",
+      "sha256": "766ae1d42a1b53f97968d163b10443d944e7ec6a8f490a609c781b78e584027a"
+    },
+    {
+      "path": ".cache/files-handoff-02/positive-bootstrap-03/close_failed_ui_06.py",
+      "sha256": "ffb99c46b6f5e7c79155e886485b9c0167f1b3873dca28f025e8afa7c6558a71"
+    },
+    {
+      "path": ".cache/files-handoff-02/positive-bootstrap-03/reconcile_failed_06.py",
+      "sha256": "dbc4017d342c34cabc8057c9403d1062718d018d77ef082416a0c23e6abd8b41"
+    }
+  ],
+  "attemptReview": {
+    "path": ".cache/files-handoff-02/positive-bootstrap-03/independent-review-01.json",
+    "sha256": "ac1331684b855d75f59db969ca8e8068e0cf4dddb70efb08b77b4753c3be74ac"
+  },
+  "actual": {
+    "prepareMethodsPassed": 1,
+    "controllerMethodsFailed": 1,
+    "controllerPhaseStatuses": 0,
+    "diagnostic": "CONTROLLER:ASSERT_SELECTED_CARD:STATE:CONTROLLER:234:SELECTOR_V1:W=5,1,1,1,1:T=0,0,1:A=NONE:S=NO_TITLE",
+    "exactMeaning": "At final sampling one eligible sender root and one exact eligible label match; zero exact eligible selected-title matches. Earlier polling trajectory and root cause remain unknown.",
+    "normalOpenExecuted": false,
+    "normalHandoffPassed": false,
+    "hostEventCounts": {
+      "session_created": 1,
+      "server_initial_kexinit_written": 1,
+      "client_initial_kexinit_negotiation_start": 1,
+      "key_established": 1,
+      "auth_request": 1,
+      "auth_accepted": 1,
+      "session_authenticated": 1,
+      "channel_open": 2,
+      "sftp_init_request": 2,
+      "sftp_initialized": 2,
+      "sftp_opendir_request": 2,
+      "sftp_readdir_request": 4,
+      "sftp_close_request": 2,
+      "sftp_destroying": 2,
+      "session_closed": 1
+    },
+    "hostExitCode": null,
+    "normalCloseActions": 3,
+    "verifyMethodsPassed": 1,
+    "cleanupMethodsPassed": 1,
+    "cleanupRowsRemoved": 3,
+    "ownedConfigsRemoved": 4,
+    "ownedReverseRemoved": 1,
+    "originalCheckpointPreserved": true,
+    "originalRowsMetadataGenerationReplayRestored": true,
+    "failedEvidencePreserved": true,
+    "productFrameworkCacheProjection": false,
+    "controllerCacheChangedSincePrivacyCheckpoint": true,
+    "controllerCachePreservedDuringRecovery": true,
+    "productAndOwningTestAPKsChanged": false,
+    "threeTestAPKsInstalled": true,
+    "bothProductsInstalledStopped": true
+  },
+  "privateEvidenceDigests": [
+    {
+      "label": "bootstrap-terminal",
+      "sha256": "f7a3adb8a5cf55d3a786cfa448f39831155e0f4ad462710ae6fde953202be81a"
+    },
+    {
+      "label": "device-terminal",
+      "sha256": "9816d674f98865040c1f460f432239f0f8de7a130d8e69818ad3b7d14cecbe9e"
+    },
+    {
+      "label": "original-checkpoint",
+      "sha256": "c4abc1be98cffdf10e3761b8674bd95f21998b69dd1404a46f3cdc3738365822"
+    },
+    {
+      "label": "prepare-stdout",
+      "sha256": "f7fbd4825e81c7981807273d89d5072bb4632f2b2f59796ea20fb91f5e03c373"
+    },
+    {
+      "label": "prepare-stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "controller-stdout",
+      "sha256": "0261307e4fbedc2d8feb48f3cb0013b04d4ddf50fd7cb331684bf79a497112eb"
+    },
+    {
+      "label": "host-events",
+      "sha256": "7a2aaa06d458472a1f31c18019e0945bc34fecc0a1400c8f0783248f4f36380d"
+    },
+    {
+      "label": "host-summary",
+      "sha256": "ffffb45bfcd8d0ea7e9f8d62bfd7f4ec93ee03d257b21649d5963b9541667692"
+    },
+    {
+      "label": "normal-close",
+      "sha256": "cb1c02a54233c8f0df26b24a539b09026ae34b2a0abe25d14e628bb1f2fe3bbb"
+    },
+    {
+      "label": "recovery-terminal",
+      "sha256": "198296464a41e30cec43866ae6626dbaa29d34253fe69e927b33309a218cb902"
+    },
+    {
+      "label": "verify-stdout",
+      "sha256": "a44e32ad85c5353db938a78fbe8403d33fda6d98996ac75d5bca829763f8395f"
+    },
+    {
+      "label": "cleanup-stdout",
+      "sha256": "525d9bbd22a7f3e200955bfbd76beb17e15fe69b4dac103f431d287604f9f217"
+    }
+  ],
+  "limits": [
+    "Fixed snapshot is a final sample after bounded scrolling, not a summary of earlier predicates or proof of cache staleness",
+    "Literal selected-title resource matches controller argument; later UI does not establish earlier accessibility heading/root state",
+    "No ordinary Open/BAL/fresh receiver authentication/read through Open or positive observer retirement pass",
+    "Original host exit unknown despite recorded session closure and current process/listener absence",
+    "SQLite and retained qualification evidence changes remain explicit; no full prior-file equality claim",
+    "Supported cache-freshness test repair remains a separate source/build/refresh/next-attempt boundary; no prior failure cause inferred",
+    "Existing protected-vault human question remains pending without prompt replay"
+  ]
+}

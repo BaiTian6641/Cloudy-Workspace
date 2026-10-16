@@ -7504,6 +7504,66 @@
       "sourceUpdatedOn": null,
       "note": "Time.UTC changes location to UTC. HOST-CONTEXT01 formats RFC3339Nano after both real readers; this is an observation time, not boot time or an atomic identity tuple. Actual command timestamps are checked within private process intervals. Owner host core, P4-S1; scoped source/runtime qualification in 2026-10-16-host-context.",
       "refresh": "Before changing selected Go/runtime or diagnostic output; reuse unchanged upstream semantics and verify changed adapter boundaries."
+    },
+    {
+      "id": "G253",
+      "title": "Android UiAutomation accessibility-cache invalidation",
+      "url": "https://developer.android.com/reference/android/app/UiAutomation#clearCache()",
+      "publisher": "Google Android Developers",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Public UiAutomation.clearCache(), API34, returns whether the accessibility cache was cleared. The min35 standalone handoff controller checks it before existing dynamic-window queries. This does not clear app data or prove the earlier timeout cause; actual fresh handoff remains separate. Owner Android qualification, P1-S3.",
+      "refresh": "Before changing the affected adapter, selected dependency or qualification claim; reuse unchanged upstream evidence and check changed boundaries."
+    },
+    {
+      "id": "G254",
+      "title": "AndroidX UIAutomator explicit cache invalidation reference",
+      "url": "https://android.googlesource.com/platform/frameworks/support/+/af8d1d8a47a4985bfcb692d8b00f1b2b688708e7%5E!/",
+      "publisher": "AndroidX project",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Immutable upstream change demonstrates explicit cache clearing before root acquisition when nodes can remain cached. Reference only, no new UIAutomator dependency adoption or claim that this code is in the installed platform. Owner Android qualification, P1-S3.",
+      "refresh": "Before changing the affected adapter, selected dependency or qualification claim; reuse unchanged upstream evidence and check changed boundaries."
+    },
+    {
+      "id": "R356",
+      "title": "bbolt v1.5.0 official release",
+      "url": "https://github.com/etcd-io/bbolt/releases/tag/v1.5.0",
+      "publisher": "etcd-io maintainers",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Released2026-06-21, selected immutable e7a8b2dd498494a3766ba24dd94d3509e5588485 for bounded Linux own-job event persistence. MIT notice and exact module sums reviewed. Runtime closure uses existing x/sys0.49; new implementation acceptance remains source/test scoped. Owner host core, P4-S1.",
+      "refresh": "Before changing the affected adapter, selected dependency or qualification claim; reuse unchanged upstream evidence and check changed boundaries."
+    },
+    {
+      "id": "R357",
+      "title": "bbolt pinned open options, locking and file-size behavior",
+      "url": "https://github.com/etcd-io/bbolt/blob/e7a8b2dd498494a3766ba24dd94d3509e5588485/db.go",
+      "publisher": "etcd-io maintainers",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Options.OpenFile/Timeout/MaxSize and DB.Open/View/Update inspected. Open auto-initializes zero-size files; MaxSize alone does not reject an already oversized Linux file; writable Open can change freelist metadata before application validation. Cloudy requires handle checks and read-only validation before writable revalidation. Trusted-directory race limits remain explicit. Owner host core, P4-S1.",
+      "refresh": "Before changing the affected adapter, selected dependency or qualification claim; reuse unchanged upstream evidence and check changed boundaries."
+    },
+    {
+      "id": "R358",
+      "title": "bbolt pinned transaction commit semantics",
+      "url": "https://github.com/etcd-io/bbolt/blob/e7a8b2dd498494a3766ba24dd94d3509e5588485/tx.go",
+      "publisher": "etcd-io maintainers",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Reuse upstream transactional persistence with default sync behavior; Cloudy joins sequence/latest/retention in one transaction and treats commit/write/sync errors as completion unknown. Reopen presence cannot establish original sync success. No process retry or database repair follows from a cursor gap. Owner host core, P4-S1.",
+      "refresh": "Before changing the affected adapter, selected dependency or qualification claim; reuse unchanged upstream evidence and check changed boundaries."
     }
   ]
 }

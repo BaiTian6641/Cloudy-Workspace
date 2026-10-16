@@ -44,7 +44,7 @@ jobs:
             printf 'Files requiring gofmt:\n%s\n' "$formatting"
             exit 1
           fi
-      - name: Download the exact reviewed Windows API module
+      - name: Download the exact reviewed host modules
         env:
           GOPROXY: https://proxy.golang.org
           GOSUMDB: sum.golang.org
@@ -54,6 +54,7 @@ jobs:
           # Only this step has module-network access. Committed checksums and the
           # public checksum database bind the selected upstream implementation.
           go mod download golang.org/x/sys@v0.49.0
+          go mod download go.etcd.io/bbolt@v1.5.0
           go mod verify
           git diff --exit-code -- go.mod go.sum
       - name: Compile, vet and execute contract tests
