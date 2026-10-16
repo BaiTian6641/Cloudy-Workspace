@@ -1,0 +1,661 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-15",
+  "timezone": "America/Chicago",
+  "stage": "P0-S4",
+  "scope": "one finite native video preview with explicit user observation",
+  "status": "finite-visual-preview-passed-capability-pending",
+  "sourceCommit": "c0113a342fbb53ad2db6cb944b2454a34c9cdac9",
+  "application": {
+    "versionName": "0.1.10",
+    "versionCode": 11,
+    "buildRef": "8262bedf-19ea-41f0-baff-04a2f4d2ff8e",
+    "nativeBuildRef": "f336e245-805d-4aad-bc1a-9208df8db318",
+    "apk": {
+      "path": ".cache/native-stream-android/presentation-03/app/build/outputs/apk/debug/app-debug.apk",
+      "bytes": 24851299,
+      "sha256": "d02eebced99b3d7db9d8c62f33d4fdf93dba13052d93af98a9d8ee6379abbfed"
+    },
+    "installedPulledApk": {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/installed-cloudy-stream-0.1.10.apk",
+      "bytes": 24851299,
+      "sha256": "d02eebced99b3d7db9d8c62f33d4fdf93dba13052d93af98a9d8ee6379abbfed"
+    }
+  },
+  "device": {
+    "model": "HP Googlebook 14",
+    "manufacturer": "HP",
+    "release": "17",
+    "api": "37",
+    "build": "CL3B.260622.276.R2",
+    "incremental": "16560795",
+    "patch": "2026-09-01",
+    "abi": "arm64-v8a"
+  },
+  "playback": {
+    "journal": {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-playback-journal-5a2f0071-cbb7-46ef-8959-72902fe27c0d.json",
+      "bytes": 5016,
+      "sha256": "82babfdc7ca69080f4fd4ccf9be53ee8c7c2a13894b350901e97ec450be2be7d"
+    },
+    "operation": "PLAY",
+    "requestedAuthenticationMode": "DEVICE_CREDENTIAL",
+    "startedElapsedMillis": 111982536,
+    "observedElapsedMillis": 112016795,
+    "status": "cancelled",
+    "failureCode": null,
+    "cancelReason": "AUTHORIZATION_DEADLINE",
+    "closed": true,
+    "runAdmitted": true,
+    "workerActionReturned": true,
+    "controllerRunReturned": true,
+    "selectedApplicationId": 1773951989,
+    "catalogGeneration": 2,
+    "surfaceGeneration": 1,
+    "surfaceDetached": true,
+    "surfaceReleased": true,
+    "surfacePresentation": {
+      "surfaceGeneration": 1,
+      "textureUpdates": 1361,
+      "firstUpdateElapsedMillis": 111987635,
+      "lastUpdateElapsedMillis": 112016584,
+      "geometryChanges": 1,
+      "omittedSamples": 0,
+      "surfaceDetached": true,
+      "surfaceReleased": true,
+      "coordinateSpace": "root-view",
+      "doesNotProveOtherWindowOcclusionOrVisiblePixels": true,
+      "admitted": true,
+      "retired": true,
+      "latest": {
+        "width": 951,
+        "height": 534,
+        "visibleLeft": 0,
+        "visibleTop": 0,
+        "visibleWidth": 0,
+        "visibleHeight": 0,
+        "attached": false,
+        "shown": false,
+        "hardwareAccelerated": true
+      },
+      "admission": {
+        "edge": "ADMISSION",
+        "elapsedMillis": 111982538,
+        "geometry": {
+          "width": 951,
+          "height": 534,
+          "visibleLeft": 561,
+          "visibleTop": 363,
+          "visibleWidth": 951,
+          "visibleHeight": 534,
+          "attached": true,
+          "shown": true,
+          "hardwareAccelerated": true
+        }
+      },
+      "firstUpdate": {
+        "edge": "FIRST_UPDATE",
+        "elapsedMillis": 111987635,
+        "geometry": {
+          "width": 951,
+          "height": 534,
+          "visibleLeft": 561,
+          "visibleTop": 363,
+          "visibleWidth": 951,
+          "visibleHeight": 534,
+          "attached": true,
+          "shown": true,
+          "hardwareAccelerated": true
+        }
+      },
+      "retirement": {
+        "edge": "RETIREMENT",
+        "elapsedMillis": 112016795,
+        "geometry": {
+          "width": 951,
+          "height": 534,
+          "visibleLeft": 0,
+          "visibleTop": 0,
+          "visibleWidth": 0,
+          "visibleHeight": 0,
+          "attached": false,
+          "shown": false,
+          "hardwareAccelerated": true
+        }
+      },
+      "samples": [
+        {
+          "edge": "ADMISSION",
+          "elapsedMillis": 111982538,
+          "geometry": {
+            "width": 951,
+            "height": 534,
+            "visibleLeft": 561,
+            "visibleTop": 363,
+            "visibleWidth": 951,
+            "visibleHeight": 534,
+            "attached": true,
+            "shown": true,
+            "hardwareAccelerated": true
+          }
+        },
+        {
+          "edge": "FIRST_UPDATE",
+          "elapsedMillis": 111987635,
+          "geometry": {
+            "width": 951,
+            "height": 534,
+            "visibleLeft": 561,
+            "visibleTop": 363,
+            "visibleWidth": 951,
+            "visibleHeight": 534,
+            "attached": true,
+            "shown": true,
+            "hardwareAccelerated": true
+          }
+        },
+        {
+          "edge": "DESTRUCTION",
+          "elapsedMillis": 112016795,
+          "geometry": {
+            "width": 951,
+            "height": 534,
+            "visibleLeft": 0,
+            "visibleTop": 0,
+            "visibleWidth": 0,
+            "visibleHeight": 0,
+            "attached": false,
+            "shown": false,
+            "hardwareAccelerated": true
+          }
+        },
+        {
+          "edge": "RETIREMENT",
+          "elapsedMillis": 112016795,
+          "geometry": {
+            "width": 951,
+            "height": 534,
+            "visibleLeft": 0,
+            "visibleTop": 0,
+            "visibleWidth": 0,
+            "visibleHeight": 0,
+            "attached": false,
+            "shown": false,
+            "hardwareAccelerated": true
+          }
+        }
+      ]
+    },
+    "playback": {
+      "phase": "RETIRED",
+      "failure": "NONE",
+      "stopReason": "OPERATOR",
+      "started": true,
+      "cleanupComplete": true,
+      "nativeStartResult": 0,
+      "terminationCode": 0,
+      "width": 1280,
+      "height": 720,
+      "format": 1,
+      "codecName": "c2.qti.avc.decoder.low_latency",
+      "hardwareReported": true,
+      "glRendererKnown": true,
+      "decodeUnitSubmissions": 1533,
+      "outputBuffersReleasedForRender": 1518,
+      "frameRenderedCallbacks": 1518,
+      "httpCalls": 2,
+      "httpBytes": 719,
+      "stageCallbacks": 22
+    },
+    "authenticatedAtElapsedMillis": 111986605,
+    "authenticationType": 1,
+    "identityState": "READY",
+    "securityLevel": "trusted-environment",
+    "qualification": {
+      "securityLevel": "trusted-environment",
+      "authenticationHardwareEnforced": true,
+      "privateEncodingUnavailable": true,
+      "signVerified": true,
+      "keyBits": 2048,
+      "certificateBytes": 715,
+      "signatureBytes": 256,
+      "certificateSha256": "1746d903cbcfc803874fef80b5386cce453e8df18143816e634d4165f6fc901b"
+    }
+  },
+  "catalogs": [
+    {
+      "journal": {
+        "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-catalog-journal-b5cc5eae-d39a-432d-81e9-bd8b01e1bd0b.json",
+        "bytes": 1120,
+        "sha256": "767a5855fa52c4f222ac9845dea57fa9b935f7040f07a67426574df9621e9551"
+      },
+      "operation": "CATALOG",
+      "status": "completed",
+      "requestedAuthenticationMode": "DEVICE_CREDENTIAL",
+      "authenticationType": 1,
+      "failureCode": null,
+      "cancelReason": null,
+      "closed": true,
+      "applicationCount": 1,
+      "httpCalls": 1,
+      "applicationListBytes": 180,
+      "callbackToFinalMillis": 158
+    },
+    {
+      "journal": {
+        "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-catalog-journal-03e40738-0864-4423-b706-a163ab242c4d.json",
+        "bytes": 1120,
+        "sha256": "e0d3d6a16d65ceac4c62e739ee0941dd6b078cca16f8988ae9572e6484d4cd76"
+      },
+      "operation": "CATALOG",
+      "status": "completed",
+      "requestedAuthenticationMode": "DEVICE_CREDENTIAL",
+      "authenticationType": 1,
+      "failureCode": null,
+      "cancelReason": null,
+      "closed": true,
+      "applicationCount": 1,
+      "httpCalls": 1,
+      "applicationListBytes": 180,
+      "callbackToFinalMillis": 222
+    },
+    {
+      "journal": {
+        "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-catalog-journal-3935499e-f90f-4a1c-9c4e-2aaad193049c.json",
+        "bytes": 1120,
+        "sha256": "896e7bc776e687e20c2c27f8283fdda7ab129c528f4e93f8f15f92e0250a5885"
+      },
+      "operation": "CATALOG",
+      "status": "completed",
+      "requestedAuthenticationMode": "DEVICE_CREDENTIAL",
+      "authenticationType": 1,
+      "failureCode": null,
+      "cancelReason": null,
+      "closed": true,
+      "applicationCount": 1,
+      "httpCalls": 1,
+      "applicationListBytes": 180,
+      "callbackToFinalMillis": 469
+    },
+    {
+      "journal": {
+        "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-catalog-journal-3402d922-0fde-45e2-a557-8ba478053866.json",
+        "bytes": 707,
+        "sha256": "eef4383ac701041fbbf7a3b1542153577e6b71453372e2f9aa5e5848730021f1"
+      },
+      "operation": "CATALOG",
+      "status": "cancelled",
+      "requestedAuthenticationMode": "DEVICE_CREDENTIAL",
+      "authenticationType": null,
+      "failureCode": null,
+      "cancelReason": "AUTH_ERROR_10",
+      "closed": true,
+      "applicationCount": 0,
+      "httpCalls": 0,
+      "applicationListBytes": 0
+    }
+  ],
+  "additionalIdentityOperations": [
+    {
+      "journal": {
+        "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-identity-journal-bac73d12-ef46-4257-82d5-1ad7d34b612b.json",
+        "bytes": 492,
+        "sha256": "15b7cd6b5b5326bf369a422e74c0b266dbb6833e39c78e1a458365a05b3000ae"
+      },
+      "operation": "REFRESH",
+      "status": "completed",
+      "requestedAuthenticationMode": "NONE",
+      "authenticationType": null,
+      "failureCode": null,
+      "cancelReason": null,
+      "closed": null
+    },
+    {
+      "journal": {
+        "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-identity-journal-83981bf2-95e3-451c-a987-ff4cefc49f59.json",
+        "bytes": 931,
+        "sha256": "98a3ca8b79ed955e0309cd879ef6aaf978c34b6883261a450c59790eed151ef0"
+      },
+      "operation": "AUTHORIZE",
+      "status": "completed",
+      "requestedAuthenticationMode": "STRONG_OR_CREDENTIAL",
+      "authenticationType": 2,
+      "failureCode": null,
+      "cancelReason": null,
+      "closed": null
+    },
+    {
+      "journal": {
+        "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-identity-journal-2945c980-487b-491f-bae6-8add75558ffc.json",
+        "bytes": 928,
+        "sha256": "a3e0bb5e45d88ff9d7928c4c2c2971d40825e4f619d57aebffb0ef213f7adc61"
+      },
+      "operation": "AUTHORIZE",
+      "status": "completed",
+      "requestedAuthenticationMode": "DEVICE_CREDENTIAL",
+      "authenticationType": 1,
+      "failureCode": null,
+      "cancelReason": null,
+      "closed": null
+    }
+  ],
+  "visualEvidence": {
+    "userReport": "Yes, the video is visible and moving",
+    "verdict": "PASS for this finite controlled preview only",
+    "textureUpdates": 1361,
+    "paneWidth": 951,
+    "paneHeight": 534,
+    "firstTextureAfterAuthenticationMillis": 1030,
+    "callbackToFinalRetirementMillis": 30190,
+    "prior019FailurePreserved": true,
+    "rootCauseOfPriorFailureEstablished": false,
+    "latencyBenchmark": false
+  },
+  "preservation": {
+    "priorRecordsVerified": 22,
+    "finalRecords": 30,
+    "counts": {
+      "files/native-load": 1,
+      "no_backup/catalog-journal": 10,
+      "no_backup/identity-journal": 15,
+      "no_backup/pairing-journal": 1,
+      "no_backup/playback-journal": 3
+    },
+    "allNetworkRecordsClosed": true
+  },
+  "cleanup": {
+    "appStopped": true,
+    "temporaryPublicProfileRemoved": true,
+    "adbReverseAdded": false,
+    "hostCleaned": true,
+    "hostResultPath": ".cache/native-stream-host/media-03/result.json"
+  },
+  "host": {
+    "sunshineVersion": "2026.914.233613",
+    "sunshineCommit": "63d35f702ee9e362e43263742981836ec0710384",
+    "binarySha256": "6946d8ac8bb0e99da1e51b374029c8b24dcabb315265a0e7004d046eb6f143fd",
+    "sunshineExitCode": 0,
+    "canvasExitCode": 0,
+    "portsReleased": 7,
+    "hostIdentityUnchanged": true,
+    "cleanupErrors": [],
+    "audioCaptureEnabled": false,
+    "remoteInputForwarding": false
+  },
+  "evidence": [
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-native-load-c90e90d1-01c8-4b9c-bf09-97f549a10e83.json",
+      "bytes": 340,
+      "sha256": "d9a1c951db91573315d9eb383f5658a34d06301f0c023af8411887bf405b560a"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-catalog-journal-03e40738-0864-4423-b706-a163ab242c4d.json",
+      "bytes": 1120,
+      "sha256": "e0d3d6a16d65ceac4c62e739ee0941dd6b078cca16f8988ae9572e6484d4cd76"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-catalog-journal-3402d922-0fde-45e2-a557-8ba478053866.json",
+      "bytes": 707,
+      "sha256": "eef4383ac701041fbbf7a3b1542153577e6b71453372e2f9aa5e5848730021f1"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-catalog-journal-35731d11-c56c-4226-8d1c-2dfcb276538d.json",
+      "bytes": 1054,
+      "sha256": "a05e376fb6a2127a11d129a93a9d4f6b99dde23cfed69fc8fff1cbc48307a92d"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-catalog-journal-3935499e-f90f-4a1c-9c4e-2aaad193049c.json",
+      "bytes": 1120,
+      "sha256": "896e7bc776e687e20c2c27f8283fdda7ab129c528f4e93f8f15f92e0250a5885"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-catalog-journal-39fa3170-6ca3-465a-8fc7-febef0fa397f.json",
+      "bytes": 1119,
+      "sha256": "995ced861ec55ad6f45a51dcdc60cec291253a0b28878c1c0830cf53a67a8706"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-catalog-journal-5216c1be-0e60-4c0b-a3a2-eaca0325af6d.json",
+      "bytes": 1119,
+      "sha256": "e4227775bf9ed5ad8f0fbee84436e7a3b26032e3f3d182dfc45ccdb1fdd38d89"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-catalog-journal-85d9f9c4-17dd-412f-b23c-ffb66bdbbc7a.json",
+      "bytes": 1119,
+      "sha256": "a83bacbc98499261eb469565c544086750139d1087e5ae86bac8fee4b270af57"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-catalog-journal-b5cc5eae-d39a-432d-81e9-bd8b01e1bd0b.json",
+      "bytes": 1120,
+      "sha256": "767a5855fa52c4f222ac9845dea57fa9b935f7040f07a67426574df9621e9551"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-catalog-journal-decc0004-e0f3-4298-a6c9-900010c09825.json",
+      "bytes": 1054,
+      "sha256": "a2ef7d67b795968ee5e59498cece5dfd22422f3fc2c1ef6607dadeed50f6994b"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-catalog-journal-fcc7e5d7-0b60-4582-b238-911cc0fd9999.json",
+      "bytes": 1119,
+      "sha256": "161b95a00b038e76278d1adcb6d4f7cece3f643e14f46fba848e8a335381acae"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-identity-journal-010a6d3e-98ef-4d39-bd64-fa00f3423e17.json",
+      "bytes": 593,
+      "sha256": "2511f9b15f8275c94bb85462c86bd9a52b04fc6abb2e34aa7e56c05383d8a3c5"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-identity-journal-150e8d85-1228-49a5-9d63-635d0cb3f785.json",
+      "bytes": 463,
+      "sha256": "7fa97ba88533c416c06157345515701fe0ee2f2b449ebae63219685e5f78ad48"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-identity-journal-2945c980-487b-491f-bae6-8add75558ffc.json",
+      "bytes": 928,
+      "sha256": "a3e0bb5e45d88ff9d7928c4c2c2971d40825e4f619d57aebffb0ef213f7adc61"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-identity-journal-2e8e351e-034a-4b61-8f88-30ba90eb1da2.json",
+      "bytes": 504,
+      "sha256": "b2e73355678e8590860b4899743f5714519853164fea780f29ab3baee7d410b5"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-identity-journal-35dd6a14-f25c-4441-913f-148460e8af61.json",
+      "bytes": 461,
+      "sha256": "5af9ea8afb63114225764a0ae69a63637cf41733fe73b5913735f4226c7e22e5"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-identity-journal-73b19fae-e0d7-4dd9-ba59-6162722b7a79.json",
+      "bytes": 491,
+      "sha256": "bbb7ea0b0457609fe74ebd0afc34039a93228cde4ad58da99ae74da5fa5515d8"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-identity-journal-83981bf2-95e3-451c-a987-ff4cefc49f59.json",
+      "bytes": 931,
+      "sha256": "98a3ca8b79ed955e0309cd879ef6aaf978c34b6883261a450c59790eed151ef0"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-identity-journal-9e063191-a64a-4ae9-87ba-07588c170da4.json",
+      "bytes": 463,
+      "sha256": "4cfb2b1a7050098c3a2a61ef796aca3f2e4530418235ed4222dbae7f1833af4c"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-identity-journal-ae4ca729-aff4-4d94-8c4f-c1187f33df7f.json",
+      "bytes": 441,
+      "sha256": "cb5f6609b5a0fe9a217f4a7d3b5986ba90dc00b453f11c0910381448fb06fd91"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-identity-journal-b9fb9469-eb7a-43bd-90bf-7be3da286c76.json",
+      "bytes": 491,
+      "sha256": "2e999def95ff5883b2aa2dd6f113ccad22c9af10d63b111f4c840656b0a1c004"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-identity-journal-ba0e4ace-6f32-4cf2-9e86-06b8c7129912.json",
+      "bytes": 491,
+      "sha256": "eee2e4b8a7b72901de2876c88350b533380995d401d6336d36940de0083c9a52"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-identity-journal-bac73d12-ef46-4257-82d5-1ad7d34b612b.json",
+      "bytes": 492,
+      "sha256": "15b7cd6b5b5326bf369a422e74c0b266dbb6833e39c78e1a458365a05b3000ae"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-identity-journal-bf3c4941-d2cb-45f4-99f8-c98a3a6ac5d9.json",
+      "bytes": 927,
+      "sha256": "90e8e446717e8076e3425e5084c10a5932b6c0d442d565651fec1ac3ee96a2c2"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-identity-journal-edefabe3-d87e-4e7e-b6c9-311d3c1f0b97.json",
+      "bytes": 429,
+      "sha256": "afee1053ae26c06f45a1c73eff49b35edcaad1950753949292bae2665847a876"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-identity-journal-f49aed16-dc9a-4603-be91-8ac593e79506.json",
+      "bytes": 491,
+      "sha256": "219fda1466a4d015e6dc993630d6720bf599c5fb56676a38c2656f2dd01c04e7"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-pairing-journal-945e8271-0120-48c3-b486-dd12c48ec5a0.json",
+      "bytes": 1063,
+      "sha256": "cf7067e6a6c5d6cc0554f1763c4e8b64eba0f3c835a2f88a984db04a545807c2"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-playback-journal-5a2f0071-cbb7-46ef-8959-72902fe27c0d.json",
+      "bytes": 5016,
+      "sha256": "82babfdc7ca69080f4fd4ccf9be53ee8c7c2a13894b350901e97ec450be2be7d"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-playback-journal-baf7357d-24d8-4c31-960a-047eb5f5b13b.json",
+      "bytes": 1768,
+      "sha256": "47d02fb2b574a3500d3277b0665f6a3de1dc4bacca7298b7e86c8c891126cfd9"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-playback-journal-d572ea58-f04a-491d-b44c-600bd69b95fd.json",
+      "bytes": 1719,
+      "sha256": "9b8e5164beb58e0ed2b3236d56f62b2a6b3a64f73dfa79b56685067abaed55e3"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/install-result.json",
+      "bytes": 284,
+      "sha256": "20d6415d5a75957a3d23303ecf5e48758cabf5384fb66b080b7edfaef1d775d9"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/before-journal-manifest.json",
+      "bytes": 3956,
+      "sha256": "72b453ce18f245e17754f7dc28ca831dcd227b365f36153c1fab93d80fcafaeb"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/final-journal-manifest.json",
+      "bytes": 7870,
+      "sha256": "09b6267ddd144cf8fb1d08eb321fbdacecd784efc23f37689f9ea6787bed35b9"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/cleanup.json",
+      "bytes": 2331,
+      "sha256": "f17017623841b6ed5d09604e9d94461ca215e022378e3c8f6c3be665c9d89845"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/device.json",
+      "bytes": 201,
+      "sha256": "f79591313921b22b9308db767f38d2d4e0cc1b67867b9518a1fe9f076ed0cc0e"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/host-build.json",
+      "bytes": 517,
+      "sha256": "19446a6f1c0b9839ddf0a9b70820a95e51e2f2883683424a1a050e6b53c4d954"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/user-observations.json",
+      "bytes": 828,
+      "sha256": "47e1ade6dc0c2083219103f78e89b473a88ff1d6dcce53d31ed24eb4211aebc3"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/idle-01-layout.json",
+      "bytes": 31566,
+      "sha256": "fe5cd7f94c40b96488133cfe63338ca6923b1c97bf7ac1f66adf826d2c90d71f"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/catalog-complete-02-layout.json",
+      "bytes": 48794,
+      "sha256": "06b994e2f8b0dee412369cc83fda0c5d8cac36da47ca94d16bd1d7c7fe4f0ba4"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/preview-ready-01-layout.json",
+      "bytes": 48845,
+      "sha256": "52d0840b2e244ec192566c7fa73310ef1dc7613979cca508540879727c0987bf"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/playback-retired-01-layout.json",
+      "bytes": 48573,
+      "sha256": "bcbed0f9e1c9303c1cea355a6cbef9b21920ec722a0dd2d75cc39eb9b69ccfaf"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-presentation-01/profile-provision-result.json",
+      "bytes": 108,
+      "sha256": "73ab1c817871bbcc761b6b43ee84c340b61b3503eabd00fcd179826f0394683e"
+    },
+    {
+      "path": ".cache/native-stream-host/media-03/result.json",
+      "bytes": 1903,
+      "sha256": "43bcb5710361829924f73161d179842edb92864c5a381f17d9e73b016e78722b"
+    },
+    {
+      "path": ".cache/native-stream-host/media-03/ready.json",
+      "bytes": 249,
+      "sha256": "6773127d6ce6d209e8ad5d2f80ad4867ec5e3daecb9f03c460ab7e467b44197b"
+    },
+    {
+      "path": ".cache/native-stream-host/media-03/sunshine.log",
+      "bytes": 60475,
+      "sha256": "a09981351d43c2b5c96f3a666546490575934e10be952965716740aa8bbe4fc9"
+    },
+    {
+      "path": ".cache/native-stream-host/media-03/canvas/events.jsonl",
+      "bytes": 285798,
+      "sha256": "df7a5b13fe8b30eed2130f0cf11310434ad9bb7a58da7f3762ef560ed6463900"
+    },
+    {
+      "path": ".cache/native-stream-host/media-preflight-03/selected-route.json",
+      "bytes": 182,
+      "sha256": "afdb186e9bcc83cf98a5630a502839f2008de53638c540de9eb42c1ed2588a3d"
+    },
+    {
+      "path": ".cache/native-stream-host/media-preflight-03/selected-output.json",
+      "bytes": 5841,
+      "sha256": "4de4616ed5b9c4fbce786cd6720d0b4584e5d8643b0105a290fd65383eaa18e4"
+    },
+    {
+      "path": ".cache/native-stream-android/device_presentation_0110.py",
+      "bytes": 7914,
+      "sha256": "9d5d5c6d42f70191d5a32fc1e693ad74216bd3eb3fff5b192ce6f2c6eae4b74f"
+    },
+    {
+      "path": ".cache/native-stream-host/media_fixture_03.py",
+      "bytes": 11186,
+      "sha256": "6cdc0ab25e43067ae96ba9793633a2f52fd53cbb86d50a4957a714a5aae48767"
+    },
+    {
+      "path": "qualification/results/P0-S4/2026-10-15-stream-presentation-build.json",
+      "bytes": 31882,
+      "sha256": "46f319754926390b2b5bc38dfeb6f742ea1c38a84e23c51abb55139e3155e9d8"
+    },
+    {
+      "path": ".cache/native-stream-android/presentation-review-01/ci-c0113a3-03.json",
+      "bytes": 1281,
+      "sha256": "14dc008709035f44e5d932654778dd0d7147069c823716b860a9791e6ecd98dc"
+    }
+  ],
+  "report": {
+    "path": "qualification/results/P0-S4/2026-10-15-stream-visible-preview.md",
+    "bytes": 5710,
+    "sha256": "50b2b4d0ad4de1bbca9ec85e9eff52d1fe9c9a3982a3b6778f20b8846bfcbbfd"
+  },
+  "limitations": [
+    "Not CAP-STREAM or product acceptance",
+    "No physical input, audio, end-to-end latency, sustained or broad-host qualification",
+    "No physical Stop-button result; outer deadline cancellation forwards generic controller OPERATOR reason",
+    "Additional manual interactions preserved without invented click attribution",
+    "Static diagnostic visual-status text does not ingest external user acceptance",
+    "Identity journal 15/16: preserve/archive before further repeated launches",
+    "Same-clock setup/retirement durations are not network-only latency"
+  ]
+}
