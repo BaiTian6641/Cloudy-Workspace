@@ -225,10 +225,10 @@
       "url": "https://developer.android.com/develop/ui/compose/designsystems/material3",
       "publisher": "Google",
       "category": "design",
-      "reviewStatus": "located",
-      "checkedOn": "2026-10-14",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
       "sourceUpdatedOn": null,
-      "note": "Native theme/component implementation route; pin Compose at P1.",
+      "note": "Reviewed native Material color/type/shape customization. Product foundation already pins Compose; full Cloudy role coverage and component review remain P1-S2 work.",
       "refresh": "Before implementation against this surface; weekly during active platform qualification."
     },
     {
@@ -346,9 +346,9 @@
       "publisher": "IBM",
       "category": "design",
       "reviewStatus": "reviewed",
-      "checkedOn": "2026-10-14",
+      "checkedOn": "2026-10-16",
       "sourceUpdatedOn": null,
-      "note": "Semantic roles and neutral layering as design references.",
+      "note": "Reviewed layering and focus/state guidance for the external feedback review: light layers alternate, dark layers lighten; Cloudy monotonic layers and halo values remain original candidates. No native qualification.",
       "refresh": "Before implementation against this surface; weekly during active platform qualification."
     },
     {
@@ -5560,6 +5560,54 @@
       "sourceUpdatedOn": null,
       "note": "Pinned sources verify API23+ getSystemService; sourceSHA256528c9e1986979fd6cd2f32e86507ffb847f3e88c0be2f039a03fb41de3642cff. Stable selected release, not movingmain.",
       "refresh": "When test dependency graph or Android target changes."
+    },
+    {
+      "id": "D10",
+      "title": "WCAG 2.2 understanding text contrast",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html",
+      "publisher": "W3C",
+      "category": "design",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Minimum text-contrast criteria; numerical pairs do not certify the whole app or long-session visual comfort. P1-S2 Q-A01.",
+      "refresh": "Before implementation against this surface; weekly during active platform qualification."
+    },
+    {
+      "id": "D11",
+      "title": "WCAG 2.2 understanding non-text contrast",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html",
+      "publisher": "W3C",
+      "category": "design",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Meaningful indicators against adjacent colors; no blanket 3:1 difference between temporal hover/rest states. P1-S2 rendered-state review remains required.",
+      "refresh": "Before implementation against this surface; weekly during active platform qualification."
+    },
+    {
+      "id": "D12",
+      "title": "Compose accessibility API defaults",
+      "url": "https://developer.android.com/develop/ui/compose/accessibility/api-defaults",
+      "publisher": "Google",
+      "category": "design",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Touch-target expansion and overlap risks; keep native target behavior and user font scaling during desktop density review. P1-S2 Q-A01/Q-A02; no phone/tablet scope.",
+      "refresh": "Before implementation against this surface; weekly during active platform qualification."
+    },
+    {
+      "id": "D13",
+      "title": "Upstream Material ColorScheme role definitions",
+      "url": "https://android.googlesource.com/platform/frameworks/support/+/eec456ba3412a9a3b355a127c065fbab72ad7392/compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/ColorScheme.kt",
+      "publisher": "Google / AndroidX",
+      "category": "design",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Reviewed immutable source for surfaceContainer, secondary, errorContainer and onErrorContainer roles; no built-in success/warning roles. Explanatory snapshot, not the selected dependency pin or device qualification. P1-S2 maps only admitted component roles; retain existing theme until reviewed. Current API page fetch exceeded tool size; upstream source inspected instead.",
+      "refresh": "Before implementation against this surface; weekly during active platform qualification."
     }
   ]
 }

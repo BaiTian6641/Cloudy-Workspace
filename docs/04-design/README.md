@@ -24,6 +24,8 @@ The specimen represents the initial screen subset. Revision 01's S13–S17 are d
 
 The final-review refinement adds a [native workspace prototype review](native-workspace-review.md) at P1-S2. Component geometry and engine-dependent interactions remain provisional until their relevant native checks pass.
 
+The [16 October external feedback review](2026-10-16-external-feedback-review.md) checks the supplied Gemini design assessment against current source and official guidance. It records useful P1-S2 candidates, corrected contrast/scope claims and the distinction between proposals and approved requirements; it does not adopt the document's EDA/IDE product or change tokens.
+
 ## Concrete visual decisions
 
 | Decision | Rule |

@@ -55,6 +55,8 @@ Before new device/host work, inspect the actual package/version, app process, jo
 
 ## Persistent decisions and working roles
 
+- The [16 October external design-feedback review](../04-design/2026-10-16-external-feedback-review.md) is a reviewed input to P1-S2, not a replacement specification. Its useful typography/role/state candidates retain native acceptance gates. EDA/IDE scope, a fourth micro-density tier, remote theme injection and replacing separate X11 windows are not adopted. Canonical tokens and installed products are unchanged; P1-S3 vault work remains ready. Read the disposition before dispatching design workers.
+
 - **Rule 0:** Googlebook desktop/laptop applications using Android package/lifecycle/permission APIs. Phone/tablet optimization is outside scope; narrow desktop windows, IME, accessibility and font scaling remain required. ChromeOS/Crostini and roadmap VM APIs are not assumed.
 - Console and Desktop remain independently useful, with separate packages, credentials and release gates. Ordinary SSH requires no custom host agent. Full scope includes separate X11 windows, SFTP/drop, standard RDP/VNC and enrolled USB forwarding.
 - Ask on every remote save when conditional replacement is unavailable; independent app releases plus a suite milestone. Native streaming adoption is resolved in P0/P1 independently of optional host adapters. Consult [approved decisions](../00-project/revision-02-final-review.md) for identifiers and exact wording.
