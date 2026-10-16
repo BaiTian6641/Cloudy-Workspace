@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application android:allowBackup="false" android:label="Cloudy input fixture"
+        android:icon="@drawable/ic_fixture"
+        android:dataExtractionRules="@xml/data_extraction_rules" android:supportsRtl="true" />
+    <instrumentation android:name=".HeldMouseInstrumentation"
+        android:targetPackage="dev.cloudy.qualification.input"
+        android:label="Finite held primary mouse driver" />
+</manifest>

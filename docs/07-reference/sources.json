@@ -5128,6 +5128,54 @@
       "sourceUpdatedOn": null,
       "note": "Hard-lockup detection and optional panic/reboot behavior; detector/configuration varies. Latest Googlebook previous-boot log contains a CPU4 hard-lockup report without causal trace. P0 incident owner: integration leader; fallback: preserve incident as unresolved, no device/kernel setting changes.",
       "refresh": "Before relying on this diagnostic interpretation or changing the tested host/kernel version."
+    },
+    {
+      "id": "G157",
+      "title": "Android Instrumentation lifecycle and UiAutomation access",
+      "url": "https://developer.android.com/reference/android/app/Instrumentation",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Instrumentation.onCreate/start/onStart/finish API1; getUiAutomation(int) API24. Separate helper targets itself and does not instrument VNC. MinSDK35 covers use; compilation accepted, helper runtime not exercised. Owner integration leader/P0-S4. Fallback fail closed without injecting; preserve evidence and unresolved qualification.",
+      "refresh": "Before changing the helper, target SDK, input admission or timing interpretation."
+    },
+    {
+      "id": "G158",
+      "title": "Android UiAutomation input injection and accessibility preservation",
+      "url": "https://developer.android.com/reference/android/app/UiAutomation",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "injectInputEvent(InputEvent,boolean) API18 returns injection success; caller recycles event. FLAG_DONT_SUPPRESS_ACCESSIBILITY_SERVICES API24. Framework acceptance does not establish host delivery; no product permission/API is added. Owner integration leader/P0-S4. Fallback fail closed without injecting; preserve evidence and unresolved qualification.",
+      "refresh": "Before changing the helper, target SDK, input admission or timing interpretation."
+    },
+    {
+      "id": "G159",
+      "title": "Android accessibility window identity and display inspection",
+      "url": "https://developer.android.com/reference/android/view/accessibility/AccessibilityWindowInfo",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "isActive/isFocused/getBoundsInScreen API21 and getDisplayId API30 gate active default-display VNC window under minSDK35. Root containment does not prove framebuffer containment; last-inspection-to-dispatch race remains. Owner integration leader/P0-S4. Fallback fail closed without injecting; preserve evidence and unresolved qualification.",
+      "refresh": "Before changing the helper, target SDK, input admission or timing interpretation."
+    },
+    {
+      "id": "G160",
+      "title": "Android monotonic clock domains",
+      "url": "https://developer.android.com/reference/android/os/SystemClock",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "uptimeMillis API1 excludes deep sleep; elapsedRealtime API1 includes it. Fixture freshness/hold uses uptime, not wall-time guarantees. A same-clock inspection route is required before executing candidate02; no /proc/uptime, host clock or guessed substitute. VNC startup intervals use its recorded elapsedRealtime domain. Owner integration leader/P0-S4. Fallback fail closed without injecting; preserve evidence and unresolved qualification.",
+      "refresh": "Before changing the helper, target SDK, input admission or timing interpretation."
     }
   ]
 }

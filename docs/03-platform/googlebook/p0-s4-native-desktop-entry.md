@@ -8,6 +8,8 @@ Carry forward the pinned **FreeRDP 3.32.2** and **LibVNC `98aaee0560baa0332339b2
 
 The [VNC focus/recovery follow-up](../../../qualification/results/P0-S4/2026-10-15-vnc-focus-recovery.md) uses the same accepted APK: a framework-injected ten-second held F8 receives a host key-up after notification-shade focus loss and before injection ends. Generated mouse DOWN produces no host press, so held-button release is **not exercised**. Home causes not-visible cancellation with native join/free. This is framework-stimulus evidence, not a physical keyboard/mouse, IME or input-latency pass. VNC's measured20.639-second first draw remains mainly initialization; host PAM attribution and waiting-state UX remain separate from the demonstrated framebuffer route.
 
+The [protocol-initialization cancellation](../../../qualification/results/P0-S4/2026-10-15-vnc-initialization-cancel.md) now adds a real worker cancel while the actual TigerVNC greeting is withheld: zero initialized connections/frames, client EOF and native join/free79ms after Stop. Twelve closed records preserve all eleven predecessors. TLS/PAM cancellation is not exercised. The [separate mouse helper](../../06-validation/2026-10-15-mouse-input-fixture.md) has source/build evidence only; establish its same-clock inspection route before testing actual held-button release.
+
 Both eventual native engines belong to Desktop's own package/process, credentials and lifecycle. Ordinary RDP/VNC servers need no Cloudy agent or Console installation. A standalone upstream app can help identify an integration fault but cannot satisfy Cloudy's native client gate. No alternative protocol stack implementation is proposed.
 
 ## Historical source candidates and initial build inputs

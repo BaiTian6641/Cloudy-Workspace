@@ -1,0 +1,134 @@
+{
+  "scope": "Candidate02 standalone Android framework mouse input helper source/build/package review; no device execution or held-button qualification.",
+  "checkedOn": "2026-10-15",
+  "candidate": "02",
+  "supersedesCandidate": "01",
+  "package": "dev.cloudy.qualification.input",
+  "versionName": "0.1.0",
+  "versionCode": 1,
+  "minimumSdk": 35,
+  "targetSdk": 37,
+  "compileSdk": 37,
+  "apkPath": ".cache/android-input-fixture-01/candidate-02/project/app/build/outputs/apk/debug/app-debug.apk",
+  "apkSha256": "bf63d0b664c936e8e2c487683c1b943fc0d204ad3b09f57b38fb4070573fb52c",
+  "apkBytes": 41375,
+  "runtimeCoordinates": [],
+  "historicalCandidate01RuntimeCoordinates": [
+    "org.jetbrains.kotlin:kotlin-stdlib:2.2.10",
+    "org.jetbrains:annotations:13.0"
+  ],
+  "sourceBindings": [
+    {
+      "path": "qualification/fixtures/android-input/README.md",
+      "sha256": "25f2ef6557c7b74095609baefef1b4d312a7edf2c25e84183401d27b8e29ab4b"
+    },
+    {
+      "path": "qualification/fixtures/android-input/app/build.gradle.kts",
+      "sha256": "b2da46db87b536adb4e564eafd4e847dbefb64433c558507007689ad75c720b9"
+    },
+    {
+      "path": "qualification/fixtures/android-input/app/src/main/AndroidManifest.xml",
+      "sha256": "9d0f553a53de1cbaf093d62d70fcb4b4c09538f454efdf2334ca2e64b8c5e483"
+    },
+    {
+      "path": "qualification/fixtures/android-input/app/src/main/java/dev/cloudy/qualification/input/HeldMouseInstrumentation.java",
+      "sha256": "18673caf72ee6d7bf0ea85150162c599d13021e77c78ebbae46956be6f4c25b7"
+    },
+    {
+      "path": "qualification/fixtures/android-input/app/src/main/res/drawable/ic_fixture.xml",
+      "sha256": "9e9228fbec55f283dd9c5e7357641e55467eadd1adb4ee4478e9c1f662146f7a"
+    },
+    {
+      "path": "qualification/fixtures/android-input/app/src/main/res/xml/data_extraction_rules.xml",
+      "sha256": "ec0f1c6431c2434ac85c7933dd0fe21c430e9601ec4db70d0112557cbebf9993"
+    },
+    {
+      "path": "qualification/fixtures/android-input/build.gradle.kts",
+      "sha256": "ed6ba3bdfc3cbdcd648d7213860ffa3b0d62da38c37915b731b08b4df6f9d209"
+    },
+    {
+      "path": "qualification/fixtures/android-input/settings.gradle.kts",
+      "sha256": "e434bf76ec4c14678882de695379e73a4e221cb3ee210d111e139d6d2ab14dbe"
+    }
+  ],
+  "sourceAndBuiltCopyHashesEqual": true,
+  "evidence": [
+    {
+      "path": ".cache/android-input-fixture-01/candidate-02/source-manifest.json",
+      "sha256": "1f4a8065738163294f643c156363379c61181a7b867b81429d2817210425e203",
+      "bytes": 1151
+    },
+    {
+      "path": ".cache/android-input-fixture-01/candidate-02/receipt.json",
+      "sha256": "e6c6676500aa137cfcdbb80d711074fd53a54061dc81da4c1c547a950c4a1023",
+      "bytes": 581
+    },
+    {
+      "path": ".cache/android-input-fixture-01/candidate-02/build-and-closure.log",
+      "sha256": "6be990557eabbf3aeb98217170e8fb8c037d950b515d6cd71beffdc3a75e8e95",
+      "bytes": 3099
+    },
+    {
+      "path": ".cache/android-input-fixture-01/candidate-02/project/app/build/reports/lint-results-debug.txt",
+      "sha256": "a69ecb171bea9d40de22744c85220b4a4ea12f5a25ce7976d67f2c88c9195334",
+      "bytes": 17
+    },
+    {
+      "path": ".cache/android-input-fixture-01/independent-review.md",
+      "sha256": "28a4c8a932c8a1bf0b72c4b6843cba713e6fb126a72003b0629140f406f81da0",
+      "bytes": 1965
+    },
+    {
+      "path": ".cache/android-input-fixture-01/candidate-02/independent-review.md",
+      "sha256": "0eb6cb97c795d0a74829e693bd22e03ae88e551063c462251b7764719b16ffbf",
+      "bytes": 1196
+    },
+    {
+      "path": ".cache/android-input-fixture-01/candidate-01/debug-runtime-classpath.txt",
+      "sha256": "1a606ca6e43a584708d21c52aeb75f6eee0606cdcb2371c8188d86a9fa22810d",
+      "bytes": 1034
+    },
+    {
+      "path": ".cache/android-input-fixture-01/candidate-02/public-audit-01/apksigner.txt",
+      "sha256": "b0a1af67205efcd284e5bbae691ebf4a0d296b4fcae02cd28e7e0509d0e0efbc",
+      "bytes": 343
+    },
+    {
+      "path": ".cache/android-input-fixture-01/candidate-02/public-audit-01/badging.txt",
+      "sha256": "c5d1f6af22d9c27ca4198273a298a43ccc5541d1123b73aba05aed06a1ff8b37",
+      "bytes": 715
+    },
+    {
+      "path": ".cache/android-input-fixture-01/candidate-02/public-audit-01/manifest.txt",
+      "sha256": "f4bebc219856682afcb25ff7f9178fb071f14a2ee703654d6a9f20fdeb5e9a9c",
+      "bytes": 1948
+    },
+    {
+      "path": ".cache/android-input-fixture-01/candidate-02/public-audit-01/docs-validation.json",
+      "sha256": "cbdfc3c2b1c21b1264223ef9abd2f661897f4a2abf1d0ed01de14c50e480976e",
+      "bytes": 644
+    }
+  ],
+  "report": {
+    "path": "docs/06-validation/2026-10-15-mouse-input-fixture.md",
+    "sha256": "7f65ddf643d2b128d6a2090f738c2e00934cae8419b930a6d63e788230f67255"
+  },
+  "checks": {
+    "assembleDebug": "passed",
+    "javaCompile": "passed with -Xlint:all -Werror",
+    "lintDebug": "passed, zero issues, warningsAsErrors",
+    "debugRuntimeClasspath": "No dependencies",
+    "signature": "passed v2",
+    "independentReview": "bounded source and candidate02 build delta accepted",
+    "device": "not installed or run",
+    "projectValidation": "passed; schemas not requested"
+  },
+  "executionAdmission": "pending verified fresh Android SystemClock.uptimeMillis inspection route",
+  "limitations": [
+    "Fresh root and framebuffer inspection required; no verified inspection-clock collection route supplied.",
+    "Do not substitute /proc/uptime, elapsedRealtime or host wall clock for Android uptimeMillis.",
+    "Hold and freshness intervals use non-sleep uptime; no wall-time or synchronous injection completion bound.",
+    "Actual host DOWN then focus loss then host UP before helper UP remains required.",
+    "Framework stimulus does not qualify physical input; no capability promotion."
+  ]
+}
