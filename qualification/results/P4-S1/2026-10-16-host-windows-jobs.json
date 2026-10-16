@@ -1,0 +1,339 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "HOST-JOBS-WINDOWS01 bounded Windows amd64 local-library construction; no CLI/remote authority or stage promotion",
+  "acceptance": "Scoped source/compiler construction accepted; native Windows execution pending",
+  "hostExecutableVersionUnchanged": "0.1.2",
+  "sources": [
+    {
+      "path": "host/core/internal/jobs/backend_linux.go",
+      "sha256": "3cfae7cdb0bc3162bd11aa953bd56be22b23a5fe7c2e7262b7a5c5b48ae24491"
+    },
+    {
+      "path": "host/core/internal/jobs/backend_linux_test.go",
+      "sha256": "b63cfd30d67347bf6fc793e14cb28d7b191a8800a37016973a25157a02f12382"
+    },
+    {
+      "path": "host/core/internal/jobs/backend_windows_amd64.go",
+      "sha256": "1365ac6de9ba97b981e1afd78be1d280214dedec1aabcbb3dc9d5e9a8ff5fabc"
+    },
+    {
+      "path": "host/core/internal/jobs/backend_windows_amd64_test.go",
+      "sha256": "bd5b72428a68bfc415810e1b48db66e805902e7152a3c43c9a9d33ac63cc383e"
+    },
+    {
+      "path": "host/core/internal/jobs/native_linux_test.go",
+      "sha256": "492b1dc494251bcbbde72144fd902328860734cac70e18c86ae88377d20ea3fd"
+    },
+    {
+      "path": "host/core/internal/jobs/native_windows_amd64_test.go",
+      "sha256": "d5ec836c2340b69c897fa84de119920b4090fa6ac36c1d68c051eab14035416f"
+    },
+    {
+      "path": "host/core/internal/jobs/types.go",
+      "sha256": "1abe1a972cb31f2939487dfa0861159a4592b278c53f0e9febb66311789e8b7e"
+    },
+    {
+      "path": "host/core/internal/jobs/types_test.go",
+      "sha256": "43d8fcb834d152f6faf8463e5722a922340879976a276d139203e6a1cd0a459c"
+    }
+  ],
+  "modules": [
+    {
+      "path": "host/core/go.mod",
+      "sha256": "8895e55963e4447a05abb84709092a640834f471dcb2ea6515c6d8dfac6613eb"
+    },
+    {
+      "path": "host/core/go.sum",
+      "sha256": "cde7b21c6627bd3cfc042453150e8eaf8b6c80aa2df25d96f48b038050945f03"
+    }
+  ],
+  "verification": {
+    "path": ".cache/host-jobs-windows-01/implementation/verification01/result.json",
+    "sha256": "9ecea84a4055626bc582586c3513a929e134ff65fbb4ef9b302fa4de558dbf0c"
+  },
+  "verificationSourceUnchanged": true,
+  "verificationModuleUnchanged": true,
+  "checks": [
+    {
+      "label": "format",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/gofmt",
+        "-l",
+        "${REPO}/host/core/internal/jobs"
+      ],
+      "environmentOverride": {},
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "module-verify",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "mod",
+        "verify"
+      ],
+      "environmentOverride": {},
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "vet-linux",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "vet",
+        "-mod=readonly",
+        "./internal/jobs"
+      ],
+      "environmentOverride": {},
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "test-linux-race",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "test",
+        "-race",
+        "-count=1",
+        "-json",
+        "-mod=readonly",
+        "-run",
+        "^Test(Validate|Collector|Failure|Coordinator|Observer|Retirement|Settlement|StartFailure|PreCanceled|Populated|PendingStart|IOAssessment|Created|NilProcess|CanceledCreate|PendingCleanup|SpawnRejects)",
+        "./internal/jobs"
+      ],
+      "environmentOverride": {},
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "compile-linux",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "test",
+        "-c",
+        "-mod=readonly",
+        "-o",
+        "${REPO}/.cache/host-jobs-windows-01/implementation/verification01/jobs-linux.test",
+        "./internal/jobs"
+      ],
+      "environmentOverride": {},
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "vet-windows",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "vet",
+        "-mod=readonly",
+        "./internal/jobs"
+      ],
+      "environmentOverride": {
+        "GOOS": "windows",
+        "GOARCH": "amd64",
+        "CGO_ENABLED": "0"
+      },
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "compile-windows",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "test",
+        "-c",
+        "-mod=readonly",
+        "-o",
+        "${REPO}/.cache/host-jobs-windows-01/implementation/verification01/jobs-windows.test",
+        "./internal/jobs"
+      ],
+      "environmentOverride": {
+        "GOOS": "windows",
+        "GOARCH": "amd64",
+        "CGO_ENABLED": "0"
+      },
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "vet-darwin",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "vet",
+        "-mod=readonly",
+        "./internal/jobs"
+      ],
+      "environmentOverride": {
+        "GOOS": "darwin",
+        "GOARCH": "arm64",
+        "CGO_ENABLED": "0"
+      },
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "compile-darwin",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "test",
+        "-c",
+        "-mod=readonly",
+        "-o",
+        "${REPO}/.cache/host-jobs-windows-01/implementation/verification01/jobs-darwin.test",
+        "./internal/jobs"
+      ],
+      "environmentOverride": {
+        "GOOS": "darwin",
+        "GOARCH": "arm64",
+        "CGO_ENABLED": "0"
+      },
+      "exitCode": 0,
+      "passed": true
+    }
+  ],
+  "artifacts": [
+    {
+      "path": ".cache/host-jobs-windows-01/implementation/verification01/jobs-linux.test",
+      "sha256": "0243f75d3a7bdf790ec710eb49329986fd8a592245c538e90a66c81f1ef96368",
+      "kind": "test executable; cross-compiled Windows/Darwin not executed"
+    },
+    {
+      "path": ".cache/host-jobs-windows-01/implementation/verification01/jobs-windows.test",
+      "sha256": "b74363e1a81365cdc1b74f27e43033428f54ec65c844be598f6938c17dfcf3c3",
+      "kind": "test executable; cross-compiled Windows/Darwin not executed"
+    },
+    {
+      "path": ".cache/host-jobs-windows-01/implementation/verification01/jobs-darwin.test",
+      "sha256": "5f2940a48169758b88da4a43c26e7ba7a529282ce611213cf426dc0fc3260cd1",
+      "kind": "test executable; cross-compiled Windows/Darwin not executed"
+    }
+  ],
+  "pureChecks": {
+    "namedPasses": 37,
+    "namedSkips": 0,
+    "failures": 0,
+    "kind": "Selected Linux race validation/collector/lifecycle-double cases including nested subtests; no real jobs",
+    "rawOutput": {
+      "path": ".cache/host-jobs-windows-01/implementation/verification01/test-linux-race.stdout",
+      "sha256": "f99b3145e5c196a39775af705098d5a40ea76b47df1e1009fdd04de15822ab96"
+    }
+  },
+  "execution": {
+    "linux/amd64": "37 selected named pure race passes; test binary compiled; no native jobs rerun",
+    "windows/amd64": "vet and complete jobs test-binary cross-compilation only; all Windows-specific pure/native tests unrun",
+    "darwin/arm64": "vet and portable jobs test-binary cross-compilation only; no macOS backend"
+  },
+  "native": {
+    "windowsExecuted": false,
+    "linuxCurrentSourceExecuted": false,
+    "nativeLinuxTestSourceUnchangedFromAccepted02": true,
+    "previousLinuxResult": "qualification/results/P4-S1/2026-10-16-host-linux-jobs.json",
+    "previousLinuxEvidenceTransferredToChangedSharedCode": false,
+    "proposedWindowsCases": [
+      "exact-job-membership-and-cancel",
+      "unicode-argv-exact-environment-input",
+      "explicit-empty-environment",
+      "exit259-is-real-exit",
+      "parent-exit-retires-pipe-holding-descendant",
+      "bounded-output-blocked-input-timeout",
+      "unlisted-inheritable-handle-excluded"
+    ],
+    "unimplementedOrUnrunNativeGates": [
+      "Run seven existing cases under exact-binary finite parent-owned safety fixture",
+      "Restrictive nested-job refusal with no child marker",
+      "Native injected post-create/query/termination/close failures retaining actual ownership",
+      "Actual Windows pipe cancellation/drain, handle inheritance and descendant retirement observations"
+    ],
+    "qualificationLimits": [
+      "SPAWNED proves descendant creation/pipe inheritance, not necessarily READY user-code observation",
+      "Sentinel numeric-handle alias can conservatively fail; no parent-only absence inference",
+      "Specific-job query is corroboration while controlled child alive with exact process handle retained, not short-job product admission"
+    ]
+  },
+  "reviews": {
+    "independentSource": {
+      "path": ".cache/host-jobs-windows-01/review/independent-source-01.json",
+      "sha256": "85b549880c6775954829c6daeac2eba6ea3a0a1eeb14443517e5bb773b716728"
+    },
+    "independentSourceText": {
+      "path": ".cache/host-jobs-windows-01/review/independent-source-01.md",
+      "sha256": "e27e293a5f815e1c6ff2f4fa5e3b48ec505f75cdf6fb2fe4a3a42b6b9a5794bb"
+    },
+    "verdict": "SCOPED_SOURCE_ACCEPTANCE_NO_ACTIONABLE_FINDING",
+    "reviewerRanBuildOrNativeTests": false,
+    "coordinatorDisposition": {
+      "path": ".cache/host-jobs-windows-01/disposition.json",
+      "sha256": "370e2ffdc02721e4d876d0643d77f8f478a4bc495d95b9ddbca4c704e11f4956"
+    }
+  },
+  "dependency": {
+    "go": "1.27.2",
+    "xSys": "v0.49.0",
+    "newModuleOrUpgrade": false,
+    "license": "BSD-3-Clause; existing tracked notice unchanged"
+  },
+  "sdkABI": {
+    "origin": "Microsoft win32metadata",
+    "commit": "0f012441d654d3bb7de898fdc664b5fcad52bdcc",
+    "headers": {
+      "WinBase.h": {
+        "url": "https://raw.githubusercontent.com/microsoft/win32metadata/0f012441d654d3bb7de898fdc664b5fcad52bdcc/generation/WinSDK/RecompiledIdlHeaders/um/WinBase.h",
+        "sha256": "1b8913de810e25f0f6ea8d91f5b736e48888d0e6a2b1003b9ca476f3c2262379"
+      },
+      "winnt.h": {
+        "url": "https://raw.githubusercontent.com/microsoft/win32metadata/0f012441d654d3bb7de898fdc664b5fcad52bdcc/generation/WinSDK/RecompiledIdlHeaders/um/winnt.h",
+        "sha256": "404019933323ca25f5db8ce14437483e1054398ce454d5c75df2e187cec2ae40"
+      }
+    },
+    "jobListConstant": "0x0002000d",
+    "accountingBytes": 48,
+    "activeProcessesOffset": 40,
+    "guards": "Compile-time Windows amd64 size and offset assertions"
+  },
+  "omp": {
+    "assignment": {
+      "path": ".cache/host-jobs-windows-01/runtime-01/assignment.json",
+      "sha256": "5f68861480e34dad80e94fa59a91ca05aa7747768346d42d2726b4f3198ddf12"
+    },
+    "taskId": "HOST-JOBS-WINDOWS01-SECURITY-DESIGN-001",
+    "provider": "zai",
+    "model": "glm-5.3",
+    "elapsedSeconds": 32.837,
+    "exitCode": 0,
+    "stopReason": "stop",
+    "terminal": true,
+    "toolEvents": 0,
+    "toolCalls": 0,
+    "toolResults": 0,
+    "fallback": false,
+    "packetSHA256": "fb99df48a5e32aa9c5ac42b0b09c321468957cabf13533bbc29a4b2979e2c3b4",
+    "launcherSHA256": "8e308eeb7eca4d05a528df092e2b2093536de9e742390a895ead985a4d4aca78",
+    "configSHA256": "5be6af03be74eb9b3af9c3984cda724ef80527a305911a779de5436a7d100053",
+    "finalTextSHA256": "73a79cec9670392c989e4fd9433651108e4e8bc55f40469bf7c2e751c9fbe16a",
+    "mode": "public-only context-only design review; no source/runtime verification",
+    "accepted": [
+      "F2 immutable SDK/ABI pin and layout guards",
+      "F5 explicit validation/encoding order and native cases"
+    ],
+    "rejectedOrCorrected": [
+      "F1 invented caller Close API",
+      "F3 private handle-table enumeration",
+      "F4 retired-with-unclosed-io",
+      "F6 cancellation semantic rewrite",
+      "Claims of demonstrated source defects from context-only review"
+    ],
+    "independentActualFinding": "Created process plus post-create error must retain one waiter; independently found by direct Sol/parent, not GLM"
+  },
+  "limits": [
+    "No actual Windows runtime support or timing qualification",
+    "Windows-specific pure/native tests cross-compiled only",
+    "Changed shared/Linux source does not inherit historical native Linux result",
+    "No finite kernel-close/stall guarantee; uncertain owner remains required",
+    "Not a hostile-user or same-user path-replacement sandbox",
+    "Concurrent uncoordinated broad-inherit spawns remain caller limitation",
+    "Attribute Delete wrapper has no observable LocalFree return",
+    "No jobs CLI, authenticated remote admission, replay/events, installation, packaging or macOS jobs backend"
+  ],
+  "capabilityOrStagePromotion": false
+}

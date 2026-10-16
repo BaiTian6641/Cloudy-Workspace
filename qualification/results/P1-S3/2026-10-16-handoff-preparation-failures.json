@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "stage": "P1-S3",
+  "status": "failed-attempts-preserved-no-positive-handoff",
+  "appVersion": "0.1.14",
+  "appVersionCode": 15,
+  "buildResultSha256": "4104610f526ec872dbafb9ce8123af11a53abf6cccb4882a664d2f6912ff1fb9",
+  "passed": false,
+  "normalOpenExecuted": false,
+  "receiverAuthenticationExecuted": false,
+  "hostSessions": 0,
+  "originalHostExitCodes": [
+    null,
+    null
+  ],
+  "evidence": [
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-handoff-positive-console-desktop-01/bootstrap.json",
+      "sha256": "1eda7d6f9d201e404f714f767b586fd8ff396e99e2866169b6483a070d277b54"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-handoff-positive-console-desktop-01/device/result.json",
+      "sha256": "107beeef0996918313fc744be46217938ea582f8b8cf98e6f21c5ac4c6363f80"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-handoff-positive-console-desktop-01/parent-reconciliation-02/result.json",
+      "sha256": "a601136422a56ad7dafb3269e0408c95ed9edb152275ab00e40230af466e876c"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-handoff-positive-console-desktop-02/bootstrap.json",
+      "sha256": "60987d112f5ec0d3594c508139a48456ae15a05abd8d8443fcbb75d9d20d7bc4"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-handoff-positive-console-desktop-02/device/result.json",
+      "sha256": "898df398d911815c6151c7c6c96b748a9f2958386b879cfab6394c6be0d28bdd"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-handoff-positive-console-desktop-02/parent-baseline-inspection-02/result.json",
+      "sha256": "292e9fa7b0af40e59574324e2398a3d486a584bf22363c5b43a42648b5632aa2"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-handoff-positive-console-desktop-02/parent-reconciliation-03/result.json",
+      "sha256": "173baa78afc30ebef67c46ba1c490dbc6036d8beb36dcccc0b172eead2c5de42"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "boundary": "configuration root-mode guard",
+      "configCreated": false,
+      "preparationExecuted": false,
+      "diagnosis": "Product no-backup root771 inside owner-matched private700 data directory; harness incorrectly required700.",
+      "repair": "Runner06 allows only700/771 product root; controller/owned-child700 and config600 unchanged. No chmod.",
+      "reconciliation": "Sole owned reverse removed; complete setup baseline restored."
+    },
+    {
+      "attempt": 2,
+      "boundary": "real receiver PREPARE",
+      "configCreated": true,
+      "preparationExecuted": true,
+      "junitMethodsRun": 1,
+      "junitFailures": 1,
+      "normalOpenExecuted": false,
+      "diagnosis": "Exact cause unknown. Failure before first qualification receipt, with generic sanitized assertion masking initial cause. Source review identifies missing pre-fixture diagnostics; no product defect inferred.",
+      "reconciliation": "Exact config archived/hash-checked then removed; sole owned reverse removed; complete setup baseline restored."
+    }
+  ],
+  "notQualified": [
+    "positive handoff",
+    "receiver path/list/read",
+    "Android observer runtime",
+    "complete host retirement",
+    "reverse direction"
+  ]
+}

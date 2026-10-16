@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "Exact Googlebook package upgrade and preserved-state test setup only",
+  "status": "passed-with-scoped-limits",
+  "productVersion": "0.1.14",
+  "productVersionCode": 15,
+  "priorVersion": "0.1.13",
+  "build": {
+    "path": ".cache/files-handoff-02/controller-retirement/build-02/result.json",
+    "sha256": "4104610f526ec872dbafb9ce8123af11a53abf6cccb4882a664d2f6912ff1fb9"
+  },
+  "installer": {
+    "path": ".cache/files-handoff-02/positive-bootstrap-01/install_03.py",
+    "sha256": "0d34687032a642a52da24d0c695ad572c4417b2d3064fe05c433718bfbca6463"
+  },
+  "runner": {
+    "path": ".cache/files-handoff-02/positive-device-03/run_positive_05.py",
+    "sha256": "085a4acbdf0ff5c058041e753de4c54b2fb234b2bed994d4529493d0400130cf"
+  },
+  "actualSetup": {
+    "path": "qualification/results/private/foundation/2026-10-16-handoff-observer-upgrade-03/bootstrap.json",
+    "sha256": "7f2431e718ce8c51d98ede7a4675d1fa586c9e661b114d5f7d9e52a358891b18"
+  },
+  "parentInspection": {
+    "path": "qualification/results/private/foundation/2026-10-16-handoff-observer-upgrade-03/parent-inspection.json",
+    "sha256": "a2668de0b2d1600cae022a7fabea372c43615fb527489d3db05dd27a5557b97d"
+  },
+  "independentReview": {
+    "path": ".cache/files-handoff-02/positive-bootstrap-01/independent-install-runtime-03.md",
+    "sha256": "72b037b144cc02d7a8ade08997e16a53e409950e74d03a91d4549e358165faa6"
+  },
+  "sourceReviews": [
+    {
+      "path": ".cache/files-handoff-02/positive-bootstrap-01/independent-install-review.md",
+      "sha256": "72d4dedb2909420254d07c4e584f3c5574ad40d38249920a8fa792fd8a97a851"
+    },
+    {
+      "path": ".cache/files-handoff-02/positive-bootstrap-01/independent-install-review-02.md",
+      "sha256": "2f826eb1cf564a397252c86b80de43a0c30003eaa187c624b06b9d174e9419c9"
+    },
+    {
+      "path": ".cache/files-handoff-02/positive-device-03/independent-review-03.md",
+      "sha256": "32e2dbce6ae5dc135fe2673638cb7e0dd38b7ce260984aaa3da832cd4ab37a75"
+    }
+  ],
+  "preservedFailures": [
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-handoff-observer-upgrade-01/bootstrap.json",
+      "sha256": "302141e76f5587b0d44253cb443747f58a81a5f41fc921c23cc1e5abee29563a"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-handoff-observer-upgrade-02/bootstrap.json",
+      "sha256": "14929854a2ff1416331e150e58d5b0d2b72ebed3261e8825424e32ee82aa7e11"
+    }
+  ],
+  "readOnlyTransportControl": {
+    "path": "qualification/results/private/foundation/2026-10-16-handoff-adb-read-control-01/result.json",
+    "sha256": "fb22ef4dff9913e359c3212d281dd1de8834e17d2b9c1a9bc6fed4d9ef8b132a"
+  },
+  "observed": {
+    "productUpgrades": 2,
+    "testPackageInstalls": 3,
+    "protectedFileCounts": {
+      "console": 27,
+      "desktop": 15
+    },
+    "fullPersistentBaselineEqual": true,
+    "productsStopped": true,
+    "testPackagesPresent": 3,
+    "productActivityLaunches": 0,
+    "authenticationOperations": 0,
+    "instrumentationRuns": 0,
+    "hostSessions": 0,
+    "failedPreflightMutations": 0
+  },
+  "sources": [
+    "G251",
+    "G252"
+  ],
+  "notQualified": [
+    "normal positive handoff/BAL",
+    "original-operation observer runtime",
+    "fresh receiver authentication/list/read",
+    "protected vault use",
+    "new feature or release acceptance"
+  ]
+}

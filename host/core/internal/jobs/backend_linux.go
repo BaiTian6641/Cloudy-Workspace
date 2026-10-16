@@ -67,13 +67,21 @@ func Start(lifetime context.Context, delegation *os.File, spec Spec) (*Job, erro
 type execProcess struct{ cmd *exec.Cmd }
 
 func spawn(s Spec, c containment, out, errOut io.Writer) (process, error) {
+	fdOwner, ok := c.(interface{ fd() int })
+	if !ok {
+		return nil, errors.New("missing-cgroup-fd")
+	}
+	fd := fdOwner.fd()
+	if fd < 0 {
+		return nil, errors.New("missing-cgroup-fd")
+	}
 	cmd := exec.Command(s.Executable, s.Args...)
 	cmd.Dir = s.Cwd
 	cmd.Env = s.Env
 	cmd.Stdin = bytes.NewReader(s.Input)
 	cmd.Stdout = out
 	cmd.Stderr = errOut
-	cmd.SysProcAttr = &syscall.SysProcAttr{UseCgroupFD: true, CgroupFD: c.fd()}
+	cmd.SysProcAttr = &syscall.SysProcAttr{UseCgroupFD: true, CgroupFD: fd}
 	// Cancellation is coordinated by Job and the owned cgroup, not WaitDelay.
 	// This bound only retires os/exec-owned copies after direct child exit.
 	cmd.WaitDelay = 250 * time.Millisecond

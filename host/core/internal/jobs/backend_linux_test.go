@@ -226,3 +226,12 @@ func TestIOAssessmentDoesNotInferDrainFromExit(t *testing.T) {
 		}
 	}
 }
+
+func TestSpawnRejectsMissingOrInvalidFDCapabilityBeforeCommand(t *testing.T) {
+	for _, c := range []containment{&ownerDouble{}, &fakeContainer{}} {
+		p, e := spawn(Spec{}, c, io.Discard, io.Discard)
+		if p != nil || e == nil || e.Error() != "missing-cgroup-fd" {
+			t.Fatal("missing fd reached command start", e)
+		}
+	}
+}

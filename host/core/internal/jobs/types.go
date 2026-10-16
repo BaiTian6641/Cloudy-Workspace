@@ -168,7 +168,6 @@ type Job struct {
 }
 
 type containment interface {
-	fd() int
 	kill() error
 	empty() (bool, error)
 	cleanup() error
@@ -250,7 +249,7 @@ func (j *Job) Wait(observer context.Context) (Snapshot, error) {
 	}
 }
 
-// Settle never starts another command or repeats a cgroup kill. It continues
+// Settle never starts another command or repeats owned-container termination. It continues
 // bounded observation/owned cleanup after a committed stop. Observer cancellation
 // alone has no effect on job lifetime. A failed kill remains a safe uncertainty.
 func (j *Job) Settle(observer context.Context) (Snapshot, error) {
@@ -345,9 +344,12 @@ func (j *Job) uncertain(stage string, cause error) (Snapshot, error) {
 
 func (j *Job) run(s Spec, start starter) {
 	p, err := start(s, j.container, &j.stdout, &j.stderr)
+	if p == nil && err == nil {
+		err = failure("invalid-start", "missing-process", nil)
+	}
 	j.mu.Lock()
 	j.state.StartResolved = true
-	j.state.Started = err == nil
+	j.state.Started = p != nil
 	if err != nil {
 		j.state.Failure = failure("start-failed", "spawn", err)
 	}
@@ -355,6 +357,9 @@ func (j *Job) run(s Spec, start starter) {
 	close(j.startDone)
 	if err != nil {
 		j.commit("start-failed")
+	}
+	// A created process remains owned even when a later setup step failed.
+	if p == nil {
 		close(j.waitDone)
 	} else {
 		go func() {
@@ -364,7 +369,7 @@ func (j *Job) run(s Spec, start starter) {
 			j.state.ExitCode = r.exitCode
 			j.state.Signal = r.signal
 			j.state.IOCompletion = r.ioCompletion
-			if r.err != nil {
+			if r.err != nil && j.state.Failure == nil {
 				j.state.Failure = failure("wait-result", "wait", r.err)
 			}
 			j.mu.Unlock()

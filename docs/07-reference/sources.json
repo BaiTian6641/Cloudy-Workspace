@@ -7156,6 +7156,90 @@
       "sourceUpdatedOn": null,
       "note": "Exact already-adopted x/sys module supplies FcntlInt/F_DUPFD_CLOEXEC, Fstat/Fstatfs, Mkdirat/Openat/Fstatat/Unlinkat and public cgroup constants. Pinned local module declarations inspected; Linux jobs expand reviewed API use without a module/version change. BSD-3-Clause closure retained. HOST-JOBS01/P4-S1.",
       "refresh": "Before changing job admission, ownership, output/retirement policy, Go or selected x/sys version."
+    },
+    {
+      "id": "G251",
+      "title": "AOSP UserHandle UID and app-ID composition",
+      "url": "https://android.googlesource.com/platform/frameworks/base/+/refs/heads/main/core/java/android/os/UserHandle.java",
+      "publisher": "Android Open Source Project",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Explanatory upstream source defines PER_USER_RANGE=100000, getUserId/getAppId and UID recomposition. Used to review parent-side package-dump qualification parsing: exact package appId plus corresponding installed/stopped user must match the actual run-as full UID, which remains preserved. These hidden framework methods are not adopted application APIs; upstream main is not proof of the installed HP framework source or a stable dumpsys format. P1-S3 observer upgrade preflight.",
+      "refresh": "Before changing qualification UID parsing, selected Android build or package-manager dump interpretation."
+    },
+    {
+      "id": "G252",
+      "title": "Official ADB shell and package-operation manual",
+      "url": "https://android.googlesource.com/platform/packages/modules/adb/+/refs/heads/main/docs/user/adb.1.md",
+      "publisher": "Android Open Source Project",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "shell -T disables PTY allocation; -x disables remote exit codes and separate stdout/stderr and is deliberately not used. Parent qualification binary reads require actual zero remote status and empty stderr. Exact existing-DB and missing-path Googlebook controls preserve bytes and distinguish absence. Optional replay absence is separately established by complete private inventory, never inferred from a failed read. install -r retains existing app data; no new application API is adopted. P1-S3 handoff test bootstrap.",
+      "refresh": "Before changing ADB transport, binary snapshot handling or qualification package operations."
+    },
+    {
+      "id": "R329",
+      "title": "Microsoft creation-time process attribute contract",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-updateprocthreadattribute",
+      "publisher": "Microsoft",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "JOB_LIST assigns jobs at child creation on Windows10/Server2016 onward. HANDLE_LIST restricts inherited handles; bInheritHandles must be true. Attribute backing values must remain live until attribute-list deletion. Host Windows jobs use maintained x/sys wrappers; compiler acceptance is separate from native availability/containment.",
+      "refresh": "Before changing Windows jobs ABI, process creation/containment/retirement policy, platform baseline or selected dependency."
+    },
+    {
+      "id": "R330",
+      "title": "Microsoft CreateProcessW ownership and Unicode inputs",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessw",
+      "publisher": "Microsoft",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Exact executable, Unicode command/environment and STARTUPINFOEX handle ownership guide the Windows job adapter. Actual creation returns process/thread owners before later fallible work. Parent/child application argument conventions and same-user executable replacement remain explicit limits; no implicit shell or ambient environment is introduced.",
+      "refresh": "Before changing Windows jobs ABI, process creation/containment/retirement policy, platform baseline or selected dependency."
+    },
+    {
+      "id": "R331",
+      "title": "Microsoft Job Object basic accounting and active processes",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-jobobject_basic_accounting_information",
+      "publisher": "Microsoft",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "ActiveProcesses supplies owned-job membership observation. Zero active processes is separate from retained-process wait, pipe/worker joins and successful resource closure. The selected public ABI is pinned in R333; real Windows execution remains pending.",
+      "refresh": "Before changing Windows jobs ABI, process creation/containment/retirement policy, platform baseline or selected dependency."
+    },
+    {
+      "id": "R332",
+      "title": "Microsoft specific Job Object information query",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/jobapi2/nf-jobapi2-queryinformationjobobject",
+      "publisher": "Microsoft",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "QueryInformationJobObject with the specific owned handle supports accounting and BasicProcessIdList. Native membership test must query the exact child Job Object while retaining the process handle; merely being in an ambient CI job does not establish membership. Query failures retain ownership uncertainty.",
+      "refresh": "Before changing Windows jobs ABI, process creation/containment/retirement policy, platform baseline or selected dependency."
+    },
+    {
+      "id": "R333",
+      "title": "Pinned Microsoft Windows SDK definitions for job attributes and accounting",
+      "url": "https://github.com/microsoft/win32metadata/tree/0f012441d654d3bb7de898fdc664b5fcad52bdcc/generation/WinSDK/RecompiledIdlHeaders/um",
+      "publisher": "Microsoft",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Immutable official win32metadata source supplies public JOB_LIST0x2000d and basic-accounting layout absent as named definitions in selected x/sys. WinBase.h SHA2561b8913de810e25f0f6ea8d91f5b736e48888d0e6a2b1003b9ca476f3c2262379; winnt.h SHA256404019933323ca25f5db8ce14437483e1054398ce454d5c75df2e187cec2ae40. amd64 compile-time48-byte/offset40 guards; no copied implementation or dependency update.",
+      "refresh": "Before changing Windows jobs ABI, process creation/containment/retirement policy, platform baseline or selected dependency."
     }
   ]
 }
