@@ -6,6 +6,7 @@ import android.os.Looper
 import android.os.Process
 import android.os.SystemClock
 import io.github.baitian6641.cloudy.domain.*
+import io.github.baitian6641.cloudy.ssh.SshAuthenticatedOwnership
 import io.github.baitian6641.cloudy.ssh.SshObservationCancellation
 import io.github.baitian6641.cloudy.ssh.SshPasswordCredentials
 import java.io.File
@@ -34,7 +35,8 @@ sealed interface SshAuthenticationPreparation {
 internal object SshAuthenticationRegistry {
     val lock = ReentrantLock()
     val attempts: MutableSet<SshAuthenticationHandle> = ConcurrentHashMap.newKeySet()
-    // At most one expiry task per admitted registry entry; close removes it immediately.
+    // At most one authentication-expiry task per entry; successful promotion cancels that task.
+    // Established entries retain capacity until engine-proven retirement, even after cancellation.
     val expiry = ScheduledThreadPoolExecutor(1) { task ->
         Thread(task, "cloudy-auth-expiry").apply { isDaemon = true }
     }.apply { removeOnCancelPolicy = true }
@@ -148,15 +150,21 @@ class SshAuthenticationHandle internal constructor(
     private val ownership = Any()
     private var pending: SshPasswordCredentials? = credentials
     private var expiryTask: ScheduledFuture<*>? = null
-    private var admitted = false
+    private enum class Phase { PREPARED, ADMITTED, ESTABLISHED, RETIRED }
+    @Volatile private var phase = Phase.PREPARED
+    private var established: SshAuthenticatedOwnership? = null
     @Volatile private var closed = false
 
-    internal fun shouldRetire(): Boolean = closed || cancellation.isCancelled || clock() >= expiresAtMillis
+    internal fun shouldRetire(): Boolean = synchronized(ownership) {
+        // A hidden/cancelled established transport is still owned. Neither expiry nor another
+        // begin may release its capacity while actual socket/Reader/helper retirement is unknown.
+        established == null && (closed || cancellation.isCancelled || clock() >= expiresAtMillis)
+    }
 
     internal fun armExpiry() = synchronized(ownership) {
         check(!closed)
         // Publication is serialized with close; scheduling failure is handled before Ready escapes.
-        expiryTask = expiryScheduler.schedule({ close() },
+        expiryTask = expiryScheduler.schedule({ expireAuthentication() },
             (expiresAtMillis - clock()).coerceAtLeast(0), TimeUnit.MILLISECONDS)
     }
 
@@ -166,7 +174,7 @@ class SshAuthenticationHandle internal constructor(
         if (onMain()) { close(); return null }
         if (!SshAuthenticationRegistry.lock.tryLock()) { close(); return null }
         try {
-            if (closed || admitted || cancellation.isCancelled || peer != profile.peer || key != expectedKey) {
+            if (closed || phase != Phase.PREPARED || cancellation.isCancelled || peer != profile.peer || key != expectedKey) {
                 invalidate(); return null
             }
             val now = clock()
@@ -183,12 +191,95 @@ class SshAuthenticationHandle internal constructor(
                 if (gateTime < 0 || gateTime >= expiresAtMillis) null
                 else synchronized(ownership) {
                     if (closed || pending?.isClosed != false) null
-                    else pending.also { pending = null; admitted = true }
+                    else pending.also { pending = null; phase = Phase.ADMITTED }
                 }
             }.also { if (it == null) invalidate() }
         } catch (_: Exception) {
             invalidate(); return null
         } finally { SshAuthenticationRegistry.lock.unlock() }
+    }
+
+    /**
+     * Promote only an engine-issued authenticated proof, under the same exact-state gate used
+     * for credential admission. This consumes no new secret and performs no transport work.
+     * A duplicate/invalid promotion fails closed but cannot discard an already established owner.
+     */
+    fun establishSession(proof: SshAuthenticatedOwnership): Boolean {
+        if (onMain()) { close(); return false }
+        if (!SshAuthenticationRegistry.lock.tryLock()) { close(); return false }
+        try {
+            if (closed || phase != Phase.ADMITTED || proof.isRetired ||
+                proof.cancellation !== cancellation || proof.peer != profile.peer || proof.key != expectedKey) {
+                invalidate(); return false
+            }
+            val now = clock()
+            if (now < 0 || now >= expiresAtMillis) { invalidate(); return false }
+            val catalog = (profiles.load() as? ConnectionProfilesResult.Success)?.value
+            val current = catalog?.profiles?.singleOrNull { it.id == profile.profile.id }
+            val pin = (trust.lookup(profile.peer) as? SshTrustStoreResult.Success)?.value?.current
+            if (catalog == null || current == null || current.protocol != ConnectionProtocol.SSH ||
+                SshObservationProfile.create(catalog.generation, current) != profile || pin != expected) {
+                invalidate(); return false
+            }
+            val promoted = cancellation.tryIfActive {
+                synchronized(ownership) {
+                    val gateTime = clock()
+                    if (closed || phase != Phase.ADMITTED || proof.isRetired || gateTime < 0 || gateTime >= expiresAtMillis) false
+                    else {
+                        established = proof
+                        phase = Phase.ESTABLISHED
+                        // cancel(false) alone is insufficient: a task already running will also
+                        // phase-check under ownership before deciding to expire authentication.
+                        expiryTask?.cancel(false)
+                        expiryTask = null
+                        true
+                    }
+                }
+            } == true
+            if (!promoted) invalidate()
+            return promoted
+        } catch (_: Exception) {
+            invalidate(); return false
+        } finally { SshAuthenticationRegistry.lock.unlock() }
+    }
+
+    /** Exact object identity plus the engine's monotonic retirement flag are both required.
+     * This path needs no SQLite/coordination lock and cannot release a different transport. */
+    fun releaseSession(proof: SshAuthenticatedOwnership) {
+        val release = synchronized(ownership) {
+            if (established !== proof || !proof.isRetired) false
+            else {
+                established = null
+                phase = Phase.RETIRED
+                closed = true
+                true
+            }
+        }
+        if (release) {
+            cancellation.cancel()
+            SshAuthenticationRegistry.attempts.remove(this)
+        }
+    }
+
+    /** An expiry task may already be executing when promotion cancels its Future. Choose its
+     * winner under ownership, release that monitor, then signal cancellation: never reverse
+     * the coordination -> cancellation -> ownership order by cancelling while ownership is held. */
+    private fun expireAuthentication() {
+        val expire = synchronized(ownership) {
+            if (established != null || phase == Phase.RETIRED) false
+            else {
+                closed = true
+                phase = Phase.RETIRED
+                expiryTask = null
+                pending?.close()
+                pending = null
+                true
+            }
+        }
+        if (expire) {
+            cancellation.cancel()
+            SshAuthenticationRegistry.attempts.remove(this)
+        }
     }
 
     internal fun invalidate() {
@@ -198,16 +289,17 @@ class SshAuthenticationHandle internal constructor(
 
     override fun close() {
         // Never waits for a store/SQLite operation, including when called accidentally on main.
-        // Cancel wins the signal monitor before disposal competes with an admission transfer.
+        // Cancel wins the signal monitor before disposal competes with admission/promotion.
         cancellation.cancel()
-        synchronized(ownership) {
+        val remove = synchronized(ownership) {
             closed = true
             expiryTask?.cancel(false)
             expiryTask = null
             pending?.close()
             pending = null
+            if (established == null) { phase = Phase.RETIRED; true } else false
         }
-        SshAuthenticationRegistry.attempts.remove(this)
+        if (remove) SshAuthenticationRegistry.attempts.remove(this)
     }
     override fun toString() = "SshAuthenticationHandle(redacted)"
 }

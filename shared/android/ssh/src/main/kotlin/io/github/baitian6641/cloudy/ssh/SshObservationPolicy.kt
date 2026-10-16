@@ -10,7 +10,7 @@ internal object SshObservationPolicy {
     const val CIPHER = "aes128-gcm@openssh.com"
     const val MAC = "hmac-sha2-256"
 
-    fun create(logging: LoggerFactory): DefaultSecurityProviderConfig = DefaultSecurityProviderConfig().apply {
+    fun create(logging: LoggerFactory, idleReadTimeoutMillis: Int = 10_000): DefaultSecurityProviderConfig = DefaultSecurityProviderConfig().apply {
         // This class disables SSHJ's BC auto-registration before SSHClient is constructed.
         loggerFactory = logging
         keyExchangeFactories = keyExchangeFactories.filter { it.name == KEX || it.name == "ext-info-c" }
@@ -21,8 +21,11 @@ internal object SshObservationPolicy {
         check(keyExchangeFactories.any { it.name == KEX } && keyAlgorithms.isNotEmpty() &&
             cipherFactories.isNotEmpty() && getMACFactories().isNotEmpty() && compressionFactories.isNotEmpty())
         timeoutMs = 10_000
-        channelReadTimeoutMs = 10_000
-        channelErrorReadTimeoutMs = 10_000
+        // Retained transports use owned cancellation instead of treating quiet channels as failure.
+        // The finite observer/authentication defaults remain unchanged.
+        require(idleReadTimeoutMillis >= 0)
+        channelReadTimeoutMs = idleReadTimeoutMillis
+        channelErrorReadTimeoutMs = idleReadTimeoutMillis
         maxCircularBufferSize = 1_048_576
     }
 }

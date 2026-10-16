@@ -2122,6 +2122,53 @@
       "researchEvidence": "docs/03-platform/googlebook/product-ssh-authentication-entry.md",
       "compileEvidence": "qualification/results/P1-S3/2026-10-16-ssh-authentication-ui-build.json",
       "deviceEvidence": "qualification/results/P1-S3/2026-10-16-ssh-authentication-ui.md"
+    },
+    {
+      "id": "API62",
+      "feature": "Retained authenticated SSH ownership and bounded read-only SFTP",
+      "symbols": [
+        "net.schmizz.sshj.SSHClient.auth",
+        "net.schmizz.sshj.transport.verification.HostKeyVerifier.verify",
+        "net.schmizz.sshj.transport.Transport.setDisconnectListener",
+        "net.schmizz.sshj.connection.channel.direct.SessionChannel",
+        "net.schmizz.sshj.sftp.SFTPEngine.reader",
+        "net.schmizz.sshj.sftp.SFTPClient(SFTPEngine)",
+        "net.schmizz.sshj.sftp.SFTPClient.ls",
+        "net.schmizz.sshj.sftp.RemoteFile.read",
+        "java.net.Socket.setSoTimeout"
+      ],
+      "sourceIds": [
+        "R57",
+        "R58",
+        "R93",
+        "R95",
+        "R273",
+        "R274",
+        "R275",
+        "R276",
+        "R277",
+        "R286",
+        "R287",
+        "R288",
+        "R289",
+        "R290",
+        "R291",
+        "R292",
+        "R293"
+      ],
+      "minimumApi": 28,
+      "libraryVersion": "Selected SSHJ0.41.2 unchanged; public/protected library hooks, not new Android platform APIs. Productmin35/target37. ApacheSSHD2.20.0 sshd-sftp added only to host fixture.",
+      "availability": "documented",
+      "qualification": "partial",
+      "checkedOn": "2026-10-16",
+      "owner": "Android/platform and SSH security developers",
+      "stage": "P1-S3",
+      "runtimeGuard": "Off-main same cancellation/current profile+exact pin; actual auth before proof and atomic establish. One retained factory owner/one operation; original admission deadline until promotion; finite per-operation bounds. Keep registry capacity until actual socket/Reader/PacketReader/helper/owner retirement; quarantine uncertainty. Incoming SFTP frame<=256KiB; entries<=512, path4096/name1024UTF16, file<=1MiB.",
+      "fallback": "Typed failure and actual retirement on cancellation, changed profile/trust/key, timeout, remote-data/bound or protocol failure. No reconnect, fallback auth, upload, terminal or UI lifecycle. Strict malformed UTF8 filename rejection and snapshot consistency not claimed.",
+      "experiment": "Build01 passes strict compiler/dependency verification and four zero-finding Lint reports. Host01:9/9 actual retained transport/SFTP/rekey/cancel/deadline cases. Googlebook device01:61 policy/SQLite cases (nine simulated-proof policy cases), three default skips and three separate actual engine-proof consumers;3real auth/4channels. Exact product APK/data/settings/boot baseline preserved. New product bytes built only; installed0.1.9 finite UI unchanged.",
+      "researchEvidence": "docs/02-architecture/ssh-retained-session.md",
+      "compileEvidence": "qualification/results/P1-S3/2026-10-16-ssh-retained-session-build.json",
+      "deviceEvidence": "qualification/results/P1-S3/2026-10-16-ssh-retained-session.md"
     }
   ],
   "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."

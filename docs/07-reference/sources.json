@@ -2001,9 +2001,9 @@
       "publisher": "SSHJ upstream",
       "category": "protocol",
       "reviewStatus": "reviewed",
-      "checkedOn": "2026-10-15",
+      "checkedOn": "2026-10-16",
       "sourceUpdatedOn": null,
-      "note": "Pinned public open/rename/extension handling. OpenSSH POSIX rename fallback requires explicit OVERWRITE; atomic rename has no expected-version condition. Preserve per-save consent.",
+      "note": "Pinned public open/rename/extension handling. OpenSSH POSIX rename fallback requires explicit OVERWRITE; atomic rename has no expected-version condition. Preserve per-save consent. Retained-session follow-up: protected final reader exposes the actual PacketReader. Constructor opens session/subsystem, init starts Reader; close interrupts but does not join. Selected-pin tracked SessionFactory and subclass account for partial construction and actual join.",
       "refresh": "Before P0-S3 dependency adoption, after relevant upstream/security changes, and before product engine qualification."
     },
     {
@@ -2013,9 +2013,9 @@
       "publisher": "SSHJ upstream",
       "category": "backend",
       "reviewStatus": "reviewed",
-      "checkedOn": "2026-10-15",
+      "checkedOn": "2026-10-16",
       "sourceUpdatedOn": null,
-      "note": "setSocketFactory and connectVia(DirectConnection) support scoped sockets/nested SSH. Generic stream-only connectVia labels peer localhost/65535; preserve real destination identity for trust.",
+      "note": "setSocketFactory and connectVia(DirectConnection) support scoped sockets/nested SSH. Generic stream-only connectVia labels peer localhost/65535; preserve real destination identity for trust. Retained-session follow-up: onConnect applies socket SO_TIMEOUT. The retained engine explicitly clears that timeout after authentication, separately from zero channel idle-read timeout; finite defaults remain unchanged.",
       "refresh": "Before P0-S3 dependency adoption, after relevant upstream/security changes, and before product engine qualification."
     },
     {
@@ -2552,9 +2552,9 @@
       "publisher": "SSHJ upstream",
       "category": "backend",
       "reviewStatus": "reviewed",
-      "checkedOn": "2026-10-15",
+      "checkedOn": "2026-10-16",
       "sourceUpdatedOn": null,
-      "note": "Pinned implementation sends window-change with want-reply false, so server-observed resize is required. allocateDefaultPTY passes an empty mode map despite interface echo wording; use explicit verified modes. Single-use guard inspected. Owner P0-S3 probe maintainer; no implementation cast or fabricated size fallback.",
+      "note": "Pinned implementation sends window-change with want-reply false, so server-observed resize is required. allocateDefaultPTY passes an empty mode map despite interface echo wording; use explicit verified modes. Single-use guard inspected. Owner P0-S3 probe maintainer; no implementation cast or fabricated size fallback. Retained-session follow-up: public SessionChannel(Connection, Charset) plus open permits publishing actual ownership before open/subsystem requests, mirroring SSHClient.startSession without replacing encoding.",
       "refresh": "Before P0-S3 exec/PTY implementation, on SSHJ or OpenSSH policy changes, and before qualification claims.",
       "sha256": "43c538d8868e1327da0617ba16310abef72ebe718fd1573b62b51f09be4135fc"
     },
@@ -6218,7 +6218,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-16",
       "sourceUpdatedOn": null,
-      "note": "Selected KEX completion precedes verifyHost; false verifiers reject before client NEWKEYS. Product has exactly one always-rejecting observer verifier. Signed observation is not host trust, completed handshake or authentication. Selected engine performs cryptography. Finite password-check review: after initial KEX, isKeyExchangeAllowed rejects another exchange until transport authentication. Incoming KEXINIT then waits on cleared kexInitSent; observed finite timeout is not second-verifier rejection or rekey support.",
+      "note": "Selected KEX completion precedes verifyHost; false verifiers reject before client NEWKEYS. Product has exactly one always-rejecting observer verifier. Signed observation is not host trust, completed handshake or authentication. Selected engine performs cryptography. Finite password-check review: after initial KEX, isKeyExchangeAllowed rejects another exchange until transport authentication. Incoming KEXINIT then waits on cleared kexInitSent; observed finite timeout is not second-verifier rejection or rekey support. Retained-session follow-up: real host01 now proves same-key post-authentication rekey with continued SFTP and changed-key rejection with typed KEY_REJECTED. Pre-authentication limitation and full adoption gaps remain.",
       "refresh": "Before observer/platform or selected engine upgrades; preserve exact compile and device qualification separately."
     },
     {
@@ -6230,7 +6230,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-16",
       "sourceUpdatedOn": null,
-      "note": "init starts Reader; join waits close event and isRunning reads interruption rather than proving Thread termination. Observer independently joins the captured actual Reader and tracked watcher/close helper after closing its owned socket.",
+      "note": "init starts Reader; join waits close event and isRunning reads interruption rather than proving Thread termination. Observer independently joins the captured actual Reader and tracked watcher/close helper after closing its owned socket. Retained-session follow-up: authed is volatile; disconnect listener wakes owned cleanup without transport closure on Reader. Actual Thread retirement remains separate from callbacks.",
       "refresh": "Before observer/platform or selected engine upgrades; preserve exact compile and device qualification separately."
     },
     {
@@ -6242,7 +6242,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-16",
       "sourceUpdatedOn": null,
-      "note": "Protected doKex is invoked after transport init; observer marks Reader expected there and calls selected engine implementation. No reflective engine lookup/global thread scan, auth/session API or credential handoff is used. The same pin's authPassword convenience overload adds AuthKeyboardInteractive fallback; future strict password policy must select methods explicitly. No authentication route is implemented by the observer.",
+      "note": "Protected doKex is invoked after transport init; observer marks Reader expected there and calls selected engine implementation. No reflective engine lookup/global thread scan, auth/session API or credential handoff is used. The same pin's authPassword convenience overload adds AuthKeyboardInteractive fallback; future strict password policy must select methods explicitly. No authentication route is implemented by the observer. Retained-session follow-up: public startSession constructs SessionChannel before open. Retained adapter tracks that partial ownership and never returns raw SSHClient.",
       "refresh": "Before observer/platform or selected engine upgrades; preserve exact compile and device qualification separately."
     },
     {
@@ -6266,7 +6266,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-16",
       "sourceUpdatedOn": null,
-      "note": "Buffer.putSensitiveString(null) serializes an empty string, not cancellation. Credential adapters must reject unavailable/cancelled input before encoding; returning null from a provider is not proof of zero credential requests. This follows selected source; Cloudy's separate strict password-change refusal has real host evidence without taking this convenience path.",
+      "note": "Buffer.putSensitiveString(null) serializes an empty string, not cancellation. Credential adapters must reject unavailable/cancelled input before encoding; returning null from a provider is not proof of zero credential requests. This follows selected source; Cloudy's separate strict password-change refusal has real host evidence without taking this convenience path. Retained-session follow-up: inherited MAX_SIZE is1GiB; readString(Charset) bounds bytes but decodes through new String, which may replace malformed input. Cloudy adds a256KiB SFTP frame guard and does not claim strict wire UTF8 rejection.",
       "refresh": "Before P1-S3/P2 authentication implementation or SSHJ upgrades; Android/security owner must qualify strict method/refusal behavior against a real owned server."
     },
     {
@@ -6412,6 +6412,102 @@
       "sourceUpdatedOn": "2026-08-18",
       "note": "Autofill framework is API26+. Official guidance documents importantForAutofill=noExcludeDescendants on an Activity hierarchy and warns that disabling expected credential autofill reduces convenience. The finite per-session entry deliberately excludes the decor subtree; actual tests assert that configured flag, not complete service/IME behavior. Product vault and future deliberate password-manager integration remain separate. Direct oversized View API page was unavailable; guide plus compiled public SDK constant establish this scoped use. Owner Android/security; P1-S3 API61.",
       "refresh": "Before changing per-session credential persistence, autofill or password-manager integration; retain native UX and exact lifecycle ownership."
+    },
+    {
+      "id": "R286",
+      "title": "SSHJ0.41.2 SFTP packet reader and allocation boundary",
+      "url": "https://raw.githubusercontent.com/hierynomus/sshj/6fad160fe36605a68847ac8a527750c615b4bd04/src/main/java/net/schmizz/sshj/sftp/PacketReader.java",
+      "publisher": "SSHJ maintainers",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "PacketReader is an actual Thread. readPacket reads an unsigned four-byte length, compares against SFTPPacket.MAX_SIZE, then ensureCapacity before payload read. SFTPPacket inherits Buffer.MAX_SIZE (1GiB), so facade entry/byte caps alone do not bound wire allocation. Cloudy's input framing guard validates a 256KiB frame before exposing the fourth header byte; upstream retains message parsing/crypto. Actual PacketReader join is required; interrupt alone is not retirement. P1-S3 Android/platform and SSH security owner; fail closed/quarantine on missing retirement.",
+      "refresh": "Before retained SSH/SFTP implementation or selected SSHJ upgrades; preserve source, build and actual backend/device qualification separately."
+    },
+    {
+      "id": "R287",
+      "title": "SSHJ0.41.2 explicit SFTP engine and read-only handles",
+      "url": "https://raw.githubusercontent.com/hierynomus/sshj/6fad160fe36605a68847ac8a527750c615b4bd04/src/main/java/net/schmizz/sshj/sftp/SFTPClient.java",
+      "publisher": "SSHJ maintainers",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Public SFTPClient(SFTPEngine) supports explicitly owned initialization; SessionFactory convenience constructs and initializes implicitly. ls(path, RemoteResourceSelector) closes RemoteDirectory through try-with-resources, including selector BREAK. open(path, Set<OpenMode>) allows explicit READ-only handles; the library also has mutation APIs, which Cloudy's facade does not expose. P1-S3 Android/platform and SSH security owner; protocol/close failure retires the transport rather than reconnecting or publishing truncated data.",
+      "refresh": "Before retained SSH/SFTP implementation or selected SSHJ upgrades; preserve source, build and actual backend/device qualification separately."
+    },
+    {
+      "id": "R288",
+      "title": "SSHJ0.41.2 bounded directory selection and decoded-name boundary",
+      "url": "https://raw.githubusercontent.com/hierynomus/sshj/6fad160fe36605a68847ac8a527750c615b4bd04/src/main/java/net/schmizz/sshj/sftp/RemoteDirectory.java",
+      "publisher": "SSHJ maintainers",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "scan(RemoteResourceSelector) decodes each filename, discarded longname and attributes before selecting ACCEPT/CONTINUE/BREAK. BREAK stops accumulation/further directory requests but does not prevent allocation of the current response/string. Cloudy bounds the incoming frame separately, validates decoded leaf names, caps entries and treats overflow as failure. Dot entries are skipped upstream. Buffer string decoding can be lossy; strict filename UTF-8 rejection and arbitrary non-UTF8 filename round-trip are not claimed. P1-S3 Android/platform and SSH security owner; no local destination derivation from remote names.",
+      "refresh": "Before retained SSH/SFTP implementation or selected SSHJ upgrades; preserve source, build and actual backend/device qualification separately."
+    },
+    {
+      "id": "R289",
+      "title": "SSHJ0.41.2 offset reads and explicit EOF",
+      "url": "https://raw.githubusercontent.com/hierynomus/sshj/6fad160fe36605a68847ac8a527750c615b4bd04/src/main/java/net/schmizz/sshj/sftp/RemoteFile.java",
+      "publisher": "SSHJ maintainers",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "read(offset, byte[], offset, len) uses maintained READ requests and returns -1 only for EOF status. It copies the server-reported DATA length into the destination; callers must retain bounded destination arrays and treat malformed/oversized responses as failure. Cloudy uses explicit READ handles, repeated bounded reads and maxBytes+1 to detect overflow rather than silently truncate. No snapshot consistency or server-size immutability is inferred. P1-S3 Android/platform and SSH security owner; no upload/local publication.",
+      "refresh": "Before retained SSH/SFTP implementation or selected SSHJ upgrades; preserve source, build and actual backend/device qualification separately."
+    },
+    {
+      "id": "R290",
+      "title": "SSHJ0.41.2 authentication success publication order",
+      "url": "https://raw.githubusercontent.com/hierynomus/sshj/6fad160fe36605a68847ac8a527750c615b4bd04/src/main/java/net/schmizz/sshj/userauth/UserAuthImpl.java",
+      "publisher": "SSHJ maintainers",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "USERAUTH_SUCCESS marks Transport authenticated and switches service before delivering the authentication promise. A valid post-auth key callback may therefore precede return from SSHClient.auth on the owning worker. Retained verification must use exact pin plus live cancellation, not a later worker-only authenticated flag. This is selected-pin implementation ordering; P1-S3 Android/platform and SSH security owner must qualify actual rekey with a maintained server. It grants no new credential retry or trust enrollment authority.",
+      "refresh": "Before retained SSH/SFTP implementation or selected SSHJ upgrades; preserve source, build and actual backend/device qualification separately."
+    },
+    {
+      "id": "R291",
+      "title": "SSHJ0.41.2 channel idle reads and cancellation",
+      "url": "https://raw.githubusercontent.com/hierynomus/sshj/6fad160fe36605a68847ac8a527750c615b4bd04/src/main/java/net/schmizz/sshj/connection/channel/ChannelInputStream.java",
+      "publisher": "SSHJ maintainers",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "read waits with timeout only when timeoutMs>0; zero uses the condition wait. EOF/error and interruption remain distinct. The retained path explicitly chooses zero idle channel read timeout while preserving per-operation watchdog/request bounds, socket cancellation and actual Reader/helper joins; finite observer/auth defaults stay ten seconds. R58 separately covers socket SO_TIMEOUT. P1-S3 Android/platform and SSH security owner; quiet-idle and stalled-operation behavior need real backend evidence.",
+      "refresh": "Before retained SSH/SFTP implementation or selected SSHJ upgrades; preserve source, build and actual backend/device qualification separately."
+    },
+    {
+      "id": "R292",
+      "title": "Apache SSHD2.20.0 maintained SFTP subsystem and executor ownership",
+      "url": "https://raw.githubusercontent.com/apache/mina-sshd/2221febd396cd3daafdfbf2ff982c6d0eb69a203/sshd-sftp/src/main/java/org/apache/sshd/sftp/server/SftpSubsystemFactory.java",
+      "publisher": "Apache Software Foundation",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Public factory supports actual SFTP subsystem creation, filesystem accessor and executor provider. Cloudy fixture uses maintained protocol/filesystem code with a dedicated bounded read-only root, request allowlist and explicitly tracked subsystem executors. Fixture-only sshd-sftp artifact matches publisher checksums and verified Apache archive; no product dependency change. P1-S3 qualification owner; actual server and worker retirement must both be recorded.",
+      "refresh": "Before retained SSH/SFTP fixture or Apache SSHD upgrades; keep real protocol events and bounded worker retirement evidence."
+    },
+    {
+      "id": "R293",
+      "title": "Apache SSHD2.20.0 session-local host keys for actual rekey fixtures",
+      "url": "https://raw.githubusercontent.com/apache/mina-sshd/2221febd396cd3daafdfbf2ff982c6d0eb69a203/sshd-core/src/main/java/org/apache/sshd/server/session/AbstractServerSession.java",
+      "publisher": "Apache Software Foundation",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Public setKeyPairProvider changes the selected session provider; getHostKey loads the effective provider for the negotiated key algorithm. Fixture pairs this with real reExchangeKeys and actual KEX/write/negotiation events, using original or independent replacement key. Same-key success needs continued real SFTP; changed-key rejection needs the client typed cause. No server hook callback alone establishes client verification. P1-S3 qualification owner; host-only maintained fixture.",
+      "refresh": "Before retained SSH/SFTP fixture or Apache SSHD upgrades; keep real protocol events and bounded worker retirement evidence."
     }
   ]
 }

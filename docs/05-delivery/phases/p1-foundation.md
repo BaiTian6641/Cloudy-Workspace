@@ -96,6 +96,8 @@ The [connection-profile increment](../../../qualification/results/P1-S3/2026-10-
 
 The [0.1.9 native per-session SSH entry](../../../qualification/results/P1-S3/2026-10-16-ssh-authentication-ui.md) adds actual finite owning-app authentication and lifecycle/credential retirement, with ten build02 cases and six affected final-build reruns. Current profile/trust admission and native field epochs retain independent ownership. It supplies no reusable session or saved-vault authority; all remaining work/exits below and existing P2 prerequisites remain required.
 
+The [retained SSH ownership increment](../../../qualification/results/P1-S3/2026-10-16-ssh-retained-session.md) passes bounded host rekey/SFTP and actual Android invalidation/retirement tests. It supplies shared construction and lower-level consumer evidence; native retained-session UI/lifecycle, saved-vault use and the remaining P1/P2 gates are still required.
+
 Deliverables:
 
 - Identity/IPC/lifecycle library and schema fixtures

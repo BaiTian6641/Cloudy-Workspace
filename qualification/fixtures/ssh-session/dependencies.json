@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "scope": "host-qualification-only",
+  "upstreamTagCommit": "2221febd396cd3daafdfbf2ff982c6d0eb69a203",
+  "artifacts": [
+    {
+      "file": "sshd-core-2.20.0.jar",
+      "url": "https://repo.maven.apache.org/maven2/org/apache/sshd/sshd-core/2.20.0/sshd-core-2.20.0.jar",
+      "bytes": 970864,
+      "sha256": "0f2fd957d1c7162b7fa682942e30de21be3377b98d698b6b5b729657df74e576",
+      "publishedChecksums": {
+        "sha1": "e7de1ae88f20ca16af1360b6a2f3398425d2d501"
+      }
+    },
+    {
+      "file": "sshd-common-2.20.0.jar",
+      "url": "https://repo.maven.apache.org/maven2/org/apache/sshd/sshd-common/2.20.0/sshd-common-2.20.0.jar",
+      "bytes": 966659,
+      "sha256": "55612c7c6a03302940c047d8b8b80761e963f4c529a032f47acda99a1a064334",
+      "publishedChecksums": {
+        "sha1": "8a7c2c39150ed4ba3a75671c5a2314b9406d08d2"
+      }
+    },
+    {
+      "file": "slf4j-api-2.0.20.jar",
+      "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/2.0.20/slf4j-api-2.0.20.jar",
+      "bytes": 70255,
+      "sha256": "7e1446499b359675d8aabe6af2de86b85e72ae8a2a932c0b40d0e5ba57097439",
+      "publishedChecksums": {
+        "sha512": "6abf6218c2558a0059f35cecc24db3ef1552dbccdfb8f32d6c9d1d8b11fd545405e04e79673219d19e17b99ca6a2a3da7d92006bcaedaa15646bf07737115d17"
+      }
+    },
+    {
+      "file": "slf4j-nop-2.0.20.jar",
+      "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-nop/2.0.20/slf4j-nop-2.0.20.jar",
+      "bytes": 4966,
+      "sha256": "6522080396fb339e99bae40d329a06d18d3190dc864020ac4ca943519d0fd85b",
+      "publishedChecksums": {
+        "sha512": "54005dadb4dd979f214de7cafc231ba7bb15e848a82c7d17fdc736879e41e06a313bd3787d856d592784460f73224b621373d17e55655ebe08ce7bf0af71562d"
+      }
+    },
+    {
+      "file": "sshd-sftp-2.20.0.jar",
+      "url": "https://repo.maven.apache.org/maven2/org/apache/sshd/sshd-sftp/2.20.0/sshd-sftp-2.20.0.jar",
+      "bytes": 394207,
+      "sha256": "70ce2e0e35b1106c4371471fb93313e67e0ceab8f127bc09432e115f67a5089e",
+      "publishedChecksums": {
+        "sha1": "640163a12584c3eedd8e23ecd0f2b5d29143670d"
+      }
+    }
+  ],
+  "apacheBinaryVerification": {
+    "url": "https://downloads.apache.org/mina/sshd/2.20.0/apache-sshd-2.20.0.zip",
+    "archiveSha512": "bc8568be236d51e35a3f5380bc46160c15ea8dbc0059cff205436348db9bb8944e3f61152487f33942b8459a8e593f3fca2f7844e072d092b4370e2946013e95",
+    "jars": [
+      {
+        "artifact": "sshd-core-2.20.0.jar",
+        "archivePath": "apache-sshd-2.20.0/lib/sshd-core-2.20.0.jar",
+        "sha256": "0f2fd957d1c7162b7fa682942e30de21be3377b98d698b6b5b729657df74e576",
+        "mavenBytesMatch": true
+      },
+      {
+        "artifact": "sshd-common-2.20.0.jar",
+        "archivePath": "apache-sshd-2.20.0/lib/sshd-common-2.20.0.jar",
+        "sha256": "55612c7c6a03302940c047d8b8b80761e963f4c529a032f47acda99a1a064334",
+        "mavenBytesMatch": true
+      },
+      {
+        "artifact": "sshd-sftp-2.20.0.jar",
+        "archivePath": "apache-sshd-2.20.0/lib/sshd-sftp-2.20.0.jar",
+        "sha256": "70ce2e0e35b1106c4371471fb93313e67e0ceab8f127bc09432e115f67a5089e",
+        "mavenBytesMatch": true
+      }
+    ]
+  },
+  "sourceArtifacts": [
+    {
+      "file": "sshd-sftp-2.20.0-sources.jar",
+      "url": "https://repo.maven.apache.org/maven2/org/apache/sshd/sshd-sftp/2.20.0/sshd-sftp-2.20.0-sources.jar",
+      "bytes": 278271,
+      "sha256": "0b06a4c4425460577f356b0205a2667cd2bb4a1a25210e35772b7a0ff2cd61d0",
+      "publishedChecksums": {
+        "sha1": "83cf65b1c9c58169582e5e93a98bdfa2db813ada"
+      }
+    },
+    {
+      "file": "sshd-sftp-2.20.0.pom",
+      "url": "https://repo.maven.apache.org/maven2/org/apache/sshd/sshd-sftp/2.20.0/sshd-sftp-2.20.0.pom",
+      "bytes": 8676,
+      "sha256": "6fa66afd4b3d48f00f018db20a13310ae27197cc97a4964c61c4d4a00a260a4d",
+      "publishedChecksums": {
+        "sha1": "17efeff8a74266d3a94707743a8041a3d65248d8"
+      }
+    }
+  ]
+}

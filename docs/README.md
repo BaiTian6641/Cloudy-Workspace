@@ -72,3 +72,5 @@ These entries retain chronological checkpoints. Use the current execution state 
 - [Native app appearance/density contract](04-design/native-display-settings.md) and [0.1.6 actual build/device result](../qualification/results/P1-S2/2026-10-16-native-display-settings.md):12 actual cases, both owning apps, six Console Light/Dark × density captures and explicit remaining P1-S2 limits. [External-feedback follow-through](04-design/2026-10-16-external-feedback-review.md) preserves accepted/deferred scope.
 
 - [Finite SSH password admission](02-architecture/ssh-password-admission.md) and [qualification](../qualification/results/P1-S3/2026-10-16-ssh-authentication.md): real password-only transport, exact profile/trust coordination,52 Android storage cases,10 final host cases, retained failed rekey expectation and pending native entry.
+
+- [Retained SSH ownership/read-only SFTP](02-architecture/ssh-retained-session.md) and [qualification](../qualification/results/P1-S3/2026-10-16-ssh-retained-session.md): strict build,9 real-host cases,61 Android policy/storage cases and3 actual engine-proof consumers; native retained product UI and broader gates remain open.
