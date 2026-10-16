@@ -9,6 +9,10 @@ qualification/probes/device-baseline/app/src/main/assets/third_party_notices/run
 qualification/probes/device-baseline/app/src/main/assets/third_party_notices/ssh/slf4j-embedded-LICENSE.txt -text whitespace=cr-at-eol,-blank-at-eof
 qualification/probes/device-baseline/app/src/main/assets/third_party_notices/ssh/slf4j-module-LICENSE.txt -text whitespace=-blank-at-eof
 qualification/probes/device-baseline/app/src/main/assets/third_party_notices/ssh/sshj-NOTICE.txt -text whitespace=-blank-at-eol
+# The product packages the same reviewed upstream bytes; do not normalize notices.
+shared/android/platform/src/main/assets/third_party_notices/ssh/slf4j-embedded-LICENSE.txt -text whitespace=cr-at-eol,-blank-at-eof
+shared/android/platform/src/main/assets/third_party_notices/ssh/slf4j-module-LICENSE.txt -text whitespace=-blank-at-eof
+shared/android/platform/src/main/assets/third_party_notices/ssh/sshj-NOTICE.txt -text whitespace=-blank-at-eol
 # Preserve the native diagnostic's reviewed notice bytes and APK provenance.
 qualification/probes/native-rdp/app/src/main/assets/runtime-copyrights.txt whitespace=-blank-at-eof
 qualification/probes/native-usb/app/src/main/assets/runtime-copyrights.txt whitespace=-blank-at-eof

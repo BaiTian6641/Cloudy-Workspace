@@ -21,12 +21,13 @@ android {
         kotlin.directories.add(rootProject.file("testing/foundation/src/debug/kotlin").absolutePath)
         manifest.srcFile(rootProject.file("testing/foundation/src/debug/AndroidManifest.xml"))
     }
+    packaging.resources.merges += setOf("META-INF/LICENSE.md", "META-INF/LICENSE.txt")
     defaultConfig {
         applicationId = "io.github.baitian6641.cloudy.desktop"
         minSdk = 35
         targetSdk = 37
-        versionCode = 8
-        versionName = "0.1.7"
+        versionCode = 9
+        versionName = "0.1.8"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 }

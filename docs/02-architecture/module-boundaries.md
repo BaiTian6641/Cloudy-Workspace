@@ -29,7 +29,7 @@ The implemented vertical slice is local window naming, fresh document creation, 
 
 App UI depends on shared models and services. Shared modules never depend on either app. Protocol schemas describe serialization without importing platform UI types. Host adapters depend on host-core interfaces; host core does not import OS-specific APIs directly. Design tokens have no product-state dependency.
 
-The [connection-profile increment](../../qualification/results/P1-S3/2026-10-16-connection-profiles.md) adds `:identity → :domain` so vault bindings and local endpoint profiles use the same unchanged `EndpointHost` normalization. Domain remains pure Kotlin/JVM with no reverse identity/platform dependency. `:platform` owns each app's actual profile SQLite store; the domain model owns no persistence, credential or trust authority. The native profile editor and registered-resource integration remain pending.
+The [connection-profile increment](../../qualification/results/P1-S3/2026-10-16-connection-profiles.md) adds `:identity → :domain` so vault bindings and local endpoint profiles use the same unchanged `EndpointHost` normalization. Domain remains pure Kotlin/JVM with no reverse identity/platform dependency. `:platform` owns each app's actual profile SQLite store; the domain model owns no persistence, credential or trust authority. The native profile editor is implemented with scoped qualification; registered-resource integration remains pending.
 
 SSH/SFTP engine adapters must be replaceable without redesigning navigation. Stream launch and integrated stream adapters expose different capability levels rather than pretending external-client lifecycle is controllable. USB ownership state is shared domain logic with backend-confirmed facts, not a boolean derived from a button.
 
@@ -48,3 +48,10 @@ Release manifests record app and agent versions, protocol range, backend version
 The [native foundation report](../../qualification/results/P1-S1/2026-10-16-native-foundation.md) records strict build12 with no dependency-regeneration flags, nine passing JVM tests (domain5/design4), and zero Lint findings in both apps. On HP Googlebook14, Android17/API37 build `CL3B.260622.276.R2`, five real platform Bundle/Parcel tests and two Activity tests per app pass (nine connected tests total). Each product is independently installed/launched with the other absent. The first Console instrumentation failure exposed Espresso3.5 reflection incompatibility; the test-only3.7 pin corrects it, without changing the frozen product APK hashes.
 
 This qualifies only the tested local-window metadata/editor/restoration boundary. P1-S1 is complete with actual Desktop New/Close and both package replacement/uninstall receipts; later product requirements remain open. Physical keyboard/native IME, process-death restoration, broader geometry/accessibility and remote functionality are not established by Activity recreation or Compose test stimulus.
+
+
+## Current credential-free SSH boundary
+
+P1-S3 adds a seventh real production module, pure JVM `:ssh` at `shared/android/ssh`. The dependency direction is `:console/:desktop → :platform → :ssh → :domain`, alongside the existing identity/design modules. The engine owns bounded numeric-address transport observation and actual thread/socket retirement, with no Android context, DNS, credential store, trust persistence or UI dependency. Platform owns resolver/permission/lifecycle presentation and its app-private trust CAS. No process or credential data is shared between products.
+
+The [observation contract](ssh-key-observation.md) and [0.1.8 result](../../qualification/results/P1-S3/2026-10-16-ssh-key-observation.md) cover only that real finite route. PTY, authentication, jumps, SFTP, forwarding and full P2-S1 acceptance remain required. Existing diagnostic implementations do not become product features merely by sharing an engine pin.

@@ -91,3 +91,8 @@ The [native window/font-scale follow-up](qualification/results/P1-S2/2026-10-16-
 
 
 The [profile navigation/confirmation follow-up](qualification/results/P1-S2/2026-10-16-profile-geometry.md) now installs **Console/Desktop0.1.7/code8** with two observed desktop-UX repairs: selected lower-list editors appear automatically, and complete saved identities remain reachable in short/scaled confirmations. Six actual geometry and sixteen existing profile/lifecycle tests pass; six default opt-in checks skip. Data, preferences, boot and display configuration are preserved; both products are stopped. These results advance P1-S2/P1-S3 without completing their physical, protected-operation or remote-feature gates.
+
+
+## Current signed-key observation increment
+
+Console/Desktop **0.1.8/code9** now provide a real credential-free SSH server-key check from an owning-app saved profile, exact key comparison and explicit trust enrollment. The [actual result](qualification/results/P1-S3/2026-10-16-ssh-key-observation.md) records14 Android cases,13 separately run host cases and6 default assumption skips. Successful Save requires a fresh Check; this observer deliberately rejects transport and never authenticates or opens a session. Read the [contract](docs/02-architecture/ssh-key-observation.md) for deadlines, lifecycle retirement, permission hints and exact-pin library dependency. Products are installed/stopped with prior data preserved. Full SSH authentication/terminal/SFTP, other remote features and the complete roadmap remain required.

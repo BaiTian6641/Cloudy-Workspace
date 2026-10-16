@@ -137,7 +137,7 @@
       "owner": "Android/platform developer",
       "stage": "P0-S4",
       "fallback": "Explicit absolute mode or separately qualified external mouse/backend; none is a relative 3D pass.",
-      "experiment": "Q-D09: Diagnostic 0.1.5 (six-patch FreeRDP3.32.2) passed native build, Android compilation/Lint and 45 JVM tests. Its sixth patch adds authoritative server-position dispatch; the Kotlin adapter adds bounded presentation-only prediction, and standard relative wire input has no absolute fallback. Physical attempt 13: user reports \u201cHost trail and cursor move; release works\u201d; mouse versus trackpad was unspecified. Two confirmed capture intervals have eight actual UI edges and 619+418 relative JNI admissions (1,037 total relative, 1,678 total input); 565 framebuffer updates at 1280x720. The controlled host target recorded 824 moves and normal operator close with held input 0; native thread joined and instance freed. This is bounded user-report/target-behavior evidence, not latency, 3D, device-type coverage or other-OS qualification. Live authoritative-position callback and server default/hidden states were not separately exercised; prior lag remains unmeasured. Earlier diagnostic 0.1.4 KRdp6.4.5 captured movement failed despite queue admission; source review found no registered relative callback. The later GRD run also had user-visible captured movement failure with release working; missing release-edge evidence prevented attributing target moves to the captured interval.",
+      "experiment": "Q-D09: Diagnostic 0.1.5 (six-patch FreeRDP3.32.2) passed native build, Android compilation/Lint and 45 JVM tests. Its sixth patch adds authoritative server-position dispatch; the Kotlin adapter adds bounded presentation-only prediction, and standard relative wire input has no absolute fallback. Physical attempt 13: user reports “Host trail and cursor move; release works”; mouse versus trackpad was unspecified. Two confirmed capture intervals have eight actual UI edges and 619+418 relative JNI admissions (1,037 total relative, 1,678 total input); 565 framebuffer updates at 1280x720. The controlled host target recorded 824 moves and normal operator close with held input 0; native thread joined and instance freed. This is bounded user-report/target-behavior evidence, not latency, 3D, device-type coverage or other-OS qualification. Live authoritative-position callback and server default/hidden states were not separately exercised; prior lag remains unmeasured. Earlier diagnostic 0.1.4 KRdp6.4.5 captured movement failed despite queue admission; source review found no registered relative callback. The later GRD run also had user-visible captured movement failure with release working; missing release-edge evidence prevented attributing target moves to the captured interval.",
       "versionNotes": "Capture methods API26; relative axes API24. Captured getX/getY deltas and explicit relative axes are alternative representations, not additive. Historical samples matter.",
       "researchEvidence": "docs/03-platform/googlebook/rdp-cursor-presentation-entry.md",
       "compileEvidence": "qualification/results/P0-S4/2026-10-15-rdp-cursor-repair.md",
@@ -1039,9 +1039,9 @@
       "experiment": "Compare actual view/metrics insets while resizing and moving between displays.",
       "partialObservation": {
         "evidence": "qualification/results/P0-S2/2026-10-15-window-probe.md",
-        "note": "Actual maximize/restore, corner resize to 638 \u00d7 612 px and tiled divider resize to a 653 px wide window observed at density 1.625 / font scale 1.0. Activity recreation preserved local state. Attached-decor versus metrics inset source differences retained. No physical-input, larger-font or external-display claim.",
+        "note": "Actual maximize/restore, corner resize to 638 × 612 px and tiled divider resize to a 653 px wide window observed at density 1.625 / font scale 1.0. Activity recreation preserved local state. Attached-decor versus metrics inset source differences retained. No physical-input, larger-font or external-display claim.",
         "fontScaleEvidence": "qualification/results/P0-S2/2026-10-15-font-scale.md",
-        "fontScaleNote": "Separate 0.2.0 run: 130%/200% actual font configurations, reachable controls by scrolling in 648\u00d7600px window, actual Refresh completion and independent saved marker state; original1.0 restored. No full accessibility/physical input qualification."
+        "fontScaleNote": "Separate 0.2.0 run: 130%/200% actual font configurations, reachable controls by scrolling in 648×600px window, actual Refresh completion and independent saved marker state; original1.0 restored. No full accessibility/physical input qualification."
       }
     },
     {
@@ -1139,7 +1139,7 @@
         "note": "Explicit recreate preserved A logical ID/task/marker/count in a fresh generation with unchanged process and B state. Resize-triggered recreations retained state. The separate background-kill run verified old PID absence, then restored B logical ID/task/C2 from Bundle in a new generation and process via existing Recents task. No force-stop, reboot, natural low-memory or operation durability claim.",
         "processRestorationEvidence": "qualification/results/P0-S2/2026-10-15-process-restoration.md",
         "fontScaleEvidence": "qualification/results/P0-S2/2026-10-15-font-scale.md",
-        "fontScaleNote": "Separate 0.2.0 run: 130%/200% actual font configurations, reachable controls by scrolling in 648\u00d7600px window, actual Refresh completion and independent saved marker state; original1.0 restored. No full accessibility/physical input qualification."
+        "fontScaleNote": "Separate 0.2.0 run: 130%/200% actual font configurations, reachable controls by scrolling in 648×600px window, actual Refresh completion and independent saved marker state; original1.0 restored. No full accessibility/physical input qualification."
       }
     },
     {
@@ -1431,7 +1431,7 @@
       "owner": "Desktop/native developer",
       "stage": "P0-S4",
       "fallback": "Offer explicit absolute mode or separately qualified backend; AINPUT is a distinct extension, and accumulated absolute helper fallback is never standard relative or3D proof.",
-      "experiment": "Q-D09: Diagnostic 0.1.5 (six-patch FreeRDP3.32.2) passed native build, Android compilation/Lint and 45 JVM tests. Its sixth patch adds authoritative server-position dispatch; the Kotlin adapter adds bounded presentation-only prediction, and standard relative wire input has no absolute fallback. Physical attempt 13: user reports \u201cHost trail and cursor move; release works\u201d; mouse versus trackpad was unspecified. Two confirmed capture intervals have eight actual UI edges and 619+418 relative JNI admissions (1,037 total relative, 1,678 total input); 565 framebuffer updates at 1280x720. The controlled host target recorded 824 moves and normal operator close with held input 0; native thread joined and instance freed. This is bounded user-report/target-behavior evidence, not latency, 3D, device-type coverage or other-OS qualification. Live authoritative-position callback and server default/hidden states were not separately exercised; prior lag remains unmeasured. Earlier diagnostic 0.1.4 KRdp6.4.5 captured movement failed despite queue admission; source review found no registered relative callback. The later GRD run also had user-visible captured movement failure with release working; missing release-edge evidence prevented attributing target moves to the captured interval.",
+      "experiment": "Q-D09: Diagnostic 0.1.5 (six-patch FreeRDP3.32.2) passed native build, Android compilation/Lint and 45 JVM tests. Its sixth patch adds authoritative server-position dispatch; the Kotlin adapter adds bounded presentation-only prediction, and standard relative wire input has no absolute fallback. Physical attempt 13: user reports “Host trail and cursor move; release works”; mouse versus trackpad was unspecified. Two confirmed capture intervals have eight actual UI edges and 619+418 relative JNI admissions (1,037 total relative, 1,678 total input); 565 framebuffer updates at 1280x720. The controlled host target recorded 824 moves and normal operator close with held input 0; native thread joined and instance freed. This is bounded user-report/target-behavior evidence, not latency, 3D, device-type coverage or other-OS qualification. Live authoritative-position callback and server default/hidden states were not separately exercised; prior lag remains unmeasured. Earlier diagnostic 0.1.4 KRdp6.4.5 captured movement failed despite queue admission; source review found no registered relative callback. The later GRD run also had user-visible captured movement failure with release working; missing release-edge evidence prevented attributing target moves to the captured interval.",
       "versionNotes": "RDP relative capability0x80 plus earlyclient0x10 and protocol>=0x00080011; events signedINT16. minimumApi26 is Android capture prerequisite, not RDP protocol OS level. Defaults already advertise relative support; server capability gates use. New JNI uses standard core relative events only, with no AINPUT or absolute fallback. Server callback registration is a separate integration requirement; selected FreeRDPserver3.32.1 can advertise support yet discard events at a null callback. Sixth patch enables authoritative pointer-position dispatch/callback; bounded cursor prediction changes presentation only. Accepted relative wire input remains unchanged with no absolute fallback.",
       "researchEvidence": "docs/03-platform/googlebook/rdp-cursor-presentation-entry.md",
       "compileEvidence": "qualification/results/P0-S4/2026-10-15-rdp-cursor-repair.md",
@@ -1997,6 +1997,52 @@
       "researchEvidence": "docs/06-validation/2026-10-16-profile-geometry-review.md",
       "compileEvidence": "qualification/results/P1-S2/2026-10-16-profile-geometry-build.json",
       "deviceEvidence": "qualification/results/P1-S2/2026-10-16-profile-geometry.md"
+    },
+    {
+      "id": "API59",
+      "feature": "Credential-free signed SSH key observation and explicit foreground enrollment",
+      "symbols": [
+        "android.net.DnsResolver.query",
+        "android.net.DnsResolver(Context, Looper)",
+        "android.net.DnsResolver.getInstance",
+        "android.net.InetAddresses.parseNumericAddress",
+        "android.os.CancellationSignal.cancel",
+        "android.net.ConnectivityManager.getActiveNetwork",
+        "android.net.ConnectivityManager.getNetworkCapabilities",
+        "android.net.NetworkCapabilities.hasTransport",
+        "Manifest.permission.ACCESS_NETWORK_STATE",
+        "Manifest.permission.ACCESS_LOCAL_NETWORK",
+        "net.schmizz.sshj.SSHClient.doKex",
+        "net.schmizz.sshj.transport.verification.HostKeyVerifier.verify",
+        "net.schmizz.sshj.common.LoggerFactory",
+        "net.schmizz.sshj.transport.Reader.run"
+      ],
+      "sourceIds": [
+        "G223",
+        "G224",
+        "G225",
+        "G226",
+        "G227",
+        "R272",
+        "R273",
+        "R274",
+        "R275",
+        "G79",
+        "G81"
+      ],
+      "minimumApi": 29,
+      "libraryVersion": "Retained SSHJ0.41.2/asn-one0.6.0, BC1.86, SLF4J API/NOP2.0.20. Product min35/target37 and existing Compose pins unchanged. Reader debug terminal hook is exact-pin implementation dependency.",
+      "availability": "documented",
+      "qualification": "partial",
+      "checkedOn": "2026-10-16",
+      "owner": "Android/platform and security developers",
+      "stage": "P1-S3",
+      "runtimeGuard": "DnsResolver Context/Looper constructor only on runtime37+, otherwise guarded getInstance on35–36. Local permission is requested only on runtime37; broadcast/private hints are not route authority, and VPN/cellular are excluded. Manual permission never replays observation. Numeric parse/query API29; CancellationSignal API16; network capabilities API21/activeNetwork23. No changes to global network or providers.",
+      "fallback": "Cancel, deadline, unavailable DNS/algorithm, stale profile/trust and incomplete retirement fail closed. Unknown cleanup quarantines observer. Only plain connect failure may try another resolved address inside the shared deadline. Save records trust only; no credentials/authentication or automatic continuation. Full authentication/rekey/jumps/SFTP remain separate gates.",
+      "experiment": "Host OpenSSH10.2p1 run passes13 engine tests, including real signed reference twice and four real TCP greeting/KEX cancellation/deadline boundaries. On HP Googlebook14 Android17/API37 CL3B.260622.276.R2 incremental16560795, Console/Desktop0.1.8/code9 pass14 scoped Android cases: numeric/cancellation resolver6, real transport2, each product Cancel/recreation, explicit Save/fresh Match and stale trust CAS refusal. Six default opt-in cases skip. USB reverse only; actual DNS names/LAN permission/physical input/full SSH authentication remain unqualified. Host receipt collector user0 assumption failed after Console pass; original preserved, receipts recovered and Desktop-only follow-up passed. Exact baselines restored, products stopped, test packages/listeners/reverse removed.",
+      "researchEvidence": "docs/06-validation/2026-10-16-ssh-observation-review.md",
+      "compileEvidence": "qualification/results/P1-S3/2026-10-16-ssh-key-observation-build.json",
+      "deviceEvidence": "qualification/results/P1-S3/2026-10-16-ssh-key-observation.md"
     }
   ],
   "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."

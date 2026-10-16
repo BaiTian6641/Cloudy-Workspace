@@ -50,6 +50,7 @@ internal fun SshTrustScreen(
     onRefresh: () -> Unit,
     onClose: () -> Unit,
     onCopyFingerprint: () -> Unit,
+    onCheckServer: () -> Unit,
 ) {
     val listState = rememberLazyListState()
     val detailsIndex = 2 + (if (message != null) 1 else 0) + (if (uncertain) 1 else 0)
@@ -90,6 +91,7 @@ internal fun SshTrustScreen(
                 FlowRow(horizontalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall),
                     verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
                     TrustButton(R.string.ssh_trust_refresh, "trust_refresh", !busy, onRefresh)
+                    TrustButton(R.string.ssh_trust_check_server, "trust_check_server", !busy && !uncertain, onCheckServer)
                     // Closing does not cancel or replay an already admitted database mutation.
                     TrustButton(R.string.ssh_trust_close, "trust_close", true, onClose)
                 }

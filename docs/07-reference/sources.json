@@ -1671,7 +1671,7 @@
       "publisher": "Google",
       "category": "platform",
       "reviewStatus": "reviewed",
-      "checkedOn": "2026-10-15",
+      "checkedOn": "2026-10-16",
       "sourceUpdatedOn": "2026-10-02",
       "note": "Runtime37 and target37+ require ACCESS_LOCAL_NETWORK for direct LAN access. Covers TCP/UDP/library/WebView traffic; denial may appear as timeout. System-mediated picker is separate. Streaming0.1.5 requests this permission before its finite USB-reversed loopback pairing; this route does not establish denied direct-LAN enforcement. Owner Android/platform, P0-S4.",
       "refresh": "Before network probe implementation and each target SDK update."
@@ -1695,7 +1695,7 @@
       "publisher": "Google",
       "category": "platform",
       "reviewStatus": "reviewed",
-      "checkedOn": "2026-10-15",
+      "checkedOn": "2026-10-16",
       "sourceUpdatedOn": null,
       "note": "Manifest.permission.ACCESS_LOCAL_NETWORK addedAPI37, dangerous; value android.permission.ACCESS_LOCAL_NETWORK. Reference defines local network on broadcast-capable Wi-Fi/Ethernet and excludes cellular/VPN; do not generalize LAN results to VPN routes. Constant presence/value independently checked in selected SDK37.0 android.jar; no app grant/device pass.",
       "refresh": "Before network probe implementation and each target SDK update."
@@ -2303,7 +2303,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Reviewed 2.0.17 and 2.0.18\u20132.0.20 release notes; final diagnostic selects matched API/NOP 2.0.20. Exact source and embedded licenses are preserved.",
+      "note": "Reviewed 2.0.17 and 2.0.18–2.0.20 release notes; final diagnostic selects matched API/NOP 2.0.20. Exact source and embedded licenses are preserved.",
       "refresh": "Before SSH diagnostic dependency/provider changes, after relevant upstream security updates, and before product adoption."
     },
     {
@@ -3122,7 +3122,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected CLI/tool-control guidance: no-tools disables built-ins while custom tool modules have a separate discovery surface. Use explicit model selectors, bounded assignments and reviewed results; no sandbox or worker-success guarantee. Owner integration leader, P0\u2013P6.",
+      "note": "Inspected CLI/tool-control guidance: no-tools disables built-ins while custom tool modules have a separate discovery surface. Use explicit model selectors, bounded assignments and reviewed results; no sandbox or worker-success guarantee. Owner integration leader, P0–P6.",
       "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
     },
     {
@@ -3134,7 +3134,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected config roots, profiles, discovery precedence and custom-tool/MCP integration. Empty cwd and a prompt alone do not isolate user/global or foreign configuration. Use per-run controls without altering global auth/settings. Owner integration leader, P0\u2013P6.",
+      "note": "Inspected config roots, profiles, discovery precedence and custom-tool/MCP integration. Empty cwd and a prompt alone do not isolate user/global or foreign configuration. Use per-run controls without altering global auth/settings. Owner integration leader, P0–P6.",
       "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
     },
     {
@@ -3146,7 +3146,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected separate direct getAllPluginToolPaths(cwd) enumeration after capability discovery. disabledProviders is not a complete custom-tool loading switch; the accepted CLI trial additionally had absent native/project plugin roots. Owner integration leader, P0\u2013P6.",
+      "note": "Inspected separate direct getAllPluginToolPaths(cwd) enumeration after capability discovery. disabledProviders is not a complete custom-tool loading switch; the accepted CLI trial additionally had absent native/project plugin roots. Owner integration leader, P0–P6.",
       "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
     },
     {
@@ -3158,7 +3158,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected plugin-root enumeration: node_modules absence yields an empty plugin list. The trial uses observed root absence, not a general sandbox or global no-discovery claim. Owner integration leader, P0\u2013P6.",
+      "note": "Inspected plugin-root enumeration: node_modules absence yields an empty plugin list. The trial uses observed root absence, not a general sandbox or global no-discovery claim. Owner integration leader, P0–P6.",
       "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
     },
     {
@@ -3170,7 +3170,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected registered enabledProviders/disabledProviders settings; source-discovery IDs are distinct from the explicitly selected kimi-code model backend. Use a per-run overlay, not a global config edit. Owner integration leader, P0\u2013P6.",
+      "note": "Inspected registered enabledProviders/disabledProviders settings; source-discovery IDs are distinct from the explicitly selected kimi-code model backend. Use a per-run overlay, not a global config edit. Owner integration leader, P0–P6.",
       "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
     },
     {
@@ -3638,7 +3638,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Method reference API31 controls guard; API23\u201330 older isInsideSecureHardware boolean cannot identify StrongBox. Actual Googlebook backing untested. Owner: Android/security; API15, P1-S3/P3-S7.",
+      "note": "Method reference API31 controls guard; API23–30 older isInsideSecureHardware boolean cannot identify StrongBox. Actual Googlebook backing untested. Owner: Android/security; API15, P1-S3/P3-S7.",
       "refresh": "Before changing the affected adapter, security policy or compatibility claim."
     },
     {
@@ -5030,7 +5030,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected getPluginsDir/getPluginsNodeModules and profile/config/XDG path resolution. Production plugin root uses the data-category resolver; default without overrides is ~/.omp/plugins/node_modules. Recheck actual overrides and project ancestors per invocation; temporary cwd alone is not isolation. Used for the two finite GLM context-only trials; no OS sandbox claim. Owner integration leader, P0\u2013P6.",
+      "note": "Inspected getPluginsDir/getPluginsNodeModules and profile/config/XDG path resolution. Production plugin root uses the data-category resolver; default without overrides is ~/.omp/plugins/node_modules. Recheck actual overrides and project ancestors per invocation; temporary cwd alone is not isolation. Used for the two finite GLM context-only trials; no OS sandbox claim. Owner integration leader, P0–P6.",
       "refresh": "When changing installed CLI version, active profile, path environment or worker discovery controls."
     },
     {
@@ -6136,6 +6136,114 @@
       "sourceUpdatedOn": "2026-10-01",
       "note": "AlertDialog provides separate title/text/confirmButton/dismissButton slots; Google recommends it for ordinary two-button confirmations. Cloudy omits the separate fixed title and renders an explicit heading with the frozen content in the scrollable text slot, preserving action slots. This is a Cloudy response to measured short-window geometry, not a claim that the guide mandates this arrangement. Existing Material3 1.4.0 unchanged; owner Android/platform; P1-S2/P1-S3; qualify actual scaled text and action reachability.",
       "refresh": "Before changing profile editor reveal, confirmation layout or Compose dependency versions."
+    },
+    {
+      "id": "G223",
+      "title": "Android asynchronous DNS resolver",
+      "url": "https://developer.android.com/reference/android/net/DnsResolver",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "DnsResolver.query A/AAAA and getInstance API29; Context/Looper constructor API37, also S extension22. getInstance deprecated37. Product guards constructor37 and uses getInstance on min35–36; async executor/CancellationSignal and default-network null are explicit. Numeric fixture tests do not qualify actual hostname/provider behavior.",
+      "refresh": "Before observer/platform or selected engine upgrades; preserve exact compile and device qualification separately."
+    },
+    {
+      "id": "G224",
+      "title": "Android numeric IP parsing",
+      "url": "https://developer.android.com/reference/android/net/InetAddresses",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "InetAddresses.parseNumericAddress/isNumericAddress API29 never perform DNS lookup. Product strips no explicit scope: scoped literals fail unavailable; immutable numeric transport candidates remain distinct from canonical logical trust peer.",
+      "refresh": "Before observer/platform or selected engine upgrades; preserve exact compile and device qualification separately."
+    },
+    {
+      "id": "G225",
+      "title": "Android operation cancellation signal",
+      "url": "https://developer.android.com/reference/android/os/CancellationSignal",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2026-08-03",
+      "note": "CancellationSignal/cancel API16; actual asynchronous DNS adapter uses a one-shot terminal gate, cancellation and elapsed deadline with late-result fencing. Cancel cannot retract an already selected app result. No real hostname cancellation result is inferred from numeric tests.",
+      "refresh": "Before observer/platform or selected engine upgrades; preserve exact compile and device qualification separately."
+    },
+    {
+      "id": "G226",
+      "title": "Android default-network capabilities",
+      "url": "https://developer.android.com/reference/android/net/ConnectivityManager",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "getActiveNetwork API23 and getNetworkCapabilities API21; requires ACCESS_NETWORK_STATE. Snapshot supports a permission-prompt hint only, not per-destination routing proof or a replacement for OS permission enforcement.",
+      "refresh": "Before observer/platform or selected engine upgrades; preserve exact compile and device qualification separately."
+    },
+    {
+      "id": "G227",
+      "title": "Android network transport capability flags",
+      "url": "https://developer.android.com/reference/android/net/NetworkCapabilities",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "hasTransport and Wi-Fi/Ethernet/VPN/cellular transport constants API21. VPN/cellular are excluded from Android local-network permission definition; private address alone must not impose a permission gate. Unknown route remains unknown.",
+      "refresh": "Before observer/platform or selected engine upgrades; preserve exact compile and device qualification separately."
+    },
+    {
+      "id": "R272",
+      "title": "SSHJ0.41.2 Reader retirement source",
+      "url": "https://raw.githubusercontent.com/hierynomus/sshj/6fad160fe36605a68847ac8a527750c615b4bd04/src/main/java/net/schmizz/sshj/transport/Reader.java",
+      "publisher": "SSHJ maintainers",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Exact selected source invokes debug(Stopping) after normal/Exception/interrupt exits. Observer per-client NOP logger hook captures actual Reader then joins it; missing hook, wrong thread or incomplete join causes cleanup uncertainty/quarantine. This is a pin-specific implementation dependency, not a public lifecycle guarantee.",
+      "refresh": "Before observer/platform or selected engine upgrades; preserve exact compile and device qualification separately."
+    },
+    {
+      "id": "R273",
+      "title": "SSHJ0.41.2 key exchange verifier ordering",
+      "url": "https://raw.githubusercontent.com/hierynomus/sshj/6fad160fe36605a68847ac8a527750c615b4bd04/src/main/java/net/schmizz/sshj/transport/KeyExchanger.java",
+      "publisher": "SSHJ maintainers",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Selected KEX completion precedes verifyHost; false verifiers reject before client NEWKEYS. Product has exactly one always-rejecting observer verifier. Signed observation is not host trust, completed handshake or authentication. Selected engine performs cryptography.",
+      "refresh": "Before observer/platform or selected engine upgrades; preserve exact compile and device qualification separately."
+    },
+    {
+      "id": "R274",
+      "title": "SSHJ0.41.2 transport lifecycle",
+      "url": "https://raw.githubusercontent.com/hierynomus/sshj/6fad160fe36605a68847ac8a527750c615b4bd04/src/main/java/net/schmizz/sshj/transport/TransportImpl.java",
+      "publisher": "SSHJ maintainers",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "init starts Reader; join waits close event and isRunning reads interruption rather than proving Thread termination. Observer independently joins the captured actual Reader and tracked watcher/close helper after closing its owned socket.",
+      "refresh": "Before observer/platform or selected engine upgrades; preserve exact compile and device qualification separately."
+    },
+    {
+      "id": "R275",
+      "title": "SSHJ0.41.2 client connection hooks",
+      "url": "https://raw.githubusercontent.com/hierynomus/sshj/6fad160fe36605a68847ac8a527750c615b4bd04/src/main/java/net/schmizz/sshj/SSHClient.java",
+      "publisher": "SSHJ maintainers",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Protected doKex is invoked after transport init; observer marks Reader expected there and calls selected engine implementation. No reflective engine lookup/global thread scan, auth/session API or credential handoff is used.",
+      "refresh": "Before observer/platform or selected engine upgrades; preserve exact compile and device qualification separately."
     }
   ]
 }

@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "Credential-free signed SSH host-key observation, explicit first-use CAS and fresh observation; no authentication or full engine adoption",
+  "status": "partial",
+  "version": {
+    "versionName": "0.1.8",
+    "versionCode": 9
+  },
+  "device": {
+    "model": "HP Googlebook 14",
+    "release": "17",
+    "api": "37",
+    "build": "CL3B.260622.276.R2",
+    "incremental": "16560795",
+    "abi": "arm64-v8a"
+  },
+  "build": {
+    "baseCommit": "7bd163854292c1b59683ea78e331450a5a49013d",
+    "attempt": "build-03",
+    "startedAt": "2026-10-16T11:52:09.684213+00:00",
+    "endedAt": "2026-10-16T11:52:36.011647+00:00",
+    "exitCode": 0,
+    "sourceUnchangedDuringBuild": true,
+    "durationReportedSeconds": 26,
+    "tasks": {
+      "total": 322,
+      "executed": 55,
+      "upToDate": 267
+    },
+    "sourceFileCount": 136,
+    "artifacts": [
+      {
+        "path": "apps/console/build/outputs/apk/debug/console-debug.apk",
+        "bytes": 41370750,
+        "sha256": "b6db0a620318152461ab8b3f61480e6a550b3b69670763014cfbf064430f4306"
+      },
+      {
+        "path": "apps/desktop/build/outputs/apk/debug/desktop-debug.apk",
+        "bytes": 41370754,
+        "sha256": "ee706dd41da6e55146f0680ba4c643de55b061a9759304ea2662db0af3f55e8b"
+      },
+      {
+        "path": "shared/android/platform/build/outputs/apk/androidTest/debug/platform-debug-androidTest.apk",
+        "bytes": 42191908,
+        "sha256": "318284dbee6cf781e450216a4c8cf9a59c782f1f290a37b2d5878289aeeee072"
+      },
+      {
+        "path": "apps/console/build/outputs/apk/androidTest/debug/console-debug-androidTest.apk",
+        "bytes": 3322241,
+        "sha256": "932a196d03050124d64c36ea8ce9e626c699ed87e7d22fed2d09971143183d56"
+      },
+      {
+        "path": "apps/desktop/build/outputs/apk/androidTest/debug/desktop-debug-androidTest.apk",
+        "bytes": 3322241,
+        "sha256": "9096fcd3c73ca739ddd2328af1f7725fdfe4370fe7e764db0785d8dcec6ff1f3"
+      }
+    ],
+    "evidence": "2026-10-16-ssh-key-observation-build.json"
+  },
+  "host": {
+    "evidenceDirectory": "qualification/results/private/foundation/2026-10-16-ssh-observation-02/",
+    "startedAt": "2026-10-16T11:48:10.934646+00:00",
+    "endedAt": "2026-10-16T11:48:30.838558+00:00",
+    "jvmTests": 13,
+    "openSshFixtureConnections": 2,
+    "userauthRequests": 0,
+    "acceptedAuthentications": 0,
+    "sessionStarts": 0,
+    "listenerClosed": true,
+    "testExitCode": 0
+  },
+  "android": {
+    "actualJUnitCases": 14,
+    "defaultAssumptionSkips": 6,
+    "platformCases": 8,
+    "resolverCases": 6,
+    "transportCases": 2,
+    "consoleCases": 3,
+    "desktopCases": 3,
+    "fixtureCleanupReceipts": 6,
+    "deviceFixtureConnections": 10,
+    "receivedClientNewKeysPackets": 0,
+    "receivedUserauthRequestPackets": 0,
+    "userauthRequests": 0,
+    "acceptedAuthentications": 0,
+    "sessionStarts": 0,
+    "topology": "Owning-app numeric loopback through an owned USB ADB reverse to isolated workstation OpenSSH; not LAN or hostname-DNS qualification",
+    "runs": [
+      {
+        "evidenceDirectory": "qualification/results/private/foundation/2026-10-16-ssh-observation-03/",
+        "startedAt": "2026-10-16T11:53:35.467432+00:00",
+        "endedAt": "2026-10-16T11:53:46.194852+00:00",
+        "actualJUnitCases": 11,
+        "defaultAssumptionSkips": 3,
+        "originalRunnerPassed": false,
+        "collectionRepair": "Receipt path collector corrected without replaying completed tests; all three recovered Console receipts report PASSED and EXACT_BASELINE_RESTORED",
+        "fixtureConnections": 6
+      },
+      {
+        "evidenceDirectory": "qualification/results/private/foundation/2026-10-16-ssh-observation-04/",
+        "startedAt": "2026-10-16T11:55:06.953242+00:00",
+        "endedAt": "2026-10-16T11:55:15.949161+00:00",
+        "actualJUnitCases": 3,
+        "defaultAssumptionSkips": 3,
+        "runnerPassed": true,
+        "fixtureConnections": 4
+      }
+    ]
+  },
+  "packaging": {
+    "allNineSshAssetsMatchEachProduct": true,
+    "onlySlf4jNopProviderEachProduct": true,
+    "noticeHashes": {
+      "ssh/sshj-LICENSE.txt": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "ssh/sshj-NOTICE.txt": "28eafe2771c7cce241f05f1a28dfe0fc71c45a107d420b1a80305b487fa2f405",
+      "ssh/asn-one-LICENSE.txt": "73ba74dfaa520b49a401b5d21459a8523a146f3b7518a833eea5efa85130bf68",
+      "ssh/slf4j-module-LICENSE.txt": "226597f6ed1ff28910719f4c03264ec30d9c7e8636094649763c0166f6a02dcc",
+      "ssh/bouncycastle-LICENSE.md": "0e01f1549c9022f406392ac2947d32223b7c2e977d21ea2f8c182fdeb4dae5fd",
+      "ssh/slf4j-embedded-LICENSE.txt": "6632f550c207be8d7d6b5e87f5d7b905bee218d18392d531df457bf60bec1447",
+      "ssh/asn-one-COPYRIGHT.txt": "d418a2e89acb583c5249602fde8ea8978857f1e31ca755a0d043cd8d834aca32",
+      "ssh/README.txt": "a593aec579e7e6bbf9b5401d91ec4a9a4684983ec48eae1b1168e22c27a661a9"
+    }
+  },
+  "preservation": {
+    "bootIdUnchanged": true,
+    "bootCountUnchanged": true,
+    "fontScaleUnchanged": true,
+    "densityUnchanged": true,
+    "nightModeUnchanged": true,
+    "vaultReceiptsUnchanged": true,
+    "profileRowsAndGenerationUnchanged": true,
+    "trustRowsAndGenerationUnchanged": true,
+    "effectivePreferencesRestored": true,
+    "installedProductApksMatchBuild": true,
+    "reverseBaselineRestored": true,
+    "listenerClosed": true
+  },
+  "finalState": {
+    "productsInstalledAndStopped": true,
+    "threeTestPackagesAbsent": true,
+    "ownedReverseRemoved": true,
+    "ownedListenersClosed": true,
+    "cleanupErrors": []
+  },
+  "limits": [
+    "No LAN permission grant/denial or hostname DNS success qualification",
+    "No completed SSH connection, credentials, authentication, session, remote command, PTY, SFTP or jump support",
+    "No engine adoption, CAP-SSH promotion, stage completion or release readiness",
+    "No live rekey/revocation or verification-to-authentication synchronization qualification",
+    "No actual process death, physical power loss, physical input, rendered accessibility or scaled dialog qualification",
+    "Changed/revoked live observation UI and queued-approval lifecycle races require separate actual integration cases"
+  ]
+}

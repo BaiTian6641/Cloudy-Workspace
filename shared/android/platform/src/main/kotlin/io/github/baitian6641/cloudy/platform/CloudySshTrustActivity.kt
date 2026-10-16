@@ -2,6 +2,7 @@ package io.github.baitian6641.cloudy.platform
 
 import android.content.ClipData
 import android.content.ClipboardManager
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -77,6 +78,11 @@ class CloudySshTrustActivity : ComponentActivity() {
                     onInspect = ::inspect, onRevoke = ::requestRevoke,
                     onRefresh = { if (canInteract()) refresh(explicit = true) },
                     onClose = ::closeManager, onCopyFingerprint = ::copyFingerprint,
+                    onCheckServer = {
+                        if (canInteract() && !busy && !pending) {
+                            startActivity(Intent(this, CloudySshObserveActivity::class.java))
+                        }
+                    },
                 )
                 confirmation?.let { request ->
                     AlertDialog(

@@ -1,6 +1,6 @@
 # Foundation testing strategy
 
-**Scope:** the actual P1-S1 root graph `:console`, `:desktop`, `:domain`, `:platform`, `:design-system`, with later identity/profile/trust increments recorded below. Strict build12 and its initial bounded cases establish completed P1-S1 local construction acceptance; the opening table retains that baseline rather than current cumulative counts. Current installed products are0.1.6/code7, bound by the [native display result](../../qualification/results/P1-S2/2026-10-16-native-display-settings.md). Follow [D12](../05-delivery/library-reuse-policy.md) and the [reviewed skill overrides](../07-reference/development-skills.md).
+**Scope:** the actual P1-S1 root graph `:console`, `:desktop`, `:domain`, `:platform`, `:design-system`, with later identity/profile/trust increments recorded below. Strict build12 and its initial bounded cases establish completed P1-S1 local construction acceptance; the opening table retains that baseline rather than current cumulative counts. Current installed products are0.1.8/code9, bound by the [observation result](../../qualification/results/P1-S3/2026-10-16-ssh-key-observation.md). Earlier tables retain their dated scope. Follow [D12](../05-delivery/library-reuse-policy.md) and the [reviewed skill overrides](../07-reference/development-skills.md).
 
 ## Test boundaries
 
@@ -23,7 +23,7 @@ From the repository root, using the parent-selected existing JDK/SDK, isolated G
 ./gradlew --dependency-verification=strict --no-daemon --console=plain --max-workers=4 \
   :console:assembleDebug :desktop:assembleDebug \
   :console:lintDebug :desktop:lintDebug \
-  :domain:test :design-system:testDebugUnitTest \
+  :domain:test :ssh:test :platform:testDebugUnitTest :design-system:testDebugUnitTest \
   :platform:assembleDebugAndroidTest \
   :console:assembleDebugAndroidTest :desktop:assembleDebugAndroidTest
 ```
@@ -41,7 +41,7 @@ ANDROID_SERIAL="$QUALIFIED_DEVICE_SERIAL" ./gradlew \
   :console:connectedDebugAndroidTest :desktop:connectedDebugAndroidTest
 ```
 
-Console package is `io.github.baitian6641.cloudy.console`; Desktop is `io.github.baitian6641.cloudy.desktop`. Neither product requests network/storage permissions or runs a remote engine in this slice. Shared source does not share app state, credentials or another app's process. Keep the actual product/test APK identities and app/window context bound to each result.
+Console package is `io.github.baitian6641.cloudy.console`; Desktop is `io.github.baitian6641.cloudy.desktop`. The original P1-S1 slice requested no network/storage permissions. Current0.1.8 adds the finite SSH observer and its three network permissions; it still opens no authenticated remote session. Shared source does not share app state, credentials or another app's process. Keep the actual product/test APK identities and app/window context bound to each result.
 
 ActivityScenario recreation is not process death, a cold-launch persistence guarantee or a physical keyboard/native IME pass. Compose text entry is framework test stimulus. These tests do not qualify accessibility, system caption geometry, physical shortcut behavior, continuous sessions or remote features. Parent-owned device observations and later P1/product exits retain those distinct boundaries. Preserve failed builds and test results; do not rebuild unchanged upstream components or rerun accepted device cases just to document this strategy.
 
@@ -152,3 +152,12 @@ Acceptance requires actual JUnit success and effective preference-restoration re
 `ProfileGeometryContract` is inherited by Console/Desktop and defaults to assumption skips before owner/store/Activity work. Opt-in arguments are `cloudyProfileGeometry=enabled`, `cloudyGeometryFontScale=1.3|2.0`, `cloudyGeometryWidthPx` and `cloudyGeometryHeightPx`; actual framework scale/window measurements must match the intended run. Its methods check deep-list editor reveal without test scrolling after Edit, complete long-confirmation text through ordinary scrolling with Cancel preservation, and port/selection/viewport stability during typing and Activity recreation. Test-owned profiles use real production storage and exact revision-bound cleanup; unknown catalog state preserves fixtures.
 
 The [result](../../qualification/results/P1-S2/2026-10-16-profile-geometry.md) retains two baseline product failures, one test-import build failure and one host skip-parser error. Repaired0.1.7 passes six geometry and sixteen existing profile/recreation cases. Six default assumption skips are not feature passes. Acceptance requires JUnit completion, exact fixture and effective-preference restoration receipts, and independent host snapshots; a report's early passed field is insufficient. The dialog's accumulated line coverage and nine reviewed samples per app do not imply simultaneous full-text display, physical input, IME composition, scaledDark or screen-reader acceptance.
+
+
+## Credential-free observation tests
+
+The new `:ssh:test` suite uses the retained library and actual sockets for withheld-greeting/KEX deadline/cancellation cases. Its real OpenSSH-reference test is opt-in with `CLOUDY_SSH_TEST_PORT` and `CLOUDY_SSH_TEST_FINGERPRINT`; a default assumption skip is not successful transport evidence. The parent owns the finite loopback server, independent public-key fingerprint and server logs. No system SSH service or authentication settings are changed.
+
+Standalone `SshAddressResolverTest` supplies six numeric/cancellation API cases. `SshObservationTransportTest` requires `cloudySshObservation=true`, `cloudySshPort` and `cloudySshFingerprint` for two actual observer cases. Product `ConsoleSshObserveActivityTest` and `DesktopSshObserveActivityTest` each require `cloudySshObserveRun` (fresh UUID), `cloudySshObservePort`, `cloudySshObserveKeyFormat` and `cloudySshObserveFingerprint` for Cancel/recreation, explicit Save/fresh Match and stale-CAS cases. Default product invocations skip before launching an Activity or creating fixtures. Hostname DNS, LAN permissions and real physical input require different evidence.
+
+Keep original profiles/trust/vault and boot observations before upgrading/running. Tests durably record complete baselines and independently planned fixture identities. The test-only trust cleanup acquires the real permanent lock before opening SQLite, compares the complete metadata/catalog and removes only the exact planned row; it does not add a production delete API. Failed or uncertain states retain evidence. Collect paths from the actual owning app/Android user instead of assuming user0. The [result](../../qualification/results/P1-S3/2026-10-16-ssh-key-observation.md) preserves the user-root collector failure, recovered Console receipts and Desktop-only follow-up without redundant reruns. Class/test terminal status events are counted separately from custom status0 metadata.

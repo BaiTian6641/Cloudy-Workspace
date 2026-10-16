@@ -5,4 +5,10 @@
     <issue id="AndroidGradlePluginVersion">
         <ignore path="gradle/wrapper/gradle-wrapper.properties" />
     </issue>
+    <!-- Retained BC1.86 EST helper is not used by this SSH key-observation adapter.
+         Preserve the exact P0 artifact exception; no application TLS check is disabled.
+         Re-review if the selected artifact or EST reachability changes. -->
+    <issue id="TrustAllX509TrustManager">
+        <ignore path="**/org.bouncycastle/bcpkix-jdk18on/1.86/*/bcpkix-jdk18on-1.86.jar" />
+    </issue>
 </lint>

@@ -19,6 +19,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures { compose = true }
+    packaging.resources.merges += setOf("META-INF/LICENSE.md", "META-INF/LICENSE.txt")
 }
 // AGP supplies Android Kotlin; never also apply kotlin.android.
 kotlin {
@@ -32,6 +33,7 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":design-system"))
     implementation(project(":identity"))
+    implementation(project(":ssh"))
     api(libs.fragment)
     implementation(libs.activity.compose)
     // ComponentActivity is part of the public base Activity's inherited API.

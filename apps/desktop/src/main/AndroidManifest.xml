@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Local vault uses AndroidX authentication; no network, storage or foreground service. -->
+    <!-- Explicit SSH observations own finite sockets; no background service or credentials. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_LOCAL_NETWORK" />
     <application android:allowBackup="false" android:supportsRtl="true"
         android:usesCleartextTraffic="false" android:label="@string/app_name"
         android:theme="@style/Theme.CloudyWindow"
@@ -28,6 +31,9 @@
             android:exported="false" android:resizeableActivity="true"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name="io.github.baitian6641.cloudy.platform.CloudyDisplaySettingsActivity"
+            android:exported="false" android:resizeableActivity="true"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name="io.github.baitian6641.cloudy.platform.CloudySshObserveActivity"
             android:exported="false" android:resizeableActivity="true"
             android:windowSoftInputMode="adjustResize" />
     </application>

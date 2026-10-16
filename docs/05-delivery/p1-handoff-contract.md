@@ -38,3 +38,10 @@ Before declaring this handoff ready, compare each P1 task/deliverable/exit to cu
 ## Latest profile checkpoint
 
 Read the [0.1.7 profile result](../../qualification/results/P1-S2/2026-10-16-profile-geometry.md) and current [execution state](execution-state.md) before assigning more geometry work. The lower-list reveal and short-scaled confirmation risks are now observed/repaired, with six geometry and sixteen existing regression passes; do not reinterpret the retained0.1.6 failures as current behavior. Editor identity governs reveal, ordinary typing/recreation retain scroll, and confirmation authority is unchanged. Physical/native input, scaledDark, protected operations and remote integration remain their own work. Parent remains leader and owns builds/ADB/Git/final acceptance; direct Codex GPT6.1-Sol and authorized OMP routes retain the existing model/packet boundaries.
+
+
+## Current SSH observation handoff
+
+Console/Desktop0.1.8/code9 now have a real finite signed-key Check and explicit trust enrollment, described in the [contract](../02-architecture/ssh-key-observation.md) and [qualification](../../qualification/results/P1-S3/2026-10-16-ssh-key-observation.md). Workers must preserve the always-rejecting transport boundary and actual Reader/watcher/helper retirement; a saved pin is never a credential grant or reconnect command. The selected Reader logger hook is pin-specific and must be reviewed on dependency change. Full auth/rekey/revocation/jump/SFTP/terminal scope remains required, alongside pending human product-vault qualification.
+
+Current products are installed and stopped; all owned SSH listeners/reverse mappings/test packages are removed. The host collector's user0 assumption is a preserved failure, corrected by reading actual owning-user paths. Do not rerun the completed14 Android/13 host cases unchanged merely to produce counts. The parent remains leader; direct GPT6.1-Sol and separate OMP Kimi/GLM routes and their packet/review rules remain unchanged. This handoff introduces no P1 stopping point.

@@ -1,0 +1,475 @@
+{
+  "formatVersion": 1,
+  "checkedOn": "2026-10-16",
+  "scope": "P1-S3 product credential-free SSH key observation; retained P0-S3 candidate dependencies and upstream provenance. Authentication, sessions and full engine adoption remain separately gated.",
+  "runtimeBinaryCount": 7,
+  "selection": "Seven-JAR product observation runtime closure: SSHJ BC 1.84 requests explicitly aligned at 1.86; SSHJ SLF4J 2.0.17 and asn-one SLF4J 1.7.13 requests explicitly aligned at 2.0.20 with the matching NOP provider. Strict product runtime locks and binary digests are reviewed; each final APK needs its own byte-level packaging evidence.",
+  "components": [
+    {
+      "coordinate": "com.hierynomus:sshj:0.41.2",
+      "binary": {
+        "url": "https://repo.maven.apache.org/maven2/com/hierynomus/sshj/0.41.2/sshj-0.41.2.jar",
+        "bytes": 599969,
+        "sha256": "48a85a0067196a7b47dfb5c1d22c4ca6ed76c84a232af9ad29f1ba7aaf5c4614",
+        "embeddedNotices": []
+      },
+      "pom": {
+        "url": "https://repo.maven.apache.org/maven2/com/hierynomus/sshj/0.41.2/sshj-0.41.2.pom",
+        "bytes": 2909,
+        "sha256": "ab0317a53c99b106f0da8c2a26500d7f9e58d02bb969384ca97eb89c2df240e3",
+        "declaredLicenses": [
+          {
+            "name": "The Apache License, Version 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0"
+          }
+        ],
+        "parent": null
+      },
+      "sourceArchive": {
+        "url": "https://repo.maven.apache.org/maven2/com/hierynomus/sshj/0.41.2/sshj-0.41.2-sources.jar",
+        "bytes": 393848,
+        "sha256": "8b26554252a381006682e3b1364888bfae99839ce2258dfdeecbb2c027e00d27",
+        "embeddedNotices": []
+      },
+      "publishedDependencies": [
+        {
+          "groupId": "org.slf4j",
+          "artifactId": "slf4j-api",
+          "version": "2.0.17",
+          "scope": "runtime",
+          "optional": null,
+          "type": null
+        },
+        {
+          "groupId": "org.bouncycastle",
+          "artifactId": "bcprov-jdk18on",
+          "version": "1.84",
+          "scope": "runtime",
+          "optional": null,
+          "type": null
+        },
+        {
+          "groupId": "org.bouncycastle",
+          "artifactId": "bcpkix-jdk18on",
+          "version": "1.84",
+          "scope": "runtime",
+          "optional": null,
+          "type": null
+        },
+        {
+          "groupId": "com.hierynomus",
+          "artifactId": "asn-one",
+          "version": "0.6.0",
+          "scope": "runtime",
+          "optional": null,
+          "type": null
+        }
+      ],
+      "bundledNoticeFiles": [
+        "ssh/sshj-LICENSE.txt",
+        "ssh/sshj-NOTICE.txt"
+      ]
+    },
+    {
+      "coordinate": "org.bouncycastle:bcprov-jdk18on:1.86",
+      "binary": {
+        "url": "https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk18on/1.86/bcprov-jdk18on-1.86.jar",
+        "bytes": 7224011,
+        "sha256": "2af190b300cbb0b35e248ccf5f4a06b6072030aeb3da7a98ec73abe5b4cb371f",
+        "embeddedNotices": [
+          {
+            "entry": "META-INF/LICENSE.md",
+            "bytes": 1171,
+            "sha256": "0e01f1549c9022f406392ac2947d32223b7c2e977d21ea2f8c182fdeb4dae5fd"
+          }
+        ]
+      },
+      "pom": {
+        "url": "https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk18on/1.86/bcprov-jdk18on-1.86.pom",
+        "bytes": 1160,
+        "sha256": "970b70cb75a184639b6fb9ba3c465aca6a4e1a5f3fff4d65ce8574b2fd79ef38",
+        "declaredLicenses": [
+          {
+            "name": "Bouncy Castle Licence",
+            "url": "https://www.bouncycastle.org/licence.html"
+          }
+        ],
+        "parent": null
+      },
+      "sourceArchive": {
+        "url": "https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk18on/1.86/bcprov-jdk18on-1.86-sources.jar",
+        "bytes": 4909869,
+        "sha256": "34a8b7dcb030a08ddd5356d3d5be962f9299ca5275e1460273186f8fdbe44c34",
+        "embeddedNotices": [
+          {
+            "entry": "META-INF/LICENSE.md",
+            "bytes": 1171,
+            "sha256": "0e01f1549c9022f406392ac2947d32223b7c2e977d21ea2f8c182fdeb4dae5fd"
+          }
+        ]
+      },
+      "publishedDependencies": [],
+      "bundledNoticeFiles": [
+        "ssh/bouncycastle-LICENSE.md"
+      ]
+    },
+    {
+      "coordinate": "org.bouncycastle:bcpkix-jdk18on:1.86",
+      "binary": {
+        "url": "https://repo.maven.apache.org/maven2/org/bouncycastle/bcpkix-jdk18on/1.86/bcpkix-jdk18on-1.86.jar",
+        "bytes": 1341621,
+        "sha256": "8d8b41a4b149bdae8d331f059a578870954d1e3ff29f8269a9eb3ee19a7e4ef7",
+        "embeddedNotices": [
+          {
+            "entry": "META-INF/LICENSE.md",
+            "bytes": 1171,
+            "sha256": "0e01f1549c9022f406392ac2947d32223b7c2e977d21ea2f8c182fdeb4dae5fd"
+          }
+        ]
+      },
+      "pom": {
+        "url": "https://repo.maven.apache.org/maven2/org/bouncycastle/bcpkix-jdk18on/1.86/bcpkix-jdk18on-1.86.pom",
+        "bytes": 1522,
+        "sha256": "44989844fb17b39eb08eabeaf81e1fd16ac50c994d5c02119f891220c3ac5878",
+        "declaredLicenses": [
+          {
+            "name": "Bouncy Castle Licence",
+            "url": "https://www.bouncycastle.org/licence.html"
+          }
+        ],
+        "parent": null
+      },
+      "sourceArchive": {
+        "url": "https://repo.maven.apache.org/maven2/org/bouncycastle/bcpkix-jdk18on/1.86/bcpkix-jdk18on-1.86-sources.jar",
+        "bytes": 969954,
+        "sha256": "0bb00b50a80404e40c6465cb8012d3835d2a9100d94d16eaa9efed4587d7e34d",
+        "embeddedNotices": [
+          {
+            "entry": "META-INF/LICENSE.md",
+            "bytes": 1171,
+            "sha256": "0e01f1549c9022f406392ac2947d32223b7c2e977d21ea2f8c182fdeb4dae5fd"
+          }
+        ]
+      },
+      "publishedDependencies": [
+        {
+          "groupId": "org.bouncycastle",
+          "artifactId": "bcutil-jdk18on",
+          "version": "1.86",
+          "scope": null,
+          "optional": null,
+          "type": "jar"
+        }
+      ],
+      "bundledNoticeFiles": [
+        "ssh/bouncycastle-LICENSE.md"
+      ]
+    },
+    {
+      "coordinate": "org.bouncycastle:bcutil-jdk18on:1.86",
+      "binary": {
+        "url": "https://repo.maven.apache.org/maven2/org/bouncycastle/bcutil-jdk18on/1.86/bcutil-jdk18on-1.86.jar",
+        "bytes": 789287,
+        "sha256": "1c268e15f785aafb1e4670d8d6e5f856f69475e96c162dadcd1ff9b350e9139f",
+        "embeddedNotices": [
+          {
+            "entry": "META-INF/LICENSE.md",
+            "bytes": 1171,
+            "sha256": "0e01f1549c9022f406392ac2947d32223b7c2e977d21ea2f8c182fdeb4dae5fd"
+          }
+        ]
+      },
+      "pom": {
+        "url": "https://repo.maven.apache.org/maven2/org/bouncycastle/bcutil-jdk18on/1.86/bcutil-jdk18on-1.86.pom",
+        "bytes": 1344,
+        "sha256": "2209b3e5d1eb2bb3c593b824c1b8f142b05dea8e9df7400b0f33f2b91a0741fa",
+        "declaredLicenses": [
+          {
+            "name": "Bouncy Castle Licence",
+            "url": "https://www.bouncycastle.org/licence.html"
+          }
+        ],
+        "parent": null
+      },
+      "sourceArchive": {
+        "url": "https://repo.maven.apache.org/maven2/org/bouncycastle/bcutil-jdk18on/1.86/bcutil-jdk18on-1.86-sources.jar",
+        "bytes": 601111,
+        "sha256": "a79e8cdbc04a24aecf64503eda9a4aa61019132484c64f7ce32a68ac30ef6df7",
+        "embeddedNotices": [
+          {
+            "entry": "META-INF/LICENSE.md",
+            "bytes": 1171,
+            "sha256": "0e01f1549c9022f406392ac2947d32223b7c2e977d21ea2f8c182fdeb4dae5fd"
+          }
+        ]
+      },
+      "publishedDependencies": [
+        {
+          "groupId": "org.bouncycastle",
+          "artifactId": "bcprov-jdk18on",
+          "version": "1.86",
+          "scope": null,
+          "optional": null,
+          "type": "jar"
+        }
+      ],
+      "bundledNoticeFiles": [
+        "ssh/bouncycastle-LICENSE.md"
+      ]
+    },
+    {
+      "coordinate": "org.slf4j:slf4j-api:2.0.20",
+      "binary": {
+        "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/2.0.20/slf4j-api-2.0.20.jar",
+        "bytes": 70255,
+        "sha256": "7e1446499b359675d8aabe6af2de86b85e72ae8a2a932c0b40d0e5ba57097439",
+        "embeddedNotices": [
+          {
+            "entry": "META-INF/LICENSE.txt",
+            "bytes": 1159,
+            "sha256": "6632f550c207be8d7d6b5e87f5d7b905bee218d18392d531df457bf60bec1447"
+          }
+        ]
+      },
+      "pom": {
+        "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/2.0.20/slf4j-api-2.0.20.pom",
+        "bytes": 2826,
+        "sha256": "2e625c3f553cddd49f8554cea9926cbf70673b3d6833464f0c5a02f4d9130594",
+        "declaredLicenses": [],
+        "parent": {
+          "groupId": "org.slf4j",
+          "artifactId": "slf4j-parent",
+          "version": "2.0.20"
+        }
+      },
+      "sourceArchive": {
+        "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/2.0.20/slf4j-api-2.0.20-sources.jar",
+        "bytes": 77456,
+        "sha256": "565e509928d095e20c5d93ca5e3a528e98fc7410c3ca4e84b05ccfadf21b40ba",
+        "embeddedNotices": [
+          {
+            "entry": "META-INF/LICENSE.txt",
+            "bytes": 1159,
+            "sha256": "6632f550c207be8d7d6b5e87f5d7b905bee218d18392d531df457bf60bec1447"
+          }
+        ]
+      },
+      "publishedDependencies": [],
+      "bundledNoticeFiles": [
+        "ssh/slf4j-embedded-LICENSE.txt",
+        "ssh/slf4j-module-LICENSE.txt"
+      ]
+    },
+    {
+      "coordinate": "org.slf4j:slf4j-nop:2.0.20",
+      "binary": {
+        "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-nop/2.0.20/slf4j-nop-2.0.20.jar",
+        "bytes": 4966,
+        "sha256": "6522080396fb339e99bae40d329a06d18d3190dc864020ac4ca943519d0fd85b",
+        "embeddedNotices": [
+          {
+            "entry": "META-INF/LICENSE.txt",
+            "bytes": 1159,
+            "sha256": "6632f550c207be8d7d6b5e87f5d7b905bee218d18392d531df457bf60bec1447"
+          }
+        ]
+      },
+      "pom": {
+        "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-nop/2.0.20/slf4j-nop-2.0.20.pom",
+        "bytes": 1294,
+        "sha256": "3cee6394352190ba1cdde7bf3704532434d5563d5343e4f3016c977acd0162ee",
+        "declaredLicenses": [],
+        "parent": {
+          "groupId": "org.slf4j",
+          "artifactId": "slf4j-parent",
+          "version": "2.0.20"
+        }
+      },
+      "sourceArchive": {
+        "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-nop/2.0.20/slf4j-nop-2.0.20-sources.jar",
+        "bytes": 3667,
+        "sha256": "eac77201f8af17867f3463923efad1f18d638804835a06534766e4b44cb23ee0",
+        "embeddedNotices": [
+          {
+            "entry": "META-INF/LICENSE.txt",
+            "bytes": 1159,
+            "sha256": "6632f550c207be8d7d6b5e87f5d7b905bee218d18392d531df457bf60bec1447"
+          }
+        ]
+      },
+      "publishedDependencies": [
+        {
+          "groupId": "org.slf4j",
+          "artifactId": "slf4j-api",
+          "version": null,
+          "scope": null,
+          "optional": null,
+          "type": null
+        },
+        {
+          "groupId": "org.slf4j",
+          "artifactId": "slf4j-api",
+          "version": "${project.version}",
+          "scope": "test",
+          "optional": null,
+          "type": "test-jar"
+        }
+      ],
+      "bundledNoticeFiles": [
+        "ssh/slf4j-embedded-LICENSE.txt",
+        "ssh/slf4j-module-LICENSE.txt"
+      ]
+    },
+    {
+      "coordinate": "com.hierynomus:asn-one:0.6.0",
+      "binary": {
+        "url": "https://repo.maven.apache.org/maven2/com/hierynomus/asn-one/0.6.0/asn-one-0.6.0.jar",
+        "bytes": 67005,
+        "sha256": "e4f70fd92849b52240048b8ebace0c9a17d3bb7b9c882b3c7778cec3458495f5",
+        "embeddedNotices": []
+      },
+      "pom": {
+        "url": "https://repo.maven.apache.org/maven2/com/hierynomus/asn-one/0.6.0/asn-one-0.6.0.pom",
+        "bytes": 1832,
+        "sha256": "c2e7f76d229f2a35e392922a23a53a0e3110e9e9877da7e71566d3baa33d07d2",
+        "declaredLicenses": [
+          {
+            "name": "The Apache License, Version 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0"
+          }
+        ],
+        "parent": null
+      },
+      "sourceArchive": {
+        "url": "https://repo.maven.apache.org/maven2/com/hierynomus/asn-one/0.6.0/asn-one-0.6.0-sources.jar",
+        "bytes": 34102,
+        "sha256": "4a1c44c43d335d93f22d95c096e088bc4a4a11a45fd0f0df1d2e02a245708487",
+        "embeddedNotices": []
+      },
+      "publishedDependencies": [
+        {
+          "groupId": "org.slf4j",
+          "artifactId": "slf4j-api",
+          "version": "1.7.13",
+          "scope": "runtime",
+          "optional": null,
+          "type": null
+        }
+      ],
+      "bundledNoticeFiles": [
+        "ssh/asn-one-LICENSE.txt",
+        "ssh/asn-one-COPYRIGHT.txt"
+      ]
+    }
+  ],
+  "additionalMetadata": [
+    {
+      "coordinate": "com.hierynomus:sshj:0.41.2",
+      "url": "https://repo.maven.apache.org/maven2/com/hierynomus/sshj/0.41.2/sshj-0.41.2.module",
+      "bytes": 4092,
+      "sha256": "9d5626dc8c6776cc9423fb6553aef75b6af8e46ef6084c89f1fb10bb8501a032"
+    },
+    {
+      "coordinate": "com.hierynomus:asn-one:0.6.0",
+      "url": "https://repo.maven.apache.org/maven2/com/hierynomus/asn-one/0.6.0/asn-one-0.6.0.module",
+      "bytes": 3620,
+      "sha256": "91317ae53ae49648e2e620bb90253cc33f18f9a2a96f3c541e663c5f22180c2e"
+    },
+    {
+      "coordinate": "org.slf4j:slf4j-parent:2.0.20",
+      "role": "metadata only; not an additional runtime JAR",
+      "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-parent/2.0.20/slf4j-parent-2.0.20.pom",
+      "bytes": 13541,
+      "sha256": "d931cf99cfd3554d322809df03c43ef897082cd480d6ff91b44d8f067ca324c8"
+    }
+  ],
+  "upstreamRevisions": {
+    "sshj": "6fad160fe36605a68847ac8a527750c615b4bd04",
+    "bouncycastle": "eacda831fbe15b272933e40841d8b0827b556fae",
+    "slf4j": "58d80a4fe8f2e811707fcfba4d292b5d62fc2fe9",
+    "asn-one": "2faafc6ebb3978f56d877dcb80e5773d6e11ffb7"
+  },
+  "files": [
+    {
+      "path": "ssh/sshj-LICENSE.txt",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "origin": {
+        "url": "https://raw.githubusercontent.com/hierynomus/sshj/6fad160fe36605a68847ac8a527750c615b4bd04/LICENSE",
+        "copyMode": "verbatim"
+      }
+    },
+    {
+      "path": "ssh/sshj-NOTICE.txt",
+      "bytes": 3348,
+      "sha256": "28eafe2771c7cce241f05f1a28dfe0fc71c45a107d420b1a80305b487fa2f405",
+      "origin": {
+        "url": "https://raw.githubusercontent.com/hierynomus/sshj/6fad160fe36605a68847ac8a527750c615b4bd04/NOTICE",
+        "copyMode": "verbatim"
+      }
+    },
+    {
+      "path": "ssh/asn-one-LICENSE.txt",
+      "bytes": 10273,
+      "sha256": "73ba74dfaa520b49a401b5d21459a8523a146f3b7518a833eea5efa85130bf68",
+      "origin": {
+        "url": "https://raw.githubusercontent.com/hierynomus/asn-one/2faafc6ebb3978f56d877dcb80e5773d6e11ffb7/LICENSE",
+        "copyMode": "verbatim"
+      }
+    },
+    {
+      "path": "ssh/slf4j-module-LICENSE.txt",
+      "bytes": 1135,
+      "sha256": "226597f6ed1ff28910719f4c03264ec30d9c7e8636094649763c0166f6a02dcc",
+      "origin": {
+        "url": "https://raw.githubusercontent.com/qos-ch/slf4j/58d80a4fe8f2e811707fcfba4d292b5d62fc2fe9/slf4j-api/LICENSE.txt",
+        "copyMode": "verbatim"
+      }
+    },
+    {
+      "path": "ssh/bouncycastle-LICENSE.md",
+      "bytes": 1171,
+      "sha256": "0e01f1549c9022f406392ac2947d32223b7c2e977d21ea2f8c182fdeb4dae5fd",
+      "origin": {
+        "coordinate": "org.bouncycastle:bcprov-jdk18on:1.86",
+        "entry": "META-INF/LICENSE.md",
+        "copyMode": "verbatim"
+      }
+    },
+    {
+      "path": "ssh/slf4j-embedded-LICENSE.txt",
+      "bytes": 1159,
+      "sha256": "6632f550c207be8d7d6b5e87f5d7b905bee218d18392d531df457bf60bec1447",
+      "origin": {
+        "coordinate": "org.slf4j:slf4j-api:2.0.20",
+        "entry": "META-INF/LICENSE.txt",
+        "copyMode": "verbatim"
+      }
+    },
+    {
+      "path": "ssh/asn-one-COPYRIGHT.txt",
+      "bytes": 241,
+      "sha256": "d418a2e89acb583c5249602fde8ea8978857f1e31ca755a0d043cd8d834aca32",
+      "origin": {
+        "coordinate": "com.hierynomus:asn-one:0.6.0",
+        "sourceArchiveSha256": "4a1c44c43d335d93f22d95c096e088bc4a4a11a45fd0f0df1d2e02a245708487",
+        "representativeEntry": "com/hierynomus/asn1/types/ASN1TagClass.java",
+        "matchingSourceFileCount": 31,
+        "copyMode": "copyright text transcribed; explanatory prose authored"
+      }
+    },
+    {
+      "path": "ssh/README.txt",
+      "bytes": 1289,
+      "sha256": "a593aec579e7e6bbf9b5401d91ec4a9a4684983ec48eae1b1168e22c27a661a9",
+      "origin": {
+        "copyMode": "authored inventory and packaging boundary"
+      }
+    }
+  ],
+  "excluded": [
+    "No BCJSSE/bctls/OpenPGP/MLS artifact, logger backend other than NOP, test fixture keys or third-party implementation copied",
+    "This incremental inventory does not replace the remaining Android product dependency inventory."
+  ],
+  "packagingStatus": "Source notice inventory for the credential-free product observer. Actual debug/release APK inclusion is recorded separately in the corresponding qualification result; this source manifest alone does not prove artifact inclusion or device compatibility."
+}
