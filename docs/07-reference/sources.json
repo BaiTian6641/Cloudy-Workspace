@@ -3660,9 +3660,9 @@
       "publisher": "Google",
       "category": "security",
       "reviewStatus": "reviewed",
-      "checkedOn": "2026-10-15",
+      "checkedOn": "2026-10-16",
       "sourceUpdatedOn": null,
-      "note": "noBackup plus explicit dataExtractionRules exclusions for cloud/device transfer and older fullBackupContent; allowBackup=false alone not universal transfer exclusion. Owner: Android/security; API15, P1-S3/P3-S7.",
+      "note": "noBackup plus explicit dataExtractionRules exclusions for cloud/device transfer and older fullBackupContent; allowBackup=false alone not universal transfer exclusion. Owner: Android/security; API15, P1-S3/P3-S7. Rechecked official current XML syntax for the isolated min35 VNC harness DataExtractionRules repair: reuse the existing nine-domain cloud/device-transfer exclusions and manifest reference; no backup/transfer runtime pass. P1-S4.",
       "refresh": "Before changing the affected adapter, security policy or compatibility claim."
     },
     {
@@ -7576,6 +7576,30 @@
       "sourceUpdatedOn": null,
       "note": "Push paths-ignore suppresses a run only when all changed paths match. Mixed source/docs pushes still run. Filtered required workflows can leave pending checks, so Cloudy keeps Android pull_request unfiltered and adds manual dispatch; repository/ruleset requirements are not inferred. Owner CI/integration leader, P1-S4. YAML/source-bound review is separate from hosted execution.",
       "refresh": "Before changing workflow triggers, build input roots, required-check policy or release qualification; do not count a skipped build as executed."
+    },
+    {
+      "id": "R360",
+      "title": "Gradle dependency cache and offline artifact resolution",
+      "url": "https://docs.gradle.org/current/userguide/dependency_caching.html",
+      "publisher": "Gradle, Inc.",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Official Gradle9.8.1 guide inspected: --offline uses cached resolution and fails when required artifacts are absent; repository metadata/artifact origins remain distinct. Used to diagnose the isolated VNC runtime harness missing three test JARs, not to infer an engine defect or authorize new checksums. Fallback: reviewed already-verified maintained constraints/cache, or a separately scoped strict trusted resolution. Owner Android/build leader, P1-S4.",
+      "refresh": "Before changing dependency resolution, verification policy or affected build recipe; preserve failed attempts and check only changed boundaries."
+    },
+    {
+      "id": "R361",
+      "title": "Gradle DependencyVerificationMode strict contract",
+      "url": "https://docs.gradle.org/current/kotlin-dsl/gradle/org.gradle.api.artifacts.verification/-dependency-verification-mode/index.html",
+      "publisher": "Gradle, Inc.",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Official Gradle9.8.1 API enum DependencyVerificationMode, available since6.2, inspected: STRICT fails verification, LENIENT only logs errors and OFF disables checking. Cloudy retains --dependency-verification=strict through any scoped cache/recipe repair; no lenient/off mode or metadata regeneration. API documentation is separate from exact harness compiler and device results. Owner Android/build leader, P1-S4.",
+      "refresh": "Before changing dependency resolution, verification policy or affected build recipe; preserve failed attempts and check only changed boundaries."
     }
   ]
 }

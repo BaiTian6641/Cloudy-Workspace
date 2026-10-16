@@ -809,3 +809,10 @@ G24 was rechecked for fullscreen eligibility, pre-configuration callback orderin
 | ID | Official reference | Review status | Development use |
 | --- | --- | --- | --- |
 | R359 | [GitHub workflow event path filters](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#onpushpull_requestpull_request_targetpathspaths-ignore) | reviewed | All changed paths must match to suppress a push workflow; required filtered checks can remain pending. Keep PR triggers unfiltered and manual rerun available. Hosted execution and repository ruleset policy remain separate evidence. |
+
+## Scoped offline-build diagnosis
+
+| ID | Official reference | Review status | Development use |
+| --- | --- | --- | --- |
+| R360 | [Gradle dependency cache and offline mode](https://docs.gradle.org/current/userguide/dependency_caching.html) | reviewed | A missing required cached artifact fails offline resolution; distinguish it from a native-engine defect and preserve the failed build. |
+| R361 | [DependencyVerificationMode](https://docs.gradle.org/current/kotlin-dsl/gradle/org.gradle.api.artifacts.verification/-dependency-verification-mode/index.html) | reviewed | STRICT verification remains required; no checksum regeneration or lenient/off mode follows from a cache failure. Enum available since6.2; current9.8.1 docs inspected. |

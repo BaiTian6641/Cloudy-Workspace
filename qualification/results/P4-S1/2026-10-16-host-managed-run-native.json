@@ -1,0 +1,291 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "HOST-RETAINED-RUN02 actual finite Linux managedrun composition",
+  "status": "ACCEPTED_SCOPED_LINUX_NATIVE_COMPOSITION",
+  "acceptance": "Parent actual execution and independent source-bound evidence acceptance for one native method; no stage/capability promotion",
+  "hostExecutableVersion": "0.1.3",
+  "sources": [
+    {
+      "path": "host/core/internal/managedrun/run_linux.go",
+      "sha256": "03f970d8763e981a3d76f731279aa2f706348cdbbc51b3bf7601a2e9e9bb607d"
+    },
+    {
+      "path": "host/core/internal/managedrun/run_linux_test.go",
+      "sha256": "1cc86fd89123781daac35cf6a9145a6452eb6b2afb08067c445561c6e07ab03c"
+    },
+    {
+      "path": "host/core/internal/managedrun/native_linux_test.go",
+      "sha256": "2396d3a5abb01dd6d7281ae2a78412149a428ae21b78c49ead5998b50ca5356e"
+    }
+  ],
+  "moduleBindings": {
+    "host/core/go.mod": "216f549ff9871fea87351318ca6420efdfefeeaf1c0afa6a944ec41d2de70b4c",
+    "host/core/go.sum": "4e77c00cd0a32a85bd48f74790fc4f5fdb35d5e8e715d4b1fb131bcf7ce2d60a",
+    "host/core/THIRD_PARTY_NOTICES.txt": "3bbd241058c57c1c5aee6dd00774f60d585225dd152c037eb4738ab7f47736a7"
+  },
+  "protectedSourceBindings": {
+    "host/core/internal/jobs/types.go": "1abe1a972cb31f2939487dfa0861159a4592b278c53f0e9febb66311789e8b7e",
+    "host/core/internal/jobs/backend_linux.go": "3cfae7cdb0bc3162bd11aa953bd56be22b23a5fe7c2e7262b7a5c5b48ae24491",
+    "host/core/internal/jobrecorder/recorder_linux.go": "e78fbc3f2a2fdea13263dc46016fa1824c7eceb54787f010389ca19365402c0f",
+    "host/core/internal/jobevents/store_linux.go": "77b16682a6f450fc3ad065aebb97ca169fd7cb52330b52de12442a2b83124283",
+    "host/core/internal/jobevents/record.go": "48e9fb40072515628d05d62f24911b2339f2ec14207719119a3948be34cbbef3",
+    "host/core/internal/jobevents/cursor.go": "c5ae95b43044513bf3af3e577cb74de3f1a318f455564f33f64f13a8184b2731",
+    "host/core/internal/bootidentity/boot_linux.go": "63e317107b0e42781456b7756326463366f81a7faf21315b5cbbf003ffd20698",
+    "host/core/cmd/cloudy-host/main.go": "f1275665c1caf81851c199fea669ffd675156d0f67e80080c98885028d0c5b54",
+    "host/core/internal/diagnostic/diagnostic.go": "ae62a40dbb4bdfa1aaaa538fd6f9e3c7a81d56e8a41112629f3bfb324b25667a",
+    "host/core/go.mod": "216f549ff9871fea87351318ca6420efdfefeeaf1c0afa6a944ec41d2de70b4c",
+    "host/core/go.sum": "4e77c00cd0a32a85bd48f74790fc4f5fdb35d5e8e715d4b1fb131bcf7ce2d60a"
+  },
+  "runtime": {
+    "os": "Linux",
+    "architecture": "amd64",
+    "selectedGo": "go1.27.2",
+    "kernel": "not resampled by this recipe; earlier source03 pure report records its own kernel"
+  },
+  "compile": {
+    "receipt": {
+      "path": ".cache/host-retained-run-02/native-build-01/result.json",
+      "sha256": "951da5e51d3446a35f239c81661b6b5ccac30ff55f15be989e3a3752f7e73445"
+    },
+    "checks": 1,
+    "elapsedSeconds": 0.252,
+    "testsExecuted": false,
+    "raceEnabled": false,
+    "stdoutBytes": 0,
+    "stderrBytes": 0,
+    "binary": {
+      "path": ".cache/host-retained-run-02/native-build-01/managedrun-linux-amd64.test",
+      "sha256": "4e3e5150afee47dcee8dc8933574c7f499d2e22d2d5d660e074f753c72add669",
+      "size": 6936336
+    }
+  },
+  "native": {
+    "result": {
+      "path": ".cache/host-retained-run-02/native-execution/run-ab70390f719950a868ac603b09cb1428/result.json",
+      "sha256": "2cf185bccf526ceeec05db7afe62201378214b21f5019955a8c56d4a6a8c1cff"
+    },
+    "method": "TestNativeManagedRun",
+    "topLevelPasses": 1,
+    "namedSubtests": 0,
+    "aggregateNamedPasses": 1,
+    "controlledChildAdmissions": 1,
+    "namedSkips": 0,
+    "namedFailures": 0,
+    "methodElapsedSeconds": 0.1,
+    "testExitCode": 0,
+    "bootstrapExitCode": 0,
+    "stderrBytes": 0,
+    "owned": true,
+    "retired": true,
+    "fixtureParentEmpty": true,
+    "ownedStopRequested": false,
+    "cleanupUncertain": false,
+    "controlCommands": 5,
+    "controlExitCodes": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "finalUnit": {
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0"
+    },
+    "originalOwnedUnitGroupAbsent": true,
+    "childMembershipAndStoreAssertions": "Source assertions in exact frozen executable; child output is captured by Job and not separately published"
+  },
+  "envelope": {
+    "unitRuntimeSeconds": 85,
+    "stopTimeoutSeconds": 5,
+    "bootstrapWaitSeconds": 45,
+    "testTimeoutSeconds": 35,
+    "gateWaitSeconds": 20,
+    "parentObservationSeconds": 90,
+    "jobRuntimeSeconds": 4,
+    "childFallbackSeconds": 10,
+    "automaticRetry": false
+  },
+  "actualOperations": [
+    "Actual boot reader and crypto-random owner/event IDs; installation identity is a synthetic fixed fixture only",
+    "Real Start with one controlled executable in a fresh owned cgroup child; exact child observes its own creation-time direct-child membership before readiness",
+    "One observer-ended pending WaitAndRecord capture followed by exact append retry; observer context does not cancel job",
+    "Explicit Cancel then SettleAndRecord; actual terminal payload canceled/start-resolved/started/reaped/confirmed retirement and exact append retry",
+    "Real local bbolt reset/snapshot and two-event history with frozen IDs, revisions 1 and 2; fixed output markers absent from stored JSON",
+    "Original job child absence and checked store/delegation Close before removal; dedicated fixture parent empty after actual test"
+  ],
+  "historicalEvidence": {
+    "pureReport": "qualification/results/P4-S1/2026-10-16-host-managed-run.json",
+    "scope": "Seven distinct pure methods and sixteen subcases across retained runs; not rerun or added to native count; original failed run remains failed"
+  },
+  "omp": {
+    "summary": {
+      "path": ".cache/host-retained-run-02/omp-public/summary.json",
+      "sha256": "09ad6db783d6eb110a77cd9661cbaa5bf64c63402a5929367ba8479526e41c52"
+    },
+    "review": {
+      "path": ".cache/host-retained-run-02/omp-public/review.md",
+      "sha256": "5e022bd074c289da3bcf28dbdc77a0ebc88b0ae5ecadee236795bf0828204fd9"
+    },
+    "payload": "Newly authored generic parser policy and official public Go documentation only; no existing project source/private results/host inventories",
+    "kimi": {
+      "provider": "kimi-code",
+      "model": "k3",
+      "elapsedSeconds": 101.91,
+      "exitCode": 0,
+      "stopReason": "stop",
+      "toolEvents": 0
+    },
+    "flash": {
+      "provider": "zai",
+      "model": "glm-5.3-flash",
+      "elapsedSeconds": 44.042,
+      "exitCode": 0,
+      "stopReason": "stop",
+      "toolEvents": 0
+    },
+    "coordinatorPureUnittestMethods": 44,
+    "coordinatorPureUnittestPassed": true,
+    "codeAdoptedIntoLauncher": false,
+    "corrections": [
+      "Flash line-over-limit case is exactly 4096 bytes, not oversized",
+      "Flash claimed 65536 boundary test actually checks larger invalid input; exact grammar cannot produce a valid such large input",
+      "Missing explicit invalid expected-name types and pass-line-only substituted-name case; no claim of complete coverage"
+    ]
+  },
+  "evidence": [
+    {
+      "path": ".cache/host-retained-run-02/compile-freeze-01.json",
+      "sha256": "15704be41ff38dec6566fda5a6ac464ea9e7ec6c068eb846737b0e999f1b706b"
+    },
+    {
+      "path": ".cache/host-retained-run-02/compile-inputs-01.json",
+      "sha256": "0e841542856496475592ac86dac5fdc40d7ef685ffa60008a0611e7d3b455d84"
+    },
+    {
+      "path": ".cache/host-retained-run-02/prepare_native_01.py",
+      "sha256": "b50e834273b3d4ecda81c854afc5661ad47938b7e79727443946096a02103083"
+    },
+    {
+      "path": ".cache/host-retained-run-02/native-freeze-01.json",
+      "sha256": "cef0e6d4b4ad4432fb7c7c419c7100a11aa65ec4609095e7843d3690d707dd80"
+    },
+    {
+      "path": ".cache/host-retained-run-02/independent-compile-review-01.json",
+      "sha256": "37e5dd9f8085b7c7456d2a745a15d826a8c73b3fd9dcb032668e7959fe89936c"
+    },
+    {
+      "path": ".cache/host-retained-run-02/independent-native-review-01.json",
+      "sha256": "c5032cfea04c7460cd789887b224f2b7bc2e1f06f429dda122a9084526930fb3"
+    },
+    {
+      "path": ".cache/host-retained-run-02/native-execution/run_native_01.py",
+      "sha256": "6c75705c6eca72322f5c285c0ebbcf5baa6c3048bf9516b5d9466b4b280d33cc"
+    },
+    {
+      "path": ".cache/host-retained-run-02/native-execution/execution-inputs-01.json",
+      "sha256": "b58b6992bb149c6303d3a79533e44aae598b999ba906888e59d877235230c3c4"
+    },
+    {
+      "path": ".cache/host-retained-run-02/native-execution/offline_controls_01.py",
+      "sha256": "1c92ebdc5d03ce438e2766ac7dc815cf383b5913fde25b5217652cdb9d66d04c"
+    },
+    {
+      "path": ".cache/host-retained-run-02/native-execution/offline-controls-01.json",
+      "sha256": "77097bf7cf15aef77253560db6b187c0dd8afffb52fb604c09f43ad852e4f9b2"
+    }
+  ],
+  "privateRawBindings": [
+    {
+      "path": ".cache/host-retained-run-02/native-execution/run-ab70390f719950a868ac603b09cb1428/bootstrap-admitted.json",
+      "sha256": "e4ac3e257b38c16b41991847d0c06b523011474a75d677c7aa5b97cce5564344"
+    },
+    {
+      "path": ".cache/host-retained-run-02/native-execution/run-ab70390f719950a868ac603b09cb1428/bootstrap-terminal.json",
+      "sha256": "8c604862652db85c6407a60ab91a7f6aed2a07f9527764bf9ca268e56f8efb3d"
+    },
+    {
+      "path": ".cache/host-retained-run-02/native-execution/run-ab70390f719950a868ac603b09cb1428/control-000.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-retained-run-02/native-execution/run-ab70390f719950a868ac603b09cb1428/control-000.stdout",
+      "sha256": "3037aac333af80388c8c900e8d1fefb61518e83274aa894b78e23b52cd9e7aea"
+    },
+    {
+      "path": ".cache/host-retained-run-02/native-execution/run-ab70390f719950a868ac603b09cb1428/control-001.stderr",
+      "sha256": "d9d133b8e2de906f6df613ae2b6aee3b62af87584933ce31626b7595cb4e2b85"
+    },
+    {
+      "path": ".cache/host-retained-run-02/native-execution/run-ab70390f719950a868ac603b09cb1428/control-001.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-retained-run-02/native-execution/run-ab70390f719950a868ac603b09cb1428/control-002.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-retained-run-02/native-execution/run-ab70390f719950a868ac603b09cb1428/control-002.stdout",
+      "sha256": "c663d9aa02df0b2a7ea5f42890789f83bca249f542f310c066eda8fc857b39ba"
+    },
+    {
+      "path": ".cache/host-retained-run-02/native-execution/run-ab70390f719950a868ac603b09cb1428/control-003.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-retained-run-02/native-execution/run-ab70390f719950a868ac603b09cb1428/control-003.stdout",
+      "sha256": "f463f206e41bdcb06e528bf0575730c72eed5feb8036989a3b9bbc120f029b66"
+    },
+    {
+      "path": ".cache/host-retained-run-02/native-execution/run-ab70390f719950a868ac603b09cb1428/control-004.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-retained-run-02/native-execution/run-ab70390f719950a868ac603b09cb1428/control-004.stdout",
+      "sha256": "3037aac333af80388c8c900e8d1fefb61518e83274aa894b78e23b52cd9e7aea"
+    },
+    {
+      "path": ".cache/host-retained-run-02/native-execution/run-ab70390f719950a868ac603b09cb1428/gate.json",
+      "sha256": "7200c3f8f3e081f2a3f6cdaa8c5322a829a313f708e24a224ba18567d37b6882"
+    },
+    {
+      "path": ".cache/host-retained-run-02/native-execution/run-ab70390f719950a868ac603b09cb1428/native.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-retained-run-02/native-execution/run-ab70390f719950a868ac603b09cb1428/native.stdout",
+      "sha256": "2de45c7d2ea992fcfd04946f331122391ed0d2af2dd66427db8cac7d15db17db"
+    },
+    {
+      "path": ".cache/host-retained-run-02/native-execution/run-ab70390f719950a868ac603b09cb1428/parent-000.json",
+      "sha256": "ddc43d2469282d659a5b473c7faaeb545d2f1d6f9873bb5de24819e7cf82f5bb"
+    },
+    {
+      "path": ".cache/host-retained-run-02/native-execution/run-ab70390f719950a868ac603b09cb1428/parent-001.json",
+      "sha256": "99821e75f56c5602e87a46d8bd5dae095063e3218a7c703beb53c0d3b8b5f631"
+    },
+    {
+      "path": ".cache/host-retained-run-02/native-execution/run-ab70390f719950a868ac603b09cb1428/result.json",
+      "sha256": "2cf185bccf526ceeec05db7afe62201378214b21f5019955a8c56d4a6a8c1cff"
+    }
+  ],
+  "limits": [
+    "One finite synthetic controlled child, not arbitrary-job safety or a descendant-tree stress test",
+    "Nonrace native binary; previous pure race evidence separate",
+    "No database close/reopen or crash/power-loss recovery asserted by this native case",
+    "No production installation-reader integration, standalone CLI, daemon, registry, service, listener, pairing or remote admission",
+    "No durable admission/replay/owner recovery, boot identity on Windows, Darwin jobs backend, wire integration or P4 promotion",
+    "Actual OS commit/close fault behavior and kernel-stalled termination remain unqualified",
+    "No new hosted CI result claimed"
+  ],
+  "independentActualReview": {
+    "path": ".cache/host-retained-run-02/independent-evidence-review-01.json",
+    "sha256": "0510dcec874a19a72b5df389eb2d28d1982dd522d8635548b7204d2de7c25137"
+  }
+}
