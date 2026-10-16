@@ -674,3 +674,7 @@ Direct GPT6.1-Sol workers implement disjoint files and independently review them
 All seven hosted workflows pass for the preceding source checkpoint `64b8437f6fa121e653f4b492dd15dedbc394f00e`, with receipt `.cache/foundation-entry-01/review-01/ci-64b8437-latest.json`. The new increment requires its own exact-commit hosted result after push.
 
 The subsequent design-review checkpoint `88d2c27926f68c7d47479b73b6f4be8657d61c6f` also has all seven hosted workflows successful, including product foundation38868661656. Parent source/artifact/device bindings are verified; repository AST/Ruff, schema/example validation,82 declared contrast checks, generated-token freshness, JavaScript syntax and diff whitespace pass for the new increment.
+
+## 2026-10-16 — External feedback adoption boundary clarified
+
+A fresh read-only GPT6.1-Sol audit and leader review confirm that the unchanged supplied Word feedback is covered by the [existing assessment](../04-design/2026-10-16-external-feedback-review.md). The review now explicitly distinguishes new status foreground colors from aliases retaining current values, and visual-comfort hypotheses from measured results. Current typography, density and native dialog gaps remain P1-S2 work. This clarification changes no tokens, application behavior, device state, scope or acceptance result.
