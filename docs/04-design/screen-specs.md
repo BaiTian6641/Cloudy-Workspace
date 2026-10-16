@@ -38,6 +38,8 @@ Distinguish installed backend, paired backend, available host session, and strea
 
 ## S07 — Embedded desktop session
 
+The [shared fullscreen and overlay contract](remote-session-presentation.md) makes this screen precise: foreground ready-time fullscreen by default, an explicit windowed preference, local recoverable controls, separate capture ownership and real retirement state.
+
 **Goal:** use a native remote surface while retaining escape and context. The surface takes maximum area; a minimal overlay exposes input profile, monitor, stream settings, capture/release, and diagnostics. Controls auto-hide only when there is a reliable visible/reachable recovery mechanism. Critical protected USB state remains available without hijacking remote input.
 
 States: initial decode, playing, permission-required, stream stalled, host locked, display unavailable, backend error. Display configured profile separately from observed frame/decode statistics. No general UI bridge handles video frames.

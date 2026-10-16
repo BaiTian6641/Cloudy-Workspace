@@ -90,3 +90,7 @@ Record evidence under `qualification/results/P5-S4/` using the [run template](..
 ## Gate and failure route
 
 Native streaming requires supported CAP-STREAM and the early P1-S5 adoption decision. DocumentsProvider depends on files/lifecycle rather than the streaming decision. External-only scope reduction still requires an explicit decision. Every done stage links actual evidence; a documentation check does not qualify a device.
+
+## Shared fullscreen and overlay acceptance
+
+The user requires remote desktop ready-time fullscreen with compact local controls. The [presentation contract](../../04-design/remote-session-presentation.md) applies to P1-S2 design, P3-S7/S8 native RDP/VNC and P5-S2 native streaming. Check eligible foreground entry, denial/windowed fallback, overlay/input separation, safe escape, actual geometry and retirement. This refines existing session UX; protocol, security and physical gates remain unchanged. Sources G24/R304–R306; [worker visual checks](../../04-design/worker-visual-acceptance.md) accompany implementation.

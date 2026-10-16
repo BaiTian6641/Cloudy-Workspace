@@ -1,6 +1,6 @@
 # Optional host integration
 
-**State:** planned module boundary; no application/library implementation yet. **Delivery stages:** P4.
+**State:** HOST-EXP01 local diagnostic implemented in `core`; paired service and OS adapters remain planned. **Delivery stages:** P4. See the [construction entry](../docs/03-platform/host-core-entry.md) and [parallel client/host mandate](../docs/05-delivery/parallel-execution-contract.md).
 
 ## Responsibility
 
@@ -12,6 +12,6 @@ Ordinary Console SSH does not depend on this agent. Media/USB/bulk file data sta
 
 ## First implementation work
 
-Separate service, user-session helper, and any narrowly justified privileged helper.
+Continue genuine identity/session observation, owned jobs and event persistence in bounded packets. Separate service, user-session helper, and any narrowly justified privileged helper. The local diagnostic supplies none of the remote-control/service authority by itself.
 
 Read the [module map](../docs/02-architecture/module-boundaries.md), [phase plan](../docs/05-delivery/README.md), and [validation strategy](../docs/06-validation/strategy.md). Record exact implementation versions and evidence before promoting a capability.

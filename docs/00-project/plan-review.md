@@ -8,6 +8,8 @@
 
 ## Retain
 
+**2026-10-16 execution clarification:** the user requested simultaneous Googlebook clients and Windows/Linux/macOS host-side software. This uses the existing P4 scope; the briefly considered native-client expansion is discarded. [Parallel execution](../05-delivery/parallel-execution-contract.md) and the [fullscreen/overlay contract](../04-design/remote-session-presentation.md) refine work allocation and UX without changing Rule0 or the original stage count.
+
 The two independently useful apps, host-local compute, ordinary SSH, optional host agent, direct media/USB/file paths, established backends, conservative file writes, explicit USB ownership, and evidence-based release gates are sound foundations. Preserve the original distinctions among terminal persistence, agent conversation resume, and host reboot survival. Keep bandwidth assumptions separate from measurements.
 
 ## Corrections and changes

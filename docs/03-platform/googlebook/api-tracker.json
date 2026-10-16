@@ -17,11 +17,11 @@
       "libraryVersion": null,
       "availability": "documented",
       "qualification": "untested",
-      "checkedOn": "2026-10-14",
+      "checkedOn": "2026-10-16",
       "owner": "Android/platform developer",
       "stage": "P1-S2",
-      "fallback": "Normal resizable window",
-      "experiment": "Fullscreen enter/exit, rejection callback, resize and UI thread behavior"
+      "fallback": "Normal resizable window with explicit Enter fullscreen action on denied or ineligible deferred entry",
+      "experiment": "Foreground ready-time fullscreen intent vs user-input eligibility; enter/exit/rejection, actual geometry and pre-configuration callback ordering; marshal API36.1-or-lower undefined callback thread safely"
     },
     {
       "id": "API02",

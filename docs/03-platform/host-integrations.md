@@ -35,3 +35,7 @@ Google's [Drive desktop requirements](https://support.google.com/drive/answer/23
 ## Adapter result format
 
 Each adapter should report backend version, capability, observation time, session identity, required permission, last error, and supported recovery action. A helper process that starts successfully has not yet proved capture, input, notification fidelity, or physical device ownership.
+
+## Parallel construction entry
+
+[HOST-EXP01](host-core-entry.md) provides a finite Go local runtime diagnostic; it does not observe these session-sensitive APIs. The [parallel execution contract](../05-delivery/parallel-execution-contract.md) assigns disjoint host-core/OS work while Googlebook development proceeds. Keep authenticated integration gates, real OS observations and source/build/physical evidence separate.

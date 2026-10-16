@@ -286,9 +286,9 @@
       "publisher": "Google",
       "category": "api",
       "reviewStatus": "reviewed",
-      "checkedOn": "2026-10-15",
+      "checkedOn": "2026-10-16",
       "sourceUpdatedOn": null,
-      "note": "requestFullscreenMode signature, API 34, and callback/rejection constraints. Re-reviewed getCurrentFocus(): API 1, currently focused native View or null; observational only, not DOM focus or an IME/keyboard success signal.",
+      "note": "requestFullscreenMode signature, API 34, and callback/rejection constraints. Re-reviewed getCurrentFocus(): API 1, currently focused native View or null; observational only, not DOM focus or an IME/keyboard success signal. Fullscreen reread: pinned/topmost focused activity and user-input response; callback precedes configuration, main thread except undefined dispatch on API36.1 or lower. Deferred Connect-to-ready intent requires actual platform qualification.",
       "refresh": "Before implementation against this surface; weekly during active platform qualification."
     },
     {
@@ -6712,6 +6712,150 @@
       "sourceUpdatedOn": null,
       "note": "Inspected moving main forwards received flags to onTransact, including the AppOps collection path. This source explanation is not the exact proprietary HP build or an observed numeric flag. Use the public one-way bit and actual device results; retain first failed transport evidence.",
       "refresh": "Before changing the handoff Parcel guard or selected Android build/toolchain; distinguish public APIs, inspected AOSP internals and device evidence."
+    },
+    {
+      "id": "R295",
+      "title": "Official Go download metadata",
+      "url": "https://go.dev/dl/?mode=json",
+      "publisher": "Go project",
+      "category": "reference",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2026-10-08",
+      "note": "Selected stable Go1.27.2 linux-amd64 archive size and SHA256; verified local extraction. No global installation.",
+      "refresh": "Before changing the relevant host adapter, toolchain or remote-session UX; pin runtime/build evidence separately."
+    },
+    {
+      "id": "R296",
+      "title": "Go release history",
+      "url": "https://go.dev/doc/devel/release#go1.27.2",
+      "publisher": "Go project",
+      "category": "reference",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2026-10-08",
+      "note": "Selected1.27.2 patch release; security/bug fixes documented. Patch selection does not qualify Cloudy host services.",
+      "refresh": "Before changing the relevant host adapter, toolchain or remote-session UX; pin runtime/build evidence separately."
+    },
+    {
+      "id": "R297",
+      "title": "Go command build test and vet reference",
+      "url": "https://pkg.go.dev/cmd/go",
+      "publisher": "Go project",
+      "category": "reference",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Compiler, build targets, test and vet operations for standard-library host construction; cross-build is not target execution.",
+      "refresh": "Before changing the relevant host adapter, toolchain or remote-session UX; pin runtime/build evidence separately."
+    },
+    {
+      "id": "R298",
+      "title": "Go toolchain selection",
+      "url": "https://go.dev/doc/toolchain",
+      "publisher": "Go project",
+      "category": "reference",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Use GOTOOLCHAIN=local to avoid implicit newer toolchain downloads; actual executable version separately checked.",
+      "refresh": "Before changing the relevant host adapter, toolchain or remote-session UX; pin runtime/build evidence separately."
+    },
+    {
+      "id": "R299",
+      "title": "Windows interactive services",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/services/interactive-services",
+      "publisher": "Microsoft",
+      "category": "reference",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2021-01-07",
+      "note": "Service and interactive user-process separation; session0 does not prove desktop authority. Future P4 helper qualification.",
+      "refresh": "Before changing the relevant host adapter, toolchain or remote-session UX; pin runtime/build evidence separately."
+    },
+    {
+      "id": "R300",
+      "title": "Windows named pipe security and access rights",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/ipc/named-pipe-security-and-access-rights",
+      "publisher": "Microsoft",
+      "category": "reference",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Intentional security descriptor, access rights and logon-session boundary; endpoint naming is not authenticated IPC. No implementation selected.",
+      "refresh": "Before changing the relevant host adapter, toolchain or remote-session UX; pin runtime/build evidence separately."
+    },
+    {
+      "id": "R301",
+      "title": "Archived launchd daemon and agent guide",
+      "url": "https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html",
+      "publisher": "Apple",
+      "category": "reference",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Archived lifecycle context distinguishes per-user agents and system daemons; current API/installer behavior still needs target-version review.",
+      "refresh": "Before changing the relevant host adapter, toolchain or remote-session UX; pin runtime/build evidence separately."
+    },
+    {
+      "id": "R302",
+      "title": "systemd service unit reference",
+      "url": "https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html",
+      "publisher": "systemd project",
+      "category": "reference",
+      "reviewStatus": "located",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Current web fetch failed; inspect pinned/installed manual before unit implementation. No unit or autostart change made.",
+      "refresh": "Before changing the relevant host adapter, toolchain or remote-session UX; pin runtime/build evidence separately."
+    },
+    {
+      "id": "R303",
+      "title": "Pinned setup-go action v6",
+      "url": "https://github.com/actions/setup-go/blob/924ae3a1cded613372ab5595356fb5720e22ba16/README.md",
+      "publisher": "GitHub Actions",
+      "category": "reference",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Exact version selection and cache controls reviewed for host CLI CI; action pin from official v6 tag. Hosted execution is separate evidence.",
+      "refresh": "Before changing the relevant host adapter, toolchain or remote-session UX; pin runtime/build evidence separately."
+    },
+    {
+      "id": "R304",
+      "title": "Parsec stream overlay stats and logging",
+      "url": "https://support.parsec.app/hc/en-us/articles/32381603663636-Stream-Overlay-Stats-and-Logging",
+      "publisher": "Parsec",
+      "category": "reference",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2025-03-17",
+      "note": "Connected-session compact controls and diagnostic presentation reference; not Googlebook support, protocol dependency or embedding permission.",
+      "refresh": "Before changing the relevant host adapter, toolchain or remote-session UX; pin runtime/build evidence separately."
+    },
+    {
+      "id": "R305",
+      "title": "Parsec Windows app settings and hotkeys",
+      "url": "https://support.parsec.app/hc/en-us/articles/32381199341716-Parsec-App-for-Windows",
+      "publisher": "Parsec",
+      "category": "reference",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Connection window mode, overlay/menu, fullscreen, disconnect and immersive input are separate settings/actions; experience reference only.",
+      "refresh": "Before changing the relevant host adapter, toolchain or remote-session UX; pin runtime/build evidence separately."
+    },
+    {
+      "id": "R306",
+      "title": "TeamViewer remote session toolbar",
+      "url": "https://www.teamviewer.com/apac/global/support/knowledge-base/teamviewer-remote/remote-control/remote-session-toolbar/?language-switched=true",
+      "publisher": "TeamViewer",
+      "category": "reference",
+      "reviewStatus": "located",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Official search-extracted content supports fullscreen and collapse/expand; direct English body fetch failed, so full-body review not claimed.",
+      "refresh": "Before changing the relevant host adapter, toolchain or remote-session UX; pin runtime/build evidence separately."
     }
   ]
 }

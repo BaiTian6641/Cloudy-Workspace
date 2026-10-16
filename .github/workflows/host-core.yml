@@ -1,0 +1,52 @@
+name: Host core diagnostic
+
+on:
+  push:
+    paths: ['host/core/**', '.github/workflows/host-core.yml']
+  pull_request:
+    paths: ['host/core/**', '.github/workflows/host-core.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: bash
+        working-directory: host/core
+    env:
+      GOTOOLCHAIN: local
+      GOENV: 'off'
+      GOPROXY: 'off'
+      GOTELEMETRY: 'off'
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-go@924ae3a1cded613372ab5595356fb5720e22ba16 # v6
+        with:
+          go-version: '1.27.2'
+          cache: false
+      - name: Check selected compiler and formatting
+        run: |
+          test "$(go env GOVERSION)" = 'go1.27.2'
+          test -z "$(gofmt -l .)"
+      - name: Compile, vet and execute contract tests
+        run: |
+          go vet ./...
+          go test -mod=readonly ./...
+          go build -mod=readonly -trimpath -buildvcs=false ./cmd/cloudy-host
+      - name: Race checks on Linux
+        if: runner.os == 'Linux'
+        run: go test -race -mod=readonly ./...
+      # These are real hosted CLI executions, not desktop-session qualification.
+      - name: Execute the local diagnostic
+        run: |
+          test "$(go run ./cmd/cloudy-host version)" = '0.1.0'
+          go run ./cmd/cloudy-host inspect

@@ -1,5 +1,7 @@
 # Engineering workflow and active implementation goal
 
+The current [parallel execution mandate](parallel-execution-contract.md) keeps Googlebook client development and Windows/Linux/macOS host-side construction active together. Direct Codex GPT-6.1 Sol coordinates OMP packets; the parent retains integration and Git. Read it after execution-state during context recovery. UI assignments additionally follow the [rendered visual contract](../04-design/worker-visual-acceptance.md).
+
 **Authority:** the user's implementation-goal request, primary-host answer, established-library verification refinement and local-worker authorization, 2026-10-15, America/Chicago. This workflow applies to the primary agent and every subagent. The active Codex goal covers implementation and qualification of the approved P0–P6 scope. This document records how to pursue it; it does not claim the applications exist.
 
 ## Goal and completion boundary

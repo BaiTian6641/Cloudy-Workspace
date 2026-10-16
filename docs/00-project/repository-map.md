@@ -1,11 +1,11 @@
 # Repository map
 
-The root Gradle graph now includes five implemented P1-S1 source modules: `:console` → `apps/console`, `:desktop` → `apps/desktop`, `:domain` → `shared/android/domain`, `:platform` → `shared/android/platform`, and `:design-system` → `shared/design-system/android`. Strict build and bounded device tests now pass; P1-S1 local construction acceptance is complete. The local window slice is implemented; remote engines and the other module directories remain planned or separate qualification probes, not product features.
+The root Gradle graph contains seven source modules: `:console`, `:desktop`, `:domain`, `:platform`, `:design-system`, `:identity` and `:ssh`, with paths bound in `settings.gradle.kts`. P1-S1 local construction is complete; later scoped identity/profile/trust and foreground SSH/read-only files/handoff increments have separate evidence. Full remote workflows remain incomplete. `host/core` additionally contains the separately built [HOST-EXP01 Go diagnostic](../03-platform/host-core-entry.md); other host adapters are planned, not implemented by their directories.
 
 Read the [module boundaries](../02-architecture/module-boundaries.md) and [current state](../05-delivery/execution-state.md) before continuing. The full implementation goal continues with Codex GPT6.1-Sol and authorized OMP coworkers; no P1-only stopping rule is inferred from historical plans.
 
 
-The tree below mixes the implemented five-module slice with reserved future ownership boundaries. Root Gradle configuration exists for those five modules; other Gradle/Go/JavaScript targets are not implied by their directories.
+The tree below mixes the implemented Android source modules with reserved future ownership boundaries. Root Gradle configuration exists for the Android modules; host/core has its own explicit go.mod. Other targets are not implied by their directories.
 
 ```text
 apps/

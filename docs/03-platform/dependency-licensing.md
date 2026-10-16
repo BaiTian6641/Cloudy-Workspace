@@ -21,7 +21,7 @@ Use the [established-library policy](../05-delivery/library-reuse-policy.md) whe
 | VirtualHere | Android USB provider + host consumers | External licensed software | P0-S5 / P1-S4: trial/license/API/redistribution terms |
 | Tailscale | Existing private network route | Official separate app | P0-S6: route/one-VPN behavior; no admin key in client |
 | rclone | Optional Linux cloud-file adapter | Host-configured, not embedded by default | P3-S3/P5-S3: cache/conflicts and actual license |
-| Go | Optional host core | Select toolchain at implementation | P1-S1/P4-S1 |
+| Go | Optional host core | Go1.27.2 standard-library-only HOST-EXP01 diagnostic, exact verified archive; no remote transport selection | P4-S1 integration and actual packaged source/notices closure remain open |
 
 The [Moonlight repository](https://github.com/moonlight-stream/moonlight-android) identifies its GPL-3.0 license. Invoking an external app and distributing a derived/integrated implementation are distinct choices; do not assume one licenses the other. [VirtualHere's Android page](https://www.virtualhere.com/android) and [consumer API](https://www.virtualhere.com/client_api) are entry points; API availability does not grant redistribution rights. The [FreeRDP root license](https://github.com/FreeRDP/FreeRDP/blob/master/LICENSE) and [LibVNC copying terms](https://github.com/LibVNC/libvncserver/blob/master/COPYING) are starting evidence, not substitutes for reviewing the selected build.
 

@@ -570,7 +570,8 @@
         "Qualify keyboard navigation, shortcut discovery, right-click/hover/cursors, range selection, pointer/touch access and focus ownership on Googlebook. Preserve ordinary native field editing and explicit per-surface shortcut ownership under D14.",
         "Run narrow tiled/short windows, multi-instance and display-scale changes; preserve desktop workflows without adding phone/tablet navigation.",
         "Run the native workspace review with two host contexts, terminal/SFTP, X11 modal, RDP/VNC input release and a device interruption; label synthetic and engine-backed evidence separately.",
-        "Record Q-A02 shell/geometry findings and feature-specific pending checks before freezing revised interaction components."
+        "Record Q-A02 shell/geometry findings and feature-specific pending checks before freezing revised interaction components.",
+        "Apply the shared ready-time fullscreen and recoverable local-overlay contract; qualify input isolation, escape, viewport mapping, platform denial and honest retirement without inferring engine support."
       ],
       "deliverables": [
         "Native desktop component catalog and S01\u2013S17 interaction review",
@@ -596,7 +597,11 @@
         "G122",
         "G123",
         "G124",
-        "G125"
+        "G125",
+        "G24",
+        "R304",
+        "R305",
+        "R306"
       ],
       "acceptanceCases": [
         "Q-P02",
@@ -1352,7 +1357,8 @@
         "Embed the qualified maintained RDP engine behind the native surface/input interface with explicit profile, server identity and credential handling.",
         "Support verified certificate/NLA authentication and the P1-S3 on-Googlebook vault, desktop physical keyboard/IME/buttons/wheel, absolute and genuinely negotiated relative mouse for qualified3D, scaling/resize, explicit clipboard policy and reliable local capture release.",
         "Expose actual negotiated transport/graphics/input capabilities and recovery; qualify UDP/TCP conditions and Linux/Windows/macOS server-specific host rows. macOS requires a selected compatible RDP server; VNC is a separately labeled route. No absolute-fallback claim of relative 3D support.",
-        "Record optional RemoteApp/gateway/redirection support separately; test with Console and the custom host agent absent."
+        "Record optional RemoteApp/gateway/redirection support separately; test with Console and the custom host agent absent.",
+        "Apply the shared ready-time fullscreen and recoverable local-overlay contract; qualify input isolation, escape, viewport mapping, platform denial and honest retirement without inferring engine support."
       ],
       "deliverables": [
         "Integrated RDP profile/connect/session workflow",
@@ -1383,7 +1389,11 @@
         "G134",
         "G135",
         "G136",
-        "G137"
+        "G137",
+        "G24",
+        "R304",
+        "R305",
+        "R306"
       ],
       "acceptanceCases": [
         "Q-D07",
@@ -1418,7 +1428,8 @@
         "Embed the license/security-approved RFB client behind the native desktop interface and add explicit encoding/security/server profiles.",
         "Support framebuffer/cursor/input, resize if negotiated, clipboard policy and a verified encrypted or authenticated-tunnel route.",
         "Bound update/decode memory without discarding dependent protocol state; expose actual encoding/security and server extension limits.",
-        "Qualify primary VNC servers, malformed/unsupported updates, network recovery and file handoff through independent SFTP where available."
+        "Qualify primary VNC servers, malformed/unsupported updates, network recovery and file handoff through independent SFTP where available.",
+        "Apply the shared ready-time fullscreen and recoverable local-overlay contract; qualify input isolation, escape, viewport mapping, platform denial and honest retirement without inferring engine support."
       ],
       "deliverables": [
         "Integrated VNC profile/connect/session workflow",
@@ -1435,7 +1446,11 @@
         "R27",
         "R32",
         "G09",
-        "G10"
+        "G10",
+        "G24",
+        "R304",
+        "R305",
+        "R306"
       ],
       "acceptanceCases": [
         "Q-D08",
@@ -1572,7 +1587,16 @@
       ],
       "sourceIds": [
         "G18",
-        "R08"
+        "R08",
+        "R295",
+        "R296",
+        "R297",
+        "R298",
+        "R299",
+        "R300",
+        "R301",
+        "R302",
+        "R303"
       ],
       "acceptanceCases": [
         "Q-S01",
@@ -1713,7 +1737,8 @@
         "Integrate the approved maintained native stream engine with direct media/input, native Surface and measured decoder/profile selection.",
         "Minimize copies/queue age, use supported low-latency decoder modes, and implement backend-supported adaptation with stable audio/video pacing.",
         "Qualify CAD/keyboard/trackpad/mouse, display/scaling/capture release, permissions/session and thermal 8-hour behavior.",
-        "Compare input-to-photon and quality against qualified standalone Moonlight and Parsec where supported; run impaired links and recovery without false parity claims."
+        "Compare input-to-photon and quality against qualified standalone Moonlight and Parsec where supported; run impaired links and recovery without false parity claims.",
+        "Apply the shared ready-time fullscreen and recoverable local-overlay contract; qualify input isolation, escape, viewport mapping, platform denial and honest retirement without inferring engine support."
       ],
       "deliverables": [
         "Native high-performance Desktop stream path and diagnostics",
@@ -1732,7 +1757,11 @@
         "R05",
         "R06",
         "R29",
-        "R30"
+        "R30",
+        "G24",
+        "R304",
+        "R305",
+        "R306"
       ],
       "acceptanceCases": [
         "Q-D02",

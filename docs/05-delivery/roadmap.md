@@ -25,6 +25,8 @@ The implementation-readiness review further separates reusable transfer work int
 
 ## Dependency structure
 
+The user explicitly requested [parallel client and host development](parallel-execution-contract.md). Bounded host construction/research can proceed independently under the [HOST-EXP01 entry](../03-platform/host-core-entry.md); integrated P4 prerequisites below remain unchanged. This is host-side Windows/Linux/macOS software, not a new client-platform roadmap. The existing40-stage denominator and effort hypothesis are retained.
+
 This diagram summarizes the main paths. [backlog.json](backlog.json) contains every stage prerequisite and required capability outcome.
 
 ```mermaid

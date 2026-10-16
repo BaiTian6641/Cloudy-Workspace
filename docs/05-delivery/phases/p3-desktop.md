@@ -250,3 +250,7 @@ Add Q-D09 for actual physical capture, negotiated relative deltas,3D behavior an
 
 
 The existing effort range remains a provisional planning hypothesis. Re-estimate the relative-input adapter, vault and additional server rows after P0/P1 evidence; no new host or security promise is represented as completed within that range.
+
+## Shared fullscreen and overlay acceptance
+
+The user requires remote desktop ready-time fullscreen with compact local controls. The [presentation contract](../../04-design/remote-session-presentation.md) applies to P1-S2 design, P3-S7/S8 native RDP/VNC and P5-S2 native streaming. Check eligible foreground entry, denial/windowed fallback, overlay/input separation, safe escape, actual geometry and retirement. This refines existing session UX; protocol, security and physical gates remain unchanged. Sources G24/R304–R306; [worker visual checks](../../04-design/worker-visual-acceptance.md) accompany implementation.

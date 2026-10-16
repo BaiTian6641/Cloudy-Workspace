@@ -13,6 +13,8 @@ The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-p
 
 ## P4-S1 — Host agent pairing, capabilities, jobs, and resumable events
 
+**Parallel construction entry:** [HOST-EXP01](../../03-platform/host-core-entry.md) now supplies a finite local diagnostic and portable build evidence under the [user mandate](../parallel-execution-contract.md). It does not activate this whole integration stage or waive P1-S4/P3-S1. Windows/Linux/macOS adapters can develop in disjoint bounded packets with explicit session/API limits.
+
 **Owner:** Host/core developer. **Prerequisites:** P1-S4, P3-S1. **Status:** planned.
 
 Work:
@@ -106,3 +108,5 @@ Record evidence under `qualification/results/P4-S4/` using the [run template](..
 ## Gate and failure route
 
 Keep ordinary SSH/RDP/VNC and native streaming independent of the optional host agent. Unsupported OS event capabilities stay explicit; a suite integration failure does not fabricate a standalone app defect. Every done stage links actual evidence; a documentation check does not qualify a device.
+
+HOST-EXP01 source/toolchain and service-boundary references: R295–R303. They support the bounded entry and future adapter research; no unsupported capability or completed P4 stage follows.

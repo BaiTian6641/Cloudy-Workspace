@@ -1,0 +1,52 @@
+# Host core construction entry — HOST-EXP01
+
+**2026-10-16; bounded construction experiment for P4-S1.** The user requested parallel Windows/Linux/macOS host software while Googlebook client work continues. The experiment tests whether a small, separately versioned Go core builds portably and exposes truthful local diagnostics without choosing remote transport prematurely. Parent owns acceptance; direct Codex GPT-6.1 Sol owns source; OMP Kimi/Flash supply reviewed proposals. Scope cap: this finite command, its tests and three build targets; stop before adding identity persistence, listeners, jobs, services or OS permissions.
+
+## Implemented local profile
+
+`host/core` contains a standard-library-only Go module and `cloudy-host` executable, version **0.1.0**. `inspect` reads the actual running binary's OS/architecture/toolchain and current UTC time. It emits `localDiagnosticVersion: 1`, `agentVersion`, `observedAt`, `runtime`, `features` and `backends`. `version` prints the executable version. Invalid or extra arguments return exit2; output failure returns exit1 with fixed safe text. A successful exit and complete JSON are both required; stdout is not an atomic publication mechanism.
+
+Cloudy's unimplemented pairing, remote control, jobs, events and session adapters report **unavailable / not-implemented**. External desktop, USB and notification backends report **unknown / not-inspected**. The command neither probes those services nor claims they are absent. It does not collect hostname, account, environment, paths, credentials, machine inventory, installation/boot/session identifiers or backend output.
+
+This is a **local diagnostic profile**, not `protocol/schemas/capabilities.schema.json`. That draft requires authoritative installation, boot and session identities that this experiment does not supply. Do not fill them with arbitrary UUIDs or map process startup to OS boot. Authenticated capabilities/version negotiation, registered roots, request authorization, idempotency, persistent events and cursor gaps remain P4-S1 work.
+
+## Toolchain and checks
+
+The bounded core selects **Go1.27.2** with no external modules. The `go` directive defines a minimum requirement; validation additionally checks the actual executable version and uses `GOTOOLCHAIN=local`, `GOENV=off`, `GOPROXY=off` and `GOTELEMETRY=off`. No automatic toolchain substitution or global Go installation was performed. The parent downloaded the official archive into ignored workspace cache and verified its exact size and SHA256 against the [official download metadata](https://go.dev/dl/?mode=json) (R295).
+
+| Artifact | Value |
+| --- | --- |
+| Linux build tool | `go1.27.2.linux-amd64.tar.gz` |
+| Size | 70,590,635 bytes |
+| SHA256 | `ecbadb99091a3f46e31f5f934b068b1864eafa7995211b39eaddf76996045fe5` |
+| Local build targets | linux/amd64, windows/amd64, darwin/arm64 |
+| Actual local executable run | linux/amd64 only |
+
+The [Go release history](https://go.dev/doc/devel/release#go1.27.2) records the selected patch release (R296). [Go command documentation](https://pkg.go.dev/cmd/go) defines the build/test/vet operations (R297). Go's standard library/runtime is reused under its upstream terms; future packaged artifacts need their actual source/notices and dependency closure. No repository-wide or Console license grant is implied.
+
+Local checks: formatting, `go vet`, compiled tests with Linux race instrumentation, three `CGO_ENABLED=0` builds, and actual Linux inspect/version/invalid-argument processes. Cross-compilation proves buildability only. The pinned CI workflow additionally runs on actual hosted Linux/Windows/macOS runners; even a hosted CLI pass will not establish interactive sessions, installers, permissions or physical peripherals. See the [build evidence](../../qualification/results/P4-S1/2026-10-16-host-baseline.md).
+
+## Next disjoint host work
+
+| Packet | Owned surface | Required outcome before integration |
+| --- | --- | --- |
+| HOST-IDENTITY | Core identity store plus platform identity adapters after the interface is frozen | Persist genuine installation identity; distinguish OS boot, user logon/session and process identity; corrupt/unwritable state fails honestly without replacement |
+| HOST-JOBS | Transport-neutral job ownership after its local execution profile review | Explicit executable/argv/cwd, bounded/redacted I/O, timeout/cancel, actual descendant ownership and waited retirement; no automatic replay |
+| HOST-EVENTS | Bounded persistence/cursor store after event profile review | Stable IDs, sequence/stream reset, retention gaps, snapshot reconciliation and crash windows; own-job events first |
+| HOST-WINDOWS | `host/windows` | Interactive helper and notification consent/packaging/API evidence; default service/session0 is not a user desktop |
+| HOST-LINUX | `host/linux` | Actual session and supported compositor/backend observations; environment variables are hints and a notification protocol is not an observer grant |
+| HOST-MACOS | `host/macos` | User-agent lifecycle and own-app/job events; precise permission state; arbitrary notification capture stays unestablished |
+| HOST-PAIRING | Parent-reviewed protocol/security contract, then scoped implementation | Exact transport, per-app identity/scopes, revocation, freshness/replay and local IPC peer policy before exposing commands |
+
+These are bounded packets inside the existing P4 plan, not extra completed stages. Core and OS interfaces are reviewed before concurrent writers consume them. Pairing and Googlebook profile integration still require P1-S4/P3-S1. No default daemon/service registration, autostart, system configuration, installed backend control or programming operation belongs to this experiment.
+
+## Official OS reference routes
+
+| Surface / exact entry point | Availability and reviewed limit | Qualification / fallback |
+| --- | --- | --- |
+| Windows service/user-session split; named-pipe security descriptor and logon SID | Microsoft official Win32 guidance reviewed; no selected Windows helper implementation or minimum build yet (R299–R300) | P4-S1/S2 peer/session tests; unavailable adapter until implemented; no interactive-service workaround |
+| `UserNotificationListener`, `GetAccessStatus` | Existing R11 guide; packaging/capability, user access and read result differ | P4-S2 denial/revocation and fidelity; own-job events remain useful |
+| macOS LaunchAgent versus LaunchDaemon | Archived official launchd guide reviewed as background, not current installer proof (R301) | P4-S3 exact macOS/service API investigation and logged-in-session tests |
+| Linux `systemd.service`, user/graphical-session lifetime | Current web reference located but fetch failed; inspect pinned or installed manual before writing units (R302) | P4-S3 actual session lifecycle; no automatic root service or linger |
+
+Checked 2026-10-16. These references guide future adapters; HOST-EXP01 invokes none of those APIs. No P4 stage, backend or OS support claim is promoted.

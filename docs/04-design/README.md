@@ -43,3 +43,7 @@ The [16 October external feedback review](2026-10-16-external-feedback-review.md
 Review the specimen on the real Googlebook at its actual scaling before adopting final sizes. Brand/font decisions are proposed; the current specimen uses locally available system fonts and no downloaded assets.
 
 Saved review views: [Desktop light](previews/desktop-light.jpg), [Console dark](previews/console-dark.jpg). See the [planning verification record](../06-validation/planning-review.md) for the exact browser checks and their limits.
+
+## Worker implementation and remote sessions
+
+Use the [worker visual acceptance contract](worker-visual-acceptance.md) for bounded model assignments, exact rendering evidence and native interaction checks. [Remote session presentation](remote-session-presentation.md) specifies fullscreen after connection readiness, recoverable local overlay controls and input ownership for RDP/VNC/integrated streaming.

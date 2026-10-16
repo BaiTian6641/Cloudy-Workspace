@@ -53,3 +53,7 @@ Bound queue age. Adapt bitrate first under congestion, then explicitly qualified
 Use the [performance protocol](../06-validation/desktop-performance.md): input-to-photon p50/p95/p99, frame pacing, frozen time, connection/recovery behavior, memory, thermal load, and readable output. Match the host/route/codec/profile when comparing standalone Moonlight or Parsec. Proposed Cloudy overhead is at most one requested frame interval at p95 relative to the qualified native baseline; absolute budgets remain hypotheses until P0.
 
 Required failure cases include Wi-Fi roam, route change/direct-to-relay, loss/jitter/bandwidth reduction, decoder reset, focus loss, host sleep/lock, permission revocation, and app process death. Recovery releases held input and tells the truth about the remote session. A launcher-only R2 stream lane is an early milestone; the full integrated high-performance goal remains P5 work. Native RDP/VNC are explicit R2 gates, not external-launch placeholders.
+
+## Common local session UX
+
+RDP, VNC and integrated streaming follow the [fullscreen/overlay contract](../04-design/remote-session-presentation.md). Its UI state consumes actual backend readiness, geometry and retirement; it cannot invent connection success, metrics or input support. External applications retain their own chrome.

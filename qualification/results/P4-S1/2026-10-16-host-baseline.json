@@ -1,0 +1,106 @@
+{
+  "checks": [
+    {
+      "args": [
+        "version"
+      ],
+      "exitCode": 0
+    },
+    {
+      "args": [
+        "vet",
+        "./..."
+      ],
+      "exitCode": 0
+    },
+    {
+      "args": [
+        "test",
+        "-race",
+        "-json",
+        "./..."
+      ],
+      "exitCode": 0
+    },
+    {
+      "target": "linux/amd64",
+      "compiled": true,
+      "sha256": "62f5bc2fca18924f890934561130b923b4ad12e4472f7274328f8946c1255d19",
+      "executed": true
+    },
+    {
+      "target": "windows/amd64",
+      "compiled": true,
+      "sha256": "e35cf39aace1e3b0652f0bfcd4de61198a81ae893b1515d392907c8dd1c7a734",
+      "executed": false
+    },
+    {
+      "target": "darwin/arm64",
+      "compiled": true,
+      "sha256": "2f556f0b840f4b873b46646748364f50d7a083f5d8737c8c7bc55743325afb17",
+      "executed": false
+    }
+  ],
+  "gofmt": "pass",
+  "actualLinuxCommands": [
+    "inspect",
+    "version",
+    "reject-extra-argument"
+  ],
+  "sources": {
+    "host/core/cmd/cloudy-host/main.go": "f1275665c1caf81851c199fea669ffd675156d0f67e80080c98885028d0c5b54",
+    "host/core/go.mod": "6fd07de50d4297a4ca131dd78921aeb09e239bd68b8c733bd1cc055b03cada3a",
+    "host/core/internal/diagnostic/diagnostic.go": "4f1e11be80fe3253cc8579794f18757ee502ff587c4287a0eed8e1ac2745d535",
+    "host/core/internal/diagnostic/diagnostic_test.go": "24aef2345b8d04a566992672986b8c7332c8ef502c1d9656a1ee797a8d0b051b"
+  },
+  "experiment": "HOST-EXP01",
+  "date": "2026-10-16",
+  "topLevelTests": 6,
+  "subtests": 9,
+  "actualLinuxDiagnostic": {
+    "localDiagnosticVersion": 1,
+    "agentVersion": "0.1.0",
+    "observedAt": "2026-10-16T17:20:46.123711207Z",
+    "runtime": {
+      "os": "linux",
+      "arch": "amd64",
+      "goVersion": "go1.27.2"
+    },
+    "features": {
+      "pairing": {
+        "state": "unavailable",
+        "reason": "not-implemented"
+      },
+      "remoteControl": {
+        "state": "unavailable",
+        "reason": "not-implemented"
+      },
+      "jobs": {
+        "state": "unavailable",
+        "reason": "not-implemented"
+      },
+      "events": {
+        "state": "unavailable",
+        "reason": "not-implemented"
+      },
+      "sessionAdapters": {
+        "state": "unavailable",
+        "reason": "not-implemented"
+      }
+    },
+    "backends": {
+      "remoteDesktop": {
+        "state": "unknown",
+        "reason": "not-inspected"
+      },
+      "usb": {
+        "state": "unknown",
+        "reason": "not-inspected"
+      },
+      "notifications": {
+        "state": "unknown",
+        "reason": "not-inspected"
+      }
+    }
+  }
+}
