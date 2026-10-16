@@ -100,3 +100,8 @@ The [eight actual local-workspace cases](../../qualification/results/P1-S2/2026-
 ## Profile-manager follow-through
 
 The [profile geometry review and repair](../../qualification/results/P1-S2/2026-10-16-profile-geometry.md) now turns two source risks into observed failures and verified fixes. Console/Desktop0.1.7 reveal a selected lower-list editor and let the complete frozen confirmation text scroll while actions remain visible. Six actual geometry cases and sixteen profile/lifecycle regressions pass; both products preserve data and system settings. This addresses readable desktop interaction at existing text roles and densities. The feedback's deferred palette, halo, toolkit-injection and EDA product proposals retain their earlier disposition; full P1-S2 remains open.
+
+
+## Native credential-entry follow-through
+
+The [0.1.9 SSH entry](../../qualification/results/P1-S3/2026-10-16-ssh-authentication-ui.md) reuses existing Cloudy typography and control metrics with native username/password editing. Credential retirement also disposes field undo state; sampled framework Ctrl+Z/Ctrl+Shift+Z cannot restore cleared fields after success/cancellation. This applies desktop editing together with credential lifetime requirements, without disabling native selection/composition while typing. These are actual framework input/lifecycle cases, not physical keyboard, IME, visual/accessibility or full P1-S2 acceptance. No palette, density or scope decision changes.

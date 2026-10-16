@@ -6352,6 +6352,66 @@
       "sourceUpdatedOn": "2026-09-16",
       "note": "Application.getProcessName is public since API28. Default process name equals package name; named processes use the manifest-selected suffix. Finite SSH admission and affected profile/trust stores require default process plus existing UID/CE checks; process-local cancellation is not multiprocess IPC. Product min35 unchanged.",
       "refresh": "Before P1-S3/P2 authentication or selected engine/fixture upgrades; Android/security owner preserves source, compile, host and device distinctions."
+    },
+    {
+      "id": "R284",
+      "title": "Selected Compose Foundation1.12.1 credential editing and undo source",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation-android/1.12.1/foundation-android-1.12.1-sources.jar",
+      "publisher": "Google / AndroidX",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Official selected source JAR SHA256 5b58cea5db2583142e4b4b39dce10cbd75722bd06ab35161f06f987be90a53f1. CoreTextField.kt290-291 remembers UndoManager; TextFieldKeyInput.kt211-216 returns retained values on Undo/Redo without password exemption. Clearing external TextFieldValue alone does not discard history. TextFieldState.kt250-273 records programmatic edits;695-713 rememberTextFieldState uses rememberSaveable and its Saver retains text/selection/undo. undoState is experimental at228. BasicSecureTextField123 exists and supplies password/cut-copy restrictions, not automatic transient ownership. Cloudy keeps transient TextFieldValue, keyed credential epoch and stale-callback fencing; no dependency upgrade or whole-JVM erasure claim.",
+      "refresh": "Before changing transient SSH input lifetime, lifecycle handling or the selected Compose pins; Android/platform and security owners retain P1-S3 source/build/device distinctions."
+    },
+    {
+      "id": "R285",
+      "title": "Selected Compose Material3 1.4.0 secure field source",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/compose/material3/material3-android/1.4.0/material3-android-1.4.0-sources.jar",
+      "publisher": "Google / AndroidX",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Official selected source JAR SHA256 3e3209422a382566a780e2c1410edd866e4474498098fdbcf942c690ade1ddaa. SecureTextField.kt127 and292 expose SecureTextField/OutlinedSecureTextField(state: TextFieldState); delegate to BasicSecureTextField. Availability does not establish save-free state or history disposal. Native credential entry retains existing OutlinedTextField(TextFieldValue) with PasswordVisualTransformation, explicit keyboard hints and epoch disposal. Selected dependencies unchanged; no secure-field migration adopted.",
+      "refresh": "Before changing transient SSH input lifetime, lifecycle handling or the selected Compose pins; Android/platform and security owners retain P1-S3 source/build/device distinctions."
+    },
+    {
+      "id": "G229",
+      "title": "Android sensitive Activity screenshot protection and overlay limits",
+      "url": "https://developer.android.com/security/fraud-prevention/activities",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2026-03-06",
+      "note": "WindowManager.LayoutParams.FLAG_SECURE prevents ordinary screenshots/non-secure display output; official guide explicitly says it does not reliably prevent overlay attacks. Cloudy sets the existing public flag before credential composition. No HIDE_OVERLAY_WINDOWS permission or overlay-protection guarantee is introduced; IME retention and whole-process erasure are not implied. Owner: Android/security; P1-S3 API61.",
+      "refresh": "Before changing transient SSH input lifetime, lifecycle handling or the selected Compose pins; Android/platform and security owners retain P1-S3 source/build/device distinctions."
+    },
+    {
+      "id": "G230",
+      "title": "Compose state-based text field migration and saved state",
+      "url": "https://developer.android.com/develop/ui/compose/text/migrate-state-based",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Official guide recommends state-based field migration and documents rememberTextFieldState save/restore via rememberSaveable and TextFieldState.Saver. This default is unsuitable for transient per-session credentials. Cloudy retains selected value-based fields and native TextFieldValue selection/composition, disposing the field subtree on credential retirement. A future state-based migration must use explicitly non-saveable state ownership and discard retained undo; no new experimental API adopted. Reuse G207/G208/G209 for input/lifecycle/selection. Owner: Android/platform; P1-S3 API61.",
+      "refresh": "Before changing transient SSH input lifetime, lifecycle handling or the selected Compose pins; Android/platform and security owners retain P1-S3 source/build/device distinctions."
+    },
+    {
+      "id": "G231",
+      "title": "Android autofill exclusion and integration guidance",
+      "url": "https://developer.android.com/identity/autofill/autofill-optimize",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2026-08-18",
+      "note": "Autofill framework is API26+. Official guidance documents importantForAutofill=noExcludeDescendants on an Activity hierarchy and warns that disabling expected credential autofill reduces convenience. The finite per-session entry deliberately excludes the decor subtree; actual tests assert that configured flag, not complete service/IME behavior. Product vault and future deliberate password-manager integration remain separate. Direct oversized View API page was unavailable; guide plus compiled public SDK constant establish this scoped use. Owner Android/security; P1-S3 API61.",
+      "refresh": "Before changing per-session credential persistence, autofill or password-manager integration; retain native UX and exact lifecycle ownership."
     }
   ]
 }

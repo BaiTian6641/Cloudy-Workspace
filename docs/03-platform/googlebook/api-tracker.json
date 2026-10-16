@@ -2083,6 +2083,45 @@
       "researchEvidence": "docs/02-architecture/ssh-password-admission.md",
       "compileEvidence": "qualification/results/P1-S3/2026-10-16-ssh-authentication.json",
       "deviceEvidence": "qualification/results/P1-S3/2026-10-16-ssh-authentication.md"
+    },
+    {
+      "id": "API61",
+      "feature": "Transient native per-session SSH credential input and lifecycle retirement",
+      "symbols": [
+        "android.view.WindowManager.LayoutParams.FLAG_SECURE",
+        "android.view.View.IMPORTANT_FOR_AUTOFILL_NO_EXCLUDE_DESCENDANTS",
+        "androidx.compose.ui.text.input.TextFieldValue",
+        "androidx.compose.ui.text.input.PasswordVisualTransformation",
+        "androidx.compose.runtime.key",
+        "androidx.compose.foundation.text.KeyboardOptions",
+        "android.app.Activity.onPause",
+        "android.app.Activity.onSaveInstanceState",
+        "android.app.Activity.onDestroy"
+      ],
+      "sourceIds": [
+        "R284",
+        "R285",
+        "G229",
+        "G230",
+        "G207",
+        "G208",
+        "G209",
+        "G58",
+        "G231"
+      ],
+      "minimumApi": 26,
+      "libraryVersion": "Existing Compose Foundation/UI1.12.1, Material3 1.4.0, Activity1.13.0; product min35/target37 unchanged.",
+      "availability": "documented",
+      "qualification": "partial",
+      "checkedOn": "2026-10-16",
+      "owner": "Android/platform and SSH security developers",
+      "stage": "P1-S3",
+      "runtimeGuard": "Nonexported owning-app Activity; FLAG_SECURE before composition and autofill-excluded decor. Transient TextFieldValue fields preserve native selection/composition while typing. Keyed epoch disposes internal undo on clear/submit/pause; callbacks require captured current epoch. No credential saveable state/Bundle/Intent. One process slot, original fifteen-second attempt deadline, same coordinator cancellation and one numeric address; no permission or lifecycle replay.",
+      "fallback": "Pause/save/destroy/cancel clears input and retires work; restored pending state reports uncertainty, never restores credentials or authentication. Secure-field availability does not authorize remembered save/restore; clearing an external value alone is insufficient. Keyboard options are hints; FLAG_SECURE is not overlay protection or complete JVM/IME erasure.",
+      "experiment": "Strict final build03 and four zero-finding Lint reports pass. Actual HP Googlebook14/API37 native entry: ten cases on build02 plus six affected final-build03 reruns; generated owned-fixture credentials through USB loopback. Success, denial, change refusal, host-confirmed cancel/recreation, framework undo and exact baseline cleanup are separately evidenced. Physical keyboard/IME, LAN permission, two-window Busy/stale UI races, saved vault and reusable SSH remain unqualified.",
+      "researchEvidence": "docs/03-platform/googlebook/product-ssh-authentication-entry.md",
+      "compileEvidence": "qualification/results/P1-S3/2026-10-16-ssh-authentication-ui-build.json",
+      "deviceEvidence": "qualification/results/P1-S3/2026-10-16-ssh-authentication-ui.md"
     }
   ],
   "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."

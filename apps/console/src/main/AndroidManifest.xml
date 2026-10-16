@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Explicit SSH observations own finite sockets; no background service or credentials. -->
+    <!-- Explicit SSH checks own finite sockets; no background service or exported credentials. -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_LOCAL_NETWORK" />
@@ -34,6 +34,9 @@
             android:exported="false" android:resizeableActivity="true"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name="io.github.baitian6641.cloudy.platform.CloudySshObserveActivity"
+            android:exported="false" android:resizeableActivity="true"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name="io.github.baitian6641.cloudy.platform.CloudySshAuthenticateActivity"
             android:exported="false" android:resizeableActivity="true"
             android:windowSoftInputMode="adjustResize" />
     </application>

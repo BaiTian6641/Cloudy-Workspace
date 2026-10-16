@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ssh_auth_heading">Check SSH password authentication</string>
+    <string name="ssh_auth_scope">Use a password for this check only. A fresh connection must match saved trust. No terminal or remote session opens; the connection closes after the check.</string>
+    <string name="ssh_auth_choose">Choose a saved SSH profile.</string>
+    <string name="ssh_auth_selected">Selected endpoint</string>
+    <string name="ssh_auth_endpoint">SSH · %1$s</string>
+    <string name="ssh_auth_direct">Route: Direct</string>
+    <string name="ssh_auth_revision">Profile revision: %1$d</string>
+    <string name="ssh_auth_username">Username</string>
+    <string name="ssh_auth_password">Password for this check</string>
+    <string name="ssh_auth_authenticate">Authenticate and close</string>
+    <string name="ssh_auth_cancel">Cancel</string>
+    <string name="ssh_auth_refresh">Refresh profiles</string>
+    <string name="ssh_auth_close">Close</string>
+    <string name="ssh_auth_profiles">Saved SSH profiles</string>
+    <string name="ssh_auth_catalog_unavailable">Profiles are loading or unavailable. Refresh to read current profiles.</string>
+    <string name="ssh_auth_empty">No saved SSH profiles.</string>
+    <string name="ssh_auth_ready">Enter credentials for this endpoint. Nothing is saved.</string>
+    <string name="ssh_auth_checking">Checking authentication. Credentials have been cleared from the fields.</string>
+    <string name="ssh_auth_success">Authentication succeeded; the connection was closed. Enter credentials again for a new check.</string>
+    <string name="ssh_auth_failure">Authentication was not confirmed (%1$s). This may include a transport failure. No automatic retry was made.</string>
+    <string name="ssh_auth_cancelled">Check cancelled. Enter credentials again for a new check.</string>
+    <string name="ssh_auth_interrupted">The previous check ended without a confirmed result here. Already admitted bytes cannot be retracted. Enter credentials again for a new check.</string>
+    <string name="ssh_auth_busy">Another SSH authentication operation is still preparing or retiring. No new check was queued.</string>
+    <string name="ssh_auth_invalid">Enter a username and password. Input must fit the supported length and contain valid text. Values are not trimmed or normalized.</string>
+    <string name="ssh_auth_local_permission">Allow local network access</string>
+    <string name="ssh_auth_permission_needed">Local network permission may be needed for this route. This check has ended and its input was cleared.</string>
+    <string name="ssh_auth_permission_return">Permission request finished. Choose the profile, enter credentials again and explicitly start a new check.</string>
+</resources>

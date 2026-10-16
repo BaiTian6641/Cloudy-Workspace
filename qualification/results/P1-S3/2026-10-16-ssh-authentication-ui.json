@@ -1,0 +1,964 @@
+{
+  "schema": 1,
+  "date": "2026-10-16",
+  "status": "PASSED_BOUNDED_NATIVE_AUTHENTICATION",
+  "scope": "Native per-session password entry, real finite SSH authentication, credential retirement and Activity recreation in both owning apps; no live remote session or saved-vault use.",
+  "buildEvidence": "qualification/results/P1-S3/2026-10-16-ssh-authentication-ui-build.json",
+  "productVersion": {
+    "name": "0.1.9",
+    "code": 10
+  },
+  "runs": [
+    {
+      "id": "device03",
+      "build": "build-02",
+      "privateEvidencePath": "qualification/results/private/foundation/2026-10-16-ssh-auth-ui-03",
+      "resultSha256": "caf799db8d6401ff0841a6652b46958c83935aa02bc14ca94b9127d6264bc18c",
+      "runnerSha256": "f5cdb757bcfe30fa83cd4e17cd37026cadb8856d6bfbf2bfb97ba16418966887",
+      "startedAt": "2026-10-16T13:14:53.723745+00:00",
+      "endedAt": "2026-10-16T13:15:29.669378+00:00",
+      "device": {
+        "model": "HP Googlebook 14",
+        "release": "17",
+        "api": "37",
+        "build": "CL3B.260622.276.R2",
+        "incremental": "16560795",
+        "abi": "arm64-v8a"
+      },
+      "topology": "Owning-app Android native UI through owned USB loopback reverse to isolated Apache SSHD; not LAN/physical-input qualification",
+      "tests": {
+        "console-default-skip": {
+          "passed": true,
+          "completed": 0,
+          "skipped": 5
+        },
+        "console-success": {
+          "passed": true,
+          "completed": 1,
+          "skipped": 0
+        },
+        "console-denial": {
+          "passed": true,
+          "completed": 1,
+          "skipped": 0
+        },
+        "console-change": {
+          "passed": true,
+          "completed": 1,
+          "skipped": 0
+        },
+        "console-cancel": {
+          "passed": true,
+          "completed": 1,
+          "skipped": 0
+        },
+        "console-recreate": {
+          "passed": true,
+          "completed": 1,
+          "skipped": 0
+        },
+        "desktop-default-skip": {
+          "passed": true,
+          "completed": 0,
+          "skipped": 5
+        },
+        "desktop-success": {
+          "passed": true,
+          "completed": 1,
+          "skipped": 0
+        },
+        "desktop-denial": {
+          "passed": true,
+          "completed": 1,
+          "skipped": 0
+        },
+        "desktop-change": {
+          "passed": true,
+          "completed": 1,
+          "skipped": 0
+        },
+        "desktop-cancel": {
+          "passed": true,
+          "completed": 1,
+          "skipped": 0
+        },
+        "desktop-recreate": {
+          "passed": true,
+          "completed": 1,
+          "skipped": 0
+        }
+      },
+      "artifacts": [
+        {
+          "path": "apps/console/build/outputs/apk/debug/console-debug.apk",
+          "bytes": 40659241,
+          "sha256": "840ceb77785d2212de1defb882549cc1a238fa5e8d723af36faceb1a50fc9726"
+        },
+        {
+          "path": "apps/desktop/build/outputs/apk/debug/desktop-debug.apk",
+          "bytes": 40659245,
+          "sha256": "dcd4275fdb78e57e9c6148cb1f9feec3bb91f320074a78b5b2c6444455a71230"
+        },
+        {
+          "path": "shared/android/platform/build/outputs/apk/androidTest/debug/platform-debug-androidTest.apk",
+          "bytes": 42204336,
+          "sha256": "f71036b7bc6fecd92bff166757f8024963f0ff867257692ca69ff10cb7c1ff56"
+        },
+        {
+          "path": "apps/console/build/outputs/apk/androidTest/debug/console-debug-androidTest.apk",
+          "bytes": 3486317,
+          "sha256": "7da92b7201450cde897ed31de343e16a0d724308c1af623ae6716480ef367c2a"
+        },
+        {
+          "path": "apps/desktop/build/outputs/apk/androidTest/debug/desktop-debug-androidTest.apk",
+          "bytes": 3486317,
+          "sha256": "22196ee898f8ebc48310f5eb0a3a0c76cef5e87d62027821e2b23fc1d858a235"
+        }
+      ],
+      "preservation": {
+        "reverseBaselineRestored": true,
+        "bootIdUnchanged": true,
+        "bootCountUnchanged": true,
+        "fontScaleUnchanged": true,
+        "densityUnchanged": true,
+        "nightModeUnchanged": true,
+        "vaultReceiptsUnchanged": true,
+        "profileRowsAndGenerationUnchanged": true,
+        "trustRowsAndGenerationUnchanged": true,
+        "effectivePreferencesRestored": true,
+        "installedProductApksMatchBuild": true
+      },
+      "cases": [
+        {
+          "app": "console",
+          "case": "success",
+          "passed": true,
+          "receiptSha256": "cdc5f4df6adee112c2f8595203579f96a0a9bf938f38132694d68a432cec4e52",
+          "hostEventsSha256": "92c3107ac86836b8c036c5af36add8ee6a699bb2fa50ce544cedddb91947adaa",
+          "hostBeforeParentCleanup": {
+            "schema": 1,
+            "events": 8,
+            "overflow": false,
+            "ioFailed": false,
+            "serverClosed": false,
+            "counts": {
+              "session_created": 1,
+              "server_initial_kexinit_written": 1,
+              "client_initial_kexinit_negotiation_start": 1,
+              "key_established": 1,
+              "auth_request": 1,
+              "request.accept.password": 1,
+              "passwordChange.false": 1,
+              "auth_accepted": 1,
+              "session_authenticated": 1,
+              "session_closed": 1
+            }
+          },
+          "exactBaselineRestored": true,
+          "listenerClosed": true,
+          "serverClosed": true,
+          "serverExit": 143,
+          "frameworkChecks": {
+            "flagSecureConfirmed": true,
+            "autofillExcluded": true,
+            "inputRetired": true,
+            "clearedUsernameUndoRedoEmpty": true,
+            "clearedPasswordUndoRedoEmpty": true,
+            "keyboardRoute": "Compose framework key injection; not physical keyboard",
+            "keys": [
+              "CtrlLeft+Z",
+              "CtrlLeft+ShiftLeft+Z"
+            ]
+          }
+        },
+        {
+          "app": "console",
+          "case": "denial",
+          "passed": true,
+          "receiptSha256": "42fb49f8c893c22326b925dde79215104d78cb8eb437daf627e030aacfb6ceb0",
+          "hostEventsSha256": "c16cc3e2865dc12603a9009672f6940fa11ab0974ba5cf5115b6eed535d10853",
+          "hostBeforeParentCleanup": {
+            "schema": 1,
+            "events": 7,
+            "overflow": false,
+            "ioFailed": false,
+            "serverClosed": false,
+            "counts": {
+              "session_created": 1,
+              "server_initial_kexinit_written": 1,
+              "client_initial_kexinit_negotiation_start": 1,
+              "key_established": 1,
+              "auth_request": 1,
+              "request.deny.password": 1,
+              "passwordChange.false": 1,
+              "auth_denied": 1,
+              "session_closed": 1
+            }
+          },
+          "exactBaselineRestored": true,
+          "listenerClosed": true,
+          "serverClosed": true,
+          "serverExit": 143,
+          "frameworkChecks": {
+            "flagSecureConfirmed": true,
+            "autofillExcluded": true,
+            "inputRetired": true
+          }
+        },
+        {
+          "app": "console",
+          "case": "change",
+          "passed": true,
+          "receiptSha256": "0925bfb1f2569f3b44943b8973bbc1eeb847ae3d9be687b85bfd64805de9afe0",
+          "hostEventsSha256": "159d828cb21083c112c5f8a15d0abc38a7b5316e49bd1b4476b50a01650c8920",
+          "hostBeforeParentCleanup": {
+            "schema": 1,
+            "events": 7,
+            "overflow": false,
+            "ioFailed": false,
+            "serverClosed": false,
+            "counts": {
+              "session_created": 1,
+              "server_initial_kexinit_written": 1,
+              "client_initial_kexinit_negotiation_start": 1,
+              "key_established": 1,
+              "auth_request": 1,
+              "request.change.password": 1,
+              "passwordChange.false": 1,
+              "change_required": 1,
+              "session_closed": 1
+            }
+          },
+          "exactBaselineRestored": true,
+          "listenerClosed": true,
+          "serverClosed": true,
+          "serverExit": 143,
+          "frameworkChecks": {
+            "flagSecureConfirmed": true,
+            "autofillExcluded": true,
+            "inputRetired": true
+          }
+        },
+        {
+          "app": "console",
+          "case": "cancel",
+          "passed": true,
+          "receiptSha256": "5ddb2e4b644adc5120cdab35c954b507398d4aac033b0b2cfa2a93c0246ffdaa",
+          "hostEventsSha256": "3cae5096567aa6e6c750715c35af5ca8702f679e2cca5cf4c80a52d151f6f770",
+          "hostBeforeParentCleanup": {
+            "schema": 1,
+            "events": 7,
+            "overflow": false,
+            "ioFailed": false,
+            "serverClosed": false,
+            "counts": {
+              "session_created": 1,
+              "server_initial_kexinit_written": 1,
+              "client_initial_kexinit_negotiation_start": 1,
+              "key_established": 1,
+              "auth_request": 1,
+              "request.wait.password": 1,
+              "passwordChange.false": 1,
+              "auth_wait": 1,
+              "session_closed": 1
+            }
+          },
+          "exactBaselineRestored": true,
+          "listenerClosed": true,
+          "serverClosed": true,
+          "serverExit": 143,
+          "frameworkChecks": {
+            "flagSecureConfirmed": true,
+            "autofillExcluded": true,
+            "inputRetired": true,
+            "clearedUsernameUndoRedoEmpty": true,
+            "clearedPasswordUndoRedoEmpty": true,
+            "keyboardRoute": "Compose framework key injection; not physical keyboard",
+            "keys": [
+              "CtrlLeft+Z",
+              "CtrlLeft+ShiftLeft+Z"
+            ]
+          },
+          "actualServerRequestAcknowledgement": {
+            "sha256": "ce917a716301e7a4b2adcb666a11ad14521f43cc4896d04f6b632daab5690cbb",
+            "eventLine": 5,
+            "event": {
+              "event": "auth_request",
+              "session": 1,
+              "mode": "wait",
+              "method": "password",
+              "passwordChange": false
+            }
+          }
+        },
+        {
+          "app": "console",
+          "case": "recreate",
+          "passed": true,
+          "receiptSha256": "a2c375311a895be5411333e88d88b28d2bed94b29e26d15cc2a911bdda6b6ade",
+          "hostEventsSha256": "3cae5096567aa6e6c750715c35af5ca8702f679e2cca5cf4c80a52d151f6f770",
+          "hostBeforeParentCleanup": {
+            "schema": 1,
+            "events": 7,
+            "overflow": false,
+            "ioFailed": false,
+            "serverClosed": false,
+            "counts": {
+              "session_created": 1,
+              "server_initial_kexinit_written": 1,
+              "client_initial_kexinit_negotiation_start": 1,
+              "key_established": 1,
+              "auth_request": 1,
+              "request.wait.password": 1,
+              "passwordChange.false": 1,
+              "auth_wait": 1,
+              "session_closed": 1
+            }
+          },
+          "exactBaselineRestored": true,
+          "listenerClosed": true,
+          "serverClosed": true,
+          "serverExit": 143,
+          "frameworkChecks": {
+            "flagSecureConfirmed": true,
+            "autofillExcluded": true,
+            "inputRetired": true,
+            "savedStateCount": 2,
+            "savedStateExcludedFixtureCredentials": true,
+            "recreatedSelectionAbsent": true
+          },
+          "actualServerRequestAcknowledgement": {
+            "sha256": "865fff5c64d541fc1c4207542255823d16f80b128b136e2a29f180505c8f6ec7",
+            "eventLine": 5,
+            "event": {
+              "event": "auth_request",
+              "session": 1,
+              "mode": "wait",
+              "method": "password",
+              "passwordChange": false
+            }
+          }
+        },
+        {
+          "app": "desktop",
+          "case": "success",
+          "passed": true,
+          "receiptSha256": "d2bfbc6f4da6b91a6a0c5d73c9ada5124a9707a7d188b21f7a8b50932d740c43",
+          "hostEventsSha256": "92c3107ac86836b8c036c5af36add8ee6a699bb2fa50ce544cedddb91947adaa",
+          "hostBeforeParentCleanup": {
+            "schema": 1,
+            "events": 8,
+            "overflow": false,
+            "ioFailed": false,
+            "serverClosed": false,
+            "counts": {
+              "session_created": 1,
+              "server_initial_kexinit_written": 1,
+              "client_initial_kexinit_negotiation_start": 1,
+              "key_established": 1,
+              "auth_request": 1,
+              "request.accept.password": 1,
+              "passwordChange.false": 1,
+              "auth_accepted": 1,
+              "session_authenticated": 1,
+              "session_closed": 1
+            }
+          },
+          "exactBaselineRestored": true,
+          "listenerClosed": true,
+          "serverClosed": true,
+          "serverExit": 143,
+          "frameworkChecks": {
+            "flagSecureConfirmed": true,
+            "autofillExcluded": true,
+            "inputRetired": true,
+            "clearedUsernameUndoRedoEmpty": true,
+            "clearedPasswordUndoRedoEmpty": true,
+            "keyboardRoute": "Compose framework key injection; not physical keyboard",
+            "keys": [
+              "CtrlLeft+Z",
+              "CtrlLeft+ShiftLeft+Z"
+            ]
+          }
+        },
+        {
+          "app": "desktop",
+          "case": "denial",
+          "passed": true,
+          "receiptSha256": "82849a95176614b5de5283cd623fe5c55edfaca2ae28ef1487d9dd752b4bb840",
+          "hostEventsSha256": "c16cc3e2865dc12603a9009672f6940fa11ab0974ba5cf5115b6eed535d10853",
+          "hostBeforeParentCleanup": {
+            "schema": 1,
+            "events": 7,
+            "overflow": false,
+            "ioFailed": false,
+            "serverClosed": false,
+            "counts": {
+              "session_created": 1,
+              "server_initial_kexinit_written": 1,
+              "client_initial_kexinit_negotiation_start": 1,
+              "key_established": 1,
+              "auth_request": 1,
+              "request.deny.password": 1,
+              "passwordChange.false": 1,
+              "auth_denied": 1,
+              "session_closed": 1
+            }
+          },
+          "exactBaselineRestored": true,
+          "listenerClosed": true,
+          "serverClosed": true,
+          "serverExit": 143,
+          "frameworkChecks": {
+            "flagSecureConfirmed": true,
+            "autofillExcluded": true,
+            "inputRetired": true
+          }
+        },
+        {
+          "app": "desktop",
+          "case": "change",
+          "passed": true,
+          "receiptSha256": "2eaaf83aa052e44c7a858a6e9bc3ea84e6e6c307a321c6e7a9245d026e627147",
+          "hostEventsSha256": "159d828cb21083c112c5f8a15d0abc38a7b5316e49bd1b4476b50a01650c8920",
+          "hostBeforeParentCleanup": {
+            "schema": 1,
+            "events": 7,
+            "overflow": false,
+            "ioFailed": false,
+            "serverClosed": false,
+            "counts": {
+              "session_created": 1,
+              "server_initial_kexinit_written": 1,
+              "client_initial_kexinit_negotiation_start": 1,
+              "key_established": 1,
+              "auth_request": 1,
+              "request.change.password": 1,
+              "passwordChange.false": 1,
+              "change_required": 1,
+              "session_closed": 1
+            }
+          },
+          "exactBaselineRestored": true,
+          "listenerClosed": true,
+          "serverClosed": true,
+          "serverExit": 143,
+          "frameworkChecks": {
+            "flagSecureConfirmed": true,
+            "autofillExcluded": true,
+            "inputRetired": true
+          }
+        },
+        {
+          "app": "desktop",
+          "case": "cancel",
+          "passed": true,
+          "receiptSha256": "8e134eb6c1f79a90c2d5c4241c32c11c1908b13296ca2285ecef8b7c4a915da4",
+          "hostEventsSha256": "3cae5096567aa6e6c750715c35af5ca8702f679e2cca5cf4c80a52d151f6f770",
+          "hostBeforeParentCleanup": {
+            "schema": 1,
+            "events": 7,
+            "overflow": false,
+            "ioFailed": false,
+            "serverClosed": false,
+            "counts": {
+              "session_created": 1,
+              "server_initial_kexinit_written": 1,
+              "client_initial_kexinit_negotiation_start": 1,
+              "key_established": 1,
+              "auth_request": 1,
+              "request.wait.password": 1,
+              "passwordChange.false": 1,
+              "auth_wait": 1,
+              "session_closed": 1
+            }
+          },
+          "exactBaselineRestored": true,
+          "listenerClosed": true,
+          "serverClosed": true,
+          "serverExit": 143,
+          "frameworkChecks": {
+            "flagSecureConfirmed": true,
+            "autofillExcluded": true,
+            "inputRetired": true,
+            "clearedUsernameUndoRedoEmpty": true,
+            "clearedPasswordUndoRedoEmpty": true,
+            "keyboardRoute": "Compose framework key injection; not physical keyboard",
+            "keys": [
+              "CtrlLeft+Z",
+              "CtrlLeft+ShiftLeft+Z"
+            ]
+          },
+          "actualServerRequestAcknowledgement": {
+            "sha256": "68f2232e66908315a96f8e35e50fb2f44c817a9123b1f3d44f8cbcee3fb674c6",
+            "eventLine": 5,
+            "event": {
+              "event": "auth_request",
+              "session": 1,
+              "mode": "wait",
+              "method": "password",
+              "passwordChange": false
+            }
+          }
+        },
+        {
+          "app": "desktop",
+          "case": "recreate",
+          "passed": true,
+          "receiptSha256": "99d64e7fb7ead5eef18c3a911c05d19c33b5611bd7879bbd61effcbded068f25",
+          "hostEventsSha256": "3cae5096567aa6e6c750715c35af5ca8702f679e2cca5cf4c80a52d151f6f770",
+          "hostBeforeParentCleanup": {
+            "schema": 1,
+            "events": 7,
+            "overflow": false,
+            "ioFailed": false,
+            "serverClosed": false,
+            "counts": {
+              "session_created": 1,
+              "server_initial_kexinit_written": 1,
+              "client_initial_kexinit_negotiation_start": 1,
+              "key_established": 1,
+              "auth_request": 1,
+              "request.wait.password": 1,
+              "passwordChange.false": 1,
+              "auth_wait": 1,
+              "session_closed": 1
+            }
+          },
+          "exactBaselineRestored": true,
+          "listenerClosed": true,
+          "serverClosed": true,
+          "serverExit": 143,
+          "frameworkChecks": {
+            "flagSecureConfirmed": true,
+            "autofillExcluded": true,
+            "inputRetired": true,
+            "savedStateCount": 2,
+            "savedStateExcludedFixtureCredentials": true,
+            "recreatedSelectionAbsent": true
+          },
+          "actualServerRequestAcknowledgement": {
+            "sha256": "23b714ef008240e0517dfd3f5d96da3cf600a56658ffa852a23a6593deaf5920",
+            "eventLine": 5,
+            "event": {
+              "event": "auth_request",
+              "session": 1,
+              "mode": "wait",
+              "method": "password",
+              "passwordChange": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "device04",
+      "build": "build-03",
+      "privateEvidencePath": "qualification/results/private/foundation/2026-10-16-ssh-auth-ui-04",
+      "resultSha256": "0a87fead0399722c1b60974a70105727a23e1fb2e3659e9f55694680a452f4dc",
+      "runnerSha256": "b4328f22c901ffcf2d7e4f7b0bd3e8b8564d096a56e0cb5b3f5ac50669983961",
+      "startedAt": "2026-10-16T13:16:48.271578+00:00",
+      "endedAt": "2026-10-16T13:17:14.032692+00:00",
+      "device": {
+        "model": "HP Googlebook 14",
+        "release": "17",
+        "api": "37",
+        "build": "CL3B.260622.276.R2",
+        "incremental": "16560795",
+        "abi": "arm64-v8a"
+      },
+      "topology": "Owning-app Android native UI through owned USB loopback reverse to isolated Apache SSHD; not LAN/physical-input qualification",
+      "tests": {
+        "console-default-skip": {
+          "passed": true,
+          "completed": 0,
+          "skipped": 5
+        },
+        "console-success": {
+          "passed": true,
+          "completed": 1,
+          "skipped": 0
+        },
+        "console-cancel": {
+          "passed": true,
+          "completed": 1,
+          "skipped": 0
+        },
+        "console-recreate": {
+          "passed": true,
+          "completed": 1,
+          "skipped": 0
+        },
+        "desktop-default-skip": {
+          "passed": true,
+          "completed": 0,
+          "skipped": 5
+        },
+        "desktop-success": {
+          "passed": true,
+          "completed": 1,
+          "skipped": 0
+        },
+        "desktop-cancel": {
+          "passed": true,
+          "completed": 1,
+          "skipped": 0
+        },
+        "desktop-recreate": {
+          "passed": true,
+          "completed": 1,
+          "skipped": 0
+        }
+      },
+      "artifacts": [
+        {
+          "path": "apps/console/build/outputs/apk/debug/console-debug.apk",
+          "bytes": 41501382,
+          "sha256": "372fec1bb0490d395f6bf2924f38a8a09093ca9ab28ff827b6aa38a8fcd95193"
+        },
+        {
+          "path": "apps/desktop/build/outputs/apk/debug/desktop-debug.apk",
+          "bytes": 41501386,
+          "sha256": "1b5c9b04c1883298700f0192c5698630dd16e473b608f77b0a6fc56cfdc02a2c"
+        },
+        {
+          "path": "shared/android/platform/build/outputs/apk/androidTest/debug/platform-debug-androidTest.apk",
+          "bytes": 42204336,
+          "sha256": "2eabf54b18934b5330dccb66c1f9a81483d3eb2f690e7eee555651e88734f994"
+        },
+        {
+          "path": "apps/console/build/outputs/apk/androidTest/debug/console-debug-androidTest.apk",
+          "bytes": 3486317,
+          "sha256": "7da92b7201450cde897ed31de343e16a0d724308c1af623ae6716480ef367c2a"
+        },
+        {
+          "path": "apps/desktop/build/outputs/apk/androidTest/debug/desktop-debug-androidTest.apk",
+          "bytes": 3486317,
+          "sha256": "22196ee898f8ebc48310f5eb0a3a0c76cef5e87d62027821e2b23fc1d858a235"
+        }
+      ],
+      "preservation": {
+        "reverseBaselineRestored": true,
+        "bootIdUnchanged": true,
+        "bootCountUnchanged": true,
+        "fontScaleUnchanged": true,
+        "densityUnchanged": true,
+        "nightModeUnchanged": true,
+        "vaultReceiptsUnchanged": true,
+        "profileRowsAndGenerationUnchanged": true,
+        "trustRowsAndGenerationUnchanged": true,
+        "effectivePreferencesRestored": true,
+        "installedProductApksMatchBuild": true
+      },
+      "cases": [
+        {
+          "app": "console",
+          "case": "success",
+          "passed": true,
+          "receiptSha256": "4b90ba4885d53cc62984b9f61dc8e6557a2b3e32549d03aafe2ccd034aea57dd",
+          "hostEventsSha256": "92c3107ac86836b8c036c5af36add8ee6a699bb2fa50ce544cedddb91947adaa",
+          "hostBeforeParentCleanup": {
+            "schema": 1,
+            "events": 8,
+            "overflow": false,
+            "ioFailed": false,
+            "serverClosed": false,
+            "counts": {
+              "session_created": 1,
+              "server_initial_kexinit_written": 1,
+              "client_initial_kexinit_negotiation_start": 1,
+              "key_established": 1,
+              "auth_request": 1,
+              "request.accept.password": 1,
+              "passwordChange.false": 1,
+              "auth_accepted": 1,
+              "session_authenticated": 1,
+              "session_closed": 1
+            }
+          },
+          "exactBaselineRestored": true,
+          "listenerClosed": true,
+          "serverClosed": true,
+          "serverExit": 143,
+          "frameworkChecks": {
+            "flagSecureConfirmed": true,
+            "autofillExcluded": true,
+            "inputRetired": true,
+            "clearedUsernameUndoRedoEmpty": true,
+            "clearedPasswordUndoRedoEmpty": true,
+            "keyboardRoute": "Compose framework key injection; not physical keyboard",
+            "keys": [
+              "CtrlLeft+Z",
+              "CtrlLeft+ShiftLeft+Z"
+            ]
+          }
+        },
+        {
+          "app": "console",
+          "case": "cancel",
+          "passed": true,
+          "receiptSha256": "ad9f10015e2befb2136c6c915b89e423b60cdf59dd6fd88760900ae295b690a3",
+          "hostEventsSha256": "3cae5096567aa6e6c750715c35af5ca8702f679e2cca5cf4c80a52d151f6f770",
+          "hostBeforeParentCleanup": {
+            "schema": 1,
+            "events": 7,
+            "overflow": false,
+            "ioFailed": false,
+            "serverClosed": false,
+            "counts": {
+              "session_created": 1,
+              "server_initial_kexinit_written": 1,
+              "client_initial_kexinit_negotiation_start": 1,
+              "key_established": 1,
+              "auth_request": 1,
+              "request.wait.password": 1,
+              "passwordChange.false": 1,
+              "auth_wait": 1,
+              "session_closed": 1
+            }
+          },
+          "exactBaselineRestored": true,
+          "listenerClosed": true,
+          "serverClosed": true,
+          "serverExit": 143,
+          "frameworkChecks": {
+            "flagSecureConfirmed": true,
+            "autofillExcluded": true,
+            "inputRetired": true,
+            "clearedUsernameUndoRedoEmpty": true,
+            "clearedPasswordUndoRedoEmpty": true,
+            "keyboardRoute": "Compose framework key injection; not physical keyboard",
+            "keys": [
+              "CtrlLeft+Z",
+              "CtrlLeft+ShiftLeft+Z"
+            ]
+          },
+          "actualServerRequestAcknowledgement": {
+            "sha256": "d2707facdf71aaebec5bc95072f33b41bdf1fbac6dea0b50226bc68899559e48",
+            "eventLine": 5,
+            "event": {
+              "event": "auth_request",
+              "session": 1,
+              "mode": "wait",
+              "method": "password",
+              "passwordChange": false
+            }
+          }
+        },
+        {
+          "app": "console",
+          "case": "recreate",
+          "passed": true,
+          "receiptSha256": "4230c51558ab9e4cfeba53fa07bcf794e0f507bde1acd59e125e401eaec63303",
+          "hostEventsSha256": "3cae5096567aa6e6c750715c35af5ca8702f679e2cca5cf4c80a52d151f6f770",
+          "hostBeforeParentCleanup": {
+            "schema": 1,
+            "events": 7,
+            "overflow": false,
+            "ioFailed": false,
+            "serverClosed": false,
+            "counts": {
+              "session_created": 1,
+              "server_initial_kexinit_written": 1,
+              "client_initial_kexinit_negotiation_start": 1,
+              "key_established": 1,
+              "auth_request": 1,
+              "request.wait.password": 1,
+              "passwordChange.false": 1,
+              "auth_wait": 1,
+              "session_closed": 1
+            }
+          },
+          "exactBaselineRestored": true,
+          "listenerClosed": true,
+          "serverClosed": true,
+          "serverExit": 143,
+          "frameworkChecks": {
+            "flagSecureConfirmed": true,
+            "autofillExcluded": true,
+            "inputRetired": true,
+            "savedStateCount": 2,
+            "savedStateExcludedFixtureCredentials": true,
+            "recreatedSelectionAbsent": true
+          },
+          "actualServerRequestAcknowledgement": {
+            "sha256": "c690e491cab52a13b3acaae3b168e1ed146c45403bbed766ac0ae6317486190e",
+            "eventLine": 5,
+            "event": {
+              "event": "auth_request",
+              "session": 1,
+              "mode": "wait",
+              "method": "password",
+              "passwordChange": false
+            }
+          }
+        },
+        {
+          "app": "desktop",
+          "case": "success",
+          "passed": true,
+          "receiptSha256": "3ae2267785f3a7b8ecf67c8471764fa7f0c5536cf0ffa5d03d8f6c795445e686",
+          "hostEventsSha256": "92c3107ac86836b8c036c5af36add8ee6a699bb2fa50ce544cedddb91947adaa",
+          "hostBeforeParentCleanup": {
+            "schema": 1,
+            "events": 8,
+            "overflow": false,
+            "ioFailed": false,
+            "serverClosed": false,
+            "counts": {
+              "session_created": 1,
+              "server_initial_kexinit_written": 1,
+              "client_initial_kexinit_negotiation_start": 1,
+              "key_established": 1,
+              "auth_request": 1,
+              "request.accept.password": 1,
+              "passwordChange.false": 1,
+              "auth_accepted": 1,
+              "session_authenticated": 1,
+              "session_closed": 1
+            }
+          },
+          "exactBaselineRestored": true,
+          "listenerClosed": true,
+          "serverClosed": true,
+          "serverExit": 143,
+          "frameworkChecks": {
+            "flagSecureConfirmed": true,
+            "autofillExcluded": true,
+            "inputRetired": true,
+            "clearedUsernameUndoRedoEmpty": true,
+            "clearedPasswordUndoRedoEmpty": true,
+            "keyboardRoute": "Compose framework key injection; not physical keyboard",
+            "keys": [
+              "CtrlLeft+Z",
+              "CtrlLeft+ShiftLeft+Z"
+            ]
+          }
+        },
+        {
+          "app": "desktop",
+          "case": "cancel",
+          "passed": true,
+          "receiptSha256": "4bed0a7e4355b4221ab9e9b32eb9e05a10785f90b3f38804b73d6b0abdceb321",
+          "hostEventsSha256": "3cae5096567aa6e6c750715c35af5ca8702f679e2cca5cf4c80a52d151f6f770",
+          "hostBeforeParentCleanup": {
+            "schema": 1,
+            "events": 7,
+            "overflow": false,
+            "ioFailed": false,
+            "serverClosed": false,
+            "counts": {
+              "session_created": 1,
+              "server_initial_kexinit_written": 1,
+              "client_initial_kexinit_negotiation_start": 1,
+              "key_established": 1,
+              "auth_request": 1,
+              "request.wait.password": 1,
+              "passwordChange.false": 1,
+              "auth_wait": 1,
+              "session_closed": 1
+            }
+          },
+          "exactBaselineRestored": true,
+          "listenerClosed": true,
+          "serverClosed": true,
+          "serverExit": 143,
+          "frameworkChecks": {
+            "flagSecureConfirmed": true,
+            "autofillExcluded": true,
+            "inputRetired": true,
+            "clearedUsernameUndoRedoEmpty": true,
+            "clearedPasswordUndoRedoEmpty": true,
+            "keyboardRoute": "Compose framework key injection; not physical keyboard",
+            "keys": [
+              "CtrlLeft+Z",
+              "CtrlLeft+ShiftLeft+Z"
+            ]
+          },
+          "actualServerRequestAcknowledgement": {
+            "sha256": "c2e4be9699e51e12af0424f6ae56826aacc9530c375bf976b4383145ee9a9e5a",
+            "eventLine": 5,
+            "event": {
+              "event": "auth_request",
+              "session": 1,
+              "mode": "wait",
+              "method": "password",
+              "passwordChange": false
+            }
+          }
+        },
+        {
+          "app": "desktop",
+          "case": "recreate",
+          "passed": true,
+          "receiptSha256": "e88c979b37eb360371585fc0fcd27de9ad7c48a24b1d68c50746a0095553def2",
+          "hostEventsSha256": "3cae5096567aa6e6c750715c35af5ca8702f679e2cca5cf4c80a52d151f6f770",
+          "hostBeforeParentCleanup": {
+            "schema": 1,
+            "events": 7,
+            "overflow": false,
+            "ioFailed": false,
+            "serverClosed": false,
+            "counts": {
+              "session_created": 1,
+              "server_initial_kexinit_written": 1,
+              "client_initial_kexinit_negotiation_start": 1,
+              "key_established": 1,
+              "auth_request": 1,
+              "request.wait.password": 1,
+              "passwordChange.false": 1,
+              "auth_wait": 1,
+              "session_closed": 1
+            }
+          },
+          "exactBaselineRestored": true,
+          "listenerClosed": true,
+          "serverClosed": true,
+          "serverExit": 143,
+          "frameworkChecks": {
+            "flagSecureConfirmed": true,
+            "autofillExcluded": true,
+            "inputRetired": true,
+            "savedStateCount": 2,
+            "savedStateExcludedFixtureCredentials": true,
+            "recreatedSelectionAbsent": true
+          },
+          "actualServerRequestAcknowledgement": {
+            "sha256": "66f1d3dc1826779bbb4a83f6591055143aada1356c809ff615b7af7bc1bf5621",
+            "eventLine": 5,
+            "event": {
+              "event": "auth_request",
+              "session": 1,
+              "mode": "wait",
+              "method": "password",
+              "passwordChange": false
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "retainedFailedAttempts": [
+    {
+      "id": "device01",
+      "evidence": "qualification/results/private/foundation/2026-10-16-ssh-auth-ui-01",
+      "outcome": "Provisioning command quote error before credential authentication; five default skips, baseline and cleanup pass."
+    },
+    {
+      "id": "device02",
+      "evidence": "qualification/results/private/foundation/2026-10-16-ssh-auth-ui-02",
+      "outcome": "exec-out has no stdin transfer; provisioning timed out before authentication, empty owned partial file separately verified/removed; five default skips, baseline and cleanup pass."
+    }
+  ],
+  "carryForward": "Final build03 differs from build02 only by mutableStateOf(0L) -> mutableLongStateOf(0L) plus its import. Six affected input-retirement/recreation cases reran on build03. Four real denial/password-change cases from build02 carry forward with unchanged engine, coordinator, result and test code.",
+  "limits": [
+    "No physical keyboard/IME or native visual/accessibility qualification",
+    "No LAN permission or hostname/DNS interoperability qualification: generated credentials and USB loopback only",
+    "No saved-vault authentication or user screen-lock prompt",
+    "No reusable session, command, terminal, SFTP/drop, jump or X11 implementation",
+    "Two-window Busy and stale-before-admission UI races remain unrun; earlier exact coordinator storage evidence is separate",
+    "Activity recreation is not process-death/power-loss qualification",
+    "FLAG_SECURE and autofill flags checked; no overlay protection or full JVM/IME memory-erasure claim",
+    "No capability or phase promotion"
+  ]
+}
