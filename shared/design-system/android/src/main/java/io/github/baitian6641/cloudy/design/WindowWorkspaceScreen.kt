@@ -47,6 +47,7 @@ fun WindowWorkspaceScreen(
     onClose: () -> Unit,
     onCredentials: (() -> Unit)? = null,
     onProfiles: (() -> Unit)? = null,
+    onSshTrust: (() -> Unit)? = null,
 ) {
     // Inputs reset live composition, but rememberSaveable does not validate the
     // prior inputs on restoration. The envelope independently binds the accepted ID.
@@ -94,6 +95,13 @@ fun WindowWorkspaceScreen(
                     shape = RoundedCornerShape(CloudyTokens.Radii.Button.dp),
                     modifier = Modifier.heightIn(min = CloudyTokens.Density.Comfortable.dp)) {
                     Text(stringResource(R.string.cloudy_connection_profiles))
+                }
+            }
+            if (onSshTrust != null) {
+                OutlinedButton(onClick = onSshTrust,
+                    shape = RoundedCornerShape(CloudyTokens.Radii.Button.dp),
+                    modifier = Modifier.heightIn(min = CloudyTokens.Density.Comfortable.dp)) {
+                    Text(stringResource(R.string.cloudy_ssh_host_keys))
                 }
             }
             OutlinedTextField(

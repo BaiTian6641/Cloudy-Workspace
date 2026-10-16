@@ -1403,7 +1403,7 @@
       "category": "platform",
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-16",
-      "sourceUpdatedOn": null,
+      "sourceUpdatedOn": "2026-10-07",
       "note": "Small Activity saved state versus process memory, persistence and dismissal; recreation and process-death evidence are separate.",
       "refresh": "Before changing task launch, saved state or process-restoration behavior."
     },
@@ -3336,9 +3336,9 @@
       "publisher": "Google",
       "category": "platform",
       "reviewStatus": "reviewed",
-      "checkedOn": "2026-10-15",
-      "sourceUpdatedOn": null,
-      "note": "Native ClipData/MIME handling and sensitive clipboard guidance. D14 explicit per-surface clipboard operations; no implicit remote clipboard bridge. P1-S2/P2-S2.",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2026-10-01",
+      "note": "Native ClipData/MIME handling and sensitive clipboard guidance. D14 explicit per-surface clipboard operations; no implicit remote clipboard bridge. P1-S2/P2-S2. Rechecked for the explicit public-fingerprint copy action in P1-S3: API33+ supplies system copy feedback; avoid duplicate app notifications. This action does not establish remote clipboard integration or a device clipboard pass.",
       "refresh": "Before implementing the affected boundary, on relevant upstream changes/advisories, and before capability claims."
     },
     {
@@ -6004,6 +6004,18 @@
       "sourceUpdatedOn": null,
       "note": "Section3 defines rsa-sha2-256/rsa-sha2-512 signatures using the existing ssh-rsa public-key encoding. Accepting that key-format identifier does not authorize the deprecated SHA1 ssh-rsa signature algorithm. Future Cloudy adapter must restrict negotiated signature algorithms separately. Owner: platform/security; P1-S3 trust metadata/P2-S1 adapter. No engine adoption or crypto implementation inferred.",
       "refresh": "Before implementing SSH RSA negotiation or changing accepted host-key formats."
+    },
+    {
+      "id": "G212",
+      "title": "Compose lazy list keys and scrolling",
+      "url": "https://developer.android.com/develop/ui/compose/lists",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2026-10-01",
+      "note": "LazyColumn item keys must be stable/unique and supported by Android Bundle (primitive, enum or Parcelable). A custom domain peer class is not an eligible saved-state key; SSH trust UI uses an unambiguous primitive key. rememberLazyListState and animateScrollToItem support deliberate selected-details visibility. These are library guidance, not a rendered or device pass. Owner: Android/platform; P1-S2/P1-S3. Existing pinned Compose stack unchanged.",
+      "refresh": "Before changing trust-list identity, saved list state or selected-details scrolling."
     }
   ]
 }

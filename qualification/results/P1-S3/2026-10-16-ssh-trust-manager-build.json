@@ -1,0 +1,197 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "baseCommit": "5c577697fe16ed5931761a7c77410d191e906ecc",
+  "sourceChangesUncommittedAtBuild": true,
+  "sources": [
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/SshTrustUiStateTest.kt",
+      "bytes": 2756,
+      "sha256": "193570bef2fd8d427b218c763ea44081bfad861e81b41232c377e1b9930442dd"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudyWindowActivity.kt",
+      "bytes": 6295,
+      "sha256": "bd4be6d755ee026fc474559093bcf91904ce0904a2b6bd257986267308e6c221"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/SshTrustScreen.kt",
+      "bytes": 10943,
+      "sha256": "729d4e53f2a486b029d3d2c041bcb30f3ec6ea2d80f7d9dd081aca8e5268393a"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/SshTrustUiState.kt",
+      "bytes": 1646,
+      "sha256": "9836eccdbfc9bcc3109ddfec08db64a6f028f0f4e61e9bccc2d88a532a4c0d56"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudySshTrustActivity.kt",
+      "bytes": 14163,
+      "sha256": "a61f6951914b4528c63876d8e64aa68fca8d23380679418fbeca70dca5cdea66"
+    },
+    {
+      "path": "shared/android/platform/src/main/res/values/ssh_trust_strings.xml",
+      "bytes": 3847,
+      "sha256": "3586505125b8c3c5e8236833cb839ca61ae2d1e77c8a932f850fb1c632f2e6aa"
+    },
+    {
+      "path": "shared/design-system/android/src/main/res/values/strings.xml",
+      "bytes": 582,
+      "sha256": "c2f79be91105933cfbb2a23af86fd9506e8509c5615891e8cd07744285a227f2"
+    },
+    {
+      "path": "shared/design-system/android/src/main/java/io/github/baitian6641/cloudy/design/WindowWorkspaceScreen.kt",
+      "bytes": 7544,
+      "sha256": "551b2e4c4985235b737488f084df97d5d92b0897c3a24ffd0b48187c2243f9a9"
+    },
+    {
+      "path": "apps/console/src/main/AndroidManifest.xml",
+      "bytes": 1998,
+      "sha256": "a140802c9034709d77888a87220a5060424e9991b493ad500ac346af82fbc0bd"
+    },
+    {
+      "path": "apps/console/src/androidTest/kotlin/io/github/baitian6641/cloudy/console/ConsoleSshTrustActivityTest.kt",
+      "bytes": 369,
+      "sha256": "5e12c7d28cc9da79818952d27fe9798ac90dce412d1c933fdcd05045f989ef4e"
+    },
+    {
+      "path": "apps/desktop/src/main/AndroidManifest.xml",
+      "bytes": 1998,
+      "sha256": "a140802c9034709d77888a87220a5060424e9991b493ad500ac346af82fbc0bd"
+    },
+    {
+      "path": "apps/desktop/src/androidTest/kotlin/io/github/baitian6641/cloudy/desktop/DesktopSshTrustActivityTest.kt",
+      "bytes": 369,
+      "sha256": "110d58602c1b2e7fbd07edc50c0104044be47d37e97f571cc9610908a3ccb654"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/SshTrustActivityContract.kt",
+      "bytes": 23957,
+      "sha256": "d51eb12bbcccc7504cc3e7bb4eb6f9266adf5520d273f25d56a9a2f764f5b939"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/SshTrustTestQueue.kt",
+      "bytes": 4213,
+      "sha256": "9841b3e46b9a5380090b23bbcdf79c89a83ec54e4cf53e08136d6ef96d04b461"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/WindowActivityContract.kt",
+      "bytes": 6022,
+      "sha256": "dc92bc95876efbb3d78c00f383c777c6623d809b31ac5d6789fef7722c61a256"
+    },
+    {
+      "path": "apps/console/build.gradle.kts",
+      "bytes": 2264,
+      "sha256": "993afa5d0fe08c5ff6f5de1a511cde10bd550ce5f16c2cc0a9ff8d4473a1e0f8"
+    },
+    {
+      "path": "apps/desktop/build.gradle.kts",
+      "bytes": 2264,
+      "sha256": "219e200d7953d22bbf82e8062fd7fad63fae8b54c77094f0aac34b8d978daeaa"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "apps/console/build/outputs/apk/debug/console-debug.apk",
+      "bytes": 31950544,
+      "sha256": "f292ce860cf1f3a9359a64ee3adda5c87e60d18bb6fab30b426ff265cb2e084f"
+    },
+    {
+      "path": "apps/desktop/build/outputs/apk/debug/desktop-debug.apk",
+      "bytes": 31950548,
+      "sha256": "906d4eaeba175dc22eff66745e3585eef94840a335d6ad1f5bba485f60b9a6bb"
+    },
+    {
+      "path": "shared/android/platform/build/outputs/apk/androidTest/debug/platform-debug-androidTest.apk",
+      "bytes": 33060663,
+      "sha256": "d5651271af9db15ad439fb9418177b340597146ae5d7a0591b68879c0e36be84"
+    },
+    {
+      "path": "apps/console/build/outputs/apk/androidTest/debug/console-debug-androidTest.apk",
+      "bytes": 3207049,
+      "sha256": "fa895a6c8609cecde49494d728a38f7f5cfacb237fe35c396dda61cbd20282b3"
+    },
+    {
+      "path": "apps/desktop/build/outputs/apk/androidTest/debug/desktop-debug-androidTest.apk",
+      "bytes": 3207053,
+      "sha256": "6aeb25b789cc1b009021461608f6ddccb5bb7f695d436298284c28aaadc2da9b"
+    }
+  ],
+  "build": {
+    "directory": ".cache/ssh-trust-ui-01/build-02/",
+    "exitCode": 0,
+    "sourceUnchangedDuringBuild": true,
+    "command": [
+      "./gradlew",
+      ":domain:test",
+      ":console:assembleDebug",
+      ":desktop:assembleDebug",
+      ":console:lintDebug",
+      ":desktop:lintDebug",
+      ":platform:lintDebug",
+      ":platform:assembleDebugAndroidTest",
+      ":console:assembleDebugAndroidTest",
+      ":desktop:assembleDebugAndroidTest",
+      "--dependency-verification=strict",
+      "--no-daemon",
+      "--console=plain",
+      "--max-workers=4"
+    ],
+    "startedAt": "2026-10-16T09:53:16.370599+00:00",
+    "endedAt": "2026-10-16T09:53:33.422888+00:00",
+    "lintIssueCounts": {
+      "desktop-lint-results-debug.xml": 0,
+      "console-lint-results-debug.xml": 0,
+      "platform-lint-results-debug.xml": 0
+    },
+    "domainJvm": "Task up-to-date; 38 prior passing domain reports retained. No domain source changed in this increment."
+  },
+  "priorBuild": {
+    "directory": ".cache/ssh-trust-ui-01/build-01/",
+    "exitCode": 1,
+    "failure": "Invalid import androidx.compose.ui.test.assertDoesNotExist in test source; this is a member assertion in the pinned API. Removed the import. No device run used this build.",
+    "sourceManifestChangedFile": {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/SshTrustActivityContract.kt",
+      "bytes": 24008,
+      "sha256": "44b7e6c3c02430a466152e59269647ede57b7ef397885d4dd92dd09af5cb2686"
+    }
+  },
+  "device": {
+    "startedAt": "2026-10-16T09:54:20.728187+00:00",
+    "device": {
+      "model": "HP Googlebook 14",
+      "release": "17",
+      "api": "37",
+      "build": "CL3B.260622.276.R2",
+      "incremental": "16560795",
+      "abi": "arm64-v8a"
+    },
+    "build": "build-02",
+    "versionName": "0.1.5",
+    "versionCode": 6,
+    "tests": {
+      "state": true,
+      "console": true,
+      "desktop": true
+    },
+    "dataCleared": false,
+    "uninstalled-io.github.baitian6641.cloudy.console.test": true,
+    "uninstalled-io.github.baitian6641.cloudy.desktop.test": true,
+    "uninstalled-io.github.baitian6641.cloudy.platform.test": true,
+    "absent-io.github.baitian6641.cloudy.console.test": true,
+    "absent-io.github.baitian6641.cloudy.desktop.test": true,
+    "absent-io.github.baitian6641.cloudy.platform.test": true,
+    "upgradedApps": [
+      "console",
+      "desktop"
+    ],
+    "bootIdUnchanged": true,
+    "bootCountUnchanged": true,
+    "vaultReceiptsUnchanged": true,
+    "profileRowsAndGenerationUnchanged": true,
+    "installedApksMatchBuild": true,
+    "trustCatalogsInitializedAndEmpty": true,
+    "endedAt": "2026-10-16T09:54:40.028172+00:00"
+  },
+  "installedProducts": "Both exact build02 product APKs installed as 0.1.5/code6 without data clear. Three test packages removed, both products stopped. New own-app trust ledgers initialized; exact fixture cleanup leaves both empty."
+}

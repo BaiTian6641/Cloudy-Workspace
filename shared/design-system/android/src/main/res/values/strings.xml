@@ -6,4 +6,5 @@
     <string name="cloudy_name_too_long">Please use a shorter window name. The last edit was not accepted.</string>
     <string name="cloudy_saved_credentials">Saved credentials</string>
     <string name="cloudy_connection_profiles">Connection profiles</string>
+    <string name="cloudy_ssh_host_keys">SSH host keys</string>
 </resources>

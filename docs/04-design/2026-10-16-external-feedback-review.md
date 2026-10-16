@@ -72,3 +72,8 @@ P1-S2 remains the owner of these items. Use the [native workspace review](native
 ## Native profile component follow-through
 
 The [0.1.4 profile editor](../../qualification/results/P1-S3/2026-10-16-profile-editor.md) now consumes canonical geometry through a public `CloudyControlMetrics` facade. Its confirmation dialogs explicitly select section typography, the accepted raised-container color and20dp dialog radius; working fields and buttons retain their existing canonical roles. This applies the source-level lesson above without changing the palette or globally remapping page typography. Actual CRUD/state tests pass; both-theme rendering, scaled/narrow geometry, physical focus/input and accessibility remain unqualified for this component. The original vault dialog finding and remaining specimen density/state work are still open.
+
+
+## Native SSH trust component follow-through
+
+The [0.1.5 SSH trust manager](../../qualification/results/P1-S3/2026-10-16-ssh-trust-manager.md) applies the same explicit canonical section typography, raised dialog container,20dp dialog radius and control metrics. Exact peer/key/state details remain selectable, with an explicit fingerprint-only copy action. Inspection/revocation and controlled recreation pass actual Activity tests; both-theme/scaled/narrow rendering, physical focus/selection and clipboard execution still need their own evidence. This adds another source-level application of the feedback without promoting the remaining vault dialog, specimen density/state or full P1-S2 gates.

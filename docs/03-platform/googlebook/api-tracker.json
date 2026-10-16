@@ -1842,10 +1842,50 @@
       "owner": "Platform/security developer",
       "stage": "P1-S3",
       "fallback": "Unsupported key formats, wrong owner, stale generation/revision, missing/corrupt/newer established state and unavailable storage fail closed. Retain revocations. Completion unknown requires reload without automatic retry. A stored pin/challenge releases no credentials.",
-      "experiment": "Strict build01 and zero Console/Desktop/platform Lint pass; 38 domain JVM cases include12 new trust cases. Twenty actual standalone Android storage cases pass on HP Googlebook API37 buildCL3B.260622.276.R2. Test APK removed; installed product bytes, profile rows/generations, vault receipts and boot unchanged. Reopen-object and concurrent-thread coverage does not establish process-death, simultaneous cross-process writers or power-loss behavior. Native UI/controller, installed-product trust isolation, actual SSH verification/credential ordering, jump and live-rekey/revocation gates remain open.",
+      "experiment": "Historical domain/storage checkpoint: Strict build01 and zero Console/Desktop/platform Lint pass; 38 domain JVM cases include12 new trust cases. Twenty actual standalone Android storage cases pass on HP Googlebook API37 buildCL3B.260622.276.R2. Test APK removed; installed product bytes, profile rows/generations, vault receipts and boot unchanged. Reopen-object and concurrent-thread coverage does not establish process-death, simultaneous cross-process writers or power-loss behavior. At that checkpoint native UI/controller work remained open; API55 records the subsequent finite native inspection/revocation manager. Installed-product trust-file isolation, observed-key enrollment/controller, actual SSH verification/credential ordering, jumps and live-rekey/revocation gates remain open.",
       "researchEvidence": "docs/02-architecture/ssh-host-trust.md",
       "compileEvidence": "qualification/results/P1-S3/2026-10-16-ssh-host-trust-build.json",
       "deviceEvidence": "qualification/results/P1-S3/2026-10-16-ssh-host-trust.md"
+    },
+    {
+      "id": "API55",
+      "feature": "Native owning-app SSH trust inspection and confirmed revocation manager",
+      "symbols": [
+        "Activity.onCreate",
+        "Activity.onResume",
+        "Activity.onPause",
+        "Activity.onSaveInstanceState",
+        "Activity.onDestroy",
+        "Bundle",
+        "androidx.compose.foundation.lazy.LazyColumn",
+        "androidx.compose.foundation.lazy.itemsIndexed",
+        "androidx.compose.foundation.lazy.rememberLazyListState",
+        "LazyListState.animateScrollToItem",
+        "androidx.compose.foundation.text.selection.SelectionContainer",
+        "ClipboardManager.setPrimaryClip",
+        "ClipData.newPlainText"
+      ],
+      "sourceIds": [
+        "G212",
+        "G125",
+        "G58",
+        "G208",
+        "G175",
+        "G177",
+        "G178"
+      ],
+      "minimumApi": null,
+      "libraryVersion": "Existing pinned Compose BOM2026.09.00: UI/foundation/runtime1.12.1, Material3 1.4.0; Activity/activity-compose1.13.0. Framework clipboard/lifecycle APIs within existing productmin35; no dependency or API-floor change.",
+      "availability": "documented",
+      "qualification": "partial",
+      "checkedOn": "2026-10-16",
+      "owner": "Android/platform developer",
+      "stage": "P1-S3",
+      "fallback": "Unavailable reads clear details without claiming an empty catalog; stale revocation requires a fresh read and confirmation of the current saved key. Preserve uncertain completion across queued recreation until explicit successful Refresh; never replay a mutation or restore approval. Close remains available while work may complete.",
+      "experiment": "Strict build02 passes with zero Console/Desktop/platform Lint findings; preserved build01 failed on a test-only import before device execution. Seventeen actual Android cases pass on HP Googlebook Android17/API37 CL3B.260622.276.R2 incremental16560795: three custom Bundle/Parcel cases, four trust Activity cases and three workspace cases per product. Tests cover exact inspection, Cancel, confirmed revocation/tombstone, stale frozen confirmation, unconfirmed-dialog recreation and one admitted revocation across controlled Activity recreation without replay. Console/Desktop0.1.5/code6 installed/stopped; three test packages removed; exact trust baselines restored, trust ledgers initialized/empty, profile/vault/boot unchanged. The custom saved record contains only schema/owner/pending; separate framework/Compose state may contain primitive peer-key metadata. Clipboard execution and physical selection, both-theme/scaled/narrow visual quality, unavailable-store exit, cross-app trust-file isolation, actual process death, simultaneous independent-process writes and physical power loss remain unqualified. No enrollment, SSH authentication/connection, credential-release, live-session or engine adoption claim follows.",
+      "researchEvidence": "docs/02-architecture/ssh-host-trust.md",
+      "compileEvidence": "qualification/results/P1-S3/2026-10-16-ssh-trust-manager-build.json",
+      "deviceEvidence": "qualification/results/P1-S3/2026-10-16-ssh-trust-manager.md"
     }
   ],
   "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."

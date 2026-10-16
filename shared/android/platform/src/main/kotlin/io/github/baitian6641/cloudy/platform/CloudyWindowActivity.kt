@@ -58,6 +58,7 @@ abstract class CloudyWindowActivity : ComponentActivity() {
                     onClose = ::closeWindow,
                     onCredentials = ::openCredentials,
                     onProfiles = ::openProfiles,
+                    onSshTrust = ::openSshTrust,
                 )
             }
         }
@@ -133,6 +134,15 @@ abstract class CloudyWindowActivity : ComponentActivity() {
     private fun openProfiles() {
         try {
             startActivity(Intent(this, CloudyProfilesActivity::class.java))
+        } catch (_: RuntimeException) {
+            notice = getString(R.string.cloudy_window_launch_failed)
+        }
+    }
+
+    private fun openSshTrust() {
+        try {
+            // The manager reads this package's ledger; launch data confers no trust or approval.
+            startActivity(Intent(this, CloudySshTrustActivity::class.java))
         } catch (_: RuntimeException) {
             notice = getString(R.string.cloudy_window_launch_failed)
         }

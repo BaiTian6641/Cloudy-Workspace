@@ -9,6 +9,8 @@ import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTextInputSelection
@@ -118,5 +120,19 @@ abstract class WindowActivityContract<A : CloudyWindowActivity>(
         )).performScrollTo().assertIsDisplayed()
         val after = observe()
         assertEquals(before, after)
+    }
+
+    @Test fun hostKeyManagerOpensFromTheWorkspaceAndReturnsToTheSameWindow() {
+        val before = observe()
+        compose.onNodeWithText(string(
+            io.github.baitian6641.cloudy.design.R.string.cloudy_ssh_host_keys,
+        )).performScrollTo().performClick()
+        compose.waitUntil(10_000) {
+            compose.onAllNodesWithTag("trust_close").fetchSemanticsNodes().size == 1
+        }
+        compose.onNodeWithTag("trust_close").performScrollTo().performClick()
+        compose.waitForIdle()
+        assertEquals(before.snapshot, observe().snapshot)
+        assertCommittedHeading(before.snapshot.name)
     }
 }
