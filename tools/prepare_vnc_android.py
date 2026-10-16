@@ -56,19 +56,24 @@ def property_value(value):
     return str(value).replace('\\', '\\\\').replace(':', '\\:')
 
 
-def expected_files(contents):
+def expected_files(contents, adapter_run=None):
     prefix = OVERLAY.relative_to(ROOT).as_posix() + '/'
     lock = json.loads(contents[prefix + 'packaging.lock.json'])
     if not re.fullmatch(r'[a-z0-9][a-z0-9-]{0,63}', lock['nativeRun']):
         raise ValueError('Invalid native run name')
-    run = native.CACHE / lock['nativeRun']
-    if record(native.base.read(run / 'receipt.json')) != lock['nativeReceipt']:
+    run = native.CACHE / lock['nativeRun'] if adapter_run is None else native.base.safe(adapter_run)
+    if adapter_run is None and record(native.base.read(run / 'receipt.json')) != lock['nativeReceipt']:
         raise ValueError('Pinned accepted adapter receipt changed')
     receipt = native.check(run)
+    if adapter_run is not None and receipt.get('mode') != 'portable-source-build':
+        raise ValueError('Portable Android preparation requires source-built adapter')
     if receipt['buildRef'] != lock['nativeBuildRef']:
         raise ValueError('Native build reference mismatch')
     payload = {name: native.base.read(run / 'prepared/nativeLibraries/arm64-v8a' / name) for name in LIBRARIES}
-    validate_libraries(lock, receipt, payload)
+    effective_lock = lock if adapter_run is None else dict(lock, nativeLibraries={
+        name: {key: item[key] for key in ('bytes', 'sha256')}
+        for name, item in receipt['libraries'].items()})
+    validate_libraries(effective_lock, receipt, payload)
     files = {}
     for name, raw in contents.items():
         if name.startswith(prefix):
@@ -94,8 +99,10 @@ def expected_files(contents):
             raise ValueError('Accepted native notice changed')
         files[GENERATED + 'nativeNotices/' + native.base.relative(item['asset']).as_posix()] = raw
     metadata = {'schemaVersion': 1, 'buildRef': lock['buildRef'], 'nativeBuildRef': receipt['buildRef'],
-                'nativeReceipt': lock['nativeReceipt'], 'libraries': receipt['libraries'],
+                'nativeReceipt': record(native.base.read(run / 'receipt.json')), 'libraries': receipt['libraries'],
                 'scope': 'Private diagnostic import; no server, APK runtime or final source-distribution qualification'}
+    if adapter_run is not None:
+        metadata.update(mode='portable-source-build', qualification='hosted-build-only-no-device')
     files[GENERATED + 'nativeNotices/native-build.json'] = (json.dumps(metadata, indent=2) + '\n').encode()
     return files, lock
 
@@ -123,8 +130,15 @@ def check(stage):
     frozen = inputs()
     if saved['inputs'] != {name: record(raw) for name, raw in frozen.items()}:
         raise ValueError('Current Android source differs from preparation receipt')
-    files, lock = expected_files(frozen)
-    if saved['nativeReceipt'] != lock['nativeReceipt']:
+    adapter_run = None
+    if saved.get('mode') == 'portable-source-build':
+        import build_vnc_ci as ci
+        adapter_run = ci.predecessor_path(saved['adapterPredecessor'], native.CACHE)
+    elif 'mode' in saved:
+        raise ValueError('Unknown Android provenance mode')
+    files, lock = expected_files(frozen, adapter_run)
+    actual_receipt = lock['nativeReceipt'] if adapter_run is None else record(native.base.read(adapter_run / 'receipt.json'))
+    if saved['nativeReceipt'] != actual_receipt:
         raise ValueError('Native receipt binding changed')
     expected = {name: record(raw) for name, raw in files.items()}
     # SDK path is local operator configuration, not a portable public artifact.
@@ -137,9 +151,9 @@ def check(stage):
     return saved
 
 
-def prepare(stage, sdk):
+def prepare(stage, sdk, adapter_run=None):
     frozen = inputs()
-    files, lock = expected_files(frozen)
+    files, lock = expected_files(frozen, adapter_run)
     sdk = native.base.safe(sdk.absolute())
     if not (sdk / 'platforms/android-37.0/android.jar').is_file():
         raise ValueError('Existing Android SDK37 required; no installation is performed')
@@ -152,9 +166,14 @@ def prepare(stage, sdk):
             target.write_bytes(raw)
         (stage / 'gradlew').chmod(0o755)
         unchanged(frozen)
-        receipt = {'schemaVersion': 1, 'buildRef': lock['buildRef'], 'nativeReceipt': lock['nativeReceipt'],
+        native_receipt = lock['nativeReceipt'] if adapter_run is None else record(native.base.read(adapter_run / 'receipt.json'))
+        receipt = {'schemaVersion': 1, 'buildRef': lock['buildRef'], 'nativeReceipt': native_receipt,
                    'inputs': {name: record(raw) for name, raw in frozen.items()},
                    'stagedFiles': {name: record(raw) for name, raw in files.items()}}
+        if adapter_run is not None:
+            import build_vnc_ci as ci
+            receipt.update(mode=ci.MODE, qualification=ci.SCOPE,
+                           adapterPredecessor=ci.predecessor(adapter_run / 'receipt.json'))
         (stage / 'cloudy-preparation.json').write_text(json.dumps(receipt, indent=2) + '\n')
         check(stage)
     except BaseException as error:
@@ -170,12 +189,13 @@ def main():
     group.add_argument('--check', action='store_true')
     parser.add_argument('--stage', required=True)
     parser.add_argument('--sdk', type=Path, default=ROOT / '.cache/android-sdk')
+    parser.add_argument('--source-built-adapter', type=Path, help='Explicit portable source-built adapter run')
     args = parser.parse_args()
     if not re.fullmatch(r'[a-z0-9][a-z0-9-]{0,63}', args.stage):
         parser.error('Stage must be a simple lowercase fresh name')
     try:
         stage = native.base.safe(CACHE / args.stage)
-        result = prepare(stage, args.sdk) if args.prepare else check(stage)
+        result = prepare(stage, args.sdk, args.source_built_adapter) if args.prepare else check(stage)
         print(json.dumps({'status': 'prepared' if args.prepare else 'verified', 'files': len(result['stagedFiles'])}))
     except (OSError, ValueError, KeyError) as error:
         parser.exit(1, f'VNC Android preparation failed: {error}\n')

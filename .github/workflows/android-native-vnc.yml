@@ -1,0 +1,118 @@
+name: Android native VNC diagnostic
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Check out source
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - name: Set isolated build directories on the runner
+        run: |
+          echo "GRADLE_USER_HOME=$RUNNER_TEMP/cloudy-native-vnc-gradle" >> "$GITHUB_ENV"
+          echo "ANDROID_USER_HOME=$RUNNER_TEMP/cloudy-vnc-android-user" >> "$GITHUB_ENV"
+          mkdir -p "$RUNNER_TEMP/cloudy-vnc-android-user"
+      - name: Install host build tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends ninja-build pkg-config
+      - name: Select Java 21
+        uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify pinned Gradle wrapper
+        working-directory: qualification/probes/device-baseline
+        run: |
+          echo '497c8c2a7e5031f6aa847f88104aa80a93532ec32ee17bdb8d1d2f67a194a9c7  gradle/wrapper/gradle-wrapper.jar' | sha256sum --check
+      - name: Install selected SDK with verified command-line tools
+        run: |
+          cloudy_tools="$RUNNER_TEMP/cloudy-command-tools"
+          mkdir -p "$cloudy_tools" "$ANDROID_USER_HOME"
+          curl --fail --location --retry 2 --output "$cloudy_tools/tools.zip" https://dl.google.com/android/repository/commandlinetools-linux-15859902_latest.zip
+          echo "4e4c464f145a7512b57d088ac6c278c03c9eea610886b35a5e0804e74eedf583  $cloudy_tools/tools.zip" | sha256sum --check
+          unzip -q "$cloudy_tools/tools.zip" -d "$cloudy_tools"
+          # Use the hosted runner's accepted SDK license records; do not pipe yes
+          # to new licenses or invoke the bundled CLI's automatic update path.
+          "$cloudy_tools/cmdline-tools/bin/sdkmanager" --sdk_root="$ANDROID_HOME" 'platforms;android-37.0' 'build-tools;36.0.0' 'ndk;29.0.14206865' 'cmake;4.1.2'
+      - name: Reject unreviewed SDK revision drift
+        run: |
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          sdk = Path(os.environ['ANDROID_HOME'])
+          expected = {
+              'platforms/android-37.0/source.properties': {
+                  'Pkg.Revision': '2', 'AndroidVersion.ApiLevel': '37.0',
+                  'AndroidVersion.ExtensionLevel': '22', 'AndroidVersion.IsBaseSdk': 'true',
+              },
+              'build-tools/36.0.0/source.properties': {'Pkg.Revision': '36.0.0'},
+              'ndk/29.0.14206865/source.properties': {'Pkg.Revision': '29.0.14206865'},
+              'cmake/4.1.2/source.properties': {'Pkg.Revision': '4.1.2'},
+          }
+          for relative, pins in expected.items():
+              observed = dict(tuple(part.strip() for part in line.split('=', 1))
+                              for line in (sdk / relative).read_text().splitlines()
+                              if '=' in line and not line.startswith('#'))
+              for key, value in pins.items():
+                  if observed.get(key) != value:
+                      raise SystemExit(f'SDK drift in {relative}: {key} must be {value}')
+          print('SDK platform/build-tool/NDK/CMake revision pins verified')
+          PY
+      - name: Cache verified source downloads only
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: |
+            .cache/native-rdp/downloads
+            .cache/native-vnc/downloads
+          key: native-vnc-downloads-${{ runner.os }}-${{ hashFiles('qualification/probes/native-rdp/source-lock.json', 'qualification/probes/native-vnc/sources.lock.json') }}
+      - name: Verify authored native preparation boundaries
+        run: python3 -m unittest discover -s tests -p 'test_*vnc*.py' -v
+      - name: Build pinned OpenSSL, VNC base, adapter and Android stage
+        run: |
+          python3 tools/build_vnc_ci.py --build --run ci --sdk "$ANDROID_HOME" --rdp-stage "$RUNNER_TEMP/cloudy-vnc-openssl"
+          python3 tools/build_vnc_ci.py --check --run ci
+      - name: Compile, lint and test the real VNC diagnostic APK
+        run: |
+          .cache/native-vnc-android/ci/gradlew -p .cache/native-vnc-android/ci \
+            --no-daemon --console=plain --max-workers=4 \
+            assembleDebug lintDebug testDebugUnitTest recordCloudyRuntimeDependencies
+      - name: Gate on receipts and audit the APK
+        run: |
+          python3 tools/build_vnc_ci.py --check --run ci \
+            --apk .cache/native-vnc-android/ci/app/build/outputs/apk/debug/app-debug.apk
+      - name: Verify APK signature with pinned build-tools apksigner
+        run: |
+          "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose \
+      - name: Retain bounded build diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: native-vnc-build-diagnostics
+          if-no-files-found: ignore
+          retention-days: 7
+          include-hidden-files: true
+          path: |
+            .cache/native-vnc-ci/ci/*.json
+            .cache/native-vnc-ci/openssl-ci/*.json
+            .cache/native-vnc-ci/openssl-ci/*.log
+            .cache/native-vnc/ci-ci/*.json
+            .cache/native-vnc/ci-ci/*.log
+            .cache/native-vnc/adapter/ci-ci/*.json
+            .cache/native-vnc/adapter/ci-ci/*.log
+            .cache/native-vnc-android/ci/cloudy-preparation.json
+            .cache/native-vnc-android/ci/cloudy-failure.json
+            ${{ runner.temp }}/cloudy-vnc-openssl/configure.log
+            .cache/native-vnc-android/ci/app/build/outputs/apk/debug/app-debug.apk
+            .cache/native-vnc-android/ci/app/build/reports/
+            .cache/native-vnc-android/ci/app/build/test-results/
+      # Hosted CI has no Googlebook/peripheral. Compile, receipt and signature
+      # checks do not qualify framebuffer, input, latency or support behavior.
+      # Publish diagnostics only; APK/source-distribution review remains separate.

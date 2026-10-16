@@ -27,7 +27,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PROBE = ROOT / "qualification/probes/native-vnc"
 LOCK = PROBE / "sources.lock.json"
 CACHE = ROOT / ".cache/native-vnc"
-SHARED = ("tools/build_rdp_native.py", "tools/prepare_rdp_native.py")
+SHARED = ("tools/build_rdp_native.py", "tools/prepare_rdp_native.py", "tools/build_vnc_ci.py")
 LIBRARIES = {"libvncclient.so", "libssl.so", "libcrypto.so"}
 SYSTEM = {"libc.so", "libdl.so", "libm.so", "libz.so"}
 
@@ -175,13 +175,21 @@ def validate_import(lock, receipt_raw, files):
             raise ValueError("OpenSSL library differs from accepted receipt")
 
 
-def import_openssl(lock, prefix, receipt_path, destination):
+def import_openssl(lock, prefix, receipt_path, destination, source_build=False):
     pin = lock["openssl"]
     receipt_raw = read(receipt_path)
-    names = [f"lib/{name}" for name in pin["libraries"]]
-    names += [f"include/{name}" for name in pin["headers"]]
+    if source_build:
+        import build_vnc_ci as ci
+        portable = ci.check_openssl(receipt_path.parent)
+        names = sorted(portable["files"])
+    else:
+        names = [f"lib/{name}" for name in pin["libraries"]]
+        names += [f"include/{name}" for name in pin["headers"]]
     files = {name: read(prefix / relative(name)) for name in names}
-    validate_import(lock, receipt_raw, files)
+    if source_build:
+        ci.portable_ssl_import(receipt_path, files)
+    else:
+        validate_import(lock, receipt_raw, files)
     destination.mkdir()
     for name, raw in files.items():
         target = destination / name
@@ -262,7 +270,16 @@ def check(run, receipt=None):
     verified(read(notices / lock["openssl"]["source"]["archive"]), lock["openssl"]["source"])
     imported = notices / "openssl-import"
     files = {name: read(imported / name) for name in hashes(imported) if name != "accepted-receipt.json"}
-    validate_import(lock, read(imported / "accepted-receipt.json"), files)
+    if receipt.get("mode") == "portable-source-build":
+        import build_vnc_ci as ci
+        previous = ci.predecessor_path(receipt["opensslPredecessor"], ci.CACHE)
+        ci.portable_ssl_import(previous / "receipt.json", files)
+        if read(imported / "accepted-receipt.json") != read(previous / "receipt.json"):
+            raise ValueError("Copied portable OpenSSL receipt differs")
+    elif "mode" in receipt:
+        raise ValueError("Unknown native provenance mode")
+    else:
+        validate_import(lock, read(imported / "accepted-receipt.json"), files)
     raw = {name: read(prepared / "nativeLibraries/arm64-v8a" / name) for name in LIBRARIES}
     if native_info(raw) != receipt["elf"]:
         raise ValueError("ELF differs from receipt")
@@ -283,6 +300,13 @@ def build(args, run):
             target.write_bytes(data)
         pins = (lock["source"], lock["jpeg"], lock["openssl"]["source"])
         archives = {pin["archive"]: acquire(pin) for pin in pins}
+        source_build = getattr(args, "source_build", False)
+        if source_build:
+            import build_vnc_ci as ci
+            tool_records = ci.tool_records(args.sdk.resolve(strict=True), ci.recipe_inputs()[0])
+            ssl_record = ci.check_openssl(args.openssl_receipt.parent)
+            if tool_records != ssl_record["toolBinaries"]:
+                raise ValueError("OpenSSL/VNC toolchain differs")
         ndk = args.sdk.resolve(strict=True) / "ndk" / limits["ndk"]
         if f"Pkg.Revision = {limits['ndk']}" not in read(ndk / "source.properties").decode():
             raise ValueError("NDK version mismatch")
@@ -302,7 +326,7 @@ def build(args, run):
             source_tree(archives[lock["source"]["archive"]], lock, contents, source)
             extract(archives[lock["jpeg"]["archive"]], lock["jpeg"], jpeg)
             source_hashes, jpeg_hashes = hashes(source), hashes(jpeg)
-            import_openssl(lock, args.openssl_prefix, args.openssl_receipt, ssl)
+            import_openssl(lock, args.openssl_prefix, args.openssl_receipt, ssl, source_build)
             common = ["-G", "Ninja", f"-DCMAKE_MAKE_PROGRAM={cmake_dir / 'ninja'}",
                       f"-DCMAKE_TOOLCHAIN_FILE={toolchain}", "-DANDROID_ABI=arm64-v8a",
                       "-DANDROID_PLATFORM=android-29", "-DCMAKE_BUILD_TYPE=RelWithDebInfo",
@@ -329,6 +353,8 @@ def build(args, run):
             compile_contract(vb)
             bounded([cmake, "--build", str(vb), "--target", "vncclient", "--parallel", "4"], run, "vnc-build", limits)
             unchanged(inputs)
+            if source_build and ci.tool_records(args.sdk.resolve(strict=True), ci.recipe_inputs()[0]) != tool_records:
+                raise ValueError("Native toolchain changed during build")
             if hashes(source) != source_hashes or hashes(jpeg) != jpeg_hashes:
                 raise ValueError("Compiler changed pinned sources")
             raw = {"libvncclient.so": read(vb / "libvncclient.so")}
@@ -372,6 +398,10 @@ def build(args, run):
                        "prepared": hashes(prepared), "elf": infos,
                        "libraries": {name: {"sha256": digest(data), "bytes": len(data)} for name, data in raw.items()},
                        "evidence": {name: digest(read(run / name)) for name in evidence_names}}
+            if source_build:
+                import build_vnc_ci as ci
+                receipt.update(mode=ci.MODE, qualification=ci.SCOPE,
+                               opensslPredecessor=ci.predecessor(args.openssl_receipt))
             check(run, receipt)
             unchanged(inputs)
             save(run / "receipt.json", receipt)
@@ -390,6 +420,7 @@ def main():
     parser.add_argument("--sdk", type=Path, default=ROOT / ".cache/android-sdk")
     parser.add_argument("--openssl-prefix", type=Path)
     parser.add_argument("--openssl-receipt", type=Path)
+    parser.add_argument("--source-build", action="store_true", help="Require portable verified OpenSSL source-build predecessor")
     args = parser.parse_args()
     if not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,63}", args.run):
         parser.error("Run must be a bounded lowercase filename")

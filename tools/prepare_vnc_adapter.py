@@ -40,9 +40,12 @@ def unchanged(inputs):
         raise ValueError("Adapter inputs changed; publication rejected")
 
 
-def patched_source(base_run, target, lock):
-    base.verified(base.read(base_run / "receipt.json"), lock["baseReceipt"])
+def patched_source(base_run, target, lock, source_build=False):
+    if not source_build:
+        base.verified(base.read(base_run / "receipt.json"), lock["baseReceipt"])
     receipt = base.check(base_run)
+    if source_build and receipt.get("mode") != "portable-source-build":
+        raise ValueError("Portable adapter requires source-built base")
     shutil.copytree(base_run / "source", target)
     patch = base.verified(base.read(ADAPTER / lock["patch"]["path"]), lock["patch"])
     replay_patch(target, patch)
@@ -55,6 +58,14 @@ def check(run, receipt=None):
     inputs, _ = snapshot()
     if receipt["inputs"] != inputs or receipt["exitCode"] != 0:
         raise ValueError("Adapter receipt stale or failed")
+    if receipt.get("mode") == "portable-source-build":
+        import build_vnc_ci as ci
+        previous = ci.predecessor_path(receipt["basePredecessor"], base.CACHE)
+        prior = base.check(previous)
+        if prior.get("mode") != ci.MODE or receipt.get("baseReceiptSha256") != base.digest(base.read(previous / "receipt.json")):
+            raise ValueError("Portable base mode differs")
+    elif "mode" in receipt:
+        raise ValueError("Unknown adapter provenance mode")
     prepared = run / "prepared"
     if base.hashes(prepared) != receipt["prepared"]:
         raise ValueError("Adapter prepared outputs changed")
@@ -89,7 +100,14 @@ def build(args, run):
         with tempfile.TemporaryDirectory(prefix="cloudy-vnc-adapter-") as temporary:
             stage = Path(temporary)
             source = stage / "source"
-            accepted = patched_source(args.base_run, source, lock)
+            source_build = getattr(args, "source_build", False)
+            accepted = patched_source(args.base_run, source, lock, source_build)
+            if source_build:
+                import build_vnc_ci as ci
+                tool_records = ci.tool_records(args.sdk.resolve(strict=True), ci.recipe_inputs()[0])
+                ssl_run = ci.predecessor_path(accepted["opensslPredecessor"], ci.CACHE)
+                if tool_records != ci.check_openssl(ssl_run)["toolBinaries"]:
+                    raise ValueError("Adapter/OpenSSL toolchain differs")
             source_files = base.hashes(source)
             base_prepared = args.base_run / "prepared"
             notices = base_prepared / "nativeNotices"
@@ -146,6 +164,8 @@ def build(args, run):
             base.bounded([javac, "--release", "17", "-Xlint:all", "-Werror", "-d", str(stage / "java-classes"),
                           "-h", str(stage / "jni-headers"), str(adapter_source / "VncBridge.java")], run, "java-compile", limits)
             unchanged(inputs)
+            if source_build and ci.tool_records(args.sdk.resolve(strict=True), ci.recipe_inputs()[0]) != tool_records:
+                raise ValueError("Adapter toolchain changed during build")
             if base.hashes(source) != source_files:
                 raise ValueError("Compiler changed patched source")
             prepared = run / "prepared"
@@ -179,11 +199,15 @@ def build(args, run):
                 actual[name] = {"bytes": len(raw), "sha256": base.digest(raw), "elf": info}
             evidence_names = [name.name for name in run.iterdir() if name.is_file()]
             receipt = {"schemaVersion": 1, "exitCode": 0, "scope": "native-adapter-build-only-no-runtime",
-                       "buildRef": lock["buildRef"], "inputs": inputs, "baseReceiptSha256": lock["baseReceipt"]["sha256"],
+                       "buildRef": lock["buildRef"], "inputs": inputs, "baseReceiptSha256": base.digest(base.read(args.base_run / "receipt.json")),
                        "baseToolchain": accepted["toolchain"], "sourceFiles": source_files,
                        "libraries": actual, "prepared": base.hashes(prepared),
                        "requiredJniExports": sorted(EXPORTS),
                        "evidence": {name: base.digest(base.read(run / name)) for name in evidence_names}}
+            if source_build:
+                import build_vnc_ci as ci
+                receipt.update(mode=ci.MODE, qualification=ci.SCOPE,
+                               basePredecessor=ci.predecessor(args.base_run / "receipt.json"))
             check(run, receipt)
             unchanged(inputs)
             base.save(run / "receipt.json", receipt)
@@ -200,6 +224,7 @@ def main():
     mode.add_argument("--check", action="store_true")
     parser.add_argument("--run", required=True)
     parser.add_argument("--base-run", type=Path, default=ROOT / ".cache/native-vnc/entry-03")
+    parser.add_argument("--source-build", action="store_true", help="Require recursively verified portable base build")
     parser.add_argument("--sdk", type=Path, default=ROOT / ".cache/android-sdk")
     args = parser.parse_args()
     if not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,63}", args.run):

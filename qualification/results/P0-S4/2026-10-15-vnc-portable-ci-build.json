@@ -1,0 +1,193 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-15",
+  "stage": "P0-S4",
+  "scope": "portable-vnc-source-build-and-apk-audit-no-device",
+  "status": "local-build-and-audit-passed-hosted-run-pending",
+  "run": "local-ci-02",
+  "mode": "portable-source-build",
+  "apk": {
+    "bytes": 10888223,
+    "sha256": "0440e31613d984701d9fb2d40a76c8b51f73ecde2da0747e2b65cdb2ca5ebf3f"
+  },
+  "validation": {
+    "pythonAstFiles": 30,
+    "pythonLint": "passed",
+    "repositoryTests": 114,
+    "focusedVncTests": 30,
+    "newBoundaryTests": 12,
+    "androidJvm": {
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "androidLintFindings": 0,
+    "runtimeDependencies": [],
+    "apkSignature": "v2-verified-one-signer",
+    "nativeClosure": [
+      "lib/arm64-v8a/libcloudy-vnc-jni.so",
+      "lib/arm64-v8a/libcrypto.so",
+      "lib/arm64-v8a/libssl.so"
+    ],
+    "nativeZipAlignment": 16384,
+    "manifest": "merged-XML-policy-verified-not-binary-APK-decoding",
+    "workflowSyntax": "YAML-and-bash-passed-not-Actions-schema"
+  },
+  "review": {
+    "implementation": "direct-Codex-gpt-6.1-sol",
+    "independent": "direct-Codex-gpt-6.1-sol",
+    "leader": "parent-Codex",
+    "fixedFindings": [
+      "Bind executing native helper in OpenSSL provenance",
+      "Reject extra assets and verify merged manifest policy"
+    ],
+    "omp": {
+      "provider": "kimi-code",
+      "model": "k3",
+      "toolCalls": 0,
+      "scope": "context-only-workflow-proposal-parent-corrected-and-applied"
+    }
+  },
+  "preservedFailure": {
+    "run": "local-ci-01",
+    "reason": "source changed during integration build; rejected stale inputs",
+    "acceptedTopReceipt": false
+  },
+  "limits": [
+    "No installation or device/server test",
+    "No performance or supported-capability promotion",
+    "No byte identity with historical device APK",
+    "No final APK/source-distribution approval"
+  ],
+  "files": {
+    ".cache/native-vnc-android/local-ci-02/app/build/outputs/apk/debug/app-debug.apk": {
+      "bytes": 10888223,
+      "sha256": "0440e31613d984701d9fb2d40a76c8b51f73ecde2da0747e2b65cdb2ca5ebf3f"
+    },
+    ".cache/native-vnc-android/local-ci-02/app/build/reports/cloudy-runtime-dependencies.json": {
+      "bytes": 9,
+      "sha256": "ed7a03718bfa994095a377c46d359ebba966453acaac2a76b2718e7bb4e494c4"
+    },
+    ".cache/native-vnc-android/local-ci-02/app/build/reports/lint-results-debug.xml": {
+      "bytes": 86,
+      "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f"
+    },
+    ".cache/native-vnc-android/local-ci-02/app/build/test-results/testDebugUnitTest/TEST-dev.cloudy.qualification.vnc.VncDiagnosticsTest.xml": {
+      "bytes": 787,
+      "sha256": "37487aac7e1373a5b067bdc9ccf060793d0373175a85aa9d7c151e04b690af26"
+    },
+    ".cache/native-vnc-android/local-ci-02/app/build/test-results/testDebugUnitTest/TEST-dev.cloudy.qualification.vnc.VncPoliciesTest.xml": {
+      "bytes": 1320,
+      "sha256": "a1f8b113f8d6f60deda737cf53c1c213a4f69f82db79c8e45be428f6cda39834"
+    },
+    ".cache/native-vnc-android/local-ci-02/cloudy-preparation.json": {
+      "bytes": 13482,
+      "sha256": "3bd213e3f8ab39f7ba298e51a46c57afcda08de4e212d760eb3a611831d03909"
+    },
+    ".cache/native-vnc-ci/local-ci-01/failure.json": {
+      "bytes": 76,
+      "sha256": "e6fd10a97dd143c892acb34a1a3df34a207caea4398dac052cd385b14bd15e35"
+    },
+    ".cache/native-vnc-ci/local-ci-02/android-build.json": {
+      "bytes": 448,
+      "sha256": "f5737fa2e400f7160c7f5b662d6b5eebf18015aaa123bf7d0a119cc6e50dc45e"
+    },
+    ".cache/native-vnc-ci/local-ci-02/android-build.log": {
+      "bytes": 3497,
+      "sha256": "40868afa537126d67351232b715a5e57db3c9b683badc8d2ce300f930a122c03"
+    },
+    ".cache/native-vnc-ci/local-ci-02/apk-audit.json": {
+      "bytes": 2438,
+      "sha256": "b3332afe96de8b77fc53f8cc5263aceca3a4ebcb3c601fcece4cef2a2fd75ba0"
+    },
+    ".cache/native-vnc-ci/local-ci-02/apksigner.log": {
+      "bytes": 343,
+      "sha256": "b0a1af67205efcd284e5bbae691ebf4a0d296b4fcae02cd28e7e0509d0e0efbc"
+    },
+    ".cache/native-vnc-ci/local-ci-02/receipt.json": {
+      "bytes": 936,
+      "sha256": "2bb8489896bea134c720ffa5e5a16ad3ec01777b66e7eef43d22210ec90dceff"
+    },
+    ".cache/native-vnc-ci/openssl-local-ci-02/receipt.json": {
+      "bytes": 25391,
+      "sha256": "c0368f56926bb8610447b715d191e41fc2253996f11aa2272dd1d53a66afc47c"
+    },
+    ".cache/native-vnc-ci/review-02/ast.json": {
+      "bytes": 62,
+      "sha256": "d5b613ec98a9aa3439d935ab544a1736e144ff4c325a01918d113bb93954918e"
+    },
+    ".cache/native-vnc-ci/review-02/ast.log": {
+      "bytes": 1295,
+      "sha256": "709749f61ad93bc23781ca1f1b364ded6a4af2ff99e51338c85d3c96e0a4a410"
+    },
+    ".cache/native-vnc-ci/review-02/ruff.json": {
+      "bytes": 61,
+      "sha256": "259a196a27b8912d660cfb4cf6e72c60ff6f6b1c8bc01c84e61a4a68a5e57096"
+    },
+    ".cache/native-vnc-ci/review-02/ruff.log": {
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    ".cache/native-vnc-ci/review-02/tests.json": {
+      "bytes": 100,
+      "sha256": "a82733d2998470c661128ba647a8e5df4d692619c5467c1f152802392c1948f2"
+    },
+    ".cache/native-vnc-ci/review-02/tests.log": {
+      "bytes": 18476,
+      "sha256": "4ac319dbdbc446cb3cada3e04dac9708dc460028ee1959e43f13775cdb924ec0"
+    },
+    ".cache/native-vnc-ci/review-02/workflow-syntax.json": {
+      "bytes": 122,
+      "sha256": "60d4ce78fdf9d4dd3ab348db2850c68c5da99929c4ed0ef0e3c00708d6d3a544"
+    },
+    ".cache/native-vnc/adapter/ci-local-ci-02/receipt.json": {
+      "bytes": 70693,
+      "sha256": "be0699803d07d9bd484a894a7ca013c2788f80cdf65dcd3f1225d3980bda6f46"
+    },
+    ".cache/native-vnc/ci-local-ci-01/failure.json": {
+      "bytes": 122,
+      "sha256": "ca3f7f1d25106a00501ffe5d592da129898b0042059daf9237a6e1ffd5a210d9"
+    },
+    ".cache/native-vnc/ci-local-ci-02/receipt.json": {
+      "bytes": 102699,
+      "sha256": "ef1cefc6a8b78a4174f18719e70973207731a21f7ba1192c866ba90b3e883c44"
+    },
+    ".cache/omp-workers/2026-10-15-vnc-ci/runtime-01/VNC-CI-001/assignment.json": {
+      "bytes": 710,
+      "sha256": "69a14fa7d6e58352abbef0def92092f7f31039f2dc30245c5513ffbb6b9fa27d"
+    },
+    ".cache/omp-workers/2026-10-15-vnc-ci/runtime-01/VNC-CI-001/final-output.json": {
+      "bytes": 6553,
+      "sha256": "3921b2b4ea3a16979928eba00d9a0cf9a0a43e5c8de5b904858048d7c0fe2321"
+    },
+    ".cache/omp-workers/2026-10-15-vnc-ci/runtime-01/VNC-CI-001/parent-review.json": {
+      "bytes": 1054,
+      "sha256": "fdbfdde6235436942591ace53e6d20d3ac6be6994bda9226c568a8192bb7f5e4"
+    },
+    ".github/workflows/android-native-vnc.yml": {
+      "bytes": 6145,
+      "sha256": "9f6e0c6bafd45acb943e833b4e9c7ad83e30ccbf0ababe43151b85ebd08806f4"
+    },
+    "tests/test_build_vnc_ci.py": {
+      "bytes": 13605,
+      "sha256": "90301e61dd7eb828323b046472822ff73e410874b0d28be6ff8e61ef6da77fde"
+    },
+    "tools/build_vnc_ci.py": {
+      "bytes": 19113,
+      "sha256": "108ea6f59716b2432db3880fa9d1aa7c4692ee8f3eba194d47b0ef16eda49cc8"
+    },
+    "tools/prepare_vnc_adapter.py": {
+      "bytes": 14507,
+      "sha256": "7f1eb6bd055c837ba68ec070fd0dabd1c7c7f6d75d4298a0e054741954101073"
+    },
+    "tools/prepare_vnc_android.py": {
+      "bytes": 10615,
+      "sha256": "bbc88497b04ee8b6b3dc8037459b1853654fb314f12fa70bf9b5cc5c1214e32f"
+    },
+    "tools/prepare_vnc_native.py": {
+      "bytes": 22459,
+      "sha256": "b627c6f51a26cc588f498f5214750dfa417fad7a6bec38542584f963dff0cfdc"
+    }
+  }
+}
