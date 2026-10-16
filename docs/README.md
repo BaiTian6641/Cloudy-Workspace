@@ -80,3 +80,5 @@ These entries retain chronological checkpoints. Use the current execution state 
 - [Receiver-owned location contract](02-architecture/files-resource-registration.md) and [domain/SQLite qualification](../qualification/results/P1-S3/2026-10-16-files-resource-storage.md):12 new JVM and20 actual Android storage cases, exact account/profile/trust metadata and terminal revocation. The later native registration/location and protected transport milestones supersede that built-only status; positive cross-app authenticated navigation remains required.
 
 - [Protected files handoff contract](02-architecture/protected-files-handoff.md) and [real transport result](../qualification/results/P1-S3/2026-10-16-files-handoff-transport.md):0.1.12 native sender/receiver composition and14 both-direction discovery/denial cases; positive Open/BAL/authenticated listing remains open.
+
+- [Full P0–P6 execution-stage snapshot](05-delivery/2026-10-16-project-progress.md):all40 stage statuses, remaining integration boundaries and parent/Sol/OMP coordination.
