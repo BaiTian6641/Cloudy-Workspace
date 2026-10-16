@@ -1,5 +1,6 @@
 package io.github.baitian6641.cloudy.testing
 
+import android.content.Context
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assert
@@ -45,15 +46,23 @@ abstract class ProfileActivityContract(private val expectedOwner: WindowOwner) {
     private val prefix = "profile-ui-${UUID.randomUUID()}"
     private var preexistingIds = emptySet<String>()
     private val ownedIds = mutableSetOf<String>()
-    private val store get() = ConnectionProfiles(compose.activity.applicationContext)
+    private lateinit var storeContext: Context
+    private val store get() = ConnectionProfiles(storeContext)
 
     @Before fun recordPreexistingProfiles() {
+        compose.activityRule.scenario.onActivity { storeContext = it.applicationContext }
         awaitIdle()
         preexistingIds = catalog().profiles.map { it.id }.toSet()
     }
 
     @After fun removeOnlyThisTestsCreatedProfiles() {
-        awaitIdle()
+        val queue = ProfileTestQueue.actual()
+        val closeFailure = try {
+            runCatching { compose.activityRule.scenario.close() }.exceptionOrNull()
+        } finally { queue.releaseGates() }
+        check(closeFailure == null) { "Profile Activity close unproved; preserve fixture" }
+        // Cleanup cannot depend on the same scrolling/semantics that a failed UI case may break.
+        queue.drain()
         // Discover an interrupted UI create by its unique label, while excluding every initial ID.
         val current = catalog()
         current.profiles.filter { it.id !in preexistingIds && it.label.startsWith(prefix) }

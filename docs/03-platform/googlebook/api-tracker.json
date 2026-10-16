@@ -1723,7 +1723,7 @@
       "stage": "P1-S3",
       "researchEvidence": "docs/02-architecture/connection-profiles.md",
       "compileEvidence": "qualification/results/P1-S3/2026-10-16-connection-profiles-build.json",
-      "deviceEvidence": "qualification/results/P1-S3/2026-10-16-connection-profiles.md",
+      "deviceEvidence": "qualification/results/P1-S3/2026-10-16-profile-recovery.md",
       "id": "API52",
       "feature": "App-owned connection profile persistence and endpoint normalization",
       "symbols": [
@@ -1756,7 +1756,7 @@
       "minimumApi": 28,
       "libraryVersion": "Framework SQLite journal/sync parameters API28; IDN API9; existing productmin35 unchanged",
       "fallback": "Reject stale generation/revision, missing/corrupt established store or invalid owner; uncertain mutations require reload and never auto-retry. No network/trust claim.",
-      "experiment": "26 domain and14 identity JVM cases pass;19 actual Android profile cases and two distinct-process phases pass. Default process invocation skips. Native editor, installed-product storage isolation, simultaneous cross-process writers and physical power-cut durability remain unqualified."
+      "experiment": "Original storage and editor evidence remains scoped to its dated packets. The profile-recovery follow-up passes 12 existing UI cases, 4 controlled admitted-save Activity-recreation cases and 6 paired isolation phases across preserved attempts; 2 defaults skip. Initial console filesystem assertion and separate host preflight fail and remain recorded. Revised verify confirms exact owner-side peer path/read plus own-file positive control; both products report NOT_VISIBLE/errno 2. Original rows/generations restored, test APKs removed, product 0.1.4 bytes/vault receipts/boot unchanged. Actual process death, simultaneous writers, power loss, unavailable-store exit UI, protected credentials, physical input/IME and native visual/accessibility qualification remain open. No trust, network or handoff authority is established."
     },
     {
       "id": "API53",
@@ -1795,10 +1795,10 @@
       "owner": "Android/platform developer",
       "stage": "P1-S3",
       "fallback": "Retain bounded draft and report unavailable/conflict/uncertain completion; no automatic mutation retry, silent overwrite, restored confirmation or invented connection. Unavailable catalog never renders as a successfully empty list.",
-      "experiment": "Strict build02 passes in31seconds with303 tasks/63 executed and zero findings in Console/Desktop/platform Lint. On HP Googlebook Android17/API37 CL3B.260622.276.R2 incremental16560795, ten actual ProfileEditorState cases and eight cases per product (six profile Activity cases plus two window regressions) pass:26 total. Both products0.1.4/code5 are installed/stopped; test APK absence, unchanged boot identity/count and preexisting vault receipt hashes are verified by the parent run. Cross-app catalog isolation, admitted-write/unknown-completion recreation, unknown-store exit UI, actual process-death editor recovery, physical keyboard/IME, themes, scale and pointer/visual qualification remain unrun. No authentication or network operation is qualified; local endpoint editing confers no trust, enrollment or handoff authority.",
+      "experiment": "Original storage and editor evidence remains scoped to its dated packets. The profile-recovery follow-up passes 12 existing UI cases, 4 controlled admitted-save Activity-recreation cases and 6 paired isolation phases across preserved attempts; 2 defaults skip. Initial console filesystem assertion and separate host preflight fail and remain recorded. Revised verify confirms exact owner-side peer path/read plus own-file positive control; both products report NOT_VISIBLE/errno 2. Original rows/generations restored, test APKs removed, product 0.1.4 bytes/vault receipts/boot unchanged. Actual process death, simultaneous writers, power loss, unavailable-store exit UI, protected credentials, physical input/IME and native visual/accessibility qualification remain open. No trust, network or handoff authority is established.",
       "researchEvidence": "docs/02-architecture/connection-profiles.md",
       "compileEvidence": "qualification/results/P1-S3/2026-10-16-profile-editor-build.json",
-      "deviceEvidence": "qualification/results/P1-S3/2026-10-16-profile-editor.md"
+      "deviceEvidence": "qualification/results/P1-S3/2026-10-16-profile-recovery.md"
     }
   ],
   "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."

@@ -5920,6 +5920,66 @@
       "sourceUpdatedOn": null,
       "note": "Official indexed API content inspected after direct page fetch exceeded tool size. TextFieldValue contains text, selection and composition; passing null composition can apply an ongoing IME composition. Preserve incoming TextFieldValue during live edits, restore only validated bounded text/selection and no live composition. API page common-platform overload annotations are not Android OS minimums; actual selected artifact is ui-text1.12.1. Owner: Android/platform; P1-S3 API53.",
       "refresh": "Before changing profile editor state, text input, Activity ownership or the pinned Compose integration."
+    },
+    {
+      "id": "R267",
+      "title": "Pinned SSHJ host-key verifier interface",
+      "url": "https://github.com/hierynomus/sshj/blob/6fad160fe36605a68847ac8a527750c615b4bd04/src/main/java/net/schmizz/sshj/transport/verification/HostKeyVerifier.java",
+      "publisher": "SSHJ upstream maintainers",
+      "category": "security",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "HostKeyVerifier.verify(String,int,PublicKey) and findExistingAlgorithms(String,int) define the selected candidate callback boundary. Capture exact logical peer/attempt separately from socket addresses; algorithm preference never authorizes deprecated algorithms. Fallback: reject unknown/changed/revoked/unsupported peer or unavailable verification; no permissive verifier. Owner: platform/security; P1-S3 CAP-FOUNDATION construction entry. SSHJ0.41.2 remains experimental, not adopted; P1-S4/CAP-SSH and actual adapter/device qualification remain pending.",
+      "refresh": "Before implementing or changing SSH host-key identity, enrollment, verifier callbacks or the selected SSHJ pin; reuse unchanged upstream evidence under D12."
+    },
+    {
+      "id": "R268",
+      "title": "Pinned SSHJ fingerprint verifier",
+      "url": "https://github.com/hierynomus/sshj/blob/6fad160fe36605a68847ac8a527750c615b4bd04/src/main/java/net/schmizz/sshj/transport/verification/FingerprintVerifier.java",
+      "publisher": "SSHJ upstream maintainers",
+      "category": "security",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "FingerprintVerifier.getInstance(String) supports SHA256, SHA1 and MD5; verify(String,int,PublicKey) hashes SSHJ Buffer.PlainBuffer.putPublicKey serialization. Cloudy proposes canonical SHA256 only, with bounded validated digest representation; no authored SSH-key parser. Fallback: reject unsupported/malformed fingerprints or failed verification, without weaker-digest fallback. Owner: platform/security; P1-S3 CAP-FOUNDATION construction entry. SSHJ0.41.2 remains experimental, not adopted; P1-S4/CAP-SSH and actual adapter/device qualification remain pending.",
+      "refresh": "Before implementing or changing SSH host-key identity, enrollment, verifier callbacks or the selected SSHJ pin; reuse unchanged upstream evidence under D12."
+    },
+    {
+      "id": "R269",
+      "title": "Pinned SSHJ fingerprint utility digest",
+      "url": "https://github.com/hierynomus/sshj/blob/6fad160fe36605a68847ac8a527750c615b4bd04/src/main/java/net/schmizz/sshj/common/SecurityUtils.java",
+      "publisher": "SSHJ upstream maintainers",
+      "category": "security",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "SecurityUtils.getFingerprint(PublicKey) computes an MD5 colon-hex fingerprint at this revision. It is not the proposed Cloudy SHA256 display helper. Fallback: retain the reviewed SHA256 verifier/serialization route or deny unavailable verification; do not substitute the default MD5 helper. Owner: platform/security; P1-S3 CAP-FOUNDATION construction entry. SSHJ0.41.2 remains experimental, not adopted; P1-S4/CAP-SSH and actual adapter/device qualification remain pending.",
+      "refresh": "Before implementing or changing SSH host-key identity, enrollment, verifier callbacks or the selected SSHJ pin; reuse unchanged upstream evidence under D12."
+    },
+    {
+      "id": "R270",
+      "title": "Pinned SSHJ OpenSSH known-host parsing and persistence",
+      "url": "https://github.com/hierynomus/sshj/blob/6fad160fe36605a68847ac8a527750c615b4bd04/src/main/java/net/schmizz/sshj/transport/verification/OpenSSHKnownHosts.java",
+      "publisher": "SSHJ upstream maintainers",
+      "category": "security",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "OpenSSHKnownHosts.readEntries can skip malformed entries; verify matches applicable key types before changed/unverifiable actions; write() and write(KnownHostEntry) directly replace/append files. These semantics do not supply Cloudy fail-closed durable CAS/revocation storage. Fallback: separate app-owned exact-pin ledger; explicit import remains unimplemented and must reject unsupported input rather than silently establish trust. Owner: platform/security; P1-S3 CAP-FOUNDATION construction entry. SSHJ0.41.2 remains experimental, not adopted; P1-S4/CAP-SSH and actual adapter/device qualification remain pending.",
+      "refresh": "Before implementing or changing SSH host-key identity, enrollment, verifier callbacks or the selected SSHJ pin; reuse unchanged upstream evidence under D12."
+    },
+    {
+      "id": "G210",
+      "title": "Pinned AOSP app-data mount namespace isolation",
+      "url": "https://android.googlesource.com/platform/frameworks/base/+/bba5ed7765e4b843877513cd9e518f85da0e43cc/core/jni/com_android_internal_os_Zygote.cpp",
+      "publisher": "AOSP / Google",
+      "category": "security",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "ensureInAppMountNamespace, MountAppDataTmpFs and isolateAppData isolate app data with a mount namespace, tmpfs overlay and selected related-package bind mounts. Explains why a known existing sibling path can be absent from another app namespace; this pinned source does not identify the installed Googlebook framework or establish the cause of an observed errno. Test-only Os.open outcomes need a successful owner-side read of the exact sibling path and matching path digest, plus a positive own-file control. Fallback: fail an unwitnessed or mismatched path; never treat arbitrary ENOENT as isolation proof. Owner: Android/platform; P1-S3 profile-isolation qualification. No hidden API is called by Cloudy.",
+      "refresh": "Before changing cross-app private-file isolation assertions or target framework behavior."
     }
   ]
 }
