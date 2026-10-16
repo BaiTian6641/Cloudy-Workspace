@@ -1,6 +1,7 @@
 package io.github.baitian6641.cloudy.platform
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -28,6 +29,7 @@ class CloudySshFilesActivity : ComponentActivity() {
     private lateinit var model: SshFilesSessionModel
     private val attachment = Any()
     private var initialRefresh = false
+    private var initialLocationTicket: String? = null
     private var interactive by mutableStateOf(false)
     private var username by mutableStateOf(TextFieldValue())
     private var password by mutableStateOf(TextFieldValue())
@@ -61,8 +63,23 @@ class CloudySshFilesActivity : ComponentActivity() {
         })[SshFilesSessionModel::class.java]
         // Existing ViewModel state is the actual live owner on configuration recreation. A new
         // model after process loss receives only an interruption notice, never a restored command.
-        if (created && restorePending(savedInstanceState)) notice = getString(R.string.ssh_files_interrupted)
+        if (created) {
+            val restored = restorePending(savedInstanceState)
+            if (restored.session) notice = getString(R.string.ssh_files_interrupted)
+            if (restored.registration) {
+                model.restoreRegistrationUncertainty()
+                notice = getString(R.string.ssh_location_unknown)
+            }
+        }
         initialRefresh = created
+        // A launch ticket is one-use process memory, never restoration authority. A recreated
+        // model after process loss asks for a fresh selection instead of replaying the Intent.
+        if (created && savedInstanceState == null) {
+            initialLocationTicket = try {
+                if (intent.hasExtra(LOCATION_TICKET)) intent.getStringExtra(LOCATION_TICKET) ?: "" else null
+            } catch (_: RuntimeException) { "" }
+        }
+        try { intent.removeExtra(LOCATION_TICKET) } catch (_: RuntimeException) { initialLocationTicket = "" }
         enableEdgeToEdge()
         window.decorView.importantForAutofill = View.IMPORTANT_FOR_AUTOFILL_NO_EXCLUDE_DESCENDANTS
         title = getString(R.string.ssh_files_heading)
@@ -74,10 +91,21 @@ class CloudySshFilesActivity : ComponentActivity() {
                 // its focus callback. Observe the Compose owner's current window, not a cache.
                 val windowFocused = LocalWindowInfo.current.isWindowFocused
                 LaunchedEffect(state.selected) { clearFields() }
-                SshFilesScreen(state, username, password, epoch, interactive && windowFocused, notice,
+                LaunchedEffect(interactive, windowFocused) {
+                    model.onOwnerForeground(attachment, interactive && windowFocused && hasWindowFocus())
+                }
+                val displayedUsername = state.location?.accountName?.let { account ->
+                    username.takeIf { it.text == account } ?: TextFieldValue(account)
+                } ?: username
+                SshFilesScreen(state, displayedUsername, password, epoch, interactive && windowFocused, notice,
                     onUsername = { value ->
                         if (epoch == credentialEpoch && canEdit()) {
-                            if (value.text.length <= SshPasswordCredentials.MAX_USERNAME_UNITS) username = value
+                            val boundAccount = model.state.location?.accountName
+                            // Read-only still emits native selection changes. Preserve selection
+                            // without allowing edits to the account used by registered auth.
+                            if (boundAccount != null) {
+                                if (value.text == boundAccount) username = value
+                            } else if (value.text.length <= SshPasswordCredentials.MAX_USERNAME_UNITS) username = value
                             else notice = getString(R.string.ssh_files_invalid)
                         }
                     },
@@ -96,6 +124,19 @@ class CloudySshFilesActivity : ComponentActivity() {
                     onRead = { entry -> if (interactive && hasWindowFocus()) { notice = null; model.read(entry) } },
                     onDisconnect = { clearFields(); notice = null; model.disconnect() },
                     onClose = { clearFields(); model.disconnect(); finish() },
+                    onLocations = {
+                        if (canEdit() && !model.state.registrationPending) {
+                            clearFields()
+                            startActivity(Intent(this, CloudyFilesLocationsActivity::class.java))
+                        }
+                    },
+                    onRegister = { candidate, label ->
+                        // Refresh the opaque owner's foreground gate synchronously; an enabled
+                        // Compose callback may have been queued before an external focus change.
+                        model.onOwnerForeground(attachment, interactive && hasWindowFocus() && !isFinishing)
+                        model.register(candidate, label)
+                    },
+                    onCancelRegistration = model::cancelRegistration,
                     offerLocalPermission = Build.VERSION.SDK_INT >= 37 && !hasLocalPermission(),
                     onPermission = ::requestLocalPermission)
             }
@@ -108,13 +149,21 @@ class CloudySshFilesActivity : ComponentActivity() {
             model.onOwnerStarted(attachment)
             if (initialRefresh) {
                 initialRefresh = false
-                if (model.state.phase == SshFilesPhase.IDLE) model.refreshProfiles()
+                val ticket = initialLocationTicket
+                initialLocationTicket = null
+                if (ticket != null) model.selectLocation(ticket)
+                else if (model.state.phase == SshFilesPhase.IDLE) model.refreshProfiles()
             }
         }
     }
-    override fun onResume() { super.onResume(); interactive = true }
+    override fun onResume() {
+        super.onResume()
+        interactive = true
+        if (::model.isInitialized) model.onOwnerForeground(attachment, hasWindowFocus())
+    }
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
+        if (::model.isInitialized) model.onOwnerForeground(attachment, interactive && hasFocus)
         if (!hasFocus) {
             clearFields()
             if (::model.isInitialized) model.pauseAuthentication(attachment)
@@ -123,7 +172,10 @@ class CloudySshFilesActivity : ComponentActivity() {
     override fun onPause() {
         interactive = false
         clearFields()
-        if (::model.isInitialized) model.pauseAuthentication(attachment)
+        if (::model.isInitialized) {
+            model.onOwnerForeground(attachment, false)
+            model.pauseAuthentication(attachment)
+        }
         super.onPause()
     }
     override fun onStop() {
@@ -136,11 +188,13 @@ class CloudySshFilesActivity : ComponentActivity() {
         interactive = false
         clearFields()
         if (::model.isInitialized) {
+            model.onOwnerForeground(attachment, false)
             val pending = model.state.phase in setOf(SshFilesPhase.CONNECTING, SshFilesPhase.CONNECTED,
                 SshFilesPhase.READING, SshFilesPhase.RETIRING)
             model.pauseAuthentication(attachment)
             outState.putBundle(STATE_KEY, Bundle().apply {
-                putInt("schema", 1); putString("owner", owner.wireId); putBoolean("pending", pending)
+                putInt("schema", 2); putString("owner", owner.wireId); putBoolean("pending", pending)
+                putBoolean("registrationUncertain", model.state.registrationPending || model.state.registrationUncertain)
             })
         }
         super.onSaveInstanceState(outState)
@@ -148,7 +202,8 @@ class CloudySshFilesActivity : ComponentActivity() {
     override fun onDestroy() { clearFields(); super.onDestroy() }
 
     // Recheck framework focus at action admission, even if a previously enabled UI callback queues.
-    private fun canEdit() = interactive && hasWindowFocus() && !isFinishing && model.state.phase in setOf(SshFilesPhase.IDLE, SshFilesPhase.FAILED)
+    private fun canEdit() = interactive && hasWindowFocus() && !isFinishing && !model.state.registrationPending &&
+        model.state.phase in setOf(SshFilesPhase.IDLE, SshFilesPhase.FAILED)
     private fun clearFields() {
         // Rotate the native field composition to dispose undo history, and fence queued callbacks.
         credentialEpoch++
@@ -157,7 +212,7 @@ class CloudySshFilesActivity : ComponentActivity() {
     }
     private fun connect() {
         if (!canEdit() || model.state.selected == null) return
-        val user = username.text.toCharArray()
+        val user = (model.state.location?.accountName ?: username.text).toCharArray()
         val secret = password.text.toCharArray()
         val credentials = try { SshPasswordCredentials.create(user, secret) }
         catch (_: IllegalArgumentException) { notice = getString(R.string.ssh_files_invalid); return }
@@ -178,16 +233,24 @@ class CloudySshFilesActivity : ComponentActivity() {
     }
 
     @Suppress("DEPRECATION")
-    private fun restorePending(source: Bundle?): Boolean {
-        if (source == null) return false
+    private fun restorePending(source: Bundle?): PendingState {
+        if (source == null) return PendingState(false, false)
         return try {
-            if (!source.containsKey(STATE_KEY)) false else {
-                val record = source.get(STATE_KEY) as? Bundle ?: return true
-                if (record.keySet() != setOf("schema", "owner", "pending") || record.get("schema") != 1 ||
-                    record.get("owner") != owner.wireId || record.get("pending") !is Boolean) true
-                else record.get("pending") as Boolean
+            if (!source.containsKey(STATE_KEY)) PendingState(false, false) else {
+                val record = source.get(STATE_KEY) as? Bundle ?: return PendingState(true, true)
+                val schema = record.get("schema")
+                val keys = if (schema == 1) setOf("schema", "owner", "pending")
+                    else setOf("schema", "owner", "pending", "registrationUncertain")
+                if (schema !in setOf(1, 2) || record.keySet() != keys ||
+                    record.get("owner") != owner.wireId || record.get("pending") !is Boolean ||
+                    (schema == 2 && record.get("registrationUncertain") !is Boolean)) PendingState(true, true)
+                else PendingState(record.getBoolean("pending"), schema == 2 && record.getBoolean("registrationUncertain"))
             }
-        } catch (_: RuntimeException) { true }
+        } catch (_: RuntimeException) { PendingState(true, true) }
     }
-    companion object { private const val STATE_KEY = "io.github.baitian6641.cloudy.ssh-files.v1" }
+    private class PendingState(val session: Boolean, val registration: Boolean)
+    companion object {
+        private const val STATE_KEY = "io.github.baitian6641.cloudy.ssh-files.v1"
+        internal const val LOCATION_TICKET = "io.github.baitian6641.cloudy.FILES_LOCATION_TICKET"
+    }
 }

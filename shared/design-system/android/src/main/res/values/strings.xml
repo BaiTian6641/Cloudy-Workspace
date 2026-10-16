@@ -10,4 +10,5 @@
     <string name="cloudy_ssh_authenticate">Check SSH password authentication</string>
     <string name="cloudy_ssh_files">Browse SSH files</string>
     <string name="cloudy_display_settings">Appearance and density</string>
+    <string name="cloudy_files_locations">Saved file locations</string>
 </resources>

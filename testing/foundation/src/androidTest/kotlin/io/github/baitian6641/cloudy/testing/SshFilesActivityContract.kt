@@ -2,6 +2,7 @@ package io.github.baitian6641.cloudy.testing
 
 import android.app.Activity
 import android.app.Application
+import android.content.Context
 import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
@@ -30,6 +31,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.platform.app.InstrumentationRegistry
 import io.github.baitian6641.cloudy.domain.WindowOwner
+import io.github.baitian6641.cloudy.domain.FilesResourceRegistration
+import io.github.baitian6641.cloudy.platform.CloudyFilesLocationsActivity
 import io.github.baitian6641.cloudy.platform.CloudyProfilesActivity
 import io.github.baitian6641.cloudy.platform.CloudySshFilesActivity
 import io.github.baitian6641.cloudy.platform.R
@@ -51,6 +54,10 @@ abstract class SshFilesActivityContract(private val expectedOwner: WindowOwner) 
     @Test fun hiddenOwnerRetiresAndReturnDoesNotReconnect() = exercise("hide")
     @Test fun realProfileEditRetiresEstablishedConnection() = exercise("profile")
     @Test fun heldRealReadDisconnectCannotPublishLatePreview() = exercise("hold")
+
+    @Test fun realListedDirectoryRegistersPrivateAndOrdinarySessionSurvives() = exerciseLocations("register")
+    @Test fun registrationFocusLossCancelsFrozenProposalWithoutMutation() = exerciseLocations("registration-focus")
+    @Test fun registeredLocationUsesFreshAccountAndInitialDirectoryThenRevocationRetires() = exerciseLocations("registered-location")
 
     private fun exercise(case: String) {
         val run = InstrumentationRegistry.getArguments().getString("cloudySshFilesRun")
@@ -246,6 +253,290 @@ abstract class SshFilesActivityContract(private val expectedOwner: WindowOwner) 
             } catch (error: Throwable) { record(error, "RESTORE_PRESERVE_FIXTURE") }
         }
         if (failed) throw AssertionError("SSH_FILES_QUALIFICATION_FAILED_SEE_PRIVATE_PHASE_RECEIPT")
+    }
+
+    /** New positive cases use actual engine proofs only; reflection observes identity/retirement. */
+    private fun exerciseLocations(case: String) {
+        val run = InstrumentationRegistry.getArguments().getString("cloudySshFilesRun")
+        assumeTrue("Explicit owning-app retained SFTP qualification only", run != null)
+        val instrumentation = InstrumentationRegistry.getInstrumentation()
+        val context = instrumentation.targetContext
+        val app = context.applicationContext as Application
+        var fixture: SshFilesFixture? = null
+        var locations: FilesLocationsFixture? = null
+        val scenarios = mutableListOf<ActivityScenario<CloudySshFilesActivity>>()
+        var manager: ActivityScenario<CloudyFilesLocationsActivity>? = null
+        val windows = OwnedLocationWindows(checkNotNull(run), context.packageName)
+        var saves: CredentialStateObserver? = null
+        var failed = false
+        var stage = "INITIALIZE"
+        fun failure(error: Throwable, at: String) {
+            failed = true
+            val name = error.javaClass.simpleName.takeIf { Regex("[A-Za-z0-9_$]{1,128}").matches(it) } ?: "OTHER"
+            try { fixture?.recordFailure(at, name) } catch (_: Throwable) { }
+        }
+        app.registerActivityLifecycleCallbacks(windows)
+        try {
+            val owned = SshFilesFixture.open(context, expectedOwner, run, case)
+            fixture = owned
+            owned.seed()
+            val resource = FilesLocationsFixture(context, expectedOwner, run, case)
+            locations = resource
+            saves = CredentialStateObserver(owned.username, owned.password)
+            app.registerActivityLifecycleCallbacks(checkNotNull(saves))
+            fun ordinary(): ActivityScenario<CloudySshFilesActivity> {
+                val live = ActivityScenario.launch<CloudySshFilesActivity>(Intent(context, CloudySshFilesActivity::class.java)
+                    .putExtra(OwnedLocationWindows.OWNER, run))
+                scenarios.add(live)
+                secure(live)
+                clickEnabled("ssh_files_profile_${owned.profileId}", "PROFILE")
+                input(owned)
+                clickEnabled("ssh_files_connect", "CONNECT")
+                helloRow()
+                return live
+            }
+            stage = "CONNECT_AND_LIST"
+            owned.phase("CASE_START")
+            val first = ordinary()
+            val initial = identity(first)
+            compose.onNodeWithTag("ssh_files_list").performScrollToNode(hasTestTag("ssh_files_path"))
+            compose.onNodeWithTag("ssh_files_path").performTextReplacement(FilesLocationsFixture.NESTED_ROOT)
+            clickEnabled("ssh_files_list_path", "LIST")
+            remoteRow(FilesLocationsFixture.NESTED_NAME)
+            owned.phase("ACTUAL_NONDEFAULT_DIRECTORY_LISTED")
+            if (case == "registration-focus") {
+                stage = "CANCEL_PROPOSAL"
+                clickEnabled("ssh_location_register", "REGISTER")
+                clickEnabled("ssh_location_cancel", "CANCEL")
+                resource.assertExpected()
+                check(identity(first).proof === initial.proof && !retired(initial.proof))
+                clickEnabled("ssh_files_refresh", "REFRESH")
+                remoteRow(FilesLocationsFixture.NESTED_NAME)
+                stage = "FOCUS_INVALIDATES_PROPOSAL"
+                clickEnabled("ssh_location_register", "REGISTER")
+                first.onActivity { it.onWindowFocusChanged(false) }
+                compose.waitForIdle()
+                check(compose.onAllNodesWithTag("ssh_location_confirmation").fetchSemanticsNodes().isEmpty())
+                first.onActivity { it.onWindowFocusChanged(true) }
+                resource.assertExpected()
+                check(identity(first).proof === initial.proof && !retired(initial.proof))
+                owned.phase("CANCEL_AND_FRAMEWORK_FOCUS_PROPOSAL_DENIAL_CONFIRMED")
+            } else {
+                stage = "REGISTER_ACTUAL_LISTING"
+                val firstRow = registerLocation(owned, resource, "Location $run A")
+                owned.phase("REAL_PRIVATE_REGISTRATION_CONFIRMED")
+                if (case == "register") {
+                    stage = "ORDINARY_RESOURCE_INDEPENDENCE"
+                    val shared = resource.changeThroughStore(firstRow, true)
+                    resource.changeThroughStore(shared, false)
+                    check(identity(first).proof === initial.proof && !retired(initial.proof))
+                    readRemote(FilesLocationsFixture.NESTED_NAME, FilesLocationsFixture.NESTED_TEXT)
+                    check(identity(first).proof === initial.proof && !retired(initial.proof))
+                    owned.phase("ORDINARY_LIVE_PROOF_SURVIVES_RESOURCE_STORE_CHANGES")
+                    disconnect()
+                    SshFilesFixture.settle()
+                    first.close()
+                    stage = "SECOND_REAL_REGISTRATION"
+                    val second = ordinary()
+                    awaitEnabled("ssh_files_path", "PATH")
+                    compose.onNodeWithTag("ssh_files_path").performTextReplacement(FilesLocationsFixture.NESTED_ROOT)
+                    clickEnabled("ssh_files_list_path", "LIST")
+                    remoteRow(FilesLocationsFixture.NESTED_NAME)
+                    val secondRow = registerLocation(owned, resource, "Location $run B")
+                    disconnect()
+                    SshFilesFixture.settle()
+                    second.close()
+                    stage = "MANAGER_REAL_SHARE_REVOKE"
+                    manager = launchManager(context, run)
+                    inspectLocation(secondRow)
+                    managerClick("locations_share")
+                    managerClick("locations_cancel")
+                    resource.assertExpected()
+                    val next = resource.expectChange(secondRow, true)
+                    managerClick("locations_share")
+                    managerClick("locations_confirm")
+                    waitManagerRevision(next.revision)
+                    resource.confirmChange(next)
+                    val revoked = resource.expectChange(next, false)
+                    managerClick("locations_revoke")
+                    managerClick("locations_confirm")
+                    waitManagerRevision(revoked.revision)
+                    resource.confirmChange(revoked)
+                    owned.phase("MANAGER_CANCEL_SHARE_AND_REVOKE_CONFIRMED")
+                } else {
+                    stage = "RETIRE_BEFORE_REGISTERED_OPEN"
+                    disconnect()
+                    SshFilesFixture.settle()
+                    first.close()
+                    manager = launchManager(context, run)
+                    inspectLocation(firstRow)
+                    stage = "MANAGER_TICKET_OPEN"
+                    checkNotNull(manager).onActivity { windows.armOpen(it) }
+                    managerClick("locations_open")
+                    compose.waitUntil(10_000) { windows.opened.get() != null }
+                    val opened = checkNotNull(windows.opened.get())
+                    stage = "FRESH_REGISTERED_AUTHENTICATION"
+                    // Username is frozen by the registered destination; never replace it as an ordinary input.
+                    awaitEnabled("ssh_files_username", "USERNAME")
+                    check(compose.onNodeWithTag("ssh_files_username").fetchSemanticsNode()
+                        .config[SemanticsProperties.EditableText].text == owned.username) { "REGISTERED_ACCOUNT_MISMATCH" }
+                    awaitEnabled("ssh_files_password", "PASSWORD")
+                    compose.onNodeWithTag("ssh_files_password").performTextReplacement(owned.password)
+                    clickEnabled("ssh_files_connect", "CONNECT")
+                    remoteRow(FilesLocationsFixture.NESTED_NAME)
+                    val bound = AtomicReference<Identity>()
+                    instrumentation.runOnMainSync {
+                        val model = model(opened)
+                        bound.set(Identity(model, checkNotNull(proof(model))))
+                        val state = model.javaClass.getMethod("getState").invoke(model)
+                        check(state.javaClass.getMethod("getPath").invoke(state) == FilesLocationsFixture.NESTED_ROOT)
+                    }
+                    readRemote(FilesLocationsFixture.NESTED_NAME, FilesLocationsFixture.NESTED_TEXT)
+                    owned.phase("REAL_TICKET_FRESH_ACCOUNT_NONDEFAULT_LIST_AND_READ_CONFIRMED")
+                    stage = "LIVE_REGISTERED_RESOURCE_REVOKE"
+                    resource.changeThroughStore(firstRow, false)
+                    SshFilesFixture.settle()
+                    check(retired(checkNotNull(bound.get()).proof))
+                    instrumentation.runOnMainSync {
+                        val state = model(opened).javaClass.getMethod("getState").invoke(model(opened))
+                        check(state.javaClass.getMethod("getPreview").invoke(state) == null)
+                    }
+                    phase(R.string.ssh_files_failed)
+                    owned.phase("ACTUAL_RESOURCE_REVOCATION_RETIRED_REGISTERED_OWNER")
+                }
+            }
+            resource.assertExpected()
+            owned.assertUnchanged()
+            check(checkNotNull(saves).clean.get())
+            owned.recordUiEvidence(checkNotNull(saves).saved.get(), checkNotNull(saves).clean.get(), case == "registration-focus")
+            owned.phase("CASE_ASSERTIONS_CONFIRMED")
+        } catch (error: Throwable) { failure(error, stage) }
+        finally {
+            var closed = true
+            try { instrumentation.runOnMainSync { windows.finishOwned() } }
+            catch (error: Throwable) { closed = false; failure(error, "CLOSE_OWNED_WINDOWS") }
+            try {
+                manager?.close()
+                scenarios.asReversed().forEach { it.close() }
+                compose.waitUntil(10_000) {
+                    val destroyed = AtomicBoolean()
+                    instrumentation.runOnMainSync { destroyed.set(windows.allDestroyed()) }
+                    destroyed.get()
+                }
+            } catch (error: Throwable) { closed = false; failure(error, "CLOSE_SCENARIOS") }
+            saves?.let { observer -> app.unregisterActivityLifecycleCallbacks(observer); observer.dispose() }
+            try {
+                check(closed)
+                locations?.restore() // Resources before their exact profile/trust parents.
+                fixture?.restore(!failed)
+            } catch (error: Throwable) { failure(error, "RESTORE_PRESERVE_FIXTURE") }
+            app.unregisterActivityLifecycleCallbacks(windows)
+            windows.dispose()
+        }
+        if (failed) throw AssertionError("SSH_FILES_LOCATIONS_QUALIFICATION_FAILED_SEE_PRIVATE_RECEIPT")
+    }
+
+    private fun registerLocation(fixture: SshFilesFixture, resources: FilesLocationsFixture, label: String): FilesResourceRegistration {
+        resources.plan(label, fixture.observedProfile, fixture.acceptedPin, FilesLocationsFixture.NESTED_ROOT, fixture.username)
+        clickEnabled("ssh_location_register", "REGISTER")
+        awaitEnabled("ssh_location_label", "LOCATION_LABEL")
+        compose.onNodeWithTag("ssh_location_label").performTextReplacement(label)
+        clickEnabled("ssh_location_confirm", "CONFIRM")
+        compose.waitUntil(10_000) {
+            try { scroll("ssh_location_saved"); compose.onNodeWithTag("ssh_location_saved").fetchSemanticsNode(); true }
+            catch (_: AssertionError) { false }
+        }
+        return resources.captureCreated()
+    }
+    private fun remoteRow(name: String): String {
+        phase(R.string.ssh_files_connected)
+        val matcher = SemanticsMatcher("returned remote entry") { node ->
+            node.config.contains(SemanticsProperties.TestTag) && node.config[SemanticsProperties.TestTag].matches(Regex("ssh_files_entry_[0-9]{1,3}"))
+        } and hasAnyDescendant(hasText(name))
+        var tag: String? = null
+        compose.waitUntil(10_000) {
+            try {
+                compose.onNodeWithTag("ssh_files_list").performScrollToNode(matcher)
+                tag = compose.onNode(matcher).fetchSemanticsNode().config[SemanticsProperties.TestTag]
+                true
+            } catch (_: AssertionError) { false }
+        }
+        return checkNotNull(tag)
+    }
+    private fun readRemote(name: String, expected: String) {
+        val index = remoteRow(name).substringAfterLast('_')
+        clickEnabled("ssh_files_read_$index", "READ")
+        compose.waitUntil(10_000) {
+            try {
+                scroll("ssh_files_preview_content")
+                compose.onNodeWithTag("ssh_files_preview_content").fetchSemanticsNode()
+                    .config[SemanticsProperties.Text].single().text == expected
+            } catch (_: AssertionError) { false }
+        }
+        phase(R.string.ssh_files_connected)
+    }
+    private fun launchManager(context: Context, run: String): ActivityScenario<CloudyFilesLocationsActivity> =
+        ActivityScenario.launch(Intent(context, CloudyFilesLocationsActivity::class.java).putExtra(OwnedLocationWindows.OWNER, run))
+    private fun managerClick(tag: String) {
+        compose.waitUntil(10_000) {
+            try {
+                compose.onNodeWithTag("locations_list").performScrollToNode(hasTestTag(tag))
+                compose.onNodeWithTag(tag).performScrollTo().assertIsEnabled()
+                true
+            } catch (_: AssertionError) { false }
+        }
+        compose.onNodeWithTag(tag).performClick()
+    }
+    private fun inspectLocation(row: FilesResourceRegistration) {
+        val matcher = SemanticsMatcher("owned location row") { node ->
+            node.config.contains(SemanticsProperties.TestTag) && node.config[SemanticsProperties.TestTag].matches(Regex("locations_row_[0-9]{1,3}"))
+        } and hasAnyDescendant(hasText(row.label))
+        compose.waitUntil(10_000) {
+            try { compose.onNodeWithTag("locations_list").performScrollToNode(matcher); compose.onNode(matcher).fetchSemanticsNode(); true }
+            catch (_: AssertionError) { false }
+        }
+        val index = compose.onNode(matcher).fetchSemanticsNode().config[SemanticsProperties.TestTag].substringAfterLast('_')
+        managerClick("locations_inspect_$index")
+    }
+    private fun waitManagerRevision(revision: Long) {
+        compose.waitUntil(10_000) {
+            try {
+                compose.onNodeWithTag("locations_list").performScrollToNode(hasTestTag("locations_detail_revision"))
+                compose.onNodeWithTag("locations_detail_revision").fetchSemanticsNode().config[SemanticsProperties.Text].single().text == revision.toString()
+            } catch (_: AssertionError) { false }
+        }
+    }
+
+    private class OwnedLocationWindows(private val run: String, private val ownerPackage: String) : Application.ActivityLifecycleCallbacks {
+        private val owned = mutableListOf<Activity>()
+        private var managerTask: Int? = null
+        private var expectingOpen = false
+        val opened = AtomicReference<CloudySshFilesActivity?>()
+        fun armOpen(manager: CloudyFilesLocationsActivity) {
+            check(manager in owned)
+            managerTask = manager.taskId
+            expectingOpen = true
+        }
+        fun finishOwned() { owned.asReversed().forEach { if (!it.isDestroyed && !it.isFinishing) it.finish() } }
+        fun allDestroyed(): Boolean = owned.all { it.isDestroyed }
+        fun dispose() { owned.clear(); opened.set(null) }
+        override fun onActivityCreated(activity: Activity, state: Bundle?) {
+            if (activity.packageName != ownerPackage || activity !is CloudySshFilesActivity && activity !is CloudyFilesLocationsActivity) return
+            if (activity.intent.getStringExtra(OWNER) == run) owned.add(activity)
+            else if (expectingOpen && activity is CloudySshFilesActivity && activity.taskId == managerTask) {
+                check(opened.get() == null)
+                expectingOpen = false
+                owned.add(activity)
+                opened.set(activity)
+            }
+        }
+        override fun onActivityStarted(activity: Activity) = Unit
+        override fun onActivityResumed(activity: Activity) = Unit
+        override fun onActivityPaused(activity: Activity) = Unit
+        override fun onActivityStopped(activity: Activity) = Unit
+        override fun onActivityDestroyed(activity: Activity) = Unit
+        override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) = Unit
+        companion object { const val OWNER = "cloudy.testing.owned.files.window" }
     }
 
     private fun input(fixture: SshFilesFixture) {
@@ -458,11 +749,14 @@ abstract class SshFilesActivityContract(private val expectedOwner: WindowOwner) 
         }
         val saved = AtomicInteger()
         val clean = AtomicBoolean(true)
+        @Suppress("DEPRECATION")
         override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
             if (activity !is CloudySshFilesActivity) return
             try {
                 val record = outState.getBundle("io.github.baitian6641.cloudy.ssh-files.v1")
-                if (record == null || record.keySet() != setOf("schema", "owner", "pending")) clean.set(false)
+                if (record == null || record.keySet() != setOf("schema", "owner", "pending", "registrationUncertain") ||
+                    record.get("schema") != 2 || record.get("owner") != activity.packageName.substringAfterLast('.') ||
+                    record.get("pending") !is Boolean || record.get("registrationUncertain") !is Boolean) clean.set(false)
                 val parcel = Parcel.obtain()
                 val bytes = try { parcel.writeBundle(outState); parcel.marshall() } finally { parcel.recycle() }
                 try { if (bytes.size > 1_048_576 || needles.any { contains(bytes, it) }) clean.set(false) }

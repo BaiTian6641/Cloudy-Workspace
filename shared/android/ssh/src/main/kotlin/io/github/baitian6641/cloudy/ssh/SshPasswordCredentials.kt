@@ -4,6 +4,9 @@ package io.github.baitian6641.cloudy.ssh
 class SshPasswordCredentials private constructor(private var material: Material?) : AutoCloseable {
     val isClosed: Boolean @Synchronized get() = material == null
 
+    /** Exact account metadata from the still-owned copy; never a password or authentication proof. */
+    @Synchronized fun accountName(): String? = material?.username?.concatToString()
+
     /** Transfers owned arrays once; the engine must close the returned material on every path. */
     @Synchronized internal fun take(): Material? = material.also { material = null }
     @Synchronized override fun close() { material?.close(); material = null }

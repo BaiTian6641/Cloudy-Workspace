@@ -13,6 +13,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import io.github.baitian6641.cloudy.domain.ConnectionProfile
 import io.github.baitian6641.cloudy.domain.ConnectionProfileDraft
 import io.github.baitian6641.cloudy.domain.ConnectionProtocol
+import io.github.baitian6641.cloudy.domain.SshObservationProfile
 import io.github.baitian6641.cloudy.domain.SshHostKeyIdentity
 import io.github.baitian6641.cloudy.domain.SshPeerIdentity
 import io.github.baitian6641.cloudy.domain.SshTrustChallenge
@@ -72,6 +73,8 @@ internal class SshFilesFixture private constructor(
         .put("trustMetadata", JSONArray(trustFixture.baselineMetadata())).put("phases", journal)
     private var ownedProfile: ConnectionProfile? = null
     val profileId: String get() = checkNotNull(ownedProfile).id
+    val observedProfile: SshObservationProfile get() = SshObservationProfile.create(profileBaseline.generation, checkNotNull(expectedProfile))
+    val acceptedPin: SshTrustSnapshot get() = plannedPin
     private var expectedProfile: ConnectionProfile? = null
     private var mutationUncertain = false
 
@@ -234,7 +237,7 @@ internal class SshFilesFixture private constructor(
             check(context.packageName == "io.github.baitian6641.cloudy.${owner.wireId}" &&
                 context.applicationInfo.uid == Process.myUid() && !context.isDeviceProtectedStorage)
             check(Regex("[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}").matches(run))
-            check(case in setOf("basic", "recreate", "hide", "focus", "profile", "hold"))
+            check(case in setOf("basic", "recreate", "hide", "focus", "profile", "hold", "register", "registration-focus", "registered-location"))
             val directory = File(context.noBackupFilesDir, "ssh-files-fixture")
             val info = Os.lstat(directory.path)
             check(!Files.isSymbolicLink(directory.toPath()) && OsConstants.S_ISDIR(info.st_mode) &&

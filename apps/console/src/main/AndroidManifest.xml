@@ -42,5 +42,8 @@
         <activity android:name="io.github.baitian6641.cloudy.platform.CloudySshFilesActivity"
             android:exported="false" android:resizeableActivity="true"
             android:windowSoftInputMode="adjustResize" />
+        <activity android:name="io.github.baitian6641.cloudy.platform.CloudyFilesLocationsActivity"
+            android:exported="false" android:resizeableActivity="true"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 </manifest>

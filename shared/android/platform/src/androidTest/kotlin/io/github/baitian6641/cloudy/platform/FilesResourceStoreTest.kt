@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import io.github.baitian6641.cloudy.ssh.SshPasswordCredentials
 import io.github.baitian6641.cloudy.domain.ConnectionProfileDraft
 import io.github.baitian6641.cloudy.domain.ConnectionProtocol
 import io.github.baitian6641.cloudy.domain.FilesResourceDraft
@@ -44,6 +45,7 @@ class FilesResourceStoreTest {
     private val application = ApplicationProvider.getApplicationContext<Context>()
     private val root = File(application.noBackupFilesDir, "files-resources-test-${UUID.randomUUID()}").apply { check(mkdir()) }
     private val workersSettled = AtomicBoolean(true)
+    private val authHandles = mutableListOf<SshAuthenticationHandle>()
     private val owner = WindowOwner.DESKTOP
     private val packageName = "io.github.baitian6641.cloudy.desktop"
     private val profiles = ConnectionProfiles(root, owner, packageName, { false })
@@ -106,6 +108,8 @@ class FilesResourceStoreTest {
     }
 
     @After fun cleanup() {
+        authHandles.forEach { it.close() }
+        check(SshAuthenticationRegistry.attempts.none { it.root == root.absoluteFile })
         if (!workersSettled.get()) {
             InstrumentationRegistry.getInstrumentation().sendStatus(0, Bundle().apply {
                 putString("cloudyFilesResourceFixtureCleanup", "UNCERTAIN")
@@ -358,4 +362,43 @@ class FilesResourceStoreTest {
         assertTrue(rejected)
         assertEquals(1, success(store().load()).registrations.size)
     }
+
+    private fun prepareForResource(row: FilesResourceRegistration, registered: Boolean): SshAuthenticationHandle {
+        val coordinator = SshAuthenticationCoordinator(root, owner, profiles, trust)
+        val credentials = SshPasswordCredentials.create(row.accountName.toCharArray(), "fixture-password".toCharArray())
+        val prepared = if (registered) coordinator.beginRegistered(row, credentials) else coordinator.begin(row.profile, credentials)
+        return (prepared as SshAuthenticationPreparation.Ready).handle.also { authHandles.add(it) }
+    }
+
+    @Test fun uncertainShareAndRevokeStillInvalidateExactResourceOwnersBeforeAttempt() {
+        val row = create()
+        val ordinary = prepareForResource(row, false)
+        val privateOwner = prepareForResource(row, true)
+        sql("CREATE TRIGGER refuse_resource_update BEFORE UPDATE ON resources BEGIN SELECT RAISE(ABORT,'TEST_ONLY'); END")
+        denied(FilesResourceCode.COMPLETION_UNKNOWN, store().share(row.version()))
+        assertTrue(privateOwner.cancellation.isCancelled)
+        assertFalse(ordinary.cancellation.isCancelled)
+        assertEquals(row, success(store().resolve(row.reference, FilesResourceState.PRIVATE)))
+        sql("DROP TRIGGER refuse_resource_update")
+        val shared = success(store().share(row.version()))
+        val sharedOwner = prepareForResource(shared, true)
+        sql("CREATE TRIGGER refuse_resource_update BEFORE UPDATE ON resources BEGIN SELECT RAISE(ABORT,'TEST_ONLY'); END")
+        denied(FilesResourceCode.COMPLETION_UNKNOWN, store().revoke(shared.version()))
+        assertTrue(sharedOwner.cancellation.isCancelled)
+        assertFalse(ordinary.cancellation.isCancelled)
+        assertEquals(shared, success(store().resolve(shared.reference)))
+        checkNotNull(ordinary.admit(row.profile.peer, ordinary.expectedKey)).close()
+    }
+
+    @Test fun deniedResourceCasNeverInvalidatesAnUnchangedPreparedOwner() {
+        val row = create()
+        val handle = prepareForResource(row, true)
+        denied(FilesResourceCode.CONFLICT, store().share(FilesResourceVersion.create(row.generation,
+            row.reference.resourceId, row.revision + 1)))
+        denied(FilesResourceCode.STALE_GENERATION, store().revoke(FilesResourceVersion.create(UUID.randomUUID().toString(),
+            row.reference.resourceId, row.revision)))
+        assertFalse(handle.cancellation.isCancelled)
+        checkNotNull(handle.admit(row.profile.peer, handle.expectedKey)).close()
+    }
+
 }

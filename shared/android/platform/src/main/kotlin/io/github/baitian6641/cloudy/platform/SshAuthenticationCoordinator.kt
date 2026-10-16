@@ -18,6 +18,7 @@ import java.util.concurrent.locks.ReentrantLock
 
 enum class SshAuthenticationCode {
     WRONG_THREAD, WRONG_OWNER, BUSY, STORE_UNAVAILABLE, PROFILE_CHANGED, TRUST_REQUIRED, CAPACITY, CREDENTIALS_UNAVAILABLE,
+    ACCOUNT_MISMATCH, RESOURCE_CHANGED,
 }
 
 sealed interface SshAuthenticationPreparation {
@@ -45,6 +46,14 @@ internal object SshAuthenticationRegistry {
         attempts.filter { it.root == root.absoluteFile && it.profile.profile.owner == owner && it.profile.profile.id == id }
             .forEach { it.invalidate() }
     }
+    fun invalidateResource(root: File, owner: WindowOwner, generation: String, resourceId: String) {
+        check(lock.isHeldByCurrentThread)
+        attempts.filter { handle ->
+            val binding = handle.resourceBinding
+            handle.root == root.absoluteFile && binding != null && binding.owner == owner &&
+                binding.generation == generation && binding.reference.resourceId == resourceId
+        }.forEach { it.invalidate() }
+    }
     fun invalidatePeer(root: File, owner: WindowOwner, peer: SshPeerIdentity) {
         check(lock.isHeldByCurrentThread)
         attempts.filter { it.root == root.absoluteFile && it.profile.profile.owner == owner && it.profile.peer == peer }
@@ -58,6 +67,7 @@ class SshAuthenticationCoordinator private constructor(
     private val owner: WindowOwner?,
     private val profiles: ConnectionProfiles,
     private val trust: SshHostTrustStore,
+    private val resources: FilesResourceStore,
     private val validProcess: () -> Boolean,
     private val onMain: () -> Boolean,
     private val clock: () -> Long,
@@ -67,7 +77,7 @@ class SshAuthenticationCoordinator private constructor(
 
     private constructor(application: Context, suppliedDeviceProtected: Boolean) : this(
         { application.noBackupFilesDir }, owner(application.packageName),
-        ConnectionProfiles(application), SshHostTrustStore(application),
+        ConnectionProfiles(application), SshHostTrustStore(application), FilesResourceStore(application),
         { !suppliedDeviceProtected && !application.isDeviceProtectedStorage &&
             application.applicationInfo.uid == Process.myUid() && Application.getProcessName() == application.packageName },
         { Looper.myLooper() == Looper.getMainLooper() }, SystemClock::elapsedRealtime, SshAuthenticationRegistry.expiry,
@@ -76,20 +86,34 @@ class SshAuthenticationCoordinator private constructor(
     internal constructor(root: File, owner: WindowOwner, profiles: ConnectionProfiles, trust: SshHostTrustStore,
         onMainThread: () -> Boolean = { false },
         expiryScheduler: ScheduledThreadPoolExecutor = SshAuthenticationRegistry.expiry,
+        resources: FilesResourceStore = FilesResourceStore(root, owner, packageFor(owner), onMainThread, profiles, trust),
         clock: () -> Long = SystemClock::elapsedRealtime) : this(
-        { root }, owner, profiles, trust, { true }, onMainThread, clock, expiryScheduler,
+        { root }, owner, profiles, trust, resources, { true }, onMainThread, clock, expiryScheduler,
     )
 
     /** Ownership transfers on every outcome, including validation and capacity failures. */
-    fun begin(profile: SshObservationProfile, credentials: SshPasswordCredentials): SshAuthenticationPreparation {
+    fun begin(profile: SshObservationProfile, credentials: SshPasswordCredentials): SshAuthenticationPreparation =
+        beginBound(profile, credentials, null)
+
+    /** Caller metadata is never sufficient: resolve the exact current registration before preparing. */
+    internal fun beginRegistered(registration: FilesResourceRegistration,
+                                 credentials: SshPasswordCredentials): SshAuthenticationPreparation =
+        beginBound(registration.profile, credentials, registration)
+
+    private fun beginBound(profile: SshObservationProfile, credentials: SshPasswordCredentials,
+                           registration: FilesResourceRegistration?): SshAuthenticationPreparation {
         fun failed(code: SshAuthenticationCode): SshAuthenticationPreparation {
             credentials.close()
             return SshAuthenticationPreparation.Failed(code)
         }
-        try {
+        val accountName = try {
             if (credentials.isClosed) return failed(SshAuthenticationCode.CREDENTIALS_UNAVAILABLE)
             if (onMain()) return failed(SshAuthenticationCode.WRONG_THREAD)
-            if (!validProcess() || owner == null || profile.profile.owner != owner) return failed(SshAuthenticationCode.WRONG_OWNER)
+            if (!validProcess() || owner == null || profile.profile.owner != owner ||
+                (registration != null && registration.owner != owner)) return failed(SshAuthenticationCode.WRONG_OWNER)
+            val account = credentials.accountName() ?: return failed(SshAuthenticationCode.CREDENTIALS_UNAVAILABLE)
+            if (registration != null && registration.accountName != account) return failed(SshAuthenticationCode.ACCOUNT_MISMATCH)
+            account
         } catch (_: Exception) { return failed(SshAuthenticationCode.STORE_UNAVAILABLE) }
         if (!SshAuthenticationRegistry.lock.tryLock()) return failed(SshAuthenticationCode.BUSY)
         try {
@@ -107,10 +131,14 @@ class SshAuthenticationCoordinator private constructor(
                 ?: return failed(SshAuthenticationCode.STORE_UNAVAILABLE)
             val snapshot = lookup.current ?: return failed(SshAuthenticationCode.TRUST_REQUIRED)
             if (snapshot.status !is SshTrustStatus.Accepted) return failed(SshAuthenticationCode.TRUST_REQUIRED)
+            if (registration != null) resourceFailure(resources, registration)?.let { return failed(it) }
+            // A caller retaining the holder may close it while storage is read. Do not prepare
+            // an unavailable holder or substitute an independently supplied account string.
+            if (credentials.accountName() != accountName) return failed(SshAuthenticationCode.CREDENTIALS_UNAVAILABLE)
             val now = clock()
             if (now < 0 || now > Long.MAX_VALUE - LIFETIME_MILLIS) return failed(SshAuthenticationCode.STORE_UNAVAILABLE)
             val handle = SshAuthenticationHandle(root().absoluteFile, profile, snapshot, now + LIFETIME_MILLIS,
-                credentials, profiles, trust, onMain, clock, expiryScheduler)
+                credentials, profiles, trust, onMain, clock, expiryScheduler, accountName, registration, resources)
             SshAuthenticationRegistry.attempts.add(handle)
             try { handle.armExpiry() } catch (_: Exception) {
                 handle.close()
@@ -124,6 +152,7 @@ class SshAuthenticationCoordinator private constructor(
 
     companion object {
         private const val LIFETIME_MILLIS = 45_000L
+        private fun packageFor(owner: WindowOwner): String = "io.github.baitian6641.cloudy.${owner.wireId}"
         private fun owner(packageName: String) = WindowOwner.entries.singleOrNull {
             packageName == when (it) {
                 WindowOwner.CONSOLE -> "io.github.baitian6641.cloudy.console"
@@ -144,7 +173,11 @@ class SshAuthenticationHandle internal constructor(
     private val onMain: () -> Boolean,
     private val clock: () -> Long,
     private val expiryScheduler: ScheduledThreadPoolExecutor,
+    val accountName: String,
+    internal val resourceBinding: FilesResourceRegistration?,
+    private val resources: FilesResourceStore,
 ) : AutoCloseable {
+    internal val acceptedTrust: SshTrustSnapshot get() = expected
     val expectedKey: SshHostKeyIdentity = (expected.status as SshTrustStatus.Accepted).key
     val cancellation = SshObservationCancellation()
     private val ownership = Any()
@@ -182,7 +215,7 @@ class SshAuthenticationHandle internal constructor(
             val catalog = (profiles.load() as? ConnectionProfilesResult.Success)?.value
             val current = catalog?.profiles?.singleOrNull { it.id == profile.profile.id }
             val pin = (trust.lookup(peer) as? SshTrustStoreResult.Success)?.value?.current
-            if (catalog == null || current == null || SshObservationProfile.create(catalog.generation, current) != profile || pin != expected) {
+            if (catalog == null || current == null || SshObservationProfile.create(catalog.generation, current) != profile || pin != expected || !resourceCurrent()) {
                 invalidate(); return null
             }
             return cancellation.tryIfActive {
@@ -190,7 +223,7 @@ class SshAuthenticationHandle internal constructor(
                 val gateTime = clock()
                 if (gateTime < 0 || gateTime >= expiresAtMillis) null
                 else synchronized(ownership) {
-                    if (closed || pending?.isClosed != false) null
+                    if (closed || pending?.accountName() != accountName) null
                     else pending.also { pending = null; phase = Phase.ADMITTED }
                 }
             }.also { if (it == null) invalidate() }
@@ -218,7 +251,7 @@ class SshAuthenticationHandle internal constructor(
             val current = catalog?.profiles?.singleOrNull { it.id == profile.profile.id }
             val pin = (trust.lookup(profile.peer) as? SshTrustStoreResult.Success)?.value?.current
             if (catalog == null || current == null || current.protocol != ConnectionProtocol.SSH ||
-                SshObservationProfile.create(catalog.generation, current) != profile || pin != expected) {
+                SshObservationProfile.create(catalog.generation, current) != profile || pin != expected || !resourceCurrent()) {
                 invalidate(); return false
             }
             val promoted = cancellation.tryIfActive {
@@ -242,6 +275,19 @@ class SshAuthenticationHandle internal constructor(
             invalidate(); return false
         } finally { SshAuthenticationRegistry.lock.unlock() }
     }
+
+    /** Short controller gate only. Caller rechecks stores while holding coordination first. */
+    internal fun matchesEstablished(proof: SshAuthenticatedOwnership): Boolean {
+        if (onMain() || !SshAuthenticationRegistry.lock.isHeldByCurrentThread) return false
+        return cancellation.tryIfActive {
+            synchronized(ownership) {
+                !closed && phase == Phase.ESTABLISHED && established === proof && !proof.isRetired &&
+                    proof.cancellation === cancellation && proof.peer == profile.peer && proof.key == expectedKey
+            }
+        } == true
+    }
+
+    private fun resourceCurrent(): Boolean = resourceBinding?.let { resourceFailure(resources, it) == null } ?: true
 
     /** Exact object identity plus the engine's monotonic retirement flag are both required.
      * This path needs no SQLite/coordination lock and cannot release a different transport. */
@@ -303,3 +349,14 @@ class SshAuthenticationHandle internal constructor(
     }
     override fun toString() = "SshAuthenticationHandle(redacted)"
 }
+
+/** Called only under coordination; resolution performs current profile/trust validation itself. */
+private fun resourceFailure(store: FilesResourceStore, expected: FilesResourceRegistration): SshAuthenticationCode? =
+    when (val current = store.resolve(expected.reference, expected.state)) {
+        is FilesResourceResult.Success -> if (current.value == expected) null else SshAuthenticationCode.RESOURCE_CHANGED
+        is FilesResourceResult.Failure -> when (current.code) {
+            FilesResourceCode.BUSY -> SshAuthenticationCode.BUSY
+            FilesResourceCode.STORE_UNAVAILABLE, FilesResourceCode.COMPLETION_UNKNOWN -> SshAuthenticationCode.STORE_UNAVAILABLE
+            else -> SshAuthenticationCode.RESOURCE_CHANGED
+        }
+    }

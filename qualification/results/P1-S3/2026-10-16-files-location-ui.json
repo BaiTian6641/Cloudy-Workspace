@@ -1,0 +1,678 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "stage": "P1-S3",
+  "scope": "Actual owning-app listing registration, native manager and fresh account-bound destination; no protected cross-app IPC acceptance",
+  "baseCommit": "be321e3204d122fb39244e35fbb6d05ceae068a4",
+  "sourceChangesUncommitted": true,
+  "buildReceipt": "qualification/results/P1-S3/2026-10-16-files-location-ui-build.json",
+  "buildReceiptSha256": "e44ce265af232c75ca89ff7abb4f0f49763568110323743307bf3962397548a0",
+  "frozenBuildResultSha256": "e44ce265af232c75ca89ff7abb4f0f49763568110323743307bf3962397548a0",
+  "sourceCount": 206,
+  "lintFindings": {
+    "desktop-lint-results-debug.xml": 0,
+    "console-lint-results-debug.xml": 0,
+    "design-system-lint-results-debug.xml": 0,
+    "platform-lint-results-debug.xml": 0
+  },
+  "jvmReports": {
+    "tests": 120,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 20,
+    "passed": 100,
+    "executionScope": "Build02 JVM tasks UP-TO-DATE. Build01 reran SSH/platform/design tasks; domain reports carried forward. Not 100 newly executed build02 cases."
+  },
+  "device": {
+    "model": "HP Googlebook 14",
+    "release": "17",
+    "api": "37",
+    "build": "CL3B.260622.276.R2",
+    "incremental": "16560795",
+    "abi": "arm64-v8a"
+  },
+  "platform": {
+    "actualPassed": 47,
+    "skipped": 0,
+    "failed": 0,
+    "perClass": {
+      "SshAuthenticationCoordinatorTest": {
+        "passed": 21,
+        "skipped": 0,
+        "failed": 0
+      },
+      "FilesResourceStoreTest": {
+        "passed": 22,
+        "skipped": 0,
+        "failed": 0
+      },
+      "SshFilesRegistrationTest": {
+        "passed": 4,
+        "skipped": 0,
+        "failed": 0
+      }
+    },
+    "completedMethods": [
+      [
+        "io.github.baitian6641.cloudy.platform.SshAuthenticationCoordinatorTest",
+        "simulatedEstablishedResourceOwnerRetainsCapacityUntilExactProofRetires"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.SshAuthenticationCoordinatorTest",
+        "unrelatedProfileAndPeerMutationDoesNotCancel"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.SshAuthenticationCoordinatorTest",
+        "gateTransfersOnceAndLaterRevokeSignalsTransportWithoutRetractingOwnership"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.SshAuthenticationCoordinatorTest",
+        "editAndRevokeWinningBeforeGatePreventAnyTransfer"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.SshAuthenticationCoordinatorTest",
+        "simulatedProofPromotionRechecksResourceAfterPasswordAdmission"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.SshAuthenticationCoordinatorTest",
+        "accidentalActualMainThreadAdmissionDoesNotWaitForCoordinationOrSQLite"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.SshAuthenticationCoordinatorTest",
+        "registryCapacityIsBoundedAndCloseReturnsCapacity"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.SshAuthenticationCoordinatorTest",
+        "registeredPreparationResolvesExactCurrentStateRevisionAndFullMetadata"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.SshAuthenticationCoordinatorTest",
+        "closedCredentialsAndFailedExpirySchedulingNeverRetainRegistryOrSecrets"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.SshAuthenticationCoordinatorTest",
+        "sameHolderCapturesExactAccountAndAcceptedTrustForOrdinaryPreparation"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.SshAuthenticationCoordinatorTest",
+        "productionConfigurationRejectsAnotherProcessNameBeforeStorageIo"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.SshAuthenticationCoordinatorTest",
+        "resourceShareAndRevokeCancelOnlyTheirExactRegisteredOwners"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.SshAuthenticationCoordinatorTest",
+        "wrongObservedKeyAndExactDeadlineDenyAndCancel"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.SshAuthenticationCoordinatorTest",
+        "staleGenerationProfileAndUnacceptedTrustFailPreparation"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.SshAuthenticationCoordinatorTest",
+        "cancellationWinningSignalMonitorPreventsGateAndConcurrentRaceTransfersAtMostOnce"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.SshAuthenticationCoordinatorTest",
+        "changedTrustStoreGenerationCannotReuseSameKeyAndRevisionAuthority"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.SshAuthenticationCoordinatorTest",
+        "registeredWrongAccountAndClosedHolderAreDisposedBeforeAnyAdmission"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.SshAuthenticationCoordinatorTest",
+        "sameKeyReenrollmentStillInvalidatesOriginalRevisionAuthority"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.SshAuthenticationCoordinatorTest",
+        "expiredEntriesAreDisposedBeforeCapacityCheckEvenIfTimerHasNotRun"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.SshAuthenticationCoordinatorTest",
+        "resourceIdentityInvalidationDoesNotCrossRootOwnerGenerationOrResource"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.SshAuthenticationCoordinatorTest",
+        "resourceRereadRejectsUnsignalledRevisionChangeBeforePasswordGate"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.FilesResourceStoreTest",
+        "missingEstablishedDatabaseAndMarkerAreNeverRecreated"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.FilesResourceStoreTest",
+        "exactFourIdsAreRequiredAndNoNamespaceIdsAreReused"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.FilesResourceStoreTest",
+        "interruptedBootstrapAndDifferentMarkerNeverResetTheStore"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.FilesResourceStoreTest",
+        "uncertainShareAndRevokeStillInvalidateExactResourceOwnersBeforeAttempt"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.FilesResourceStoreTest",
+        "actualRejectedInsertIsCompletionUnknownAndDoesNotAutoRetry"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.FilesResourceStoreTest",
+        "actualProfileDeletionAndProtocolChangeDoNotRemainBindings"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.FilesResourceStoreTest",
+        "tombstonesCountTowardCapacityAndNoUpsertOccurs"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.FilesResourceStoreTest",
+        "noncanonicalRowsAndWrongTypesAreNotAccepted"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.FilesResourceStoreTest",
+        "corruptBytesArePreservedAndNeverAutoDeleted"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.FilesResourceStoreTest",
+        "actualProfileEditBlocksCreateShareResolveButNotRevocation"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.FilesResourceStoreTest",
+        "newerSchemaAndWrongMetadataFailClosed"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.FilesResourceStoreTest",
+        "staleGenerationAndStaleRevisionCannotMutateOrResurrect"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.FilesResourceStoreTest",
+        "permanentFileAndCoordinationLocksFailBusyWithoutMutation"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.FilesResourceStoreTest",
+        "overflowDoesNotWriteOrWrap"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.FilesResourceStoreTest",
+        "actualTrustReplacementAndRevocationInvalidateExactRevision"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.FilesResourceStoreTest",
+        "deniedResourceCasNeverInvalidatesAnUnchangedPreparedOwner"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.FilesResourceStoreTest",
+        "missingPermanentAnchorDeniesWithoutReplacement"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.FilesResourceStoreTest",
+        "privateCreationShareResolveAndRetainedRevocationSurviveReopen"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.FilesResourceStoreTest",
+        "competingRealConnectionsCannotBothAdvanceSameVersion"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.FilesResourceStoreTest",
+        "mainThreadDeviceProtectedOwnerAndProcessRejectBeforeStoreCreation"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.FilesResourceStoreTest",
+        "sameKeyReacceptedAtNewTrustRevisionDoesNotReviveOldRegistration"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.FilesResourceStoreTest",
+        "catalogAndResultRemainRedactedAndCatalogCannotBeMutated"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.SshFilesRegistrationTest",
+        "staleWindowCannotRestoreForegroundOrStopTheCurrentOwner"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.SshFilesRegistrationTest",
+        "restoredUncertaintyIsNotAWriteAndSurvivesOwnerReplacement"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.SshFilesRegistrationTest",
+        "privateTicketsDenyMainThreadAndUnsupportedOwningPackageBeforeStorage"
+      ],
+      [
+        "io.github.baitian6641.cloudy.platform.SshFilesRegistrationTest",
+        "constructedMetadataCannotCreateAListingOpportunityOrRegistration"
+      ]
+    ],
+    "separateResourceCleanupReceipts": 22,
+    "simulatedProofPolicyMethods": [
+      "simulatedProofPromotionRechecksResourceAfterPasswordAdmission",
+      "simulatedEstablishedResourceOwnerRetainsCapacityUntilExactProofRetires"
+    ],
+    "scope": "Actual Android execution of policy/SQLite tests; no network or authenticated-engine proof",
+    "instrumentationSeconds": 2.567,
+    "privateEvidencePath": "qualification/results/private/foundation/2026-10-16-files-location-platform-device-01",
+    "privateResultSha256": "9755ae215b08b90d081171378eb396cb207d1f60c3bd18c6e4d9734079baffd3",
+    "runnerSha256": "c1c3244b38b03f2111d2ef8e25ca99dad6fe3617f1f8c6a26a4b8b9a0c2b6018",
+    "preservationPassed": true,
+    "ownedFixtureRootsAbsent": true,
+    "testPackageUninstalled": true,
+    "sourceArtifactBindingsUnchanged": true
+  },
+  "product": {
+    "versionName": "0.1.11",
+    "versionCode": 12,
+    "installedAndStopped": true,
+    "actualPassed": 6,
+    "separateDefaultSkipped": 18,
+    "privateEvidencePath": "qualification/results/private/foundation/2026-10-16-files-location-ui-01",
+    "privateResultSha256": "4e77abc8b3745740b16d5e8b719db120c2504164fa7f96defac942294182bb1f",
+    "runnerSha256": "88d39f16535bbdb2895921a5fb1ad3849b49efa4dbacfdcd291a3a57745f5513",
+    "cases": [
+      {
+        "app": "console",
+        "case": "register",
+        "method": "realListedDirectoryRegistersPrivateAndOrdinarySessionSurvives",
+        "passed": true,
+        "instrumentation": {
+          "actualPassed": 1,
+          "defaultSkipped": 0,
+          "failed": 0,
+          "uniquePassed": 1,
+          "uniqueSkipped": 0,
+          "runnerFinished": true,
+          "passed": true
+        },
+        "caseOutcome": "PASSED",
+        "receiptSha256": "134e449ba0ed02e24d840a051c23858ff4ad556a8b4332e6b20eab65e18414b2",
+        "resourceReceiptSha256": "2abcdace4e505af0553ab55193827ff26e5aa0708ddc775873ac95c29633f0ec",
+        "exactBaselineRestored": true,
+        "exactResourceBaselineRestored": true,
+        "actualPeerClosedBeforeParentCleanup": true,
+        "hostCaseEvidencePassed": true,
+        "listenerClosed": true,
+        "syntheticBytesUnchanged": true,
+        "ownedPrivateFilesRemovedAfterCollection": true,
+        "fixtureSettlementProved": true,
+        "hostCounts": {
+          "session_created": 2,
+          "server_initial_kexinit_written": 2,
+          "client_initial_kexinit_negotiation_start": 2,
+          "key_established": 2,
+          "auth_request": 2,
+          "request.basic.password": 2,
+          "passwordChange.false": 2,
+          "auth_accepted": 2,
+          "session_authenticated": 2,
+          "channel_open": 5,
+          "sftp_init_request": 5,
+          "sftp_initialized": 5,
+          "sftp_opendir_request": 4,
+          "sftp_readdir_request": 8,
+          "sftp_close_request": 5,
+          "sftp_destroying": 5,
+          "sftp_lstat_request": 1,
+          "sftp_open_request": 1,
+          "sftp_read_request": 2,
+          "read_completed": 2,
+          "session_closed": 2
+        },
+        "hostWorkersRetired": true,
+        "hostServerClosed": true,
+        "hostExitCode": 0
+      },
+      {
+        "app": "console",
+        "case": "registration-focus",
+        "method": "registrationFocusLossCancelsFrozenProposalWithoutMutation",
+        "passed": true,
+        "instrumentation": {
+          "actualPassed": 1,
+          "defaultSkipped": 0,
+          "failed": 0,
+          "uniquePassed": 1,
+          "uniqueSkipped": 0,
+          "runnerFinished": true,
+          "passed": true
+        },
+        "caseOutcome": "PASSED",
+        "receiptSha256": "226c06a104706e6ef944fa2a3ab2b0fa6cc3d92107415d031a91383d4b1fcdda",
+        "resourceReceiptSha256": "b74a1619f9f7c4713a7b0d95f5714149590f3ee157fd0fad9f7c83681f43eb73",
+        "exactBaselineRestored": true,
+        "exactResourceBaselineRestored": true,
+        "actualPeerClosedBeforeParentCleanup": true,
+        "hostCaseEvidencePassed": true,
+        "listenerClosed": true,
+        "syntheticBytesUnchanged": true,
+        "ownedPrivateFilesRemovedAfterCollection": true,
+        "fixtureSettlementProved": true,
+        "hostCounts": {
+          "session_created": 1,
+          "server_initial_kexinit_written": 1,
+          "client_initial_kexinit_negotiation_start": 1,
+          "key_established": 1,
+          "auth_request": 1,
+          "request.basic.password": 1,
+          "passwordChange.false": 1,
+          "auth_accepted": 1,
+          "session_authenticated": 1,
+          "channel_open": 3,
+          "sftp_init_request": 3,
+          "sftp_initialized": 3,
+          "sftp_opendir_request": 3,
+          "sftp_readdir_request": 6,
+          "sftp_close_request": 3,
+          "sftp_destroying": 3,
+          "session_closed": 1
+        },
+        "hostWorkersRetired": true,
+        "hostServerClosed": true,
+        "hostExitCode": 0
+      },
+      {
+        "app": "console",
+        "case": "registered-location",
+        "method": "registeredLocationUsesFreshAccountAndInitialDirectoryThenRevocationRetires",
+        "passed": true,
+        "instrumentation": {
+          "actualPassed": 1,
+          "defaultSkipped": 0,
+          "failed": 0,
+          "uniquePassed": 1,
+          "uniqueSkipped": 0,
+          "runnerFinished": true,
+          "passed": true
+        },
+        "caseOutcome": "PASSED",
+        "receiptSha256": "5270d2e6c5af714eb2f5f595d756a07f81996688bbb8c8da362849ffe9276d8a",
+        "resourceReceiptSha256": "0b35f889218aec3d5fbd7deb4b323ca3b2d424888996ca7787b7f28e512f67bf",
+        "exactBaselineRestored": true,
+        "exactResourceBaselineRestored": true,
+        "actualPeerClosedBeforeParentCleanup": true,
+        "hostCaseEvidencePassed": true,
+        "listenerClosed": true,
+        "syntheticBytesUnchanged": true,
+        "ownedPrivateFilesRemovedAfterCollection": true,
+        "fixtureSettlementProved": true,
+        "hostCounts": {
+          "session_created": 2,
+          "server_initial_kexinit_written": 2,
+          "client_initial_kexinit_negotiation_start": 2,
+          "key_established": 2,
+          "auth_request": 2,
+          "request.basic.password": 2,
+          "passwordChange.false": 2,
+          "auth_accepted": 2,
+          "session_authenticated": 2,
+          "channel_open": 4,
+          "sftp_init_request": 4,
+          "sftp_initialized": 4,
+          "sftp_opendir_request": 3,
+          "sftp_readdir_request": 6,
+          "sftp_close_request": 4,
+          "sftp_destroying": 4,
+          "session_closed": 2,
+          "sftp_lstat_request": 1,
+          "sftp_open_request": 1,
+          "sftp_read_request": 2,
+          "read_completed": 2
+        },
+        "hostWorkersRetired": true,
+        "hostServerClosed": true,
+        "hostExitCode": 0
+      },
+      {
+        "app": "desktop",
+        "case": "register",
+        "method": "realListedDirectoryRegistersPrivateAndOrdinarySessionSurvives",
+        "passed": true,
+        "instrumentation": {
+          "actualPassed": 1,
+          "defaultSkipped": 0,
+          "failed": 0,
+          "uniquePassed": 1,
+          "uniqueSkipped": 0,
+          "runnerFinished": true,
+          "passed": true
+        },
+        "caseOutcome": "PASSED",
+        "receiptSha256": "7ebbeb405be03f56ed62f461703686a1feabd6d3eddcab258f2455841d07ce2c",
+        "resourceReceiptSha256": "b6e9ca20735145f57a8c69e70bd16e78a47877773fa085180e69ec9faf055d6e",
+        "exactBaselineRestored": true,
+        "exactResourceBaselineRestored": true,
+        "actualPeerClosedBeforeParentCleanup": true,
+        "hostCaseEvidencePassed": true,
+        "listenerClosed": true,
+        "syntheticBytesUnchanged": true,
+        "ownedPrivateFilesRemovedAfterCollection": true,
+        "fixtureSettlementProved": true,
+        "hostCounts": {
+          "session_created": 2,
+          "server_initial_kexinit_written": 2,
+          "client_initial_kexinit_negotiation_start": 2,
+          "key_established": 2,
+          "auth_request": 2,
+          "request.basic.password": 2,
+          "passwordChange.false": 2,
+          "auth_accepted": 2,
+          "session_authenticated": 2,
+          "channel_open": 5,
+          "sftp_init_request": 5,
+          "sftp_initialized": 5,
+          "sftp_opendir_request": 4,
+          "sftp_readdir_request": 8,
+          "sftp_close_request": 5,
+          "sftp_destroying": 5,
+          "sftp_lstat_request": 1,
+          "sftp_open_request": 1,
+          "sftp_read_request": 2,
+          "read_completed": 2,
+          "session_closed": 2
+        },
+        "hostWorkersRetired": true,
+        "hostServerClosed": true,
+        "hostExitCode": 0
+      },
+      {
+        "app": "desktop",
+        "case": "registration-focus",
+        "method": "registrationFocusLossCancelsFrozenProposalWithoutMutation",
+        "passed": true,
+        "instrumentation": {
+          "actualPassed": 1,
+          "defaultSkipped": 0,
+          "failed": 0,
+          "uniquePassed": 1,
+          "uniqueSkipped": 0,
+          "runnerFinished": true,
+          "passed": true
+        },
+        "caseOutcome": "PASSED",
+        "receiptSha256": "2d80b3a4abc8dc06a88ab1e42456f3843c1a1f0784fe9b7a94e3baa94820afe4",
+        "resourceReceiptSha256": "4f36557b146bcc6619bd570cc1c7a2f87662f3f682ff73aed637a12efc9d8b77",
+        "exactBaselineRestored": true,
+        "exactResourceBaselineRestored": true,
+        "actualPeerClosedBeforeParentCleanup": true,
+        "hostCaseEvidencePassed": true,
+        "listenerClosed": true,
+        "syntheticBytesUnchanged": true,
+        "ownedPrivateFilesRemovedAfterCollection": true,
+        "fixtureSettlementProved": true,
+        "hostCounts": {
+          "session_created": 1,
+          "server_initial_kexinit_written": 1,
+          "client_initial_kexinit_negotiation_start": 1,
+          "key_established": 1,
+          "auth_request": 1,
+          "request.basic.password": 1,
+          "passwordChange.false": 1,
+          "auth_accepted": 1,
+          "session_authenticated": 1,
+          "channel_open": 3,
+          "sftp_init_request": 3,
+          "sftp_initialized": 3,
+          "sftp_opendir_request": 3,
+          "sftp_readdir_request": 6,
+          "sftp_close_request": 3,
+          "sftp_destroying": 3,
+          "session_closed": 1
+        },
+        "hostWorkersRetired": true,
+        "hostServerClosed": true,
+        "hostExitCode": 0
+      },
+      {
+        "app": "desktop",
+        "case": "registered-location",
+        "method": "registeredLocationUsesFreshAccountAndInitialDirectoryThenRevocationRetires",
+        "passed": true,
+        "instrumentation": {
+          "actualPassed": 1,
+          "defaultSkipped": 0,
+          "failed": 0,
+          "uniquePassed": 1,
+          "uniqueSkipped": 0,
+          "runnerFinished": true,
+          "passed": true
+        },
+        "caseOutcome": "PASSED",
+        "receiptSha256": "1db85cddca601164eb7a7c97464ecce71a7d446dbbf8d2cb1b972646a957cce4",
+        "resourceReceiptSha256": "70d3ac0fa2d6ee9b39591b973eee6e5228803ae5d8a85a079794871bcbbf4029",
+        "exactBaselineRestored": true,
+        "exactResourceBaselineRestored": true,
+        "actualPeerClosedBeforeParentCleanup": true,
+        "hostCaseEvidencePassed": true,
+        "listenerClosed": true,
+        "syntheticBytesUnchanged": true,
+        "ownedPrivateFilesRemovedAfterCollection": true,
+        "fixtureSettlementProved": true,
+        "hostCounts": {
+          "session_created": 2,
+          "server_initial_kexinit_written": 2,
+          "client_initial_kexinit_negotiation_start": 2,
+          "key_established": 2,
+          "auth_request": 2,
+          "request.basic.password": 2,
+          "passwordChange.false": 2,
+          "auth_accepted": 2,
+          "session_authenticated": 2,
+          "channel_open": 4,
+          "sftp_init_request": 4,
+          "sftp_initialized": 4,
+          "sftp_opendir_request": 3,
+          "sftp_readdir_request": 6,
+          "sftp_close_request": 4,
+          "sftp_destroying": 4,
+          "session_closed": 2,
+          "sftp_lstat_request": 1,
+          "sftp_open_request": 1,
+          "sftp_read_request": 2,
+          "read_completed": 2
+        },
+        "hostWorkersRetired": true,
+        "hostServerClosed": true,
+        "hostExitCode": 0
+      }
+    ],
+    "upgradePreservation": {
+      "bootIdUnchanged": true,
+      "bootCountUnchanged": true,
+      "fontScaleUnchanged": true,
+      "densityUnchanged": true,
+      "nightModeUnchanged": true,
+      "profilesUnchanged": true,
+      "trustUnchanged": true,
+      "vaultReceiptSha256Unchanged": true,
+      "effectivePreferencesUnchanged": true,
+      "preferencesFileExistsUnchanged": true,
+      "resourcesPreservedOrEmptyInitialized": true,
+      "passed": true
+    },
+    "finalPreservation": {
+      "bootIdUnchanged": true,
+      "bootCountUnchanged": true,
+      "fontScaleUnchanged": true,
+      "densityUnchanged": true,
+      "nightModeUnchanged": true,
+      "profilesUnchanged": true,
+      "trustUnchanged": true,
+      "vaultReceiptSha256Unchanged": true,
+      "effectivePreferencesUnchanged": true,
+      "preferencesFileExistsUnchanged": true,
+      "resourcesPreservedOrEmptyInitialized": true,
+      "passed": true
+    },
+    "resourceCatalogOutcome": {
+      "console": {
+        "exactOriginal": false,
+        "initializedEmptyFromAbsence": true,
+        "passed": true
+      },
+      "desktop": {
+        "exactOriginal": false,
+        "initializedEmptyFromAbsence": true,
+        "passed": true
+      }
+    },
+    "installedProductApksMatchBuild": true,
+    "allThreeTestPackagesAbsent": true,
+    "reverseBaselineRestored": true,
+    "sourceAndArtifactBindingsUnchangedAfterCases": true,
+    "cleanupErrors": [],
+    "runnerPassed": true,
+    "authentications": 10,
+    "sftpChannels": 24
+  },
+  "review": {
+    "directCodex": "Disjoint GPT6.1-Sol source/test authors and independent UI/runner/evidence reviewers; leader owns integration and acceptance.",
+    "testRepairs": [
+      "Saved-state observer exact schema2/four-key validation",
+      "Preserve AtomicFile receipt base/bak/new"
+    ],
+    "runnerRepairs": [
+      "Bind final build02",
+      "Retain sanitized failure codes",
+      "Validate complete owned file family before removal and record partial removals"
+    ],
+    "ompCopy": {
+      "accepted": true,
+      "scope": "strings-only copy suggestions with parent edits; no security or runtime qualification",
+      "actualProvider": "zai",
+      "actualModel": "glm-5.3-flash",
+      "toolCalls": 0,
+      "elapsedSeconds": 20.627,
+      "decisions": [
+        "Fresh authentication jargon replaced with explicit password and directory behavior.",
+        "Counterpart jargon removed; kept existing body placeholder and did not add an unsupplied title placeholder.",
+        "Shorter Save this directory as a location label selected.",
+        "Restore wording simplified.",
+        "Parent independently replaced tombstone/retired jargon in revoke explanation."
+      ],
+      "limitations": [
+        "Inputs are the recorded strings snapshot before later parent status/label edits.",
+        "Model mentioned nonexistent ssh_location_private resource; actual scope string retained.",
+        "No build, layout or device evidence follows."
+      ]
+    },
+    "independentEvidence": {
+      "path": ".cache/files-location-ui-01/final-evidence-review.md",
+      "sha256": "28f9dad2958ec8313fbc5892d47528364cc397b6d46353710568e73b894d0228",
+      "outcome": "Scoped acceptance; raw instrumentation/host/SQLite receipts and current source/artifact bindings independently compared."
+    }
+  },
+  "notQualified": [
+    "protected counterpart discovery/submit and signed callers",
+    "actual 30-second candidate expiry",
+    "uncertain registration commit across process recreation",
+    "physical focus/keyboard/IME/accessibility or full native scene",
+    "separate-process resource persistence and power loss",
+    "saved-vault authentication, network hostname/LAN and durable background sessions",
+    "full transfer/edit/drop/X11 or native Desktop engine integration",
+    "full stage/capability/release acceptance"
+  ],
+  "repositoryChecks": {
+    "pythonAstFiles": 32,
+    "ruff": "passed",
+    "regressionTests": 123,
+    "javascriptSyntaxFiles": 4,
+    "documentationSchemas": "passed"
+  }
+}

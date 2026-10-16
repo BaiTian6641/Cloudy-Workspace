@@ -11,6 +11,9 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import io.github.baitian6641.cloudy.domain.*
 import io.github.baitian6641.cloudy.ssh.SshPasswordCredentials
+import io.github.baitian6641.cloudy.ssh.SshAuthenticatedOwnership
+import io.github.baitian6641.cloudy.ssh.SshObservationCancellation
+import java.util.concurrent.atomic.AtomicBoolean
 import java.io.File
 import java.io.RandomAccessFile
 import java.util.Base64
@@ -36,6 +39,9 @@ class SshAuthenticationCoordinatorTest {
     private var now = 100L
     private val coordinator = SshAuthenticationCoordinator(root, owner, profiles, trust) { now }
     private val handles = mutableListOf<SshAuthenticationHandle>()
+    // Reflected objects below are policy simulations, never real authenticated engine evidence.
+    private val simulatedProofs = mutableListOf<SshAuthenticatedOwnership>()
+    private val resources = FilesResourceStore(root, owner, packageName, { false }, profiles, trust)
     private val key = key(1)
 
     private fun key(n: Int) = SshHostKeyIdentity.create("ecdsa-sha2-nistp256", "SHA256:" +
@@ -64,7 +70,12 @@ class SshAuthenticationCoordinatorTest {
 
     @After fun cleanup() {
         handles.forEach { it.close() }
+        simulatedProofs.forEach { proof ->
+            simulatedRetired(proof)
+            handles.forEach { it.releaseSession(proof) }
+        }
         SshAuthenticationRegistry.attempts.filter { it.root == root.absoluteFile }.forEach { it.close() }
+        check(SshAuthenticationRegistry.attempts.none { it.root == root.absoluteFile })
         check(root.deleteRecursively())
     }
 
@@ -295,6 +306,179 @@ class SshAuthenticationCoordinatorTest {
         assertEquals(SshAuthenticationCode.WRONG_OWNER,
             (SshAuthenticationCoordinator(context).begin(profile, secret) as SshAuthenticationPreparation.Failed).code)
         assertTrue(secret.isClosed)
+    }
+
+
+    private fun resource(profile: SshObservationProfile, account: String = "fixture-user"): FilesResourceRegistration {
+        val catalog = (resources.load() as FilesResourceResult.Success).value
+        val pin = checkNotNull(trustSuccess(trust.lookup(profile.peer)).current)
+        return (resources.create(catalog.generation, FilesResourceDraft.create(owner, "Owned directory", profile,
+            pin, "./private/../directory", account)) as FilesResourceResult.Success).value
+    }
+    private fun registered(resource: FilesResourceRegistration): SshAuthenticationHandle =
+        (coordinator.beginRegistered(resource, SshPasswordCredentials.create(resource.accountName.toCharArray(),
+            "fixture-password".toCharArray())) as SshAuthenticationPreparation.Ready).handle.also { handles.add(it) }
+    private fun resourceSql(statement: String) {
+        // Deliberate isolated storage alteration bypasses production invalidation, testing the
+        // admission/promotion reread itself rather than just the already-tested signal path.
+        SshAuthenticationRegistry.lock.lock()
+        try {
+            SQLiteDatabase.openDatabase(File(root, "files-resources-v1/resources.db").path, null,
+                SQLiteDatabase.OPEN_READWRITE).use { it.execSQL(statement) }
+        } finally { SshAuthenticationRegistry.lock.unlock() }
+    }
+    private fun simulatedProof(handle: SshAuthenticationHandle): SshAuthenticatedOwnership {
+        val constructor = SshAuthenticatedOwnership::class.java.getDeclaredConstructor(SshPeerIdentity::class.java,
+            SshHostKeyIdentity::class.java, SshObservationCancellation::class.java).apply { isAccessible = true }
+        return constructor.newInstance(handle.profile.peer, handle.expectedKey, handle.cancellation).also { simulatedProofs.add(it) }
+    }
+    private fun simulatedRetired(proof: SshAuthenticatedOwnership) {
+        check(proof in simulatedProofs)
+        val field = SshAuthenticatedOwnership::class.java.getDeclaredField("retired").apply { isAccessible = true }
+        (field.get(proof) as AtomicBoolean).set(true)
+    }
+
+    @Test fun sameHolderCapturesExactAccountAndAcceptedTrustForOrdinaryPreparation() {
+        val profile = seed()
+        val user = "  User-e\u0301  ".toCharArray()
+        val holder = SshPasswordCredentials.create(user, "fixture-password".toCharArray())
+        val expected = user.concatToString()
+        user.fill('x')
+        val handle = (coordinator.begin(profile, holder) as SshAuthenticationPreparation.Ready).handle.also { handles.add(it) }
+        assertEquals(expected, handle.accountName)
+        assertEquals(trustSuccess(trust.lookup(profile.peer)).current, handle.acceptedTrust)
+        assertNull(handle.resourceBinding)
+        assertSame(holder, handle.admit(profile.peer, key))
+        holder.close()
+        assertNull(holder.accountName())
+        assertEquals(expected, handle.accountName)
+        assertFalse(handle.toString().contains(expected))
+    }
+
+    @Test fun registeredWrongAccountAndClosedHolderAreDisposedBeforeAnyAdmission() {
+        val row = resource(seed(), " Exact-account ")
+        for (account in listOf("Exact-account", " exact-account ")) {
+            val holder = SshPasswordCredentials.create(account.toCharArray(), "fixture-password".toCharArray())
+            assertEquals(SshAuthenticationCode.ACCOUNT_MISMATCH,
+                (coordinator.beginRegistered(row, holder) as SshAuthenticationPreparation.Failed).code)
+            assertTrue(holder.isClosed)
+            assertNull(holder.accountName())
+        }
+        val accepted = registered(row)
+        assertEquals(row.accountName, accepted.accountName)
+        assertEquals(row, accepted.resourceBinding)
+        accepted.close()
+        val holder = credentials().also { it.close() }
+        assertEquals(SshAuthenticationCode.CREDENTIALS_UNAVAILABLE,
+            (coordinator.beginRegistered(row, holder) as SshAuthenticationPreparation.Failed).code)
+        assertTrue(SshAuthenticationRegistry.attempts.none { it.root == root.absoluteFile })
+    }
+
+    @Test fun registeredPreparationResolvesExactCurrentStateRevisionAndFullMetadata() {
+        val row = resource(seed())
+        val changedDraft = FilesResourceDraft.create(owner, row.label, row.profile, row.acceptedTrust,
+            "/different-root", row.accountName)
+        val forgedMetadata = FilesResourceRegistration.restore(row.generation, row.reference, row.revision, row.state, changedDraft)
+        val holder = credentials()
+        assertEquals(SshAuthenticationCode.RESOURCE_CHANGED,
+            (coordinator.beginRegistered(forgedMetadata, holder) as SshAuthenticationPreparation.Failed).code)
+        assertTrue(holder.isClosed)
+        val staleGeneration = FilesResourceRegistration.restore(UUID.randomUUID().toString(), row.reference,
+            row.revision, row.state, row.draft)
+        val staleHolder = credentials()
+        assertEquals(SshAuthenticationCode.RESOURCE_CHANGED,
+            (coordinator.beginRegistered(staleGeneration, staleHolder) as SshAuthenticationPreparation.Failed).code)
+        assertTrue(staleHolder.isClosed)
+        val shared = (resources.share(row.version()) as FilesResourceResult.Success).value
+        val stale = credentials()
+        assertEquals(SshAuthenticationCode.RESOURCE_CHANGED,
+            (coordinator.beginRegistered(row, stale) as SshAuthenticationPreparation.Failed).code)
+        assertTrue(stale.isClosed)
+        registered(shared).close()
+        val revoked = (resources.revoke(shared.version()) as FilesResourceResult.Success).value
+        val denied = credentials()
+        assertEquals(SshAuthenticationCode.RESOURCE_CHANGED,
+            (coordinator.beginRegistered(revoked, denied) as SshAuthenticationPreparation.Failed).code)
+        assertTrue(denied.isClosed)
+    }
+
+    @Test fun resourceRereadRejectsUnsignalledRevisionChangeBeforePasswordGate() {
+        val row = resource(seed())
+        val handle = registered(row)
+        resourceSql("UPDATE resources SET revision=revision+1")
+        assertFalse(handle.cancellation.isCancelled)
+        assertNull(handle.admit(row.profile.peer, key))
+        assertTrue(handle.cancellation.isCancelled)
+        assertFalse(handle in SshAuthenticationRegistry.attempts)
+    }
+
+    @Test fun simulatedProofPromotionRechecksResourceAfterPasswordAdmission() {
+        val row = resource(seed())
+        val handle = registered(row)
+        checkNotNull(handle.admit(row.profile.peer, key)).close()
+        val proof = simulatedProof(handle)
+        resourceSql("UPDATE resources SET navigation_root='/other-root'")
+        assertFalse(handle.cancellation.isCancelled)
+        assertFalse(handle.establishSession(proof))
+        assertTrue(handle.cancellation.isCancelled)
+        assertFalse(handle in SshAuthenticationRegistry.attempts)
+    }
+
+    @Test fun resourceShareAndRevokeCancelOnlyTheirExactRegisteredOwners() {
+        val profile = seed()
+        val first = resource(profile)
+        val second = resource(profile)
+        val ordinary = begin(profile)
+        val firstOwner = registered(first)
+        val secondOwner = registered(second)
+        val shared = (resources.share(first.version()) as FilesResourceResult.Success).value
+        assertTrue(firstOwner.cancellation.isCancelled)
+        assertFalse(secondOwner.cancellation.isCancelled)
+        assertFalse(ordinary.cancellation.isCancelled)
+        val sharedOwner = registered(shared)
+        resources.revoke(shared.version()) as FilesResourceResult.Success
+        assertTrue(sharedOwner.cancellation.isCancelled)
+        assertFalse(secondOwner.cancellation.isCancelled)
+        assertFalse(ordinary.cancellation.isCancelled)
+        checkNotNull(secondOwner.admit(profile.peer, key)).close()
+        checkNotNull(ordinary.admit(profile.peer, key)).close()
+    }
+
+    @Test fun simulatedEstablishedResourceOwnerRetainsCapacityUntilExactProofRetires() {
+        val row = resource(seed())
+        val handle = registered(row)
+        checkNotNull(handle.admit(row.profile.peer, key)).close()
+        val proof = simulatedProof(handle)
+        assertTrue(handle.establishSession(proof))
+        assertFalse(handle.matchesEstablished(proof)) // Missing coordination is not a controller gate.
+        SshAuthenticationRegistry.lock.lock()
+        try { assertTrue(handle.matchesEstablished(proof)) }
+        finally { SshAuthenticationRegistry.lock.unlock() }
+        resources.revoke(row.version()) as FilesResourceResult.Success
+        assertTrue(handle.cancellation.isCancelled)
+        handle.close()
+        handle.releaseSession(proof)
+        assertTrue(handle in SshAuthenticationRegistry.attempts)
+        SshAuthenticationRegistry.lock.lock()
+        try { assertFalse(handle.matchesEstablished(proof)) }
+        finally { SshAuthenticationRegistry.lock.unlock() }
+        simulatedRetired(proof)
+        handle.releaseSession(proof)
+        assertFalse(handle in SshAuthenticationRegistry.attempts)
+    }
+
+    @Test fun resourceIdentityInvalidationDoesNotCrossRootOwnerGenerationOrResource() {
+        val row = resource(seed())
+        val handle = registered(row)
+        SshAuthenticationRegistry.lock.lock()
+        try {
+            SshAuthenticationRegistry.invalidateResource(File(root, "other"), owner, row.generation, row.reference.resourceId)
+            SshAuthenticationRegistry.invalidateResource(root, WindowOwner.DESKTOP, row.generation, row.reference.resourceId)
+            SshAuthenticationRegistry.invalidateResource(root, owner, UUID.randomUUID().toString(), row.reference.resourceId)
+            SshAuthenticationRegistry.invalidateResource(root, owner, row.generation, UUID.randomUUID().toString())
+        } finally { SshAuthenticationRegistry.lock.unlock() }
+        assertFalse(handle.cancellation.isCancelled)
+        checkNotNull(handle.admit(row.profile.peer, key)).close()
     }
 
 }

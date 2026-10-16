@@ -55,4 +55,25 @@ class SshPasswordCredentialsTest {
         }
         SshPasswordCredentials.create(CharArray(256) { 'x' }, CharArray(4096) { '\u0000' }).close()
     }
+
+    @Test fun accountSnapshotComesFromOwnedCopyAndDisappearsAfterTransferOrClose() {
+        val input = "  User-e\u0301 \uD801\uDC00  ".toCharArray()
+        val expected = input.concatToString()
+        val holder = SshPasswordCredentials.create(input, "unrelated-password".toCharArray())
+        input.fill('x')
+        assertEquals(expected, holder.accountName())
+        assertNotEquals(expected.trim(), holder.accountName())
+        val snapshot = holder.accountName()
+        val material = checkNotNull(holder.take())
+        assertNull(holder.accountName())
+        material.close()
+        assertEquals(expected, snapshot)
+        holder.close()
+        assertNull(holder.accountName())
+        val closed = SshPasswordCredentials.create("exact".toCharArray(), "other".toCharArray())
+        closed.close()
+        assertNull(closed.accountName())
+        assertEquals("SshPasswordCredentials(redacted)", closed.toString())
+    }
+
 }

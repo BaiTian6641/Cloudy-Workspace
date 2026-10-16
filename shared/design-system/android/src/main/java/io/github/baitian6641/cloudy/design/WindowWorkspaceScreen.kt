@@ -50,6 +50,7 @@ fun WindowWorkspaceScreen(
     onDisplaySettings: (() -> Unit)? = null,
     onSshAuthenticate: (() -> Unit)? = null,
     onSshFiles: (() -> Unit)? = null,
+    onFilesLocations: (() -> Unit)? = null,
 ) {
     // Inputs reset live composition, but rememberSaveable does not validate the
     // prior inputs on restoration. The envelope independently binds the accepted ID.
@@ -120,6 +121,13 @@ fun WindowWorkspaceScreen(
                     shape = RoundedCornerShape(CloudyControlMetrics.buttonRadius),
                     modifier = Modifier.heightIn(min = CloudyControlMetrics.controlMinHeight)) {
                     Text(stringResource(R.string.cloudy_ssh_files))
+                }
+            }
+            if (onFilesLocations != null) {
+                OutlinedButton(onClick = onFilesLocations,
+                    shape = RoundedCornerShape(CloudyControlMetrics.buttonRadius),
+                    modifier = Modifier.heightIn(min = CloudyControlMetrics.controlMinHeight)) {
+                    Text(stringResource(R.string.cloudy_files_locations))
                 }
             }
             if (onDisplaySettings != null) {

@@ -116,6 +116,9 @@ class FilesResourceStore private constructor(private val configuration: Configur
             // Revoke remains available even after its bound profile/pin has changed.
             if (next == FilesResourceState.SHARED) bindingFailure(old.draft)?.let { return@operate failure(it) }
             val saved = if (next == FilesResourceState.SHARED) old.share() else old.revoke()
+            // Invalidate exact resource owners before a possible write, including an uncertain
+            // commit. Ordinary sessions and other registrations sharing this peer stay independent.
+            SshAuthenticationRegistry.invalidateResource(root, owner, catalog.generation, old.reference.resourceId)
             attempting()
             check(db.update("resources", values(saved), CAS_WHERE,
                 arrayOf(old.reference.resourceId, old.revision.toString(), old.state.name)) == 1)

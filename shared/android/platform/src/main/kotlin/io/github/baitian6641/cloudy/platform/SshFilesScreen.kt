@@ -23,6 +23,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import io.github.baitian6641.cloudy.design.CloudyControlMetrics
 import io.github.baitian6641.cloudy.domain.ConnectionProfile
 import io.github.baitian6641.cloudy.domain.ConnectionProtocol
+import io.github.baitian6641.cloudy.domain.WindowState
 import io.github.baitian6641.cloudy.ssh.SshFileEntry
 import io.github.baitian6641.cloudy.ssh.SshFileKind
 import io.github.baitian6641.cloudy.ssh.SshReadOnlyFiles
@@ -36,10 +37,17 @@ internal fun SshFilesScreen(
     onSelect: (ConnectionProfile) -> Unit, onConnect: () -> Unit, onRefreshProfiles: () -> Unit,
     onList: (String) -> Unit, onRead: (SshFileEntry) -> Unit,
     onDisconnect: () -> Unit, onClose: () -> Unit,
+    onLocations: () -> Unit, onRegister: (FilesListingCandidate, String) -> Unit,
+    onCancelRegistration: (FilesListingCandidate) -> Unit,
     offerLocalPermission: Boolean, onPermission: () -> Unit,
 ) {
-    val canConnect = interactive && state.phase in setOf(SshFilesPhase.IDLE, SshFilesPhase.FAILED)
-    val canBrowse = interactive && state.phase == SshFilesPhase.CONNECTED
+    val canConnect = interactive && !state.registrationPending && state.phase in setOf(SshFilesPhase.IDLE, SshFilesPhase.FAILED)
+    val canBrowse = interactive && !state.registrationPending && state.phase == SshFilesPhase.CONNECTED
+    // This proposal belongs to one completed listing only. No rememberSaveable, Intent or
+    // restored field can resurrect its authority after focus/lifecycle invalidation.
+    var confirming by remember(state.registrationCandidate, interactive) { mutableStateOf(false) }
+    var locationLabel by remember(state.registrationCandidate, interactive) { mutableStateOf(TextFieldValue()) }
+    var locationLabelRejected by remember(state.registrationCandidate, interactive) { mutableStateOf(false) }
     var pathDraft by remember(state.path) { mutableStateOf(TextFieldValue(state.path)) }
     var pathTooLong by remember(state.path) { mutableStateOf(false) }
     val scroll = rememberLazyListState()
@@ -48,7 +56,7 @@ internal fun SshFilesScreen(
     val hasPermission = state.permissionNeeded || (offerLocalPermission && canConnect)
     val hasBrowser = state.phase in setOf(SshFilesPhase.CONNECTED, SshFilesPhase.READING)
     val pathIndex = 2 + (if (state.selected != null) 1 else 0) + (if (hasForm) 3 else 0) + (if (hasPermission) 1 else 0)
-    val previewIndex = pathIndex + if (hasBrowser) 3 + state.entries.size +
+    val previewIndex = pathIndex + if (hasBrowser) 4 + state.entries.size +
         (if (state.entries.isEmpty() && state.phase == SshFilesPhase.CONNECTED) 1 else 0) else 0
     // Reveal completed navigation/preview once; never move focus/scroll on a field keystroke.
     LaunchedEffect(state.path, hasBrowser, state.preview) {
@@ -63,6 +71,7 @@ internal fun SshFilesScreen(
                 horizontalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall),
                 verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
                 FilesButton(R.string.ssh_files_disconnect, "ssh_files_disconnect", true, onDisconnect)
+                FilesButton(R.string.ssh_location_manage, "ssh_location_manage", canConnect, onLocations)
                 FilesButton(R.string.ssh_files_close, "ssh_files_close", true, onClose)
             }
             LazyColumn(state = scroll, modifier = Modifier.weight(1f).fillMaxWidth().testTag("ssh_files_list"),
@@ -82,6 +91,15 @@ internal fun SshFilesScreen(
                             ?: if (state.phase == SshFilesPhase.IDLE) stringResource(R.string.ssh_files_ready) else null
                         if (status != null) Text(status, modifier = Modifier.testTag("ssh_files_status")
                             .semantics { liveRegion = LiveRegionMode.Polite })
+                        // Metadata writes can finish after Disconnect. Their outcome must remain
+                        // visible even when there is no connected browser to display it beside.
+                        if (state.registrationPending) Text(stringResource(R.string.ssh_location_saving))
+                        if (state.registrationUncertain) Text(stringResource(R.string.ssh_location_unknown),
+                            modifier = Modifier.testTag("ssh_location_unknown").semantics { liveRegion = LiveRegionMode.Polite })
+                        state.registrationCode?.let { Text(stringResource(R.string.ssh_files_code, it),
+                            modifier = Modifier.testTag("ssh_location_result").semantics { liveRegion = LiveRegionMode.Polite }) }
+                        state.registrationSaved?.let { Text(stringResource(R.string.ssh_location_saved, it.label),
+                            modifier = Modifier.testTag("ssh_location_saved").semantics { liveRegion = LiveRegionMode.Polite }) }
                     }
                 }
                 state.selected?.let { selection -> item(key = "identity") {
@@ -101,6 +119,10 @@ internal fun SshFilesScreen(
                                     state.fingerprint?.let { value ->
                                         Text(value, modifier = Modifier.testTag("ssh_files_fingerprint"))
                                     }
+                                    state.location?.let { location ->
+                                        Text(stringResource(R.string.ssh_location_selected, location.label))
+                                        Text(stringResource(R.string.ssh_location_root, location.navigationRoot))
+                                    }
                                 }
                             }
                         }
@@ -109,6 +131,7 @@ internal fun SshFilesScreen(
                 if (hasForm) {
                     item(key = "username") { key(credentialEpoch) {
                         OutlinedTextField(username, onUsername, enabled = canConnect, singleLine = true,
+                            readOnly = state.location != null,
                             label = { Text(stringResource(R.string.ssh_files_username)) },
                             keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.None, autoCorrectEnabled = false),
                             shape = RoundedCornerShape(CloudyControlMetrics.fieldRadius),
@@ -153,6 +176,59 @@ internal fun SshFilesScreen(
                             FilesButton(R.string.ssh_files_list_path, "ssh_files_list_path", canBrowse && pathDraft.text.isNotEmpty()) { onList(pathDraft.text) }
                             FilesButton(R.string.ssh_files_refresh, "ssh_files_refresh", canBrowse) { onList(state.path) }
                             FilesButton(R.string.ssh_files_parent, "ssh_files_parent", canBrowse && state.path != "/") { onList(remoteParent(state.path)) }
+                        }
+                    }
+                    item(key = "registration") {
+                        Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                            val candidate = state.registrationCandidate
+                            FilesButton(R.string.ssh_location_register, "ssh_location_register", canBrowse && candidate != null && !confirming) {
+                                locationLabel = TextFieldValue(candidate?.profile?.profile?.label.orEmpty())
+                                locationLabelRejected = false
+                                confirming = true
+                            }
+                            if (confirming && candidate != null) Surface(Modifier.fillMaxWidth().testTag("ssh_location_confirmation"),
+                                color = MaterialTheme.colorScheme.surfaceContainer,
+                                shape = RoundedCornerShape(CloudyControlMetrics.dialogRadius)) {
+                                Column(Modifier.padding(CloudyControlMetrics.spaceLarge),
+                                    verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceMedium)) {
+                                    Text(stringResource(R.string.ssh_location_confirm_heading), style = MaterialTheme.typography.titleLarge,
+                                        modifier = Modifier.semantics { heading() })
+                                    Text(stringResource(R.string.ssh_location_private_scope))
+                                    SelectionContainer {
+                                        Column(verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                                            Text(peerText(candidate.profile.profile))
+                                            Text(stringResource(R.string.ssh_location_account, candidate.accountName))
+                                            Text(stringResource(R.string.ssh_location_root, candidate.navigationRoot))
+                                            Text((candidate.acceptedTrust.status as io.github.baitian6641.cloudy.domain.SshTrustStatus.Accepted).key.fingerprint)
+                                        }
+                                    }
+                                    val labelInvalid = locationLabelRejected || WindowState.nameProblem(locationLabel.text) != null
+                                    OutlinedTextField(locationLabel, {
+                                        locationLabelRejected = it.text.length > 160
+                                        if (!locationLabelRejected) locationLabel = it
+                                    },
+                                        label = { Text(stringResource(R.string.ssh_location_label)) },
+                                        enabled = canBrowse, singleLine = true,
+                                        isError = labelInvalid,
+                                        supportingText = { if (labelInvalid) Text(stringResource(R.string.ssh_location_label_invalid)) },
+                                        shape = RoundedCornerShape(CloudyControlMetrics.fieldRadius),
+                                        modifier = Modifier.fillMaxWidth().testTag("ssh_location_label"))
+                                    FlowRow(horizontalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall),
+                                        verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                                        FilesButton(R.string.ssh_location_confirm, "ssh_location_confirm",
+                                            canBrowse && !labelInvalid) {
+                                            confirming = false
+                                            onRegister(candidate, locationLabel.text)
+                                        }
+                                        FilesButton(R.string.ssh_location_cancel, "ssh_location_cancel", true) {
+                                            confirming = false
+                                            onCancelRegistration(candidate)
+                                        }
+                                    }
+                                }
+                            }
+                            if (candidate == null && !state.registrationPending && state.registrationSaved == null)
+                                Text(stringResource(R.string.ssh_location_refresh_required))
                         }
                     }
                     item(key = "entries-heading") {

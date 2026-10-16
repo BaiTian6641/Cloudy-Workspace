@@ -15,6 +15,10 @@ import androidx.lifecycle.ViewModel
 import io.github.baitian6641.cloudy.domain.ConnectionProfile
 import io.github.baitian6641.cloudy.domain.ConnectionProtocol
 import io.github.baitian6641.cloudy.domain.SshObservationProfile
+import io.github.baitian6641.cloudy.domain.FilesResourceDraft
+import io.github.baitian6641.cloudy.domain.FilesResourceRegistration
+import io.github.baitian6641.cloudy.domain.SshTrustSnapshot
+import io.github.baitian6641.cloudy.ssh.SshAuthenticatedOwnership
 import io.github.baitian6641.cloudy.ssh.SshAuthenticatedTransport
 import io.github.baitian6641.cloudy.ssh.SshAuthenticatedTransportFactory
 import io.github.baitian6641.cloudy.ssh.SshFileEntry
@@ -42,6 +46,14 @@ internal data class SshFilesPreview(val name: String, val byteCount: Int, val te
     override fun toString() = "SshFilesPreview(redacted)"
 }
 
+/** Opaque opportunity; register accepts only the exact current model-issued object. */
+internal class FilesListingCandidate internal constructor(
+    val profile: SshObservationProfile, val acceptedTrust: SshTrustSnapshot,
+    val navigationRoot: String, val accountName: String, val expiresAtMillis: Long,
+) {
+    override fun toString() = "FilesListingCandidate(redacted)"
+}
+
 internal data class SshFilesSessionState(
     val catalog: ConnectionProfileCatalog? = null,
     val selected: SshObservationProfile? = null,
@@ -52,6 +64,12 @@ internal data class SshFilesSessionState(
     val code: String? = null,
     val permissionNeeded: Boolean = false,
     val fingerprint: String? = null,
+    val location: FilesResourceRegistration? = null,
+    val registrationCandidate: FilesListingCandidate? = null,
+    val registrationPending: Boolean = false,
+    val registrationUncertain: Boolean = false,
+    val registrationCode: String? = null,
+    val registrationSaved: FilesResourceRegistration? = null,
 ) {
     override fun toString() = "SshFilesSessionState(${phase.name},redacted)"
 }
@@ -68,6 +86,18 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
     private var attachmentEpoch = 0L
     private var handoffDeadline = 0L
     private var handoffTimeout: Runnable? = null
+    // Worker admission reads this short gate, never Compose state or an Activity reference.
+    private val registrationGate = Any()
+    private var registrationOwner: Any? = null
+    private var registrationForeground = false
+    private var listingEpoch = 0L
+    private var listingCandidate: ListingContext? = null
+    private var candidateExpiry: Runnable? = null
+    private var registrationOperation = 0L
+    private class ListingContext(val candidate: FilesListingCandidate, val session: FilesSession,
+        val proof: SshAuthenticatedOwnership, val handle: SshAuthenticationHandle,
+        val owner: Any, val epoch: Long, val storeGeneration: String)
+
 
     fun onOwnerStarted(token: Any) {
         main()
@@ -78,12 +108,26 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
         if (handoffDeadline != 0L && SystemClock.elapsedRealtime() >= handoffDeadline) disconnect()
         clearHandoff()
         ownerToken = token
+        synchronized(registrationGate) { registrationOwner = token }
+    }
+
+    /** Focus/lifecycle loss invalidates consent, while a published visible session may survive. */
+    fun onOwnerForeground(token: Any, foreground: Boolean) {
+        main()
+        if (cleared || ownerToken !== token) return
+        synchronized(registrationGate) {
+            registrationOwner = token
+            registrationForeground = foreground
+        }
+        if (!foreground) invalidateListing()
     }
 
     fun onOwnerStopped(token: Any, changingConfigurations: Boolean) {
         main()
         if (cleared || ownerToken !== token) return
         ownerToken = null
+        synchronized(registrationGate) { registrationOwner = null; registrationForeground = false }
+        invalidateListing()
         clearHandoff()
         if (!changingConfigurations || state.phase !in setOf(SshFilesPhase.CONNECTED, SshFilesPhase.READING)) {
             disconnect()
@@ -115,17 +159,20 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
 
     fun refreshProfiles() {
         main()
-        if (cleared || !idle() || session != null) return
+        if (cleared || !idle() || session != null || state.registrationPending) return
+        invalidateListing()
         val version = ++generation
-        state = SshFilesSessionState(phase = SshFilesPhase.LOADING)
+        state = SshFilesSessionState(phase = SshFilesPhase.LOADING,
+            registrationPending = state.registrationPending, registrationUncertain = state.registrationUncertain,
+            registrationCode = state.registrationCode, registrationSaved = state.registrationSaved)
         if (!FilesRuntime.work {
                 val loaded = try { ConnectionProfiles(app).load() } catch (_: Exception) { null }
                 FilesRuntime.main.post {
                     if (!cleared && generation == version && session == null) {
                         state = when (loaded) {
-                            is ConnectionProfilesResult.Success -> SshFilesSessionState(catalog = loaded.value)
-                            is ConnectionProfilesResult.Failure -> SshFilesSessionState(phase = SshFilesPhase.FAILED, code = loaded.code.name)
-                            null -> SshFilesSessionState(phase = SshFilesPhase.FAILED, code = "UNAVAILABLE")
+                            is ConnectionProfilesResult.Success -> state.copy(catalog = loaded.value, phase = SshFilesPhase.IDLE, code = null)
+                            is ConnectionProfilesResult.Failure -> state.copy(catalog = null, phase = SshFilesPhase.FAILED, code = loaded.code.name)
+                            null -> state.copy(catalog = null, phase = SshFilesPhase.FAILED, code = "UNAVAILABLE")
                         }
                     }
                 }
@@ -134,28 +181,172 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
 
     fun selectProfile(profile: ConnectionProfile) {
         main()
-        if (cleared || ownerToken == null || !idle() || session != null) return
+        if (cleared || ownerToken == null || !idle() || session != null || state.registrationPending) return
         val catalog = state.catalog ?: return
         // Only the exact catalog object is a selectable row; the coordinator rechecks persisted data.
         val exact = catalog.profiles.singleOrNull { it === profile } ?: return
         if (exact.protocol != ConnectionProtocol.SSH) return
+        invalidateListing()
         generation++
-        state = state.copy(selected = SshObservationProfile.create(catalog.generation, exact),
+        state = state.copy(location = null, selected = SshObservationProfile.create(catalog.generation, exact),
             path = ".", entries = emptyList(), preview = null, code = null, fingerprint = null,
             permissionNeeded = false, phase = SshFilesPhase.IDLE)
+    }
+
+    /** Restored metadata is uncertainty only, never approval, a candidate or a replayable write. */
+    fun restoreRegistrationUncertainty() {
+        main()
+        if (cleared) return
+        invalidateListing()
+        state = state.copy(registrationUncertain = true, registrationCode = "COMPLETION_UNKNOWN")
+    }
+
+    /** Consume only on a new destination's first start; process restore never calls this. */
+    fun selectLocation(ticket: String) {
+        main()
+        if (cleared || ownerToken == null || !idle() || session != null || state.registrationPending) return
+        invalidateListing()
+        val version = ++generation
+        state = state.copy(phase = SshFilesPhase.LOADING, selected = null, location = null,
+            entries = emptyList(), preview = null, fingerprint = null, code = null)
+        if (!FilesRuntime.work {
+                val selected = FilesLocationTickets.consume(app, ticket)
+                val catalog = if (selected is FilesResourceResult.Success) ConnectionProfiles(app).load() else null
+                FilesRuntime.main.post {
+                    if (!cleared && generation == version && session == null) {
+                        state = when {
+                            selected is FilesResourceResult.Success && catalog is ConnectionProfilesResult.Success ->
+                                state.copy(catalog = catalog.value, selected = selected.value.profile,
+                                    location = selected.value, path = selected.value.navigationRoot, phase = SshFilesPhase.IDLE)
+                            selected is FilesResourceResult.Failure -> state.copy(phase = SshFilesPhase.FAILED, code = selected.code.name)
+                            else -> state.copy(phase = SshFilesPhase.FAILED, code = "STORE_UNAVAILABLE")
+                        }
+                    }
+                }
+            }) state = state.copy(phase = SshFilesPhase.FAILED, code = "BUSY")
+    }
+
+    /** Cancel consumes this opportunity without touching persistence or a different listing. */
+    fun cancelRegistration(candidate: FilesListingCandidate) {
+        main()
+        val matching = synchronized(registrationGate) { listingCandidate?.candidate === candidate }
+        if (matching) invalidateListing()
+    }
+
+    /** Explicit consent only. Worker admission, not queue submission, chooses lifecycle winner. */
+    fun register(candidate: FilesListingCandidate, label: String) {
+        main()
+        if (cleared || state.registrationPending || state.registrationUncertain) return
+        val context = synchronized(registrationGate) {
+            listingCandidate?.takeIf { it.candidate === candidate && registrationForeground &&
+                registrationOwner === it.owner && ownerToken === it.owner }
+        } ?: return
+        val operation = ++registrationOperation
+        state = state.copy(registrationPending = true, registrationCandidate = null,
+            registrationCode = null, registrationSaved = null)
+        if (!FilesRuntime.work {
+                val result = registerWorker(context, label)
+                FilesRuntime.main.post {
+                    if (!cleared && operation == registrationOperation) {
+                        invalidateListing()
+                        state = when (result) {
+                            is FilesResourceResult.Success -> state.copy(registrationPending = false,
+                                registrationUncertain = false, registrationSaved = result.value, registrationCode = null)
+                            is FilesResourceResult.Failure -> state.copy(registrationPending = false,
+                                registrationUncertain = result.code == FilesResourceCode.COMPLETION_UNKNOWN,
+                                registrationCode = result.code.name)
+                        }
+                    }
+                }
+            }) {
+            invalidateListing()
+            state = state.copy(registrationPending = false, registrationCode = "BUSY")
+        }
+    }
+
+    private fun registerWorker(context: ListingContext, label: String): FilesResourceResult<FilesResourceRegistration> {
+        if (!SshAuthenticationRegistry.lock.tryLock()) return FilesResourceResult.Failure(FilesResourceCode.BUSY)
+        try {
+            // Storage happens outside the short gate so main can revoke foreground consent.
+            val store = FilesResourceStore(app)
+            val catalog = store.load()
+            if (catalog is FilesResourceResult.Failure) return catalog
+            if ((catalog as FilesResourceResult.Success).value.generation != context.storeGeneration) {
+                return FilesResourceResult.Failure(FilesResourceCode.STALE_GENERATION)
+            }
+            val admitted = synchronized(registrationGate) {
+                val now = SystemClock.elapsedRealtime()
+                val valid = listingCandidate === context && listingEpoch == context.epoch &&
+                    registrationOwner === context.owner && registrationForeground &&
+                    now >= 0 && now < context.candidate.expiresAtMillis &&
+                    !context.session.cancelled.get() && context.session.transport.get()?.ownership === context.proof &&
+                    context.handle.matchesEstablished(context.proof)
+                // Every attempted approval is consumed, including stale/expired proposals.
+                if (listingCandidate === context) listingCandidate = null
+                valid
+            }
+            if (!admitted) return FilesResourceResult.Failure(FilesResourceCode.INVALID_STATE)
+            val candidate = context.candidate
+            val draft = try { FilesResourceDraft.create(candidate.profile.profile.owner, label, candidate.profile,
+                candidate.acceptedTrust, candidate.navigationRoot, candidate.accountName) }
+            catch (_: IllegalArgumentException) { return FilesResourceResult.Failure(FilesResourceCode.INVALID_INPUT) }
+            // Foreground loss after the short admission point cannot roll back an admitted CAS.
+            return store.create(context.storeGeneration, draft)
+        } catch (_: Exception) { return FilesResourceResult.Failure(FilesResourceCode.STORE_UNAVAILABLE) }
+        finally { SshAuthenticationRegistry.lock.unlock() }
+    }
+
+    private fun invalidateListing() {
+        synchronized(registrationGate) { listingEpoch++; listingCandidate = null }
+        candidateExpiry?.let { FilesRuntime.main.removeCallbacks(it) }
+        candidateExpiry = null
+        state = state.copy(registrationCandidate = null)
+    }
+
+    /** Called only by genuine successful listing publication on main, never by UI supplied data. */
+    private fun listingContext(token: FilesSession, path: String, storeGeneration: String,
+        expectedListingEpoch: Long): ListingContext? {
+        if (state.registrationPending || state.registrationUncertain) return null
+        val handle = token.handle.get() ?: return null
+        val proof = token.transport.get()?.ownership ?: return null
+        if (proof.isRetired || handle.cancellation.isCancelled || token.cancelled.get()) return null
+        val now = SystemClock.elapsedRealtime()
+        if (now < 0 || now > Long.MAX_VALUE - REGISTRATION_LIFETIME_MILLIS) return null
+        val draft = try { FilesResourceDraft.create(token.profile.profile.owner, token.profile.profile.label,
+            token.profile, handle.acceptedTrust, path, handle.accountName) }
+        catch (_: IllegalArgumentException) { return null }
+        val context = synchronized(registrationGate) {
+            val owner = registrationOwner
+            if (owner == null || !registrationForeground || ownerToken !== owner || listingEpoch != expectedListingEpoch) return null
+            val candidate = FilesListingCandidate(draft.profile, draft.acceptedTrust, path,
+                draft.accountName, now + REGISTRATION_LIFETIME_MILLIS)
+            ListingContext(candidate, token, proof, handle, owner, listingEpoch, storeGeneration)
+                .also { listingCandidate = it }
+        }
+        val expiry = Runnable {
+            if (!cleared && synchronized(registrationGate) { listingCandidate === context }) {
+                invalidateListing()
+                state = state.copy(registrationCode = "REGISTRATION_EXPIRED")
+            }
+        }
+        candidateExpiry = expiry
+        FilesRuntime.main.postDelayed(expiry, REGISTRATION_LIFETIME_MILLIS)
+        return context
     }
 
     /** Takes ownership on every path, including invalid selection, permission and Busy. */
     fun connect(credentials: SshPasswordCredentials) {
         if (Looper.myLooper() != Looper.getMainLooper()) { credentials.close(); return }
         val profile = state.selected
-        if (cleared || ownerToken == null || !idle() || session != null || profile == null) { credentials.close(); return }
+        if (cleared || ownerToken == null || !idle() || session != null || profile == null || state.registrationPending) { credentials.close(); return }
         if (SshLocalNetworkPolicy.shouldRequestPermission(app, profile.peer) && !permitted()) {
             credentials.close()
             state = state.copy(permissionNeeded = true, code = "PERMISSION_REQUIRED")
             return
         }
-        val token = FilesSession(profile, credentials, SystemClock.elapsedRealtime() + 15_000L)
+        invalidateListing()
+        val token = FilesSession(profile, credentials, SystemClock.elapsedRealtime() + 15_000L, state.location,
+            synchronized(registrationGate) { listingEpoch })
         if (!FilesRuntime.claim(token)) {
             credentials.close()
             state = state.copy(code = if (FilesRuntime.quarantined.get()) "QUARANTINED" else "BUSY")
@@ -173,6 +364,7 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
             FilesRuntime.main.post {
                 if (!cleared && session === token && generation == version) {
                     if (certain) session = null
+                    invalidateListing()
                     state = state.copy(phase = if (code == null && certain) SshFilesPhase.IDLE else SshFilesPhase.FAILED,
                         entries = emptyList(), preview = null, fingerprint = null,
                         code = if (certain) code else "CLEANUP_UNCERTAIN",
@@ -192,7 +384,12 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
         try {
             if (!token.active()) { token.reason.compareAndSet(null, "TIMED_OUT"); return }
             val credentials = token.credentials.getAndSet(null) ?: return
-            val prepared = try { SshAuthenticationCoordinator(app).begin(token.profile, credentials) }
+            val prepared = try {
+                val coordinator = SshAuthenticationCoordinator(app)
+                val location = token.location
+                if (location == null) coordinator.begin(token.profile, credentials)
+                else coordinator.beginRegistered(location, credentials)
+            }
             catch (error: Exception) { credentials.close(); throw error }
             if (prepared is SshAuthenticationPreparation.Failed) { token.reason.set(prepared.code.name); return }
             val handle = (prepared as SshAuthenticationPreparation.Ready).handle
@@ -245,8 +442,9 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
                             // Authentication has promoted, but the initial directory operation
                             // still owns the worker. Publish its busy state before enabling browsing.
                             publish(token, version) { it.copy(phase = SshFilesPhase.READING, fingerprint = handle.expectedKey.fingerprint) }
-                            val listing = result.transport.files.list(".", timeoutMillis = 3_000)
-                            deliverList(token, version, ".", listing)
+                            val initialPath = token.location?.navigationRoot ?: "."
+                            val listing = result.transport.files.list(initialPath, timeoutMillis = 3_000)
+                            deliverList(token, version, initialPath, listing, token.initialListingEpoch)
                         }
                     }
                 }
@@ -268,19 +466,32 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
     fun list(path: String) {
         main()
         val token = session ?: return
-        if (ownerToken == null || state.phase != SshFilesPhase.CONNECTED || token.cancelled.get()) return
+        if (ownerToken == null || state.phase != SshFilesPhase.CONNECTED || token.cancelled.get() || state.registrationPending) return
+        invalidateListing()
         val version = generation
+        val listing = synchronized(registrationGate) { listingEpoch }
         state = state.copy(phase = SshFilesPhase.READING, preview = null, code = null)
         if (!FilesRuntime.work {
-                try { deliverList(token, version, path, checkNotNull(token.transport.get()).files.list(path, timeoutMillis = 3_000)) }
+                try { deliverList(token, version, path, checkNotNull(token.transport.get()).files.list(path, timeoutMillis = 3_000), listing) }
                 catch (_: Exception) { token.stop("UNAVAILABLE") }
             }) state = state.copy(phase = SshFilesPhase.CONNECTED, code = "BUSY")
     }
 
-    private fun deliverList(token: FilesSession, version: Long, path: String, result: SshFilesResult<List<SshFileEntry>>) {
+    private fun deliverList(token: FilesSession, version: Long, path: String,
+        result: SshFilesResult<List<SshFileEntry>>, expectedListingEpoch: Long) {
         when (result) {
-            is SshFilesResult.Success -> publish(token, version) { it.copy(phase = SshFilesPhase.CONNECTED,
-                path = path, entries = result.value, preview = null, code = null) }
+            is SshFilesResult.Success -> {
+                // Listing is genuine, but metadata-store availability is separate from browsing.
+                val catalog = FilesResourceStore(app).load()
+                publish(token, version) {
+                    val context = if (catalog is FilesResourceResult.Success)
+                        listingContext(token, path, catalog.value.generation, expectedListingEpoch) else null
+                    it.copy(phase = SshFilesPhase.CONNECTED, path = path, entries = result.value,
+                        preview = null, code = null, registrationCandidate = context?.candidate,
+                        registrationCode = if (it.registrationUncertain) it.registrationCode
+                            else (catalog as? FilesResourceResult.Failure)?.code?.name)
+                }
+            }
             is SshFilesResult.Failure -> token.stop(result.code.name)
         }
     }
@@ -288,10 +499,11 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
     fun read(entry: SshFileEntry) {
         main()
         val token = session ?: return
-        if (ownerToken == null || state.phase != SshFilesPhase.CONNECTED || token.cancelled.get() ||
+        if (ownerToken == null || state.phase != SshFilesPhase.CONNECTED || token.cancelled.get() || state.registrationPending ||
             state.entries.none { it === entry } || entry.kind != SshFileKind.REGULAR) return
         if ((entry.size ?: 0) > PREVIEW_LIMIT) { state = state.copy(code = "PREVIEW_LIMIT"); return }
         val path = if (state.path.endsWith('/')) state.path + entry.name else state.path + "/" + entry.name
+        invalidateListing()
         val version = generation
         state = state.copy(phase = SshFilesPhase.READING, preview = null, code = null)
         if (!FilesRuntime.work {
@@ -318,6 +530,7 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
 
     fun disconnect() {
         main()
+        invalidateListing()
         val token = session ?: return
         state = state.copy(phase = SshFilesPhase.RETIRING, entries = emptyList(), preview = null, code = null)
         token.intentional.set(true)
@@ -328,6 +541,8 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
         main()
         // An obsolete window cannot cancel a replacement owner's newly submitted attempt.
         if (ownerToken !== owner) return
+        synchronized(registrationGate) { registrationForeground = false }
+        invalidateListing()
         // UI publication is the visibility boundary. A pause winning before Connected cancels
         // even a just-promoted worker proof; its late publication is fenced by token cancellation.
         if (state.phase == SshFilesPhase.CONNECTING) disconnect()
@@ -342,6 +557,8 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
     override fun onCleared() {
         cleared = true
         ownerToken = null
+        synchronized(registrationGate) { registrationOwner = null; registrationForeground = false }
+        invalidateListing()
         clearHandoff()
         session?.intentional?.set(true)
         session?.stop(null)
@@ -350,6 +567,7 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
 
     companion object {
         private const val CONFIGURATION_HANDOFF_MILLIS = 5_000L
+        private const val REGISTRATION_LIFETIME_MILLIS = 30_000L
         private const val PREVIEW_LIMIT = 65_536
         private fun preview(name: String, bytes: ByteArray): SshFilesPreview {
             val decoded = try {
@@ -389,7 +607,8 @@ private object FilesRuntime {
     }
 }
 
-private class FilesSession(val profile: SshObservationProfile, credentials: SshPasswordCredentials, val deadline: Long) {
+private class FilesSession(val profile: SshObservationProfile, credentials: SshPasswordCredentials,
+    val deadline: Long, val location: FilesResourceRegistration?, val initialListingEpoch: Long) {
     val credentials = AtomicReference<SshPasswordCredentials?>(credentials)
     val handle = AtomicReference<SshAuthenticationHandle?>()
     val resolver = AtomicReference<SshAddressResolver?>()

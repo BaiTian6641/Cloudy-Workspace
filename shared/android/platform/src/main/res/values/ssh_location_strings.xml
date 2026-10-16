@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ssh_location_manage">Saved file locations</string>
+    <string name="ssh_location_register">Save this directory as a location</string>
+    <string name="ssh_location_confirm_heading">Register private file location</string>
+    <string name="ssh_location_private_scope">Save this account and starting directory in this app. No password is saved. This directory is a starting point, not a boundary on remote access. Sharing requires a separate action.</string>
+    <string name="ssh_location_label">Location name</string>
+    <string name="ssh_location_label_invalid">Enter a name of 1–80 characters without control characters. Very long edits are not applied.</string>
+    <string name="ssh_location_account">Account: %1$s</string>
+    <string name="ssh_location_root">Starting directory: %1$s</string>
+    <string name="ssh_location_selected">Registered location: %1$s</string>
+    <string name="ssh_location_confirm">Register private location</string>
+    <string name="ssh_location_cancel">Cancel registration</string>
+    <string name="ssh_location_saving">Registering location…</string>
+    <string name="ssh_location_saved">Private location saved: %1$s. Open Saved file locations to manage it after disconnecting.</string>
+    <string name="ssh_location_unknown">Registration may have completed. Inspect saved locations before creating another record.</string>
+    <string name="ssh_location_refresh_required">Refresh this directory to prepare a new registration.</string>
+</resources>
