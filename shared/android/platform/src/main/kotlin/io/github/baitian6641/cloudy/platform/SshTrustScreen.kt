@@ -189,7 +189,7 @@ internal fun trustKey(status: SshTrustStatus): SshHostKeyIdentity = when (status
 private fun TrustButton(label: Int, tag: String, enabled: Boolean, onClick: () -> Unit) {
     OutlinedButton(onClick = onClick, enabled = enabled,
         shape = RoundedCornerShape(CloudyControlMetrics.buttonRadius),
-        modifier = Modifier.heightIn(min = CloudyControlMetrics.comfortableMinHeight).testTag(tag)) {
+        modifier = Modifier.heightIn(min = CloudyControlMetrics.controlMinHeight).testTag(tag)) {
         Text(stringResource(label))
     }
 }

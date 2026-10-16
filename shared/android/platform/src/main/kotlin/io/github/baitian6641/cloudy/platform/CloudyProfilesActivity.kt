@@ -20,7 +20,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import io.github.baitian6641.cloudy.design.CloudyControlMetrics
-import io.github.baitian6641.cloudy.design.CloudyTheme
 import io.github.baitian6641.cloudy.domain.ConnectionProfile
 import io.github.baitian6641.cloudy.domain.ConnectionProfileDraft
 import io.github.baitian6641.cloudy.domain.ConnectionProfileValidationCode
@@ -72,7 +71,7 @@ class CloudyProfilesActivity : ComponentActivity() {
             override fun handleOnBackPressed() { leaveEditor { finish() } }
         })
         setContent {
-            CloudyTheme {
+            CloudyAppTheme {
                 ProfileEditorScreen(
                     appName = applicationInfo.loadLabel(packageManager).toString(), owner = owner,
                     catalog = catalog, draft = draft, busy = busy, message = message,
@@ -110,14 +109,14 @@ class CloudyProfilesActivity : ComponentActivity() {
                                     if (canInteract()) request.action()
                                 },
                                 shape = RoundedCornerShape(CloudyControlMetrics.buttonRadius),
-                                modifier = Modifier.heightIn(min = CloudyControlMetrics.comfortableMinHeight)
+                                modifier = Modifier.heightIn(min = CloudyControlMetrics.controlMinHeight)
                                     .testTag("profile_confirm"),
                             ) { Text(getString(request.accept)) }
                         },
                         dismissButton = {
                             TextButton(onClick = { confirmation = null },
                                 shape = RoundedCornerShape(CloudyControlMetrics.buttonRadius),
-                                modifier = Modifier.heightIn(min = CloudyControlMetrics.comfortableMinHeight)
+                                modifier = Modifier.heightIn(min = CloudyControlMetrics.controlMinHeight)
                                     .testTag("profile_cancel")) { Text(getString(R.string.profile_cancel)) }
                         },
                     )

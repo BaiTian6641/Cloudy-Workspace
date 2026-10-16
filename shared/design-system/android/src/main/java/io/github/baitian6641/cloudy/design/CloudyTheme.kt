@@ -8,6 +8,7 @@ import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -61,15 +62,25 @@ private val CloudyTypography = with(CloudyTokens.Type) {
 }
 
 @Composable
-fun CloudyTheme(content: @Composable () -> Unit) {
-    MaterialTheme(
-        colorScheme = if (isSystemInDarkTheme()) Dark else Light,
-        typography = CloudyTypography,
-        shapes = Shapes(
-            small = RoundedCornerShape(CloudyTokens.Radii.Field.dp),
-            medium = RoundedCornerShape(CloudyTokens.Radii.Menu.dp),
-            large = RoundedCornerShape(CloudyTokens.Radii.Dialog.dp),
-        ),
-        content = content,
-    )
+fun CloudyTheme(
+    preferences: CloudyDisplayPreferences = CloudyDisplayPreferences(),
+    content: @Composable () -> Unit,
+) {
+    val dark = when (preferences.appearance) {
+        CloudyAppearance.SYSTEM -> isSystemInDarkTheme()
+        CloudyAppearance.LIGHT -> false
+        CloudyAppearance.DARK -> true
+    }
+    CompositionLocalProvider(LocalCloudyDensityMetrics provides metricsFor(preferences.density)) {
+        MaterialTheme(
+            colorScheme = if (dark) Dark else Light,
+            typography = CloudyTypography,
+            shapes = Shapes(
+                small = RoundedCornerShape(CloudyTokens.Radii.Field.dp),
+                medium = RoundedCornerShape(CloudyTokens.Radii.Menu.dp),
+                large = RoundedCornerShape(CloudyTokens.Radii.Dialog.dp),
+            ),
+            content = content,
+        )
+    }
 }

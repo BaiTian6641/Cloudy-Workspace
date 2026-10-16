@@ -34,7 +34,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.unit.dp
 
 @Composable
 fun WindowWorkspaceScreen(
@@ -48,6 +47,7 @@ fun WindowWorkspaceScreen(
     onCredentials: (() -> Unit)? = null,
     onProfiles: (() -> Unit)? = null,
     onSshTrust: (() -> Unit)? = null,
+    onDisplaySettings: (() -> Unit)? = null,
 ) {
     // Inputs reset live composition, but rememberSaveable does not validate the
     // prior inputs on restoration. The envelope independently binds the accepted ID.
@@ -75,8 +75,8 @@ fun WindowWorkspaceScreen(
                 // than double-counting overlapping bottom insets.
                 .windowInsetsPadding(WindowInsets.safeDrawing.union(WindowInsets.ime))
                 .verticalScroll(rememberScrollState())
-                .padding(CloudyTokens.Space16.dp),
-            verticalArrangement = Arrangement.spacedBy(CloudyTokens.Space12.dp),
+                .padding(CloudyControlMetrics.spaceLarge),
+            verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceMedium),
         ) {
             // Committed context remains visible independently of the editable draft;
             // OEM captions may display only the application's label.
@@ -86,22 +86,31 @@ fun WindowWorkspaceScreen(
                 color = MaterialTheme.colorScheme.onSurfaceVariant)
             if (notice != null) Text(notice, style = MaterialTheme.typography.bodyMedium)
             if (onCredentials != null) {
-                OutlinedButton(onClick = onCredentials) {
+                OutlinedButton(onClick = onCredentials,
+                    shape = RoundedCornerShape(CloudyControlMetrics.buttonRadius),
+                    modifier = Modifier.heightIn(min = CloudyControlMetrics.controlMinHeight)) {
                     Text(stringResource(R.string.cloudy_saved_credentials))
                 }
             }
             if (onProfiles != null) {
                 OutlinedButton(onClick = onProfiles,
-                    shape = RoundedCornerShape(CloudyTokens.Radii.Button.dp),
-                    modifier = Modifier.heightIn(min = CloudyTokens.Density.Comfortable.dp)) {
+                    shape = RoundedCornerShape(CloudyControlMetrics.buttonRadius),
+                    modifier = Modifier.heightIn(min = CloudyControlMetrics.controlMinHeight)) {
                     Text(stringResource(R.string.cloudy_connection_profiles))
                 }
             }
             if (onSshTrust != null) {
                 OutlinedButton(onClick = onSshTrust,
-                    shape = RoundedCornerShape(CloudyTokens.Radii.Button.dp),
-                    modifier = Modifier.heightIn(min = CloudyTokens.Density.Comfortable.dp)) {
+                    shape = RoundedCornerShape(CloudyControlMetrics.buttonRadius),
+                    modifier = Modifier.heightIn(min = CloudyControlMetrics.controlMinHeight)) {
                     Text(stringResource(R.string.cloudy_ssh_host_keys))
+                }
+            }
+            if (onDisplaySettings != null) {
+                OutlinedButton(onClick = onDisplaySettings,
+                    shape = RoundedCornerShape(CloudyControlMetrics.buttonRadius),
+                    modifier = Modifier.heightIn(min = CloudyControlMetrics.controlMinHeight)) {
+                    Text(stringResource(R.string.cloudy_display_settings))
                 }
             }
             OutlinedTextField(
@@ -124,27 +133,27 @@ fun WindowWorkspaceScreen(
                 supportingText = { if (error != null) Text(error) },
                 modifier = Modifier.fillMaxWidth(),
                 textStyle = MaterialTheme.typography.bodyLarge,
-                shape = RoundedCornerShape(CloudyTokens.Radii.Field.dp),
+                shape = RoundedCornerShape(CloudyControlMetrics.fieldRadius),
             )
             FlowRow(
-                horizontalArrangement = Arrangement.spacedBy(CloudyTokens.Space8.dp),
-                verticalArrangement = Arrangement.spacedBy(CloudyTokens.Space8.dp),
+                horizontalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall),
+                verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall),
             ) {
                 Button(onClick = {
                     renameError = onRename(draft.text)
                 }, enabled = !retained.tooLong,
-                    shape = RoundedCornerShape(CloudyTokens.Radii.Button.dp),
-                    modifier = Modifier.heightIn(min = CloudyTokens.Density.Comfortable.dp)) {
+                    shape = RoundedCornerShape(CloudyControlMetrics.buttonRadius),
+                    modifier = Modifier.heightIn(min = CloudyControlMetrics.controlMinHeight)) {
                     Text(stringResource(R.string.cloudy_save_name))
                 }
                 OutlinedButton(onClick = onNewWindow,
-                    shape = RoundedCornerShape(CloudyTokens.Radii.Button.dp),
-                    modifier = Modifier.heightIn(min = CloudyTokens.Density.Comfortable.dp)) {
+                    shape = RoundedCornerShape(CloudyControlMetrics.buttonRadius),
+                    modifier = Modifier.heightIn(min = CloudyControlMetrics.controlMinHeight)) {
                     Text(stringResource(R.string.cloudy_new_window))
                 }
                 OutlinedButton(onClick = onClose,
-                    shape = RoundedCornerShape(CloudyTokens.Radii.Button.dp),
-                    modifier = Modifier.heightIn(min = CloudyTokens.Density.Comfortable.dp)) {
+                    shape = RoundedCornerShape(CloudyControlMetrics.buttonRadius),
+                    modifier = Modifier.heightIn(min = CloudyControlMetrics.controlMinHeight)) {
                     Text(stringResource(R.string.cloudy_close_window))
                 }
             }

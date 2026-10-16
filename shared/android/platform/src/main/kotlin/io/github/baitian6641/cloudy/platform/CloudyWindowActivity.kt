@@ -9,7 +9,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import io.github.baitian6641.cloudy.design.CloudyTheme
 import io.github.baitian6641.cloudy.design.WindowWorkspaceScreen
 import io.github.baitian6641.cloudy.domain.WindowNameProblem
 import io.github.baitian6641.cloudy.domain.WindowOwner
@@ -46,7 +45,7 @@ abstract class CloudyWindowActivity : ComponentActivity() {
         if (restored is WindowRestore.Rejected) notice = getString(R.string.cloudy_restore_rejected)
         updateSystemLabel()
         setContent {
-            CloudyTheme {
+            CloudyAppTheme {
                 val current = windowContext
                 WindowWorkspaceScreen(
                     appName = getString(appNameResource),
@@ -59,6 +58,7 @@ abstract class CloudyWindowActivity : ComponentActivity() {
                     onCredentials = ::openCredentials,
                     onProfiles = ::openProfiles,
                     onSshTrust = ::openSshTrust,
+                    onDisplaySettings = ::openDisplaySettings,
                 )
             }
         }
@@ -143,6 +143,15 @@ abstract class CloudyWindowActivity : ComponentActivity() {
         try {
             // The manager reads this package's ledger; launch data confers no trust or approval.
             startActivity(Intent(this, CloudySshTrustActivity::class.java))
+        } catch (_: RuntimeException) {
+            notice = getString(R.string.cloudy_window_launch_failed)
+        }
+    }
+
+    private fun openDisplaySettings() {
+        try {
+            // Appearance is local to this package; the destination accepts no preference extras.
+            startActivity(Intent(this, CloudyDisplaySettingsActivity::class.java))
         } catch (_: RuntimeException) {
             notice = getString(R.string.cloudy_window_launch_failed)
         }

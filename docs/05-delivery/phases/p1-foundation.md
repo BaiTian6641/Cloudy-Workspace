@@ -161,3 +161,9 @@ Resolve each engine's license/security/build and capability gates before integra
 ## RDP credential implementation detail
 
 P1-S3 implements the [RDP authentication/vault contract](../../02-architecture/rdp-authentication-security.md) and Q-S02: explicit per-app saved credentials protected by Android Keystore and local authorization, backup/transfer exclusions, key invalidation, bound session access and secret-free exports/logs. Native trust/provider review remains P1-S4; actual RDP session integration is P3-S7. The temporary P0 diagnostic file does not satisfy the vault gate.
+
+## P1-S2 native display checkpoint — 2026-10-16
+
+The [0.1.6 result](../../../qualification/results/P1-S2/2026-10-16-native-display-settings.md) adds real independent appearance/density settings, live theme/spacing updates and canonical vault-dialog presentation. Strict build/four Lint reports and12 actual Android cases pass. Six current Console viewport captures at font scale1.0 were inspected across both themes/all three densities. The [display contract](../../04-design/native-display-settings.md) records nominal versus observed geometry, system-owned chrome and effective preference restoration.
+
+This increment advances existing P1-S2 work without changing dependencies, efforts or required exits. Full component catalog, HTML specimen states/density, scaled/narrow/short native windows, physical input/focus/accessibility and engine-backed layout remain open; P1-S2 is not complete. The P1-S3 protected-vault and real SSH enrollment/authentication prerequisites remain separate.

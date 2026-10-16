@@ -24,7 +24,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import io.github.baitian6641.cloudy.design.CloudyControlMetrics
-import io.github.baitian6641.cloudy.design.CloudyTheme
 import io.github.baitian6641.cloudy.domain.SshPeerIdentity
 import io.github.baitian6641.cloudy.domain.SshTrustEditToken
 import io.github.baitian6641.cloudy.domain.SshTrustSnapshot
@@ -70,7 +69,7 @@ class CloudySshTrustActivity : ComponentActivity() {
         enableEdgeToEdge()
         title = getString(R.string.ssh_trust_heading)
         setContent {
-            CloudyTheme {
+            CloudyAppTheme {
                 SshTrustScreen(
                     appName = applicationInfo.loadLabel(packageManager).toString(),
                     catalog = catalog, selected = selected, busy = busy, message = message,
@@ -101,14 +100,14 @@ class CloudySshTrustActivity : ComponentActivity() {
                                 confirmation = null
                                 if (current === request && canInteract() && !pending) revoke(request)
                             }, shape = RoundedCornerShape(CloudyControlMetrics.buttonRadius),
-                                modifier = Modifier.heightIn(min = CloudyControlMetrics.comfortableMinHeight).testTag("trust_confirm")) {
+                                modifier = Modifier.heightIn(min = CloudyControlMetrics.controlMinHeight).testTag("trust_confirm")) {
                                 Text(getString(R.string.ssh_trust_confirm))
                             }
                         },
                         dismissButton = {
                             TextButton(onClick = { if (confirmation === request) confirmation = null },
                                 shape = RoundedCornerShape(CloudyControlMetrics.buttonRadius),
-                                modifier = Modifier.heightIn(min = CloudyControlMetrics.comfortableMinHeight).testTag("trust_cancel")) {
+                                modifier = Modifier.heightIn(min = CloudyControlMetrics.controlMinHeight).testTag("trust_cancel")) {
                                 Text(getString(R.string.ssh_trust_cancel))
                             }
                         },

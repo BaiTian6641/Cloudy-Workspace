@@ -7,6 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
@@ -17,10 +18,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.unit.dp
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Lifecycle
-import io.github.baitian6641.cloudy.design.CloudyTheme
+import io.github.baitian6641.cloudy.design.CloudyControlMetrics
 import io.github.baitian6641.cloudy.identity.*
 import java.util.concurrent.Executors
 import java.util.concurrent.atomic.AtomicBoolean
@@ -48,7 +48,7 @@ open class CloudyVaultActivity : FragmentActivity() {
         window.addFlags(WindowManager.LayoutParams.FLAG_SECURE)
         enableEdgeToEdge()
         prompts = VaultPromptController(this)
-        setContent { CloudyTheme { Screen() } }
+        setContent { CloudyAppTheme { Screen() } }
     }
 
     override fun onStart() { super.onStart(); refresh() }
@@ -147,38 +147,56 @@ open class CloudyVaultActivity : FragmentActivity() {
 
     @Composable private fun Screen() {
         LocalView.current.importantForAutofill = View.IMPORTANT_FOR_AUTOFILL_NO_EXCLUDE_DESCENDANTS
-        Surface(Modifier.fillMaxSize()) {
+        Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
             Column(Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.safeDrawing.union(WindowInsets.ime))
-                .verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                .verticalScroll(rememberScrollState()).padding(CloudyControlMetrics.spaceLarge),
+                verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceMedium)) {
                 Text(stringResource(R.string.vault_heading), style = MaterialTheme.typography.headlineSmall)
-                Text(stringResource(R.string.vault_local_only))
-                Text(message)
-                FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    VaultProtocol.entries.forEach { value -> FilterChip(protocol == value, { protocol = value }, { Text(value.name) }, enabled = !busy) }
+                Text(stringResource(R.string.vault_local_only), style = MaterialTheme.typography.bodyMedium)
+                Text(message, style = MaterialTheme.typography.bodyMedium)
+                FlowRow(horizontalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall),
+                    verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                    VaultProtocol.entries.forEach { value -> FilterChip(protocol == value, { protocol = value }, { Text(value.name) }, enabled = !busy,
+                        shape = RoundedCornerShape(CloudyControlMetrics.chipRadius),
+                        modifier = Modifier.heightIn(min = CloudyControlMetrics.controlMinHeight)) }
                 }
                 Field(R.string.vault_host, host, 1024) { host = it }
                 Field(R.string.vault_port, port, 5) { port = it }
-                FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    VaultRole.entries.forEach { value -> FilterChip(role == value, { role = value }, { Text(stringResource(if (value == VaultRole.TARGET) R.string.vault_target else R.string.vault_gateway)) }, enabled = !busy) }
+                FlowRow(horizontalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall),
+                    verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                    VaultRole.entries.forEach { value -> FilterChip(role == value, { role = value }, { Text(stringResource(if (value == VaultRole.TARGET) R.string.vault_target else R.string.vault_gateway)) }, enabled = !busy,
+                        shape = RoundedCornerShape(CloudyControlMetrics.chipRadius),
+                        modifier = Modifier.heightIn(min = CloudyControlMetrics.controlMinHeight)) }
                 }
                 Field(R.string.vault_username, username, SensitivePayload.MAX_IDENTITY_CHARS) { username = it }
                 Field(R.string.vault_domain, domain, SensitivePayload.MAX_IDENTITY_CHARS) { domain = it }
                 Field(R.string.vault_password, password, SensitivePayload.MAX_PASSWORD_CHARS, true) { password = it }
-                FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Button(::enroll, enabled = !busy) { Text(stringResource(R.string.vault_save)) }
-                    OutlinedButton({ prompts.cancel(); pending?.close(); pending = null }) { Text(stringResource(R.string.vault_cancel)) }
-                    OutlinedButton(::refresh, enabled = !busy) { Text(stringResource(R.string.vault_refresh)) }
+                FlowRow(horizontalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall),
+                    verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                    Button(::enroll, enabled = !busy, shape = RoundedCornerShape(CloudyControlMetrics.buttonRadius),
+                        modifier = Modifier.heightIn(min = CloudyControlMetrics.controlMinHeight)) { Text(stringResource(R.string.vault_save)) }
+                    OutlinedButton({ prompts.cancel(); pending?.close(); pending = null },
+                        shape = RoundedCornerShape(CloudyControlMetrics.buttonRadius),
+                        modifier = Modifier.heightIn(min = CloudyControlMetrics.controlMinHeight)) { Text(stringResource(R.string.vault_cancel)) }
+                    OutlinedButton(::refresh, enabled = !busy, shape = RoundedCornerShape(CloudyControlMetrics.buttonRadius),
+                        modifier = Modifier.heightIn(min = CloudyControlMetrics.controlMinHeight)) { Text(stringResource(R.string.vault_refresh)) }
                 }
                 rows.forEach { row ->
                     HorizontalDivider()
                     val binding = row.profile?.binding
                     Text(if (binding == null) getString(R.string.vault_missing_profile, row.id.value.take(8))
-                        else "${binding.protocol.name} · ${binding.host}:${binding.port} · ${binding.role.name} · ${row.id.value.take(8)}")
-                    Text(row.state?.name ?: stringResource(R.string.vault_missing_record))
-                    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        else "${binding.protocol.name} · ${binding.host}:${binding.port} · ${binding.role.name} · ${row.id.value.take(8)}",
+                        style = MaterialTheme.typography.bodyLarge)
+                    Text(row.state?.name ?: stringResource(R.string.vault_missing_record), style = MaterialTheme.typography.bodyMedium)
+                    FlowRow(horizontalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall),
+                        verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
                         OutlinedButton({ row.profile?.let { authorize(VaultOperation.USE, it) } },
-                            enabled = !busy && row.profile != null && row.state == VaultRecordState.READY) { Text(stringResource(R.string.vault_check)) }
-                        OutlinedButton({ confirmation = row }, enabled = !busy && row.profile != null && row.state != null) { Text(stringResource(R.string.vault_delete)) }
+                            enabled = !busy && row.profile != null && row.state == VaultRecordState.READY,
+                            shape = RoundedCornerShape(CloudyControlMetrics.buttonRadius),
+                            modifier = Modifier.heightIn(min = CloudyControlMetrics.controlMinHeight)) { Text(stringResource(R.string.vault_check)) }
+                        OutlinedButton({ confirmation = row }, enabled = !busy && row.profile != null && row.state != null,
+                            shape = RoundedCornerShape(CloudyControlMetrics.buttonRadius),
+                            modifier = Modifier.heightIn(min = CloudyControlMetrics.controlMinHeight)) { Text(stringResource(R.string.vault_delete)) }
                         if (row.profile != null && row.state == null) {
                             OutlinedButton(onClick = {
                                 work {
@@ -191,7 +209,8 @@ open class CloudyVaultActivity : FragmentActivity() {
                                     }
                                     getString(R.string.vault_operation_result, absence.code.name)
                                 }
-                            }, enabled = !busy) {
+                            }, enabled = !busy, shape = RoundedCornerShape(CloudyControlMetrics.buttonRadius),
+                                modifier = Modifier.heightIn(min = CloudyControlMetrics.controlMinHeight)) {
                                 Text(stringResource(R.string.vault_remove_unused))
                             }
                         }
@@ -204,22 +223,35 @@ open class CloudyVaultActivity : FragmentActivity() {
                                     if (purge.code == VaultCode.OK) VaultProfiles(applicationContext).remove(row.id)
                                     getString(R.string.vault_operation_result, purge.code.name)
                                 } else getString(R.string.vault_operation_result, result.code.name)
-                            } }, enabled = !busy) { Text(stringResource(R.string.vault_cleanup)) }
+                            } }, enabled = !busy, shape = RoundedCornerShape(CloudyControlMetrics.buttonRadius),
+                                modifier = Modifier.heightIn(min = CloudyControlMetrics.controlMinHeight)) { Text(stringResource(R.string.vault_cleanup)) }
                         }
                     }
                 }
             }
         }
         confirmation?.let { row -> AlertDialog(onDismissRequest = { confirmation = null },
-            title = { Text(stringResource(R.string.vault_delete)) },
-            text = { Text((row.profile?.binding?.let { "${it.protocol.name} · ${it.host}:${it.port} · ${it.role.name}\n" } ?: "") + stringResource(R.string.vault_delete_warning)) },
-            confirmButton = { TextButton({ confirmation = null; row.profile?.let { authorize(VaultOperation.DELETE, it) } }) { Text(stringResource(R.string.vault_delete)) } },
-            dismissButton = { TextButton({ confirmation = null }) { Text(stringResource(R.string.vault_keep)) } }) }
+            shape = RoundedCornerShape(CloudyControlMetrics.dialogRadius),
+            containerColor = MaterialTheme.colorScheme.surfaceContainer,
+            title = { Text(stringResource(R.string.vault_delete), style = MaterialTheme.typography.titleLarge) },
+            text = {
+                Column(Modifier.verticalScroll(rememberScrollState()),
+                    verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                    Text((row.profile?.binding?.let { "${it.protocol.name} · ${it.host}:${it.port} · ${it.role.name}\n" } ?: "") + stringResource(R.string.vault_delete_warning),
+                        style = MaterialTheme.typography.bodyMedium)
+                }
+            },
+            confirmButton = { TextButton({ confirmation = null; row.profile?.let { authorize(VaultOperation.DELETE, it) } },
+                shape = RoundedCornerShape(CloudyControlMetrics.buttonRadius),
+                modifier = Modifier.heightIn(min = CloudyControlMetrics.controlMinHeight)) { Text(stringResource(R.string.vault_delete)) } },
+            dismissButton = { TextButton({ confirmation = null }, shape = RoundedCornerShape(CloudyControlMetrics.buttonRadius),
+                modifier = Modifier.heightIn(min = CloudyControlMetrics.controlMinHeight)) { Text(stringResource(R.string.vault_keep)) } }) }
     }
 
     @Composable private fun Field(label: Int, value: String, limit: Int, secret: Boolean = false, change: (String) -> Unit) {
         OutlinedTextField(value, { if (it.length <= limit) change(it) else message = getString(R.string.vault_too_long) },
             label = { Text(stringResource(label)) }, singleLine = true, enabled = !busy,
+            textStyle = MaterialTheme.typography.bodyLarge, shape = RoundedCornerShape(CloudyControlMetrics.fieldRadius),
             visualTransformation = if (secret) PasswordVisualTransformation() else VisualTransformation.None,
             keyboardOptions = KeyboardOptions(autoCorrectEnabled = false, keyboardType = if (secret) KeyboardType.Password else KeyboardType.Text),
             modifier = Modifier.fillMaxWidth())

@@ -152,7 +152,7 @@ private fun ProfileDraftEditor(
             // oversized edits as a whole and owns their error message; this view never truncates.
             OutlinedTextField(value = draft.label, onValueChange = { onDraftChange(draft.copy(label = it)) },
                 label = { Text(stringResource(R.string.profile_name)) }, enabled = editable, singleLine = true,
-                textStyle = MaterialTheme.typography.bodyLarge, shape = MaterialTheme.shapes.small,
+                textStyle = MaterialTheme.typography.bodyLarge, shape = RoundedCornerShape(CloudyControlMetrics.fieldRadius),
                 modifier = Modifier.fillMaxWidth().testTag("profile_label"))
             Text(stringResource(R.string.profile_protocol), style = MaterialTheme.typography.labelLarge)
             ProfileActions {
@@ -162,18 +162,18 @@ private fun ProfileDraftEditor(
                         onClick = { onDraftChange(draft.copy(protocol = protocol)) },
                         label = { Text(protocolLabel(protocol)) },
                         shape = RoundedCornerShape(CloudyControlMetrics.chipRadius),
-                        modifier = Modifier.heightIn(min = CloudyControlMetrics.comfortableMinHeight).testTag("profile_protocol_${protocol.wireId}"))
+                        modifier = Modifier.heightIn(min = CloudyControlMetrics.controlMinHeight).testTag("profile_protocol_${protocol.wireId}"))
                 }
             }
             OutlinedTextField(value = draft.host, onValueChange = { onDraftChange(draft.copy(host = it)) },
                 label = { Text(stringResource(R.string.profile_host)) }, enabled = editable, singleLine = true,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Uri),
-                textStyle = MaterialTheme.typography.bodyLarge, shape = MaterialTheme.shapes.small,
+                textStyle = MaterialTheme.typography.bodyLarge, shape = RoundedCornerShape(CloudyControlMetrics.fieldRadius),
                 modifier = Modifier.fillMaxWidth().testTag("profile_host"))
             OutlinedTextField(value = draft.port, onValueChange = { onDraftChange(draft.copy(port = it)) },
                 label = { Text(stringResource(R.string.profile_port)) }, enabled = editable, singleLine = true,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                textStyle = MaterialTheme.typography.bodyLarge, shape = MaterialTheme.shapes.small,
+                textStyle = MaterialTheme.typography.bodyLarge, shape = RoundedCornerShape(CloudyControlMetrics.fieldRadius),
                 modifier = Modifier.fillMaxWidth().testTag("profile_port"))
             ProfileActions {
                 ProfileButton(R.string.profile_save, "profile_save", editable, onSave, primary = true)
@@ -209,7 +209,7 @@ private fun SavedProfileRow(profile: ConnectionProfile, busy: Boolean, onEdit: (
             // confirmation before changing editor identity or losing unsaved native field state.
             OutlinedButton(onClick = { onEdit(profile) }, enabled = !busy,
                 shape = RoundedCornerShape(CloudyControlMetrics.buttonRadius),
-                modifier = Modifier.heightIn(min = CloudyControlMetrics.comfortableMinHeight).semantics { contentDescription = description }
+                modifier = Modifier.heightIn(min = CloudyControlMetrics.controlMinHeight).semantics { contentDescription = description }
                     .testTag("profile_edit_${profile.id}")) {
                 Text(stringResource(R.string.profile_edit))
             }
@@ -242,9 +242,9 @@ private fun ProfileActions(content: @Composable () -> Unit) {
 
 @Composable
 private fun ProfileButton(label: Int, tag: String, enabled: Boolean, onClick: () -> Unit, primary: Boolean = false) {
-    // Control geometry comes from the canonical token facade. Field radius and typography
-    // come from the supplied CloudyTheme.
-    val modifier = Modifier.heightIn(min = CloudyControlMetrics.comfortableMinHeight).testTag(tag)
+    // Control geometry comes from the canonical token facade; typography comes from
+    // the owning app theme.
+    val modifier = Modifier.heightIn(min = CloudyControlMetrics.controlMinHeight).testTag(tag)
     val shape = RoundedCornerShape(CloudyControlMetrics.buttonRadius)
     if (primary) {
         Button(onClick = onClick, enabled = enabled, shape = shape, modifier = modifier) { Text(stringResource(label)) }

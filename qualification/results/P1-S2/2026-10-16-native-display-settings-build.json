@@ -1,0 +1,1015 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "baseCommit": "1084a5e27a76f78d6fcdf5a7e91f9f67f06cbc52",
+  "sourceChangesUncommittedAtBuild": true,
+  "sources": [
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/CloudyDisplayPreferencesStorageTest.kt",
+      "bytes": 5710,
+      "sha256": "d1ea95a23d4df586240afe0162e787fc4e109e6ea4294138be000f145c441d6a"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudyProfilesActivity.kt",
+      "bytes": 18883,
+      "sha256": "a9f1cd620c705ff12c4163c7689c40b32b8cfbda741259281deed3019e7e7396"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/DisplaySettingsScreen.kt",
+      "bytes": 7023,
+      "sha256": "7b4e85192c2d9235c674e28f3df8a13819e8350904f6ff3934dddf05b2e611f9"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudyAppTheme.kt",
+      "bytes": 2082,
+      "sha256": "20fb22a91736465fd6fc2aa5a3eef9f6129f2792547f1cd52e4b3cb8493b6a44"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudyWindowActivity.kt",
+      "bytes": 6667,
+      "sha256": "066f063c751fd51f7910cede75605307a3b92dae6ab140c9146061c31e36c3ea"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudyDisplaySettings.kt",
+      "bytes": 10488,
+      "sha256": "d4f6bc3e080a320dc7f496b0fe0e0ad3a5cb407368919b90918b4902c656626d"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/ProfileEditorScreen.kt",
+      "bytes": 14315,
+      "sha256": "b42148708846368ea94a63fb151f6e6ad6e23820a94ab246042737fa5c54623b"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudyVaultActivity.kt",
+      "bytes": 16955,
+      "sha256": "9e802bf856bc247b2f1342e6fec90f34452bf9f11bad1394eedfd567ee33f9b8"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/SshTrustScreen.kt",
+      "bytes": 10939,
+      "sha256": "4a692f8c7a5a10e6dab85587d55f696680bfc98d764b98b510de7e327c5e08e1"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudyDisplaySettingsActivity.kt",
+      "bytes": 1363,
+      "sha256": "ffc868b25b4edc534cafde8863eb73ec4cf63506a4666ca7aebcf047a9fa4a4c"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudySshTrustActivity.kt",
+      "bytes": 14103,
+      "sha256": "ce3163b6ec9d1c9f4a7db5af0bccb8653b25abe3b58dba17eaec97df1cfe19aa"
+    },
+    {
+      "path": "shared/android/platform/src/main/res/values/display_settings_strings.xml",
+      "bytes": 2178,
+      "sha256": "d10679661980ee0575c88026d496f3540179048f74a0d0c191cc5e4a25ec236d"
+    },
+    {
+      "path": "shared/design-system/android/src/main/res/values/strings.xml",
+      "bytes": 657,
+      "sha256": "5702a18175ae5cf6160d6d330d98bf6bba443380ee18e725cc9855fdbcdb9bf9"
+    },
+    {
+      "path": "shared/design-system/android/src/main/java/io/github/baitian6641/cloudy/design/CloudyTheme.kt",
+      "bytes": 4175,
+      "sha256": "ff600f5d1d333204b08b853f23fd87a5a5ccaded412c9a6c09cd921b0769c804"
+    },
+    {
+      "path": "shared/design-system/android/src/main/java/io/github/baitian6641/cloudy/design/CloudyControlMetrics.kt",
+      "bytes": 2527,
+      "sha256": "7fd07da98a3c6964f7d8eee7b26f727fe8afdad0dbd56688cb1109628fa110ac"
+    },
+    {
+      "path": "shared/design-system/android/src/main/java/io/github/baitian6641/cloudy/design/CloudyDisplayPreferences.kt",
+      "bytes": 493,
+      "sha256": "b88ac16d9dee72aa73884c07839cfa07ebf5af34242f0d00490c30edccc3d648"
+    },
+    {
+      "path": "shared/design-system/android/src/main/java/io/github/baitian6641/cloudy/design/WindowWorkspaceScreen.kt",
+      "bytes": 8199,
+      "sha256": "0edce4aa53d9a8ccaa888fa8c5d76844a27510a565a16a9c17f923f1a3191407"
+    },
+    {
+      "path": "apps/console/src/main/AndroidManifest.xml",
+      "bytes": 2228,
+      "sha256": "ada109ee49301e605747da802e413c6fdcf30244e1854be6b86b1aaf85bfe555"
+    },
+    {
+      "path": "apps/console/src/androidTest/kotlin/io/github/baitian6641/cloudy/console/ConsoleDisplaySettingsActivityTest.kt",
+      "bytes": 390,
+      "sha256": "b23a1bed047b08166200cf4d875b2cb7fd0a5f952d61872208bad33e21dfa1f2"
+    },
+    {
+      "path": "apps/console/src/androidTest/kotlin/io/github/baitian6641/cloudy/console/ConsoleWindowDisplayTest.kt",
+      "bytes": 441,
+      "sha256": "c21b6b810263e90ee2c4cc7cb358d5729297850fa395425a4f13b289f656cbe4"
+    },
+    {
+      "path": "apps/desktop/src/main/AndroidManifest.xml",
+      "bytes": 2228,
+      "sha256": "ada109ee49301e605747da802e413c6fdcf30244e1854be6b86b1aaf85bfe555"
+    },
+    {
+      "path": "apps/desktop/src/androidTest/kotlin/io/github/baitian6641/cloudy/desktop/DesktopWindowDisplayTest.kt",
+      "bytes": 442,
+      "sha256": "ff118639bda89f9132967c7e5c4ebfaca21e3bb4158d533f4a7f07b6aca2e206"
+    },
+    {
+      "path": "apps/desktop/src/androidTest/kotlin/io/github/baitian6641/cloudy/desktop/DesktopDisplaySettingsActivityTest.kt",
+      "bytes": 390,
+      "sha256": "7877dc10b0e7f4e5589bfc133c8a7a75de8bc4b3eca872df6eaa8b55019bdfca"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/WindowDisplayContract.kt",
+      "bytes": 9007,
+      "sha256": "b2f5afd1f8c8b7af64abb8009e133b0e946f16052d9235af8523ad56f9a29e75"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/DisplaySettingsActivityContract.kt",
+      "bytes": 7061,
+      "sha256": "82b5526141278ea0e6476a3c0dfe2926f291c8c61d86c139e461e0d461e02951"
+    },
+    {
+      "path": "apps/console/build.gradle.kts",
+      "bytes": 2264,
+      "sha256": "fb927bb9eecfa5f0a09c93560786ec94080c8bff7518886da0bad8b969969c80"
+    },
+    {
+      "path": "apps/desktop/build.gradle.kts",
+      "bytes": 2264,
+      "sha256": "fc5e3ecb5028ef59d3207b0d5d9cc53da95bf46e70d598a4c7b00474ff797ad4"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "apps/console/build/outputs/apk/debug/console-debug.apk",
+      "bytes": 32042472,
+      "sha256": "6ebeb44ffd529000dc733dcff9929389897b631fae9de81f2c5d0b9439390ebb"
+    },
+    {
+      "path": "apps/desktop/build/outputs/apk/debug/desktop-debug.apk",
+      "bytes": 32042484,
+      "sha256": "61962a70e93f3c4e8d31239be32ad2b4856006221d0c9a852ae4236f65606076"
+    },
+    {
+      "path": "shared/android/platform/build/outputs/apk/androidTest/debug/platform-debug-androidTest.apk",
+      "bytes": 33070527,
+      "sha256": "e7ac46333112825d1bfd1b4a91df6fb62d589f60d7b2939fd19792cf57c9ceae"
+    },
+    {
+      "path": "apps/console/build/outputs/apk/androidTest/debug/console-debug-androidTest.apk",
+      "bytes": 3207477,
+      "sha256": "00c32f0f6248e5d7abc883b0868c26325630541f880f4fbf9a30cbb052df0c73"
+    },
+    {
+      "path": "apps/desktop/build/outputs/apk/androidTest/debug/desktop-debug-androidTest.apk",
+      "bytes": 3207481,
+      "sha256": "d86ae5e7b0f9e34d99957ad8874036568ae8ad627417d1aff43942b1e1cb1578"
+    }
+  ],
+  "build": {
+    "startedAt": "2026-10-16T10:19:13.005419+00:00",
+    "endedAt": "2026-10-16T10:19:38.175925+00:00",
+    "command": [
+      "./gradlew",
+      ":domain:test",
+      ":design-system:testDebugUnitTest",
+      ":console:assembleDebug",
+      ":desktop:assembleDebug",
+      ":console:lintDebug",
+      ":desktop:lintDebug",
+      ":platform:lintDebug",
+      ":design-system:lintDebug",
+      ":platform:assembleDebugAndroidTest",
+      ":console:assembleDebugAndroidTest",
+      ":desktop:assembleDebugAndroidTest",
+      "--dependency-verification=strict",
+      "--no-daemon",
+      "--console=plain",
+      "--max-workers=4"
+    ],
+    "exitCode": 0,
+    "sourceUnchangedDuringBuild": true
+  },
+  "device": {
+    "model": "HP Googlebook 14",
+    "release": "17",
+    "api": "37",
+    "build": "CL3B.260622.276.R2",
+    "incremental": "16560795",
+    "abi": "arm64-v8a"
+  },
+  "deviceInterval": {
+    "startedAt": "2026-10-16T10:24:38.979190+00:00",
+    "endedAt": "2026-10-16T10:24:59.508947+00:00"
+  },
+  "actualCases": {
+    "storage": {
+      "passed": true,
+      "expected": 4,
+      "completed": 4,
+      "effectivePreferenceRestorations": 0,
+      "trustRestorations": 0
+    },
+    "consoleDisplay": {
+      "passed": true,
+      "expected": 2,
+      "completed": 2,
+      "effectivePreferenceRestorations": 2,
+      "trustRestorations": 0
+    },
+    "consoleRegression": {
+      "passed": true,
+      "expected": 2,
+      "completed": 2,
+      "effectivePreferenceRestorations": 0,
+      "trustRestorations": 1
+    },
+    "desktopDisplay": {
+      "passed": true,
+      "expected": 2,
+      "completed": 2,
+      "effectivePreferenceRestorations": 2,
+      "trustRestorations": 0
+    },
+    "desktopRegression": {
+      "passed": true,
+      "expected": 2,
+      "completed": 2,
+      "effectivePreferenceRestorations": 0,
+      "trustRestorations": 1
+    }
+  },
+  "captureFiles": [
+    {
+      "name": "light-comfortable.png",
+      "bytes": 62191,
+      "sha256": "4cc202736a83d2c1117c81f077fb6bfbf9d81a1ca3fdf0b37a42159b51f3841b"
+    },
+    {
+      "name": "light-standard_pointer.png",
+      "bytes": 62141,
+      "sha256": "e1cac2b20bc77d5adf0591ad9d10c74a38d652e72bbd2a88e63fd76a6320ec44"
+    },
+    {
+      "name": "light-compact_pointer.png",
+      "bytes": 62092,
+      "sha256": "3eb7b7848ab95374d4ccdd9b1119a5e4e6aad379fba5280e137cd36436dddc2e"
+    },
+    {
+      "name": "dark-comfortable.png",
+      "bytes": 63323,
+      "sha256": "93acf8cf410028173036dbf28e92838637bc0adaabf3fa0ff3700be73e9c73b7"
+    },
+    {
+      "name": "dark-standard_pointer.png",
+      "bytes": 63101,
+      "sha256": "15d24de734ae2eb606570eea17e9cb94363441b89c9148109dfa07e135b7a868"
+    },
+    {
+      "name": "dark-compact_pointer.png",
+      "bytes": 63088,
+      "sha256": "fbb41a30b99e9661ed6462eb605ed582a0e4938983ff6bac37eb8c8035023040"
+    },
+    {
+      "name": "report.json",
+      "bytes": 14963,
+      "sha256": "48328585b5162f99e3b4960e292f1b507baee92e96fbf6dbc65aacde2fd87214"
+    }
+  ],
+  "captureMeasurements": [
+    {
+      "appearance": "LIGHT",
+      "densityPreference": "COMFORTABLE",
+      "screenshot": "light-comfortable.png",
+      "widthPx": 2073,
+      "heightPx": 1231,
+      "scrollPosition": "Committed window heading scrolled into view; viewport only",
+      "fontScale": 1,
+      "densityDpi": 260,
+      "displayDensity": 1.625,
+      "screenWidthDp": 1276,
+      "screenHeightDp": 798,
+      "uiMode": 17,
+      "controls": [
+        {
+          "label": "Saved credentials",
+          "buttonClippedBoundsPx": [
+            26,
+            139,
+            278,
+            217
+          ],
+          "textClippedBoundsPx": [
+            65,
+            162,
+            239,
+            195
+          ]
+        },
+        {
+          "label": "Connection profiles",
+          "buttonClippedBoundsPx": [
+            26,
+            237,
+            293,
+            315
+          ],
+          "textClippedBoundsPx": [
+            65,
+            260,
+            254,
+            293
+          ]
+        },
+        {
+          "label": "SSH host keys",
+          "buttonClippedBoundsPx": [
+            26,
+            335,
+            243,
+            413
+          ],
+          "textClippedBoundsPx": [
+            65,
+            358,
+            204,
+            391
+          ]
+        },
+        {
+          "label": "Appearance and density",
+          "buttonClippedBoundsPx": [
+            26,
+            433,
+            339,
+            511
+          ],
+          "textClippedBoundsPx": [
+            65,
+            456,
+            300,
+            489
+          ]
+        },
+        {
+          "label": "Apply name",
+          "buttonClippedBoundsPx": [
+            26,
+            681,
+            220,
+            759
+          ],
+          "textClippedBoundsPx": [
+            65,
+            704,
+            181,
+            737
+          ]
+        },
+        {
+          "label": "New window",
+          "buttonClippedBoundsPx": [
+            233,
+            681,
+            434,
+            759
+          ],
+          "textClippedBoundsPx": [
+            272,
+            704,
+            395,
+            737
+          ]
+        },
+        {
+          "label": "Close window",
+          "buttonClippedBoundsPx": [
+            447,
+            681,
+            659,
+            759
+          ],
+          "textClippedBoundsPx": [
+            486,
+            704,
+            620,
+            737
+          ]
+        }
+      ]
+    },
+    {
+      "appearance": "LIGHT",
+      "densityPreference": "STANDARD_POINTER",
+      "screenshot": "light-standard_pointer.png",
+      "widthPx": 2073,
+      "heightPx": 1231,
+      "scrollPosition": "Committed window heading scrolled into view; viewport only",
+      "fontScale": 1,
+      "densityDpi": 260,
+      "displayDensity": 1.625,
+      "screenWidthDp": 1276,
+      "screenHeightDp": 798,
+      "uiMode": 17,
+      "controls": [
+        {
+          "label": "Saved credentials",
+          "buttonClippedBoundsPx": [
+            20,
+            126,
+            272,
+            191
+          ],
+          "textClippedBoundsPx": [
+            59,
+            142,
+            233,
+            175
+          ]
+        },
+        {
+          "label": "Connection profiles",
+          "buttonClippedBoundsPx": [
+            20,
+            217,
+            287,
+            282
+          ],
+          "textClippedBoundsPx": [
+            59,
+            233,
+            248,
+            266
+          ]
+        },
+        {
+          "label": "SSH host keys",
+          "buttonClippedBoundsPx": [
+            20,
+            308,
+            237,
+            373
+          ],
+          "textClippedBoundsPx": [
+            59,
+            324,
+            198,
+            357
+          ]
+        },
+        {
+          "label": "Appearance and density",
+          "buttonClippedBoundsPx": [
+            20,
+            399,
+            333,
+            464
+          ],
+          "textClippedBoundsPx": [
+            59,
+            415,
+            294,
+            448
+          ]
+        },
+        {
+          "label": "Apply name",
+          "buttonClippedBoundsPx": [
+            20,
+            633,
+            214,
+            698
+          ],
+          "textClippedBoundsPx": [
+            59,
+            649,
+            175,
+            682
+          ]
+        },
+        {
+          "label": "New window",
+          "buttonClippedBoundsPx": [
+            227,
+            633,
+            428,
+            698
+          ],
+          "textClippedBoundsPx": [
+            266,
+            649,
+            389,
+            682
+          ]
+        },
+        {
+          "label": "Close window",
+          "buttonClippedBoundsPx": [
+            441,
+            633,
+            653,
+            698
+          ],
+          "textClippedBoundsPx": [
+            480,
+            649,
+            614,
+            682
+          ]
+        }
+      ]
+    },
+    {
+      "appearance": "LIGHT",
+      "densityPreference": "COMPACT_POINTER",
+      "screenshot": "light-compact_pointer.png",
+      "widthPx": 2073,
+      "heightPx": 1231,
+      "scrollPosition": "Committed window heading scrolled into view; viewport only",
+      "fontScale": 1,
+      "densityDpi": 260,
+      "displayDensity": 1.625,
+      "screenWidthDp": 1276,
+      "screenHeightDp": 798,
+      "uiMode": 17,
+      "controls": [
+        {
+          "label": "Saved credentials",
+          "buttonClippedBoundsPx": [
+            13,
+            122,
+            265,
+            181
+          ],
+          "textClippedBoundsPx": [
+            52,
+            135,
+            226,
+            168
+          ]
+        },
+        {
+          "label": "Connection profiles",
+          "buttonClippedBoundsPx": [
+            13,
+            213,
+            280,
+            272
+          ],
+          "textClippedBoundsPx": [
+            52,
+            226,
+            241,
+            259
+          ]
+        },
+        {
+          "label": "SSH host keys",
+          "buttonClippedBoundsPx": [
+            13,
+            304,
+            230,
+            363
+          ],
+          "textClippedBoundsPx": [
+            52,
+            317,
+            191,
+            350
+          ]
+        },
+        {
+          "label": "Appearance and density",
+          "buttonClippedBoundsPx": [
+            13,
+            395,
+            326,
+            454
+          ],
+          "textClippedBoundsPx": [
+            52,
+            408,
+            287,
+            441
+          ]
+        },
+        {
+          "label": "Apply name",
+          "buttonClippedBoundsPx": [
+            13,
+            629,
+            207,
+            688
+          ],
+          "textClippedBoundsPx": [
+            52,
+            642,
+            168,
+            675
+          ]
+        },
+        {
+          "label": "New window",
+          "buttonClippedBoundsPx": [
+            214,
+            629,
+            415,
+            688
+          ],
+          "textClippedBoundsPx": [
+            253,
+            642,
+            376,
+            675
+          ]
+        },
+        {
+          "label": "Close window",
+          "buttonClippedBoundsPx": [
+            422,
+            629,
+            634,
+            688
+          ],
+          "textClippedBoundsPx": [
+            461,
+            642,
+            595,
+            675
+          ]
+        }
+      ]
+    },
+    {
+      "appearance": "DARK",
+      "densityPreference": "COMFORTABLE",
+      "screenshot": "dark-comfortable.png",
+      "widthPx": 2073,
+      "heightPx": 1231,
+      "scrollPosition": "Committed window heading scrolled into view; viewport only",
+      "fontScale": 1,
+      "densityDpi": 260,
+      "displayDensity": 1.625,
+      "screenWidthDp": 1276,
+      "screenHeightDp": 798,
+      "uiMode": 17,
+      "controls": [
+        {
+          "label": "Saved credentials",
+          "buttonClippedBoundsPx": [
+            26,
+            139,
+            278,
+            217
+          ],
+          "textClippedBoundsPx": [
+            65,
+            162,
+            239,
+            195
+          ]
+        },
+        {
+          "label": "Connection profiles",
+          "buttonClippedBoundsPx": [
+            26,
+            237,
+            293,
+            315
+          ],
+          "textClippedBoundsPx": [
+            65,
+            260,
+            254,
+            293
+          ]
+        },
+        {
+          "label": "SSH host keys",
+          "buttonClippedBoundsPx": [
+            26,
+            335,
+            243,
+            413
+          ],
+          "textClippedBoundsPx": [
+            65,
+            358,
+            204,
+            391
+          ]
+        },
+        {
+          "label": "Appearance and density",
+          "buttonClippedBoundsPx": [
+            26,
+            433,
+            339,
+            511
+          ],
+          "textClippedBoundsPx": [
+            65,
+            456,
+            300,
+            489
+          ]
+        },
+        {
+          "label": "Apply name",
+          "buttonClippedBoundsPx": [
+            26,
+            681,
+            220,
+            759
+          ],
+          "textClippedBoundsPx": [
+            65,
+            704,
+            181,
+            737
+          ]
+        },
+        {
+          "label": "New window",
+          "buttonClippedBoundsPx": [
+            233,
+            681,
+            434,
+            759
+          ],
+          "textClippedBoundsPx": [
+            272,
+            704,
+            395,
+            737
+          ]
+        },
+        {
+          "label": "Close window",
+          "buttonClippedBoundsPx": [
+            447,
+            681,
+            659,
+            759
+          ],
+          "textClippedBoundsPx": [
+            486,
+            704,
+            620,
+            737
+          ]
+        }
+      ]
+    },
+    {
+      "appearance": "DARK",
+      "densityPreference": "STANDARD_POINTER",
+      "screenshot": "dark-standard_pointer.png",
+      "widthPx": 2073,
+      "heightPx": 1231,
+      "scrollPosition": "Committed window heading scrolled into view; viewport only",
+      "fontScale": 1,
+      "densityDpi": 260,
+      "displayDensity": 1.625,
+      "screenWidthDp": 1276,
+      "screenHeightDp": 798,
+      "uiMode": 17,
+      "controls": [
+        {
+          "label": "Saved credentials",
+          "buttonClippedBoundsPx": [
+            20,
+            126,
+            272,
+            191
+          ],
+          "textClippedBoundsPx": [
+            59,
+            142,
+            233,
+            175
+          ]
+        },
+        {
+          "label": "Connection profiles",
+          "buttonClippedBoundsPx": [
+            20,
+            217,
+            287,
+            282
+          ],
+          "textClippedBoundsPx": [
+            59,
+            233,
+            248,
+            266
+          ]
+        },
+        {
+          "label": "SSH host keys",
+          "buttonClippedBoundsPx": [
+            20,
+            308,
+            237,
+            373
+          ],
+          "textClippedBoundsPx": [
+            59,
+            324,
+            198,
+            357
+          ]
+        },
+        {
+          "label": "Appearance and density",
+          "buttonClippedBoundsPx": [
+            20,
+            399,
+            333,
+            464
+          ],
+          "textClippedBoundsPx": [
+            59,
+            415,
+            294,
+            448
+          ]
+        },
+        {
+          "label": "Apply name",
+          "buttonClippedBoundsPx": [
+            20,
+            633,
+            214,
+            698
+          ],
+          "textClippedBoundsPx": [
+            59,
+            649,
+            175,
+            682
+          ]
+        },
+        {
+          "label": "New window",
+          "buttonClippedBoundsPx": [
+            227,
+            633,
+            428,
+            698
+          ],
+          "textClippedBoundsPx": [
+            266,
+            649,
+            389,
+            682
+          ]
+        },
+        {
+          "label": "Close window",
+          "buttonClippedBoundsPx": [
+            441,
+            633,
+            653,
+            698
+          ],
+          "textClippedBoundsPx": [
+            480,
+            649,
+            614,
+            682
+          ]
+        }
+      ]
+    },
+    {
+      "appearance": "DARK",
+      "densityPreference": "COMPACT_POINTER",
+      "screenshot": "dark-compact_pointer.png",
+      "widthPx": 2073,
+      "heightPx": 1231,
+      "scrollPosition": "Committed window heading scrolled into view; viewport only",
+      "fontScale": 1,
+      "densityDpi": 260,
+      "displayDensity": 1.625,
+      "screenWidthDp": 1276,
+      "screenHeightDp": 798,
+      "uiMode": 17,
+      "controls": [
+        {
+          "label": "Saved credentials",
+          "buttonClippedBoundsPx": [
+            13,
+            122,
+            265,
+            181
+          ],
+          "textClippedBoundsPx": [
+            52,
+            135,
+            226,
+            168
+          ]
+        },
+        {
+          "label": "Connection profiles",
+          "buttonClippedBoundsPx": [
+            13,
+            213,
+            280,
+            272
+          ],
+          "textClippedBoundsPx": [
+            52,
+            226,
+            241,
+            259
+          ]
+        },
+        {
+          "label": "SSH host keys",
+          "buttonClippedBoundsPx": [
+            13,
+            304,
+            230,
+            363
+          ],
+          "textClippedBoundsPx": [
+            52,
+            317,
+            191,
+            350
+          ]
+        },
+        {
+          "label": "Appearance and density",
+          "buttonClippedBoundsPx": [
+            13,
+            395,
+            326,
+            454
+          ],
+          "textClippedBoundsPx": [
+            52,
+            408,
+            287,
+            441
+          ]
+        },
+        {
+          "label": "Apply name",
+          "buttonClippedBoundsPx": [
+            13,
+            629,
+            207,
+            688
+          ],
+          "textClippedBoundsPx": [
+            52,
+            642,
+            168,
+            675
+          ]
+        },
+        {
+          "label": "New window",
+          "buttonClippedBoundsPx": [
+            214,
+            629,
+            415,
+            688
+          ],
+          "textClippedBoundsPx": [
+            253,
+            642,
+            376,
+            675
+          ]
+        },
+        {
+          "label": "Close window",
+          "buttonClippedBoundsPx": [
+            422,
+            629,
+            634,
+            688
+          ],
+          "textClippedBoundsPx": [
+            461,
+            642,
+            595,
+            675
+          ]
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Viewport captures only, not native caption or complete component catalog",
+    "Application-context configuration is recorded separately from actual captured root dimensions",
+    "Clipped semantics bounds do not measure interactive hit targets",
+    "Effective preference values restored; previously absent XML created with explicit defaults",
+    "No process-death, disk-failure, physical-input, font-scale or accessibility qualification"
+  ]
+}

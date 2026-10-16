@@ -77,3 +77,11 @@ The [0.1.4 profile editor](../../qualification/results/P1-S3/2026-10-16-profile-
 ## Native SSH trust component follow-through
 
 The [0.1.5 SSH trust manager](../../qualification/results/P1-S3/2026-10-16-ssh-trust-manager.md) applies the same explicit canonical section typography, raised dialog container,20dp dialog radius and control metrics. Exact peer/key/state details remain selectable, with an explicit fingerprint-only copy action. Inspection/revocation and controlled recreation pass actual Activity tests; both-theme/scaled/narrow rendering, physical focus/selection and clipboard execution still need their own evidence. This adds another source-level application of the feedback without promoting the remaining vault dialog, specimen density/state or full P1-S2 gates.
+
+## Native appearance, density and vault-dialog follow-through
+
+The [0.1.6 native display increment](../../qualification/results/P1-S2/2026-10-16-native-display-settings.md) implements per-app System/Light/Dark and the existing three density tiers. It also corrects the vault deletion dialog's explicit section typography, raised container and20dp shape, preserving its security/lifecycle behavior. The vault change is source/compile reviewed; protected-dialog rendering and authentication remain unqualified.
+
+Twelve actual Android cases pass. Six leader-inspected Console viewport captures cover Light/Dark × Comfortable/Standard pointer/Compact pointer at font scale1.0, with preserved native draft/selection and window identity. Sampled control semantics heights are48/40/36.31dp;32dp remains a nominal Compact minimum, not an exact rendered size or hit-target measurement. No token/palette replacement or scope expansion follows from this result.
+
+This supersedes only the native missing-choice/nominal-density and vault-source findings above. The HTML specimen still needs its section/metadata, Standard pointer and hover-state work. Native narrow/short/scaled geometry, physical focus/input, accessibility and full component review remain open. The original document remains unchanged review material, and proposed palette/halo/EDA integration ideas retain their earlier disposition.

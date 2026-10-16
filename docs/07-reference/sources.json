@@ -6016,6 +6016,66 @@
       "sourceUpdatedOn": "2026-10-01",
       "note": "LazyColumn item keys must be stable/unique and supported by Android Bundle (primitive, enum or Parcelable). A custom domain peer class is not an eligible saved-state key; SSH trust UI uses an unambiguous primitive key. rememberLazyListState and animateScrollToItem support deliberate selected-details visibility. These are library guidance, not a rendered or device pass. Owner: Android/platform; P1-S2/P1-S3. Existing pinned Compose stack unchanged.",
       "refresh": "Before changing trust-list identity, saved list state or selected-details scrolling."
+    },
+    {
+      "id": "G213",
+      "title": "Android app-private SharedPreferences",
+      "url": "https://developer.android.com/reference/android/content/SharedPreferences",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "SharedPreferences API1; process-local shared instances, explicitly not supported across multiple processes. Direct fetch timed out in this refresh; official indexed reference confirms process limitation, with Editor reference directly inspected. Cloudy uses only two app-private presentation enum fields and one owning-app process state; no credentials or cross-process authority. Fallback: safe presentation defaults plus unavailable/recovery notice. Owner: Android/platform; P1-S2.",
+      "refresh": "Before changing display preference persistence, theme ownership, density mapping or selected AndroidX dependencies."
+    },
+    {
+      "id": "G214",
+      "title": "Android synchronous preference editor commit",
+      "url": "https://developer.android.com/reference/android/content/SharedPreferences.Editor",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2026-08-03",
+      "note": "Editor.commit() API1 synchronously reports persistent write success; apply() API9 has no failure notification. Editors modify selected fields and last commit wins for concurrent modifications. Cloudy serializes off-main enum-field-only commits, preserves unrelated keys, and retains write uncertainty after failure: a cached reread does not prove persistence. Fallback: explicit user retry, no automatic mutation replay. Owner: Android/platform; P1-S2.",
+      "refresh": "Before changing display preference persistence, theme ownership, density mapping or selected AndroidX dependencies."
+    },
+    {
+      "id": "G215",
+      "title": "AndroidX per-window system bar appearance",
+      "url": "https://developer.android.com/reference/androidx/activity/SystemBarStyle",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "SystemBarStyle.auto(lightScrim,darkScrim,detectDarkMode) added Activity1.8.0; selected Activity1.13.0 remains pinned. Moving documentation marks it deprecated in1.14.0-alpha03 and recommends WindowCompat/ProtectionLayout; that newer API surface is not adopted or repinned here. Cloudy updates owning-window transparent styles with effective content darkness, without app/global uiMode mutation. Fallback: retain platform caption/splash/IME appearance; review migration before dependency upgrade. Owner: Android/platform; P1-S2.",
+      "refresh": "Before changing display preference persistence, theme ownership, density mapping or selected AndroidX dependencies."
+    },
+    {
+      "id": "G216",
+      "title": "Compose composition-scoped presentation values",
+      "url": "https://developer.android.com/develop/ui/compose/compositionlocal",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "CompositionLocalProvider and staticCompositionLocalOf scope values to a composition subtree; provider changes recompose consumers. Cloudy scopes canonical density metrics while retaining sp typography, system font scaling and native Material interactive minimums. Existing pinned Compose runtime/UI/foundation1.12.1 and Material3 1.4.0 unchanged. Fallback: Comfortable metric defaults; physical input/rendered geometry qualification remains separate. Owner: design/Android; P1-S2.",
+      "refresh": "Before changing display preference persistence, theme ownership, density mapping or selected AndroidX dependencies."
+    },
+    {
+      "id": "G217",
+      "title": "Android application night mode alternative",
+      "url": "https://developer.android.com/reference/android/app/UiModeManager",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "setApplicationNightMode(int), added API31, persists an application night-mode override and may change configuration/recreate components. Reviewed alternative, not adopted: this slice uses app-private Compose presentation preferences and window bar contrast; SYSTEM reads current system darkness. Do not infer a resetApplicationNightMode API or follow-system reset from MODE_NIGHT_AUTO. No device-global setNightMode call. Fallback: retain the chosen Compose-only boundary with OS-owned caption/splash/IME. Owner: Android/platform; P1-S2.",
+      "refresh": "Before changing display preference persistence, theme ownership, density mapping or selected AndroidX dependencies."
     }
   ]
 }
