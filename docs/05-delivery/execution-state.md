@@ -95,3 +95,8 @@ The [0.1.1/code2 increment](../../qualification/results/P1-S2/2026-10-16-committ
 At pushed6017877, six existing workflows pass and the new product workflow fails after SDK/token checks. Unauthenticated detailed logs are unavailable. The [local reproduction/repair](../06-validation/2026-10-16-foundation-clean-build.md) identifies five missing dependency metadata hashes and verifies exact MavenCentral bytes; no selected versions/locks change. CI now preserves bounded escaped failure diagnostics. New hosted recovery is pending the next push; do not label6017877 all-green or infer its detailed failure from the local reproduction.
 
 P1-S3 remains planned with a [reviewed real vault entry](../03-platform/googlebook/product-vault-entry.md). Actual GLM proposal and direct Codex/parent review reject placeholders, unsupported invalidation assumptions and incomplete cleanup; no vault has been implemented. Continue the full goal with ready P1-S2 interaction and P1-S3 protected identity work.
+
+
+## Exact hosted checkpoint
+
+All seven workflows pass for implementation commit `31a3df82695229c7a5931db8d01b0af1467a60fd`, including product foundation run38859789521. The [public exact-SHA receipt](../../qualification/results/P1-S2/2026-10-16-ci-checkpoint.json) records all run IDs/URLs and check time. This establishes hosted recovery; the initial6017877 product failure remains historical. Source, actual0.1.1device checks and private evidence are unchanged by this result-record update. A later documentation commit does not inherit an exact-SHA result; the accepted implementation checkpoint remains31a3df8. Only the three previously unintegrated streaming-input files remain intentionally untracked.

@@ -1,0 +1,56 @@
+{
+  "sha": "31a3df82695229c7a5931db8d01b0af1467a60fd",
+  "checkedAt": "2026-10-16T06:15:23.057550+00:00",
+  "runs": [
+    {
+      "name": "Repository checks",
+      "id": 38859789506,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/BaiTian6641/Cloudy-Workspace/actions/runs/38859789506"
+    },
+    {
+      "name": "Android native USB diagnostic",
+      "id": 38859789531,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/BaiTian6641/Cloudy-Workspace/actions/runs/38859789531"
+    },
+    {
+      "name": "Android native stream diagnostic",
+      "id": 38859789561,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/BaiTian6641/Cloudy-Workspace/actions/runs/38859789561"
+    },
+    {
+      "name": "Android qualification probe",
+      "id": 38859789557,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/BaiTian6641/Cloudy-Workspace/actions/runs/38859789557"
+    },
+    {
+      "name": "Android native RDP diagnostic",
+      "id": 38859789591,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/BaiTian6641/Cloudy-Workspace/actions/runs/38859789591"
+    },
+    {
+      "name": "Android product foundation",
+      "id": 38859789521,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/BaiTian6641/Cloudy-Workspace/actions/runs/38859789521"
+    },
+    {
+      "name": "Android native VNC diagnostic",
+      "id": 38859789545,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/BaiTian6641/Cloudy-Workspace/actions/runs/38859789545"
+    }
+  ],
+  "scope": "Exact implementation commit hosted results only; separate from actual Googlebook evidence"
+}
