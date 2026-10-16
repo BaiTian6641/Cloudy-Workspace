@@ -1,6 +1,6 @@
 # Retained Linux managed-run owner
 
-**Accepted construction boundary:** parent and independent source03/composite evidence review accept the bounded internal library and affected pure checks. Combined evidence covers seven distinct pure methods across two runs; the first run remains failed. Native managedrun execution remains unrun.
+**Accepted construction boundary:** parent and independent source03/composite evidence review accept the bounded internal library and affected pure checks. Combined evidence covers seven distinct pure methods across two runs; the first run remains failed. The subsequent [one-method native composition](../../qualification/results/P4-S1/2026-10-16-host-managed-run-native.md) now passes actual retained-owner/recorder/store behavior for one controlled Linux child; this is separate from those pure checks and does not supply a service lifetime.
 
 HOST-RETAINED-RUN01 adds one in-process owner in `host/core/internal/managedrun`. It composes the accepted Linux jobs, recorder and local event-store APIs while keeping a real returned Job reachable through uncertainty. It adds no CLI, service, registry, listener, remote admission or crash recovery. Host executable version remains 0.1.3 and P4 stage prerequisites remain unchanged.
 

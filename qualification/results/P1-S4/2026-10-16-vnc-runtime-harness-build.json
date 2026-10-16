@@ -1,0 +1,693 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "VNC isolated repaired-AAR runtime harness compiler03 and packaging inspection",
+  "status": "ACCEPTED_COMPILER03_AND_OFFLINE_ARTIFACT_METADATA_ONLY",
+  "acceptance": "Independent compiler and APK evidence reviews plus parent merged-test-surface metadata acceptance; deviceReady=false, no runtime pass or device operation scheduled by this artifact receipt",
+  "publishedBase": "950bce19378f6b4670ed5a23aa26b902dbc5a813",
+  "build": {
+    "result": {
+      "path": ".cache/vnc-product-runtime-entry-02/build-03/result.json",
+      "sha256": "381c9b6228604e215fb06c98488ea6fc3aee6451ddbbc9cd9d6126070ae12b21"
+    },
+    "exitCode": 0,
+    "tasks": {
+      "total": 73,
+      "executed": 23,
+      "upToDate": 50
+    },
+    "gradleSeconds": 12.117156300984789,
+    "receiptWallSeconds": 12.433354,
+    "lintIssues": 0,
+    "tasksAreAllFresh": false,
+    "command": [
+      "${REPO}/gradlew",
+      "--project-dir",
+      "${REPO}/.cache/vnc-product-runtime-entry-02/project",
+      ":runtime:assembleDebug",
+      ":runtime:assembleDebugAndroidTest",
+      ":runtime:lintDebug",
+      "--offline",
+      "--dependency-verification=strict",
+      "--no-daemon",
+      "--console=plain",
+      "--max-workers=4"
+    ],
+    "instrumentationExecuted": false,
+    "jvmTestsExecuted": false,
+    "deviceExecuted": false,
+    "canonicalModuleAssembleExecuted": false,
+    "nativeRebuilt": false,
+    "artifacts": {
+      "runtime/build/outputs/apk/debug/runtime-debug.apk": {
+        "sha256": "739fd2948761197011e485b8623a1b481e26774ada2b1fa201b4cf8381494de9",
+        "bytes": 76695405
+      },
+      "runtime/build/outputs/apk/androidTest/debug/runtime-debug-androidTest.apk": {
+        "sha256": "f0dfee73ef3e064bfc03a19c08ecc3ba205a9a93f0a82c440e023491530370dd",
+        "bytes": 2235458
+      },
+      "runtime/build/reports/lint-results-debug.xml": {
+        "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f",
+        "bytes": 86
+      }
+    }
+  },
+  "apkInspection": {
+    "result": {
+      "path": ".cache/vnc-product-runtime-entry-02/apk-inspection-01/result03.json",
+      "sha256": "373cf4fedeb5d4c2c3e2f876b91a2276b8a9469ec1973934885b381229212c86"
+    },
+    "freeze": {
+      "path": ".cache/vnc-product-runtime-entry-02/apk-inspection-01/freeze03.json",
+      "sha256": "629dc01965395015ea4b94f976516b80d97bdf1eee256795ba4711864cd22395"
+    },
+    "sdkCommandsExecutedOnce": 8,
+    "sdkCommandsRerun": false,
+    "allExitCodes": 0,
+    "allStderrBytes": 0,
+    "inputHashesBeforeAfterEqual": true,
+    "apks": {
+      "target": {
+        "package": "io.github.baitian6641.cloudy.desktop.vnc.runtime",
+        "sha256": "739fd2948761197011e485b8623a1b481e26774ada2b1fa201b4cf8381494de9",
+        "compileSdk": 37,
+        "minSdk": 35,
+        "targetSdk": 37,
+        "permissions": [
+          "android.permission.INTERNET",
+          "android.permission.ACCESS_LOCAL_NETWORK"
+        ],
+        "components": [],
+        "classDefinitionCount": 1223,
+        "signerSha256": "ce641362dd8500eed3c179a029899e1a24dfd5249e29c816ca9e637978de2807",
+        "engineDefinitions": [
+          "Lio/github/baitian6641/cloudy/desktop/vnc/VncBridge$Sink;",
+          "Lio/github/baitian6641/cloudy/desktop/vnc/VncBridge;",
+          "Lio/github/baitian6641/cloudy/desktop/vnc/VncEngine$Input;",
+          "Lio/github/baitian6641/cloudy/desktop/vnc/VncEngine$$ExternalSyntheticLambda0;",
+          "Lio/github/baitian6641/cloudy/desktop/vnc/VncEngine$$ExternalSyntheticLambda1;",
+          "Lio/github/baitian6641/cloudy/desktop/vnc/VncEngine$$ExternalSyntheticLambda2;",
+          "Lio/github/baitian6641/cloudy/desktop/vnc/VncEngine$$ExternalSyntheticLambda3;",
+          "Lio/github/baitian6641/cloudy/desktop/vnc/VncEngine$$ExternalSyntheticLambda4;",
+          "Lio/github/baitian6641/cloudy/desktop/vnc/VncEngine$$ExternalSyntheticLambda5;",
+          "Lio/github/baitian6641/cloudy/desktop/vnc/VncEngine$$ExternalSyntheticLambda6;",
+          "Lio/github/baitian6641/cloudy/desktop/vnc/VncEngine$$ExternalSyntheticLambda7;",
+          "Lio/github/baitian6641/cloudy/desktop/vnc/VncEngine$$ExternalSyntheticLambda8;",
+          "Lio/github/baitian6641/cloudy/desktop/vnc/VncEngine$Backend;",
+          "Lio/github/baitian6641/cloudy/desktop/vnc/VncEngine$1;",
+          "Lio/github/baitian6641/cloudy/desktop/vnc/VncEngine$2;",
+          "Lio/github/baitian6641/cloudy/desktop/vnc/VncEngine$Config$$ExternalSyntheticLambda0;",
+          "Lio/github/baitian6641/cloudy/desktop/vnc/VncEngine$Config;",
+          "Lio/github/baitian6641/cloudy/desktop/vnc/VncEngine$Frame;",
+          "Lio/github/baitian6641/cloudy/desktop/vnc/VncEngine$ReleaseOutcome;",
+          "Lio/github/baitian6641/cloudy/desktop/vnc/VncEngine$Snapshot;",
+          "Lio/github/baitian6641/cloudy/desktop/vnc/VncEngine$State;",
+          "Lio/github/baitian6641/cloudy/desktop/vnc/VncEngine-IA;",
+          "Lio/github/baitian6641/cloudy/desktop/vnc/VncEngine;",
+          "Lio/github/baitian6641/cloudy/desktop/vnc/R;"
+        ],
+        "versionCode": 2,
+        "versionName": "0.0.2-runtime-qualification",
+        "nativeAbi": "arm64-v8a",
+        "allowBackup": false,
+        "usesCleartextTraffic": false,
+        "dataExtractionRulesPresent": true
+      },
+      "test": {
+        "package": "io.github.baitian6641.cloudy.desktop.vnc.runtime.test",
+        "sha256": "f0dfee73ef3e064bfc03a19c08ecc3ba205a9a93f0a82c440e023491530370dd",
+        "compileSdk": 37,
+        "minSdk": 35,
+        "targetSdk": 37,
+        "permissions": [
+          "android.permission.REORDER_TASKS"
+        ],
+        "components": [
+          {
+            "tag": "activity",
+            "attributes": {
+              "android:theme": "@0x7f010001",
+              "android:name": "\"androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity\" (Raw: \"androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity\")",
+              "android:exported": "true"
+            }
+          },
+          {
+            "tag": "activity",
+            "attributes": {
+              "android:theme": "@0x7f010001",
+              "android:name": "\"androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity\" (Raw: \"androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity\")",
+              "android:exported": "true"
+            }
+          },
+          {
+            "tag": "activity",
+            "attributes": {
+              "android:theme": "@0x7f010000",
+              "android:name": "\"androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity\" (Raw: \"androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity\")",
+              "android:exported": "true"
+            }
+          }
+        ],
+        "classDefinitionCount": 2003,
+        "signerSha256": "ce641362dd8500eed3c179a029899e1a24dfd5249e29c816ca9e637978de2807",
+        "engineDefinitions": [],
+        "versionCode": null,
+        "versionName": null,
+        "versionMetadata": "Absent from actual merged manifest and empty in badging; not inferred from target or output-metadata",
+        "instrumentationRunner": "androidx.test.runner.AndroidJUnitRunner",
+        "instrumentationTarget": "io.github.baitian6641.cloudy.desktop.vnc.runtime",
+        "nativeAbi": "none packaged"
+      }
+    },
+    "engineClassDefinitionOrigin": "Actual DEX class definitions include all12 repaired-AAR definitions plus D8-generated classes. Exact local AAR dependency/frozen source graph establishes provenance; DEX transformation is not byte-identical classfile or runtime-load proof.",
+    "targetNativeLibraries": {
+      "lib/arm64-v8a/libcloudy-vnc-jni.so": "702667cae3c54f550528a9d48c04e58619f868c702fc3931f9f44e406f254729",
+      "lib/arm64-v8a/libcrypto.so": "46c0eb8c3c601f3c9d8746e051aefe61e7a324bf152a535feac3f97472deb2d8",
+      "lib/arm64-v8a/libssl.so": "66288be31a05675f6a319632d6abb137eb38b07f10eea302a8b128bd6ed7d5c0"
+    },
+    "testNativeLibraries": {},
+    "componentOrigin": {
+      "coordinate": "androidx.test:core:1.7.0",
+      "path": ".cache/gradle-home/caches/modules-2/files-2.1/androidx.test/core/1.7.0/442a8eec92a3a26cd48e9605b161611520efd586/core-1.7.0.aar",
+      "sha256": "f4dacd8edceeec48e0c76ecf28339b28f4b4f6b74f8e34e9e59b472c27d9eb81",
+      "manifestSha256": "ac4ef82716b466004e74932cae9c81012108fd7884f58426a84964b457790f19"
+    },
+    "inspectionToolInputHashes": {
+      ".cache/vnc-product-runtime-entry-02/apk-inspection-01/run_inspection_01.py": "a3a0752856ce9b0a6aeed83fda0c586b2bd3abd9f929b031e59fbf234f29ee5f",
+      ".cache/vnc-product-runtime-entry-02/build-03/result.json": "381c9b6228604e215fb06c98488ea6fc3aee6451ddbbc9cd9d6126070ae12b21",
+      ".cache/vnc-product-runtime-entry-02/compiler-freeze-03.json": "cc605c3b0cc72a2dc6af9238876725d0b09c5fb645a6b2f0cc8a30551b97178e",
+      ".cache/vnc-product-runtime-entry-02/run_compile_03.py": "31c4a85ebb18a0a7bf53516e94bd09cfb7541a5d2b4e719cc879f26d84c842e8",
+      ".cache/android-sdk/build-tools/36.0.0/aapt2": "1a6a396b9cd071f7040071fdd108718cb98c3c9f4960044f373b288993d19eb7",
+      ".cache/android-sdk/build-tools/36.0.0/dexdump": "0944161e1e453ac40a16362ab42f4b1ee5e60eccf503cd87f4a6040c78247d02",
+      ".cache/android-sdk/build-tools/36.0.0/lib/apksigner.jar": "3716d9311e55d2b0918a2fd9d54ba9e406c5f6abeea700b287f11259bc163dec",
+      "/usr/lib/jvm/java-21-openjdk-amd64/bin/java": "af14efcaa70a4bfd214159034f6c13c93a1099d90315f57f711c01dcbfdd111c",
+      ".cache/vnc-owner-cleanup-repair-01/build-01/vnc-release.aar": "96158cdfb71c37e5154324d06426867a9095090f6c01d5082d0b4d106adc3022",
+      ".cache/vnc-product-runtime-entry-02/build-03/runtime-debug.apk": "739fd2948761197011e485b8623a1b481e26774ada2b1fa201b4cf8381494de9",
+      ".cache/vnc-product-runtime-entry-02/build-03/runtime-debug-androidTest.apk": "f0dfee73ef3e064bfc03a19c08ecc3ba205a9a93f0a82c440e023491530370dd",
+      "tools/build_rdp_native.py": "07ed0db14c8f68d5eaebd810c812631baedcabc59998f5d596046bb486fd3fd1",
+      "tools/prepare_rdp_native.py": "63105726cac73f8c6fd7519962a67bf1bac789666846fc73355f3b842e63d1ed",
+      ".cache/vnc-product-engine-01/prepared/jniLibs/arm64-v8a/libcloudy-vnc-jni.so": "702667cae3c54f550528a9d48c04e58619f868c702fc3931f9f44e406f254729",
+      ".cache/vnc-product-engine-01/prepared/jniLibs/arm64-v8a/libcrypto.so": "46c0eb8c3c601f3c9d8746e051aefe61e7a324bf152a535feac3f97472deb2d8",
+      ".cache/vnc-product-engine-01/prepared/jniLibs/arm64-v8a/libssl.so": "66288be31a05675f6a319632d6abb137eb38b07f10eea302a8b128bd6ed7d5c0"
+    },
+    "rawBindings": [
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/apk-inspection-01/target-badging.stdout",
+        "sha256": "56a48fe1a98e0142d9c8e90a1d3ecd05fbb382d33020df4668c88267a873669e"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/apk-inspection-01/target-badging.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/apk-inspection-01/target-manifest.stdout",
+        "sha256": "59d0a7488df9e97f95f089756c4d32feedf718f86704fcb3a4404f08839f0363"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/apk-inspection-01/target-manifest.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/apk-inspection-01/target-signature.stdout",
+        "sha256": "20b1268496d391ba13c15d9a8df1643f4471dea87237fdc82cc9776528383d62"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/apk-inspection-01/target-signature.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/apk-inspection-01/target-dex.stdout",
+        "sha256": "c76edc893a8d7464cc50ccdf40a543a89511eb42f8ee01081616a6f3f1cf0c68"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/apk-inspection-01/target-dex.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/apk-inspection-01/test-badging.stdout",
+        "sha256": "3010893ed5271942a1c1d322c0e676a9a510768a9096db5bf816025d416c1cb4"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/apk-inspection-01/test-badging.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/apk-inspection-01/test-manifest.stdout",
+        "sha256": "bbdb4bc1d44e8cd9b3d24baf1a3009c44859d644a58e67cdc781e5b64879036f"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/apk-inspection-01/test-manifest.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/apk-inspection-01/test-signature.stdout",
+        "sha256": "20b1268496d391ba13c15d9a8df1643f4471dea87237fdc82cc9776528383d62"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/apk-inspection-01/test-signature.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/apk-inspection-01/test-dex.stdout",
+        "sha256": "c266e1e0e5c7be70b4bda49af401cc859cb72ab833ae1a555e65bff8a20d7765"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/apk-inspection-01/test-dex.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "receiptHoldsAtCreation": [
+      "PARENT_REVIEW_ANDROIDX_TEST_ONLY_MERGED_SURFACE_REQUIRED"
+    ],
+    "currentDisposition": "Parent accepted exact isolated merged metadata. deviceReady remains false until a fresh parent-reviewed/frozen live-state setup/run/teardown recipe exists; existing user device-testing authorization persists."
+  },
+  "runtimeDependency": {
+    "path": ".cache/vnc-owner-cleanup-repair-01/build-01/vnc-release.aar",
+    "sha256": "96158cdfb71c37e5154324d06426867a9095090f6c01d5082d0b4d106adc3022"
+  },
+  "projectSources": {
+    ".cache/vnc-product-runtime-entry-02/project/build.gradle.kts": "ed6ba3bdfc3cbdcd648d7213860ffa3b0d62da38c37915b731b08b4df6f9d209",
+    ".cache/vnc-product-runtime-entry-02/project/gradle/libs.versions.toml": "60d180501c2232390c0c886c697217e05819a2ab0aca0774ef85abdf9fe5664d",
+    ".cache/vnc-product-runtime-entry-02/project/gradle/verification-metadata.xml": "aa5dcf7341e6039a72d8239113f96e80de28a3a1960096455798ca5dd2096ba0",
+    ".cache/vnc-product-runtime-entry-02/project/gradle.properties": "756906280baf7a9f8aef3a9889d08c711d20d240265550a4e69477404c59186d",
+    ".cache/vnc-product-runtime-entry-02/project/local.properties": "6172752e948816f773762a966cb5319534b9c3e23002b6faad9c24dca19a7e3d",
+    ".cache/vnc-product-runtime-entry-02/project/runtime/build.gradle.kts": "7998c4bd3043b9bcf37c678ad21bea1338684720d76887fbf53dc03ea243fd92",
+    ".cache/vnc-product-runtime-entry-02/project/runtime/src/androidTest/java/io/github/baitian6641/cloudy/desktop/vnc/runtime/VncSilentGreetingRuntimeTest.java": "ef4762ffe5b6bb52a39fde962e606b838d636c18d010f1fb357dc02561a56c30",
+    ".cache/vnc-product-runtime-entry-02/project/runtime/src/main/AndroidManifest.xml": "0bb9e68478fe1863ace0c724800ba717d32dea8e59bdaa2ead9bac0397a965dd",
+    ".cache/vnc-product-runtime-entry-02/project/runtime/src/main/res/values/strings.xml": "5d06a65ebecffa16aeea55cc7edeb7bfa11ba51bb6aa17f3865ff8148b15569c",
+    ".cache/vnc-product-runtime-entry-02/project/runtime/src/main/res/xml/cloudy_data_extraction_rules.xml": "9053f4326fa3ccd5ac3bd677a088f3535a8d692522b193b1f564ba3bbc9d4e41",
+    ".cache/vnc-product-runtime-entry-02/project/settings.gradle.kts": "b0e5f14a3e6bd6d47f34dcf2005213d277adb7a74ec9eac04c8a61db9aa5eed8"
+  },
+  "protectedAdapterSources": {
+    "adapters/desktop/vnc/android/README.md": "afec586301f69a1b819a145786d8915e972d76457c55de1be9ffc6d9ceced85a",
+    "adapters/desktop/vnc/android/build.gradle.kts": "b86cdfa3ed72a194c882c9ecc3d01a1ee0caae1e25e8359d958598a867e93b32",
+    "adapters/desktop/vnc/android/consumer-rules.pro": "bcfff3c82954028518b9a8700f3819753525add7e020f6d8f8351a893e4345fb",
+    "adapters/desktop/vnc/android/src/main/AndroidManifest.xml": "343d5be1ac17cdd45d1a2f2ddc616c509290e655869125a9422a96d88aa66066",
+    "adapters/desktop/vnc/android/src/main/cpp/CMakeLists.txt": "b5b82ca2dab2077fc645f9146d5886a603b66d29080904ff13b71be8154d6e40",
+    "adapters/desktop/vnc/android/src/main/java/io/github/baitian6641/cloudy/desktop/vnc/VncBridge.java": "1dde20fa8cbc644e7eb29e1bfe5e6770087abc5a372e8c7da886243e85976142",
+    "adapters/desktop/vnc/android/src/main/java/io/github/baitian6641/cloudy/desktop/vnc/VncEngine.java": "335d7e76d8ad182c04d9316c6870aa1f1ef8a0dafe9596f5bf5dbcf2f4703390",
+    "adapters/desktop/vnc/android/src/test/java/io/github/baitian6641/cloudy/desktop/vnc/VncEngineTest.java": "31332a2c5c4f459e033ac9cb8e1be7c17abdf224c921e1ca0a4e83b7e0052a8d"
+  },
+  "frozenToolAndPriorEvidenceBindings": {
+    ".cache/vnc-product-runtime-entry-02/run_compile_01.py": "c76cb00ab3dbb8b4e0127a18de2c09d0212190ca14ba98c44f095b21747211b9",
+    ".cache/vnc-product-runtime-entry-02/source-01.patch": "8db6a06c9ce96b26254c8f448671a02d84fc6c2ac0dff6dbe17f684e3d181d5c",
+    "tools/prepare_vnc_native.py": "b627c6f51a26cc588f498f5214750dfa417fad7a6bec38542584f963dff0cfdc",
+    "tools/prepare_rdp_native.py": "63105726cac73f8c6fd7519962a67bf1bac789666846fc73355f3b842e63d1ed",
+    "tools/build_rdp_native.py": "07ed0db14c8f68d5eaebd810c812631baedcabc59998f5d596046bb486fd3fd1",
+    "tools/prepare_desktop_vnc.py": "67fe846630dea647682b4d2568519470c1323a22432fdceb81db6ca134bee32b",
+    "lint.xml": "e51b54e363f2239673a4785192b97cd3553f84f38ca206388113c2310a866ca1",
+    "gradlew": "a5a5c199ba02189ae8c46a334223371a20599d9c298ef65e7540ede4a3f72d59",
+    "gradle/wrapper/gradle-wrapper.jar": "497c8c2a7e5031f6aa847f88104aa80a93532ec32ee17bdb8d1d2f67a194a9c7",
+    "gradle/wrapper/gradle-wrapper.properties": "c629b14195c2b627ef184fba4416f5dfce6f69c8b088230965bf3f77b8a1a7b4",
+    "gradle/libs.versions.toml": "60d180501c2232390c0c886c697217e05819a2ab0aca0774ef85abdf9fe5664d",
+    "gradle/verification-metadata.xml": "aa5dcf7341e6039a72d8239113f96e80de28a3a1960096455798ca5dd2096ba0",
+    "settings.gradle.kts": "f48ab59cf49155aa36ebba3edd2f2fbf663c0d439960175c8044b5cf1651e821",
+    "build.gradle.kts": "2cb98bec90e342ac6de363b5062e2d520502e97fcf0ba0238dc09c6f02cb0a0e",
+    ".cache/android-sdk/platforms/android-37.0/android.jar": "bf1b4387cc7ca94fc6ef684f040d9d16fbf16248e181819f020736ea2053f177",
+    ".cache/android-sdk/platforms/android-37.0/source.properties": "fa89029fc0cee414cb5e44a37cd3033771217eeecb5086577bb6d9b1b03b5b5f",
+    ".cache/android-sdk/build-tools/36.0.0/source.properties": "7dee6632e9ad6cb111da2bb99d747211e27927061b1276d040bb1d71fded5ebb",
+    ".cache/android-sdk/build-tools/36.0.0/aapt2": "1a6a396b9cd071f7040071fdd108718cb98c3c9f4960044f373b288993d19eb7",
+    ".cache/vnc-owner-cleanup-repair-01/build-01/vnc-release.aar": "96158cdfb71c37e5154324d06426867a9095090f6c01d5082d0b4d106adc3022",
+    ".cache/vnc-owner-cleanup-repair-01/build-01/vnc-debug.aar": "25cd1f08dcc8610ca0cd1c8f3243c3aa72344f3bdf66c655a9cf242fc9566c43",
+    ".cache/vnc-owner-cleanup-repair-01/freeze02.json": "1834f64e2f52731f31a393baa328a1b7dd19ca6cd15f66cc37118f607bd678bb",
+    ".cache/vnc-owner-cleanup-repair-01/inspection-02/result02.json": "5cb4f68734d8e2a8d1e8257641038af803b2e99c92f84181ebffa88298363587",
+    ".cache/vnc-owner-cleanup-repair-01/independent-evidence-review-02.json": "58906e6d3fa1a9ba3dfbb157ec69bfab5113a112e1e09fa69d70fcd671500328",
+    ".cache/vnc-product-engine-01/prepared/receipt.json": "06bc8873a11f37bbc6faae798a29568d8e0acb11e8ec3a0180a6a76b109dae26",
+    ".cache/vnc-product-engine-01/owner-java-reuse-20261016-01.json": "d1d05142944e77607fbfa4754cd86bfa88dbab139307eba4969aff1d64895aeb",
+    ".cache/vnc-native-reuse-entry-01/canonical-gradle-check-01/result.json": "53ce9fd9b140bed265e64d38943748baa21c3244e31a9604c1e4c91f331c3b4f",
+    ".cache/vnc-native-reuse-entry-01/independent-review-01.json": "93ca935e3eab151da391e07ee86863d13b9d0864693b9c50d98d925857af5ef1",
+    "docs/05-delivery/phases/p1-foundation.md": "92e2882415b0da6467b830416da2f98b431c7d5ce6b60b029090a1bbd00374c8",
+    "docs/05-delivery/phases/p3-desktop.md": "e0c1e4f547499e5f44ef8c7a17d7a93b40885ff0758e54723042bc49d8924b03",
+    "docs/05-delivery/library-reuse-policy.md": "cdc35580955188d8ac85a53ee0a2debd4860d6d3da966008de5a6fc0231199a2",
+    "docs/03-platform/googlebook/vnc-native-reuse-entry.md": "0ae0880ccc2ae05bde3d9794dca6c4de3508f2a678b0cbfbf6f90d9c26636984",
+    ".cache/vnc-product-runtime-entry-01/build-01/result.json": "347df3182567ccd5fd953e20bcad25f752c9f1126df59ce5290337f80d3a01e9",
+    ".cache/vnc-product-runtime-entry-01/freeze-02.json": "e1c3399283891d57a28fe9c02018fc0417941ed36ad46ca48ff29a72780e6cde",
+    ".cache/vnc-product-engine-01/prepared/jniLibs/arm64-v8a/libcloudy-vnc-jni.so": "702667cae3c54f550528a9d48c04e58619f868c702fc3931f9f44e406f254729",
+    ".cache/vnc-product-engine-01/prepared/jniLibs/arm64-v8a/libcrypto.so": "46c0eb8c3c601f3c9d8746e051aefe61e7a324bf152a535feac3f97472deb2d8",
+    ".cache/vnc-product-engine-01/prepared/jniLibs/arm64-v8a/libssl.so": "66288be31a05675f6a319632d6abb137eb38b07f10eea302a8b128bd6ed7d5c0",
+    "/usr/lib/jvm/java-21-openjdk-amd64/release": "44f12869e6166479a88af9de46d6cbd9d6260da426b916262c59e85c4de21ba6",
+    "/usr/lib/jvm/java-21-openjdk-amd64/bin/java": "af14efcaa70a4bfd214159034f6c13c93a1099d90315f57f711c01dcbfdd111c",
+    "/usr/lib/jvm/java-21-openjdk-amd64/bin/javac": "fad7233dfc534be188f01a72a6deaeab00f4a871aba3e494995d7db3262e4cb0",
+    "/usr/lib/jvm/java-21-openjdk-amd64/lib/modules": "7aee3c69fa52daa3396f9af83abee0459ee61e947a6c939bf1f3db302a272b61",
+    ".cache/vnc-product-runtime-entry-02/run_compile_02.py": "33ef0ebddee2ef3a06bad37aa2f075d332a60810dcc75f3402d190b4f574db2e",
+    ".cache/vnc-product-runtime-entry-02/source-02.patch": "2d1746b48aec9a7cb7d93906416de62052786417bc89f1c09342a1ee57b33dbf",
+    ".cache/vnc-product-runtime-entry-02/driver-02.patch": "5f1b46988a4a3c1e3229e5f595e6d1337e9e5fd46f3dc42b7993e25aa597b8a9",
+    ".cache/vnc-product-runtime-entry-02/compiler-freeze-01.json": "abb9d011f37f5c86881bf71af0ca8f6996de3530f3f8c8123bf78e45100cd9d3",
+    ".cache/vnc-product-runtime-entry-02/build-01/result.json": "acd9a864fc9f76337f72552c3d96203832f94865eb3bcb2de0d75db087d11858",
+    ".cache/vnc-product-runtime-entry-02/build-01/gradle.log": "1adb633f77623091ffd559b4a9bf5b17766de24eb027e9d14fa9fb51551c7e78",
+    ".cache/vnc-product-runtime-entry-02/dependency-diagnosis-01/result.json": "b4e6e687dafb3ac3ca65ef60dff5987b910181d73a8e48a961ebd42612dc18e4",
+    ".cache/vnc-product-runtime-entry-02/dependency-diagnosis-01/notes.md": "7651b5b68ed44200bd86094072eb5ac879965bbfdf247f8e6c5f4d6f6e33ae7c",
+    ".cache/gradle-home/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-android/1.9.0/6cf3b8df5a2ce8c6b0dffe55657a827c405ee2fe/kotlinx-coroutines-android-1.9.0.jar": "bd783acd2f9738845d58380f46f45b5cde95d0cb03027d56725338b26bfc4d72",
+    ".cache/gradle-home/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-android/1.9.0/7f5b0462b04998bcbccc9ba4210b2bc9e61c7758/kotlinx-coroutines-android-1.9.0.module": "7df1e04d77f0cc411890d999a9449b0e3bcd4f159a46c3060b110204ca607d43",
+    ".cache/gradle-home/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-core-jvm/1.9.0/9beade4c1c1569e4f36cbd2c37e02e3e41502601/kotlinx-coroutines-core-jvm-1.9.0.jar": "ad89c2892235e670f222d819cb3d81188143cb19a05b59df9889ae4269f5c70a",
+    ".cache/gradle-home/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-core-jvm/1.9.0/253c11ec9fcf1ba2abc04263404ae403e4560e76/kotlinx-coroutines-core-jvm-1.9.0.module": "b321a899e40d3ce345707aa2cfda9983ad0dcc69fea74a9b8bf906a16c1cf8a9",
+    ".cache/gradle-home/caches/modules-2/files-2.1/androidx.annotation/annotation/1.9.1/85ca0ac710745a44efb824601e0b887fa1b6379b/annotation-1.9.1.module": "f204b05b728a97561718bc716242e47c629c0085a80ee74fca53d4d638bcbe3f",
+    ".cache/gradle-home/caches/modules-2/files-2.1/androidx.annotation/annotation-jvm/1.9.1/b17951747e38bf3986a24431b9ba0d039958aa5f/annotation-jvm-1.9.1.jar": "1e343917ebf27ba96fe4dc52b1cad7fd32b738fbc6355bb6cd5b3b305d7212d0",
+    ".cache/gradle-home/caches/modules-2/files-2.1/androidx.annotation/annotation-jvm/1.9.1/95ca2172772c875ac264fd1acb0451fa9b4a31a5/annotation-jvm-1.9.1.module": "03fb659177c8618e47425925c11bc91f384703ea26c265be9b25cd79292b511c",
+    ".cache/gradle-home/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-bom/1.9.0/11a86a1aa2fb0ecb72e865e4e0b421be56eb30fb/kotlinx-coroutines-bom-1.9.0.pom": "bea5511e9001f2c593ab5080df131b219ab5e2085cc5979ce583eacd4946fd78",
+    ".cache/vnc-product-runtime-entry-02/run_compile_03.py": "31c4a85ebb18a0a7bf53516e94bd09cfb7541a5d2b4e719cc879f26d84c842e8",
+    ".cache/vnc-product-runtime-entry-02/source-03.patch": "e8bc656e79353baa15a6ee57349430f3615465e381604164533721739aa16063",
+    ".cache/vnc-product-runtime-entry-02/driver-03.patch": "55cbabcc0388dc961838c373a761c52174daf4f20eb71d0fe3a7d2c25cc451ec",
+    ".cache/vnc-product-runtime-entry-02/compiler-freeze-02.json": "26628b834c29602b8ca3ff1db960449fba6b56a9d0480341a42bf39c0c9d91ef",
+    ".cache/vnc-product-runtime-entry-02/failed-artifacts-02/receipt.json": "34375cbc6139e1995319d3b767f0366ba556c8c3b201045d4fb8fba2d613c3a9",
+    ".cache/vnc-product-runtime-entry-02/build-02/result.json": "77868b7998c1fb30eee9f85c2593117c5d0af63dd22a4ffa06a34079112517d5",
+    ".cache/vnc-product-runtime-entry-02/build-02/gradle.log": "9fc4bff6f14b7a35a88fd54bffcbc1d74b1c16008a4e1354a09504c5674aef51",
+    "shared/android/platform/src/main/res/xml/cloudy_data_extraction_rules.xml": "9053f4326fa3ccd5ac3bd677a088f3535a8d692522b193b1f564ba3bbc9d4e41",
+    ".cache/vnc-product-runtime-entry-02/failed-artifacts-02/runtime-debug-androidTest.apk": "f0dfee73ef3e064bfc03a19c08ecc3ba205a9a93f0a82c440e023491530370dd",
+    ".cache/vnc-product-runtime-entry-02/failed-artifacts-02/runtime-debug.apk": "e997d85c50a66f7a1f3aed4f1f81b9f8e7ab13790419d09501d05d9b44ed6f66",
+    ".cache/vnc-product-runtime-entry-02/failed-artifacts-02/lint-results-debug.txt": "e43e8cc6025a199dd1e4eb97ebb00138c017d4f02cff08d7945c3c9ff6ccef77",
+    ".cache/vnc-product-runtime-entry-02/failed-artifacts-02/lint-results-debug.xml": "1fc37bc4f34bd4b646e93cc28fdff034005c0abae4106717e7da60080fe8b69c",
+    ".cache/vnc-product-runtime-entry-02/failed-artifacts-02/lint-results-debug.sarif": "ba461e8a7e83a6021381293864ec5b83a952413942d8eee0332d66432759f1ee",
+    ".cache/vnc-product-runtime-entry-02/failed-artifacts-02/test-output-metadata.json": "0282821dbc5a3741f3144a8c074de27e7938f408aa6bef746caad5b0b7acfd7e",
+    ".cache/vnc-product-runtime-entry-02/failed-artifacts-02/lint-results-debug.html": "44751f448f8ed3bf7a3a9c87d6aa0e60b378de2668a2163298cf04f13d7df755",
+    ".cache/vnc-product-runtime-entry-02/failed-artifacts-02/target-output-metadata.json": "6aaeb27074f677a67ded658695b5f9d5b21049aa37c01cd6cbc170538aaca4bf"
+  },
+  "priorFailures": [
+    {
+      "result": {
+        "path": ".cache/vnc-product-runtime-entry-02/build-01/result.json",
+        "sha256": "acd9a864fc9f76337f72552c3d96203832f94865eb3bcb2de0d75db087d11858"
+      },
+      "passed": false,
+      "reason": "Offline instrumentation classpath requested uncached coroutines 1.8.1 and annotation-jvm 1.7.0; no compiler success"
+    },
+    {
+      "result": {
+        "path": ".cache/vnc-product-runtime-entry-02/build-02/result.json",
+        "sha256": "77868b7998c1fb30eee9f85c2593117c5d0af63dd22a4ffa06a34079112517d5"
+      },
+      "passed": false,
+      "reason": "Partial APKs assembled, but Lint failed GradlePath and DataExtractionRules; aggregate remains failed"
+    }
+  ],
+  "failedPartialArtifactReceipt": {
+    "path": ".cache/vnc-product-runtime-entry-02/failed-artifacts-02/receipt.json",
+    "sha256": "34375cbc6139e1995319d3b767f0366ba556c8c3b201045d4fb8fba2d613c3a9"
+  },
+  "repairDisposition": [
+    "Compiler02 selects already cached artifacts matching existing strict verification metadata; no verification relaxation or dependency acquisition",
+    "Compiler03 replaces absolute Gradle paths with derived relative repository/AAR/Lint paths",
+    "Compiler03 copies exact maintained no-backup data extraction XML and adds its manifest reference; no suppression/baseline; not actual device backup qualification"
+  ],
+  "independentCompilerReview": {
+    "path": ".cache/vnc-product-runtime-entry-02/independent-build-evidence-review-01.json",
+    "sha256": "c8be100c9414891ca57ef505198a1711df0cca57710ecc482de6f905fd9a142c"
+  },
+  "evidence": [
+    {
+      "path": ".cache/vnc-product-runtime-entry-02/compiler-freeze-01.json",
+      "sha256": "abb9d011f37f5c86881bf71af0ca8f6996de3530f3f8c8123bf78e45100cd9d3"
+    },
+    {
+      "path": ".cache/vnc-product-runtime-entry-02/compiler-freeze-02.json",
+      "sha256": "26628b834c29602b8ca3ff1db960449fba6b56a9d0480341a42bf39c0c9d91ef"
+    },
+    {
+      "path": ".cache/vnc-product-runtime-entry-02/compiler-freeze-03.json",
+      "sha256": "cc605c3b0cc72a2dc6af9238876725d0b09c5fb645a6b2f0cc8a30551b97178e"
+    },
+    {
+      "path": ".cache/vnc-product-runtime-entry-02/source-01.patch",
+      "sha256": "8db6a06c9ce96b26254c8f448671a02d84fc6c2ac0dff6dbe17f684e3d181d5c"
+    },
+    {
+      "path": ".cache/vnc-product-runtime-entry-02/source-02.patch",
+      "sha256": "2d1746b48aec9a7cb7d93906416de62052786417bc89f1c09342a1ee57b33dbf"
+    },
+    {
+      "path": ".cache/vnc-product-runtime-entry-02/source-03.patch",
+      "sha256": "e8bc656e79353baa15a6ee57349430f3615465e381604164533721739aa16063"
+    },
+    {
+      "path": ".cache/vnc-product-runtime-entry-02/driver-02.patch",
+      "sha256": "5f1b46988a4a3c1e3229e5f595e6d1337e9e5fd46f3dc42b7993e25aa597b8a9"
+    },
+    {
+      "path": ".cache/vnc-product-runtime-entry-02/driver-03.patch",
+      "sha256": "55cbabcc0388dc961838c373a761c52174daf4f20eb71d0fe3a7d2c25cc451ec"
+    },
+    {
+      "path": ".cache/vnc-product-runtime-entry-02/run_compile_01.py",
+      "sha256": "c76cb00ab3dbb8b4e0127a18de2c09d0212190ca14ba98c44f095b21747211b9"
+    },
+    {
+      "path": ".cache/vnc-product-runtime-entry-02/run_compile_02.py",
+      "sha256": "33ef0ebddee2ef3a06bad37aa2f075d332a60810dcc75f3402d190b4f574db2e"
+    },
+    {
+      "path": ".cache/vnc-product-runtime-entry-02/run_compile_03.py",
+      "sha256": "31c4a85ebb18a0a7bf53516e94bd09cfb7541a5d2b4e719cc879f26d84c842e8"
+    },
+    {
+      "path": ".cache/vnc-product-runtime-entry-02/failed-artifacts-02/receipt.json",
+      "sha256": "34375cbc6139e1995319d3b767f0366ba556c8c3b201045d4fb8fba2d613c3a9"
+    },
+    {
+      "path": ".cache/vnc-product-runtime-entry-02/independent-review-01.json",
+      "sha256": "e6560941bb969d8639215c0f7b50683160232a3e7c511cfde230b6b9096b4e43"
+    },
+    {
+      "path": ".cache/vnc-product-runtime-entry-02/independent-review-02.json",
+      "sha256": "9b788ed031d0fdfe2c2591f9e42c943e2e398511d0c539b9f93bb7a1c089f5d2"
+    },
+    {
+      "path": ".cache/vnc-product-runtime-entry-02/independent-review-03.json",
+      "sha256": "dc6c810cf8d968ede53f55c1385d6445d5393d60946a6c4c4320a225906ab7cc"
+    },
+    {
+      "path": ".cache/vnc-product-runtime-entry-02/independent-build-evidence-review-01.json",
+      "sha256": "c8be100c9414891ca57ef505198a1711df0cca57710ecc482de6f905fd9a142c"
+    },
+    {
+      "path": ".cache/vnc-product-runtime-entry-02/build-01/result.json",
+      "sha256": "acd9a864fc9f76337f72552c3d96203832f94865eb3bcb2de0d75db087d11858"
+    },
+    {
+      "path": ".cache/vnc-product-runtime-entry-02/build-01/gradle.log",
+      "sha256": "1adb633f77623091ffd559b4a9bf5b17766de24eb027e9d14fa9fb51551c7e78"
+    },
+    {
+      "path": ".cache/vnc-product-runtime-entry-02/build-01/gradle.json",
+      "sha256": "97ad4ced5a52ded55350997ac140c7ca4e445b8569164c710a4f37271b71e76c"
+    },
+    {
+      "path": ".cache/vnc-product-runtime-entry-02/build-02/result.json",
+      "sha256": "77868b7998c1fb30eee9f85c2593117c5d0af63dd22a4ffa06a34079112517d5"
+    },
+    {
+      "path": ".cache/vnc-product-runtime-entry-02/build-02/gradle.log",
+      "sha256": "9fc4bff6f14b7a35a88fd54bffcbc1d74b1c16008a4e1354a09504c5674aef51"
+    },
+    {
+      "path": ".cache/vnc-product-runtime-entry-02/build-02/gradle.json",
+      "sha256": "97ad4ced5a52ded55350997ac140c7ca4e445b8569164c710a4f37271b71e76c"
+    },
+    {
+      "path": ".cache/vnc-product-runtime-entry-02/build-03/result.json",
+      "sha256": "381c9b6228604e215fb06c98488ea6fc3aee6451ddbbc9cd9d6126070ae12b21"
+    },
+    {
+      "path": ".cache/vnc-product-runtime-entry-02/build-03/gradle.log",
+      "sha256": "50572d6457cc847113c7d9928fb27627aefc594c454802b62ee2ef681c5dfd1c"
+    },
+    {
+      "path": ".cache/vnc-product-runtime-entry-02/build-03/gradle.json",
+      "sha256": "a4c7d9cb016905090d503ff3c6bb4d7cf6003bbb778be81bd9d78c9d7782c8c2"
+    },
+    {
+      "path": ".cache/vnc-product-runtime-entry-02/apk-inspection-01/run_inspection_01.py",
+      "sha256": "a3a0752856ce9b0a6aeed83fda0c586b2bd3abd9f929b031e59fbf234f29ee5f"
+    },
+    {
+      "path": ".cache/vnc-product-runtime-entry-02/apk-inspection-01/complete_02.py",
+      "sha256": "d428e0b1434c62e67c9e39f4d7cee3e83c78e4802799178e20fbb9d311caf197"
+    },
+    {
+      "path": ".cache/vnc-product-runtime-entry-02/apk-inspection-01/complete_03.py",
+      "sha256": "2d1f7e96b54ec9a8a94a7b785bb3cf40b1853f48d35a8e15c1fed2b94b887abe"
+    },
+    {
+      "path": ".cache/vnc-product-runtime-entry-02/apk-inspection-01/androidx-test-core-1.7.0-manifest.xml",
+      "sha256": "ac4ef82716b466004e74932cae9c81012108fd7884f58426a84964b457790f19"
+    }
+  ],
+  "limits": [
+    "Independent and parent offline metadata reviews accepted; deviceReady=false means a fresh parent-reviewed/frozen live-state setup/run/teardown recipe is required, not a new human permission request",
+    "Compilation/Lint/package construction is not JNI loading, VNC API runtime behavior or actual server/frame presentation",
+    "No JVM or instrumentation test execution in this graph; prior repaired-owner JVM evidence carried separately",
+    "No APK install or Googlebook/device/vault interaction; saved vault authentication remains pending",
+    "No native upstream rebuild, product root graph adoption, Desktop embedding, capability/stage promotion or release/source/notices closure"
+  ],
+  "preservedPriorSourceSnapshots": {
+    "source-01": [
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/source-01/build.gradle.kts",
+        "sha256": "ed6ba3bdfc3cbdcd648d7213860ffa3b0d62da38c37915b731b08b4df6f9d209"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/source-01/gradle/libs.versions.toml",
+        "sha256": "60d180501c2232390c0c886c697217e05819a2ab0aca0774ef85abdf9fe5664d"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/source-01/gradle/verification-metadata.xml",
+        "sha256": "aa5dcf7341e6039a72d8239113f96e80de28a3a1960096455798ca5dd2096ba0"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/source-01/gradle.properties",
+        "sha256": "756906280baf7a9f8aef3a9889d08c711d20d240265550a4e69477404c59186d"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/source-01/local.properties",
+        "sha256": "6172752e948816f773762a966cb5319534b9c3e23002b6faad9c24dca19a7e3d"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/source-01/runtime/build.gradle.kts",
+        "sha256": "2155ec35c2bc10d85ffe077e64a7d1f6c2352d50390355509b9df4f51a9eecc3"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/source-01/runtime/src/androidTest/java/io/github/baitian6641/cloudy/desktop/vnc/runtime/VncSilentGreetingRuntimeTest.java",
+        "sha256": "ef4762ffe5b6bb52a39fde962e606b838d636c18d010f1fb357dc02561a56c30"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/source-01/runtime/src/main/AndroidManifest.xml",
+        "sha256": "ab4fa53491aedf76579b10d85bac2187847ca81b157fff395628fabdac5008a4"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/source-01/runtime/src/main/res/values/strings.xml",
+        "sha256": "5d06a65ebecffa16aeea55cc7edeb7bfa11ba51bb6aa17f3865ff8148b15569c"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/source-01/settings.gradle.kts",
+        "sha256": "b0e5f14a3e6bd6d47f34dcf2005213d277adb7a74ec9eac04c8a61db9aa5eed8"
+      }
+    ],
+    "source-02": [
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/source-02/build.gradle.kts",
+        "sha256": "ed6ba3bdfc3cbdcd648d7213860ffa3b0d62da38c37915b731b08b4df6f9d209"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/source-02/gradle/libs.versions.toml",
+        "sha256": "60d180501c2232390c0c886c697217e05819a2ab0aca0774ef85abdf9fe5664d"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/source-02/gradle/verification-metadata.xml",
+        "sha256": "aa5dcf7341e6039a72d8239113f96e80de28a3a1960096455798ca5dd2096ba0"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/source-02/gradle.properties",
+        "sha256": "756906280baf7a9f8aef3a9889d08c711d20d240265550a4e69477404c59186d"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/source-02/local.properties",
+        "sha256": "6172752e948816f773762a966cb5319534b9c3e23002b6faad9c24dca19a7e3d"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/source-02/runtime/build.gradle.kts",
+        "sha256": "9edcd4596d528e8130aecad3c7188cae9c14be6ebcc8ccb33ddcef07e4467167"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/source-02/runtime/src/androidTest/java/io/github/baitian6641/cloudy/desktop/vnc/runtime/VncSilentGreetingRuntimeTest.java",
+        "sha256": "ef4762ffe5b6bb52a39fde962e606b838d636c18d010f1fb357dc02561a56c30"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/source-02/runtime/src/main/AndroidManifest.xml",
+        "sha256": "ab4fa53491aedf76579b10d85bac2187847ca81b157fff395628fabdac5008a4"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/source-02/runtime/src/main/res/values/strings.xml",
+        "sha256": "5d06a65ebecffa16aeea55cc7edeb7bfa11ba51bb6aa17f3865ff8148b15569c"
+      },
+      {
+        "path": ".cache/vnc-product-runtime-entry-02/source-02/settings.gradle.kts",
+        "sha256": "b0e5f14a3e6bd6d47f34dcf2005213d277adb7a74ec9eac04c8a61db9aa5eed8"
+      }
+    ]
+  },
+  "preservedFailedPartialArtifacts": [
+    {
+      "originalPath": ".cache/vnc-product-runtime-entry-02/project/runtime/build/outputs/apk/debug/runtime-debug.apk",
+      "preservedPath": ".cache/vnc-product-runtime-entry-02/failed-artifacts-02/runtime-debug.apk",
+      "sha256": "e997d85c50a66f7a1f3aed4f1f81b9f8e7ab13790419d09501d05d9b44ed6f66",
+      "bytes": 76693654
+    },
+    {
+      "originalPath": ".cache/vnc-product-runtime-entry-02/project/runtime/build/outputs/apk/debug/output-metadata.json",
+      "preservedPath": ".cache/vnc-product-runtime-entry-02/failed-artifacts-02/target-output-metadata.json",
+      "sha256": "6aaeb27074f677a67ded658695b5f9d5b21049aa37c01cd6cbc170538aaca4bf",
+      "bytes": 458
+    },
+    {
+      "originalPath": ".cache/vnc-product-runtime-entry-02/project/runtime/build/outputs/apk/androidTest/debug/runtime-debug-androidTest.apk",
+      "preservedPath": ".cache/vnc-product-runtime-entry-02/failed-artifacts-02/runtime-debug-androidTest.apk",
+      "sha256": "f0dfee73ef3e064bfc03a19c08ecc3ba205a9a93f0a82c440e023491530370dd",
+      "bytes": 2235458
+    },
+    {
+      "originalPath": ".cache/vnc-product-runtime-entry-02/project/runtime/build/outputs/apk/androidTest/debug/output-metadata.json",
+      "preservedPath": ".cache/vnc-product-runtime-entry-02/failed-artifacts-02/test-output-metadata.json",
+      "sha256": "0282821dbc5a3741f3144a8c074de27e7938f408aa6bef746caad5b0b7acfd7e",
+      "bytes": 459
+    },
+    {
+      "originalPath": ".cache/vnc-product-runtime-entry-02/project/runtime/build/reports/lint-results-debug.txt",
+      "preservedPath": ".cache/vnc-product-runtime-entry-02/failed-artifacts-02/lint-results-debug.txt",
+      "sha256": "e43e8cc6025a199dd1e4eb97ebb00138c017d4f02cff08d7945c3c9ff6ccef77",
+      "bytes": 2348
+    },
+    {
+      "originalPath": ".cache/vnc-product-runtime-entry-02/project/runtime/build/reports/lint-results-debug.xml",
+      "preservedPath": ".cache/vnc-product-runtime-entry-02/failed-artifacts-02/lint-results-debug.xml",
+      "sha256": "1fc37bc4f34bd4b646e93cc28fdff034005c0abae4106717e7da60080fe8b69c",
+      "bytes": 3058
+    },
+    {
+      "originalPath": ".cache/vnc-product-runtime-entry-02/project/runtime/build/reports/lint-results-debug.sarif",
+      "preservedPath": ".cache/vnc-product-runtime-entry-02/failed-artifacts-02/lint-results-debug.sarif",
+      "sha256": "ba461e8a7e83a6021381293864ec5b83a952413942d8eee0332d66432759f1ee",
+      "bytes": 12916
+    },
+    {
+      "originalPath": ".cache/vnc-product-runtime-entry-02/project/runtime/build/reports/lint-results-debug.html",
+      "preservedPath": ".cache/vnc-product-runtime-entry-02/failed-artifacts-02/lint-results-debug.html",
+      "sha256": "44751f448f8ed3bf7a3a9c87d6aa0e60b378de2668a2163298cf04f13d7df755",
+      "bytes": 48719
+    }
+  ],
+  "nativeReusedInputs": {
+    ".cache/vnc-product-engine-01/prepared/receipt.json": "06bc8873a11f37bbc6faae798a29568d8e0acb11e8ec3a0180a6a76b109dae26",
+    ".cache/vnc-product-engine-01/prepared/jniLibs/arm64-v8a/libcloudy-vnc-jni.so": "702667cae3c54f550528a9d48c04e58619f868c702fc3931f9f44e406f254729",
+    ".cache/vnc-product-engine-01/prepared/jniLibs/arm64-v8a/libcrypto.so": "46c0eb8c3c601f3c9d8746e051aefe61e7a324bf152a535feac3f97472deb2d8",
+    ".cache/vnc-product-engine-01/prepared/jniLibs/arm64-v8a/libssl.so": "66288be31a05675f6a319632d6abb137eb38b07f10eea302a8b128bd6ed7d5c0"
+  },
+  "deviceReady": false,
+  "inspectionParserFailures": [
+    {
+      "receipt": {
+        "path": ".cache/vnc-product-runtime-entry-02/apk-inspection-01/result.json",
+        "sha256": "718c057148bad856c3d45f64fc6a8377846eec86483d60027d7f8d6dbdc0e56b"
+      },
+      "passed": false,
+      "reason": "Own aggregate parser expected android: attribute aliases; actual aapt2 output used full URI keys; eight SDK commands themselves all succeeded"
+    },
+    {
+      "receipt": {
+        "path": ".cache/vnc-product-runtime-entry-02/apk-inspection-01/parser-failure02.json",
+        "sha256": "708ef452677eb1fc58356688baf86baa99260ec1ef1fcdc39a11a6ab5a6d39ac"
+      },
+      "passed": false,
+      "reason": "Retained-output parser used engine namespace prefix that incorrectly included the runtime harness package; no SDK rerun and no separately captured raw traceback claimed"
+    }
+  ],
+  "independentApkReview": {
+    "path": ".cache/vnc-product-runtime-entry-02/independent-apk-evidence-review-01.json",
+    "sha256": "22f84aee85c6a458fcc47776493bddce893396b1b1d7d689ace423061351554e"
+  },
+  "parentTestSurfaceReview": {
+    "path": ".cache/vnc-product-runtime-entry-02/apk-inspection-01/parent-surface-review-01.json",
+    "sha256": "27f3a881be63129d8927da8c320845120309e2cbba30722715a0e9694b8e1588"
+  },
+  "deviceTestingAuthorization": "Existing user full-goal/device-testing authorization persists; no new human permission cycle. A fresh parent-reviewed/frozen live-state setup/run/teardown recipe is required before actual qualification.",
+  "humanSavedVaultQuestion": "Still pending; distinct from ordinary already-authorized qualification preparation."
+}
