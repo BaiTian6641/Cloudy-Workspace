@@ -5018,7 +5018,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "API14 TextureView participates in ordinary view clipping and requires a hardware-accelerated window. Built0.1.10 implements a fixed adaptive 16:9 pane and bounded actual texture/geometry observations; compiler/60JVM/zeroownedLint pass, runtime pending. Installed0.1.9 user-visible playback remains FAILED. Window flags/update callbacks are not visible-pixel or occlusion proof. G25/API47/P0-S4.",
+      "note": "API14 TextureView participates in ordinary view clipping and requires a hardware-accelerated window. Installed0.1.10 has a finite user-confirmed moving-video pass and bounded actual texture/geometry observations; the historical0.1.9 visual failure remains. Compiler/60JVM/zeroownedLint evidence carriesforward. Windowflags/updatecallbacks alone are not visible-pixel or occlusionproof. G25/API47/P0-S4.",
       "refresh": "Before implementing presentation repair or interpreting its device evidence."
     },
     {
@@ -5032,6 +5032,18 @@
       "sourceUpdatedOn": null,
       "note": "Inspected getPluginsDir/getPluginsNodeModules and profile/config/XDG path resolution. Production plugin root uses the data-category resolver; default without overrides is ~/.omp/plugins/node_modules. Recheck actual overrides and project ancestors per invocation; temporary cwd alone is not isolation. Used for the two finite GLM context-only trials; no OS sandbox claim. Owner integration leader, P0\u2013P6.",
       "refresh": "When changing installed CLI version, active profile, path environment or worker discovery controls."
+    },
+    {
+      "id": "R252",
+      "title": "Qt QGuiApplication platform-theme selection",
+      "url": "https://doc.qt.io/qt-6/qguiapplication.html#QGuiApplication",
+      "publisher": "The Qt Company",
+      "category": "tooling",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Public -platformtheme option and QT_QPA_PLATFORMTHEME environment selection; currentdocs6.12, actualfixtureQt6.9.2. Ownerintegrationleader/P0-S4. Per-processgeneric theme lets the isolatedXcbcanvas start after inheritedKDEtheme attempts do not reachreadiness. Exact earlierstartupcause remainsunproven. Fallback stopfixture and retainfailure; no globaltheme/authentication changes, no Googlebook API claim. See2026-10-15-vnc-startup-timing.",
+      "refresh": "Before changing host fixture Qt version or platform-theme selection."
     }
   ]
 }
