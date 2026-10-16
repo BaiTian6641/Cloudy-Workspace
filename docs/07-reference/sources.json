@@ -334,9 +334,9 @@
       "publisher": "Google",
       "category": "api",
       "reviewStatus": "reviewed",
-      "checkedOn": "2026-10-14",
-      "sourceUpdatedOn": null,
-      "note": "API 35 multi-instance System UI property does not implement task behavior.",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2026-08-28",
+      "note": "API 35 multi-instance System UI property does not implement task behavior. Refreshed getCurrentWindowMetrics() API30: Activity visual-context metrics reflect current task bounds and include undeducted insets. P1-S2 geometry probe compares requested launch rectangle with actual window/insets/root; requested bounds alone are not qualification. Owner: Android/platform. Fallback: retain actual measurement and mark unavailable/inconclusive if the intended shape is not achieved. Eight actual local-workspace cases now pass at measured narrow/short windows and font scales1.3/2.0; see API57 and qualification/results/P1-S2/2026-10-16-native-window-geometry.md for bounded evidence, restoration and remaining gates.",
       "refresh": "Before implementation against this surface; weekly during active platform qualification."
     },
     {
@@ -5438,7 +5438,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-16",
       "sourceUpdatedOn": null,
-      "note": "recreate exercises Activity recreation, not actual process death; record those claims separately.",
+      "note": "recreate exercises Activity recreation, not actual process death; record those claims separately. Refreshed launch(Intent, Bundle) overload passes real ActivityOptions to the launched Activity. Selected androidx.test:core1.7.0 unchanged. P1-S2 geometry probe launches the actual owning-product WorkspaceActivity; no synthetic configuration context. Fallback: actual bounds must demonstrate the requested narrow/short geometry; lifecycle completion alone is not layout acceptance. Eight actual local-workspace cases now pass at measured narrow/short windows and font scales1.3/2.0; see API57 and qualification/results/P1-S2/2026-10-16-native-window-geometry.md for bounded evidence, restoration and remaining gates.",
       "refresh": "Before changing this integration, dependency pin or qualification boundary."
     },
     {
@@ -6076,6 +6076,30 @@
       "sourceUpdatedOn": null,
       "note": "setApplicationNightMode(int), added API31, persists an application night-mode override and may change configuration/recreate components. Reviewed alternative, not adopted: this slice uses app-private Compose presentation preferences and window bar contrast; SYSTEM reads current system darkness. Do not infer a resetApplicationNightMode API or follow-system reset from MODE_NIGHT_AUTO. No device-global setNightMode call. Fallback: retain the chosen Compose-only boundary with OS-owned caption/splash/IME. Owner: Android/platform; P1-S2.",
       "refresh": "Before changing display preference persistence, theme ownership, density mapping or selected AndroidX dependencies."
+    },
+    {
+      "id": "G218",
+      "title": "Android public Activity launch bounds",
+      "url": "https://developer.android.com/reference/android/app/ActivityOptions",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2026-08-28",
+      "note": "ActivityOptions.setLaunchBounds(Rect) API24 takes screen-coordinate pixels; ignored without supported freeform/PiP device/display support. P1-S2 actual-product probe uses makeBasic/setLaunchBounds/toBundle with existing ActivityScenario launch(Intent,Bundle), then measures actual task/window bounds. No hidden freeform/windowing-mode API. Fallback: record actual achieved geometry and mark a missed requested shape inconclusive, never a narrow-window pass. Owner: Android/platform; existing productmin35 unchanged. Eight actual local-workspace cases now pass at measured narrow/short windows and font scales1.3/2.0; see API57 and qualification/results/P1-S2/2026-10-16-native-window-geometry.md for bounded evidence, restoration and remaining gates.",
+      "refresh": "Before changing native geometry/font-scale qualification or target Android windowing behavior."
+    },
+    {
+      "id": "G219",
+      "title": "Android14 nonlinear font scaling and maximum-size testing",
+      "url": "https://developer.android.com/about/versions/14/features",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2026-10-01",
+      "note": "Android14/API34 supports nonlinear font scaling to200%; sp text/line heights use framework conversion. Configuration.fontScale is informational, not a linear pixel multiplier; avoid scaledDensity/manual equations. P1-S2 probe exercises real system font scale1.3/2.0, records actual Activity configuration, and restores exact prior literal setting. No context-only configuration override. Fallback: retained sp typography and unqualified geometry until actual rendered/reachable-control observations. Owner: design/Android; no product API-floor change. Eight actual local-workspace cases now pass at measured narrow/short windows and font scales1.3/2.0; see API57 and qualification/results/P1-S2/2026-10-16-native-window-geometry.md for bounded evidence, restoration and remaining gates.",
+      "refresh": "Before changing native geometry/font-scale qualification or target Android windowing behavior."
     }
   ]
 }

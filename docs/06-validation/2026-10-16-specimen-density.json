@@ -1,0 +1,3028 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "Synthetic HTML specimen only; captured viewport visual review",
+  "browser": "Google Chrome 155.0.8059.39",
+  "execution": "Headless Chrome with CDP; Chrome sandbox enabled for accepted run",
+  "acceptedAttempt": "run-04",
+  "evidenceRoot": ".cache/specimen-density-01/run-04",
+  "rawReport": {
+    "path": ".cache/specimen-density-01/run-04/report.json",
+    "sha256": "07db6cb851243c426ab4f2343fa1ee4a60766c8edc742ad10a3d27c6ff39e623",
+    "publication": "Raw local report retained locally; absolute navigation URLs omitted from this public manifest"
+  },
+  "attempts": [
+    {
+      "attempt": "run-01",
+      "disposition": "Chrome SUID sandbox startup abort inside command sandbox; no frame captured; not a visual pass"
+    },
+    {
+      "attempt": "run-02",
+      "disposition": "Harness reported PASS with 16 layouts and 10 states; unmatched inspector arrangements and announcement-over-footer limits prevent final visual acceptance"
+    },
+    {
+      "attempt": "run-03",
+      "disposition": "Failed before any render: new-document URL comparison did not encode filesystem spaces; zero layouts and zero states"
+    },
+    {
+      "attempt": "run-04",
+      "disposition": "Final PASS: 16 layouts and 10 states; URL.href navigation identity, explicit wide-open/narrow-closed inspector, naturally expired announcements and viewport-only captures"
+    }
+  ],
+  "sourcesUnchangedBetweenAttempts": true,
+  "sources": {
+    "preview.html": "b9032ddc7b8c0d980d064c1673aaf32e296bcb8b72948b0abe4898fde41a034c",
+    "preview.css": "dcad505af49b6d70735000c90d472f6e1031721d61aff4f36a5a6f31323465e6",
+    "preview.js": "521d50451cd269bdc2de2527803209922b6bf648adc79851186ef9923ecc5792",
+    "tokens.css": "2f75de94999b440b4e4077d45e93d38c816f381f32b00fd69f8e3009858eeb7a"
+  },
+  "startedAt": "2026-10-16T10:43:23.316Z",
+  "endedAt": "2026-10-16T10:45:12.428Z",
+  "layoutCount": 16,
+  "stateCount": 10,
+  "status": "passed",
+  "layoutVisualReview": {
+    "path": ".cache/specimen-density-01/run-04/layout-visual-review.md",
+    "sha256": "543ec90693027a7d7728580630701e28355cc5518f0251d12093fc0523924e1d",
+    "result": "All sixteen layout images directly inspected; no actionable defects in visible captured content"
+  },
+  "stateVisualReview": {
+    "reviewer": "Integration leader, direct Codex GPT6.1-Sol",
+    "result": "All ten state captures directly inspected; distinct neutral monogram outline, keyboard focus and selection accepted with stable inspector"
+  },
+  "limits": [
+    "Nominal CSS-pixel tiers are not native dp or hit-target qualification",
+    "Viewport-only: offscreen content excluded",
+    "Pressed/down state not covered",
+    "No native profile/trust/vault or scaled-native qualification",
+    "No real host/session/device operations, physical input or system caption qualification"
+  ],
+  "renders": [
+    {
+      "app": "console",
+      "theme": "light",
+      "density": "comfortable",
+      "width": 1440,
+      "metrics": {
+        "theme": "light",
+        "density": "comfortable",
+        "body": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 1219,
+          "width": 1440,
+          "bg": "rgb(244, 247, 247)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 1440,
+          "clientWidth": 1440
+        },
+        "h1": {
+          "font": "24px",
+          "line": "32px",
+          "minHeight": "0px",
+          "height": 32,
+          "width": 197.078125,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 197,
+          "clientWidth": 197
+        },
+        "inspectorHeading": {
+          "font": "20px",
+          "line": "28px",
+          "minHeight": "0px",
+          "height": 28,
+          "width": 223,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 223,
+          "clientWidth": 223
+        },
+        "inspectorProse": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 0,
+          "width": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(76, 96, 102)",
+          "outline": "rgb(76, 96, 102) none 3px",
+          "offset": "0px",
+          "scrollWidth": 0,
+          "clientWidth": 0
+        },
+        "mainAction": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "48px",
+          "height": 48,
+          "width": 136.375,
+          "bg": "rgb(0, 106, 106)",
+          "color": "rgb(255, 255, 255)",
+          "outline": "rgb(255, 255, 255) none 3px",
+          "offset": "0px",
+          "scrollWidth": 134,
+          "clientWidth": 134
+        },
+        "nav": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "48px",
+          "height": 48,
+          "width": 187,
+          "bg": "rgb(210, 241, 234)",
+          "color": "rgb(0, 80, 71)",
+          "outline": "rgb(0, 80, 71) none 3px",
+          "offset": "0px",
+          "scrollWidth": 187,
+          "clientWidth": 187
+        },
+        "tableRow": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 0,
+          "width": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 0,
+          "clientWidth": 0
+        },
+        "viewport": 1440,
+        "pageWidth": 1440,
+        "announcement": "Offline. Previous output remains readable; device ownership must be reconciled before reassignment."
+      },
+      "screenshot": {
+        "file": "console-light-comfortable-1440.png",
+        "bytes": 222867,
+        "sha256": "231a7589cc34a92def057dacf06c0b8f414307df5f45e07f5bc606a7dd47f201",
+        "clip": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 1200,
+          "scale": 1
+        },
+        "before": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 266,
+            "width": 264,
+            "height": 826
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        },
+        "after": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 266,
+            "width": 264,
+            "height": 826
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        }
+      }
+    },
+    {
+      "app": "console",
+      "theme": "light",
+      "density": "standard",
+      "width": 1440,
+      "metrics": {
+        "theme": "light",
+        "density": "standard",
+        "body": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 1195,
+          "width": 1440,
+          "bg": "rgb(244, 247, 247)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 1440,
+          "clientWidth": 1440
+        },
+        "h1": {
+          "font": "24px",
+          "line": "32px",
+          "minHeight": "0px",
+          "height": 32,
+          "width": 197.078125,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 197,
+          "clientWidth": 197
+        },
+        "inspectorHeading": {
+          "font": "20px",
+          "line": "28px",
+          "minHeight": "0px",
+          "height": 28,
+          "width": 223,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 223,
+          "clientWidth": 223
+        },
+        "inspectorProse": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 0,
+          "width": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(76, 96, 102)",
+          "outline": "rgb(76, 96, 102) none 3px",
+          "offset": "0px",
+          "scrollWidth": 0,
+          "clientWidth": 0
+        },
+        "mainAction": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "40px",
+          "height": 40,
+          "width": 136.375,
+          "bg": "rgb(0, 106, 106)",
+          "color": "rgb(255, 255, 255)",
+          "outline": "rgb(255, 255, 255) none 3px",
+          "offset": "0px",
+          "scrollWidth": 134,
+          "clientWidth": 134
+        },
+        "nav": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "40px",
+          "height": 40,
+          "width": 187,
+          "bg": "rgb(210, 241, 234)",
+          "color": "rgb(0, 80, 71)",
+          "outline": "rgb(0, 80, 71) none 3px",
+          "offset": "0px",
+          "scrollWidth": 187,
+          "clientWidth": 187
+        },
+        "tableRow": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 0,
+          "width": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 0,
+          "clientWidth": 0
+        },
+        "viewport": 1440,
+        "pageWidth": 1440,
+        "announcement": "Offline. Previous output remains readable; device ownership must be reconciled before reassignment."
+      },
+      "screenshot": {
+        "file": "console-light-standard-1440.png",
+        "bytes": 223597,
+        "sha256": "ce94c19cc70e23b86b524cbfdcac2df5b88b3097a514335a122e66e7d3fbef57",
+        "clip": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 1200,
+          "scale": 1
+        },
+        "before": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 250,
+            "width": 264,
+            "height": 818
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        },
+        "after": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 250,
+            "width": 264,
+            "height": 818
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        }
+      }
+    },
+    {
+      "app": "console",
+      "theme": "light",
+      "density": "compact",
+      "width": 1440,
+      "metrics": {
+        "theme": "light",
+        "density": "compact",
+        "body": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 1172,
+          "width": 1440,
+          "bg": "rgb(244, 247, 247)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 1440,
+          "clientWidth": 1440
+        },
+        "h1": {
+          "font": "24px",
+          "line": "32px",
+          "minHeight": "0px",
+          "height": 32,
+          "width": 197.078125,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 197,
+          "clientWidth": 197
+        },
+        "inspectorHeading": {
+          "font": "20px",
+          "line": "28px",
+          "minHeight": "0px",
+          "height": 28,
+          "width": 223,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 223,
+          "clientWidth": 223
+        },
+        "inspectorProse": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 0,
+          "width": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(76, 96, 102)",
+          "outline": "rgb(76, 96, 102) none 3px",
+          "offset": "0px",
+          "scrollWidth": 0,
+          "clientWidth": 0
+        },
+        "mainAction": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "32px",
+          "height": 32,
+          "width": 136.375,
+          "bg": "rgb(0, 106, 106)",
+          "color": "rgb(255, 255, 255)",
+          "outline": "rgb(255, 255, 255) none 3px",
+          "offset": "0px",
+          "scrollWidth": 134,
+          "clientWidth": 134
+        },
+        "nav": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "32px",
+          "height": 32,
+          "width": 187,
+          "bg": "rgb(210, 241, 234)",
+          "color": "rgb(0, 80, 71)",
+          "outline": "rgb(0, 80, 71) none 3px",
+          "offset": "0px",
+          "scrollWidth": 187,
+          "clientWidth": 187
+        },
+        "tableRow": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 0,
+          "width": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 0,
+          "clientWidth": 0
+        },
+        "viewport": 1440,
+        "pageWidth": 1440,
+        "announcement": "Offline. Previous output remains readable; device ownership must be reconciled before reassignment."
+      },
+      "screenshot": {
+        "file": "console-light-compact-1440.png",
+        "bytes": 222768,
+        "sha256": "024ffa58366ec0f3df065fedf54995db8c648fd4e1ab0b1334943cfd2ff870da",
+        "clip": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 1200,
+          "scale": 1
+        },
+        "before": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 235,
+            "width": 264,
+            "height": 810
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        },
+        "after": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 235,
+            "width": 264,
+            "height": 810
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        }
+      }
+    },
+    {
+      "app": "console",
+      "theme": "dark",
+      "density": "comfortable",
+      "width": 1440,
+      "metrics": {
+        "theme": "dark",
+        "density": "comfortable",
+        "body": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 1219,
+          "width": 1440,
+          "bg": "rgb(16, 26, 29)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 1440,
+          "clientWidth": 1440
+        },
+        "h1": {
+          "font": "24px",
+          "line": "32px",
+          "minHeight": "0px",
+          "height": 32,
+          "width": 197.078125,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 197,
+          "clientWidth": 197
+        },
+        "inspectorHeading": {
+          "font": "20px",
+          "line": "28px",
+          "minHeight": "0px",
+          "height": 28,
+          "width": 223,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 223,
+          "clientWidth": 223
+        },
+        "inspectorProse": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 0,
+          "width": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(174, 195, 201)",
+          "outline": "rgb(174, 195, 201) none 3px",
+          "offset": "0px",
+          "scrollWidth": 0,
+          "clientWidth": 0
+        },
+        "mainAction": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "48px",
+          "height": 48,
+          "width": 136.375,
+          "bg": "rgb(125, 213, 199)",
+          "color": "rgb(0, 58, 52)",
+          "outline": "rgb(0, 58, 52) none 3px",
+          "offset": "0px",
+          "scrollWidth": 134,
+          "clientWidth": 134
+        },
+        "nav": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "48px",
+          "height": 48,
+          "width": 187,
+          "bg": "rgb(22, 76, 67)",
+          "color": "rgb(177, 242, 222)",
+          "outline": "rgb(177, 242, 222) none 3px",
+          "offset": "0px",
+          "scrollWidth": 187,
+          "clientWidth": 187
+        },
+        "tableRow": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 0,
+          "width": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 0,
+          "clientWidth": 0
+        },
+        "viewport": 1440,
+        "pageWidth": 1440,
+        "announcement": "Offline. Previous output remains readable; device ownership must be reconciled before reassignment."
+      },
+      "screenshot": {
+        "file": "console-dark-comfortable-1440.png",
+        "bytes": 225105,
+        "sha256": "5142dc832e09b2ad8706b893a83f62a46938324f6184a277ec67f47cbb83c79a",
+        "clip": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 1200,
+          "scale": 1
+        },
+        "before": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 266,
+            "width": 264,
+            "height": 826
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        },
+        "after": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 266,
+            "width": 264,
+            "height": 826
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        }
+      }
+    },
+    {
+      "app": "console",
+      "theme": "dark",
+      "density": "standard",
+      "width": 1440,
+      "metrics": {
+        "theme": "dark",
+        "density": "standard",
+        "body": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 1195,
+          "width": 1440,
+          "bg": "rgb(16, 26, 29)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 1440,
+          "clientWidth": 1440
+        },
+        "h1": {
+          "font": "24px",
+          "line": "32px",
+          "minHeight": "0px",
+          "height": 32,
+          "width": 197.078125,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 197,
+          "clientWidth": 197
+        },
+        "inspectorHeading": {
+          "font": "20px",
+          "line": "28px",
+          "minHeight": "0px",
+          "height": 28,
+          "width": 223,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 223,
+          "clientWidth": 223
+        },
+        "inspectorProse": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 0,
+          "width": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(174, 195, 201)",
+          "outline": "rgb(174, 195, 201) none 3px",
+          "offset": "0px",
+          "scrollWidth": 0,
+          "clientWidth": 0
+        },
+        "mainAction": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "40px",
+          "height": 40,
+          "width": 136.375,
+          "bg": "rgb(125, 213, 199)",
+          "color": "rgb(0, 58, 52)",
+          "outline": "rgb(0, 58, 52) none 3px",
+          "offset": "0px",
+          "scrollWidth": 134,
+          "clientWidth": 134
+        },
+        "nav": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "40px",
+          "height": 40,
+          "width": 187,
+          "bg": "rgb(22, 76, 67)",
+          "color": "rgb(177, 242, 222)",
+          "outline": "rgb(177, 242, 222) none 3px",
+          "offset": "0px",
+          "scrollWidth": 187,
+          "clientWidth": 187
+        },
+        "tableRow": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 0,
+          "width": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 0,
+          "clientWidth": 0
+        },
+        "viewport": 1440,
+        "pageWidth": 1440,
+        "announcement": "Offline. Previous output remains readable; device ownership must be reconciled before reassignment."
+      },
+      "screenshot": {
+        "file": "console-dark-standard-1440.png",
+        "bytes": 225298,
+        "sha256": "b9f57dd5a77535ac7899f5dfd7d56bd499f03b5d0eed2e40c110950eb17ddaf6",
+        "clip": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 1200,
+          "scale": 1
+        },
+        "before": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 250,
+            "width": 264,
+            "height": 818
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        },
+        "after": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 250,
+            "width": 264,
+            "height": 818
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        }
+      }
+    },
+    {
+      "app": "console",
+      "theme": "dark",
+      "density": "compact",
+      "width": 1440,
+      "metrics": {
+        "theme": "dark",
+        "density": "compact",
+        "body": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 1172,
+          "width": 1440,
+          "bg": "rgb(16, 26, 29)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 1440,
+          "clientWidth": 1440
+        },
+        "h1": {
+          "font": "24px",
+          "line": "32px",
+          "minHeight": "0px",
+          "height": 32,
+          "width": 197.078125,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 197,
+          "clientWidth": 197
+        },
+        "inspectorHeading": {
+          "font": "20px",
+          "line": "28px",
+          "minHeight": "0px",
+          "height": 28,
+          "width": 223,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 223,
+          "clientWidth": 223
+        },
+        "inspectorProse": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 0,
+          "width": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(174, 195, 201)",
+          "outline": "rgb(174, 195, 201) none 3px",
+          "offset": "0px",
+          "scrollWidth": 0,
+          "clientWidth": 0
+        },
+        "mainAction": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "32px",
+          "height": 32,
+          "width": 136.375,
+          "bg": "rgb(125, 213, 199)",
+          "color": "rgb(0, 58, 52)",
+          "outline": "rgb(0, 58, 52) none 3px",
+          "offset": "0px",
+          "scrollWidth": 134,
+          "clientWidth": 134
+        },
+        "nav": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "32px",
+          "height": 32,
+          "width": 187,
+          "bg": "rgb(22, 76, 67)",
+          "color": "rgb(177, 242, 222)",
+          "outline": "rgb(177, 242, 222) none 3px",
+          "offset": "0px",
+          "scrollWidth": 187,
+          "clientWidth": 187
+        },
+        "tableRow": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 0,
+          "width": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 0,
+          "clientWidth": 0
+        },
+        "viewport": 1440,
+        "pageWidth": 1440,
+        "announcement": "Offline. Previous output remains readable; device ownership must be reconciled before reassignment."
+      },
+      "screenshot": {
+        "file": "console-dark-compact-1440.png",
+        "bytes": 224768,
+        "sha256": "93322b30189671515e09a34bbd7a9d92ccc2fd01369414bdf02682d8a668b997",
+        "clip": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 1200,
+          "scale": 1
+        },
+        "before": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 235,
+            "width": 264,
+            "height": 810
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        },
+        "after": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 235,
+            "width": 264,
+            "height": 810
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        }
+      }
+    },
+    {
+      "app": "desktop",
+      "theme": "light",
+      "density": "comfortable",
+      "width": 1440,
+      "metrics": {
+        "theme": "light",
+        "density": "comfortable",
+        "body": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 1219,
+          "width": 1440,
+          "bg": "rgb(244, 247, 247)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 1440,
+          "clientWidth": 1440
+        },
+        "h1": {
+          "font": "24px",
+          "line": "32px",
+          "minHeight": "0px",
+          "height": 32,
+          "width": 197.078125,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 197,
+          "clientWidth": 197
+        },
+        "inspectorHeading": {
+          "font": "20px",
+          "line": "28px",
+          "minHeight": "0px",
+          "height": 28,
+          "width": 223,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 223,
+          "clientWidth": 223
+        },
+        "inspectorProse": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 0,
+          "width": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(76, 96, 102)",
+          "outline": "rgb(76, 96, 102) none 3px",
+          "offset": "0px",
+          "scrollWidth": 0,
+          "clientWidth": 0
+        },
+        "mainAction": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "48px",
+          "height": 48,
+          "width": 145.21875,
+          "bg": "rgb(0, 106, 106)",
+          "color": "rgb(255, 255, 255)",
+          "outline": "rgb(255, 255, 255) none 3px",
+          "offset": "0px",
+          "scrollWidth": 143,
+          "clientWidth": 143
+        },
+        "nav": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "48px",
+          "height": 48,
+          "width": 187,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 187,
+          "clientWidth": 187
+        },
+        "tableRow": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 48,
+          "width": 850,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 850,
+          "clientWidth": 850
+        },
+        "viewport": 1440,
+        "pageWidth": 1440,
+        "announcement": "Offline. Previous output remains readable; device ownership must be reconciled before reassignment."
+      },
+      "screenshot": {
+        "file": "desktop-light-comfortable-1440.png",
+        "bytes": 185106,
+        "sha256": "6aea46d29efb9b15428c5b4e46d169944190b2fcf7578f0c90784ed83382d361",
+        "clip": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 1200,
+          "scale": 1
+        },
+        "before": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 266,
+            "width": 264,
+            "height": 826
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        },
+        "after": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 266,
+            "width": 264,
+            "height": 826
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        }
+      }
+    },
+    {
+      "app": "desktop",
+      "theme": "light",
+      "density": "standard",
+      "width": 1440,
+      "metrics": {
+        "theme": "light",
+        "density": "standard",
+        "body": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 1195,
+          "width": 1440,
+          "bg": "rgb(244, 247, 247)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 1440,
+          "clientWidth": 1440
+        },
+        "h1": {
+          "font": "24px",
+          "line": "32px",
+          "minHeight": "0px",
+          "height": 32,
+          "width": 197.078125,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 197,
+          "clientWidth": 197
+        },
+        "inspectorHeading": {
+          "font": "20px",
+          "line": "28px",
+          "minHeight": "0px",
+          "height": 28,
+          "width": 223,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 223,
+          "clientWidth": 223
+        },
+        "inspectorProse": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 0,
+          "width": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(76, 96, 102)",
+          "outline": "rgb(76, 96, 102) none 3px",
+          "offset": "0px",
+          "scrollWidth": 0,
+          "clientWidth": 0
+        },
+        "mainAction": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "40px",
+          "height": 40,
+          "width": 145.21875,
+          "bg": "rgb(0, 106, 106)",
+          "color": "rgb(255, 255, 255)",
+          "outline": "rgb(255, 255, 255) none 3px",
+          "offset": "0px",
+          "scrollWidth": 143,
+          "clientWidth": 143
+        },
+        "nav": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "40px",
+          "height": 40,
+          "width": 187,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 187,
+          "clientWidth": 187
+        },
+        "tableRow": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 40,
+          "width": 850,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 850,
+          "clientWidth": 850
+        },
+        "viewport": 1440,
+        "pageWidth": 1440,
+        "announcement": "Offline. Previous output remains readable; device ownership must be reconciled before reassignment."
+      },
+      "screenshot": {
+        "file": "desktop-light-standard-1440.png",
+        "bytes": 186213,
+        "sha256": "66f7ef82e3a92e0e10a2c7356dd6358a88ca5d2927caaa4992b248cb5d0ff50f",
+        "clip": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 1200,
+          "scale": 1
+        },
+        "before": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 250,
+            "width": 264,
+            "height": 818
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        },
+        "after": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 250,
+            "width": 264,
+            "height": 818
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        }
+      }
+    },
+    {
+      "app": "desktop",
+      "theme": "light",
+      "density": "compact",
+      "width": 1440,
+      "metrics": {
+        "theme": "light",
+        "density": "compact",
+        "body": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 1172,
+          "width": 1440,
+          "bg": "rgb(244, 247, 247)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 1440,
+          "clientWidth": 1440
+        },
+        "h1": {
+          "font": "24px",
+          "line": "32px",
+          "minHeight": "0px",
+          "height": 32,
+          "width": 197.078125,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 197,
+          "clientWidth": 197
+        },
+        "inspectorHeading": {
+          "font": "20px",
+          "line": "28px",
+          "minHeight": "0px",
+          "height": 28,
+          "width": 223,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 223,
+          "clientWidth": 223
+        },
+        "inspectorProse": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 0,
+          "width": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(76, 96, 102)",
+          "outline": "rgb(76, 96, 102) none 3px",
+          "offset": "0px",
+          "scrollWidth": 0,
+          "clientWidth": 0
+        },
+        "mainAction": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "32px",
+          "height": 32,
+          "width": 145.21875,
+          "bg": "rgb(0, 106, 106)",
+          "color": "rgb(255, 255, 255)",
+          "outline": "rgb(255, 255, 255) none 3px",
+          "offset": "0px",
+          "scrollWidth": 143,
+          "clientWidth": 143
+        },
+        "nav": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "32px",
+          "height": 32,
+          "width": 187,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 187,
+          "clientWidth": 187
+        },
+        "tableRow": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 32,
+          "width": 850,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 850,
+          "clientWidth": 850
+        },
+        "viewport": 1440,
+        "pageWidth": 1440,
+        "announcement": "Offline. Previous output remains readable; device ownership must be reconciled before reassignment."
+      },
+      "screenshot": {
+        "file": "desktop-light-compact-1440.png",
+        "bytes": 185473,
+        "sha256": "0e071557cc23b63c6620d6b6c43f3af9d13a6146c65b74e33de020f25257caca",
+        "clip": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 1200,
+          "scale": 1
+        },
+        "before": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 235,
+            "width": 264,
+            "height": 810
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        },
+        "after": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 235,
+            "width": 264,
+            "height": 810
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        }
+      }
+    },
+    {
+      "app": "desktop",
+      "theme": "dark",
+      "density": "comfortable",
+      "width": 1440,
+      "metrics": {
+        "theme": "dark",
+        "density": "comfortable",
+        "body": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 1219,
+          "width": 1440,
+          "bg": "rgb(16, 26, 29)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 1440,
+          "clientWidth": 1440
+        },
+        "h1": {
+          "font": "24px",
+          "line": "32px",
+          "minHeight": "0px",
+          "height": 32,
+          "width": 197.078125,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 197,
+          "clientWidth": 197
+        },
+        "inspectorHeading": {
+          "font": "20px",
+          "line": "28px",
+          "minHeight": "0px",
+          "height": 28,
+          "width": 223,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 223,
+          "clientWidth": 223
+        },
+        "inspectorProse": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 0,
+          "width": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(174, 195, 201)",
+          "outline": "rgb(174, 195, 201) none 3px",
+          "offset": "0px",
+          "scrollWidth": 0,
+          "clientWidth": 0
+        },
+        "mainAction": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "48px",
+          "height": 48,
+          "width": 145.21875,
+          "bg": "rgb(125, 213, 199)",
+          "color": "rgb(0, 58, 52)",
+          "outline": "rgb(0, 58, 52) none 3px",
+          "offset": "0px",
+          "scrollWidth": 143,
+          "clientWidth": 143
+        },
+        "nav": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "48px",
+          "height": 48,
+          "width": 187,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 187,
+          "clientWidth": 187
+        },
+        "tableRow": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 48,
+          "width": 850,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 850,
+          "clientWidth": 850
+        },
+        "viewport": 1440,
+        "pageWidth": 1440,
+        "announcement": "Offline. Previous output remains readable; device ownership must be reconciled before reassignment."
+      },
+      "screenshot": {
+        "file": "desktop-dark-comfortable-1440.png",
+        "bytes": 187673,
+        "sha256": "03b65eda205f1659086aab9b14499640c2e64d609b2ccfa3d5badc947f69888d",
+        "clip": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 1200,
+          "scale": 1
+        },
+        "before": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 266,
+            "width": 264,
+            "height": 826
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        },
+        "after": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 266,
+            "width": 264,
+            "height": 826
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        }
+      }
+    },
+    {
+      "app": "desktop",
+      "theme": "dark",
+      "density": "standard",
+      "width": 1440,
+      "metrics": {
+        "theme": "dark",
+        "density": "standard",
+        "body": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 1195,
+          "width": 1440,
+          "bg": "rgb(16, 26, 29)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 1440,
+          "clientWidth": 1440
+        },
+        "h1": {
+          "font": "24px",
+          "line": "32px",
+          "minHeight": "0px",
+          "height": 32,
+          "width": 197.078125,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 197,
+          "clientWidth": 197
+        },
+        "inspectorHeading": {
+          "font": "20px",
+          "line": "28px",
+          "minHeight": "0px",
+          "height": 28,
+          "width": 223,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 223,
+          "clientWidth": 223
+        },
+        "inspectorProse": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 0,
+          "width": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(174, 195, 201)",
+          "outline": "rgb(174, 195, 201) none 3px",
+          "offset": "0px",
+          "scrollWidth": 0,
+          "clientWidth": 0
+        },
+        "mainAction": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "40px",
+          "height": 40,
+          "width": 145.21875,
+          "bg": "rgb(125, 213, 199)",
+          "color": "rgb(0, 58, 52)",
+          "outline": "rgb(0, 58, 52) none 3px",
+          "offset": "0px",
+          "scrollWidth": 143,
+          "clientWidth": 143
+        },
+        "nav": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "40px",
+          "height": 40,
+          "width": 187,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 187,
+          "clientWidth": 187
+        },
+        "tableRow": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 40,
+          "width": 850,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 850,
+          "clientWidth": 850
+        },
+        "viewport": 1440,
+        "pageWidth": 1440,
+        "announcement": "Offline. Previous output remains readable; device ownership must be reconciled before reassignment."
+      },
+      "screenshot": {
+        "file": "desktop-dark-standard-1440.png",
+        "bytes": 188692,
+        "sha256": "81a35b7ed0cdf15a838173222c8250b2f27c7e468362cfcb5c395491d6df9bc3",
+        "clip": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 1200,
+          "scale": 1
+        },
+        "before": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 250,
+            "width": 264,
+            "height": 818
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        },
+        "after": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 250,
+            "width": 264,
+            "height": 818
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        }
+      }
+    },
+    {
+      "app": "desktop",
+      "theme": "dark",
+      "density": "compact",
+      "width": 1440,
+      "metrics": {
+        "theme": "dark",
+        "density": "compact",
+        "body": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 1172,
+          "width": 1440,
+          "bg": "rgb(16, 26, 29)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 1440,
+          "clientWidth": 1440
+        },
+        "h1": {
+          "font": "24px",
+          "line": "32px",
+          "minHeight": "0px",
+          "height": 32,
+          "width": 197.078125,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 197,
+          "clientWidth": 197
+        },
+        "inspectorHeading": {
+          "font": "20px",
+          "line": "28px",
+          "minHeight": "0px",
+          "height": 28,
+          "width": 223,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 223,
+          "clientWidth": 223
+        },
+        "inspectorProse": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 0,
+          "width": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(174, 195, 201)",
+          "outline": "rgb(174, 195, 201) none 3px",
+          "offset": "0px",
+          "scrollWidth": 0,
+          "clientWidth": 0
+        },
+        "mainAction": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "32px",
+          "height": 32,
+          "width": 145.21875,
+          "bg": "rgb(125, 213, 199)",
+          "color": "rgb(0, 58, 52)",
+          "outline": "rgb(0, 58, 52) none 3px",
+          "offset": "0px",
+          "scrollWidth": 143,
+          "clientWidth": 143
+        },
+        "nav": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "32px",
+          "height": 32,
+          "width": 187,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 187,
+          "clientWidth": 187
+        },
+        "tableRow": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 32,
+          "width": 850,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 850,
+          "clientWidth": 850
+        },
+        "viewport": 1440,
+        "pageWidth": 1440,
+        "announcement": "Offline. Previous output remains readable; device ownership must be reconciled before reassignment."
+      },
+      "screenshot": {
+        "file": "desktop-dark-compact-1440.png",
+        "bytes": 188545,
+        "sha256": "c1769cfd679240e80ed5e975976b406f3527039bee0072f5595e1feac6c10bea",
+        "clip": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 1200,
+          "scale": 1
+        },
+        "before": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 235,
+            "width": 264,
+            "height": 810
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        },
+        "after": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 235,
+            "width": 264,
+            "height": 810
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        }
+      }
+    },
+    {
+      "app": "console",
+      "theme": "light",
+      "density": "compact",
+      "width": 560,
+      "metrics": {
+        "theme": "light",
+        "density": "compact",
+        "body": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 1214,
+          "width": 560,
+          "bg": "rgb(244, 247, 247)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 560,
+          "clientWidth": 560
+        },
+        "h1": {
+          "font": "24px",
+          "line": "32px",
+          "minHeight": "0px",
+          "height": 32,
+          "width": 197.078125,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 197,
+          "clientWidth": 197
+        },
+        "inspectorHeading": {
+          "font": "20px",
+          "line": "28px",
+          "minHeight": "0px",
+          "height": 0,
+          "width": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 0,
+          "clientWidth": 0
+        },
+        "inspectorProse": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 0,
+          "width": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(76, 96, 102)",
+          "outline": "rgb(76, 96, 102) none 3px",
+          "offset": "0px",
+          "scrollWidth": 0,
+          "clientWidth": 0
+        },
+        "mainAction": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "32px",
+          "height": 32,
+          "width": 128.375,
+          "bg": "rgb(0, 106, 106)",
+          "color": "rgb(255, 255, 255)",
+          "outline": "rgb(255, 255, 255) none 3px",
+          "offset": "0px",
+          "scrollWidth": 126,
+          "clientWidth": 126
+        },
+        "nav": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "32px",
+          "height": 0,
+          "width": 0,
+          "bg": "rgb(210, 241, 234)",
+          "color": "rgb(0, 80, 71)",
+          "outline": "rgb(0, 80, 71) none 3px",
+          "offset": "0px",
+          "scrollWidth": 0,
+          "clientWidth": 0
+        },
+        "tableRow": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 0,
+          "width": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 0,
+          "clientWidth": 0
+        },
+        "viewport": 560,
+        "pageWidth": 560,
+        "announcement": "Offline. Previous output remains readable; device ownership must be reconciled before reassignment."
+      },
+      "screenshot": {
+        "file": "console-light-compact-560.png",
+        "bytes": 119027,
+        "sha256": "980357a0cf3103e6d5b80f607d0c456f47ff6cf219337d59ffb27be8a8463695",
+        "clip": {
+          "x": 0,
+          "y": 0,
+          "width": 560,
+          "height": 1200,
+          "scale": 1
+        },
+        "before": {
+          "readyState": "complete",
+          "width": 560,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": true,
+          "inspectorExpanded": "false",
+          "inspectorBounds": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "workspaceInspector": "false",
+          "announcementVisible": false
+        },
+        "after": {
+          "readyState": "complete",
+          "width": 560,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": true,
+          "inspectorExpanded": "false",
+          "inspectorBounds": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "workspaceInspector": "false",
+          "announcementVisible": false
+        }
+      }
+    },
+    {
+      "app": "console",
+      "theme": "dark",
+      "density": "compact",
+      "width": 560,
+      "metrics": {
+        "theme": "dark",
+        "density": "compact",
+        "body": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 1214,
+          "width": 560,
+          "bg": "rgb(16, 26, 29)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 560,
+          "clientWidth": 560
+        },
+        "h1": {
+          "font": "24px",
+          "line": "32px",
+          "minHeight": "0px",
+          "height": 32,
+          "width": 197.078125,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 197,
+          "clientWidth": 197
+        },
+        "inspectorHeading": {
+          "font": "20px",
+          "line": "28px",
+          "minHeight": "0px",
+          "height": 0,
+          "width": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 0,
+          "clientWidth": 0
+        },
+        "inspectorProse": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 0,
+          "width": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(174, 195, 201)",
+          "outline": "rgb(174, 195, 201) none 3px",
+          "offset": "0px",
+          "scrollWidth": 0,
+          "clientWidth": 0
+        },
+        "mainAction": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "32px",
+          "height": 32,
+          "width": 128.375,
+          "bg": "rgb(125, 213, 199)",
+          "color": "rgb(0, 58, 52)",
+          "outline": "rgb(0, 58, 52) none 3px",
+          "offset": "0px",
+          "scrollWidth": 126,
+          "clientWidth": 126
+        },
+        "nav": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "32px",
+          "height": 0,
+          "width": 0,
+          "bg": "rgb(22, 76, 67)",
+          "color": "rgb(177, 242, 222)",
+          "outline": "rgb(177, 242, 222) none 3px",
+          "offset": "0px",
+          "scrollWidth": 0,
+          "clientWidth": 0
+        },
+        "tableRow": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 0,
+          "width": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 0,
+          "clientWidth": 0
+        },
+        "viewport": 560,
+        "pageWidth": 560,
+        "announcement": "Offline. Previous output remains readable; device ownership must be reconciled before reassignment."
+      },
+      "screenshot": {
+        "file": "console-dark-compact-560.png",
+        "bytes": 119955,
+        "sha256": "b68402774140851745528a85804da3e671eb9929cd5caed7b3f3da73840deee2",
+        "clip": {
+          "x": 0,
+          "y": 0,
+          "width": 560,
+          "height": 1200,
+          "scale": 1
+        },
+        "before": {
+          "readyState": "complete",
+          "width": 560,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": true,
+          "inspectorExpanded": "false",
+          "inspectorBounds": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "workspaceInspector": "false",
+          "announcementVisible": false
+        },
+        "after": {
+          "readyState": "complete",
+          "width": 560,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": true,
+          "inspectorExpanded": "false",
+          "inspectorBounds": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "workspaceInspector": "false",
+          "announcementVisible": false
+        }
+      }
+    },
+    {
+      "app": "desktop",
+      "theme": "light",
+      "density": "compact",
+      "width": 560,
+      "metrics": {
+        "theme": "light",
+        "density": "compact",
+        "body": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 1176,
+          "width": 560,
+          "bg": "rgb(244, 247, 247)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 560,
+          "clientWidth": 560
+        },
+        "h1": {
+          "font": "24px",
+          "line": "32px",
+          "minHeight": "0px",
+          "height": 32,
+          "width": 197.078125,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 197,
+          "clientWidth": 197
+        },
+        "inspectorHeading": {
+          "font": "20px",
+          "line": "28px",
+          "minHeight": "0px",
+          "height": 0,
+          "width": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 0,
+          "clientWidth": 0
+        },
+        "inspectorProse": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 0,
+          "width": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(76, 96, 102)",
+          "outline": "rgb(76, 96, 102) none 3px",
+          "offset": "0px",
+          "scrollWidth": 0,
+          "clientWidth": 0
+        },
+        "mainAction": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "32px",
+          "height": 32,
+          "width": 137.21875,
+          "bg": "rgb(0, 106, 106)",
+          "color": "rgb(255, 255, 255)",
+          "outline": "rgb(255, 255, 255) none 3px",
+          "offset": "0px",
+          "scrollWidth": 135,
+          "clientWidth": 135
+        },
+        "nav": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "32px",
+          "height": 0,
+          "width": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 0,
+          "clientWidth": 0
+        },
+        "tableRow": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 32,
+          "width": 506,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 36, 39)",
+          "outline": "rgb(24, 36, 39) none 3px",
+          "offset": "0px",
+          "scrollWidth": 506,
+          "clientWidth": 506
+        },
+        "viewport": 560,
+        "pageWidth": 560,
+        "announcement": "Offline. Previous output remains readable; device ownership must be reconciled before reassignment."
+      },
+      "screenshot": {
+        "file": "desktop-light-compact-560.png",
+        "bytes": 112024,
+        "sha256": "055a7d19f3a641fa1c5fa6ad72236d4a3e8af427887cb0ef8816b490320aeb95",
+        "clip": {
+          "x": 0,
+          "y": 0,
+          "width": 560,
+          "height": 1200,
+          "scale": 1
+        },
+        "before": {
+          "readyState": "complete",
+          "width": 560,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": true,
+          "inspectorExpanded": "false",
+          "inspectorBounds": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "workspaceInspector": "false",
+          "announcementVisible": false
+        },
+        "after": {
+          "readyState": "complete",
+          "width": 560,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": true,
+          "inspectorExpanded": "false",
+          "inspectorBounds": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "workspaceInspector": "false",
+          "announcementVisible": false
+        }
+      }
+    },
+    {
+      "app": "desktop",
+      "theme": "dark",
+      "density": "compact",
+      "width": 560,
+      "metrics": {
+        "theme": "dark",
+        "density": "compact",
+        "body": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 1176,
+          "width": 560,
+          "bg": "rgb(16, 26, 29)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 560,
+          "clientWidth": 560
+        },
+        "h1": {
+          "font": "24px",
+          "line": "32px",
+          "minHeight": "0px",
+          "height": 32,
+          "width": 197.078125,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 197,
+          "clientWidth": 197
+        },
+        "inspectorHeading": {
+          "font": "20px",
+          "line": "28px",
+          "minHeight": "0px",
+          "height": 0,
+          "width": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 0,
+          "clientWidth": 0
+        },
+        "inspectorProse": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 0,
+          "width": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(174, 195, 201)",
+          "outline": "rgb(174, 195, 201) none 3px",
+          "offset": "0px",
+          "scrollWidth": 0,
+          "clientWidth": 0
+        },
+        "mainAction": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "32px",
+          "height": 32,
+          "width": 137.21875,
+          "bg": "rgb(125, 213, 199)",
+          "color": "rgb(0, 58, 52)",
+          "outline": "rgb(0, 58, 52) none 3px",
+          "offset": "0px",
+          "scrollWidth": 135,
+          "clientWidth": 135
+        },
+        "nav": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "32px",
+          "height": 0,
+          "width": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 0,
+          "clientWidth": 0
+        },
+        "tableRow": {
+          "font": "14px",
+          "line": "20px",
+          "minHeight": "0px",
+          "height": 32,
+          "width": 506,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(225, 235, 237)",
+          "outline": "rgb(225, 235, 237) none 3px",
+          "offset": "0px",
+          "scrollWidth": 506,
+          "clientWidth": 506
+        },
+        "viewport": 560,
+        "pageWidth": 560,
+        "announcement": "Offline. Previous output remains readable; device ownership must be reconciled before reassignment."
+      },
+      "screenshot": {
+        "file": "desktop-dark-compact-560.png",
+        "bytes": 113288,
+        "sha256": "7f20c5092456124cb3b43d44a7a89225a99561bf17ab385273ecde38be8753c7",
+        "clip": {
+          "x": 0,
+          "y": 0,
+          "width": 560,
+          "height": 1200,
+          "scale": 1
+        },
+        "before": {
+          "readyState": "complete",
+          "width": 560,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": true,
+          "inspectorExpanded": "false",
+          "inspectorBounds": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "workspaceInspector": "false",
+          "announcementVisible": false
+        },
+        "after": {
+          "readyState": "complete",
+          "width": 560,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": true,
+          "inspectorExpanded": "false",
+          "inspectorBounds": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "workspaceInspector": "false",
+          "announcementVisible": false
+        }
+      }
+    }
+  ],
+  "states": [
+    {
+      "theme": "light",
+      "label": "rest",
+      "metrics": {
+        "viewport": 1440,
+        "inspectorHidden": false,
+        "hover": false,
+        "focusVisible": false,
+        "selected": "false",
+        "rowBg": "rgba(0, 0, 0, 0)",
+        "badgeBg": "rgb(237, 242, 243)",
+        "badgeBorder": "1px solid rgb(102, 122, 128)",
+        "color": "rgb(76, 96, 102)",
+        "outline": "rgb(24, 36, 39) none 3px",
+        "outlineOffset": "0px"
+      },
+      "screenshot": {
+        "file": "state-light-rest.png",
+        "bytes": 223597,
+        "sha256": "ce94c19cc70e23b86b524cbfdcac2df5b88b3097a514335a122e66e7d3fbef57",
+        "clip": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 1200,
+          "scale": 1
+        },
+        "before": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 250,
+            "width": 264,
+            "height": 818
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        },
+        "after": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 250,
+            "width": 264,
+            "height": 818
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        }
+      }
+    },
+    {
+      "theme": "light",
+      "label": "hover",
+      "metrics": {
+        "viewport": 1440,
+        "inspectorHidden": false,
+        "hover": true,
+        "focusVisible": false,
+        "selected": "false",
+        "rowBg": "rgb(227, 234, 236)",
+        "badgeBg": "rgb(237, 242, 243)",
+        "badgeBorder": "1px solid rgb(102, 122, 128)",
+        "color": "rgb(76, 96, 102)",
+        "outline": "rgb(24, 36, 39) none 3px",
+        "outlineOffset": "0px"
+      },
+      "screenshot": {
+        "file": "state-light-hover.png",
+        "bytes": 223942,
+        "sha256": "58ea2525be074fde3275caaea4a4d2f4ccdec56e5788edb9f5799db37ff778b9",
+        "clip": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 1200,
+          "scale": 1
+        },
+        "before": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 250,
+            "width": 264,
+            "height": 818
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        },
+        "after": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 250,
+            "width": 264,
+            "height": 818
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        }
+      }
+    },
+    {
+      "theme": "light",
+      "label": "hover-focus",
+      "metrics": {
+        "viewport": 1440,
+        "inspectorHidden": false,
+        "hover": true,
+        "focusVisible": true,
+        "selected": "false",
+        "rowBg": "rgb(227, 234, 236)",
+        "badgeBg": "rgb(237, 242, 243)",
+        "badgeBorder": "1px solid rgb(102, 122, 128)",
+        "color": "rgb(76, 96, 102)",
+        "outline": "rgb(53, 89, 199) solid 2px",
+        "outlineOffset": "3px"
+      },
+      "screenshot": {
+        "file": "state-light-hover-focus.png",
+        "bytes": 224559,
+        "sha256": "1df55d0aa7d38c9ca586e9ed0a6cbb94b56e5b8ceeb63590e38fc7947e487e47",
+        "clip": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 1200,
+          "scale": 1
+        },
+        "before": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 250,
+            "width": 264,
+            "height": 818
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        },
+        "after": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 250,
+            "width": 264,
+            "height": 818
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        }
+      }
+    },
+    {
+      "theme": "light",
+      "label": "selected-focus",
+      "metrics": {
+        "viewport": 1440,
+        "inspectorHidden": false,
+        "hover": true,
+        "focusVisible": true,
+        "selected": "true",
+        "rowBg": "rgb(255, 255, 255)",
+        "badgeBg": "rgb(237, 242, 243)",
+        "badgeBorder": "1px solid rgb(102, 122, 128)",
+        "color": "rgb(76, 96, 102)",
+        "outline": "rgb(53, 89, 199) solid 2px",
+        "outlineOffset": "3px"
+      },
+      "screenshot": {
+        "file": "state-light-selected-focus.png",
+        "bytes": 224657,
+        "sha256": "5ea09ebe2be7784cb5ba1c600490e825c8c19e2c23df041ec89de39d64f887bd",
+        "clip": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 1200,
+          "scale": 1
+        },
+        "before": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 250,
+            "width": 264,
+            "height": 818
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        },
+        "after": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 250,
+            "width": 264,
+            "height": 818
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        }
+      }
+    },
+    {
+      "theme": "light",
+      "label": "palette",
+      "metrics": {
+        "open": true,
+        "font": "20px",
+        "line": "28px",
+        "active": "palette-input"
+      },
+      "screenshot": {
+        "file": "palette-light.png",
+        "bytes": 293992,
+        "sha256": "0d6c35527051df13f6dd39d8f312245298e165c0146595b488581d8624e393b1",
+        "clip": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 1200,
+          "scale": 1
+        },
+        "before": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 250,
+            "width": 264,
+            "height": 818
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        },
+        "after": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 250,
+            "width": 264,
+            "height": 818
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        }
+      }
+    },
+    {
+      "theme": "dark",
+      "label": "rest",
+      "metrics": {
+        "viewport": 1440,
+        "inspectorHidden": false,
+        "hover": false,
+        "focusVisible": false,
+        "selected": "false",
+        "rowBg": "rgba(0, 0, 0, 0)",
+        "badgeBg": "rgb(28, 48, 54)",
+        "badgeBorder": "1px solid rgb(121, 149, 158)",
+        "color": "rgb(174, 195, 201)",
+        "outline": "rgb(225, 235, 237) none 3px",
+        "outlineOffset": "0px"
+      },
+      "screenshot": {
+        "file": "state-dark-rest.png",
+        "bytes": 225298,
+        "sha256": "b9f57dd5a77535ac7899f5dfd7d56bd499f03b5d0eed2e40c110950eb17ddaf6",
+        "clip": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 1200,
+          "scale": 1
+        },
+        "before": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 250,
+            "width": 264,
+            "height": 818
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        },
+        "after": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 250,
+            "width": 264,
+            "height": 818
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        }
+      }
+    },
+    {
+      "theme": "dark",
+      "label": "hover",
+      "metrics": {
+        "viewport": 1440,
+        "inspectorHidden": false,
+        "hover": true,
+        "focusVisible": false,
+        "selected": "false",
+        "rowBg": "rgb(38, 62, 69)",
+        "badgeBg": "rgb(28, 48, 54)",
+        "badgeBorder": "1px solid rgb(121, 149, 158)",
+        "color": "rgb(174, 195, 201)",
+        "outline": "rgb(225, 235, 237) none 3px",
+        "outlineOffset": "0px"
+      },
+      "screenshot": {
+        "file": "state-dark-hover.png",
+        "bytes": 225690,
+        "sha256": "8746e0e5164f433420fd439e545f092a6c3b6cfb8e61e472aaf8ed73695c7e64",
+        "clip": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 1200,
+          "scale": 1
+        },
+        "before": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 250,
+            "width": 264,
+            "height": 818
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        },
+        "after": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 250,
+            "width": 264,
+            "height": 818
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        }
+      }
+    },
+    {
+      "theme": "dark",
+      "label": "hover-focus",
+      "metrics": {
+        "viewport": 1440,
+        "inspectorHidden": false,
+        "hover": true,
+        "focusVisible": true,
+        "selected": "false",
+        "rowBg": "rgb(38, 62, 69)",
+        "badgeBg": "rgb(28, 48, 54)",
+        "badgeBorder": "1px solid rgb(121, 149, 158)",
+        "color": "rgb(174, 195, 201)",
+        "outline": "rgb(186, 200, 255) solid 2px",
+        "outlineOffset": "3px"
+      },
+      "screenshot": {
+        "file": "state-dark-hover-focus.png",
+        "bytes": 226580,
+        "sha256": "1efed04fbab3f88028c9c7abf9bed50049a4c6aacad0e69025e6af35cab2b0af",
+        "clip": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 1200,
+          "scale": 1
+        },
+        "before": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 250,
+            "width": 264,
+            "height": 818
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        },
+        "after": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 250,
+            "width": 264,
+            "height": 818
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        }
+      }
+    },
+    {
+      "theme": "dark",
+      "label": "selected-focus",
+      "metrics": {
+        "viewport": 1440,
+        "inspectorHidden": false,
+        "hover": true,
+        "focusVisible": true,
+        "selected": "true",
+        "rowBg": "rgb(23, 38, 43)",
+        "badgeBg": "rgb(28, 48, 54)",
+        "badgeBorder": "1px solid rgb(121, 149, 158)",
+        "color": "rgb(174, 195, 201)",
+        "outline": "rgb(186, 200, 255) solid 2px",
+        "outlineOffset": "3px"
+      },
+      "screenshot": {
+        "file": "state-dark-selected-focus.png",
+        "bytes": 226656,
+        "sha256": "c63f6b318144c796cbbf8c87b3368638abee5dfb1e40ec3957dd329d313f3b4e",
+        "clip": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 1200,
+          "scale": 1
+        },
+        "before": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 250,
+            "width": 264,
+            "height": 818
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        },
+        "after": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 250,
+            "width": 264,
+            "height": 818
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        }
+      }
+    },
+    {
+      "theme": "dark",
+      "label": "palette",
+      "metrics": {
+        "open": true,
+        "font": "20px",
+        "line": "28px",
+        "active": "palette-input"
+      },
+      "screenshot": {
+        "file": "palette-dark.png",
+        "bytes": 285672,
+        "sha256": "6e04c8b4e3e362659447946b67f44faf4650e5be54fc7c6d4bcbc3b8913a43cb",
+        "clip": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 1200,
+          "scale": 1
+        },
+        "before": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 250,
+            "width": 264,
+            "height": 818
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        },
+        "after": {
+          "readyState": "complete",
+          "width": 1440,
+          "height": 1200,
+          "devicePixelRatio": 1,
+          "inspectorHidden": false,
+          "inspectorExpanded": "true",
+          "inspectorBounds": {
+            "x": 1143,
+            "y": 250,
+            "width": 264,
+            "height": 818
+          },
+          "workspaceInspector": "true",
+          "announcementVisible": false
+        }
+      }
+    }
+  ]
+}

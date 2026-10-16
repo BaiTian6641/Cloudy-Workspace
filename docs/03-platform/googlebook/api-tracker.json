@@ -1929,6 +1929,39 @@
       "researchEvidence": "docs/04-design/native-display-settings.md",
       "compileEvidence": "qualification/results/P1-S2/2026-10-16-native-display-settings-build.json",
       "deviceEvidence": "qualification/results/P1-S2/2026-10-16-native-display-settings.md"
+    },
+    {
+      "id": "API57",
+      "feature": "Measured native workspace launch geometry and actual system font scaling",
+      "symbols": [
+        "ActivityOptions.makeBasic",
+        "ActivityOptions.setLaunchBounds(Rect)",
+        "ActivityOptions.toBundle",
+        "ActivityScenario.launch(Intent, Bundle)",
+        "WindowManager.getCurrentWindowMetrics",
+        "WindowMetrics.getBounds",
+        "WindowMetrics.getWindowInsets",
+        "Configuration.fontScale"
+      ],
+      "sourceIds": [
+        "G218",
+        "G219",
+        "G28",
+        "G43",
+        "G178"
+      ],
+      "minimumApi": null,
+      "libraryVersion": "setLaunchBounds API24; currentWindowMetrics API30; nonlinear font scaling API34. Existing productmin35 and AndroidX Test core1.7.0, Compose UI/foundation1.12.1 unchanged.",
+      "availability": "documented",
+      "qualification": "partial",
+      "checkedOn": "2026-10-16",
+      "owner": "Android/platform and design developers",
+      "stage": "P1-S2",
+      "fallback": "Requested bounds never prove achieved geometry. Record actual Activity/window/root; missed shape is unqualified. Host restores exact system font literal and checks default-display configuration; product never overrides user font scale.",
+      "experiment": "Strict build04 and four zero-issue Lint reports pass. Eight actual cases on HP Googlebook14 Android17/API37 CL3B.260622.276.R2 incremental16560795 use unchanged Console/Desktop0.1.6/code7 APKs: each app650x900px/font1.3/Comfortable,1300x560px/font1.3/Standard pointer,650x560px/font2.0/Comfortable and Compact pointer. All seven labels are individually reachable with complete line/node/root containment and retained draft selection/window identity. Sixteen actual Light viewport captures reviewed; raw semantics overflow flags retained and explained separately from complete line geometry. Prior failed assertions preserved. Original font literal/default-display configuration1.0 and effective app preferences restored; boot/profile/trust/vault/APK identities unchanged; test packages removed. No physical input, hit targets, caption overlap, scaledDark, other native components or engine acceptance claimed.",
+      "researchEvidence": "docs/04-design/native-workspace-review.md",
+      "compileEvidence": "qualification/results/P1-S2/2026-10-16-native-window-geometry-build.json",
+      "deviceEvidence": "qualification/results/P1-S2/2026-10-16-native-window-geometry.md"
     }
   ],
   "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."

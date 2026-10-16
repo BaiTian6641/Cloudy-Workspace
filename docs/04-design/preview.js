@@ -228,7 +228,19 @@
     byId('selected-file-section').hidden = false; byId('selected-file-name').textContent = button.dataset.file; setInspector(true); announce('Showing details for ' + button.dataset.file);
   }));
   byId('theme-toggle').addEventListener('click', () => setTheme(document.documentElement.dataset.theme === 'light' ? 'dark' : 'light'));
-  byId('density').addEventListener('change', event => { appWindow.dataset.density = event.target.value; announce(event.target.value === 'compact' ? 'Compact pointer spacing. Text size is unchanged.' : 'Comfortable spacing.'); });
+  byId('density').addEventListener('change', event => {
+    const descriptions = {
+      comfortable: 'Comfortable spacing. Nominal 48 pixel rows and controls.',
+      standard: 'Standard pointer spacing. Nominal 40 pixel rows and controls.',
+      compact: 'Compact pointer spacing. Nominal 32 pixel rows and controls.'
+    };
+    const density = event.target.value;
+    if (!Object.hasOwn(descriptions, density)) return;
+    // Include the separate command dialog in the same local specimen setting.
+    document.documentElement.dataset.density = density;
+    appWindow.dataset.density = density;
+    announce(descriptions[density] + ' Text size is unchanged; content may grow. Illustrative layout only.');
+  });
   byId('connection').addEventListener('change', event => setConnection(event.target.value));
   byId('inspector-toggle').addEventListener('click', () => setInspector(byId('inspector').hidden));
   byId('inspector-close').addEventListener('click', () => setInspector(false));

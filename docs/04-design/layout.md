@@ -33,13 +33,13 @@ These are not renamed Android window-size-class constants. Native code maps avai
 
 | Mode | Table/list row | Control visual height | Intended use |
 | --- | --- | --- | --- |
-| Comfortable | 48 | 40–48 with proper target | Default when input capability is unknown or touch is primary |
-| Standard pointer | 40 | 36–40 | Qualified precise pointer workflow |
-| Compact pointer | 32 | 32 | Explicit user preference for high-density work |
+| Comfortable | 48 nominal minimum | 48 nominal minimum | Default when input capability is unknown or touch is primary |
+| Standard pointer | 40 nominal minimum | 40 nominal minimum | Qualified precise pointer workflow |
+| Compact pointer | 32 nominal minimum | 32 nominal minimum | Explicit user preference for high-density work |
 
-Keep body text at 14 by default in every density. Compact mode changes padding and row height; it is not a global zoom-down. Avoid overlapping invisible hit areas. Native controls may keep platform minimum touch targets; custom compact controls require a documented precise-input mode and accessibility review. The specimen offers Comfortable/Compact to compare the visual tradeoff; it is not device qualification.
+Keep body text at 14 by default in every density. Compact mode changes padding and row height; it is not a global zoom-down. Avoid overlapping invisible hit areas. Native controls may keep platform minimum touch targets; custom compact controls require a documented precise-input mode and accessibility review. The current HTML specimen offers all three choices: Comfortable, Standard pointer and Compact pointer. Its controls and rows use nominal48/40/32 minimums with content growth, rather than fixed heights or text shrinking; wrapped labels and scaled content may increase rendered height. This is browser presentation, not native hit-target or device qualification.
 
-Density preference is sticky per app/window profile. Do not rearrange the UI on every mouse/touch event. Provide an obvious comfortable-mode switch and keep a safe default when capabilities are ambiguous.
+The implemented native presentation preference is app-owned and observed by its open windows; independent window-profile layout persistence remains planned. Density preference is explicit and sticky per owning app. Do not rearrange the UI on every mouse/touch event. Provide an obvious comfortable-mode switch and keep a safe default when capabilities are ambiguous.
 
 ## Console arrangement
 
@@ -60,3 +60,7 @@ Separate X11 applications are native desktop windows outside the main Console pa
 Align labels/values on common starts, file sizes and numeric metrics at the end, and row actions consistently. Truncate long host names/paths at the least useful segment while exposing the full value on focus/hover and in details. The main shell must not horizontally scroll. A terminal, data table, or technical path may have an intentional local scroll region.
 
 On RTL locales, mirror navigation and ordinary layout appropriately, while preserving LTR treatment for commands, identifiers, IP addresses, and terminal content. Do not reverse stream input coordinates merely because app chrome is mirrored.
+
+## Current specimen role follow-through — 2026-10-16
+
+Reviewed HTML/CSS source now binds section/dialog headings to the existing20/28 role, explanatory body text to14/20, and supporting metadata to12/16. Neutral workspace monograms use surface-muted with an outline border and visible identity text, so row hover does not rely on an indistinguishable fill alone. This preserves existing canonical roles; it adds no palette, halo or EDA micro-density tier. The [final specimen review](../06-validation/2026-10-16-specimen-density.md) accepts sixteen layout and ten interaction-state captures in both appearances; the corrected run04 keeps pane geometry stable and waits for announcements to expire. Browser geometry and native component acceptance remain separate.

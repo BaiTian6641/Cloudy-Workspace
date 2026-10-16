@@ -1,0 +1,4481 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "baseCommit": "90a8c00abf65e1f7ac6f3621b83f074bb5022369",
+  "sourceChangesUncommittedAtBuild": true,
+  "sources": [
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudyAppTheme.kt",
+      "bytes": 2082,
+      "sha256": "20fb22a91736465fd6fc2aa5a3eef9f6129f2792547f1cd52e4b3cb8493b6a44"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudyWindowActivity.kt",
+      "bytes": 6667,
+      "sha256": "066f063c751fd51f7910cede75605307a3b92dae6ab140c9146061c31e36c3ea"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudyDisplaySettings.kt",
+      "bytes": 10488,
+      "sha256": "d4f6bc3e080a320dc7f496b0fe0e0ad3a5cb407368919b90918b4902c656626d"
+    },
+    {
+      "path": "shared/design-system/android/src/main/java/io/github/baitian6641/cloudy/design/CloudyTheme.kt",
+      "bytes": 4175,
+      "sha256": "ff600f5d1d333204b08b853f23fd87a5a5ccaded412c9a6c09cd921b0769c804"
+    },
+    {
+      "path": "shared/design-system/android/src/main/java/io/github/baitian6641/cloudy/design/CloudyControlMetrics.kt",
+      "bytes": 2527,
+      "sha256": "7fd07da98a3c6964f7d8eee7b26f727fe8afdad0dbd56688cb1109628fa110ac"
+    },
+    {
+      "path": "shared/design-system/android/src/main/java/io/github/baitian6641/cloudy/design/CloudyDisplayPreferences.kt",
+      "bytes": 493,
+      "sha256": "b88ac16d9dee72aa73884c07839cfa07ebf5af34242f0d00490c30edccc3d648"
+    },
+    {
+      "path": "shared/design-system/android/src/main/java/io/github/baitian6641/cloudy/design/WindowWorkspaceScreen.kt",
+      "bytes": 8199,
+      "sha256": "0edce4aa53d9a8ccaa888fa8c5d76844a27510a565a16a9c17f923f1a3191407"
+    },
+    {
+      "path": "apps/console/src/androidTest/kotlin/io/github/baitian6641/cloudy/console/ConsoleWindowGeometryTest.kt",
+      "bytes": 420,
+      "sha256": "9db28efa538ac42e167429c37afd615d0eef93e97864667627649d5f7c62a4bb"
+    },
+    {
+      "path": "apps/desktop/src/androidTest/kotlin/io/github/baitian6641/cloudy/desktop/DesktopWindowGeometryTest.kt",
+      "bytes": 420,
+      "sha256": "bd4d18fae8c2e9f333aee1b2d0a5421736c5f781c9dae6656fab07750525fb84"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/DisplaySettingsActivityContract.kt",
+      "bytes": 7061,
+      "sha256": "82b5526141278ea0e6476a3c0dfe2926f291c8c61d86c139e461e0d461e02951"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/WindowGeometryContract.kt",
+      "bytes": 18753,
+      "sha256": "84a7c5bdae344b328baa4576032722e0a682cad74bef8b6594feed62420c9e60"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "apps/console/build/outputs/apk/debug/console-debug.apk",
+      "bytes": 32042472,
+      "sha256": "6ebeb44ffd529000dc733dcff9929389897b631fae9de81f2c5d0b9439390ebb"
+    },
+    {
+      "path": "apps/desktop/build/outputs/apk/debug/desktop-debug.apk",
+      "bytes": 32042484,
+      "sha256": "61962a70e93f3c4e8d31239be32ad2b4856006221d0c9a852ae4236f65606076"
+    },
+    {
+      "path": "shared/android/platform/build/outputs/apk/androidTest/debug/platform-debug-androidTest.apk",
+      "bytes": 33070527,
+      "sha256": "e7ac46333112825d1bfd1b4a91df6fb62d589f60d7b2939fd19792cf57c9ceae"
+    },
+    {
+      "path": "apps/console/build/outputs/apk/androidTest/debug/console-debug-androidTest.apk",
+      "bytes": 3207477,
+      "sha256": "1f22c3f99b839385455a7e00bbac16c8cf70ace2d2913c9e193c02a5cb73e136"
+    },
+    {
+      "path": "apps/desktop/build/outputs/apk/androidTest/debug/desktop-debug-androidTest.apk",
+      "bytes": 3207481,
+      "sha256": "0050f9d854be072b2af04940357ede1481673e9f7906d36dc174feac89644e3c"
+    }
+  ],
+  "build": {
+    "startedAt": "2026-10-16T10:47:43.994557+00:00",
+    "endedAt": "2026-10-16T10:48:02.958641+00:00",
+    "command": [
+      "./gradlew",
+      ":domain:test",
+      ":design-system:testDebugUnitTest",
+      ":console:assembleDebug",
+      ":desktop:assembleDebug",
+      ":console:lintDebug",
+      ":desktop:lintDebug",
+      ":platform:lintDebug",
+      ":design-system:lintDebug",
+      ":platform:assembleDebugAndroidTest",
+      ":console:assembleDebugAndroidTest",
+      ":desktop:assembleDebugAndroidTest",
+      "--dependency-verification=strict",
+      "--no-daemon",
+      "--console=plain",
+      "--max-workers=4"
+    ],
+    "exitCode": 0,
+    "sourceUnchangedDuringBuild": true
+  },
+  "buildTaskSummary": {
+    "total": 313,
+    "executed": 16,
+    "upToDate": 297,
+    "domainPassingReportsCarriedForward": 38,
+    "designPassingReportsCarriedForward": 4,
+    "jvmTestsNewlyExecuted": false
+  },
+  "device": {
+    "model": "HP Googlebook 14",
+    "release": "17",
+    "api": "37",
+    "build": "CL3B.260622.276.R2",
+    "incremental": "16560795",
+    "abi": "arm64-v8a"
+  },
+  "deviceInterval": {
+    "startedAt": "2026-10-16T10:48:10.376919+00:00",
+    "endedAt": "2026-10-16T10:48:35.981979+00:00"
+  },
+  "productVersion": {
+    "versionName": "0.1.6",
+    "versionCode": 7,
+    "productInstallAttempted": false,
+    "installedApksUnchanged": true
+  },
+  "actualJUnitCases": 8,
+  "effectivePreferenceRestorationReceipts": 8,
+  "rawHasVisualOverflowTrueCount": 56,
+  "cases": [
+    {
+      "case": "console-1",
+      "junitCompleted": 1,
+      "passed": true,
+      "measuredPassReceipts": 1,
+      "effectivePreferenceRestorations": 1,
+      "ownedCaptureDirectoryRemoved": true,
+      "files": [
+        {
+          "name": "report.json",
+          "bytes": 13061,
+          "sha256": "d7f8f65d7b22ed2aa1477e51063ebd2d3ecc5037fca3a04e2137d21757a49b77"
+        },
+        {
+          "name": "top.png",
+          "bytes": 64179,
+          "sha256": "c7cdbf658e513c286a7a7be7d1e56fb93576696b40d6042838122a2e2160ce93"
+        },
+        {
+          "name": "final-actions.png",
+          "bytes": 64770,
+          "sha256": "cffc0a44c32ff4855c8231f65a6a159f578db1d761d9ea61cf8f3f3401aa3794"
+        }
+      ],
+      "measurement": {
+        "requestedBoundsPx": [
+          48,
+          48,
+          698,
+          948
+        ],
+        "requestedFontScale": "1.3",
+        "requestedDensity": "COMFORTABLE",
+        "baselineAppearance": "SYSTEM",
+        "baselineDensity": "COMFORTABLE",
+        "actualBoundsPx": [
+          48,
+          59,
+          698,
+          959
+        ],
+        "decorWidthPx": 650,
+        "decorHeightPx": 900,
+        "systemInsetsPx": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fontScale": 1.2999999523162842,
+        "densityDpi": 260,
+        "displayDensity": 1.625,
+        "activityWidthDp": 400,
+        "activityHeightDp": 554,
+        "multiWindow": true,
+        "topRootWidthPx": 650,
+        "topRootHeightPx": 835,
+        "final-actionsRootWidthPx": 650,
+        "final-actionsRootHeightPx": 835,
+        "controlsAtIndividualScrollPositions": [
+          {
+            "label": "Saved credentials",
+            "buttonClippedBoundsPx": [
+              26,
+              151,
+              343,
+              229
+            ],
+            "labelClippedBoundsPx": [
+              65,
+              168,
+              304,
+              212
+            ],
+            "labelUnclippedBoundsPx": [
+              65,
+              168,
+              304,
+              211.99998
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              835
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 239,
+                "sizeHeightPx": 44,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 520,
+                "multiParagraphHeightPx": 44,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 44,
+                    "leftPx": 0,
+                    "rightPx": 238.3125,
+                    "start": 0,
+                    "end": 17,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 520,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 1.2999999523162842
+              }
+            ]
+          },
+          {
+            "label": "Connection profiles",
+            "buttonClippedBoundsPx": [
+              26,
+              249,
+              368,
+              327
+            ],
+            "labelClippedBoundsPx": [
+              65,
+              266,
+              329,
+              310
+            ],
+            "labelUnclippedBoundsPx": [
+              65,
+              266,
+              329,
+              310
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              835
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 264,
+                "sizeHeightPx": 44,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 520,
+                "multiParagraphHeightPx": 44,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 44,
+                    "leftPx": 0,
+                    "rightPx": 263.62109375,
+                    "start": 0,
+                    "end": 19,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 520,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 1.2999999523162842
+              }
+            ]
+          },
+          {
+            "label": "SSH host keys",
+            "buttonClippedBoundsPx": [
+              26,
+              347,
+              296,
+              425
+            ],
+            "labelClippedBoundsPx": [
+              65,
+              364,
+              257,
+              408
+            ],
+            "labelUnclippedBoundsPx": [
+              65,
+              364,
+              257,
+              408
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              835
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 192,
+                "sizeHeightPx": 44,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 520,
+                "multiParagraphHeightPx": 44,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 44,
+                    "leftPx": 0,
+                    "rightPx": 191.515625,
+                    "start": 0,
+                    "end": 13,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 520,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 1.2999999523162842
+              }
+            ]
+          },
+          {
+            "label": "Appearance and density",
+            "buttonClippedBoundsPx": [
+              26,
+              445,
+              428,
+              523
+            ],
+            "labelClippedBoundsPx": [
+              65,
+              462,
+              389,
+              506
+            ],
+            "labelUnclippedBoundsPx": [
+              65,
+              461.99997,
+              389,
+              506
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              835
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 324,
+                "sizeHeightPx": 44,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 520,
+                "multiParagraphHeightPx": 44,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 44,
+                    "leftPx": 0,
+                    "rightPx": 323.2109375,
+                    "start": 0,
+                    "end": 22,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 520,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 1.2999999523162842
+              }
+            ]
+          },
+          {
+            "label": "Apply name",
+            "buttonClippedBoundsPx": [
+              26,
+              696,
+              263,
+              774
+            ],
+            "labelClippedBoundsPx": [
+              65,
+              713,
+              224,
+              757
+            ],
+            "labelUnclippedBoundsPx": [
+              65,
+              713,
+              224.00002,
+              757
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              835
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 159,
+                "sizeHeightPx": 44,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 520,
+                "multiParagraphHeightPx": 44,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 44,
+                    "leftPx": 0,
+                    "rightPx": 158.7421875,
+                    "start": 0,
+                    "end": 10,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 520,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 1.2999999523162842
+              }
+            ]
+          },
+          {
+            "label": "New window",
+            "buttonClippedBoundsPx": [
+              276,
+              696,
+              523,
+              774
+            ],
+            "labelClippedBoundsPx": [
+              315,
+              713,
+              484,
+              757
+            ],
+            "labelUnclippedBoundsPx": [
+              315,
+              713,
+              484,
+              757
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              835
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 169,
+                "sizeHeightPx": 44,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 520,
+                "multiParagraphHeightPx": 44,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 44,
+                    "leftPx": 0,
+                    "rightPx": 169,
+                    "start": 0,
+                    "end": 10,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 520,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 1.2999999523162842
+              }
+            ]
+          },
+          {
+            "label": "Close window",
+            "buttonClippedBoundsPx": [
+              26,
+              757,
+              290,
+              835
+            ],
+            "labelClippedBoundsPx": [
+              65,
+              774,
+              251,
+              818
+            ],
+            "labelUnclippedBoundsPx": [
+              65,
+              774,
+              250.99998,
+              818
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              835
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 186,
+                "sizeHeightPx": 44,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 520,
+                "multiParagraphHeightPx": 44,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 44,
+                    "leftPx": 0,
+                    "rightPx": 186,
+                    "start": 0,
+                    "end": 12,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 520,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 1.2999999523162842
+              }
+            ]
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "case": "console-2",
+      "junitCompleted": 1,
+      "passed": true,
+      "measuredPassReceipts": 1,
+      "effectivePreferenceRestorations": 1,
+      "ownedCaptureDirectoryRemoved": true,
+      "files": [
+        {
+          "name": "report.json",
+          "bytes": 13082,
+          "sha256": "0bdfec99615d023a34e0b98bea2967fc7b6f88efb3f7053ce99ea85d85f91861"
+        },
+        {
+          "name": "top.png",
+          "bytes": 43672,
+          "sha256": "eb54d652c0d0072e211435b09d9cc6707f3c8b18c75d993419d263d752e502bc"
+        },
+        {
+          "name": "final-actions.png",
+          "bytes": 45182,
+          "sha256": "8b33ba3c66f2b25013975c33d3bbbb4bfb078ca92f0c4ba9c06dc6362cfe0c73"
+        }
+      ],
+      "measurement": {
+        "requestedBoundsPx": [
+          48,
+          48,
+          1348,
+          608
+        ],
+        "requestedFontScale": "1.3",
+        "requestedDensity": "STANDARD_POINTER",
+        "baselineAppearance": "SYSTEM",
+        "baselineDensity": "COMFORTABLE",
+        "actualBoundsPx": [
+          48,
+          59,
+          1348,
+          619
+        ],
+        "decorWidthPx": 1300,
+        "decorHeightPx": 560,
+        "systemInsetsPx": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fontScale": 1.2999999523162842,
+        "densityDpi": 260,
+        "displayDensity": 1.625,
+        "activityWidthDp": 800,
+        "activityHeightDp": 345,
+        "multiWindow": true,
+        "topRootWidthPx": 1300,
+        "topRootHeightPx": 495,
+        "final-actionsRootWidthPx": 1300,
+        "final-actionsRootHeightPx": 495,
+        "controlsAtIndividualScrollPositions": [
+          {
+            "label": "Saved credentials",
+            "buttonClippedBoundsPx": [
+              20,
+              115,
+              337,
+              185
+            ],
+            "labelClippedBoundsPx": [
+              59,
+              128,
+              298,
+              172
+            ],
+            "labelUnclippedBoundsPx": [
+              59,
+              128,
+              298,
+              172
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              1300,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 239,
+                "sizeHeightPx": 44,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 1182,
+                "multiParagraphHeightPx": 44,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 44,
+                    "leftPx": 0,
+                    "rightPx": 238.3125,
+                    "start": 0,
+                    "end": 17,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 1182,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 1.2999999523162842
+              }
+            ]
+          },
+          {
+            "label": "Connection profiles",
+            "buttonClippedBoundsPx": [
+              20,
+              206,
+              362,
+              276
+            ],
+            "labelClippedBoundsPx": [
+              59,
+              219,
+              323,
+              263
+            ],
+            "labelUnclippedBoundsPx": [
+              59,
+              219,
+              323,
+              263
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              1300,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 264,
+                "sizeHeightPx": 44,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 1182,
+                "multiParagraphHeightPx": 44,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 44,
+                    "leftPx": 0,
+                    "rightPx": 263.62109375,
+                    "start": 0,
+                    "end": 19,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 1182,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 1.2999999523162842
+              }
+            ]
+          },
+          {
+            "label": "SSH host keys",
+            "buttonClippedBoundsPx": [
+              20,
+              297,
+              290,
+              367
+            ],
+            "labelClippedBoundsPx": [
+              59,
+              310,
+              251,
+              354
+            ],
+            "labelUnclippedBoundsPx": [
+              59,
+              310,
+              250.99998,
+              354
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              1300,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 192,
+                "sizeHeightPx": 44,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 1182,
+                "multiParagraphHeightPx": 44,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 44,
+                    "leftPx": 0,
+                    "rightPx": 191.515625,
+                    "start": 0,
+                    "end": 13,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 1182,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 1.2999999523162842
+              }
+            ]
+          },
+          {
+            "label": "Appearance and density",
+            "buttonClippedBoundsPx": [
+              20,
+              388,
+              422,
+              458
+            ],
+            "labelClippedBoundsPx": [
+              59,
+              401,
+              383,
+              445
+            ],
+            "labelUnclippedBoundsPx": [
+              59,
+              401,
+              383,
+              445
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              1300,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 324,
+                "sizeHeightPx": 44,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 1182,
+                "multiParagraphHeightPx": 44,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 44,
+                    "leftPx": 0,
+                    "rightPx": 323.2109375,
+                    "start": 0,
+                    "end": 22,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 1182,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 1.2999999523162842
+              }
+            ]
+          },
+          {
+            "label": "Apply name",
+            "buttonClippedBoundsPx": [
+              20,
+              425,
+              257,
+              495
+            ],
+            "labelClippedBoundsPx": [
+              59,
+              438,
+              218,
+              482
+            ],
+            "labelUnclippedBoundsPx": [
+              59,
+              438,
+              217.99998,
+              482
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              1300,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 159,
+                "sizeHeightPx": 44,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 1182,
+                "multiParagraphHeightPx": 44,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 44,
+                    "leftPx": 0,
+                    "rightPx": 158.7421875,
+                    "start": 0,
+                    "end": 10,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 1182,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 1.2999999523162842
+              }
+            ]
+          },
+          {
+            "label": "New window",
+            "buttonClippedBoundsPx": [
+              270,
+              425,
+              517,
+              495
+            ],
+            "labelClippedBoundsPx": [
+              309,
+              438,
+              478,
+              482
+            ],
+            "labelUnclippedBoundsPx": [
+              309,
+              438,
+              478,
+              482
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              1300,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 169,
+                "sizeHeightPx": 44,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 1182,
+                "multiParagraphHeightPx": 44,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 44,
+                    "leftPx": 0,
+                    "rightPx": 169,
+                    "start": 0,
+                    "end": 10,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 1182,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 1.2999999523162842
+              }
+            ]
+          },
+          {
+            "label": "Close window",
+            "buttonClippedBoundsPx": [
+              530,
+              425,
+              794,
+              495
+            ],
+            "labelClippedBoundsPx": [
+              569,
+              438,
+              755,
+              482
+            ],
+            "labelUnclippedBoundsPx": [
+              569,
+              438,
+              755,
+              482
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              1300,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 186,
+                "sizeHeightPx": 44,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 1182,
+                "multiParagraphHeightPx": 44,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 44,
+                    "leftPx": 0,
+                    "rightPx": 186,
+                    "start": 0,
+                    "end": 12,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 1182,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 1.2999999523162842
+              }
+            ]
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "case": "console-3",
+      "junitCompleted": 1,
+      "passed": true,
+      "measuredPassReceipts": 1,
+      "effectivePreferenceRestorations": 1,
+      "ownedCaptureDirectoryRemoved": true,
+      "files": [
+        {
+          "name": "report.json",
+          "bytes": 12914,
+          "sha256": "3f8bf736aef7b481b290b17a3f237d421e3eed6b1cba7ce2b6e191c2cf366538"
+        },
+        {
+          "name": "top.png",
+          "bytes": 40056,
+          "sha256": "7a7fb2cef6bbdaea76938d6db178586f3217557799dedbdc73eb27e0e3b5e70a"
+        },
+        {
+          "name": "final-actions.png",
+          "bytes": 36876,
+          "sha256": "ccb05b98afa530d1c50aa947137ea3a443b4db0859c16ee9a6c5f6c98b2af78e"
+        }
+      ],
+      "measurement": {
+        "requestedBoundsPx": [
+          48,
+          48,
+          698,
+          608
+        ],
+        "requestedFontScale": "2.0",
+        "requestedDensity": "COMFORTABLE",
+        "baselineAppearance": "SYSTEM",
+        "baselineDensity": "COMFORTABLE",
+        "actualBoundsPx": [
+          48,
+          59,
+          698,
+          619
+        ],
+        "decorWidthPx": 650,
+        "decorHeightPx": 560,
+        "systemInsetsPx": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fontScale": 2,
+        "densityDpi": 260,
+        "displayDensity": 1.625,
+        "activityWidthDp": 400,
+        "activityHeightDp": 345,
+        "multiWindow": true,
+        "topRootWidthPx": 650,
+        "topRootHeightPx": 495,
+        "final-actionsRootWidthPx": 650,
+        "final-actionsRootHeightPx": 495,
+        "controlsAtIndividualScrollPositions": [
+          {
+            "label": "Saved credentials",
+            "buttonClippedBoundsPx": [
+              26,
+              157,
+              441,
+              244
+            ],
+            "labelClippedBoundsPx": [
+              65,
+              170,
+              402,
+              231
+            ],
+            "labelUnclippedBoundsPx": [
+              65,
+              170,
+              402,
+              230.99998
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 337,
+                "sizeHeightPx": 61,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 520,
+                "multiParagraphHeightPx": 61,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 61,
+                    "leftPx": 0,
+                    "rightPx": 336.03515625,
+                    "start": 0,
+                    "end": 17,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 520,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 2
+              }
+            ]
+          },
+          {
+            "label": "Connection profiles",
+            "buttonClippedBoundsPx": [
+              26,
+              264,
+              472,
+              351
+            ],
+            "labelClippedBoundsPx": [
+              65,
+              277,
+              433,
+              338
+            ],
+            "labelUnclippedBoundsPx": [
+              65,
+              277,
+              433,
+              338
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 368,
+                "sizeHeightPx": 61,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 520,
+                "multiParagraphHeightPx": 61,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 61,
+                    "leftPx": 0,
+                    "rightPx": 367.46875,
+                    "start": 0,
+                    "end": 19,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 520,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 2
+              }
+            ]
+          },
+          {
+            "label": "SSH host keys",
+            "buttonClippedBoundsPx": [
+              26,
+              371,
+              375,
+              458
+            ],
+            "labelClippedBoundsPx": [
+              65,
+              384,
+              336,
+              445
+            ],
+            "labelUnclippedBoundsPx": [
+              65,
+              384,
+              336,
+              445
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 271,
+                "sizeHeightPx": 61,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 520,
+                "multiParagraphHeightPx": 61,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 61,
+                    "leftPx": 0,
+                    "rightPx": 270.32421875,
+                    "start": 0,
+                    "end": 13,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 520,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 2
+              }
+            ]
+          },
+          {
+            "label": "Appearance and density",
+            "buttonClippedBoundsPx": [
+              26,
+              408,
+              559,
+              495
+            ],
+            "labelClippedBoundsPx": [
+              65,
+              421,
+              520,
+              482
+            ],
+            "labelUnclippedBoundsPx": [
+              65,
+              421.00003,
+              520,
+              482
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 455,
+                "sizeHeightPx": 61,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 520,
+                "multiParagraphHeightPx": 61,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 61,
+                    "leftPx": 0,
+                    "rightPx": 454.890625,
+                    "start": 0,
+                    "end": 22,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 520,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 2
+              }
+            ]
+          },
+          {
+            "label": "Apply name",
+            "buttonClippedBoundsPx": [
+              26,
+              408,
+              328,
+              495
+            ],
+            "labelClippedBoundsPx": [
+              65,
+              421,
+              289,
+              482
+            ],
+            "labelUnclippedBoundsPx": [
+              65,
+              421.00003,
+              289,
+              482
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 224,
+                "sizeHeightPx": 61,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 520,
+                "multiParagraphHeightPx": 61,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 61,
+                    "leftPx": 0,
+                    "rightPx": 223.63671875,
+                    "start": 0,
+                    "end": 10,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 520,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 2
+              }
+            ]
+          },
+          {
+            "label": "New window",
+            "buttonClippedBoundsPx": [
+              26,
+              408,
+              342,
+              495
+            ],
+            "labelClippedBoundsPx": [
+              65,
+              421,
+              303,
+              482
+            ],
+            "labelUnclippedBoundsPx": [
+              65,
+              421.00003,
+              303,
+              482
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 238,
+                "sizeHeightPx": 61,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 520,
+                "multiParagraphHeightPx": 61,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 61,
+                    "leftPx": 0,
+                    "rightPx": 238,
+                    "start": 0,
+                    "end": 10,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 520,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 2
+              }
+            ]
+          },
+          {
+            "label": "Close window",
+            "buttonClippedBoundsPx": [
+              26,
+              408,
+              365,
+              495
+            ],
+            "labelClippedBoundsPx": [
+              65,
+              421,
+              326,
+              482
+            ],
+            "labelUnclippedBoundsPx": [
+              65,
+              421.00003,
+              326,
+              482
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 261,
+                "sizeHeightPx": 61,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 520,
+                "multiParagraphHeightPx": 61,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 61,
+                    "leftPx": 0,
+                    "rightPx": 261,
+                    "start": 0,
+                    "end": 12,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 520,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 2
+              }
+            ]
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "case": "console-4",
+      "junitCompleted": 1,
+      "passed": true,
+      "measuredPassReceipts": 1,
+      "effectivePreferenceRestorations": 1,
+      "ownedCaptureDirectoryRemoved": true,
+      "files": [
+        {
+          "name": "report.json",
+          "bytes": 12918,
+          "sha256": "4e98b4c7791e9073899b05dcf53301fe264d87a11ef4dd1820845cc2c6cf02e6"
+        },
+        {
+          "name": "top.png",
+          "bytes": 45059,
+          "sha256": "324e5dc6d2cef66da637f744ee8263ea3e3139dabdf9438679f4d82f49363f46"
+        },
+        {
+          "name": "final-actions.png",
+          "bytes": 40788,
+          "sha256": "d3e665fd68b77f1586b6048f1e863679864af52ea194be999bb931ddb3a103de"
+        }
+      ],
+      "measurement": {
+        "requestedBoundsPx": [
+          48,
+          48,
+          698,
+          608
+        ],
+        "requestedFontScale": "2.0",
+        "requestedDensity": "COMPACT_POINTER",
+        "baselineAppearance": "SYSTEM",
+        "baselineDensity": "COMFORTABLE",
+        "actualBoundsPx": [
+          48,
+          59,
+          698,
+          619
+        ],
+        "decorWidthPx": 650,
+        "decorHeightPx": 560,
+        "systemInsetsPx": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fontScale": 2,
+        "densityDpi": 260,
+        "displayDensity": 1.625,
+        "activityWidthDp": 400,
+        "activityHeightDp": 345,
+        "multiWindow": true,
+        "topRootWidthPx": 650,
+        "topRootHeightPx": 495,
+        "final-actionsRootWidthPx": 650,
+        "final-actionsRootHeightPx": 495,
+        "controlsAtIndividualScrollPositions": [
+          {
+            "label": "Saved credentials",
+            "buttonClippedBoundsPx": [
+              13,
+              143,
+              428,
+              230
+            ],
+            "labelClippedBoundsPx": [
+              52,
+              156,
+              389,
+              217
+            ],
+            "labelUnclippedBoundsPx": [
+              52,
+              156,
+              389,
+              217.00002
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 337,
+                "sizeHeightPx": 61,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 546,
+                "multiParagraphHeightPx": 61,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 61,
+                    "leftPx": 0,
+                    "rightPx": 336.03515625,
+                    "start": 0,
+                    "end": 17,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 546,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 2
+              }
+            ]
+          },
+          {
+            "label": "Connection profiles",
+            "buttonClippedBoundsPx": [
+              13,
+              243,
+              459,
+              330
+            ],
+            "labelClippedBoundsPx": [
+              52,
+              256,
+              420,
+              317
+            ],
+            "labelUnclippedBoundsPx": [
+              52,
+              256,
+              420,
+              317
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 368,
+                "sizeHeightPx": 61,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 546,
+                "multiParagraphHeightPx": 61,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 61,
+                    "leftPx": 0,
+                    "rightPx": 367.46875,
+                    "start": 0,
+                    "end": 19,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 546,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 2
+              }
+            ]
+          },
+          {
+            "label": "SSH host keys",
+            "buttonClippedBoundsPx": [
+              13,
+              343,
+              362,
+              430
+            ],
+            "labelClippedBoundsPx": [
+              52,
+              356,
+              323,
+              417
+            ],
+            "labelUnclippedBoundsPx": [
+              52,
+              356,
+              323,
+              417
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 271,
+                "sizeHeightPx": 61,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 546,
+                "multiParagraphHeightPx": 61,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 61,
+                    "leftPx": 0,
+                    "rightPx": 270.32421875,
+                    "start": 0,
+                    "end": 13,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 546,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 2
+              }
+            ]
+          },
+          {
+            "label": "Appearance and density",
+            "buttonClippedBoundsPx": [
+              13,
+              408,
+              546,
+              495
+            ],
+            "labelClippedBoundsPx": [
+              52,
+              421,
+              507,
+              482
+            ],
+            "labelUnclippedBoundsPx": [
+              52,
+              421.00003,
+              507,
+              482
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 455,
+                "sizeHeightPx": 61,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 546,
+                "multiParagraphHeightPx": 61,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 61,
+                    "leftPx": 0,
+                    "rightPx": 454.890625,
+                    "start": 0,
+                    "end": 22,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 546,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 2
+              }
+            ]
+          },
+          {
+            "label": "Apply name",
+            "buttonClippedBoundsPx": [
+              13,
+              408,
+              315,
+              495
+            ],
+            "labelClippedBoundsPx": [
+              52,
+              421,
+              276,
+              482
+            ],
+            "labelUnclippedBoundsPx": [
+              52,
+              421.00003,
+              276,
+              482
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 224,
+                "sizeHeightPx": 61,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 546,
+                "multiParagraphHeightPx": 61,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 61,
+                    "leftPx": 0,
+                    "rightPx": 223.63671875,
+                    "start": 0,
+                    "end": 10,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 546,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 2
+              }
+            ]
+          },
+          {
+            "label": "New window",
+            "buttonClippedBoundsPx": [
+              13,
+              408,
+              329,
+              495
+            ],
+            "labelClippedBoundsPx": [
+              52,
+              421,
+              290,
+              482
+            ],
+            "labelUnclippedBoundsPx": [
+              52,
+              421.00003,
+              290,
+              482
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 238,
+                "sizeHeightPx": 61,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 546,
+                "multiParagraphHeightPx": 61,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 61,
+                    "leftPx": 0,
+                    "rightPx": 238,
+                    "start": 0,
+                    "end": 10,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 546,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 2
+              }
+            ]
+          },
+          {
+            "label": "Close window",
+            "buttonClippedBoundsPx": [
+              13,
+              408,
+              352,
+              495
+            ],
+            "labelClippedBoundsPx": [
+              52,
+              421,
+              313,
+              482
+            ],
+            "labelUnclippedBoundsPx": [
+              52,
+              421.00003,
+              313,
+              482
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 261,
+                "sizeHeightPx": 61,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 546,
+                "multiParagraphHeightPx": 61,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 61,
+                    "leftPx": 0,
+                    "rightPx": 261,
+                    "start": 0,
+                    "end": 12,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 546,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 2
+              }
+            ]
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "case": "desktop-1",
+      "junitCompleted": 1,
+      "passed": true,
+      "measuredPassReceipts": 1,
+      "effectivePreferenceRestorations": 1,
+      "ownedCaptureDirectoryRemoved": true,
+      "files": [
+        {
+          "name": "report.json",
+          "bytes": 13061,
+          "sha256": "39b702f71f3a7552b35622813157d413c1aa732d85f100ee743a83c26a1e3e20"
+        },
+        {
+          "name": "top.png",
+          "bytes": 65208,
+          "sha256": "f05c4041dcf84c9ddb94e5f577460a8afef4e85c5e043e689211c6831b5b012f"
+        },
+        {
+          "name": "final-actions.png",
+          "bytes": 65788,
+          "sha256": "531352c61950683b09aa13832e130d6d324abbf63941cf412588359fdc76957b"
+        }
+      ],
+      "measurement": {
+        "requestedBoundsPx": [
+          48,
+          48,
+          698,
+          948
+        ],
+        "requestedFontScale": "1.3",
+        "requestedDensity": "COMFORTABLE",
+        "baselineAppearance": "SYSTEM",
+        "baselineDensity": "COMFORTABLE",
+        "actualBoundsPx": [
+          48,
+          59,
+          698,
+          959
+        ],
+        "decorWidthPx": 650,
+        "decorHeightPx": 900,
+        "systemInsetsPx": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fontScale": 1.2999999523162842,
+        "densityDpi": 260,
+        "displayDensity": 1.625,
+        "activityWidthDp": 400,
+        "activityHeightDp": 554,
+        "multiWindow": true,
+        "topRootWidthPx": 650,
+        "topRootHeightPx": 835,
+        "final-actionsRootWidthPx": 650,
+        "final-actionsRootHeightPx": 835,
+        "controlsAtIndividualScrollPositions": [
+          {
+            "label": "Saved credentials",
+            "buttonClippedBoundsPx": [
+              26,
+              151,
+              343,
+              229
+            ],
+            "labelClippedBoundsPx": [
+              65,
+              168,
+              304,
+              212
+            ],
+            "labelUnclippedBoundsPx": [
+              65,
+              168,
+              304,
+              211.99998
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              835
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 239,
+                "sizeHeightPx": 44,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 520,
+                "multiParagraphHeightPx": 44,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 44,
+                    "leftPx": 0,
+                    "rightPx": 238.3125,
+                    "start": 0,
+                    "end": 17,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 520,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 1.2999999523162842
+              }
+            ]
+          },
+          {
+            "label": "Connection profiles",
+            "buttonClippedBoundsPx": [
+              26,
+              249,
+              368,
+              327
+            ],
+            "labelClippedBoundsPx": [
+              65,
+              266,
+              329,
+              310
+            ],
+            "labelUnclippedBoundsPx": [
+              65,
+              266,
+              329,
+              310
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              835
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 264,
+                "sizeHeightPx": 44,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 520,
+                "multiParagraphHeightPx": 44,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 44,
+                    "leftPx": 0,
+                    "rightPx": 263.62109375,
+                    "start": 0,
+                    "end": 19,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 520,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 1.2999999523162842
+              }
+            ]
+          },
+          {
+            "label": "SSH host keys",
+            "buttonClippedBoundsPx": [
+              26,
+              347,
+              296,
+              425
+            ],
+            "labelClippedBoundsPx": [
+              65,
+              364,
+              257,
+              408
+            ],
+            "labelUnclippedBoundsPx": [
+              65,
+              364,
+              257,
+              408
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              835
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 192,
+                "sizeHeightPx": 44,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 520,
+                "multiParagraphHeightPx": 44,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 44,
+                    "leftPx": 0,
+                    "rightPx": 191.515625,
+                    "start": 0,
+                    "end": 13,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 520,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 1.2999999523162842
+              }
+            ]
+          },
+          {
+            "label": "Appearance and density",
+            "buttonClippedBoundsPx": [
+              26,
+              445,
+              428,
+              523
+            ],
+            "labelClippedBoundsPx": [
+              65,
+              462,
+              389,
+              506
+            ],
+            "labelUnclippedBoundsPx": [
+              65,
+              461.99997,
+              389,
+              506
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              835
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 324,
+                "sizeHeightPx": 44,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 520,
+                "multiParagraphHeightPx": 44,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 44,
+                    "leftPx": 0,
+                    "rightPx": 323.2109375,
+                    "start": 0,
+                    "end": 22,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 520,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 1.2999999523162842
+              }
+            ]
+          },
+          {
+            "label": "Apply name",
+            "buttonClippedBoundsPx": [
+              26,
+              696,
+              263,
+              774
+            ],
+            "labelClippedBoundsPx": [
+              65,
+              713,
+              224,
+              757
+            ],
+            "labelUnclippedBoundsPx": [
+              65,
+              713,
+              224.00002,
+              757
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              835
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 159,
+                "sizeHeightPx": 44,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 520,
+                "multiParagraphHeightPx": 44,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 44,
+                    "leftPx": 0,
+                    "rightPx": 158.7421875,
+                    "start": 0,
+                    "end": 10,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 520,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 1.2999999523162842
+              }
+            ]
+          },
+          {
+            "label": "New window",
+            "buttonClippedBoundsPx": [
+              276,
+              696,
+              523,
+              774
+            ],
+            "labelClippedBoundsPx": [
+              315,
+              713,
+              484,
+              757
+            ],
+            "labelUnclippedBoundsPx": [
+              315,
+              713,
+              484,
+              757
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              835
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 169,
+                "sizeHeightPx": 44,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 520,
+                "multiParagraphHeightPx": 44,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 44,
+                    "leftPx": 0,
+                    "rightPx": 169,
+                    "start": 0,
+                    "end": 10,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 520,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 1.2999999523162842
+              }
+            ]
+          },
+          {
+            "label": "Close window",
+            "buttonClippedBoundsPx": [
+              26,
+              757,
+              290,
+              835
+            ],
+            "labelClippedBoundsPx": [
+              65,
+              774,
+              251,
+              818
+            ],
+            "labelUnclippedBoundsPx": [
+              65,
+              774,
+              250.99998,
+              818
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              835
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 186,
+                "sizeHeightPx": 44,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 520,
+                "multiParagraphHeightPx": 44,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 44,
+                    "leftPx": 0,
+                    "rightPx": 186,
+                    "start": 0,
+                    "end": 12,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 520,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 1.2999999523162842
+              }
+            ]
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "case": "desktop-2",
+      "junitCompleted": 1,
+      "passed": true,
+      "measuredPassReceipts": 1,
+      "effectivePreferenceRestorations": 1,
+      "ownedCaptureDirectoryRemoved": true,
+      "files": [
+        {
+          "name": "report.json",
+          "bytes": 13082,
+          "sha256": "2c965e4fb268e8a4415b700467921e0e836a895b41075072941b18803ac26cdd"
+        },
+        {
+          "name": "top.png",
+          "bytes": 44774,
+          "sha256": "c35ecc61bd21344a712844d41445fabc991c5a88307407a98a98d4b2c1f2e9f0"
+        },
+        {
+          "name": "final-actions.png",
+          "bytes": 45182,
+          "sha256": "8b33ba3c66f2b25013975c33d3bbbb4bfb078ca92f0c4ba9c06dc6362cfe0c73"
+        }
+      ],
+      "measurement": {
+        "requestedBoundsPx": [
+          48,
+          48,
+          1348,
+          608
+        ],
+        "requestedFontScale": "1.3",
+        "requestedDensity": "STANDARD_POINTER",
+        "baselineAppearance": "SYSTEM",
+        "baselineDensity": "COMFORTABLE",
+        "actualBoundsPx": [
+          48,
+          59,
+          1348,
+          619
+        ],
+        "decorWidthPx": 1300,
+        "decorHeightPx": 560,
+        "systemInsetsPx": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fontScale": 1.2999999523162842,
+        "densityDpi": 260,
+        "displayDensity": 1.625,
+        "activityWidthDp": 800,
+        "activityHeightDp": 345,
+        "multiWindow": true,
+        "topRootWidthPx": 1300,
+        "topRootHeightPx": 495,
+        "final-actionsRootWidthPx": 1300,
+        "final-actionsRootHeightPx": 495,
+        "controlsAtIndividualScrollPositions": [
+          {
+            "label": "Saved credentials",
+            "buttonClippedBoundsPx": [
+              20,
+              115,
+              337,
+              185
+            ],
+            "labelClippedBoundsPx": [
+              59,
+              128,
+              298,
+              172
+            ],
+            "labelUnclippedBoundsPx": [
+              59,
+              128,
+              298,
+              172
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              1300,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 239,
+                "sizeHeightPx": 44,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 1182,
+                "multiParagraphHeightPx": 44,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 44,
+                    "leftPx": 0,
+                    "rightPx": 238.3125,
+                    "start": 0,
+                    "end": 17,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 1182,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 1.2999999523162842
+              }
+            ]
+          },
+          {
+            "label": "Connection profiles",
+            "buttonClippedBoundsPx": [
+              20,
+              206,
+              362,
+              276
+            ],
+            "labelClippedBoundsPx": [
+              59,
+              219,
+              323,
+              263
+            ],
+            "labelUnclippedBoundsPx": [
+              59,
+              219,
+              323,
+              263
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              1300,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 264,
+                "sizeHeightPx": 44,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 1182,
+                "multiParagraphHeightPx": 44,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 44,
+                    "leftPx": 0,
+                    "rightPx": 263.62109375,
+                    "start": 0,
+                    "end": 19,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 1182,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 1.2999999523162842
+              }
+            ]
+          },
+          {
+            "label": "SSH host keys",
+            "buttonClippedBoundsPx": [
+              20,
+              297,
+              290,
+              367
+            ],
+            "labelClippedBoundsPx": [
+              59,
+              310,
+              251,
+              354
+            ],
+            "labelUnclippedBoundsPx": [
+              59,
+              310,
+              250.99998,
+              354
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              1300,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 192,
+                "sizeHeightPx": 44,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 1182,
+                "multiParagraphHeightPx": 44,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 44,
+                    "leftPx": 0,
+                    "rightPx": 191.515625,
+                    "start": 0,
+                    "end": 13,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 1182,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 1.2999999523162842
+              }
+            ]
+          },
+          {
+            "label": "Appearance and density",
+            "buttonClippedBoundsPx": [
+              20,
+              388,
+              422,
+              458
+            ],
+            "labelClippedBoundsPx": [
+              59,
+              401,
+              383,
+              445
+            ],
+            "labelUnclippedBoundsPx": [
+              59,
+              401,
+              383,
+              445
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              1300,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 324,
+                "sizeHeightPx": 44,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 1182,
+                "multiParagraphHeightPx": 44,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 44,
+                    "leftPx": 0,
+                    "rightPx": 323.2109375,
+                    "start": 0,
+                    "end": 22,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 1182,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 1.2999999523162842
+              }
+            ]
+          },
+          {
+            "label": "Apply name",
+            "buttonClippedBoundsPx": [
+              20,
+              425,
+              257,
+              495
+            ],
+            "labelClippedBoundsPx": [
+              59,
+              438,
+              218,
+              482
+            ],
+            "labelUnclippedBoundsPx": [
+              59,
+              438,
+              217.99998,
+              482
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              1300,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 159,
+                "sizeHeightPx": 44,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 1182,
+                "multiParagraphHeightPx": 44,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 44,
+                    "leftPx": 0,
+                    "rightPx": 158.7421875,
+                    "start": 0,
+                    "end": 10,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 1182,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 1.2999999523162842
+              }
+            ]
+          },
+          {
+            "label": "New window",
+            "buttonClippedBoundsPx": [
+              270,
+              425,
+              517,
+              495
+            ],
+            "labelClippedBoundsPx": [
+              309,
+              438,
+              478,
+              482
+            ],
+            "labelUnclippedBoundsPx": [
+              309,
+              438,
+              478,
+              482
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              1300,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 169,
+                "sizeHeightPx": 44,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 1182,
+                "multiParagraphHeightPx": 44,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 44,
+                    "leftPx": 0,
+                    "rightPx": 169,
+                    "start": 0,
+                    "end": 10,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 1182,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 1.2999999523162842
+              }
+            ]
+          },
+          {
+            "label": "Close window",
+            "buttonClippedBoundsPx": [
+              530,
+              425,
+              794,
+              495
+            ],
+            "labelClippedBoundsPx": [
+              569,
+              438,
+              755,
+              482
+            ],
+            "labelUnclippedBoundsPx": [
+              569,
+              438,
+              755,
+              482
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              1300,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 186,
+                "sizeHeightPx": 44,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 1182,
+                "multiParagraphHeightPx": 44,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 44,
+                    "leftPx": 0,
+                    "rightPx": 186,
+                    "start": 0,
+                    "end": 12,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 1182,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 1.2999999523162842
+              }
+            ]
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "case": "desktop-3",
+      "junitCompleted": 1,
+      "passed": true,
+      "measuredPassReceipts": 1,
+      "effectivePreferenceRestorations": 1,
+      "ownedCaptureDirectoryRemoved": true,
+      "files": [
+        {
+          "name": "report.json",
+          "bytes": 12914,
+          "sha256": "6db0753c839b4449a9bac9fae2c0dab5cf9103894b5eb491546e4477ce91f8c9"
+        },
+        {
+          "name": "top.png",
+          "bytes": 41440,
+          "sha256": "1a3011cbe15ff272a07ebdbb81567701e8a8022ea95edbad96836b96f4b567f3"
+        },
+        {
+          "name": "final-actions.png",
+          "bytes": 36876,
+          "sha256": "ccb05b98afa530d1c50aa947137ea3a443b4db0859c16ee9a6c5f6c98b2af78e"
+        }
+      ],
+      "measurement": {
+        "requestedBoundsPx": [
+          48,
+          48,
+          698,
+          608
+        ],
+        "requestedFontScale": "2.0",
+        "requestedDensity": "COMFORTABLE",
+        "baselineAppearance": "SYSTEM",
+        "baselineDensity": "COMFORTABLE",
+        "actualBoundsPx": [
+          48,
+          59,
+          698,
+          619
+        ],
+        "decorWidthPx": 650,
+        "decorHeightPx": 560,
+        "systemInsetsPx": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fontScale": 2,
+        "densityDpi": 260,
+        "displayDensity": 1.625,
+        "activityWidthDp": 400,
+        "activityHeightDp": 345,
+        "multiWindow": true,
+        "topRootWidthPx": 650,
+        "topRootHeightPx": 495,
+        "final-actionsRootWidthPx": 650,
+        "final-actionsRootHeightPx": 495,
+        "controlsAtIndividualScrollPositions": [
+          {
+            "label": "Saved credentials",
+            "buttonClippedBoundsPx": [
+              26,
+              157,
+              441,
+              244
+            ],
+            "labelClippedBoundsPx": [
+              65,
+              170,
+              402,
+              231
+            ],
+            "labelUnclippedBoundsPx": [
+              65,
+              170,
+              402,
+              230.99998
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 337,
+                "sizeHeightPx": 61,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 520,
+                "multiParagraphHeightPx": 61,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 61,
+                    "leftPx": 0,
+                    "rightPx": 336.03515625,
+                    "start": 0,
+                    "end": 17,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 520,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 2
+              }
+            ]
+          },
+          {
+            "label": "Connection profiles",
+            "buttonClippedBoundsPx": [
+              26,
+              264,
+              472,
+              351
+            ],
+            "labelClippedBoundsPx": [
+              65,
+              277,
+              433,
+              338
+            ],
+            "labelUnclippedBoundsPx": [
+              65,
+              277,
+              433,
+              338
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 368,
+                "sizeHeightPx": 61,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 520,
+                "multiParagraphHeightPx": 61,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 61,
+                    "leftPx": 0,
+                    "rightPx": 367.46875,
+                    "start": 0,
+                    "end": 19,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 520,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 2
+              }
+            ]
+          },
+          {
+            "label": "SSH host keys",
+            "buttonClippedBoundsPx": [
+              26,
+              371,
+              375,
+              458
+            ],
+            "labelClippedBoundsPx": [
+              65,
+              384,
+              336,
+              445
+            ],
+            "labelUnclippedBoundsPx": [
+              65,
+              384,
+              336,
+              445
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 271,
+                "sizeHeightPx": 61,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 520,
+                "multiParagraphHeightPx": 61,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 61,
+                    "leftPx": 0,
+                    "rightPx": 270.32421875,
+                    "start": 0,
+                    "end": 13,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 520,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 2
+              }
+            ]
+          },
+          {
+            "label": "Appearance and density",
+            "buttonClippedBoundsPx": [
+              26,
+              408,
+              559,
+              495
+            ],
+            "labelClippedBoundsPx": [
+              65,
+              421,
+              520,
+              482
+            ],
+            "labelUnclippedBoundsPx": [
+              65,
+              421.00003,
+              520,
+              482
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 455,
+                "sizeHeightPx": 61,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 520,
+                "multiParagraphHeightPx": 61,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 61,
+                    "leftPx": 0,
+                    "rightPx": 454.890625,
+                    "start": 0,
+                    "end": 22,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 520,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 2
+              }
+            ]
+          },
+          {
+            "label": "Apply name",
+            "buttonClippedBoundsPx": [
+              26,
+              408,
+              328,
+              495
+            ],
+            "labelClippedBoundsPx": [
+              65,
+              421,
+              289,
+              482
+            ],
+            "labelUnclippedBoundsPx": [
+              65,
+              421.00003,
+              289,
+              482
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 224,
+                "sizeHeightPx": 61,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 520,
+                "multiParagraphHeightPx": 61,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 61,
+                    "leftPx": 0,
+                    "rightPx": 223.63671875,
+                    "start": 0,
+                    "end": 10,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 520,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 2
+              }
+            ]
+          },
+          {
+            "label": "New window",
+            "buttonClippedBoundsPx": [
+              26,
+              408,
+              342,
+              495
+            ],
+            "labelClippedBoundsPx": [
+              65,
+              421,
+              303,
+              482
+            ],
+            "labelUnclippedBoundsPx": [
+              65,
+              421.00003,
+              303,
+              482
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 238,
+                "sizeHeightPx": 61,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 520,
+                "multiParagraphHeightPx": 61,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 61,
+                    "leftPx": 0,
+                    "rightPx": 238,
+                    "start": 0,
+                    "end": 10,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 520,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 2
+              }
+            ]
+          },
+          {
+            "label": "Close window",
+            "buttonClippedBoundsPx": [
+              26,
+              408,
+              365,
+              495
+            ],
+            "labelClippedBoundsPx": [
+              65,
+              421,
+              326,
+              482
+            ],
+            "labelUnclippedBoundsPx": [
+              65,
+              421.00003,
+              326,
+              482
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 261,
+                "sizeHeightPx": 61,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 520,
+                "multiParagraphHeightPx": 61,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 61,
+                    "leftPx": 0,
+                    "rightPx": 261,
+                    "start": 0,
+                    "end": 12,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 520,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 2
+              }
+            ]
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "case": "desktop-4",
+      "junitCompleted": 1,
+      "passed": true,
+      "measuredPassReceipts": 1,
+      "effectivePreferenceRestorations": 1,
+      "ownedCaptureDirectoryRemoved": true,
+      "files": [
+        {
+          "name": "report.json",
+          "bytes": 12918,
+          "sha256": "f3a40809e10b04311909da3c5436e873a4bb2be5875a1dd5c40933fb64b31748"
+        },
+        {
+          "name": "top.png",
+          "bytes": 46337,
+          "sha256": "a6e7a87de37f69219f0f4a403fcd60132f06313fdaeef42993645b01432a7470"
+        },
+        {
+          "name": "final-actions.png",
+          "bytes": 40788,
+          "sha256": "d3e665fd68b77f1586b6048f1e863679864af52ea194be999bb931ddb3a103de"
+        }
+      ],
+      "measurement": {
+        "requestedBoundsPx": [
+          48,
+          48,
+          698,
+          608
+        ],
+        "requestedFontScale": "2.0",
+        "requestedDensity": "COMPACT_POINTER",
+        "baselineAppearance": "SYSTEM",
+        "baselineDensity": "COMFORTABLE",
+        "actualBoundsPx": [
+          48,
+          59,
+          698,
+          619
+        ],
+        "decorWidthPx": 650,
+        "decorHeightPx": 560,
+        "systemInsetsPx": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fontScale": 2,
+        "densityDpi": 260,
+        "displayDensity": 1.625,
+        "activityWidthDp": 400,
+        "activityHeightDp": 345,
+        "multiWindow": true,
+        "topRootWidthPx": 650,
+        "topRootHeightPx": 495,
+        "final-actionsRootWidthPx": 650,
+        "final-actionsRootHeightPx": 495,
+        "controlsAtIndividualScrollPositions": [
+          {
+            "label": "Saved credentials",
+            "buttonClippedBoundsPx": [
+              13,
+              143,
+              428,
+              230
+            ],
+            "labelClippedBoundsPx": [
+              52,
+              156,
+              389,
+              217
+            ],
+            "labelUnclippedBoundsPx": [
+              52,
+              156,
+              389,
+              217.00002
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 337,
+                "sizeHeightPx": 61,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 546,
+                "multiParagraphHeightPx": 61,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 61,
+                    "leftPx": 0,
+                    "rightPx": 336.03515625,
+                    "start": 0,
+                    "end": 17,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 546,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 2
+              }
+            ]
+          },
+          {
+            "label": "Connection profiles",
+            "buttonClippedBoundsPx": [
+              13,
+              243,
+              459,
+              330
+            ],
+            "labelClippedBoundsPx": [
+              52,
+              256,
+              420,
+              317
+            ],
+            "labelUnclippedBoundsPx": [
+              52,
+              256,
+              420,
+              317
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 368,
+                "sizeHeightPx": 61,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 546,
+                "multiParagraphHeightPx": 61,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 61,
+                    "leftPx": 0,
+                    "rightPx": 367.46875,
+                    "start": 0,
+                    "end": 19,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 546,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 2
+              }
+            ]
+          },
+          {
+            "label": "SSH host keys",
+            "buttonClippedBoundsPx": [
+              13,
+              343,
+              362,
+              430
+            ],
+            "labelClippedBoundsPx": [
+              52,
+              356,
+              323,
+              417
+            ],
+            "labelUnclippedBoundsPx": [
+              52,
+              356,
+              323,
+              417
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 271,
+                "sizeHeightPx": 61,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 546,
+                "multiParagraphHeightPx": 61,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 61,
+                    "leftPx": 0,
+                    "rightPx": 270.32421875,
+                    "start": 0,
+                    "end": 13,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 546,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 2
+              }
+            ]
+          },
+          {
+            "label": "Appearance and density",
+            "buttonClippedBoundsPx": [
+              13,
+              408,
+              546,
+              495
+            ],
+            "labelClippedBoundsPx": [
+              52,
+              421,
+              507,
+              482
+            ],
+            "labelUnclippedBoundsPx": [
+              52,
+              421.00003,
+              507,
+              482
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 455,
+                "sizeHeightPx": 61,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 546,
+                "multiParagraphHeightPx": 61,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 61,
+                    "leftPx": 0,
+                    "rightPx": 454.890625,
+                    "start": 0,
+                    "end": 22,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 546,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 2
+              }
+            ]
+          },
+          {
+            "label": "Apply name",
+            "buttonClippedBoundsPx": [
+              13,
+              408,
+              315,
+              495
+            ],
+            "labelClippedBoundsPx": [
+              52,
+              421,
+              276,
+              482
+            ],
+            "labelUnclippedBoundsPx": [
+              52,
+              421.00003,
+              276,
+              482
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 224,
+                "sizeHeightPx": 61,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 546,
+                "multiParagraphHeightPx": 61,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 61,
+                    "leftPx": 0,
+                    "rightPx": 223.63671875,
+                    "start": 0,
+                    "end": 10,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 546,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 2
+              }
+            ]
+          },
+          {
+            "label": "New window",
+            "buttonClippedBoundsPx": [
+              13,
+              408,
+              329,
+              495
+            ],
+            "labelClippedBoundsPx": [
+              52,
+              421,
+              290,
+              482
+            ],
+            "labelUnclippedBoundsPx": [
+              52,
+              421.00003,
+              290,
+              482
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 238,
+                "sizeHeightPx": 61,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 546,
+                "multiParagraphHeightPx": 61,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 61,
+                    "leftPx": 0,
+                    "rightPx": 238,
+                    "start": 0,
+                    "end": 10,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 546,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 2
+              }
+            ]
+          },
+          {
+            "label": "Close window",
+            "buttonClippedBoundsPx": [
+              13,
+              408,
+              352,
+              495
+            ],
+            "labelClippedBoundsPx": [
+              52,
+              421,
+              313,
+              482
+            ],
+            "labelUnclippedBoundsPx": [
+              52,
+              421.00003,
+              313,
+              482
+            ],
+            "rootViewportBoundsPx": [
+              0,
+              0,
+              650,
+              495
+            ],
+            "boundsTolerancePx": 1,
+            "lineBoundsFit": true,
+            "layouts": [
+              {
+                "sizeWidthPx": 261,
+                "sizeHeightPx": 61,
+                "didOverflowWidth": true,
+                "didOverflowHeight": false,
+                "hasVisualOverflow": true,
+                "didExceedMaxLines": false,
+                "multiParagraphWidthPx": 546,
+                "multiParagraphHeightPx": 61,
+                "lineCount": 1,
+                "lines": [
+                  {
+                    "index": 0,
+                    "topPx": 0,
+                    "bottomPx": 61,
+                    "leftPx": 0,
+                    "rightPx": 261,
+                    "start": 0,
+                    "end": 12,
+                    "ellipsized": false
+                  }
+                ],
+                "maxLines": 2147483647,
+                "softWrap": true,
+                "overflow": "Clip",
+                "constraintsMinWidthPx": 0,
+                "constraintsMaxWidthPx": 546,
+                "constraintsMinHeightPx": 0,
+                "constraintsMaxHeightPx": 2147483647,
+                "fontSize": "14.0.sp",
+                "lineHeight": "20.0.sp",
+                "layoutDensity": 1.625,
+                "layoutFontScale": 2
+              }
+            ]
+          }
+        ],
+        "passed": true
+      }
+    }
+  ],
+  "restoration": {
+    "actualFrameworkFontRestoration": "DEFAULT_DISPLAY_CONFIG_MATCHED",
+    "preFrameworkFontScale": 1.0,
+    "postFrameworkFontScale": 1.0,
+    "fontScaleLiteralRestored": true,
+    "bootIdUnchanged": true,
+    "bootCountUnchanged": true,
+    "fontScaleUnchanged": true,
+    "densityUnchanged": true,
+    "nightModeUnchanged": true,
+    "vaultReceiptsUnchanged": true,
+    "profileRowsAndGenerationUnchanged": true,
+    "trustRowsAndGenerationUnchanged": true,
+    "effectivePreferencesRestored": true,
+    "productApksUnchanged": true
+  },
+  "finalState": {
+    "allThreeTestPackagesAbsent": true,
+    "productsStopped": true,
+    "successfulOwnedCaptureDirectoriesRemoved": 8,
+    "priorFailedPartialCaptureDirectoriesRetained": 2,
+    "cleanupErrors": []
+  },
+  "failedDeviceRuns": [
+    {
+      "run": "01",
+      "passed": false,
+      "stoppedAfter": "console-1",
+      "reason": "Essential label raw semantics hasVisualOverflow asserted true",
+      "resultSha256": "a4a20ff0d6688b793ef23908dd807dfc3aecd709888e65a3588ba42b57645f99",
+      "reportSha256": "63f8be0706673eb6d609a8b5d28e9f379c5a082d60928bb43ae84a304ab1176c",
+      "partialCaptureDirectoryRetained": true,
+      "systemRestoration": "DEFAULT_DISPLAY_CONFIG_MATCHED"
+    },
+    {
+      "run": "02",
+      "passed": false,
+      "stoppedAfter": "console-1",
+      "reason": "Essential label raw semantics hasVisualOverflow asserted true",
+      "resultSha256": "6fb6139c2c4d2f4a1d0b7baf6f9974755dd6d7bc4d036225f779e7afee3437a1",
+      "reportSha256": "a934c4467eaf989440de0da23a94d3ebc1e6a0daab5a145c82978da553b45fa9",
+      "partialCaptureDirectoryRetained": true,
+      "systemRestoration": "DEFAULT_DISPLAY_CONFIG_MATCHED"
+    }
+  ],
+  "selectedBytecodeArtifacts": [
+    {
+      "coordinate": "androidx.compose.ui:ui-text-android:1.12.1",
+      "sha256": "e710a5776966537df09a2e5c4ca1dacc14ca11d7b20a6af16c0e992ddd3aecd3"
+    },
+    {
+      "coordinate": "androidx.compose.foundation:foundation-android:1.12.1",
+      "sha256": "444749ea7b5a563e530504b9035c87e47ed0fb62b9f7ba00e90af8aa81e6bfb8"
+    }
+  ],
+  "logs": [
+    {
+      "packet": ".cache/window-geometry-01/build-04",
+      "name": "gradle.log",
+      "sha256": "615954cbc8235d432878a0d6a9f768a1d7b8f147025598591e324b48ae4b806b"
+    },
+    {
+      "packet": ".cache/window-geometry-01/build-04",
+      "name": "result.json",
+      "sha256": "380defc4d9d61612e5a2f176e565ebb340c7620fc05d0b937f1835e4dac337f6"
+    },
+    {
+      "packet": "private-run03",
+      "name": "console-1.log",
+      "sha256": "64fbff566129fe448a9bb05f7dcba17fba5bb2c005445b976095d0c1a1f9773d"
+    },
+    {
+      "packet": "private-run03",
+      "name": "console-2.log",
+      "sha256": "3989a8784a9878516f860594f5bde8176039a662a0f962114eb3fa315de8c9b2"
+    },
+    {
+      "packet": "private-run03",
+      "name": "console-3.log",
+      "sha256": "b1126f721678f0b472e887a2c427f39afb3e2e36c94259d9c0459af6a20afb38"
+    },
+    {
+      "packet": "private-run03",
+      "name": "console-4.log",
+      "sha256": "94f938f917cb656bc3557d80a37329a47bbe96453502f19d4f713486e418a31a"
+    },
+    {
+      "packet": "private-run03",
+      "name": "desktop-1.log",
+      "sha256": "08d9cd74f1102e998cbbcc8d738447cfd539250a71dad779aad2fa0d75311025"
+    },
+    {
+      "packet": "private-run03",
+      "name": "desktop-2.log",
+      "sha256": "ac7d72f0faab044cdf79c5f2b5af713e5a798f09f6899b569e87eef626b57819"
+    },
+    {
+      "packet": "private-run03",
+      "name": "desktop-3.log",
+      "sha256": "3278cc56ac5295756820f69e1b5472706c934f4f74803352f3c447d761d48dea"
+    },
+    {
+      "packet": "private-run03",
+      "name": "desktop-4.log",
+      "sha256": "632f4207f72ed313044f9b83ed3b0c1c7f4276895373ba81a209d790b0501a13"
+    },
+    {
+      "packet": ".cache/window-geometry-01/build-04",
+      "name": "console-lint-results-debug.xml",
+      "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f",
+      "issues": 0
+    },
+    {
+      "packet": ".cache/window-geometry-01/build-04",
+      "name": "desktop-lint-results-debug.xml",
+      "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f",
+      "issues": 0
+    },
+    {
+      "packet": ".cache/window-geometry-01/build-04",
+      "name": "platform-lint-results-debug.xml",
+      "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f",
+      "issues": 0
+    },
+    {
+      "packet": ".cache/window-geometry-01/build-04",
+      "name": "design-system-lint-results-debug.xml",
+      "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f",
+      "issues": 0
+    }
+  ],
+  "visualReview": {
+    "status": "ACCEPTED_BOUNDED_VIEWPORT",
+    "reviewer": "parent integration leader",
+    "capturesInspected": 16,
+    "appearance": "System baseline with currently light content",
+    "observations": "Headings, native field/selected draft and visible readable actions; final viewport shows Apply/New/Close; intentional offscreen clipping during vertical scroll",
+    "limits": "Not all seven actions simultaneously visible; individual-scroll semantics cover56 labels; scaled Dark unqualified"
+  },
+  "limits": [
+    "Seven actions checked at separate scroll positions, not simultaneously visible",
+    "Raw semantics overflow is retained and explained by selected simple-string reconstruction; line/node geometry checked separately",
+    "No font-ink, hit-target or physical-input qualification",
+    "Zero reported insets do not explain the 65px decor/root height difference or measure a caption",
+    "Only workspace geometry; protected dialogs, other components, arbitrary sizes/scales and remote engines remain open"
+  ],
+  "buildHistory": [
+    {
+      "attempt": "build01",
+      "exitCode": 1,
+      "startedAt": "2026-10-16T10:36:58.732453+00:00",
+      "endedAt": "2026-10-16T10:37:15.387058+00:00",
+      "sourceUnchangedDuringBuild": true,
+      "logSha256": "f9b166db1c9d0f9c9e3ec1f746d2787f5e4a4362dbc4a27c2320e6060a3874d3",
+      "resultSha256": "0ff97647265f31764816e2cc377a7ffc4f648fdc201ff4448d15b8e6d9c66849"
+    },
+    {
+      "attempt": "build02",
+      "exitCode": 0,
+      "startedAt": "2026-10-16T10:41:39.773026+00:00",
+      "endedAt": "2026-10-16T10:41:58.884937+00:00",
+      "sourceUnchangedDuringBuild": true,
+      "logSha256": "8ce062245eaa20a6d482511753307d38015827ba0801f372299b5971d420efd7",
+      "resultSha256": "44d543ba6fccda085e4178ca54a491ab6e8c8167471257d2db826aa120f189b8"
+    },
+    {
+      "attempt": "build03",
+      "exitCode": 0,
+      "startedAt": "2026-10-16T10:45:42.223787+00:00",
+      "endedAt": "2026-10-16T10:46:00.234244+00:00",
+      "sourceUnchangedDuringBuild": true,
+      "logSha256": "43858f285d3604231a488ea371a75fab8916ae4c49cf200d8c1ae158c90c35ee",
+      "resultSha256": "a9bf98e7e07d7c99a78cf3fd97637f2642234f6a4b1e1f6fe985e814221e49d7"
+    },
+    {
+      "attempt": "build04",
+      "exitCode": 0,
+      "startedAt": "2026-10-16T10:47:43.994557+00:00",
+      "endedAt": "2026-10-16T10:48:02.958641+00:00",
+      "sourceUnchangedDuringBuild": true,
+      "logSha256": "615954cbc8235d432878a0d6a9f768a1d7b8f147025598591e324b48ae4b806b",
+      "resultSha256": "380defc4d9d61612e5a2f176e565ebb340c7620fc05d0b937f1835e4dac337f6"
+    }
+  ]
+}
