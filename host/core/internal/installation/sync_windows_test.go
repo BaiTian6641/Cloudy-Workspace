@@ -39,18 +39,3 @@ func unsupportedSymlinkFixture(err error) bool {
 	var linkError *os.LinkError
 	return errors.As(err, &linkError) && linkError.Op == "symlink" && errors.Is(linkError.Err, syscall.ERROR_PRIVILEGE_NOT_HELD)
 }
-
-func TestActualDirectorySyncSkipRequiresExactWindowsCause(t *testing.T) {
-	exact := &os.PathError{Op: "sync", Path: "private-path", Err: syscall.ERROR_ACCESS_DENIED}
-	f := &Failure{Code: "identity-initialization-incomplete", Claimed: true, cause: exact}
-	if !provenClaimSyncLimitation(f, []string{"claim-parent-sync"}) {
-		t.Fatal("exact proven actual limitation not recognized")
-	}
-	if provenClaimSyncLimitation(f, []string{"claim-parent-sync", "temp-create"}) {
-		t.Fatal("different reached boundary accepted")
-	}
-	f.Published = true
-	if provenClaimSyncLimitation(f, []string{"claim-parent-sync"}) {
-		t.Fatal("published state accepted as unsupported claim")
-	}
-}

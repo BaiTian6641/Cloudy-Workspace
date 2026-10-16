@@ -38,6 +38,9 @@ func (e *Failure) Error() string { return e.Code }
 
 type Result struct {
 	Record Record
+	// Windows local-output v2 describes the parsed profile; it grants no authority.
+	RecordVersion  int
+	StorageProfile string
 	// Sync-completed means the requested file/directory sync calls succeeded,
 	// not a portable guarantee about storage hardware or recovery after power loss.
 	Durability string
@@ -59,7 +62,7 @@ func openState(path string) (*os.Root, error) {
 		return nil, errors.New("invalid-state-directory")
 	}
 	before, err := os.Lstat(path)
-	if err != nil || !before.IsDir() || before.Mode()&os.ModeSymlink != 0 {
+	if err != nil || !before.IsDir() || observedReparse(before) {
 		return nil, errors.New("invalid-state-directory")
 	}
 	root, err := os.OpenRoot(path)
@@ -76,7 +79,7 @@ func openState(path string) (*os.Root, error) {
 
 func openChild(root *os.Root) (*os.Root, error) {
 	before, err := root.Lstat(AnchorName)
-	if err != nil || !before.IsDir() || before.Mode()&os.ModeSymlink != 0 {
+	if err != nil || !before.IsDir() || observedReparse(before) {
 		return nil, errors.New("identity-state-incomplete")
 	}
 	child, err := root.OpenRoot(AnchorName)
@@ -104,11 +107,12 @@ func syncDirectory(root *os.Root) error {
 	return closeErr
 }
 
-// Init never repairs an existing anchor, even if the record has disappeared.
-// Only the exclusive Mkdir winner may generate a new identity. Any later failure
-// leaves that anchor intact for a separately designed explicit recovery operation.
+// Init never repairs an existing anchor, even if its record is absent. Each OS
+// profile uses one exclusive claim at AnchorName before generating an identity;
+// every later failure retains that claim for separately designed recovery.
 func Init(path string) (Result, error) { return initialize(path, nil) }
-func initialize(path string, inject fault) (result Result, err error) {
+func Read(path string) (Result, error) { return readIdentity(path) }
+func initializeDirectory(path string, inject fault) (result Result, err error) {
 	claimed, published := false, false
 	failure := func(code string) error { return &Failure{Code: code, Claimed: claimed, Published: published} }
 	root, e := openState(path)
@@ -195,12 +199,12 @@ func initialize(path string, inject fault) (result Result, err error) {
 	if e := step(inject, "cleanup-dir-sync", func() error { return syncDirectory(child) }); e != nil {
 		return result, failure("identity-commit-uncertain")
 	}
-	return Result{record, "sync-completed"}, nil
+	return Result{Record: record, Durability: "sync-completed"}, nil
 }
 
 // Read only observes an existing record. Readback never certifies that an earlier
 // uncertain publication survives a future power loss, and never completes init.
-func Read(path string) (result Result, err error) {
+func readDirectory(path string) (result Result, err error) {
 	failure := func(code string) error { return &Failure{Code: code} }
 	root, e := openState(path)
 	if e != nil {
@@ -211,6 +215,13 @@ func Read(path string) (result Result, err error) {
 			err = failure("identity-read-failed")
 		}
 	}()
+	return readDirectoryRoot(root)
+}
+
+// The caller retains the already checked root; Windows legacy reads never reopen
+// a string path as a second storage authority.
+func readDirectoryRoot(root *os.Root) (result Result, err error) {
+	failure := func(code string) error { return &Failure{Code: code} }
 	child, e := openChild(root)
 	if e != nil {
 		return result, failure(e.Error())
@@ -221,7 +232,7 @@ func Read(path string) (result Result, err error) {
 		}
 	}()
 	before, e := child.Lstat(RecordName)
-	if e != nil || !before.Mode().IsRegular() || before.Size() > MaxRecordBytes {
+	if e != nil || !before.Mode().IsRegular() || observedReparse(before) || before.Size() > MaxRecordBytes {
 		return result, failure("identity-record-invalid")
 	}
 	file, e := child.Open(RecordName)
@@ -234,7 +245,7 @@ func Read(path string) (result Result, err error) {
 		}
 	}()
 	opened, e := file.Stat()
-	if e != nil || !opened.Mode().IsRegular() || !os.SameFile(before, opened) {
+	if e != nil || !opened.Mode().IsRegular() || observedReparse(opened) || !os.SameFile(before, opened) {
 		return result, failure("identity-record-changed")
 	}
 	data, e := io.ReadAll(io.LimitReader(file, MaxRecordBytes+1))
@@ -242,14 +253,14 @@ func Read(path string) (result Result, err error) {
 		return result, failure("identity-read-failed")
 	}
 	after, e := child.Lstat(RecordName)
-	if e != nil || !after.Mode().IsRegular() || !os.SameFile(opened, after) {
+	if e != nil || !after.Mode().IsRegular() || observedReparse(after) || !os.SameFile(opened, after) {
 		return result, failure("identity-record-changed")
 	}
 	record, e := parseRecord(data)
 	if e != nil {
 		return result, failure("identity-record-invalid")
 	}
-	return Result{record, "not-assessed"}, nil
+	return Result{Record: record, Durability: "not-assessed"}, nil
 }
 
 func parseRecord(data []byte) (Record, error) {

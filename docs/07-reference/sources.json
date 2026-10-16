@@ -6952,6 +6952,102 @@
       "sourceUpdatedOn": null,
       "note": "FlushFileBuffers requires GENERIC_WRITE. Pinned Go File.Sync uses this call on Windows. A real isolated read-only directory probe and exact actual failure classify a limited test skip; no Windows identity usability or durability pass follows.",
       "refresh": "Before changing host identity publication, filesystem adapters or selected Go version; actual OS qualification remains separate."
+    },
+    {
+      "id": "R314",
+      "title": "Go1.27.2 Windows scoped open flags",
+      "url": "https://github.com/golang/go/blob/go1.27.2/src/internal/syscall/windows/at_windows.go",
+      "publisher": "Go",
+      "category": "reference",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Pinned source maps O_EXCL to FILE_CREATE and O_SYNC to FILE_WRITE_THROUGH. This binds the selected request semantics, not power-loss durability.",
+      "refresh": "Before changing Windows identity profile, Go or x/sys version; native platform results remain separately bound."
+    },
+    {
+      "id": "R315",
+      "title": "Windows NtCreateFile creation disposition",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/winternl/nf-winternl-ntcreatefile",
+      "publisher": "Microsoft",
+      "category": "reference",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2021-10-13",
+      "note": "FILE_CREATE refuses an existing namespace entry. Used to review selected Go same-leaf file/directory claim behavior; native contention remains required.",
+      "refresh": "Before changing Windows identity profile, Go or x/sys version; native platform results remain separately bound."
+    },
+    {
+      "id": "R316",
+      "title": "Windows GetVolumeInformationByHandleW",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-getvolumeinformationbyhandlew",
+      "publisher": "Microsoft",
+      "category": "reference",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2022-09-27",
+      "note": "Actual retained directory handle supplies filesystem name before Windows identity claim. Query failure or non-NTFS refuses; official API minimum Vista/Server2008 is not product OS qualification.",
+      "refresh": "Before changing Windows identity profile, Go or x/sys version; native platform results remain separately bound."
+    },
+    {
+      "id": "R317",
+      "title": "Windows GetFinalPathNameByHandleW",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-getfinalpathnamebyhandlew",
+      "publisher": "Microsoft",
+      "category": "reference",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2023-02-09",
+      "note": "Actual handle with VOLUME_NAME_GUID and bounded return-length checks supplies a strictly parsed volume root; no guessed drive-letter fallback.",
+      "refresh": "Before changing Windows identity profile, Go or x/sys version; native platform results remain separately bound."
+    },
+    {
+      "id": "R318",
+      "title": "Windows GetDriveTypeW",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-getdrivetypew",
+      "publisher": "Microsoft",
+      "category": "reference",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2024-11-20",
+      "note": "Require DRIVE_FIXED for the actual GUID volume root with trailing separator. Unknown, unsupported and query failure stay distinct refusals; native compatibility is a separate gate.",
+      "refresh": "Before changing Windows identity profile, Go or x/sys version; native platform results remain separately bound."
+    },
+    {
+      "id": "R319",
+      "title": "Windows CreateFileW write-through semantics",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilew",
+      "publisher": "Microsoft",
+      "category": "reference",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2023-02-09",
+      "note": "Write-through request semantics and file handle lifetime inform the Windows profile. Cloudy uses public Go scoped operations and maintained wrappers; no atomic full-record appearance or hardware durability inferred.",
+      "refresh": "Before changing Windows identity profile, Go or x/sys version; native platform results remain separately bound."
+    },
+    {
+      "id": "R320",
+      "title": "Go Windows API wrappers v0.49.0",
+      "url": "https://go.googlesource.com/sys/+/refs/tags/v0.49.0/",
+      "publisher": "Go",
+      "category": "reference",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Exact official module obtained through authenticated Go module download, origin b6b8557e8e2974925aec7a136ba0e323eedc5f43 and actual BSD-3-Clause license reviewed locally. Direct web license retrieval failed; no successful page read claimed.",
+      "refresh": "Before changing Windows identity profile, Go or x/sys version; native platform results remain separately bound."
+    },
+    {
+      "id": "R321",
+      "title": "Go module authentication",
+      "url": "https://go.dev/ref/mod#authenticating",
+      "publisher": "Go",
+      "category": "reference",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Committed module sums and signed sum.golang.org verification bind exact x/sys v0.49.0 adoption; owned module cache verified and readonly subsequent builds.",
+      "refresh": "Before changing Windows identity profile, Go or x/sys version; native platform results remain separately bound."
     }
   ]
 }

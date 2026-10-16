@@ -12,7 +12,7 @@ import (
 	"github.com/BaiTian6641/Cloudy-Workspace/host/core/internal/installation"
 )
 
-const AgentVersion = "0.1.1"
+const AgentVersion = "0.1.2"
 
 const usage = "usage: cloudy-host inspect | version | identity init|read --state-dir <existing-directory>\n"
 
@@ -132,7 +132,14 @@ func runIdentity(args []string, out, errOut io.Writer) int {
 		Operation            string `json:"operation"`
 		InstallationID       string `json:"installationId"`
 		Durability           string `json:"durability"`
-	}{1, AgentVersion, args[1], result.Record.InstallationID, result.Durability}
+		RecordVersion        int    `json:"recordVersion,omitempty"`
+		StorageProfile       string `json:"storageProfile,omitempty"`
+	}{1, AgentVersion, args[1], result.Record.InstallationID, result.Durability, 0, ""}
+	if runtime.GOOS == "windows" {
+		response.LocalIdentityVersion = 2
+		response.RecordVersion = result.RecordVersion
+		response.StorageProfile = result.StorageProfile
+	}
 	if err := json.NewEncoder(checkedWriter{out}).Encode(response); err != nil {
 		// Init effects are retained despite response loss. Neither this message nor
 		// a later read can certify power-loss durability or authorize regeneration.

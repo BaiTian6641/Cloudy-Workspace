@@ -44,9 +44,21 @@ jobs:
             printf 'Files requiring gofmt:\n%s\n' "$formatting"
             exit 1
           fi
+      - name: Download the exact reviewed Windows API module
+        env:
+          GOPROXY: https://proxy.golang.org
+          GOSUMDB: sum.golang.org
+          GONOSUMDB: ''
+          GOPRIVATE: ''
+        run: |
+          # Only this step has module-network access. Committed checksums and the
+          # public checksum database bind the selected upstream implementation.
+          go mod download golang.org/x/sys@v0.49.0
+          go mod verify
+          git diff --exit-code -- go.mod go.sum
       - name: Compile, vet and execute contract tests
         run: |
-          go vet ./...
+          go vet -mod=readonly ./...
           # Print per-case skips so an unsupported platform operation is visible.
           go test -v -mod=readonly ./...
           go build -mod=readonly -trimpath -buildvcs=false ./cmd/cloudy-host
@@ -56,5 +68,5 @@ jobs:
       # These are real hosted CLI executions, not desktop-session qualification.
       - name: Execute the local diagnostic
         run: |
-          test "$(go run ./cmd/cloudy-host version)" = '0.1.1'
-          go run ./cmd/cloudy-host inspect
+          test "$(go run -mod=readonly ./cmd/cloudy-host version)" = '0.1.2'
+          go run -mod=readonly ./cmd/cloudy-host inspect

@@ -1,6 +1,6 @@
 # Host installation identity — HOST-IDENTITY
 
-**2026-10-16; accepted bounded construction profile; source and Linux checks independently reviewed.** This bounded P4-S1 increment extends the local [host core](host-core-entry.md). It does not implement pairing, remote control, boot/session identity, jobs, listeners, service installation or a production capability manifest. Googlebook client work continues independently under the [parallel contract](../05-delivery/parallel-execution-contract.md).
+**2026-10-16; v1 directory profile and historical0.1.1 result.** Linux/macOS keep this profile. Current Windows initialization uses the separately reviewed [0.1.2 permanent-file profile](host-windows-identity-profile.md); the directory-sync limitation below describes the earlier Windows route, not a reason to retry or delete its claim. Source and Linux checks were independently reviewed. This bounded P4-S1 increment extends the local [host core](host-core-entry.md). It does not implement pairing, remote control, boot/session identity, jobs, listeners, service installation or a production capability manifest. Googlebook client work continues independently under the [parallel contract](../05-delivery/parallel-execution-contract.md).
 
 ## Explicit commands and continuity
 

@@ -4,7 +4,7 @@
 
 ## Implemented local profile
 
-`host/core` contains a standard-library-only Go module and `cloudy-host` executable. The initial diagnostic was **0.1.0**; the installation-identity increment is **0.1.1**. `inspect` reads the actual running binary's OS/architecture/toolchain and current UTC time. It emits `localDiagnosticVersion: 1`, `agentVersion`, `observedAt`, `runtime`, `features` and `backends`. `version` prints the executable version. Invalid or extra arguments return exit2; output failure returns exit1 with fixed safe text. A successful exit and complete JSON are both required; stdout is not an atomic publication mechanism.
+`host/core` contains a separately versioned Go module and `cloudy-host` executable. The initial standard-library-only diagnostic was **0.1.0**, followed by installation identity **0.1.1**. Current **0.1.2** adds the [Windows permanent-file identity profile](host-windows-identity-profile.md) and the exact Windows-only `golang.org/x/sys v0.49.0` dependency. `inspect` reads the actual running binary's OS/architecture/toolchain and current UTC time. It emits `localDiagnosticVersion: 1`, `agentVersion`, `observedAt`, `runtime`, `features` and `backends`. `version` prints the executable version. Invalid or extra arguments return exit2; output failure returns exit1 with fixed safe text. A successful exit and complete JSON are both required; stdout is not an atomic publication mechanism.
 
 Cloudy's unimplemented pairing, remote control, jobs, events and session adapters report **unavailable / not-implemented**. External desktop, USB and notification backends report **unknown / not-inspected**. The command neither probes those services nor claims they are absent. It does not collect hostname, account, environment, paths, credentials, machine inventory, installation/boot/session identifiers or backend output.
 
@@ -12,7 +12,7 @@ This is a **local diagnostic profile**, not `protocol/schemas/capabilities.schem
 
 ## Toolchain and checks
 
-The bounded core selects **Go1.27.2** with no external modules. The `go` directive defines a minimum requirement; validation additionally checks the actual executable version and uses `GOTOOLCHAIN=local`, `GOENV=off`, `GOPROXY=off` and `GOTELEMETRY=off`. No automatic toolchain substitution or global Go installation was performed. The parent downloaded the official archive into ignored workspace cache and verified its exact size and SHA256 against the [official download metadata](https://go.dev/dl/?mode=json) (R295).
+The bounded core selects **Go1.27.2**. Initial0.1.0/0.1.1 had no external modules;0.1.2 admits only the reviewed Windows API wrapper above, with authenticated checksums, actual license/notices and readonly builds. The `go` directive defines a minimum requirement; validation additionally checks the actual executable version and uses `GOTOOLCHAIN=local`, `GOENV=off`, `GOPROXY=off` and `GOTELEMETRY=off`. Only the exact dependency acquisition step enables the public module proxy/checksum database; subsequent verification/build commands keep module network access off. No automatic toolchain substitution or global Go installation was performed. The parent downloaded the official archive into ignored workspace cache and verified its exact size and SHA256 against the [official download metadata](https://go.dev/dl/?mode=json) (R295).
 
 | Artifact | Value |
 | --- | --- |

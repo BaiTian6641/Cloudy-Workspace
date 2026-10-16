@@ -1,0 +1,186 @@
+{
+  "experiment": "HOST-IDENTITY-WINDOWS",
+  "date": "2026-10-16",
+  "agentVersion": "0.1.2",
+  "goVersion": "go1.27.2",
+  "acceptance": "Scoped source/compiler/Linux construction accepted; native Windows/macOS and P4 integration remain open",
+  "sourceHashes": {
+    "host/core/README.md": "0597ef142fce3a9cc6f7a3ef01d8d0f175337b0d8bf4df2a13a2a8acdbdf86d5",
+    "host/core/THIRD_PARTY_NOTICES.txt": "258032e9028383b53faaf0e59428ef8e4d76bdb830f050f31a231e68b31b0e40",
+    "host/core/cmd/cloudy-host/main.go": "f1275665c1caf81851c199fea669ffd675156d0f67e80080c98885028d0c5b54",
+    "host/core/go.mod": "8895e55963e4447a05abb84709092a640834f471dcb2ea6515c6d8dfac6613eb",
+    "host/core/go.sum": "cde7b21c6627bd3cfc042453150e8eaf8b6c80aa2df25d96f48b038050945f03",
+    "host/core/internal/diagnostic/diagnostic.go": "92448850fc2d95c44745f1794fdfcd34a69b69b5d8bca99dc23b5974dd8c1d4f",
+    "host/core/internal/diagnostic/diagnostic_test.go": "343b4a335611d7628648630dbc60ed1d7d0292e961b8f6950ba14e055ac2b0e4",
+    "host/core/internal/installation/profile_other.go": "e11b2c0924241c088178f1bff11efdc518b47adb79254433c54fec68d2c7035c",
+    "host/core/internal/installation/profile_windows.go": "46a938b39cfe99aaaf26914e9fb2baac6b905a8ff8fd9c8041fe0e954e602e65",
+    "host/core/internal/installation/profile_windows_test.go": "04c2e38c60bb3fbab7bf822daa080e6fc035957d5d47087044a3fe9dfbd3403a",
+    "host/core/internal/installation/store.go": "d061f32a7d10ab89cae77a2d8fb41c685f600a686bb37c5c8d7e2a89c1b5bd94",
+    "host/core/internal/installation/store_test.go": "4b3ddb3669e6c4c4c9c80fcbd6176407e6a65f74686ef7a73aca4ed909d49510",
+    "host/core/internal/installation/sync_other_test.go": "5f7844f64e5e7064c55dd9d5c71eedc7e4812839d9fdec32723a8e20de9af0d5",
+    "host/core/internal/installation/sync_windows_test.go": "a0818fbf173d2107f9b21db24cd430bab9ec97e973338f546cbb2d884b48ab96",
+    "host/core/internal/installation/windows_record.go": "fddede14adfb842694be4c623271a2c65953cd89bc3408bde8f17dff446ab1a0",
+    "host/core/internal/installation/windows_record_test.go": "4b9470ccc904b3269e609afe013a5f32a8c51555f3828b72e0de4ab87e3a4bf0"
+  },
+  "workflowHash": "0a7aeffe5749df403960279ecafce0124705e54e86b6bd8547392522566e2c9f",
+  "artifacts": {
+    "darwin-diagnostic.test": {
+      "bytes": 5649922,
+      "sha256": "8d853847743d5285aa80c4f713eba970bf21894195675fd7c70f12424b2af373"
+    },
+    "cloudy-host-windows.exe": {
+      "bytes": 5275136,
+      "sha256": "6047b4892af4baedb102e126edb6c765f79b0087266ca0166681fc46335ad3bf"
+    },
+    "cloudy-host-darwin": {
+      "bytes": 4516642,
+      "sha256": "e966ada99a2bb8aa98ec1876765186eb144210bbeff492842bf26f455f7e2614"
+    },
+    "windows-diagnostic.test": {
+      "bytes": 6468608,
+      "sha256": "bb30a1a7539977df93633a123604a42e315a2a52eb48c40d885032a7c1571e0a"
+    },
+    "darwin-installation.test": {
+      "bytes": 5704210,
+      "sha256": "cc986b81e9140178da0049978c2bd22be906d0d845a6f549e1aeb64d92e80d32"
+    },
+    "cloudy-host-linux": {
+      "bytes": 4693912,
+      "sha256": "0b64730d5a2bcf2a635b29f61eec9c29456cf08557b6c213f7a00bce08489c3f"
+    },
+    "windows-installation.test": {
+      "bytes": 6679040,
+      "sha256": "d6cb31a6e8ec94ea669866403c84ab74cf57b4e47c4baea3d612cb8abfe1e360"
+    }
+  },
+  "checks": [
+    {
+      "check": "version",
+      "exitCode": 0
+    },
+    {
+      "check": "module-verify",
+      "exitCode": 0
+    },
+    {
+      "check": "module-closure",
+      "exitCode": 0
+    },
+    {
+      "check": "format",
+      "exitCode": 0
+    },
+    {
+      "check": "vet-linux",
+      "exitCode": 0
+    },
+    {
+      "check": "test-linux-race",
+      "exitCode": 0
+    },
+    {
+      "check": "build-linux",
+      "exitCode": 0
+    },
+    {
+      "check": "build-windows",
+      "exitCode": 0
+    },
+    {
+      "check": "vet-windows",
+      "exitCode": 0
+    },
+    {
+      "check": "compile-windows-installation",
+      "exitCode": 0
+    },
+    {
+      "check": "compile-windows-diagnostic",
+      "exitCode": 0
+    },
+    {
+      "check": "build-darwin",
+      "exitCode": 0
+    },
+    {
+      "check": "vet-darwin",
+      "exitCode": 0
+    },
+    {
+      "check": "compile-darwin-installation",
+      "exitCode": 0
+    },
+    {
+      "check": "compile-darwin-diagnostic",
+      "exitCode": 0
+    }
+  ],
+  "namedLinuxTests": {
+    "pass": 45,
+    "skip": 0,
+    "fail": 0
+  },
+  "execution": {
+    "linux/amd64": "45 actual named race cases; separate unchanged-Linux-input verification03 CLI smoke carried forward",
+    "windows/amd64": "Product, vet and installation/diagnostic test compilation only; native unrun",
+    "darwin/arm64": "Product, vet and installation/diagnostic test compilation only; native unrun"
+  },
+  "dependency": {
+    "version": "v0.49.0",
+    "origin": {
+      "VCS": "git",
+      "URL": "https://go.googlesource.com/sys",
+      "Hash": "b6b8557e8e2974925aec7a136ba0e323eedc5f43",
+      "Ref": "refs/tags/v0.49.0"
+    },
+    "moduleSum": "h1:XbzkgYJHdqh/8m2Uu0W/dQv8nktxx4BFHp1M0gROTXA=",
+    "goModSum": "h1:hNLxWAXmnKAxqDtdwIYC4bM9oQPEecfsnNMuSxOs3og=",
+    "checksumDatabase": "sum.golang.org authenticated by selected Go tool; signed lookup retained in owned module cache",
+    "license": "BSD-3-Clause",
+    "licenseSha256": "911f8f5782931320f5b8d1160a76365b83aea6447ee6c04fa6d5591467db9dad",
+    "minimumGo": "1.26.0",
+    "selectedGo": "1.27.2",
+    "adoption": "Windows-only x/sys/windows API wrappers; no vendor implementation added"
+  },
+  "evidence": {
+    ".cache/host-identity-windows-04/verification05/result.json": "b6fa0645c6e7ea5e97cdcb16b69c1c611f6aee7a403b80e70a922cab2a1fc213",
+    ".cache/host-identity-windows-04/verification05/test-linux-race.stdout": "6a341619827f3eac316f3ccc6322c4e8ea2723c479f5f3b5e42687cb9483bd8b",
+    ".cache/host-identity-windows-04/inspection03.json": "21cae73579fb29d4e41d2df82570c1df82b2c8e1d0ba09d3a37a434d7fc1c478",
+    ".cache/host-identity-windows-04/inspection05.json": "d38153b22ebcc2f89bba9e5f9427780cddab5764df0c838ca88096ab6e5beb80",
+    ".cache/host-identity-windows-04/dependency-review/review.json": "77cf8e0aeefe60240f2932f0c75d8bdd704a9aee456c15b0d1da9690dc98b9e7",
+    ".cache/host-identity-windows-04/review/actual-source-review.md": "f883340f76eb51c8329254dfd1aef2c8c760384dbe5eaea9dcd731e1080aa41c",
+    ".cache/host-identity-windows-04/review/actual-source-review.json": "288d671eeef519fcb6a11066201e6319199d29e13f2f19d9f51bac6f444465bf",
+    ".cache/host-identity-windows-04/review/omp-design-review.md": "d166edff315a39e4bbeaff528f2f61d432941f975c8089ef305ce35b6b711dcc",
+    ".cache/host-identity-windows-04/ci-review.md": "45b45dab96ca4dbad17c383a5d69e8eb5875b7750c2318394aaf3e157da30f67",
+    ".cache/host-identity-windows-04/omp-security-review/packet.md": "d48ede54d9ed1d04a6f57de3be9a5561383185dc7f3cc193e77ef5d93f1d5950",
+    ".cache/host-identity-windows-04/omp-security-review/review-summary.json": "62450683807e93494c3a3dc9d441af2dcc8d1a6a3c511ec03933c065bb2955a7",
+    ".cache/host-identity-windows-04/final-doc-review.md": "10d262ce4e54ea6431bd1b67cb3137d6aedfc7faa72b17e34fbbf7b2c1977108"
+  },
+  "review": {
+    "productionFinding": "Original Windows Root.Lstat observation now checked against opened handle before reading; repaired04",
+    "regressionFinding": "Root.Lstat eager observations replace lazy os.Lstat fixture; repaired05",
+    "closure": "Independent exact source/artifact review05 no unresolved blocking finding",
+    "limits": [
+      "Native replacement regression unrun",
+      "Legacy contention models old algorithm, not historical executable",
+      "Windows legacy-negative coverage narrower than Unix v1 suite"
+    ]
+  },
+  "omp": {
+    "provider": "zai",
+    "model": "glm-5.3",
+    "seconds": 47.856,
+    "exitCode": 0,
+    "stopReason": "stop",
+    "toolEvents": 0,
+    "sourceReviewed": false,
+    "fallback": false,
+    "acceptance": "Context-only design advice with explicit corrections; no generated implementation integrated"
+  },
+  "limitations": [
+    "No power-loss, ACL, hostile same-user mutation or arbitrary cloud/filter-path qualification",
+    "No recovery/reset, pairing, jobs, events, service or OS session identity",
+    "Partial records remain claimed; valid Read does not settle earlier uncertain durability",
+    "Native OS evidence must come from exact subsequent commit; crossbuild cannot substitute"
+  ]
+}
