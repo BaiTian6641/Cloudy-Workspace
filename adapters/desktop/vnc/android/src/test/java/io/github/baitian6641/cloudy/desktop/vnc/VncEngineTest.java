@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /** Test-only backend and numeric-check seam. No JNI/library/server/Android permission evidence. */
 public final class VncEngineTest {
@@ -14,7 +16,7 @@ public final class VncEngineTest {
         return new VncEngine.Config("test", "127.0.0.1", 5901, new byte[32], 10,
             address -> { if (!address.equals("127.0.0.1")) throw new IllegalArgumentException(); });
     }
-    private static final class Backend implements VncEngine.Backend {
+    private static class Backend implements VncEngine.Backend {
         volatile VncBridge.Sink sink;
         volatile boolean started, joined = true, refuseFree, createZero;
         volatile int releaseResult = 1;
@@ -127,4 +129,83 @@ public final class VncEngineTest {
         assertTrue(replacement.connect(config(),secret(),secret())); await(replacement,VncEngine.State.INITIALIZED);
         replacement.stop(); await(replacement,VncEngine.State.RETIRED);
     }
+    private static ScheduledThreadPoolExecutor ownerExecutor() {
+        return new ScheduledThreadPoolExecutor(1, task -> {
+            Thread thread = new Thread(task, "VncTestOwner"); thread.setDaemon(true); return thread;
+        });
+    }
+    private static void latch(CountDownLatch value) {
+        try { assertTrue(value.await(2, TimeUnit.SECONDS)); }
+        catch (InterruptedException error) { Thread.currentThread().interrupt(); throw new AssertionError(error); }
+    }
+    private static void fence(ScheduledThreadPoolExecutor executor) {
+        CountDownLatch drained = new CountDownLatch(1);
+        executor.execute(drained::countDown); latch(drained);
+    }
+    @Test public void directPollAndQueuedStopShareOneCleanupAuthorization() throws Exception {
+        CountDownLatch pollEntered = new CountDownLatch(1), pollProceed = new CountDownLatch(1);
+        AtomicBoolean firstStatus = new AtomicBoolean(true);
+        Backend backend = new Backend(false) {
+            @Override public long[] status(long handle) {
+                if (firstStatus.compareAndSet(true, false)) {
+                    pollEntered.countDown(); latch(pollProceed);
+                }
+                // Real native termination is represented only by this clearly test-owned seam.
+                return new long[]{3,0,0,0,0,0,1,1};
+            }
+        };
+        backend.joined = false;
+        ScheduledThreadPoolExecutor executor = ownerExecutor();
+        VncEngine engine = new VncEngine(null, backend, executor);
+        try {
+            assertTrue(engine.connect(config(), secret(), secret())); latch(pollEntered);
+            engine.stop(); // Queued behind the paused poll, whose direct cleanup will finish first.
+            CountDownLatch queuedStopDrained = new CountDownLatch(1);
+            executor.execute(queuedStopDrained::countDown);
+            pollProceed.countDown(); latch(queuedStopDrained);
+            assertEquals(VncEngine.State.CLEANUP_UNCERTAIN, engine.snapshot().state);
+            assertEquals(Arrays.asList("cancel", "join"), backend.operations);
+            assertEquals(1, backend.freed.getCount());
+            backend.joined = true;
+            engine.retryCleanup(); assertTrue(backend.freed.await(2, TimeUnit.SECONDS));
+            await(engine, VncEngine.State.RETIRED);
+            assertEquals(Arrays.asList("cancel", "join", "cancel", "join", "free"), backend.operations);
+        } finally {
+            pollProceed.countDown();
+            // Test-only executor owner is retained until all observations are made; failure shutdown
+            // does not stand in for a successful native free or release the engine's static lease.
+            executor.shutdownNow(); assertTrue(executor.awaitTermination(2, TimeUnit.SECONDS));
+        }
+    }
+    @Test public void repeatedStopPreservesUncertaintyAndExplicitRetriesCoalesce() throws Exception {
+        Backend backend = new Backend(false); backend.joined = false;
+        ScheduledThreadPoolExecutor executor = ownerExecutor();
+        VncEngine engine = new VncEngine(null, backend, executor);
+        CountDownLatch retryGate = new CountDownLatch(1);
+        try {
+            assertTrue(engine.connect(config(), secret(), secret())); await(engine, VncEngine.State.INITIALIZED);
+            engine.stop(); fence(executor);
+            assertEquals(VncEngine.State.CLEANUP_UNCERTAIN, engine.snapshot().state);
+            engine.stop(); engine.stop(); fence(executor);
+            assertEquals(VncEngine.State.CLEANUP_UNCERTAIN, engine.snapshot().state);
+            assertEquals(Arrays.asList("release", "cancel", "join"), backend.operations);
+            CountDownLatch retryBlocked = new CountDownLatch(1);
+            executor.execute(() -> { retryBlocked.countDown(); latch(retryGate); }); latch(retryBlocked);
+            engine.retryCleanup(); engine.retryCleanup(); engine.stop();
+            retryGate.countDown(); fence(executor);
+            // Duplicate requests authorized against the first uncertainty cannot consume the next.
+            assertEquals(VncEngine.State.CLEANUP_UNCERTAIN, engine.snapshot().state);
+            assertEquals(Arrays.asList("release", "cancel", "join", "cancel", "join"), backend.operations);
+            assertEquals(1, backend.freed.getCount());
+            engine.stop(); fence(executor);
+            assertEquals(VncEngine.State.CLEANUP_UNCERTAIN, engine.snapshot().state);
+            backend.joined = true; engine.retryCleanup();
+            assertTrue(backend.freed.await(2, TimeUnit.SECONDS)); await(engine, VncEngine.State.RETIRED);
+            assertEquals(Arrays.asList("release", "cancel", "join", "cancel", "join", "cancel", "join", "free"), backend.operations);
+        } finally {
+            retryGate.countDown(); executor.shutdownNow();
+            assertTrue(executor.awaitTermination(2, TimeUnit.SECONDS));
+        }
+    }
+
 }

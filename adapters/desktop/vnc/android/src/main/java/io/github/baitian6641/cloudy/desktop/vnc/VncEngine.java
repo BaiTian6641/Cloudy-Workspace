@@ -100,7 +100,9 @@ public final class VncEngine {
     private final Backend backend;
     private final ScheduledThreadPoolExecutor owner;
     private final AtomicBoolean admitted = new AtomicBoolean(), stop = new AtomicBoolean();
-    private final AtomicBoolean cleanupQueued = new AtomicBoolean();
+    // Guarded by callbacks. Automatic paths share attempt1; only explicit retry authorizes the next.
+    private int cleanupAttempts;
+    private boolean retryQueued;
     private final AtomicInteger queuedInputs = new AtomicInteger();
     private final Object callbacks = new Object();
     private final Object attempt = new Object();
@@ -115,10 +117,13 @@ public final class VncEngine {
     private ScheduledFuture<?> poll;
     public VncEngine(Context context) { this(context.getApplicationContext(), JNI); }
     VncEngine(Context context, Backend backend) {
-        this.context = context; this.backend = backend;
-        owner = new ScheduledThreadPoolExecutor(1, task -> {
+        this(context, backend, new ScheduledThreadPoolExecutor(1, task -> {
             Thread thread = new Thread(task, "CloudyVncOwner"); thread.setDaemon(true); return thread;
-        });
+        }));
+    }
+    // Package-only executor seam for deterministic owner-queue fencing; public callers use owned executor.
+    VncEngine(Context context, Backend backend, ScheduledThreadPoolExecutor executor) {
+        this.context = context; this.backend = backend; owner = executor;
         owner.setRemoveOnCancelPolicy(true);
         owner.setKeepAliveTime(1, TimeUnit.SECONDS);
         owner.allowCoreThreadTimeOut(true);
@@ -152,11 +157,11 @@ public final class VncEngine {
                     finally { wipe(username); wipe(password); }
                     synchronized (callbacks) { handle = allocated; }
                     if (allocated == 0) { finishWithoutHandle(username, password); return; }
-                    if (stop.get() || !backend.start(allocated)) { stop.set(true); cleanup(); return; }
+                    if (stop.get() || !backend.start(allocated)) { stop.set(true); cleanup(1); return; }
                     synchronized (callbacks) { if (!stop.get() && !initialized) publish(State.AUTHENTICATING); }
                     poll = owner.scheduleWithFixedDelay(this::pollNative, 100, 100, TimeUnit.MILLISECONDS);
                 } catch (RuntimeException | LinkageError error) {
-                    if (handle == 0) finishWithoutHandle(username, password); else { stop.set(true); cleanup(); }
+                    if (handle == 0) finishWithoutHandle(username, password); else { stop.set(true); cleanup(1); }
                 } finally { wipe(username); wipe(password); }
             });
             return true;
@@ -198,36 +203,49 @@ public final class VncEngine {
             if (h == 0) return;
             long[] status = backend.status(h);
             if (status == null || status.length != 8 || status[0] < 0 || status[0] > 4) {
-                stop.set(true); cleanup(); return;
+                stop.set(true); cleanup(1); return;
             }
             synchronized (callbacks) {
                 snapshot = new Snapshot(snapshot.state, (int) status[1], completed, failed, releaseOutcome);
             }
-            if (status[0] >= 3 || stop.get()) { stop.set(true); cleanup(); }
-        } catch (RuntimeException | LinkageError error) { stop.set(true); cleanup(); }
+            if (status[0] >= 3 || stop.get()) { stop.set(true); cleanup(1); }
+        } catch (RuntimeException | LinkageError error) { stop.set(true); cleanup(1); }
     }
     /** Nonblocking, idempotent request. A failed join/free leaves the handle and lease retained.
      * No input-release write or cancellation can be treated as remote receipt confirmation.
      */
     public void stop() {
-        stop.set(true);
-        synchronized (callbacks) { pending = null; if (handle != 0) publish(State.STOP_REQUESTED); }
-        queueCleanup();
+        synchronized (callbacks) {
+            // Publish the first request in the same critical section as its CAS: poll cleanup
+            // must not finish UNCERTAIN between admission of this stop and its state publication.
+            if (!stop.compareAndSet(false, true)) return;
+            pending = null; if (handle != 0) publish(State.STOP_REQUESTED);
+        }
+        try { owner.execute(() -> cleanup(1)); }
+        catch (RejectedExecutionException error) { /* Retired/no-handle owner has no cleanup to retry. */ }
     }
     /** Explicit retry only, after observing CLEANUP_UNCERTAIN. No automatic retry/reset/reconnect. */
     public void retryCleanup() {
-        if (snapshot.state == State.CLEANUP_UNCERTAIN) queueCleanup();
+        final int authorizedAttempt;
+        synchronized (callbacks) {
+            if (snapshot.state != State.CLEANUP_UNCERTAIN || retryQueued) return;
+            retryQueued = true;
+            authorizedAttempt = cleanupAttempts + 1;
+        }
+        try { owner.execute(() -> cleanup(authorizedAttempt)); }
+        catch (RejectedExecutionException error) { synchronized (callbacks) { retryQueued = false; } }
     }
-    private void queueCleanup() {
-        if (!cleanupQueued.compareAndSet(false, true)) return;
-        try { owner.execute(() -> { try { cleanup(); } finally { cleanupQueued.set(false); } }); }
-        catch (RejectedExecutionException error) { cleanupQueued.set(false); }
-    }
-    private void cleanup() {
+    private void cleanup(int authorizedAttempt) {
+        final long h;
+        synchronized (callbacks) {
+            // The owner consumes an authorization once before any native call. A stale queued stop
+            // cannot turn a direct attempt's uncertainty into a retry or overwrite its outcome.
+            if (authorizedAttempt != cleanupAttempts + 1 || handle == 0) return;
+            cleanupAttempts = authorizedAttempt;
+            retryQueued = false;
+            h = handle; pending = null; publish(State.STOP_REQUESTED);
+        }
         if (poll != null) { poll.cancel(false); poll = null; }
-        long h = handle;
-        if (h == 0) return;
-        synchronized (callbacks) { pending = null; publish(State.STOP_REQUESTED); }
         try {
             releaseBeforeCancel(h);
             if (!backend.cancel(h) || !backend.join(h, 5000)) { publish(State.CLEANUP_UNCERTAIN); return; }

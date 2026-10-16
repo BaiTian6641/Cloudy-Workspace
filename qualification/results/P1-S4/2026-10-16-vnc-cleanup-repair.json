@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "VNC Java owner cleanup correction: independently reviewed source, actual affected projection compiler/JVM/Lint and corrected offline AAR inspection; no native/device runtime acceptance",
+  "acceptance": "Parent and independent source/build/evidence review accept the scoped Java repair and byte-identical reused native/source-notice payload. Original aggregate and first offline inspection failures remain unchanged.",
+  "sources": [
+    {
+      "path": "adapters/desktop/vnc/android/src/main/java/io/github/baitian6641/cloudy/desktop/vnc/VncEngine.java",
+      "sha256": "335d7e76d8ad182c04d9316c6870aa1f1ef8a0dafe9596f5bf5dbcf2f4703390",
+      "beforeSha256": "7939ba62f6ba6a018ea15b517a99043fa8158bdb2555719f0b682610c4486375"
+    },
+    {
+      "path": "adapters/desktop/vnc/android/src/test/java/io/github/baitian6641/cloudy/desktop/vnc/VncEngineTest.java",
+      "sha256": "31332a2c5c4f459e033ac9cb8e1be7c17abdf224c921e1ca0a4e83b7e0052a8d",
+      "beforeSha256": "5827dde11f1059e115717d02144f3feb3d52f3851728bda8b6277a9cfd30fb82"
+    }
+  ],
+  "authority": {
+    "sourceFreeze": {
+      "path": ".cache/vnc-owner-cleanup-repair-01/freeze02.json",
+      "sha256": "1834f64e2f52731f31a393baa328a1b7dd19ca6cd15f66cc37118f607bd678bb"
+    },
+    "buildFreeze": {
+      "path": ".cache/vnc-owner-cleanup-repair-01/build-freeze03.json",
+      "sha256": "5c8129a9dd3470ccdca2312fb3ea48bd37d4b95146f1fa2896eedb714288151c"
+    },
+    "buildRunner": {
+      "path": ".cache/vnc-owner-cleanup-repair-01/run_build_03.py",
+      "sha256": "c82de493e208e81744ab1f30d1f34292b68ab97bce6049559d098ee8ef9111a6"
+    },
+    "independentSourceReview": {
+      "path": ".cache/vnc-owner-cleanup-repair-01/independent-review-02.json",
+      "sha256": "c723aa8df684140f1239da929bab759e10cb16f9edd156d8d017dc63c2bc9faa"
+    },
+    "independentBuildReview": {
+      "path": ".cache/vnc-owner-cleanup-repair-01/independent-build-review-02.json",
+      "sha256": "eda3b93df31468ee2dc437148e7bd2e7354786de776c9268ae2095e913df731a"
+    },
+    "independentEvidenceReview": {
+      "path": ".cache/vnc-owner-cleanup-repair-01/independent-evidence-review-02.json",
+      "sha256": "58906e6d3fa1a9ba3dfbb157ec69bfab5113a112e1e09fa69d70fcd671500328"
+    }
+  },
+  "actual": {
+    "originalAggregate": {
+      "path": ".cache/vnc-owner-cleanup-repair-01/build-01/result.json",
+      "sha256": "b9a682071475dc1d2414d214895b7fb13c3467f5e48d08b14ccf3d9dd227d4e1"
+    },
+    "originalAggregatePassed": false,
+    "originalFailure": "Post-build inspector counted directory entries as native/asset files; exact predicate inferred read-only from frozen program and archive maps, not a reported compiler trace.",
+    "gradle": {
+      "path": ".cache/vnc-owner-cleanup-repair-01/build-01/gradle.json",
+      "sha256": "ebd52aa6df1ac5acbf0405328fd1de3b7e5541fb4d1cc405c0cc203ad122ef0f"
+    },
+    "gradleLog": {
+      "path": ".cache/vnc-owner-cleanup-repair-01/build-01/gradle.log",
+      "sha256": "0ec8292fddfcee3e93a3287acf7388ad92dec20b543948a5fe3de75161bf9d43"
+    },
+    "gradleExitCode": 0,
+    "gradleDurationSeconds": 26.23463434894802,
+    "tasksExecuted": 72,
+    "tasksActionable": 72,
+    "actualJvmMethods": [
+      "createRejectionReleasesLeaseAndDisposesSecrets",
+      "deliberateStopReleasesBeforeCancelJoinFreeOffCallingThread",
+      "releaseTimeoutIsFiniteAndRetainedCleanupDoesNotReleaseTwice",
+      "stopDuringCreateRetainsThenJoinsAndWipesCredentials",
+      "joinTimeoutAndFreeRefusalNeverReleaseOwnerEarly",
+      "repeatedStopPreservesUncertaintyAndExplicitRetriesCoalesce",
+      "staleAndStoppedCallbacksCannotPublishOrRetainFrames",
+      "directPollAndQueuedStopShareOneCleanupAuthorization",
+      "invalidCredentialsAreWipedWithoutNativeAllocation",
+      "releaseWriteFailureStillCancelsAndDoesNotClaimAck"
+    ],
+    "jvmTests": 10,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "junit": {
+      "path": ".cache/vnc-owner-cleanup-repair-01/build-01/TEST-io.github.baitian6641.cloudy.desktop.vnc.VncEngineTest.xml",
+      "sha256": "72da56477cb0c11a06091e6d733f533e7fa15b497205ebe2c945423e171aa30c"
+    },
+    "lint": {
+      "debug": {
+        "path": ".cache/vnc-owner-cleanup-repair-01/build-01/lint-results-debug.xml",
+        "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f",
+        "issues": 0
+      },
+      "release": {
+        "path": ".cache/vnc-owner-cleanup-repair-01/build-01/lint-results-release.xml",
+        "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f",
+        "issues": 0
+      }
+    },
+    "inspectionFreeze": {
+      "path": ".cache/vnc-owner-cleanup-repair-01/inspection-02/freeze02.json",
+      "sha256": "942d8368fba71d0fd738b7fe3615de2010ee92c974062bd8526882fbf186c980"
+    },
+    "offlineInspection": {
+      "path": ".cache/vnc-owner-cleanup-repair-01/inspection-02/result02.json",
+      "sha256": "5cb4f68734d8e2a8d1e8257641038af803b2e99c92f84181ebffa88298363587"
+    },
+    "offlineInspectionPassed": true,
+    "firstOfflineInspectionPassed": false,
+    "firstOfflineInspectionFailure": "Separate 128MiB member cap refused inherited 139847680-byte OpenSSL source archive before payload comparison; preserved and replaced by exact frozen metadata bounds plus streaming.",
+    "syntheticZipControls": 3,
+    "gradleRerun": false,
+    "nativeRebuilt": false,
+    "deviceExecuted": false
+  },
+  "artifacts": {
+    "debug": {
+      "path": ".cache/vnc-owner-cleanup-repair-01/build-01/vnc-debug.aar",
+      "sha256": "25cd1f08dcc8610ca0cd1c8f3243c3aa72344f3bdf66c655a9cf242fc9566c43",
+      "bytes": 62693275,
+      "nativeFileHashes": {
+        "jni/arm64-v8a/libcloudy-vnc-jni.so": "702667cae3c54f550528a9d48c04e58619f868c702fc3931f9f44e406f254729",
+        "jni/arm64-v8a/libcrypto.so": "46c0eb8c3c601f3c9d8746e051aefe61e7a324bf152a535feac3f97472deb2d8",
+        "jni/arm64-v8a/libssl.so": "66288be31a05675f6a319632d6abb137eb38b07f10eea302a8b128bd6ed7d5c0"
+      },
+      "nativeDirectories": [
+        "jni/",
+        "jni/arm64-v8a/"
+      ],
+      "assetFileCount": 17,
+      "assetFileHashesUnchanged": true,
+      "assetDirectories": [
+        "assets/",
+        "assets/cloudy-vnc-notices/",
+        "assets/cloudy-vnc-notices/authored/"
+      ],
+      "classCount": 12,
+      "changedClasses": [
+        "io/github/baitian6641/cloudy/desktop/vnc/VncEngine$2.class",
+        "io/github/baitian6641/cloudy/desktop/vnc/VncEngine.class"
+      ],
+      "bridgeClassUnchanged": true
+    },
+    "release": {
+      "path": ".cache/vnc-owner-cleanup-repair-01/build-01/vnc-release.aar",
+      "sha256": "96158cdfb71c37e5154324d06426867a9095090f6c01d5082d0b4d106adc3022",
+      "bytes": 62692649,
+      "nativeFileHashes": {
+        "jni/arm64-v8a/libcloudy-vnc-jni.so": "702667cae3c54f550528a9d48c04e58619f868c702fc3931f9f44e406f254729",
+        "jni/arm64-v8a/libcrypto.so": "46c0eb8c3c601f3c9d8746e051aefe61e7a324bf152a535feac3f97472deb2d8",
+        "jni/arm64-v8a/libssl.so": "66288be31a05675f6a319632d6abb137eb38b07f10eea302a8b128bd6ed7d5c0"
+      },
+      "nativeDirectories": [
+        "jni/",
+        "jni/arm64-v8a/"
+      ],
+      "assetFileCount": 17,
+      "assetFileHashesUnchanged": true,
+      "assetDirectories": [
+        "assets/",
+        "assets/cloudy-vnc-notices/",
+        "assets/cloudy-vnc-notices/authored/"
+      ],
+      "classCount": 12,
+      "changedClasses": [
+        "io/github/baitian6641/cloudy/desktop/vnc/VncEngine$2.class",
+        "io/github/baitian6641/cloudy/desktop/vnc/VncEngine.class"
+      ],
+      "bridgeClassUnchanged": true
+    }
+  },
+  "buildScope": "IGNORED_SOURCE_SET_PROJECTION_ONLY",
+  "canonicalModuleVerifyNativeCompatible": false,
+  "limits": [
+    "Canonical broad-source verifyNative still refuses historical receipt after changed Java; explicit portable native-reuse route needs separate review before canonical/root adoption.",
+    "Library remains outside root graph and Desktop dependency; installed Console/Desktop0.1.15/code16 and their preserved-state authority are unchanged.",
+    "JVM backend/executor seams establish changed ordering invariants, not genuine forced JNI join/free uncertainty.",
+    "No wrapper device session, TLS/authentication/frame/input/UI/latency or release/license closure is qualified.",
+    "Historical AAR/native/build/result evidence remains immutable. No stage/capability promotion."
+  ]
+}
