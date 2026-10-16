@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Stage pinned Moonlight with owned identity, pairing and finite playback adapters."""
+"""Stage pinned Moonlight with owned identity, pairing, playback and catalog adapters."""
 
 import argparse
 import hashlib
@@ -18,6 +18,8 @@ CACHE = ROOT / ".cache/native-stream-android"
 WRAPPER = ROOT / "qualification/probes/device-baseline"
 PAIRING = ROOT / "qualification/probes/native-stream/pairing"
 PLAYBACK = ROOT / "qualification/probes/native-stream/playback"
+CATALOG = ROOT / "qualification/probes/native-stream/catalog"
+COMPATIBILITY = ROOT / "qualification/probes/native-stream/compatibility"
 REQUIRED_OVERLAYS = {
     "build.gradle", "settings.gradle", "gradle.properties", "gradle-wrapper.properties",
     "app/build.gradle", "app/lint-baseline.xml", "app/src/main/AndroidManifest.xml",
@@ -49,6 +51,8 @@ def inputs():
     paths.extend(path for path in sorted(OVERLAY.rglob("*")) if path.is_file())
     paths.extend(PAIRING / name for name in ("sources.lock.json", "finite-pairing.patch"))
     paths.extend(PLAYBACK / name for name in ("sources.lock.json", "finite-playback.patch"))
+    paths.extend(CATALOG / name for name in ("sources.lock.json", "finite-catalog.patch"))
+    paths.extend(COMPATIBILITY / name for name in ("sources.lock.json", "finite-compatibility.patch"))
     return {str(path.relative_to(ROOT)): native.read(path) for path in paths}
 
 
@@ -67,6 +71,18 @@ def apply_playback(files, source_inputs):
             or digest(source_inputs[required]) != dependency["sha256"]):
         raise ValueError("Playback prerequisite pairing patch changed")
     apply_overlay(files, source_inputs, PLAYBACK, "Playback")
+
+
+def apply_catalog(files, source_inputs):
+    """Keep the accepted transport overlays intact; catalog fixes consume their output."""
+    prefix = CATALOG.relative_to(ROOT).as_posix() + "/"
+    lock = json.loads(source_inputs[prefix + "sources.lock.json"])
+    required = PLAYBACK.relative_to(ROOT).as_posix() + "/finite-playback.patch"
+    dependency = lock["appliesAfter"]
+    if (dependency["path"] != required
+            or digest(source_inputs[required]) != dependency["sha256"]):
+        raise ValueError("Catalog prerequisite playback patch changed")
+    apply_overlay(files, source_inputs, CATALOG, "Catalog")
 
 
 def apply_overlay(files, source_inputs, directory, label):
@@ -104,6 +120,18 @@ def apply_overlay(files, source_inputs, directory, label):
         files.update(result)
 
 
+def apply_compatibility(files, source_inputs):
+    """Patch staged owned policy after copying it; preserve frozen historical inputs."""
+    prefix = COMPATIBILITY.relative_to(ROOT).as_posix() + "/"
+    lock = json.loads(source_inputs[prefix + "sources.lock.json"])
+    required = CATALOG.relative_to(ROOT).as_posix() + "/finite-catalog.patch"
+    dependency = lock["appliesAfter"]
+    if (dependency["path"] != required
+            or digest(source_inputs[required]) != dependency["sha256"]):
+        raise ValueError("Compatibility prerequisite catalog patch changed")
+    apply_overlay(files, source_inputs, COMPATIBILITY, "Compatibility")
+
+
 def expected_files(native_run, source_inputs):
     # The native verifier reconstructs these source bytes from the four exact
     # archives and checks its source/build inputs before Java packaging can start.
@@ -132,6 +160,8 @@ def expected_files(native_run, source_inputs):
             files["app/build/generated/cloudy/" + name] = native.read(native_run / "prepared" / name)
     apply_pairing(files, source_inputs)
     apply_playback(files, source_inputs)
+    apply_catalog(files, source_inputs)
+    apply_compatibility(files, source_inputs)
     return files, receipt
 
 

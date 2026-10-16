@@ -41,6 +41,7 @@ public final class VncSession implements VncBridge.Sink {
     private final AtomicLong resultSequence = new AtomicLong(), failedSequence = new AtomicLong();
     private volatile Runnable listener;
     private volatile VncSnapshot snapshot = new VncSnapshot("idle", "not-qualified", false, false, new long[6], 0, 0);
+    private volatile VncDiagnostics diagnostics = new VncDiagnostics();
     private volatile long handle;
     private volatile boolean admission, closed, stopRequested;
     private boolean stopping, cancelled, joined, started, freed, journalFailed;
@@ -83,13 +84,17 @@ public final class VncSession implements VncBridge.Sink {
             snapshot=new VncSnapshot("unavailable",JOURNAL_BLOCKED.get() ? "journal-blocked" : "another-owner",false,false,new long[6],0,0);
             notifyChanged(); return;
         }
+        final VncDiagnostics attemptDiagnostics=new VncDiagnostics();
+        attemptDiagnostics.mark(VncDiagnostics.Time.ACCEPTED,SystemClock.elapsedRealtime());
+        diagnostics=attemptDiagnostics;
         stopRequested=false;
-        snapshot = new VncSnapshot("starting", "none", true, false, new long[6], 0, 0);
+        snapshot = new VncSnapshot("starting", "worker-queued", true, false, new long[6], 0, 0);
         pendingFrame.set(null); bitmap = null; bitmapSequence=0; lastDrawn=0;
         notifyChanged();
         boolean queued=enqueue(() -> {
             try {
                 reset();
+                attemptDiagnostics.mark(VncDiagnostics.Time.WORKER,SystemClock.elapsedRealtime());
                 try { reserveJournal(username == null ? "load" : "session"); }
                 catch (Exception failure) { journalFailed=true; JOURNAL_BLOCKED.set(true); state="blocked"; detail="journal-failure"; throw failure; }
                 VncBridge.load();
@@ -98,12 +103,17 @@ public final class VncSession implements VncBridge.Sink {
                 if (Build.VERSION.SDK_INT>=37 && context.checkSelfPermission(Manifest.permission.ACCESS_LOCAL_NETWORK)!=PackageManager.PERMISSION_GRANTED) throw new SecurityException();
                 VncProfile profile = VncProfile.read(context);
                 try {
-                    handle = VncBridge.create(profile.id, profile.address, profile.port, profile.pin, username, password, profile.duration, this);
+                    handle = VncBridge.create(profile.id, profile.address, profile.port, profile.pin, username, password, profile.duration, new VncBridge.Sink() {
+                        // Captured attempt identity rejects callbacks after native address reuse.
+                        @Override public void onState(long id,int value,int error) { if (diagnostics==attemptDiagnostics) VncSession.this.onState(id,value,error); }
+                        @Override public void onFrame(long id,int width,int height,byte[] rgba) { if (diagnostics==attemptDiagnostics) VncSession.this.onFrame(id,width,height,rgba); }
+                        @Override public void onInputResult(long id,long sequence,boolean written) { if (diagnostics==attemptDiagnostics) VncSession.this.onInputResult(id,sequence,written); }
+                    });
                 } finally { wipe(profile.pin); wipe(username); wipe(password); }
                 if (handle == 0) throw new IllegalStateException();
                 deadline = SystemClock.elapsedRealtime() + profile.duration * 1000L;
                 if (closed || stopRequested) { stopping=true; reason="cancelled-before-start"; }
-                else { started = VncBridge.start(handle); if (!started) { stopping=true; reason="start-rejected"; } }
+                else { attemptDiagnostics.mark(VncDiagnostics.Time.NATIVE_START,SystemClock.elapsedRealtime()); started = VncBridge.start(handle); if (!started) { stopping=true; reason="start-rejected"; } }
                 state = started ? "connecting" : "closing";
                 persist(false); poll();
             } catch (Exception | LinkageError failure) {
@@ -124,7 +134,7 @@ public final class VncSession implements VncBridge.Sink {
         stopping=false; cancelled=false; joined=false; started=false; freed=false; journalFailed=false; journal=null; record=null;
         releaseSequence=0; deadline=0; releaseDeadline=0; resultSequence.set(0); failedSequence.set(0);
         initialized.set(false); callbackFrames.set(0); convertedFrames.set(0); drawnFrames.set(0); nativeStatus=new long[8];
-        state="starting"; detail="none"; reason="none"; releaseResult="none"; startElapsed=SystemClock.elapsedRealtime();
+        state="starting"; detail="none"; reason="none"; releaseResult="none"; startElapsed=diagnostics.time(VncDiagnostics.Time.ACCEPTED);
     }
     private void reserveJournal(String type) throws Exception {
         File directory = new File(context.getFilesDir(), "vnc-journal");
@@ -159,6 +169,13 @@ public final class VncSession implements VncBridge.Sink {
             record.put("convertedFrames",convertedFrames.get()); record.put("uniqueFrameDraws",drawnFrames.get());
             record.put("admittedInputs",nativeStatus[3]); record.put("completedInputs",nativeStatus[4]); record.put("successfulWrites",nativeStatus[5]);
             record.put("width",nativeStatus[6]); record.put("height",nativeStatus[7]); record.put("releaseResult",releaseResult);
+            JSONObject milestones=new JSONObject(), markers=new JSONObject();
+            for (VncDiagnostics.Time time:VncDiagnostics.Time.values()) {
+                long observed=diagnostics.time(time); milestones.put(time.name(),observed<0 ? JSONObject.NULL : observed);
+            }
+            for (VncDiagnostics.Marker marker:VncDiagnostics.Marker.values()) markers.put(marker.name(),diagnostics.countOf(marker));
+            record.put("startupElapsedRealtimeMillis",milestones).put("f8FrameView",markers)
+                    .put("f8WriteConfirmation","unavailable-no-per-key-sequence-correlation");
             out=atomic.startWrite(); out.write(record.toString().getBytes(StandardCharsets.UTF_8)); atomic.finishWrite(out);
         } catch (Exception error) {
             if (out != null) atomic.failWrite(out);
@@ -174,6 +191,7 @@ public final class VncSession implements VncBridge.Sink {
     public void hidden() { requestStop("not-visible"); }
     public void close() { closed=true; requestStop("destroyed"); }
     private void requestStop(String why) {
+        if (snapshot.busy) diagnostics.mark(VncDiagnostics.Time.STOP,SystemClock.elapsedRealtime());
         admission=false; stopRequested=true;
         if (owner.isShutdown()) return;
         enqueue(() -> guarded(() -> {
@@ -223,9 +241,10 @@ public final class VncSession implements VncBridge.Sink {
         if (terminal) { if (releaseSequence>0) { releaseResult="terminal-before-confirmation"; releaseSequence=0; } stopping=true; admission=false; if (reason.equals("none")) reason="native-terminal"; }
         if (stopping && VncLifetime.mayCancel(releaseSequence,now,releaseDeadline,terminal)) {
             admission=false;
-            if (!cancelled && !terminal) { persist(false); VncBridge.cancel(handle); cancelled=true; }
+            if (!cancelled && !terminal) { diagnostics.mark(VncDiagnostics.Time.STOP,SystemClock.elapsedRealtime()); persist(false); VncBridge.cancel(handle); cancelled=true; }
             if (terminal || cancelled || !started) {
                 if (VncBridge.join(handle,0)) {
+                    diagnostics.mark(VncDiagnostics.Time.JOINED,SystemClock.elapsedRealtime());
                     joined=true; nativeStatus=VncBridge.status(handle); state=nativeStatus[1]==0 ? "closed" : "native-terminal";
                     detail="native-error-"+nativeStatus[1]; persist(false);
                     if (!VncLifetime.mayFree(started,joined)) throw new IllegalStateException();
@@ -243,11 +262,12 @@ public final class VncSession implements VncBridge.Sink {
         }
         publish(true);
     }
+    public void marker(VncDiagnostics.Marker marker) { if (snapshot.busy) diagnostics.count(marker); }
     private void publish(boolean busy) {
-        snapshot=new VncSnapshot(journalFailed ? "blocked" : state,journalFailed ? "journal-failure" : detail,busy,handle!=0 && nativeStatus[0]==2 && !stopping,new long[]{callbackFrames.get(),convertedFrames.get(),drawnFrames.get(),nativeStatus[3],nativeStatus[4],nativeStatus[5]},(int)nativeStatus[6],(int)nativeStatus[7]);
+        snapshot=new VncSnapshot(journalFailed ? "blocked" : state,journalFailed ? "journal-failure" : busy && !stopping ? diagnostics.phase() : detail,busy,handle!=0 && nativeStatus[0]==2 && !stopping,new long[]{callbackFrames.get(),convertedFrames.get(),drawnFrames.get(),nativeStatus[3],nativeStatus[4],nativeStatus[5]},(int)nativeStatus[6],(int)nativeStatus[7]);
         notifyChanged();
     }
-    @Override public void onState(long id,int value,int error) { if (id==handle) { if (value==2) initialized.set(true); notifyChanged(); } }
+    @Override public void onState(long id,int value,int error) { if (id==handle) { if (value==2) { initialized.set(true); diagnostics.mark(VncDiagnostics.Time.CONNECTED,SystemClock.elapsedRealtime()); } notifyChanged(); } }
     @Override public void onInputResult(long id,long sequence,boolean written) {
         if (id!=handle) return;
         if (!written) failedSequence.accumulateAndGet(sequence,Math::max);
@@ -255,6 +275,7 @@ public final class VncSession implements VncBridge.Sink {
     }
     @Override public void onFrame(long id,int width,int height,byte[] rgba) {
         if (id!=handle || !VncFramePolicy.valid(width,height,rgba.length)) return;
+        diagnostics.mark(VncDiagnostics.Time.FRAME,SystemClock.elapsedRealtime());
         callbackFrames.incrementAndGet(); pendingFrame.set(new Frame(id,frameSequence.incrementAndGet(),width,height,rgba)); notifyChanged();
     }
     private void applyLatestFrame() {
@@ -264,13 +285,13 @@ public final class VncSession implements VncBridge.Sink {
             if (bitmap==null || bitmap.getWidth()!=frame.width || bitmap.getHeight()!=frame.height) bitmap=Bitmap.createBitmap(frame.width,frame.height,Bitmap.Config.ARGB_8888);
             int[] row=new int[frame.width];
             for (int y=0;y<frame.height;y++) { VncFramePolicy.row(frame.rgba,y*frame.width*4,row); bitmap.setPixels(row,0,frame.width,0,y,frame.width,1); }
-            bitmapSequence=frame.sequence; convertedFrames.incrementAndGet();
+            bitmapSequence=frame.sequence; convertedFrames.incrementAndGet(); diagnostics.mark(VncDiagnostics.Time.CONVERTED,SystemClock.elapsedRealtime());
         } catch (RuntimeException | OutOfMemoryError error) { requestStop("presentation-failure"); }
     }
     public boolean draw(Canvas canvas,RectF destination) {
         if (bitmap==null) return false;
         canvas.drawBitmap(bitmap,null,destination,null);
-        if (lastDrawn!=bitmapSequence) { lastDrawn=bitmapSequence; drawnFrames.incrementAndGet(); }
+        if (lastDrawn!=bitmapSequence) { lastDrawn=bitmapSequence; drawnFrames.incrementAndGet(); diagnostics.mark(VncDiagnostics.Time.DRAWN,SystemClock.elapsedRealtime()); }
         return true;
     }
     private static void wipe(byte[] value) { if (value!=null) Arrays.fill(value,(byte)0); }

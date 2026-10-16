@@ -43,3 +43,11 @@ Commit and push coherent reviewed, passing milestones promptly to the configured
 The primary test host is this Ubuntu 26.04/Wayland workstation, selected by the user. Windows remains a desired host lane; Parsec is an accepted temporary Windows access option. An unavailable Windows test host does not certify Windows support or block Linux qualification. The USB board/probe is still unspecified; do not infer it or perform programming operations without an identified target.
 
 **Desktop distribution decision D16:** the user selected open-source Cloudy Desktop with compatible licensing and required source, notices and build materials. Read `docs/adr/0010-desktop-open-source-distribution.md`. Do not re-ask that direction after context changes. Exact release license expression, dependency closure and source/notices/build obligations remain review work; Console retains independent terms and this is not a blanket repository license grant.
+
+## Recovery and evidence continuity
+
+On context recovery, follow `docs/05-delivery/execution-state.md` and its latest review before acting on historical “next step” text. Read actual Git/device/fixture state; old receipts establish their past run only. Keep one current summary, append dated history, and preserve frozen build/evidence artifacts. A review finding is not a completed repair.
+
+For interactive qualification, correlate app/version/build, process and operation/attempt with the user question. Keep one outstanding test question at a time; explicitly retire expired questions before another operation. An authentication callback or decoder/render counter does not override the user's report of no visible playback. Record uncorrelated replies as ambiguous without inventing what prompt or screen the user saw. The current streaming visual verdict is FAILED until a new identified run supplies actual visible-video evidence.
+
+A request for comprehensive review changes the immediate work order; it does not revoke already authorized implementation or introduce a new permission cycle. Complete and record the review before resuming its scoped follow-up. Preserve parent leadership, direct Codex GPT6.1-Sol workers, OMP Kimi K3 only, D12 reuse, stage reviews and timely reviewed Git checkpoints.

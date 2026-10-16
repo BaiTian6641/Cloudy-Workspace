@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "checkedOn": "2026-10-15",
-  "buildRef": "f1b74f98-3691-4399-8169-ffc4fb36ba99",
+  "buildRef": "478b0a46-2d02-4eeb-940b-e25e602f8aa1",
   "nativeBuildRef": "vnc-adapter-x509plain-2026-10-15",
   "nativeRun": "auth-idle-01",
   "nativeReceipt": {
@@ -10,8 +10,8 @@
   },
   "application": {
     "id": "dev.cloudy.qualification.vnc",
-    "versionName": "0.1.2",
-    "versionCode": 3,
+    "versionName": "0.1.3",
+    "versionCode": 4,
     "compileSdk": 37,
     "targetSdk": 37,
     "minSdk": 35,

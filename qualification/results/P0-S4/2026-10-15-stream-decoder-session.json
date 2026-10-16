@@ -1,0 +1,672 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-15",
+  "stage": "P0-S4",
+  "scope": "actual-bounded-decoder-session-visual-playback-failed",
+  "status": "native-decoder-progress-visual-playback-failed",
+  "application": {
+    "versionName": "0.1.9",
+    "versionCode": 10,
+    "buildRef": "a9159dd4-2b44-4fc4-9818-bbc5ba1876f5",
+    "nativeBuildRef": "f336e245-805d-4aad-bc1a-9208df8db318",
+    "apk": {
+      "path": ".cache/native-stream-android/compatibility-01/app/build/outputs/apk/debug/app-debug.apk",
+      "bytes": 24804371,
+      "sha256": "813fad6c49f3ffd08afbe5b1ffeabd834cbea0a271f9552db8f4f618c43631da"
+    },
+    "preparationNativeReceipt": {
+      "bytes": 88116,
+      "sha256": "dbb6035ba335dd39f41fdb0d4f672d5beda65710c2bbfb08dab063773944feae"
+    }
+  },
+  "device": {
+    "model": "HP Googlebook14",
+    "os": "Android17",
+    "api": 37,
+    "build": "CL3B.260622.276.R2"
+  },
+  "playback": {
+    "journal": {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/final-playback-journal-baf7357d-24d8-4c31-960a-047eb5f5b13b.json",
+      "bytes": 1768,
+      "sha256": "47d02fb2b574a3500d3277b0665f6a3de1dc4bacca7298b7e86c8c891126cfd9"
+    },
+    "status": "cancelled",
+    "cancelReason": "PAIRING_AUTH_DEADLINE",
+    "requestedAuthenticationMode": "DEVICE_CREDENTIAL",
+    "authenticationType": 1,
+    "authenticatedAtElapsedMillis": 108317679,
+    "observedElapsedMillis": 108347800,
+    "callbackToFinalObservationMillis": 30121,
+    "qualification": {
+      "securityLevel": "trusted-environment",
+      "authenticationHardwareEnforced": true,
+      "privateEncodingUnavailable": true,
+      "signVerified": true,
+      "keyBits": 2048,
+      "certificateBytes": 715,
+      "signatureBytes": 256,
+      "certificateSha256": "1746d903cbcfc803874fef80b5386cce453e8df18143816e634d4165f6fc901b"
+    },
+    "selectedApplicationId": 1773951989,
+    "closed": true,
+    "workerActionReturned": true,
+    "controllerRunReturned": true,
+    "surfaceDetached": true,
+    "surfaceReleased": true,
+    "result": {
+      "phase": "RETIRED",
+      "failure": "NONE",
+      "stopReason": "DEADLINE_OR_AUTHORIZATION",
+      "started": true,
+      "cleanupComplete": true,
+      "nativeStartResult": 0,
+      "terminationCode": 0,
+      "width": 1280,
+      "height": 720,
+      "format": 1,
+      "codecName": "c2.qti.avc.decoder.low_latency",
+      "hardwareReported": true,
+      "glRendererKnown": true,
+      "decodeUnitSubmissions": 1524,
+      "outputBuffersReleasedForRender": 1517,
+      "frameRenderedCallbacks": 1517,
+      "httpCalls": 2,
+      "httpBytes": 719,
+      "stageCallbacks": 22
+    }
+  },
+  "catalogs": [
+    {
+      "journal": {
+        "path": "qualification/results/private/native-stream/2026-10-15-playback-02/final-catalog-journal-85d9f9c4-17dd-412f-b23c-ffb66bdbbc7a.json",
+        "bytes": 1119,
+        "sha256": "a83bacbc98499261eb469565c544086750139d1087e5ae86bac8fee4b270af57"
+      },
+      "status": "completed",
+      "failureCode": null,
+      "failureAt": "CREATED",
+      "authenticationType": 1,
+      "callbackToObservationMillis": 160,
+      "applications": 1,
+      "bytes": 180,
+      "httpCalls": 1,
+      "closed": true
+    },
+    {
+      "journal": {
+        "path": "qualification/results/private/native-stream/2026-10-15-playback-02/final-catalog-journal-39fa3170-6ca3-465a-8fc7-febef0fa397f.json",
+        "bytes": 1119,
+        "sha256": "995ced861ec55ad6f45a51dcdc60cec291253a0b28878c1c0830cf53a67a8706"
+      },
+      "status": "completed",
+      "failureCode": null,
+      "failureAt": "CREATED",
+      "authenticationType": 1,
+      "callbackToObservationMillis": 138,
+      "applications": 1,
+      "bytes": 180,
+      "httpCalls": 1,
+      "closed": true
+    },
+    {
+      "journal": {
+        "path": "qualification/results/private/native-stream/2026-10-15-playback-02/final-catalog-journal-5216c1be-0e60-4c0b-a3a2-eaca0325af6d.json",
+        "bytes": 1119,
+        "sha256": "e4227775bf9ed5ad8f0fbee84436e7a3b26032e3f3d182dfc45ccdb1fdd38d89"
+      },
+      "status": "completed",
+      "failureCode": null,
+      "failureAt": "CREATED",
+      "authenticationType": 1,
+      "callbackToObservationMillis": 88,
+      "applications": 1,
+      "bytes": 180,
+      "httpCalls": 1,
+      "closed": true
+    },
+    {
+      "journal": {
+        "path": "qualification/results/private/native-stream/2026-10-15-playback-02/final-catalog-journal-35731d11-c56c-4226-8d1c-2dfcb276538d.json",
+        "bytes": 1054,
+        "sha256": "a05e376fb6a2127a11d129a93a9d4f6b99dde23cfed69fc8fff1cbc48307a92d"
+      },
+      "status": "failed",
+      "failureCode": "IOException",
+      "failureAt": "CLIENT_TLS",
+      "authenticationType": 1,
+      "callbackToObservationMillis": 189,
+      "applications": 0,
+      "bytes": 0,
+      "httpCalls": 1,
+      "closed": true
+    },
+    {
+      "journal": {
+        "path": "qualification/results/private/native-stream/2026-10-15-playback-02/final-catalog-journal-decc0004-e0f3-4298-a6c9-900010c09825.json",
+        "bytes": 1054,
+        "sha256": "a2ef7d67b795968ee5e59498cece5dfd22422f3fc2c1ef6607dadeed50f6994b"
+      },
+      "status": "failed",
+      "failureCode": "IOException",
+      "failureAt": "CLIENT_TLS",
+      "authenticationType": 1,
+      "callbackToObservationMillis": 128,
+      "applications": 0,
+      "bytes": 0,
+      "httpCalls": 1,
+      "closed": true
+    }
+  ],
+  "catalogFailureInterpretation": "Two later CLIENT_TLS IOException results are consistent with closed finite host fixture; no synchronized cross-clock causal proof and no local identity regression established",
+  "userReports": [
+    "Authenticated, but still no moving video",
+    "no, no password pop0up, no changes",
+    "no playback"
+  ],
+  "userReportCorrelation": "Latest prior description cannot be assigned to a specific click; final explicit no playback verdict is FAILED visual playback, and click ambiguity does not explain or qualify the failure",
+  "visualEvidence": {
+    "passed": false,
+    "activeSessionLayoutRetained": false,
+    "beforePromptTextureViewPresent": true,
+    "finalTextureAbsence": "Expected after actual retirement/release; not proof of hidden active preview",
+    "laterNoChangePossibleGuardExplanation": "One-play-per-process/restart-required possible but unproven",
+    "verdict": "FAILED per explicit final user report"
+  },
+  "preservation": {
+    "verifiedPriorRecords": 15,
+    "verifiedFinalRecords": 22,
+    "finalCounts": {
+      "files/native-load": 1,
+      "no_backup/identity-journal": 12,
+      "no_backup/pairing-journal": 1,
+      "no_backup/catalog-journal": 6,
+      "no_backup/playback-journal": 2
+    },
+    "allNetworkRecordsClosed": true
+  },
+  "cleanup": {
+    "appStopped": true,
+    "temporaryPublicProfileRemoved": true,
+    "adbReverseAdded": false,
+    "hostCleaned": true,
+    "sunshineExitCode": 0,
+    "canvasExitCode": 0,
+    "allSevenPortsReleased": true,
+    "desktopPermissionCacheCleanupExitCode": 0,
+    "hostIdentityUnchanged": true,
+    "errors": []
+  },
+  "frozenAndroidInputs": {
+    "tools/prepare_stream_android.py": {
+      "bytes": 13243,
+      "sha256": "bd52975933a4b0cf55f3e85bca1b4c4e62e711bfc11aca1dd69102b55bbf7302"
+    },
+    "qualification/probes/device-baseline/gradlew": {
+      "bytes": 8656,
+      "sha256": "a5a5c199ba02189ae8c46a334223371a20599d9c298ef65e7540ede4a3f72d59"
+    },
+    "qualification/probes/device-baseline/gradle/wrapper/gradle-wrapper.jar": {
+      "bytes": 48462,
+      "sha256": "497c8c2a7e5031f6aa847f88104aa80a93532ec32ee17bdb8d1d2f67a194a9c7"
+    },
+    "qualification/probes/native-stream/android/app/build.gradle": {
+      "bytes": 3986,
+      "sha256": "b0bbf93aa6010d4b78343cb635def492f78b81de33c4c614543f6a5b97d95a06"
+    },
+    "qualification/probes/native-stream/android/app/lint-baseline.xml": {
+      "bytes": 11299,
+      "sha256": "8b7b1ae58e2ca3719515263eb7c8712ed61dbde84a25551e55b32c5c1817b9c0"
+    },
+    "qualification/probes/native-stream/android/app/src/main/AndroidManifest.xml": {
+      "bytes": 1902,
+      "sha256": "4553c13af9127e3042085d6c05375de87d0e74210609cdc0c36d276300c75ab7"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/CatalogController.java": {
+      "bytes": 6140,
+      "sha256": "082e45485e9efca9cd1c532c796c1f244375005d5457aee2004d38807a913688"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/CatalogEntry.java": {
+      "bytes": 418,
+      "sha256": "4c7db9bad0041fd205c521192abca9dcd037088d8228b47758bb8d9b66c358c2"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/CatalogLease.java": {
+      "bytes": 1598,
+      "sha256": "49d25f68b8ae24cbf767ecce1f6be27a25979cf5b9e117e73858104a4b7ab7e1"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/CatalogPeerProfile.java": {
+      "bytes": 4478,
+      "sha256": "02f6610ebd489016b3672a695b2589f667f84a4098bc7e096e553d9b45c30d7c"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/CatalogPolicy.java": {
+      "bytes": 1691,
+      "sha256": "c95f658c33064d3f4d7dd7a1f2c96d35914c0cce40f23d74ceb0a17191566b1a"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/NetworkEvidenceStore.java": {
+      "bytes": 6212,
+      "sha256": "89e1d340eb7aaa30e94dd447180b33cd1cead7f45d67009af85eb47efb5619a7"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/NetworkJournalPolicy.java": {
+      "bytes": 449,
+      "sha256": "117c372972a545638a05e7075b220c2248b0567c03ec2b4a7fd7ce48d4e43eb2"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/PairingPinPolicy.java": {
+      "bytes": 694,
+      "sha256": "80939358dfc6cb02efc17015fb12ea78e58062d959e44a731ac93674467b46fc"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/PairingProfile.java": {
+      "bytes": 2986,
+      "sha256": "ad0a5f566586a27cb485e3c2c5597324fe51e1a48826f194cde3253ddd01080a"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/PlaybackCompletionPolicy.java": {
+      "bytes": 865,
+      "sha256": "082a7beb339d027c63bbb38fd1769655de5d378bd8117b625c0dfe563e0ce526"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/PlaybackProfileFile.java": {
+      "bytes": 2874,
+      "sha256": "7bef1283758df6d6d9fa08f6b679c61f1b9e10231ba0e7b3a998b12ef8b534a8"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/PlaybackSurfaceOwner.java": {
+      "bytes": 2203,
+      "sha256": "66815b9eec032133adc5244cb91703270a36201f52821f0d0722108576a16463"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/StreamOperationLease.java": {
+      "bytes": 624,
+      "sha256": "3dc59c6d8e89be4e51f16bbca3196ed7bef300a3b0fbe80aa3a3f6ab7f3356d9"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/StreamProbeActivity.java": {
+      "bytes": 15651,
+      "sha256": "66247d8c969aafb414349ba1638d3a2eab82e1548def28bedcfd1de450d31403"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/StreamProbeViewModel.java": {
+      "bytes": 48994,
+      "sha256": "0a8aa75a9f85a7590b493a6b5f04a56407da7520fcb38c925788306c25623e49"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/identity/IdentityAuthorization.java": {
+      "bytes": 922,
+      "sha256": "0f9f65c6f494fae3a4c2bfef166ff43abc2b6df6045b001fee76f77f2619d003"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/identity/StreamIdentityStore.java": {
+      "bytes": 35309,
+      "sha256": "be19ddd21f841acd8353065fdffe538aec0d22e0af4647b58cddd25368d8579c"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/pairing/AttemptLease.java": {
+      "bytes": 1606,
+      "sha256": "b63166585504daea630aadf5e3c8b0ad5fade6237664902286c4e04bcca2b61e"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/pairing/LeafPolicy.java": {
+      "bytes": 1154,
+      "sha256": "bf8e426ec6e276f7edbc93e79f701a00366b0254dcad5a61ee7c3c0f6e22122b"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/pairing/PairingController.java": {
+      "bytes": 8423,
+      "sha256": "9e56c1071df5281440fd6b0018bb816ad3dcef5bf2b26c1fe06daecb65630c1e"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/playback/GlRendererProbe.java": {
+      "bytes": 2724,
+      "sha256": "560516509ace080f14f59a9ca162226eab24b79b853948d1c53b1ac3ef91b875"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/playback/PlaybackController.java": {
+      "bytes": 16052,
+      "sha256": "6ba0c1bae246a3f9cae387c5acbc7f63d84341a42083a9e9d316d2138477a33a"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/playback/PlaybackLease.java": {
+      "bytes": 1269,
+      "sha256": "43ad352d14a8c072402ff9f7a59daef588743226a26e324b3dbc63ac7bf437a2"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/playback/PlaybackOwnership.java": {
+      "bytes": 515,
+      "sha256": "b789fbb58630d47ca4dcc761ae4c47ef8b84fc7d6dc0bd2cde2a4de10a325830"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/playback/PlaybackPolicy.java": {
+      "bytes": 1722,
+      "sha256": "a9740afde71a561e5bef475d9b2e988bb549b0ee539669c8618c2583970ad11d"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/playback/PlaybackProcessLease.java": {
+      "bytes": 619,
+      "sha256": "141d68f80262ec7112333adc93faad7a076eb3c51e37e4ed668bc90ae6ff47e3"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/playback/PlaybackProfile.java": {
+      "bytes": 3542,
+      "sha256": "063b914a27df0a694032fb8e38dc54222ae4157b9795c3193fc1e4e6fc2ec812"
+    },
+    "qualification/probes/native-stream/android/app/src/main/res/drawable/cloudy_stream_icon.xml": {
+      "bytes": 347,
+      "sha256": "99fff10d938a1361f5ecab8672e186d42923095d3d4c550a0774d305b4056cdc"
+    },
+    "qualification/probes/native-stream/android/app/src/main/res/values/cloudy_strings.xml": {
+      "bytes": 9327,
+      "sha256": "5f4a2960da4833821fa4194e25b344fd69ac111157849b8596b8521e3791c7c3"
+    },
+    "qualification/probes/native-stream/android/app/src/main/res/xml/cloudy_backup.xml": {
+      "bytes": 339,
+      "sha256": "f3e864f6856a75a8d52d8de359041e941ff09a8999ad24fb0af31889ca22ecf1"
+    },
+    "qualification/probes/native-stream/android/app/src/main/res/xml/cloudy_extraction.xml": {
+      "bytes": 717,
+      "sha256": "ca0f7c537fddf4413f256872b327a983b3de2a40aae71d7e0444468814e905ce"
+    },
+    "qualification/probes/native-stream/android/app/src/main/res/xml/cloudy_network_security.xml": {
+      "bytes": 452,
+      "sha256": "6c91d8321a5e1a33f52d96a2c963a6010492f759a66629e682632b20072c1164"
+    },
+    "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/CatalogParserTest.java": {
+      "bytes": 1653,
+      "sha256": "02ccce422f6d402f5ca89e8b1b942145511a79bad22154262dda9c1f4c3d37ea"
+    },
+    "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/CatalogPolicyTest.java": {
+      "bytes": 2965,
+      "sha256": "ecc4ac8cd5f1665308ae9771690baeb36074c7c010476189457735b2dea994db"
+    },
+    "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/NetworkJournalPolicyTest.java": {
+      "bytes": 1007,
+      "sha256": "79ac894e8d24aae23600e45b2e196c2e3652853fa59312ba48012a598f327327"
+    },
+    "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/PairingPoliciesTest.java": {
+      "bytes": 2215,
+      "sha256": "176bd0206eb5214e29b1c470ff6df251bd643de03225e2a69d916d4716b39b89"
+    },
+    "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/PlaybackOwnershipTest.java": {
+      "bytes": 2201,
+      "sha256": "47a4a8261362056202aaae632acffc4b3d5e492c2e9af89fa40281ef2c8d06c2"
+    },
+    "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/PromptModeTest.java": {
+      "bytes": 1180,
+      "sha256": "9203404a754aa3dd1ceac88531919079708e59c1344c536a4be6088c0b49ebcb"
+    },
+    "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/ServerVersionCompatibilityTest.java": {
+      "bytes": 1923,
+      "sha256": "967a0e2f46c25ed64414b106d2d11a63713852fb916f687d1963db00c589640d"
+    },
+    "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/identity/IdentityAuthorizationTest.java": {
+      "bytes": 1553,
+      "sha256": "3f99b2488aebd4ab5bbafe01a2e33b9b66a73718ab8d7349069b7682260e9533"
+    },
+    "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/pairing/AttemptLeaseTest.java": {
+      "bytes": 2797,
+      "sha256": "8031ee8e8a08dd4fcbf6fbde892ef0f88e7e9fd1faf1443d9d74095c13bcb558"
+    },
+    "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/pairing/LeafPolicyTest.java": {
+      "bytes": 2804,
+      "sha256": "df8efb136c0fda7766a757256ba508cfe847058af9cff6eceae23038d2a0337c"
+    },
+    "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/playback/PlaybackPolicyTest.java": {
+      "bytes": 5205,
+      "sha256": "9090308be4673e75d1d9f3072053b45fc1f1563fdad4e5b2cda79061d5ff260f"
+    },
+    "qualification/probes/native-stream/android/build.gradle": {
+      "bytes": 69,
+      "sha256": "0537c547218629772f95b8cc26803dfeca0e85b6d7ace78f42fd4af02dfc1162"
+    },
+    "qualification/probes/native-stream/android/gradle-wrapper.properties": {
+      "bytes": 289,
+      "sha256": "b28a17a308d55eba57bf91da1ca265262d12c101ebe663fe7f12180b4f607a92"
+    },
+    "qualification/probes/native-stream/android/gradle.properties": {
+      "bytes": 101,
+      "sha256": "09543e46125c3e44e3495c53f75244a701b23ce9a0e36c56bd00962a3745eea1"
+    },
+    "qualification/probes/native-stream/android/settings.gradle": {
+      "bytes": 335,
+      "sha256": "d5b284112da08ea05283b9d55353280dce968c8094f467b91fe0e957ea83d25f"
+    },
+    "qualification/probes/native-stream/pairing/sources.lock.json": {
+      "bytes": 2081,
+      "sha256": "a5ea4328a3543b355378866b5702ae76a19b4722b2616222c3cbf7861308e73b"
+    },
+    "qualification/probes/native-stream/pairing/finite-pairing.patch": {
+      "bytes": 11586,
+      "sha256": "45516825cfaa6832264d4d0b6ead822947d70b95f7e939c1135fbd4145358531"
+    },
+    "qualification/probes/native-stream/playback/sources.lock.json": {
+      "bytes": 3297,
+      "sha256": "68edc2774a31c355bdac8d95388b1f0a44cb54c4b2950f02d204fac02d88de3a"
+    },
+    "qualification/probes/native-stream/playback/finite-playback.patch": {
+      "bytes": 14916,
+      "sha256": "8daab24501c8eeb6e2794e1a45e92b846ed0b3291454cb506af539aa51beeb5a"
+    },
+    "qualification/probes/native-stream/catalog/sources.lock.json": {
+      "bytes": 2448,
+      "sha256": "9c50bee01953ff71b8b0e1e0986ee16265e9770349a712956901454e1fa2acce"
+    },
+    "qualification/probes/native-stream/catalog/finite-catalog.patch": {
+      "bytes": 1198,
+      "sha256": "b1c61382d861a10da034dc041f2ef0a47b9df43838fb2e6295c72fec90885548"
+    },
+    "qualification/probes/native-stream/compatibility/sources.lock.json": {
+      "bytes": 1124,
+      "sha256": "730f7a707efdb706a4c38d5cf528cb533b7653ba682941c64731fc6c96eaab5b"
+    },
+    "qualification/probes/native-stream/compatibility/finite-compatibility.patch": {
+      "bytes": 1003,
+      "sha256": "09df054979d1f07131234bc894461d961a93d56bd91af775c6a352b8bc1f3149"
+    }
+  },
+  "audit": {
+    "path": ".cache/native-stream-android/compatibility-audit-01/apk-audit.json",
+    "bytes": 16065,
+    "sha256": "c034c0a5d89571a75ff4ce7a3fc7cf9eff2fdb9262b35f244492e9f98c5ff37f"
+  },
+  "evidence": [
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/cleanup.json",
+      "bytes": 403,
+      "sha256": "38aa8f35e6d4deaa8849959e7561cdc15c52aaa7b8d5ffcb1665369e79f37803"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/final-journal-manifest.json",
+      "bytes": 5770,
+      "sha256": "7c49c3df0ef12bd74776fd4e1019fafff4736b489843cb1987afe91e5ad4cf29"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/prior-journal-manifest.json",
+      "bytes": 2695,
+      "sha256": "243cb74d58ab4b5f6926524044b88b7db9a3fa795c388a1b4787007c95bbb911"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/installed-package-command.json",
+      "bytes": 6295,
+      "sha256": "93af063308f759fce3cc3be7d0c6548de201a92277703f4a5d6bd23528ee7083"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/identity-api-command.json",
+      "bytes": 299,
+      "sha256": "5d1af4fbb1f03a65a9eae2e454090a96031544928f25b96d11ef98f6244fbbc8"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/identity-build-command.json",
+      "bytes": 306,
+      "sha256": "1301b3a19c24f3392c422952436921223964b70356dc49fb93abbd13998349d6"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/final-force-stop-command.json",
+      "bytes": 51,
+      "sha256": "82ba84932a5e33382a24576f4e975d46304907c3ea97780daa0f791e4124209c"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/final-stopped-command.json",
+      "bytes": 51,
+      "sha256": "afe848e22cecdf427e44bde909a797345997412d2cfc07d8662cb15eefc38344"
+    },
+    {
+      "path": ".cache/native-stream-android/compatibility-audit-01/apk-audit.json",
+      "bytes": 16065,
+      "sha256": "c034c0a5d89571a75ff4ce7a3fc7cf9eff2fdb9262b35f244492e9f98c5ff37f"
+    },
+    {
+      "path": ".cache/native-stream-android/compatibility-01/cloudy-preparation.json",
+      "bytes": 134585,
+      "sha256": "eb27fdb45841977e2e2dd91c06d4e4236fe1b21e3290566ce30186f416db3599"
+    },
+    {
+      "path": ".cache/native-stream-host/media-02/result.json",
+      "bytes": 1903,
+      "sha256": "49d41d53489b6d062018c34fd3be7b903832a597b9c1da4b85b69ae77dc22683"
+    },
+    {
+      "path": ".cache/native-stream-host/media-02/canvas/events.jsonl",
+      "bytes": 38122,
+      "sha256": "130e914f233d3292b756b7bd4165f6918d4cd4d04fef27428af1e9668c8a861b"
+    },
+    {
+      "path": ".cache/native-stream-host/media-02/processes.json",
+      "bytes": 111,
+      "sha256": "e5c8beda13ed554e6f12ffa2e7b398f82c709df5dc211256325fd4a3f9788e78"
+    },
+    {
+      "path": ".cache/native-stream-host/preflight-02/squashfs-root/usr/bin/sunshine",
+      "bytes": 27596969,
+      "sha256": "6946d8ac8bb0e99da1e51b374029c8b24dcabb315265a0e7004d046eb6f143fd"
+    },
+    {
+      "path": ".cache/native-vnc-host/canvas-03/vnc_input_target",
+      "bytes": 198376,
+      "sha256": "e8a7d269d39e4cbf04da327719c3c68b770a4df86f26aeb7f45d752c76d260be"
+    },
+    {
+      "path": ".cache/native-vnc-host/canvas-03/build.json",
+      "bytes": 963,
+      "sha256": "0c0056ed2ed38dc7267b0ad46465e474d114b4b4634e1b490550ea7564e8dad9"
+    },
+    {
+      "path": ".cache/native-stream-build/entry-02/receipt.json",
+      "bytes": 88116,
+      "sha256": "dbb6035ba335dd39f41fdb0d4f672d5beda65710c2bbfb08dab063773944feae"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/final-native-load-c90e90d1-01c8-4b9c-bf09-97f549a10e83.json",
+      "bytes": 340,
+      "sha256": "d9a1c951db91573315d9eb383f5658a34d06301f0c023af8411887bf405b560a"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/final-identity-journal-010a6d3e-98ef-4d39-bd64-fa00f3423e17.json",
+      "bytes": 593,
+      "sha256": "2511f9b15f8275c94bb85462c86bd9a52b04fc6abb2e34aa7e56c05383d8a3c5"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/final-identity-journal-150e8d85-1228-49a5-9d63-635d0cb3f785.json",
+      "bytes": 463,
+      "sha256": "7fa97ba88533c416c06157345515701fe0ee2f2b449ebae63219685e5f78ad48"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/final-identity-journal-2e8e351e-034a-4b61-8f88-30ba90eb1da2.json",
+      "bytes": 504,
+      "sha256": "b2e73355678e8590860b4899743f5714519853164fea780f29ab3baee7d410b5"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/final-identity-journal-35dd6a14-f25c-4441-913f-148460e8af61.json",
+      "bytes": 461,
+      "sha256": "5af9ea8afb63114225764a0ae69a63637cf41733fe73b5913735f4226c7e22e5"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/final-identity-journal-73b19fae-e0d7-4dd9-ba59-6162722b7a79.json",
+      "bytes": 491,
+      "sha256": "bbb7ea0b0457609fe74ebd0afc34039a93228cde4ad58da99ae74da5fa5515d8"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/final-identity-journal-9e063191-a64a-4ae9-87ba-07588c170da4.json",
+      "bytes": 463,
+      "sha256": "4cfb2b1a7050098c3a2a61ef796aca3f2e4530418235ed4222dbae7f1833af4c"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/final-identity-journal-ae4ca729-aff4-4d94-8c4f-c1187f33df7f.json",
+      "bytes": 441,
+      "sha256": "cb5f6609b5a0fe9a217f4a7d3b5986ba90dc00b453f11c0910381448fb06fd91"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/final-identity-journal-b9fb9469-eb7a-43bd-90bf-7be3da286c76.json",
+      "bytes": 491,
+      "sha256": "2e999def95ff5883b2aa2dd6f113ccad22c9af10d63b111f4c840656b0a1c004"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/final-identity-journal-ba0e4ace-6f32-4cf2-9e86-06b8c7129912.json",
+      "bytes": 491,
+      "sha256": "eee2e4b8a7b72901de2876c88350b533380995d401d6336d36940de0083c9a52"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/final-identity-journal-bf3c4941-d2cb-45f4-99f8-c98a3a6ac5d9.json",
+      "bytes": 927,
+      "sha256": "90e8e446717e8076e3425e5084c10a5932b6c0d442d565651fec1ac3ee96a2c2"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/final-identity-journal-edefabe3-d87e-4e7e-b6c9-311d3c1f0b97.json",
+      "bytes": 429,
+      "sha256": "afee1053ae26c06f45a1c73eff49b35edcaad1950753949292bae2665847a876"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/final-identity-journal-f49aed16-dc9a-4603-be91-8ac593e79506.json",
+      "bytes": 491,
+      "sha256": "219fda1466a4d015e6dc993630d6720bf599c5fb56676a38c2656f2dd01c04e7"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/final-pairing-journal-945e8271-0120-48c3-b486-dd12c48ec5a0.json",
+      "bytes": 1063,
+      "sha256": "cf7067e6a6c5d6cc0554f1763c4e8b64eba0f3c835a2f88a984db04a545807c2"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/final-catalog-journal-35731d11-c56c-4226-8d1c-2dfcb276538d.json",
+      "bytes": 1054,
+      "sha256": "a05e376fb6a2127a11d129a93a9d4f6b99dde23cfed69fc8fff1cbc48307a92d"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/final-catalog-journal-39fa3170-6ca3-465a-8fc7-febef0fa397f.json",
+      "bytes": 1119,
+      "sha256": "995ced861ec55ad6f45a51dcdc60cec291253a0b28878c1c0830cf53a67a8706"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/final-catalog-journal-5216c1be-0e60-4c0b-a3a2-eaca0325af6d.json",
+      "bytes": 1119,
+      "sha256": "e4227775bf9ed5ad8f0fbee84436e7a3b26032e3f3d182dfc45ccdb1fdd38d89"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/final-catalog-journal-85d9f9c4-17dd-412f-b23c-ffb66bdbbc7a.json",
+      "bytes": 1119,
+      "sha256": "a83bacbc98499261eb469565c544086750139d1087e5ae86bac8fee4b270af57"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/final-catalog-journal-decc0004-e0f3-4298-a6c9-900010c09825.json",
+      "bytes": 1054,
+      "sha256": "a2ef7d67b795968ee5e59498cece5dfd22422f3fc2c1ef6607dadeed50f6994b"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/final-catalog-journal-fcc7e5d7-0b60-4582-b238-911cc0fd9999.json",
+      "bytes": 1119,
+      "sha256": "161b95a00b038e76278d1adcb6d4f7cece3f643e14f46fba848e8a335381acae"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/final-playback-journal-baf7357d-24d8-4c31-960a-047eb5f5b13b.json",
+      "bytes": 1768,
+      "sha256": "47d02fb2b574a3500d3277b0665f6a3de1dc4bacca7298b7e86c8c891126cfd9"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/final-playback-journal-d572ea58-f04a-491d-b44c-600bd69b95fd.json",
+      "bytes": 1719,
+      "sha256": "9b8e5164beb58e0ed2b3236d56f62b2a6b3a64f73dfa79b56685067abaed55e3"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/terminal-preview-01-layout.json",
+      "bytes": 26263,
+      "sha256": "91368246479a20d04bdfdf312899748324b1aefe832730a7debe31834b4fe4ce"
+    },
+    {
+      "path": "qualification/results/private/native-stream/2026-10-15-playback-02/before-playback-start-01-layout.json",
+      "bytes": 25377,
+      "sha256": "71f51b8faaef5fb7125efbe99c7f25174452496e643d29ac281c75efdf490682"
+    }
+  ],
+  "limitations": [
+    "Decoder submissions/render callbacks are not verified visible moving video or photon timing",
+    "HardwareReported is not a measured hardware performance pass",
+    "No audio/input/latency/3D/CAP-STREAM pass",
+    "Approximately30s authorization deadline plus cleanup overhead is not automatic authorization extension",
+    "No hidden-preview or latest-click cause proven",
+    "Worker documentation-only; no new source/build/device/host/Git operation"
+  ],
+  "report": {
+    "path": "qualification/results/P0-S4/2026-10-15-stream-decoder-session.md",
+    "bytes": 6143,
+    "sha256": "7a8215dddfe802dc003d1fd3366ae6d21cb3c63b2df49b135deb914902febbaa"
+  },
+  "followupAuthority": "Complete the requested comprehensive review before resuming the existing authorized scope; no automatic replay or new approval gate solely because review occurred."
+}

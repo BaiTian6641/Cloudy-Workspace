@@ -543,3 +543,16 @@ The [pinned source review](../03-platform/googlebook/native-x11-engine-entry.md)
 - **G153** — [Android codec hardware acceleration metadata](https://developer.android.com/reference/android/media/MediaCodecInfo#isHardwareAccelerated()): API29 isHardwareAccelerated is manufacturer-supplied metadata, not measured performance; retain actual codec identity and hardwareReported separately from physical qualification. API17/API47/P0-S4.
 
 - **R243** — [AOSP Android EGL display ownership](https://android.googlesource.com/platform/frameworks/native/+/refs/heads/main/opengl/libs/EGL/egl_display.cpp): Android-specific initialize/terminate reference counting supports the balanced metadata query; moving source is not exact vendor runtime proof or a portable EGL guarantee. API47/P0-S4.
+
+## Controlled catalog and first-media fixture references
+
+- **R246** — [Qt output selection and fullscreen](https://doc.qt.io/qt-6/qwindow.html#setScreen): public `QWindow::setScreen`, `screen` and `showFullScreen`; current docs6.12, compiled host6.9.2. Exact output matching and fullscreen requests do not certify unoccluded or private capture.
+- **R247** — [Qt screen name](https://doc.qt.io/qt-6/qscreen.html#name-prop): `QScreen::name` identifies the exact platform output; missing/duplicate match fails the fixture.
+- **R248** — [Pinned Sunshine audio capture switch](https://github.com/LizardByte/Sunshine/blob/v2026.914.233613/src/audio.cpp#L146-L151): disabling `stream_audio` waits for shutdown without host audio capture. First-video testing uses this real configuration and makes no audio pass claim.
+
+The [catalog build](../../qualification/results/P0-S4/2026-10-15-stream-catalog-build.md) uses the already registered R211 `NvHTTP.getAppListRaw` on a positive explicit HTTPS port, with a narrow quiet-parser overlay. The [VNC timing build](../../qualification/results/P0-S4/2026-10-15-vnc-timing-build.md) records actual same-clock milestones and marker gates; runtime attribution remains separate.
+
+- **R249** — [Sunshine version sentinel](https://github.com/LizardByte/Sunshine/blob/63d35f702ee9e362e43263742981836ec0710384/src/nvhttp.h#L30-L40): the pinned host intentionally reports application version `7.1.431.-1`; its GFE version is unsigned `3.23.0.74`.
+- **R250** — [Moonlight signed version parser](https://github.com/moonlight-stream/moonlight-common-c/blob/874ac9548f1bd6f095ef2b435c42cdde460e7821/src/Misc.c#L87-L103): native `extractVersionQuad` uses signed `strtol`; the prior owned unsigned-only guard was corrected by the separate0.1.9 overlay. The failed runtime branch is inferred because that attempt retained a generic START classification.
+
+- **G154** — [Android TextureView presentation contract](https://developer.android.com/reference/android/view/TextureView): reviewed API14 hardware-window and clipping boundary; bounded presentation observations proposed after the failed0.1.9 visual test, not a runtime pass.

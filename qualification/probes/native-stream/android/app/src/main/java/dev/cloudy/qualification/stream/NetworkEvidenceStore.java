@@ -46,10 +46,10 @@ final class NetworkEvidenceStore {
             if (!"RECONCILE".equals(json.getString("operation"))) throw new IOException();
             if (!"completed".equals(json.getString("status"))) continue;
             if (!"UNKNOWN".equals(json.getString("hostState")) || json.getBoolean("networkReplayed") || !json.getBoolean("localProcessInterruptionAcknowledged")) throw new IOException();
-            JSONArray rows=json.getJSONArray("reconciledRecords"); if (rows.length()>128) throw new IOException();
+            JSONArray rows=json.getJSONArray("reconciledRecords"); if (rows.length()>192) throw new IOException();
             for (int i=0;i<rows.length();i++) {
                 JSONObject row=rows.getJSONObject(i); String path=row.getString("path"),hash=row.getString("sha256");
-                if (!path.matches("(?:pairing|playback)-journal/[a-f0-9-]{36}\\.json(?:\\.pending)?") || !hash.matches("[a-f0-9]{64}")) throw new IOException();
+                if (!path.matches("(?:pairing|playback|catalog)-journal/[a-f0-9-]{36}\\.json(?:\\.pending)?") || !hash.matches("[a-f0-9]{64}")) throw new IOException();
                 result.put(path,hash);
             }
         }
@@ -57,7 +57,7 @@ final class NetworkEvidenceStore {
     }
     private static List<Ref> refs(File noBackup) throws Exception {
         List<Ref> result=new ArrayList<>();
-        for (String name:new String[]{"pairing-journal","playback-journal"}) {
+        for (String name:new String[]{"pairing-journal","playback-journal","catalog-journal"}) {
             File dir=new File(noBackup,name); if (!dir.exists()) continue;
             File[] files=dir.listFiles(); if (files==null || files.length>64) throw new IOException();
             for (File file:files) {
@@ -78,7 +78,7 @@ final class NetworkEvidenceStore {
                     process=(String)value;
                 }
                 String operation=json.getString("operation");
-                if (!(name.equals("pairing-journal") ? operation.equals("PAIR") : operation.equals("PLAY"))) throw new IOException();
+                if (!(name.equals("pairing-journal") ? operation.equals("PAIR") : name.equals("playback-journal") ? operation.equals("PLAY") : operation.equals("CATALOG"))) throw new IOException();
                 String hash=hex(MessageDigest.getInstance("SHA-256").digest(bytes));
                 result.add(new Ref(name+"/"+file.getName(),hash,process,(Boolean)closed,"EVIDENCE_UNAVAILABLE".equals(json.optString("failureCode"))));
             }

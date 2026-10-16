@@ -1,0 +1,21 @@
+--- a/app/src/main/java/com/limelight/nvstream/http/NvHTTP.java
++++ b/app/src/main/java/com/limelight/nvstream/http/NvHTTP.java
+@@ -718,11 +718,17 @@
+                 }
+                 break;
+             case (XmlPullParser.TEXT):
++                // Controlled catalogs may contain whitespace before their first App.
++                if (quiet && (appList.isEmpty() || currentTag.empty())) break;
+                 NvApp app = appList.getLast();
+                 if (currentTag.peek().equals("AppTitle")) {
+                     app.setAppName(xpp.getText());
+                 } else if (currentTag.peek().equals("ID")) {
+-                    app.setAppId(xpp.getText());
++                    if (quiet) {
++                        // NvApp's String overload logs malformed peer text.
++                        try { app.setAppId(Integer.parseInt(xpp.getText())); }
++                        catch (NumberFormatException rejected) { throw new IOException("catalog-id-rejected"); }
++                    } else app.setAppId(xpp.getText());
+                 } else if (currentTag.peek().equals("IsHdrSupported")) {
+                     app.setHdrSupported(xpp.getText().equals("1"));
+                 }

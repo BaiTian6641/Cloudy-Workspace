@@ -46,14 +46,27 @@ public final class VncFrameView extends View {
             destination.set((getWidth()-width)/2,(getHeight()-height)/2,(getWidth()+width)/2,(getHeight()+height)/2);
             if (session.draw(canvas,destination)) return;
         }
-        destination.setEmpty(); canvas.drawText(getContext().getString(R.string.vnc_no_frame),16,32,paint);
+        destination.setEmpty(); canvas.drawText(getContext().getString(R.string.vnc_waiting_phase,state.detail),16,32,paint);
     }
     private boolean ready() { return isFocused() && hasWindowFocus() && state.connected; }
     @Override public boolean dispatchKeyEvent(KeyEvent event) {
         int code=event.getKeyCode(); Integer held=heldKeys.get(code);
+        boolean f8=code==KeyEvent.KEYCODE_F8;
+        if (f8 && (event.getAction()==KeyEvent.ACTION_DOWN || event.getAction()==KeyEvent.ACTION_UP)) {
+            session.marker(event.getAction()==KeyEvent.ACTION_DOWN ? VncDiagnostics.Marker.DOWN_SEEN : VncDiagnostics.Marker.UP_SEEN);
+            if (event.getAction()==KeyEvent.ACTION_UP && held==null) session.marker(VncDiagnostics.Marker.UP_UNOWNED);
+            if (event.getAction()==KeyEvent.ACTION_DOWN) {
+                if (!isFocused()) session.marker(VncDiagnostics.Marker.REJECT_FOCUS);
+                if (!hasWindowFocus()) session.marker(VncDiagnostics.Marker.REJECT_WINDOW);
+                if (!state.connected) session.marker(VncDiagnostics.Marker.REJECT_CONNECTION);
+                if (event.isMetaPressed()) session.marker(VncDiagnostics.Marker.REJECT_META);
+            }
+        }
         // Pair an owned UP before gates: native fields and window focus may have changed.
         if (event.getAction()==KeyEvent.ACTION_UP && held!=null) {
-            heldKeys.remove(code); session.key(held,false); return true;
+            heldKeys.remove(code); boolean queued=session.key(held,false);
+            if (f8) session.marker(queued ? VncDiagnostics.Marker.UP_QUEUED : VncDiagnostics.Marker.QUEUE_REJECTED);
+            return true;
         }
         if (event.getAction()!=KeyEvent.ACTION_DOWN || !ready() || event.isMetaPressed()) return super.dispatchKeyEvent(event);
         Integer symbol=held!=null ? held : VncKeyMap.special(code);
@@ -62,7 +75,11 @@ public final class VncFrameView extends View {
             symbol=VncKeyMap.unicode(event.getUnicodeChar(meta));
         }
         if (symbol==null || heldKeys.size()>=64) return super.dispatchKeyEvent(event);
-        if (!session.key(symbol,true)) return super.dispatchKeyEvent(event);
+        if (!session.key(symbol,true)) {
+            if (f8) session.marker(VncDiagnostics.Marker.QUEUE_REJECTED);
+            return super.dispatchKeyEvent(event);
+        }
+        if (f8) session.marker(VncDiagnostics.Marker.DOWN_QUEUED);
         heldKeys.put(code,symbol); return true;
     }
     private boolean position(MotionEvent event,boolean outside) {

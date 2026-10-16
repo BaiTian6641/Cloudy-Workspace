@@ -4886,7 +4886,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": "2026-08-03",
-      "note": "API14 onSurfaceTextureDestroyed false transfers release responsibility to client. Proposed finite preview cancels then retains SurfaceTexture until actual decoder retirement; no automatic rebind. API47/P0-S4.",
+      "note": "API14 onSurfaceTextureDestroyed false transfers release responsibility to client. Implemented finite preview cancels then retains SurfaceTexture until actual decoder retirement; no automatic rebind. API47/P0-S4. API14 onSurfaceTextureUpdated observes updateTexImage;0.1.9 handler is empty and bounded observation is proposed by comprehensive review, not yet implemented.",
       "refresh": "Before playback surface integration, SDK update or decoder evidence changes."
     },
     {
@@ -4948,6 +4948,78 @@
       "sourceUpdatedOn": null,
       "note": "SConnection::approveConnection(true) sends secResultOK, enters RFBSTATE_INITIALISATION and calls authSuccess; clientInit sends ServerInit later. Separates server authentication success from client initialization/frames. Desktop/VNC, P0-S4; fallback retain exact failure and bounded timeout without weakening authentication.",
       "refresh": "Before changing authentication timing or the selected TigerVNC fixture version."
+    },
+    {
+      "id": "R246",
+      "title": "Qt public output selection and fullscreen window presentation",
+      "url": "https://doc.qt.io/qt-6/qwindow.html#setScreen",
+      "publisher": "Qt Group",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "QWindow::setScreen/screen/showFullScreen are public Qt6 APIs used by the controlled host canvas. Current docs6.12; actual strict build6.9.2. Exact-screen checks and fullscreen requests do not guarantee unoccluded output or content privacy. P0-S4 host fixture; stop capture before removing the canvas.",
+      "refresh": "Recheck when the selected host fixture or backend version changes."
+    },
+    {
+      "id": "R247",
+      "title": "Qt public screen name contract",
+      "url": "https://doc.qt.io/qt-6/qscreen.html#name-prop",
+      "publisher": "Qt Group",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "QScreen::name provides the platform screen name for exact selected-output matching. The Wayland fixture rejects missing/duplicate names and stops on selected-output removal. Host compile6.9.2; current docs6.12; not an Android or transport capability.",
+      "refresh": "Recheck when the selected host fixture or backend version changes."
+    },
+    {
+      "id": "R248",
+      "title": "Pinned Sunshine disabled-audio capture behavior",
+      "url": "https://github.com/LizardByte/Sunshine/blob/v2026.914.233613/src/audio.cpp#L146-L151",
+      "publisher": "LizardByte",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "audio::capture checks config::audio.stream and waits for shutdown without capturing audio when disabled. First finite LAN video fixture deliberately sets stream_audio=disabled; no audio delivery or synchronization claim. Selected stable v2026.914.233613, P0-S4.",
+      "refresh": "Recheck when the selected host fixture or backend version changes."
+    },
+    {
+      "id": "R249",
+      "title": "Pinned Sunshine signed application-version sentinel",
+      "url": "https://github.com/LizardByte/Sunshine/blob/63d35f702ee9e362e43263742981836ec0710384/src/nvhttp.h#L30-L40",
+      "publisher": "LizardByte",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "VERSION is 7.1.431.-1; the negative fourth number intentionally identifies Sunshine. GFE_VERSION is 3.23.0.74. Cloudy unsigned-only validation is incompatible; preserve signed sentinel unchanged and keep optional GFE bounded unsigned. P0-S4.",
+      "refresh": "Recheck when the selected Sunshine or Moonlight revision changes."
+    },
+    {
+      "id": "R250",
+      "title": "Pinned Moonlight native signed version parser",
+      "url": "https://github.com/moonlight-stream/moonlight-common-c/blob/874ac9548f1bd6f095ef2b435c42cdde460e7821/src/Misc.c#L87-L103",
+      "publisher": "Moonlight Stream",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "extractVersionQuad uses strtol for the four components and accepts the documented signed final component. Pinned Java getServerAppVersionQuad uses Integer.parseInt. A narrow owned policy correction is needed; unchanged native parser is reused, not reimplemented. P0-S4.",
+      "refresh": "Recheck when the selected Sunshine or Moonlight revision changes."
+    },
+    {
+      "id": "G154",
+      "title": "Android TextureView presentation and hardware window contract",
+      "url": "https://developer.android.com/reference/android/view/TextureView",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "API14 TextureView participates in ordinary view clipping and requires a hardware-accelerated window. Current0.1.9 lacks live visibility/update observations; proposed fixed adaptive pane and bounded presentation diagnostics are review follow-up, not implemented or qualified. User-visible playback FAILED. API47/P0-S4.",
+      "refresh": "Before implementing presentation repair or interpreting its device evidence."
     }
   ]
 }

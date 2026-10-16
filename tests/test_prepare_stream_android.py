@@ -188,5 +188,61 @@ class PlaybackReplayChecks(unittest.TestCase):
             MODULE.apply_playback({name: paired}, contents)
 
 
+class CatalogReplayChecks(unittest.TestCase):
+    def test_catalog_requires_exact_playback_output_and_patch(self):
+        name = "app/src/main/java/Example.java"
+        prefix = MODULE.CATALOG.relative_to(ROOT).as_posix() + "/"
+        prerequisite = MODULE.PLAYBACK.relative_to(ROOT).as_posix() + "/finite-playback.patch"
+        raw = ("--- a/" + name + "\n+++ b/" + name +
+               "\n@@ -1 +1 @@\n-playback\n+catalog\n").encode()
+        contents = {prerequisite: b"reviewed playback patch"}
+        lock = {"appliesAfter": {"path": prerequisite,
+                                 "sha256": MODULE.digest(contents[prerequisite])},
+                "patch": {"file": "finite-catalog.patch", "sha256": MODULE.digest(raw)},
+                "authoredSources": {}, "files": {name: {
+                    "beforeSha256": MODULE.digest(b"playback\n"),
+                    "afterSha256": MODULE.digest(b"catalog\n")}}}
+        contents[prefix + "finite-catalog.patch"] = raw
+        contents[prefix + "sources.lock.json"] = json.dumps(lock).encode()
+        # Catalog cannot bypass either accepted predecessor by replaying against
+        # a similar earlier source. Unrelated native bytes remain untouched.
+        with self.assertRaisesRegex(ValueError, "before hash changed"):
+            MODULE.apply_catalog({name: b"pairing\n"}, contents)
+        files = {name: b"playback\n", "native.so": b"accepted"}
+        MODULE.apply_catalog(files, contents)
+        self.assertEqual(files, {name: b"catalog\n", "native.so": b"accepted"})
+        contents[prerequisite] += b"changed"
+        with self.assertRaisesRegex(ValueError, "prerequisite playback patch changed"):
+            MODULE.apply_catalog({name: b"playback\n"}, contents)
+
+
+class CompatibilityReplayChecks(unittest.TestCase):
+    def test_compatibility_requires_exact_owned_source_and_catalog_patch(self):
+        name = "app/src/main/java/Example.java"
+        prefix = MODULE.COMPATIBILITY.relative_to(ROOT).as_posix() + "/"
+        prerequisite = MODULE.CATALOG.relative_to(ROOT).as_posix() + "/finite-catalog.patch"
+        raw = ("--- a/" + name + "\n+++ b/" + name +
+               "\n@@ -1 +1 @@\n-playback\n+catalog\n").encode()
+        contents = {prerequisite: b"reviewed playback patch"}
+        lock = {"appliesAfter": {"path": prerequisite,
+                                 "sha256": MODULE.digest(contents[prerequisite])},
+                "patch": {"file": "finite-compatibility.patch", "sha256": MODULE.digest(raw)},
+                "authoredSources": {}, "files": {name: {
+                    "beforeSha256": MODULE.digest(b"playback\n"),
+                    "afterSha256": MODULE.digest(b"catalog\n")}}}
+        contents[prefix + "finite-compatibility.patch"] = raw
+        contents[prefix + "sources.lock.json"] = json.dumps(lock).encode()
+        # The fourth overlay must consume exact staged owned bytes and the exact
+        # catalog predecessor. Native bytes remain outside the patch target.
+        with self.assertRaisesRegex(ValueError, "before hash changed"):
+            MODULE.apply_compatibility({name: b"pairing\n"}, contents)
+        files = {name: b"playback\n", "native.so": b"accepted"}
+        MODULE.apply_compatibility(files, contents)
+        self.assertEqual(files, {name: b"catalog\n", "native.so": b"accepted"})
+        contents[prerequisite] += b"changed"
+        with self.assertRaisesRegex(ValueError, "prerequisite catalog patch changed"):
+            MODULE.apply_compatibility({name: b"playback\n"}, contents)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -8,7 +8,7 @@
     <string name="vnc_connect">Connect finite session</string>
     <string name="vnc_disconnect">Cancel / disconnect</string>
     <string name="vnc_frame_description">Remote VNC framebuffer. Focus here for physical keyboard and absolute pointer input.</string>
-    <string name="vnc_no_frame">No remote framebuffer received</string>
     <string name="vnc_credentials_invalid">Credentials must be nonempty canonical UTF-8 without NUL (username ≤256 bytes, password ≤1024 bytes).</string>
     <string name="vnc_status">State: %1$s · %2$s\nGeometry: %3$d × %4$d\nFrame callbacks: %5$d · converted: %6$d · unique View draws: %7$d\nInputs admitted: %8$d · completed: %9$d · upstream writes: %10$d\nAdmission and writes do not prove host delivery; View draws do not measure display latency.</string>
+    <string name="vnc_waiting_phase">No frame yet · %1$s</string>
 </resources>

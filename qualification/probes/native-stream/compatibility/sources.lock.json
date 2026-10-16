@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "scope": "staged owned playback application-version compatibility after catalog overlay; frozen authored input and native core unchanged",
+  "upstreamRevision": "b48494cb96bff23d8886c4775cc4f39a1075495d",
+  "appliesAfter": {
+    "path": "qualification/probes/native-stream/catalog/finite-catalog.patch",
+    "sha256": "b1c61382d861a10da034dc041f2ef0a47b9df43838fb2e6295c72fec90885548"
+  },
+  "patch": {
+    "file": "finite-compatibility.patch",
+    "sha256": "09df054979d1f07131234bc894461d961a93d56bd91af775c6a352b8bc1f3149"
+  },
+  "files": {
+    "app/src/main/java/dev/cloudy/qualification/stream/playback/PlaybackPolicy.java": {
+      "beforeSha256": "a9740afde71a561e5bef475d9b2e988bb549b0ee539669c8618c2583970ad11d",
+      "afterSha256": "d2e306bb17d6585b0443d7d0462e55e9ba0969846fc8b83350621a4f622a870c"
+    }
+  },
+  "authoredSources": {
+    "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/ServerVersionCompatibilityTest.java": {
+      "bytes": 1923,
+      "sha256": "967a0e2f46c25ed64414b106d2d11a63713852fb916f687d1963db00c589640d"
+    }
+  }
+}

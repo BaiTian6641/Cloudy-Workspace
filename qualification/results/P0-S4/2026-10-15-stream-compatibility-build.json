@@ -1,0 +1,675 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-15",
+  "stage": "P0-S4",
+  "status": "compatibility-build-and-source-review-passed-runtime-not-run",
+  "scope": "narrow staged application-version sentinel compatibility; build-only checkpoint",
+  "runtime": {
+    "installed": false,
+    "executed": false,
+    "deviceObservation": null,
+    "hostObservation": null,
+    "frameObservation": null,
+    "audioObservation": null,
+    "performanceObservation": null
+  },
+  "build": {
+    "applicationId": "dev.cloudy.qualification.stream",
+    "versionName": "0.1.9",
+    "versionCode": 10,
+    "buildRef": "a9159dd4-2b44-4fc4-9818-bbc5ba1876f5",
+    "nativeBuildRef": "f336e245-805d-4aad-bc1a-9208df8db318",
+    "minSdk": 35,
+    "compileSdk": 37,
+    "targetSdk": 37,
+    "identityMinimumApi": 37,
+    "apk": {
+      "path": ".cache/native-stream-android/compatibility-01/app/build/outputs/apk/debug/app-debug.apk",
+      "bytes": 24804371,
+      "sha256": "813fad6c49f3ffd08afbe5b1ffeabd834cbea0a271f9552db8f4f618c43631da"
+    },
+    "native": {
+      "bytes": 5110376,
+      "sha256": "95640675b34cd4d1a7908ff4e22949af7d214b8771e1c3bc954dbc21eea99a98",
+      "zipOffset": 16908288,
+      "alignment": 16384,
+      "stored": true
+    },
+    "preparationReceipt": {
+      "path": ".cache/native-stream-android/compatibility-01/cloudy-preparation.json",
+      "bytes": 134585,
+      "sha256": "eb27fdb45841977e2e2dd91c06d4e4236fe1b21e3290566ce30186f416db3599"
+    },
+    "stagedFiles": 671,
+    "sourceInputs": [
+      {
+        "path": "tools/prepare_stream_android.py",
+        "bytes": 13243,
+        "sha256": "bd52975933a4b0cf55f3e85bca1b4c4e62e711bfc11aca1dd69102b55bbf7302"
+      },
+      {
+        "path": "qualification/probes/device-baseline/gradlew",
+        "bytes": 8656,
+        "sha256": "a5a5c199ba02189ae8c46a334223371a20599d9c298ef65e7540ede4a3f72d59"
+      },
+      {
+        "path": "qualification/probes/device-baseline/gradle/wrapper/gradle-wrapper.jar",
+        "bytes": 48462,
+        "sha256": "497c8c2a7e5031f6aa847f88104aa80a93532ec32ee17bdb8d1d2f67a194a9c7"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/build.gradle",
+        "bytes": 3986,
+        "sha256": "b0bbf93aa6010d4b78343cb635def492f78b81de33c4c614543f6a5b97d95a06"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/lint-baseline.xml",
+        "bytes": 11299,
+        "sha256": "8b7b1ae58e2ca3719515263eb7c8712ed61dbde84a25551e55b32c5c1817b9c0"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/AndroidManifest.xml",
+        "bytes": 1902,
+        "sha256": "4553c13af9127e3042085d6c05375de87d0e74210609cdc0c36d276300c75ab7"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/CatalogController.java",
+        "bytes": 6140,
+        "sha256": "082e45485e9efca9cd1c532c796c1f244375005d5457aee2004d38807a913688"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/CatalogEntry.java",
+        "bytes": 418,
+        "sha256": "4c7db9bad0041fd205c521192abca9dcd037088d8228b47758bb8d9b66c358c2"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/CatalogLease.java",
+        "bytes": 1598,
+        "sha256": "49d25f68b8ae24cbf767ecce1f6be27a25979cf5b9e117e73858104a4b7ab7e1"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/CatalogPeerProfile.java",
+        "bytes": 4478,
+        "sha256": "02f6610ebd489016b3672a695b2589f667f84a4098bc7e096e553d9b45c30d7c"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/CatalogPolicy.java",
+        "bytes": 1691,
+        "sha256": "c95f658c33064d3f4d7dd7a1f2c96d35914c0cce40f23d74ceb0a17191566b1a"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/NetworkEvidenceStore.java",
+        "bytes": 6212,
+        "sha256": "89e1d340eb7aaa30e94dd447180b33cd1cead7f45d67009af85eb47efb5619a7"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/NetworkJournalPolicy.java",
+        "bytes": 449,
+        "sha256": "117c372972a545638a05e7075b220c2248b0567c03ec2b4a7fd7ce48d4e43eb2"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/PairingPinPolicy.java",
+        "bytes": 694,
+        "sha256": "80939358dfc6cb02efc17015fb12ea78e58062d959e44a731ac93674467b46fc"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/PairingProfile.java",
+        "bytes": 2986,
+        "sha256": "ad0a5f566586a27cb485e3c2c5597324fe51e1a48826f194cde3253ddd01080a"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/PlaybackCompletionPolicy.java",
+        "bytes": 865,
+        "sha256": "082a7beb339d027c63bbb38fd1769655de5d378bd8117b625c0dfe563e0ce526"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/PlaybackProfileFile.java",
+        "bytes": 2874,
+        "sha256": "7bef1283758df6d6d9fa08f6b679c61f1b9e10231ba0e7b3a998b12ef8b534a8"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/PlaybackSurfaceOwner.java",
+        "bytes": 2203,
+        "sha256": "66815b9eec032133adc5244cb91703270a36201f52821f0d0722108576a16463"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/StreamOperationLease.java",
+        "bytes": 624,
+        "sha256": "3dc59c6d8e89be4e51f16bbca3196ed7bef300a3b0fbe80aa3a3f6ab7f3356d9"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/StreamProbeActivity.java",
+        "bytes": 15651,
+        "sha256": "66247d8c969aafb414349ba1638d3a2eab82e1548def28bedcfd1de450d31403"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/StreamProbeViewModel.java",
+        "bytes": 48994,
+        "sha256": "0a8aa75a9f85a7590b493a6b5f04a56407da7520fcb38c925788306c25623e49"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/identity/IdentityAuthorization.java",
+        "bytes": 922,
+        "sha256": "0f9f65c6f494fae3a4c2bfef166ff43abc2b6df6045b001fee76f77f2619d003"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/identity/StreamIdentityStore.java",
+        "bytes": 35309,
+        "sha256": "be19ddd21f841acd8353065fdffe538aec0d22e0af4647b58cddd25368d8579c"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/pairing/AttemptLease.java",
+        "bytes": 1606,
+        "sha256": "b63166585504daea630aadf5e3c8b0ad5fade6237664902286c4e04bcca2b61e"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/pairing/LeafPolicy.java",
+        "bytes": 1154,
+        "sha256": "bf8e426ec6e276f7edbc93e79f701a00366b0254dcad5a61ee7c3c0f6e22122b"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/pairing/PairingController.java",
+        "bytes": 8423,
+        "sha256": "9e56c1071df5281440fd6b0018bb816ad3dcef5bf2b26c1fe06daecb65630c1e"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/playback/GlRendererProbe.java",
+        "bytes": 2724,
+        "sha256": "560516509ace080f14f59a9ca162226eab24b79b853948d1c53b1ac3ef91b875"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/playback/PlaybackController.java",
+        "bytes": 16052,
+        "sha256": "6ba0c1bae246a3f9cae387c5acbc7f63d84341a42083a9e9d316d2138477a33a"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/playback/PlaybackLease.java",
+        "bytes": 1269,
+        "sha256": "43ad352d14a8c072402ff9f7a59daef588743226a26e324b3dbc63ac7bf437a2"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/playback/PlaybackOwnership.java",
+        "bytes": 515,
+        "sha256": "b789fbb58630d47ca4dcc761ae4c47ef8b84fc7d6dc0bd2cde2a4de10a325830"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/playback/PlaybackPolicy.java",
+        "bytes": 1722,
+        "sha256": "a9740afde71a561e5bef475d9b2e988bb549b0ee539669c8618c2583970ad11d"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/playback/PlaybackProcessLease.java",
+        "bytes": 619,
+        "sha256": "141d68f80262ec7112333adc93faad7a076eb3c51e37e4ed668bc90ae6ff47e3"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/playback/PlaybackProfile.java",
+        "bytes": 3542,
+        "sha256": "063b914a27df0a694032fb8e38dc54222ae4157b9795c3193fc1e4e6fc2ec812"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/res/drawable/cloudy_stream_icon.xml",
+        "bytes": 347,
+        "sha256": "99fff10d938a1361f5ecab8672e186d42923095d3d4c550a0774d305b4056cdc"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/res/values/cloudy_strings.xml",
+        "bytes": 9327,
+        "sha256": "5f4a2960da4833821fa4194e25b344fd69ac111157849b8596b8521e3791c7c3"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/res/xml/cloudy_backup.xml",
+        "bytes": 339,
+        "sha256": "f3e864f6856a75a8d52d8de359041e941ff09a8999ad24fb0af31889ca22ecf1"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/res/xml/cloudy_extraction.xml",
+        "bytes": 717,
+        "sha256": "ca0f7c537fddf4413f256872b327a983b3de2a40aae71d7e0444468814e905ce"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/main/res/xml/cloudy_network_security.xml",
+        "bytes": 452,
+        "sha256": "6c91d8321a5e1a33f52d96a2c963a6010492f759a66629e682632b20072c1164"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/CatalogParserTest.java",
+        "bytes": 1653,
+        "sha256": "02ccce422f6d402f5ca89e8b1b942145511a79bad22154262dda9c1f4c3d37ea"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/CatalogPolicyTest.java",
+        "bytes": 2965,
+        "sha256": "ecc4ac8cd5f1665308ae9771690baeb36074c7c010476189457735b2dea994db"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/NetworkJournalPolicyTest.java",
+        "bytes": 1007,
+        "sha256": "79ac894e8d24aae23600e45b2e196c2e3652853fa59312ba48012a598f327327"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/PairingPoliciesTest.java",
+        "bytes": 2215,
+        "sha256": "176bd0206eb5214e29b1c470ff6df251bd643de03225e2a69d916d4716b39b89"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/PlaybackOwnershipTest.java",
+        "bytes": 2201,
+        "sha256": "47a4a8261362056202aaae632acffc4b3d5e492c2e9af89fa40281ef2c8d06c2"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/PromptModeTest.java",
+        "bytes": 1180,
+        "sha256": "9203404a754aa3dd1ceac88531919079708e59c1344c536a4be6088c0b49ebcb"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/ServerVersionCompatibilityTest.java",
+        "bytes": 1923,
+        "sha256": "967a0e2f46c25ed64414b106d2d11a63713852fb916f687d1963db00c589640d"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/identity/IdentityAuthorizationTest.java",
+        "bytes": 1553,
+        "sha256": "3f99b2488aebd4ab5bbafe01a2e33b9b66a73718ab8d7349069b7682260e9533"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/pairing/AttemptLeaseTest.java",
+        "bytes": 2797,
+        "sha256": "8031ee8e8a08dd4fcbf6fbde892ef0f88e7e9fd1faf1443d9d74095c13bcb558"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/pairing/LeafPolicyTest.java",
+        "bytes": 2804,
+        "sha256": "df8efb136c0fda7766a757256ba508cfe847058af9cff6eceae23038d2a0337c"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/playback/PlaybackPolicyTest.java",
+        "bytes": 5205,
+        "sha256": "9090308be4673e75d1d9f3072053b45fc1f1563fdad4e5b2cda79061d5ff260f"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/build.gradle",
+        "bytes": 69,
+        "sha256": "0537c547218629772f95b8cc26803dfeca0e85b6d7ace78f42fd4af02dfc1162"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/gradle-wrapper.properties",
+        "bytes": 289,
+        "sha256": "b28a17a308d55eba57bf91da1ca265262d12c101ebe663fe7f12180b4f607a92"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/gradle.properties",
+        "bytes": 101,
+        "sha256": "09543e46125c3e44e3495c53f75244a701b23ce9a0e36c56bd00962a3745eea1"
+      },
+      {
+        "path": "qualification/probes/native-stream/android/settings.gradle",
+        "bytes": 335,
+        "sha256": "d5b284112da08ea05283b9d55353280dce968c8094f467b91fe0e957ea83d25f"
+      },
+      {
+        "path": "qualification/probes/native-stream/pairing/sources.lock.json",
+        "bytes": 2081,
+        "sha256": "a5ea4328a3543b355378866b5702ae76a19b4722b2616222c3cbf7861308e73b"
+      },
+      {
+        "path": "qualification/probes/native-stream/pairing/finite-pairing.patch",
+        "bytes": 11586,
+        "sha256": "45516825cfaa6832264d4d0b6ead822947d70b95f7e939c1135fbd4145358531"
+      },
+      {
+        "path": "qualification/probes/native-stream/playback/sources.lock.json",
+        "bytes": 3297,
+        "sha256": "68edc2774a31c355bdac8d95388b1f0a44cb54c4b2950f02d204fac02d88de3a"
+      },
+      {
+        "path": "qualification/probes/native-stream/playback/finite-playback.patch",
+        "bytes": 14916,
+        "sha256": "8daab24501c8eeb6e2794e1a45e92b846ed0b3291454cb506af539aa51beeb5a"
+      },
+      {
+        "path": "qualification/probes/native-stream/catalog/sources.lock.json",
+        "bytes": 2448,
+        "sha256": "9c50bee01953ff71b8b0e1e0986ee16265e9770349a712956901454e1fa2acce"
+      },
+      {
+        "path": "qualification/probes/native-stream/catalog/finite-catalog.patch",
+        "bytes": 1198,
+        "sha256": "b1c61382d861a10da034dc041f2ef0a47b9df43838fb2e6295c72fec90885548"
+      },
+      {
+        "path": "qualification/probes/native-stream/compatibility/sources.lock.json",
+        "bytes": 1124,
+        "sha256": "730f7a707efdb706a4c38d5cf528cb533b7653ba682941c64731fc6c96eaab5b"
+      },
+      {
+        "path": "qualification/probes/native-stream/compatibility/finite-compatibility.patch",
+        "bytes": 1003,
+        "sha256": "09df054979d1f07131234bc894461d961a93d56bd91af775c6a352b8bc1f3149"
+      }
+    ],
+    "result": {
+      "exitCode": 0,
+      "durationMillis": 40203
+    },
+    "tasks": [
+      "assembleDebug",
+      "lintDebug",
+      "testDebugUnitTest",
+      "recordCloudyRuntimeDependencies"
+    ],
+    "permissions": [
+      "android.permission.ACCESS_LOCAL_NETWORK",
+      "android.permission.INTERNET",
+      "android.permission.USE_BIOMETRIC",
+      "android.permission.USE_FINGERPRINT"
+    ],
+    "components": [
+      "dev.cloudy.qualification.stream.StreamProbeActivity"
+    ],
+    "mergedManifest": {
+      "path": ".cache/native-stream-android/compatibility-01/app/build/intermediates/merged_manifests/debug/processDebugManifest/AndroidManifest.xml",
+      "bytes": 2221,
+      "sha256": "a78e418e9a996b73ea0201144a67bb745ea916587e46fb4ee5d709d90de2932c"
+    }
+  },
+  "checks": {
+    "jvm": {
+      "tests": 42,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "reports": [
+        {
+          "path": ".cache/native-stream-android/compatibility-01/app/build/test-results/testDebugUnitTest/TEST-dev.cloudy.qualification.stream.CatalogParserTest.xml",
+          "bytes": 938,
+          "sha256": "f6f6a7cc3c7fb1330ce910f8087f474f45e6304929ebe9d959b8c6203638cd15"
+        },
+        {
+          "path": ".cache/native-stream-android/compatibility-01/app/build/test-results/testDebugUnitTest/TEST-dev.cloudy.qualification.stream.CatalogPolicyTest.xml",
+          "bytes": 1114,
+          "sha256": "3c066716204a286757e8cd3c474ee1ef6629b1bf558a493e425407f0ba4f6877"
+        },
+        {
+          "path": ".cache/native-stream-android/compatibility-01/app/build/test-results/testDebugUnitTest/TEST-dev.cloudy.qualification.stream.NetworkJournalPolicyTest.xml",
+          "bytes": 695,
+          "sha256": "bff17d19ecec28a19a2eba795df633e1a66d797a8edb7fdb962f19c4d7cc03fb"
+        },
+        {
+          "path": ".cache/native-stream-android/compatibility-01/app/build/test-results/testDebugUnitTest/TEST-dev.cloudy.qualification.stream.PairingPoliciesTest.xml",
+          "bytes": 968,
+          "sha256": "b8a0eb9ec1cfd304a73b1f5e4a1838f84f8620fcf49e8b2dd753c7dac22da129"
+        },
+        {
+          "path": ".cache/native-stream-android/compatibility-01/app/build/test-results/testDebugUnitTest/TEST-dev.cloudy.qualification.stream.PlaybackOwnershipTest.xml",
+          "bytes": 996,
+          "sha256": "02ffd86277a0e71baba37af616044612ce49d67b0454ef6ddc15f30febb2d6f6"
+        },
+        {
+          "path": ".cache/native-stream-android/compatibility-01/app/build/test-results/testDebugUnitTest/TEST-dev.cloudy.qualification.stream.PromptModeTest.xml",
+          "bytes": 668,
+          "sha256": "1ee446172264c068fb041bd59b3ec78ca2927f470ea12f90ebc5dce1c7bb8219"
+        },
+        {
+          "path": ".cache/native-stream-android/compatibility-01/app/build/test-results/testDebugUnitTest/TEST-dev.cloudy.qualification.stream.ServerVersionCompatibilityTest.xml",
+          "bytes": 1026,
+          "sha256": "2b82944390460db0b2df56abf65965026fba6dd40ebc6bb4b564941dd371071a"
+        },
+        {
+          "path": ".cache/native-stream-android/compatibility-01/app/build/test-results/testDebugUnitTest/TEST-dev.cloudy.qualification.stream.identity.IdentityAuthorizationTest.xml",
+          "bytes": 874,
+          "sha256": "ad7b03ef1a459bb095d1b67a0909389b6866d26019d62baf901238b0c04cc7b2"
+        },
+        {
+          "path": ".cache/native-stream-android/compatibility-01/app/build/test-results/testDebugUnitTest/TEST-dev.cloudy.qualification.stream.pairing.AttemptLeaseTest.xml",
+          "bytes": 971,
+          "sha256": "8fe8bf19ce01d41c6cd160ed7a6771163ea271d935e048b93e67d97e457a58f5"
+        },
+        {
+          "path": ".cache/native-stream-android/compatibility-01/app/build/test-results/testDebugUnitTest/TEST-dev.cloudy.qualification.stream.pairing.LeafPolicyTest.xml",
+          "bytes": 679,
+          "sha256": "fc31c23225e5b60dacf614c42b16086afcc0d67befed936689ff56fb38490d6d"
+        },
+        {
+          "path": ".cache/native-stream-android/compatibility-01/app/build/test-results/testDebugUnitTest/TEST-dev.cloudy.qualification.stream.playback.PlaybackPolicyTest.xml",
+          "bytes": 1637,
+          "sha256": "5f7f928de70d9d2ecf2d46bb60e9f57b86168955df9dfeaacad30ef8b7b05b0f"
+        }
+      ]
+    },
+    "lint": {
+      "report": {
+        "path": ".cache/native-stream-android/compatibility-01/app/build/reports/lint-results-debug.xml",
+        "bytes": 398967,
+        "sha256": "29b0d7095a693353e321ce4b31c4c236634ab33d4db4944dc38a4a27fec2d7fc"
+      },
+      "errors": 0,
+      "counts": {
+        "Hint": 1,
+        "Warning": 338
+      },
+      "baseline": {
+        "path": ".cache/native-stream-android/compatibility-01/app/lint-baseline.xml",
+        "bytes": 11299,
+        "sha256": "8b7b1ae58e2ca3719515263eb7c8712ed61dbde84a25551e55b32c5c1817b9c0"
+      },
+      "baselinedInactiveUpstreamErrors": 27,
+      "ownedFindings": 0
+    },
+    "sourceCompile": {
+      "exitCode": 0,
+      "flags": "--release 17 -Xlint:all,-classfile -Werror",
+      "scope": "real staged patched policy plus existing pure playback dependencies/tests"
+    },
+    "sourceJunit": {
+      "tests": 12,
+      "newTests": 4,
+      "existingTests": 8,
+      "failures": 0,
+      "scope": "actual composed policy; compatibility plus existing playback tests"
+    },
+    "resourcesXml": "parsed",
+    "independentReadOnlyReview": "no concrete blocker at source freeze",
+    "packageAudit": [
+      "actual compiled manifest and merged manifest",
+      "exact native bytes",
+      "native ZIP16KiB",
+      "APK signature",
+      "selected notices",
+      "zero new Lint errors"
+    ],
+    "nativeBytesUnchanged": true,
+    "nativeRebuildRun": false,
+    "runtimeClosureUnchanged": true,
+    "runtimeArtifacts": 39,
+    "signingContinuity": true,
+    "compiledNetworkPolicy": {
+      "path": ".cache/native-stream-android/compatibility-audit-01/apk-network-security.txt",
+      "bytes": 266,
+      "sha256": "5aa400a41c104bff581f74aa2b523e8afb821c26f5729c6f49f7d1befa1154ae"
+    },
+    "testOnlyParser": "net.sf.kxml:kxml2:2.3.0",
+    "fourthOverlayReplay": {
+      "fuzz": 0,
+      "exitCode": 0,
+      "afterHashMatched": true
+    },
+    "frozenOriginalPolicyHashMatched": true,
+    "repositoryChecks": [
+      {
+        "command": [
+          "python3",
+          "tools/check_ast.py"
+        ],
+        "exitCode": 0,
+        "durationMillis": 114
+      },
+      {
+        "command": [
+          ".venv/bin/ruff",
+          "check",
+          "."
+        ],
+        "exitCode": 0,
+        "durationMillis": 16
+      },
+      {
+        "command": [
+          ".venv/bin/python",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-v"
+        ],
+        "exitCode": 0,
+        "durationMillis": 5022
+      },
+      {
+        "command": [
+          ".venv/bin/python",
+          "tools/validate_project.py",
+          "--schemas"
+        ],
+        "exitCode": 0,
+        "durationMillis": 265
+      }
+    ]
+  },
+  "implementation": {
+    "change": "required application version permits only documented -1 final sentinel; optional GFE remains unsigned/null; all prior bounds preserved",
+    "target": "staged owned PlaybackPolicy.java only",
+    "overlay": {
+      "schemaVersion": 1,
+      "scope": "staged owned playback application-version compatibility after catalog overlay; frozen authored input and native core unchanged",
+      "upstreamRevision": "b48494cb96bff23d8886c4775cc4f39a1075495d",
+      "appliesAfter": {
+        "path": "qualification/probes/native-stream/catalog/finite-catalog.patch",
+        "sha256": "b1c61382d861a10da034dc041f2ef0a47b9df43838fb2e6295c72fec90885548"
+      },
+      "patch": {
+        "file": "finite-compatibility.patch",
+        "sha256": "09df054979d1f07131234bc894461d961a93d56bd91af775c6a352b8bc1f3149"
+      },
+      "files": {
+        "app/src/main/java/dev/cloudy/qualification/stream/playback/PlaybackPolicy.java": {
+          "beforeSha256": "a9740afde71a561e5bef475d9b2e988bb549b0ee539669c8618c2583970ad11d",
+          "afterSha256": "d2e306bb17d6585b0443d7d0462e55e9ba0969846fc8b83350621a4f622a870c"
+        }
+      },
+      "authoredSources": {
+        "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/ServerVersionCompatibilityTest.java": {
+          "bytes": 1923,
+          "sha256": "967a0e2f46c25ed64414b106d2d11a63713852fb916f687d1963db00c589640d"
+        }
+      }
+    },
+    "frozenOriginalPolicyUnchanged": true,
+    "earlierOverlayPatchesUnchanged": true,
+    "catalogControllerChange": "whitespace-only blank line trimmed; authored-source pin refreshed; catalog parser patch unchanged",
+    "historical018ArtifactsUnchanged": true,
+    "diagnosticsOrControlInterfaceExpansion": false,
+    "nativeRebuildRun": false,
+    "causalLimit": "prior START exception was not captured; sentinel rejection inferred from exact source and retained pre-native sequence"
+  },
+  "evidence": [
+    {
+      "path": ".cache/native-stream-android/compatibility-build-01/command.json",
+      "bytes": 864,
+      "sha256": "36b9f90041e14aeaab548dc76613447c527a1ade01ed94919433083e73cc1dc2"
+    },
+    {
+      "path": ".cache/native-stream-android/compatibility-build-01/result.json",
+      "bytes": 41,
+      "sha256": "7d7a67b8b562b50790620d56d86a48cc7ca040c6a3c581dd4f62b7efb50a71ca"
+    },
+    {
+      "path": ".cache/native-stream-android/compatibility-build-01/build.log",
+      "bytes": 4422,
+      "sha256": "76a20f5bbe9e8a801c2b0e0698fbf70412931a4705c0cd2a166c51b2e43640f1"
+    },
+    {
+      "path": ".cache/native-stream-android/compatibility-audit-01/apk-audit.json",
+      "bytes": 16065,
+      "sha256": "c034c0a5d89571a75ff4ce7a3fc7cf9eff2fdb9262b35f244492e9f98c5ff37f"
+    },
+    {
+      "path": ".cache/native-stream-android/compatibility-audit-01/apk-alignment.txt",
+      "bytes": 37790,
+      "sha256": "ea966593d3084dcc47e99055a4e4cad5f727d4bcec21a5ad9d9c4da95039e573"
+    },
+    {
+      "path": ".cache/native-stream-android/compatibility-audit-01/apk-manifest.txt",
+      "bytes": 4056,
+      "sha256": "9ca588a3c036ef5cde4ddfeca2b6561e95802ae52da579a613050d8b494a7cf4"
+    },
+    {
+      "path": ".cache/native-stream-android/compatibility-audit-01/apk-signature.txt",
+      "bytes": 955,
+      "sha256": "d9d71ff2180513e2821e3b52d3bf38158890572ed199f998fb383a5652e93fa1"
+    },
+    {
+      "path": ".cache/native-stream-android/compatibility-source-check-01/checks.json",
+      "bytes": 383,
+      "sha256": "288d4fd0a3ad28e169787122b1b748856d206b6e71c8ff1496cf9917fded9e18"
+    },
+    {
+      "path": ".cache/native-stream-android/compatibility-source-check-01/javac.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/native-stream-android/compatibility-source-check-01/tests.log",
+      "bytes": 62,
+      "sha256": "9b304113ae98f47304871f0d1bba78aa871db3cf9c4e7d3e149c5cd51c342823"
+    },
+    {
+      "path": ".cache/native-stream-android/compatibility-source-check-01/patch.log",
+      "bytes": 93,
+      "sha256": "d31a282fa6f700331294b6a6924fecc4b9a66af55f2455cb782db2f4788d9ea7"
+    },
+    {
+      "path": ".cache/native-stream-android/compatibility-repository-checks-01/results.json",
+      "bytes": 599,
+      "sha256": "96a72a8400d785b75284970e0a1d71842e2a6b80fc6cedb6e90d2056c2012525"
+    },
+    {
+      "path": ".cache/native-stream-android/compatibility-repository-checks-01/0.log",
+      "bytes": 1232,
+      "sha256": "ba424001f788fba68ba401f8cfeeb87c2dd97d0b89861c99d9f48746343e35dc"
+    },
+    {
+      "path": ".cache/native-stream-android/compatibility-repository-checks-01/1.log",
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": ".cache/native-stream-android/compatibility-repository-checks-01/2.log",
+      "bytes": 16554,
+      "sha256": "7727c185fbbf9ff82a9673624952c7d6bdba0bfdcebfd678d100028c2659398c"
+    },
+    {
+      "path": ".cache/native-stream-android/compatibility-repository-checks-01/3.log",
+      "bytes": 703,
+      "sha256": "4b53b66940e4c8b1050bff2b9ab195b6fb9b320a8f42e0f7cabfc680475fe2f1"
+    }
+  ],
+  "publicDocuments": [
+    {
+      "path": "qualification/results/P0-S4/2026-10-15-stream-compatibility-build.md",
+      "bytes": 4006,
+      "sha256": "bbe701b4cb0c7312737b0d617ec3ce92686aafb285a12cdfadc3fb4fb516e376"
+    }
+  ],
+  "limitations": [
+    "build-only; next actual device attempt separate",
+    "prior pre-native failure exact exception absent; source-supported cause remains inference",
+    "no new prompt, network, host launch, media/frame/audio, physical or performance observation",
+    "one native playback run per process remains",
+    "original trust/auth/deadline/selection/cancellation policy unchanged",
+    "27 inactive upstream baseline errors remain",
+    "D16 corresponding-source/notices release closure incomplete",
+    "no product vault/reconnect/CAP-STREAM promotion"
+  ]
+}

@@ -1,0 +1,15 @@
+--- a/app/src/main/java/dev/cloudy/qualification/stream/playback/PlaybackPolicy.java
++++ b/app/src/main/java/dev/cloudy/qualification/stream/playback/PlaybackPolicy.java
+@@ -21,7 +21,11 @@
+         } catch (Exception rejected) { return false; }
+     }
+     public static boolean serverVersion(String value,boolean optional) {
+-        return value==null ? optional : value.matches("[0-9]{1,5}(\\.[0-9]{1,5}){3}");
++        if (value==null) return optional;
++        // Sunshine's documented -1 fourth component identifies its application protocol.
++        // The optional GFE version remains an unsigned four-component value.
++        return value.matches("[0-9]{1,5}(\\.[0-9]{1,5}){3}")
++                || (!optional && value.matches("[0-9]{1,5}(\\.[0-9]{1,5}){2}\\.-1"));
+     }
+     public static boolean port(int port) { return port>=1 && port<=65535; }
+     public static boolean requestPath(String path) { return "/serverinfo".equals(path) || "/launch".equals(path) || "/resume".equals(path); }

@@ -8,11 +8,11 @@ android {
         minSdk 35
         // Direct pairing uses the Android 17 local-network runtime permission.
         targetSdk 37
-        versionCode 8
-        versionName '0.1.7'
+        versionCode 10
+        versionName '0.1.9'
         ndk { abiFilters 'arm64-v8a' }
         buildConfigField 'boolean', 'ROOT_BUILD', 'false'
-        buildConfigField 'String', 'QUALIFICATION_BUILD_REF', '"02109898-ebfa-439a-a478-cec9359b4fb6"'
+        buildConfigField 'String', 'QUALIFICATION_BUILD_REF', '"a9159dd4-2b44-4fc4-9818-bbc5ba1876f5"'
         buildConfigField 'String', 'NATIVE_BUILD_REF', '"f336e245-805d-4aad-bc1a-9208df8db318"'
     }
     buildFeatures { buildConfig = true; resValues = true }
@@ -58,6 +58,8 @@ dependencies {
     implementation 'androidx.biometric:biometric:1.1.0'
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.5'
     testImplementation 'junit:junit:4.13.2'
+    // Exercise the real upstream application-list parser on the host JVM.
+    testImplementation 'net.sf.kxml:kxml2:2.3.0'
 }
 
 def verifiedRepository = providers.gradleProperty('cloudyRepositoryRoot')

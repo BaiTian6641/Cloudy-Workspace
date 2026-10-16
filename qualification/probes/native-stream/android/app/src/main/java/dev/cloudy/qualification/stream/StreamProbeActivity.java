@@ -46,8 +46,13 @@ public final class StreamProbeActivity extends FragmentActivity {
     private LinearLayout previewContainer;
     private PlaybackSurfaceOwner previewSurface;
     private TextView playbackStatus;
-    private Button preview, cleanup, reconcile;
+    private Button preview, cleanup, reconcile, catalog;
+    private LinearLayout catalogList;
+    private TextView catalogStatus;
+    private java.util.List<CatalogEntry> renderedCatalog;
+    private long renderedCatalogGeneration;
     private boolean idle, readyIdentity, restartRequired;
+    private int selectedAppId;
     private long cancelledPromptToken;
 
     @Override public void onCreate(Bundle state) {
@@ -100,6 +105,10 @@ public final class StreamProbeActivity extends FragmentActivity {
             pairingPin.getText().clear();
             model.pair(pin);
         });
+        label(content,R.string.cloudy_catalog_help);
+        catalog=button(content,R.string.cloudy_catalog_read,view -> model.readCatalog());
+        catalogStatus=label(content,R.string.cloudy_catalog_ready);
+        catalogList=new LinearLayout(this);catalogList.setOrientation(LinearLayout.VERTICAL);content.addView(catalogList);
         label(content,R.string.cloudy_play_title).setTextSize(20);
         label(content,R.string.cloudy_play_help);
         previewContainer=new LinearLayout(this);
@@ -150,10 +159,22 @@ public final class StreamProbeActivity extends FragmentActivity {
                 });
     }
     private void render(StreamProbeViewModel.UiState state) {
-        idle=!state.busy; readyIdentity=state.identityState.equals("READY"); restartRequired=state.restartRequired;
+        selectedAppId=state.selectedAppId;idle=!state.busy; readyIdentity=state.identityState.equals("READY"); restartRequired=state.restartRequired;
         if (idle && !restartRequired && previewContainer.getChildCount()==0) installPreview();
         playbackStatus.setText(state.playbackStatus.isEmpty() ? getString(R.string.cloudy_play_ready) : state.playbackStatus);
-        preview.setEnabled(idle && readyIdentity && !restartRequired && previewSurface!=null && previewSurface.ready());
+        preview.setEnabled(idle && readyIdentity && !restartRequired && state.selectedAppId>0 && previewSurface!=null && previewSurface.ready());
+        catalog.setEnabled(idle && readyIdentity);
+        catalogStatus.setText(getString(R.string.cloudy_catalog_selection,state.catalogEntries.size(),state.selectedAppId));
+        if (renderedCatalog!=state.catalogEntries || renderedCatalogGeneration!=state.catalogGeneration) {
+            renderedCatalog=state.catalogEntries;renderedCatalogGeneration=state.catalogGeneration;
+            catalogList.removeAllViews();
+            final long generation=state.catalogGeneration;
+            for (CatalogEntry entry:state.catalogEntries) {
+                Button choice=button(catalogList,R.string.cloudy_catalog_choose,view -> model.selectCatalogApp(generation,entry.id));
+                choice.setText(getString(R.string.cloudy_catalog_entry,entry.id,entry.title));
+            }
+        }
+        for (int i=0;i<catalogList.getChildCount();i++) catalogList.getChildAt(i).setEnabled(idle);
         cleanup.setEnabled(state.cleanupRetry);
         reconcile.setEnabled(idle);
         identity.setText(getString(R.string.cloudy_identity_state, state.identityState, state.securityLevel));
@@ -184,7 +205,7 @@ public final class StreamProbeActivity extends FragmentActivity {
             try {
                 prompt.authenticate(new BiometricPrompt.PromptInfo.Builder()
                         .setTitle(getString(R.string.cloudy_identity_prompt_title))
-                        .setSubtitle(getString(state.playback ? R.string.cloudy_play_prompt_subtitle : state.pairing ? R.string.cloudy_pair_prompt_subtitle : state.promptMode == StreamProbeViewModel.PromptMode.DEVICE_CREDENTIAL
+                        .setSubtitle(getString(state.catalog ? R.string.cloudy_catalog_prompt_subtitle : state.playback ? R.string.cloudy_play_prompt_subtitle : state.pairing ? R.string.cloudy_pair_prompt_subtitle : state.promptMode == StreamProbeViewModel.PromptMode.DEVICE_CREDENTIAL
                                 ? R.string.cloudy_identity_credential_subtitle : R.string.cloudy_identity_prompt_subtitle))
                         .setAllowedAuthenticators(authenticators).build());
             } catch (IllegalArgumentException | IllegalStateException unavailable) {
@@ -200,7 +221,7 @@ public final class StreamProbeActivity extends FragmentActivity {
             @Override public void onSurfaceTextureAvailable(SurfaceTexture texture,int width,int height) {
                 owner=new PlaybackSurfaceOwner(StreamProbeActivity.this,texture,() -> previewContainer.removeView(textureView));
                 previewSurface=owner;
-                if (preview!=null) preview.setEnabled(idle && readyIdentity && !restartRequired);
+                if (preview!=null) preview.setEnabled(idle && readyIdentity && !restartRequired && selectedAppId>0);
             }
             @Override public boolean onSurfaceTextureDestroyed(SurfaceTexture texture) {
                 // Returning false transfers the real texture to the retained owner.

@@ -44,7 +44,7 @@ Reported key backing: %2$s</string>
     <string name="cloudy_pair_prompt_subtitle">Authorize this finite loopback pairing and client-certificate HTTPS read with the existing identity.</string>
     <string name="cloudy_pair_success">Real pairing and client-certificate HTTPS application-list read completed. No video was decoded.</string>
     <string name="cloudy_play_title">Finite native playback preview</string>
-    <string name="cloudy_play_help">Provision no_backup/playback-config.json for an approved numeric LAN peer, exact public certificate and selected application ID. A fresh screen-lock approval starts at most 30 seconds of real 1280 × 720 H.264 SDR video and audio, including setup. No automatic pairing, retry or replacement of another host application occurs. Input forwarding is not part of this preview. One native playback run is allowed per process; restart the diagnostic for another. Cancellation may leave the host application running.</string>
+    <string name="cloudy_play_help">Read the real paired HTTPS application catalog from privately provisioned no_backup/catalog-config.json, then select a returned application ID. A separate fresh screen-lock approval starts at most 30 seconds of real 1280 × 720 H.264 SDR video and audio, including setup. No guessed ID or old playback-config fallback is used. No automatic pairing, retry or replacement of another host application occurs. Input forwarding is not part of this preview. One native playback run is allowed per process; restart the diagnostic for another. Cancellation may leave the host application running.</string>
     <string name="cloudy_play_ready">No playback observation yet. Decoder submissions, buffers released for rendering and actual frame-render callbacks are separate counters; none alone proves visible presentation or latency.</string>
     <string name="cloudy_play_start">Authorize and start finite playback</string>
     <string name="cloudy_play_surface">Native video preview surface</string>
@@ -57,4 +57,12 @@ Reported key backing: %2$s</string>
     <string name="cloudy_network_reconcile_confirm">Acknowledge local interruption</string>
     <string name="cloudy_network_reconcile_warning">Acknowledge only well-formed unfinished records from a previous diagnostic process. Original records remain unchanged and host state remains UNKNOWN. This performs no network operation, retry, unpair or host stop. Malformed evidence requires deliberate private-file repair.</string>
     <string name="cloudy_network_reconciled">Previous process interruption acknowledged in a separate verified receipt. Host state remains UNKNOWN; no network action was replayed.</string>
+    <string name="cloudy_catalog_help">Explicit paired application discovery uses only pinned HTTPS /applist on the approved numeric LAN peer. Provision no_backup/catalog-config.json with schema 1, profile ID, numeric address, HTTP/HTTPS/RTSP ports, SHA-256 certificate pin and public certificate DER Base64. No application ID belongs in that file. A fresh screen-lock approval qualifies the existing READY identity. Reading does not pair, launch or consume the one-native-playback allowance. Catalog titles and selection remain in memory only; preview requires another fresh approval.</string>
+    <string name="cloudy_catalog_read">Authorize and read paired applications</string>
+    <string name="cloudy_catalog_ready">No application catalog has been read.</string>
+    <string name="cloudy_catalog_complete">Paired HTTPS application catalog read completed. Select a returned ID; an empty catalog cannot launch playback.</string>
+    <string name="cloudy_catalog_prompt_subtitle">Authorize one paired HTTPS application-list read using the existing identity. No pairing or launch occurs.</string>
+    <string name="cloudy_catalog_choose">Select returned application</string>
+    <string name="cloudy_catalog_entry">ID %1$d · %2$s</string>
+    <string name="cloudy_catalog_selection">Returned applications: %1$d · Selected ID: %2$d (0 means none)</string>
 </resources>

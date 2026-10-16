@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "scope": "controlled quiet catalog parser after accepted playback overlay; native core unchanged",
+  "upstreamRevision": "b48494cb96bff23d8886c4775cc4f39a1075495d",
+  "appliesAfter": {
+    "path": "qualification/probes/native-stream/playback/finite-playback.patch",
+    "sha256": "8daab24501c8eeb6e2794e1a45e92b846ed0b3291454cb506af539aa51beeb5a"
+  },
+  "patch": {
+    "file": "finite-catalog.patch",
+    "sha256": "b1c61382d861a10da034dc041f2ef0a47b9df43838fb2e6295c72fec90885548"
+  },
+  "files": {
+    "app/src/main/java/com/limelight/nvstream/http/NvHTTP.java": {
+      "beforeSha256": "c9c283511c40145d01fab25376aaedb21a1e0eab0807311203ddcc898e261f53",
+      "afterSha256": "2021c98df67e5d0b570a8a5adceaa696413b4127c1835860228df17fb48d5cb8"
+    }
+  },
+  "authoredSources": {
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/CatalogController.java": {
+      "bytes": 6140,
+      "sha256": "082e45485e9efca9cd1c532c796c1f244375005d5457aee2004d38807a913688"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/CatalogEntry.java": {
+      "bytes": 418,
+      "sha256": "4c7db9bad0041fd205c521192abca9dcd037088d8228b47758bb8d9b66c358c2"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/CatalogLease.java": {
+      "bytes": 1598,
+      "sha256": "49d25f68b8ae24cbf767ecce1f6be27a25979cf5b9e117e73858104a4b7ab7e1"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/CatalogPeerProfile.java": {
+      "bytes": 4478,
+      "sha256": "02f6610ebd489016b3672a695b2589f667f84a4098bc7e096e553d9b45c30d7c"
+    },
+    "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/CatalogPolicy.java": {
+      "bytes": 1691,
+      "sha256": "c95f658c33064d3f4d7dd7a1f2c96d35914c0cce40f23d74ceb0a17191566b1a"
+    },
+    "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/CatalogParserTest.java": {
+      "bytes": 1653,
+      "sha256": "02ccce422f6d402f5ca89e8b1b942145511a79bad22154262dda9c1f4c3d37ea"
+    },
+    "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/CatalogPolicyTest.java": {
+      "bytes": 2965,
+      "sha256": "ecc4ac8cd5f1665308ae9771690baeb36074c7c010476189457735b2dea994db"
+    }
+  }
+}
