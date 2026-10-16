@@ -1,6 +1,6 @@
 # P1 — Shared foundation and design
 
-**Status:** P1-S1 ready for scoped implementation; other stages planned. **Active effort:** 15–24 person-days before contingency. **Purpose:** Establish two independent Android desktop packages, shared design/lifecycle contracts and early engine/distribution decisions, including native streaming at P1-S5.
+**Status:** P1-S1 complete with real independently qualified local app targets; other stages planned. **Active effort:** 15–24 person-days before contingency. **Purpose:** Establish two independent Android desktop packages, shared design/lifecycle contracts and early engine/distribution decisions, including native streaming at P1-S5.
 
 The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-project/platform-rule-zero.md) defines desktop scope. Follow [capability outcomes](../feasibility-gates.md) and [independent release gates](../release-gates.md). Estimates are active effort, not elapsed time; re-estimate after physical evidence. Revision 02 moved the former P5-S1 decision to P1-S5; other stage IDs retain their identity.
 
@@ -16,7 +16,7 @@ The [ADR0012 refinement](../../adr/0012-foundation-construction-and-platform-acc
 
 ## P1-S1 — Native app targets and shared-module build foundation
 
-**Owner:** Android/build developer. **Prerequisites:** P0-S3 investigation complete. **Status:** ready.
+**Owner:** Android/build developer. **Prerequisites:** P0-S3 investigation complete. **Status:** done. See the [actual local foundation result](../../../qualification/results/P1-S1/2026-10-16-native-foundation.md) and [stage review](../../06-validation/2026-10-16-native-foundation-review.md).
 
 **Required supported capabilities:** CAP-FOUNDATION.
 

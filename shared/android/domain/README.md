@@ -1,17 +1,9 @@
-# Domain models
+# Local window domain
 
-**State:** planned module boundary; no application/library implementation yet. **Delivery stages:** P1-S1.
+Pure Kotlin/JVM source for P1-S1 local logical window identity, shared by independently packaged Console and Desktop. Package: `io.github.baitian6641.cloudy.domain`. It has no Android, UI, network, persistence, credential, process or live-operation state.
 
-## Responsibility
+`WindowState.create` allocates a fresh UUID. Immutable rename preserves owner and logical ID. Schema1 `WindowSnapshot` restores only for the expected app owner and an exact lowercase canonical UUID; rejected snapshots return a typed reason. This is validation of local metadata, not an authenticated cross-app handoff.
 
-Immutable host/environment/workspace/resource identifiers, capability states, transfer/device/session state vocabulary, and typed errors.
+Accepted names are trimmed, nonblank and at most80 Unicode code points. Raw UTF-16 input is bounded to160 code units before scanning; controls, Unicode line/paragraph separators and unpaired surrogates are rejected, without silent truncation. `CONTROL_CHARACTER` includes line breaks (U+2028/U+2029) because titles are single-line. Multilingual text, combining marks, emoji and ZWJ sequences are permitted. Surrounding whitespace is trimmed only after raw control/unicode validation, so a trailing control cannot disappear into an accepted name. Invalid create/rename throws `IllegalArgumentException`; restore returns `Rejected`.
 
-## Boundary
-
-Keep serialization and UI semantics separate; unknown is distinct from false/unavailable/failed.
-
-## First implementation work
-
-Add version conversion and model fixtures; do not encode OS behavior by machine model name.
-
-Read the [module map](../../../docs/02-architecture/module-boundaries.md), [phase plan](../../../docs/05-delivery/README.md), and [validation strategy](../../../docs/06-validation/strategy.md). Record exact implementation versions and evidence before promoting a capability.
+JUnit4 tests cover independent identities, immutable rename, restoration and app-owner isolation, malformed schema/IDs, Unicode boundaries and rejection through each ingress. Parent build12 executes all five domain JVM tests successfully. The shared domain is packaged into the real apps, whose bounded Bundle/Activity tests pass on the selected Googlebook; this does not convert pure-domain tests into physical input or process-death evidence. See the [native foundation report](../../../qualification/results/P1-S1/2026-10-16-native-foundation.md). P1-S1 local construction acceptance is complete. The domain implements no session ownership, saved-state storage or remote engine. The user's latest revision continues the full implementation goal with direct Codex GPT6.1-Sol and authorized OMP coworkers, without an automatic P1 stopping point.

@@ -1,0 +1,366 @@
+{
+  "schemaVersion": 1,
+  "scope": "P1-S1 local construction; exact private evidence bindings, no remote/input/release verdict",
+  "files": [
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-01/adb-preflight.txt",
+      "bytes": 131,
+      "sha256": "7ad63496ae793362b81164a42df9ddb66bf2e2038803d4adad363f9a01dc43ba"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-01/between-apps-packages.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-01/build-apks.json",
+      "bytes": 426,
+      "sha256": "92704eb20ad82c2b0204e2caf41acb81d275b8557c0f94b3307b2f26929fba5a"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-01/console-0.1.0.apk",
+      "bytes": 29023736,
+      "sha256": "dc0d8bef6cf54addd921023a0294ec7a141235879b7d11bbb6ad0ffc5dce1785"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-01/console-alone-layout.json",
+      "bytes": 14136,
+      "sha256": "d385465ab61524ef9c2d5778c15341d69b3bb47c15265926d378fdb6da5a926a"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-01/console-alone-packages.txt",
+      "bytes": 45,
+      "sha256": "29437a9dbd511dc6b9e11fe565ebf94f57f48168298e5661ff656194960d2150"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-01/console-alone.png",
+      "bytes": 198299,
+      "sha256": "8f74c61827edc6e692ca0c6053cb41b129623ebb06a572af44fa575ba51ab8bc"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-01/console-androidTest.apk",
+      "bytes": 2884035,
+      "sha256": "8f694de7454af2184edcb5f429bdd688fd49d064b7fd0844802d7133fac02c66"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-01/console-install.txt",
+      "bytes": 36,
+      "sha256": "781a31c82430c97897af612ece5e0ca2205e301cb5ff121ce2660541ea5182c7"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-01/console-instrument.txt",
+      "bytes": 49029,
+      "sha256": "0310969e131aa429ae2cfff328cc04220afc7e5fff98f4f283476679df12f3d7"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-01/console-launch.txt",
+      "bytes": 214,
+      "sha256": "46c5986c88a7b48829944145785b6a60e2546da353cb3054723f8184202bfc27"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-01/console-layout-cli.txt",
+      "bytes": 153,
+      "sha256": "a91def993e08e9ac3df7b6b5417b0789c72c4307b5457d00977157e543862729"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-01/console-pid.txt",
+      "bytes": 6,
+      "sha256": "4f4137f2a9271b12098b141b8cfde22b874c91a31cfa753f2ee546a7182906f4"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-01/console-pretest-stop.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-01/console-reinstall.txt",
+      "bytes": 36,
+      "sha256": "781a31c82430c97897af612ece5e0ca2205e301cb5ff121ce2660541ea5182c7"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-01/console-test-install.txt",
+      "bytes": 36,
+      "sha256": "781a31c82430c97897af612ece5e0ca2205e301cb5ff121ce2660541ea5182c7"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-01/console-uninstall.txt",
+      "bytes": 8,
+      "sha256": "7fc0023a6402c7bd7abd98bb3e580968de4833eed07d88d1cc8d70819d69c7a0"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-01/desktop-0.1.0.apk",
+      "bytes": 29023746,
+      "sha256": "406a7ac8de2fea9e65217bd5f9c37d4a12038abecdd19505c2a5038ef464b56e"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-01/desktop-alone-layout.json",
+      "bytes": 26332,
+      "sha256": "4a33d62ed062731c44c44148ed72878efc34665562c62a3d456cf3dfebf35b8d"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-01/desktop-alone-packages.txt",
+      "bytes": 45,
+      "sha256": "facef9d30a43678a480dd61fe51c971ee270529e20eb087bed58632b81e491b7"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-01/desktop-install.txt",
+      "bytes": 36,
+      "sha256": "781a31c82430c97897af612ece5e0ca2205e301cb5ff121ce2660541ea5182c7"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-01/desktop-launch.txt",
+      "bytes": 214,
+      "sha256": "feb7fa9135db816ad018678113bf9e751a8c8df6a0d955500a70df7f5f5def60"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-01/desktop-pretest-stop.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-01/device-preflight.json",
+      "bytes": 324,
+      "sha256": "90017ed89e1f14776db8bb1f38c73b9f71edc315f352a1093ea2f9d72f06bfeb"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-01/instrumentation-summary.json",
+      "bytes": 4889,
+      "sha256": "f10eebb790f177e52be23b1083e87981a547f8605e4549a51a7c426da5c693a3"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-01/platform-androidTest.apk",
+      "bytes": 29811802,
+      "sha256": "ea665c9713ce607458b0d87b12b575c1e11244dbc4c0080fe1c78bcda3ae5981"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-01/platform-instrument.txt",
+      "bytes": 3604,
+      "sha256": "a4831964baca7d8ce3960c00c6987d7f2a39521e12f5fccd81a91ea37c677d4f"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-01/platform-test-install.txt",
+      "bytes": 36,
+      "sha256": "781a31c82430c97897af612ece5e0ca2205e301cb5ff121ce2660541ea5182c7"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-01/preinstall-packages.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-02/after-desktop-uninstall.txt",
+      "bytes": 196,
+      "sha256": "24a5cd4ff6b89f798d116895f9a5d9ce8d4d11228a70d847a01e68add4360295"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-02/boot-after.txt",
+      "bytes": 37,
+      "sha256": "8851dee1080738ba13866e998e7c91fe5008eb55abfa233ea3d186482234bb03"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-02/boot-count-after.txt",
+      "bytes": 2,
+      "sha256": "f0b5c2c2211c8d67ed15e75e656c7862d086e9245420892a7de62cd9ec582a06"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-02/console-androidTest.apk",
+      "bytes": 2729596,
+      "sha256": "cfe1e1de68a03221874461c3a7990edf37f4677ca6440ea8579a0874e834daff"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-02/console-install.txt",
+      "bytes": 36,
+      "sha256": "781a31c82430c97897af612ece5e0ca2205e301cb5ff121ce2660541ea5182c7"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-02/console-instrument.txt",
+      "bytes": 1584,
+      "sha256": "52442ad9c51d380840b0463faf7b9e32943a26e7cce0246449cf48032e5b3760"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-02/console-replace-launch.txt",
+      "bytes": 214,
+      "sha256": "273b39c02de018aafe95b96d760707790c4b56293e4b2b616364a1a85625d043"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-02/console-replace.txt",
+      "bytes": 36,
+      "sha256": "781a31c82430c97897af612ece5e0ca2205e301cb5ff121ce2660541ea5182c7"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-02/console-stop.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-02/desktop-androidTest.apk",
+      "bytes": 2729600,
+      "sha256": "a7579bbbcceb786b10807eb63baf6b056ade7476a4a4d1657562477705cc6f83"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-02/desktop-install.txt",
+      "bytes": 36,
+      "sha256": "781a31c82430c97897af612ece5e0ca2205e301cb5ff121ce2660541ea5182c7"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-02/desktop-instrument.txt",
+      "bytes": 1584,
+      "sha256": "7eeb2b5e990c9917e45c5ad81535c3e1981362a2af8023b7c29bf19ba24e8d88"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-02/desktop-replace-launch.txt",
+      "bytes": 214,
+      "sha256": "6bbfd8d17612c11bd22a411f164c17342be797bba8d3cf21aa6b6a089fd5288c"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-02/desktop-replace.txt",
+      "bytes": 36,
+      "sha256": "781a31c82430c97897af612ece5e0ca2205e301cb5ff121ce2660541ea5182c7"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-02/desktop-restore.txt",
+      "bytes": 36,
+      "sha256": "781a31c82430c97897af612ece5e0ca2205e301cb5ff121ce2660541ea5182c7"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-02/desktop-stop.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-02/desktop-uninstall.txt",
+      "bytes": 8,
+      "sha256": "7fc0023a6402c7bd7abd98bb3e580968de4833eed07d88d1cc8d70819d69c7a0"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-02/desktop-window-launch.txt",
+      "bytes": 214,
+      "sha256": "f705af81472e2dbaa7d544ebc329908e9ae126301c0ca49d67045c3898c56bc6"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-02/instrumentation-summary.json",
+      "bytes": 3621,
+      "sha256": "30af8b978a5dcef414637886454b8487f33aa4d19ab8f30439f29a71c6f02a3d"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-02/io.github.baitian6641.cloudy.console.test-uninstall.txt",
+      "bytes": 8,
+      "sha256": "7fc0023a6402c7bd7abd98bb3e580968de4833eed07d88d1cc8d70819d69c7a0"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-02/io.github.baitian6641.cloudy.desktop.test-uninstall.txt",
+      "bytes": 8,
+      "sha256": "7fc0023a6402c7bd7abd98bb3e580968de4833eed07d88d1cc8d70819d69c7a0"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-02/io.github.baitian6641.cloudy.platform.test-uninstall.txt",
+      "bytes": 8,
+      "sha256": "7fc0023a6402c7bd7abd98bb3e580968de4833eed07d88d1cc8d70819d69c7a0"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-02/package-cleanup-summary.json",
+      "bytes": 1213,
+      "sha256": "6d51d4f9cd4e7cac17982d38bcfd84a4cb5733da67d616639f73dd73f34b1840"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-02/tasks-after-close.txt",
+      "bytes": 60077,
+      "sha256": "06ff6e35b605f6702a3757b8a5dda81379059172ebaf512f92c480a3105a850c"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-02/tasks-after-new.txt",
+      "bytes": 66636,
+      "sha256": "379fb0dba3a4d1ac5791ca3960204358c5fec837668fad4c6987e91a857d6031"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-02/tasks-before-new.txt",
+      "bytes": 59976,
+      "sha256": "c3fda237b57d40735fb037bc64ae21c222e752305b23238770dbd52e330f9c21"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-02/window-actions.json",
+      "bytes": 179,
+      "sha256": "43da49167037f4c89463d4e46e0b8eecf47a6ca2b6c11d957a89660f6b874c49"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-02/window-after-close.json",
+      "bytes": 26127,
+      "sha256": "90efccb38b018303ce7998dfda24ff6424cd313090e51668677f2b99e90d7c36"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-02/window-after-new.json",
+      "bytes": 28742,
+      "sha256": "5fa0005718422489cc7ce62c0556c700c59fd935182fcda0840c141c1a278d27"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-02/window-before-new.json",
+      "bytes": 9307,
+      "sha256": "d8707e8b17f30ddedaaf19ecba30b921ef039bdbc06e9ec9badc3b05acb95f23"
+    },
+    {
+      "path": "qualification/results/private/foundation/2026-10-16-window-02/window-ready-new.json",
+      "bytes": 26127,
+      "sha256": "8e1956dc4bf4e5ddeaeea152fdccc0f39c9ba101daac8eec97e8e7b148d23056"
+    },
+    {
+      "path": ".cache/foundation-entry-01/build-12/TEST-io.github.baitian6641.cloudy.design.WindowDraftCodecTest.xml",
+      "bytes": 985,
+      "sha256": "76ce2ebb3d8b3984b7286b4a7502c81d99544fb2e210c1fcf41d223805a9c564"
+    },
+    {
+      "path": ".cache/foundation-entry-01/build-12/TEST-io.github.baitian6641.cloudy.domain.WindowStateTest.xml",
+      "bytes": 1134,
+      "sha256": "f69941c77f8d3484a72d5d92ee932b2bac0c410b82357f00b676668d825c3515"
+    },
+    {
+      "path": ".cache/foundation-entry-01/build-12/apk-audit.json",
+      "bytes": 439,
+      "sha256": "c46417cbbe24b1102259ba854109c1ac84ec7cd5b01463bb2f4fb8bd980c6199"
+    },
+    {
+      "path": ".cache/foundation-entry-01/build-12/check-summary.json",
+      "bytes": 385,
+      "sha256": "beeb03a7bb3f7ffdb006bdd8423b9e06e880cd70fb5f94125a1a01be4598f972"
+    },
+    {
+      "path": ".cache/foundation-entry-01/build-12/console-lint.xml",
+      "bytes": 86,
+      "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f"
+    },
+    {
+      "path": ".cache/foundation-entry-01/build-12/console-manifest.txt",
+      "bytes": 7604,
+      "sha256": "e1bea1cd20a9469a8120eba56a87d174559f48378b857f628e673193acc9b137"
+    },
+    {
+      "path": ".cache/foundation-entry-01/build-12/console-signature.txt",
+      "bytes": 955,
+      "sha256": "20b1268496d391ba13c15d9a8df1643f4471dea87237fdc82cc9776528383d62"
+    },
+    {
+      "path": ".cache/foundation-entry-01/build-12/desktop-lint.xml",
+      "bytes": 86,
+      "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f"
+    },
+    {
+      "path": ".cache/foundation-entry-01/build-12/desktop-manifest.txt",
+      "bytes": 7604,
+      "sha256": "c070ec5a9e712098d9d096f8e0cc6681202df8f129ee911dc1e3c2cf8f75876c"
+    },
+    {
+      "path": ".cache/foundation-entry-01/build-12/desktop-signature.txt",
+      "bytes": 955,
+      "sha256": "20b1268496d391ba13c15d9a8df1643f4471dea87237fdc82cc9776528383d62"
+    },
+    {
+      "path": ".cache/foundation-entry-01/build-12/final-package-audit.json",
+      "bytes": 939,
+      "sha256": "64ab3c662d7a9188df5ecc46a14c92ea96c1112f08c42f25f2f35183bd25abf8"
+    },
+    {
+      "path": ".cache/foundation-entry-01/build-12/gradle.log",
+      "bytes": 17723,
+      "sha256": "ee6221e268f64ab2317b7118e626a515e62b6ade77ba4a6d670c0c242ae501c5"
+    }
+  ]
+}

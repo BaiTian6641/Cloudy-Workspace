@@ -1,0 +1,7 @@
+<resources>
+    <string name="cloudy_window_name">Window name</string>
+    <string name="cloudy_save_name">Apply name</string>
+    <string name="cloudy_new_window">New window</string>
+    <string name="cloudy_close_window">Close window</string>
+    <string name="cloudy_name_too_long">Please use a shorter window name. The last edit was not accepted.</string>
+</resources>

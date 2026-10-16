@@ -512,7 +512,7 @@
       "id": "P1-S1",
       "phase": "P1",
       "title": "Native app targets and shared-module build foundation",
-      "status": "ready",
+      "status": "done",
       "effortDays": {
         "low": 3,
         "high": 4
@@ -548,7 +548,8 @@
       "evidenceDirectory": "qualification/results/P1-S1/",
       "requiresCapabilities": [
         "CAP-FOUNDATION"
-      ]
+      ],
+      "completionEvidence": "qualification/results/P1-S1/2026-10-16-native-foundation.md"
     },
     {
       "id": "P1-S2",

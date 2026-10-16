@@ -1,17 +1,15 @@
-# Platform and lifecycle adapters
+# Android window platform
 
-**State:** planned module boundary; no application/library implementation yet. **Delivery stages:** P0-S2, P1-S2/S3.
+**State:** implemented P1-S1 source, Gradle `:platform`; strict compilation and bounded device tests now pass; full stage acceptance remains parent-owned and open. This shared library depends on `:domain` and `:design-system` and is instantiated independently inside each app process.
 
-## Responsibility
+`CloudyWindowActivity` hosts the native Compose workspace, validates/restores owner-bound local window metadata through `WindowBundles`, commits name changes and updates Activity/task labels. It requests a fresh document task for New Window, copies no local state into launch extras, ignores externally supplied Intent state, and closes only its own window. Framework saved state and the editor's saveable draft are distinct from durable storage or live-operation ownership.
 
-Window insets/instances, input and IME integration, URI grants, permission state, connection lifecycle, timeout, and process recreation wrappers.
+The shared XML extraction resource excludes all nine supported domains from both cloud backup and device transfer. Both apps also disable backup. This is configured policy, not an actual migration-exclusion test or a product vault. System captions, safe drawing and IME insets remain part of the native window boundary.
 
-## Boundary
+No shared daemon, credentials, network, remote operation, permission orchestration or general background-session implementation exists in this library. URI grants, protected storage and operation-specific lifecycle adapters remain planned P1-S3 and feature work. Read the [module map](../../../docs/02-architecture/module-boundaries.md) and [current state](../../../docs/05-delivery/execution-state.md).
 
-Guard version-specific calls and preserve system controls/shortcuts. A foreground service is not an unrestricted keepalive mechanism.
+## Accepted bounded build/device checkpoint
 
-## First implementation work
+The [native foundation report](../../../qualification/results/P1-S1/2026-10-16-native-foundation.md) records strict build12 with no dependency-regeneration flags, nine passing JVM tests (domain5/design4), and zero Lint findings in both apps. On HP Googlebook14, Android17/API37 build `CL3B.260622.276.R2`, five real platform Bundle/Parcel tests and two Activity tests per app pass (nine connected tests total). Each product is independently installed/launched with the other absent. The first Console instrumentation failure exposed Espresso3.5 reflection incompatibility; the test-only3.7 pin corrects it, without changing the frozen product APK hashes.
 
-Use the API tracker and focused device probes before wiring durable product assumptions.
-
-Read the [module map](../../../docs/02-architecture/module-boundaries.md), [phase plan](../../../docs/05-delivery/README.md), and [validation strategy](../../../docs/06-validation/strategy.md). Record exact implementation versions and evidence before promoting a capability.
+This qualifies only the tested local-window metadata/editor/restoration boundary. P1-S1 is complete with actual Desktop New/Close and both package replacement/uninstall receipts; later product requirements remain open. Physical keyboard/native IME, process-death restoration, broader geometry/accessibility and remote functionality are not established by Activity recreation or Compose test stimulus.

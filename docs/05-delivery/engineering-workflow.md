@@ -4,6 +4,8 @@
 
 ## Goal and completion boundary
 
+**Current user direction (2026-10-16 revision):** the user removed the P1 stopping point and asked direct Codex GPT6.1-Sol and OMP coworkers to continue toward the full implementation goal. P1 completion and the detailed [OMP collaboration packet](p1-handoff-contract.md) remain milestones; they do not stop ready P2–P6 work or waive dependencies and acceptance gates.
+
 Develop independently useful Android-packaged Cloudy Console and Cloudy Desktop for the Googlebook desktop/laptop ecosystem. Start with P0 on the connected HP Googlebook. Preserve [Rule 0](../00-project/platform-rule-zero.md), the [approved decisions](../00-project/revision-02-final-review.md), [capability outcomes](feasibility-gates.md) and [independent release gates](release-gates.md).
 
 Completion requires the supported product scope, real backend/device behavior and recorded release evidence. Scaffolds, static checks, design specimens, a compiled APK, or a completed investigation alone do not satisfy that goal. Report a genuine blocker and continue independent work; propose a scope change explicitly if the required capability has no acceptable supported route.
@@ -124,3 +126,9 @@ Private evidence for each assignment is retained under `.cache/omp-workers/2026-
 ### SSH retention worker checkpoint
 
 The later finite `zai/glm-5.3` security assignment failed before any model event with `EROFS` while creating its normal daemon runtime directory. Its exact catalog/configuration/source packet and failure are retained privately at `.cache/omp-workers/2026-10-15-ssh-retention-security/`; no fallback or global configuration change was made. Direct Codex review supplied the scoped design review, followed by a separate actual-source review. The earlier accepted context-only routes remain accepted. Resolve this local runtime boundary in a deliberately scoped invocation before another OMP assignment; this failure is neither a GLM review nor a reason to repeat already accepted model trials.
+
+## Product foundation coworker checkpoint
+
+The 2026-10-16 assignments FOUNDATION-CI-001 and FOUNDATION-SEC-001 ran concurrently through OMP18.7.0 with actual routes `kimi-code/k3` and `zai/glm-5.3`, zero tool events and exit0. The user explicitly approved the selected project-code packets after automatic approval review stopped the first launch before model execution. The bounded retry used the documented per-run controls without global configuration changes. Source hashes, packet, routing/events and leader dispositions remain ignored under `.cache/omp-workers/2026-10-16-foundation/runtime-01/`.
+
+Kimi supplied the useful product CI workflow; the parent applied it, corrected a claim about a separate device job, verified the wrapper pin and requested independent Codex review. GLM identified restoration-warning overwrite and a saved-state whitelist guard; both were incorporated. Its older-Android concern was rejected because both apps require API35, above the API33 builder. Its proposed future generation hook was deferred until an actual vault operation exists, and its vault outline remains planning input. These are bounded context-only implementation/review contributions, not tool-enabled editing, device qualification or a security verdict. The active user direction is continued full-goal work; P1 is no longer a stopping point.

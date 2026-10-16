@@ -614,3 +614,27 @@ Checked 2026-10-16; owner: integration leader, P1-S1. These reviewed official so
 - **G172** — [UI AAR](https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-android/1.12.1/ui-android-1.12.1.aar).
 - **G173** — [Activity Compose module metadata](https://dl.google.com/dl/android/maven2/androidx/activity/activity-compose/1.13.0/activity-compose-1.13.0.module).
 - **G35** — [AGP 9.4 compatibility table](https://developer.android.com/build/releases/agp-9-4-0-release-notes).
+
+## P1 native window and test boundary references
+
+Checked 2026-10-16; product execution status is separate from these official contracts. G136 remains the backup/extraction syntax source.
+
+- **G174** — [Android task description builder](https://developer.android.com/reference/android/app/ActivityManager.TaskDescription.Builder). Builder and setLabel API33; actual caption pixels remain device evidence.
+- **G175** — [Compose window insets](https://developer.android.com/develop/ui/compose/system/insets). safeDrawing includes caption/system obstructions; combine IME via union to avoid double padding.
+- **G176** — [AndroidX Test stable releases](https://developer.android.com/jetpack/androidx/releases/test). Selected stable runner/core1.7.0 and extJUnit1.3.0; test-only actual resolution still needs build verification.
+- **G177** — [Compose testing setup](https://developer.android.com/develop/ui/compose/testing). Instrument actual application Activity with AndroidJUnitRunner and Compose semantics; test-manifest not needed for actual app host.
+- **G178** — [ActivityScenario reference](https://developer.android.com/reference/androidx/test/core/app/ActivityScenario). recreate exercises Activity recreation, not actual process death; record those claims separately.
+- **G179** — [Pinned runtime-saveable source1.12.1](https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-saveable/1.12.1/runtime-saveable-1.12.1-sources.jar). RememberSaveable.kt lines57-59 explicitly say saved restoration does not validate prior inputs; bind and validate logical window ID in custom saved envelope.
+- **G180** — [Published AndroidX Test runner1.7.0 POM](https://dl.google.com/dl/android/maven2/androidx/test/runner/1.7.0/runner-1.7.0.pom). Runner1.7.0 minimum SDK21 and dependency requests inspected; product min35 fits metadata.
+- **G181** — [Published AndroidX Test core1.7.0 POM](https://dl.google.com/dl/android/maven2/androidx/test/core/1.7.0/core-1.7.0.pom). ActivityScenario provided by core; no core-ktx requirement for this test scope.
+- **G182** — [Published AndroidX Test JUnit extension1.3.0 POM](https://dl.google.com/dl/android/maven2/androidx/test/ext/junit/1.3.0/junit-1.3.0.pom). Test-only AndroidJUnit4 runner integration, min21 metadata; actual build needed.
+- **G183** — [Published Compose UI Android test1.12.1 AAR](https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-test-junit4-android/1.12.1/ui-test-junit4-android-1.12.1.aar). Test artifact min23, compile37 and AGP9.1.0 floors fit product stack; BOM mapping G162. Metadata is not a test execution result.
+
+- **G184** — [Compose test v2 migration](https://developer.android.com/develop/ui/compose/testing/migrate-v2). Use the v2 factory supported by pinned1.12.1; newer1.13 configuration examples are outside this pin. G45 was refreshed for the required Kotlin source-set wiring.
+
+## Android17 instrumentation dependency correction
+
+- **R262** — [AndroidX Test issue2507 resolved dependency correction](https://github.com/android/android-test/issues/2507). Author corrects actual Espresso3.5 transitive floor; explicit3.7 fixes API37 InputManager lookup. Issue title alone is misleading.
+- **R263** — [AndroidX Test public InputManager lookup fix](https://github.com/android/android-test/commit/fddcda4adc8eaba515fbf2d790cf8dfe5c1b722d). Exact upstream change uses Context.getSystemService on API23+; prior reflection remains only below23.
+- **G185** — [Published Espresso core3.7.0 AAR](https://dl.google.com/dl/android/maven2/androidx/test/espresso/espresso-core/3.7.0/espresso-core-3.7.0.aar). 472033bytes SHA2565dd90e366838bf044cb52eae06474debd285df18a7a77c40441ac8e8951bb00f; public API23+ lookup verified in actual class bytecode. Test-only.
+- **G186** — [Published Espresso core3.7.0 sources](https://dl.google.com/dl/android/maven2/androidx/test/espresso/espresso-core/3.7.0/espresso-core-3.7.0-sources.jar). Pinned sources verify API23+ getSystemService; sourceSHA256528c9e1986979fd6cd2f32e86507ffb847f3e88c0be2f039a03fb41de3642cff. Stable selected release, not movingmain.

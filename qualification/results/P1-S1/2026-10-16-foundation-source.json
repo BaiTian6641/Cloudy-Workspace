@@ -1,0 +1,262 @@
+{
+  "scope": "P1-S1 source and build inputs, not a device verdict",
+  "files": [
+    {
+      "path": ".github/workflows/android-foundation.yml",
+      "sha256": "588fb55f9a7086375a142ec773c3b8c9c5eea584117e6f1e8a55bef80e6ad251"
+    },
+    {
+      "path": "apps/console/README.md",
+      "sha256": "42c28b946a8adac70b9a327064eab741d1b346cb4b1161a46f92ef13b7b44f21"
+    },
+    {
+      "path": "apps/console/build.gradle.kts",
+      "sha256": "b353d30d1361362b9421a28c0581899989b1a08aac364da85111f11d187b6d1b"
+    },
+    {
+      "path": "apps/console/gradle.lockfile",
+      "sha256": "1bf586d58afcf2736fd1a1e1a23690a9dc6274e4d542a068558c6110aacfe40e"
+    },
+    {
+      "path": "apps/console/src/androidTest/kotlin/io/github/baitian6641/cloudy/console/ConsoleWindowActivityTest.kt",
+      "sha256": "a861aa981b588184930d4600bfdc3d478b4911bdaa5e686cbd41619f9d1eeeef"
+    },
+    {
+      "path": "apps/console/src/main/AndroidManifest.xml",
+      "sha256": "f1f2bdbc122dea5e2217c937b80b35df8607e0f96c4f9738410f8e5c4a313f27"
+    },
+    {
+      "path": "apps/console/src/main/kotlin/io/github/baitian6641/cloudy/console/WorkspaceActivity.kt",
+      "sha256": "e5858e0dd0fc3056ad4d28aa40dd0474bee95e007e50dea46419c9475ae11a6c"
+    },
+    {
+      "path": "apps/console/src/main/res/drawable/ic_launcher_background.xml",
+      "sha256": "cccdd202dc66f4824d113d06d0253d9b9010f05e422702fa94717f44e353d345"
+    },
+    {
+      "path": "apps/console/src/main/res/drawable/ic_launcher_foreground.xml",
+      "sha256": "04c52fd1b5cecf5f79804b8a8b9aff43d9e5f9afbfe46a99afdffddf371bd371"
+    },
+    {
+      "path": "apps/console/src/main/res/drawable/ic_launcher_monochrome.xml",
+      "sha256": "2e0ec4a2e21e10dfa664ed1386258dc8e3edca9a6c8384a6a7e58d02aff0fdb1"
+    },
+    {
+      "path": "apps/console/src/main/res/mipmap-anydpi/ic_launcher.xml",
+      "sha256": "ada31da9e23f4520f3753e71ca23799a107431473daa3774b6cecac26847260c"
+    },
+    {
+      "path": "apps/console/src/main/res/values/strings.xml",
+      "sha256": "ea0592ed54e86a2f09c2292c2609c686a2c0e71dc0acec297d2c591a4030cf4c"
+    },
+    {
+      "path": "apps/desktop/README.md",
+      "sha256": "322ee17ba00d68e5b430664672567bd6a9011629b78738cda38b6502e461350b"
+    },
+    {
+      "path": "apps/desktop/build.gradle.kts",
+      "sha256": "e4146b6e8d58d12e4ad355c69dabafd5af20c349829cde8f62e008ce23fcc87d"
+    },
+    {
+      "path": "apps/desktop/gradle.lockfile",
+      "sha256": "ac7b0b7177602fdb4992da64bc3d2fe1be8afd1831b76d7da36153729c361def"
+    },
+    {
+      "path": "apps/desktop/src/androidTest/kotlin/io/github/baitian6641/cloudy/desktop/DesktopWindowActivityTest.kt",
+      "sha256": "cc7c4342de5b1007bace542cf849d8ed1d9400989a9a32a4bce9521d48f3ce27"
+    },
+    {
+      "path": "apps/desktop/src/main/AndroidManifest.xml",
+      "sha256": "f1f2bdbc122dea5e2217c937b80b35df8607e0f96c4f9738410f8e5c4a313f27"
+    },
+    {
+      "path": "apps/desktop/src/main/kotlin/io/github/baitian6641/cloudy/desktop/WorkspaceActivity.kt",
+      "sha256": "cf5b5a08a4da2b5779625a62b41cde6b559e417fb5a0a29a948751d522c4b123"
+    },
+    {
+      "path": "apps/desktop/src/main/res/drawable/ic_launcher_background.xml",
+      "sha256": "cccdd202dc66f4824d113d06d0253d9b9010f05e422702fa94717f44e353d345"
+    },
+    {
+      "path": "apps/desktop/src/main/res/drawable/ic_launcher_foreground.xml",
+      "sha256": "b78cf1dc2a730abe91b0d7183dc8890473d319834639a58b067e837411885898"
+    },
+    {
+      "path": "apps/desktop/src/main/res/drawable/ic_launcher_monochrome.xml",
+      "sha256": "595de0662ce4d98a703b0ca8a5095fc1cb8d322a60ceb3da4541170884f8e6d9"
+    },
+    {
+      "path": "apps/desktop/src/main/res/mipmap-anydpi/ic_launcher.xml",
+      "sha256": "ada31da9e23f4520f3753e71ca23799a107431473daa3774b6cecac26847260c"
+    },
+    {
+      "path": "apps/desktop/src/main/res/values/strings.xml",
+      "sha256": "e778bb9ea63a60be013d71053a21b1a78b115ff815dfda4b98570caaa1d96542"
+    },
+    {
+      "path": "build.gradle.kts",
+      "sha256": "2cb98bec90e342ac6de363b5062e2d520502e97fcf0ba0238dc09c6f02cb0a0e"
+    },
+    {
+      "path": "gradle/libs.versions.toml",
+      "sha256": "56d9aec4edff67366b5ed4631a06b74778ca2cabb2bc1f562dc8dada016298fd"
+    },
+    {
+      "path": "gradle/verification-metadata.xml",
+      "sha256": "91cdcaaa8c9e8dd1276913cb3154e62262301791066244454768c67704f1b286"
+    },
+    {
+      "path": "gradle/wrapper/gradle-wrapper.jar",
+      "sha256": "497c8c2a7e5031f6aa847f88104aa80a93532ec32ee17bdb8d1d2f67a194a9c7"
+    },
+    {
+      "path": "gradle/wrapper/gradle-wrapper.properties",
+      "sha256": "c629b14195c2b627ef184fba4416f5dfce6f69c8b088230965bf3f77b8a1a7b4"
+    },
+    {
+      "path": "gradle.properties",
+      "sha256": "d7bdeb259622ba17e8cb3a8417f5a38e2e338444e301cd5f3493d581c458cf67"
+    },
+    {
+      "path": "gradlew",
+      "sha256": "a5a5c199ba02189ae8c46a334223371a20599d9c298ef65e7540ede4a3f72d59"
+    },
+    {
+      "path": "gradlew.bat",
+      "sha256": "d539676c48b596afda64c963ec8f7ee56c7b3fe7e3b81d1dbe2d1a1e3dd9e9f8"
+    },
+    {
+      "path": "lint.xml",
+      "sha256": "6aeb4ee76d36ce5fe6fc27e33f4afd512b4cf7185172aecc451bb922314cac13"
+    },
+    {
+      "path": "settings-gradle.lockfile",
+      "sha256": "5e2d075903b5cd264613e7538c7c51b1484fe2ed489d4ead3e6b4ba0cf3911c4"
+    },
+    {
+      "path": "settings.gradle.kts",
+      "sha256": "ea62b41108727341c418a64cac25ed243525d7eaab14076d83b407b597e6ea09"
+    },
+    {
+      "path": "shared/android/domain/README.md",
+      "sha256": "c588d771aa231facc2ad14626a212071811d1b46194111553de184951ee744a9"
+    },
+    {
+      "path": "shared/android/domain/build.gradle.kts",
+      "sha256": "d6db0cc6a78e0940dad069fe5966ff553441036197f63b54af9fed8059ab50f9"
+    },
+    {
+      "path": "shared/android/domain/gradle.lockfile",
+      "sha256": "b9e2d1e91356a28c97132f538667ae06f1907352d68b4f9c74aba8c03a75e65a"
+    },
+    {
+      "path": "shared/android/domain/src/main/kotlin/io/github/baitian6641/cloudy/domain/WindowState.kt",
+      "sha256": "7e4c0146756c4011f49b5dcef04f1b9144937db66e1f77b86b4615c8175424b7"
+    },
+    {
+      "path": "shared/android/domain/src/test/kotlin/io/github/baitian6641/cloudy/domain/WindowStateTest.kt",
+      "sha256": "dd9e4a4039cdcb0de29946b7188e08ec60072fbf22c81fbc77f9c3d4f886a74e"
+    },
+    {
+      "path": "shared/android/platform/README.md",
+      "sha256": "6a088a68b4821062cb82f15ce754cc5c7043e3b08a7ae25c8639662cd1372280"
+    },
+    {
+      "path": "shared/android/platform/build.gradle.kts",
+      "sha256": "329bc4a5cb98f7538594f8bebbe153f1cb8e50d44b65e176d028a9a32607d2c9"
+    },
+    {
+      "path": "shared/android/platform/gradle.lockfile",
+      "sha256": "1574baefe5f4dcd7423937746141c90183a260405f458da72c4073f82eeebc9b"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/WindowBundlesTest.kt",
+      "sha256": "7a7d45c54a489f063c7f2241bf3ded4cb4486098f31751dd37e8117262404417"
+    },
+    {
+      "path": "shared/android/platform/src/main/AndroidManifest.xml",
+      "sha256": "daa0fb1f32ba7ea85a07ef6302ab3d58c3407d7fd2aa03ec132cb9e38e8d9849"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudyWindowActivity.kt",
+      "sha256": "8fe871ec334f27def7e7582f2847908a04358bf6ee690a5602ebdf7d95e515d9"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/WindowBundles.kt",
+      "sha256": "5b3da64777dabee6e85adb8435b073af71be43a1360a4678a6536c897ee492c5"
+    },
+    {
+      "path": "shared/android/platform/src/main/res/values/strings.xml",
+      "sha256": "840318c98e6014ca7ba7fbea6b8495e713c2d764417707402207224599166262"
+    },
+    {
+      "path": "shared/android/platform/src/main/res/values/styles.xml",
+      "sha256": "08c45932d886bf094c541d5831c57c368e2cc1fdb576ba241855baf2b3a22aef"
+    },
+    {
+      "path": "shared/android/platform/src/main/res/values-night/styles.xml",
+      "sha256": "d2b018657d8b71f26a08e4cb7fd665cf2c212bfe41a811a733e322bcec13e70c"
+    },
+    {
+      "path": "shared/android/platform/src/main/res/xml/cloudy_data_extraction_rules.xml",
+      "sha256": "9053f4326fa3ccd5ac3bd677a088f3535a8d692522b193b1f564ba3bbc9d4e41"
+    },
+    {
+      "path": "shared/design-system/android/README.md",
+      "sha256": "0e5b023d554c245ca857657c3b7d56790a7b68172f902659501a5240824b4030"
+    },
+    {
+      "path": "shared/design-system/android/build.gradle.kts",
+      "sha256": "591065cf26dfe9ce64b075d2426146d0139bed361929311d4713d526d80bc964"
+    },
+    {
+      "path": "shared/design-system/android/gradle.lockfile",
+      "sha256": "2a0510f4f302dabc65eb26d149c3c3072dcc6e6d0edc63b82b33cefd194f8d30"
+    },
+    {
+      "path": "shared/design-system/android/src/main/AndroidManifest.xml",
+      "sha256": "daa0fb1f32ba7ea85a07ef6302ab3d58c3407d7fd2aa03ec132cb9e38e8d9849"
+    },
+    {
+      "path": "shared/design-system/android/src/main/java/io/github/baitian6641/cloudy/design/CloudyTheme.kt",
+      "sha256": "ba476ff83a954a9e2d8a22248bc9f6675450800784e6ca64cba684aef42b4500"
+    },
+    {
+      "path": "shared/design-system/android/src/main/java/io/github/baitian6641/cloudy/design/CloudyTokens.kt",
+      "sha256": "b92111e6782b429d1ff599e9f6dbdbbed069855988d6e27d8ea787fe5cfb89c3"
+    },
+    {
+      "path": "shared/design-system/android/src/main/java/io/github/baitian6641/cloudy/design/WindowDraftCodec.kt",
+      "sha256": "0e80c07715656baf0959ef57a381197a8f5b97acc56c11b392ac0dd029a88e91"
+    },
+    {
+      "path": "shared/design-system/android/src/main/java/io/github/baitian6641/cloudy/design/WindowWorkspaceScreen.kt",
+      "sha256": "57d15af6b26eb6e660a80beeaad6de0eee21a3d7c017c3608e2ade29fe8cbc81"
+    },
+    {
+      "path": "shared/design-system/android/src/main/res/values/strings.xml",
+      "sha256": "dcd952977472f87e1370e2e32f01803f881815e28d814f6586a9be01d9b227dc"
+    },
+    {
+      "path": "shared/design-system/android/src/test/java/io/github/baitian6641/cloudy/design/WindowDraftCodecTest.kt",
+      "sha256": "6aac689c54910a1f0e296ac7e9b8410d0553ddc4dec57fd542c54a1c7b57f8cb"
+    },
+    {
+      "path": "shared/design-system/tokens.json",
+      "sha256": "dabfa9d7e8bde69df0345aee62c944413ce57889bb0cf1dfa41d6c0c455a0047"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/WindowActivityContract.kt",
+      "sha256": "8c1afdd37ec035b515106d62903348dc19f3a12b238bf79898faa8982df33b5d"
+    },
+    {
+      "path": "tests/test_android_tokens.py",
+      "sha256": "74aacf64a513131b067091da67d6480a8f16e0c6d3d3e9ed757af2e1489f1819"
+    },
+    {
+      "path": "tools/generate_android_tokens.py",
+      "sha256": "490bf094a680c6394487d8c55e6b7dc857ad02135672a0e4a766828fd59f7fb6"
+    }
+  ],
+  "baseCommit": "0b794107bcf0c1868be9b0ee219bbce13cac1b38"
+}

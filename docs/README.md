@@ -17,7 +17,7 @@ The numbered folders describe one development program. Read project decisions be
 | Decisions | [ADR index](adr/README.md) |
 | Intake | [Original plan and provenance](intake/README.md) |
 
-The [desktop workflow design](04-design/desktop-workflows.md) expands the visual system for S13–S17; the offline specimen remains the initial subset. Cross-links are repository-relative for GitHub/local use. P0-S1 qualification setup is **complete**, with a real diagnostic APK, device run and explicit inventory gaps; P0-S2 investigation is complete with CAP-PLATFORM in a bounded experiment; P0-S3 SSH/terminal qualification and P0-S4 native-engine integration are in progress. Console, Desktop and host implementation remain planned. See the [setup closeout](../qualification/results/P0-S1/2026-10-15-setup-closeout.md).
+The [desktop workflow design](04-design/desktop-workflows.md) expands the visual system for S13–S17; the offline specimen remains the initial subset. Cross-links are repository-relative for GitHub/local use. P0-S1 qualification setup is **complete**, with a real diagnostic APK, device run and explicit inventory gaps; P0-S2 investigation is complete with CAP-PLATFORM in a bounded experiment; P0-S3 investigation and P1-S1 local app foundation are complete. P0-S4 native engines and P0-S5 USB remain in progress; remote product features and the host remain planned. The [actual P1-S1 result](../qualification/results/P1-S1/2026-10-16-native-foundation.md), [toolchain](03-platform/googlebook/product-toolchain.md) and [review](06-validation/2026-10-16-native-foundation-review.md) control the new local-window scope. See the [setup closeout](../qualification/results/P0-S1/2026-10-15-setup-closeout.md).
 
 ## Qualification history and current references
 

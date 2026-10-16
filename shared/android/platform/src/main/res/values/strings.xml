@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cloudy_window_title">%1$s · %2$s</string>
+    <string name="cloudy_restore_rejected">This window’s previous name could not be restored. A new local window was opened.</string>
+    <string name="cloudy_name_blank">Enter a name for this window.</string>
+    <string name="cloudy_name_long">Use a shorter window name.</string>
+    <string name="cloudy_name_invalid">Use a single line of valid text without control characters.</string>
+    <string name="cloudy_name_updated">Window name updated.</string>
+    <string name="cloudy_system_title_failed">The local name is available, but the system task label could not be updated.</string>
+    <string name="cloudy_window_launch_failed">The new window could not be opened. Try again.</string>
+</resources>

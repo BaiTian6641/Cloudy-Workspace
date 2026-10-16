@@ -24,6 +24,8 @@ Use `codex/` for new working branches unless the user requests another name. Do 
 
 ## Execution mandate from the user
 
+**Current execution direction (user revision, 2026-10-16): continue toward the full P0–P6 goal with direct Codex GPT6.1-Sol and authorized OMP Kimi/GLM coworkers.** The user explicitly removed the earlier P1 stopping point. Complete and document the P1 foundation as an integration milestone, then continue ready roadmap work; the detailed [OMP handoff contract](docs/05-delivery/p1-handoff-contract.md) is now a rolling collaboration packet, not a stop instruction. Preserve this revision through context compression. Workers own bounded disjoint tasks; the parent retains integration, shared operations and acceptance.
+
 The implementation goal is active. Read `docs/05-delivery/engineering-workflow.md` and `docs/05-delivery/execution-state.md` before continuing work, then read the relevant stage and its sources. Preserve decisions across context changes; update the state record and `docs/00-project/history.md` at each reviewed milestone.
 
 **Do not use placeholder implementations.** Product actions must perform their real operation or expose an honest unsupported/unavailable state. Empty handlers, fabricated sessions/results, fake network/device responses, and log-only methods cannot satisfy an implementation stage. Test doubles belong in test fixtures/source sets and never count as integration or physical-device evidence. A real qualification probe is allowed when it measures actual APIs and clearly states its limited purpose.
