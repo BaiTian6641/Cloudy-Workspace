@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "One actual repaired public VNC Engine/JNI cancellation and sequential-owner case in isolated Googlebook instrumentation",
+  "acceptance": "Parent and independent evidence review accept actual setup/one measurement/explicit teardown; no product/stage/capability promotion",
+  "platform": {
+    "model": "HP Googlebook14",
+    "android": "17",
+    "api": 37,
+    "abi": "arm64-v8a",
+    "build": "CL3B.260622.276.R2",
+    "incremental": "16560795"
+  },
+  "target": {
+    "package": "io.github.baitian6641.cloudy.desktop.vnc.runtime",
+    "versionCode": 2,
+    "versionName": "0.0.2-runtime-qualification",
+    "apk": {
+      "path": ".cache/vnc-product-runtime-entry-02/build-03/runtime-debug.apk",
+      "sha256": "739fd2948761197011e485b8623a1b481e26774ada2b1fa201b4cf8381494de9"
+    }
+  },
+  "test": {
+    "package": "io.github.baitian6641.cloudy.desktop.vnc.runtime.test",
+    "manifestVersion": "unversioned",
+    "apk": {
+      "path": ".cache/vnc-product-runtime-entry-02/build-03/runtime-debug-androidTest.apk",
+      "sha256": "f0dfee73ef3e064bfc03a19c08ecc3ba205a9a93f0a82c440e023491530370dd"
+    }
+  },
+  "releaseAar": {
+    "path": ".cache/vnc-owner-cleanup-repair-01/build-01/vnc-release.aar",
+    "sha256": "96158cdfb71c37e5154324d06426867a9095090f6c01d5082d0b4d106adc3022"
+  },
+  "recipe": {
+    "path": ".cache/vnc-product-runtime-entry-02/runtime-parent-02/freeze-03.json",
+    "sha256": "794653610a07320a759539ce905df45bfd4330b393143dca32b536c1a48de9d5"
+  },
+  "driver": {
+    "path": ".cache/vnc-product-runtime-entry-02/runtime-parent-02/runtime_parent_04.py",
+    "sha256": "413326555f0c162d873a173d6b8e20dddd21e8fbc5567f652e56163f62a5a352"
+  },
+  "preparation": {
+    "path": ".cache/vnc-product-runtime-entry-02/runtime-parent-02/preparation-03.json",
+    "sha256": "9e1ec5204d3e0153e85ee83fa6e9ace9267c9257a39b375b514c9c46d8046387"
+  },
+  "recipeIndependentReview": {
+    "path": ".cache/vnc-product-runtime-entry-02/runtime-parent-02/independent-review-02.json",
+    "sha256": "b71ec6276b26c3d5804033d4063ffaee20ffbde2a2f19dc364a8ed71aca8448a"
+  },
+  "operations": {
+    "setup": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-wrapper-runtime-01/setup/runtime-result.json",
+      "sha256": "b962055d51a4a14321755f6134d06d2c34c2202d2032ac24227dda0c1bfcb7b4"
+    },
+    "measurement": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-wrapper-runtime-01/measurement/runtime-result.json",
+      "sha256": "6b1749fb1059da5413825625d33c0882109c15a3c30b684dba7823ceac6a476f"
+    },
+    "teardown": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-wrapper-runtime-01/teardown/runtime-result.json",
+      "sha256": "1c3e8ee56ea5cb7ea06de8922ba5afbdcf9641487845d482922d1106203d49db"
+    }
+  },
+  "actualInstrumentation": {
+    "method": "io.github.baitian6641.cloudy.desktop.vnc.runtime.VncSilentGreetingRuntimeTest#silentGreetingCancellationRetiresRealOwner",
+    "invocations": 1,
+    "passes": 1,
+    "failures": 0,
+    "skips": 0,
+    "orderedPhases": 10,
+    "phaseSpanMillis": 37,
+    "junitSeconds": 0.046,
+    "elapsedField": "absolute SystemClock.elapsedRealtime milliseconds; duration is last minus first",
+    "stdout": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-wrapper-runtime-01/measurement/io/instrumentation.stdout",
+      "sha256": "dd8fb5a8b5f8e300bfa892817d342f580fb118c799e9796a5370f9dfebb56e38"
+    },
+    "stderr": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-wrapper-runtime-01/measurement/io/instrumentation.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "realOperations": "Two sequential real Engine/JNI owners and silent real loopback peers; live-owner refusal, stop once, retirement and peer EOF",
+    "authFramesInputOrUiExercised": false
+  },
+  "preservation": {
+    "authority": {
+      "path": "qualification/results/private/foundation/2026-10-16-handoff-positive-desktop-console-01/bootstrap.json",
+      "sha256": "1046891afcfb4d62a9a094b35fdb5a766a0881b24f7ce3123d1397cec0ea00eb"
+    },
+    "products": "Console/Desktop0.1.15/code16 installed and stopped",
+    "completeBaselineEquality": true,
+    "oldFoundationTestPackagesAbsent": 3,
+    "isolatedTargetAndTestRemoved": true,
+    "screenLockOrVaultPrompt": false,
+    "permissionProvisioning": "Isolated install -g; exact read-only PackageManager integer0, not product consent UX"
+  },
+  "preparationChecks": {
+    "parserControls": 10,
+    "uidListingControls": 5,
+    "unchangedPermissionControlsCarried": 6,
+    "scope": "synthetic preparation only; distinct from actual JNI/runtime"
+  },
+  "limits": [
+    "No protected VNC authentication/framebuffer/input/rendering or product embedding",
+    "No remote latency, sustained operation, broad lifecycle/host compatibility or release closure",
+    "Native/Java/AAR unchanged; prior compiler/JVM/Lint evidence carried",
+    "Android CLI launcher EROFS preserved; existing pinned SDK/ADB used without global install",
+    "Earlier recipe failures preserved unexecuted; no automatic failure cleanup/retry"
+  ],
+  "independentActualEvidenceReview": {
+    "path": ".cache/vnc-product-runtime-entry-02/runtime-parent-02/independent-runtime-evidence-01.json",
+    "sha256": "72e7df1e1934d84655171944b21fb29e0885be0360f6f43b748a797a6b9ee404",
+    "status": "ACCEPTED_SCOPED_ACTUAL_RUNTIME_NO_RERUN"
+  }
+}

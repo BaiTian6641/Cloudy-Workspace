@@ -207,3 +207,8 @@ The [0.1.9 native-entry result](../../../qualification/results/P1-S3/2026-10-16-
 ## Shared fullscreen and overlay acceptance
 
 The user requires remote desktop ready-time fullscreen with compact local controls. The [presentation contract](../../04-design/remote-session-presentation.md) applies to P1-S2 design, P3-S7/S8 native RDP/VNC and P5-S2 native streaming. Check eligible foreground entry, denial/windowed fallback, overlay/input separation, safe escape, actual geometry and retirement. This refines existing session UX; protocol, security and physical gates remain unchanged. Sources G24/R304–R306; [worker visual checks](../../04-design/worker-visual-acceptance.md) accompany implementation.
+
+
+## P1-S4 VNC wrapper runtime checkpoint — 2026-10-16
+
+The [actual isolated Googlebook case](../../../qualification/results/P1-S4/2026-10-16-vnc-wrapper-runtime.md) passes one repaired public-Engine/JNI method with two sequential silent TCP peers, live-owner refusal, single-stop retirement and peer EOF. Separate setup/measurement/teardown preserve the complete installed0.1.15 product/system/boot baseline and remove both isolated packages. Prior compiler/JVM/Lint/native evidence is carried unchanged; no new upstream battery runs. Protected VNC negotiation/authentication, frames, input, fullscreen presentation, owning-app/root adoption and release closure remain open. This bounded runtime result changes neither P1-S4 prerequisites nor formal stage/capability acceptance. Host-side construction continues independently under the parallel execution contract.
