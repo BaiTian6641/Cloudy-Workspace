@@ -8,11 +8,11 @@ android {
         minSdk 35
         // Direct pairing uses the Android 17 local-network runtime permission.
         targetSdk 37
-        versionCode 10
-        versionName '0.1.9'
+        versionCode 11
+        versionName '0.1.10'
         ndk { abiFilters 'arm64-v8a' }
         buildConfigField 'boolean', 'ROOT_BUILD', 'false'
-        buildConfigField 'String', 'QUALIFICATION_BUILD_REF', '"a9159dd4-2b44-4fc4-9818-bbc5ba1876f5"'
+        buildConfigField 'String', 'QUALIFICATION_BUILD_REF', '"8262bedf-19ea-41f0-baff-04a2f4d2ff8e"'
         buildConfigField 'String', 'NATIVE_BUILD_REF', '"f336e245-805d-4aad-bc1a-9208df8db318"'
     }
     buildFeatures { buildConfig = true; resValues = true }

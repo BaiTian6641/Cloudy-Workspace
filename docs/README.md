@@ -1,6 +1,6 @@
 # Documentation map
 
-The numbered folders describe one development program. Read project decisions before implementation details, and use the phase files to find executable next steps.
+The numbered folders describe one development program. Read project decisions before implementation details, and use the phase files to find executable next steps. Current continuation: [execution state](05-delivery/execution-state.md), [streaming comprehensive review](06-validation/2026-10-15-stream-comprehensive-review.md) and [0.1.10 repair](06-validation/2026-10-15-stream-presentation-review.md). The repair is built but uninstalled; visual playback remains failed.
 
 | Area | Key documents |
 | --- | --- |

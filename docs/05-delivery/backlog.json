@@ -232,7 +232,7 @@
         "D15: qualify genuine negotiated RDP relative mouse through public Android capture and an actual3D application, separately for physical mouse/trackpad and exact Linux/Windows/macOS server rows. Diagnostic0.1.5 adds a user-confirmed captured host-trail/cursor/release result on GRD50.2, preserving earlier KRdp/0.1.4 failures. Input subtype was not supplied;3D/broader release and performance remain unqualified. macOS RDP server selection remains unresolved; built-in Apple VNC is a separate lane.",
         "Carry forward the reviewed0.1.5 cursor repair and attempt13 physical result: user confirms captured host trail/cursor movement and release; eight capture edges and real host-painted motion are retained. Prediction stays presentation-only and the standard relative wire route is unchanged. Input subtype, actual3D and measured latency remain unqualified; investigate the earlier lag with bounded client/host measurements and explicit software-fixture limitations.",
         "Review the bounded0.1.6 status/control optimization and same four-gesture device sample: p95 Android frame time remains11ms with one janky frame per sample. No measured lag improvement, end-to-end latency or new physical capture result. Next isolate measured draw/monitor/host costs; do not infer latency from framework counters.",
-        "Carry forward same-key credential pairing and real pinned LAN catalogs. The documented Sunshine 7.1.431.-1 compatibility correction is implemented in0.1.9; native start returns0, with1524decode submissions/1517rendercallbacks and complete finite retirement. User final result is no playback: visual acceptanceFAILED. Comprehensive UI/auth/presentation/evidence/context review is complete: resolve open SR-01..SR-06 in a separately reviewed increment; SR-07 documentation continuity is corrected; counters cannot satisfy visible video. Three0.1.9catalog reads complete160/138/88ms afterauthorization; two laterCLIENT_TLS failures remain recorded. Preserve22finalrecords and15priorbyte-identities. VNC0.1.2 frame/pointer/disconnect and userkeyboard evidence carry forward; one-minute blankstartup is unresolved. Built/reviewed0.1.3 timing/F8/focus is uninstalled,10JVM/zeroLint. Streaming0.1.9build42JVM/zeroownedLint, native/39runtime dependencies unchanged. Do not rerun unchanged upstream tests or weaken host/key policy. Wrong-pin/cancel/expiry, visible playback/input/performance, D16 distribution closure and independent app gates remain."
+        "Carry forward same-key credential pairing and real pinned LAN catalogs. The Sunshine 7.1.431.-1 correction is implemented in 0.1.9; native start returns 0, with 1,524 decode submissions/1,517 render callbacks and complete finite retirement. The user reports no playback: visual acceptance remains FAILED. The comprehensive review and 0.1.10 source repair are complete. SR-01/02/04/05/06 corrections and SR-03 observations compile with 60 JVM tests, zero owned Lint and 681 staged files verified. The new APK is uninstalled/unexecuted, so runtime acceptance remains pending; SR-07 continuity is corrected. Preserve all 22 final records, 15 prior byte-identities and later CLIENT_TLS failures. Final presentation-03 retains native bytes and 39 runtime dependencies; the first build resource warning/audit correction remain historical. VNC 0.1.2 frames, pointer, disconnect and user keyboard evidence carry forward; roughly one-minute blank startup is unresolved. Built/reviewed VNC 0.1.3 timing/F8/focus remains uninstalled with 10 JVM tests and zero Lint. Do not rerun unchanged upstream tests or weaken host/key policy. Wrong-pin/cancel/expiry, visible playback/input/performance, D16 distribution closure and independent app gates remain open."
       ],
       "deliverables": [
         "Pinned stream/RDP/VNC engine and server feasibility matrix",
@@ -347,7 +347,10 @@
         "R247",
         "R248",
         "R249",
-        "R250"
+        "R250",
+        "G25",
+        "G151",
+        "G154"
       ],
       "acceptanceCases": [
         "Q-D01",

@@ -8,6 +8,11 @@ import android.text.InputFilter;
 import android.view.WindowManager;
 import android.graphics.SurfaceTexture;
 import android.view.TextureView;
+import android.graphics.Rect;
+import android.view.Gravity;
+import android.widget.FrameLayout;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.os.Bundle;
@@ -43,7 +48,19 @@ public final class StreamProbeActivity extends FragmentActivity {
     private Button load;
     private Button pair;
     private EditText pairingPin;
-    private LinearLayout previewContainer;
+    private FrameLayout previewContainer;
+    private LinearLayout root, presentationChrome;
+    private TextureView previewTexture;
+    private TextView phaseStatus,deadlineStatus,previewReason,textureStatus;
+    private StreamProbeViewModel.UiState lastState;
+    private final Handler uiHandler=new Handler(Looper.getMainLooper());
+    private boolean foreground;
+    private final Runnable deadlineTick=new Runnable() {
+        @Override public void run() {
+            if (!foreground) return;
+            updateDeadline();uiHandler.postDelayed(this,1000);
+        }
+    };
     private PlaybackSurfaceOwner previewSurface;
     private TextView playbackStatus;
     private Button preview, cleanup, reconcile, catalog;
@@ -62,17 +79,35 @@ public final class StreamProbeActivity extends FragmentActivity {
         // Reconstruct on every creation to replace AndroidX's callback for an
         // existing prompt. Never call authenticate() just to reattach it.
         prompt = newPrompt(model.promptTokenForReattach());
-        LinearLayout content = new LinearLayout(this);
-        content.setOrientation(LinearLayout.VERTICAL);
-        int padding = dp(20);
-        content.setPadding(padding, padding, padding, padding);
-        content.setOnApplyWindowInsetsListener((view, insets) -> {
-            android.graphics.Insets safe = insets.getInsets(WindowInsets.Type.systemBars()
+        root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);
+        int padding=dp(12);
+        root.setPadding(padding,padding,padding,padding);
+        root.setOnApplyWindowInsetsListener((view,insets) -> {
+            android.graphics.Insets safe=insets.getInsets(WindowInsets.Type.systemBars()
                     | WindowInsets.Type.displayCutout() | WindowInsets.Type.ime());
-            view.setPadding(padding + safe.left, padding + safe.top,
-                    padding + safe.right, padding + safe.bottom);
+            view.setPadding(padding+safe.left,padding+safe.top,padding+safe.right,padding+safe.bottom);
             return insets;
         });
+        presentationChrome=new LinearLayout(this);presentationChrome.setOrientation(LinearLayout.VERTICAL);
+        phaseStatus=label(presentationChrome,R.string.cloudy_presentation_idle);phaseStatus.setMaxLines(2);
+        phaseStatus.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);
+        deadlineStatus=label(presentationChrome,R.string.cloudy_presentation_no_deadline);deadlineStatus.setMaxLines(1);
+        textureStatus=label(presentationChrome,R.string.cloudy_presentation_texture_none);textureStatus.setMaxLines(1);
+        previewReason=label(presentationChrome,R.string.cloudy_presentation_surface);previewReason.setMaxLines(2);
+        root.addView(presentationChrome);
+        // The render target never belongs to the controls scroller and is never reparented live.
+        previewContainer=new FrameLayout(this);previewContainer.setBackgroundColor(android.graphics.Color.BLACK);
+        root.addView(previewContainer,new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0));
+        installPreview();
+        LinearLayout playbackActions=new LinearLayout(this);
+        preview=new Button(this);preview.setText(R.string.cloudy_play_start);
+        preview.setOnClickListener(view -> model.preview(previewSurface));
+        playbackActions.addView(preview,new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.WRAP_CONTENT,1));
+        cancel=button(playbackActions,R.string.cloudy_presentation_stop,view -> {
+            model.cancel();prompt.cancelAuthentication();
+        });
+        root.addView(playbackActions,0); // Stop stays reachable even when a very short window cannot fit video.
+        LinearLayout content = new LinearLayout(this);content.setOrientation(LinearLayout.VERTICAL);
         label(content, R.string.cloudy_stream_title).setTextSize(22);
         label(content, R.string.cloudy_stream_scope);
         nativeStatus = label(content, R.string.cloudy_stream_ready);
@@ -111,12 +146,7 @@ public final class StreamProbeActivity extends FragmentActivity {
         catalogList=new LinearLayout(this);catalogList.setOrientation(LinearLayout.VERTICAL);content.addView(catalogList);
         label(content,R.string.cloudy_play_title).setTextSize(20);
         label(content,R.string.cloudy_play_help);
-        previewContainer=new LinearLayout(this);
-        content.addView(previewContainer,new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,dp(240)));
-        installPreview();
         playbackStatus=label(content,R.string.cloudy_play_ready);
-        preview=button(content,R.string.cloudy_play_start,view -> model.preview(previewSurface));
         cleanup=button(content,R.string.cloudy_play_retry,view -> model.retryPlaybackCleanup());
         reconcile=button(content,R.string.cloudy_network_reconcile,view -> new AlertDialog.Builder(this)
                 .setTitle(R.string.cloudy_network_reconcile)
@@ -125,10 +155,6 @@ public final class StreamProbeActivity extends FragmentActivity {
                 .setPositiveButton(R.string.cloudy_network_reconcile_confirm,(dialog,which) -> model.reconcileNetworkEvidence())
                 .show());
         refresh = button(content, R.string.cloudy_identity_refresh, view -> model.refreshIdentity());
-        cancel = button(content, R.string.cloudy_identity_cancel, view -> {
-            model.cancel(); // Revoke the owner before cancelling framework authentication.
-            prompt.cancelAuthentication();
-        });
         delete = button(content, R.string.cloudy_identity_delete, view -> new AlertDialog.Builder(this)
                 .setTitle(R.string.cloudy_identity_delete)
                 .setMessage(R.string.cloudy_identity_delete_warning)
@@ -140,8 +166,13 @@ public final class StreamProbeActivity extends FragmentActivity {
         });
         ScrollView scroll = new ScrollView(this);
         scroll.addView(content);
-        setContentView(scroll);
-        content.requestApplyInsets();
+        root.addView(scroll,new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0,1));
+        root.addOnLayoutChangeListener((view,l,t,r,b,ol,ot,or,ob) -> sizePreview(playbackActions));
+        presentationChrome.addOnLayoutChangeListener((view,l,t,r,b,ol,ot,or,ob) -> sizePreview(playbackActions));
+        playbackActions.addOnLayoutChangeListener((view,l,t,r,b,ol,ot,or,ob) -> sizePreview(playbackActions));
+        previewContainer.addOnLayoutChangeListener((view,l,t,r,b,ol,ot,or,ob) -> fitTexture());
+        setContentView(root);
+        root.requestApplyInsets();
         model.state().observe(this, this::render);
     }
 
@@ -159,10 +190,11 @@ public final class StreamProbeActivity extends FragmentActivity {
                 });
     }
     private void render(StreamProbeViewModel.UiState state) {
+        lastState=state;
         selectedAppId=state.selectedAppId;idle=!state.busy; readyIdentity=state.identityState.equals("READY"); restartRequired=state.restartRequired;
         if (idle && !restartRequired && previewContainer.getChildCount()==0) installPreview();
         playbackStatus.setText(state.playbackStatus.isEmpty() ? getString(R.string.cloudy_play_ready) : state.playbackStatus);
-        preview.setEnabled(idle && readyIdentity && !restartRequired && state.selectedAppId>0 && previewSurface!=null && previewSurface.ready());
+        refreshPresentationControls();
         catalog.setEnabled(idle && readyIdentity);
         catalogStatus.setText(getString(R.string.cloudy_catalog_selection,state.catalogEntries.size(),state.selectedAppId));
         if (renderedCatalog!=state.catalogEntries || renderedCatalogGeneration!=state.catalogGeneration) {
@@ -213,36 +245,136 @@ public final class StreamProbeActivity extends FragmentActivity {
             }
         }
     }
+    private void sizePreview(LinearLayout actions) {
+        int inner=root.getHeight()-root.getPaddingTop()-root.getPaddingBottom();
+        int chrome=presentationChrome.getMeasuredHeight()+actions.getMeasuredHeight();
+        int height=PresentationLayout.paneHeight(inner,chrome,dp(72));
+        if (previewContainer.getLayoutParams().height!=height) {
+            previewContainer.getLayoutParams().height=height;previewContainer.requestLayout();
+        }
+        fitTexture();
+    }
+    private void fitTexture() {
+        TextureView view=previewTexture;if (view==null) return;
+        PresentationLayout.Size fit=PresentationLayout.contain(previewContainer.getWidth(),previewContainer.getHeight());
+        android.view.ViewGroup.LayoutParams params=view.getLayoutParams();
+        if (params.width!=fit.width || params.height!=fit.height) {
+            params.width=fit.width;params.height=fit.height;view.setLayoutParams(params);
+        }
+        sample(view,ownerFor(view),PresentationTracker.Edge.VISIBILITY);
+        refreshPresentationControls();
+    }
+    private void refreshPresentationControls() {
+        StreamProbeViewModel.UiState state=lastState;if (state==null || preview==null) return;
+        if (previewTexture!=null) sample(previewTexture,ownerFor(previewTexture),PresentationTracker.Edge.VISIBILITY);
+        boolean surfaceReady=previewSurface!=null && previewSurface.ready();
+        String blocker=PresentationAdmissionPolicy.blocker(state.admissionBlocker,state.busy,state.cleanupRetry,
+                state.restartRequired,state.networkPermissionGranted,readyIdentity,state.selectedAppId,surfaceReady);
+        boolean allowed="NONE".equals(blocker);
+        preview.setEnabled(allowed);
+        setTextIfChanged(preview,getString(state.restartRequired && !state.busy ? R.string.cloudy_presentation_restart_button : R.string.cloudy_play_start));
+        setTextIfChanged(previewReason,getString(blockerText(blocker)));
+        previewReason.setContentDescription(getString(blockerText(blocker)));
+        if (previewSurface==null) setTextIfChanged(textureStatus,getString(R.string.cloudy_presentation_texture_none));
+        else setTextIfChanged(textureStatus,previewSurface.presentationSummary());
+        setTextIfChanged(phaseStatus,getString(R.string.cloudy_presentation_phase,phaseText(state.operationPhase),
+                state.operationId.isEmpty() ? getString(R.string.cloudy_presentation_no_operation) : state.operationId));
+        updateDeadline();
+    }
+    private int blockerText(String blocker) {
+        return switch (blocker) {
+            case "NONE" -> R.string.cloudy_presentation_admitted;
+            case "OWNER_NOT_VISIBLE" -> R.string.cloudy_presentation_not_visible;
+            case "NATIVE_PROCESS_USED" -> R.string.cloudy_presentation_restart;
+            case "NETWORK_PERMISSION_REQUIRED" -> R.string.cloudy_presentation_permission;
+            case "IDENTITY_REQUIRED" -> R.string.cloudy_presentation_identity;
+            case "CATALOG_REQUIRED" -> R.string.cloudy_presentation_catalog;
+            case "SURFACE_REQUIRED" -> R.string.cloudy_presentation_surface;
+            case "CLEANUP_PENDING" -> R.string.cloudy_play_cleanup_pending;
+            case "OPERATION_ACTIVE" -> R.string.cloudy_presentation_busy;
+            case "EVIDENCE_RESTART_REQUIRED" -> R.string.cloudy_presentation_evidence_restart;
+            case "EVIDENCE_CAPACITY" -> R.string.cloudy_presentation_capacity;
+            case "EVIDENCE_UNFINISHED_CURRENT" -> R.string.cloudy_presentation_current_evidence;
+            case "EVIDENCE_PRIOR_PROCESS" -> R.string.cloudy_presentation_prior_evidence;
+            case "EVIDENCE_MALFORMED" -> R.string.cloudy_presentation_malformed_evidence;
+            case "EVIDENCE_UNAVAILABLE" -> R.string.cloudy_presentation_unavailable_evidence;
+            case "PROCESS_OWNER" -> R.string.cloudy_presentation_owner;
+            default -> R.string.cloudy_presentation_blocked;
+        };
+    }
+    private String phaseText(String phase) {
+        int resource=switch (phase) {
+            case "PREPARING" -> R.string.cloudy_presentation_preparing;
+            case "AUTHORIZATION_REQUIRED" -> R.string.cloudy_presentation_auth_required;
+            case "AUTHORIZING" -> R.string.cloudy_presentation_authorizing;
+            case "RUNNING" -> R.string.cloudy_presentation_running;
+            case "STOPPING" -> R.string.cloudy_identity_cancelling;
+            case "CLEANUP_PENDING" -> R.string.cloudy_play_cleanup_pending;
+            case "RETIRED" -> R.string.cloudy_presentation_retired;
+            default -> R.string.cloudy_presentation_idle;
+        };
+        return getString(resource);
+    }
+    private void updateDeadline() {
+        StreamProbeViewModel.UiState state=lastState;if (state==null) return;
+        long now=SystemClock.elapsedRealtime();
+        if (state.busy && state.authorizationDeadlineElapsedMillis>=0) {
+            setTextIfChanged(deadlineStatus,getString(R.string.cloudy_presentation_authorization_time,
+                    PresentationLayout.remainingSeconds(now,state.authorizationDeadlineElapsedMillis)));
+        } else if (state.busy && state.promptDeadlineElapsedMillis>=0) {
+            setTextIfChanged(deadlineStatus,getString(R.string.cloudy_presentation_prompt_time,
+                    PresentationLayout.remainingSeconds(now,state.promptDeadlineElapsedMillis)));
+        } else setTextIfChanged(deadlineStatus,getString(R.string.cloudy_presentation_no_deadline));
+    }
+    private static void setTextIfChanged(TextView view,CharSequence text) {
+        // Layout callbacks also refresh presentation; unchanged labels must not cause a layout loop.
+        if (!android.text.TextUtils.equals(view.getText(),text)) view.setText(text);
+    }
+    private PlaybackSurfaceOwner ownerFor(TextureView view) {
+        return view.getTag() instanceof PlaybackSurfaceOwner ? (PlaybackSurfaceOwner)view.getTag() : null;
+    }
+    private void sample(TextureView view,PlaybackSurfaceOwner owner,PresentationTracker.Edge edge) {
+        if (owner==null) return;
+        Rect visible=new Rect();boolean hasRect=view.getGlobalVisibleRect(visible);
+        owner.observePresentation(edge,new PresentationTracker.Geometry(view.getWidth(),view.getHeight(),
+                hasRect ? visible.width() : 0,hasRect ? visible.height() : 0,
+                view.isAttachedToWindow(),view.isShown(),view.isHardwareAccelerated(),
+                hasRect ? visible.left : 0,hasRect ? visible.top : 0));
+    }
     private void installPreview() {
-        TextureView textureView=new TextureView(this);
+        TextureView textureView=new TextureView(this);previewTexture=textureView;
         textureView.setContentDescription(getString(R.string.cloudy_play_surface));
         textureView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
             private PlaybackSurfaceOwner owner;
             @Override public void onSurfaceTextureAvailable(SurfaceTexture texture,int width,int height) {
                 owner=new PlaybackSurfaceOwner(StreamProbeActivity.this,texture,() -> previewContainer.removeView(textureView));
-                previewSurface=owner;
-                if (preview!=null) preview.setEnabled(idle && readyIdentity && !restartRequired && selectedAppId>0);
+                textureView.setTag(owner);if (previewTexture==textureView) previewSurface=owner;sample(textureView,owner,PresentationTracker.Edge.AVAILABLE);refreshPresentationControls();
             }
             @Override public boolean onSurfaceTextureDestroyed(SurfaceTexture texture) {
-                // Returning false transfers the real texture to the retained owner.
-                // A detach request alone never permits release while the codec can use it.
                 PlaybackSurfaceOwner destroyed=owner;
                 if (previewSurface==destroyed) previewSurface=null;
-                if (preview!=null) preview.setEnabled(false);
+                if (previewTexture==textureView) { previewTexture=null;preview.setEnabled(false); }
                 if (destroyed!=null) model.surfaceDestroyed(destroyed);
-                return false;
+                return false; // Actual handoff; the retained owner waits for real decoder retirement.
             }
-            @Override public void onSurfaceTextureSizeChanged(SurfaceTexture texture,int width,int height) { }
-            @Override public void onSurfaceTextureUpdated(SurfaceTexture texture) { }
+            @Override public void onSurfaceTextureSizeChanged(SurfaceTexture texture,int width,int height) {
+                sample(textureView,owner,PresentationTracker.Edge.VISIBILITY);refreshPresentationControls();
+            }
+            @Override public void onSurfaceTextureUpdated(SurfaceTexture texture) {
+                if (owner!=null && owner.textureUpdated()) sample(textureView,owner,PresentationTracker.Edge.FIRST_UPDATE);
+            }
         });
-        previewContainer.addView(textureView,new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT));
+        previewContainer.addView(textureView,new FrameLayout.LayoutParams(0,0,Gravity.CENTER));
+        textureView.addOnLayoutChangeListener((view,l,t,r,b,ol,ot,or,ob) -> {
+            sample(textureView,ownerFor(textureView),PresentationTracker.Edge.VISIBILITY);refreshPresentationControls();
+        });
+        fitTexture();
     }
     private TextView label(LinearLayout parent, int resource) {
         TextView view = new TextView(this);
         view.setText(resource);
         view.setTextSize(16);
-        view.setPadding(0, dp(12), 0, dp(12));
+        view.setPadding(0, dp(4), 0, dp(4));
         parent.addView(view);
         return view;
     }
@@ -253,9 +385,17 @@ public final class StreamProbeActivity extends FragmentActivity {
         parent.addView(view);
         return view;
     }
+    @SuppressWarnings("deprecation") // Retain the existing native permission request route; no authorization is restored.
+    @Override public void onRequestPermissionsResult(int requestCode,String[] permissions,int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode,permissions,grantResults);
+        if (requestCode==17) model.refreshAdmission();
+    }
     private int dp(int value) { return Math.round(value * getResources().getDisplayMetrics().density); }
-    @Override protected void onStart() { super.onStart(); model.onVisible(); }
+    @Override protected void onStart() {
+        super.onStart();foreground=true;uiHandler.removeCallbacks(deadlineTick);uiHandler.post(deadlineTick);model.onVisible();
+    }
     @Override protected void onStop() {
+        foreground=false;uiHandler.removeCallbacks(deadlineTick);
         // The native prompt may take window focus. Focus alone never revokes it.
         // A real background stop does; configuration recreation only reattaches.
         if (!isChangingConfigurations()) {

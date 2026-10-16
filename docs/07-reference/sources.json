@@ -300,7 +300,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "API 35 cross-instance drag flags. Re-reviewed API 1 requestFocus(), setFocusable(boolean), setFocusableInTouchMode(boolean), isFocusableInTouchMode() and hasFocus(); boolean request result is checked, and hasFocus includes descendants. Exact method sections fetched from the canonical official page after browser-tool retrieval failed. Remaining View methods still require individual review. RDP ownership: hasWindowFocus/onWindowFocusChanged API1; pointer capture request/release/callback/hasPointerCapture API26. Current0.1.4 compiles relative capture and framework confirmation/release are observed; host relative movement failed on the selected KRdp server. API06/30; P0-S4.",
+      "note": "API 35 cross-instance drag flags. Re-reviewed API 1 requestFocus(), setFocusable(boolean), setFocusableInTouchMode(boolean), isFocusableInTouchMode() and hasFocus(); boolean request result is checked, and hasFocus includes descendants. Exact method sections fetched from the canonical official page after browser-tool retrieval failed. Remaining View methods still require individual review. RDP ownership: hasWindowFocus/onWindowFocusChanged API1; pointer capture request/release/callback/hasPointerCapture API26. Current0.1.4 compiles relative capture and framework confirmation/release are observed; host relative movement failed on the selected KRdp server. API06/30; P0-S4. Presentation review: getGlobalVisibleRect(Rect) API1 reports clipping within root-view coordinates, not screen coordinates or other-window occlusion; false leaves Rect contents undefined, so absent geometry is explicitly zeroed. isAttachedToWindow API19 and isHardwareAccelerated API11 establish attachment/window flags only. API47/P0-S4; min35 covers these symbols.",
       "refresh": "Before implementation against this surface; weekly during active platform qualification."
     },
     {
@@ -4886,7 +4886,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": "2026-08-03",
-      "note": "API14 onSurfaceTextureDestroyed false transfers release responsibility to client. Implemented finite preview cancels then retains SurfaceTexture until actual decoder retirement; no automatic rebind. API47/P0-S4. API14 onSurfaceTextureUpdated observes updateTexImage;0.1.9 handler is empty and bounded observation is proposed by comprehensive review, not yet implemented.",
+      "note": "API14 onSurfaceTextureDestroyed false transfers release responsibility to client. Implemented finite preview cancels then retains SurfaceTexture until actual decoder retirement; no automatic rebind. API47/P0-S4. API14 onSurfaceTextureUpdated observes updateTexImage. Built0.1.10 records actual count/first-last elapsed timestamps separately from codec callbacks, with bounded immutable geometry snapshots; not yet installed or runtime-qualified.",
       "refresh": "Before playback surface integration, SDK update or decoder evidence changes."
     },
     {
@@ -5018,7 +5018,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "API14 TextureView participates in ordinary view clipping and requires a hardware-accelerated window. Current0.1.9 lacks live visibility/update observations; proposed fixed adaptive pane and bounded presentation diagnostics are review follow-up, not implemented or qualified. User-visible playback FAILED. API47/P0-S4.",
+      "note": "API14 TextureView participates in ordinary view clipping and requires a hardware-accelerated window. Built0.1.10 implements a fixed adaptive 16:9 pane and bounded actual texture/geometry observations; compiler/60JVM/zeroownedLint pass, runtime pending. Installed0.1.9 user-visible playback remains FAILED. Window flags/update callbacks are not visible-pixel or occlusion proof. G25/API47/P0-S4.",
       "refresh": "Before implementing presentation repair or interpreting its device evidence."
     }
   ]
