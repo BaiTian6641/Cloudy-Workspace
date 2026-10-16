@@ -1,6 +1,6 @@
 # Feasibility outcomes and implementation readiness
 
-**Status:** adopted for planning following the final review. CAP-PLATFORM now has a bounded `experiment` outcome; the other seven capability outcomes remain pending. No capability is supported. Stage progress and a capability decision answer different questions: a completed investigation can establish that the requested integration is blocked or requires a bounded follow-up.
+**Status:** adopted, with the explicit [foundation refinement](../adr/0012-foundation-construction-and-platform-acceptance.md). CAP-FOUNDATION is supported only for demonstrated native app/window construction primitives. CAP-PLATFORM, CAP-SSH and CAP-TERMINAL are experiments; the five other feature outcomes remain pending. A completed investigation and a supported feature answer different questions.
 
 ## Decision record
 
@@ -30,7 +30,8 @@ The repository checker validates the structure, references and supported-outcome
 
 | Capability | Deciding investigation | Required evidence |
 | --- | --- | --- |
-| Desktop Android lifecycle/windows | P0-S2 | Independent tasks, recreation, input and operation-specific background strategy on the target build |
+| Native app/window construction | P0-S2 / ADR0012 | Existing actual build/install, native tasks/local state/recreation and bounded geometry evidence; CAP-FOUNDATION controls P1-S1/S2/S3 construction only |
+| Complete product Android platform | P0-S2 plus applicable product qualification | Independent tasks, complete applicable input/display and operation-specific background/distribution strategy; CAP-PLATFORM controls R1/R2/R4 acceptance |
 | Shared SSH transport and SFTP | P0-S3 + P1-S4 | Engine build/adoption, server trust/authentication/jumps and actual SFTP probes independent of any terminal renderer; CAP-SSH controls P2-S1/P2-S8 |
 | Terminal renderer and committed input | P0-S3 + P1-S4 | Chosen renderer, exact committed bytes, IME/accessibility, bounded output and renderer adoption; CAP-TERMINAL controls P2-S2 |
 | Native X11 app windows | P0-S7 + P1-S4 | Two apps, owned dialogs/popups, native window behavior, trust isolation, lifetime and engine adoption |
@@ -43,6 +44,8 @@ P0 records the experimental verdict even when final engine adoption remains pend
 
 P1-S4 completes each relevant engine decision separately: a blocked renderer, VNC or X11 choice does not stop foundation completion or promote that blocked feature. Its capability outcome continues to hold only its own dependent implementation. Splitting a record creates no qualification evidence.
 
-The [2026-10-15 platform decision](../03-platform/googlebook/p0-s2-platform-decision.md) completes P0-S2's investigation with partial Q-P01/Q-P02 and accepted window/lifecycle/finite UIDT observations. Its remaining continuous-service classification, physical keyboard/mouse/native IME/focus-release and display cases remain explicit in the CAP-PLATFORM experiment. P0-S3 may proceed because it depends on the completed investigation and does not require a supported CAP-PLATFORM outcome. P1-S1, P1-S2 and P1-S3 do require that supported outcome and remain planned. No feature scope, product prerequisite or acceptance pass has been waived.
+The [platform investigation](../03-platform/googlebook/p0-s2-platform-decision.md) and [foundation admission](../../qualification/results/P0-S2/2026-10-15-foundation-admission.md) now distinguish construction primitives from full platform readiness. P0-S3 is [complete as an investigation](../../qualification/results/P0-S3/2026-10-15-investigation-closeout.md), with separate experimental transport/renderer outcomes and unmet acceptance cases. P1-S1 is ready under supported CAP-FOUNDATION; P1-S2/S3 retain their P1-S1 dependencies and remain planned. No app is implemented by those decisions.
+
+CAP-PLATFORM remains experiment and is explicitly required at P2-S5/R1, P3-S5/R2 and P5-S4/R4. P4-S4 and P6 inherit those acceptance boundaries through their existing dependencies. The validator rejects removing/substituting these protected requirements, as well as activation with an unsupported required outcome. No feature, physical-input, security, lifecycle, display or distribution requirement is waived; the applicable cases still run on each actual app/backend before acceptance. Unrelated app/optional-adapter blockers remain scoped.
 
 The USB and X11 fallbacks retain their existing product limits: a lab-side USB server does not establish Googlebook-local plug-and-play, and one full X desktop does not establish separate native application windows.

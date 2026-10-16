@@ -1,6 +1,6 @@
 # Official source register
 
-Research snapshot: **2026-10-15, America/Chicago**, including reviewed development skills/toolchain sources; earlier source check dates remain in the canonical records. Canonical data: [sources.json](sources.json). Entries are official platform, standards, vendor or upstream project sources. An upstream library interface is not a Googlebook OS API.
+Research snapshot: **2026-10-16, America/Chicago**, including reviewed development skills/toolchain sources; earlier source check dates remain in the canonical records. Canonical data: [sources.json](sources.json). Entries are official platform, standards, vendor or upstream project sources. An upstream library interface is not a Googlebook OS API.
 
 `reviewed` means the relevant claim was inspected. `located` means the entry point was found/opened but exact details still need implementation review. `javascript-required` means readable page content was unavailable. A checked date does not qualify a device or certify a release. Update dates are recorded only when inspected; null is unknown. Read [watchlist.md](watchlist.md) for change handling.
 
@@ -594,3 +594,23 @@ The [focused source/observation note](2026-10-15-android-mouse-automation.md) ca
 - **R260** — [Pinned AOSP single UiAutomation registration ownership](https://github.com/aosp-mirror/platform_frameworks_base/blob/1cdfff555f4a21f71ccc978290e2e212e2f8b168/services/accessibility/java/com/android/server/accessibility/UiAutomationManager.java): registerUiTestAutomationServiceLocked admits one accessibility-backed automation service and rejects a second registration. Owned CLI instrumentation was observed registered during candidate03; isolated same-APK inspection later succeeded after retiring it. Source plus correlation supports a candidate, not a recovered primary exception.
 
 - **R261** — [Pinned AOSP accessibility window connection ID allocation](https://github.com/aosp-mirror/platform_frameworks_base/blob/1cdfff555f4a21f71ccc978290e2e212e2f8b168/services/accessibility/java/com/android/server/accessibility/AccessibilityWindowManager.java): addAccessibilityInteractionConnection allocates windowId with sNextWindowId++; connection removal is separate. getId is diagnostic registration identity, not a durable app/Activity token. Observed separate helper registrations report99 then110 with identical bounds; exact vendor reassignment cause is unproven.
+
+## Compose foundation source registration
+
+Checked 2026-10-16; owner: integration leader, P1-S1. These reviewed official sources establish documented/published availability, not a Cloudy build or device pass. Preserve the accepted toolchain on incompatibility; refresh before first resolution or a relevant dependency/toolchain change. See the [focused entry](2026-10-16-compose-foundation-entry.md).
+
+- **G161** — [Google Maven metadata](https://dl.google.com/dl/android/maven2/androidx/compose/compose-bom/maven-metadata.xml).
+- **G162** — [BOM POM](https://dl.google.com/dl/android/maven2/androidx/compose/compose-bom/2026.09.00/compose-bom-2026.09.00.pom).
+- **G163** — [runtime release documentation](https://developer.android.com/jetpack/androidx/releases/compose-runtime).
+- **G164** — [Material3 release documentation](https://developer.android.com/jetpack/androidx/releases/compose-material3).
+- **G165** — [Activity Compose release metadata](https://dl.google.com/dl/android/maven2/androidx/activity/activity-compose/maven-metadata.xml).
+- **G166** — [AndroidX Activity release documentation](https://developer.android.com/jetpack/androidx/releases/activity).
+- **G167** — [Published plugin](https://plugins.gradle.org/plugin/org.jetbrains.kotlin.plugin.compose/2.2.10).
+- **G168** — [migration guide](https://kotlinlang.org/docs/compose-compiler-migration-guide.html).
+- **G46** — [AGP POM](https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle/9.4.0/gradle-9.4.0.pom).
+- **G169** — [Compose setup guide](https://developer.android.com/develop/ui/compose/setup-compose-dependencies-and-compiler).
+- **G170** — [BOM guide](https://developer.android.com/develop/ui/compose/bom).
+- **G171** — [UI module metadata](https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-android/1.12.1/ui-android-1.12.1.module).
+- **G172** — [UI AAR](https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-android/1.12.1/ui-android-1.12.1.aar).
+- **G173** — [Activity Compose module metadata](https://dl.google.com/dl/android/maven2/androidx/activity/activity-compose/1.13.0/activity-compose-1.13.0.module).
+- **G35** — [AGP 9.4 compatibility table](https://developer.android.com/build/releases/agp-9-4-0-release-notes).

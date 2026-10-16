@@ -1,6 +1,6 @@
 # P1 — Shared foundation and design
 
-**Status:** planned. **Active effort:** 15–24 person-days before contingency. **Purpose:** Establish two independent Android desktop packages, shared design/lifecycle contracts and early engine/distribution decisions, including native streaming at P1-S5.
+**Status:** P1-S1 ready for scoped implementation; other stages planned. **Active effort:** 15–24 person-days before contingency. **Purpose:** Establish two independent Android desktop packages, shared design/lifecycle contracts and early engine/distribution decisions, including native streaming at P1-S5.
 
 The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-project/platform-rule-zero.md) defines desktop scope. Follow [capability outcomes](../feasibility-gates.md) and [independent release gates](../release-gates.md). Estimates are active effort, not elapsed time; re-estimate after physical evidence. Revision 02 moved the former P5-S1 decision to P1-S5; other stage IDs retain their identity.
 
@@ -12,11 +12,15 @@ The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-p
 | P1-S5 | Early native-stream adoption and distribution decision | 2–3 | P0-S4, P1-S1 |
 | P1-S4 | CI, dependency decision, and foundation gate | 2–4 | P1-S2, P1-S3 |
 
+The [ADR0012 refinement](../../adr/0012-foundation-construction-and-platform-acceptance.md) supports construction on demonstrated native primitives. It leaves CAP-PLATFORM experimental and required at product acceptance; every P1 work item and exit below remains required. Product dependencies and actual shell/input/security checks still need their own evidence.
+
 ## P1-S1 — Native app targets and shared-module build foundation
 
-**Owner:** Android/build developer. **Prerequisites:** P0-S3. **Status:** planned.
+**Owner:** Android/build developer. **Prerequisites:** P0-S3 investigation complete. **Status:** ready.
 
-**Required supported capabilities:** CAP-PLATFORM.
+**Required supported capabilities:** CAP-FOUNDATION.
+
+Implementation entry: use the [reviewed Compose candidate stack](../../07-reference/2026-10-16-compose-foundation-entry.md), then qualify the actual product dependency closure and build. The diagnostic native Views results do not qualify Compose. Start with real local window/state behavior and independently installed packages.
 
 Work:
 
@@ -43,7 +47,7 @@ Apply [D14 desktop interaction](../../04-design/desktop-terminal-interaction-con
 
 **Owner:** Design/Android developer. **Prerequisites:** P1-S1. **Status:** planned.
 
-**Required supported capabilities:** CAP-PLATFORM.
+**Required supported capabilities:** CAP-FOUNDATION.
 
 Work:
 
@@ -72,7 +76,7 @@ Record evidence under `qualification/results/P1-S2/` using the [run template](..
 
 **Owner:** Platform/security developer. **Prerequisites:** P1-S1, P0-S2. **Status:** planned.
 
-**Required supported capabilities:** CAP-PLATFORM.
+**Required supported capabilities:** CAP-FOUNDATION.
 
 Work:
 

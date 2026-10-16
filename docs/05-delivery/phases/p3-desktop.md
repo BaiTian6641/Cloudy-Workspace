@@ -193,6 +193,8 @@ Record evidence under `qualification/results/P3-S8/` using the [run template](..
 
 **Owner:** Product/QA owner. **Prerequisites:** P3-S2, P3-S3, P3-S4, P3-S6, P3-S7, P3-S8, P0-S6. **Status:** planned.
 
+**Required supported capabilities:** CAP-PLATFORM. CAP-FOUNDATION construction admission cannot satisfy this product acceptance gate; see [ADR0012](../../adr/0012-foundation-construction-and-platform-acceptance.md).
+
 Work:
 
 1. Run native RDP and VNC, qualified external stream handoff, files and enrolled USB with Console and the optional Cloudy host agent absent; record any separately required USB consumer adapter.

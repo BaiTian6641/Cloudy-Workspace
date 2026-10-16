@@ -15,6 +15,8 @@
 
 Release labels identify scope, not an unconditional chronological sequence. P2-S1 qualifies reusable SSH transport/authentication and P2-S8 implements and qualifies shared SFTP transfer/staging/publication. Those source stages use CAP-SSH, independently of the terminal renderer's CAP-TERMINAL. Console attachments and the session SFTP pane consume the core in P2-S4/P2-S7; Desktop's cross-root files consume it directly in P3-S3. Each app repeats its own integration cases with its own credentials, grants and jobs. Shared source does not require Console UI to be complete or a Console package to be installed/released.
 
+The [ADR0012 construction/acceptance refinement](../adr/0012-foundation-construction-and-platform-acceptance.md) explicitly requires supported **CAP-PLATFORM at R1/P2-S5, R2/P3-S5 and R4/P5-S4**. Supported CAP-FOUNDATION admits only native construction and cannot substitute at those boundaries. R3 and R5 inherit the existing standalone/integrated gates. Each actual app/backend still supplies its applicable input, geometry, lifetime, security and distribution evidence; unrelated features or the other app are not new dependencies.
+
 ## App-scoped release checklist
 
 Each R1/R2 gate includes Q-R02 and the applicable Q-R01 checks before a standalone package is promoted for use:

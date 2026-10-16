@@ -1,6 +1,6 @@
 # Delivery plan index
 
-The execution-reviewed plan has seven phases and 40 stages under [Rule 0](../00-project/platform-rule-zero.md). P0-S1 setup and P0-S2 investigation are complete; CAP-PLATFORM remains a bounded experiment, and P0-S3 investigation is in progress. Product application implementation remains planned. Read the [engineering workflow](engineering-workflow.md) and [execution state](execution-state.md) before continuing. No phone/tablet workstream is included.
+The execution-reviewed plan has seven phases and 40 stages under [Rule 0](../00-project/platform-rule-zero.md). P0-S1 setup, P0-S2 and P0-S3 investigations are complete; CAP-FOUNDATION supports native construction, P1-S1 is ready, and full CAP-PLATFORM plus SSH/terminal adoption remain experimental. Product applications are not yet implemented. Read the [engineering workflow](engineering-workflow.md) and [execution state](execution-state.md) before continuing. No phone/tablet workstream is included.
 
 | Phase | Stage count | Detail |
 | --- | ---: | --- |
@@ -16,4 +16,4 @@ Read [roadmap.md](roadmap.md) for dependencies, estimates, release gates, and th
 
 The [capability outcome protocol](feasibility-gates.md) controls when implementation becomes ready. [Independent release gates](release-gates.md) distinguish Console, Desktop, the combined journey and full-suite qualification. The former P5-S1 adoption decision is now P1-S5.
 
-The [established-library policy](library-reuse-policy.md) records the user's instruction to reuse solid upstream engines and avoid excessive repeated verification. The [general progress table](execution-state.md#general-progress) separates completed investigations, diagnostic behavior and unfinished product subsystems.
+The [established-library policy](library-reuse-policy.md) records the user's instruction to reuse solid upstream engines and avoid excessive repeated verification. The [general progress table](execution-state.md#stage-and-product-status) separates completed investigations, diagnostic behavior and unfinished product subsystems.

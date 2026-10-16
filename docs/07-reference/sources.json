@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "snapshotDate": "2026-10-15",
+  "snapshotDate": "2026-10-16",
   "timezone": "America/Chicago",
   "sources": [
     {
@@ -5224,6 +5224,162 @@
       "sourceUpdatedOn": null,
       "note": "AOSP reference commit 1cdfff555f4a21f71ccc978290e2e212e2f8b168. addAccessibilityInteractionConnection allocates windowId with sNextWindowId++; connection removal is separate. getId is diagnostic registration identity, not a durable app/Activity token. Observed separate helper registrations report99 then110 with identical bounds; exact vendor reassignment cause is unproven. Owner: integration leader, P0-S4 test fixture only. Fallback: fail closed before input, retain primary/cleanup evidence and serialize owned automation; no product API or capability change. See docs/07-reference/2026-10-15-android-mouse-automation.md.",
       "refresh": "Before changing helper lifecycle/admission or relying on these internals for another platform build; review exact relevant source delta, not a general framework audit."
+    },
+    {
+      "id": "G161",
+      "title": "Compose foundation: Google Maven metadata",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/compose/compose-bom/maven-metadata.xml",
+      "publisher": "Google",
+      "category": "development-tooling",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Published stable BOM list inspected; latest stable 2026.09.00. Owner: integration leader/P1-S1. Published metadata and documentation reviewed; actual resolved closure, compiler and device compatibility remain unqualified. Fallback: retain accepted diagnostic toolchain and stop the incompatible product build; no silent version upgrade or placeholder application.",
+      "refresh": "Before first P1-S1 dependency resolution and any change to the pinned toolchain or Compose closure; inspect relevant changed metadata and run actual compile/Lint/device checks."
+    },
+    {
+      "id": "G162",
+      "title": "Compose foundation: BOM POM",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/compose/compose-bom/2026.09.00/compose-bom-2026.09.00.pom",
+      "publisher": "Google",
+      "category": "development-tooling",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Published BOM inspected: runtime/runtime-saveable/UI/foundation1.12.1 and Material3 1.4.0. Owner: integration leader/P1-S1. Published metadata and documentation reviewed; actual resolved closure, compiler and device compatibility remain unqualified. Fallback: retain accepted diagnostic toolchain and stop the incompatible product build; no silent version upgrade or placeholder application.",
+      "refresh": "Before first P1-S1 dependency resolution and any change to the pinned toolchain or Compose closure; inspect relevant changed metadata and run actual compile/Lint/device checks."
+    },
+    {
+      "id": "G163",
+      "title": "Compose foundation: runtime release documentation",
+      "url": "https://developer.android.com/jetpack/androidx/releases/compose-runtime",
+      "publisher": "Google",
+      "category": "development-tooling",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Stable runtime1.12.1 documented. Owner: integration leader/P1-S1. Published metadata and documentation reviewed; actual resolved closure, compiler and device compatibility remain unqualified. Fallback: retain accepted diagnostic toolchain and stop the incompatible product build; no silent version upgrade or placeholder application.",
+      "refresh": "Before first P1-S1 dependency resolution and any change to the pinned toolchain or Compose closure; inspect relevant changed metadata and run actual compile/Lint/device checks."
+    },
+    {
+      "id": "G164",
+      "title": "Compose foundation: Material3 release documentation",
+      "url": "https://developer.android.com/jetpack/androidx/releases/compose-material3",
+      "publisher": "Google",
+      "category": "development-tooling",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Stable Material3 1.4.0 documented; newer branches prerelease. Owner: integration leader/P1-S1. Published metadata and documentation reviewed; actual resolved closure, compiler and device compatibility remain unqualified. Fallback: retain accepted diagnostic toolchain and stop the incompatible product build; no silent version upgrade or placeholder application.",
+      "refresh": "Before first P1-S1 dependency resolution and any change to the pinned toolchain or Compose closure; inspect relevant changed metadata and run actual compile/Lint/device checks."
+    },
+    {
+      "id": "G165",
+      "title": "Activity Compose release metadata",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/activity/activity-compose/maven-metadata.xml",
+      "publisher": "Google",
+      "category": "development-tooling",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Published Activity Compose stable list inspected; latest stable1.13.0. Owner: integration leader/P1-S1. Published metadata and documentation reviewed; actual resolved closure, compiler and device compatibility remain unqualified. Fallback: retain accepted diagnostic toolchain and stop the incompatible product build; no silent version upgrade or placeholder application.",
+      "refresh": "Before first P1-S1 dependency resolution and any change to the pinned toolchain or Compose closure; inspect relevant changed metadata and run actual compile/Lint/device checks."
+    },
+    {
+      "id": "G166",
+      "title": "AndroidX Activity release documentation",
+      "url": "https://developer.android.com/jetpack/androidx/releases/activity",
+      "publisher": "Google",
+      "category": "development-tooling",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Stable Activity1.13.0 documented. Owner: integration leader/P1-S1. Published metadata and documentation reviewed; actual resolved closure, compiler and device compatibility remain unqualified. Fallback: retain accepted diagnostic toolchain and stop the incompatible product build; no silent version upgrade or placeholder application.",
+      "refresh": "Before first P1-S1 dependency resolution and any change to the pinned toolchain or Compose closure; inspect relevant changed metadata and run actual compile/Lint/device checks."
+    },
+    {
+      "id": "G167",
+      "title": "Compose foundation: Published plugin",
+      "url": "https://plugins.gradle.org/plugin/org.jetbrains.kotlin.plugin.compose/2.2.10",
+      "publisher": "Gradle Plugin Portal / JetBrains",
+      "category": "development-tooling",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Compose compiler plugin2.2.10 published. Owner: integration leader/P1-S1. Published metadata and documentation reviewed; actual resolved closure, compiler and device compatibility remain unqualified. Fallback: retain accepted diagnostic toolchain and stop the incompatible product build; no silent version upgrade or placeholder application.",
+      "refresh": "Before first P1-S1 dependency resolution and any change to the pinned toolchain or Compose closure; inspect relevant changed metadata and run actual compile/Lint/device checks."
+    },
+    {
+      "id": "G168",
+      "title": "Compose foundation: migration guide",
+      "url": "https://kotlinlang.org/docs/compose-compiler-migration-guide.html",
+      "publisher": "JetBrains",
+      "category": "development-tooling",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Compose compiler version matches Kotlin; AGP9 built-in Kotlin avoids redundant kotlin.android plugin. Owner: integration leader/P1-S1. Published metadata and documentation reviewed; actual resolved closure, compiler and device compatibility remain unqualified. Fallback: retain accepted diagnostic toolchain and stop the incompatible product build; no silent version upgrade or placeholder application.",
+      "refresh": "Before first P1-S1 dependency resolution and any change to the pinned toolchain or Compose closure; inspect relevant changed metadata and run actual compile/Lint/device checks."
+    },
+    {
+      "id": "G169",
+      "title": "Compose foundation: Compose setup guide",
+      "url": "https://developer.android.com/develop/ui/compose/setup-compose-dependencies-and-compiler",
+      "publisher": "Google",
+      "category": "development-tooling",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2026-10-14",
+      "note": "Compiler plugin and buildFeatures.compose configuration; documented setup is not a Cloudy compile pass. Owner: integration leader/P1-S1. Published metadata and documentation reviewed; actual resolved closure, compiler and device compatibility remain unqualified. Fallback: retain accepted diagnostic toolchain and stop the incompatible product build; no silent version upgrade or placeholder application.",
+      "refresh": "Before first P1-S1 dependency resolution and any change to the pinned toolchain or Compose closure; inspect relevant changed metadata and run actual compile/Lint/device checks."
+    },
+    {
+      "id": "G170",
+      "title": "Compose foundation: BOM guide",
+      "url": "https://developer.android.com/develop/ui/compose/bom",
+      "publisher": "Google",
+      "category": "development-tooling",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2026-10-01",
+      "note": "BOM aligns libraries, adds none, and does not version compiler or Activity. Owner: integration leader/P1-S1. Published metadata and documentation reviewed; actual resolved closure, compiler and device compatibility remain unqualified. Fallback: retain accepted diagnostic toolchain and stop the incompatible product build; no silent version upgrade or placeholder application.",
+      "refresh": "Before first P1-S1 dependency resolution and any change to the pinned toolchain or Compose closure; inspect relevant changed metadata and run actual compile/Lint/device checks."
+    },
+    {
+      "id": "G171",
+      "title": "Compose foundation: UI module metadata",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-android/1.12.1/ui-android-1.12.1.module",
+      "publisher": "Google",
+      "category": "development-tooling",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Published UI1.12.1 dependency metadata inspected; Kotlin stdlib2.1.20 floor. Owner: integration leader/P1-S1. Published metadata and documentation reviewed; actual resolved closure, compiler and device compatibility remain unqualified. Fallback: retain accepted diagnostic toolchain and stop the incompatible product build; no silent version upgrade or placeholder application.",
+      "refresh": "Before first P1-S1 dependency resolution and any change to the pinned toolchain or Compose closure; inspect relevant changed metadata and run actual compile/Lint/device checks."
+    },
+    {
+      "id": "G172",
+      "title": "Compose foundation: UI AAR",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-android/1.12.1/ui-android-1.12.1.aar",
+      "publisher": "Google",
+      "category": "development-tooling",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Published UI1.12.1 AAR metadata: minCompileSdk37.0, minimumAGP9.1.0; manifest minSDK23. Owner: integration leader/P1-S1. Published metadata and documentation reviewed; actual resolved closure, compiler and device compatibility remain unqualified. Fallback: retain accepted diagnostic toolchain and stop the incompatible product build; no silent version upgrade or placeholder application.",
+      "refresh": "Before first P1-S1 dependency resolution and any change to the pinned toolchain or Compose closure; inspect relevant changed metadata and run actual compile/Lint/device checks."
+    },
+    {
+      "id": "G173",
+      "title": "Compose foundation: Activity Compose module metadata",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/activity/activity-compose/1.13.0/activity-compose-1.13.0.module",
+      "publisher": "Google",
+      "category": "development-tooling",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Published Activity Compose1.13.0 dependencies inspected: Activity1.13.0, CoreKTX1.18.0, lifecycle2.9.4, navigationevent-compose1.0.0. Owner: integration leader/P1-S1. Published metadata and documentation reviewed; actual resolved closure, compiler and device compatibility remain unqualified. Fallback: retain accepted diagnostic toolchain and stop the incompatible product build; no silent version upgrade or placeholder application.",
+      "refresh": "Before first P1-S1 dependency resolution and any change to the pinned toolchain or Compose closure; inspect relevant changed metadata and run actual compile/Lint/device checks."
     }
   ]
 }

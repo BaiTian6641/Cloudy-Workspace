@@ -65,6 +65,8 @@ Record evidence under `qualification/results/P5-S3/` using the [run template](..
 
 **Owner:** Network/desktop QA. **Prerequisites:** P5-S2, P5-S3, P0-S6, P3-S4, P3-S6. **Status:** planned.
 
+**Required supported capabilities:** CAP-PLATFORM. CAP-FOUNDATION construction admission cannot satisfy this product acceptance gate; see [ADR0012](../../adr/0012-foundation-construction-and-platform-acceptance.md).
+
 Work:
 
 1. Add policy for hidden streams, thumbnails, prefetch, bitrate selection, and explicit large-transfer choices.

@@ -199,6 +199,8 @@ Record evidence under `qualification/results/P2-S7/` using the [run template](..
 
 **Owner:** Terminal/product QA. **Prerequisites:** P2-S4, P2-S6, P2-S7. **Status:** planned.
 
+**Required supported capabilities:** CAP-PLATFORM. CAP-FOUNDATION construction admission cannot satisfy this product acceptance gate; see [ADR0012](../../adr/0012-foundation-construction-and-platform-acceptance.md).
+
 Work:
 
 1. Qualify selected current agent CLIs as ordinary PTY applications with versions/authentication recorded; keep their credentials on the host.

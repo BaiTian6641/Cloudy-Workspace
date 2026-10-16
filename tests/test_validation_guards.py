@@ -124,6 +124,63 @@ class ValidationPolicyTests(unittest.TestCase):
         self.stage("P2-S1")["status"] = "ready"
         self.assert_rejected(self.validate(self.backlog), "P2-S1", "CAP-SSH")
 
+    def foundation(self):
+        evidence = "qualification/results/P0-S2/synthetic-policy-test.md"
+        gate = next(g for g in self.backlog["capabilityGates"] if g["id"] == "CAP-FOUNDATION")
+        gate.update(outcome="supported", supportedScope="Synthetic construction primitives only",
+                    evidencePaths=[evidence], decisionNote="Policy fixture, not device evidence")
+        for ident in gate["decidingStages"]:
+            self.stage(ident)["status"] = "done"
+        self.stage("P0-S1")["status"] = "done"
+        return gate, evidence
+
+    def test_foundation_admits_p1_only_after_p0_s3(self):
+        _, evidence = self.foundation()
+        self.experiment(evidence)
+        self.stage("P0-S3")["status"] = "done"
+        self.stage("P1-S1")["status"] = "ready"
+        status, report = self.validate(self.backlog, evidence)
+        self.assertEqual((status, report["errors"]), (0, []))
+        self.stage("P0-S3")["status"] = "planned"
+        self.assert_rejected(self.validate(self.backlog, evidence), "P1-S1", "prerequisites")
+
+    def test_supported_foundation_requires_scope_evidence_and_completed_decision(self):
+        gate, evidence = self.foundation()
+        for field, value, diagnostic in (("supportedScope", None, "scope"),
+                                         ("evidencePaths", [], "evidence")):
+            original = gate[field]
+            gate[field] = value
+            self.assert_rejected(self.validate(self.backlog, evidence), "CAP-FOUNDATION", diagnostic)
+            gate[field] = original
+        self.stage(gate["decidingStages"][0])["status"] = "planned"
+        self.assert_rejected(self.validate(self.backlog, evidence), "CAP-FOUNDATION", "completed deciding")
+
+    def test_platform_experiment_still_blocks_prerequisite_complete_acceptance(self):
+        _, evidence = self.foundation()
+        # All prerequisite stages/capabilities are qualified in this synthetic
+        # scenario, isolating the broad platform gate from foundation admission.
+        for stage in self.backlog["stages"]:
+            stage["status"] = "done"
+        for gate in self.backlog["capabilityGates"]:
+            gate.update(outcome="supported", supportedScope="Synthetic test scope",
+                        evidencePaths=[evidence], decisionNote="Policy fixture only")
+        self.experiment(evidence)
+        for ident in ("P2-S5", "P3-S5", "P5-S4"):
+            self.assert_rejected(self.validate(self.backlog, evidence), ident, "CAP-PLATFORM", "not supported")
+
+    def test_required_gate_cannot_be_removed_or_substituted(self):
+        for ident, gate in (("P1-S1", "CAP-FOUNDATION"), ("P1-S2", "CAP-FOUNDATION"),
+                            ("P1-S3", "CAP-FOUNDATION"), ("P2-S5", "CAP-PLATFORM"),
+                            ("P3-S5", "CAP-PLATFORM"), ("P5-S4", "CAP-PLATFORM")):
+            with self.subTest(stage=ident):
+                stage = self.stage(ident)
+                original = stage["requiresCapabilities"][:]
+                stage["requiresCapabilities"] = [g for g in original if g != gate]
+                if gate == "CAP-PLATFORM":
+                    stage["requiresCapabilities"].append("CAP-FOUNDATION")
+                self.assert_rejected(self.validate(self.backlog), ident, "requires " + gate)
+                stage["requiresCapabilities"] = original
+
     def test_desktop_release_cannot_inherit_a_renderer_dependency(self):
         self.stage("P3-S3")["dependsOn"].append("P2-S2")
         self.assert_rejected(self.validate(self.backlog), "P3-S5", "P2-S2")
@@ -131,6 +188,31 @@ class ValidationPolicyTests(unittest.TestCase):
     def test_native_stream_cannot_wait_for_optional_host_adapters(self):
         self.stage("P5-S2")["dependsOn"].append("P4-S4")
         self.assert_rejected(self.validate(self.backlog), "P5-S2", "P4-S4")
+
+    def test_optional_host_release_retains_both_standalone_acceptance_paths(self):
+        self.stage("P4-S4")["dependsOn"].remove("P3-S9")
+        for required in ("P2-S5", "P3-S5"):
+            self.assert_rejected(self.validate(self.backlog), "P4-S4", "missing required", required)
+
+    def test_final_suite_entry_retains_standalone_and_stream_acceptance_paths(self):
+        original = self.stage("P6-S1")["dependsOn"][:]
+        for removed, required in (("P5-S4", "P5-S4"), ("P3-S9", "P2-S5"),
+                                  ("P3-S9", "P3-S5")):
+            with self.subTest(required=required):
+                # Removing the direct suite edge alone leaves the alternate
+                # P4-S4 route intact; remove both to exercise full ancestry.
+                self.stage("P6-S1")["dependsOn"] = [
+                    value for value in original
+                    if value != removed and not (removed == "P3-S9" and value == "P4-S4")
+                ]
+                self.assert_rejected(self.validate(self.backlog), "P6-S1", "missing required", required)
+        self.stage("P6-S1")["dependsOn"] = original
+
+    def test_final_gate_cannot_bypass_p6_entry_through_intermediate_stage(self):
+        # Mutate the intermediate edge, rather than the final stage's direct
+        # list, to prove the existing validator follows transitive ancestry.
+        self.stage("P6-S2")["dependsOn"] = []
+        self.assert_rejected(self.validate(self.backlog), "P6-S4", "missing required", "P6-S1")
 
     def test_suite_requires_both_independent_app_candidates(self):
         self.stage("P3-S9")["dependsOn"].remove("P2-S5")

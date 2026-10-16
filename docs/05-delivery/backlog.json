@@ -165,7 +165,7 @@
       "id": "P0-S3",
       "phase": "P0",
       "title": "SSH engine and terminal renderer qualification",
-      "status": "in-progress",
+      "status": "done",
       "effortDays": {
         "low": 2,
         "high": 4
@@ -512,7 +512,7 @@
       "id": "P1-S1",
       "phase": "P1",
       "title": "Native app targets and shared-module build foundation",
-      "status": "planned",
+      "status": "ready",
       "effortDays": {
         "low": 3,
         "high": 4
@@ -547,7 +547,7 @@
       ],
       "evidenceDirectory": "qualification/results/P1-S1/",
       "requiresCapabilities": [
-        "CAP-PLATFORM"
+        "CAP-FOUNDATION"
       ]
     },
     {
@@ -605,7 +605,7 @@
       ],
       "evidenceDirectory": "qualification/results/P1-S2/",
       "requiresCapabilities": [
-        "CAP-PLATFORM"
+        "CAP-FOUNDATION"
       ]
     },
     {
@@ -657,7 +657,7 @@
       ],
       "evidenceDirectory": "qualification/results/P1-S3/",
       "requiresCapabilities": [
-        "CAP-PLATFORM"
+        "CAP-FOUNDATION"
       ]
     },
     {
@@ -1111,7 +1111,10 @@
         "Q-R02",
         "Q-R01"
       ],
-      "evidenceDirectory": "qualification/results/P2-S5/"
+      "evidenceDirectory": "qualification/results/P2-S5/",
+      "requiresCapabilities": [
+        "CAP-PLATFORM"
+      ]
     },
     {
       "id": "P3-S1",
@@ -1484,7 +1487,10 @@
         "Q-R02",
         "Q-R01"
       ],
-      "evidenceDirectory": "qualification/results/P3-S5/"
+      "evidenceDirectory": "qualification/results/P3-S5/",
+      "requiresCapabilities": [
+        "CAP-PLATFORM"
+      ]
     },
     {
       "id": "P3-S9",
@@ -1816,7 +1822,10 @@
         "Q-N02",
         "Q-N03"
       ],
-      "evidenceDirectory": "qualification/results/P5-S4/"
+      "evidenceDirectory": "qualification/results/P5-S4/",
+      "requiresCapabilities": [
+        "CAP-PLATFORM"
+      ]
     },
     {
       "id": "P6-S1",
@@ -1993,9 +2002,28 @@
       "evidenceDirectory": "qualification/results/P6-S4/"
     }
   ],
-  "revision": "03-execution-setup-and-shared-transfer",
+  "revision": "04-investigation-closeout-and-foundation-admission",
   "targetScope": "Googlebook desktop/laptop Android applications; no phone/tablet optimization workstream.",
   "capabilityGates": [
+    {
+      "id": "CAP-FOUNDATION",
+      "title": "Native Android app and window construction primitives",
+      "outcome": "supported",
+      "decidingStages": [
+        "P0-S2"
+      ],
+      "ownerRole": "Android/platform developer",
+      "supportedScope": "HP Googlebook14 Android17/API37 arm64-v8a buildCL3B.260622.276.R2 incremental16560795: native Android build/install/launch, document-task windows, independent local context, sampled caption/resize/tile/close, Bundle recreation and observed background-process restoration, bounded font-scale reachability. Permits P1 native targets/window/local-state construction only. Does not qualify complete product input/IME/accessibility/display, indefinite sessions, engine adoption, product security or distribution.",
+      "evidencePaths": [
+        "qualification/results/P0-S2/2026-10-15-foundation-admission.md",
+        "qualification/results/P0-S1/2026-10-15-device-probe.md",
+        "qualification/results/P0-S2/2026-10-15-window-probe.md",
+        "qualification/results/P0-S2/2026-10-15-process-restoration.md",
+        "qualification/results/P0-S2/2026-10-15-font-scale.md"
+      ],
+      "nextExperiment": null,
+      "decisionNote": "docs/adr/0012-foundation-construction-and-platform-acceptance.md: accepted existing actual device evidence supports the named construction primitives. P1-S1/S2/S3 retain their dependencies/work/exits. CAP-PLATFORM remains experiment and explicitly guards independent R1/R2 and R4 acceptance; no requested feature or acceptance obligation removed."
+    },
     {
       "id": "CAP-PLATFORM",
       "title": "Desktop Android windows and operation lifetimes",
@@ -2017,32 +2045,44 @@
         "qualification/results/P0-S3/2026-10-15-terminal-physical-input.md"
       ],
       "nextExperiment": {
-        "hypothesis": "A reviewed native SSH engine can own an actual ordinary-SSH session independently of renderer and Activity generation on the selected Linux host; any hidden-session lifetime can be evaluated under a separately justified service classification without unrelated permissions or automatic input replay.",
+        "hypothesis": "The remaining product-level input, geometry and operation-specific lifecycle requirements can be implemented and qualified using the demonstrated Android primitives, with justified continuous-session classification and no automatic operation replay. The finite SSH ownership cases are complete and are carried forward.",
         "ownerRole": "Android/platform developer with Terminal/Android developer",
         "effortCapDays": 2,
         "stopCondition": "Stop the candidate at an unsupported API/type/prerequisite, private-API or unrelated-permission requirement, lost ownership, unexpected authentication/input replay, unbounded resources or two engineer-days. Preserve failures and record blocked/inconclusive scope; no silent cap extension or relabelled service.",
-        "expectedEvidence": "Exact source/APK/engine/server/build/route and reviewed compile/lint/tests; real SSH trust/authentication and independent SFTP hash round trip; visible/recreation/two-window owner correlation; justified FGS declaration/prerequisites plus actual notification, hidden/return, stop and process-loss observations or an explicit classification blocker; no input replay; separate distribution assessment. Retain required physical keyboard, trackpad/mouse, native IME/preedit/exact committed bytes, focus-loss modifier/pointer release, keyboard navigation/accessibility and remaining Q-P02 fullscreen/external-display cases. ADB injection and engagement hints do not satisfy physical cases. Full requirements remain pending when unavailable."
+        "expectedEvidence": "Carry forward accepted source/APK/engine/device identities and actual finite SSH/SFTP/window/retention results; do not repeat them without a changed boundary. Remaining evidence: justified continuous-session service/distribution decision, native composition/preedit/exact bytes, physical focus-loss modifier/pointer release, keyboard navigation/accessibility, remaining Q-P02 fullscreen/display cases and relevant real backend loss/recovery. Unavailable routes remain unmet; Android injection or finite service success is not a broad platform pass."
       },
-      "decisionNote": "docs/03-platform/googlebook/p0-s2-platform-decision.md: P0-S2 investigation closes with partial Q-P01/Q-P02 and accepted bounded window/engagement/finite HTTPS evidence; continuous SSH/desktop FGS, physical input, remaining geometry and operation-specific failure cases stay unresolved. No supported scope or product readiness. P0-S3 investigation may proceed; P1-S1/P1-S2/P1-S3 remain planned. The unchanged0.8.0 finite retention follow-up now passes hide/return, notification Disconnect and controlled process-loss reconciliation without reconnecting. Carry accepted results forward; no indefinite lifetime, Play or product admission follows. The 0.8.0 physical packet adds sampled built-in Backspace correction/Ctrl+C with matching user/UI evidence; trackpad selection is user-reported only, native composition not run because no composition IME is configured. The earlier longer-sequence discrepancy remains ambiguous. Broader desktop input, clipboard/menu integration, native IME/exact bytes, accessibility and adoption remain unmet."
+      "decisionNote": "docs/adr/0012-foundation-construction-and-platform-acceptance.md explicitly separates CAP-FOUNDATION construction admission from this broader platform experiment. Existing P0 window/finite operation and physical samples retain their scope. Continuous-product classification/distribution, complete physical/IME/accessibility/focus and geometry/backend obligations remain unresolved. This gate is required at P2-S5/R1, P3-S5/R2 and P5-S4/R4; no construction or finite-test result substitutes for product acceptance. Original two-day follow-up ceiling remains, with completed cases carried forward and no silent extension."
     },
     {
       "id": "CAP-SSH",
       "title": "Shared SSH transport and SFTP route",
-      "outcome": "pending",
+      "outcome": "experiment",
       "decidingStages": [
         "P0-S3",
         "P1-S4"
       ],
       "ownerRole": "SSH/platform developer",
       "supportedScope": null,
-      "evidencePaths": [],
-      "nextExperiment": null,
-      "decisionNote": null
+      "evidencePaths": [
+        "qualification/results/P0-S3/2026-10-15-investigation-closeout.md",
+        "qualification/results/P0-S3/2026-10-15-ssh-sftp-probe.md",
+        "qualification/results/P0-S3/2026-10-15-ssh-pty-probe.md",
+        "qualification/results/P0-S3/2026-10-15-ssh-lifecycle.md",
+        "qualification/results/P0-S3/2026-10-15-ssh-retention-cases.md"
+      ],
+      "nextExperiment": {
+        "hypothesis": "The selected SSHJ candidate can implement native authentication and independently trusted jump-hop contracts with separate per-app ownership, without changing the demonstrated trust-before-authentication boundary.",
+        "ownerRole": "SSH/platform developer with maintainer/security reviewer",
+        "effortCapDays": 2,
+        "stopCondition": "Stop the affected route on peer-identity confusion, premature authentication, secret leakage, uncertain cleanup, unavailable prerequisite or two engineer-days; preserve actual evidence and keep adoption unsupported. No silent crypto/provider downgrade or effort extension.",
+        "expectedEvidence": "Prerequisites: reviewed exact dependency/notice closure and the separate P1-S4 adoption context; owned actual server fixtures. Record route-specific native prompt/authentication, encrypted-key and separate jump-peer trust/cancel/cleanup observations where implemented. Carry existing finite SSH/SFTP/PTY evidence forward; product publication and credentials remain their own stage obligations."
+      },
+      "decisionNote": "docs/adr/0011-ssh-terminal-investigation.md: positive finite native transport feasibility with SSHJ0.41.2 and exact reviewed graph. Investigation complete, final P1-S4 adoption and named auth/jump/ownership contracts unresolved; no CAP-SSH support or P2 activation."
     },
     {
       "id": "CAP-TERMINAL",
       "title": "Terminal renderer and committed input",
-      "outcome": "pending",
+      "outcome": "experiment",
       "decidingStages": [
         "P0-S3",
         "P1-S4"
@@ -2050,10 +2090,19 @@
       "ownerRole": "Terminal/Android developer",
       "supportedScope": null,
       "evidencePaths": [
+        "qualification/results/P0-S3/2026-10-15-investigation-closeout.md",
+        "qualification/results/P0-S3/2026-10-15-terminal-probe.md",
+        "qualification/results/P0-S3/2026-10-15-terminal-upstream-device.md",
         "qualification/results/P0-S3/2026-10-15-terminal-physical-input.md"
       ],
-      "nextExperiment": null,
-      "decisionNote": "The 0.8.0 physical packet adds sampled built-in Backspace correction/Ctrl+C with matching user/UI evidence; trackpad selection is user-reported only, native composition not run because no composition IME is configured. The earlier longer-sequence discrepancy remains ambiguous. Broader desktop input, clipboard/menu integration, native IME/exact bytes, accessibility and adoption remain unmet."
+      "nextExperiment": {
+        "hypothesis": "The exact repaired xterm/WebView candidate can meet desktop committed-input/accessibility requirements through a bounded authored adapter and actual platform checks without replacing native SSH.",
+        "ownerRole": "Terminal/Android developer with device/accessibility operator",
+        "effortCapDays": 2,
+        "stopCondition": "Stop the affected route on concrete correctness/security/ownership failure, unavailable required prerequisite or two engineer-days including implementation/review/checks. Preserve the defect and keep adoption unsupported; no automatic fallback, quota expansion or input waiver.",
+        "expectedEvidence": "Prerequisites: preserved evidence capacity, exact source/APK/provider, owned actual byte-capture fixture, an authorized composition/accessibility route and implemented reviewed clipboard/menu controls. Native composition currently unavailable because no IME is configured. Record actual preedit/commit/cancel exact bytes, desktop editing/selection/clipboard/menu and real screen-reader/focus behavior; finite sustained-output/CPU/memory/input-latency observations. Parser ACKs are not pixels or latency. Carry accepted unchanged tests forward."
+      },
+      "decisionNote": "docs/adr/0011-ssh-terminal-investigation.md: retain exact xterm6.1.0-beta.315/fit0.12.0-beta.311/WebKit1.17.1 experiment, not adopted. Sampled repaired bytes/physical correction/Ctrl+C pass; selection user-observed; longer physical sequence ambiguous. No composition IME configured. Clipboard/menu adapter, native composition/exact bytes/accessibility, focus-release and sustained/performance acceptance remain unmet. P2-S2 stays gated."
     },
     {
       "id": "CAP-X11",
@@ -2243,6 +2292,30 @@
         "P3-S5"
       ],
       "reason": "Suite promotion uses independently qualified app candidates."
+    },
+    {
+      "stage": "P4-S4",
+      "requiredAncestors": [
+        "P2-S5",
+        "P3-S5"
+      ],
+      "forbiddenAncestors": []
+    },
+    {
+      "stage": "P6-S1",
+      "requiredAncestors": [
+        "P2-S5",
+        "P3-S5",
+        "P5-S4"
+      ],
+      "forbiddenAncestors": []
+    },
+    {
+      "stage": "P6-S4",
+      "requiredAncestors": [
+        "P6-S1"
+      ],
+      "forbiddenAncestors": []
     }
   ]
 }

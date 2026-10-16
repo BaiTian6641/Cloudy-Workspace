@@ -200,6 +200,13 @@ def main():
             finite = not isinstance(cap, float) or math.isfinite(cap)
             check(isinstance(cap, (int, float)) and not isinstance(cap, bool) and finite and cap > 0, f'{ident}: further experiment lacks a finite positive effort cap')
     activated = {'ready', 'in-progress', 'review', 'done'}
+    # Construction admission cannot silently replace complete platform acceptance.
+    for ident in ('P1-S1', 'P1-S2', 'P1-S3'):
+        required = stage_map.get(ident, {}).get('requiresCapabilities', [])
+        check('CAP-FOUNDATION' in required, f'{ident}: foundation admission requires CAP-FOUNDATION')
+    for ident in ('P2-S5', 'P3-S5', 'P5-S4'):
+        required = stage_map.get(ident, {}).get('requiresCapabilities', [])
+        check('CAP-PLATFORM' in required, f'{ident}: product acceptance requires CAP-PLATFORM; CAP-FOUNDATION is not a substitute')
     for stage in backlog['stages']:
         for ident in stage.get('requiresCapabilities', []):
             check(ident in gate_map, f"{stage['id']}: unknown capability gate {ident}")
