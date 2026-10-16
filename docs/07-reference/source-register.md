@@ -560,3 +560,9 @@ The [catalog build](../../qualification/results/P0-S4/2026-10-15-stream-catalog-
 - **R251** — [OMP18.7.0 plugin directory and profile resolution](https://github.com/can1357/oh-my-pi/blob/v18.7.0/packages/utils/src/dirs.ts): `getPluginsDir`/`getPluginsNodeModules` use the data-category resolver, including profile/config/XDG rules. Without overrides the native root is `~/.omp/plugins/node_modules`. The GLM trials checked actual roots and used empty project anchors; temporary pathnames alone do not isolate discovery. This upstream tooling contract is not a Googlebook API or an OS sandbox guarantee.
 
 - **R252** — [Qt platform-theme selection](https://doc.qt.io/qt-6/qguiapplication.html#QGuiApplication): public `QT_QPA_PLATFORMTHEME` / `-platformtheme`, current docs6.12 and tested fixtureQt6.9.2. Per-process generic theme establishes isolated canvas readiness; inherited-theme failure cause remains unproven. No global desktop or authentication policy change. P0-S4; integration leader.
+
+## VNC hosted verification correction
+
+- **R253** — [Official apksigner syntax](https://developer.android.com/tools/apksigner): verification requires the APK operand; no signature-policy relaxation is warranted for an invocation error.
+- **R254** — [GitHub artifact REST API](https://docs.github.com/en/rest/actions/artifacts): identity-bound GET/DELETE, Actions write permission and204 deletion response; actual removal needs a subsequent absence check.
+- **R255** — [Workflow token permissions](https://docs.github.com/en/actions/tutorials/authenticate-with-github_token): separate minimum-permission cleanup job, with no checkout or dependency execution.

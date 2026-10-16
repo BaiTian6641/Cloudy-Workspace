@@ -5044,6 +5044,42 @@
       "sourceUpdatedOn": null,
       "note": "Public -platformtheme option and QT_QPA_PLATFORMTHEME environment selection; currentdocs6.12, actualfixtureQt6.9.2. Ownerintegrationleader/P0-S4. Per-processgeneric theme lets the isolatedXcbcanvas start after inheritedKDEtheme attempts do not reachreadiness. Exact earlierstartupcause remainsunproven. Fallback stopfixture and retainfailure; no globaltheme/authentication changes, no Googlebook API claim. See2026-10-15-vnc-startup-timing.",
       "refresh": "Before changing host fixture Qt version or platform-theme selection."
+    },
+    {
+      "id": "R253",
+      "title": "Android apksigner command and verification contract",
+      "url": "https://developer.android.com/tools/apksigner",
+      "publisher": "Google",
+      "category": "tooling",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "apksigner verify [options] app-name.apk requires an APK operand; verification reports signature acceptance for supported platforms. P0-S4/CI owner integration leader. The first VNC workflow omitted the operand; restoring it preserves the signature gate. Failure fallback remains a failed job with retained diagnostics.",
+      "refresh": "When changing signature tooling, artifact cleanup or workflow token permissions."
+    },
+    {
+      "id": "R254",
+      "title": "GitHub Actions artifact REST identity and deletion",
+      "url": "https://docs.github.com/en/rest/actions/artifacts",
+      "publisher": "GitHub",
+      "category": "tooling",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "GET identifies an artifact and its workflow run/head SHA; DELETE /repos/{owner}/{repo}/actions/artifacts/{artifact_id} requires Actions write and returns204. P0-S4/CI owner integration leader. One-shot correction is constrained to artifact12020846433/run38839325183/head594c799; mismatch fails closed. Actual withdrawal must be separately verified.",
+      "refresh": "When changing signature tooling, artifact cleanup or workflow token permissions."
+    },
+    {
+      "id": "R255",
+      "title": "GitHub workflow token permissions",
+      "url": "https://docs.github.com/en/actions/tutorials/authenticate-with-github_token",
+      "publisher": "GitHub",
+      "category": "tooling",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "GITHUB_TOKEN is job-scoped repository authentication; use minimum job permissions. One-shot artifact cleanup has Actions write in a separate push-only job without checkout or dependency code; ordinary VNC build stays contents read. No user credential discovery or published token. Owner integration leader/P0-S4.",
+      "refresh": "When changing signature tooling, artifact cleanup or workflow token permissions."
     }
   ]
 }
