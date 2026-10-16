@@ -39,3 +39,10 @@ A genuine admitted Open can initialize the receiver replay ledger, add the reque
 Compile touched Kotlin/test targets with strict dependency verification and Android Lint. Test the new codec/phase/cleanup boundaries, including wrong identity/hash/generation, malformed data, foreign rows, failed export, zero deletions on preflight rejection and preservation after partial cleanup. Keep source/build and actual device evidence separate. Do not repeat unchanged SSH or upstream engine tests without a concrete changed boundary.
 
 Stop at ambiguous launch, privilege confounding, timeout, uncorrelated host attempt, unknown row ownership or unproven retirement. Preserve the first result and owned resources for review. No positive Open/BAL, saved-vault, physical-input, complete P1-S3 or release pass is established yet. Current implementation status belongs in the [execution record](../05-delivery/execution-state.md).
+
+
+## Implemented path-observation foundation
+
+The [fixture path observer](../../qualification/results/P1-S3/2026-10-16-handoff-path-observer.md) now uses pinned public SSHD callbacks and actual handle paths, with a separate bounded private journal. JDK21 strict compile and14 pure mapping/outcome assertions pass; callback/listener/device execution remains unrun. R322–R324 record the selected upstream boundaries. The parent run must require actual measured-session nested directory/file completions, clean count/sequence summaries and original authentication/closure correlation. Compile the helper alongside main; old main-only fixture recipes are insufficient.
+
+Source review confirms that accessibility window/package/PID continuity and idle controls alone do not identify the original Activity/model/call. Replacement objects can initialize idle, and an early unbind does not prove the synchronous sender call finished. The parent has therefore admitted a narrowly bounded passive debug-only observation increment; until its source/build/runtime review, no old-operation retirement claim or positive handoff run is accepted. This observation grants no credential, launch, replay or cleanup authority.

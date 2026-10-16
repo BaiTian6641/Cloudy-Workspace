@@ -7048,6 +7048,42 @@
       "sourceUpdatedOn": null,
       "note": "Committed module sums and signed sum.golang.org verification bind exact x/sys v0.49.0 adoption; owned module cache verified and readonly subsequent builds.",
       "refresh": "Before changing Windows identity profile, Go or x/sys version; native platform results remain separately bound."
+    },
+    {
+      "id": "R322",
+      "title": "Pinned SSHD public SFTP callback observation",
+      "url": "https://github.com/apache/mina-sshd/blob/2221febd396cd3daafdfbf2ff982c6d0eb69a203/sshd-sftp/src/main/java/org/apache/sshd/sftp/server/SftpEventListener.java",
+      "publisher": "Apache Software Foundation",
+      "category": "reference",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "readingEntries/readEntries observe actual DirectoryHandle pages; reading/read expose FileHandle and actual chunk outcome. Production by server is distinct from client reception/full listing.",
+      "refresh": "Before changing the pinned SSHD fixture or path observation; real callback and Googlebook handoff evidence remain separate."
+    },
+    {
+      "id": "R323",
+      "title": "Pinned SSHD public SFTP handle paths",
+      "url": "https://github.com/apache/mina-sshd/blob/2221febd396cd3daafdfbf2ff982c6d0eb69a203/sshd-sftp/src/main/java/org/apache/sshd/sftp/server/Handle.java",
+      "publisher": "Apache Software Foundation",
+      "category": "reference",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Handle.getFile supplies actual virtual Path; bounded fixture observer classifies it without recording raw paths, handles or content.",
+      "refresh": "Before changing the pinned SSHD fixture or path observation; real callback and Googlebook handoff evidence remain separate."
+    },
+    {
+      "id": "R324",
+      "title": "Pinned SSHD rooted filesystem boundary",
+      "url": "https://github.com/apache/mina-sshd/blob/2221febd396cd3daafdfbf2ff982c6d0eb69a203/sshd-common/src/main/java/org/apache/sshd/common/file/root/RootedFileSystem.java",
+      "publisher": "Apache Software Foundation",
+      "category": "reference",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "RootedFileSystem.getRoot and absolute RootedPath identity bind finite synthetic nested path classes to the trusted root. Mapping is not additional access control or runtime qualification.",
+      "refresh": "Before changing the pinned SSHD fixture or path observation; real callback and Googlebook handoff evidence remain separate."
     }
   ]
 }

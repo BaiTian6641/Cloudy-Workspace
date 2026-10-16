@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "fixture-only compilation and pure path/outcome mapping; not runtime qualification",
+  "sources": [
+    {
+      "path": "qualification/fixtures/ssh-session/src/CloudySftpPathObservation.java",
+      "bytes": 1055,
+      "sha256": "8bf4abe2effb71651b80bcf725c997b29ef5e885cf3d1ef23b44a77e7af70f2e"
+    },
+    {
+      "path": "qualification/fixtures/ssh-session/src/CloudySftpPathObservationTest.java",
+      "bytes": 1921,
+      "sha256": "37df0576b07feda8923816b45dfa03166871aa399ae35b60a4b13b7d92cdf2fd"
+    },
+    {
+      "path": "qualification/fixtures/ssh-session/src/CloudySshSessionFixture.java",
+      "bytes": 35796,
+      "sha256": "2e1bb44b58a40a581efa359c19f8a7241298a7cfe04ce4e6fbd52597f982221f"
+    }
+  ],
+  "buildReceipt": {
+    "path": ".cache/files-handoff-02/host-path-observer/build-01/result.json",
+    "sha256": "217bf1be0ef2bfa9547b39c045ddb31d88a0b2ff2ca45a0fb32b63d1ddb1f590",
+    "sourceUnchanged": true
+  },
+  "dependencies": {
+    "manifest": "qualification/fixtures/ssh-session/dependencies.json",
+    "sha256": "17ead23d33236a1e37ad41cb2458ccd334a0e1c1d3f07dbc5c3d7dff78295aca",
+    "verifiedArtifactCount": 5,
+    "upstreamTagCommit": "2221febd396cd3daafdfbf2ff982c6d0eb69a203"
+  },
+  "checks": {
+    "compiler": "JDK21 javac -Xlint:all -Werror; all three sources",
+    "compileExitCode": 0,
+    "mappingExitCode": 0,
+    "mappingAssertions": 14,
+    "mappingMarker": "PATH_MAPPING_PASS_14",
+    "logs": [
+      {
+        "path": ".cache/files-handoff-02/host-path-observer/build-01/compile.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".cache/files-handoff-02/host-path-observer/build-01/compile.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".cache/files-handoff-02/host-path-observer/build-01/mapping.stdout",
+        "bytes": 21,
+        "sha256": "3776f2819df3562694fb69b6554fbc65df9eac8f2da047da329eb769ffc371a6"
+      },
+      {
+        "path": ".cache/files-handoff-02/host-path-observer/build-01/mapping.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ]
+  },
+  "assertions": [
+    {
+      "input": "absolute /nested",
+      "expected": "nested-directory"
+    },
+    {
+      "input": "absolute /nested/nested.txt",
+      "expected": "nested-file"
+    },
+    {
+      "input": "absolute /nested/./nested.txt",
+      "expected": "nested-file"
+    },
+    {
+      "input": "relative nested/nested.txt",
+      "expected": "other"
+    },
+    {
+      "input": "absolute /nested.txt",
+      "expected": "other"
+    },
+    {
+      "input": "absolute /nested/nested.txt.extra",
+      "expected": "other"
+    },
+    {
+      "input": "absolute /nested/other.txt",
+      "expected": "other"
+    },
+    {
+      "input": "absolute /",
+      "expected": "other"
+    },
+    {
+      "input": "foreign rooted filesystem /nested/nested.txt",
+      "expected": "other"
+    },
+    {
+      "input": "ordinary provider /nested/nested.txt",
+      "expected": "other"
+    },
+    {
+      "input": "read length 1; no failure",
+      "expected": "completed"
+    },
+    {
+      "input": "read length 0; no failure",
+      "expected": "empty"
+    },
+    {
+      "input": "read length -1; no failure",
+      "expected": "eof"
+    },
+    {
+      "input": "read length 12; IOException present",
+      "expected": "failed"
+    }
+  ],
+  "runtime": {
+    "listenerStarted": false,
+    "authenticationExecuted": false,
+    "sftpCallbacksExecuted": false,
+    "deviceExecuted": false,
+    "journalFaultOrOverflowExecuted": false
+  },
+  "review": "Independent source review found no blocker; pure tests do not establish actual host or client handoff behavior."
+}

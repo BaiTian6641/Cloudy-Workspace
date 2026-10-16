@@ -15,6 +15,7 @@ import org.apache.sshd.server.channel.ChannelSessionFactory;
 import org.apache.sshd.sftp.common.SftpConstants;
 import org.apache.sshd.sftp.SftpModuleProperties;
 import org.apache.sshd.sftp.server.FileHandle;
+import org.apache.sshd.sftp.server.DirectoryHandle;
 import org.apache.sshd.sftp.server.SftpEventListener;
 import org.apache.sshd.sftp.server.SftpFileSystemAccessor;
 import org.apache.sshd.sftp.server.SftpSubsystemFactory;
@@ -77,6 +78,7 @@ public final class CloudySshSessionFixture {
     private static final int MAX_SECONDS = 180;
     private static final int MAX_SESSIONS = 16;
     private static final int MAX_EVENTS = 2048;
+    private static final int MAX_PATH_EVENTS = 512;
     private final Path directory;
     private final SshServer server = SshServer.setUpDefaultServer();
     private final Map<Session, Integer> sessions = new ConcurrentHashMap<>();
@@ -88,6 +90,9 @@ public final class CloudySshSessionFixture {
     private final AtomicBoolean stopping = new AtomicBoolean();
     private final CountDownLatch stopped = new CountDownLatch(1);
     private int events;
+    private int pathEvents;
+    private volatile boolean pathOverflow;
+    private volatile boolean pathIoFailed;
     private volatile boolean overflow;
     private volatile boolean closed;
     private volatile boolean ioFailed;
@@ -138,6 +143,7 @@ public final class CloudySshSessionFixture {
         directory = Files.createDirectory(destination,
                 PosixFilePermissions.asFileAttribute(PosixFilePermissions.fromString("rwx------")));
         privateFile("events.jsonl");
+        privateFile("path-events.jsonl");
         byte[] random = new byte[32];
         new SecureRandom().nextBytes(random);
         password = Base64.getUrlEncoder().withoutPadding().encodeToString(random);
@@ -248,10 +254,21 @@ public final class CloudySshSessionFixture {
             @Override public void destroying(ServerSession session) {
                 event("sftp_destroying", session, null, null);
             }
+            // These maintained callbacks expose the actual opened virtual directory,
+            // not a guessed path inferred from an opcode or from the client UI.
+            @Override public void readingEntries(ServerSession session, String handle, DirectoryHandle directoryHandle) {
+                pathEvent(session, directoryHandle.getFile(), "directory-list", "requested");
+            }
+            @Override public void readEntries(ServerSession session, String handle, DirectoryHandle directoryHandle,
+                    Map<String, Path> entries) {
+                // Means entries were produced by SSHD, not that the client acknowledged them.
+                pathEvent(session, directoryHandle.getFile(), "directory-list", "completed");
+            }
             @Override public void reading(ServerSession session, String handle, FileHandle file,
                     long offset, byte[] data, int dataOffset, int dataLen) throws IOException {
                 if (offset < 0 || offset > 1_048_576L || dataLen < 0 || dataLen > 65_536
                         || requestedBytes.computeIfAbsent(session, ignored -> new AtomicLong()).addAndGet(dataLen) > 8_388_608L) throw new IOException("FIXTURE_READ_BOUND");
+                pathEvent(session, file.getFile(), "file-read", "requested");
                 CountDownLatch releaseRead = new CountDownLatch(1);
                 if (fixtureCase.equals("hold-read") && heldReads.putIfAbsent(session, releaseRead) == null) {
                     event("read_hold_entered", session, null, null);
@@ -275,6 +292,7 @@ public final class CloudySshSessionFixture {
             @Override public void read(ServerSession session, String handle, FileHandle file,
                     long offset, byte[] data, int dataOffset, int dataLen, int readLen, Throwable thrown) {
                 event(thrown == null ? "read_completed" : "read_failed", session, null, null);
+                pathEvent(session, file.getFile(), "file-read", CloudySftpPathObservation.readCompletion(readLen, thrown));
             }
         });
         server.setSubsystemFactories(List.of(sftp));
@@ -490,6 +508,39 @@ public final class CloudySshSessionFixture {
             events++;
             summary();
         } catch (IOException exception) { ioFailed = true; }
+    }
+
+    /** Separate bounded journal preserves all existing event names/count semantics.
+     * Only finite literals and the fixture's session number cross this boundary. */
+    private synchronized void pathEvent(ServerSession session, Path actual, String operation, String completion) {
+        if (pathEvents >= MAX_PATH_EVENTS) {
+            pathOverflow = true; overflow = true;
+            try { pathSummary(); } catch (IOException failure) { pathIoFailed = true; ioFailed = true; }
+            return;
+        }
+        String pathClass = CloudySftpPathObservation.classify(root, actual);
+        int id = sessionId(session);
+        if (id == 0) { pathOverflow = true; overflow = true; return; }
+        String line = "{\"schema\":1,\"sequence\":" + (pathEvents + 1) + ",\"session\":" + id
+                + ",\"operation\":\"" + operation + "\",\"pathClass\":\"" + pathClass
+                + "\",\"completion\":\"" + completion + "\"}\n";
+        try (FileChannel output = FileChannel.open(directory.resolve("path-events.jsonl"),
+                StandardOpenOption.WRITE, StandardOpenOption.APPEND)) {
+            ByteBuffer bytes = StandardCharsets.UTF_8.encode(line);
+            while (bytes.hasRemaining()) output.write(bytes);
+            output.force(true);
+            pathEvents++;
+            pathSummary();
+        } catch (IOException failure) { pathIoFailed = true; ioFailed = true; }
+    }
+
+    private void pathSummary() throws IOException {
+        Path temporary = directory.resolve("path-summary.tmp");
+        Files.deleteIfExists(temporary);
+        Files.createFile(temporary, PosixFilePermissions.asFileAttribute(PosixFilePermissions.fromString("rw-------")));
+        Files.writeString(temporary, "{\"schema\":1,\"events\":" + pathEvents + ",\"overflow\":" + pathOverflow
+                + ",\"ioFailed\":" + pathIoFailed + "}\n", StandardCharsets.UTF_8, StandardOpenOption.WRITE);
+        Files.move(temporary, directory.resolve("path-summary.json"), StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
     }
 
     private synchronized void summary() throws IOException {

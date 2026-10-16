@@ -14,7 +14,7 @@ CloudySshSessionFixture <fresh-output-directory> <existing-synthetic-root> <case
 
 The parent provisions known non-secret bytes, for example `hello.txt` containing exactly UTF-8 `Cloudy retained SFTP\n`, plus `overflowdir/a`, `overflowdir/b` and `overflowdir/c`. The fixture does not create or overwrite root content. Enumeration and read responses come from the actual filesystem through MINA; expected bytes and client bounds must be asserted by the caller. Reading may update filesystem access time; no host metadata-preservation claim is made.
 
-The output leaf is created fresh0700; `fixture.properties`, `events.jsonl` and atomic `summary.json` are0600. Properties keys are `port`, `fingerprint`, `replacementFingerprint`, `password`, `user`, `case`. Host address is implicitly127.0.0.1. The host key and independent replacement key are fresh in-memory P256 keys; the password is generated from32 random bytes. Properties contain generated fixture credentials and must remain private. Only `READY port=... fingerprint=...` is printed; generic failures contain no path, credential or exception transcript. Library logging must resolve to NOP or startup refuses. Java immutable password/properties Strings are not securely erased; this is not whole-JVM zeroization.
+The output leaf is created fresh0700; `fixture.properties`, `events.jsonl`, `path-events.jsonl` and atomic `summary.json`/`path-summary.json` are0600. Properties keys are `port`, `fingerprint`, `replacementFingerprint`, `password`, `user`, `case`. Host address is implicitly127.0.0.1. The host key and independent replacement key are fresh in-memory P256 keys; the password is generated from32 random bytes. Properties contain generated fixture credentials and must remain private. Only `READY port=... fingerprint=...` is printed; generic failures contain no path, credential or exception transcript. Library logging must resolve to NOP or startup refuses. Java immutable password/properties Strings are not securely erased; this is not whole-JVM zeroization.
 
 ## Real protocol and read-only boundary
 
@@ -65,3 +65,22 @@ The main lifetime is at most175seconds before closure, with a180second absolute 
 No build, listener, host test or Android device result is claimed by this source entry. These controlled maintained-server tests will remain separate from OpenSSH, installed-product, LAN/hostname, physical-input, saved-vault and complete SSH/SFTP product qualification.
 
 The [2026-10-16 qualification](../../results/P1-S3/2026-10-16-ssh-retained-session.md) now records actual host and lower-level Android execution separately from this fixture contract.
+
+## Path observer compilation and bounded evidence
+
+Compile the helper alongside main; old main-only recipes are insufficient. With the five verified locked JARs already available in `$FIXTURE_JARS`, use JDK21:
+
+```bash
+fixture_cp="$FIXTURE_JARS/sshd-core-2.20.0.jar:$FIXTURE_JARS/sshd-common-2.20.0.jar:$FIXTURE_JARS/sshd-sftp-2.20.0.jar:$FIXTURE_JARS/slf4j-api-2.0.20.jar:$FIXTURE_JARS/slf4j-nop-2.0.20.jar"
+javac -Xlint:all -Werror -cp "$fixture_cp" -d "$FIXTURE_CLASSES" \
+  qualification/fixtures/ssh-session/src/CloudySftpPathObservation.java \
+  qualification/fixtures/ssh-session/src/CloudySshSessionFixture.java \
+  qualification/fixtures/ssh-session/src/CloudySftpPathObservationTest.java
+java -cp "$FIXTURE_CLASSES:$fixture_cp" CloudySftpPathObservationTest
+```
+
+`FIXTURE_CLASSES` is a parent-owned fresh build directory. The pure main runs14 mapping/outcome assertions; it starts no fixture. Exact source/build hashes and the executed compile result are in the [2026-10-16 observer result](../../results/P1-S3/2026-10-16-handoff-path-observer.md). This compile result does not qualify listener/authentication/callback/runtime behavior.
+
+The separate append-only `path-events.jsonl` journal caps at512 records and shares existing session correlation IDs. It emits only schema1, monotonic sequence, session and finite operation (`directory-list`/`file-read`), pathClass (`nested-directory`/`nested-file`/`other`) and completion literals. Absolute rooted paths must match the trusted synthetic root; exact normalized virtual `/nested` and `/nested/nested.txt` are classified, while other paths remain `other`. No raw path, entry name, handle, file bytes, credentials or exception text is logged. This classification does not change access authorization.
+
+Public directory callbacks record requested/produced pages; file callbacks record requested reads and completed/empty/eof/failed outcomes. Completion establishes subsystem production, not client reception or full listing. Forced journal writes and atomic private `path-summary.json` count/overflow/ioFailed accompany the unchanged original event journal/summary. Overflow or I/O failure also fails overall fixture status. Parent acceptance must demand both clean final summaries, contiguous sequence/count agreement, expected measured-session classes/completions and corresponding original authentication/closure evidence; missing or inconsistent evidence is not success. Actual callback paths, journal faults/overflow and host/client handoff remain separately qualified runtime work.
