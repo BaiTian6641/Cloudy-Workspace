@@ -1,0 +1,223 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "Console-to-Desktop attempt07 ordinary Open UI sequence passed; receiver observer completion rejected; exact postOpen recovery preserved legitimate replay",
+  "acceptance": "Overall positive handoff remains failed; parent completed reviewed original-checkpoint recovery; author inspected actual raw phase/checkpoint/replay/artifact evidence without rerun",
+  "productVersionUnchanged": "0.1.14",
+  "productVersionCodeUnchanged": 15,
+  "device": {
+    "model": "HP Googlebook 14",
+    "release": "17",
+    "api": "37",
+    "build": "CL3B.260622.276.R2",
+    "incremental": "16560795",
+    "abi": "arm64-v8a"
+  },
+  "build": {
+    "path": ".cache/files-handoff-02/controller-freshness-01/build-01/result.json",
+    "sha256": "26d8096641c8d78abb01a502fb7872a97b855af79879ad6e962bae59cd21d127",
+    "platformTestApkSha256": "652075d56cb178caedd03550fd58be4c2f3287c2df16a10869968cc1722f9457"
+  },
+  "sourcesAtRun": [
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/FilesHandoffPositiveControllerTest.kt",
+      "bytes": 24878,
+      "sha256": "7ee1126dacf020ce3fd0910046cc6679db14cb71718cdd9fdc228f914c9eabd8"
+    },
+    {
+      "path": "shared/android/platform/src/debug/kotlin/io/github/baitian6641/cloudy/platform/FilesPositiveObservation.kt",
+      "bytes": 14050,
+      "sha256": "c8d03eee8c6f31e083c33275ad128780337f0cf725024ac26641f06ab4a2e8b5"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/SshFilesSessionModel.kt",
+      "bytes": 36423,
+      "sha256": "f44899bb7905bef6ef9b2a723347b496352e3071bd48315b2b6d2ef9b39ea3ef"
+    }
+  ],
+  "helpers": [
+    {
+      "path": ".cache/files-handoff-02/positive-bootstrap-04/bootstrap_07.py",
+      "sha256": "5730097727d82080f04b9377187efdcfff9b5abf7878847609be16ab949fd280"
+    },
+    {
+      "path": ".cache/files-handoff-02/positive-bootstrap-04/run_positive_11.py",
+      "sha256": "457c3555bec45968df75565528995f25a9eca322761bc2eebc080636a41eea71"
+    },
+    {
+      "path": ".cache/files-handoff-02/positive-bootstrap-04/install_09.py",
+      "sha256": "c68583c78eb35bf24a0d365a213388953739f6750af615488447151a7d765546"
+    },
+    {
+      "path": ".cache/files-handoff-02/positive-bootstrap-04/reconcile_failed_07_03.py",
+      "sha256": "c405d76fa4042a408318f8f5d281f74bd413b75fee1ca546e564c980920bc7b5"
+    }
+  ],
+  "attemptFreeze": {
+    "path": ".cache/files-handoff-02/positive-bootstrap-04/freeze-01.json",
+    "sha256": "eb5b436d073eaa7e8159ee1abb3d7c78ee8abf7e4dac256faff005230c39a5ce"
+  },
+  "recoveryFreeze": {
+    "path": ".cache/files-handoff-02/positive-bootstrap-04/recovery-freeze-03.json",
+    "sha256": "8010eb1f71259176ab40cac8a01526c5ab4497edb3f1e2e5cd4ce43591fd6a0d"
+  },
+  "recoveryIndependentSourceReview": {
+    "path": ".cache/files-handoff-02/positive-bootstrap-04/recovery-independent-review-01.json",
+    "sha256": "ede670280640197dc4c53a67c23041516e611a2cef629b77217b051afd8a51fb"
+  },
+  "actualInspection": {
+    "path": ".cache/files-handoff-02/positive-bootstrap-04/recovery-actual-inspection-01.json",
+    "sha256": "9d9aff902419a1cbb31876709b15cf4025a9c40b6aa1623f97c79ec27d530e1d"
+  },
+  "actual": {
+    "prepareMethodsPassed": 1,
+    "controllerMethodsPassed": 1,
+    "controllerPhaseStatuses": 8,
+    "checkedClearCacheExecutedSuccessfully": true,
+    "cacheCallInvocationCountMeasured": false,
+    "ordinaryOpenExecuted": true,
+    "receiverFixtureAuthenticationConnectedNestedPreviewAndDisconnectUiPassed": true,
+    "ordinaryPlannedCloseSequenceExecuted": true,
+    "extraRecoveryCloseActions": 0,
+    "senderObserver": {
+      "sealed": true,
+      "invalid": false,
+      "originalOperationChainComplete": true,
+      "events": 5
+    },
+    "receiverObserver": {
+      "sealed": true,
+      "invalid": false,
+      "originalOperationChainComplete": false,
+      "events": 9,
+      "eventNames": [
+        "DISPATCH_STARTED",
+        "DISPATCH_RETIRED",
+        "RECEIVER_CREATED",
+        "SESSION_CLAIMED",
+        "TRANSPORT_ESTABLISHED",
+        "TRANSPORT_RETIRED",
+        "SAME_SESSION_IDLE",
+        "MODEL_CLEARED",
+        "RECEIVER_DESTROYED"
+      ]
+    },
+    "deviceFailureCode": "OBSERVER_HEADER_OR_TERMINAL",
+    "normalHandoffPassed": false,
+    "observerQualificationPassed": false,
+    "hostEventCounts": {
+      "session_created": 2,
+      "server_initial_kexinit_written": 2,
+      "client_initial_kexinit_negotiation_start": 2,
+      "key_established": 2,
+      "auth_request": 2,
+      "auth_accepted": 2,
+      "session_authenticated": 2,
+      "channel_open": 4,
+      "sftp_init_request": 4,
+      "sftp_initialized": 4,
+      "sftp_opendir_request": 3,
+      "sftp_readdir_request": 6,
+      "sftp_close_request": 4,
+      "sftp_destroying": 4,
+      "session_closed": 2,
+      "sftp_lstat_request": 1,
+      "sftp_open_request": 1,
+      "sftp_read_request": 2,
+      "read_completed": 2
+    },
+    "hostPathEventCount": 10,
+    "freshMeasuredSession": 2,
+    "actualNestedDirectoryListAndNestedFileReadRequestedCompleted": true,
+    "hostExitCode": null,
+    "verifyMethodsPassed": 1,
+    "cleanupMethodsPassed": 1,
+    "cleanupStatuses": 7,
+    "cleanupRowsRemoved": 3,
+    "ownedConfigsRemoved": 4,
+    "ownedReverseRemoved": 1,
+    "originalRowsMetadataGenerationRestored": true,
+    "legitimateAdmissionReplayDeltaValidated": true,
+    "postOpenReplayPreserved": true,
+    "finalReplayRowCounts": {
+      "console": 0,
+      "desktop": 1
+    },
+    "replayResetOrDeletion": false,
+    "originalCheckpointAndFailedEvidencePreserved": true,
+    "productFrameworkCacheProjection": false,
+    "controllerNonConfigFilesAndUidPreserved": true,
+    "deviceBootSettingsUidPreserved": true,
+    "allFiveInstalledApksMatchFrozenBuild": true,
+    "bothProductsInstalledStopped": true,
+    "threeTestApksInstalled": true
+  },
+  "privateEvidenceDigests": [
+    {
+      "label": "bootstrap-terminal",
+      "sha256": "8db4e55b6fab1306ae8a74b7d67e25969c55342fb829e239fb76a16d7fe7378c"
+    },
+    {
+      "label": "device-terminal",
+      "sha256": "71c81c469e3887f1977f932b2f6df42e2947eeffbc926f465f396633b2c03ac6"
+    },
+    {
+      "label": "controller-stdout",
+      "sha256": "fe63335279c64b7a584c2b423c4fbf764de788ea5254833c2272fb8493c9d6b7"
+    },
+    {
+      "label": "controller-stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "prepare-stdout",
+      "sha256": "62c10e1a3f85a6fcdd6c87b4259466867688562dbd85a17f2c57ddfda417fcc4"
+    },
+    {
+      "label": "original-checkpoint",
+      "sha256": "a53b5f16f50531a84c19ff6d705ab6992482a585ae43e3083723c4b4c75fe168"
+    },
+    {
+      "label": "sender-observer",
+      "sha256": "5c58a3e598e72fdb2c2255ac14dce88d4bf93fd247b7ebc0b392fc0a84f7fd29"
+    },
+    {
+      "label": "receiver-observer",
+      "sha256": "144f42919dcb8660fb481c25b65043bdd8d527ac45278613b782e5f1621ea201"
+    },
+    {
+      "label": "host-events",
+      "sha256": "81cebf8951986a80c8a73605f25e656246797c90c102d0427e0e6da8c7317cfc"
+    },
+    {
+      "label": "host-path-events",
+      "sha256": "be1099c7cac75a2e6570b71e2795e791996c5147d52d7643d2672ac2e0f18071"
+    },
+    {
+      "label": "host-summary",
+      "sha256": "2651342868fb703d1acd1d736ca799ca3cb86c386eb7a3543deba495256bd4cb"
+    },
+    {
+      "label": "recovery-terminal",
+      "sha256": "8103af8a285e28741191f189e3537301b575dc7ea8df9d643b8ac396120b97c5"
+    },
+    {
+      "label": "verify-stdout",
+      "sha256": "0c8c567040fdc4498265949297e176206a7e12f86682010bc0b69de5467cce12"
+    },
+    {
+      "label": "cleanup-stdout",
+      "sha256": "b845e93fbb0a03d689ca008c87b9dce8628087b2c3d129152a3878c15a8470f1"
+    }
+  ],
+  "recoveryPhase": "POSTOPEN_OBSERVER_FAILURE_RECONCILED",
+  "limits": [
+    "No overall positive handoff or receiver observer completion pass: original sealed receiver completion remains false",
+    "Successful clearCache use and ordinary UI sequence do not retrospectively prove cache staleness in prior attempts",
+    "Observed post-idle MODEL_CLEARED is rejected by current observer policy; no collector/validator repair is implemented at this checkpoint",
+    "Recovery-only nine-event validation never rewrites or promotes qualification receipts",
+    "Legitimate one-row receiver admission replay persists; original preOpen replay equality is deliberately not claimed",
+    "Host process exit and original primary-summary serverClosed/workersRetired remain unknown/false rather than inferred clean",
+    "No additional authentication prompt, retry, reverse direction or full P1-S3 acceptance; protected-vault human question remains pending"
+  ]
+}

@@ -2407,9 +2407,10 @@
       "stage": "P1-S3",
       "runtimeGuard": "Parent-controlled private0700 directory/0600 strict bounded config; fresh finite nonce exclusively claimed without reset; one debug worker,32events/12identities/16KiB and<=5min. Actual original Activity/call/model/session hooks; checked staging mode/write/sync/close then final rename. Release contains no collector or file access. Parent correlates sealed valid original chain with exact build/boot/process/controller phases and genuine host evidence.",
       "fallback": "Missing/invalid/expired/partial/uncertain receipt invalidates qualification without changing the product operation. No automatic retry, replay, credential or launch authority. Preserve uncertain staging/claims and historical evidence; no directory or power-loss durability promise.",
-      "experiment": "Final0.1.14/code15 build02 binds231 unchanged inputs/seven APKs. Strict debug/release compilation and seven zero-issue Lint reports pass; platform16JVM cases/zero failures/errors/skips include nine observer methods. Independent and parent source/hash review close publication/whitespace findings. Actual Android file/lifecycle behavior, ordinary positive Open and receiver phases remain unrun.",
+      "experiment": "Final0.1.14/code15 build02 binds231 inputs/seven APKs with strict debug/release compilation, seven zero-issue Lint reports and16 platformJVM cases including nine observer methods. Later actual attempt07 seals valid sender and receiver receipts after all eight controller phases; receiver chain remains false because normal post-IDLE model clearing is universally rejected. Overall handoff remains failed. Recovery preserves original sealed evidence and legitimate replay. A narrow observer repair is proposed, not implemented or device-qualified.",
       "researchEvidence": "docs/06-validation/files-handoff-observation.md",
-      "compileEvidence": "qualification/results/P1-S3/2026-10-16-handoff-observation-build.json"
+      "compileEvidence": "qualification/results/P1-S3/2026-10-16-handoff-observation-build.json",
+      "deviceEvidence": "qualification/results/P1-S3/2026-10-16-handoff-postopen-observer-failure.md"
     },
     {
       "id": "API68",
@@ -2425,15 +2426,16 @@
       "minimumApi": 34,
       "libraryVersion": "Public Android SDK; standalone platform instrumentation minSdk35; no new dependency.",
       "availability": "documented",
-      "qualification": "unverified",
+      "qualification": "partial",
       "checkedOn": "2026-10-16",
       "owner": "Android qualification developer and integration leader",
       "stage": "P1-S3",
       "runtimeGuard": "Standalone qualification only; require true from clearCache before each existing window query and final timeout sample. Exact app/active/focused/visible and heading/card selectors, bounded polling and one ordinary Open remain unchanged. No permission identity adoption.",
       "fallback": "False or unavailable cache invalidation fails safely through fixed diagnostic output; never relax selectors, fabricate success or retry Open. Prior failures retain unknown root cause.",
-      "experiment": "Strict focused compilation and four zero-issue Lint reports pass; product/owning-test APK bytes remain unchanged. Actual platform-test-only preserved-state replacement passes, zero methods or UI launched. The next normal operation must qualify the freshness candidate; no callback-only or synthetic pass is inferred.",
+      "experiment": "Strict focused compilation and four zero-issue Lint reports pass; product/owning-test APK bytes remain unchanged. Actual platform-test-only replacement preserves state and runs zero methods. The separately identified attempt07 then passes all eight controller phases, which require successful checked clearCache calls. Whole handoff verification fails its receiver observer chain; original-checkpoint recovery preserves legitimate consumed replay. This is sampled runtime API use, not proof of the historical timeout cause or complete positive handoff acceptance.",
       "researchEvidence": "qualification/results/P1-S3/2026-10-16-handoff-controller-freshness.md",
-      "compileEvidence": "qualification/results/P1-S3/2026-10-16-handoff-controller-freshness.json"
+      "compileEvidence": "qualification/results/P1-S3/2026-10-16-handoff-controller-freshness.json",
+      "deviceEvidence": "qualification/results/P1-S3/2026-10-16-handoff-postopen-observer-failure.md"
     }
   ],
   "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."
