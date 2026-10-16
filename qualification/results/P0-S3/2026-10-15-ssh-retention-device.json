@@ -1,0 +1,709 @@
+{
+  "schemaVersion": 1,
+  "runId": "2026-10-15-ssh-retention-device",
+  "stage": "P0-S3",
+  "stageStatus": "in-progress",
+  "verdict": "installed-failed-pty-attempt-reboot-observed-retention-unqualified",
+  "reviewStatus": "Accepted by primary and direct Codex independent reviewer; all109 artifact hashes/sizes and install/journal/cleanup/CI projections verified; no blocking findings",
+  "application": {
+    "installedVersion": "0.8.0",
+    "versionCode": 12,
+    "apkBytes": 16005509,
+    "apkSha256": "fc2cc377cb09aaf9ad571489a09854719e84de3a9a3a03b131fabab01fa46e09",
+    "predecessorSha256": "c6f52b83d66846c528f867f3f450e66e32c8add0e14e717d8c8820b6fda9e949",
+    "allFourJournalsUnchanged": true,
+    "predecessorStoppedBeforeInstall": true,
+    "sourceCommit": "d9518d18390e2a8cca7752a0546f89d8b4e7a9a2",
+    "packageName": "dev.cloudy.qualification.baseline",
+    "buildRef": "7aab1ccd-e90b-41e1-bd51-1183042c134a",
+    "publicLauncherUsedAfterInstallation": true
+  },
+  "device": {
+    "model": "HP Googlebook 14",
+    "release": "17",
+    "api": 37,
+    "abi": "arm64-v8a",
+    "buildId": "CL3B.260622.276.R2",
+    "incremental": "16560795",
+    "privateIdentityPublished": false
+  },
+  "backend": {
+    "system": "Ubuntu 26.04 / KDE / Wayland",
+    "server": "OpenSSH_10.2p1 Ubuntu-2ubuntu3.8",
+    "fixture": "host-05 existing identities and fixed protocol",
+    "normalContextRetryConnections": 0
+  },
+  "attempt": {
+    "id": "201d6614-73d4-48c9-b9af-6894003bb182",
+    "operation": "retained-exec-pty",
+    "status": "failed",
+    "reason": "ConnectionException",
+    "authenticated": true,
+    "execVerified": true,
+    "ptyReady": false,
+    "events": 8,
+    "deviceFinalEventUtc": "2026-10-16T03:17:35.607174Z"
+  },
+  "retentionCases": {
+    "hideReturn": "not-exercised",
+    "notificationCancel": "not-exercised",
+    "controlledProcessLoss": "not-exercised"
+  },
+  "incident": {
+    "deviceRebootConfirmed": true,
+    "approximateNewBootUtc": "2026-10-16T03:23:09Z",
+    "initialObservedUptimeSeconds": 90.68,
+    "laterObservedUptimeSeconds": 228.2,
+    "bootCount": 5,
+    "sameNewBootIdentityAcrossReads": true,
+    "reportedReason": "reboot",
+    "latestKernelEvidence": "watchdog: Watchdog detected hard LOCKUP on cpu 4",
+    "previousKernelTimestampSeconds": 97738.904657,
+    "latestKmsgTruncated": true,
+    "causalTraceAvailable": false,
+    "cause": "unresolved",
+    "olderOtaEntryExplainsCurrentReboot": false,
+    "rebootRequestedByReviewedCommands": false,
+    "userAuthorizesNormalContinuation": true
+  },
+  "preservation": {
+    "fourJournalsUnchangedAcrossInstall": true,
+    "predecessorSshRowsUnchanged": 4,
+    "terminalSshRowsAfterIncident": 5,
+    "trustedHostsUnchanged": true,
+    "postRebootJournalByteEqual": true,
+    "journalCapacity": 8,
+    "remainingSlots": 3,
+    "archiveOrDeletionPerformed": false
+  },
+  "cleanup": {
+    "bothFixtureMastersExitedZero": true,
+    "bothListenersClosed": true,
+    "scopedFixtureHelpersAbsent": true,
+    "cloudyProcessAbsentAtTriage": true,
+    "cloudyServicesAbsentAtTriage": true,
+    "adbRecovered": true,
+    "noQuestionPending": true
+  },
+  "hostedCi": {
+    "commit": "d9518d18390e2a8cca7752a0546f89d8b4e7a9a2",
+    "allSixPassed": true,
+    "runs": [
+      {
+        "id": 38843977268,
+        "name": "Android native stream diagnostic",
+        "head_sha": "d9518d18390e2a8cca7752a0546f89d8b4e7a9a2",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/BaiTian6641/Cloudy-Workspace/actions/runs/38843977268",
+        "updated_at": "2026-10-16T03:11:04Z",
+        "run_attempt": 1
+      },
+      {
+        "id": 38843977196,
+        "name": "Android native RDP diagnostic",
+        "head_sha": "d9518d18390e2a8cca7752a0546f89d8b4e7a9a2",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/BaiTian6641/Cloudy-Workspace/actions/runs/38843977196",
+        "updated_at": "2026-10-16T03:11:55Z",
+        "run_attempt": 1
+      },
+      {
+        "id": 38843977195,
+        "name": "Android qualification probe",
+        "head_sha": "d9518d18390e2a8cca7752a0546f89d8b4e7a9a2",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/BaiTian6641/Cloudy-Workspace/actions/runs/38843977195",
+        "updated_at": "2026-10-16T03:11:37Z",
+        "run_attempt": 1
+      },
+      {
+        "id": 38843977273,
+        "name": "Android native VNC diagnostic",
+        "head_sha": "d9518d18390e2a8cca7752a0546f89d8b4e7a9a2",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/BaiTian6641/Cloudy-Workspace/actions/runs/38843977273",
+        "updated_at": "2026-10-16T03:12:01Z",
+        "run_attempt": 1
+      },
+      {
+        "id": 38843977177,
+        "name": "Repository checks",
+        "head_sha": "d9518d18390e2a8cca7752a0546f89d8b4e7a9a2",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/BaiTian6641/Cloudy-Workspace/actions/runs/38843977177",
+        "updated_at": "2026-10-16T03:08:37Z",
+        "run_attempt": 1
+      },
+      {
+        "id": 38843977201,
+        "name": "Android native USB diagnostic",
+        "head_sha": "d9518d18390e2a8cca7752a0546f89d8b4e7a9a2",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/BaiTian6641/Cloudy-Workspace/actions/runs/38843977201",
+        "updated_at": "2026-10-16T03:10:44Z",
+        "run_attempt": 1
+      }
+    ],
+    "deviceQualificationImplied": false
+  },
+  "sourceIds": [
+    "G155",
+    "G156",
+    "R256",
+    "R257"
+  ],
+  "capabilityPromotion": false,
+  "artifacts": [
+    {
+      "path": ".cache/ssh-retention-01/cases.py",
+      "bytes": 2691,
+      "sha256": "ccd20c79600043db753815223c8a7461dfbfa3afa90d56ab6fb23c9bb2358e9d"
+    },
+    {
+      "path": ".cache/ssh-retention-01/ci-d9518d1-final.json",
+      "bytes": 2446,
+      "sha256": "e14b8994a26f68413f5849eda4232be7a531223a9e43ad7f43bc8ad34ded541e"
+    },
+    {
+      "path": ".cache/ssh-retention-01/device.py",
+      "bytes": 4482,
+      "sha256": "aceda8bf405c6992cb0d58312c26e7ecb6b889c2fb7bb0592e78cb05c4b31307"
+    },
+    {
+      "path": ".cache/ssh-retention-01/host.py",
+      "bytes": 3294,
+      "sha256": "21415ebf86471f16d74ae0543333f5f0442e5e9939964d0cf457e138ec44cbcf"
+    },
+    {
+      "path": ".cache/ssh-retention-01/host_normal.py",
+      "bytes": 3282,
+      "sha256": "735d8976f11eeb9edac9deaed69ff79e9a53a971dcd9845d09890b154895f326"
+    },
+    {
+      "path": ".cache/ssh-retention-01/incident.py",
+      "bytes": 2232,
+      "sha256": "7964d5945f087c9c5012df0aa9de7a22e8ddf0d133b5792e6fc0b572e6f10a84"
+    },
+    {
+      "path": ".cache/ssh-retention-01/install.py",
+      "bytes": 2317,
+      "sha256": "59f2d8ff64e2b7a2545f44e94ab985abf840b1941f3e7eebd908aae0d93ce26b"
+    },
+    {
+      "path": ".cache/ssh-retention-01/prepare_host.py",
+      "bytes": 4846,
+      "sha256": "edca5ca360dad8011877f098c08996f2ee0a3215339fb086f898104ea1f03de9"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/00-preupgrade-activities-command.json",
+      "bytes": 106714,
+      "sha256": "38ee9f7293684de19effd2eab5b30ab0b1c0655c04111acf0f48234b3288054e"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/00-preupgrade-exit-info-command.json",
+      "bytes": 8404,
+      "sha256": "d7e0e333d7e6c9321abdd9b25b5604a12a148720c9426084442d3f3f1e844c2a"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/00-preupgrade-package-command.json",
+      "bytes": 7805,
+      "sha256": "4300fa8a5049b4f38b99ae1ae2882bb90a4f1587ab0599e2582fcdcf8487601b"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/00-preupgrade-process-command.json",
+      "bytes": 319,
+      "sha256": "3ca715837a0f6ddacc096b8e7c3b2cd9ae8df59e23c924af044c836e53844b47"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/00-preupgrade-services-command.json",
+      "bytes": 4529,
+      "sha256": "be9c21f22551ae5e1c45c00b0eac0054c0b84b145df07d81083f4ec1c2c53a1f"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/01-current-user-command.json",
+      "bytes": 296,
+      "sha256": "a2b9a78bd7b7ea1cda6426f4657ae3c7263fce8aadce010326721a5c5d5c6d26"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/01-preserve-baseline.json-command.json",
+      "bytes": 82129,
+      "sha256": "6cb1d9a2846fc20127d1d7fda0115c33356911d6f9cb80353386352b5b1bba3d"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/01-preserve-ssh-journal.json-command.json",
+      "bytes": 16581,
+      "sha256": "22adb88a273c4be0df7e79d09ae17b43f091b800478a15b1632eaf4ba292b7cd"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/01-preserve-terminal-journal.json-command.json",
+      "bytes": 7105,
+      "sha256": "50ca5ed94a0e7a3421749ff1b185ab3433d61fe54d91aba496eebb3a2ca7eebb"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/01-preserve-transfer-journal.json-command.json",
+      "bytes": 5855,
+      "sha256": "b04bf78050895766e5437e721f0c8885be3570e6aeec34ccc387575f39cd0335"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/01-preupgrade-summary.json",
+      "bytes": 805,
+      "sha256": "420e4d6790e5c7a2433f51c27c332ee542b7ee8a53cbf413414c064fc19299a0"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/01-ssh-config-command.json",
+      "bytes": 799,
+      "sha256": "e5c136318f4e01dd565406dd2a333c637ad27a4d0462b1018d23cea6d713997a"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/02-after-baseline.json-command.json",
+      "bytes": 82129,
+      "sha256": "44aa66a591a793a39d0d61b1f20cc7592af0caedae8565512b934a3723d01dd3"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/02-after-ssh-journal.json-command.json",
+      "bytes": 16581,
+      "sha256": "1880cdf7a481fa495181b0e7a8b65506e5414ff3cebdf5f352ece52e7b99b07a"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/02-after-terminal-journal.json-command.json",
+      "bytes": 7105,
+      "sha256": "35a65614d576eb335178090e1886d97418176214665324891c700e65700d7f36"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/02-after-transfer-journal.json-command.json",
+      "bytes": 5855,
+      "sha256": "37e54488c21ffab78832495777b4d3005e02fb75834ca8f111fbd2771bcfb217"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/02-install-command.json",
+      "bytes": 447,
+      "sha256": "288572691ad0f9da536def891fb10e38a657699fd5870903e9ff20853d894060"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/02-install-result.json",
+      "bytes": 415,
+      "sha256": "0f1aadb0a11c3c9a2c9e5895d56fe1eceb8e81e1cef82d04de4c9dc62e36773f"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/02-installed-package-command.json",
+      "bytes": 7132,
+      "sha256": "343de7821a237d04d4fe66440d57f3edce6c68a8cf1299df83ca5ab8160cbb92"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/02-old-package-path-command.json",
+      "bytes": 438,
+      "sha256": "26ffb8ae9099a12ea945b79142ffd472725c9dfb6e536e96c9a9cb71e6efe224"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/02-package-path-command.json",
+      "bytes": 438,
+      "sha256": "604b03d809b4dc4348c6be0a7d3ce050909a16e50cf64e196759a626d94a6d02"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/02-pull-installed-command.json",
+      "bytes": 657,
+      "sha256": "6e239f70559916fa3d5ca84c52436bca4d4a547638a39a48f34d2f7c13f373c9"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/02-pull-old-command.json",
+      "bytes": 659,
+      "sha256": "f9242c703c9a612e558090bab36acc980b8122b7cd8796593c036f021ef132d5"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/02-stop-predecessor-command.json",
+      "bytes": 330,
+      "sha256": "2fbb9c77680b1d81be88a2a0a4d69299414fa881a472a4d7e15376c513d4d09c"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/02-stopped-command.json",
+      "bytes": 312,
+      "sha256": "667db40fd50e9826345e96d553835ee43e138be31f418fb170f66dd10d757d84"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/03-launch-command.json",
+      "bytes": 2643,
+      "sha256": "682088ec10b4c74eb3e63642867ca379d9c9e7ba89fd040d2edb1ad82ab6476e"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/03-ready-layout-command.json",
+      "bytes": 575,
+      "sha256": "087d89090edc3ce28df1969bc6b86c4edf38abfe340f2f93881cc2c92ebe9706"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/03-ready-layout.json",
+      "bytes": 24496,
+      "sha256": "da0a1e2dc45fd51547fabfcf3f0e0c987cc283d805662979da344066b43ed544"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/04-activity-state-command.json",
+      "bytes": 101369,
+      "sha256": "fb3c31fdd0a32b0f2b84a41ae68994bcdfeee0269b009db6b6cb8c395dc7325e"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/04-ready-layout-command.json",
+      "bytes": 575,
+      "sha256": "d1caa0c5a71def2353055f4891fc9eb59d3c71070719658050b2f6eac4271808"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/04-ready-layout.json",
+      "bytes": 10124,
+      "sha256": "fe140a82aa0389e96b8f508159963259df79e92bfea39fb74aa6667de70592be"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/05-baseline-layout-command.json",
+      "bytes": 581,
+      "sha256": "d6fcc2ed1438573df075a1eda0f959db221504b0cbee2bd58bedeb3e7d2e0aea"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/05-baseline-layout.json",
+      "bytes": 35952,
+      "sha256": "6f810606d4034f229d46f3a8e3e078a53c6160185cd3d8b0116fad478d0b1a83"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/05-private-launch-correction.json",
+      "bytes": 227,
+      "sha256": "476c37caf03d9262b8915aa0d908f57c2c1098a4a11da70227f72d1eff84a02c"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/05-public-launch-command.json",
+      "bytes": 552,
+      "sha256": "23dd61f6a8b28766a62037a74fae5dbed09b957725e27bc1080bea2171ff6986"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/06-open-ssh-layout-command.json",
+      "bytes": 581,
+      "sha256": "f02b03a8802d1b6bd6e815f896baa2b240238e7ffac71d013b02bf1f50112a20"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/06-open-ssh-layout.json",
+      "bytes": 35952,
+      "sha256": "172be9f74a1cceb614a86c306ce488f8678789ecab488c32a7dda9d777e9c9f0"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/06-open-ssh-tap-command.json",
+      "bytes": 291,
+      "sha256": "492a348a5fb0cc117599709304e724305847e257a181c8c04eee2a5b67eebc39"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/06-ssh-layout-command.json",
+      "bytes": 571,
+      "sha256": "489236cbda69088b3a2737b7935dcfb282670edd06cf04b9b074985cb18be384"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/06-ssh-layout.json",
+      "bytes": 20764,
+      "sha256": "f2098b44703f830553c1a592dc53851df06e1d0caad5210710c11773c2978401"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/07-after-start-command.json",
+      "bytes": 17514,
+      "sha256": "7e9069e205d952b72816864186f98e52ff667b50431b3ef4e6284b11173dca3c"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/07-after-start.json",
+      "bytes": 15504,
+      "sha256": "bd5894212da80a22a07896ad182b9fd02eed63dd8e848e5dd955365b83a48b57"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/07-start-retained-layout-command.json",
+      "bytes": 593,
+      "sha256": "c8d7688976764a776600cf062b697661f1c2b4c9b77c66bce1a433d02080d1b8"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/07-start-retained-layout.json",
+      "bytes": 20764,
+      "sha256": "f2098b44703f830553c1a592dc53851df06e1d0caad5210710c11773c2978401"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/07-start-retained-tap-command.json",
+      "bytes": 291,
+      "sha256": "c5b50e9ac96ab57aa7f8c63bc8d2917e95941d765dbf19396841a7e32736f68f"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/08-ready-activities-command.json",
+      "bytes": 113220,
+      "sha256": "08be2351de441cea6f5c9222e81808f07cb6ec818368ca9ed1315a63bf090759"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/08-ready-command.json",
+      "bytes": 19742,
+      "sha256": "62be865d26f862f7c001cd3c23504075481c783d17a6ec3efb0bd4c3fd7735c7"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/08-ready-exit-info-command.json",
+      "bytes": 8310,
+      "sha256": "bab51b9a75f7851bc8b7aac695fbefc36b260cdf7cc80c165abf81cd7c5c097e"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/08-ready-package-command.json",
+      "bytes": 8785,
+      "sha256": "c0ca47692f22f743b9db4a86443768d1d0e7cc0580da93f5c93ab16732b40192"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/08-ready-process-command.json",
+      "bytes": 319,
+      "sha256": "d227624d52be5cfc4414a3c5e0d67d0b4a3b9b57f158ee05e1d2dc4ad528f708"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/08-ready-services-command.json",
+      "bytes": 400,
+      "sha256": "81f7019566306745c2b8de9e8e47b06bb4fd92a03efcd1c1ad72f62317ab5936"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/08-ready.json",
+      "bytes": 17515,
+      "sha256": "2de1d5230a0ead984753f36398ce12439fc540135125515688be326a645c3b65"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/10-before-command.json",
+      "bytes": 19742,
+      "sha256": "fb5a1603dab41d9c0122bb35777eb88252f90a508729be11fb0b60aac357295e"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/10-before.json",
+      "bytes": 17515,
+      "sha256": "2de1d5230a0ead984753f36398ce12439fc540135125515688be326a645c3b65"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/10-start-layout-command.json",
+      "bytes": 575,
+      "sha256": "0376ab7be1e691f29e8f5fedf7c6cc7f2a48a84dfd63d62115f9cbe2e7352761"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/10-start-layout.json",
+      "bytes": 7222,
+      "sha256": "49a093f60998d719f01b25a8d1339cc8901644e8cebc24d3a696133af7f8f1b6"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/14-post-incident-transport-command.json",
+      "bytes": 267,
+      "sha256": "97750d275b7c5ca8bfb8132afb5801e329494df1a73cbef037c27b18a88f6a42"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/baseline.json",
+      "bytes": 74679,
+      "sha256": "8e60b5c0ce9e041afe2085d2d6cf0a09e20570de572dee9cb19ea3b518216860"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/ssh-journal.json",
+      "bytes": 14657,
+      "sha256": "8118d0feb3ec33da6068d25296562a1a6d4077d511ddb30b694f54134b91826f"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/terminal-journal.json",
+      "bytes": 6068,
+      "sha256": "e9029fe95acfd9e08ec2e7ff0c04bc8980474a291c06447c3fd6a34afe312a8f"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/device-04/transfer-journal.json",
+      "bytes": 5034,
+      "sha256": "39962f7dc2c17a0e23d64557f9896fa941b7f1e8a245eabecd08bef1d0205160"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-05/07-after-start-observation.json",
+      "bytes": 156,
+      "sha256": "19077b702d0cc52ab6158bf3f0942aea5f0850fdb004a7c0a05646f2130ee486"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-05/07-after-start-server.log",
+      "bytes": 126,
+      "sha256": "c8294ed1728211e366f85c0150354c607a5b47512303bc2d0b19afeaad44b316"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-05/08-ready-channel-c4a2c757-123b-4924-833f-db06b63464cd.jsonl",
+      "bytes": 583,
+      "sha256": "de5c53b071e8f8a30c21e6ac9ca5cea000037354f849d546028abd316010247b"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-05/08-ready-observation.json",
+      "bytes": 1263,
+      "sha256": "6bf473bb110771c3bf9551935356c2dc5ba8752c397c397b4e0fea2e2811253d"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-05/08-ready-server.log",
+      "bytes": 1229,
+      "sha256": "b8884ea87ca1b53fd2034e4318c5f836ac52859bb0b68bb34dbfaab50eadbd68"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-05/audit/channel-c4a2c757-123b-4924-833f-db06b63464cd.jsonl",
+      "bytes": 583,
+      "sha256": "de5c53b071e8f8a30c21e6ac9ca5cea000037354f849d546028abd316010247b"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-05/client-identity-check.json",
+      "bytes": 249,
+      "sha256": "d08b95f10b1e36e8962e4d3a8857e1e6e790d7d88e5e5a8554afbd59739f7fb9"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-05/normal-server.log",
+      "bytes": 81,
+      "sha256": "d487aec3c1d2d04f983aff73a2b43fb8c733a490dc1105af724a5e8f387d5f7f"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-05/normal-started.json",
+      "bytes": 153,
+      "sha256": "32b0336656b08a0ab3a40b61c5afa4a17bac58089569e1a325a2937f0e753c96"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-05/normal-stopped.json",
+      "bytes": 132,
+      "sha256": "a18f4ad354f2bdc9c94fbc6a3a40765348b507f9fcdd3c54fab2b7ce14120c4c"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-05/preparation.json",
+      "bytes": 1343,
+      "sha256": "6ee4e6994ddd010f36f7ab4a96c4559ed88c28a06199e95cd3d2c6f63c9d3dfe"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-05/retention-server.log",
+      "bytes": 1263,
+      "sha256": "f93d122ecd445a3c6c5ee9290cd3c85c4624c764eb8e976119449446c946af16"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-05/retention-started.json",
+      "bytes": 147,
+      "sha256": "c74b59f695c9209b63658d286055e76dc886d042dae4965b69e803051b50d3d1"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-05/retention-stopped.json",
+      "bytes": 132,
+      "sha256": "4094bb2bf6240f1a23dd56bbfe4c4ce0f369bd973ba85b16aed25acafb0b2db3"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-05/syntax.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-05/syntax.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/host-05/tested-fixture.py",
+      "bytes": 13666,
+      "sha256": "e771898736e4bc9ef99a866ac4dea2c2fe3a5eec8a906fcd7a2c583c0019436f"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/reboot-triage-01/boot-clock-retry.json",
+      "bytes": 324,
+      "sha256": "5b9d66b01e1af605cbcd85d176ec05bd08d61eed60b714b3e9d351192b4247cb"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/reboot-triage-01/boot-clock.json",
+      "bytes": 333,
+      "sha256": "7c47dba8385ae465e97cce6c30f15562bf192939816482e4a355eda0329698d1"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/reboot-triage-01/boot-logcat-retry.json",
+      "bytes": 456301,
+      "sha256": "44df103aa905dbf9035c8922eea1bc0921218ecb987dae155c8e3bbdec3e801f"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/reboot-triage-01/boot-logcat.json",
+      "bytes": 290,
+      "sha256": "5bd82cdcbb212021d9713f1f103971511b3756fd92cdb107609a37f86ab5e514"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/reboot-triage-01/boot-properties.json",
+      "bytes": 488,
+      "sha256": "e33f907b4684ab31611a3ebefb543b092cff7ebcf4d360d923295e311415c748"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/reboot-triage-01/boot-record-retry.json",
+      "bytes": 536,
+      "sha256": "c8044f9f900bf252ae0489ae80991e9f72dbf9d26f022f70666874e4b6ab12c7"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/reboot-triage-01/boot-record-tag.json",
+      "bytes": 1837,
+      "sha256": "2c258b0b5a007f555f38d0e3ca8e192eb9b595d851ab03201042d29c813ad61c"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/reboot-triage-01/boot-record.json",
+      "bytes": 249,
+      "sha256": "3c354377f93fff20c3a0e345960834574b3c3e58815f3bcb859479688ff149fb"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/reboot-triage-01/cloudy-exit-info.json",
+      "bytes": 8277,
+      "sha256": "498bfd331fcffce9361121dfaa1a7c2fff879201a0decf6b8e58e85adefb116d"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/reboot-triage-01/cloudy-process.json",
+      "bytes": 185,
+      "sha256": "1cd7b3173673bc433fb776916582b149733994ae7d86bbe002570e58b609a882"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/reboot-triage-01/cloudy-services.json",
+      "bytes": 273,
+      "sha256": "a723273ee2879ee8912d0e8455ef3268bb9f107071ed05458f878996a20d420b"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/reboot-triage-01/crash-buffer.json",
+      "bytes": 691,
+      "sha256": "12eca5558a8d71716c452e270e94d969eec814375d7c4e341eebff74b9c4b6bd"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/reboot-triage-01/dropbox-index.json",
+      "bytes": 1187,
+      "sha256": "549c03a42b9245e28e43bcf48dce52d930c37d7b4a1301a7eb28b7c2ec85edd0"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/reboot-triage-01/last-kmsg-retry.json",
+      "bytes": 546,
+      "sha256": "36beeff423f449f8aa766e24cc20b853c6984e23a137f11b20187aa9a92d2cb4"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/reboot-triage-01/last-kmsg-tag.json",
+      "bytes": 134161,
+      "sha256": "1da12ef45fa1f8031174d13285947cc0e2cc4242b5f974362c9bb8b60bffc5d4"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/reboot-triage-01/last-kmsg.json",
+      "bytes": 254,
+      "sha256": "fe9d3066809de63a656aaf8856edf5a42912249282b987e647b89dbc9b54c48a"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/reboot-triage-01/power-properties-retry.json",
+      "bytes": 462,
+      "sha256": "0aa0d4ad8a7d6e83ac17b48b7f4949981fffbdb78e9245225d76904438cae7d2"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/reboot-triage-01/power-properties.json",
+      "bytes": 348,
+      "sha256": "c7d8b09297509627a6f2576cf59beb5514b8c2d00560b0c7337e901af5eb5b89"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/reboot-triage-01/pstore-index.json",
+      "bytes": 193,
+      "sha256": "4775c35167502f158393dcddc33567c9d63611905098e94b82862fc735435b15"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/reboot-triage-01/review-and-continuation.json",
+      "bytes": 419,
+      "sha256": "9c4e03bf120f79cea441874f3ddc23dd00eeb3d877cf2e0ee8e3d5f974e2b6e3"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/reboot-triage-01/ssh-journal.json",
+      "bytes": 19615,
+      "sha256": "f4126a9b214c8ee2bb6bda0d3d4a73bc3aefef5950b1fa9cf854bbf4e937f7b1"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/reboot-triage-01/summary.json",
+      "bytes": 1601,
+      "sha256": "6c76fa1fa3df013d9e2be0e682ebd0597a3d58a6f8f25e5a94d99fff3aabecb4"
+    },
+    {
+      "path": "qualification/results/private/ssh-probe/reboot-triage-01/transport.json",
+      "bytes": 140,
+      "sha256": "b90f24d328d98a36884c82d0a1998b97f411ace08fe4b5111f52b846cfc45eb3"
+    }
+  ]
+}

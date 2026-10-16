@@ -1,6 +1,6 @@
 # P0-S3 finite SSH retention contract
 
-**Checked:** 2026-10-15, America/Chicago. **Candidate:** baseline diagnostic 0.8.0/code12, build reference `7aab1ccd-e90b-41e1-bd51-1183042c134a`. The [reviewed build](../../06-validation/2026-10-15-ssh-retention-build.md) passes compilation, 206 JVM tests and zero Android Lint. Device retention and Play acceptance remain unqualified. Read [Rule 0](../../00-project/platform-rule-zero.md), [operation lifetimes](p0-s2-operation-lifetimes.md) and the [platform decision](p0-s2-platform-decision.md).
+**Checked:** 2026-10-15, America/Chicago. **Candidate:** baseline diagnostic 0.8.0/code12, build reference `7aab1ccd-e90b-41e1-bd51-1183042c134a`. The [reviewed build](../../06-validation/2026-10-15-ssh-retention-build.md) passes compilation, 206 JVM tests and zero Android Lint. The [first device report](../../../qualification/results/P0-S3/2026-10-15-ssh-retention-device.md) confirms installation, a failed host-PTY attempt and a separately observed device reboot; none of the three retained cases was exercised. Device retention and Play acceptance remain unqualified. Read [Rule 0](../../00-project/platform-rule-zero.md), [operation lifetimes](p0-s2-operation-lifetimes.md) and the [platform decision](p0-s2-platform-decision.md).
 
 ## Operation and classification
 

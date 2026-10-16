@@ -568,3 +568,9 @@ The [catalog build](../../qualification/results/P0-S4/2026-10-15-stream-catalog-
 - **R255** — [Workflow token permissions](https://docs.github.com/en/actions/tutorials/authenticate-with-github_token): separate minimum-permission cleanup job, with no checkout or dependency execution.
 
 - **G155** — [Launch and promote a foreground service](https://developer.android.com/develop/background-work/services/fgs/launch): reviewed visible start request versus actual declared-type promotion. The finite SSH candidate consumes admission only after promotion; runtime and Play acceptance remain separate.
+
+## SSH host failure and Googlebook reboot triage
+
+- **G156** — [AOSP canonical boot reason](https://source.android.com/docs/core/architecture/bootloader/boot-reason): distinguish generic `reboot` from an attributed trigger; these diagnostic properties do not add a product API contract.
+- **R256** — [OpenSSH10.2 PTY ownership](https://github.com/openssh/openssh-portable/blob/V_10_2_P1/sshpty.c): pinned `pty_setowner` fatal ownership path explains the sandboxed fixture failure; it does not explain the Googlebook reboot.
+- **R257** — [Linux lockup watchdogs](https://docs.kernel.org/admin-guide/lockup-watchdogs.html): hard-lockup meaning and conditional panic/reboot behavior; the HP kernel's exact detector/configuration and incident trigger remain unestablished.

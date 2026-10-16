@@ -101,6 +101,8 @@ The [0.8.0 finite retention build](../../06-validation/2026-10-15-ssh-retention-
 
 Record evidence under `qualification/results/P0-S3/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-C01, Q-C02, Q-A01, Q-F02. Official/upstream source IDs: G09, G10, G17, R09, R10, R121, R130–R131, R138; resolve them in the [source register](../../07-reference/source-register.md).
 
+The [0.8.0 installation and interrupted qualification](../../../qualification/results/P0-S3/2026-10-15-ssh-retention-device.md) preserve one failed host-PTY attempt, a subsequent confirmed Googlebook reboot with kernel hard-lockup evidence and no established trigger, and all prior journals. No retained-session case passes. The user authorizes normal continuation with fresh state checks; no capability, stage prerequisite or distribution decision changes.
+
 ## P0-S4 — Streaming, RDP/VNC, physical input and decoder qualification
 
 **Owner:** Desktop/device developer. **Prerequisites:** P0-S2. **Status:** in-progress; FreeRDP native/JNI/APK, trust/NLA and bounded real framebuffer/explicit cleanup observed; input/performance and other engine lanes remain pending.

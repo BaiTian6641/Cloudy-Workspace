@@ -374,7 +374,11 @@
       "researchEvidence": "docs/03-platform/googlebook/p0-s3-ssh-retention-contract.md",
       "versionNotes": "connectedDevice/dataSync constants API29; specialUse API34. Target31+ background starts and target34+ types/prerequisites apply on relevant runtimes. API level for this mixed policy record remains null. Candidate min35/target37 covers Context.startForegroundService(API26), typed Service.startForeground(API29) and specialUse(API34); no permission or runtime guard is inferred from a successful build.",
       "decisionEvidence": "docs/03-platform/googlebook/p0-s2-platform-decision.md",
-      "compileEvidence": "docs/06-validation/2026-10-15-ssh-retention-build.md"
+      "compileEvidence": "docs/06-validation/2026-10-15-ssh-retention-build.md",
+      "runtimeAttemptEvidence": {
+        "evidence": "qualification/results/P0-S3/2026-10-15-ssh-retention-device.md",
+        "note": "0.8.0 installed; authenticated fixed exec then host PTY failure. No retained hide/return, notification-stop or controlled process-loss case exercised. Subsequent real device reboot has kernel hard-lockup evidence without established cause; not a runtime qualification pass."
+      }
     },
     {
       "id": "API15",

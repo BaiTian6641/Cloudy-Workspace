@@ -5092,6 +5092,42 @@
       "sourceUpdatedOn": "2026-10-01",
       "note": "Context.startForegroundService requests launch; the service must promote with a declared type and notification. Target31+ background-start restrictions and target34+ type permissions apply. Finite SSH diagnostic promotes before consuming its ticket/network entry; compilation does not prove runtime retention or Play approval.",
       "refresh": "Before changing retained-session admission, target SDK or distribution route."
+    },
+    {
+      "id": "G156",
+      "title": "AOSP canonical boot reason",
+      "url": "https://source.android.com/docs/core/architecture/bootloader/boot-reason",
+      "publisher": "Google / AOSP",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-10-09",
+      "note": "ro.boot.bootreason and sys.boot.reason are platform diagnostic properties, not a new app API. Read after userdata availability; generic reboot does not attribute a caller. P0-S2/P0-S3 incident owner: integration leader; fallback: retain uptime, raw logs and unknown cause.",
+      "refresh": "Before relying on this diagnostic interpretation or changing the tested host/kernel version."
+    },
+    {
+      "id": "R256",
+      "title": "OpenSSH10.2 portable PTY ownership",
+      "url": "https://github.com/openssh/openssh-portable/blob/V_10_2_P1/sshpty.c",
+      "publisher": "OpenSSH",
+      "category": "implementation",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Pinned pty_setowner treats non-EROFS chown failure as fatal. Explains sandbox fixture PTY failure only; normal host retry unexercised. P0-S3 host fixture owner: integration leader. Keep existing auth policy and record exact execution context.",
+      "refresh": "Before relying on this diagnostic interpretation or changing the tested host/kernel version."
+    },
+    {
+      "id": "R257",
+      "title": "Linux soft and hard lockup watchdogs",
+      "url": "https://docs.kernel.org/admin-guide/lockup-watchdogs.html",
+      "publisher": "Linux kernel documentation",
+      "category": "implementation",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": null,
+      "note": "Hard-lockup detection and optional panic/reboot behavior; detector/configuration varies. Latest Googlebook previous-boot log contains a CPU4 hard-lockup report without causal trace. P0 incident owner: integration leader; fallback: preserve incident as unresolved, no device/kernel setting changes.",
+      "refresh": "Before relying on this diagnostic interpretation or changing the tested host/kernel version."
     }
   ]
 }
