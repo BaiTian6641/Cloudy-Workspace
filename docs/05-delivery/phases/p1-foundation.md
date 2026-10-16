@@ -180,3 +180,5 @@ This supersedes the earlier wholly unrun HTML/narrow/scaled statements only for 
 ## Current P1-S3 observation follow-through
 
 The [0.1.8 observation result](../../../qualification/results/P1-S3/2026-10-16-ssh-key-observation.md) advances work item1 with a real credential-free signed-key route, foreground comparison and explicit trust CAS. Fourteen actual Android cases and13 separately executed host cases pass;6 default assumptions remain skips. Exact-pin Reader retirement, source/license scope and remaining authentication/rekey/jump requirements are documented in the [contract](../../02-architecture/ssh-key-observation.md). P1-S3/P1-S4/CAP-SSH and the full Console/Desktop requirements remain open; no phase dependency or capability promotion changes.
+
+The next [SSH authentication implementation entry](../../03-platform/googlebook/product-ssh-authentication-entry.md) freezes worker responsibilities and the unresolved admission/credential/strict-method boundaries. It is a reviewed packet, not an implemented adapter or password-server result. P1-S3 remains in progress and all P2 acceptance dependencies remain unchanged.

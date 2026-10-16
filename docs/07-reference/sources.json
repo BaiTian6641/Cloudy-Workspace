@@ -6242,8 +6242,32 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-16",
       "sourceUpdatedOn": null,
-      "note": "Protected doKex is invoked after transport init; observer marks Reader expected there and calls selected engine implementation. No reflective engine lookup/global thread scan, auth/session API or credential handoff is used.",
+      "note": "Protected doKex is invoked after transport init; observer marks Reader expected there and calls selected engine implementation. No reflective engine lookup/global thread scan, auth/session API or credential handoff is used. The same pin's authPassword convenience overload adds AuthKeyboardInteractive fallback; future strict password policy must select methods explicitly. No authentication route is implemented by the observer.",
       "refresh": "Before observer/platform or selected engine upgrades; preserve exact compile and device qualification separately."
+    },
+    {
+      "id": "R276",
+      "title": "SSHJ0.41.2 password authentication method and password-change path",
+      "url": "https://github.com/hierynomus/sshj/blob/6fad160fe36605a68847ac8a527750c615b4bd04/src/main/java/net/schmizz/sshj/userauth/method/AuthPassword.java",
+      "publisher": "SSHJ maintainers",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "AuthPassword(PasswordFinder) installs a non-null default PasswordUpdateProvider returning null. handle(USERAUTH_60) can then serialize a change-password request; a null constructor provider takes the refusal branch but shouldRetry dereferences that provider. Future strict password policy requires an explicit reviewed refusal path and no retry/fallback. Source finding only; no product authentication or server qualification.",
+      "refresh": "Before P1-S3/P2 authentication implementation or SSHJ upgrades; Android/security owner must qualify strict method/refusal behavior against a real owned server."
+    },
+    {
+      "id": "R277",
+      "title": "SSHJ0.41.2 sensitive-string buffer encoding",
+      "url": "https://github.com/hierynomus/sshj/blob/6fad160fe36605a68847ac8a527750c615b4bd04/src/main/java/net/schmizz/sshj/common/Buffer.java",
+      "publisher": "SSHJ maintainers",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Buffer.putSensitiveString(null) serializes an empty string, not cancellation. Future credential adapters must reject unavailable/cancelled input before encoding; returning null from a provider is not proof of zero credential requests. This follows selected source, not an executed authentication test.",
+      "refresh": "Before P1-S3/P2 authentication implementation or SSHJ upgrades; Android/security owner must qualify strict method/refusal behavior against a real owned server."
     }
   ]
 }
