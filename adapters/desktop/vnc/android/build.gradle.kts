@@ -4,7 +4,17 @@ val repositoryRoot = projectDir.resolve("../../../..").canonicalFile
 val nativeRoot = repositoryRoot.resolve(".cache/vnc-product-engine-01/prepared")
 val verifyNative = tasks.register<Exec>("verifyNative") {
     workingDir(repositoryRoot)
-    commandLine("python3", "tools/prepare_desktop_vnc.py", "--check", "--output", nativeRoot.absolutePath)
+    val receipt = providers.gradleProperty("cloudy.vnc.reuseReceiptSha").orNull
+    val declaration = providers.gradleProperty("cloudy.vnc.reuseDeclaration").orNull
+    val declarationSha = providers.gradleProperty("cloudy.vnc.reuseDeclarationSha").orNull
+    require(listOf(receipt, declaration, declarationSha).all { it == null } ||
+        listOf(receipt, declaration, declarationSha).all { it != null }) { "Incomplete explicit native reuse binding" }
+    if (receipt == null) {
+        commandLine("python3", "tools/prepare_desktop_vnc.py", "--check", "--output", nativeRoot.absolutePath)
+    } else {
+        commandLine("python3", "tools/prepare_desktop_vnc.py", "--check-native-reuse", "--output", nativeRoot.absolutePath,
+            "--receipt-sha256", receipt, "--reuse-declaration", declaration!!, "--reuse-sha256", declarationSha!!)
+    }
 }
 android {
     namespace = "io.github.baitian6641.cloudy.desktop.vnc"

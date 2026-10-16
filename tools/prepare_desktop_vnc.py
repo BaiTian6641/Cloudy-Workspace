@@ -306,11 +306,54 @@ def build(output):
     save(output, 'receipt.json', (json.dumps(record, indent=2) + '\n').encode())
 
 
-def check(output):
+def verify_reuse_sources(record, receipt_sha256, declaration, declaration_sha256):
+    # Explicit caller-pinned metadata; this is not a new compilation or a historical receipt edit.
+    raw = read(declaration)
+    if declaration.absolute().parent != CACHE.absolute() or len(raw) > 64 * 1024 or sha(raw) != declaration_sha256:
+        raise ValueError('REUSE_DECLARATION_BINDING')
+    def unique(pairs):
+        value = {}
+        for name, content in pairs:
+            if name in value:
+                raise ValueError('REUSE_DUPLICATE_FIELD')
+            value[name] = content
+        return value
+    value = json.loads(raw, object_pairs_hook=unique)
+    if set(value) != {'schema', 'scope', 'originalReceiptSha256', 'expectedCurrentSources'} or type(value['schema']) is not int or value['schema'] != 1 or value[
+            'scope'] != 'OWNER_JAVA_ONLY_NATIVE_REUSE' or value['originalReceiptSha256'] != receipt_sha256:
+        raise ValueError('REUSE_DECLARATION_SCHEMA')
+    current = module_inputs()
+    if value['expectedCurrentSources'] != current or set(current) != set(record['sources']):
+        raise ValueError('REUSE_CURRENT_SOURCE_BINDING')
+    allowed = {
+        'tools/prepare_desktop_vnc.py',  # The current checker differs from its historical build implementation.
+        'adapters/desktop/vnc/android/build.gradle.kts',  # Explicit check-entry selection, not a CMake input.
+        'adapters/desktop/vnc/android/src/main/java/io/github/baitian6641/cloudy/desktop/vnc/VncEngine.java',
+        'adapters/desktop/vnc/android/src/test/java/io/github/baitian6641/cloudy/desktop/vnc/VncEngineTest.java',
+    }
+    changes = {name: {'originalSha256': record['sources'][name], 'currentSha256': current[name]}
+               for name in current if current[name] != record['sources'][name]}
+    if not set(changes) <= allowed:
+        raise ValueError('REUSE_NATIVE_OR_UNREVIEWED_SOURCE_DRIFT')
+    # Toolchain is checked without invoking it. All original import/staged/library checks still follow.
+    toolchain(record)
+    return {'schema': 1, 'scope': 'OWNER_JAVA_ONLY_NATIVE_REUSE', 'originalReceiptSha256': receipt_sha256,
+            'declarationSha256': declaration_sha256, 'currentSources': current, 'sourceChanges': changes,
+            'nativeRebuilt': False, 'wholeModuleUnchanged': False, 'releaseClosureApproved': False}
+
+
+def check(output, reuse=None):
     destination(output)
-    record = json.loads(read(output / 'receipt.json'))
+    receipt_raw = read(output / 'receipt.json')
+    record = json.loads(receipt_raw)
+    scope = None
+    if reuse is not None:
+        receipt_sha256, declaration, declaration_sha256 = reuse
+        if sha(receipt_raw) != receipt_sha256:
+            raise ValueError('REUSE_ORIGINAL_RECEIPT_BINDING')
+        scope = verify_reuse_sources(record, receipt_sha256, declaration, declaration_sha256)
     if record['status'] != 'NATIVE_NAMESPACE_PORT_COMPILED' or record['nativeBuildExecuted'] is not True or record[
-            'selectedReceiptSha256'] != RECEIPT_SHA or record['sources'] != module_inputs():
+            'selectedReceiptSha256'] != RECEIPT_SHA or (reuse is None and record['sources'] != module_inputs()):
         raise ValueError('UNACCEPTED_PRODUCT_NATIVE')
     _, imports = selected_inputs()
     if {n: sha(b) for n, b in imports.items()} != record['imports']:
@@ -332,6 +375,13 @@ def check(output):
     if {n: sha(b) for n, b in payload.items()} != record['libraries']:
         raise ValueError('PACKAGED_NATIVE_CHANGED')
     verify_libraries(payload)
+    if scope is not None:
+        if module_inputs() != scope['currentSources'] or sha(read(output / 'receipt.json')) != scope[
+                'originalReceiptSha256'] or sha(read(reuse[1])) != scope['declarationSha256']:
+            raise ValueError('REUSE_CHECK_INPUT_DRIFT')
+        scope['originalLibraries'] = record['libraries']
+        scope['stagedImportsAndPublishedBytesVerified'] = True
+        return scope
     return record
 
 
@@ -341,10 +391,20 @@ def main():
     mode.add_argument('--stage', action='store_true')
     mode.add_argument('--prepare', action='store_true')
     mode.add_argument('--check', action='store_true')
+    mode.add_argument('--check-native-reuse', action='store_true')
+    parser.add_argument('--receipt-sha256')
+    parser.add_argument('--reuse-declaration', type=Path)
+    parser.add_argument('--reuse-sha256')
     parser.add_argument('--output', type=Path, default=CACHE / 'prepared')
     args = parser.parse_args()
     output = args.output.absolute()
-    if args.check:
+    if args.check_native_reuse:
+        if not (args.receipt_sha256 and args.reuse_declaration and args.reuse_sha256):
+            parser.error('native reuse requires exact receipt/declaration SHA256 and declaration path')
+        print(json.dumps(check(output, (args.receipt_sha256, args.reuse_declaration, args.reuse_sha256)), sort_keys=True))
+    elif args.receipt_sha256 or args.reuse_declaration or args.reuse_sha256:
+        parser.error('reuse metadata is valid only with explicit native reuse mode')
+    elif args.check:
         check(output)
     elif args.prepare:
         build(output)

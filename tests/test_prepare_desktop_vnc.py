@@ -245,5 +245,54 @@ class PreparationTests(unittest.TestCase):
                     module.check(target)
 
 
+    def test_explicit_java_reuse_policy_and_native_drift_refusal(self):
+        # Pure metadata policy. No native import/ELF/platform evidence is supplied by these mocks.
+        java = 'adapters/desktop/vnc/android/src/main/java/io/github/baitian6641/cloudy/desktop/vnc/VncEngine.java'
+        cmake = 'adapters/desktop/vnc/android/src/main/cpp/CMakeLists.txt'
+        bridge = 'adapters/desktop/vnc/android/src/main/java/io/github/baitian6641/cloudy/desktop/vnc/VncBridge.java'
+        baseline = {java: 'old-java', cmake: 'same-cmake', bridge: 'same-bridge'}
+        current = dict(baseline, **{java: 'reviewed-java'})
+        with tempfile.TemporaryDirectory(prefix='cloudy-vnc-reuse-policy-') as temporary:
+            root = Path(temporary)
+            declaration = root / 'reuse.json'
+            def declare(sources):
+                raw = json.dumps({'schema': 1, 'scope': 'OWNER_JAVA_ONLY_NATIVE_REUSE',
+                                  'originalReceiptSha256': 'bound-receipt', 'expectedCurrentSources': sources}).encode()
+                declaration.write_bytes(raw)
+                return module.sha(raw)
+            digest = declare(current)
+            with patch.object(module, 'CACHE', root), patch.object(module, 'module_inputs', return_value=current), patch.object(
+                    module, 'toolchain') as toolchain:
+                result = module.verify_reuse_sources({'sources': baseline}, 'bound-receipt', declaration, digest)
+                self.assertFalse(result['wholeModuleUnchanged'])
+                self.assertFalse(result['nativeRebuilt'])
+                self.assertEqual(set(result['sourceChanges']), {java})
+                toolchain.assert_called_once()
+                with self.assertRaisesRegex(ValueError, 'REUSE_DECLARATION_BINDING'):
+                    module.verify_reuse_sources({'sources': baseline}, 'bound-receipt', declaration, 'wrong')
+                for native in (cmake, bridge):
+                    changed = dict(current, **{native: 'drift'})
+                    digest = declare(changed)
+                    with patch.object(module, 'module_inputs', return_value=changed):
+                        with self.assertRaisesRegex(ValueError, 'REUSE_NATIVE_OR_UNREVIEWED_SOURCE_DRIFT'):
+                            module.verify_reuse_sources({'sources': baseline}, 'bound-receipt', declaration, digest)
+                digest = declare(dict(current, **{'unexpected/new-file': 'new'}))
+                with self.assertRaisesRegex(ValueError, 'REUSE_CURRENT_SOURCE_BINDING'):
+                    module.verify_reuse_sources({'sources': baseline}, 'bound-receipt', declaration, digest)
+
+    def test_explicit_reuse_does_not_bypass_original_receipt_pin(self):
+        with tempfile.TemporaryDirectory(prefix='cloudy-vnc-reuse-receipt-') as temporary:
+            root = Path(temporary)
+            output = root / 'prepared'
+            output.mkdir()
+            sentinel = b'{"schema":1,"status":"NATIVE_NAMESPACE_PORT_COMPILED"}'
+            (output / 'receipt.json').write_bytes(sentinel)
+            with patch.object(module, 'CACHE', root):
+                with self.assertRaisesRegex(ValueError, 'REUSE_ORIGINAL_RECEIPT_BINDING'):
+                    module.check(output, ('wrong', root / 'missing.json', 'wrong'))
+            self.assertEqual((output / 'receipt.json').read_bytes(), sentinel)
+
+
+
 if __name__ == '__main__':
     unittest.main()
