@@ -42,6 +42,8 @@ The CLI trial also used an explicit `--system-prompt` and empty `--append-system
 
 ## Context packet and ownership ledger
 
+Use [Cloudy real implementation](../cloudy-real-implementation/SKILL.md) for every implementation, repair or implementation-review packet. Compose its compact preamble and one relevant [prompt module](../cloudy-real-implementation/references/worker-prompts.md) with the resolved task card and approved source/reference subset. Include the actual text and hashes in the packet: current `--no-skills` discovery does not load a linked local skill for OMP. Distinguish context-only unrun proposals from authorized tool edits. Require real operation/error/retirement paths and reject placeholder or fake-success proposals before integration. Do not dispatch unresolved template fields or broaden source access to fill missing context.
+
 For every assignment record locally: task ID, exact model, base commit, supplied file hashes, intended result, writable paths (or none), deadline/status and review outcome. Keep prompts, raw results and runtime metadata in ignored `.cache/omp-workers/` or a private temporary directory. Publish only sanitized decisions and useful project artifacts.
 
 The packet must include the finite question, relevant stage, accepted user decisions, applicable project/skill instructions, source/reference excerpts, known facts versus unknowns, acceptance checks and a stop condition. Supply enough source to make the answer grounded. Never send credentials, private inventory, raw device/UI transcripts or unrelated workspace material. If the task outgrows its packet, the worker reports the missing context to the leader rather than guessing.

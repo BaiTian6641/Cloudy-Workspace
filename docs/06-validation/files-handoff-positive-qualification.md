@@ -30,6 +30,8 @@ Use a fixed run-derived file under the app's private no-backup qualification dir
 
 Coordination spans validation and removal; do not hold locks while waiting for main/UI callbacks. Cross-database cleanup is not globally atomic. Preserve planned/confirmed step receipts and any partial failure. Ordinary cleanup refuses unexpected or partially cleaned state; a separately reviewed recovery packet is required. No prefix deletion, current-state baseline substitution, direct SQLite reset or guessed already-clean success is allowed.
 
+The parent runs VERIFY before CLEANUP to retain the observed post-operation state. This is test orchestration, not an additional persisted authorization state machine: CLEANUP independently imports the hash-bound immutable checkpoint and repeats the full current-state preflight. A prior mutable VERIFY receipt cannot grant deletion authority or replace that check. Preparation elapsed time is same-boot correlation only; the parent separately proves boot continuity. Neither timestamp nor phase receipt grants credential authority or an authentication lifetime.
+
 ## Intended replay change and acceptance
 
 A genuine admitted Open can initialize the receiver replay ledger, add the request/expiry, prune expired rows and advance its high-water mark. Even a failed visible launch can leave admitted state. Record those intended deltas against the actual interval; retain them permanently. Do not delete, reset or rewind replay state to make a preservation check pass. Sender discovery alone must not reserve.
