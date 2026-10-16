@@ -1,5 +1,6 @@
 package io.github.baitian6641.cloudy.platform
 
+import android.app.Application
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
@@ -117,6 +118,7 @@ class SshHostTrustStore private constructor(private val configuration: Configura
             }
             val saved = SshTrustSnapshot.create(owner, catalog.generation, token.peer,
                 (previous?.revision ?: 0L) + 1, SshTrustStatus.accepted(challenge.observedKey))
+            SshAuthenticationRegistry.invalidatePeer(root, owner, token.peer)
             attempting()
             if (previous == null) db.insertOrThrow("pins", null, values(saved))
             else check(db.update("pins", values(saved), CAS_WHERE, casArguments(previous)) == 1)
@@ -136,6 +138,7 @@ class SshHostTrustStore private constructor(private val configuration: Configura
             if (previous.revision == Long.MAX_VALUE) return@operate failure(SshTrustStoreCode.REVISION_EXHAUSTED)
             val saved = SshTrustSnapshot.create(owner, catalog.generation, token.peer,
                 previous.revision + 1, SshTrustStatus.revoked(key(previous.status)))
+            SshAuthenticationRegistry.invalidatePeer(root, owner, token.peer)
             attempting()
             check(db.update("pins", values(saved), CAS_WHERE, casArguments(previous)) == 1)
             SshTrustStoreResult.Success(saved)
@@ -148,7 +151,11 @@ class SshHostTrustStore private constructor(private val configuration: Configura
         if (configuration.onMainThread()) return failure(SshTrustStoreCode.WRONG_THREAD)
         if (configuration.deviceProtected) return failure(SshTrustStoreCode.STORE_UNAVAILABLE)
         if (packageFor(owner) != configuration.ownerPackage) return failure(SshTrustStoreCode.WRONG_OWNER)
-        if (!monitor.tryLock()) return failure(SshTrustStoreCode.BUSY)
+        if (!SshAuthenticationRegistry.lock.tryLock()) return failure(SshTrustStoreCode.BUSY)
+        if (!monitor.tryLock()) {
+            SshAuthenticationRegistry.lock.unlock()
+            return failure(SshTrustStoreCode.BUSY)
+        }
         var mutationAttempted = false
         return try {
             // Check process identity before evaluating the lazy private storage root.
@@ -194,7 +201,7 @@ class SshHostTrustStore private constructor(private val configuration: Configura
             failure(if (mutationAttempted) SshTrustStoreCode.COMPLETION_UNKNOWN else SshTrustStoreCode.BUSY)
         } catch (_: Exception) {
             failure(if (mutationAttempted) SshTrustStoreCode.COMPLETION_UNKNOWN else SshTrustStoreCode.STORE_UNAVAILABLE)
-        } finally { monitor.unlock() }
+        } finally { monitor.unlock(); SshAuthenticationRegistry.lock.unlock() }
     }
 
     private fun initialize(generation: String) {
@@ -325,7 +332,7 @@ class SshHostTrustStore private constructor(private val configuration: Configura
             return Configuration({ application.noBackupFilesDir }, owner, packageName, uid,
                 suppliedDeviceProtected || application.isDeviceProtectedStorage,
                 { Looper.myLooper() == Looper.getMainLooper() }, MAX_RECORDS,
-                { application.applicationInfo.uid == uid && Process.myUid() == uid })
+                { application.applicationInfo.uid == uid && Process.myUid() == uid && Application.getProcessName() == packageName })
         }
 
         private fun packageFor(owner: WindowOwner): String = when (owner) {

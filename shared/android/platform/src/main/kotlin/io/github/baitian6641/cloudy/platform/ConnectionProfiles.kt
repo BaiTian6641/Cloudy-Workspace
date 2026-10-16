@@ -1,5 +1,6 @@
 package io.github.baitian6641.cloudy.platform
 
+import android.app.Application
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
@@ -101,6 +102,7 @@ class ConnectionProfiles private constructor(private val configuration: Configur
             val old = catalog.profiles.single { it.id == version.id }
             if (old.revision == Long.MAX_VALUE) return@operate failure(ConnectionProfilesCode.REVISION_EXHAUSTED)
             val revised = old.revised(draft)
+            SshAuthenticationRegistry.invalidateProfile(root, owner, version.id)
             attempting()
             val changed = db.update("profiles", values(revised), "id=? AND revision=?",
                 arrayOf(version.id, version.revision.toString()))
@@ -111,6 +113,7 @@ class ConnectionProfiles private constructor(private val configuration: Configur
 
     fun delete(version: ConnectionProfileVersion): ConnectionProfilesResult<Unit> = operate { db, catalog, attempting ->
         versionFailure(catalog, version)?.let { return@operate it }
+        SshAuthenticationRegistry.invalidateProfile(root, owner, version.id)
         attempting()
         check(db.delete("profiles", "id=? AND revision=?", arrayOf(version.id, version.revision.toString())) == 1)
         ConnectionProfilesResult.Success(Unit)
@@ -129,7 +132,11 @@ class ConnectionProfiles private constructor(private val configuration: Configur
         if (configuration.onMainThread()) return failure(ConnectionProfilesCode.WRONG_THREAD)
         if (configuration.deviceProtected) return failure(ConnectionProfilesCode.STORE_UNAVAILABLE)
         if (packageFor(owner) != configuration.ownerPackage) return failure(ConnectionProfilesCode.WRONG_OWNER)
-        if (!monitor.tryLock()) return failure(ConnectionProfilesCode.BUSY)
+        if (!SshAuthenticationRegistry.lock.tryLock()) return failure(ConnectionProfilesCode.BUSY)
+        if (!monitor.tryLock()) {
+            SshAuthenticationRegistry.lock.unlock()
+            return failure(ConnectionProfilesCode.BUSY)
+        }
         var mutationAttempted = false
         return try {
             if (!configuration.validProcess()) return failure(ConnectionProfilesCode.WRONG_OWNER)
@@ -176,7 +183,7 @@ class ConnectionProfiles private constructor(private val configuration: Configur
             failure(if (mutationAttempted) ConnectionProfilesCode.COMPLETION_UNKNOWN else ConnectionProfilesCode.BUSY)
         } catch (_: Exception) {
             failure(if (mutationAttempted) ConnectionProfilesCode.COMPLETION_UNKNOWN else ConnectionProfilesCode.STORE_UNAVAILABLE)
-        } finally { monitor.unlock() }
+        } finally { monitor.unlock(); SshAuthenticationRegistry.lock.unlock() }
     }
 
     private fun initialize(generation: String) {
@@ -288,7 +295,7 @@ class ConnectionProfiles private constructor(private val configuration: Configur
             return Configuration({ application.noBackupFilesDir }, owner, packageName,
                 suppliedDeviceProtected || application.isDeviceProtectedStorage,
                 { Looper.myLooper() == Looper.getMainLooper() }, MAX_RECORDS,
-                { application.applicationInfo.uid == Process.myUid() })
+                { application.applicationInfo.uid == Process.myUid() && Application.getProcessName() == packageName })
         }
 
         private fun packageFor(owner: WindowOwner): String = when (owner) {

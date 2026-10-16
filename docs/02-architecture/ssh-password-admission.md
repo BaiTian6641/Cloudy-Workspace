@@ -1,0 +1,44 @@
+# Finite SSH password admission
+
+**Construction checkpoint:** 2026-10-16, P1-S3. The shared SSH engine and Android admission coordinator are implemented. [Evidence](../../qualification/results/P1-S3/2026-10-16-ssh-authentication.md) distinguishes host JVM authentication, actual Googlebook storage tests and built-only application artifacts. Installed Console/Desktop remain the earlier 0.1.8 signed-key-observation build. No native password-entry screen, saved-vault authentication, Android network-authentication pass or reusable remote session is claimed here.
+
+The operation establishes whether a fresh, exactly pinned connection can authenticate using one password request, then retires it. It opens no channel and exposes no live transport. The existing credential-free observer continues rejecting every connection after its signed-key observation. Ordinary SSH still requires no Cloudy host agent.
+
+## Caller contract
+
+1. On an owning background worker, supply an exact `SshObservationProfile` and new `SshPasswordCredentials` to `SshAuthenticationCoordinator.begin`. The coordinator consumes credentials on every result, including failure. `Ready` owns an expiring handle; the caller must close it in `finally`.
+2. Resolve the endpoint within the operation's original lifetime and foreground/permission policy. A numeric address is transport routing, while the canonical profile peer remains trust identity. Never infer trust from DNS or a label. The current engine receives an already resolved `InetAddress`; it does no hidden DNS or alternate-address retry.
+3. Pass the handle's exact `profile.peer`, `expectedKey`, **same cancellation signal**, and `handle::admit` to `SshAuthenticationCheck.authenticate`. A substitute cancellation signal would detach profile/trust invalidation from the transport and violates this contract. Choose the transport timeout within the remaining original lifetime, at most ten seconds.
+4. Display only the typed result after owned cleanup and close the handle. Cancellation, backgrounding, recreation, profile changes or trust changes never grant retry authority. Native entry/lifecycle integration is the next packet; no action restores a password or automatically replays authentication.
+
+Per-session credentials are an authorized alternative to saving. The eventual native entry uses desktop keyboard editing and `FLAG_SECURE`; neither username nor password belongs in saved instance state, a general UI bridge, telemetry or evidence. A user-entered password does not require a fabricated vault grant or a replayed screen-lock prompt. The existing pending vault-readiness question remains separate.
+
+## Current-state admission and invalidation
+
+`begin` requires the owning package/UID, credential-encrypted context, default application process and an off-main caller. It loads the current SSH profile and accepted trust record while holding process-local coordination, publishes the handle into the invalidation registry and arms expiry before returning it. Its maximum authority lifetime is 45 seconds of `SystemClock.elapsedRealtime`; timer delays do not extend admission. At most sixteen handles may be registered. Scheduling failure closes/removes the unpublished handle and wipes pending buffers.
+
+After the fresh connection's signature/key verification, `admit` rereads both stores under the same coordination lock. It compares the entire profile identity, catalog generation, profile revision, peer, trust generation/revision/status and accepted key. Matching fingerprint text alone is insufficient. It transfers credentials once only. A changed generation, revoked/reaccepted same key, stale revision, unrelated owner or expired/cancelled handle cannot pass.
+
+All profile/trust operations use the lock order **coordination → store monitor → permanent file lock → SQLite**. Admission's final transfer uses **coordination → cancellation monitor → short credential-ownership monitor**. No network exchange, crypto or arbitrary callback runs while holding coordination. `tryLock` fails with a busy result rather than blocking the caller on another operation.
+
+Profile update/delete and peer trust accept/revoke invalidate matching handles after revision validation and immediately before the write attempt. A failed write may conservatively cancel its matching attempt. Editing an unrelated profile does not cancel this one. Cancellation before transfer prevents release; after transfer it wakes transport shutdown and cannot retract already admitted bytes. `close` latches cancellation, wipes untransferred buffers, removes its timer/registry entry and never waits for SQLite. The single process-local expiry executor is not a shared app service or cross-app daemon.
+
+`Application.getProcessName()` is public since API28, below product min35. Default-process enforcement is necessary because the registry is in-process; adding an `android:process` component requires a separately designed IPC owner. Existing file locks alone do not supply cross-process cancellation. Isolated storage tests use explicitly internal test roots and owner configuration; they do not certify installed-product authentication or trust isolation.
+
+## Password and result semantics
+
+The credential holder copies validated arrays, accepts bounded well-formed Unicode and preserves exact password contents without trimming or normalization. Username controls are refused; password controls/NUL remain valid length-delimited content. Array bounds are 256 UTF-16 units for username and 4,096 for password. Transfer and disposal are one-use operations. Arrays are wiped after upstream encoding and on retirement; SSHJ's immutable username and packet copies prevent a complete JVM-zeroization guarantee.
+
+The selected SSHJ0.41.2 engine performs negotiation and cryptography. Cloudy retains the already selected narrow ECDH/ECDSA P-256, AES128-GCM, HMAC-SHA256 and no-compression policy. It explicitly calls `SSHClient.auth(username, strictMethod)`, avoiding the convenience method's keyboard-interactive fallback. A small `AuthPassword` subclass refuses message60 before parsing prompts or invoking the changed-password encoder; both retry paths return false. No alternate method, password change, channel, reconnect or session is admitted by this operation.
+
+`Success` requires actual engine authentication and confirmed retirement. A verified key followed by an unsuccessful operation reports `AUTHENTICATION_FAILED`; a dropped connection cannot truthfully be labelled a wrong password. Cancellation, deadline, key rejection, admission denial and password-change refusal retain distinct codes. No upstream exception text or server prompt determines policy. The actual owned socket, Reader, deadline watcher and close helper must retire within the shared two-second cleanup budget; uncertainty quarantines that engine instance and prevents a subsequent success/reuse claim.
+
+## Pre-authentication rekey limitation
+
+At the exact selected pin, `KeyExchanger.isKeyExchangeAllowed()` permits initial exchange or exchange after authentication. After initial exchange completes but authentication is pending, a server KEXINIT reaches `handle`, which cannot send its own new KEXINIT and waits until timeout. This source finding explains the retained first host run's unmet `KEY_REJECTED` expectation. No production bypass or engine fork was introduced to make that expectation pass. [Pinned SSHJ source](https://github.com/hierynomus/sshj/blob/6fad160fe36605a68847ac8a527750c615b4bd04/src/main/java/net/schmizz/sshj/transport/KeyExchanger.java).
+
+The honest finite outcome is timeout with confirmed resource retirement and no additional credential request or channel. The adapter refuses a second verifier callback if reached, but this pre-authentication case cannot establish that branch. Real post-authentication rekey and continuing trust-revocation ownership require a separately retained authenticated session and real backend evidence before full sessions ship. Do not turn a timeout regression pass into a rekey-support claim.
+
+## Remaining integration gates
+
+Native per-session entry must qualify foreground loss, recreation and secret disposal without automatic retry. Actual Android transport/admission composition, ordinary username/password interoperability, physical keyboard/IME and accessible credential controls need their own tests. Saved use additionally needs a scoped revocable vault lease and explicit credential/account reference; current profile labels are not associations. Public key, interactive authentication, jumps, live rekey/revocation, terminal/SFTP/drop, X11 and full independent app release gates remain required. This increment advances P1-S3 without completing it or promoting CAP-SSH/CAP-PLATFORM.

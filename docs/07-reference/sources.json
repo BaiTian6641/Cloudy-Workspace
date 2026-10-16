@@ -6218,7 +6218,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-16",
       "sourceUpdatedOn": null,
-      "note": "Selected KEX completion precedes verifyHost; false verifiers reject before client NEWKEYS. Product has exactly one always-rejecting observer verifier. Signed observation is not host trust, completed handshake or authentication. Selected engine performs cryptography.",
+      "note": "Selected KEX completion precedes verifyHost; false verifiers reject before client NEWKEYS. Product has exactly one always-rejecting observer verifier. Signed observation is not host trust, completed handshake or authentication. Selected engine performs cryptography. Finite password-check review: after initial KEX, isKeyExchangeAllowed rejects another exchange until transport authentication. Incoming KEXINIT then waits on cleared kexInitSent; observed finite timeout is not second-verifier rejection or rekey support.",
       "refresh": "Before observer/platform or selected engine upgrades; preserve exact compile and device qualification separately."
     },
     {
@@ -6254,7 +6254,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-16",
       "sourceUpdatedOn": null,
-      "note": "AuthPassword(PasswordFinder) installs a non-null default PasswordUpdateProvider returning null. handle(USERAUTH_60) can then serialize a change-password request; a null constructor provider takes the refusal branch but shouldRetry dereferences that provider. Future strict password policy requires an explicit reviewed refusal path and no retry/fallback. Source finding only; no product authentication or server qualification.",
+      "note": "AuthPassword(PasswordFinder) installs a non-null default PasswordUpdateProvider returning null. handle(USERAUTH_60) can then serialize a change-password request; a null constructor provider takes the refusal branch but shouldRetry dereferences that provider. Cloudy now selects a strict public-method subclass that rejects USERAUTH_60 before superclass processing and always disables retry. A real Apache SSHD2.20.0 host case confirms typed refusal with one ordinary request and no change request. Native UI/Android authentication remain unqualified.",
       "refresh": "Before P1-S3/P2 authentication implementation or SSHJ upgrades; Android/security owner must qualify strict method/refusal behavior against a real owned server."
     },
     {
@@ -6266,8 +6266,92 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-16",
       "sourceUpdatedOn": null,
-      "note": "Buffer.putSensitiveString(null) serializes an empty string, not cancellation. Future credential adapters must reject unavailable/cancelled input before encoding; returning null from a provider is not proof of zero credential requests. This follows selected source, not an executed authentication test.",
+      "note": "Buffer.putSensitiveString(null) serializes an empty string, not cancellation. Credential adapters must reject unavailable/cancelled input before encoding; returning null from a provider is not proof of zero credential requests. This follows selected source; Cloudy's separate strict password-change refusal has real host evidence without taking this convenience path.",
       "refresh": "Before P1-S3/P2 authentication implementation or SSHJ upgrades; Android/security owner must qualify strict method/refusal behavior against a real owned server."
+    },
+    {
+      "id": "R278",
+      "title": "Apache MINA SSHD2.20.0 release",
+      "url": "https://mina.apache.org/sshd-project/download_2.20.0.html",
+      "publisher": "Apache Software Foundation",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Host-only maintained SSH server fixture. Official binary ZIP SHA512 verified; contained core/common JAR bytes match Maven artifacts. Exact closure in qualification/fixtures/ssh-password/dependencies.json; no product dependency or Android-server adoption. Failed SHA512 sidecar lookup for Maven JARs retained before archive verification.",
+      "refresh": "Before P1-S3/P2 authentication or selected engine/fixture upgrades; Android/security owner preserves source, compile, host and device distinctions."
+    },
+    {
+      "id": "R279",
+      "title": "Apache SSHD2.20.0 genuine password-change challenge",
+      "url": "https://github.com/apache/mina-sshd/blob/2221febd396cd3daafdfbf2ff982c6d0eb69a203/sshd-core/src/main/java/org/apache/sshd/server/auth/password/UserAuthPassword.java",
+      "publisher": "Apache Software Foundation",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "UserAuthPassword catches PasswordChangeRequiredException and sends encrypted SSH_MSG_USERAUTH_PASSWD_CHANGEREQ through maintained encoding/transport. Fixture uses this real challenge; server counts request method/change flag without recording credentials. Compiled and exercised host-side; not OpenSSH/PAM qualification.",
+      "refresh": "Before P1-S3/P2 authentication or selected engine/fixture upgrades; Android/security owner preserves source, compile, host and device distinctions."
+    },
+    {
+      "id": "R280",
+      "title": "Apache SSHD2.20.0 asynchronous authentication",
+      "url": "https://github.com/apache/mina-sshd/blob/2221febd396cd3daafdfbf2ff982c6d0eb69a203/sshd-core/src/main/java/org/apache/sshd/server/auth/AsyncAuthException.java",
+      "publisher": "Apache Software Foundation",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "AsyncAuthException keeps authentication incomplete without sleeping inside the I/O/auth callback. Fixture leaves its result unresolved for actual deadline/cancellation and scheduled-close/rekey tests, allowing maintained NIO session closure to be observed.",
+      "refresh": "Before P1-S3/P2 authentication or selected engine/fixture upgrades; Android/security owner preserves source, compile, host and device distinctions."
+    },
+    {
+      "id": "R281",
+      "title": "Apache SSHD2.20.0 server rekey and packet ownership",
+      "url": "https://github.com/apache/mina-sshd/blob/2221febd396cd3daafdfbf2ff982c6d0eb69a203/sshd-core/src/main/java/org/apache/sshd/common/session/helpers/AbstractSession.java",
+      "publisher": "Apache Software Foundation",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "reExchangeKeys requests a new KEX without an authentication gate. sendKexInit invokes the reserved handler before extracting original exchange-hash payload; an observing sender must preserve that buffer. Maintained writePacket owns framing/encryption/I/O. Fixture copies already-encoded payload into createBuffer and returns actual future; no new cryptography.",
+      "refresh": "Before P1-S3/P2 authentication or selected engine/fixture upgrades; Android/security owner preserves source, compile, host and device distinctions."
+    },
+    {
+      "id": "R282",
+      "title": "Apache SSHD2.20.0 public KEX write hook",
+      "url": "https://github.com/apache/mina-sshd/blob/2221febd396cd3daafdfbf2ff982c6d0eb69a203/sshd-core/src/main/java/org/apache/sshd/common/session/ReservedSessionMessagesHandler.java",
+      "publisher": "Apache Software Foundation",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "sendKexInitRequest nonnull IoWriteFuture transfers delivery responsibility. Fixture returns its actual upstream writePacket future and records only fixed success/failure metadata. Completion establishes underlying I/O completion, not remote reception or KEX success.",
+      "refresh": "Before P1-S3/P2 authentication or selected engine/fixture upgrades; Android/security owner preserves source, compile, host and device distinctions."
+    },
+    {
+      "id": "R283",
+      "title": "Apache SSHD2.20.0 public negotiation and retirement events",
+      "url": "https://github.com/apache/mina-sshd/blob/2221febd396cd3daafdfbf2ff982c6d0eb69a203/sshd-core/src/main/java/org/apache/sshd/common/session/SessionListener.java",
+      "publisher": "Apache Software Foundation",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "sessionNegotiationStart counts parsed peer proposals reaching negotiation; it is not raw malformed-packet ingress accounting. KeyEstablished and sessionClosed carry actual maintained-session events. Fixture session-local initial/rekey counters and bounded logs distinguish initial exchange from server rekey request.",
+      "refresh": "Before P1-S3/P2 authentication or selected engine/fixture upgrades; Android/security owner preserves source, compile, host and device distinctions."
+    },
+    {
+      "id": "G228",
+      "title": "Android current application process name",
+      "url": "https://developer.android.com/reference/android/app/Application#getProcessName()",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2026-09-16",
+      "note": "Application.getProcessName is public since API28. Default process name equals package name; named processes use the manifest-selected suffix. Finite SSH admission and affected profile/trust stores require default process plus existing UID/CE checks; process-local cancellation is not multiprocess IPC. Product min35 unchanged.",
+      "refresh": "Before P1-S3/P2 authentication or selected engine/fixture upgrades; Android/security owner preserves source, compile, host and device distinctions."
     }
   ]
 }

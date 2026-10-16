@@ -2043,6 +2043,46 @@
       "researchEvidence": "docs/06-validation/2026-10-16-ssh-observation-review.md",
       "compileEvidence": "qualification/results/P1-S3/2026-10-16-ssh-key-observation-build.json",
       "deviceEvidence": "qualification/results/P1-S3/2026-10-16-ssh-key-observation.md"
+    },
+    {
+      "id": "API60",
+      "feature": "Finite per-session SSH password admission in the owning default Android process",
+      "symbols": [
+        "android.app.Application.getProcessName",
+        "android.os.SystemClock.elapsedRealtime",
+        "net.schmizz.sshj.SSHClient.auth",
+        "net.schmizz.sshj.userauth.method.AuthPassword.buildReq",
+        "net.schmizz.sshj.userauth.method.AuthPassword.handle",
+        "net.schmizz.sshj.userauth.method.AuthPassword.shouldRetry"
+      ],
+      "sourceIds": [
+        "G228",
+        "R272",
+        "R273",
+        "R274",
+        "R275",
+        "R276",
+        "R277",
+        "R278",
+        "R279",
+        "R280",
+        "R281",
+        "R282",
+        "R283"
+      ],
+      "minimumApi": 28,
+      "libraryVersion": "SSHJ0.41.2 retained; productmin35/target37. ApacheSSHD2.20.0 is host-fixture-only. No product dependency or crypto-provider change.",
+      "availability": "documented",
+      "qualification": "partial",
+      "checkedOn": "2026-10-16",
+      "owner": "Android/platform and SSH security developers",
+      "stage": "P1-S3",
+      "runtimeGuard": "Off-main, owning package/UID, CE context, default process, exact profile/trust snapshot, 45-second elapsed authority, one-use credential admission and same cancellation signal. Engine has at most ten-second transport and shared two-second retirement bounds.",
+      "fallback": "Fail closed on stale/unknown/revoked trust, changed profile, cancellation, expiry or missing retirement. No automatic fallback, password-change request, retry or session channel. Pre-authentication server rekey at this pin times out; no live rekey support inferred.",
+      "experiment": "Strict build02 and four zero-issue Lint reports; actual Googlebook52 isolated SQLite/coordinator cases pass (13new+19profiles+20trust). Final host03 executes10/10 real maintained-server cases with bounded cleanup; failed host01 expectation9/10 retained. No native entry, saved-vault release or Android network password authentication. Products remain prior installed0.1.8 observation checkpoint; new build bytes not installed.",
+      "researchEvidence": "docs/02-architecture/ssh-password-admission.md",
+      "compileEvidence": "qualification/results/P1-S3/2026-10-16-ssh-authentication.json",
+      "deviceEvidence": "qualification/results/P1-S3/2026-10-16-ssh-authentication.md"
     }
   ],
   "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."

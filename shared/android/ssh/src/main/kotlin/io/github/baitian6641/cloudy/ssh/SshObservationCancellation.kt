@@ -12,6 +12,15 @@ class SshObservationCancellation {
         listener?.invoke()
     }
 
+    /**
+     * Linearizes a short nonblocking transfer with cancellation. Lock order is coordination then
+     * cancellation; block must not call cancel(), perform I/O, or acquire coordination/SQLite locks.
+     * A null result means cancellation won (or the block itself returned null).
+     */
+    fun <T> tryIfActive(block: () -> T): T? = synchronized(monitor) {
+        if (cancelled) null else block()
+    }
+
     internal fun attach(listener: () -> Unit): Boolean {
         val accepted = synchronized(monitor) {
             if (wake != null) false else { wake = listener; true }
