@@ -105,5 +105,5 @@ jobs:
       # These are real hosted CLI executions, not desktop-session qualification.
       - name: Execute the local diagnostic
         run: |
-          test "$(go run -mod=readonly ./cmd/cloudy-host version)" = '0.1.2'
+          test "$(go run -mod=readonly ./cmd/cloudy-host version)" = '0.1.3'
           go run -mod=readonly ./cmd/cloudy-host inspect

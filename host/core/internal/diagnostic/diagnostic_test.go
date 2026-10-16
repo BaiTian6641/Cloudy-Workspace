@@ -29,7 +29,7 @@ func TestInspectContract(t *testing.T) {
 	}
 	// An exact independently written contract catches accidental extra identity,
 	// environment or wire-manifest fields as well as false capability claims.
-	want := `{"localDiagnosticVersion":1,"agentVersion":"0.1.2","observedAt":"2026-10-16T17:30:15.123456789Z","runtime":{"os":"test-os","arch":"test-arch","goVersion":"test-go"},"features":{"pairing":{"state":"unavailable","reason":"not-implemented"},"remoteControl":{"state":"unavailable","reason":"not-implemented"},"jobs":{"state":"unavailable","reason":"not-implemented"},"events":{"state":"unavailable","reason":"not-implemented"},"sessionAdapters":{"state":"unavailable","reason":"not-implemented"}},"backends":{"remoteDesktop":{"state":"unknown","reason":"not-inspected"},"usb":{"state":"unknown","reason":"not-inspected"},"notifications":{"state":"unknown","reason":"not-inspected"}}}` + "\n"
+	want := `{"localDiagnosticVersion":1,"agentVersion":"0.1.3","observedAt":"2026-10-16T17:30:15.123456789Z","runtime":{"os":"test-os","arch":"test-arch","goVersion":"test-go"},"features":{"pairing":{"state":"unavailable","reason":"not-implemented"},"remoteControl":{"state":"unavailable","reason":"not-implemented"},"jobs":{"state":"unavailable","reason":"not-implemented"},"events":{"state":"unavailable","reason":"not-implemented"},"sessionAdapters":{"state":"unavailable","reason":"not-implemented"}},"backends":{"remoteDesktop":{"state":"unknown","reason":"not-inspected"},"usb":{"state":"unknown","reason":"not-inspected"},"notifications":{"state":"unknown","reason":"not-inspected"}}}` + "\n"
 	if out.String() != want {
 		t.Fatalf("unexpected diagnostic JSON: %s", out.String())
 	}
@@ -45,7 +45,7 @@ func forbiddenRuntime() Runtime { panic("unexpected runtime inspection") }
 func TestVersionDoesNotInspectRuntime(t *testing.T) {
 	var out, errOut bytes.Buffer
 	code := Run([]string{"version"}, &out, &errOut, forbiddenClock, forbiddenRuntime)
-	if code != 0 || out.String() != "0.1.2\n" || errOut.Len() != 0 {
+	if code != 0 || out.String() != "0.1.3\n" || errOut.Len() != 0 {
 		t.Fatalf("exit=%d stdout=%q stderr=%q", code, out.String(), errOut.String())
 	}
 }
@@ -55,7 +55,7 @@ func TestUsageRejectsUnknownAndExtraArguments(t *testing.T) {
 		t.Run(strings.Join(args, "/"), func(t *testing.T) {
 			var out, errOut bytes.Buffer
 			code := Run(args, &out, &errOut, forbiddenClock, forbiddenRuntime)
-			if code != 2 || out.Len() != 0 || errOut.String() != "usage: cloudy-host inspect | version | identity init|read --state-dir <existing-directory>\n" {
+			if code != 2 || out.Len() != 0 || errOut.String() != "usage: cloudy-host inspect | version | identity init|read --state-dir <existing-directory> | context read --state-dir <existing-directory>\n" {
 				t.Fatalf("exit=%d stdout=%q stderr=%q", code, out.String(), errOut.String())
 			}
 		})
@@ -141,9 +141,9 @@ func TestIdentityReadOutputAndFailureRetainState(t *testing.T) {
 	if code := Run(args, &out, &errOut, forbiddenClock, forbiddenRuntime); code != 0 {
 		t.Fatalf("read exit%d error%s", code, errOut.String())
 	}
-	want := `{"localIdentityVersion":1,"agentVersion":"0.1.2","operation":"read","installationId":"12345678-1234-4234-8234-123456789abc","durability":"not-assessed"}` + "\n"
+	want := `{"localIdentityVersion":1,"agentVersion":"0.1.3","operation":"read","installationId":"12345678-1234-4234-8234-123456789abc","durability":"not-assessed"}` + "\n"
 	if runtime.GOOS == "windows" {
-		want = `{"localIdentityVersion":2,"agentVersion":"0.1.2","operation":"read","installationId":"12345678-1234-4234-8234-123456789abc","durability":"not-assessed","recordVersion":1,"storageProfile":"legacy-directory-v1"}` + "\n"
+		want = `{"localIdentityVersion":2,"agentVersion":"0.1.3","operation":"read","installationId":"12345678-1234-4234-8234-123456789abc","durability":"not-assessed","recordVersion":1,"storageProfile":"legacy-directory-v1"}` + "\n"
 	}
 	if out.String() != want || errOut.Len() != 0 {
 		t.Fatalf("output%q error%q", out.String(), errOut.String())
@@ -157,5 +157,18 @@ func TestIdentityReadOutputAndFailureRetainState(t *testing.T) {
 	after, err := os.ReadFile(record)
 	if err != nil || !bytes.Equal(after, data) {
 		t.Fatal("read/output failure changed identity")
+	}
+}
+
+func TestContextRejectsArgumentsBeforeIO(t *testing.T) {
+	for _, args := range [][]string{
+		{"context"}, {"context", "read"}, {"context", "init", "--state-dir", "private"},
+		{"context", "read", "--state-dir", ""}, {"context", "read", "--wrong", "private"},
+		{"context", "read", "--state-dir", "private", "extra"},
+	} {
+		var out, errOut bytes.Buffer
+		if code := Run(args, &out, &errOut, forbiddenClock, forbiddenRuntime); code != 2 || out.Len() != 0 || errOut.String() != usage {
+			t.Fatal("invalid context syntax entered operation")
+		}
 	}
 }

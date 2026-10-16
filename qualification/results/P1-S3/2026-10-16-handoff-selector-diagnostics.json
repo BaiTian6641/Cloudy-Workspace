@@ -1,0 +1,160 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "Test-only bounded future handoff section-selector timeout diagnostic",
+  "acceptance": "Parent/independent source and strict build review accepted; three actual Googlebook new selector privacy/bounds methods passed",
+  "productVersionUnchanged": "0.1.14",
+  "productVersionCodeUnchanged": 15,
+  "sources": [
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/FilesHandoffControllerDiagnosticTest.kt",
+      "sha256": "3cc560ccd2f6979a4b8af75192ac85bea1523bdcb6807107ec2cbd74eb850b68",
+      "bytes": 5082
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/FilesHandoffPositiveControllerTest.kt",
+      "sha256": "f1943d453d08936691f1f742230373b723220c95e5b50dc46ef708b22d5f7193",
+      "bytes": 24638
+    }
+  ],
+  "sourceFreeze": {
+    "path": ".cache/files-handoff-02/controller-diagnostic-02/freeze-01.json",
+    "sha256": "5fc8da4040d76ddeb023968ca19afed5ae55d79c2cf754fa10e9b1ea7bea1df7"
+  },
+  "build": {
+    "path": ".cache/files-handoff-02/controller-diagnostic-02/build-01/result.json",
+    "sha256": "1bff5b192ff9d3ab02d2dd3247a875888b5d325f5a557b70741de48c1e167663"
+  },
+  "independentSourceReview": {
+    "path": ".cache/files-handoff-02/controller-diagnostic-02/independent-review-01.json",
+    "sha256": "ce8313f0ef7dca21f72ce65b94c11f065f57185506ae546482349c667f98efc9"
+  },
+  "sourceCount": 232,
+  "sourceUnchangedDuringBuild": true,
+  "artifacts": [
+    {
+      "path": "apps/console/build/outputs/apk/androidTest/debug/console-debug-androidTest.apk",
+      "bytes": 4593117,
+      "sha256": "c2e64fdf93fd96dc247ceb20eab4cbd078d97a4ae6aa41cc67c0275087ef5971"
+    },
+    {
+      "path": "apps/console/build/outputs/apk/debug/console-debug.apk",
+      "bytes": 41382877,
+      "sha256": "3127c84f789577c0d5d0fff1dc9e2169a9ce9bd29eec883d0d0ff76094fc1e0c"
+    },
+    {
+      "path": "apps/desktop/build/outputs/apk/androidTest/debug/desktop-debug-androidTest.apk",
+      "bytes": 4593113,
+      "sha256": "b9f0a17916a232f7633e2551e5cbd267743dd28a6d9560d47e09dfd6108b9b24"
+    },
+    {
+      "path": "apps/desktop/build/outputs/apk/debug/desktop-debug.apk",
+      "bytes": 41382885,
+      "sha256": "af4eb3702ead629f0a23945d2571b22b656fecfa7a96a5ca3ee2957f3c76c452"
+    },
+    {
+      "path": "shared/android/platform/build/outputs/apk/androidTest/debug/platform-debug-androidTest.apk",
+      "bytes": 45059272,
+      "sha256": "5c502de6ac42766eed786b79dc45e3157f36f728fe892e76ed5442e4f160aa20"
+    }
+  ],
+  "buildElapsedReportedSeconds": 20,
+  "actionableTasks": 310,
+  "executedTasks": 10,
+  "rawLintZeroIssueReportCount": 4,
+  "productAndOwningTestAPKBytesPreserved": true,
+  "onlyPlatformTestAPKChanged": true,
+  "ordinaryOpenCallCount": 1,
+  "successSelectorsAndPositivePhasesUnchanged": true,
+  "serializedBounds": {
+    "windowCounters": 5,
+    "titleHeadingTargetCounters": 3,
+    "maxAncestorRecords": 8,
+    "ancestorDepthRange": [
+      0,
+      7
+    ],
+    "counterRange": [
+      0,
+      2048
+    ],
+    "windowListRefusalAbove": 64,
+    "reusedNodeDepthLimit": 40,
+    "reusedVisibleNodeLimit": 2048
+  },
+  "snapshotTiming": "One best-effort passive sample only after future section await timeout; sequential, not atomic",
+  "newPrivacyMethodsCompiled": 3,
+  "diagnosticClassTotalMethods": 6,
+  "newPrivacyMethodsExecuted": 3,
+  "runtime": {
+    "status": "THREE_NEW_METHODS_PASSED_RECOVERED_BASELINE_PRESERVED",
+    "helper": {
+      "path": ".cache/files-handoff-02/controller-diagnostic-02/refresh_and_privacy_01.py",
+      "sha256": "febdb67c6ca5e3c2b68e6dac3aabc87ccb9c647bbc2078daa6169971b407d0f1"
+    },
+    "freeze": {
+      "path": ".cache/files-handoff-02/controller-diagnostic-02/privacy-freeze-01.json",
+      "sha256": "e1e4f90f4cbe1389928488163572e394c004485cb8ac8b5017feec09fc48839e"
+    },
+    "sourceApproval": {
+      "path": ".cache/files-handoff-02/controller-diagnostic-02/privacy-independent-review-01.json",
+      "sha256": "fd94cf45902bd6f46eb1d3f3d761f9c751bf4838ceafe267f33040c043989efc"
+    },
+    "independentRuntimeReview": {
+      "path": ".cache/files-handoff-02/controller-diagnostic-02/privacy-runtime-independent-review-01.json",
+      "sha256": "ebf8d1e527db3c4b1457defec54bbb488c61b0389da549106b54c7b70be04acb"
+    },
+    "methodNames": [
+      "selectorTimeoutNeverSerializesHostileCauseOrText",
+      "selectorCountersAndAncestorDepthAreBounded",
+      "selectorSnapshotDistinguishesHeadingAndAncestorEvidence"
+    ],
+    "actualMethodStarts": 3,
+    "actualMethodPasses": 3,
+    "actualMethodSkips": 0,
+    "actualMethodFailures": 0,
+    "instrumentationFinalCode": -1,
+    "stderrBytes": 0,
+    "installedAPKHashObservations": 15,
+    "onlyPlatformTestAPKReplaced": true,
+    "productAndOwningTestAPKBytesPreserved": true,
+    "recovery05BaselinePreserved": true,
+    "controllerPrivateHashesAndUIDPreserved": true,
+    "controllerProfileVerifierCacheStayedByteIdentical": true,
+    "cacheBranchMeasured": "Exact retained original cache; PM update advanced after replacement and remained stable",
+    "bothProductsInstalledAndStopped": true,
+    "threeTestAPKsInstalled": true,
+    "activityUiAutomationAuthenticationHostOrOpenStarted": false,
+    "newMethodsOnly": true,
+    "diagnosticClassTotalMethods": 6
+  },
+  "historicalAttempt05FailureCauseEstablished": false,
+  "normalPositiveHandoffPassed": false,
+  "capabilityOrStagePromoted": false,
+  "device": {
+    "model": "HP Googlebook 14",
+    "androidRelease": "17",
+    "api": 37,
+    "build": "CL3B.260622.276.R2",
+    "incremental": "16560795",
+    "abi": "arm64-v8a"
+  },
+  "privateEvidenceDigests": [
+    {
+      "label": "terminal",
+      "sha256": "3dfbe20509ca9be8cab4bcc7db93188b20f96342052627099b163b7039f3c13a"
+    },
+    {
+      "label": "instrumentation-stdout",
+      "sha256": "7042c79b1a2defa304c9b61c11219e620f9df26b53b9fdccc87beffed7174a2c"
+    },
+    {
+      "label": "instrumentation-stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "final-product-private-snapshot",
+      "sha256": "5eafac92a2defd2cbfe86cdddfc883b111c6f68e181faf37b1a798e0d6e8e2c5"
+    }
+  ]
+}

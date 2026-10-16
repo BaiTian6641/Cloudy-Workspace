@@ -1,0 +1,168 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "Fresh Console-to-Desktop diagnostic attempt05; controller selected-card timeout before Open; exact original-checkpoint recovery",
+  "acceptance": "Failed normal handoff retained; actual PREPARE and original VERIFY/CLEANUP pass; parent and independent actual evidence review accept finite recovery",
+  "productVersionUnchanged": "0.1.14",
+  "productVersionCodeUnchanged": 15,
+  "device": {
+    "model": "HP Googlebook 14",
+    "androidRelease": "17",
+    "api": 37,
+    "build": "CL3B.260622.276.R2",
+    "incremental": "16560795",
+    "abi": "arm64-v8a"
+  },
+  "build": {
+    "path": ".cache/files-handoff-02/controller-diagnostic-01/build-01/result.json",
+    "sha256": "ad27448c2f9bb4ef4d28466a0f903b4805eb0f45bccc5ca5aa7406614eb8ee82"
+  },
+  "sourcesAtRun": [
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/FilesHandoffPositiveControllerTest.kt",
+      "sha256": "fb1ed3fe5f22be3cf9d44b1031a8230604450f9f4031b7d72105032506e02bf0"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/FilesHandoffControllerDiagnosticTest.kt",
+      "sha256": "b76512b5910017e2eb74d1ef9b799d391aa8daecb4e0e18fcbec14b457e34fad"
+    }
+  ],
+  "helpers": [
+    {
+      "path": ".cache/files-handoff-02/positive-bootstrap-02/bootstrap_05.py",
+      "sha256": "eb0389f07f2eae74bd8cdfa941af3dee225c36a3a51485f5d71d74c50f1aed99"
+    },
+    {
+      "path": ".cache/files-handoff-02/positive-bootstrap-02/run_positive_09.py",
+      "sha256": "6fb82979e57b22fd8f4214ad1cc3459b5696faac162187c301798c8c429d4b85"
+    },
+    {
+      "path": ".cache/files-handoff-02/positive-bootstrap-02/install_07.py",
+      "sha256": "f1eb443268f46e50b9313eddf1a142a283207b26525f66ebad2b72d3c1e6cb37"
+    },
+    {
+      "path": ".cache/files-handoff-02/positive-bootstrap-02/close_failed_ui_05.py",
+      "sha256": "23180400090646ec8e843ffa12d57e8f1f2b36808d0fe83da83ddd9f49cd91c4"
+    },
+    {
+      "path": ".cache/files-handoff-02/positive-bootstrap-02/reconcile_failed_05.py",
+      "sha256": "1245d718a6594b8a38ada7fce16fcf0f4e98e448932c8abc2ba62eb681a8b496"
+    }
+  ],
+  "attemptReview": {
+    "path": ".cache/files-handoff-02/positive-bootstrap-02/independent-review-01.json",
+    "sha256": "823f1a5da40e15089e08184b860ce77a0793cebb31248b0964f8086a29bff9b8"
+  },
+  "recoverySourceReview": {
+    "path": ".cache/files-handoff-02/positive-bootstrap-02/recovery-independent-review-01.json",
+    "sha256": "12ce357fb5ce7405ac8959aae6adfaacc1f0829086cf7ff5915d7e90033025a8"
+  },
+  "actual": {
+    "prepareMethodsPassed": 1,
+    "controllerMethodsFailed": 1,
+    "controllerPhaseStatuses": 0,
+    "diagnostic": "CONTROLLER:ASSERT_SELECTED_CARD:STATE:CONTROLLER:229",
+    "exactMeaning": "Bounded selector await exhausted; missing specific predicate remains unlocalized",
+    "normalOpenExecuted": false,
+    "normalHandoffPassed": false,
+    "hostEventCounts": {
+      "session_created": 1,
+      "server_initial_kexinit_written": 1,
+      "client_initial_kexinit_negotiation_start": 1,
+      "key_established": 1,
+      "auth_request": 1,
+      "auth_accepted": 1,
+      "session_authenticated": 1,
+      "channel_open": 2,
+      "sftp_init_request": 2,
+      "sftp_initialized": 2,
+      "sftp_opendir_request": 2,
+      "sftp_readdir_request": 4,
+      "sftp_close_request": 2,
+      "sftp_destroying": 2,
+      "session_closed": 1
+    },
+    "hostExitCode": null,
+    "normalCloseActions": 3,
+    "verifyMethodsPassed": 1,
+    "cleanupMethodsPassed": 1,
+    "cleanupRowsRemoved": 3,
+    "ownedConfigsRemoved": 4,
+    "ownedReverseRemoved": 1,
+    "originalCheckpointPreserved": true,
+    "originalRowsMetadataGenerationReplayRestored": true,
+    "failedEvidencePreserved": true,
+    "productFrameworkCacheProjection": false,
+    "controllerCacheChangedSincePrivacyCheckpoint": true,
+    "controllerCachePreservedDuringRecovery": true,
+    "productAndOwningTestAPKsChanged": false,
+    "threeTestAPKsInstalled": true,
+    "bothProductsInstalledStopped": true
+  },
+  "privateEvidenceDigests": [
+    {
+      "label": "bootstrap-terminal",
+      "sha256": "291fc87615bfaf61d8798d6497ed311902c2bfff69c7a9714235fa0fecc38a3d"
+    },
+    {
+      "label": "device-terminal",
+      "sha256": "b51dbf1e7f16277bddd028b7843007b5d05bfdc9fe24cab7b5e386b7976af7cb"
+    },
+    {
+      "label": "original-checkpoint",
+      "sha256": "6ea06334a735813e6eb536d2e1a9a7ce4839cdc4dda3c5b3cd480fd4fd944a26"
+    },
+    {
+      "label": "prepare-stdout",
+      "sha256": "f61527dc26df625401df6ff05e40e9ec862dfbac725432275a99afd0e97f064d"
+    },
+    {
+      "label": "prepare-stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "controller-stdout",
+      "sha256": "fee6985bf9666828e166d940b2df398be72b6f55725259c6fed740a290234930"
+    },
+    {
+      "label": "host-events",
+      "sha256": "7a2aaa06d458472a1f31c18019e0945bc34fecc0a1400c8f0783248f4f36380d"
+    },
+    {
+      "label": "host-summary",
+      "sha256": "ffffb45bfcd8d0ea7e9f8d62bfd7f4ec93ee03d257b21649d5963b9541667692"
+    },
+    {
+      "label": "normal-close",
+      "sha256": "95d8c40a0ea3814544a8a6a54aa46fc12f75962f37b6e20aca66cdbd28fbf322"
+    },
+    {
+      "label": "later-hierarchy",
+      "sha256": "6826d7a6721afe341f00e5e9e555768987cf63a7e0c002f40d092f64b981f489"
+    },
+    {
+      "label": "recovery-terminal",
+      "sha256": "abf72c07c6fd43ab4e5023d6e54a550f74f9cb2afc343d94ee8f9083c28cb454"
+    },
+    {
+      "label": "verify-stdout",
+      "sha256": "1937cfaf895d6ec5e51e7934f047af0fb5286d81c1b85ea9b2daf1c0d79727d4"
+    },
+    {
+      "label": "cleanup-stdout",
+      "sha256": "84a4418ed882aa94c3d54d02b3b7e5f9ac59a8572b67a3717481ead296647388"
+    }
+  ],
+  "limits": [
+    "Later XML shows selected title/card; does not establish earlier isHeading, active/focused root or selector ancestry result",
+    "No specific selector repair or root cause accepted",
+    "No normal Open/BAL/fresh receiver auth/read from Open or positive observer retirement pass",
+    "Original host exit unknown despite session closure and current process/listener absence",
+    "SQLite and retained qualification evidence changes remain explicit; no full prior-file equality claim",
+    "Future diagnostics require their own source/build/install/attempt bindings; protected-vault question remains pending"
+  ],
+  "recoveryRuntimeReview": {
+    "path": ".cache/files-handoff-02/positive-bootstrap-02/runtime-review-01.json",
+    "sha256": "896a93d9558df35b883047a92e9f3d0822b50639fbd00b97fd0443433aa61835"
+  }
+}

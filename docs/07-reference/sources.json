@@ -7468,6 +7468,42 @@
       "sourceUpdatedOn": null,
       "note": "es_sync_client is a queued delivery marker; callback invocation on destruction/null must not be interpreted as live-client exact empty descendant ownership. No retirement or Darwin adapter acceptance follows. Owner host core, P4-S1.",
       "refresh": "Before changing the affected host adapter, selected OS/runtime or claimed identity/retirement scope; keep source, compilation and actual runtime evidence separate."
+    },
+    {
+      "id": "R353",
+      "title": "Go 1.27.2 JSON encoder output",
+      "url": "https://pkg.go.dev/encoding/json@go1.27.2#Encoder.Encode",
+      "publisher": "Go project",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Encoder.Encode writes a JSON value and newline to its writer. HOST-CONTEXT01 reuses the existing typed output path and checked writer; complete JSON plus successful exit is required, not atomic stdout publication. No external JSON decoding or new dependency is introduced. Owner host core, P4-S1; scoped source/runtime qualification in 2026-10-16-host-context.",
+      "refresh": "Before changing selected Go/runtime or diagnostic output; reuse unchanged upstream semantics and verify changed adapter boundaries."
+    },
+    {
+      "id": "R354",
+      "title": "Go 1.27.2 writer and short-write contract",
+      "url": "https://pkg.go.dev/io@go1.27.2#Writer",
+      "publisher": "Go project",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "io.Writer returns written byte count and an error for short writes. Cloudy retains its checkedWriter guard against a violating writer and tests actual /dev/full failure plus synthetic short writes. Partial stdout is not a successful context observation. Owner host core, P4-S1; scoped source/runtime qualification in 2026-10-16-host-context.",
+      "refresh": "Before changing selected Go/runtime or diagnostic output; reuse unchanged upstream semantics and verify changed adapter boundaries."
+    },
+    {
+      "id": "R355",
+      "title": "Go 1.27.2 UTC observation formatting",
+      "url": "https://pkg.go.dev/time@go1.27.2#Time.UTC",
+      "publisher": "Go project",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Time.UTC changes location to UTC. HOST-CONTEXT01 formats RFC3339Nano after both real readers; this is an observation time, not boot time or an atomic identity tuple. Actual command timestamps are checked within private process intervals. Owner host core, P4-S1; scoped source/runtime qualification in 2026-10-16-host-context.",
+      "refresh": "Before changing selected Go/runtime or diagnostic output; reuse unchanged upstream semantics and verify changed adapter boundaries."
     }
   ]
 }

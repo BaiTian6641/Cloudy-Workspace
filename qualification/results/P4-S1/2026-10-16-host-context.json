@@ -1,0 +1,512 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "HOST-CONTEXT01 explicit finite local Linux context read; not capability/service/IPC authority",
+  "acceptance": "Parent and independent scoped source/retained finite Linux runtime acceptance; no capability or stage promotion",
+  "hostExecutableVersion": "0.1.3",
+  "command": "cloudy-host context read --state-dir <existing-app-owned-directory>",
+  "outputProfile": {
+    "localContextVersion": 1,
+    "fields": [
+      "localContextVersion",
+      "agentVersion",
+      "observedAt",
+      "runtime",
+      "installationId",
+      "bootId",
+      "identityDurability",
+      "observationConsistency"
+    ],
+    "identityDurability": "Actual installation.Read Result.Durability, not reassessed",
+    "observationConsistency": "sequential-not-atomic",
+    "timestamp": "UTC after both readers; observation timestamp only"
+  },
+  "sources": [
+    {
+      "path": "host/core/internal/diagnostic/context_linux.go",
+      "sha256": "c0679b7da593a08555eb268dea43474fa8183e8f7ae21269fa5048d450400456"
+    },
+    {
+      "path": "host/core/internal/diagnostic/context_linux_test.go",
+      "sha256": "275daa487fd11ad4dbc212f635d71e56cf3b47c8220dd0f2b4c8bd410ea333a0"
+    },
+    {
+      "path": "host/core/internal/diagnostic/context_other.go",
+      "sha256": "341af4180601c96f93a5268d212fa26c5ad4a3c5e6bcea1494096b9a2f873d1b"
+    },
+    {
+      "path": "host/core/internal/diagnostic/context_other_test.go",
+      "sha256": "ebdf154d821d873d85195d6a52311d6075444ffc5fe8c02950b9eb1833ab4af6"
+    },
+    {
+      "path": "host/core/internal/diagnostic/diagnostic.go",
+      "sha256": "ae62a40dbb4bdfa1aaaa538fd6f9e3c7a81d56e8a41112629f3bfb324b25667a"
+    },
+    {
+      "path": "host/core/internal/diagnostic/diagnostic_test.go",
+      "sha256": "27fd5766b883047abc8e6bfcbe2eaf20c197e320ffdaa33a43c7acb6377556b2"
+    }
+  ],
+  "modulesUnchanged": true,
+  "protectedReadersUnchanged": true,
+  "protectedReaderBindings": {
+    "host/core/internal/installation/profile_other.go": "e11b2c0924241c088178f1bff11efdc518b47adb79254433c54fec68d2c7035c",
+    "host/core/internal/installation/profile_windows.go": "46a938b39cfe99aaaf26914e9fb2baac6b905a8ff8fd9c8041fe0e954e602e65",
+    "host/core/internal/installation/profile_windows_test.go": "04c2e38c60bb3fbab7bf822daa080e6fc035957d5d47087044a3fe9dfbd3403a",
+    "host/core/internal/installation/store.go": "d061f32a7d10ab89cae77a2d8fb41c685f600a686bb37c5c8d7e2a89c1b5bd94",
+    "host/core/internal/installation/store_test.go": "4b3ddb3669e6c4c4c9c80fcbd6176407e6a65f74686ef7a73aca4ed909d49510",
+    "host/core/internal/installation/sync_other_test.go": "5f7844f64e5e7064c55dd9d5c71eedc7e4812839d9fdec32723a8e20de9af0d5",
+    "host/core/internal/installation/sync_windows_test.go": "a0818fbf173d2107f9b21db24cd430bab9ec97e973338f546cbb2d884b48ab96",
+    "host/core/internal/installation/windows_record.go": "fddede14adfb842694be4c623271a2c65953cd89bc3408bde8f17dff446ab1a0",
+    "host/core/internal/installation/windows_record_test.go": "4b9470ccc904b3269e609afe013a5f32a8c51555f3828b72e0de4ab87e3a4bf0",
+    "host/core/internal/bootidentity/boot_linux.go": "63e317107b0e42781456b7756326463366f81a7faf21315b5cbbf003ffd20698",
+    "host/core/internal/bootidentity/boot_linux_test.go": "7a5365d5daef1c59cbcafde8ce7892867e291a462f8c3cb5074fcbd1a1f0fcfc",
+    "host/core/internal/localpeer/peer_darwin.go": "8fc49a4691b4752f4548748947f29a575e682d7bda6a3706b0a3ebe61704d711",
+    "host/core/internal/localpeer/peer_darwin_test.go": "26f95dae319bd1fdd2fa8b6cc957feeedc6992b5b9c4a5f63ea2aa4646d29d1d",
+    "host/core/internal/localpeer/peer_linux.go": "54e490a636034f58766d02d244f6778b2acb970ac301d642c51afed302deb3fc",
+    "host/core/internal/localpeer/peer_linux_test.go": "649221d1e2fbae848ae9dd380ef770103de35a2a89b8a12fea3ab657ebeafd61",
+    "host/core/internal/jobs/backend_linux.go": "3cfae7cdb0bc3162bd11aa953bd56be22b23a5fe7c2e7262b7a5c5b48ae24491",
+    "host/core/internal/jobs/backend_linux_test.go": "b63cfd30d67347bf6fc793e14cb28d7b191a8800a37016973a25157a02f12382",
+    "host/core/internal/jobs/backend_windows_amd64.go": "1365ac6de9ba97b981e1afd78be1d280214dedec1aabcbb3dc9d5e9a8ff5fabc",
+    "host/core/internal/jobs/backend_windows_amd64_test.go": "bd5b72428a68bfc415810e1b48db66e805902e7152a3c43c9a9d33ac63cc383e",
+    "host/core/internal/jobs/native_linux_test.go": "492b1dc494251bcbbde72144fd902328860734cac70e18c86ae88377d20ea3fd",
+    "host/core/internal/jobs/native_windows_amd64_test.go": "d5ec836c2340b69c897fa84de119920b4090fa6ac36c1d68c051eab14035416f",
+    "host/core/internal/jobs/types.go": "1abe1a972cb31f2939487dfa0861159a4592b278c53f0e9febb66311789e8b7e",
+    "host/core/internal/jobs/types_test.go": "43d8fcb834d152f6faf8463e5722a922340879976a276d139203e6a1cd0a459c"
+  },
+  "moduleBindings": {
+    "host/core/go.mod": "8895e55963e4447a05abb84709092a640834f471dcb2ea6515c6d8dfac6613eb",
+    "host/core/go.sum": "cde7b21c6627bd3cfc042453150e8eaf8b6c80aa2df25d96f48b038050945f03"
+  },
+  "verification": {
+    "path": ".cache/host-next-02/verification01/result.json",
+    "sha256": "6c3845312a040737c8bad41e99d4efcc2a2b264eed12f4ec001a9481de245462"
+  },
+  "runtime": {
+    "os": "Linux",
+    "kernel": "7.0.0-38-generic",
+    "architecture": "x86_64"
+  },
+  "checks": [
+    {
+      "label": "compiler",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "env",
+        "GOVERSION"
+      ],
+      "environmentOverride": {},
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "format",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/gofmt",
+        "-l",
+        "${REPO}/host/core/internal/diagnostic"
+      ],
+      "environmentOverride": {},
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "vet-linux",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "vet",
+        "-mod=readonly",
+        "./internal/diagnostic"
+      ],
+      "environmentOverride": {},
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "test-linux-race",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "test",
+        "-race",
+        "-count=1",
+        "-json",
+        "-timeout=15s",
+        "-mod=readonly",
+        "./internal/diagnostic"
+      ],
+      "environmentOverride": {},
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "build-linux-amd64",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "build",
+        "-mod=readonly",
+        "-o",
+        "${REPO}/.cache/host-next-02/verification01/cloudy-host-linux-amd64",
+        "./cmd/cloudy-host"
+      ],
+      "environmentOverride": {
+        "GOOS": "linux",
+        "GOARCH": "amd64",
+        "CGO_ENABLED": "0"
+      },
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "build-windows-amd64",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "build",
+        "-mod=readonly",
+        "-o",
+        "${REPO}/.cache/host-next-02/verification01/cloudy-host-windows-amd64.exe",
+        "./cmd/cloudy-host"
+      ],
+      "environmentOverride": {
+        "GOOS": "windows",
+        "GOARCH": "amd64",
+        "CGO_ENABLED": "0"
+      },
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "vet-windows-amd64",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "vet",
+        "-mod=readonly",
+        "./internal/diagnostic"
+      ],
+      "environmentOverride": {
+        "GOOS": "windows",
+        "GOARCH": "amd64",
+        "CGO_ENABLED": "0"
+      },
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "compile-tests-windows-amd64",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "test",
+        "-c",
+        "-mod=readonly",
+        "-o",
+        "${REPO}/.cache/host-next-02/verification01/diagnostic-windows-amd64.test.exe",
+        "./internal/diagnostic"
+      ],
+      "environmentOverride": {
+        "GOOS": "windows",
+        "GOARCH": "amd64",
+        "CGO_ENABLED": "0"
+      },
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "build-darwin-arm64",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "build",
+        "-mod=readonly",
+        "-o",
+        "${REPO}/.cache/host-next-02/verification01/cloudy-host-darwin-arm64",
+        "./cmd/cloudy-host"
+      ],
+      "environmentOverride": {
+        "GOOS": "darwin",
+        "GOARCH": "arm64",
+        "CGO_ENABLED": "0"
+      },
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "vet-darwin-arm64",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "vet",
+        "-mod=readonly",
+        "./internal/diagnostic"
+      ],
+      "environmentOverride": {
+        "GOOS": "darwin",
+        "GOARCH": "arm64",
+        "CGO_ENABLED": "0"
+      },
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "compile-tests-darwin-arm64",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "test",
+        "-c",
+        "-mod=readonly",
+        "-o",
+        "${REPO}/.cache/host-next-02/verification01/diagnostic-darwin-arm64.test",
+        "./internal/diagnostic"
+      ],
+      "environmentOverride": {
+        "GOOS": "darwin",
+        "GOARCH": "arm64",
+        "CGO_ENABLED": "0"
+      },
+      "exitCode": 0,
+      "passed": true
+    }
+  ],
+  "LinuxTests": {
+    "topLevelPasses": 14,
+    "aggregateNamedPassesIncludingSubtests": 25,
+    "skips": 0,
+    "failures": 0,
+    "count": 1,
+    "raceEnabled": true,
+    "timeoutSeconds": 15,
+    "scope": "Changed diagnostic package only; no boot/installation/peer/jobs test-suite repeats"
+  },
+  "artifacts": [
+    {
+      "path": ".cache/host-next-02/verification01/diagnostic-windows-amd64.test.exe",
+      "sha256": "0339bb09c2331bcf4dfac9829ea826f0ab5d967c352858c7f78e6ab704334173",
+      "execution": "Linux product executed; Windows/Darwin products and test executables cross-compiled only"
+    },
+    {
+      "path": ".cache/host-next-02/verification01/cloudy-host-linux-amd64",
+      "sha256": "b2e0b219f2c26820e745f9937315fc741e1f2da74a79c665a6d0c4cefab7be3e",
+      "execution": "Linux product executed; Windows/Darwin products and test executables cross-compiled only"
+    },
+    {
+      "path": ".cache/host-next-02/verification01/diagnostic-darwin-arm64.test",
+      "sha256": "fa2aa979298a3c2fff91e7e05d31a483bb9a9ba9f24ff9971bb37e818d657af4",
+      "execution": "Linux product executed; Windows/Darwin products and test executables cross-compiled only"
+    },
+    {
+      "path": ".cache/host-next-02/verification01/cloudy-host-windows-amd64.exe",
+      "sha256": "6d7654a16f9886d29f6bfc60635d06731b66489104c597c1f8a50ee106afc96c",
+      "execution": "Linux product executed; Windows/Darwin products and test executables cross-compiled only"
+    },
+    {
+      "path": ".cache/host-next-02/verification01/cloudy-host-darwin-arm64",
+      "sha256": "6c0771132121e0093bdd67f3a9916d79e041aaa0bf9bd5d91c9ed85002bf6bcd",
+      "execution": "Linux product executed; Windows/Darwin products and test executables cross-compiled only"
+    }
+  ],
+  "rawCheckOutputs": [
+    {
+      "path": ".cache/host-next-02/verification01/build-windows-amd64.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-next-02/verification01/format.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-next-02/verification01/compile-tests-windows-amd64.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-next-02/verification01/compile-tests-darwin-arm64.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-next-02/verification01/format.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-next-02/verification01/build-darwin-arm64.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-next-02/verification01/vet-linux.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-next-02/verification01/vet-linux.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-next-02/verification01/vet-windows-amd64.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-next-02/verification01/compiler.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-next-02/verification01/build-windows-amd64.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-next-02/verification01/vet-darwin-arm64.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-next-02/verification01/compiler.stdout",
+      "sha256": "c7b759af077e0a308fea285fdf452706e84e9b93cc33b2200a07a0c816642b0a"
+    },
+    {
+      "path": ".cache/host-next-02/verification01/vet-windows-amd64.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-next-02/verification01/build-darwin-arm64.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-next-02/verification01/test-linux-race.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-next-02/verification01/test-linux-race.stdout",
+      "sha256": "cdda2d4c86286e198bb7a71f98b2777e8625eb37cf9e55f9ae54e64508d58ae4"
+    },
+    {
+      "path": ".cache/host-next-02/verification01/vet-darwin-arm64.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-next-02/verification01/build-linux-amd64.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-next-02/verification01/compile-tests-windows-amd64.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-next-02/verification01/compile-tests-darwin-arm64.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-next-02/verification01/build-linux-amd64.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "processReceipt": {
+    "path": ".cache/host-next-02/process01/result.json",
+    "sha256": "b019c2bd433de2d469ab155888a015d5c32683a20c51fa479a6db7cde749655f"
+  },
+  "actualLinuxProcesses": {
+    "commands": 10,
+    "timeoutPerCommandSeconds": 5,
+    "checks": [
+      {
+        "label": "version",
+        "exitCode": 0,
+        "stdoutSha256": "2d2454ef0edeb462a6ce8b25d387aaa74df08093d5cea0428a10ce55510c6326",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "inspect",
+        "exitCode": 0,
+        "stdoutSha256": "c1116c8489473c5a7a92689bd9957e8dcd6f480c1fbab27a9ba6fee8a48f26d5",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "missing-state",
+        "exitCode": 1,
+        "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderrSha256": "291726721a520018f5ccba6afa0dc875a935eca32c6a1e649c7f9e76f259ef8e"
+      },
+      {
+        "label": "invalid-arguments",
+        "exitCode": 2,
+        "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderrSha256": "03471c42b0ea5ee617627a464a18d943d147177c7dee86399143c7d26f4d59e6"
+      },
+      {
+        "label": "explicit-owned-init",
+        "exitCode": 0,
+        "stdoutSha256": "16bfc3659fae6b5643364890cba4ae57854139c393c3b5df0ece4f889ff3fc23",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "context-first",
+        "exitCode": 0,
+        "stdoutSha256": "7342439be6ebf0068d99db3591a4af9b6627fa7e0c3274b11b854098900b9aad",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "context-second",
+        "exitCode": 0,
+        "stdoutSha256": "689afe34a2d23f38657bd53106e83289e4bf710daa66441e02d231ca49cad77d",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "context-output-failure",
+        "exitCode": 1,
+        "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderrSha256": "f80f08171450a9cdb0793ef4d226356aac9eda567a30207db37fde71a6003faa"
+      },
+      {
+        "label": "partial-state",
+        "exitCode": 1,
+        "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderrSha256": "291726721a520018f5ccba6afa0dc875a935eca32c6a1e649c7f9e76f259ef8e"
+      },
+      {
+        "label": "corrupt-state",
+        "exitCode": 1,
+        "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderrSha256": "291726721a520018f5ccba6afa0dc875a935eca32c6a1e649c7f9e76f259ef8e"
+      }
+    ],
+    "twoBootObservationsEqual": true,
+    "twoInstallationObservationsEqual": true,
+    "timestampWithinProcessIntervals": true,
+    "ownedIdentityTreeBytesAndModesUnchanged": true,
+    "partialAndCorruptAnchorsUnchanged": true,
+    "identifierBearingOutput": "Only explicit command private ignored stdout; no observed IDs emitted in tests or report"
+  },
+  "otherOS": {
+    "command": "Fixed unsupported response before state/runtime/clock access",
+    "actualNativeExecution": false,
+    "qualification": "No Windows/Darwin boot reader or host-context support claimed"
+  },
+  "evidence": [
+    {
+      "path": ".cache/host-next-02/freeze01.json",
+      "sha256": "dd45cb5a62e29deed9ebcc503fbeb6bc746b990feba9a2b613c4a40333e15034"
+    },
+    {
+      "path": ".cache/host-next-02/source01.patch",
+      "sha256": "2ac6881c4ac9126db93d1c0e4ed2c00cd66897322ceeac18df6cb8dab4c7dd6e"
+    },
+    {
+      "path": ".cache/host-next-02/run_process_checks.py",
+      "sha256": "634db324c174bbcf55d3970a113d33896cfb294142bee77d383dfe0fbe4ea920"
+    }
+  ],
+  "limitations": [
+    "Caller trusts existing app-owned state directory and procfs mount view",
+    "Sequential reads are not atomic tuple, authenticated host, session identity or durability proof",
+    "Byte bound inherited from boot reader is not hostile mount deadline",
+    "Output can be partial; complete JSON and exit0 required",
+    "No init/repair/fallback/cache or new dependency/schema/service/listener/remoteadmission",
+    "No Windows/Darwin native command execution",
+    "No reboot/namespace/mount/account changes, jobs, ADB or Git operations",
+    "P4-S1/P1-S4/P3-S1 dependencies and capability gates unchanged"
+  ],
+  "review": {
+    "verdict": "SCOPED_ACCEPTANCE_NO_ACTIONABLE_FINDINGS",
+    "findings": [],
+    "independent": {
+      "path": ".cache/host-next-02/independent-review-01.json",
+      "sha256": "4e1768f0c2b411e6dcdecd4d6c57b122552e4a25b34910992a76df7014571ab0"
+    },
+    "independentText": {
+      "path": ".cache/host-next-02/independent-review-01.md",
+      "sha256": "aa9e65254e546e72a08d2d076bfdb62a0a177961ad860f9bf275348771168e86"
+    },
+    "runtimeReruns": false
+  },
+  "hostedCIForThisIncrement": "Not run or claimed; earlier exact-SHA results do not certify changed0.1.3 source"
+}

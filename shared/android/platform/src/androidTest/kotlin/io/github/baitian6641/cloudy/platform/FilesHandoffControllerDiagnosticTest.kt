@@ -44,4 +44,34 @@ class FilesHandoffControllerDiagnosticTest {
         assertNull(primary.cause)
         assertEquals(0, primary.suppressed.size)
     }
+    @Test fun selectorTimeoutNeverSerializesHostileCauseOrText() {
+        val secret = "SECRET_SENTINEL:/private/credential"
+        val error = ControllerSelectorTimeout(ControllerSelectorSnapshot.unavailable()).apply {
+            initCause(IllegalStateException(secret))
+            addSuppressed(SecurityException(secret))
+            stackTrace = emptyArray()
+        }
+        val result = ControllerFailure.capture(ControllerStage.ASSERT_SELECTED_CARD, error)
+        assertEquals("FILES_POSITIVE_CONTROLLER_FAILED_PRESERVE_STATE:CONTROLLER:ASSERT_SELECTED_CARD:STATE:UNKNOWN:0:" +
+            "SELECTOR_V1:W=0,0,0,0,0:T=0,0,0:A=NONE:S=UNAVAILABLE", result.message)
+        assertFalse(result.toString().contains(secret))
+        assertNull(result.cause)
+        assertEquals(0, result.suppressed.size)
+        assertSame(result, ControllerFailure.capture(ControllerStage.FINAL_STATUS, result))
+    }
+    @Test fun selectorCountersAndAncestorDepthAreBounded() {
+        val snapshot = ControllerSelectorSnapshot.create(List(100) { Int.MAX_VALUE }, -1, Int.MAX_VALUE, Int.MIN_VALUE,
+            List(100) { ControllerSelectorAncestor(true, false, Int.MAX_VALUE) }, ControllerSelectorStop.DEPTH_LIMIT)
+        assertEquals("SELECTOR_V1:W=2048,2048,2048,2048,2048:T=0,2048,0:A=" +
+            (0 until 8).joinToString(";") { "$it,1,0,2048" } + ":S=DEPTH_LIMIT", snapshot.encode())
+    }
+    @Test fun selectorSnapshotDistinguishesHeadingAndAncestorEvidence() {
+        val snapshot = ControllerSelectorSnapshot.create(listOf(2, 1, 1, 1, 1), 1, 0, 2,
+            listOf(ControllerSelectorAncestor(false, true, 1)), ControllerSelectorStop.TARGET_FOUND)
+        assertEquals("SELECTOR_V1:W=2,1,1,1,1:T=1,0,2:A=0,0,1,1:S=TARGET_FOUND", snapshot.encode())
+        assertEquals("SELECTOR_V1:W=0,0,0,0,0:T=0,0,0:A=NONE:S=ROOT_INELIGIBLE",
+            ControllerSelectorSnapshot.create(emptyList(), 0, 0, 0, emptyList(),
+                ControllerSelectorStop.ROOT_INELIGIBLE).encode())
+    }
+
 }

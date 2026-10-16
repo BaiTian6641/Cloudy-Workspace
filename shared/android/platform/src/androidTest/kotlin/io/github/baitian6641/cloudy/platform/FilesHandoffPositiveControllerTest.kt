@@ -205,6 +205,7 @@ class FilesHandoffPositiveControllerTest {
         private fun matches(node: AccessibilityNodeInfo, text: String): Boolean =
             !node.isPassword && !node.isEditable && node.text?.toString() == text
         private fun await(packageName: String, scroll: Boolean = false,
+                          diagnostic: (() -> ControllerSelectorSnapshot)? = null,
                           select: (List<AccessibilityNodeInfo>) -> AccessibilityNodeInfo?): AccessibilityNodeInfo {
             val deadline = SystemClock.elapsedRealtime() + 20_000
             var scrolls = 0
@@ -226,7 +227,11 @@ class FilesHandoffPositiveControllerTest {
                 }
                 SystemClock.sleep(100)
             }
-            error("CONTROLLER_SELECTOR_TIMEOUT")
+            // Sampling is passive and cannot replace the primary timeout if accessibility fails.
+            val snapshot = try { diagnostic?.invoke() } catch (_: Throwable) {
+                ControllerSelectorSnapshot.unavailable()
+            }
+            throw ControllerSelectorTimeout(snapshot)
         }
         private fun unique(all: List<AccessibilityNodeInfo>, predicate: (AccessibilityNodeInfo) -> Boolean): AccessibilityNodeInfo? {
             val matches = all.filter(predicate); check(matches.size <= 1)
@@ -238,7 +243,7 @@ class FilesHandoffPositiveControllerTest {
         /** Selected labels also remain in discovery/profile rows. Scope to the
          * nearest semantic card containing the unique heading, never the whole list. */
         fun requireSectionText(packageName: String, heading: String, text: String, scroll: Boolean = false) {
-            await(packageName, scroll) { all ->
+            await(packageName, scroll, diagnostic = { sectionSnapshot(packageName, heading, text) }) { all ->
                 val anchor = unique(all) { matches(it, heading) && it.isHeading } ?: return@await null
                 var section = anchor.parent
                 repeat(8) {
@@ -251,6 +256,46 @@ class FilesHandoffPositiveControllerTest {
                 }
                 null
             }
+        }
+        /** One passive timeout sample. Selector arguments remain in memory only. */
+        private fun sectionSnapshot(packageName: String, heading: String, text: String): ControllerSelectorSnapshot {
+            val windows = ui.windows
+            if (windows.size > 64) return ControllerSelectorSnapshot.unavailable()
+            val application = windows.filter { it.type == AccessibilityWindowInfo.TYPE_APPLICATION }
+            val expected = application.mapNotNull { window -> window.root?.let { window to it } }
+                .filter { (_, node) -> node.packageName?.toString() == packageName && node.isVisibleToUser }
+            val counts = listOf(application.size, expected.size, expected.count { it.first.isActive },
+                expected.count { it.first.isFocused }, expected.count { it.first.isActive && it.first.isFocused })
+            val eligible = expected.filter { it.first.isActive && it.first.isFocused }
+            if (eligible.size != 1) return ControllerSelectorSnapshot.create(counts, 0, 0, 0,
+                emptyList(), ControllerSelectorStop.ROOT_INELIGIBLE)
+            val all = nodes(eligible.single().second)
+            val titles = all.filter { matches(it, heading) }
+            val headingCount = titles.count { it.isHeading }
+            val targets = all.count { matches(it, text) }
+            if (titles.size != 1) return ControllerSelectorSnapshot.create(counts, titles.size, headingCount,
+                targets, emptyList(), if (titles.isEmpty()) ControllerSelectorStop.NO_TITLE else ControllerSelectorStop.AMBIGUOUS)
+            var section = titles.single().parent
+            val ancestors = mutableListOf<ControllerSelectorAncestor>()
+            repeat(8) {
+                val current = section ?: return ControllerSelectorSnapshot.create(counts, titles.size, headingCount,
+                    targets, ancestors, ControllerSelectorStop.NO_PARENT)
+                val parent = current.parent
+                val found = nodes(current).count { matches(it, text) }
+                ancestors.add(ControllerSelectorAncestor(current.isScrollable, parent != null, found))
+                val stop = when {
+                    current.isScrollable -> ControllerSelectorStop.SCROLL_BOUNDARY
+                    parent == null -> ControllerSelectorStop.ROOT_BOUNDARY
+                    found > 1 -> ControllerSelectorStop.AMBIGUOUS
+                    found == 1 -> ControllerSelectorStop.TARGET_FOUND
+                    else -> null
+                }
+                if (stop != null) return ControllerSelectorSnapshot.create(counts, titles.size, headingCount,
+                    targets, ancestors, stop)
+                section = parent
+            }
+            return ControllerSelectorSnapshot.create(counts, titles.size, headingCount, targets,
+                ancestors, ControllerSelectorStop.DEPTH_LIMIT)
         }
         private fun actionable(node: AccessibilityNodeInfo): AccessibilityNodeInfo? {
             var candidate: AccessibilityNodeInfo? = node
@@ -332,8 +377,34 @@ internal class ControllerFailure private constructor(message: String) : Assertio
                     it.fileName == "FilesHandoffPositiveControllerTest.kt" && it.lineNumber in 1..100_000
             }
             val source = if (frame == null) "UNKNOWN" else "CONTROLLER"
+            val diagnostic = (error as? ControllerSelectorTimeout)?.snapshot?.encode()?.let { ":$it" } ?: ""
             return ControllerFailure("FILES_POSITIVE_CONTROLLER_FAILED_PRESERVE_STATE:CONTROLLER:" +
-                "${stage.name}:$category:$source:${frame?.lineNumber ?: 0}")
+                "${stage.name}:$category:$source:${frame?.lineNumber ?: 0}$diagnostic")
         }
     }
 }
+
+/** Fixed vocabulary and clamped counters are the entire serialized observation surface. */
+internal enum class ControllerSelectorStop {
+    ROOT_INELIGIBLE, NO_TITLE, NO_PARENT, SCROLL_BOUNDARY, ROOT_BOUNDARY,
+    DEPTH_LIMIT, TARGET_FOUND, AMBIGUOUS, UNAVAILABLE
+}
+internal data class ControllerSelectorAncestor(val scrollable: Boolean, val hasParent: Boolean, val matches: Int)
+internal class ControllerSelectorSnapshot private constructor(private val encoded: String) {
+    fun encode(): String = encoded
+    companion object {
+        fun unavailable() = create(emptyList(), 0, 0, 0, emptyList(), ControllerSelectorStop.UNAVAILABLE)
+        fun create(windows: List<Int>, titles: Int, headings: Int, targets: Int,
+                   ancestors: List<ControllerSelectorAncestor>, stop: ControllerSelectorStop): ControllerSelectorSnapshot {
+            fun count(value: Int) = value.coerceIn(0, 2048)
+            val roots = (0 until 5).joinToString(",") { count(windows.getOrElse(it) { 0 }).toString() }
+            val chain = ancestors.take(8).mapIndexed { depth, value ->
+                "$depth,${if (value.scrollable) 1 else 0},${if (value.hasParent) 1 else 0},${count(value.matches)}"
+            }.joinToString(";").ifEmpty { "NONE" }
+            return ControllerSelectorSnapshot("SELECTOR_V1:W=$roots:T=${count(titles)},${count(headings)},${count(targets)}:" +
+                "A=$chain:S=${stop.name}")
+        }
+    }
+}
+internal class ControllerSelectorTimeout(val snapshot: ControllerSelectorSnapshot?) :
+    IllegalStateException("CONTROLLER_SELECTOR_TIMEOUT")

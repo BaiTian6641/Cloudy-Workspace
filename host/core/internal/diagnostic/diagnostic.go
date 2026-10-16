@@ -12,9 +12,9 @@ import (
 	"github.com/BaiTian6641/Cloudy-Workspace/host/core/internal/installation"
 )
 
-const AgentVersion = "0.1.2"
+const AgentVersion = "0.1.3"
 
-const usage = "usage: cloudy-host inspect | version | identity init|read --state-dir <existing-directory>\n"
+const usage = "usage: cloudy-host inspect | version | identity init|read --state-dir <existing-directory> | context read --state-dir <existing-directory>\n"
 
 type Runtime struct {
 	OS        string `json:"os"`
@@ -75,6 +75,14 @@ func snapshot(now time.Time, facts Runtime) Snapshot {
 // deterministic tests; the executable supplies actual clock/runtime readers.
 // Writer errors are never displayed because their text may contain private data.
 func Run(args []string, out, errOut io.Writer, now func() time.Time, facts func() Runtime) int {
+	if len(args) > 0 && args[0] == "context" {
+		// Reject the complete syntax before either platform or state access.
+		if len(args) != 4 || args[1] != "read" || args[2] != "--state-dir" || args[3] == "" {
+			_, _ = io.WriteString(errOut, usage)
+			return 2
+		}
+		return runContextRead(args[3], out, errOut, now, facts)
+	}
 	if len(args) > 0 && args[0] == "identity" {
 		return runIdentity(args, out, errOut)
 	}
