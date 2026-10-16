@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <!-- Explicit instrumentation only. No external caller, launcher or production build entry. -->
+        <activity android:name="io.github.baitian6641.cloudy.qualification.VaultQualificationActivity"
+            android:exported="false" android:resizeableActivity="true"
+            android:label="Cloudy vault qualification" />
+    </application>
+</manifest>

@@ -74,7 +74,7 @@ Record evidence under `qualification/results/P1-S2/` using the [run template](..
 
 ## P1-S3 — Identity, typed contracts, and lifecycle persistence
 
-**Owner:** Platform/security developer. **Prerequisites:** P1-S1, P0-S2. **Status:** in progress. The [vault source review](../../06-validation/2026-10-16-product-vault-review.md) and [storage tests](../../../qualification/results/P1-S3/2026-10-16-vault-storage-tests.md) leave actual product authentication and all other exits open.
+**Owner:** Platform/security developer. **Prerequisites:** P1-S1, P0-S2. **Status:** in progress. The [vault source review](../../06-validation/2026-10-16-product-vault-review.md) and [storage tests](../../../qualification/results/P1-S3/2026-10-16-vault-storage-tests.md) leave actual product authentication and all other exits open. The [0.1.2 UI entry](../../../qualification/results/P1-S3/2026-10-16-vault-ui-entry.md) and [built-only manual harness](../../06-validation/2026-10-16-vault-harness-review.md) do not promote those gates.
 
 **Required supported capabilities:** CAP-FOUNDATION.
 

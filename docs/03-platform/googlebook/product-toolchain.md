@@ -13,7 +13,7 @@ Checked 2026-10-16. The root Gradle graph builds the two actual local-window app
 | Activity | 1.13.0 |
 | Vault prompt host | Biometric1.1.0 / Fragment1.9.1; dedicated FragmentActivity |
 | Tests only | JUnit4.13.2; runner/core1.7.0; extJUnit1.3.0; Compose test1.12.1 v2 rule; Espresso core/idling3.7.0 |
-| Package / version | `io.github.baitian6641.cloudy.console`, `.desktop`; candidate0.1.2/code3 built; installed0.1.1/code2 (P1-S1 qualified0.1.0/code1) |
+| Package / version | `io.github.baitian6641.cloudy.console`, `.desktop`; candidate0.1.3/code4 built only; installed0.1.2/code3 (P1-S1 qualified0.1.0/code1) |
 
 Use the root wrapper, never a globally selected Gradle. Its JAR SHA256 is `497c8c2a7e5031f6aa847f88104aa80a93532ec32ee17bdb8d1d2f67a194a9c7`; the distribution SHA256 is `bbaeb2fef8710818cf0e261201dab964c572f92b942812df0c3620d62a529a01`. The version catalog, module lockfiles and verification metadata are committed inputs. Strict lock mode rejects unrecorded selected configurations; checksum verification rejects unreviewed artifact bytes. Generating either record is a deliberate reviewed dependency change, never an ordinary CI step. The verification file can contain metadata/transitively requested versions that are not selected runtime dependencies; use the module lock configuration when determining the resolved graph.
 
@@ -25,7 +25,7 @@ All nine Android extraction domains are excluded from both cloud backup and devi
 
 ## Build and distribution boundaries
 
-Set `JAVA_HOME`, `ANDROID_HOME`, `ANDROID_USER_HOME` and `GRADLE_USER_HOME` to the reviewed local installation/cache, then use the exact commands in the [testing strategy](../../06-validation/foundation-testing.md). Keep SDKs, caches, signing keys and local inventories outside Git. The current product build has one narrowly scoped Android Lint exception: the wrapper-file Gradle update notice, because Gradle9.6 is deliberately pinned to AGP9.4's documented baseline. Authored source/resource warnings, dependency checks and all other notices remain errors.
+Set `JAVA_HOME`, `ANDROID_HOME`, `ANDROID_USER_HOME` and `GRADLE_USER_HOME` to the reviewed local installation/cache, then use the exact commands in the [testing strategy](../../06-validation/foundation-testing.md). Keep SDKs, caches, signing keys and local inventories outside Git. The production-source build has one narrowly scoped Android Lint exception: the wrapper-file Gradle update notice, because Gradle9.6 is deliberately pinned to AGP9.4's documented baseline. Authored source/resource warnings, dependency checks and all other notices remain errors.
 
 An APK is directly installable through the authorized Android package manager tooling. An AAB is a publishing input from which a distributor generates device APKs; it is not an `adb install` substitute. These debug APKs are development artifacts, not a Play publishing or release-signing qualification. Independent update/uninstall, lifecycle and physical Googlebook evidence are recorded separately from a compiler or hosted CI pass.
 
@@ -39,3 +39,5 @@ An APK is directly installable through the authorized Android package manager to
 - Activity recreation tests and framework-driven text edits do not establish process-death persistence, physical keyboard/IME, caption pixels or a usable remote feature.
 
 The first hosted product run fails at the Gradle step. A fresh local dependency-cache reproduction identifies five missing parent/BOM metadata checksum entries; their official bytes are checked and pinned without changing selected dependencies. The [clean-build correction](../../06-validation/2026-10-16-foundation-clean-build.md) records strict resolution and a full clean compilation, preserving the original failure. Hosted recovery requires the next exact-commit result.
+
+The [0.1.3 manual qualification increment](../../06-validation/2026-10-16-vault-harness-review.md) wires a non-exported debug-only Activity and one opt-in instrumentation case separately into each app. Both actual merged release manifests exclude that Activity. The diagnostic onCreate alone permits fixed English labels through SetTextI18n; it is not a product localization waiver. Strict build/Lint and source/test discovery pass without dependency lock/version/checksum changes. The candidate is not installed;0.1.2 UI entry is recorded separately.

@@ -17,12 +17,16 @@ android {
     sourceSets.getByName("androidTest").kotlin.directories.add(
         rootProject.file("testing/foundation/src/androidTest/kotlin").absolutePath,
     )
+    sourceSets.getByName("debug").apply {
+        kotlin.directories.add(rootProject.file("testing/foundation/src/debug/kotlin").absolutePath)
+        manifest.srcFile(rootProject.file("testing/foundation/src/debug/AndroidManifest.xml"))
+    }
     defaultConfig {
         applicationId = "io.github.baitian6641.cloudy.desktop"
         minSdk = 35
         targetSdk = 37
-        versionCode = 3
-        versionName = "0.1.2"
+        versionCode = 4
+        versionName = "0.1.3"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 }
@@ -36,6 +40,7 @@ kotlin {
 dependencies {
     implementation(project(":domain"))
     implementation(project(":platform"))
+    debugImplementation(project(":identity"))
 }
 
 // Tests exercise real Android boundaries; these artifacts are not app runtime dependencies.

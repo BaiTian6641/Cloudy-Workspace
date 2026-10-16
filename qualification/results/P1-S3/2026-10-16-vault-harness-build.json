@@ -1,0 +1,87 @@
+{
+  "scope": "built-not-installed-no-manual-tests-executed",
+  "apps": [
+    {
+      "app": "console",
+      "version": "0.1.3",
+      "code": 4,
+      "debugFixtureNonExported": true,
+      "releaseManifestFixtureAbsent": true,
+      "lintIssues": 0,
+      "v2SignatureVerified": true,
+      "manualTestClassPresent": true,
+      "permissions": [
+        "android.permission.USE_BIOMETRIC",
+        "android.permission.USE_FINGERPRINT",
+        "io.github.baitian6641.cloudy.console.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+      ],
+      "nativeBytesSameAs012": true,
+      "artifacts": [
+        {
+          "role": "app",
+          "path": "apps/console/build/outputs/apk/debug/console-debug.apk",
+          "bytes": 31528288,
+          "sha256": "b9b49be1a90a9ccd81b64f2499144af243a63e3dd206dce44aa6defc03766914"
+        },
+        {
+          "role": "test",
+          "path": "apps/console/build/outputs/apk/androidTest/debug/console-debug-androidTest.apk",
+          "bytes": 2768609,
+          "sha256": "9d0d29ffac9ac567fc2750e545df5b42b3bca782e50d87918020fb04dd25c046"
+        }
+      ]
+    },
+    {
+      "app": "desktop",
+      "version": "0.1.3",
+      "code": 4,
+      "debugFixtureNonExported": true,
+      "releaseManifestFixtureAbsent": true,
+      "lintIssues": 0,
+      "v2SignatureVerified": true,
+      "manualTestClassPresent": true,
+      "permissions": [
+        "android.permission.USE_BIOMETRIC",
+        "android.permission.USE_FINGERPRINT",
+        "io.github.baitian6641.cloudy.desktop.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+      ],
+      "nativeBytesSameAs012": true,
+      "artifacts": [
+        {
+          "role": "app",
+          "path": "apps/desktop/build/outputs/apk/debug/desktop-debug.apk",
+          "bytes": 31528292,
+          "sha256": "90b963fae8a95b005fc8fe9bf98d9042ebe7ab8bd7ef1ea9bf34c621d07b170e"
+        },
+        {
+          "role": "test",
+          "path": "apps/desktop/build/outputs/apk/androidTest/debug/desktop-debug-androidTest.apk",
+          "bytes": 2768613,
+          "sha256": "b2c05313f9944959ca54dcceb512496a47435ddb55a4c42700eafdbddac0b2a3"
+        }
+      ]
+    }
+  ],
+  "source": [
+    {
+      "path": "apps/console/build.gradle.kts",
+      "sha256": "9edc84af8e5cdf15480067b3b716516e41aea56e6a1e006a6030a1b4122ac23c"
+    },
+    {
+      "path": "apps/desktop/build.gradle.kts",
+      "sha256": "9d82b9e419ae7e54bd211c333468637451ac8cfbd5e77fad2faba50aad5e83a3"
+    },
+    {
+      "path": "testing/foundation/src/debug/AndroidManifest.xml",
+      "sha256": "59289339709c728aa8a2553439de0e346b572afbb3bf0cf4529b92ffef713d73"
+    },
+    {
+      "path": "testing/foundation/src/debug/kotlin/io/github/baitian6641/cloudy/qualification/VaultQualificationActivity.kt",
+      "sha256": "f128ea1677a1810832233e3f33a0ee58dcbfc8dacc70dcae7c5e5334129c7cbd"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/VaultManualQualificationTest.kt",
+      "sha256": "abe29ee1c23c935a773a7d4106ff388203f876bb93217281ac03f437a934f643"
+    }
+  ]
+}
