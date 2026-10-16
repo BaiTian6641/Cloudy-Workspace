@@ -12,7 +12,7 @@ Checked 2026-10-16. The root Gradle graph builds the two actual local-window app
 | Compose BOM | 2026.09.00; runtime/saveable/UI/foundation1.12.1, Material3 1.4.0 |
 | Activity | 1.13.0 |
 | Tests only | JUnit4.13.2; runner/core1.7.0; extJUnit1.3.0; Compose test1.12.1 v2 rule; Espresso core/idling3.7.0 |
-| Package / version | `io.github.baitian6641.cloudy.console`, `.desktop`; each0.1.0/code1 |
+| Package / version | `io.github.baitian6641.cloudy.console`, `.desktop`; each0.1.1/code2 (P1-S1 qualified0.1.0/code1) |
 
 Use the root wrapper, never a globally selected Gradle. Its JAR SHA256 is `497c8c2a7e5031f6aa847f88104aa80a93532ec32ee17bdb8d1d2f67a194a9c7`; the distribution SHA256 is `bbaeb2fef8710818cf0e261201dab964c572f92b942812df0c3620d62a529a01`. The version catalog, module lockfiles and verification metadata are committed inputs. Strict lock mode rejects unrecorded selected configurations; checksum verification rejects unreviewed artifact bytes. Generating either record is a deliberate reviewed dependency change, never an ordinary CI step. The verification file can contain metadata/transitively requested versions that are not selected runtime dependencies; use the module lock configuration when determining the resolved graph.
 
@@ -36,3 +36,5 @@ An APK is directly installable through the authorized Android package manager to
 - Compose1.12.1 deprecates the v1 test-rule factory. Use its v2 factory with explicit idle synchronization; newer1.13-only configuration examples are not part of this pin.
 - `rememberSaveable` inputs do not authenticate restored state (G179). The draft envelope explicitly includes and validates the accepted logical window ID, bounded text and selection. A rejected window snapshot cannot import the preceding window's draft.
 - Activity recreation tests and framework-driven text edits do not establish process-death persistence, physical keyboard/IME, caption pixels or a usable remote feature.
+
+The first hosted product run fails at the Gradle step. A fresh local dependency-cache reproduction identifies five missing parent/BOM metadata checksum entries; their official bytes are checked and pinned without changing selected dependencies. The [clean-build correction](../../06-validation/2026-10-16-foundation-clean-build.md) records strict resolution and a full clean compilation, preserving the original failure. Hosted recovery requires the next exact-commit result.

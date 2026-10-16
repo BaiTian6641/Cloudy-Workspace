@@ -75,8 +75,12 @@ fun WindowWorkspaceScreen(
                 .padding(CloudyTokens.Space16.dp),
             verticalArrangement = Arrangement.spacedBy(CloudyTokens.Space12.dp),
         ) {
-            Text(appName, style = MaterialTheme.typography.headlineSmall,
+            // Committed context remains visible independently of the editable draft;
+            // OEM captions may display only the application's label.
+            Text(currentName, style = MaterialTheme.typography.headlineSmall,
                 modifier = Modifier.semantics { heading() })
+            Text(appName, style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant)
             if (notice != null) Text(notice, style = MaterialTheme.typography.bodyMedium)
             OutlinedTextField(
                 value = draft,

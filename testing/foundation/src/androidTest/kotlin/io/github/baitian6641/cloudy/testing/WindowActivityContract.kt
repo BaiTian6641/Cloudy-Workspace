@@ -5,6 +5,7 @@ import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithText
@@ -63,6 +64,12 @@ abstract class WindowActivityContract<A : CloudyWindowActivity>(
         compose.waitForIdle()
     }
 
+    private fun assertCommittedHeading(name: String) {
+        compose.onNode(
+            hasText(name) and SemanticsMatcher.expectValue(SemanticsProperties.Heading, Unit),
+        ).performScrollTo().assertIsDisplayed()
+    }
+
     @Test fun committedContextAndUnsavedDraftSurviveActivityRecreation() {
         val initial = observe()
         assertEquals(expectedOwner.wireId, initial.snapshot.owner)
@@ -78,11 +85,13 @@ abstract class WindowActivityContract<A : CloudyWindowActivity>(
         assertEquals(committedName, committed.snapshot.name)
         assertEquals(expectedTitle, committed.title)
         assertEquals(expectedTitle, committed.taskLabel)
+        assertCommittedHeading(committedName)
 
         val draft = "Unapplied draft Ω"
         val selection = TextRange(2, 8)
         compose.onNode(hasSetTextAction()).performTextReplacement(draft)
         compose.onNode(hasSetTextAction()).performTextInputSelection(selection)
+        assertCommittedHeading(committedName)
         compose.activityRule.scenario.recreate()
         compose.waitForIdle()
 
@@ -94,6 +103,7 @@ abstract class WindowActivityContract<A : CloudyWindowActivity>(
         // Metadata assertions do not establish actual Googlebook system-caption pixels.
         assertEquals(expectedTitle, restored.title)
         assertEquals(expectedTitle, restored.taskLabel)
+        assertCommittedHeading(committedName)
         compose.onNode(hasSetTextAction()).assert(
             SemanticsMatcher.expectValue(SemanticsProperties.EditableText, AnnotatedString(draft)),
         ).assert(SemanticsMatcher.expectValue(SemanticsProperties.TextSelectionRange, selection))

@@ -63,11 +63,27 @@ jobs:
           ANDROID_USER_HOME: ${{ runner.temp }}/cloudy-android-user
         run: |
           mkdir -p "$GRADLE_USER_HOME" "$ANDROID_USER_HOME"
+          set +e
           ./gradlew :console:assembleDebug :desktop:assembleDebug \
             :console:lintDebug :desktop:lintDebug \
             :domain:test :design-system:testDebugUnitTest \
             :platform:assembleDebugAndroidTest :console:assembleDebugAndroidTest :desktop:assembleDebugAndroidTest \
-            --dependency-verification=strict --no-daemon --console=plain --max-workers=4
+            --dependency-verification=strict --no-daemon --console=plain --max-workers=4 \
+            2>&1 | tee "$RUNNER_TEMP/cloudy-foundation-build.log"
+          cloudy_build_status=${PIPESTATUS[0]}
+          set -e
+          if [ "$cloudy_build_status" -ne 0 ]; then
+            # Public bounded diagnostics preserve failure visibility when full job
+            # log downloads require authentication. This build has no secrets.
+            python3 - <<'PYTHON' || echo '::warning::Unable to annotate the build log; retaining original Gradle status.'
+          import os
+          from pathlib import Path
+          text = (Path(os.environ['RUNNER_TEMP']) / 'cloudy-foundation-build.log').read_text(errors='replace')[-12000:]
+          escaped = text.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+          print(f'::error title=Product foundation Gradle failure::{escaped}')
+          PYTHON
+          fi
+          exit "$cloudy_build_status"
       - name: Verify debug APK signatures
         run: |
           apksigner="$ANDROID_HOME/build-tools/36.0.0/apksigner"

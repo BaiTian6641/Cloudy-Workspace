@@ -1,6 +1,6 @@
 # P1 — Shared foundation and design
 
-**Status:** P1-S1 complete with real independently qualified local app targets; other stages planned. **Active effort:** 15–24 person-days before contingency. **Purpose:** Establish two independent Android desktop packages, shared design/lifecycle contracts and early engine/distribution decisions, including native streaming at P1-S5.
+**Status:** P1-S1 complete; P1-S2 native context/controls in progress; other stages planned. **Active effort:** 15–24 person-days before contingency. **Purpose:** Establish two independent Android desktop packages, shared design/lifecycle contracts and early engine/distribution decisions, including native streaming at P1-S5.
 
 The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-project/platform-rule-zero.md) defines desktop scope. Follow [capability outcomes](../feasibility-gates.md) and [independent release gates](../release-gates.md). Estimates are active effort, not elapsed time; re-estimate after physical evidence. Revision 02 moved the former P5-S1 decision to P1-S5; other stage IDs retain their identity.
 
@@ -45,7 +45,7 @@ Record evidence under `qualification/results/P1-S1/` using the [run template](..
 
 Apply [D14 desktop interaction](../../04-design/desktop-terminal-interaction-contract.md): keyboard shortcuts, ordinary native editing, direct pointer selection and context menus remain required regardless of the reused engine. No long-press or mobile key row is a prerequisite.
 
-**Owner:** Design/Android developer. **Prerequisites:** P1-S1. **Status:** planned.
+**Owner:** Design/Android developer. **Prerequisites:** P1-S1. **Status:** in progress. The [committed-context increment](../../../qualification/results/P1-S2/2026-10-16-committed-context.md) is a bounded first result; the work and exits below remain required.
 
 **Required supported capabilities:** CAP-FOUNDATION.
 

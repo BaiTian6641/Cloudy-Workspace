@@ -1294,9 +1294,9 @@
       "publisher": "Google / AOSP",
       "category": "platform",
       "reviewStatus": "reviewed",
-      "checkedOn": "2026-10-15",
+      "checkedOn": "2026-10-16",
       "sourceUpdatedOn": null,
-      "note": "Single-owner private snapshot writes; AtomicFile is not a locking primitive and report readback is separate from power-loss durability.",
+      "note": "Single-owner private snapshot writes; AtomicFile is not a locking primitive and report readback is separate from power-loss durability. Rechecked2026-10-16 for product vault serialized AtomicFile/readback; no multi-file/Keystore atomicity inferred.",
       "refresh": "Recheck exact public contract and implementation when updating the persistence/input path."
     },
     {
@@ -2303,7 +2303,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Reviewed 2.0.17 and 2.0.18\u20132.0.20 release notes; final diagnostic selects matched API/NOP 2.0.20. Exact source and embedded licenses are preserved.",
+      "note": "Reviewed 2.0.17 and 2.0.18–2.0.20 release notes; final diagnostic selects matched API/NOP 2.0.20. Exact source and embedded licenses are preserved.",
       "refresh": "Before SSH diagnostic dependency/provider changes, after relevant upstream security updates, and before product adoption."
     },
     {
@@ -2437,9 +2437,9 @@
       "publisher": "Google",
       "category": "platform",
       "reviewStatus": "reviewed",
-      "checkedOn": "2026-10-15",
+      "checkedOn": "2026-10-16",
       "sourceUpdatedOn": null,
-      "note": "AES/GCM algorithm listed API 10; updateAAD methods require API 19. Actual SSH GCM compatibility and provider behavior remain device tests.",
+      "note": "AES/GCM algorithm listed API 10; updateAAD methods require API 19. Actual SSH GCM compatibility and provider behavior remain device tests. Product vault uses real immutable AAD binding and whole-result AEAD checks; AES/Keystore evidence remains pending.",
       "refresh": "Before SSH diagnostic dependency/provider changes, after relevant upstream security updates, and before product adoption."
     },
     {
@@ -3122,7 +3122,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected CLI/tool-control guidance: no-tools disables built-ins while custom tool modules have a separate discovery surface. Use explicit model selectors, bounded assignments and reviewed results; no sandbox or worker-success guarantee. Owner integration leader, P0\u2013P6.",
+      "note": "Inspected CLI/tool-control guidance: no-tools disables built-ins while custom tool modules have a separate discovery surface. Use explicit model selectors, bounded assignments and reviewed results; no sandbox or worker-success guarantee. Owner integration leader, P0–P6.",
       "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
     },
     {
@@ -3134,7 +3134,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected config roots, profiles, discovery precedence and custom-tool/MCP integration. Empty cwd and a prompt alone do not isolate user/global or foreign configuration. Use per-run controls without altering global auth/settings. Owner integration leader, P0\u2013P6.",
+      "note": "Inspected config roots, profiles, discovery precedence and custom-tool/MCP integration. Empty cwd and a prompt alone do not isolate user/global or foreign configuration. Use per-run controls without altering global auth/settings. Owner integration leader, P0–P6.",
       "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
     },
     {
@@ -3146,7 +3146,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected separate direct getAllPluginToolPaths(cwd) enumeration after capability discovery. disabledProviders is not a complete custom-tool loading switch; the accepted CLI trial additionally had absent native/project plugin roots. Owner integration leader, P0\u2013P6.",
+      "note": "Inspected separate direct getAllPluginToolPaths(cwd) enumeration after capability discovery. disabledProviders is not a complete custom-tool loading switch; the accepted CLI trial additionally had absent native/project plugin roots. Owner integration leader, P0–P6.",
       "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
     },
     {
@@ -3158,7 +3158,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected plugin-root enumeration: node_modules absence yields an empty plugin list. The trial uses observed root absence, not a general sandbox or global no-discovery claim. Owner integration leader, P0\u2013P6.",
+      "note": "Inspected plugin-root enumeration: node_modules absence yields an empty plugin list. The trial uses observed root absence, not a general sandbox or global no-discovery claim. Owner integration leader, P0–P6.",
       "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
     },
     {
@@ -3170,7 +3170,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected registered enabledProviders/disabledProviders settings; source-discovery IDs are distinct from the explicitly selected kimi-code model backend. Use a per-run overlay, not a global config edit. Owner integration leader, P0\u2013P6.",
+      "note": "Inspected registered enabledProviders/disabledProviders settings; source-discovery IDs are distinct from the explicitly selected kimi-code model backend. Use a per-run overlay, not a global config edit. Owner integration leader, P0–P6.",
       "refresh": "When changing the installed CLI version, worker tool permissions or discovery configuration."
     },
     {
@@ -3624,9 +3624,9 @@
       "publisher": "Google",
       "category": "security",
       "reviewStatus": "reviewed",
-      "checkedOn": "2026-10-15",
+      "checkedOn": "2026-10-16",
       "sourceUpdatedOn": null,
-      "note": "Builder/user-auth-required API23, StrongBox preference28, setUserAuthenticationParameters30. Proposed30s strong-biometric/device-credential window is not per-operation hardware consent. Owner: Android/security; API15, P1-S3/P3-S7.",
+      "note": "Builder/user-auth-required API23, StrongBox preference28, setUserAuthenticationParameters30. Proposed30s strong-biometric/device-credential window is not per-operation hardware consent. Owner: Android/security; API15, P1-S3/P3-S7. Rechecked2026-10-16: timed authentication may authorize other duration-bound keys; combined device-credential policy does not promise new-biometric enrollment invalidation. Product min35 covers the selected APIs.",
       "refresh": "Before changing the affected adapter, security policy or compatibility claim."
     },
     {
@@ -3638,7 +3638,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Method reference API31 controls guard; API23\u201330 older isInsideSecureHardware boolean cannot identify StrongBox. Actual Googlebook backing untested. Owner: Android/security; API15, P1-S3/P3-S7.",
+      "note": "Method reference API31 controls guard; API23–30 older isInsideSecureHardware boolean cannot identify StrongBox. Actual Googlebook backing untested. Owner: Android/security; API15, P1-S3/P3-S7.",
       "refresh": "Before changing the affected adapter, security policy or compatibility claim."
     },
     {
@@ -5030,7 +5030,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": null,
-      "note": "Inspected getPluginsDir/getPluginsNodeModules and profile/config/XDG path resolution. Production plugin root uses the data-category resolver; default without overrides is ~/.omp/plugins/node_modules. Recheck actual overrides and project ancestors per invocation; temporary cwd alone is not isolation. Used for the two finite GLM context-only trials; no OS sandbox claim. Owner integration leader, P0\u2013P6.",
+      "note": "Inspected getPluginsDir/getPluginsNodeModules and profile/config/XDG path resolution. Production plugin root uses the data-category resolver; default without overrides is ~/.omp/plugins/node_modules. Recheck actual overrides and project ancestors per invocation; temporary cwd alone is not isolation. Used for the two finite GLM context-only trials; no OS sandbox claim. Owner integration leader, P0–P6.",
       "refresh": "When changing installed CLI version, active profile, path environment or worker discovery controls."
     },
     {

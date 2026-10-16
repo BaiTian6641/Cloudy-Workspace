@@ -555,7 +555,7 @@
       "id": "P1-S2",
       "phase": "P1",
       "title": "Cloudy design system and native shell",
-      "status": "planned",
+      "status": "in-progress",
       "effortDays": {
         "low": 5,
         "high": 8

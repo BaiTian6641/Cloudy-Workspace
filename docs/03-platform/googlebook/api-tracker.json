@@ -398,7 +398,12 @@
         "Context.getNoBackupFilesDir",
         "BiometricPrompt",
         "BiometricManager.canAuthenticate",
-        "android:dataExtractionRules"
+        "android:dataExtractionRules",
+        "AtomicFile.startWrite",
+        "AtomicFile.finishWrite",
+        "AtomicFile.failWrite",
+        "Cipher.updateAAD",
+        "Cipher.doFinal"
       ],
       "sourceIds": [
         "G18",
@@ -407,19 +412,22 @@
         "G135",
         "G136",
         "G137",
-        "G138"
+        "G138",
+        "G50",
+        "G104"
       ],
       "minimumApi": 30,
       "libraryVersion": null,
       "availability": "documented-proposed-vault-not-implemented",
       "qualification": "untested",
-      "checkedOn": "2026-10-15",
+      "checkedOn": "2026-10-16",
       "owner": "Android/platform developer",
       "stage": "P1-S3",
       "fallback": "Per-session native entry when chosen authentication/backing/storage policy cannot be met; invalidated keys require re-enrollment. Never plaintext persistence or silent hardware-policy downgrade.",
       "experiment": "Q-S02: actual AES-GCM record authentication/tamper rejection, local prompt cancellation/generation ownership, key backing/invalidation/lock, backup and device-transfer exclusions, independent app handles, no secrets in exports/native logs; no product vault pass from diagnostic config.",
-      "versionNotes": "Selected vault policy API30+; AndroidKeyStore provider18, noBackup21, symmetricKeyGenParameterSpec/userauth23, StrongBox28, authparameters30, KeyInfo.getSecurityLevel31 (guard/fallbackboolean23). AndroidX version must be pinned at implementation. API31+ backup rules; older fullBackupContent separately.",
-      "researchEvidence": "docs/02-architecture/rdp-authentication-security.md"
+      "versionNotes": "Selected vault policy API30+; AndroidKeyStore provider18, noBackup21, symmetricKeyGenParameterSpec/userauth23, StrongBox28, authparameters30, KeyInfo.getSecurityLevel31 (guard/fallbackboolean23). AndroidX version must be pinned at implementation. API31+ backup rules; older fullBackupContent separately. Product app min35 covers these paths; AtomicFile17/updateAAD19. Timed app admission and deletion recovery need real implementation; combined credential policy does not promise new-biometric enrollment invalidation.",
+      "researchEvidence": "docs/02-architecture/rdp-authentication-security.md",
+      "implementationEntry": "docs/03-platform/googlebook/product-vault-entry.md"
     },
     {
       "id": "API16",
