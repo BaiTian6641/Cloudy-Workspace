@@ -5980,6 +5980,30 @@
       "sourceUpdatedOn": null,
       "note": "ensureInAppMountNamespace, MountAppDataTmpFs and isolateAppData isolate app data with a mount namespace, tmpfs overlay and selected related-package bind mounts. Explains why a known existing sibling path can be absent from another app namespace; this pinned source does not identify the installed Googlebook framework or establish the cause of an observed errno. Test-only Os.open outcomes need a successful owner-side read of the exact sibling path and matching path digest, plus a positive own-file control. Fallback: fail an unwitnessed or mismatched path; never treat arbitrary ENOENT as isolation proof. Owner: Android/platform; P1-S3 profile-isolation qualification. No hidden API is called by Cloudy.",
       "refresh": "Before changing cross-app private-file isolation assertions or target framework behavior."
+    },
+    {
+      "id": "G211",
+      "title": "Android standard Base64 encoding",
+      "url": "https://developer.android.com/reference/java/util/Base64",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2026-08-03",
+      "note": "Base64.getDecoder/getEncoder are public API26; basic encoding uses the standard alphabet. Cloudy validates bounded canonical SHA256 fingerprints by decoding exactly32 bytes and comparing unpadded re-encoding; padding, alternate alphabets and noncanonical pad bits are rejected. This is digest representation validation, not public-key parsing or trust. Owner: platform/security; P1-S3 API54. Productmin35 unchanged.",
+      "refresh": "Before changing SSH trust fingerprint representation or Android compatibility."
+    },
+    {
+      "id": "R271",
+      "title": "RSA SHA-2 algorithms for SSH",
+      "url": "https://www.rfc-editor.org/rfc/rfc8332",
+      "publisher": "IETF / RFC Editor",
+      "category": "security",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Section3 defines rsa-sha2-256/rsa-sha2-512 signatures using the existing ssh-rsa public-key encoding. Accepting that key-format identifier does not authorize the deprecated SHA1 ssh-rsa signature algorithm. Future Cloudy adapter must restrict negotiated signature algorithms separately. Owner: platform/security; P1-S3 trust metadata/P2-S1 adapter. No engine adoption or crypto implementation inferred.",
+      "refresh": "Before implementing SSH RSA negotiation or changing accepted host-key formats."
     }
   ]
 }

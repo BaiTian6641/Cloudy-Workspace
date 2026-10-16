@@ -693,3 +693,10 @@ API53 reuses G58/G162/G171/G175/G177/G178 and the existing pinned dependency gra
 - **R267–R270**: pinned SSHJ0.41.2 candidate `HostKeyVerifier`, `FingerprintVerifier`, `SecurityUtils` and `OpenSSHKnownHosts` inform the [trust construction entry](../02-architecture/ssh-host-trust.md). Cloudy plans exact SHA256 pins and revision-checked per-app storage, while retaining library-owned SSH-key serialization/crypto. The default utility fingerprint is MD5 and is not the proposed display helper. No engine adoption or verifier implementation is claimed.
 
 API52/API53 now link the narrow installed-product isolation and controlled Activity-recreation follow-up. Earlier failed assertions and skipped defaults remain distinct; actual process death, protected credentials and native visual/input gates remain open.
+
+
+## SSH trust domain/storage — 2026-10-16
+
+- **G211**: [Android Base64](https://developer.android.com/reference/java/util/Base64) provides the API26 basic decoder/encoder used for bounded canonical 32-byte SHA256 fingerprint representation. Decode/re-encode equality rejects padding/unused-bit aliases; this is not public-key parsing or authentication. Existing product min35 is unchanged.
+- **R271**: [RFC8332 section3](https://www.rfc-editor.org/rfc/rfc8332) reuses the `ssh-rsa` public-key encoding with RSA SHA-2 signature algorithms. The domain's accepted key-format identifier does not authorize SHA1 signatures; negotiation remains an engine policy.
+- **G198–G204/R266**: existing official SQLite/CE/locking/durability references support the separate real pin ledger. [API54](../03-platform/googlebook/api-tracker.json) and the [result](../../qualification/results/P1-S3/2026-10-16-ssh-host-trust.md) separate documented APIs, strict compilation and 20 actual standalone Android cases from pending product trust UI/isolation/authentication.

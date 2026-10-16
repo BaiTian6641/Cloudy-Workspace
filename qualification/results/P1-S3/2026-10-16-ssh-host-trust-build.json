@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "baseCommit": "82a5118887048c4644ce76e1f9d31cbd02b433cf",
+  "sourceChangesUncommittedAtBuild": true,
+  "sources": [
+    {
+      "path": "shared/android/domain/src/test/kotlin/io/github/baitian6641/cloudy/domain/SshHostTrustTest.kt",
+      "bytes": 13556,
+      "sha256": "0177b29c202b01014fbd6e39572f3d4a808e8a6d13faf9b8eb501a017592f810"
+    },
+    {
+      "path": "shared/android/domain/src/main/kotlin/io/github/baitian6641/cloudy/domain/SshHostTrust.kt",
+      "bytes": 12537,
+      "sha256": "1e3a81ede9d8640bae75be5aa2da12f998168c2c92979bcb7ede962025047d5d"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/SshHostTrustStoreTest.kt",
+      "bytes": 17075,
+      "sha256": "8daf9c7a63ee7eff729cff1875b96bc71b497c769743b898243aefbe3302a959"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/SshHostTrustStore.kt",
+      "bytes": 19708,
+      "sha256": "084b38cc106ff08a5e599449da7be252f89dad9245eb50d87f985e913c216de4"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "apps/console/build/outputs/apk/debug/console-debug.apk",
+      "bytes": 32189720,
+      "sha256": "e6b0ed4a97dea1683a0004a3f055d321fea25df8919b7809c3698e2fed7859f3"
+    },
+    {
+      "path": "apps/desktop/build/outputs/apk/debug/desktop-debug.apk",
+      "bytes": 32189724,
+      "sha256": "d0b99ce06f9f4e3169515142f9e2d7a41c5e86a6c180159dd047dc5b73d9c852"
+    },
+    {
+      "path": "shared/android/platform/build/outputs/apk/androidTest/debug/platform-debug-androidTest.apk",
+      "bytes": 33042879,
+      "sha256": "91aceb83ba95b7ea43ec4ceafd8336c53f3aa4ffd5a57a719938c162f1663daf"
+    },
+    {
+      "path": "apps/console/build/outputs/apk/androidTest/debug/console-debug-androidTest.apk",
+      "bytes": 3206641,
+      "sha256": "0e0994d26738b44d351c46368decf4451e9c7ec01bd37a3b578dcfbe9c188d42"
+    },
+    {
+      "path": "apps/desktop/build/outputs/apk/androidTest/debug/desktop-debug-androidTest.apk",
+      "bytes": 3206645,
+      "sha256": "f68b48d225f3754f8276f59a6fef8901d71f32a66e210349bc4b02d175be023e"
+    }
+  ],
+  "build": {
+    "directory": ".cache/ssh-trust-01/build-01/",
+    "startedAt": "2026-10-16T09:36:04.098008+00:00",
+    "endedAt": "2026-10-16T09:36:48.807767+00:00",
+    "exitCode": 0,
+    "sourceUnchangedDuringBuild": true,
+    "command": [
+      "./gradlew",
+      ":domain:test",
+      ":console:assembleDebug",
+      ":desktop:assembleDebug",
+      ":console:lintDebug",
+      ":desktop:lintDebug",
+      ":platform:lintDebug",
+      ":platform:assembleDebugAndroidTest",
+      ":console:assembleDebugAndroidTest",
+      ":desktop:assembleDebugAndroidTest",
+      "--dependency-verification=strict",
+      "--no-daemon",
+      "--console=plain",
+      "--max-workers=4"
+    ],
+    "lintIssueCounts": {
+      "console-lint-results-debug.xml": 0,
+      "desktop-lint-results-debug.xml": 0,
+      "platform-lint-results-debug.xml": 0
+    },
+    "domainJvmSuites": [
+      {
+        "name": "io.github.baitian6641.cloudy.domain.ConnectionProfileTest",
+        "tests": "8",
+        "skipped": "0",
+        "failures": "0",
+        "errors": "0"
+      },
+      {
+        "name": "io.github.baitian6641.cloudy.domain.EndpointHostTest",
+        "tests": "5",
+        "skipped": "0",
+        "failures": "0",
+        "errors": "0"
+      },
+      {
+        "name": "io.github.baitian6641.cloudy.domain.HandoffEnvelopeTest",
+        "tests": "8",
+        "skipped": "0",
+        "failures": "0",
+        "errors": "0"
+      },
+      {
+        "name": "io.github.baitian6641.cloudy.domain.SshHostTrustTest",
+        "tests": "12",
+        "skipped": "0",
+        "failures": "0",
+        "errors": "0"
+      },
+      {
+        "name": "io.github.baitian6641.cloudy.domain.WindowStateTest",
+        "tests": "5",
+        "skipped": "0",
+        "failures": "0",
+        "errors": "0"
+      }
+    ]
+  },
+  "device": {
+    "startedAt": "2026-10-16T09:37:02.089804+00:00",
+    "device": {
+      "model": "HP Googlebook 14",
+      "release": "17",
+      "api": "37",
+      "build": "CL3B.260622.276.R2",
+      "incremental": "16560795",
+      "abi": "arm64-v8a"
+    },
+    "build": "build-01",
+    "expectedCases": 20,
+    "productApksReinstalled": false,
+    "testsPassed": true,
+    "testUninstalled": true,
+    "testAbsent": true,
+    "bootIdUnchanged": true,
+    "bootCountUnchanged": true,
+    "vaultReceiptsUnchanged": true,
+    "productApkBytesUnchanged": true,
+    "profileRowsAndGenerationUnchanged": true,
+    "endedAt": "2026-10-16T09:37:04.328518+00:00"
+  },
+  "installedProducts": "Product APKs built only. Existing installed Console/Desktop0.1.4/code5 remain byte-identical; only the standalone platform test APK was installed and removed. No trust UI or engine is integrated."
+}

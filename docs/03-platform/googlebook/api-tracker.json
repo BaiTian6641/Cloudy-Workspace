@@ -1799,6 +1799,53 @@
       "researchEvidence": "docs/02-architecture/connection-profiles.md",
       "compileEvidence": "qualification/results/P1-S3/2026-10-16-profile-editor-build.json",
       "deviceEvidence": "qualification/results/P1-S3/2026-10-16-profile-recovery.md"
+    },
+    {
+      "id": "API54",
+      "feature": "SSH exact-key trust domain and app-owned persistent pin/revocation ledger",
+      "symbols": [
+        "java.util.Base64.getDecoder",
+        "java.util.Base64.getEncoder",
+        "java.util.Base64.Encoder.withoutPadding",
+        "Context.noBackupFilesDir",
+        "Context.isDeviceProtectedStorage",
+        "Process.myUid",
+        "ApplicationInfo.uid",
+        "SQLiteDatabase.OpenParams.Builder",
+        "SQLiteDatabase.beginTransaction",
+        "SQLiteDatabase.setTransactionSuccessful",
+        "SQLiteDatabase.endTransaction",
+        "SQLiteDatabase.setMaximumSize",
+        "FileChannel.tryLock",
+        "Os.open",
+        "Os.fstat",
+        "Os.fsync"
+      ],
+      "sourceIds": [
+        "G137",
+        "G198",
+        "G199",
+        "G200",
+        "G201",
+        "G202",
+        "G204",
+        "G205",
+        "G211",
+        "R266",
+        "R271"
+      ],
+      "minimumApi": 28,
+      "libraryVersion": "Framework OpenParams journal/sync controls API28; Java Base64 API26; product min35 unchanged. Existing SQLite and domain modules; no new dependency.",
+      "availability": "documented",
+      "qualification": "partial",
+      "checkedOn": "2026-10-16",
+      "owner": "Platform/security developer",
+      "stage": "P1-S3",
+      "fallback": "Unsupported key formats, wrong owner, stale generation/revision, missing/corrupt/newer established state and unavailable storage fail closed. Retain revocations. Completion unknown requires reload without automatic retry. A stored pin/challenge releases no credentials.",
+      "experiment": "Strict build01 and zero Console/Desktop/platform Lint pass; 38 domain JVM cases include12 new trust cases. Twenty actual standalone Android storage cases pass on HP Googlebook API37 buildCL3B.260622.276.R2. Test APK removed; installed product bytes, profile rows/generations, vault receipts and boot unchanged. Reopen-object and concurrent-thread coverage does not establish process-death, simultaneous cross-process writers or power-loss behavior. Native UI/controller, installed-product trust isolation, actual SSH verification/credential ordering, jump and live-rekey/revocation gates remain open.",
+      "researchEvidence": "docs/02-architecture/ssh-host-trust.md",
+      "compileEvidence": "qualification/results/P1-S3/2026-10-16-ssh-host-trust-build.json",
+      "deviceEvidence": "qualification/results/P1-S3/2026-10-16-ssh-host-trust.md"
     }
   ],
   "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."
