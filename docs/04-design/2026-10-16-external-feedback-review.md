@@ -95,3 +95,8 @@ The [final specimen review](../06-validation/2026-10-16-specimen-density.md) now
 ## Native geometry follow-through
 
 The [eight actual local-workspace cases](../../qualification/results/P1-S2/2026-10-16-native-window-geometry.md) now establish sampled narrow/short reachability at font scales1.3/2.0 on unchanged0.1.6 products. Sixteen Light viewports were inspected, with retained draft/window identity and restored app/system settings. The selected Compose semantics discrepancy and corrected line-geometry assertions are explicitly recorded with both failed attempts. This narrows the remaining geometry work; it does not establish scaledDark, physical input, accessibility or other components. No palette replacement, fixed compact height or global font reduction was needed.
+
+
+## Profile-manager follow-through
+
+The [profile geometry review and repair](../../qualification/results/P1-S2/2026-10-16-profile-geometry.md) now turns two source risks into observed failures and verified fixes. Console/Desktop0.1.7 reveal a selected lower-list editor and let the complete frozen confirmation text scroll while actions remain visible. Six actual geometry cases and sixteen profile/lifecycle regressions pass; both products preserve data and system settings. This addresses readable desktop interaction at existing text roles and densities. The feedback's deferred palette, halo, toolkit-injection and EDA product proposals retain their earlier disposition; full P1-S2 remains open.

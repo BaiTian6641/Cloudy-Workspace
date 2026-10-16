@@ -33,3 +33,8 @@ Keep credentials, private transcripts, SDK/cache downloads and machine-specific 
 ## Milestone review and continuation
 
 Before declaring this handoff ready, compare each P1 task/deliverable/exit to current source and evidence, resolve stage-review findings, run the applicable checks, update history/current state and commit/push the reviewed result. Present incomplete feature and hardware qualification plainly. Foundation completion does not mark the P0–P6 product objective achieved. The latest user instruction already authorizes continued implementation on ready roadmap work; no renewed approval is needed merely to cross the P1 milestone.
+
+
+## Latest profile checkpoint
+
+Read the [0.1.7 profile result](../../qualification/results/P1-S2/2026-10-16-profile-geometry.md) and current [execution state](execution-state.md) before assigning more geometry work. The lower-list reveal and short-scaled confirmation risks are now observed/repaired, with six geometry and sixteen existing regression passes; do not reinterpret the retained0.1.6 failures as current behavior. Editor identity governs reveal, ordinary typing/recreation retain scroll, and confirmation authority is unchanged. Physical/native input, scaledDark, protected operations and remote integration remain their own work. Parent remains leader and owns builds/ADB/Git/final acceptance; direct Codex GPT6.1-Sol and authorized OMP routes retain the existing model/packet boundaries.

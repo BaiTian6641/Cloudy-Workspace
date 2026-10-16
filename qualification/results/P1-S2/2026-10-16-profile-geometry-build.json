@@ -1,0 +1,4800 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "Actual local profile geometry and regression qualification; no physical input, authentication or remote connection",
+  "builds": [
+    {
+      "startedAt": "2026-10-16T11:02:34.257698+00:00",
+      "endedAt": "2026-10-16T11:02:50.909345+00:00",
+      "baseCommit": "6f1578fa8bfb42c8b06e7f75270ffdce99122b3e",
+      "exitCode": 1,
+      "sourceUnchangedDuringBuild": true,
+      "command": [
+        "./gradlew",
+        ":domain:test",
+        ":design-system:testDebugUnitTest",
+        ":console:assembleDebug",
+        ":desktop:assembleDebug",
+        ":console:lintDebug",
+        ":desktop:lintDebug",
+        ":platform:lintDebug",
+        ":design-system:lintDebug",
+        ":platform:assembleDebugAndroidTest",
+        ":console:assembleDebugAndroidTest",
+        ":desktop:assembleDebugAndroidTest",
+        "--dependency-verification=strict",
+        "--no-daemon",
+        "--console=plain",
+        "--max-workers=4"
+      ],
+      "attempt": "01",
+      "log": {
+        "bytes": 21270,
+        "sha256": "c9b620dfe4b9aa10f1e0592b6f51d9d47c9dec2ed17ea94d05fa8a2b9f85e1ef"
+      },
+      "receipt": {
+        "bytes": 23455,
+        "sha256": "3c027c033ed6dd423fca0e799c5413d5541a93af983e1c56795ed0376329eed1"
+      }
+    },
+    {
+      "startedAt": "2026-10-16T11:03:45.833507+00:00",
+      "endedAt": "2026-10-16T11:04:05.447523+00:00",
+      "baseCommit": "6f1578fa8bfb42c8b06e7f75270ffdce99122b3e",
+      "exitCode": 0,
+      "sourceUnchangedDuringBuild": true,
+      "command": [
+        "./gradlew",
+        ":domain:test",
+        ":design-system:testDebugUnitTest",
+        ":console:assembleDebug",
+        ":desktop:assembleDebug",
+        ":console:lintDebug",
+        ":desktop:lintDebug",
+        ":platform:lintDebug",
+        ":design-system:lintDebug",
+        ":platform:assembleDebugAndroidTest",
+        ":console:assembleDebugAndroidTest",
+        ":desktop:assembleDebugAndroidTest",
+        "--dependency-verification=strict",
+        "--no-daemon",
+        "--console=plain",
+        "--max-workers=4"
+      ],
+      "attempt": "02",
+      "log": {
+        "bytes": 20250,
+        "sha256": "0aad8c4ae6bbd4e4e479f06c9bd9db051a5f9e25eab5e3585fd48d5102e89c54"
+      },
+      "receipt": {
+        "bytes": 24523,
+        "sha256": "77d6b7e578fe4dae1039d7123cf058632d17945fb3b5ad72f6f4b7a4bc6aeca6"
+      }
+    },
+    {
+      "startedAt": "2026-10-16T11:06:55.252107+00:00",
+      "endedAt": "2026-10-16T11:07:42.066219+00:00",
+      "baseCommit": "6f1578fa8bfb42c8b06e7f75270ffdce99122b3e",
+      "exitCode": 0,
+      "sourceUnchangedDuringBuild": true,
+      "command": [
+        "./gradlew",
+        ":domain:test",
+        ":design-system:testDebugUnitTest",
+        ":console:assembleDebug",
+        ":desktop:assembleDebug",
+        ":console:lintDebug",
+        ":desktop:lintDebug",
+        ":platform:lintDebug",
+        ":design-system:lintDebug",
+        ":platform:assembleDebugAndroidTest",
+        ":console:assembleDebugAndroidTest",
+        ":desktop:assembleDebugAndroidTest",
+        "--dependency-verification=strict",
+        "--no-daemon",
+        "--console=plain",
+        "--max-workers=4"
+      ],
+      "attempt": "03",
+      "log": {
+        "bytes": 20459,
+        "sha256": "235bc9eacdc73b7cfd90c6ace821f01b90fa4dcd63e010fe1ad55f543ce0d032"
+      },
+      "receipt": {
+        "bytes": 24523,
+        "sha256": "e16c7fb3fcb26b0a433d4eb03f6a3979822d26019c1f735f0d16632ae3999094"
+      },
+      "sources": [
+        {
+          "path": "shared/android/domain/src/test/kotlin/io/github/baitian6641/cloudy/domain/EndpointHostTest.kt",
+          "bytes": 3533,
+          "sha256": "3d940493196c2cbdfdc6bab3fa6643534b138d312e882da9e530d8c7e59eec6d"
+        },
+        {
+          "path": "shared/android/domain/src/test/kotlin/io/github/baitian6641/cloudy/domain/SshHostTrustTest.kt",
+          "bytes": 13556,
+          "sha256": "0177b29c202b01014fbd6e39572f3d4a808e8a6d13faf9b8eb501a017592f810"
+        },
+        {
+          "path": "shared/android/domain/src/test/kotlin/io/github/baitian6641/cloudy/domain/ConnectionProfileTest.kt",
+          "bytes": 6245,
+          "sha256": "3d299dc53c8627d0ac4b924eb6212cc671012a00d04523775ffeb5b76b7c28e1"
+        },
+        {
+          "path": "shared/android/domain/src/test/kotlin/io/github/baitian6641/cloudy/domain/HandoffEnvelopeTest.kt",
+          "bytes": 5873,
+          "sha256": "3c7591dcb298439f31801fb7b4a72f707bd2710c31e9889f9574b9af9568ded9"
+        },
+        {
+          "path": "shared/android/domain/src/test/kotlin/io/github/baitian6641/cloudy/domain/WindowStateTest.kt",
+          "bytes": 4478,
+          "sha256": "dd9e4a4039cdcb0de29946b7188e08ec60072fbf22c81fbc77f9c3d4f886a74e"
+        },
+        {
+          "path": "shared/android/domain/src/main/kotlin/io/github/baitian6641/cloudy/domain/EndpointHost.kt",
+          "bytes": 3631,
+          "sha256": "37ca1e5cef343128f68dd27dbf595c76c49b768d739870cea8809a927f49e89a"
+        },
+        {
+          "path": "shared/android/domain/src/main/kotlin/io/github/baitian6641/cloudy/domain/SshHostTrust.kt",
+          "bytes": 12537,
+          "sha256": "1e3a81ede9d8640bae75be5aa2da12f998168c2c92979bcb7ede962025047d5d"
+        },
+        {
+          "path": "shared/android/domain/src/main/kotlin/io/github/baitian6641/cloudy/domain/HandoffEnvelope.kt",
+          "bytes": 4121,
+          "sha256": "cf11e96b286231cd09cac9256d8dca3e3610f1b181aee9afdd4ea8a1cb8d07e5"
+        },
+        {
+          "path": "shared/android/domain/src/main/kotlin/io/github/baitian6641/cloudy/domain/ConnectionProfile.kt",
+          "bytes": 3412,
+          "sha256": "7d8dfabcfee886439afe6e0332418d1eb5cb5e10e64b7e158eb9cc1c5bd35ba7"
+        },
+        {
+          "path": "shared/android/domain/src/main/kotlin/io/github/baitian6641/cloudy/domain/WindowState.kt",
+          "bytes": 4042,
+          "sha256": "7e4c0146756c4011f49b5dcef04f1b9144937db66e1f77b86b4615c8175424b7"
+        },
+        {
+          "path": "shared/android/platform/src/main/AndroidManifest.xml",
+          "bytes": 52,
+          "sha256": "daa0fb1f32ba7ea85a07ef6302ab3d58c3407d7fd2aa03ec132cb9e38e8d9849"
+        },
+        {
+          "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/HandoffReplayProcessTest.kt",
+          "bytes": 3530,
+          "sha256": "1bb6994b187b5f772be7c97e8eb0a0d78b6d3fcdebb0144f4624d6eb5f605d14"
+        },
+        {
+          "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/HandoffCallerTest.kt",
+          "bytes": 3073,
+          "sha256": "b190a2517971332a002303c3d2b83c447ec0d4d39f9c20863421e01749161c05"
+        },
+        {
+          "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/ProfileEditorStateTest.kt",
+          "bytes": 11427,
+          "sha256": "c77767b92f67e1bf35698d23b97bee38a4780df3fd00f71f6d25b7e589e6beea"
+        },
+        {
+          "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/WindowBundlesTest.kt",
+          "bytes": 4566,
+          "sha256": "7a7d45c54a489f063c7f2241bf3ded4cb4486098f31751dd37e8117262404417"
+        },
+        {
+          "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/SshTrustUiStateTest.kt",
+          "bytes": 2756,
+          "sha256": "193570bef2fd8d427b218c763ea44081bfad861e81b41232c377e1b9930442dd"
+        },
+        {
+          "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/ConnectionProfilesTest.kt",
+          "bytes": 15106,
+          "sha256": "6920cbc8bb43a408a017ba38fbdc552acc5a0b2b44bde571b4a79a142395fd2e"
+        },
+        {
+          "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/CloudyDisplayPreferencesStorageTest.kt",
+          "bytes": 5710,
+          "sha256": "d1ea95a23d4df586240afe0162e787fc4e109e6ea4294138be000f145c441d6a"
+        },
+        {
+          "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/ConnectionProfilesProcessTest.kt",
+          "bytes": 4239,
+          "sha256": "1545fc5e314daaa786b73db607afaa574ba35f3316c05ffdead171df99aa40d3"
+        },
+        {
+          "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/HandoffJsonTest.kt",
+          "bytes": 6990,
+          "sha256": "6621c131aa3239d7d37a0497c35e52675486be5e087851eb34912e193605b186"
+        },
+        {
+          "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/SshHostTrustStoreTest.kt",
+          "bytes": 17075,
+          "sha256": "8daf9c7a63ee7eff729cff1875b96bc71b497c769743b898243aefbe3302a959"
+        },
+        {
+          "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/HandoffReplayLedgerTest.kt",
+          "bytes": 10697,
+          "sha256": "834401656d724779556d81985d1a0d0aa18df9bd79fd8324682c12b6c10e50e8"
+        },
+        {
+          "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudyProfilesActivity.kt",
+          "bytes": 19908,
+          "sha256": "aae91ece1f471bc0334c253478d88ffdf5d26f5de289a396b57d99941b1f5fae"
+        },
+        {
+          "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/SshHostTrustStore.kt",
+          "bytes": 19708,
+          "sha256": "084b38cc106ff08a5e599449da7be252f89dad9245eb50d87f985e913c216de4"
+        },
+        {
+          "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/HandoffReplayLedger.kt",
+          "bytes": 11875,
+          "sha256": "fa22695ae2b25afb58c3bf1323c184d36b0fec94576a196b589ca114887019c0"
+        },
+        {
+          "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/DisplaySettingsScreen.kt",
+          "bytes": 7023,
+          "sha256": "7b4e85192c2d9235c674e28f3df8a13819e8350904f6ff3934dddf05b2e611f9"
+        },
+        {
+          "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudyAppTheme.kt",
+          "bytes": 2082,
+          "sha256": "20fb22a91736465fd6fc2aa5a3eef9f6129f2792547f1cd52e4b3cb8493b6a44"
+        },
+        {
+          "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudyWindowActivity.kt",
+          "bytes": 6667,
+          "sha256": "066f063c751fd51f7910cede75605307a3b92dae6ab140c9146061c31e36c3ea"
+        },
+        {
+          "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/HandoffCaller.kt",
+          "bytes": 3979,
+          "sha256": "6e43ba4a851090b1f2c43a11bac39b9dc505f7ed6fa03b165608ecf31df12699"
+        },
+        {
+          "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudyDisplaySettings.kt",
+          "bytes": 10488,
+          "sha256": "d4f6bc3e080a320dc7f496b0fe0e0ad3a5cb407368919b90918b4902c656626d"
+        },
+        {
+          "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/ProfileEditorScreen.kt",
+          "bytes": 15507,
+          "sha256": "985f937fe7bbe8b3020cdfe95a733febfc2415dbb12f2c9534a2dbda5fda2a65"
+        },
+        {
+          "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/ProfileEditorState.kt",
+          "bytes": 8500,
+          "sha256": "f077970ab72ffcbacff2862b2b7cc637f569b43b671ebdd9e991fecd3b5bed9a"
+        },
+        {
+          "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudyVaultActivity.kt",
+          "bytes": 16955,
+          "sha256": "9e802bf856bc247b2f1342e6fec90f34452bf9f11bad1394eedfd567ee33f9b8"
+        },
+        {
+          "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/SshTrustScreen.kt",
+          "bytes": 10939,
+          "sha256": "4a692f8c7a5a10e6dab85587d55f696680bfc98d764b98b510de7e327c5e08e1"
+        },
+        {
+          "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/SshTrustUiState.kt",
+          "bytes": 1646,
+          "sha256": "9836eccdbfc9bcc3109ddfec08db64a6f028f0f4e61e9bccc2d88a532a4c0d56"
+        },
+        {
+          "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudyDisplaySettingsActivity.kt",
+          "bytes": 1363,
+          "sha256": "ffc868b25b4edc534cafde8863eb73ec4cf63506a4666ca7aebcf047a9fa4a4c"
+        },
+        {
+          "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudySshTrustActivity.kt",
+          "bytes": 14103,
+          "sha256": "ce3163b6ec9d1c9f4a7db5af0bccb8653b25abe3b58dba17eaec97df1cfe19aa"
+        },
+        {
+          "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/ConnectionProfiles.kt",
+          "bytes": 17472,
+          "sha256": "2d54d0bc4dd7741ec6f5936874b1b6c6c509e7514d6edbcdc7225d2f0041f4f4"
+        },
+        {
+          "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/HandoffJson.kt",
+          "bytes": 7200,
+          "sha256": "fcb0dc8397d21b69e3d5e004c1fb6f2ae0c0b5f731e345173ef762107de777cb"
+        },
+        {
+          "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/WindowBundles.kt",
+          "bytes": 1754,
+          "sha256": "5b3da64777dabee6e85adb8435b073af71be43a1360a4678a6536c897ee492c5"
+        },
+        {
+          "path": "shared/android/platform/src/main/res/xml/cloudy_data_extraction_rules.xml",
+          "bytes": 1142,
+          "sha256": "9053f4326fa3ccd5ac3bd677a088f3535a8d692522b193b1f564ba3bbc9d4e41"
+        },
+        {
+          "path": "shared/android/platform/src/main/res/values/profile_strings.xml",
+          "bytes": 5899,
+          "sha256": "82a0e7de9888e522faf38445443f4bf5acab641e208ae2c62057bfc83eff9304"
+        },
+        {
+          "path": "shared/android/platform/src/main/res/values/strings.xml",
+          "bytes": 821,
+          "sha256": "840318c98e6014ca7ba7fbea6b8495e713c2d764417707402207224599166262"
+        },
+        {
+          "path": "shared/android/platform/src/main/res/values/vault_strings.xml",
+          "bytes": 2077,
+          "sha256": "84ba0ecd23d906fa3ef2bab9ccf2ac85eef445bc81af4e1d626b6d12fca414ef"
+        },
+        {
+          "path": "shared/android/platform/src/main/res/values/display_settings_strings.xml",
+          "bytes": 2178,
+          "sha256": "d10679661980ee0575c88026d496f3540179048f74a0d0c191cc5e4a25ec236d"
+        },
+        {
+          "path": "shared/android/platform/src/main/res/values/styles.xml",
+          "bytes": 416,
+          "sha256": "08c45932d886bf094c541d5831c57c368e2cc1fdb576ba241855baf2b3a22aef"
+        },
+        {
+          "path": "shared/android/platform/src/main/res/values/ssh_trust_strings.xml",
+          "bytes": 3847,
+          "sha256": "3586505125b8c3c5e8236833cb839ca61ae2d1e77c8a932f850fb1c632f2e6aa"
+        },
+        {
+          "path": "shared/android/platform/src/main/res/values-night/styles.xml",
+          "bytes": 412,
+          "sha256": "d2b018657d8b71f26a08e4cb7fd665cf2c212bfe41a811a733e322bcec13e70c"
+        },
+        {
+          "path": "shared/design-system/android/src/main/AndroidManifest.xml",
+          "bytes": 52,
+          "sha256": "daa0fb1f32ba7ea85a07ef6302ab3d58c3407d7fd2aa03ec132cb9e38e8d9849"
+        },
+        {
+          "path": "shared/design-system/android/src/test/java/io/github/baitian6641/cloudy/design/WindowDraftCodecTest.kt",
+          "bytes": 2091,
+          "sha256": "6aac689c54910a1f0e296ac7e9b8410d0553ddc4dec57fd542c54a1c7b57f8cb"
+        },
+        {
+          "path": "shared/design-system/android/src/main/res/values/strings.xml",
+          "bytes": 657,
+          "sha256": "5702a18175ae5cf6160d6d330d98bf6bba443380ee18e725cc9855fdbcdb9bf9"
+        },
+        {
+          "path": "shared/design-system/android/src/main/java/io/github/baitian6641/cloudy/design/CloudyTheme.kt",
+          "bytes": 4175,
+          "sha256": "ff600f5d1d333204b08b853f23fd87a5a5ccaded412c9a6c09cd921b0769c804"
+        },
+        {
+          "path": "shared/design-system/android/src/main/java/io/github/baitian6641/cloudy/design/CloudyControlMetrics.kt",
+          "bytes": 2527,
+          "sha256": "7fd07da98a3c6964f7d8eee7b26f727fe8afdad0dbd56688cb1109628fa110ac"
+        },
+        {
+          "path": "shared/design-system/android/src/main/java/io/github/baitian6641/cloudy/design/CloudyDisplayPreferences.kt",
+          "bytes": 493,
+          "sha256": "b88ac16d9dee72aa73884c07839cfa07ebf5af34242f0d00490c30edccc3d648"
+        },
+        {
+          "path": "shared/design-system/android/src/main/java/io/github/baitian6641/cloudy/design/WindowDraftCodec.kt",
+          "bytes": 1419,
+          "sha256": "0e80c07715656baf0959ef57a381197a8f5b97acc56c11b392ac0dd029a88e91"
+        },
+        {
+          "path": "shared/design-system/android/src/main/java/io/github/baitian6641/cloudy/design/CloudyTokens.kt",
+          "bytes": 3959,
+          "sha256": "b92111e6782b429d1ff599e9f6dbdbbed069855988d6e27d8ea787fe5cfb89c3"
+        },
+        {
+          "path": "shared/design-system/android/src/main/java/io/github/baitian6641/cloudy/design/WindowWorkspaceScreen.kt",
+          "bytes": 8199,
+          "sha256": "0edce4aa53d9a8ccaa888fa8c5d76844a27510a565a16a9c17f923f1a3191407"
+        },
+        {
+          "path": "apps/console/src/main/AndroidManifest.xml",
+          "bytes": 2228,
+          "sha256": "ada109ee49301e605747da802e413c6fdcf30244e1854be6b86b1aaf85bfe555"
+        },
+        {
+          "path": "apps/console/src/androidTest/kotlin/io/github/baitian6641/cloudy/console/ConsoleSshTrustActivityTest.kt",
+          "bytes": 369,
+          "sha256": "5e12c7d28cc9da79818952d27fe9798ac90dce412d1c933fdcd05045f989ef4e"
+        },
+        {
+          "path": "apps/console/src/androidTest/kotlin/io/github/baitian6641/cloudy/console/ConsoleProfileGeometryTest.kt",
+          "bytes": 366,
+          "sha256": "48765c51601d32725200f6fa947f0cc081bdf26604843ee5c6902731424f90a0"
+        },
+        {
+          "path": "apps/console/src/androidTest/kotlin/io/github/baitian6641/cloudy/console/ConsoleProfileActivityTest.kt",
+          "bytes": 366,
+          "sha256": "9fcee18f29dada931fae60e65bdbe8b32083a5c3601878364d3343a76e6a1f57"
+        },
+        {
+          "path": "apps/console/src/androidTest/kotlin/io/github/baitian6641/cloudy/console/ConsoleProfileRecreationTest.kt",
+          "bytes": 372,
+          "sha256": "7d373c3c3e30a0d4a6b9fae53e62aa0fdd52cfdb02146e756cf8481949cead34"
+        },
+        {
+          "path": "apps/console/src/androidTest/kotlin/io/github/baitian6641/cloudy/console/ConsoleDisplaySettingsActivityTest.kt",
+          "bytes": 390,
+          "sha256": "b23a1bed047b08166200cf4d875b2cb7fd0a5f952d61872208bad33e21dfa1f2"
+        },
+        {
+          "path": "apps/console/src/androidTest/kotlin/io/github/baitian6641/cloudy/console/ConsoleWindowDisplayTest.kt",
+          "bytes": 441,
+          "sha256": "c21b6b810263e90ee2c4cc7cb358d5729297850fa395425a4f13b289f656cbe4"
+        },
+        {
+          "path": "apps/console/src/androidTest/kotlin/io/github/baitian6641/cloudy/console/ConsoleWindowActivityTest.kt",
+          "bytes": 469,
+          "sha256": "a861aa981b588184930d4600bfdc3d478b4911bdaa5e686cbd41619f9d1eeeef"
+        },
+        {
+          "path": "apps/console/src/androidTest/kotlin/io/github/baitian6641/cloudy/console/ConsoleWindowGeometryTest.kt",
+          "bytes": 420,
+          "sha256": "9db28efa538ac42e167429c37afd615d0eef93e97864667627649d5f7c62a4bb"
+        },
+        {
+          "path": "apps/console/src/main/kotlin/io/github/baitian6641/cloudy/console/WorkspaceActivity.kt",
+          "bytes": 479,
+          "sha256": "e5858e0dd0fc3056ad4d28aa40dd0474bee95e007e50dea46419c9475ae11a6c"
+        },
+        {
+          "path": "apps/console/src/main/res/values/strings.xml",
+          "bytes": 182,
+          "sha256": "ea0592ed54e86a2f09c2292c2609c686a2c0e71dc0acec297d2c591a4030cf4c"
+        },
+        {
+          "path": "apps/console/src/main/res/mipmap-anydpi/ic_launcher.xml",
+          "bytes": 344,
+          "sha256": "ada31da9e23f4520f3753e71ca23799a107431473daa3774b6cecac26847260c"
+        },
+        {
+          "path": "apps/console/src/main/res/drawable/ic_launcher_background.xml",
+          "bytes": 251,
+          "sha256": "cccdd202dc66f4824d113d06d0253d9b9010f05e422702fa94717f44e353d345"
+        },
+        {
+          "path": "apps/console/src/main/res/drawable/ic_launcher_foreground.xml",
+          "bytes": 463,
+          "sha256": "04c52fd1b5cecf5f79804b8a8b9aff43d9e5f9afbfe46a99afdffddf371bd371"
+        },
+        {
+          "path": "apps/console/src/main/res/drawable/ic_launcher_monochrome.xml",
+          "bytes": 465,
+          "sha256": "2e0ec4a2e21e10dfa664ed1386258dc8e3edca9a6c8384a6a7e58d02aff0fdb1"
+        },
+        {
+          "path": "apps/desktop/src/main/AndroidManifest.xml",
+          "bytes": 2228,
+          "sha256": "ada109ee49301e605747da802e413c6fdcf30244e1854be6b86b1aaf85bfe555"
+        },
+        {
+          "path": "apps/desktop/src/androidTest/kotlin/io/github/baitian6641/cloudy/desktop/DesktopProfileGeometryTest.kt",
+          "bytes": 366,
+          "sha256": "e2670e07dd3082b4f9bfde2b8d53eb76ab37d9a6f904afd2f380c9b1188a8455"
+        },
+        {
+          "path": "apps/desktop/src/androidTest/kotlin/io/github/baitian6641/cloudy/desktop/DesktopWindowGeometryTest.kt",
+          "bytes": 420,
+          "sha256": "bd4d18fae8c2e9f333aee1b2d0a5421736c5f781c9dae6656fab07750525fb84"
+        },
+        {
+          "path": "apps/desktop/src/androidTest/kotlin/io/github/baitian6641/cloudy/desktop/DesktopProfileActivityTest.kt",
+          "bytes": 366,
+          "sha256": "a26d1edf94e64c1b46ff8f15c12b75c9050cb6ea258b2dc4ad0101a8fb020f00"
+        },
+        {
+          "path": "apps/desktop/src/androidTest/kotlin/io/github/baitian6641/cloudy/desktop/DesktopSshTrustActivityTest.kt",
+          "bytes": 369,
+          "sha256": "110d58602c1b2e7fbd07edc50c0104044be47d37e97f571cc9610908a3ccb654"
+        },
+        {
+          "path": "apps/desktop/src/androidTest/kotlin/io/github/baitian6641/cloudy/desktop/DesktopWindowActivityTest.kt",
+          "bytes": 469,
+          "sha256": "cc7c4342de5b1007bace542cf849d8ed1d9400989a9a32a4bce9521d48f3ce27"
+        },
+        {
+          "path": "apps/desktop/src/androidTest/kotlin/io/github/baitian6641/cloudy/desktop/DesktopProfileRecreationTest.kt",
+          "bytes": 372,
+          "sha256": "dc190373178ec9da191a6f656b60a44343b4412c140e31a6c38b6f66288848a3"
+        },
+        {
+          "path": "apps/desktop/src/androidTest/kotlin/io/github/baitian6641/cloudy/desktop/DesktopWindowDisplayTest.kt",
+          "bytes": 442,
+          "sha256": "ff118639bda89f9132967c7e5c4ebfaca21e3bb4158d533f4a7f07b6aca2e206"
+        },
+        {
+          "path": "apps/desktop/src/androidTest/kotlin/io/github/baitian6641/cloudy/desktop/DesktopDisplaySettingsActivityTest.kt",
+          "bytes": 390,
+          "sha256": "7877dc10b0e7f4e5589bfc133c8a7a75de8bc4b3eca872df6eaa8b55019bdfca"
+        },
+        {
+          "path": "apps/desktop/src/main/kotlin/io/github/baitian6641/cloudy/desktop/WorkspaceActivity.kt",
+          "bytes": 479,
+          "sha256": "cf5b5a08a4da2b5779625a62b41cde6b559e417fb5a0a29a948751d522c4b123"
+        },
+        {
+          "path": "apps/desktop/src/main/res/values/strings.xml",
+          "bytes": 182,
+          "sha256": "e778bb9ea63a60be013d71053a21b1a78b115ff815dfda4b98570caaa1d96542"
+        },
+        {
+          "path": "apps/desktop/src/main/res/mipmap-anydpi/ic_launcher.xml",
+          "bytes": 344,
+          "sha256": "ada31da9e23f4520f3753e71ca23799a107431473daa3774b6cecac26847260c"
+        },
+        {
+          "path": "apps/desktop/src/main/res/drawable/ic_launcher_background.xml",
+          "bytes": 251,
+          "sha256": "cccdd202dc66f4824d113d06d0253d9b9010f05e422702fa94717f44e353d345"
+        },
+        {
+          "path": "apps/desktop/src/main/res/drawable/ic_launcher_foreground.xml",
+          "bytes": 505,
+          "sha256": "b78cf1dc2a730abe91b0d7183dc8890473d319834639a58b067e837411885898"
+        },
+        {
+          "path": "apps/desktop/src/main/res/drawable/ic_launcher_monochrome.xml",
+          "bytes": 507,
+          "sha256": "595de0662ce4d98a703b0ca8a5095fc1cb8d322a60ceb3da4541170884f8e6d9"
+        },
+        {
+          "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/ProfileGeometryContract.kt",
+          "bytes": 26307,
+          "sha256": "a124ce1eb252ceb58f25ba452994aae7f03c673b704ab83f6852087d4b1d2c36"
+        },
+        {
+          "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/WindowDisplayContract.kt",
+          "bytes": 9007,
+          "sha256": "b2f5afd1f8c8b7af64abb8009e133b0e946f16052d9235af8523ad56f9a29e75"
+        },
+        {
+          "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/ProfileRecreationContract.kt",
+          "bytes": 8412,
+          "sha256": "60d18842c4e010dc0a48acbfa475ec66d51d959d9a17f80de00720b25f8cb215"
+        },
+        {
+          "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/DisplaySettingsActivityContract.kt",
+          "bytes": 7061,
+          "sha256": "82b5526141278ea0e6476a3c0dfe2926f291c8c61d86c139e461e0d461e02951"
+        },
+        {
+          "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/SshTrustActivityContract.kt",
+          "bytes": 23957,
+          "sha256": "d51eb12bbcccc7504cc3e7bb4eb6f9266adf5520d273f25d56a9a2f764f5b939"
+        },
+        {
+          "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/SshTrustTestQueue.kt",
+          "bytes": 4213,
+          "sha256": "9841b3e46b9a5380090b23bbcdf79c89a83ec54e4cf53e08136d6ef96d04b461"
+        },
+        {
+          "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/VaultManualQualificationTest.kt",
+          "bytes": 12987,
+          "sha256": "abe29ee1c23c935a773a7d4106ff388203f876bb93217281ac03f437a934f643"
+        },
+        {
+          "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/ProfileActivityContract.kt",
+          "bytes": 14184,
+          "sha256": "827078c47b487126fcb1d7d48e4af25347727b07d13c8c45c98a178843640769"
+        },
+        {
+          "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/ProfileIsolationTest.kt",
+          "bytes": 17892,
+          "sha256": "1278bec0d21646854aa986a448dfe23d9625b6d7484bfc55d390b695f12296b9"
+        },
+        {
+          "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/WindowActivityContract.kt",
+          "bytes": 6022,
+          "sha256": "dc92bc95876efbb3d78c00f383c777c6623d809b31ac5d6789fef7722c61a256"
+        },
+        {
+          "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/WindowGeometryContract.kt",
+          "bytes": 18753,
+          "sha256": "84a7c5bdae344b328baa4576032722e0a682cad74bef8b6594feed62420c9e60"
+        },
+        {
+          "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/ProfileTestQueue.kt",
+          "bytes": 4194,
+          "sha256": "1b2f840965cd30d37273fd045d8e93868d8b4ed0929a8eee283327c21e7c83a2"
+        },
+        {
+          "path": "apps/console/build.gradle.kts",
+          "bytes": 2264,
+          "sha256": "a9c20cd72ae80b9a67699fbe911502117a0f01064a48760ec8dfe51b48a96d46"
+        },
+        {
+          "path": "apps/desktop/build.gradle.kts",
+          "bytes": 2264,
+          "sha256": "c403d9692094498e4037a42ca448ab7a379fafce97236044136abd4fd58334d8"
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "apps/console/build/outputs/apk/debug/console-debug.apk",
+          "bytes": 32042364,
+          "sha256": "c4d54f1bdcd89c7c32bae4ca711e1c4f2aeab2c61e73b5afe91ab77fd3ebfbec"
+        },
+        {
+          "path": "apps/desktop/build/outputs/apk/debug/desktop-debug.apk",
+          "bytes": 32042368,
+          "sha256": "7e2515c16e0e9b40b8c62767966a1557e439ca879110fe952952ae8ee1c930c2"
+        },
+        {
+          "path": "shared/android/platform/build/outputs/apk/androidTest/debug/platform-debug-androidTest.apk",
+          "bytes": 33672527,
+          "sha256": "e1e2e77f7fc15a89fbe1b896afd39fdf48bc7a3647e293f963b587058c444af0"
+        },
+        {
+          "path": "apps/console/build/outputs/apk/androidTest/debug/console-debug-androidTest.apk",
+          "bytes": 3207477,
+          "sha256": "53c17563c24b04a69fb0814611c38b1a8fb15e11351b21f0743215727c3aa51b"
+        },
+        {
+          "path": "apps/desktop/build/outputs/apk/androidTest/debug/desktop-debug-androidTest.apk",
+          "bytes": 3207481,
+          "sha256": "835fc82713150a0ad01d8af04530fadb95f78e24ed1139656d8a5b3c3632de9a"
+        }
+      ],
+      "lint": [
+        {
+          "name": "console-lint-results-debug.xml",
+          "issues": 0,
+          "bytes": 86,
+          "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f"
+        },
+        {
+          "name": "design-system-lint-results-debug.xml",
+          "issues": 0,
+          "bytes": 86,
+          "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f"
+        },
+        {
+          "name": "desktop-lint-results-debug.xml",
+          "issues": 0,
+          "bytes": 86,
+          "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f"
+        },
+        {
+          "name": "platform-lint-results-debug.xml",
+          "issues": 0,
+          "bytes": 86,
+          "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f"
+        }
+      ]
+    }
+  ],
+  "deviceRuns": [
+    {
+      "startedAt": "2026-10-16T11:04:10.286504+00:00",
+      "build": "build-02",
+      "versionName": "0.1.6",
+      "versionCode": 7,
+      "dataCleared": false,
+      "productInstallAttempted": false,
+      "actualFrameworkFontRestoration": "DEFAULT_DISPLAY_CONFIG_MATCHED",
+      "cleanupErrors": [],
+      "device": {
+        "model": "HP Googlebook 14",
+        "release": "17",
+        "api": "37",
+        "build": "CL3B.260622.276.R2",
+        "incremental": "16560795",
+        "abi": "arm64-v8a"
+      },
+      "preFrameworkFontScale": 1.0,
+      "allCasesPassed": false,
+      "fontScaleLiteralRestored": true,
+      "postFrameworkFontScale": 1.0,
+      "absent-io.github.baitian6641.cloudy.console.test": true,
+      "absent-io.github.baitian6641.cloudy.desktop.test": true,
+      "absent-io.github.baitian6641.cloudy.platform.test": true,
+      "bootIdUnchanged": true,
+      "bootCountUnchanged": true,
+      "fontScaleUnchanged": true,
+      "densityUnchanged": true,
+      "nightModeUnchanged": true,
+      "vaultReceiptsUnchanged": true,
+      "profileRowsAndGenerationUnchanged": true,
+      "trustRowsAndGenerationUnchanged": true,
+      "effectivePreferencesRestored": true,
+      "productApksUnchanged": true,
+      "endedAt": "2026-10-16T11:04:24.744258+00:00",
+      "runnerPassed": false,
+      "attempt": "01",
+      "resultReceipt": {
+        "bytes": 3524,
+        "sha256": "6e4743f5a5bddea2f7d56d201089738d12f0a77c9fa2e2040fa28330be0c1111"
+      },
+      "runner": {
+        "bytes": 16264,
+        "sha256": "795a41b2e80d0adb24b491fcfd9baf7f5cf9f709362553785fc5910953d3f5ed"
+      },
+      "tests": [
+        {
+          "passed": false,
+          "completed": 0,
+          "fixtureCleanupReceipts": 1,
+          "effectivePreferenceRestorations": 1,
+          "method": "bottomSavedRowEditAutomaticallyRevealsEditor",
+          "name": "console-1",
+          "instrumentationLog": {
+            "bytes": 4818,
+            "sha256": "7fc7c1b8e9c0cbcf510487fb3dab638079619273a7c37d0bceb2156a699be23b"
+          },
+          "rawReport": {
+            "bytes": 836,
+            "sha256": "684f1974acf928d6c7845584a33213d77a88d9261d4a62ca33f460fbc3999d39"
+          },
+          "measurements": {
+            "lane": "bottom-edit",
+            "requestedWidthPx": 650,
+            "requestedHeightPx": 900,
+            "actualBoundsPx": [
+              48,
+              59,
+              698,
+              959
+            ],
+            "fontScale": 1.2999999523162842,
+            "density": 1.625,
+            "decorWidthPx": 650,
+            "decorHeightPx": 900,
+            "activityWidthDp": 400,
+            "activityHeightDp": 554,
+            "multiWindow": true,
+            "targetCatalogIndex": 15,
+            "catalogTotal": 16,
+            "precedingOwnedRows": 15,
+            "before-editRootPx": [
+              650,
+              835
+            ],
+            "editorNodeCountAfterEdit": 0,
+            "after-edit-before-checkRootPx": [
+              650,
+              835
+            ],
+            "failureType": "ComposeTimeoutException",
+            "failureRootPx": [
+              650,
+              835
+            ],
+            "fixtureCleanup": "EXACT_BASELINE_RESTORED"
+          },
+          "captures": [
+            {
+              "name": "after-edit-before-check.png",
+              "width": 650,
+              "height": 835,
+              "bytes": 71447,
+              "sha256": "c8b7620b1900de8aab26235ad93117e4c74cb7bd9033e482f2d5c736e9ce57e6"
+            },
+            {
+              "name": "before-edit.png",
+              "width": 650,
+              "height": 835,
+              "bytes": 70573,
+              "sha256": "67a511a1348d79dffb7d569c987bc8609807a2b576a9750350b9bcbf827f6ecd"
+            },
+            {
+              "name": "failure.png",
+              "width": 650,
+              "height": 835,
+              "bytes": 70573,
+              "sha256": "67a511a1348d79dffb7d569c987bc8609807a2b576a9750350b9bcbf827f6ecd"
+            }
+          ],
+          "deviceCaptureDisposition": "retained_failed_evidence"
+        },
+        {
+          "passed": false,
+          "completed": 0,
+          "fixtureCleanupReceipts": 1,
+          "effectivePreferenceRestorations": 1,
+          "method": "longSavedIdentityDeleteCancelPreservesDraftAndStore",
+          "name": "console-2",
+          "instrumentationLog": {
+            "bytes": 5092,
+            "sha256": "e393e2ce20069acc0349b969df4314f5a760f3a3e98b4fc1cca91d192fd88982"
+          },
+          "rawReport": {
+            "bytes": 1822,
+            "sha256": "fce0a545bfa88f345b1c1b76a9f3ae7bc12da4cd9d9af4caf63da2a9a459d031"
+          },
+          "measurements": {
+            "lane": "delete-cancel",
+            "requestedWidthPx": 650,
+            "requestedHeightPx": 560,
+            "actualBoundsPx": [
+              48,
+              59,
+              698,
+              619
+            ],
+            "fontScale": 2,
+            "density": 1.625,
+            "decorWidthPx": 650,
+            "decorHeightPx": 560,
+            "activityWidthDp": 400,
+            "activityHeightDp": 345,
+            "multiWindow": true,
+            "before-editRootPx": [
+              650,
+              495
+            ],
+            "dialog-before-checkRootPx": [
+              520,
+              495
+            ],
+            "failureType": "AssertionError",
+            "failureRootPx": [
+              520,
+              495
+            ],
+            "fixtureCleanup": "EXACT_BASELINE_RESTORED"
+          },
+          "captures": [
+            {
+              "name": "before-edit.png",
+              "width": 650,
+              "height": 495,
+              "bytes": 26343,
+              "sha256": "78a94d90064982e5308f5984f0233acfc20fe079f3b5f78ea21e5865b1a975ed"
+            },
+            {
+              "name": "dialog-before-check.png",
+              "width": 520,
+              "height": 495,
+              "bytes": 23044,
+              "sha256": "2057d718f33f5573e9fa173204bb1a2d669cca2e8aa0ce5ac795e8609603584b"
+            },
+            {
+              "name": "failure.png",
+              "width": 520,
+              "height": 495,
+              "bytes": 23044,
+              "sha256": "2057d718f33f5573e9fa173204bb1a2d669cca2e8aa0ce5ac795e8609603584b"
+            }
+          ],
+          "deviceCaptureDisposition": "retained_failed_evidence"
+        }
+      ]
+    },
+    {
+      "startedAt": "2026-10-16T11:07:47.350853+00:00",
+      "build": "build-03",
+      "versionName": "0.1.7",
+      "versionCode": 8,
+      "dataCleared": false,
+      "productInstallAttempted": true,
+      "actualFrameworkFontRestoration": "DEFAULT_DISPLAY_CONFIG_MATCHED",
+      "cleanupErrors": [],
+      "device": {
+        "model": "HP Googlebook 14",
+        "release": "17",
+        "api": "37",
+        "build": "CL3B.260622.276.R2",
+        "incremental": "16560795",
+        "abi": "arm64-v8a"
+      },
+      "preFrameworkFontScale": 1.0,
+      "allCasesPassed": true,
+      "fontScaleLiteralRestored": true,
+      "postFrameworkFontScale": 1.0,
+      "absent-io.github.baitian6641.cloudy.console.test": true,
+      "absent-io.github.baitian6641.cloudy.desktop.test": true,
+      "absent-io.github.baitian6641.cloudy.platform.test": true,
+      "bootIdUnchanged": true,
+      "bootCountUnchanged": true,
+      "fontScaleUnchanged": true,
+      "densityUnchanged": true,
+      "nightModeUnchanged": true,
+      "vaultReceiptsUnchanged": true,
+      "profileRowsAndGenerationUnchanged": true,
+      "trustRowsAndGenerationUnchanged": true,
+      "effectivePreferencesRestored": true,
+      "installedProductApksMatchBuild": true,
+      "endedAt": "2026-10-16T11:08:20.336544+00:00",
+      "runnerPassed": true,
+      "attempt": "02",
+      "resultReceipt": {
+        "bytes": 12317,
+        "sha256": "052f8ab0bfaef02ea439adc0a4b16d04b23f71f43475dbc9a103f4b52a7c17d6"
+      },
+      "runner": {
+        "bytes": 16949,
+        "sha256": "5edeb003aa382ecbaa50328ba5d66ad57d4f3c3459d833f61d4ce8a59e02e83e"
+      },
+      "tests": [
+        {
+          "passed": true,
+          "completed": 1,
+          "fixtureCleanupReceipts": 1,
+          "effectivePreferenceRestorations": 1,
+          "method": "bottomSavedRowEditAutomaticallyRevealsEditor",
+          "name": "console-1",
+          "instrumentationLog": {
+            "bytes": 1970,
+            "sha256": "60589a84a48a88c24a08e6ecea7dfec6608e4801e813d437b0a5d5dd83a45017"
+          },
+          "rawReport": {
+            "bytes": 1344,
+            "sha256": "8e69f48863c7ca7f3cb58ac6501b4b20e66b77c76ffb81591b960b023544c501"
+          },
+          "measurements": {
+            "lane": "bottom-edit",
+            "requestedWidthPx": 650,
+            "requestedHeightPx": 900,
+            "actualBoundsPx": [
+              48,
+              59,
+              698,
+              959
+            ],
+            "fontScale": 1.2999999523162842,
+            "density": 1.625,
+            "decorWidthPx": 650,
+            "decorHeightPx": 900,
+            "activityWidthDp": 400,
+            "activityHeightDp": 554,
+            "multiWindow": true,
+            "targetCatalogIndex": 15,
+            "catalogTotal": 16,
+            "precedingOwnedRows": 15,
+            "before-editRootPx": [
+              650,
+              835
+            ],
+            "editorNodeCountAfterEdit": 1,
+            "after-edit-before-checkRootPx": [
+              650,
+              835
+            ],
+            "after-editRootPx": [
+              650,
+              835
+            ],
+            "measurements": [
+              {
+                "name": "label-field",
+                "unclippedPx": [
+                  46,
+                  111,
+                  604,
+                  217.99998
+                ],
+                "clippedPx": [
+                  46,
+                  111,
+                  604,
+                  218
+                ],
+                "viewportPx": [
+                  0,
+                  0,
+                  650,
+                  835
+                ]
+              },
+              {
+                "name": "editor-heading",
+                "unclippedPx": [
+                  46,
+                  46,
+                  316,
+                  91
+                ],
+                "clippedPx": [
+                  46,
+                  46,
+                  316,
+                  91
+                ],
+                "viewportPx": [
+                  0,
+                  0,
+                  650,
+                  835
+                ]
+              }
+            ],
+            "passed": true,
+            "fixtureCleanup": "EXACT_BASELINE_RESTORED"
+          },
+          "captures": [
+            {
+              "name": "after-edit-before-check.png",
+              "width": 650,
+              "height": 835,
+              "bytes": 57010,
+              "sha256": "0066dc5adf80de17f96bc0cf772b1b99281b844db5b1b6f5bccee7b0d25bd337"
+            },
+            {
+              "name": "after-edit.png",
+              "width": 650,
+              "height": 835,
+              "bytes": 57010,
+              "sha256": "0066dc5adf80de17f96bc0cf772b1b99281b844db5b1b6f5bccee7b0d25bd337"
+            },
+            {
+              "name": "before-edit.png",
+              "width": 650,
+              "height": 835,
+              "bytes": 71128,
+              "sha256": "f3c92fd0ae2149b90c126631507c1e27c316dc6274c8a41a88effa285131787d"
+            }
+          ],
+          "deviceCaptureDisposition": "removed_after_local_hash_verification"
+        },
+        {
+          "passed": true,
+          "completed": 1,
+          "fixtureCleanupReceipts": 1,
+          "effectivePreferenceRestorations": 1,
+          "method": "longSavedIdentityDeleteCancelPreservesDraftAndStore",
+          "name": "console-2",
+          "instrumentationLog": {
+            "bytes": 1984,
+            "sha256": "115a60e6febb385cbfc6af692eb7124097f083aa2835bfa23e248bc1d3fab2a4"
+          },
+          "rawReport": {
+            "bytes": 21462,
+            "sha256": "5fcacad73bae746ace05e939e40f4f31ed5183d11024c93eb7fc11282fafc16a"
+          },
+          "measurements": {
+            "lane": "delete-cancel",
+            "requestedWidthPx": 650,
+            "requestedHeightPx": 560,
+            "actualBoundsPx": [
+              48,
+              59,
+              698,
+              619
+            ],
+            "fontScale": 2,
+            "density": 1.625,
+            "decorWidthPx": 650,
+            "decorHeightPx": 560,
+            "activityWidthDp": 400,
+            "activityHeightDp": 345,
+            "multiWindow": true,
+            "before-editRootPx": [
+              650,
+              495
+            ],
+            "dialog-before-checkRootPx": [
+              520,
+              495
+            ],
+            "dialog-identity-0": {
+              "samples": [
+                {
+                  "unclippedPx": [
+                    39,
+                    39,
+                    481,
+                    181
+                  ],
+                  "clippedPx": [
+                    39,
+                    39,
+                    481,
+                    181
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    0,
+                    1
+                  ]
+                }
+              ],
+              "coveredLines": [
+                0,
+                1
+              ],
+              "requiredLines": 2
+            },
+            "dialog-identity-0RootPx": [
+              520,
+              495
+            ],
+            "dialog-identity-1": {
+              "samples": [
+                {
+                  "unclippedPx": [
+                    39,
+                    194,
+                    481,
+                    609
+                  ],
+                  "clippedPx": [
+                    39,
+                    194,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    102,
+                    481,
+                    517
+                  ],
+                  "clippedPx": [
+                    39,
+                    102,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    10,
+                    481,
+                    425
+                  ],
+                  "clippedPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    1,
+                    2
+                  ]
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    -82,
+                    481,
+                    333
+                  ],
+                  "clippedPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    3,
+                    4
+                  ]
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    -174,
+                    481,
+                    241
+                  ],
+                  "clippedPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    4,
+                    5
+                  ]
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    -266,
+                    481,
+                    149
+                  ],
+                  "clippedPx": [
+                    39,
+                    39,
+                    481,
+                    149
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    6
+                  ]
+                }
+              ],
+              "coveredLines": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "requiredLines": 7
+            },
+            "dialog-identity-1RootPx": [
+              520,
+              495
+            ],
+            "dialog-identity-2": {
+              "samples": [
+                {
+                  "unclippedPx": [
+                    39,
+                    622,
+                    481,
+                    915
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    530,
+                    481,
+                    823
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    438,
+                    481,
+                    731
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    346,
+                    481,
+                    639
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    254,
+                    481,
+                    547
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    162,
+                    481,
+                    455
+                  ],
+                  "clippedPx": [
+                    39,
+                    162,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    0
+                  ]
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    70,
+                    481,
+                    363
+                  ],
+                  "clippedPx": [
+                    39,
+                    70,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    -22,
+                    481,
+                    271
+                  ],
+                  "clippedPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    2,
+                    3
+                  ]
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    -114,
+                    481,
+                    179
+                  ],
+                  "clippedPx": [
+                    39,
+                    39,
+                    481,
+                    179
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    3,
+                    4
+                  ]
+                }
+              ],
+              "coveredLines": [
+                0,
+                1,
+                2,
+                3,
+                4
+              ],
+              "requiredLines": 5
+            },
+            "dialog-identity-2RootPx": [
+              520,
+              495
+            ],
+            "dialog-identity-3": {
+              "samples": [
+                {
+                  "unclippedPx": [
+                    39,
+                    928,
+                    481,
+                    1831.0001
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    836,
+                    481,
+                    1739
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    744,
+                    481,
+                    1647
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    652,
+                    481,
+                    1555
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    560,
+                    481,
+                    1463
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    468,
+                    481,
+                    1371
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    376,
+                    481,
+                    1279
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    284,
+                    481,
+                    1187
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    192,
+                    481,
+                    1095
+                  ],
+                  "clippedPx": [
+                    39,
+                    192,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    100,
+                    481,
+                    1003
+                  ],
+                  "clippedPx": [
+                    39,
+                    100,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    8,
+                    481,
+                    910.99994
+                  ],
+                  "clippedPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    1,
+                    2
+                  ]
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    -84,
+                    481,
+                    819
+                  ],
+                  "clippedPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    3,
+                    4
+                  ]
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    -176,
+                    481,
+                    727
+                  ],
+                  "clippedPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    4,
+                    5
+                  ]
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    -268,
+                    481,
+                    635
+                  ],
+                  "clippedPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    6,
+                    7
+                  ]
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    -360,
+                    481,
+                    543
+                  ],
+                  "clippedPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    7,
+                    8
+                  ]
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    -452,
+                    481,
+                    451
+                  ],
+                  "clippedPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    9,
+                    10
+                  ]
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    -544,
+                    481,
+                    359
+                  ],
+                  "clippedPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    10,
+                    11
+                  ]
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    -636,
+                    481,
+                    267
+                  ],
+                  "clippedPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    12,
+                    13
+                  ]
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    -728,
+                    481,
+                    175
+                  ],
+                  "clippedPx": [
+                    39,
+                    39,
+                    481,
+                    175
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    13,
+                    14
+                  ]
+                }
+              ],
+              "coveredLines": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14
+              ],
+              "requiredLines": 15
+            },
+            "dialog-identity-3RootPx": [
+              520,
+              495
+            ],
+            "dialog-identity-4": {
+              "samples": [
+                {
+                  "unclippedPx": [
+                    39,
+                    1844.0001,
+                    321,
+                    1890
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    1752,
+                    321,
+                    1798
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    1660,
+                    321,
+                    1706
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    1568,
+                    321,
+                    1614
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    1476,
+                    321,
+                    1522
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    1384,
+                    321,
+                    1430
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    1292,
+                    321,
+                    1338
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    1200,
+                    321,
+                    1246
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    1108,
+                    321,
+                    1154
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    1016,
+                    321,
+                    1062
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    923.99994,
+                    321,
+                    970
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    832,
+                    321,
+                    878
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    740,
+                    321,
+                    786
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    648,
+                    321,
+                    694
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    556,
+                    321,
+                    602
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    464,
+                    321,
+                    510
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    372,
+                    321,
+                    418
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    280,
+                    321,
+                    326
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    188,
+                    321,
+                    234
+                  ],
+                  "clippedPx": [
+                    39,
+                    188,
+                    321,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    177,
+                    321,
+                    223
+                  ],
+                  "clippedPx": [
+                    39,
+                    177,
+                    321,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    0
+                  ]
+                }
+              ],
+              "coveredLines": [
+                0
+              ],
+              "requiredLines": 1
+            },
+            "dialog-identity-4RootPx": [
+              520,
+              495
+            ],
+            "measurements": [
+              {
+                "name": "confirm-action",
+                "unclippedPx": [
+                  188,
+                  262,
+                  481,
+                  349
+                ],
+                "clippedPx": [
+                  188,
+                  262,
+                  481,
+                  349
+                ],
+                "viewportPx": [
+                  0,
+                  0,
+                  520,
+                  495
+                ]
+              },
+              {
+                "name": "cancel-action",
+                "unclippedPx": [
+                  312,
+                  369,
+                  481,
+                  456
+                ],
+                "clippedPx": [
+                  312,
+                  369,
+                  481,
+                  456
+                ],
+                "viewportPx": [
+                  0,
+                  0,
+                  520,
+                  495
+                ]
+              }
+            ],
+            "after-cancelRootPx": [
+              650,
+              495
+            ],
+            "passed": true,
+            "fixtureCleanup": "EXACT_BASELINE_RESTORED"
+          },
+          "captures": [
+            {
+              "name": "after-cancel.png",
+              "width": 650,
+              "height": 495,
+              "bytes": 33777,
+              "sha256": "9a10a0cad1a3f0e2d9a7e5bcee89aa5a6b55341dd8aa2aef8df34018e4907311"
+            },
+            {
+              "name": "before-edit.png",
+              "width": 650,
+              "height": 495,
+              "bytes": 25703,
+              "sha256": "1440dd136120a17b8417382cccab1111c1db3de67e48cb4228d0588d6b30b374"
+            },
+            {
+              "name": "dialog-before-check.png",
+              "width": 520,
+              "height": 495,
+              "bytes": 26672,
+              "sha256": "bbce30742cf9725ccf20f102574569271122f02228a90eee347d445943efddd8"
+            },
+            {
+              "name": "dialog-identity-0.png",
+              "width": 520,
+              "height": 495,
+              "bytes": 26672,
+              "sha256": "bbce30742cf9725ccf20f102574569271122f02228a90eee347d445943efddd8"
+            },
+            {
+              "name": "dialog-identity-1.png",
+              "width": 520,
+              "height": 495,
+              "bytes": 21865,
+              "sha256": "f298735fa1c28c9fba3dc4981fed91461e3cc806973ab8fc84b90ae7df54c829"
+            },
+            {
+              "name": "dialog-identity-2.png",
+              "width": 520,
+              "height": 495,
+              "bytes": 25928,
+              "sha256": "31a46cabd88d6153ac1b90b0e79185826cf248d8e64b59212ada586b30ffff51"
+            },
+            {
+              "name": "dialog-identity-3.png",
+              "width": 520,
+              "height": 495,
+              "bytes": 23223,
+              "sha256": "b306319b25ca475844bc0808538d75cd99bca14a4abd5031fe17ab305e84d3c8"
+            },
+            {
+              "name": "dialog-identity-4.png",
+              "width": 520,
+              "height": 495,
+              "bytes": 23358,
+              "sha256": "0988f7fe94f2960c4280bfa67f457ac2505ac5dd4ca76343326573778b03f8c2"
+            }
+          ],
+          "deviceCaptureDisposition": "removed_after_local_hash_verification"
+        },
+        {
+          "passed": true,
+          "completed": 1,
+          "fixtureCleanupReceipts": 1,
+          "effectivePreferenceRestorations": 1,
+          "method": "editorTypingAndRecreationPreserveViewportAndSelection",
+          "name": "console-3",
+          "instrumentationLog": {
+            "bytes": 1988,
+            "sha256": "269958c453e5651307997a2d7421ae95e3d5e69f3e915130e8bc323810c133c2"
+          },
+          "rawReport": {
+            "bytes": 3067,
+            "sha256": "23770260dad0f7c56b189204d7c82326331846d61aad7058e68fc244d9d55e8e"
+          },
+          "measurements": {
+            "lane": "typing-recreation",
+            "requestedWidthPx": 650,
+            "requestedHeightPx": 560,
+            "actualBoundsPx": [
+              48,
+              59,
+              698,
+              619
+            ],
+            "fontScale": 2,
+            "density": 1.625,
+            "decorWidthPx": 650,
+            "decorHeightPx": 560,
+            "activityWidthDp": 400,
+            "activityHeightDp": 345,
+            "multiWindow": true,
+            "targetCatalogIndex": 15,
+            "catalogTotal": 16,
+            "precedingOwnedRows": 15,
+            "before-editRootPx": [
+              650,
+              495
+            ],
+            "automatic-editorRootPx": [
+              650,
+              495
+            ],
+            "measurements": [
+              {
+                "name": "automatic-label",
+                "unclippedPx": [
+                  46,
+                  130,
+                  604,
+                  254
+                ],
+                "clippedPx": [
+                  46,
+                  130,
+                  604,
+                  254
+                ],
+                "viewportPx": [
+                  0,
+                  0,
+                  650,
+                  495
+                ]
+              },
+              {
+                "name": "automatic-heading",
+                "unclippedPx": [
+                  46,
+                  46,
+                  439,
+                  110
+                ],
+                "clippedPx": [
+                  46,
+                  46,
+                  439,
+                  110
+                ],
+                "viewportPx": [
+                  0,
+                  0,
+                  650,
+                  495
+                ]
+              },
+              {
+                "name": "before-typing",
+                "unclippedPx": [
+                  46,
+                  371,
+                  604,
+                  495
+                ],
+                "clippedPx": [
+                  46,
+                  371,
+                  604,
+                  495
+                ],
+                "viewportPx": [
+                  0,
+                  0,
+                  650,
+                  495
+                ]
+              },
+              {
+                "name": "after-typing",
+                "unclippedPx": [
+                  46,
+                  371,
+                  604,
+                  495
+                ],
+                "clippedPx": [
+                  46,
+                  371,
+                  604,
+                  495
+                ],
+                "viewportPx": [
+                  0,
+                  0,
+                  650,
+                  495
+                ]
+              },
+              {
+                "name": "after-recreation",
+                "unclippedPx": [
+                  46,
+                  371,
+                  604,
+                  495
+                ],
+                "clippedPx": [
+                  46,
+                  371,
+                  604,
+                  495
+                ],
+                "viewportPx": [
+                  0,
+                  0,
+                  650,
+                  495
+                ]
+              }
+            ],
+            "before-typingPortAndViewportPx": [
+              46,
+              371,
+              604,
+              495,
+              46,
+              371,
+              604,
+              495,
+              0,
+              0,
+              650,
+              495
+            ],
+            "beforeTypingFramework": [
+              48,
+              59,
+              698,
+              619,
+              2,
+              260,
+              400,
+              345
+            ],
+            "before-typingRootPx": [
+              650,
+              495
+            ],
+            "after-typingRootPx": [
+              650,
+              495
+            ],
+            "after-typingPortAndViewportPx": [
+              46,
+              371,
+              604,
+              495,
+              46,
+              371,
+              604,
+              495,
+              0,
+              0,
+              650,
+              495
+            ],
+            "after-typingFramework": [
+              48,
+              59,
+              698,
+              619,
+              2,
+              260,
+              400,
+              345
+            ],
+            "after-recreationRootPx": [
+              650,
+              495
+            ],
+            "after-recreationPortAndViewportPx": [
+              46,
+              371,
+              604,
+              495,
+              46,
+              371,
+              604,
+              495,
+              0,
+              0,
+              650,
+              495
+            ],
+            "after-recreationFramework": [
+              48,
+              59,
+              698,
+              619,
+              2,
+              260,
+              400,
+              345
+            ],
+            "selectionScope": "Text and selection only; IME composition unqualified",
+            "passed": true,
+            "fixtureCleanup": "EXACT_BASELINE_RESTORED"
+          },
+          "captures": [
+            {
+              "name": "after-recreation.png",
+              "width": 650,
+              "height": 495,
+              "bytes": 31873,
+              "sha256": "4d1fe638ba3a9feaeb1291af9eec7d4c40bcf6a24c91f20dd7c5d3faa2982f05"
+            },
+            {
+              "name": "after-typing.png",
+              "width": 650,
+              "height": 495,
+              "bytes": 31799,
+              "sha256": "6aab6c9b3d1bfb93da2f267e471f546422ff089f91dcb4b98f5571271087f82e"
+            },
+            {
+              "name": "automatic-editor.png",
+              "width": 650,
+              "height": 495,
+              "bytes": 36621,
+              "sha256": "6bcfa4fb76058824357e31293055f7f5e837b89ca99f624473466a4986613cda"
+            },
+            {
+              "name": "before-edit.png",
+              "width": 650,
+              "height": 495,
+              "bytes": 49775,
+              "sha256": "9d0f513f7315d7b9ff7ee69063f163d15f733dbbd1bb85b4286c24f5fae1c227"
+            },
+            {
+              "name": "before-typing.png",
+              "width": 650,
+              "height": 495,
+              "bytes": 30977,
+              "sha256": "146263352f69361bedfbd550ce90accdd80c336d874909eab78173ecc982a2c9"
+            }
+          ],
+          "deviceCaptureDisposition": "removed_after_local_hash_verification"
+        },
+        {
+          "passed": true,
+          "completed": 1,
+          "fixtureCleanupReceipts": 1,
+          "effectivePreferenceRestorations": 1,
+          "method": "bottomSavedRowEditAutomaticallyRevealsEditor",
+          "name": "desktop-1",
+          "instrumentationLog": {
+            "bytes": 1970,
+            "sha256": "1c71df694d907593896003c365555e0a2187c29c4c0318cf643fc4c9db681727"
+          },
+          "rawReport": {
+            "bytes": 1344,
+            "sha256": "bad4fe3b6bce48c3e461e657b2533c18214585b6fdfc726e863038151033b60b"
+          },
+          "measurements": {
+            "lane": "bottom-edit",
+            "requestedWidthPx": 650,
+            "requestedHeightPx": 900,
+            "actualBoundsPx": [
+              48,
+              59,
+              698,
+              959
+            ],
+            "fontScale": 1.2999999523162842,
+            "density": 1.625,
+            "decorWidthPx": 650,
+            "decorHeightPx": 900,
+            "activityWidthDp": 400,
+            "activityHeightDp": 554,
+            "multiWindow": true,
+            "targetCatalogIndex": 15,
+            "catalogTotal": 16,
+            "precedingOwnedRows": 15,
+            "before-editRootPx": [
+              650,
+              835
+            ],
+            "editorNodeCountAfterEdit": 1,
+            "after-edit-before-checkRootPx": [
+              650,
+              835
+            ],
+            "after-editRootPx": [
+              650,
+              835
+            ],
+            "measurements": [
+              {
+                "name": "label-field",
+                "unclippedPx": [
+                  46,
+                  111,
+                  604,
+                  217.99998
+                ],
+                "clippedPx": [
+                  46,
+                  111,
+                  604,
+                  218
+                ],
+                "viewportPx": [
+                  0,
+                  0,
+                  650,
+                  835
+                ]
+              },
+              {
+                "name": "editor-heading",
+                "unclippedPx": [
+                  46,
+                  46,
+                  316,
+                  91
+                ],
+                "clippedPx": [
+                  46,
+                  46,
+                  316,
+                  91
+                ],
+                "viewportPx": [
+                  0,
+                  0,
+                  650,
+                  835
+                ]
+              }
+            ],
+            "passed": true,
+            "fixtureCleanup": "EXACT_BASELINE_RESTORED"
+          },
+          "captures": [
+            {
+              "name": "after-edit-before-check.png",
+              "width": 650,
+              "height": 835,
+              "bytes": 62977,
+              "sha256": "8188c96c1d0f358b414ac42d2acc71a19984f60365ad12a885b62b1a7c7b3ee3"
+            },
+            {
+              "name": "after-edit.png",
+              "width": 650,
+              "height": 835,
+              "bytes": 62977,
+              "sha256": "8188c96c1d0f358b414ac42d2acc71a19984f60365ad12a885b62b1a7c7b3ee3"
+            },
+            {
+              "name": "before-edit.png",
+              "width": 650,
+              "height": 835,
+              "bytes": 71000,
+              "sha256": "9fded788056c09be5271286e78477492f085d4d10aaf634f6a310621e08ccfcd"
+            }
+          ],
+          "deviceCaptureDisposition": "removed_after_local_hash_verification"
+        },
+        {
+          "passed": true,
+          "completed": 1,
+          "fixtureCleanupReceipts": 1,
+          "effectivePreferenceRestorations": 1,
+          "method": "longSavedIdentityDeleteCancelPreservesDraftAndStore",
+          "name": "desktop-2",
+          "instrumentationLog": {
+            "bytes": 1984,
+            "sha256": "32e42b5a56da966a39d39afe4e884ac6a178691bc33a7dd9df91581d616da5b9"
+          },
+          "rawReport": {
+            "bytes": 21462,
+            "sha256": "4b19acb5e98cd23d2c57a6aa417b9048ada0f5b23ebbd86457ea8231828c237f"
+          },
+          "measurements": {
+            "lane": "delete-cancel",
+            "requestedWidthPx": 650,
+            "requestedHeightPx": 560,
+            "actualBoundsPx": [
+              48,
+              59,
+              698,
+              619
+            ],
+            "fontScale": 2,
+            "density": 1.625,
+            "decorWidthPx": 650,
+            "decorHeightPx": 560,
+            "activityWidthDp": 400,
+            "activityHeightDp": 345,
+            "multiWindow": true,
+            "before-editRootPx": [
+              650,
+              495
+            ],
+            "dialog-before-checkRootPx": [
+              520,
+              495
+            ],
+            "dialog-identity-0": {
+              "samples": [
+                {
+                  "unclippedPx": [
+                    39,
+                    39,
+                    481,
+                    181
+                  ],
+                  "clippedPx": [
+                    39,
+                    39,
+                    481,
+                    181
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    0,
+                    1
+                  ]
+                }
+              ],
+              "coveredLines": [
+                0,
+                1
+              ],
+              "requiredLines": 2
+            },
+            "dialog-identity-0RootPx": [
+              520,
+              495
+            ],
+            "dialog-identity-1": {
+              "samples": [
+                {
+                  "unclippedPx": [
+                    39,
+                    194,
+                    481,
+                    609
+                  ],
+                  "clippedPx": [
+                    39,
+                    194,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    102,
+                    481,
+                    517
+                  ],
+                  "clippedPx": [
+                    39,
+                    102,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    10,
+                    481,
+                    425
+                  ],
+                  "clippedPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    1,
+                    2
+                  ]
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    -82,
+                    481,
+                    333
+                  ],
+                  "clippedPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    3,
+                    4
+                  ]
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    -174,
+                    481,
+                    241
+                  ],
+                  "clippedPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    4,
+                    5
+                  ]
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    -266,
+                    481,
+                    149
+                  ],
+                  "clippedPx": [
+                    39,
+                    39,
+                    481,
+                    149
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    6
+                  ]
+                }
+              ],
+              "coveredLines": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "requiredLines": 7
+            },
+            "dialog-identity-1RootPx": [
+              520,
+              495
+            ],
+            "dialog-identity-2": {
+              "samples": [
+                {
+                  "unclippedPx": [
+                    39,
+                    622,
+                    481,
+                    915
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    530,
+                    481,
+                    823
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    438,
+                    481,
+                    731
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    346,
+                    481,
+                    639
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    254,
+                    481,
+                    547
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    162,
+                    481,
+                    455
+                  ],
+                  "clippedPx": [
+                    39,
+                    162,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    0
+                  ]
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    70,
+                    481,
+                    363
+                  ],
+                  "clippedPx": [
+                    39,
+                    70,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    -22,
+                    481,
+                    271
+                  ],
+                  "clippedPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    2,
+                    3
+                  ]
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    -114,
+                    481,
+                    179
+                  ],
+                  "clippedPx": [
+                    39,
+                    39,
+                    481,
+                    179
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    3,
+                    4
+                  ]
+                }
+              ],
+              "coveredLines": [
+                0,
+                1,
+                2,
+                3,
+                4
+              ],
+              "requiredLines": 5
+            },
+            "dialog-identity-2RootPx": [
+              520,
+              495
+            ],
+            "dialog-identity-3": {
+              "samples": [
+                {
+                  "unclippedPx": [
+                    39,
+                    928,
+                    481,
+                    1831.0001
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    836,
+                    481,
+                    1739
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    744,
+                    481,
+                    1647
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    652,
+                    481,
+                    1555
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    560,
+                    481,
+                    1463
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    468,
+                    481,
+                    1371
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    376,
+                    481,
+                    1279
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    284,
+                    481,
+                    1187
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    192,
+                    481,
+                    1095
+                  ],
+                  "clippedPx": [
+                    39,
+                    192,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    100,
+                    481,
+                    1003
+                  ],
+                  "clippedPx": [
+                    39,
+                    100,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    8,
+                    481,
+                    910.99994
+                  ],
+                  "clippedPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    1,
+                    2
+                  ]
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    -84,
+                    481,
+                    819
+                  ],
+                  "clippedPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    3,
+                    4
+                  ]
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    -176,
+                    481,
+                    727
+                  ],
+                  "clippedPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    4,
+                    5
+                  ]
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    -268,
+                    481,
+                    635
+                  ],
+                  "clippedPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    6,
+                    7
+                  ]
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    -360,
+                    481,
+                    543
+                  ],
+                  "clippedPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    7,
+                    8
+                  ]
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    -452,
+                    481,
+                    451
+                  ],
+                  "clippedPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    9,
+                    10
+                  ]
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    -544,
+                    481,
+                    359
+                  ],
+                  "clippedPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    10,
+                    11
+                  ]
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    -636,
+                    481,
+                    267
+                  ],
+                  "clippedPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    12,
+                    13
+                  ]
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    -728,
+                    481,
+                    175
+                  ],
+                  "clippedPx": [
+                    39,
+                    39,
+                    481,
+                    175
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    13,
+                    14
+                  ]
+                }
+              ],
+              "coveredLines": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14
+              ],
+              "requiredLines": 15
+            },
+            "dialog-identity-3RootPx": [
+              520,
+              495
+            ],
+            "dialog-identity-4": {
+              "samples": [
+                {
+                  "unclippedPx": [
+                    39,
+                    1844.0001,
+                    321,
+                    1890
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    1752,
+                    321,
+                    1798
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    1660,
+                    321,
+                    1706
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    1568,
+                    321,
+                    1614
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    1476,
+                    321,
+                    1522
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    1384,
+                    321,
+                    1430
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    1292,
+                    321,
+                    1338
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    1200,
+                    321,
+                    1246
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    1108,
+                    321,
+                    1154
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    1016,
+                    321,
+                    1062
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    923.99994,
+                    321,
+                    970
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    832,
+                    321,
+                    878
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    740,
+                    321,
+                    786
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    648,
+                    321,
+                    694
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    556,
+                    321,
+                    602
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    464,
+                    321,
+                    510
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    372,
+                    321,
+                    418
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    280,
+                    321,
+                    326
+                  ],
+                  "clippedPx": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    188,
+                    321,
+                    234
+                  ],
+                  "clippedPx": [
+                    39,
+                    188,
+                    321,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": []
+                },
+                {
+                  "unclippedPx": [
+                    39,
+                    177,
+                    321,
+                    223
+                  ],
+                  "clippedPx": [
+                    39,
+                    177,
+                    321,
+                    223
+                  ],
+                  "scrollViewportPx": [
+                    39,
+                    39,
+                    481,
+                    223
+                  ],
+                  "fullyVisibleLines": [
+                    0
+                  ]
+                }
+              ],
+              "coveredLines": [
+                0
+              ],
+              "requiredLines": 1
+            },
+            "dialog-identity-4RootPx": [
+              520,
+              495
+            ],
+            "measurements": [
+              {
+                "name": "confirm-action",
+                "unclippedPx": [
+                  188,
+                  262,
+                  481,
+                  349
+                ],
+                "clippedPx": [
+                  188,
+                  262,
+                  481,
+                  349
+                ],
+                "viewportPx": [
+                  0,
+                  0,
+                  520,
+                  495
+                ]
+              },
+              {
+                "name": "cancel-action",
+                "unclippedPx": [
+                  312,
+                  369,
+                  481,
+                  456
+                ],
+                "clippedPx": [
+                  312,
+                  369,
+                  481,
+                  456
+                ],
+                "viewportPx": [
+                  0,
+                  0,
+                  520,
+                  495
+                ]
+              }
+            ],
+            "after-cancelRootPx": [
+              650,
+              495
+            ],
+            "passed": true,
+            "fixtureCleanup": "EXACT_BASELINE_RESTORED"
+          },
+          "captures": [
+            {
+              "name": "after-cancel.png",
+              "width": 650,
+              "height": 495,
+              "bytes": 44932,
+              "sha256": "9517b63b162f3c8b5e358234a424ec029ddbd195a3ead1bf153d560eaa17cadd"
+            },
+            {
+              "name": "before-edit.png",
+              "width": 650,
+              "height": 495,
+              "bytes": 25703,
+              "sha256": "1440dd136120a17b8417382cccab1111c1db3de67e48cb4228d0588d6b30b374"
+            },
+            {
+              "name": "dialog-before-check.png",
+              "width": 520,
+              "height": 495,
+              "bytes": 26672,
+              "sha256": "bbce30742cf9725ccf20f102574569271122f02228a90eee347d445943efddd8"
+            },
+            {
+              "name": "dialog-identity-0.png",
+              "width": 520,
+              "height": 495,
+              "bytes": 26672,
+              "sha256": "bbce30742cf9725ccf20f102574569271122f02228a90eee347d445943efddd8"
+            },
+            {
+              "name": "dialog-identity-1.png",
+              "width": 520,
+              "height": 495,
+              "bytes": 21865,
+              "sha256": "f298735fa1c28c9fba3dc4981fed91461e3cc806973ab8fc84b90ae7df54c829"
+            },
+            {
+              "name": "dialog-identity-2.png",
+              "width": 520,
+              "height": 495,
+              "bytes": 25354,
+              "sha256": "e05803edd4710ef0bcd28dcd10ee03566e4fde31618fd1df5e772b548b841c7a"
+            },
+            {
+              "name": "dialog-identity-3.png",
+              "width": 520,
+              "height": 495,
+              "bytes": 23223,
+              "sha256": "b306319b25ca475844bc0808538d75cd99bca14a4abd5031fe17ab305e84d3c8"
+            },
+            {
+              "name": "dialog-identity-4.png",
+              "width": 520,
+              "height": 495,
+              "bytes": 23358,
+              "sha256": "0988f7fe94f2960c4280bfa67f457ac2505ac5dd4ca76343326573778b03f8c2"
+            }
+          ],
+          "deviceCaptureDisposition": "removed_after_local_hash_verification"
+        },
+        {
+          "passed": true,
+          "completed": 1,
+          "fixtureCleanupReceipts": 1,
+          "effectivePreferenceRestorations": 1,
+          "method": "editorTypingAndRecreationPreserveViewportAndSelection",
+          "name": "desktop-3",
+          "instrumentationLog": {
+            "bytes": 1988,
+            "sha256": "3a3f50376dfc6e07f3e0bd35fdb62f309d344f531a60e7fe050840778ab92c9f"
+          },
+          "rawReport": {
+            "bytes": 3067,
+            "sha256": "448e63378e1e1cd7f2f816c427974b7a6c4ed22ce2bc3d90922c58aec0e09c1f"
+          },
+          "measurements": {
+            "lane": "typing-recreation",
+            "requestedWidthPx": 650,
+            "requestedHeightPx": 560,
+            "actualBoundsPx": [
+              48,
+              59,
+              698,
+              619
+            ],
+            "fontScale": 2,
+            "density": 1.625,
+            "decorWidthPx": 650,
+            "decorHeightPx": 560,
+            "activityWidthDp": 400,
+            "activityHeightDp": 345,
+            "multiWindow": true,
+            "targetCatalogIndex": 15,
+            "catalogTotal": 16,
+            "precedingOwnedRows": 15,
+            "before-editRootPx": [
+              650,
+              495
+            ],
+            "automatic-editorRootPx": [
+              650,
+              495
+            ],
+            "measurements": [
+              {
+                "name": "automatic-label",
+                "unclippedPx": [
+                  46,
+                  130,
+                  604,
+                  254
+                ],
+                "clippedPx": [
+                  46,
+                  130,
+                  604,
+                  254
+                ],
+                "viewportPx": [
+                  0,
+                  0,
+                  650,
+                  495
+                ]
+              },
+              {
+                "name": "automatic-heading",
+                "unclippedPx": [
+                  46,
+                  46,
+                  439,
+                  110
+                ],
+                "clippedPx": [
+                  46,
+                  46,
+                  439,
+                  110
+                ],
+                "viewportPx": [
+                  0,
+                  0,
+                  650,
+                  495
+                ]
+              },
+              {
+                "name": "before-typing",
+                "unclippedPx": [
+                  46,
+                  371,
+                  604,
+                  495
+                ],
+                "clippedPx": [
+                  46,
+                  371,
+                  604,
+                  495
+                ],
+                "viewportPx": [
+                  0,
+                  0,
+                  650,
+                  495
+                ]
+              },
+              {
+                "name": "after-typing",
+                "unclippedPx": [
+                  46,
+                  371,
+                  604,
+                  495
+                ],
+                "clippedPx": [
+                  46,
+                  371,
+                  604,
+                  495
+                ],
+                "viewportPx": [
+                  0,
+                  0,
+                  650,
+                  495
+                ]
+              },
+              {
+                "name": "after-recreation",
+                "unclippedPx": [
+                  46,
+                  371,
+                  604,
+                  495
+                ],
+                "clippedPx": [
+                  46,
+                  371,
+                  604,
+                  495
+                ],
+                "viewportPx": [
+                  0,
+                  0,
+                  650,
+                  495
+                ]
+              }
+            ],
+            "before-typingPortAndViewportPx": [
+              46,
+              371,
+              604,
+              495,
+              46,
+              371,
+              604,
+              495,
+              0,
+              0,
+              650,
+              495
+            ],
+            "beforeTypingFramework": [
+              48,
+              59,
+              698,
+              619,
+              2,
+              260,
+              400,
+              345
+            ],
+            "before-typingRootPx": [
+              650,
+              495
+            ],
+            "after-typingRootPx": [
+              650,
+              495
+            ],
+            "after-typingPortAndViewportPx": [
+              46,
+              371,
+              604,
+              495,
+              46,
+              371,
+              604,
+              495,
+              0,
+              0,
+              650,
+              495
+            ],
+            "after-typingFramework": [
+              48,
+              59,
+              698,
+              619,
+              2,
+              260,
+              400,
+              345
+            ],
+            "after-recreationRootPx": [
+              650,
+              495
+            ],
+            "after-recreationPortAndViewportPx": [
+              46,
+              371,
+              604,
+              495,
+              46,
+              371,
+              604,
+              495,
+              0,
+              0,
+              650,
+              495
+            ],
+            "after-recreationFramework": [
+              48,
+              59,
+              698,
+              619,
+              2,
+              260,
+              400,
+              345
+            ],
+            "selectionScope": "Text and selection only; IME composition unqualified",
+            "passed": true,
+            "fixtureCleanup": "EXACT_BASELINE_RESTORED"
+          },
+          "captures": [
+            {
+              "name": "after-recreation.png",
+              "width": 650,
+              "height": 495,
+              "bytes": 41424,
+              "sha256": "82f8e12d26e015229f68c68f4ced534ddcf73e98c6b4fc278bec9ac148c2cb7a"
+            },
+            {
+              "name": "after-typing.png",
+              "width": 650,
+              "height": 495,
+              "bytes": 41348,
+              "sha256": "3c8b8f4b082ede0acded02c133aaa8316fec6f887cf17965b42b7109586b2a2a"
+            },
+            {
+              "name": "automatic-editor.png",
+              "width": 650,
+              "height": 495,
+              "bytes": 43095,
+              "sha256": "ab3c264e6ce17f5c9514764fab73d0ebeb8641280a57ffca575362ba73c155a0"
+            },
+            {
+              "name": "before-edit.png",
+              "width": 650,
+              "height": 495,
+              "bytes": 53324,
+              "sha256": "500010d0d09c89ef9574bd6530ccf144bd68919fcf6e468e2a811cd78ad977a3"
+            },
+            {
+              "name": "before-typing.png",
+              "width": 650,
+              "height": 495,
+              "bytes": 40495,
+              "sha256": "77019a432f1995d3daa5a0b3192577bcf14a34f99738d666251acbcf30e4930a"
+            }
+          ],
+          "deviceCaptureDisposition": "removed_after_local_hash_verification"
+        }
+      ]
+    },
+    {
+      "startedAt": "2026-10-16T11:09:30.918025+00:00",
+      "build": "build-03",
+      "versionName": "0.1.7",
+      "versionCode": 8,
+      "dataCleared": false,
+      "productInstallAttempted": false,
+      "actualFrameworkFontRestoration": "UNCHANGED_DEFAULT_DISPLAY_CONFIG",
+      "cleanupErrors": [],
+      "device": {
+        "model": "HP Googlebook 14",
+        "release": "17",
+        "api": "37",
+        "build": "CL3B.260622.276.R2",
+        "incremental": "16560795",
+        "abi": "arm64-v8a"
+      },
+      "preFrameworkFontScale": 1.0,
+      "absent-io.github.baitian6641.cloudy.console.test": true,
+      "absent-io.github.baitian6641.cloudy.desktop.test": true,
+      "absent-io.github.baitian6641.cloudy.platform.test": true,
+      "bootIdUnchanged": true,
+      "bootCountUnchanged": true,
+      "fontScaleUnchanged": true,
+      "densityUnchanged": true,
+      "nightModeUnchanged": true,
+      "vaultReceiptsUnchanged": true,
+      "profileRowsAndGenerationUnchanged": true,
+      "trustRowsAndGenerationUnchanged": true,
+      "effectivePreferencesRestored": true,
+      "installedProductApksMatchBuild": true,
+      "postFrameworkFontScale": 1.0,
+      "endedAt": "2026-10-16T11:09:35.783887+00:00",
+      "runnerPassed": false,
+      "attempt": "03",
+      "resultReceipt": {
+        "bytes": 1404,
+        "sha256": "899daee6eff8153b9becc04d90177f0e70b4334ddc2fc21608bcc8a0b6775f5d"
+      },
+      "runner": {
+        "bytes": 12419,
+        "sha256": "65f115002de4d8261fd2eca6450d0a368a6c9e94b96f98c35c524d933ab18731"
+      },
+      "tests": [
+        {
+          "passed": false,
+          "completed": 0,
+          "skipped": 0,
+          "testClassSuffix": "ProfileGeometryTest",
+          "name": "console-default-skip",
+          "instrumentationLog": {
+            "bytes": 3573,
+            "sha256": "422df7f969ac731368423ef98581aef90b9eb8f8f8822c730d262c3c078bf0d6"
+          }
+        }
+      ]
+    },
+    {
+      "startedAt": "2026-10-16T11:10:01.774790+00:00",
+      "build": "build-03",
+      "versionName": "0.1.7",
+      "versionCode": 8,
+      "dataCleared": false,
+      "productInstallAttempted": false,
+      "actualFrameworkFontRestoration": "UNCHANGED_DEFAULT_DISPLAY_CONFIG",
+      "cleanupErrors": [],
+      "device": {
+        "model": "HP Googlebook 14",
+        "release": "17",
+        "api": "37",
+        "build": "CL3B.260622.276.R2",
+        "incremental": "16560795",
+        "abi": "arm64-v8a"
+      },
+      "preFrameworkFontScale": 1.0,
+      "allCasesPassed": true,
+      "absent-io.github.baitian6641.cloudy.console.test": true,
+      "absent-io.github.baitian6641.cloudy.desktop.test": true,
+      "absent-io.github.baitian6641.cloudy.platform.test": true,
+      "bootIdUnchanged": true,
+      "bootCountUnchanged": true,
+      "fontScaleUnchanged": true,
+      "densityUnchanged": true,
+      "nightModeUnchanged": true,
+      "vaultReceiptsUnchanged": true,
+      "profileRowsAndGenerationUnchanged": true,
+      "trustRowsAndGenerationUnchanged": true,
+      "effectivePreferencesRestored": true,
+      "installedProductApksMatchBuild": true,
+      "postFrameworkFontScale": 1.0,
+      "endedAt": "2026-10-16T11:10:42.199698+00:00",
+      "runnerPassed": true,
+      "attempt": "04",
+      "resultReceipt": {
+        "bytes": 2094,
+        "sha256": "ebeeff0f845283347517ef1cade0dadbbcf62ea9ac330eff3c8da8c6e9777210"
+      },
+      "runner": {
+        "bytes": 12508,
+        "sha256": "90d02ad77eee286137c6272ebb5bc52510884a15ff229900c3f0265438a034d5"
+      },
+      "tests": [
+        {
+          "passed": true,
+          "completed": 0,
+          "skipped": 3,
+          "testClassSuffix": "ProfileGeometryTest",
+          "name": "console-default-skip",
+          "instrumentationLog": {
+            "bytes": 3573,
+            "sha256": "5ee92573a60de1ef866089bda89a42465e6d332523db045037aa467457a73151"
+          }
+        },
+        {
+          "passed": true,
+          "completed": 6,
+          "skipped": 0,
+          "testClassSuffix": "ProfileActivityTest",
+          "name": "console-profile-regressions",
+          "instrumentationLog": {
+            "bytes": 4520,
+            "sha256": "4470d0f954e14510e9410114453002d5f10bafdacfa509052b479dab8da91e87"
+          }
+        },
+        {
+          "passed": true,
+          "completed": 2,
+          "skipped": 0,
+          "testClassSuffix": "ProfileRecreationTest",
+          "name": "console-recreation-regressions",
+          "instrumentationLog": {
+            "bytes": 1661,
+            "sha256": "c847ab078aeb5251629ea071ac675c9884ddb13ab4b11c0e9af32fc96a070f4d"
+          }
+        },
+        {
+          "passed": true,
+          "completed": 0,
+          "skipped": 3,
+          "testClassSuffix": "ProfileGeometryTest",
+          "name": "desktop-default-skip",
+          "instrumentationLog": {
+            "bytes": 3573,
+            "sha256": "a60e37d12fb9b16687e3809cac497475f6ed3284a419532cb8cc2b90ae565540"
+          }
+        },
+        {
+          "passed": true,
+          "completed": 6,
+          "skipped": 0,
+          "testClassSuffix": "ProfileActivityTest",
+          "name": "desktop-profile-regressions",
+          "instrumentationLog": {
+            "bytes": 4520,
+            "sha256": "a3eec6d4854e9fe0dcdd6780c8f66b557bb531cacdd1e52573b08fe24f520bf0"
+          }
+        },
+        {
+          "passed": true,
+          "completed": 2,
+          "skipped": 0,
+          "testClassSuffix": "ProfileRecreationTest",
+          "name": "desktop-recreation-regressions",
+          "instrumentationLog": {
+            "bytes": 1661,
+            "sha256": "8076f40bd21f825101482f224e630bc4748c6036edc1ac0bdd36a273cbf67018"
+          }
+        }
+      ]
+    }
+  ],
+  "acceptance": {
+    "geometryPasses": 6,
+    "regressionPasses": 16,
+    "defaultOptInSkips": 6,
+    "preservedProductFailures": 2,
+    "preservedBuildFailures": 1,
+    "preservedRunnerParsingFailures": 1,
+    "acceptedVersionName": "0.1.7",
+    "acceptedVersionCode": 8,
+    "visualReview": "Leader viewed nine repaired Console samples and three Desktop samples; independent reviewer viewed nine repaired Desktop samples. Other captures are retained, not claimed individually reviewed."
+  },
+  "limitations": [
+    "No scaled Dark or other density qualification",
+    "No physical keyboard/pointer/IME/accessibility acceptance",
+    "No process-death or power-loss proof",
+    "Each long dialog text is covered across scroll positions, not simultaneously visible",
+    "Non-opt-in skips are not passing feature cases",
+    "Private serial, catalog generations/rows, fixture IDs, labels and hostnames excluded"
+  ]
+}

@@ -727,4 +727,11 @@ The [native display contract](../04-design/native-display-settings.md) records e
 - **G178** refreshed — [ActivityScenario](https://developer.android.com/reference/androidx/test/core/app/ActivityScenario). `launch(Intent, Bundle)` carries public launch options to the actual Activity; selected Test core1.7.0 unchanged. Lifecycle completion does not certify geometry or process death.
 - **G219** — [Android14 nonlinear scaling](https://developer.android.com/about/versions/14/features). API34 supports200% scaling; retain sp text/line heights and do not derive pixels from a linear fontScale multiplier. Page visibly updated2026-10-01. The real-system1.3/2.0 probes restore the exact prior literal setting and verify default-display configuration.
 
-The [native workspace review](../04-design/native-workspace-review.md) separates the existing0.1.6 local display result, the [eight measured geometry cases](../../qualification/results/P1-S2/2026-10-16-native-window-geometry.md) mapped by API57, and the still-unqualified full engine scene. Source-review profile dialog/reveal risks are unconfirmed until observed at runtime.
+The [native workspace review](../04-design/native-workspace-review.md) separates the existing0.1.6 local display result, the [eight measured geometry cases](../../qualification/results/P1-S2/2026-10-16-native-window-geometry.md) mapped by API57, and the still-unqualified full engine scene. The subsequent profile result below observes and repairs both profile dialog/reveal risks.
+
+
+## Profile reveal and scaled confirmation — 2026-10-16
+
+G212 is rechecked for immediate `LazyListState.scrollToItem` and saved list state. **G220** [scroll modifiers](https://developer.android.com/develop/ui/compose/touch-input/scroll/scroll-modifiers), **G221** [keyed effects](https://developer.android.com/develop/ui/compose/side-effects) and **G222** [Material dialog slots](https://developer.android.com/develop/ui/compose/components/dialog) support the existing-library repair. Only G222 has a newly inspected visible update date,2026-10-01; unknown dates remain null.
+
+The [source review](../06-validation/2026-10-16-profile-geometry-review.md) and [actual result](../../qualification/results/P1-S2/2026-10-16-profile-geometry.md) separate two observed0.1.6 failures, compiled0.1.7 repairs, six geometry passes, sixteen regression passes and six default opt-in skips. API58 records the exact library symbols, retained lifecycle/failure policy and partial qualification. No new platform capability, dependency or stage prerequisite is introduced.

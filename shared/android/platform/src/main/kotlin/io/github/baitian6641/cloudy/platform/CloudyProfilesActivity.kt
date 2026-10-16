@@ -8,17 +8,23 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.semantics
 import io.github.baitian6641.cloudy.design.CloudyControlMetrics
 import io.github.baitian6641.cloudy.domain.ConnectionProfile
 import io.github.baitian6641.cloudy.domain.ConnectionProfileDraft
@@ -88,17 +94,25 @@ class CloudyProfilesActivity : ComponentActivity() {
                         modifier = Modifier.testTag("profile_dialog"),
                         shape = RoundedCornerShape(CloudyControlMetrics.dialogRadius),
                         containerColor = MaterialTheme.colorScheme.surfaceContainer,
-                        title = { Text(getString(request.title), style = MaterialTheme.typography.titleLarge) },
                         text = {
-                            Column {
-                                Text(getString(request.body), style = MaterialTheme.typography.bodyMedium)
-                                request.saved?.let { saved ->
-                                    Text(saved.label, style = MaterialTheme.typography.bodyLarge)
-                                    val host = if (':' in saved.host) "[${saved.host}]" else saved.host
-                                    Text("${saved.protocol.wireId.uppercase()} · $host:${saved.port}",
-                                        style = MaterialTheme.typography.bodyMedium)
-                                    Text(getString(R.string.profile_revision, saved.revision),
-                                        style = MaterialTheme.typography.bodySmall)
+                            key(request) {
+                                // In a short scaled window, a fixed title can consume the whole
+                                // body viewport. Scroll all explanatory content together while
+                                // keeping both actions fixed and this exact confirmation frozen.
+                                Column(Modifier.verticalScroll(rememberScrollState()),
+                                    verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                                    Text(getString(request.title), style = MaterialTheme.typography.titleLarge,
+                                        color = MaterialTheme.colorScheme.onSurface,
+                                        modifier = Modifier.semantics { heading() })
+                                    Text(getString(request.body), style = MaterialTheme.typography.bodyMedium)
+                                    request.saved?.let { saved ->
+                                        Text(saved.label, style = MaterialTheme.typography.bodyLarge)
+                                        val host = if (':' in saved.host) "[${saved.host}]" else saved.host
+                                        Text("${saved.protocol.wireId.uppercase()} · $host:${saved.port}",
+                                            style = MaterialTheme.typography.bodyMedium)
+                                        Text(getString(R.string.profile_revision, saved.revision),
+                                            style = MaterialTheme.typography.bodySmall)
+                                    }
                                 }
                             }
                         },

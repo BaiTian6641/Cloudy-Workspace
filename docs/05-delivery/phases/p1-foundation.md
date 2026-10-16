@@ -47,6 +47,8 @@ Apply [D14 desktop interaction](../../04-design/desktop-terminal-interaction-con
 
 **Owner:** Design/Android developer. **Prerequisites:** P1-S1. **Status:** in progress. The [committed-context increment](../../../qualification/results/P1-S2/2026-10-16-committed-context.md) is a bounded first result; the work and exits below remain required.
 
+The [profile geometry follow-through](../../../qualification/results/P1-S2/2026-10-16-profile-geometry.md) repairs two actual manager defects and passes six scaled geometry plus sixteen profile/lifecycle regressions on0.1.7. It narrows the manager review; physical input/accessibility and the full component/engine scene below remain required.
+
 **Required supported capabilities:** CAP-FOUNDATION.
 
 Work:

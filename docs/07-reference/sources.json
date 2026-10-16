@@ -6014,7 +6014,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-16",
       "sourceUpdatedOn": "2026-10-01",
-      "note": "LazyColumn item keys must be stable/unique and supported by Android Bundle (primitive, enum or Parcelable). A custom domain peer class is not an eligible saved-state key; SSH trust UI uses an unambiguous primitive key. rememberLazyListState and animateScrollToItem support deliberate selected-details visibility. These are library guidance, not a rendered or device pass. Owner: Android/platform; P1-S2/P1-S3. Existing pinned Compose stack unchanged.",
+      "note": "LazyColumn item keys must be stable/unique and supported by Android Bundle (primitive, enum or Parcelable). A custom domain peer class is not an eligible saved-state key; SSH trust UI uses an unambiguous primitive key. rememberLazyListState and animateScrollToItem support deliberate selected-details visibility. These are library guidance, not a rendered or device pass. Owner: Android/platform; P1-S2/P1-S3. Existing pinned Compose stack unchanged. Profile editor follow-up uses immediate LazyListState.scrollToItem on accepted editor identity changes, with saveable reveal/list state preserving ordinary typing and restored scroll; compiler/device evidence is separate.",
       "refresh": "Before changing trust-list identity, saved list state or selected-details scrolling."
     },
     {
@@ -6100,6 +6100,42 @@
       "sourceUpdatedOn": "2026-10-01",
       "note": "Android14/API34 supports nonlinear font scaling to200%; sp text/line heights use framework conversion. Configuration.fontScale is informational, not a linear pixel multiplier; avoid scaledDensity/manual equations. P1-S2 probe exercises real system font scale1.3/2.0, records actual Activity configuration, and restores exact prior literal setting. No context-only configuration override. Fallback: retained sp typography and unqualified geometry until actual rendered/reachable-control observations. Owner: design/Android; no product API-floor change. Eight actual local-workspace cases now pass at measured narrow/short windows and font scales1.3/2.0; see API57 and qualification/results/P1-S2/2026-10-16-native-window-geometry.md for bounded evidence, restoration and remaining gates.",
       "refresh": "Before changing native geometry/font-scale qualification or target Android windowing behavior."
+    },
+    {
+      "id": "G220",
+      "title": "Compose ordinary scrolling modifiers",
+      "url": "https://developer.android.com/develop/ui/compose/touch-input/scroll/scroll-modifiers",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "verticalScroll with rememberScrollState supplies ordinary bounded content scrolling. Cloudy profile confirmations put title, explanation and exact frozen identity in one region so a fixed scaled title cannot consume the body viewport; actions stay outside. Owner: Android/platform; P1-S2/P1-S3. Existing Compose foundation1.12.1 unchanged; actual geometry remains a qualification task.",
+      "refresh": "Before changing profile editor reveal, confirmation layout or Compose dependency versions."
+    },
+    {
+      "id": "G221",
+      "title": "Compose keyed side effects",
+      "url": "https://developer.android.com/develop/ui/compose/side-effects",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "LaunchedEffect cancels/restarts when keys change. Profile reveal keys only the accepted editorId, not text, selection, protocol or validation messages. A rememberSaveable observed-ID marker prevents an existing restored editor from becoming a new reveal. Existing runtime1.12.1 unchanged. Owner: Android/platform; P1-S2/P1-S3; fallback retains normal list scrolling without granting writes or focus.",
+      "refresh": "Before changing profile editor reveal, confirmation layout or Compose dependency versions."
+    },
+    {
+      "id": "G222",
+      "title": "Compose Material confirmation dialog content and action slots",
+      "url": "https://developer.android.com/develop/ui/compose/components/dialog",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2026-10-01",
+      "note": "AlertDialog provides separate title/text/confirmButton/dismissButton slots; Google recommends it for ordinary two-button confirmations. Cloudy omits the separate fixed title and renders an explicit heading with the frozen content in the scrollable text slot, preserving action slots. This is a Cloudy response to measured short-window geometry, not a claim that the guide mandates this arrangement. Existing Material3 1.4.0 unchanged; owner Android/platform; P1-S2/P1-S3; qualify actual scaled text and action reachability.",
+      "refresh": "Before changing profile editor reveal, confirmation layout or Compose dependency versions."
     }
   ]
 }

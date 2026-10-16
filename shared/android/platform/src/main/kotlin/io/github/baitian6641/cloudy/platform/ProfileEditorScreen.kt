@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.union
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
@@ -25,6 +26,11 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
@@ -39,7 +45,7 @@ import io.github.baitian6641.cloudy.domain.ConnectionProfile
 import io.github.baitian6641.cloudy.domain.ConnectionProtocol
 import io.github.baitian6641.cloudy.domain.WindowOwner
 
-/** Stateless local-profile presentation. The Activity owns validation, confirmations and all I/O. */
+/** Local-profile presentation. The Activity owns drafts, validation, confirmations and all I/O. */
 @Composable
 internal fun ProfileEditorScreen(
     appName: String,
@@ -62,8 +68,25 @@ internal fun ProfileEditorScreen(
     onReload: () -> Unit,
     onFinish: () -> Unit,
 ) {
+    val listState = rememberLazyListState()
+    val editorId = draft?.editorId
+    var revealedEditorId by rememberSaveable { mutableStateOf(editorId) }
+    LaunchedEffect(editorId) {
+        if (editorId != revealedEditorId) {
+            if (editorId != null) {
+                // Reveal an accepted new/replaced editor, including a normalized saved/reloaded
+                // draft. Field/selection changes retain its ID and must not steal the viewport.
+                val editorIndex = 2 + (if (message != null) 1 else 0) + (if (outcomeUnknown) 1 else 0)
+                listState.scrollToItem(editorIndex)
+            }
+            revealedEditorId = editorId
+        }
+    }
+    // Both the list and reveal marker survive recreation. A restored draft is not a new
+    // navigation request, and revealing an editor never requests focus or authorizes a write.
     Surface(color = MaterialTheme.colorScheme.background, modifier = Modifier.fillMaxSize()) {
         LazyColumn(
+            state = listState,
             modifier = Modifier.fillMaxSize()
                 .windowInsetsPadding(WindowInsets.safeDrawing.union(WindowInsets.ime))
                 .testTag("profile_screen"),
