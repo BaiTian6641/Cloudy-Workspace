@@ -144,6 +144,8 @@ Record evidence under `qualification/results/P1-S5/` using the [run template](..
 
 ## P1-S4 — CI, dependency decision, and foundation gate
 
+The [VNC engine construction](../../../qualification/results/P1-S4/2026-10-16-vnc-engine-construction.md) is now an independently compiled Android library with actual JNI/Java, eight owner JVM passes and both zero-issue Lint variants. It remains outside the root graph and Desktop dependency; exact runtime/adoption, distribution closure and every stage prerequisite/exit below remain required. This bounded construction does not activate or finish P1-S4.
+
 **Owner:** Maintainer/build developer. **Prerequisites:** P1-S2, P1-S3. **Status:** planned.
 
 Work:

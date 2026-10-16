@@ -1,0 +1,364 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "HOST-JOBRECORDER02 actual finite Linux public recorder managed-job composition",
+  "acceptance": "Scoped native two-case source-bound evidence review; no stage/capability/service promotion",
+  "hostExecutableVersion": "0.1.3",
+  "baseCommit": "3bc0f011428a2f6ce8f126ed34d159012886510f",
+  "sources": [
+    {
+      "path": "host/core/internal/jobrecorder/capture_settle_native_linux_test.go",
+      "sha256": "26cdb908a0c9319b3c32682d8e8b5ff9c3f087ca2ca0b5af96fdf28e16e1b3ec"
+    },
+    {
+      "path": "host/core/internal/jobrecorder/capture_wait_native_linux_test.go",
+      "sha256": "cf1e861d3873a1c246da1a9b33211fc8f89147944d43c3650bf5508018e53f17"
+    },
+    {
+      "path": "host/core/internal/jobrecorder/native_linux_test.go",
+      "sha256": "0a24d8a3cd8ef695df29e1039602166082c9f5067ba40dadefd3ed7d77971d3d"
+    }
+  ],
+  "protectedSourceBindings": {
+    "host/core/internal/jobs/backend_linux.go": "3cfae7cdb0bc3162bd11aa953bd56be22b23a5fe7c2e7262b7a5c5b48ae24491",
+    "host/core/internal/jobs/backend_linux_test.go": "b63cfd30d67347bf6fc793e14cb28d7b191a8800a37016973a25157a02f12382",
+    "host/core/internal/jobs/backend_windows_amd64.go": "1365ac6de9ba97b981e1afd78be1d280214dedec1aabcbb3dc9d5e9a8ff5fabc",
+    "host/core/internal/jobs/backend_windows_amd64_test.go": "bd5b72428a68bfc415810e1b48db66e805902e7152a3c43c9a9d33ac63cc383e",
+    "host/core/internal/jobs/native_linux_test.go": "492b1dc494251bcbbde72144fd902328860734cac70e18c86ae88377d20ea3fd",
+    "host/core/internal/jobs/native_windows_amd64_test.go": "d5ec836c2340b69c897fa84de119920b4090fa6ac36c1d68c051eab14035416f",
+    "host/core/internal/jobs/types.go": "1abe1a972cb31f2939487dfa0861159a4592b278c53f0e9febb66311789e8b7e",
+    "host/core/internal/jobs/types_test.go": "43d8fcb834d152f6faf8463e5722a922340879976a276d139203e6a1cd0a459c",
+    "host/core/internal/jobevents/cursor.go": "c5ae95b43044513bf3af3e577cb74de3f1a318f455564f33f64f13a8184b2731",
+    "host/core/internal/jobevents/process_linux_test.go": "5950a2ea3df2dd14780fbadc53558da061c499fb817759c13e4fec22a8e354a3",
+    "host/core/internal/jobevents/record.go": "48e9fb40072515628d05d62f24911b2339f2ec14207719119a3948be34cbbef3",
+    "host/core/internal/jobevents/store_linux.go": "77b16682a6f450fc3ad065aebb97ca169fd7cb52330b52de12442a2b83124283",
+    "host/core/internal/jobevents/store_linux_test.go": "58a8d24cda113df0eb330bb4845f90a4a4d0131483fcc3bffeafc45cb951721a",
+    "host/core/internal/bootidentity/boot_linux.go": "63e317107b0e42781456b7756326463366f81a7faf21315b5cbbf003ffd20698",
+    "host/core/internal/bootidentity/boot_linux_test.go": "7a5365d5daef1c59cbcafde8ce7892867e291a462f8c3cb5074fcbd1a1f0fcfc",
+    "host/core/internal/installation/profile_other.go": "e11b2c0924241c088178f1bff11efdc518b47adb79254433c54fec68d2c7035c",
+    "host/core/internal/installation/profile_windows.go": "46a938b39cfe99aaaf26914e9fb2baac6b905a8ff8fd9c8041fe0e954e602e65",
+    "host/core/internal/installation/profile_windows_test.go": "04c2e38c60bb3fbab7bf822daa080e6fc035957d5d47087044a3fe9dfbd3403a",
+    "host/core/internal/installation/store.go": "d061f32a7d10ab89cae77a2d8fb41c685f600a686bb37c5c8d7e2a89c1b5bd94",
+    "host/core/internal/installation/store_test.go": "4b3ddb3669e6c4c4c9c80fcbd6176407e6a65f74686ef7a73aca4ed909d49510",
+    "host/core/internal/installation/sync_other_test.go": "5f7844f64e5e7064c55dd9d5c71eedc7e4812839d9fdec32723a8e20de9af0d5",
+    "host/core/internal/installation/sync_windows_test.go": "a0818fbf173d2107f9b21db24cd430bab9ec97e973338f546cbb2d884b48ab96",
+    "host/core/internal/installation/windows_record.go": "fddede14adfb842694be4c623271a2c65953cd89bc3408bde8f17dff446ab1a0",
+    "host/core/internal/installation/windows_record_test.go": "4b9470ccc904b3269e609afe013a5f32a8c51555f3828b72e0de4ab87e3a4bf0",
+    "host/core/internal/localpeer/peer_darwin.go": "8fc49a4691b4752f4548748947f29a575e682d7bda6a3706b0a3ebe61704d711",
+    "host/core/internal/localpeer/peer_darwin_test.go": "26f95dae319bd1fdd2fa8b6cc957feeedc6992b5b9c4a5f63ea2aa4646d29d1d",
+    "host/core/internal/localpeer/peer_linux.go": "54e490a636034f58766d02d244f6778b2acb970ac301d642c51afed302deb3fc",
+    "host/core/internal/localpeer/peer_linux_test.go": "649221d1e2fbae848ae9dd380ef770103de35a2a89b8a12fea3ab657ebeafd61",
+    "host/core/internal/diagnostic/context_linux.go": "c0679b7da593a08555eb268dea43474fa8183e8f7ae21269fa5048d450400456",
+    "host/core/internal/diagnostic/context_linux_test.go": "275daa487fd11ad4dbc212f635d71e56cf3b47c8220dd0f2b4c8bd410ea333a0",
+    "host/core/internal/diagnostic/context_other.go": "341af4180601c96f93a5268d212fa26c5ad4a3c5e6bcea1494096b9a2f873d1b",
+    "host/core/internal/diagnostic/context_other_test.go": "ebdf154d821d873d85195d6a52311d6075444ffc5fe8c02950b9eb1833ab4af6",
+    "host/core/internal/diagnostic/diagnostic.go": "ae62a40dbb4bdfa1aaaa538fd6f9e3c7a81d56e8a41112629f3bfb324b25667a",
+    "host/core/internal/diagnostic/diagnostic_test.go": "27fd5766b883047abc8e6bfcbe2eaf20c197e320ffdaa33a43c7acb6377556b2",
+    "host/core/internal/jobrecorder/recorder_linux.go": "e78fbc3f2a2fdea13263dc46016fa1824c7eceb54787f010389ca19365402c0f",
+    "host/core/internal/jobrecorder/recorder_linux_test.go": "4bf7037f89f6f87a73ad3b826a8ee3e8fb5ad6fb8028acf71199e21811bd4715"
+  },
+  "moduleBindings": {
+    "host/core/go.mod": "216f549ff9871fea87351318ca6420efdfefeeaf1c0afa6a944ec41d2de70b4c",
+    "host/core/go.sum": "4e77c00cd0a32a85bd48f74790fc4f5fdb35d5e8e715d4b1fb131bcf7ce2d60a",
+    "host/core/THIRD_PARTY_NOTICES.txt": "3bbd241058c57c1c5aee6dd00774f60d585225dd152c037eb4738ab7f47736a7"
+  },
+  "runtime": {
+    "os": "Linux",
+    "kernel": "7.0.0-38-generic",
+    "architecture": "x86_64"
+  },
+  "compileChecks": [
+    {
+      "label": "compiler",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "env",
+        "GOVERSION"
+      ],
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "format",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/gofmt",
+        "-l",
+        "${REPO}/host/core/internal/jobrecorder"
+      ],
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "vet",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "vet",
+        "-mod=readonly",
+        "./internal/jobrecorder"
+      ],
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "compile-race",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "test",
+        "-race",
+        "-c",
+        "-mod=readonly",
+        "-o",
+        "${REPO}/.cache/host-jobrecorder-02/verification03/jobrecorder-linux-amd64.test",
+        "./internal/jobrecorder"
+      ],
+      "exitCode": 0,
+      "passed": true
+    }
+  ],
+  "verification": {
+    "path": ".cache/host-jobrecorder-02/verification03/result.json",
+    "sha256": "2f9a68b0a3ad343b6b0fb734b827d1117be6238cbaadb43657b54ef48357b618"
+  },
+  "artifact": {
+    "path": ".cache/host-jobrecorder-02/verification03/jobrecorder-linux-amd64.test",
+    "sha256": "ffc745f1957c0fc7dea5699a306c2c5a0950edc1893cda29a2a9269fb2847b11"
+  },
+  "nativeResult": {
+    "path": ".cache/host-jobrecorder-02/native-execution/run-43b2f24a8193d94fa3d4b72e5e80966f/result.json",
+    "sha256": "d148da3d539fab4518fd72ac97d2a40381767f15ff5572cea7af2561f950cd99"
+  },
+  "nativeTests": {
+    "subtestsPassed": 2,
+    "topLevelHarnessPasses": 1,
+    "aggregateNamedPassesIncludingTop": 3,
+    "skips": 0,
+    "failures": 0,
+    "actualManagedJobs": 2,
+    "testStderrEmpty": true,
+    "topLevelReportedSeconds": 1.08,
+    "cases": [
+      "capture-wait",
+      "capture-settle"
+    ],
+    "previousFiveSeamTestsRerun": false,
+    "nativeDatabaseReopen": false,
+    "testTimeoutSeconds": 35,
+    "bootstrapWaitSeconds": 45,
+    "jobRuntimeSeconds": 4,
+    "heldChildFallbackSeconds": 10
+  },
+  "retirement": {
+    "ownedChildAbsenceAssertionsPassed": true,
+    "outerCgroupAbsentParentEvidence": true,
+    "unitTerminal": {
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0"
+    },
+    "stopOrRecoveryUsed": false
+  },
+  "rawEvidence": [
+    {
+      "path": ".cache/host-jobrecorder-02/native-execution/run-43b2f24a8193d94fa3d4b72e5e80966f/bootstrap-admitted.json",
+      "sha256": "30bc15ffea43bad4b502aaecc3ab71dd9a27b90769d65083238e8457043fdf92"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/native-execution/run-43b2f24a8193d94fa3d4b72e5e80966f/bootstrap-terminal.json",
+      "sha256": "8c604862652db85c6407a60ab91a7f6aed2a07f9527764bf9ca268e56f8efb3d"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/native-execution/run-43b2f24a8193d94fa3d4b72e5e80966f/control-000.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/native-execution/run-43b2f24a8193d94fa3d4b72e5e80966f/control-000.stdout",
+      "sha256": "9e710532c5454e6bc16334b171e516ee1bf2305487b03f69ae0e9fbcc5502fe1"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/native-execution/run-43b2f24a8193d94fa3d4b72e5e80966f/control-001.stderr",
+      "sha256": "e2196c900e24446d619a86d97aaad85989522997d261b75a69432a35cd51f6c4"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/native-execution/run-43b2f24a8193d94fa3d4b72e5e80966f/control-001.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/native-execution/run-43b2f24a8193d94fa3d4b72e5e80966f/control-002.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/native-execution/run-43b2f24a8193d94fa3d4b72e5e80966f/control-002.stdout",
+      "sha256": "2406836b3f248df0d5cd0f585f1095f8ad864b944c8e3e4f68e89305d6acad83"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/native-execution/run-43b2f24a8193d94fa3d4b72e5e80966f/control-003.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/native-execution/run-43b2f24a8193d94fa3d4b72e5e80966f/control-003.stdout",
+      "sha256": "affa0211a9797ff38d0d98c3a16970692e200c119efcf30094bd817d3238a35d"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/native-execution/run-43b2f24a8193d94fa3d4b72e5e80966f/control-004.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/native-execution/run-43b2f24a8193d94fa3d4b72e5e80966f/control-004.stdout",
+      "sha256": "affa0211a9797ff38d0d98c3a16970692e200c119efcf30094bd817d3238a35d"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/native-execution/run-43b2f24a8193d94fa3d4b72e5e80966f/control-005.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/native-execution/run-43b2f24a8193d94fa3d4b72e5e80966f/control-005.stdout",
+      "sha256": "affa0211a9797ff38d0d98c3a16970692e200c119efcf30094bd817d3238a35d"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/native-execution/run-43b2f24a8193d94fa3d4b72e5e80966f/control-006.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/native-execution/run-43b2f24a8193d94fa3d4b72e5e80966f/control-006.stdout",
+      "sha256": "affa0211a9797ff38d0d98c3a16970692e200c119efcf30094bd817d3238a35d"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/native-execution/run-43b2f24a8193d94fa3d4b72e5e80966f/control-007.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/native-execution/run-43b2f24a8193d94fa3d4b72e5e80966f/control-007.stdout",
+      "sha256": "affa0211a9797ff38d0d98c3a16970692e200c119efcf30094bd817d3238a35d"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/native-execution/run-43b2f24a8193d94fa3d4b72e5e80966f/control-008.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/native-execution/run-43b2f24a8193d94fa3d4b72e5e80966f/control-008.stdout",
+      "sha256": "9e710532c5454e6bc16334b171e516ee1bf2305487b03f69ae0e9fbcc5502fe1"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/native-execution/run-43b2f24a8193d94fa3d4b72e5e80966f/gate.json",
+      "sha256": "732d90bb90c46025dc44e06e5b9cb55e13394a439e39b968b8be8425197e4295"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/native-execution/run-43b2f24a8193d94fa3d4b72e5e80966f/native.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/native-execution/run-43b2f24a8193d94fa3d4b72e5e80966f/native.stdout",
+      "sha256": "10d81d9adee122c7312e210597ab8458d99e433153e432a4ae773e7a0117ff49"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/native-execution/run-43b2f24a8193d94fa3d4b72e5e80966f/parent-000.json",
+      "sha256": "af2d10489dab74afcf59d8edd73c8245c0451a1f0c2e30d738bc74e5012a8ed5"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/native-execution/run-43b2f24a8193d94fa3d4b72e5e80966f/parent-001.json",
+      "sha256": "19e30cd568bf7a0177259df98bc60cd18e258ee7904a8fadd382826266f490bd"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/native-execution/run-43b2f24a8193d94fa3d4b72e5e80966f/result.json",
+      "sha256": "d148da3d539fab4518fd72ac97d2a40381767f15ff5572cea7af2561f950cd99"
+    }
+  ],
+  "evidence": [
+    {
+      "path": ".cache/host-jobrecorder-02/freeze02.json",
+      "sha256": "8b0bd804d26fb98d20edca99ae1a09d9f703b707314f62210e93148de680dd6c"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/independent-review-01.json",
+      "sha256": "95179a5935ab483b09758848f35aeffe27ea433868e42d44a9db63000d4308e1"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/independent-review-01.md",
+      "sha256": "0937d3be8180d986c8e631063df56e5fc58ea9740270dab9547049da4a0177ba"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/runtime-review-01.json",
+      "sha256": "4b6b7deeefc3c16a6e239582f5753144e34dabf01aae9598442caa4e0189d320"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/runtime-review-01.md",
+      "sha256": "5ccfeb8269c98084b9fd2ffaeab4d5b59a65e21454abfea587ca91fca6b9de80"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/native-execution/run_native_02.py",
+      "sha256": "158b822cee820569b9f0c88d8f00b9236332e7e6fa96ff21513dcd7116fb4edb"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/kimi-wait/route-review.json",
+      "sha256": "2b2c91f1cb4a4aeefe98a24572d3b0b34b3e04f04124bef655d1186c173abb01"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/kimi-wait/final-proposal.md",
+      "sha256": "5726804de73051d5e2c519628960595010e2eb3ce12ef4938d93a9c889d2794a"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/kimi-wait/integration02.patch",
+      "sha256": "02fe627b64d78eb6f28203120c651e42995665220c8b8d08a181c051c908eb89"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/flash-settle/route-review.json",
+      "sha256": "8497f6308ff72eee1fc4aa2281ea31c41c8684792480f88a6a1623800320b61b"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/flash-settle/final-proposal.md",
+      "sha256": "c394cc68766ecf104583f3fec449652298e30b494e484063757495f04a71ac8c"
+    },
+    {
+      "path": ".cache/host-jobrecorder-02/flash-settle/integration02.patch",
+      "sha256": "ef9fc64fea5bab136f437ec8c095141c7ed16bec21fdf8917fc8c939fa8f77c4"
+    }
+  ],
+  "runner": {
+    "sha256": "158b822cee820569b9f0c88d8f00b9236332e7e6fa96ff21513dcd7116fb4edb",
+    "unitRuntimeMaxSeconds": 85,
+    "unitStopTimeoutSeconds": 5,
+    "sourceModuleBinaryCheckedBeforeUnitAndGate": true,
+    "privateGateMode": "0600",
+    "bootstrapOwnMembershipChecked": true,
+    "outerControlGroupRetirementObserved": true,
+    "ownedStopOrRecoveryUsed": false
+  },
+  "models": [
+    {
+      "route": "kimi-code/k3",
+      "taskId": "HOST-JOBRECORDER02-KIMI-WAIT01",
+      "elapsedSeconds": 134.937,
+      "toolEvents": 0,
+      "finalSha256": "5726804de73051d5e2c519628960595010e2eb3ce12ef4938d93a9c889d2794a",
+      "returnedCodeSha256": "a2dcc26236ee5decb277ab8ffbc87dbfca353129eecee02b5c388a1ffc978726",
+      "integrationDeltaSha256": "02fe627b64d78eb6f28203120c651e42995665220c8b8d08a181c051c908eb89",
+      "status": "Substantive native test proposal integrated with direct Sol corrections; unrun",
+      "integrationDeltaPath": ".cache/host-jobrecorder-02/kimi-wait/integration02.patch"
+    },
+    {
+      "route": "zai/glm-5.3-flash",
+      "taskId": "HOST-JOBRECORDER02-FLASH-SETTLE01",
+      "elapsedSeconds": 33.033,
+      "toolEvents": 0,
+      "finalSha256": "c394cc68766ecf104583f3fec449652298e30b494e484063757495f04a71ac8c",
+      "returnedCodeSha256": "1b0f2c707ef27c2cac4f16e27701e6b1ee12ec6cf065b63a1e1a837a04425293",
+      "integrationDeltaSha256": "ef9fc64fea5bab136f437ec8c095141c7ed16bec21fdf8917fc8c939fa8f77c4",
+      "status": "Substantive native test proposal integrated with direct Sol corrections; unrun",
+      "integrationDeltaPath": ".cache/host-jobrecorder-02/flash-settle/integration02.patch"
+    }
+  ],
+  "sourceAssertedChildEvidence": "Each finite executable checks own direct-child membership before fixed GROUP/READY markers; frozen test parses marker and later observes exact child absent. Raw per-child stdout lives in Job memory, not emitted to outer log.",
+  "limitations": [
+    "Recorded native membership/state/database assertions executed in frozen binary; no raw private child stdout or database dump published",
+    "No native database close/reopen; earlier five seam tests remain separate historical evidence",
+    "CaptureSettle may observe cleanup already completed by existing concurrent jobs owner",
+    "No automatic replay, durable owner recovery, consumer ACK store, remote transport, paired service or otherOS backend",
+    "No kernel-stall/crash/power-loss or actual OS commit/close fault certification",
+    "Store finite horizon, trusted state and uncertainty semantics unchanged",
+    "No stage/capability/newhostedCI pass claimed"
+  ]
+}

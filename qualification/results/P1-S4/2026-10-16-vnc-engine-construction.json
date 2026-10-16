@@ -1,0 +1,383 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "stage": "P1-S4",
+  "status": "BOUNDED_LIBRARY_CONSTRUCTION_CHECKED_NOT_EMBEDDED_OR_RUNTIME_QUALIFIED",
+  "module": "adapters/desktop/vnc/android",
+  "namespace": "io.github.baitian6641.cloudy.desktop.vnc",
+  "sourceFreezeSha256": "34c2a9b3c0b0b3aadee5655b40b3e26d39440ffefe936b1b47e4944d6b0b6606",
+  "sources": [
+    {
+      "path": "adapters/desktop/vnc/android/README.md",
+      "bytes": 4742,
+      "sha256": "afec586301f69a1b819a145786d8915e972d76457c55de1be9ffc6d9ceced85a"
+    },
+    {
+      "path": "adapters/desktop/vnc/android/build.gradle.kts",
+      "bytes": 1515,
+      "sha256": "6af7528e7ae2457b165df042bd1bbdbff6fe4f8f8f1bba3caa9844e0c21be188"
+    },
+    {
+      "path": "adapters/desktop/vnc/android/consumer-rules.pro",
+      "bytes": 480,
+      "sha256": "bcfff3c82954028518b9a8700f3819753525add7e020f6d8f8351a893e4345fb"
+    },
+    {
+      "path": "adapters/desktop/vnc/android/src/main/AndroidManifest.xml",
+      "bytes": 72,
+      "sha256": "343d5be1ac17cdd45d1a2f2ddc616c509290e655869125a9422a96d88aa66066"
+    },
+    {
+      "path": "adapters/desktop/vnc/android/src/main/cpp/CMakeLists.txt",
+      "bytes": 1007,
+      "sha256": "b5b82ca2dab2077fc645f9146d5886a603b66d29080904ff13b71be8154d6e40"
+    },
+    {
+      "path": "adapters/desktop/vnc/android/src/main/java/io/github/baitian6641/cloudy/desktop/vnc/VncBridge.java",
+      "bytes": 2916,
+      "sha256": "1dde20fa8cbc644e7eb29e1bfe5e6770087abc5a372e8c7da886243e85976142"
+    },
+    {
+      "path": "adapters/desktop/vnc/android/src/main/java/io/github/baitian6641/cloudy/desktop/vnc/VncEngine.java",
+      "bytes": 17125,
+      "sha256": "7939ba62f6ba6a018ea15b517a99043fa8158bdb2555719f0b682610c4486375"
+    },
+    {
+      "path": "adapters/desktop/vnc/android/src/test/java/io/github/baitian6641/cloudy/desktop/vnc/VncEngineTest.java",
+      "bytes": 8489,
+      "sha256": "5827dde11f1059e115717d02144f3feb3d52f3851728bda8b6277a9cfd30fb82"
+    },
+    {
+      "path": "tools/prepare_desktop_vnc.py",
+      "bytes": 16496,
+      "sha256": "e64a07a4f921f4e8c137a3bdcec36e41fce72ef4c1123a04d7d82e7af59a4a34"
+    },
+    {
+      "path": "tests/test_prepare_desktop_vnc.py",
+      "bytes": 13367,
+      "sha256": "02bca722271089779cba48084fdd74ca4262182d720df578f7fd55f4a8933e4a"
+    }
+  ],
+  "buildReceipt": {
+    "path": ".cache/vnc-product-engine-01/final-build-01.json",
+    "sha256": "928bb2b78e55ab922ff8adaeed5b25e7581d9dac607813a3bb141f905fdf3260"
+  },
+  "independentReview": {
+    "path": ".cache/vnc-product-engine-01/independent-review-04.json",
+    "sha256": "264fad4ccb6d5decefae11c1fa308c12abf8eabb44ed7260b327ad46403465b1",
+    "scope": "source05, native04, final AAR closure, zero Lint and unchanged-source JVM evidence"
+  },
+  "toolchain": {
+    "jdk": 21,
+    "javaTarget": 17,
+    "agp": "9.4.0",
+    "gradle": "9.6.0",
+    "compileSdk": 37,
+    "buildTools": "36.0.0",
+    "minSdk": 35,
+    "jniTargetApi": 35,
+    "abi": "arm64-v8a",
+    "ndk": "29.0.14206865",
+    "cmake": "4.1.2",
+    "offline": true,
+    "dependencyVerification": "strict"
+  },
+  "native": {
+    "selectedOriginalReceiptSha256": "55a9d23cba883119fd45442a7a75895dfd1cc52ce56e8297417e4cf26515cd53",
+    "currentReceiptSha256": "06bc8873a11f37bbc6faae798a29568d8e0acb11e8ec3a0180a6a76b109dae26",
+    "authoredAdapterOriginalSha256": "e3de365df791628c4d6c88df6ecca97726aa12243eb36bbc2a109e701fda277c",
+    "securityPatchSha256": "e110e84f0c093375ac01f1b421afa6d5131fb9fdbdb7a5cf9348a24c40f476ff",
+    "libVncRevision": "98aaee0560baa0332339b2ef464ea96ed9b9b28c",
+    "openssl": "4.0.1",
+    "jpeg": "3.2.0",
+    "preparationAttempts": 4,
+    "failedBeforeCompiler": 1,
+    "successfulJniOnlyCompilations": 3,
+    "upstreamRebuilds": 0,
+    "namespaceOnlyCPort": true
+  },
+  "android": {
+    "attempts": 3,
+    "firstConfigurationFailurePreserved": true,
+    "secondCompiledAndRanJvmButLintFailed": true,
+    "thirdAffectedAssembleLintPassed": true,
+    "jvm": {
+      "reportSha256": "a3e83578d5f9dc40cd0dd4e6903ab89df6889854f8e0763581e1d0948ef8f9a0",
+      "executedBuild": "android-build-02",
+      "tests": 8,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "methods": [
+        "createRejectionReleasesLeaseAndDisposesSecrets",
+        "deliberateStopReleasesBeforeCancelJoinFreeOffCallingThread",
+        "releaseTimeoutIsFiniteAndRetainedCleanupDoesNotReleaseTwice",
+        "stopDuringCreateRetainsThenJoinsAndWipesCredentials",
+        "joinTimeoutAndFreeRefusalNeverReleaseOwnerEarly",
+        "staleAndStoppedCallbacksCannotPublishOrRetainFrames",
+        "invalidCredentialsAreWipedWithoutNativeAllocation",
+        "releaseWriteFailureStillCancelsAndDoesNotClaimAck"
+      ],
+      "notRepeatedInBuild03": true,
+      "sourceBinding": {
+        "adapters/desktop/vnc/android/src/main/java/io/github/baitian6641/cloudy/desktop/vnc/VncBridge.java": "1dde20fa8cbc644e7eb29e1bfe5e6770087abc5a372e8c7da886243e85976142",
+        "adapters/desktop/vnc/android/src/main/java/io/github/baitian6641/cloudy/desktop/vnc/VncEngine.java": "7939ba62f6ba6a018ea15b517a99043fa8158bdb2555719f0b682610c4486375",
+        "adapters/desktop/vnc/android/src/test/java/io/github/baitian6641/cloudy/desktop/vnc/VncEngineTest.java": "5827dde11f1059e115717d02144f3feb3d52f3851728bda8b6277a9cfd30fb82"
+      }
+    },
+    "variants": {
+      "debug": {
+        "aarSha256": "906790ac138659551f378dbfa77b58f51a710db2a560580516a2fd3805932776",
+        "aarBytes": 62692971,
+        "nativeHashes": {
+          "jni/arm64-v8a/libcloudy-vnc-jni.so": "702667cae3c54f550528a9d48c04e58619f868c702fc3931f9f44e406f254729",
+          "jni/arm64-v8a/libcrypto.so": "46c0eb8c3c601f3c9d8746e051aefe61e7a324bf152a535feac3f97472deb2d8",
+          "jni/arm64-v8a/libssl.so": "66288be31a05675f6a319632d6abb137eb38b07f10eea302a8b128bd6ed7d5c0"
+        },
+        "nativeElf": {
+          "libcloudy-vnc-jni.so": {
+            "needed": [
+              "libc.so",
+              "libcrypto.so",
+              "libdl.so",
+              "libm.so",
+              "libssl.so",
+              "libz.so"
+            ],
+            "soname": "libcloudy-vnc-jni.so",
+            "machine": "AArch64",
+            "minimumLoadAlignment": 16384
+          },
+          "libcrypto.so": {
+            "needed": [
+              "libc.so",
+              "libdl.so"
+            ],
+            "soname": "libcrypto.so",
+            "machine": "AArch64",
+            "minimumLoadAlignment": 16384
+          },
+          "libssl.so": {
+            "needed": [
+              "libc.so",
+              "libcrypto.so",
+              "libdl.so"
+            ],
+            "soname": "libssl.so",
+            "machine": "AArch64",
+            "minimumLoadAlignment": 16384
+          }
+        },
+        "jniExports": [
+          "Java_io_github_baitian6641_cloudy_desktop_vnc_VncBridge_cancel",
+          "Java_io_github_baitian6641_cloudy_desktop_vnc_VncBridge_create",
+          "Java_io_github_baitian6641_cloudy_desktop_vnc_VncBridge_free",
+          "Java_io_github_baitian6641_cloudy_desktop_vnc_VncBridge_join",
+          "Java_io_github_baitian6641_cloudy_desktop_vnc_VncBridge_key",
+          "Java_io_github_baitian6641_cloudy_desktop_vnc_VncBridge_pointer",
+          "Java_io_github_baitian6641_cloudy_desktop_vnc_VncBridge_releaseInputs",
+          "Java_io_github_baitian6641_cloudy_desktop_vnc_VncBridge_start",
+          "Java_io_github_baitian6641_cloudy_desktop_vnc_VncBridge_status"
+        ],
+        "assets": {
+          "assets/cloudy-vnc-notices/BASE-NOTICE.txt": "0fbbd491a6f73c6200bc2efba0d5b15161aa772a180040023f6e95d2c5119c69",
+          "assets/cloudy-vnc-notices/LibVNC-GPL2.txt": "4d23c8c814e5baf007d854f01d8502e77dc56a41144934e003fb32c4e052d20f",
+          "assets/cloudy-vnc-notices/NOTICE.txt": "a3b0edc389375c8362702923a9e9aa1badcf9df36519e7d40778f6eb696092b8",
+          "assets/cloudy-vnc-notices/OpenSSL-LICENSE.txt": "7d5450cb2d142651b8afa315b5f238efc805dad827d91ba367d8516bc9d49e7a",
+          "assets/cloudy-vnc-notices/accepted-receipt.json": "5a55a3cb8e203bcc9d855257ed8319af9bd1257d0af50828c9c37dfecac5de5e",
+          "assets/cloudy-vnc-notices/libjpeg-turbo-3.2.0.tar": "4ac3879e40faa8734b749cd5ba608f38489e8ecea754e742efc429bffeb2862a",
+          "assets/cloudy-vnc-notices/libjpeg-turbo-LICENSE.md": "ba6bceebcba0fdd35488477c2cca8c4632ce82c74dbfbc87d886ce6fc4433579",
+          "assets/cloudy-vnc-notices/libjpeg-turbo-README.ijg": "75815e3bf6484201a3c3d17a1bbf10f2e8e3237f84df10a2357ea896db2a81d6",
+          "assets/cloudy-vnc-notices/libvncserver-98aaee0560baa0332339b2ef464ea96ed9b9b28c.tar": "1071b915eedd41f07487c12b70ace666a740ccf885c0f7bacc30d9c568903cc7",
+          "assets/cloudy-vnc-notices/openssl-4.0.1.tar": "d01dee15b71d5c662dfbd4aa2150a6433f52f92d1714eaca5d2aa927e9591b46",
+          "assets/cloudy-vnc-notices/vnc-rfbconfig.h": "9b6d6072e13ce10a87305d3cb4d57e5a0509a4ad06b54eff29301401c9da5d25",
+          "assets/cloudy-vnc-notices/authored/VncBridge.java": "4addfe369e1595ed8dffceb8260fbe8a8f2e59dd023ae9664d0c0a272f27b95a",
+          "assets/cloudy-vnc-notices/authored/adapter.c": "e3de365df791628c4d6c88df6ecca97726aa12243eb36bbc2a109e701fda277c",
+          "assets/cloudy-vnc-notices/authored/build.lock.json": "9ad4e50b04b25c33d6b7ebcb0ed6e2fcc9da33e81de5c69979044d8448c1f115",
+          "assets/cloudy-vnc-notices/authored/policy.c": "0a47ca5e817ca8c858c69bc43c01569e72b61b1931a07ad21cda6d767fca6096",
+          "assets/cloudy-vnc-notices/authored/policy.h": "aa380f6708f6e1f8eb16759d97ab8079ae1db9c655d241af1afcfbcf479d9e2b",
+          "assets/cloudy-vnc-notices/authored/security-and-cancel.patch": "e110e84f0c093375ac01f1b421afa6d5131fb9fdbdb7a5cf9348a24c40f476ff"
+        },
+        "classes": [
+          "io/github/baitian6641/cloudy/desktop/vnc/VncBridge$Sink.class",
+          "io/github/baitian6641/cloudy/desktop/vnc/VncBridge.class",
+          "io/github/baitian6641/cloudy/desktop/vnc/VncEngine$1.class",
+          "io/github/baitian6641/cloudy/desktop/vnc/VncEngine$2.class",
+          "io/github/baitian6641/cloudy/desktop/vnc/VncEngine$Backend.class",
+          "io/github/baitian6641/cloudy/desktop/vnc/VncEngine$Config.class",
+          "io/github/baitian6641/cloudy/desktop/vnc/VncEngine$Frame.class",
+          "io/github/baitian6641/cloudy/desktop/vnc/VncEngine$Input.class",
+          "io/github/baitian6641/cloudy/desktop/vnc/VncEngine$ReleaseOutcome.class",
+          "io/github/baitian6641/cloudy/desktop/vnc/VncEngine$Snapshot.class",
+          "io/github/baitian6641/cloudy/desktop/vnc/VncEngine$State.class",
+          "io/github/baitian6641/cloudy/desktop/vnc/VncEngine.class"
+        ],
+        "classesJarSha256": "6d6a769778459e03c340aed81038cbb9bf0e1418df40c1f471d192a9a81bf85c",
+        "lintIssues": 0,
+        "lintReportSha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f",
+        "qualificationActivityAndPrivateConfigJournalAbsent": true,
+        "nativeHashesEqualBuild02": true
+      },
+      "release": {
+        "aarSha256": "03b8bebcb8e9b568bbc0e903313b6de9bfe2c384c2b76ea95dcb03fada04e471",
+        "aarBytes": 62692347,
+        "nativeHashes": {
+          "jni/arm64-v8a/libcloudy-vnc-jni.so": "702667cae3c54f550528a9d48c04e58619f868c702fc3931f9f44e406f254729",
+          "jni/arm64-v8a/libcrypto.so": "46c0eb8c3c601f3c9d8746e051aefe61e7a324bf152a535feac3f97472deb2d8",
+          "jni/arm64-v8a/libssl.so": "66288be31a05675f6a319632d6abb137eb38b07f10eea302a8b128bd6ed7d5c0"
+        },
+        "nativeElf": {
+          "libcloudy-vnc-jni.so": {
+            "needed": [
+              "libc.so",
+              "libcrypto.so",
+              "libdl.so",
+              "libm.so",
+              "libssl.so",
+              "libz.so"
+            ],
+            "soname": "libcloudy-vnc-jni.so",
+            "machine": "AArch64",
+            "minimumLoadAlignment": 16384
+          },
+          "libcrypto.so": {
+            "needed": [
+              "libc.so",
+              "libdl.so"
+            ],
+            "soname": "libcrypto.so",
+            "machine": "AArch64",
+            "minimumLoadAlignment": 16384
+          },
+          "libssl.so": {
+            "needed": [
+              "libc.so",
+              "libcrypto.so",
+              "libdl.so"
+            ],
+            "soname": "libssl.so",
+            "machine": "AArch64",
+            "minimumLoadAlignment": 16384
+          }
+        },
+        "jniExports": [
+          "Java_io_github_baitian6641_cloudy_desktop_vnc_VncBridge_cancel",
+          "Java_io_github_baitian6641_cloudy_desktop_vnc_VncBridge_create",
+          "Java_io_github_baitian6641_cloudy_desktop_vnc_VncBridge_free",
+          "Java_io_github_baitian6641_cloudy_desktop_vnc_VncBridge_join",
+          "Java_io_github_baitian6641_cloudy_desktop_vnc_VncBridge_key",
+          "Java_io_github_baitian6641_cloudy_desktop_vnc_VncBridge_pointer",
+          "Java_io_github_baitian6641_cloudy_desktop_vnc_VncBridge_releaseInputs",
+          "Java_io_github_baitian6641_cloudy_desktop_vnc_VncBridge_start",
+          "Java_io_github_baitian6641_cloudy_desktop_vnc_VncBridge_status"
+        ],
+        "assets": {
+          "assets/cloudy-vnc-notices/BASE-NOTICE.txt": "0fbbd491a6f73c6200bc2efba0d5b15161aa772a180040023f6e95d2c5119c69",
+          "assets/cloudy-vnc-notices/LibVNC-GPL2.txt": "4d23c8c814e5baf007d854f01d8502e77dc56a41144934e003fb32c4e052d20f",
+          "assets/cloudy-vnc-notices/NOTICE.txt": "a3b0edc389375c8362702923a9e9aa1badcf9df36519e7d40778f6eb696092b8",
+          "assets/cloudy-vnc-notices/OpenSSL-LICENSE.txt": "7d5450cb2d142651b8afa315b5f238efc805dad827d91ba367d8516bc9d49e7a",
+          "assets/cloudy-vnc-notices/accepted-receipt.json": "5a55a3cb8e203bcc9d855257ed8319af9bd1257d0af50828c9c37dfecac5de5e",
+          "assets/cloudy-vnc-notices/libjpeg-turbo-3.2.0.tar": "4ac3879e40faa8734b749cd5ba608f38489e8ecea754e742efc429bffeb2862a",
+          "assets/cloudy-vnc-notices/libjpeg-turbo-LICENSE.md": "ba6bceebcba0fdd35488477c2cca8c4632ce82c74dbfbc87d886ce6fc4433579",
+          "assets/cloudy-vnc-notices/libjpeg-turbo-README.ijg": "75815e3bf6484201a3c3d17a1bbf10f2e8e3237f84df10a2357ea896db2a81d6",
+          "assets/cloudy-vnc-notices/libvncserver-98aaee0560baa0332339b2ef464ea96ed9b9b28c.tar": "1071b915eedd41f07487c12b70ace666a740ccf885c0f7bacc30d9c568903cc7",
+          "assets/cloudy-vnc-notices/openssl-4.0.1.tar": "d01dee15b71d5c662dfbd4aa2150a6433f52f92d1714eaca5d2aa927e9591b46",
+          "assets/cloudy-vnc-notices/vnc-rfbconfig.h": "9b6d6072e13ce10a87305d3cb4d57e5a0509a4ad06b54eff29301401c9da5d25",
+          "assets/cloudy-vnc-notices/authored/VncBridge.java": "4addfe369e1595ed8dffceb8260fbe8a8f2e59dd023ae9664d0c0a272f27b95a",
+          "assets/cloudy-vnc-notices/authored/adapter.c": "e3de365df791628c4d6c88df6ecca97726aa12243eb36bbc2a109e701fda277c",
+          "assets/cloudy-vnc-notices/authored/build.lock.json": "9ad4e50b04b25c33d6b7ebcb0ed6e2fcc9da33e81de5c69979044d8448c1f115",
+          "assets/cloudy-vnc-notices/authored/policy.c": "0a47ca5e817ca8c858c69bc43c01569e72b61b1931a07ad21cda6d767fca6096",
+          "assets/cloudy-vnc-notices/authored/policy.h": "aa380f6708f6e1f8eb16759d97ab8079ae1db9c655d241af1afcfbcf479d9e2b",
+          "assets/cloudy-vnc-notices/authored/security-and-cancel.patch": "e110e84f0c093375ac01f1b421afa6d5131fb9fdbdb7a5cf9348a24c40f476ff"
+        },
+        "classes": [
+          "io/github/baitian6641/cloudy/desktop/vnc/VncBridge$Sink.class",
+          "io/github/baitian6641/cloudy/desktop/vnc/VncBridge.class",
+          "io/github/baitian6641/cloudy/desktop/vnc/VncEngine$1.class",
+          "io/github/baitian6641/cloudy/desktop/vnc/VncEngine$2.class",
+          "io/github/baitian6641/cloudy/desktop/vnc/VncEngine$Backend.class",
+          "io/github/baitian6641/cloudy/desktop/vnc/VncEngine$Config.class",
+          "io/github/baitian6641/cloudy/desktop/vnc/VncEngine$Frame.class",
+          "io/github/baitian6641/cloudy/desktop/vnc/VncEngine$Input.class",
+          "io/github/baitian6641/cloudy/desktop/vnc/VncEngine$ReleaseOutcome.class",
+          "io/github/baitian6641/cloudy/desktop/vnc/VncEngine$Snapshot.class",
+          "io/github/baitian6641/cloudy/desktop/vnc/VncEngine$State.class",
+          "io/github/baitian6641/cloudy/desktop/vnc/VncEngine.class"
+        ],
+        "classesJarSha256": "2a543c11860386c4e0211c4279c34bdf67554423d40960c037b5f962c8aca5ab",
+        "lintIssues": 0,
+        "lintReportSha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f",
+        "qualificationActivityAndPrivateConfigJournalAbsent": true,
+        "nativeHashesEqualBuild02": true
+      }
+    }
+  },
+  "purePython": {
+    "tests": 12,
+    "failures": 0,
+    "astPythonGrammar": "3.10",
+    "ruffPassed": true,
+    "scope": "authored helper namespace/import/publication/tool-root/stream-bound/process-group controls; no native/server result"
+  },
+  "archiveTransformations": [
+    {
+      "input": "assets/cloudy-vnc-notices/libjpeg-turbo-3.2.0.tar.gz",
+      "packaged": "assets/cloudy-vnc-notices/libjpeg-turbo-3.2.0.tar",
+      "inputSha256": "6f30092cef9fb839779646608f4ee14ae3cbac989c47fa05e841b0841f09878e",
+      "decodedSha256": "4ac3879e40faa8734b749cd5ba608f38489e8ecea754e742efc429bffeb2862a"
+    },
+    {
+      "input": "assets/cloudy-vnc-notices/libvncserver-98aaee0560baa0332339b2ef464ea96ed9b9b28c.tar.gz",
+      "packaged": "assets/cloudy-vnc-notices/libvncserver-98aaee0560baa0332339b2ef464ea96ed9b9b28c.tar",
+      "inputSha256": "e4aba30e25cd7bcc743794ccaf4a9b7c3236d15945b9e8b8bb059b0ae1d2f1bb",
+      "decodedSha256": "1071b915eedd41f07487c12b70ace666a740ccf885c0f7bacc30d9c568903cc7"
+    },
+    {
+      "input": "assets/cloudy-vnc-notices/openssl-4.0.1.tar.gz",
+      "packaged": "assets/cloudy-vnc-notices/openssl-4.0.1.tar",
+      "inputSha256": "2db3f3a0d6ea4b59e1f094ace2c8cd536dffb87cdc39084c5afa1e6f7f37dd09",
+      "decodedSha256": "d01dee15b71d5c662dfbd4aa2150a6433f52f92d1714eaca5d2aa927e9591b46"
+    }
+  ],
+  "inheritedReceiptAsset": {
+    "path": "assets/cloudy-vnc-notices/accepted-receipt.json",
+    "role": "Historical RDP native closure metadata supports reused SSL/crypto provenance only. It is not this VNC build receipt.",
+    "sha256": "5a55a3cb8e203bcc9d855257ed8319af9bd1257d0af50828c9c37dfecac5de5e"
+  },
+  "limits": {
+    "rootModuleRegistration": false,
+    "desktopEmbedding": false,
+    "runtimeNativeLoad": false,
+    "serverConnection": false,
+    "visiblePlayback": false,
+    "physicalInput": false,
+    "apkZipAlignmentOrLoaderQualified": false,
+    "otherAbiOrChromeOsQualified": false,
+    "stageComplete": false,
+    "releaseLicenseAndCorrespondingSourceClosureApproved": false
+  },
+  "failureLineage": [
+    {
+      "attempt": "native01",
+      "result": "precompiler INPUT_BOUND for145095072-byte selectedclang; output/stage retained; first shell exitstatus was not retained and is not invented"
+    },
+    {
+      "attempt": "android01",
+      "result": "AGP library sourceSet classcast before Java; repaired using public variant Sources API"
+    },
+    {
+      "attempt": "android02",
+      "result": "debug/release Java and8JVM passed, both Lint reports had only ChromeOsAbiSupport at explicitarm64filter; exact inline suppression scopes sampled construction, with no otherABI claim"
+    },
+    {
+      "attempt": "android03",
+      "result": "affected assemble/Lint passed;8 unchanged-source JVM methods not rerun"
+    }
+  ],
+  "packagingNotes": [
+    "Both AARs have exact3arm64JNI libraries,9namespace exports,12engine classfiles and17verified assets.",
+    "Three gzip input source archives are packaged as tar filenames with bytes equal to the exact accepted gzip-decoded inputs;14otherassets are byte-identical.",
+    "Required original/authored materials present at this construction boundary do not establish minimized or complete final VNC release source/notices closure.",
+    "Gradle reported inability to strip the three libraries and packaged their verified exact bytes unchanged; no warning-free build claim."
+  ]
+}
