@@ -46,6 +46,8 @@ The current executable repository checks are documented in [tools](../../tools/R
 
 For established libraries, these checks target the selected build and Cloudy-owned boundaries. Rely on upstream coverage for unchanged internals. Reuse accepted results while their relevant inputs remain unchanged; expand only for the concrete triggers in the reuse policy, including an applicable advisory or undocumented assumption. Documentation-only changes require documentation/schema validation, review and configured CI, without another local Android build or device run. The [reuse policy](library-reuse-policy.md) defines adoption evidence, rerun triggers and stop conditions.
 
+The [scoped Android push-trigger review](../06-validation/2026-10-16-ci-trigger-review.md) maps current build inputs. Documentation/result/host-only branch pushes can omit unchanged Android builds; mixed source changes still run, PR triggers remain unfiltered and manual dispatch is explicit. Suppressed workflows supply no fresh compiler/test evidence. Review this mapping when a new build input root or required-check policy changes.
+
 ## Delegation and review
 
 A delegated task must identify its stage, intended outcome, read-first documents, accepted decisions, exact writable files, prohibited concurrent operations, useful sources/skills, required checks and evidence. The primary agent retains architecture and integration responsibility. Avoid assigning two writers to the same files or allowing simultaneous device control.

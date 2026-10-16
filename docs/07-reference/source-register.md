@@ -803,3 +803,9 @@ Reuse R57/R58/R93/R95/R273–R277 for selected engine/channel/socket/verificatio
 | R306 | [TeamViewer remote session toolbar](https://www.teamviewer.com/apac/global/support/knowledge-base/teamviewer-remote/remote-control/remote-session-toolbar/?language-switched=true) | located | Official search-extracted content supports fullscreen and collapse/expand; direct English body fetch failed, so full-body review not claimed. |
 
 G24 was rechecked for fullscreen eligibility, pre-configuration callback ordering and API36.1-or-lower dispatch uncertainty. API01 remains untested; the updated UX contract does not establish a runtime pass.
+
+## Scoped Android push verification
+
+| ID | Official reference | Review status | Development use |
+| --- | --- | --- | --- |
+| R359 | [GitHub workflow event path filters](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#onpushpull_requestpull_request_targetpathspaths-ignore) | reviewed | All changed paths must match to suppress a push workflow; required filtered checks can remain pending. Keep PR triggers unfiltered and manual rerun available. Hosted execution and repository ruleset policy remain separate evidence. |

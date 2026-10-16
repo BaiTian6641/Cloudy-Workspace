@@ -2,7 +2,16 @@ name: Android native stream diagnostic
 
 on:
   push:
+    # These paths are not inputs to this Android build; PR checks stay unconditional.
+    paths-ignore:
+      - "docs/**"
+      - "qualification/results/**"
+      - "host/**"
+      - "skills/**"
+      - "README.md"
+      - "AGENTS.md"
   pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read

@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "Preserved-state tests-only fresh installation before a proposed Desktop-to-Console qualification; no reverse operation",
+  "acceptance": "Parent accepted actual exit0 tests-only setup; local source-bound read-only actual evidence inspection passed",
+  "productVersionUnchanged": "0.1.15",
+  "productVersionCodeUnchanged": 16,
+  "device": {
+    "model": "HP Googlebook 14",
+    "release": "17",
+    "api": "37",
+    "build": "CL3B.260622.276.R2",
+    "incremental": "16560795",
+    "abi": "arm64-v8a"
+  },
+  "authority": {
+    "previousForwardTerminal": {
+      "path": "qualification/results/private/foundation/2026-10-16-handoff-positive-console-desktop-08/bootstrap.json",
+      "sha256": "c5ee191cfd6400bba74ae3604ba2026ece649ab78a91773a0ece5cb1898a9539"
+    },
+    "buildReceipt": {
+      "path": ".cache/files-handoff-02/observer-repair-01/build-01/result.json",
+      "sha256": "c25b1ccd83745e85172da620017ca5d58131b1c6106d7b18e8d463641669c88b"
+    },
+    "setupSource": {
+      "path": ".cache/files-handoff-02/reverse-entry-01/setup_tests_01.py",
+      "sha256": "e4260c6c31e797b241c2a3b118494c25e0e3aaf2a35284e18f47758376ec9903"
+    },
+    "sourceFreeze": {
+      "path": ".cache/files-handoff-02/reverse-entry-01/freeze-01.json",
+      "sha256": "21509118f3eb0492320f209d93cd90df9af778e66acb4549343dfeec40166a5b"
+    },
+    "actualTerminal": {
+      "path": "qualification/results/private/foundation/2026-10-16-handoff-reverse-tests-setup-01/result.json",
+      "sha256": "37dd7cd7b053eb2ba9e07d437045a5f7a40b645bcecf4857a82e33ed017c1da6"
+    }
+  },
+  "actual": {
+    "phase": "REVERSE_TESTS_ONLY_SETUP_PRESERVED",
+    "passed": true,
+    "testPackagesInitiallyAbsent": 3,
+    "testPackagesInstalled": 3,
+    "installFlags": [
+      "install",
+      "-t"
+    ],
+    "productPackagesReinstalled": 0,
+    "instrumentationMethodsExecuted": 0,
+    "instrumentationExecuted": false,
+    "positiveHandoffPassed": false,
+    "activityOrAuthenticationLaunchedByPacket": false,
+    "hostFixtureOrListenerStarted": false,
+    "testPackagesUninstalled": 0,
+    "dataClearOrReset": false,
+    "freshProtectedInventoriesEmpty": 3,
+    "freshControllerMarkerAbsent": true,
+    "freshPackageUidsBoundAndPreservedThroughSetup": true,
+    "beforeEqualsFinal": true
+  },
+  "preservation": {
+    "logicalStoresAndMetadataUnchanged": true,
+    "replayUnchanged": true,
+    "typedPreferencesIncludingUnknownValuesUnchanged": true,
+    "protectedProductFileHashesUnchanged": true,
+    "fullProductUidsUnchanged": true,
+    "productApkHashesAndVersionsUnchanged": true,
+    "deviceBootSystemSettingsUnchanged": true,
+    "controllerOldDataReused": false,
+    "rawMarkerEvidenceRetained": true,
+    "frameworkMarkerPolicy": "Only two exact product files/profileInstalled paths may be actual08-retained or strict current-PM-correlated under fixed parser/APK/version/fullUID/PM/timezone. Actual setup before/final snapshots were fully equal.",
+    "pmPrecisionLimitation": "Seconds only; no millisecond identity, authorization or durability claim"
+  },
+  "evidenceInspection": {
+    "path": ".cache/files-handoff-02/reverse-entry-01/actual-setup-inspection-01.json",
+    "sha256": "9d7559041427b4d55da820283f09dcd3774c56d7a54122968ba8f829abb6f122",
+    "mode": "Read-only archived actual evidence, no rerun",
+    "sourceInputsVerified": 232,
+    "frozenArtifactsVerified": 7,
+    "actual08ArchivesVerified": 1095
+  },
+  "limitations": [
+    "No Desktop-to-Console or new handoff operation executed",
+    "Freshly installed controller UID/private state is the new setup authority; removed controller data is not preserved or imported",
+    "Marker absence does not prove Application startup, initialization or later marker publication",
+    "No unchanged privacy, JVM or engine battery repeated",
+    "Existing forward08 pass and historical failed attempts remain immutable and separately scoped"
+  ]
+}

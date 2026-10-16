@@ -1,0 +1,313 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "One finite debug Desktop-to-Console ordinary files Open with fresh private receiver fixture authentication, registered nested listing/read, strict observer retirement and exact preserved-state teardown",
+  "acceptance": "Parent executed actual reverse01 once; source-bound read-only raw evidence inspection passed. Together with immutable forward08, both recorded debug fixture directions passed; no general BAL, release, physical UX or stage/capability promotion.",
+  "productVersion": "0.1.15",
+  "productVersionCode": 16,
+  "device": {
+    "model": "HP Googlebook 14",
+    "release": "17",
+    "api": "37",
+    "build": "CL3B.260622.276.R2",
+    "incremental": "16560795",
+    "abi": "arm64-v8a"
+  },
+  "backend": {
+    "androidSshClient": "SSHJ0.41.2",
+    "host": "Bound Apache MINA SSHD Java qualification fixture; not Cloudy host product"
+  },
+  "build": {
+    "path": ".cache/files-handoff-02/observer-repair-01/build-01/result.json",
+    "sha256": "c25b1ccd83745e85172da620017ca5d58131b1c6106d7b18e8d463641669c88b",
+    "sourceInputsVerified": 232,
+    "frozenApksVerified": 7,
+    "installedArtifactsAtStart": [
+      {
+        "path": "apps/console/build/outputs/apk/androidTest/debug/console-debug-androidTest.apk",
+        "bytes": 4593117,
+        "sha256": "c2e64fdf93fd96dc247ceb20eab4cbd078d97a4ae6aa41cc67c0275087ef5971"
+      },
+      {
+        "path": "apps/console/build/outputs/apk/debug/console-debug.apk",
+        "bytes": 41382877,
+        "sha256": "599839133bb430d579a81ec0276888f77606e594c3dd2d6a790bafa97c5bd773"
+      },
+      {
+        "path": "apps/desktop/build/outputs/apk/androidTest/debug/desktop-debug-androidTest.apk",
+        "bytes": 4593113,
+        "sha256": "b9f0a17916a232f7633e2551e5cbd267743dd28a6d9560d47e09dfd6108b9b24"
+      },
+      {
+        "path": "apps/desktop/build/outputs/apk/debug/desktop-debug.apk",
+        "bytes": 41382885,
+        "sha256": "4f883483e2b49c2bd3cff82652b338fe3bfc1e2b647f7553709995ae1d732944"
+      },
+      {
+        "path": "shared/android/platform/build/outputs/apk/androidTest/debug/platform-debug-androidTest.apk",
+        "bytes": 45059468,
+        "sha256": "2dd0e9c52df9178b07cd5ea75746eb33025acbe965bb12a51c0898358eda8f74"
+      }
+    ]
+  },
+  "sourcesAtRun": [
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/FilesHandoffPositiveControllerTest.kt",
+      "bytes": 24878,
+      "sha256": "7ee1126dacf020ce3fd0910046cc6679db14cb71718cdd9fdc228f914c9eabd8"
+    },
+    {
+      "path": "shared/android/platform/src/debug/kotlin/io/github/baitian6641/cloudy/platform/FilesPositiveObservation.kt",
+      "bytes": 14628,
+      "sha256": "f4724c310bf7b82285be7d6a5d0028920d4360339b212c0db0c4596641b79c3d"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/SshFilesSessionModel.kt",
+      "bytes": 36423,
+      "sha256": "f44899bb7905bef6ef9b2a723347b496352e3071bd48315b2b6d2ef9b39ea3ef"
+    },
+    {
+      "path": "shared/android/platform/src/release/kotlin/io/github/baitian6641/cloudy/platform/FilesPositiveObservation.kt",
+      "bytes": 740,
+      "sha256": "ff35b67e0a04c4bddea0e2aae02a655c751e13cba58a8d4a8136903712f5c65e"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/FilesHandoffReceiverCheckpoint.kt",
+      "bytes": 37308,
+      "sha256": "cbc92822a3cfde0594f0c694ea8617f9defaf7a00fd1f95de831c52a6917abaf"
+    }
+  ],
+  "authority": {
+    "testSetupReceipt": {
+      "path": "qualification/results/private/foundation/2026-10-16-handoff-reverse-tests-setup-01/result.json",
+      "sha256": "37dd7cd7b053eb2ba9e07d437045a5f7a40b645bcecf4857a82e33ed017c1da6"
+    },
+    "previousForwardTerminal": {
+      "path": "qualification/results/private/foundation/2026-10-16-handoff-positive-console-desktop-08/bootstrap.json",
+      "sha256": "c5ee191cfd6400bba74ae3604ba2026ece649ab78a91773a0ece5cb1898a9539"
+    },
+    "packetFreeze": {
+      "path": ".cache/files-handoff-02/reverse-entry-01/phase-b-draft/freeze-final-01.json",
+      "sha256": "c2e054810400ad7efb33a00a356684244fd20fbe19e0dd2bac289c5bf5b8b414"
+    },
+    "helpers": [
+      {
+        "path": ".cache/files-handoff-02/reverse-entry-01/phase-b-draft/run_positive_13.py",
+        "sha256": "24401dc5112530e763881585d095f5eeacd6e9d2afbdda59845ad52bdbd8073a"
+      },
+      {
+        "path": ".cache/files-handoff-02/reverse-entry-01/phase-b-draft/install_11.py",
+        "sha256": "f821bf6ec7a3f3a3a87d2994948ca22aef0d080e79b9184fa3ffad0b2a05842c"
+      },
+      {
+        "path": ".cache/files-handoff-02/reverse-entry-01/phase-b-draft/bootstrap_09.py",
+        "sha256": "200a38231b0b7378fc7fa280d42910015b40636154317e0647addf2e92224c3d"
+      }
+    ]
+  },
+  "actual": {
+    "supervisorTerminal": {
+      "path": "qualification/results/private/foundation/2026-10-16-handoff-positive-desktop-console-01/bootstrap.json",
+      "sha256": "1046891afcfb4d62a9a094b35fdb5a766a0881b24f7ce3123d1397cec0ea00eb"
+    },
+    "supervisorPhase": "FINAL_TEARDOWN_PRESERVED",
+    "supervisorPassed": true,
+    "deviceReceipt": {
+      "path": "qualification/results/private/foundation/2026-10-16-handoff-positive-desktop-console-01/device/result.json",
+      "sha256": "63db2de5b4bba64a9ee4daeaf23f2920de4c0924613eaa16edcd8b100b43f130",
+      "phase": "DEVICE_PORTION_PASSED_PARENT_FINAL_TEARDOWN_REQUIRED",
+      "devicePortionPassed": true,
+      "passed": false,
+      "passedFalseMeaning": "Device runner intentionally defers final overall acceptance to parent supervisor"
+    },
+    "actualInstrumentationInvocations": 4,
+    "actualMethodsPassed": 4,
+    "controllerPhaseStatuses": 8,
+    "invocations": [
+      {
+        "role": "prepare",
+        "methods": 1,
+        "customStatuses": 1,
+        "terminal": "PREPARED_RETIRED",
+        "stdoutSha256": "0897f5d6922ad9fcaba3eaf13705f5672d08b47fc95d3605db06b2072207d9fe"
+      },
+      {
+        "role": "verify",
+        "methods": 1,
+        "customStatuses": 1,
+        "terminal": "VERIFIED_RETAINED",
+        "stdoutSha256": "1a590069cbe08d6f31355e1dfa15e3f6eac15b5edca735ae411b095c27be14a6"
+      },
+      {
+        "role": "cleanup",
+        "methods": 1,
+        "customStatuses": 7,
+        "terminal": "CLEANED_EXACT",
+        "stdoutSha256": "5a447e1266c30a2ef9f8ff95a8fea3f9978cf9fd9f0c765845b5a573bbe62eab"
+      },
+      {
+        "role": "controller",
+        "methods": 1,
+        "customStatuses": 8,
+        "stdoutSha256": "2691f64fcfd63853dc1b1ad3d61b66dec868ae11cf0153f5e39ecb2ef24125d8"
+      }
+    ],
+    "ordinarySenderRefreshSelectOpen": true,
+    "directReceiverIntentUsed": false,
+    "freshReceiverAuthentication": true,
+    "registeredNondefaultNestedDirectoryListingAndRead": true,
+    "sameSessionDisconnectAndOrdinaryPlannedClose": true,
+    "checkedCacheFreshnessExecutedSuccessfully": true,
+    "cacheClearInvocationCountMeasured": false,
+    "observations": {
+      "console": {
+        "sealed": true,
+        "invalid": false,
+        "chainComplete": true,
+        "events": 9,
+        "eventNames": [
+          "DISPATCH_STARTED",
+          "DISPATCH_RETIRED",
+          "RECEIVER_CREATED",
+          "SESSION_CLAIMED",
+          "TRANSPORT_ESTABLISHED",
+          "TRANSPORT_RETIRED",
+          "SAME_SESSION_IDLE",
+          "MODEL_CLEARED",
+          "RECEIVER_DESTROYED"
+        ],
+        "sha256": "763390369179381031e2c8f1ee97db9a237d07ba35b84eb6375513b51aed3a44"
+      },
+      "desktop": {
+        "sealed": true,
+        "invalid": false,
+        "chainComplete": true,
+        "events": 5,
+        "eventNames": [
+          "SENDER_CREATED",
+          "SUBMIT_ACCEPTED",
+          "CALL_FINISHED",
+          "CALL_RETIRED",
+          "SENDER_DESTROYED"
+        ],
+        "sha256": "c9ade13279eac1130b90b0305a42670b66c9ddcc0ce794dc02116b78d1845941"
+      }
+    },
+    "host": {
+      "buildReceiptPath": ".cache/files-handoff-02/host-path-observer/build-02/result.json",
+      "buildReceiptSha256": "097ce0c14c255c3cd140ef9dddabe41980040a2cfc3e022569b8f47cf837bad4",
+      "primaryEvents": 52,
+      "pathEvents": 10,
+      "eventCounts": {
+        "session_created": 2,
+        "server_initial_kexinit_written": 2,
+        "client_initial_kexinit_negotiation_start": 2,
+        "key_established": 2,
+        "auth_request": 2,
+        "auth_accepted": 2,
+        "session_authenticated": 2,
+        "channel_open": 4,
+        "sftp_init_request": 4,
+        "sftp_initialized": 4,
+        "sftp_opendir_request": 3,
+        "sftp_readdir_request": 6,
+        "sftp_close_request": 4,
+        "sftp_destroying": 4,
+        "session_closed": 2,
+        "sftp_lstat_request": 1,
+        "sftp_open_request": 1,
+        "sftp_read_request": 2,
+        "read_completed": 2,
+        "shutdown_requested": 1
+      },
+      "authenticatedSessions": 2,
+      "closedSessions": 2,
+      "measuredSessionNestedDirectoryAndFileReadCompleted": true,
+      "exitCode": 0,
+      "serverClosed": true,
+      "workersRetired": true,
+      "overflow": false,
+      "ioFailed": false,
+      "ownedListenerClosed": true
+    },
+    "retirementAcceptedBeforeForceStop": true,
+    "originalCheckpointVerifiedAndExactlyCleaned": true,
+    "checkpointSha256": "5cd849f9458f47533e94d392b346e00ab9d4021fe60de3e4c9cd77c9abcb40ca",
+    "protectedArchivesVerified": 1100,
+    "freshControllerTransitions": [
+      {
+        "stage": "reopened-controller",
+        "stopped": true,
+        "markerPresent": false,
+        "sameFreshFullUid": true,
+        "allNonmarkerFilesExact": true,
+        "strictCurrentMarkerIfPresent": true
+      },
+      {
+        "stage": "pre-uninstall-controller",
+        "stopped": false,
+        "markerPresent": true,
+        "sameFreshFullUid": true,
+        "allNonmarkerFilesExact": true,
+        "strictCurrentMarkerIfPresent": true
+      }
+    ],
+    "testPackagesInstalledDuringOperation": 0
+  },
+  "preservation": {
+    "originalThreeStoreRowsAndMetadataRestored": true,
+    "typedPreferencesIncludingUnknownValuesPreserved": true,
+    "deviceBootSystemSettingsFullUidsPreserved": true,
+    "replay": {
+      "senderBeforeRows": 1,
+      "receiverBeforeRows": 0,
+      "receiverFinalRows": 1,
+      "exactAdmissionDeltaValidated": true,
+      "finalEqualsMeasured": true
+    },
+    "replayResetOrManualDeletion": false,
+    "newReplayAdmissionAndExpiryPruning": "Desktop sender replay remained exactly unchanged. Console receiver admitted exactly one request using the existing expiry/high-water/anchor rules. Final replay in both products exactly equals measured accepted state; no manual reservation removal/reset.",
+    "frameworkMarkers": {
+      "paths": [
+        "Console files/profileInstalled",
+        "Desktop files/profileInstalled"
+      ],
+      "selectedParser": "AndroidX ProfileInstaller1.4.0 fixed24-byte schema1/result327680/currentProfileSize0",
+      "consoleFinal": "Exact actual08-retained marker, also current-PM-correlated",
+      "desktopFinal": "Strict current-PM-correlated framework marker",
+      "originalAndCurrentRawBytesArchived": true,
+      "otherPrivateFilesGuarded": true,
+      "productMarkerWriteDeleteRestoreOrForce": false,
+      "pmCorrelationPrecision": "Seconds only; no millisecond identity, authorization or durability inference"
+    },
+    "ownedConfigsRemoved": 4,
+    "ownedReverseRemoved": 1,
+    "owningAndControllerTestPackagesRemoved": 3,
+    "productProcessesStoppedAtFinal": true,
+    "immutableCheckpointPhaseReceiptsObserverClaimsAndSealedReceiptsRetained": true,
+    "freshController": "New setup UID/private authority retained: absent marker and stopped=true before operation; strict current-PM marker and stopped=false after instrumentation, same UID/PM/timezone/nonmarker files, then exact owned test uninstall."
+  },
+  "actualEvidenceInspection": {
+    "path": ".cache/files-handoff-02/reverse-entry-01/actual-reverse-review-01/result-01.json",
+    "sha256": "6516389285e351e952da9860c921c815323e85d0dfb635ff64ab640cc63e09ea",
+    "mode": "Read-only local archived evidence, no rerun"
+  },
+  "historicalAttempt07": {
+    "remainsFailed": true,
+    "report": "qualification/results/P1-S3/2026-10-16-handoff-postopen-observer-failure.json"
+  },
+  "limitations": [
+    "Only the two separately recorded debug fixture directions passed; no general BAL compatibility qualification",
+    "Only the controlled registered nested-directory SSH/SFTP fixture; no arbitrary server or full saved-account qualification",
+    "UI accessibility assertions and source-bound ordinary actions are not human visual or physical pointer/keyboard usability evidence",
+    "No release runtime, sustained operation, audio/input/latency or broader product capability qualification",
+    "No full P1 completion or phase/capability promotion",
+    "Original-model clear acceptance requires certain original-session retirement, same-session IDLE, planned close and matching destruction; ledger tickets are absent",
+    "Fresh controller identity came only from the actual tests-only setup; removed old controller data was not reused"
+  ],
+  "previousForwardPass": {
+    "remainsAccepted": true,
+    "report": "qualification/results/P1-S3/2026-10-16-handoff-positive-console-desktop.json",
+    "scope": "One separately recorded Console-to-Desktop debug fixture operation"
+  }
+}
