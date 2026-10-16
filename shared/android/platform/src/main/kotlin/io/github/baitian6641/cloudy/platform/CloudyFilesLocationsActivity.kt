@@ -77,6 +77,9 @@ class CloudyFilesLocationsActivity : ComponentActivity() {
                     onCancel = { confirmation = null },
                     onOpen = ::openLocation,
                     onRefresh = { if (canInteract()) refresh(explicit = true) },
+                    onShared = {
+                        if (canInteract()) startActivity(Intent(this, CloudySharedLocationsActivity::class.java))
+                    },
                     onClose = { invalidate(); finish() },
                 )
             }

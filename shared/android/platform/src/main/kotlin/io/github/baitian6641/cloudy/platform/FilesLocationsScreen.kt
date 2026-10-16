@@ -43,7 +43,7 @@ internal fun FilesLocationsScreen(
     confirmation: FilesLocationConfirmation?, busy: Boolean, uncertain: Boolean, message: String?,
     onInspect: (FilesResourceRegistration) -> Unit, onShare: () -> Unit, onRevoke: () -> Unit,
     onConfirm: (FilesLocationConfirmation) -> Unit, onCancel: () -> Unit, onOpen: () -> Unit,
-    onRefresh: () -> Unit, onClose: () -> Unit,
+    onRefresh: () -> Unit, onShared: () -> Unit, onClose: () -> Unit,
 ) {
     val scroll = rememberLazyListState()
     val detailIndex = 2 + (if (message != null) 1 else 0) + (if (uncertain) 1 else 0)
@@ -81,6 +81,7 @@ internal fun FilesLocationsScreen(
                 FlowRow(horizontalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall),
                     verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
                     LocationButton(R.string.files_locations_refresh, "locations_refresh", !busy, onRefresh)
+                    LocationButton(R.string.files_locations_other_app, "locations_other_app", !busy, onShared)
                     LocationButton(R.string.files_locations_close, "locations_close", true, onClose)
                 }
             }

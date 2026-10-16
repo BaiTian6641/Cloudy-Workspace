@@ -18,7 +18,7 @@ android {
         minSdk = 35
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-    buildFeatures { compose = true }
+    buildFeatures { compose = true; aidl = true }
     packaging.resources.merges += setOf("META-INF/LICENSE.md", "META-INF/LICENSE.txt")
 }
 // AGP supplies Android Kotlin; never also apply kotlin.android.

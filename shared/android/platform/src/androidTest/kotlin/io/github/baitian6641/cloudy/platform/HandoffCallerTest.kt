@@ -8,6 +8,8 @@ import android.os.Process
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -59,4 +61,24 @@ class HandoffCallerTest {
         assertTrue(checkNotNull(packages.getPackagesForUid(Process.myUid())).contains(context.packageName))
         assertEquals(PackageManager.SIGNATURE_MATCH, packages.checkSignatures(Process.myUid(), Process.myUid()))
     }
+
+    @Test fun capturedCallerCannotBeMintedByLocalOrMainThreadCall() {
+        val captured = HandoffCaller.captureIncoming(context)
+        assertTrue(captured is HandoffCallerCapture.Rejected)
+        assertEquals(HandoffCallerCode.SELF_CALL, (captured as HandoffCallerCapture.Rejected).code)
+        InstrumentationRegistry.getInstrumentation().runOnMainSync {
+            val main = HandoffCaller.captureIncoming(context)
+            assertEquals(HandoffCallerCode.SELF_CALL, (main as HandoffCallerCapture.Rejected).code)
+        }
+    }
+
+    @Test fun capturedTypeHasNoCopyOrUidProofFactoryAndDenialsAreRedacted() {
+        // API-shape policy only. Reflection is not a security boundary or real Binder proof.
+        assertFalse(VerifiedHandoffCaller::class.java.methods.any { it.name == "copy" || it.name.startsWith("component") })
+        assertFalse(VerifiedHandoffCaller::class.java.methods.any { it.name == "create" || it.name == "restore" })
+        val denied = HandoffCallerCapture.Rejected(HandoffCallerCode.PERMISSION_DENIED)
+        assertEquals("Rejected(code=PERMISSION_DENIED)", denied.toString())
+        assertNull(HandoffCaller.captureIncoming(context).let { it as? HandoffCallerCapture.Verified })
+    }
+
 }

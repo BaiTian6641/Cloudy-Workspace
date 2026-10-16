@@ -1,0 +1,1178 @@
+{
+  "startedAt": "2026-10-16T16:51:18.963189+00:00",
+  "baseCommit": "1b968613ea30455f0804cb04d5d502f10a75b258",
+  "sourceChangesUncommitted": true,
+  "sources": [
+    {
+      "path": "apps/console/build.gradle.kts",
+      "bytes": 2353,
+      "sha256": "4fc824e362ddf8fa5916649fcd5ca6a0c2143c8ced7d90f3832b00c097b2e517"
+    },
+    {
+      "path": "apps/console/gradle.lockfile",
+      "bytes": 48347,
+      "sha256": "916993010fbfeda5a7fb0cdd081e107f8fa268ccf40fb6f99e71aef628adc231"
+    },
+    {
+      "path": "apps/console/src/androidTest/kotlin/io/github/baitian6641/cloudy/console/ConsoleDisplaySettingsActivityTest.kt",
+      "bytes": 390,
+      "sha256": "b23a1bed047b08166200cf4d875b2cb7fd0a5f952d61872208bad33e21dfa1f2"
+    },
+    {
+      "path": "apps/console/src/androidTest/kotlin/io/github/baitian6641/cloudy/console/ConsoleProfileActivityTest.kt",
+      "bytes": 366,
+      "sha256": "9fcee18f29dada931fae60e65bdbe8b32083a5c3601878364d3343a76e6a1f57"
+    },
+    {
+      "path": "apps/console/src/androidTest/kotlin/io/github/baitian6641/cloudy/console/ConsoleProfileGeometryTest.kt",
+      "bytes": 366,
+      "sha256": "48765c51601d32725200f6fa947f0cc081bdf26604843ee5c6902731424f90a0"
+    },
+    {
+      "path": "apps/console/src/androidTest/kotlin/io/github/baitian6641/cloudy/console/ConsoleProfileRecreationTest.kt",
+      "bytes": 372,
+      "sha256": "7d373c3c3e30a0d4a6b9fae53e62aa0fdd52cfdb02146e756cf8481949cead34"
+    },
+    {
+      "path": "apps/console/src/androidTest/kotlin/io/github/baitian6641/cloudy/console/ConsoleSshAuthenticateActivityTest.kt",
+      "bytes": 390,
+      "sha256": "46f81b504a4ccd3cbfc51cc3f492a21ec63dd26e212c086e5a523bff56e3217a"
+    },
+    {
+      "path": "apps/console/src/androidTest/kotlin/io/github/baitian6641/cloudy/console/ConsoleSshFilesActivityTest.kt",
+      "bytes": 369,
+      "sha256": "8c2ea52f82941128c3198858673bbc34069d789d2ff86617417de22898799a0d"
+    },
+    {
+      "path": "apps/console/src/androidTest/kotlin/io/github/baitian6641/cloudy/console/ConsoleSshObserveActivityTest.kt",
+      "bytes": 375,
+      "sha256": "43c5368aea12f52c2a2edcc0ecdcfe274c09c1328b0481643fbf1da846cc09fe"
+    },
+    {
+      "path": "apps/console/src/androidTest/kotlin/io/github/baitian6641/cloudy/console/ConsoleSshTrustActivityTest.kt",
+      "bytes": 369,
+      "sha256": "5e12c7d28cc9da79818952d27fe9798ac90dce412d1c933fdcd05045f989ef4e"
+    },
+    {
+      "path": "apps/console/src/androidTest/kotlin/io/github/baitian6641/cloudy/console/ConsoleWindowActivityTest.kt",
+      "bytes": 469,
+      "sha256": "a861aa981b588184930d4600bfdc3d478b4911bdaa5e686cbd41619f9d1eeeef"
+    },
+    {
+      "path": "apps/console/src/androidTest/kotlin/io/github/baitian6641/cloudy/console/ConsoleWindowDisplayTest.kt",
+      "bytes": 441,
+      "sha256": "c21b6b810263e90ee2c4cc7cb358d5729297850fa395425a4f13b289f656cbe4"
+    },
+    {
+      "path": "apps/console/src/androidTest/kotlin/io/github/baitian6641/cloudy/console/ConsoleWindowGeometryTest.kt",
+      "bytes": 420,
+      "sha256": "9db28efa538ac42e167429c37afd615d0eef93e97864667627649d5f7c62a4bb"
+    },
+    {
+      "path": "apps/console/src/main/AndroidManifest.xml",
+      "bytes": 4259,
+      "sha256": "2399f7c186d03d634931f410317a62ee0ab030544f0b5e6900b42143a8062885"
+    },
+    {
+      "path": "apps/console/src/main/kotlin/io/github/baitian6641/cloudy/console/WorkspaceActivity.kt",
+      "bytes": 479,
+      "sha256": "e5858e0dd0fc3056ad4d28aa40dd0474bee95e007e50dea46419c9475ae11a6c"
+    },
+    {
+      "path": "apps/console/src/main/res/drawable/ic_launcher_background.xml",
+      "bytes": 251,
+      "sha256": "cccdd202dc66f4824d113d06d0253d9b9010f05e422702fa94717f44e353d345"
+    },
+    {
+      "path": "apps/console/src/main/res/drawable/ic_launcher_foreground.xml",
+      "bytes": 463,
+      "sha256": "04c52fd1b5cecf5f79804b8a8b9aff43d9e5f9afbfe46a99afdffddf371bd371"
+    },
+    {
+      "path": "apps/console/src/main/res/drawable/ic_launcher_monochrome.xml",
+      "bytes": 465,
+      "sha256": "2e0ec4a2e21e10dfa664ed1386258dc8e3edca9a6c8384a6a7e58d02aff0fdb1"
+    },
+    {
+      "path": "apps/console/src/main/res/mipmap-anydpi/ic_launcher.xml",
+      "bytes": 344,
+      "sha256": "ada31da9e23f4520f3753e71ca23799a107431473daa3774b6cecac26847260c"
+    },
+    {
+      "path": "apps/console/src/main/res/values/strings.xml",
+      "bytes": 182,
+      "sha256": "ea0592ed54e86a2f09c2292c2609c686a2c0e71dc0acec297d2c591a4030cf4c"
+    },
+    {
+      "path": "apps/desktop/build.gradle.kts",
+      "bytes": 2353,
+      "sha256": "dd1585c76ef2cb7444a4004d08cfef204bc218211aa909e508949a7f5bed209b"
+    },
+    {
+      "path": "apps/desktop/gradle.lockfile",
+      "bytes": 48347,
+      "sha256": "b95ea672a26b1ffe35756c038dff2500b71682e19a0cc87b7fbca3b984e9d686"
+    },
+    {
+      "path": "apps/desktop/src/androidTest/kotlin/io/github/baitian6641/cloudy/desktop/DesktopDisplaySettingsActivityTest.kt",
+      "bytes": 390,
+      "sha256": "7877dc10b0e7f4e5589bfc133c8a7a75de8bc4b3eca872df6eaa8b55019bdfca"
+    },
+    {
+      "path": "apps/desktop/src/androidTest/kotlin/io/github/baitian6641/cloudy/desktop/DesktopProfileActivityTest.kt",
+      "bytes": 366,
+      "sha256": "a26d1edf94e64c1b46ff8f15c12b75c9050cb6ea258b2dc4ad0101a8fb020f00"
+    },
+    {
+      "path": "apps/desktop/src/androidTest/kotlin/io/github/baitian6641/cloudy/desktop/DesktopProfileGeometryTest.kt",
+      "bytes": 366,
+      "sha256": "e2670e07dd3082b4f9bfde2b8d53eb76ab37d9a6f904afd2f380c9b1188a8455"
+    },
+    {
+      "path": "apps/desktop/src/androidTest/kotlin/io/github/baitian6641/cloudy/desktop/DesktopProfileRecreationTest.kt",
+      "bytes": 372,
+      "sha256": "dc190373178ec9da191a6f656b60a44343b4412c140e31a6c38b6f66288848a3"
+    },
+    {
+      "path": "apps/desktop/src/androidTest/kotlin/io/github/baitian6641/cloudy/desktop/DesktopSshAuthenticateActivityTest.kt",
+      "bytes": 390,
+      "sha256": "4ccf6e229f5367b6f0ecd833b1ad5042947a66635153a64cb7f7cbd4c3f39f4f"
+    },
+    {
+      "path": "apps/desktop/src/androidTest/kotlin/io/github/baitian6641/cloudy/desktop/DesktopSshFilesActivityTest.kt",
+      "bytes": 369,
+      "sha256": "3bdfcbc8b9ae64330f404c5a8a82a33539e87fbd11360195102fa3387030e3cc"
+    },
+    {
+      "path": "apps/desktop/src/androidTest/kotlin/io/github/baitian6641/cloudy/desktop/DesktopSshObserveActivityTest.kt",
+      "bytes": 375,
+      "sha256": "b65987a3ded69bc3cebfd8acbd6dca8bf0891c038824190ef9c8355a14113793"
+    },
+    {
+      "path": "apps/desktop/src/androidTest/kotlin/io/github/baitian6641/cloudy/desktop/DesktopSshTrustActivityTest.kt",
+      "bytes": 369,
+      "sha256": "110d58602c1b2e7fbd07edc50c0104044be47d37e97f571cc9610908a3ccb654"
+    },
+    {
+      "path": "apps/desktop/src/androidTest/kotlin/io/github/baitian6641/cloudy/desktop/DesktopWindowActivityTest.kt",
+      "bytes": 469,
+      "sha256": "cc7c4342de5b1007bace542cf849d8ed1d9400989a9a32a4bce9521d48f3ce27"
+    },
+    {
+      "path": "apps/desktop/src/androidTest/kotlin/io/github/baitian6641/cloudy/desktop/DesktopWindowDisplayTest.kt",
+      "bytes": 442,
+      "sha256": "ff118639bda89f9132967c7e5c4ebfaca21e3bb4158d533f4a7f07b6aca2e206"
+    },
+    {
+      "path": "apps/desktop/src/androidTest/kotlin/io/github/baitian6641/cloudy/desktop/DesktopWindowGeometryTest.kt",
+      "bytes": 420,
+      "sha256": "bd4d18fae8c2e9f333aee1b2d0a5421736c5f781c9dae6656fab07750525fb84"
+    },
+    {
+      "path": "apps/desktop/src/main/AndroidManifest.xml",
+      "bytes": 4259,
+      "sha256": "3fe053a793fc3effd0c9e070ef74d7f46abaaf36eca951cf2d076c26fb530b39"
+    },
+    {
+      "path": "apps/desktop/src/main/kotlin/io/github/baitian6641/cloudy/desktop/WorkspaceActivity.kt",
+      "bytes": 479,
+      "sha256": "cf5b5a08a4da2b5779625a62b41cde6b559e417fb5a0a29a948751d522c4b123"
+    },
+    {
+      "path": "apps/desktop/src/main/res/drawable/ic_launcher_background.xml",
+      "bytes": 251,
+      "sha256": "cccdd202dc66f4824d113d06d0253d9b9010f05e422702fa94717f44e353d345"
+    },
+    {
+      "path": "apps/desktop/src/main/res/drawable/ic_launcher_foreground.xml",
+      "bytes": 505,
+      "sha256": "b78cf1dc2a730abe91b0d7183dc8890473d319834639a58b067e837411885898"
+    },
+    {
+      "path": "apps/desktop/src/main/res/drawable/ic_launcher_monochrome.xml",
+      "bytes": 507,
+      "sha256": "595de0662ce4d98a703b0ca8a5095fc1cb8d322a60ceb3da4541170884f8e6d9"
+    },
+    {
+      "path": "apps/desktop/src/main/res/mipmap-anydpi/ic_launcher.xml",
+      "bytes": 344,
+      "sha256": "ada31da9e23f4520f3753e71ca23799a107431473daa3774b6cecac26847260c"
+    },
+    {
+      "path": "apps/desktop/src/main/res/values/strings.xml",
+      "bytes": 182,
+      "sha256": "e778bb9ea63a60be013d71053a21b1a78b115ff815dfda4b98570caaa1d96542"
+    },
+    {
+      "path": "build.gradle.kts",
+      "bytes": 387,
+      "sha256": "2cb98bec90e342ac6de363b5062e2d520502e97fcf0ba0238dc09c6f02cb0a0e"
+    },
+    {
+      "path": "gradle.properties",
+      "bytes": 182,
+      "sha256": "d7bdeb259622ba17e8cb3a8417f5a38e2e338444e301cd5f3493d581c458cf67"
+    },
+    {
+      "path": "gradle/libs.versions.toml",
+      "bytes": 2105,
+      "sha256": "60d180501c2232390c0c886c697217e05819a2ab0aca0774ef85abdf9fe5664d"
+    },
+    {
+      "path": "gradle/verification-metadata.xml",
+      "bytes": 203542,
+      "sha256": "aa5dcf7341e6039a72d8239113f96e80de28a3a1960096455798ca5dd2096ba0"
+    },
+    {
+      "path": "lint.xml",
+      "bytes": 734,
+      "sha256": "e51b54e363f2239673a4785192b97cd3553f84f38ca206388113c2310a866ca1"
+    },
+    {
+      "path": "settings.gradle.kts",
+      "bytes": 801,
+      "sha256": "f48ab59cf49155aa36ebba3edd2f2fbf663c0d439960175c8044b5cf1651e821"
+    },
+    {
+      "path": "shared/android/domain/build.gradle.kts",
+      "bytes": 368,
+      "sha256": "d6db0cc6a78e0940dad069fe5966ff553441036197f63b54af9fed8059ab50f9"
+    },
+    {
+      "path": "shared/android/domain/src/main/kotlin/io/github/baitian6641/cloudy/domain/ConnectionProfile.kt",
+      "bytes": 3412,
+      "sha256": "7d8dfabcfee886439afe6e0332418d1eb5cb5e10e64b7e158eb9cc1c5bd35ba7"
+    },
+    {
+      "path": "shared/android/domain/src/main/kotlin/io/github/baitian6641/cloudy/domain/EndpointHost.kt",
+      "bytes": 3631,
+      "sha256": "37ca1e5cef343128f68dd27dbf595c76c49b768d739870cea8809a927f49e89a"
+    },
+    {
+      "path": "shared/android/domain/src/main/kotlin/io/github/baitian6641/cloudy/domain/FilesResourceRegistration.kt",
+      "bytes": 8987,
+      "sha256": "ce3e4bab4b7a7652e11c739c78f6e5dca7905250481fa99eae84fe583acfced9"
+    },
+    {
+      "path": "shared/android/domain/src/main/kotlin/io/github/baitian6641/cloudy/domain/FilesSharedDescriptor.kt",
+      "bytes": 932,
+      "sha256": "b4581d7d4554ce602bcb399c2ed2168f588ab798d55ca9a8239ecff2057f6cab"
+    },
+    {
+      "path": "shared/android/domain/src/main/kotlin/io/github/baitian6641/cloudy/domain/HandoffEnvelope.kt",
+      "bytes": 4121,
+      "sha256": "cf11e96b286231cd09cac9256d8dca3e3610f1b181aee9afdd4ea8a1cb8d07e5"
+    },
+    {
+      "path": "shared/android/domain/src/main/kotlin/io/github/baitian6641/cloudy/domain/SshHostTrust.kt",
+      "bytes": 12537,
+      "sha256": "1e3a81ede9d8640bae75be5aa2da12f998168c2c92979bcb7ede962025047d5d"
+    },
+    {
+      "path": "shared/android/domain/src/main/kotlin/io/github/baitian6641/cloudy/domain/SshObservationPresentation.kt",
+      "bytes": 9440,
+      "sha256": "a003a194c13ed01cb29e8aebbc49d90fcc42421a03789124fd49ccedd0a5d9e7"
+    },
+    {
+      "path": "shared/android/domain/src/main/kotlin/io/github/baitian6641/cloudy/domain/WindowState.kt",
+      "bytes": 4042,
+      "sha256": "7e4c0146756c4011f49b5dcef04f1b9144937db66e1f77b86b4615c8175424b7"
+    },
+    {
+      "path": "shared/android/domain/src/test/kotlin/io/github/baitian6641/cloudy/domain/ConnectionProfileTest.kt",
+      "bytes": 6245,
+      "sha256": "3d299dc53c8627d0ac4b924eb6212cc671012a00d04523775ffeb5b76b7c28e1"
+    },
+    {
+      "path": "shared/android/domain/src/test/kotlin/io/github/baitian6641/cloudy/domain/EndpointHostTest.kt",
+      "bytes": 3533,
+      "sha256": "3d940493196c2cbdfdc6bab3fa6643534b138d312e882da9e530d8c7e59eec6d"
+    },
+    {
+      "path": "shared/android/domain/src/test/kotlin/io/github/baitian6641/cloudy/domain/FilesResourceRegistrationTest.kt",
+      "bytes": 11640,
+      "sha256": "4832e0e1bf492f6962888a51353b2c03929e92230a35fb234bf274afc3cf61cf"
+    },
+    {
+      "path": "shared/android/domain/src/test/kotlin/io/github/baitian6641/cloudy/domain/FilesSharedDescriptorTest.kt",
+      "bytes": 1381,
+      "sha256": "81d998fb1c35a5b2c5f1562f8c6e9d3f647562ea4dcdb65009cbf9c77b8ae477"
+    },
+    {
+      "path": "shared/android/domain/src/test/kotlin/io/github/baitian6641/cloudy/domain/HandoffEnvelopeTest.kt",
+      "bytes": 5873,
+      "sha256": "3c7591dcb298439f31801fb7b4a72f707bd2710c31e9889f9574b9af9568ded9"
+    },
+    {
+      "path": "shared/android/domain/src/test/kotlin/io/github/baitian6641/cloudy/domain/SshHostTrustTest.kt",
+      "bytes": 13556,
+      "sha256": "0177b29c202b01014fbd6e39572f3d4a808e8a6d13faf9b8eb501a017592f810"
+    },
+    {
+      "path": "shared/android/domain/src/test/kotlin/io/github/baitian6641/cloudy/domain/SshObservationPresentationTest.kt",
+      "bytes": 13006,
+      "sha256": "ad8e42342c8d13690fe4a06c230d9233f40e6bb4407a0b6a93e4b73c9eb00fb5"
+    },
+    {
+      "path": "shared/android/domain/src/test/kotlin/io/github/baitian6641/cloudy/domain/WindowStateTest.kt",
+      "bytes": 4478,
+      "sha256": "dd9e4a4039cdcb0de29946b7188e08ec60072fbf22c81fbc77f9c3d4f886a74e"
+    },
+    {
+      "path": "shared/android/identity/build.gradle.kts",
+      "bytes": 1336,
+      "sha256": "6f84ca5ab8ffc990b482cfd57b0eb7eb7b9cbbba49734a781caba68243fe4661"
+    },
+    {
+      "path": "shared/android/identity/src/androidTest/kotlin/io/github/baitian6641/cloudy/identity/AndroidVaultCryptoTest.kt",
+      "bytes": 734,
+      "sha256": "dd3a67a6c64a20063993f9192b1ffe774f0cce9a27f34e7930b5876ca8e6ce27"
+    },
+    {
+      "path": "shared/android/identity/src/androidTest/kotlin/io/github/baitian6641/cloudy/identity/VaultProfilesTest.kt",
+      "bytes": 4224,
+      "sha256": "27abffcdb82477de8a3b48166abc46bf3dd596df54a2eb9f279a0cc2a25df454"
+    },
+    {
+      "path": "shared/android/identity/src/androidTest/kotlin/io/github/baitian6641/cloudy/identity/VaultStorageTest.kt",
+      "bytes": 10225,
+      "sha256": "5c28cc5837951f2e2945005569e3e1e78f09b2b9c0b4416a0d73361232fb7b82"
+    },
+    {
+      "path": "shared/android/identity/src/main/AndroidManifest.xml",
+      "bytes": 111,
+      "sha256": "c8fe08b06e479efc7e3d00476fffe693a3e943e2b874b3c6a1ba5156fc180751"
+    },
+    {
+      "path": "shared/android/identity/src/main/kotlin/io/github/baitian6641/cloudy/identity/AndroidVaultCrypto.kt",
+      "bytes": 3908,
+      "sha256": "161e5d7cce494c267bdd592aa3963deda42a5aeea0ea994c17c7ab603a42b2f2"
+    },
+    {
+      "path": "shared/android/identity/src/main/kotlin/io/github/baitian6641/cloudy/identity/PromptSessionState.kt",
+      "bytes": 499,
+      "sha256": "d5e1332d9db064ac26e7d69e6a5a24c08adcd7c614c1c00f5eca366f12962438"
+    },
+    {
+      "path": "shared/android/identity/src/main/kotlin/io/github/baitian6641/cloudy/identity/VaultAuthorization.kt",
+      "bytes": 4107,
+      "sha256": "2b0af535a22872983f358634f5ee2922cfcdbe241006fec0dd045b56a35cd6e6"
+    },
+    {
+      "path": "shared/android/identity/src/main/kotlin/io/github/baitian6641/cloudy/identity/VaultCodec.kt",
+      "bytes": 6752,
+      "sha256": "d20dd3595c6e0dee22abaeb522f79534d79f84707c16e673e802e96e1d9099f4"
+    },
+    {
+      "path": "shared/android/identity/src/main/kotlin/io/github/baitian6641/cloudy/identity/VaultProfiles.kt",
+      "bytes": 6246,
+      "sha256": "3c0d0777c57c4fe8ad9bb82dc89a1c74e3f474fe8393e502bb1bc445eafd6e94"
+    },
+    {
+      "path": "shared/android/identity/src/main/kotlin/io/github/baitian6641/cloudy/identity/VaultPromptController.kt",
+      "bytes": 7848,
+      "sha256": "e066c4dae01aa20f8044e0ef4aacc45e87e8cf2691eafe33bc2a2d40cc728f06"
+    },
+    {
+      "path": "shared/android/identity/src/main/kotlin/io/github/baitian6641/cloudy/identity/VaultStorage.kt",
+      "bytes": 11306,
+      "sha256": "779c0638dcd21b552c70a24ccbd8d17cd2c38293081e2380428ac41155465e44"
+    },
+    {
+      "path": "shared/android/identity/src/main/kotlin/io/github/baitian6641/cloudy/identity/VaultValues.kt",
+      "bytes": 4894,
+      "sha256": "be21d6e5fc679159962ea319a2f6cc38a08285158445bcbe3e4fb03fc87942f2"
+    },
+    {
+      "path": "shared/android/identity/src/main/res/values/strings.xml",
+      "bytes": 377,
+      "sha256": "775da72d6cb670e8f48eece0c86e4efc90c66106b49b08686f829037e291d920"
+    },
+    {
+      "path": "shared/android/identity/src/test/kotlin/io/github/baitian6641/cloudy/identity/PromptSessionStateTest.kt",
+      "bytes": 1155,
+      "sha256": "72f42e0eba97e76f6f3e04f9a8b9ee5d1445cbc332e08b60bee3ebc04ae26d64"
+    },
+    {
+      "path": "shared/android/identity/src/test/kotlin/io/github/baitian6641/cloudy/identity/VaultAuthorizationTest.kt",
+      "bytes": 4384,
+      "sha256": "30e0c160ee970fd4ac8029757fb8555d3d620705136391545fc6880f3c024875"
+    },
+    {
+      "path": "shared/android/identity/src/test/kotlin/io/github/baitian6641/cloudy/identity/VaultCodecTest.kt",
+      "bytes": 3992,
+      "sha256": "d5c9c7a72ed0f4b8f30dfff8fe5af95960000303eeeae6d9508c613668f45d82"
+    },
+    {
+      "path": "shared/android/identity/src/test/kotlin/io/github/baitian6641/cloudy/identity/VaultValuesTest.kt",
+      "bytes": 2672,
+      "sha256": "c24d554e36f1ce4b5f78afd0c33c99d022ecfe3eb1e70042463483fcc08d9e9a"
+    },
+    {
+      "path": "shared/android/platform/build.gradle.kts",
+      "bytes": 1917,
+      "sha256": "a316da92ce116dd5c0d7fbf8583752ffcf0fea2c4edfce21b2fc7fd3f1949e90"
+    },
+    {
+      "path": "shared/android/platform/gradle.lockfile",
+      "bytes": 50814,
+      "sha256": "c4eb90acb7912f3e6aa2306d4f0df7a3618648df87978900f03299f53a962bbb"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/CloudyDisplayPreferencesStorageTest.kt",
+      "bytes": 5710,
+      "sha256": "d1ea95a23d4df586240afe0162e787fc4e109e6ea4294138be000f145c441d6a"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/ConnectionProfilesProcessTest.kt",
+      "bytes": 4239,
+      "sha256": "1545fc5e314daaa786b73db607afaa574ba35f3316c05ffdead171df99aa40d3"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/ConnectionProfilesTest.kt",
+      "bytes": 15106,
+      "sha256": "6920cbc8bb43a408a017ba38fbdc552acc5a0b2b44bde571b4a79a142395fd2e"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/FilesHandoffParcelTest.kt",
+      "bytes": 3955,
+      "sha256": "707fb0f6102d197bbde3eafaf66d140d647cf6a43be57d1116dec4a84b8c7425"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/FilesHandoffWireTest.kt",
+      "bytes": 9473,
+      "sha256": "a7469aa4790b88dbdddf37d0ebac51b9d18670e1d2bfd0907c48846538aaca84"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/FilesResourceStoreTest.kt",
+      "bytes": 27182,
+      "sha256": "3aa303379012eea8d9a7aa722aefadb458895e449246d633116b11c516eb5772"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/HandoffCallerTest.kt",
+      "bytes": 4373,
+      "sha256": "e68c9a66528a4f8456167d559470e5a18d7375549d8da97248a2de07eb34a7c9"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/HandoffEndpointTest.kt",
+      "bytes": 5455,
+      "sha256": "aa80f07e79d1b9e8da89c8257f8eaa24657ce004d9abab2cfeae8e9d4896f8d8"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/HandoffJsonTest.kt",
+      "bytes": 6990,
+      "sha256": "6621c131aa3239d7d37a0497c35e52675486be5e087851eb34912e193605b186"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/HandoffReplayLedgerTest.kt",
+      "bytes": 10697,
+      "sha256": "834401656d724779556d81985d1a0d0aa18df9bd79fd8324682c12b6c10e50e8"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/HandoffReplayProcessTest.kt",
+      "bytes": 3530,
+      "sha256": "1bb6994b187b5f772be7c97e8eb0a0d78b6d3fcdebb0144f4624d6eb5f605d14"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/ProfileEditorStateTest.kt",
+      "bytes": 11427,
+      "sha256": "c77767b92f67e1bf35698d23b97bee38a4780df3fd00f71f6d25b7e589e6beea"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/SshAddressResolverTest.kt",
+      "bytes": 5434,
+      "sha256": "013f987869237ae78e3787d334a25adc9beef6c7128a0d7a399b13d4225d557f"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/SshAuthenticationCoordinatorTest.kt",
+      "bytes": 25975,
+      "sha256": "bfb7af4320962d69837e0d49e184062055723cefc2b2ab4527ef527a0f6cea3d"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/SshEstablishedOwnershipTest.kt",
+      "bytes": 15110,
+      "sha256": "ece01ab81f3604316c5d69d4c3b29b200674ced726c37f692c2fa430b6bd838c"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/SshFilesRegistrationTest.kt",
+      "bytes": 6705,
+      "sha256": "e373291864d25e008ce2bba74ff39c59e40e7c2995e5705a940252b60ea90abe"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/SshHostTrustStoreTest.kt",
+      "bytes": 17075,
+      "sha256": "8daf9c7a63ee7eff729cff1875b96bc71b497c769743b898243aefbe3302a959"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/SshObservationTransportTest.kt",
+      "bytes": 6620,
+      "sha256": "a50f05b0e3dcf429e82cd6d7282b5b2cadf66bd7d3fee8e8e42b82190a260f75"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/SshRetainedTransportDeviceTest.kt",
+      "bytes": 16939,
+      "sha256": "6a321a2abb41bf8e3df08632b5c487c267600a12739242e2b5cdbca8e5cd21f5"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/SshTrustUiStateTest.kt",
+      "bytes": 2756,
+      "sha256": "193570bef2fd8d427b218c763ea44081bfad861e81b41232c377e1b9930442dd"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/WindowBundlesTest.kt",
+      "bytes": 4566,
+      "sha256": "7a7d45c54a489f063c7f2241bf3ded4cb4486098f31751dd37e8117262404417"
+    },
+    {
+      "path": "shared/android/platform/src/main/AndroidManifest.xml",
+      "bytes": 357,
+      "sha256": "3af89b0023ca180fdee1272c0729efde20f42206e51ececa78109e59377198b5"
+    },
+    {
+      "path": "shared/android/platform/src/main/aidl/io/github/baitian6641/cloudy/platform/ICloudyFilesHandoff.aidl",
+      "bytes": 299,
+      "sha256": "78ea7e4a1f3da716736eb4abc78267e0235f9b0cf4374c30230ba801dd28b676"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudyAppTheme.kt",
+      "bytes": 2082,
+      "sha256": "20fb22a91736465fd6fc2aa5a3eef9f6129f2792547f1cd52e4b3cb8493b6a44"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudyDisplaySettings.kt",
+      "bytes": 10488,
+      "sha256": "d4f6bc3e080a320dc7f496b0fe0e0ad3a5cb407368919b90918b4902c656626d"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudyDisplaySettingsActivity.kt",
+      "bytes": 1363,
+      "sha256": "ffc868b25b4edc534cafde8863eb73ec4cf63506a4666ca7aebcf047a9fa4a4c"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudyFilesHandoffService.kt",
+      "bytes": 2797,
+      "sha256": "38a7e9762c18e27719d09f5a9ad1da2942b1a6320990ccb7f93b7c25197801f6"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudyFilesLocationsActivity.kt",
+      "bytes": 13187,
+      "sha256": "ad22e8014cde173596e47b4901e2d559543e70c093230940139b1db6c5acea6b"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudyProfilesActivity.kt",
+      "bytes": 19908,
+      "sha256": "aae91ece1f471bc0334c253478d88ffdf5d26f5de289a396b57d99941b1f5fae"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudySharedLocationsActivity.kt",
+      "bytes": 11062,
+      "sha256": "2d509d277f85d28f40789e1bbcae8cc09dcb9764a096f7d5cca57ba0f4ef1431"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudySshAuthenticateActivity.kt",
+      "bytes": 16403,
+      "sha256": "680f0622c564f98cd1c7d95eb14f339cf5a8cf11e9f41cb18e28eb1a77b0d9b7"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudySshFilesActivity.kt",
+      "bytes": 13430,
+      "sha256": "852bf1c4c808546f31b2ae81f26df4f61389919fd8f09844a0c28f890c846d08"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudySshObserveActivity.kt",
+      "bytes": 19138,
+      "sha256": "8f31990851f6a7f8a0c9a5a1a7d9172f3c7860335011ac10be237cfab370f8c5"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudySshTrustActivity.kt",
+      "bytes": 14380,
+      "sha256": "596980680cd40d447c9e19409184991c847d4312ca01053d8684e721a7110fe6"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudyVaultActivity.kt",
+      "bytes": 16955,
+      "sha256": "9e802bf856bc247b2f1342e6fec90f34452bf9f11bad1394eedfd567ee33f9b8"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudyWindowActivity.kt",
+      "bytes": 7999,
+      "sha256": "6d3dbf9a694614141a14ab8b221bddcd21e17d2d85b6ccd824ac78e724fa0e52"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/ConnectionProfiles.kt",
+      "bytes": 17924,
+      "sha256": "d1ce4e35b56e60a9a14efc070f604a51f0a7a9095fa484e9b687727780373ec8"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/DisplaySettingsScreen.kt",
+      "bytes": 7023,
+      "sha256": "7b4e85192c2d9235c674e28f3df8a13819e8350904f6ff3934dddf05b2e611f9"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/FilesHandoffClient.kt",
+      "bytes": 9979,
+      "sha256": "cbb3c156e4f793861cc9bfd8b7d04daa00352dec09d021c5b74e65966e7b9ae0"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/FilesHandoffDispatch.kt",
+      "bytes": 4807,
+      "sha256": "e6c01ac846a646fd50ab28eff6f5c6e28dbfda4a70c4a010a7186d1459bee381"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/FilesHandoffParcel.kt",
+      "bytes": 2125,
+      "sha256": "8e2ce0edd4ba738a0cd9a69edf8d9e771e6c80f5e3b9725345c6700a8203a381"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/FilesHandoffReceiver.kt",
+      "bytes": 8638,
+      "sha256": "197e61bb8b0b0302b2e364ff0bb5572618c598eff5e8f045da17d862df31189e"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/FilesHandoffWire.kt",
+      "bytes": 14476,
+      "sha256": "f2cc9ded60f9a27acb69c24bcc172031aeb1ecff792b159ad3041d4882d7aeb1"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/FilesLocationTickets.kt",
+      "bytes": 8289,
+      "sha256": "2e7fd90313a2bf1b9b12021c1dac97c87c3cfc535004de23070dd00285cd4995"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/FilesLocationsScreen.kt",
+      "bytes": 13157,
+      "sha256": "baf4f747fb3d57afdc7f1287e35c0750af971fee74b64ab04f335b687d420f8c"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/FilesResourceStore.kt",
+      "bytes": 27638,
+      "sha256": "f28bebcb648e5038af7c2887d83dba663a450efc8e139c839b3662de01c46d45"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/HandoffCaller.kt",
+      "bytes": 10893,
+      "sha256": "2e246dbaed60a2f6904e9581ec46589aead327d7a767b89da67a77d882b8207a"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/HandoffEndpoint.kt",
+      "bytes": 5760,
+      "sha256": "479d725a435cb5489c82e6bb534f72d0a13212e1bdc323ff1bbbeaab8e9d7ac9"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/HandoffJson.kt",
+      "bytes": 7200,
+      "sha256": "fcb0dc8397d21b69e3d5e004c1fb6f2ae0c0b5f731e345173ef762107de777cb"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/HandoffReplayLedger.kt",
+      "bytes": 11875,
+      "sha256": "fa22695ae2b25afb58c3bf1323c184d36b0fec94576a196b589ca114887019c0"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/ProfileEditorScreen.kt",
+      "bytes": 15507,
+      "sha256": "985f937fe7bbe8b3020cdfe95a733febfc2415dbb12f2c9534a2dbda5fda2a65"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/ProfileEditorState.kt",
+      "bytes": 8500,
+      "sha256": "f077970ab72ffcbacff2862b2b7cc637f569b43b671ebdd9e991fecd3b5bed9a"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/SharedLocationsScreen.kt",
+      "bytes": 8572,
+      "sha256": "61ac542cf5e160b653a0b6652e1e2fdd71d6373e122562cbd1015e60a54abe72"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/SshAddressResolver.kt",
+      "bytes": 7808,
+      "sha256": "57d9e6cd791c4311844a0e1e501eda2e3b8b5edca3d4494999dd811533e703d0"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/SshAuthenticateScreen.kt",
+      "bytes": 9287,
+      "sha256": "e2dd1b22f093f0d541d984f6a3d83b5bffd2b9149ad6015e340a8fb890e143a4"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/SshAuthenticationCoordinator.kt",
+      "bytes": 19613,
+      "sha256": "310caef7aa4cefa142400ef968da47d8be8400aed3d0466552257ee7fac6b119"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/SshFilesScreen.kt",
+      "bytes": 24363,
+      "sha256": "6d4a083c19df06b4c65c80af87ac456b5afbfb78c65623835f58a8308d13a59b"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/SshFilesSessionModel.kt",
+      "bytes": 35318,
+      "sha256": "f5580932234a0f6b99452ab1b68ab050d7b017e7348638dbd6db0704b1128e1a"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/SshHostTrustStore.kt",
+      "bytes": 20153,
+      "sha256": "f7c56e5a089a5d1ef5b00fc19101242fd0ae89da58b85522146533e17f2428cd"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/SshLocalNetworkPolicy.kt",
+      "bytes": 2588,
+      "sha256": "eba827e4d2a77da26519c28bc44a8f2c73484ea6f2e39d1f075f972675d53b9c"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/SshObserveScreen.kt",
+      "bytes": 12375,
+      "sha256": "a5e55ac3aa56c641342231073792f50140897d245f46981a54b07bc92a663f7c"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/SshTrustScreen.kt",
+      "bytes": 11093,
+      "sha256": "56a6eddfd2f6da499b781811650207a24560ef0e8e4b8d04f4910193b211ecdf"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/SshTrustUiState.kt",
+      "bytes": 1646,
+      "sha256": "9836eccdbfc9bcc3109ddfec08db64a6f028f0f4e61e9bccc2d88a532a4c0d56"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/WindowBundles.kt",
+      "bytes": 1754,
+      "sha256": "5b3da64777dabee6e85adb8435b073af71be43a1360a4678a6536c897ee492c5"
+    },
+    {
+      "path": "shared/android/platform/src/main/res/values-night/styles.xml",
+      "bytes": 412,
+      "sha256": "d2b018657d8b71f26a08e4cb7fd665cf2c212bfe41a811a733e322bcec13e70c"
+    },
+    {
+      "path": "shared/android/platform/src/main/res/values/display_settings_strings.xml",
+      "bytes": 2178,
+      "sha256": "d10679661980ee0575c88026d496f3540179048f74a0d0c191cc5e4a25ec236d"
+    },
+    {
+      "path": "shared/android/platform/src/main/res/values/files_locations_strings.xml",
+      "bytes": 5328,
+      "sha256": "c90fc857ef3bde05088785098ae701c1e3776ee76860061ab6f7a715b6c64302"
+    },
+    {
+      "path": "shared/android/platform/src/main/res/values/profile_strings.xml",
+      "bytes": 5899,
+      "sha256": "82a0e7de9888e522faf38445443f4bf5acab641e208ae2c62057bfc83eff9304"
+    },
+    {
+      "path": "shared/android/platform/src/main/res/values/shared_locations_strings.xml",
+      "bytes": 5466,
+      "sha256": "964a7e0b732d9ec704c4f4f243fee55b921b48a9b47837c8ffd5040ec54a768f"
+    },
+    {
+      "path": "shared/android/platform/src/main/res/values/ssh_auth_strings.xml",
+      "bytes": 2797,
+      "sha256": "8c6b1db1a2f0f3aa31dd3f6e2a802a4b83d9fb632e1941ad77b3776351f4ef21"
+    },
+    {
+      "path": "shared/android/platform/src/main/res/values/ssh_files_strings.xml",
+      "bytes": 4046,
+      "sha256": "21f777b667bfbcd52dcf595e9084f1933b80a433c29bc2c9b659c4a573b13b1d"
+    },
+    {
+      "path": "shared/android/platform/src/main/res/values/ssh_location_strings.xml",
+      "bytes": 1564,
+      "sha256": "430dbd300e14a2e4d4ae898a0d12077d3429d8bc42dd7b0c27cbcd40ed26e776"
+    },
+    {
+      "path": "shared/android/platform/src/main/res/values/ssh_observe_permission.xml",
+      "bytes": 143,
+      "sha256": "0e218674f2b6a0071f072230aa53b8c5d9ccbe3566baa0548c4e2abbd5734436"
+    },
+    {
+      "path": "shared/android/platform/src/main/res/values/ssh_observe_strings.xml",
+      "bytes": 4331,
+      "sha256": "e45920efc335253258955ac8f8ad44976c4ea137951976c641e7ef075067b59a"
+    },
+    {
+      "path": "shared/android/platform/src/main/res/values/ssh_trust_observe_entry.xml",
+      "bytes": 136,
+      "sha256": "e373b2e75c0b835ce67815f652312f5f62f6c6f246a4f4cd7e7307b79ca7dcd6"
+    },
+    {
+      "path": "shared/android/platform/src/main/res/values/ssh_trust_strings.xml",
+      "bytes": 3847,
+      "sha256": "3586505125b8c3c5e8236833cb839ca61ae2d1e77c8a932f850fb1c632f2e6aa"
+    },
+    {
+      "path": "shared/android/platform/src/main/res/values/strings.xml",
+      "bytes": 821,
+      "sha256": "840318c98e6014ca7ba7fbea6b8495e713c2d764417707402207224599166262"
+    },
+    {
+      "path": "shared/android/platform/src/main/res/values/styles.xml",
+      "bytes": 416,
+      "sha256": "08c45932d886bf094c541d5831c57c368e2cc1fdb576ba241855baf2b3a22aef"
+    },
+    {
+      "path": "shared/android/platform/src/main/res/values/vault_strings.xml",
+      "bytes": 2077,
+      "sha256": "84ba0ecd23d906fa3ef2bab9ccf2ac85eef445bc81af4e1d626b6d12fca414ef"
+    },
+    {
+      "path": "shared/android/platform/src/main/res/xml/cloudy_data_extraction_rules.xml",
+      "bytes": 1142,
+      "sha256": "9053f4326fa3ccd5ac3bd677a088f3535a8d692522b193b1f564ba3bbc9d4e41"
+    },
+    {
+      "path": "shared/android/platform/src/test/kotlin/io/github/baitian6641/cloudy/platform/FilesDispatchStateTest.kt",
+      "bytes": 2497,
+      "sha256": "089e80dfb306b11df229b354b6a2f5c6a455ae9162ce5e870372c5870202779e"
+    },
+    {
+      "path": "shared/android/platform/src/test/kotlin/io/github/baitian6641/cloudy/platform/SshLocalNetworkPolicyTest.kt",
+      "bytes": 1727,
+      "sha256": "9a168565a9338815cbf22c616c79dffd4907266b97bf8b0097ad6c60435cd760"
+    },
+    {
+      "path": "shared/android/ssh/build.gradle.kts",
+      "bytes": 696,
+      "sha256": "da5173b3e7c99c108a4c5587ba8d8629da2ab350cce270fc34371eee4457a459"
+    },
+    {
+      "path": "shared/android/ssh/gradle.lockfile",
+      "bytes": 4834,
+      "sha256": "1b61e14ded5d1ddfda082230ad4623397878ec3e65f8e576d39d7aca18f26b0b"
+    },
+    {
+      "path": "shared/android/ssh/src/main/kotlin/io/github/baitian6641/cloudy/ssh/SshAuthenticatedOwnership.kt",
+      "bytes": 705,
+      "sha256": "f883de004d860ca04d02589cd339b82d0b094887f7b700d2aa9cef10a33d51bb"
+    },
+    {
+      "path": "shared/android/ssh/src/main/kotlin/io/github/baitian6641/cloudy/ssh/SshAuthenticatedTransport.kt",
+      "bytes": 21200,
+      "sha256": "12a9c89e366efadd63c4a8244ab545f764122b9082eab1b85ef8441215bedd75"
+    },
+    {
+      "path": "shared/android/ssh/src/main/kotlin/io/github/baitian6641/cloudy/ssh/SshAuthenticationCheck.kt",
+      "bytes": 13765,
+      "sha256": "25630e4ed1647039ee802f398da02604d5295308131e70de5c40bf3c78f8340a"
+    },
+    {
+      "path": "shared/android/ssh/src/main/kotlin/io/github/baitian6641/cloudy/ssh/SshAuthenticationResult.kt",
+      "bytes": 784,
+      "sha256": "81ac3ef6d3ab4e8c6c74ef12a2c797f245286f25eff9d447d93e163097d3496a"
+    },
+    {
+      "path": "shared/android/ssh/src/main/kotlin/io/github/baitian6641/cloudy/ssh/SshHostKeyObserver.kt",
+      "bytes": 10930,
+      "sha256": "42f33ce5f9dbbef68ba2a0c762279ac896b745728f4da27e48026f5f222f5343"
+    },
+    {
+      "path": "shared/android/ssh/src/main/kotlin/io/github/baitian6641/cloudy/ssh/SshObservationCancellation.kt",
+      "bytes": 1289,
+      "sha256": "609ce52364e675a11e5fb59528b2c4d201eb12db57a1a48559969d5fc7eff9af"
+    },
+    {
+      "path": "shared/android/ssh/src/main/kotlin/io/github/baitian6641/cloudy/ssh/SshObservationPolicy.kt",
+      "bytes": 1736,
+      "sha256": "ecb4fff8286e99921fc370bd1b9d9f75b2aa10d3df105ba23cf67295586d259d"
+    },
+    {
+      "path": "shared/android/ssh/src/main/kotlin/io/github/baitian6641/cloudy/ssh/SshObservationResult.kt",
+      "bytes": 874,
+      "sha256": "ffd252a6693fd78817d6e6a6677a395040a7ed65dd428dcbda66a0cf1bf0e530"
+    },
+    {
+      "path": "shared/android/ssh/src/main/kotlin/io/github/baitian6641/cloudy/ssh/SshObservedKeyCodec.kt",
+      "bytes": 776,
+      "sha256": "165da5d29be715fafa81b14e075156fc373226dd3fa3b703f3b4d9541ccf01ce"
+    },
+    {
+      "path": "shared/android/ssh/src/main/kotlin/io/github/baitian6641/cloudy/ssh/SshOwnedSftp.kt",
+      "bytes": 2047,
+      "sha256": "a285fab2ee207280285d1ac246907e8c9caae9147d757b230e974acf859be3ee"
+    },
+    {
+      "path": "shared/android/ssh/src/main/kotlin/io/github/baitian6641/cloudy/ssh/SshPasswordCredentials.kt",
+      "bytes": 2566,
+      "sha256": "8d025b8120851ae88819b4a9ea86bde2dda883f88272ff527195b4d584980ba7"
+    },
+    {
+      "path": "shared/android/ssh/src/main/kotlin/io/github/baitian6641/cloudy/ssh/SshReadOnlyFiles.kt",
+      "bytes": 6196,
+      "sha256": "4e7b22ec0ec2f999273e37ce663e2380d0a0a33b7cab9efb5848c063e7f3d23c"
+    },
+    {
+      "path": "shared/android/ssh/src/main/kotlin/io/github/baitian6641/cloudy/ssh/SshReaderRetirement.kt",
+      "bytes": 2566,
+      "sha256": "fa09e36598039a9650cb14657a7eab43fde191130258043a2da2ff2621669da5"
+    },
+    {
+      "path": "shared/android/ssh/src/main/kotlin/io/github/baitian6641/cloudy/ssh/SshSftpFramingInput.kt",
+      "bytes": 3012,
+      "sha256": "00994dfeadbec37adb8b2a05125fd771553fe051d3196b8a8e192012f257e8ae"
+    },
+    {
+      "path": "shared/android/ssh/src/main/kotlin/io/github/baitian6641/cloudy/ssh/SshStrictPasswordMethod.kt",
+      "bytes": 2152,
+      "sha256": "7ab596e0250abd43a29214e49a2e02c8213ada862906f32e4d72478ee0edb335"
+    },
+    {
+      "path": "shared/android/ssh/src/test/kotlin/io/github/baitian6641/cloudy/ssh/SshAuthenticatedTransportHostTest.kt",
+      "bytes": 12081,
+      "sha256": "209eece608e765dee9bfd1f10a57cce6f1a0a627884fde2f0d5ff779850e10de"
+    },
+    {
+      "path": "shared/android/ssh/src/test/kotlin/io/github/baitian6641/cloudy/ssh/SshAuthenticationCheckTest.kt",
+      "bytes": 3836,
+      "sha256": "4498f6908babf27f1043bb2fcae68389333c58ea54b83f07b8f15ba0894542c0"
+    },
+    {
+      "path": "shared/android/ssh/src/test/kotlin/io/github/baitian6641/cloudy/ssh/SshAuthenticationHostTest.kt",
+      "bytes": 11526,
+      "sha256": "d1e938524012ef2321fc58df5eb99e92241a4152aec0984f1eed66aa06118cd1"
+    },
+    {
+      "path": "shared/android/ssh/src/test/kotlin/io/github/baitian6641/cloudy/ssh/SshHostKeyObserverTest.kt",
+      "bytes": 4299,
+      "sha256": "6b8c1834915cc404ba1f2b4085f5238e8c9024fd284ddb5e981a60c827829664"
+    },
+    {
+      "path": "shared/android/ssh/src/test/kotlin/io/github/baitian6641/cloudy/ssh/SshObservationHostTest.kt",
+      "bytes": 5925,
+      "sha256": "b869906f13c39e9982df03209e79a19c77ce1b4371f4a3795f1e7139eb7ed806"
+    },
+    {
+      "path": "shared/android/ssh/src/test/kotlin/io/github/baitian6641/cloudy/ssh/SshObservedKeyCodecTest.kt",
+      "bytes": 1959,
+      "sha256": "19fcb18e8e2b624c015fdc4b9d02e7adc662443df8b2afd7f68f38b0cf0e4782"
+    },
+    {
+      "path": "shared/android/ssh/src/test/kotlin/io/github/baitian6641/cloudy/ssh/SshPasswordCredentialsTest.kt",
+      "bytes": 3674,
+      "sha256": "066a3b40e1f18228427cbae6716c729f82b23346bde78ad5888d101ccd741344"
+    },
+    {
+      "path": "shared/android/ssh/src/test/kotlin/io/github/baitian6641/cloudy/ssh/SshRetainedBoundsTest.kt",
+      "bytes": 3600,
+      "sha256": "16a6da2c3330fa47b2da448622259a79f36622f998fb8799b32677c2522ef0b8"
+    },
+    {
+      "path": "shared/android/ssh/src/test/kotlin/io/github/baitian6641/cloudy/ssh/SshSftpFramingInputTest.kt",
+      "bytes": 3556,
+      "sha256": "700ffa6892b69ce66e5149e69c849a07c3bba384bea1dc7d0384e11c5d8b7a40"
+    },
+    {
+      "path": "shared/android/ssh/src/test/kotlin/io/github/baitian6641/cloudy/ssh/SshStrictPasswordMethodTest.kt",
+      "bytes": 2833,
+      "sha256": "be0e5db8a5fb7fb5bc0e6ba6b14f6bb60ddbc7d047c49f613a4811f307c5c818"
+    },
+    {
+      "path": "shared/design-system/android/build.gradle.kts",
+      "bytes": 1160,
+      "sha256": "591065cf26dfe9ce64b075d2426146d0139bed361929311d4713d526d80bc964"
+    },
+    {
+      "path": "shared/design-system/android/src/main/AndroidManifest.xml",
+      "bytes": 52,
+      "sha256": "daa0fb1f32ba7ea85a07ef6302ab3d58c3407d7fd2aa03ec132cb9e38e8d9849"
+    },
+    {
+      "path": "shared/design-system/android/src/main/java/io/github/baitian6641/cloudy/design/CloudyControlMetrics.kt",
+      "bytes": 2527,
+      "sha256": "7fd07da98a3c6964f7d8eee7b26f727fe8afdad0dbd56688cb1109628fa110ac"
+    },
+    {
+      "path": "shared/design-system/android/src/main/java/io/github/baitian6641/cloudy/design/CloudyDisplayPreferences.kt",
+      "bytes": 493,
+      "sha256": "b88ac16d9dee72aa73884c07839cfa07ebf5af34242f0d00490c30edccc3d648"
+    },
+    {
+      "path": "shared/design-system/android/src/main/java/io/github/baitian6641/cloudy/design/CloudyTheme.kt",
+      "bytes": 4175,
+      "sha256": "ff600f5d1d333204b08b853f23fd87a5a5ccaded412c9a6c09cd921b0769c804"
+    },
+    {
+      "path": "shared/design-system/android/src/main/java/io/github/baitian6641/cloudy/design/CloudyTokens.kt",
+      "bytes": 3959,
+      "sha256": "b92111e6782b429d1ff599e9f6dbdbbed069855988d6e27d8ea787fe5cfb89c3"
+    },
+    {
+      "path": "shared/design-system/android/src/main/java/io/github/baitian6641/cloudy/design/WindowDraftCodec.kt",
+      "bytes": 1419,
+      "sha256": "0e80c07715656baf0959ef57a381197a8f5b97acc56c11b392ac0dd029a88e91"
+    },
+    {
+      "path": "shared/design-system/android/src/main/java/io/github/baitian6641/cloudy/design/WindowWorkspaceScreen.kt",
+      "bytes": 9478,
+      "sha256": "493f9c091d92d429b751ec329ea74f3f1fb96f4402272a761640a98a63f443ea"
+    },
+    {
+      "path": "shared/design-system/android/src/main/res/values/strings.xml",
+      "bytes": 877,
+      "sha256": "c8174118b564536bf18534f378b483ed99ea570c3f3d11c0a9fb6a959f546257"
+    },
+    {
+      "path": "shared/design-system/android/src/test/java/io/github/baitian6641/cloudy/design/WindowDraftCodecTest.kt",
+      "bytes": 2091,
+      "sha256": "6aac689c54910a1f0e296ac7e9b8410d0553ddc4dec57fd542c54a1c7b57f8cb"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/DisplaySettingsActivityContract.kt",
+      "bytes": 7061,
+      "sha256": "82b5526141278ea0e6476a3c0dfe2926f291c8c61d86c139e461e0d461e02951"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/FilesLocationsFixture.kt",
+      "bytes": 14267,
+      "sha256": "94fa1d1e5adfedffdb7d2c0208b91a402190b9d3de84d48040639b05203a11c7"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/HandoffTransportTest.kt",
+      "bytes": 10511,
+      "sha256": "2677f14fa960ebc03b44c079fda6e372119d937818a15431c06d359c566d41d8"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/ProfileActivityContract.kt",
+      "bytes": 14184,
+      "sha256": "827078c47b487126fcb1d7d48e4af25347727b07d13c8c45c98a178843640769"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/ProfileGeometryContract.kt",
+      "bytes": 26307,
+      "sha256": "a124ce1eb252ceb58f25ba452994aae7f03c673b704ab83f6852087d4b1d2c36"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/ProfileIsolationTest.kt",
+      "bytes": 17892,
+      "sha256": "1278bec0d21646854aa986a448dfe23d9625b6d7484bfc55d390b695f12296b9"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/ProfileRecreationContract.kt",
+      "bytes": 8412,
+      "sha256": "60d18842c4e010dc0a48acbfa475ec66d51d959d9a17f80de00720b25f8cb215"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/ProfileTestQueue.kt",
+      "bytes": 4194,
+      "sha256": "1b2f840965cd30d37273fd045d8e93868d8b4ed0929a8eee283327c21e7c83a2"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/SshAuthenticateActivityContract.kt",
+      "bytes": 14253,
+      "sha256": "df312823868832b3a936bb4ef38e442a5036f80908dc96ce41b2c0e2a8faa373"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/SshAuthenticateFixture.kt",
+      "bytes": 17805,
+      "sha256": "8b29e1c6c698f8f213263e1dfb127d9e01763740c56979b4beeb0a8ab8d21081"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/SshFilesActivityContract.kt",
+      "bytes": 44163,
+      "sha256": "720fe4b8785af7ab70e1f0d9d49dc68e2a2deeb53f7c1c34c7964beeb27b47f6"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/SshFilesFixture.kt",
+      "bytes": 22260,
+      "sha256": "0997b5babd03ea27636e48a52badc2276bfa43345776424ee3d58bd4bb8c8810"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/SshObserveActivityContract.kt",
+      "bytes": 19344,
+      "sha256": "350c112900073cfb4e74ddba406840213905414a01e0c3f48c96ac87c9be4d4d"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/SshObserveTrustFixture.kt",
+      "bytes": 9076,
+      "sha256": "1a624c55c867f8de4cdcf8edf589d7144dfacd67b27c7d23869c09a729d62530"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/SshTrustActivityContract.kt",
+      "bytes": 23957,
+      "sha256": "d51eb12bbcccc7504cc3e7bb4eb6f9266adf5520d273f25d56a9a2f764f5b939"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/SshTrustTestQueue.kt",
+      "bytes": 4213,
+      "sha256": "9841b3e46b9a5380090b23bbcdf79c89a83ec54e4cf53e08136d6ef96d04b461"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/VaultManualQualificationTest.kt",
+      "bytes": 12987,
+      "sha256": "abe29ee1c23c935a773a7d4106ff388203f876bb93217281ac03f437a934f643"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/WindowActivityContract.kt",
+      "bytes": 6022,
+      "sha256": "dc92bc95876efbb3d78c00f383c777c6623d809b31ac5d6789fef7722c61a256"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/WindowDisplayContract.kt",
+      "bytes": 9007,
+      "sha256": "b2f5afd1f8c8b7af64abb8009e133b0e946f16052d9235af8523ad56f9a29e75"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/WindowGeometryContract.kt",
+      "bytes": 18753,
+      "sha256": "84a7c5bdae344b328baa4576032722e0a682cad74bef8b6594feed62420c9e60"
+    },
+    {
+      "path": "testing/foundation/src/debug/AndroidManifest.xml",
+      "bytes": 494,
+      "sha256": "59289339709c728aa8a2553439de0e346b572afbb3bf0cf4529b92ffef713d73"
+    },
+    {
+      "path": "testing/foundation/src/debug/kotlin/io/github/baitian6641/cloudy/qualification/VaultQualificationActivity.kt",
+      "bytes": 22068,
+      "sha256": "f128ea1677a1810832233e3f33a0ee58dcbfc8dacc70dcae7c5e5334129c7cbd"
+    }
+  ],
+  "command": [
+    "./gradlew",
+    ":domain:test",
+    ":ssh:test",
+    ":platform:testDebugUnitTest",
+    ":design-system:testDebugUnitTest",
+    ":console:assembleDebug",
+    ":desktop:assembleDebug",
+    ":console:lintDebug",
+    ":desktop:lintDebug",
+    ":platform:lintDebug",
+    ":design-system:lintDebug",
+    ":platform:assembleDebugAndroidTest",
+    ":console:assembleDebugAndroidTest",
+    ":desktop:assembleDebugAndroidTest",
+    "--dependency-verification=strict",
+    "--no-daemon",
+    "--console=plain",
+    "--max-workers=4"
+  ],
+  "scope": "Protected sibling files discovery/submit and native sender integration; build evidence only.",
+  "exitCode": 0,
+  "artifacts": [
+    {
+      "path": "apps/console/build/outputs/apk/androidTest/debug/console-debug-androidTest.apk",
+      "bytes": 4492649,
+      "sha256": "79cc1fff03ac56fd22a9638ab83a99f5d61cc58fc70d5ad4de6a324856048c8b"
+    },
+    {
+      "path": "apps/console/build/outputs/apk/debug/console-debug.apk",
+      "bytes": 42729394,
+      "sha256": "2416742a88b1def230c2694ed6aca873ac568a5d57496bb7bd60b82e22271096"
+    },
+    {
+      "path": "apps/desktop/build/outputs/apk/androidTest/debug/desktop-debug-androidTest.apk",
+      "bytes": 4492649,
+      "sha256": "295c371d6f2ced57f1faf4506e9a576ad058065868ba208d2b0c82d170c1b916"
+    },
+    {
+      "path": "apps/desktop/build/outputs/apk/debug/desktop-debug.apk",
+      "bytes": 42729402,
+      "sha256": "dede80db4c51c6c8e35b5d3fa235daa059e9cf3bd459a6909b301abdae7790db"
+    },
+    {
+      "path": "shared/android/platform/build/outputs/apk/androidTest/debug/platform-debug-androidTest.apk",
+      "bytes": 45029792,
+      "sha256": "ef960eafc787700148c9a2c3a24b8ca595a511953092923a057ff89555296226"
+    }
+  ],
+  "endedAt": "2026-10-16T16:52:09.141967+00:00",
+  "sourceUnchangedDuringBuild": true
+}

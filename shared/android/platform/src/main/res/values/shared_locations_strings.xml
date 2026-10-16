@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="shared_locations_heading">Shared locations in the other app</string>
+    <string name="shared_locations_console">Cloudy Console</string>
+    <string name="shared_locations_desktop">Cloudy Desktop</string>
+    <string name="shared_locations_scope">Refresh explicitly to browse labels deliberately shared by the signed counterpart. Selecting a label does not open or authenticate a connection.</string>
+    <string name="shared_locations_refresh">Refresh first page</string>
+    <string name="shared_locations_next">Next page</string>
+    <string name="shared_locations_close">Close</string>
+    <string name="shared_locations_select">Select</string>
+    <string name="shared_locations_open">Request Open in counterpart</string>
+    <string name="shared_locations_selected">Selected shared location</string>
+    <string name="shared_locations_open_scope">Open asks %1$s to show its private Files screen. That app owns the account and directory and requires its own fresh authentication before listing.</string>
+    <string name="shared_locations_page">Current page</string>
+    <string name="shared_locations_more">More shared labels were available when this page was read. Next page is a separate explicit request; the catalog may change between pages.</string>
+    <string name="shared_locations_paging_scope">Each page is a current observation, not a stable catalog or permission to open later. Refresh starts again at the first page.</string>
+    <string name="shared_locations_empty">No currently available shared locations were returned on this page.</string>
+    <string name="shared_locations_explicit_refresh">Press Refresh first page to make a new explicit discovery request. No previous request is replayed.</string>
+    <string name="shared_locations_loading">Requesting a shared-label page…</string>
+    <string name="shared_locations_sending">Submitting one explicit Open request…</string>
+    <string name="shared_locations_waiting">Waiting for the actual client operation to retire. Refresh remains unavailable until it returns.</string>
+    <string name="shared_locations_refreshed">A fresh shared-label page was received. Any earlier uncertain Open outcome is still unknown; discovery does not retry it.</string>
+    <string name="shared_locations_unknown">An Open request may have been admitted. Do not repeat it automatically. After the actual call retires, Refresh can load new labels for a deliberate new choice; it cannot establish what the earlier request did.</string>
+    <string name="shared_locations_restore_rejected">Saved operation metadata could not be validated. Treat any earlier Open outcome as unknown. No label, selection or request is restored; explicitly Refresh after retirement.</string>
+    <string name="shared_locations_dispatch_requested">The counterpart requested its private Files screen. Continue there if it appeared. This reply does not confirm visibility, authentication or directory listing.</string>
+    <string name="shared_locations_reserved_not_opened">The counterpart reserved this request but did not dispatch a screen. The reservation will not be undone or retried automatically.</string>
+    <string name="shared_locations_reserved_unknown">The counterpart reserved this request; delivery is unconfirmed. Continue in the counterpart if its screen appeared. No automatic resend will occur.</string>
+    <string name="shared_locations_unavailable">The exact counterpart or its protected service is unavailable. Install or enable the matching app, then choose Refresh explicitly.</string>
+    <string name="shared_locations_denied">The counterpart identity or permission check denied this operation. No automatic retry was started.</string>
+    <string name="shared_locations_busy">Another client or receiver operation is busy. No request was automatically retried.</string>
+    <string name="shared_locations_invalid_response">The counterpart response could not be validated. No automatic retry was started.</string>
+    <string name="shared_locations_unconfirmed_read">The operation ended without a confirmed result. Wait for actual retirement before explicitly Refreshing.</string>
+    <string name="shared_locations_cancelled">The operation was cancelled before a confirmed result. Use Refresh for a new deliberate discovery.</string>
+    <string name="shared_locations_version">The counterpart does not support this discovery version.</string>
+    <string name="shared_locations_invalid">The counterpart rejected the request format. No automatic retry was started.</string>
+    <string name="shared_locations_unsupported">The requested destination is unsupported. No substitute destination was opened.</string>
+    <string name="shared_locations_stale">The shared location is unavailable or its authorization changed. Refresh and make a new deliberate choice.</string>
+    <string name="shared_locations_expired">This Open request expired. It was not automatically regenerated.</string>
+    <string name="shared_locations_clock">The counterpart rejected the request time. No clock or stored history was reset.</string>
+    <string name="shared_locations_duplicate">This request was already recorded. It was not dispatched again or replaced with a new request automatically.</string>
+    <string name="shared_locations_capacity">The counterpart cannot admit more requests. Stored replay history was not cleared.</string>
+</resources>

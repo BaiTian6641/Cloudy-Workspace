@@ -1,6 +1,6 @@
 # Resource handoff runtime profile
 
-Reviewed 2026-10-16 for P1-S3. The [v1 schema](../../protocol/schemas/handoff.schema.json) describes the wire shape; the implemented [domain model](../../shared/android/domain/src/main/kotlin/io/github/baitian6641/cloudy/domain/HandoffEnvelope.kt) and [Android codec](../../shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/HandoffJson.kt) add bounded parsing and semantic validation. Their [scoped build/device result](../../qualification/results/P1-S3/2026-10-16-handoff-codec.md) does not implement or qualify cross-app navigation. The later [caller/replay primitives](handoff-admission.md) add actual caller policy and persistent request consumption with bounded device evidence. Their integration into an authenticated IPC receiver with receiver-owned resource resolution remains required under [ADR0004](../adr/0004-resource-handoff-and-trust.md).
+Reviewed 2026-10-16 for P1-S3. The [v1 schema](../../protocol/schemas/handoff.schema.json) describes the wire shape; the implemented [domain model](../../shared/android/domain/src/main/kotlin/io/github/baitian6641/cloudy/domain/HandoffEnvelope.kt) and [Android codec](../../shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/HandoffJson.kt) add bounded parsing and semantic validation. Their [scoped build/device result](../../qualification/results/P1-S3/2026-10-16-handoff-codec.md) does not implement or qualify cross-app navigation. The later [caller/replay primitives](handoff-admission.md) add actual caller policy and persistent request consumption with bounded device evidence. The later [protected files handoff implementation](protected-files-handoff.md) composes these with receiver-owned SHARED resource resolution. Actual transport and visible authenticated navigation have distinct evidence requirements under [ADR0004](../adr/0004-resource-handoff-and-trust.md).
 
 ## Accepted representation
 
@@ -22,16 +22,16 @@ The timestamp profile intentionally accepts a subset of RFC3339, which also perm
 
 `HandoffEnvelope` has a private constructor and no public copy path around validation. The codec uses Android `JsonReader`/`JsonWriter`, with explicit `peek()` token checks because reader accessors can coerce numbers and strings. Exact `BigDecimal` comparison avoids admitting a rounded value close to1. A narrow string guard rejects literal controls and invalid escapes that the reviewed AOSP reader accepts even with leniency disabled; it does not replace the library's JSON structure/number parser. Legal JSON escapes still pass to the reader and then the resource/domain constraints.
 
-## Receiver work still required
+## Receiver integration and remaining qualification
 
-The decoder deliberately performs no launch, enrollment, network call, file access or remote operation. Caller and replay primitives are now available separately; their tests do not expose an endpoint. Before exposing an IPC endpoint:
+The decoder deliberately performs no launch, enrollment, network call, file access or remote operation. The protected receiver now implements the first three requirements below; the fourth remains a set of separately qualified integration cases. Primitive tests alone cannot close them:
 
 1. Use explicit counterpart IPC protected by a receiver-owned signature permission; validate the actual Binder calling UID and expected signed package in the incoming transaction. A valid envelope, same network or shared source module is not caller identity.
 2. Resolve all IDs through the receiving app's enrolled resources and verify their host/environment/workspace relationship. Unknown resources must fail honestly; do not invent a registry entry or connect from sender-supplied strings.
 3. Enforce action/recipient compatibility, expiry and an atomic bounded request ledger before any side effect. Duplicate requests must not repeat effects across concurrent calls, restart, clock rollback or corruption. Resource lookup and ledger policy must not accidentally share credentials between apps.
 4. Qualify actual same-signed counterparts, wrong/unsigned callers, delegated handles, missing sibling, version mismatch, malformed messages, stale requests, duplicate/restart behavior, cancellation and successful navigation to real registered resources.
 
-These are remaining P1-S3/P1-S4 and suite-integration obligations. Codec tests do not close them. Ordinary Console SSH and independently installed Desktop remain independent of this handoff route.
+These remain P1-S3/P1-S4 and suite-integration requirements, with implementation and acceptance tracked separately. Codec tests do not close them. Ordinary Console SSH and independently installed Desktop remain independent of this handoff route.
 
 ## Official references and maintenance
 

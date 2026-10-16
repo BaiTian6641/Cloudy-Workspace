@@ -4,6 +4,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_LOCAL_NETWORK" />
+    <permission android:name="io.github.baitian6641.cloudy.console.permission.FILES_HANDOFF"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="io.github.baitian6641.cloudy.desktop.permission.FILES_HANDOFF" />
+    <queries><package android:name="io.github.baitian6641.cloudy.desktop" /></queries>
     <application android:allowBackup="false" android:supportsRtl="true"
         android:usesCleartextTraffic="false" android:label="@string/app_name"
         android:theme="@style/Theme.CloudyWindow"
@@ -45,5 +49,12 @@
         <activity android:name="io.github.baitian6641.cloudy.platform.CloudyFilesLocationsActivity"
             android:exported="false" android:resizeableActivity="true"
             android:windowSoftInputMode="adjustResize" />
+        <activity android:name="io.github.baitian6641.cloudy.platform.CloudySharedLocationsActivity"
+            android:exported="false" android:resizeableActivity="true"
+            android:windowSoftInputMode="adjustResize" />
+        <!-- Bound only: each receiver enforces its own permission and actual caller per transaction. -->
+        <service android:name="io.github.baitian6641.cloudy.platform.CloudyFilesHandoffService"
+            android:exported="true"
+            android:permission="io.github.baitian6641.cloudy.console.permission.FILES_HANDOFF" />
     </application>
 </manifest>

@@ -1,0 +1,360 @@
+{
+  "schemaVersion": 1,
+  "checkedOn": "2026-10-16",
+  "scope": "Scoped protected discovery and negative submit transport; not positive Open/BAL/authenticated destination or full feature acceptance.",
+  "versionName": "0.1.12",
+  "versionCode": 13,
+  "buildEvidence": "qualification/results/P1-S3/2026-10-16-files-handoff-build.json",
+  "buildResultSha256": "718a4dea566272858efa9faf6ff133679df55cc20ae86d307f0360c6cd0a553a",
+  "runs": {
+    "platform02": {
+      "scope": "Actual Android resource SQLite/wire/local identity policy only; no real Binder, positive ticket or device UI acceptance",
+      "startedAt": "2026-10-16T16:38:40.583538+00:00",
+      "endedAt": "2026-10-16T16:38:49.631198+00:00",
+      "runnerSha256": "dec928e2e53dfbc3e9fc62d7d68cd32951b688f30b23e2d8666e75b5efd321f6",
+      "runnerPassed": true,
+      "device": {
+        "model": "HP Googlebook 14",
+        "api": "37",
+        "build": "CL3B.260622.276.R2",
+        "incremental": "16560795",
+        "abi": "arm64-v8a"
+      },
+      "sourceArtifactBindingsUnchanged": true,
+      "allThreeTestPackagesAbsent": true,
+      "reverseBaselineUnchanged": true,
+      "productsDataPreferencesSettingsAndBootUnchanged": true,
+      "privateEvidence": "qualification/results/private/foundation/2026-10-16-files-handoff-platform-device-02/result.json",
+      "resultSha256": "a8804b703ae14e75c6ccc5340ebba09cdca8a4a6cd6b944caeabb3c901120155",
+      "instrumentation": {
+        "actualPassed": 54,
+        "uniquePassed": 54,
+        "skipped": 0,
+        "failed": 0,
+        "perClass": {
+          "FilesResourceStoreTest": {
+            "passed": 28,
+            "skipped": 0,
+            "failed": 0
+          },
+          "HandoffCallerTest": {
+            "passed": 7,
+            "skipped": 0,
+            "failed": 0
+          },
+          "HandoffEndpointTest": {
+            "passed": 8,
+            "skipped": 0,
+            "failed": 0
+          },
+          "FilesHandoffWireTest": {
+            "passed": 7,
+            "skipped": 0,
+            "failed": 0
+          },
+          "FilesHandoffParcelTest": {
+            "passed": 4,
+            "skipped": 0,
+            "failed": 0
+          }
+        },
+        "cleanupReceipts": 28,
+        "runnerFinished": true,
+        "passed": true
+      }
+    },
+    "failedTransport01": {
+      "scope": "Console-origin genuine sibling IPC only; Desktop invocation did not start. Six ordinary transactions failed; the seventh SecurityException alone cannot establish trailing-data enforcement.",
+      "startedAt": "2026-10-16T16:40:12.469148+00:00",
+      "endedAt": "2026-10-16T16:40:19.800720+00:00",
+      "runnerSha256": "13e98caa0b6311fa60114c6035b65300b561c4924be509ce6fedc031981cd126",
+      "runnerPassed": false,
+      "failure": {
+        "stage": "INSTRUMENT_CONSOLE",
+        "type": "RuntimeError",
+        "code": "ACTUAL_TEST_OR_BINDING_RETIREMENT_FAILED"
+      },
+      "device": {
+        "model": "HP Googlebook 14",
+        "api": "37",
+        "build": "CL3B.260622.276.R2",
+        "incremental": "16560795",
+        "abi": "arm64-v8a"
+      },
+      "sourceCount": 224,
+      "preservation": {
+        "bootId": true,
+        "bootCount": true,
+        "fontScale": true,
+        "density": true,
+        "nightMode": true,
+        "privateFilesUnchanged": true,
+        "emptyResourceCatalogsUnchanged": true,
+        "passed": true
+      },
+      "privateEvidence": "qualification/results/private/foundation/2026-10-16-files-handoff-transport-device-01/result.json",
+      "resultSha256": "0adbb4d21fe6e4d33016d847061e495a6a7b953eece510ba362b47c2a444e23f",
+      "directions": {
+        "console": {
+          "actualPassed": 1,
+          "uniquePassed": 1,
+          "skipped": 0,
+          "failed": 6,
+          "bindingRetirementCount": 7,
+          "bindingPassedCount": 1,
+          "allBindingsRetired": true,
+          "runnerFinished": true,
+          "passed": false,
+          "instrumentationSeconds": 0.619
+        }
+      }
+    },
+    "recovery01": {
+      "scope": "Recover after terminal failed Console IPC tests with all seven actual bindings retired; no rerun or reset",
+      "startedAt": "2026-10-16T16:48:32.819949+00:00",
+      "endedAt": "2026-10-16T16:48:36.507455+00:00",
+      "runnerSha256": "f2136a4ad00a8a814db6592bf167b9e15d6525aac88e4dafcc2c7120c3a4be05",
+      "runnerPassed": false,
+      "failure": {
+        "stage": "RECOVERY",
+        "type": "RuntimeError",
+        "code": "PRIVATE_OR_SYSTEM_BASELINE_CHANGED"
+      },
+      "sourceCount": 224,
+      "preservation": {
+        "bootId": true,
+        "bootCount": true,
+        "fontScale": true,
+        "density": true,
+        "nightMode": true,
+        "privateFilesUnchanged": true,
+        "emptyResourceCatalogsUnchanged": false,
+        "passed": false
+      },
+      "privateEvidence": "qualification/results/private/foundation/2026-10-16-files-handoff-transport-recovery-01/result.json",
+      "resultSha256": "8814bacac72f1f04e586b7e7abdc080a1046b045b8ee9d204d567a67303b9856"
+    },
+    "recovery02": {
+      "scope": "Recover after terminal failed Console IPC tests with all seven actual bindings retired; no rerun or reset",
+      "startedAt": "2026-10-16T16:49:42.763687+00:00",
+      "endedAt": "2026-10-16T16:49:52.982304+00:00",
+      "runnerSha256": "e293a3d4c420b83ae7294dbaa8b2bc656611cdf0b0f3b99f6f6d6ecf50a2874a",
+      "runnerPassed": true,
+      "sourceCount": 224,
+      "allThreeTestPackagesAbsent": true,
+      "productsStopped": true,
+      "reverseBaselineUnchanged": true,
+      "preservation": {
+        "bootId": true,
+        "bootCount": true,
+        "fontScale": true,
+        "density": true,
+        "nightMode": true,
+        "privateFilesUnchanged": true,
+        "emptyResourceCatalogsUnchanged": true,
+        "passed": true
+      },
+      "privateEvidence": "qualification/results/private/foundation/2026-10-16-files-handoff-transport-recovery-02/result.json",
+      "resultSha256": "cba72875dd96604cc93c1a70e7db103790c66d0337e797f4aab0814c573a3033"
+    },
+    "parcel01": {
+      "scope": "Actual Android Parcel shape/synchronous-mode policy only; no real Binder identity, positive ticket or device UI acceptance",
+      "startedAt": "2026-10-16T16:52:44.721905+00:00",
+      "endedAt": "2026-10-16T16:52:52.173897+00:00",
+      "runnerSha256": "a857d591246f98c700b656194f0404c3fa10f29b6740c461a543709664360087",
+      "runnerPassed": true,
+      "device": {
+        "model": "HP Googlebook 14",
+        "api": "37",
+        "build": "CL3B.260622.276.R2",
+        "incremental": "16560795",
+        "abi": "arm64-v8a"
+      },
+      "sourceArtifactBindingsUnchanged": true,
+      "allThreeTestPackagesAbsent": true,
+      "reverseBaselineUnchanged": true,
+      "productsDataPreferencesSettingsAndBootUnchanged": true,
+      "privateEvidence": "qualification/results/private/foundation/2026-10-16-files-handoff-parcel-device-01/result.json",
+      "resultSha256": "9c9dcca8d6dcc684ea54cfe5ef8610a2450c51030e664e326dfcc67f9569b1e0",
+      "instrumentation": {
+        "actualPassed": 7,
+        "uniquePassed": 7,
+        "skipped": 0,
+        "failed": 0,
+        "perClass": {
+          "FilesHandoffParcelTest": {
+            "passed": 7,
+            "skipped": 0,
+            "failed": 0
+          }
+        },
+        "cleanupReceipts": 0,
+        "runnerFinished": true,
+        "passed": true
+      }
+    },
+    "transport02": {
+      "scope": "Both real product UIDs: identity/discovery/denial IPC only; no BAL, positive Open/listing or signer-negative acceptance",
+      "startedAt": "2026-10-16T16:53:33.863163+00:00",
+      "endedAt": "2026-10-16T16:53:53.405132+00:00",
+      "runnerSha256": "1a3bd89a13f33781e262e26ad9afb1f892c637e973ac8fccc6a591cd448efd2d",
+      "runnerPassed": true,
+      "device": {
+        "model": "HP Googlebook 14",
+        "api": "37",
+        "build": "CL3B.260622.276.R2",
+        "incremental": "16560795",
+        "abi": "arm64-v8a"
+      },
+      "sourceCount": 224,
+      "sourceArtifactBindingsUnchanged": true,
+      "allThreeTestPackagesAbsent": true,
+      "productsStoppedAfterProvenRetirement": true,
+      "reverseBaselineUnchanged": true,
+      "preservation": {
+        "bootId": true,
+        "bootCount": true,
+        "fontScale": true,
+        "density": true,
+        "nightMode": true,
+        "privateFilesUnchanged": true,
+        "emptyResourceCatalogsUnchanged": true,
+        "passed": true
+      },
+      "privateEvidence": "qualification/results/private/foundation/2026-10-16-files-handoff-transport-device-02/result.json",
+      "resultSha256": "281dd54d2760fb80ba7b5d41b99a777d37c4935426fbf0f28fe464bb2710ebd5",
+      "directions": {
+        "console": {
+          "actualPassed": 7,
+          "uniquePassed": 7,
+          "skipped": 0,
+          "failed": 0,
+          "bindingRetirementCount": 7,
+          "bindingPassedCount": 7,
+          "allBindingsRetired": true,
+          "runnerFinished": true,
+          "passed": true,
+          "instrumentationSeconds": 0.662
+        },
+        "desktop": {
+          "actualPassed": 7,
+          "uniquePassed": 7,
+          "skipped": 0,
+          "failed": 0,
+          "bindingRetirementCount": 7,
+          "bindingPassedCount": 7,
+          "allBindingsRetired": true,
+          "runnerFinished": true,
+          "passed": true,
+          "instrumentationSeconds": 0.669
+        }
+      }
+    }
+  },
+  "privateReferenceSourceHashes": {
+    "IBinder.java": "59867dad80fbf264eb70cc66ee5995e79f1fed64fc5962ab4114b68123faaf67",
+    "BinderProxy.java": "8648d6c877f92a09eb30fe0d45284382f8b8351dc825d0e2ecae1651ebb598d2",
+    "Binder.java": "7c01fdf9046862c00c9b4d34d9fd461bcab1cb99803269fd86b7bcc581e48ec4"
+  },
+  "reviewArtifacts": [
+    {
+      "path": ".cache/files-handoff-01/client-peer-review.md",
+      "sha256": "cf0181ba7524bc44c6fd252bb1b19f1c94813bb5dab6298ae8c9cd5f32e7221d"
+    },
+    {
+      "path": ".cache/files-handoff-01/corrected-build-parcel-review.md",
+      "sha256": "9010304cfb6eb5f97e4eb05850d731c9716a18a259af585bd8d1ec0dfe11ad8a"
+    },
+    {
+      "path": ".cache/files-handoff-01/corrected-transport-review.md",
+      "sha256": "b1f0f40c9fa504b249b63a2dcd7d0fa64b0efa0e5b6132e430f475256aac3779"
+    },
+    {
+      "path": ".cache/files-handoff-01/identity-wire-peer-review.md",
+      "sha256": "ff3be4af70aa6b020faeab0ea86aa47344d90669010b6f0e1eb9859b6512d619"
+    },
+    {
+      "path": ".cache/files-handoff-01/parcel-peer-review.md",
+      "sha256": "435ad13b5c7a24fef9ab943d61c515901a38c591ccc890e8b5b9521f8b195b2d"
+    },
+    {
+      "path": ".cache/files-handoff-01/platform-evidence-review.md",
+      "sha256": "ac2c922ceca59156eb1fee095dab393bb9c473fc6300f652ef6b65b497e4558e"
+    },
+    {
+      "path": ".cache/files-handoff-01/receiver-peer-review.md",
+      "sha256": "f41acf7e39c056e4f86f6fa3dbf87dc6cd0e2e6702367b5200264815e536fa1d"
+    },
+    {
+      "path": ".cache/files-handoff-01/sender-peer-review.md",
+      "sha256": "ecf7922c745fbb9e7f9bef235f5a7b00c35c5d955d0671ed31aa2c7adda741f9"
+    },
+    {
+      "path": ".cache/files-handoff-01/transport-correction-worker-review.md",
+      "sha256": "83cf4564ffa425b8e8b372da0d9742121c1c127265e5ce83f6c7f43ac3d30378"
+    }
+  ],
+  "previousCheckpointCI": {
+    "sha": "1b968613ea30455f0804cb04d5d502f10a75b258",
+    "remoteSha": "1b968613ea30455f0804cb04d5d502f10a75b258",
+    "remoteMatches": true,
+    "runs": [
+      {
+        "name": "Repository checks",
+        "id": 38929843098,
+        "head_sha": "1b968613ea30455f0804cb04d5d502f10a75b258",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/BaiTian6641/Cloudy-Workspace/actions/runs/38929843098"
+      },
+      {
+        "name": "Android native stream diagnostic",
+        "id": 38929843221,
+        "head_sha": "1b968613ea30455f0804cb04d5d502f10a75b258",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/BaiTian6641/Cloudy-Workspace/actions/runs/38929843221"
+      },
+      {
+        "name": "Android native USB diagnostic",
+        "id": 38929843269,
+        "head_sha": "1b968613ea30455f0804cb04d5d502f10a75b258",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/BaiTian6641/Cloudy-Workspace/actions/runs/38929843269"
+      },
+      {
+        "name": "Android qualification probe",
+        "id": 38929843011,
+        "head_sha": "1b968613ea30455f0804cb04d5d502f10a75b258",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/BaiTian6641/Cloudy-Workspace/actions/runs/38929843011"
+      },
+      {
+        "name": "Android native RDP diagnostic",
+        "id": 38929842885,
+        "head_sha": "1b968613ea30455f0804cb04d5d502f10a75b258",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/BaiTian6641/Cloudy-Workspace/actions/runs/38929842885"
+      },
+      {
+        "name": "Android native VNC diagnostic",
+        "id": 38929843127,
+        "head_sha": "1b968613ea30455f0804cb04d5d502f10a75b258",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/BaiTian6641/Cloudy-Workspace/actions/runs/38929843127"
+      },
+      {
+        "name": "Android product foundation",
+        "id": 38929842997,
+        "head_sha": "1b968613ea30455f0804cb04d5d502f10a75b258",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/BaiTian6641/Cloudy-Workspace/actions/runs/38929842997"
+      }
+    ]
+  }
+}

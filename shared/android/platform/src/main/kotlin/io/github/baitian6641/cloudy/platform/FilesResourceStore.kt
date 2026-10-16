@@ -18,6 +18,7 @@ import io.github.baitian6641.cloudy.domain.FilesResourceDraft
 import io.github.baitian6641.cloudy.domain.FilesResourceReference
 import io.github.baitian6641.cloudy.domain.FilesResourceRegistration
 import io.github.baitian6641.cloudy.domain.FilesResourceState
+import io.github.baitian6641.cloudy.domain.FilesSharedDescriptor
 import io.github.baitian6641.cloudy.domain.FilesResourceVersion
 import io.github.baitian6641.cloudy.domain.SshHostKeyIdentity
 import io.github.baitian6641.cloudy.domain.SshObservationProfile
@@ -52,6 +53,12 @@ class FilesResourceCatalog internal constructor(
     override fun toString(): String = "FilesResourceCatalog(redacted)"
 }
 
+/** A fresh bounded projection; the cursor conveys neither snapshot nor navigation authority. */
+class FilesSharedPage internal constructor(locations: List<FilesSharedDescriptor>, val nextAfterResourceId: String) {
+    val locations: List<FilesSharedDescriptor> = Collections.unmodifiableList(ArrayList(locations))
+    override fun toString(): String = "FilesSharedPage(redacted)"
+}
+
 /**
  * Receiver-owned navigation metadata only. Persistence does not prove listing, user consent,
  * a live lease or remote authorization. Revoked tombstones are retained without delete/reset.
@@ -78,6 +85,44 @@ class FilesResourceStore private constructor(private val configuration: Configur
 
     fun load(): FilesResourceResult<FilesResourceCatalog> = operate { _, catalog, _ ->
         FilesResourceResult.Success(catalog)
+    }
+
+    fun discoverShared(afterResourceId: String, limit: Int = 32): FilesResourceResult<FilesSharedPage> {
+        if ((afterResourceId.isNotEmpty() && !canonicalUuid(afterResourceId)) || limit !in 1..32) {
+            return failure(FilesResourceCode.INVALID_INPUT)
+        }
+        return operate { _, catalog, _ ->
+            // Load each backing catalog once under the existing coordination gate. A failed
+            // catalog read is not evidence that individual bindings have become stale.
+            val profiles = when (val result = configuration.profiles().load()) {
+                is ConnectionProfilesResult.Success -> result.value
+                is ConnectionProfilesResult.Failure -> return@operate failure(
+                    if (result.code == ConnectionProfilesCode.BUSY) FilesResourceCode.BUSY else FilesResourceCode.STORE_UNAVAILABLE)
+            }
+            val trust = when (val result = configuration.trust().load()) {
+                is SshTrustStoreResult.Success -> result.value
+                is SshTrustStoreResult.Failure -> return@operate failure(
+                    if (result.code == SshTrustStoreCode.BUSY) FilesResourceCode.BUSY else FilesResourceCode.STORE_UNAVAILABLE)
+            }
+            val profilesById = profiles.profiles.associateBy { it.id }
+            val trustByPeer = trust.snapshots.associateBy { it.peer }
+            val eligible = catalog.registrations.asSequence()
+                .filter { it.state == FilesResourceState.SHARED && it.reference.resourceId > afterResourceId }
+                .filter { registration ->
+                    val observed = registration.profile
+                    val current = profilesById[observed.profile.id]
+                    trust.owner == owner &&
+                        profiles.generation == observed.generation && current != null &&
+                        current.owner == owner && current.protocol == ConnectionProtocol.SSH &&
+                        SshObservationProfile.create(profiles.generation, current) == observed &&
+                        trustByPeer[observed.peer] == registration.acceptedTrust &&
+                        registration.acceptedTrust.status is SshTrustStatus.Accepted
+                }
+                .sortedBy { it.reference.resourceId }.take(limit + 1).toList()
+            val locations = eligible.take(limit).map { FilesSharedDescriptor.create(it.reference, it.label) }
+            FilesResourceResult.Success(FilesSharedPage(locations,
+                if (eligible.size > limit) eligible[limit - 1].reference.resourceId else ""))
+        }
     }
 
     fun create(expectedGeneration: String, draft: FilesResourceDraft): FilesResourceResult<FilesResourceRegistration> {

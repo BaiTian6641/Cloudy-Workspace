@@ -122,6 +122,93 @@ class FilesResourceStoreTest {
         })
     }
 
+    @Test fun sharedDiscoveryPagesThirtyOneThirtyTwoAndThirtyThreeWithoutTruncation() {
+        val binding = draft()
+        val generation = success(store().load()).generation
+        repeat(31) { index ->
+            val row = success(store().create(generation, FilesResourceDraft.create(owner,
+                "Shared $index", binding.profile, binding.acceptedTrust, binding.navigationRoot, binding.accountName)))
+            success(store().share(row.version()))
+        }
+        assertEquals(31, success(store().discoverShared("")).locations.size)
+        assertEquals("", success(store().discoverShared("")).nextAfterResourceId)
+        val thirtySecond = success(store().create(generation, binding))
+        success(store().share(thirtySecond.version()))
+        assertEquals(32, success(store().discoverShared("")).locations.size)
+        assertEquals("", success(store().discoverShared("")).nextAfterResourceId)
+        val thirtyThird = success(store().create(generation, binding))
+        success(store().share(thirtyThird.version()))
+        val one = success(store().discoverShared("", 1))
+        assertEquals(1, one.locations.size)
+        assertEquals(one.locations.single().reference.resourceId, one.nextAfterResourceId)
+        val first = success(store().discoverShared(""))
+        assertEquals(32, first.locations.size)
+        assertEquals(first.locations.last().reference.resourceId, first.nextAfterResourceId)
+        val second = success(store().discoverShared(first.nextAfterResourceId))
+        assertEquals(1, second.locations.size)
+        assertEquals("", second.nextAfterResourceId)
+        val all = first.locations + second.locations
+        assertEquals(33, all.map { it.reference }.toSet().size)
+        assertEquals(all.map { it.reference.resourceId }.sorted(), all.map { it.reference.resourceId })
+        assertEquals("", success(store().discoverShared(second.locations.single().reference.resourceId)).nextAfterResourceId)
+        assertTrue(success(store().discoverShared(second.locations.single().reference.resourceId)).locations.isEmpty())
+    }
+
+    @Test fun discoveryFiltersPrivateRevokedAndStaleProfilesWithoutLeakingPrivateFields() {
+        val binding = draft("Visible label")
+        val shared = success(store().share(create(binding).version()))
+        create(binding)
+        val revoked = success(store().share(create(binding).version()))
+        success(store().revoke(revoked.version()))
+        val page = success(store().discoverShared("", 1))
+        assertEquals(listOf(shared.reference), page.locations.map { it.reference })
+        assertEquals("Visible label", page.locations.single().label)
+        assertEquals("", page.nextAfterResourceId)
+        assertFalse(page.toString().contains(binding.accountName))
+        assertFalse(page.toString().contains(binding.navigationRoot))
+        val version = ConnectionProfileVersion.create(
+            binding.profile.generation, binding.profile.profile.id, binding.profile.profile.revision)
+        profileSuccess(profiles.update(version, profileDraft("Edited")))
+        assertTrue(success(store().discoverShared("")).locations.isEmpty())
+    }
+
+    @Test fun discoveryOmitsReacceptedSameKeyAtDifferentTrustRevision() {
+        val binding = draft()
+        success(store().share(create(binding).version()))
+        revokeTrust(binding.acceptedTrust)
+        trustSuccess(trust.accept(challenge(binding.profile.peer, 1)))
+        assertTrue(success(store().discoverShared("")).locations.isEmpty())
+    }
+
+    @Test fun discoveryRejectsMalformedCursorAndInvalidLimitsBeforeInitialization() {
+        for (cursor in listOf("invalid", "AAAAAAAA-AAAA-4AAA-8AAA-AAAAAAAAAAAA", "00000000-0000-0000-0000-000000000000")) {
+            denied(FilesResourceCode.INVALID_INPUT, store().discoverShared(cursor))
+        }
+        for (limit in listOf(0, -1, 33, Int.MAX_VALUE)) {
+            denied(FilesResourceCode.INVALID_INPUT, store().discoverShared("", limit))
+        }
+        assertFalse(anchor.exists())
+        assertTrue(success(store().discoverShared("", 1)).locations.isEmpty())
+    }
+
+    @Test fun discoveryDoesNotTreatUnavailableProfileCatalogAsAnEmptyPage() {
+        val binding = draft()
+        success(store().share(create(binding).version()))
+        val profileDatabase = File(root, "connection-profiles-v1/profiles.db")
+        check(profileDatabase.delete())
+        denied(FilesResourceCode.STORE_UNAVAILABLE, store().discoverShared(""))
+        assertFalse(profileDatabase.exists())
+    }
+
+    @Test fun discoveryDoesNotTreatUnavailableTrustCatalogAsStaleRows() {
+        val binding = draft()
+        success(store().share(create(binding).version()))
+        val trustDatabase = File(root, "ssh-host-trust-v1/trust.db")
+        check(trustDatabase.delete())
+        denied(FilesResourceCode.STORE_UNAVAILABLE, store().discoverShared(""))
+        assertFalse(trustDatabase.exists())
+    }
+
     @Test fun privateCreationShareResolveAndRetainedRevocationSurviveReopen() {
         val saved = create()
         assertEquals(FilesResourceState.PRIVATE, saved.state)

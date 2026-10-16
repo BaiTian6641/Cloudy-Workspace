@@ -2233,7 +2233,11 @@
         "android.app.Service.onBind",
         "android.content.Context.enforceCallingPermission",
         "android.os.Binder.getCallingUidOrThrow",
-        "android.content.Context.BIND_ALLOW_ACTIVITY_STARTS"
+        "android.content.Context.BIND_ALLOW_ACTIVITY_STARTS",
+        "android.os.Binder.onTransact",
+        "android.os.Parcel.appendFrom",
+        "android.os.Parcel.enforceNoDataAvail",
+        "android.os.IBinder.FLAG_ONEWAY"
       ],
       "sourceIds": [
         "G239",
@@ -2247,19 +2251,25 @@
         "G198",
         "G199",
         "G200",
-        "G201"
+        "G201",
+        "G244",
+        "G245",
+        "G246",
+        "G247"
       ],
       "minimumApi": 34,
-      "libraryVersion": "Existing Android framework and AGP toolchain; productmin35/target37. No endpoint or additional runtime dependency yet.",
+      "libraryVersion": "Existing Android framework and AGP/build-tools36 generated AIDL; productmin35/target37. No additional runtime dependency.",
       "availability": "documented",
-      "qualification": "untested",
+      "qualification": "partial",
       "checkedOn": "2026-10-16",
       "owner": "Platform/security developer",
       "stage": "P1-S3",
-      "runtimeGuard": "Planned receiver-owned signature permission and every-transaction exact counterpart identity; explicit SHARED location, current profile/trust/account, replay reservation, final authorization and private one-use destination. Real own-app listing-bound registration/share/revoke and account-bound private navigation now have separate API65/API66 evidence; protected IPC endpoint remains unimplemented.",
+      "runtimeGuard": "Implemented receiver-owned FILES_HANDOFF signature permission, pre-unmarshal per-transaction exact captured counterpart identity, bounded Parcel/strict JSON replies, current SHARED row/profile/trust/account, durable replay reservation, final one-use ticket and private destination. Recheck captured installation/signing facts off main; no worker Binder UID authority. Public FLAG_ONEWAY mask permits framework bookkeeping flags; requires reply, no FDs and exact argument/trailing-data shape. The sender uses an explicit visible-Activity binding with no automatic replay; credentials remain receiver-owned.",
       "fallback": "Unknown/stale/revoked tuples deny without creating registration. Possible committed delivery remains unconfirmed, with no automatic retry; no Activity-start bypass. Ordinary standalone SSH/files stays independent.",
-      "experiment": "Native receiver prerequisites now include real completed-listing registration, explicit local share/revoke, affected registered-owner invalidation and fresh-auth own-location destination. Next is both-direction signed discovery/submit IPC, negative callers and target37 visible-binding/lifecycle cases. Neither metadata nor own-app UI evidence is positive cross-app endpoint acceptance; qualification remains untested.",
-      "researchEvidence": "docs/02-architecture/files-resource-registration.md"
+      "experiment": "Strict corrected build03 passes with224 source bindings/five APKs and four zero-finding Lint reports. Build02 standalone54 Android storage/wire/identity/Parcel cases pass; corrected build03 seven Parcel cases independently pass. First real transport attempt failed six normal transactions; its seventh SecurityException-only outcome cannot establish trailing-data validation. Recovery preserves private/system/boot state. Corrected real transport02 passes14 both-direction discovery/denial IPC cases and14 separate retired bindings, zero skips/failures; exact prior private/system/boot/reverse state preserved and all test packages absent. Read the linked report for still-unrun shared-resource Open/BAL/fresh-auth listing requirements; no suite/capability promotion.",
+      "researchEvidence": "docs/02-architecture/protected-files-handoff.md",
+      "compileEvidence": "qualification/results/P1-S3/2026-10-16-files-handoff-build.json",
+      "deviceEvidence": "qualification/results/P1-S3/2026-10-16-files-handoff-transport.md"
     },
     {
       "id": "API65",
@@ -2353,7 +2363,7 @@
       "owner": "Android/platform and SSH security developers",
       "stage": "P1-S3",
       "runtimeGuard": "Private owning-app secure Activities; actual authenticated successful directory listing issues an opaque process-only opportunity bound to exact session/proof/profile/trust/account/path, owner/listing epoch and30-second elapsed expiry. Inline frozen consent retains the Activity window; worker foreground admission precedes actual store CAS without SQLite under the short UI gate. Manager uses original exact registration version for explicit Share/Revoke. One-use30-second process-memory ticket selects exact registered account/root; coordinator rechecks current resource/profile/trust and exact same-holder account before credential admission and promotion. No saved candidate/confirmation/ticket/credentials or restored connection; saved pending metadata is uncertainty only.",
-      "fallback": "Stale/expired/foreign/malformed selection denies without ordinary-route fallback or automatic replay. Uncertain registration remains visible; directory/profile refresh cannot acknowledge a possibly committed create. Explicit committed manager inspection is required before a deliberate new proposal. Queued unadmitted foreground work is denied; admitted writes may finish after departure. Missing/revoked/changed registered resources deny or retire their exact owners; ordinary standalone Files remains independent. Sharing state prepares counterpart disclosure, while cross-app discovery/submit is unavailable.",
+      "fallback": "Stale/expired/foreign/malformed selection denies without ordinary-route fallback or automatic replay. Uncertain registration remains visible; directory/profile refresh cannot acknowledge a possibly committed create. Explicit committed manager inspection is required before a deliberate new proposal. Queued unadmitted foreground work is denied; admitted writes may finish after departure. Missing/revoked/changed registered resources deny or retire their exact owners; ordinary standalone Files remains independent. Sharing state now feeds the separately scoped protected discovery/submit source and API64 qualification; successful full cross-app navigation is not inferred from own-app evidence.",
       "experiment": "Strict build02 and four zero-finding Lint reports pass with206 unchanged source bindings; retained JVM reports contain100 passes/20 skips and are not100 newly executed build02 cases. New standalone platform lane passes47 policy/SQLite cases with0 skips/22 resource cleanup markers, including two explicitly simulated-proof coordinator cases. Six actual product cases (three per app) pass: real listed-directory private registration and ordinary-session independence, framework-injected focus loss invalidating frozen registration consent, fresh exact-account nested-root opening followed by registered-owner revocation/retirement. Actual host evidence totals10 authentications/24SFTPchannels;18 separate default opt-in skips. Console/Desktop0.1.11/code12 installed/stopped; generated fixture rows/credentials/routes/test packages retired exactly. Both formerly absent resource catalogs remain initialized empty with permanent anchors; other prior profile/trust/vault/preferences/settings/boot preserved. Thirty-second expiry, uncertain-write recreation, physical input, process loss, protected IPC and full stage/release acceptance remain unqualified.",
       "researchEvidence": "docs/02-architecture/files-resource-registration.md",
       "compileEvidence": "qualification/results/P1-S3/2026-10-16-files-location-ui-build.json",
