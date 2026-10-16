@@ -1,0 +1,33 @@
+# P0-S3 — Physical terminal input observations
+
+**2026-10-15, America/Chicago. Status: complete in the bounded scope below; session and fixture closed.** The built-in keyboard passes the sampled Backspace correction and Ctrl+C interruption checks, with matching user and actual terminal UI observations. Direct trackpad selection is user-reported; the subsequent screenshot does not retain its highlight. Native composition is untested because no composition IME is configured. The earlier longer typing sequence remains ambiguous. The [sanitized manifest](2026-10-15-terminal-physical-input.json) binds 45 private evidence files; no renderer adoption or capability promotion follows.
+
+## Exact application and session
+
+The unchanged installed baseline diagnostic is **0.8.0/code12**, APK SHA256 `fc2cc377cb09aaf9ad571489a09854719e84de3a9a3a03b131fabab01fa46e09`, build reference `7aab1ccd-e90b-41e1-bd51-1183042c134a`, underlying application source `d9518d18390e2a8cca7752a0546f89d8b4e7a9a2`. The current repository checkpoint is `d9db191a8e781492fbbe1574c39d24cc5c9d5e82`; its six hosted CI lanes pass, but no new APK was built for this run. The [accepted build](../../../docs/06-validation/2026-10-15-ssh-retention-build.md) carries unchanged build/library evidence; CI is separate from physical-input evidence.
+
+The selected hardware is HP Googlebook 14 with its built-in keyboard, Android 17/API 37, arm64-v8a, build `CL3B.260622.276.R2`, incremental 16560795. The actual WebView provider is `com.google.android.webview` 149.0.7827.5. This run's terminal attempt is `b96bbfde-d5b9-4cbb-b6e8-461b43e794c5`, process instance `84c6f022-abcd-4bea-b554-73f22970f872`; it closes through `user-disconnect`. Three final terminal records are closed, and both predecessors and trusted-host state are unchanged.
+
+The terminal host identity and configuration are reused byte-identically, with a fresh host02 ordinary same-user SSH shell using the dedicated key and PTY. This is the normal workstation context, not a sandbox. It is the interactive terminal route, separate from the [finite retained exec/PTY cases](2026-10-15-ssh-retention-cases.md). The terminal's ordinary visible-owner lifetime remains unchanged; these observations do not qualify hidden/continuous terminal sessions.
+
+## Recorded physical observations
+
+| Physical operation | User response and actual UI observation | Bounded conclusion |
+| --- | --- | --- |
+| Type `echo CLOUDY_PHYS_1234x`, Backspace, type `5`, Enter | User initially reports exact output with the built-in keyboard. Actual UI and the viewed screenshot instead show the original `x` submitted, followed by `5` as a separate command. | **Unresolved ordering/input discrepancy.** Do not mark the intended correction sequence passed or assign an app, keyboard or operator cause. |
+| Shorter retry: type `echo ABX` without Enter, Backspace, type `C`, Enter | User reports `ABC`; actual UI also shows `ABC`. | **Finite physical typing/correction observation succeeds.** This does not establish every editing, repeat or composition path. |
+| Run `sleep 30`, press Ctrl+C, then run `echo CLOUDY_CTRL_OK` | User confirms interruption/prompt return and correct output. Actual UI shows `sleep 30`, `^C`, the echo command and `CLOUDY_CTRL_OK`. | **Finite physical Ctrl+C and subsequent-input observation succeeds.** No exact host byte trace or timing claim is made. |
+| Direct trackpad selection | User reports “Selection works; no composition IME configured.” The screenshot captured afterward has no retained highlight. | **User-observed selection only.** No independently captured highlight or clipboard result; do not infer that the earlier gesture failed from a later screenshot. |
+| Native IME composition/preedit | User reports no composition IME configured. The prepared finite host helper is not launched. | **Not exercised.** Exact committed bytes, composition cancellation and preedit remain required. |
+
+These observations combine the user's physical-input account with actual terminal UI inspection. No exact raw host-input capture has yet been bound to these samples. Visible output establishes what appeared in this finite session; it cannot independently resolve every key-event/IME ordering or prove the exact transmitted bytes. The earlier [0.7.2 upstream device result](2026-10-15-terminal-upstream-device.md) remains separate ADB-injected evidence and must not be relabeled physical typing.
+
+## Preservation, cleanup and scope
+
+The native terminal closes through the actual Disconnect button: 126 input bytes, 394 stdout bytes and 0 stderr bytes in the final journal; these totals do not identify exact physical key bytes. PTY dimensions remain 146 × 23. Host evidence records one accepted public-key authentication and one shell session. No terminal input was injected by the operator during the physical cases; operator automation opened/connected, inspected and finally disconnected the session.
+
+The final three-attempt journal is byte-identical before and after stopping the app. Its two predecessor attempts and trust are unchanged, as are the existing terminal key/configuration and separate SSH/transfer journal bytes. Boot ID/count remain unchanged. The scoped host controller exits 0, with no forced kills or observed descendants remaining; a separate normal-host audit finds no extracted SSH server/helpers or scoped launcher, and the listener refuses connections. The app, its services and the owned Android CLI/UiAutomation are absent after retirement. No question or fixture remains active.
+
+The first cleanup observer assumed no services could remain after terminal Disconnect. Actual inspection showed the still-visible WebView's bound renderer service, so that expectation was too broad. The observer correction is preserved; final service absence is checked after app retirement. This is an observation correction, not an app-code repair or a new foreground-service finding.
+
+The [desktop terminal interaction contract](../../../docs/04-design/desktop-terminal-interaction-contract.md) remains the product requirement. This result does not qualify clipboard shortcuts, native copy/paste integration, menus, accessibility, modifier/pointer focus-release behavior, renderer adoption, every keyboard/layout/IME, sustained operation or continuous ownership. Cloudy's current surface delegates keyboard/textarea behavior to xterm/WebView and does not supply the complete planned desktop clipboard/menu command layer. CAP-TERMINAL and product gates remain unchanged. Carry forward the unchanged compiler/JVM/Lint/library evidence under D12; this documentation/device-observation increment does not need a new APK build.

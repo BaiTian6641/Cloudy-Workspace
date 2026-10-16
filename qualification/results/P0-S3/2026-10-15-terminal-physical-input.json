@@ -1,0 +1,360 @@
+{
+  "scope": "Finite physical built-in keyboard correction and Ctrl+C observations; user-reported trackpad selection, no configured composition IME. No clipboard/renderer adoption or capability promotion.",
+  "checkedOn": "2026-10-15",
+  "installedCandidate": {
+    "versionName": "0.8.0",
+    "versionCode": 12,
+    "buildRef": "7aab1ccd-e90b-41e1-bd51-1183042c134a",
+    "sourceCommit": "d9518d18390e2a8cca7752a0546f89d8b4e7a9a2",
+    "apkSha256": "fc2cc377cb09aaf9ad571489a09854719e84de3a9a3a03b131fabab01fa46e09",
+    "apkBytes": 16005509,
+    "reinstalled": false
+  },
+  "fixturePreparationSourceCommit": "d9db191a8e781492fbbe1574c39d24cc5c9d5e82",
+  "deviceLane": {
+    "model": "HP Googlebook14",
+    "android": "17",
+    "api": 37,
+    "abi": "arm64-v8a",
+    "build": "CL3B.260622.276.R2",
+    "incremental": "16560795",
+    "keyboard": "built-in",
+    "pointer": "built-in trackpad per requested test and user reply",
+    "webViewProvider": "com.google.android.webview",
+    "webViewVersion": "149.0.7827.5",
+    "sameBootIdAndCountAcrossRun": true
+  },
+  "backend": {
+    "host": "Ubuntu26.04/KDE/Wayland normal workstation context",
+    "server": "OpenSSH10.2p1 Ubuntu-2ubuntu3.8",
+    "shell": "ordinary Bash; dedicated key/PTY, no custom host agent",
+    "systemServiceChanged": false,
+    "acceptedPublickeys": 1,
+    "shellSessionStarts": 1
+  },
+  "attempt": {
+    "sessionId": "b96bbfde-d5b9-4cbb-b6e8-461b43e794c5",
+    "processInstanceId": "84c6f022-abcd-4bea-b554-73f22970f872",
+    "status": "closed",
+    "reason": "user-disconnect",
+    "authenticated": true,
+    "details": {
+      "rendererProvider": "com.google.android.webview",
+      "rendererVersion": "149.0.7827.5",
+      "rendererMessageListener": "true",
+      "rendererArrayBuffer": "true",
+      "hostVerificationCount": "1",
+      "inputBytes": "126",
+      "stdoutBytes": "394",
+      "stderrBytes": "0",
+      "kex": "ecdh-sha2-nistp256",
+      "hostSignature": "ecdsa-sha2-nistp256",
+      "cipherC2S": "aes128-gcm@openssh.com",
+      "cipherS2C": "aes128-gcm@openssh.com",
+      "macC2S": "hmac-sha2-256",
+      "macS2C": "hmac-sha2-256",
+      "compressionC2S": "none",
+      "compressionS2C": "none",
+      "ptyInitialCols": "146",
+      "ptyInitialRows": "23",
+      "ptyLastCols": "146",
+      "ptyLastRows": "23"
+    }
+  },
+  "cases": [
+    {
+      "case": "longer-correction",
+      "verdict": "ambiguous",
+      "userReportedExactOutput": true,
+      "observedUiAgrees": false,
+      "cause": "unestablished"
+    },
+    {
+      "case": "shorter-correction",
+      "verdict": "pass-in-scope",
+      "expected": "ABC",
+      "userReported": true,
+      "actualUiAgrees": true
+    },
+    {
+      "case": "ctrl-c-and-subsequent-input",
+      "verdict": "pass-in-scope",
+      "expected": "CLOUDY_CTRL_OK after interruption",
+      "userReported": true,
+      "actualUiAgrees": true,
+      "latencyMeasured": false
+    },
+    {
+      "case": "direct-trackpad-selection",
+      "verdict": "user-observed",
+      "userReported": true,
+      "highlightCaptured": false,
+      "subsequentScreenshot": "No retained selection highlight; does not establish the prior gesture result."
+    },
+    {
+      "case": "native-composition",
+      "verdict": "not-run",
+      "reason": "User reports no composition IME configured",
+      "exactCommittedBytesQualified": false
+    }
+  ],
+  "preservation": {
+    "recordedAtUtc": "2026-10-16T04:48:24.404536+00:00",
+    "terminalRecords": 3,
+    "allClosed": true,
+    "twoPriorRowsUnchanged": true,
+    "trustAndConfigurationUnchanged": true,
+    "terminalJournalUnchangedAfterStop": true,
+    "sshAndTransferJournalsUnchanged": true,
+    "sameBootIdAndCount": true,
+    "baselineAndOwnedCliStopped": true,
+    "servicesAbsentAfterStop": true,
+    "automationAbsent": true,
+    "nativeImeNotRun": "No composition IME configured; helper prepared but not launched."
+  },
+  "hostCleanup": {
+    "atUtc": "2026-10-16T04:47:33.064995+00:00",
+    "serverExitCode": 0,
+    "listenerClosed": true,
+    "listenerConnectErrno": 111,
+    "descendantScope": "Observed identities under controlled foreground-only commands; no arbitrary daemon containment claim",
+    "remainingOwnedProcesses": [],
+    "forcedKillPids": [],
+    "observedCount": 5
+  },
+  "evidenceFiles": [
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/00-baseline-preservation.json",
+      "sha256": "a6c542e8c70e67931d77699d48a25bb9189d373a58ae4f271ef432af9842d4b6",
+      "bytes": 1929
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/00-baseline-preserved-4.json",
+      "sha256": "e9029fe95acfd9e08ec2e7ff0c04bc8980474a291c06447c3fd6a34afe312a8f",
+      "bytes": 6068
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/00-baseline-preserved-5.json",
+      "sha256": "2fcf96d340720ba9efc94a4e2fbb81530add62dbcb75016ca737bd14603343c1",
+      "bytes": 27940
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/00-baseline-preserved-0.json",
+      "sha256": "39962f7dc2c17a0e23d64557f9896fa941b7f1e8a245eabecd08bef1d0205160",
+      "bytes": 5034
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/00-baseline-properties-command.json",
+      "sha256": "134c1e6611d1c7414fb19be2aed4e4ddcddd1c214a609348ef38a2875f8150fb",
+      "bytes": 40149
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/00-baseline-package-command.json",
+      "sha256": "4a442d88f183b00411f70ca1c59a783e7b5ed8fde0142d178a498c4fd3fb2ec1",
+      "bytes": 8546
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/11-identity.json",
+      "sha256": "59bb7d31196740f1cdf3570284e0e91120b0eb23e6cb01e6cc1618dcb447aa1c",
+      "bytes": 356
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/11-webview-command.json",
+      "sha256": "55596a54797cd1e1ea256bf11c3fcb216fe0229e039031203c793ff516e9cb3a",
+      "bytes": 1159
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/11-boot-command.json",
+      "sha256": "230c018d0dc936cfd676a53714981400b5828f9826f578d81515d00ab7b9a2df",
+      "bytes": 346
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/11-boot-count-command.json",
+      "sha256": "f8c2050e95bb4ed4969755258e0f5514bbe876b61448fcfa96bfd6a4c1d7ebb9",
+      "bytes": 306
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/12-physical-typing-observation.json",
+      "sha256": "87d6a40a87fca4a686bce2cdbf57780e16ebc8348499eb432c4a35c14c59cb28",
+      "bytes": 349
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/12-physical-typing-layout.json",
+      "sha256": "6d4aabbd2c153780ea816af9fc6ba26b2320d5593c6219b42157bb3ebefd5396",
+      "bytes": 17449
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/13-physical-typing-discrepancy.json",
+      "sha256": "8b4d796d4f695c71163e0ed7a060c406f88f509d041f530f650e5f1bf09f3cdc",
+      "bytes": 513
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/13-physical-typing.png",
+      "sha256": "b7156eb833799aabf40d455c05dce6acd945140976a82b7bb92a2396a86c9a1e",
+      "bytes": 2569162
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/14-edit-repeat-observation.json",
+      "sha256": "e19461ad6c6a0c5d853bd0c425e9b2ba655fbafdd8bb35c02f9b71465838b670",
+      "bytes": 227
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/14-edit-repeat-layout.json",
+      "sha256": "8639a60606e96761d36ed9eb0276003e9d7174fd6038cdef1235648bb71aadac",
+      "bytes": 17488
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/15-control-observation.json",
+      "sha256": "5fb91f33ee95a1cee1f8a36f7820284124b6575659304e5d2987059aab235a0b",
+      "bytes": 241
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/15-control-layout.json",
+      "sha256": "a7600a9e6497fad2aef9057b054389ee7a0c83927ef49dba152c054dec03e15e",
+      "bytes": 17587
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/16-selection-observation.json",
+      "sha256": "3264d9689f8fd0e4ac7e0dfd5cafdbcf95f46f0e5216cfd06f2d152d9c5d2036",
+      "bytes": 375
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/16-selection.png",
+      "sha256": "24b03dd47d8a136c88e9180e710d53ed7ea9ec2e2c1054f7f6d449ae955a745b",
+      "bytes": 2594536
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/17-disconnect-tap-command.json",
+      "sha256": "6b80368874b6f08d8fde41b8f20d209ac32880eb251cc7443f4859422ab79175",
+      "bytes": 291
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/19-final-before-stop.json",
+      "sha256": "111dac2c15cf01cf002e06420fe452669caa9b96c0cc7abdd7efe0a25cbd4592",
+      "bytes": 8565
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/19-final-services-command.json",
+      "sha256": "d414b62c0c2c4703f3e396872b50c48e5ca004aaf50cb7594bf0a225b36f1455",
+      "bytes": 4513
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/19-observer-correction.json",
+      "sha256": "8d0ce7b6ae8c20d07175cdb3148bcbfa18bb1391939a9a0f9c81db3d4fd17e29",
+      "bytes": 271
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/20-after-stop.json",
+      "sha256": "111dac2c15cf01cf002e06420fe452669caa9b96c0cc7abdd7efe0a25cbd4592",
+      "bytes": 8565
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/20-cleanup.json",
+      "sha256": "29ab728a9cd4b9d50e462cdf82f71c6185a1387d60b4e7b877794fe7cbba0fbb",
+      "bytes": 486
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/20-services-command.json",
+      "sha256": "8fd87ffa0c0c7526ea6bc6ffcc9bb908fb83ded48097e155dcad9f80a4608a4e",
+      "bytes": 400
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/20-baseline-absent-command.json",
+      "sha256": "34e68c6af5570a8fffc6d0c8b5d634a46630bd3e5c78e1eda58eb0f971965219",
+      "bytes": 312
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/20-cli-absent-command.json",
+      "sha256": "d81705540cdcd523e9706e5fd3f3b92c1358a863dc806f45d5057b03bb0f9b6e",
+      "bytes": 319
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/20-accessibility-command.json",
+      "sha256": "6ce278d1905278c1b5b25cbabdb0b69819c882d71d45a6564841e344d142edb8",
+      "bytes": 4766
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/20-boot-command.json",
+      "sha256": "4bcc03869e8a89b6e35ede4b75132a6d67294abe8a833cd593d1b328c6204f75",
+      "bytes": 346
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/20-boot-count-command.json",
+      "sha256": "aca4d0e4d475231987ea20431c96d4f044c5b54016a75c3a005c035928711816",
+      "bytes": 306
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/20-preserve-ssh-journal.json-command.json",
+      "sha256": "244d41003318b6a695f00eeef12c53ae0566a579fb942889a9aaa35899750d6f",
+      "bytes": 31292
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/device-04/20-preserve-transfer-journal.json-command.json",
+      "sha256": "39c71995c7c99e013c4501bbd61cfb24fdb67d6efe8a350822027f1a41f262ad",
+      "bytes": 5855
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-02/sshd_config",
+      "sha256": "c89b9120244ba878a5bcb5b3e5f3aee3d39166ece636b3ffe4563b432738e6a4",
+      "bytes": 1571
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-02/physical-01-server.log",
+      "sha256": "24004f4c9df3a75972533d3447b9a9287aaecec774176a0c5f952741ec5af2ec",
+      "bytes": 1440
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-02/physical-01-started.json",
+      "sha256": "86adafaf08035531f3a0702fbe35e4e277cb03255acfa82f51df57a7e8914aec",
+      "bytes": 167
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-02/physical-01-process-events.json",
+      "sha256": "8b77f6e5a39be5a7151170132bf4c3e670f28df34005eeb33095f217308317c3",
+      "bytes": 883
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-02/physical-01-stopped.json",
+      "sha256": "4435008d2bec3d4a4eff3247bbbef11acf0ab3c54fb4ce345ca5f0aac102d7f8",
+      "bytes": 334
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-02/final-process-audit.json",
+      "sha256": "93a8b8b96ac72a15ef788a595de6eb52b01f05cb2dc7ca09475dac35dfd8b04f",
+      "bytes": 176
+    },
+    {
+      "path": "qualification/results/private/terminal-probe/host-02/work/launcher-345a00e7-cf95-4a5f-ba82-dd71fcc279ed.json",
+      "sha256": "64e60702fdeff1667edef9287c27623adb65da7b62e8bb7a8279b96afe3746d8",
+      "bytes": 378
+    },
+    {
+      "path": ".cache/terminal-physical-01/controller.py",
+      "sha256": "8215974a91e020b33bd3475c469483e2fa659c336ec99af7e3da850ab23e3c24",
+      "bytes": 4628
+    },
+    {
+      "path": ".cache/terminal-physical-01/device.py",
+      "sha256": "c215104eb60da7864c2414a1edda67ffdf0c9f3226cdf2ed4a8d2a1addaa07ca",
+      "bytes": 9212
+    },
+    {
+      "path": ".cache/terminal-physical-01/core.py",
+      "sha256": "2aba6e3e7b5ef59bfb697a9875a232b78c5bc6d06de1640ef84bf317d0b3a3dc",
+      "bytes": 3185
+    },
+    {
+      "path": ".cache/terminal-physical-01/ci-d9db191-03.json",
+      "sha256": "a99cca17edb44107fb0f0547b0d5a7559405c80c36c876e9772a642054073135",
+      "bytes": 1907
+    }
+  ],
+  "limitations": [
+    "No raw host key/input trace for these physical samples.",
+    "No native composition IME configured; prepared helper never launched.",
+    "No clipboard/menu integration, accessibility, modifier/pointer focus-release or renderer adoption verdict.",
+    "Initial no-service cleanup assumption corrected: visible terminal WebView has a renderer service; final post-stop service absence verified.",
+    "Historical failures and earlier user/UI discrepancy retained.",
+    "Ordinary same-user shell is not an isolation sandbox."
+  ]
+}
