@@ -19,7 +19,9 @@ The numbered folders describe one development program. Read project decisions be
 
 The [desktop workflow design](04-design/desktop-workflows.md) expands the visual system for S13–S17; the offline specimen remains the initial subset. Cross-links are repository-relative for GitHub/local use. P0-S1 qualification setup is **complete**, with a real diagnostic APK, device run and explicit inventory gaps; P0-S2 investigation is complete with CAP-PLATFORM in a bounded experiment; P0-S3 SSH/terminal qualification and P0-S4 native-engine integration are in progress. Console, Desktop and host implementation remain planned. See the [setup closeout](../qualification/results/P0-S1/2026-10-15-setup-closeout.md).
 
-## Active qualification references
+## Qualification history and current references
+
+These entries retain chronological checkpoints. Use the current execution state and latest linked follow-up before treating an earlier “next” or “pending” sentence as active work.
 
 - [P0 diagnostic toolchain](03-platform/googlebook/probe-toolchain.md) and [real device-baseline probe](../qualification/probes/device-baseline/README.md).
 - [P0-S2 platform decision](03-platform/googlebook/p0-s2-platform-decision.md) and [operation lifetimes](03-platform/googlebook/p0-s2-operation-lifetimes.md): accepted finite UIDT/window evidence, unresolved continuous-session classification and required physical-input/backend cases.
@@ -54,3 +56,5 @@ The [desktop workflow design](04-design/desktop-workflows.md) expands the visual
 - [Pinned native X11 engine entry](03-platform/googlebook/native-x11-engine-entry.md): existing display windows, missing per-XID broker, public startup and Console-license boundaries.
 
 - [Finite streaming playback adapter build](../qualification/results/P0-S4/2026-10-15-stream-playback-build.md) and [next UI/Surface/journal integration contract](03-platform/googlebook/native-stream-playback-entry.md): build-only0.1.6, actual playback pending.
+
+- [VNC focus/recovery result](../qualification/results/P0-S4/2026-10-15-vnc-focus-recovery.md): framework-held key release and hidden-session retirement; held-button and initializing-cancel cases remain open. Eleven closed records preserve the previous nine.

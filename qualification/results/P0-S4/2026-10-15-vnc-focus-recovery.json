@@ -1,0 +1,452 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-15",
+  "stage": "P0-S4",
+  "scope": "finite-vnc-framework-held-key-focus-release-and-hidden-retirement",
+  "status": "bounded-key-focus-and-hidden-retirement-pass-pointer-case-not-exercised",
+  "versionName": "0.1.3",
+  "versionCode": 4,
+  "buildRef": "478b0a46-2d02-4eeb-940b-e25e602f8aa1",
+  "device": {
+    "model": "HP Googlebook 14",
+    "release": "17",
+    "api": "37",
+    "build": "CL3B.260622.276.R2",
+    "incremental": "16560795",
+    "abi": "arm64-v8a"
+  },
+  "apkSha256": "97799b6a6495f3c6506df705d2cb5249f1a013d0bfe646b37dd2997a8b8d55f0",
+  "host": {
+    "os": "Ubuntu 26.04",
+    "server": "TigerVNC 1.15.0+dfsg-2build1",
+    "canvas": "Qt 6.9.2 canvas03",
+    "session": "isolated virtual X display; not Wayland desktop capture",
+    "rfbVersion": "3.8",
+    "security": "VeNCrypt19 / X509Plain262 / exact approved ephemeral leaf / normal PAM other",
+    "encodingsObserved": [
+      "Tight",
+      "Tight JPEG"
+    ],
+    "serverBinarySha256": "e59b12d25e9a9341db3b54b2da365c0964faeb52b5b720fb50674631d3fcac84",
+    "canvasBinarySha256": "e8a7d269d39e4cbf04da327719c3c68b770a4df86f26aeb7f45d752c76d260be"
+  },
+  "newAttempts": [
+    {
+      "schema": 1,
+      "attemptId": "39a6112a-3124-49f0-b89f-97de7c6631bb",
+      "kind": "session",
+      "version": "0.1.3",
+      "buildRef": "478b0a46-2d02-4eeb-940b-e25e602f8aa1",
+      "nativeBuildRef": "vnc-adapter-x509plain-2026-10-15",
+      "startedElapsedMs": 116188685,
+      "state": "native-terminal",
+      "detail": "native-error-1",
+      "reason": "operator",
+      "closed": true,
+      "threadStarted": true,
+      "joined": true,
+      "freed": true,
+      "elapsedMs": 50529,
+      "connectionsInitialized": 1,
+      "nativeState": 3,
+      "nativeError": 1,
+      "nativeFrameCallbacks": 1025,
+      "javaFrameCallbacks": 1025,
+      "convertedFrames": 982,
+      "uniqueFrameDraws": 860,
+      "admittedInputs": 907,
+      "completedInputs": 907,
+      "successfulWrites": 907,
+      "width": 1280,
+      "height": 720,
+      "releaseResult": "written-not-host-confirmed",
+      "startupElapsedRealtimeMillis": {
+        "ACCEPTED": 116188685,
+        "WORKER": 116188687,
+        "NATIVE_START": 116188701,
+        "CONNECTED": 116209261,
+        "FRAME": 116209269,
+        "CONVERTED": 116209282,
+        "DRAWN": 116209328,
+        "STOP": 116239040,
+        "JOINED": 116239206
+      },
+      "f8FrameView": {
+        "DOWN_SEEN": 0,
+        "UP_SEEN": 0,
+        "UP_UNOWNED": 0,
+        "REJECT_FOCUS": 0,
+        "REJECT_WINDOW": 0,
+        "REJECT_CONNECTION": 0,
+        "REJECT_META": 0,
+        "DOWN_QUEUED": 0,
+        "UP_QUEUED": 0,
+        "QUEUE_REJECTED": 0
+      },
+      "f8WriteConfirmation": "unavailable-no-per-key-sequence-correlation"
+    },
+    {
+      "schema": 1,
+      "attemptId": "4e3d23ab-2edd-4907-94c5-197703599707",
+      "kind": "session",
+      "version": "0.1.3",
+      "buildRef": "478b0a46-2d02-4eeb-940b-e25e602f8aa1",
+      "nativeBuildRef": "vnc-adapter-x509plain-2026-10-15",
+      "startedElapsedMs": 116378746,
+      "state": "native-terminal",
+      "detail": "native-error-1",
+      "reason": "not-visible",
+      "closed": true,
+      "threadStarted": true,
+      "joined": true,
+      "freed": true,
+      "elapsedMs": 113916,
+      "connectionsInitialized": 1,
+      "nativeState": 3,
+      "nativeError": 1,
+      "nativeFrameCallbacks": 525,
+      "javaFrameCallbacks": 525,
+      "convertedFrames": 511,
+      "uniqueFrameDraws": 503,
+      "admittedInputs": 44,
+      "completedInputs": 44,
+      "successfulWrites": 44,
+      "width": 1280,
+      "height": 720,
+      "releaseResult": "written-not-host-confirmed",
+      "startupElapsedRealtimeMillis": {
+        "ACCEPTED": 116378746,
+        "WORKER": 116378747,
+        "NATIVE_START": 116378759,
+        "CONNECTED": 116399318,
+        "FRAME": 116399327,
+        "CONVERTED": 116399339,
+        "DRAWN": 116399389,
+        "STOP": 116492444,
+        "JOINED": 116492656
+      },
+      "f8FrameView": {
+        "DOWN_SEEN": 1,
+        "UP_SEEN": 2,
+        "UP_UNOWNED": 2,
+        "REJECT_FOCUS": 0,
+        "REJECT_WINDOW": 0,
+        "REJECT_CONNECTION": 0,
+        "REJECT_META": 0,
+        "DOWN_QUEUED": 1,
+        "UP_QUEUED": 0,
+        "QUEUE_REJECTED": 0
+      },
+      "f8WriteConfirmation": "unavailable-no-per-key-sequence-correlation"
+    }
+  ],
+  "focusResult": {
+    "stimulus": "ADB keyevent --duration 10000 KEYCODE_F8 and notification shade window-focus loss",
+    "physicalInput": false,
+    "startedAtUtc": "2026-10-16T02:35:22.215873+00:00",
+    "events": [
+      {
+        "event": "armed",
+        "hostMonotonicNs": 418314242592337
+      },
+      {
+        "event": "held-key-started",
+        "hostMonotonicNs": 418356331125942
+      },
+      {
+        "event": "host-marker-down",
+        "hostMonotonicNs": 418356384114340,
+        "canvasEvent": {
+          "activeWindow": true,
+          "elapsedNanoseconds": "336076372087",
+          "event": "key-down",
+          "hasFocus": true,
+          "markerCode": 16777271,
+          "repeat": false,
+          "sequence": 737
+        },
+        "keyCommandRunning": true
+      },
+      {
+        "event": "shade-requested",
+        "hostMonotonicNs": 418356411271866
+      },
+      {
+        "event": "host-release-before-injected-up",
+        "hostMonotonicNs": 418356516293899,
+        "canvasEvent": {
+          "activeWindow": true,
+          "elapsedNanoseconds": "336188001504",
+          "event": "key-up",
+          "hasFocus": true,
+          "markerCode": 16777271,
+          "repeat": false,
+          "sequence": 738
+        },
+        "keyCommandRunning": true
+      },
+      {
+        "event": "key-command-completed",
+        "hostMonotonicNs": 418366373351483
+      }
+    ],
+    "verdict": "host-release-observed-before-injected-key-up",
+    "durationMillis": 52158
+  },
+  "pointerResult": {
+    "physicalInput": false,
+    "stimulus": "ADB mouse motionevent DOWN, system notification shade, then later UP",
+    "events": [
+      {
+        "event": "injected-down",
+        "hostMonotonicNs": 418405001183863
+      },
+      {
+        "event": "injected-up",
+        "hostMonotonicNs": 418408087723980
+      }
+    ],
+    "verdict": "not-exercised",
+    "failure": "host-button-down-not-observed"
+  },
+  "cleanup": {
+    "records": 11,
+    "allClosed": true,
+    "priorNineByteIdentical": true,
+    "noOwnedAppProcess": true,
+    "profileRemoved": true,
+    "exactReverseRemoved": true,
+    "installedApkByteIdentical": true,
+    "apkSha256": "97799b6a6495f3c6506df705d2cb5249f1a013d0bfe646b37dd2997a8b8d55f0"
+  },
+  "hostCleanup": {
+    "schemaVersion": 1,
+    "scope": "finite real isolated X509Plain/PAM server and X11 input canvas",
+    "startedAtUtc": "2026-10-16T02:30:28.141281+00:00",
+    "deadlineSeconds": 600,
+    "serverBinarySha256": "e59b12d25e9a9341db3b54b2da365c0964faeb52b5b720fb50674631d3fcac84",
+    "canvasBinarySha256": "e8a7d269d39e4cbf04da327719c3c68b770a4df86f26aeb7f45d752c76d260be",
+    "events": [
+      {
+        "event": "ready",
+        "elapsedMillis": 204
+      }
+    ],
+    "stopRequested": true,
+    "canvasExitCode": 0,
+    "canvasCompletion": {
+      "activationTransitions": 1,
+      "activeWindow": true,
+      "buttonEvents": 2,
+      "elapsedNanoseconds": "508956644674",
+      "event": "completion",
+      "exitCode": 0,
+      "focusTransitions": 1,
+      "hasFocus": true,
+      "heldKeys": [],
+      "keyEvents": 2,
+      "lastObservedButtons": 0,
+      "motionEvents": 762,
+      "paintEvents": 2638,
+      "reason": "operator-stop",
+      "sequence": 770,
+      "timerTicks": 1873,
+      "wheelEvents": 0
+    },
+    "serverExitCode": 0,
+    "rfbListenerClosed": true,
+    "xSocketAbsent": true,
+    "xLockAbsent": true,
+    "durationMillis": 509134,
+    "finishedAtUtc": "2026-10-16T02:38:57.278282+00:00"
+  },
+  "limitations": [
+    "Framework-injected keyboard test; no physical keyboard/mouse subtype qualification",
+    "Mouse button-down was not observed; held-primary-button focus release not exercised",
+    "Cancellation while connection is initializing not exercised",
+    "No process-death recovery, direct-LAN, native IME, broader-server, latency or product credential-storage pass",
+    "No CAP-VNC, P0-S4 or product-stage promotion"
+  ],
+  "evidenceFiles": [
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-recovery-01/device.json",
+      "bytes": 152,
+      "sha256": "d755afec0fa9c0313b84b948fe521611e4dc6db143cb868a55bc970f60a1c0f3"
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-recovery-01/before-manifest.json",
+      "bytes": 1382,
+      "sha256": "1e189db0add296f300193e51f2bca5df709614d78ecc0f659a495dc8522998e2"
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-recovery-01/final-journal-manifest.json",
+      "bytes": 1690,
+      "sha256": "0048ba36499c66d2c084b6d49777860bab91f36349ede1ae2c41b05680bc569a"
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-recovery-01/cleanup.json",
+      "bytes": 281,
+      "sha256": "b2c9a17d151d8730fe50f072bf5f8d3a774bb3be9bbd78f1969eb1e247f23ec5"
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-recovery-01/user-observations.json",
+      "bytes": 283,
+      "sha256": "991a0808c5f669a95b09acb0f428b3ceaf6a3d16f14246f19887b7bb22e99f04"
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-recovery-01/focus-result.json",
+      "bytes": 1382,
+      "sha256": "5beb59fc30abe709f43c631477921dbbdb7138fa27afc27cde1f63ed453e38aa"
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-recovery-01/pointer-result.json",
+      "bytes": 379,
+      "sha256": "67b91a704a02174dc3e45dae18e356793a78b81e259176b7b92b16c7e47262ad"
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-recovery-01/focus-before-window-command.json",
+      "bytes": 118653,
+      "sha256": "be6d21993ddd733f9fa6b3958b092627d4c45a383f09f00565e36feca5192d6b"
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-recovery-01/focus-shade-window-command.json",
+      "bytes": 119691,
+      "sha256": "31851c9468d7d9e16d9cf275c02041f74a78731d4be2a8c059a00dfda2ffd0e1"
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-recovery-01/focus-key-command.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-recovery-01/focus-key-command.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-recovery-01/focus-hide-close-command.json",
+      "bytes": 301,
+      "sha256": "7bc9073f24dd0fdb2fc447298bc65974c2eca0f5980e7713bb0e9ca5f32d951f"
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-recovery-01/input-usage.stdout",
+      "bytes": 1875,
+      "sha256": "21df8eefea3dba53ddc636fecb93ef347ad99362dee640e721496820972a52b9"
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-recovery-01/installed-cloudy-vnc-0.1.3.apk",
+      "bytes": 10888183,
+      "sha256": "97799b6a6495f3c6506df705d2cb5249f1a013d0bfe646b37dd2997a8b8d55f0"
+    },
+    {
+      "path": ".cache/native-vnc-android/timings-02/app/build/outputs/apk/debug/app-debug.apk",
+      "bytes": 10888183,
+      "sha256": "97799b6a6495f3c6506df705d2cb5249f1a013d0bfe646b37dd2997a8b8d55f0"
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-recovery-01/final-1b452388-235c-4c56-bab6-20bba0435c87.json",
+      "bytes": 637,
+      "sha256": "b7c3dbe1b7b811e4e35b1e3799831115579ecfd589382637821cb3868c99878c"
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-recovery-01/final-39a6112a-3124-49f0-b89f-97de7c6631bb.json",
+      "bytes": 1137,
+      "sha256": "3cf7d4c24fbde47b432c0a826c51aee22ab81b02a72d3126ffce8a9b44fc4923"
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-recovery-01/final-3e424a1f-d11b-4862-aa28-7cbdba43a4bb.json",
+      "bytes": 1078,
+      "sha256": "cb2dea5ab7b8c29951feeba7f847a31c8a399b47ef6a56bff0fa1638b3a102be"
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-recovery-01/final-4e3d23ab-2edd-4907-94c5-197703599707.json",
+      "bytes": 1136,
+      "sha256": "cdf332c6fa3031731835c79c9cbdeb9bf83756c7cce1a647928704e1d4cbfc6b"
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-recovery-01/final-52109479-3fd7-4f1e-bb27-fd51430f7015.json",
+      "bytes": 624,
+      "sha256": "3a9cc5093f4b5008b0b9659a5607591025394207d1570ec73df20e3ed68138ca"
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-recovery-01/final-6986e1e0-f035-4c52-b0f0-5d03a54a55af.json",
+      "bytes": 653,
+      "sha256": "d9e934c350b66db7ca3b9b31353c49cb391d87c3d9d8ae3e81340d16270ec470"
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-recovery-01/final-6b34c12f-1022-4530-91a1-fbe97c638903.json",
+      "bytes": 1142,
+      "sha256": "02524c02a074265754edb89aa4753c58420e2317ccca5f21d7422a905f3f84da"
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-recovery-01/final-7298b3c8-c043-4215-a794-cc829ffcd2f7.json",
+      "bytes": 623,
+      "sha256": "eedc0349da5e337c43b2051899ae911c104f7ee819239bf290686b8450366f3d"
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-recovery-01/final-7ac4ad88-4ced-4dd6-afe9-97bd8f80231d.json",
+      "bytes": 674,
+      "sha256": "23ba1ccc48981a511d1c5fb70f4a5138a04f0f21de4e0d64e5ce61d31e21bde9"
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-recovery-01/final-c3341b8d-b527-4300-b05b-66a75003cea4.json",
+      "bytes": 642,
+      "sha256": "79bc01f44ef5b2c531d5c122a946774afa0b82d797776d2a005558cdc6176cc8"
+    },
+    {
+      "path": "qualification/results/private/native-vnc/2026-10-15-recovery-01/final-eb3520d2-1ba4-42de-9f48-a706c3c23951.json",
+      "bytes": 642,
+      "sha256": "bd718cbe8983f0b9e193abd1eb6a393fe7809606ad63ba70b2b06e49ae81a2c6"
+    },
+    {
+      "path": ".cache/native-vnc-android/recovery_01.py",
+      "bytes": 5591,
+      "sha256": "0105419399af8d0b2870e8493e76599193cfe32aa1c58c15419c46473055ca29"
+    },
+    {
+      "path": ".cache/native-vnc-android/focus_recovery_01.py",
+      "bytes": 4079,
+      "sha256": "b7853ac8b6c4829811d2cf2a1ce6bea6a7fb5561da75a86386a5678d05544e10"
+    },
+    {
+      "path": ".cache/native-vnc-android/pointer_recovery_01.py",
+      "bytes": 2685,
+      "sha256": "5242bf130f8065a41be8ed0169718e14172350eb7fb3aec04da327adce9752c1"
+    },
+    {
+      "path": ".cache/native-vnc-android/cleanup_recovery_01.py",
+      "bytes": 3157,
+      "sha256": "1a3ca37ac2d16729d38a6f8b12194deebd4b58e376126ccf5df70bdfc61cf648"
+    },
+    {
+      "path": ".cache/native-vnc-host/session-08/result.json",
+      "bytes": 1143,
+      "sha256": "a7b9bef1e70a81017bd59d2aa713d08c5d7225ae374a3f0cb27843cdddfb8bbd"
+    },
+    {
+      "path": ".cache/native-vnc-host/session-08/server.log",
+      "bytes": 3620,
+      "sha256": "d5b8c51ea7a5fa83727a128216fb348871c06412ee781999988a1abc53eda64a"
+    },
+    {
+      "path": ".cache/native-vnc-host/session-08/canvas.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/native-vnc-host/session-08/server-command.json",
+      "bytes": 940,
+      "sha256": "506d5daa96798b74a7afd367914eb39094b2f0af2aa4c2077defc1b291782a9c"
+    },
+    {
+      "path": ".cache/native-vnc-host/session-08/canvas/events.jsonl",
+      "bytes": 84407,
+      "sha256": "f3904d0c53fd8a39ba055326ae23d2f8635cb3700efd79a0d01e2f67e7bab733"
+    },
+    {
+      "path": ".cache/native-vnc-host/session_fixture_08.py",
+      "bytes": 6416,
+      "sha256": "982f56f73116a917a0ddbaa4a29b54b706c99618297d5c9f941c786d33a3894b"
+    }
+  ]
+}
