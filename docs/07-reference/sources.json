@@ -192,7 +192,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": "2026-10-01",
-      "note": "Reviewed operation-specific type/prerequisite and specialUse declaration contracts. No continuous SSH/desktop service type selected and no distribution approval established.",
+      "note": "Reviewed through official Android CLI KB for the finite0.8.0 SSH specialUse candidate; direct web fetch timed out. Type/prerequisite and subtype contracts inspected. Candidate compilation is separate from actual runtime and distribution approval; generic product background support remains unresolved.",
       "refresh": "Before implementation against this surface; weekly during active platform qualification."
     },
     {
@@ -264,7 +264,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-15",
       "sourceUpdatedOn": "2026-10-01",
-      "note": "POST_NOTIFICATIONS runtime permission API33; request in feature context and expose denial separately. The probe permits UIDT scheduling when denied, still calls required setNotification, and retains native-screen Cancel. Notification-action visibility requires actual observation; no denied-UIDT scheduling claim.",
+      "note": "POST_NOTIFICATIONS runtime permission API33; request in feature context and expose denial separately. The probe permits UIDT scheduling when denied, still calls required setNotification, and retains native-screen Cancel. Notification-action visibility requires actual observation; no denied-UIDT scheduling claim. Finite0.8.0 retained-SSH admission deliberately requires granted/enabled notifications as its stop-control policy; POST_NOTIFICATIONS is not an OS FGS launch prerequisite. This does not change UIDT behavior.",
       "refresh": "Before implementation against this surface; weekly during active platform qualification."
     },
     {
@@ -5080,6 +5080,18 @@
       "sourceUpdatedOn": null,
       "note": "GITHUB_TOKEN is job-scoped repository authentication; use minimum job permissions. One-shot artifact cleanup has Actions write in a separate push-only job without checkout or dependency code; ordinary VNC build stays contents read. No user credential discovery or published token. Owner integration leader/P0-S4.",
       "refresh": "When changing signature tooling, artifact cleanup or workflow token permissions."
+    },
+    {
+      "id": "G155",
+      "title": "Launch and promote a foreground service",
+      "url": "https://developer.android.com/develop/background-work/services/fgs/launch",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-15",
+      "sourceUpdatedOn": "2026-10-01",
+      "note": "Context.startForegroundService requests launch; the service must promote with a declared type and notification. Target31+ background-start restrictions and target34+ type permissions apply. Finite SSH diagnostic promotes before consuming its ticket/network entry; compilation does not prove runtime retention or Play approval.",
+      "refresh": "Before changing retained-session admission, target SDK or distribution route."
     }
   ]
 }

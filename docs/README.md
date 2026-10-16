@@ -58,3 +58,5 @@ These entries retain chronological checkpoints. Use the current execution state 
 - [Finite streaming playback adapter build](../qualification/results/P0-S4/2026-10-15-stream-playback-build.md) and [next UI/Surface/journal integration contract](03-platform/googlebook/native-stream-playback-entry.md): build-only0.1.6, actual playback pending.
 
 - [VNC focus/recovery result](../qualification/results/P0-S4/2026-10-15-vnc-focus-recovery.md): framework-held key release and hidden-session retirement; held-button and initializing-cancel cases remain open. Eleven closed records preserve the previous nine.
+
+- [Finite SSH retention contract](03-platform/googlebook/p0-s3-ssh-retention-contract.md) and [0.8.0 build review](06-validation/2026-10-15-ssh-retention-build.md): actual service-owned exec/PTY candidate, 206 JVM tests and zero Lint; device retention and distribution acceptance pending.

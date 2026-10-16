@@ -268,4 +268,31 @@ class SshStateTest {
             sftp.update(old.id, "running", "protocol", details = mapOf("execExitStatus" to "17"), time = time())
         }
     }
+
+    @Test fun retainedPtyUsesTheSameProtocolBoundsWithoutChangingOrdinaryOperations() {
+        assertFalse(SshOperation.SFTP.isPty)
+        assertTrue(SshOperation.EXEC_PTY.isPty)
+        assertTrue(SshOperation.RETAINED_EXEC_PTY.isPty)
+        assertEquals(180L, SshOperation.RETAINED_EXEC_PTY.totalTimeoutSeconds)
+        val state = SshState()
+        val row = requireNotNull(state.begin(UUID.randomUUID().toString(), process, config,
+            SshOperation.RETAINED_EXEC_PTY, build, time()))
+        listOf(mapOf("sftpVersion" to "3"), mapOf("ptyStdoutBytes" to "4097"),
+            mapOf("ptyInputBytes" to "13"), mapOf("ptyStdoutSha256" to "not-a-hash")).forEach { invalid ->
+            assertThrows(IllegalArgumentException::class.java) {
+                state.update(row.id, "running", "protocol", details = invalid, time = time())
+            }
+        }
+        assertEquals(row, current(state))
+        assertTrue(state.update(row.id, "running", "pty-awaiting-resize", fingerprint, true,
+            mapOf("ptyInitialCols" to "80", "ptyInitialRows" to "24"), time()))
+        val restored = SshState(state.snapshot())
+        assertTrue(restored.reconcileInterrupted(time()))
+        assertEquals(SshOperation.RETAINED_EXEC_PTY, current(restored).operation)
+        assertEquals(row.id, current(restored).id)
+        assertEquals("interrupted", current(restored).status)
+        assertThrows(IllegalArgumentException::class.java) {
+            SshState(listOf(row.copy(buildIdentity = null)))
+        }
+    }
 }

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ssh_retention_run">Start retained exec + PTY check</string>
+    <string name="ssh_retention_request_notifications">Allow session notification</string>
+    <string name="ssh_retention_scope">Optional finite retention check: start here, hide this window briefly, then return to resize and finish the same PTY. An ongoing notification provides Disconnect. This check requires notification access, sets a 120-second PTY read timeout and requests cancellation at the 180-second operation deadline. Cleanup is recorded separately. It does not retain the interactive terminal renderer.</string>
+</resources>

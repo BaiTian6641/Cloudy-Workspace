@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ssh_retention_channel">Finite SSH retention</string>
+    <string name="ssh_retention_notification_title">SSH qualification session retained</string>
+    <string name="ssh_retention_notification_text">%1$s · finite PTY probe; Disconnect stops this session</string>
+    <string name="ssh_retention_disconnect">Disconnect</string>
+</resources>

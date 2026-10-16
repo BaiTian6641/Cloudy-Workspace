@@ -20,6 +20,8 @@ class SshActivity : Activity() {
     private lateinit var runtime: SshRuntime
     private lateinit var run: Button
     private lateinit var runPty: Button
+    private lateinit var runRetention: Button
+    private lateinit var notifications: Button
     private lateinit var resizePty: Button
     private lateinit var finishPty: Button
     private lateinit var trust: Button
@@ -58,6 +60,15 @@ class SshActivity : Activity() {
         content.addView(run)
         runPty = button(R.id.ssh_run_pty, R.string.ssh_run_pty) { start(SshOperation.EXEC_PTY) }
         content.addView(runPty)
+        content.addView(TextView(this).apply { setText(R.string.ssh_retention_scope) })
+        notifications = button(R.id.ssh_retention_notifications, R.string.ssh_retention_request_notifications) {
+            if (!hasNotificationPermission()) {
+                requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), 52)
+            }
+        }
+        content.addView(notifications)
+        runRetention = button(R.id.ssh_run_retention, R.string.ssh_retention_run) { startRetained() }
+        content.addView(runRetention)
         keySummary = TextView(this).apply { id = R.id.ssh_key_summary; setTextIsSelectable(true) }
         content.addView(keySummary)
         trust = button(R.id.ssh_trust, R.string.ssh_trust) { runtime.acceptTrust() }
@@ -94,7 +105,7 @@ class SshActivity : Activity() {
         }
         setContentView(root)
         root.requestApplyInsets()
-        run.isEnabled = false; runPty.isEnabled = false
+        run.isEnabled = false; runPty.isEnabled = false; runRetention.isEnabled = false
         resizePty.isEnabled = false; finishPty.isEnabled = false
         trust.isEnabled = false; cancel.isEnabled = false
     }
@@ -124,6 +135,8 @@ class SshActivity : Activity() {
         keySummary.text = state.trustSummary
         run.isEnabled = visible && hasLanPermission() && state.canRun
         runPty.isEnabled = run.isEnabled
+        runRetention.isEnabled = run.isEnabled && hasNotificationPermission()
+        notifications.isEnabled = visible && !hasNotificationPermission()
         resizePty.isEnabled = visible && hasLanPermission() && state.ptyAction == SshPtyAction.RESIZE
         finishPty.isEnabled = visible && hasLanPermission() && state.ptyAction == SshPtyAction.FINISH
         trust.isEnabled = visible && state.canTrust
@@ -150,6 +163,20 @@ class SshActivity : Activity() {
             finishPty.isEnabled = false
         }
     }
+
+    private fun startRetained() {
+        val owner = WeakReference(this)
+        val capturedEpoch = epoch
+        // This predicate admits one visible request. Only actual service promotion
+        // can transfer its lifetime to the notification; no Activity is retained.
+        SshSessionService.requestStart(this) { owner.get()?.let {
+            it.visible && it.epoch == capturedEpoch && !it.isFinishing && !it.isDestroyed &&
+                it.hasLanPermission() && it.hasNotificationPermission()
+        } == true }
+    }
+
+    private fun hasNotificationPermission(): Boolean =
+        checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED
 
     private fun hasLanPermission(): Boolean = Build.VERSION.SDK_INT < 37 ||
         checkSelfPermission(Manifest.permission.ACCESS_LOCAL_NETWORK) == PackageManager.PERMISSION_GRANTED

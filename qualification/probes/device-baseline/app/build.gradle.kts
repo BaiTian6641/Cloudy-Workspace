@@ -15,10 +15,10 @@ android {
         applicationId = "dev.cloudy.qualification.baseline"
         minSdk = 35
         targetSdk = 37
-        versionCode = 11
-        versionName = "0.7.2"
+        versionCode = 12
+        versionName = "0.8.0"
         // Stable source build reference; the external run manifest binds its commit and exact APK.
-        buildConfigField("String", "QUALIFICATION_BUILD_REF", "\"475bcf30-ce99-4995-a549-7fcbb1cfd31d\"")
+        buildConfigField("String", "QUALIFICATION_BUILD_REF", "\"7aab1ccd-e90b-41e1-bd51-1183042c134a\"")
     }
 
     buildFeatures { buildConfig = true }

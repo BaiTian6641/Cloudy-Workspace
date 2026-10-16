@@ -91,7 +91,8 @@ internal object SshJournalCodec {
                 },
             )
         },
-        "scope" to "Finite native SSH/SFTP and exec/PTY diagnostic; no automatic reconnect, overwrite or remote deletion. " +
+        "scope" to "Finite native SSH/SFTP and exec/PTY diagnostic with optional explicit service retention; " +
+            "no automatic reconnect, overwrite or remote deletion. " +
             "Legacy execution builds remain external evidence; historical completion is not a new remote-file audit.",
     )
 

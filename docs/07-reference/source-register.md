@@ -566,3 +566,5 @@ The [catalog build](../../qualification/results/P0-S4/2026-10-15-stream-catalog-
 - **R253** — [Official apksigner syntax](https://developer.android.com/tools/apksigner): verification requires the APK operand; no signature-policy relaxation is warranted for an invocation error.
 - **R254** — [GitHub artifact REST API](https://docs.github.com/en/rest/actions/artifacts): identity-bound GET/DELETE, Actions write permission and204 deletion response; actual removal needs a subsequent absence check.
 - **R255** — [Workflow token permissions](https://docs.github.com/en/actions/tutorials/authenticate-with-github_token): separate minimum-permission cleanup job, with no checkout or dependency execution.
+
+- **G155** — [Launch and promote a foreground service](https://developer.android.com/develop/background-work/services/fgs/launch): reviewed visible start request versus actual declared-type promotion. The finite SSH candidate consumes admission only after promotion; runtime and Play acceptance remain separate.

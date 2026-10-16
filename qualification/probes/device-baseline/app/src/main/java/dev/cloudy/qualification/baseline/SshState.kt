@@ -6,7 +6,10 @@ import java.util.UUID
 internal enum class SshTrustDecision { UNKNOWN, MATCH, REJECT }
 
 internal enum class SshOperation(val wireValue: String, val totalTimeoutSeconds: Long) {
-    SFTP("sftp", 60), EXEC_PTY("exec-pty", 180);
+    SFTP("sftp", 60), EXEC_PTY("exec-pty", 180), RETAINED_EXEC_PTY("retained-exec-pty", 180);
+
+    // Retention changes the explicit lifetime owner, not the SSH fixture or trust policy.
+    val isPty: Boolean get() = this == EXEC_PTY || this == RETAINED_EXEC_PTY
 }
 
 internal data class SshBuildIdentity(val versionName: String, val versionCode: Int, val buildRef: String) {
@@ -81,7 +84,7 @@ internal class SshState(restored: List<SshAttempt> = emptyList()) {
             values["uploadName"]?.let {
                 require(it.startsWith("cloudy-") && it.endsWith(".bin") && canonicalSshUuid(it.removePrefix("cloudy-").removeSuffix(".bin"))) { "SshUploadName" }
             }
-            if (operation == SshOperation.EXEC_PTY) {
+            if (operation.isPty) {
                 values.filterKeys { it.endsWith("Sha256") }.values.forEach {
                     require(it.matches(Regex("[0-9a-f]{64}"))) { "SshProtocolHash" }
                 }

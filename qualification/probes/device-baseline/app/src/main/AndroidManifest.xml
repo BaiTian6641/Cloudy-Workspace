@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.ACCESS_LOCAL_NETWORK" />
     <uses-permission android:name="android.permission.RUN_USER_INITIATED_JOBS" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
     <application
         android:name=".ProbeApplication"
         android:allowBackup="false"
@@ -17,6 +19,16 @@
         android:usesCleartextTraffic="false"
         android:theme="@style/ProbeTheme">
         <receiver android:name=".TransferCancelReceiver" android:exported="false" />
+        <!-- Provisional diagnostic classification, not a Play distribution approval. -->
+        <service
+            android:name=".SshSessionService"
+            android:exported="false"
+            android:stopWithTask="false"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="User-started finite SSH exec and PTY qualification retained while its desktop windows are hidden, with an ongoing Disconnect notification and no automatic reconnect." />
+        </service>
         <service
             android:name=".TransferJobService"
             android:exported="false"

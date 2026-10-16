@@ -342,7 +342,10 @@
         "ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE",
         "ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC",
         "ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE",
-        "android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+        "android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE",
+        "Context.startForegroundService(Intent)",
+        "Service.START_NOT_STICKY",
+        "Service.stopSelfResult(int)"
       ],
       "sourceIds": [
         "G16",
@@ -354,7 +357,10 @@
         "G68",
         "G72",
         "G98",
-        "G99"
+        "G99",
+        "G22",
+        "G67",
+        "G155"
       ],
       "minimumApi": null,
       "libraryVersion": null,
@@ -364,10 +370,11 @@
       "owner": "Android/platform developer",
       "stage": "P1-S3",
       "fallback": "Visible user work, honest background disconnection, journaled recovery and host-side durability; no unrelated permissions or invented provider ownership.",
-      "experiment": "CAP-PLATFORM remains experiment after P0-S2 investigation closeout. P0-S3 first proves visible native SSH ownership independently of renderer; a real continuous-session FGS candidate requires separate feature/prerequisite review, bounded lifecycle/stop/process-loss evidence and distribution assessment. No FGS type, compilation, runtime support or Play approval is established. USB and streaming remain independent operation decisions.",
-      "researchEvidence": "docs/03-platform/googlebook/p0-s2-operation-lifetimes.md",
-      "versionNotes": "connectedDevice/dataSync constants API29; specialUse API34. Target31+ background starts and target34+ types/prerequisites apply on relevant runtimes. API level for this mixed policy record remains null.",
-      "decisionEvidence": "docs/03-platform/googlebook/p0-s2-platform-decision.md"
+      "experiment": "Finite baseline0.8.0 retained exec/PTY candidate compiles with provisional specialUse, visible one-use admission, actual promotion before engine entry and notification Disconnect. Device hide/return, notification stop and process-loss cases are pending. Existing ordinary operations remain visible-only. This does not qualify continuous product sessions, USB/streaming routes or Play distribution.",
+      "researchEvidence": "docs/03-platform/googlebook/p0-s3-ssh-retention-contract.md",
+      "versionNotes": "connectedDevice/dataSync constants API29; specialUse API34. Target31+ background starts and target34+ types/prerequisites apply on relevant runtimes. API level for this mixed policy record remains null. Candidate min35/target37 covers Context.startForegroundService(API26), typed Service.startForeground(API29) and specialUse(API34); no permission or runtime guard is inferred from a successful build.",
+      "decisionEvidence": "docs/03-platform/googlebook/p0-s2-platform-decision.md",
+      "compileEvidence": "docs/06-validation/2026-10-15-ssh-retention-build.md"
     },
     {
       "id": "API15",

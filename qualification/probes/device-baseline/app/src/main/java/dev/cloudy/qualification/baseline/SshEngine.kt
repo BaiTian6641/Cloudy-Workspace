@@ -174,7 +174,7 @@ internal class SshEngine {
             if (!authenticated) throw SshProbeFailure("authentication-not-established")
             observe("authenticated")
 
-            if (operation == SshOperation.EXEC_PTY) {
+            if (operation.isPty) {
                 runExecPty(ssh, details, helpers, ::checkActive, ::observe)
             } else ssh.newSFTPClient().use { sftp ->
                 sftp.getSFTPEngine().timeoutMs = IO_TIMEOUT_MILLIS

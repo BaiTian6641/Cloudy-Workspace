@@ -178,4 +178,33 @@ class SshJournalCodecTest {
         assertEquals(state.snapshot(), restored.snapshot())
         assertEquals(legacy.attempts, restored.snapshot().take(5))
     }
+
+    @Test fun retainedPtyRoundTripsAsADistinctOperationAndRestoresOnlyInterruptedHistory() {
+        val original = SshJournalCodec.decode(legacy())
+        val state = SshState(original.attempts)
+        val ordinary = requireNotNull(state.begin(UUID(0, 6).toString(), newProcess,
+            "b".repeat(64), SshOperation.EXEC_PTY, build, time))
+        state.update(ordinary.id, "cancelled", "user-cancel", time = time)
+        val preserved = state.snapshot()
+        val retained = requireNotNull(state.begin(UUID(0, 7).toString(), newProcess,
+            "b".repeat(64), SshOperation.RETAINED_EXEC_PTY, build, time))
+        state.update(retained.id, "running", "pty-awaiting-resize", fingerprint, true,
+            mapOf("ptyInitialCols" to "80", "ptyInitialRows" to "24"), time)
+        val encoded = encode(state)
+        assertEquals(2, encoded["schemaVersion"])
+        assertEquals("exec-pty", row(encoded, 5)["operation"])
+        assertEquals("retained-exec-pty", row(encoded, 6)["operation"])
+        val decoded = SshJournalCodec.decode(encoded)
+        assertEquals(preserved, decoded.attempts.take(6))
+        assertEquals(original.trust, decoded.trust)
+        val restored = SshState(decoded.attempts)
+        assertTrue(restored.reconcileInterrupted(time))
+        val after = SshJournalCodec.decode(encode(restored)).attempts
+        assertEquals(preserved, after.take(6))
+        assertEquals(7, after.size)
+        assertEquals(retained.id, after.last().id)
+        assertEquals(SshOperation.RETAINED_EXEC_PTY, after.last().operation)
+        assertEquals("interrupted", after.last().status)
+        assertEquals(build, after.last().buildIdentity)
+    }
 }
