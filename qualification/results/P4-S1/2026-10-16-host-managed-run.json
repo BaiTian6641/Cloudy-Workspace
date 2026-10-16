@@ -1,0 +1,526 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "HOST-RETAINED-RUN01 internal Linux ownership construction",
+  "status": "ACCEPTED_BOUNDED_SOURCE03_COMPOSITE_PURE_CHECKS",
+  "acceptance": "Parent and independent scoped source03/composite pure-check acceptance; no native integration, capability or stage promotion",
+  "hostExecutableVersion": "0.1.3",
+  "sources": [
+    {
+      "path": "host/core/internal/managedrun/run_linux.go",
+      "sha256": "03f970d8763e981a3d76f731279aa2f706348cdbbc51b3bf7601a2e9e9bb607d"
+    },
+    {
+      "path": "host/core/internal/managedrun/run_linux_test.go",
+      "sha256": "1cc86fd89123781daac35cf6a9145a6452eb6b2afb08067c445561c6e07ab03c"
+    },
+    {
+      "path": "host/core/internal/managedrun/native_linux_test.go",
+      "sha256": "2396d3a5abb01dd6d7281ae2a78412149a428ae21b78c49ead5998b50ca5356e"
+    }
+  ],
+  "failedRunSources": [
+    {
+      "path": "host/core/internal/managedrun/run_linux.go",
+      "sha256": "03f970d8763e981a3d76f731279aa2f706348cdbbc51b3bf7601a2e9e9bb607d"
+    },
+    {
+      "path": "host/core/internal/managedrun/run_linux_test.go",
+      "sha256": "11e76912eb9e99183fcf71bd6202e1889e361dc7faad0eaa599489d32c8908d2"
+    },
+    {
+      "path": "host/core/internal/managedrun/native_linux_test.go",
+      "sha256": "2396d3a5abb01dd6d7281ae2a78412149a428ae21b78c49ead5998b50ca5356e"
+    }
+  ],
+  "moduleBindings": {
+    "host/core/go.mod": "216f549ff9871fea87351318ca6420efdfefeeaf1c0afa6a944ec41d2de70b4c",
+    "host/core/go.sum": "4e77c00cd0a32a85bd48f74790fc4f5fdb35d5e8e715d4b1fb131bcf7ce2d60a",
+    "host/core/THIRD_PARTY_NOTICES.txt": "3bbd241058c57c1c5aee6dd00774f60d585225dd152c037eb4738ab7f47736a7"
+  },
+  "protectedSourceBindings": {
+    "host/core/internal/jobs/types.go": "1abe1a972cb31f2939487dfa0861159a4592b278c53f0e9febb66311789e8b7e",
+    "host/core/internal/jobs/backend_linux.go": "3cfae7cdb0bc3162bd11aa953bd56be22b23a5fe7c2e7262b7a5c5b48ae24491",
+    "host/core/internal/jobrecorder/recorder_linux.go": "e78fbc3f2a2fdea13263dc46016fa1824c7eceb54787f010389ca19365402c0f",
+    "host/core/internal/jobevents/store_linux.go": "77b16682a6f450fc3ad065aebb97ca169fd7cb52330b52de12442a2b83124283",
+    "host/core/internal/jobevents/record.go": "48e9fb40072515628d05d62f24911b2339f2ec14207719119a3948be34cbbef3",
+    "host/core/internal/jobevents/cursor.go": "c5ae95b43044513bf3af3e577cb74de3f1a318f455564f33f64f13a8184b2731",
+    "host/core/internal/bootidentity/boot_linux.go": "63e317107b0e42781456b7756326463366f81a7faf21315b5cbbf003ffd20698",
+    "host/core/cmd/cloudy-host/main.go": "f1275665c1caf81851c199fea669ffd675156d0f67e80080c98885028d0c5b54",
+    "host/core/internal/diagnostic/diagnostic.go": "ae62a40dbb4bdfa1aaaa538fd6f9e3c7a81d56e8a41112629f3bfb324b25667a",
+    "host/core/go.mod": "216f549ff9871fea87351318ca6420efdfefeeaf1c0afa6a944ec41d2de70b4c",
+    "host/core/go.sum": "4e77c00cd0a32a85bd48f74790fc4f5fdb35d5e8e715d4b1fb131bcf7ce2d60a"
+  },
+  "runtime": {
+    "os": "Linux",
+    "kernel": "7.0.0-38-generic",
+    "architecture": "x86_64"
+  },
+  "failedFirstRun": {
+    "verification": {
+      "path": ".cache/host-retained-run-01/check-entry-02/verification-01/result.json",
+      "sha256": "310b5919ee2bf37543f57c6d8307c4b11bdb04300c6154869a9bfcdab603dc69"
+    },
+    "passed": false,
+    "checks": [
+      {
+        "label": "compiler",
+        "argv": [
+          "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+          "env",
+          "GOVERSION",
+          "GOOS",
+          "GOARCH",
+          "GOROOT"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.051,
+        "stop": "",
+        "failures": [],
+        "logOverflow": false,
+        "passed": true,
+        "inspection": {}
+      },
+      {
+        "label": "format",
+        "argv": [
+          "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/gofmt",
+          "-l",
+          "${REPO}/host/core/internal/managedrun/run_linux.go",
+          "${REPO}/host/core/internal/managedrun/run_linux_test.go",
+          "${REPO}/host/core/internal/managedrun/native_linux_test.go"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.053,
+        "stop": "",
+        "failures": [],
+        "logOverflow": false,
+        "passed": true,
+        "inspection": {}
+      },
+      {
+        "label": "module-verify",
+        "argv": [
+          "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+          "mod",
+          "verify"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.051,
+        "stop": "",
+        "failures": [],
+        "logOverflow": false,
+        "passed": true,
+        "inspection": {}
+      },
+      {
+        "label": "deps",
+        "argv": [
+          "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+          "list",
+          "-mod=readonly",
+          "-deps",
+          "-json",
+          "./internal/managedrun"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.151,
+        "stop": "",
+        "failures": [],
+        "logOverflow": false,
+        "passed": true,
+        "inspection": {
+          "packages": 127,
+          "runtimeModules": [
+            [
+              "github.com/BaiTian6641/Cloudy-Workspace/host/core",
+              ""
+            ],
+            [
+              "go.etcd.io/bbolt",
+              "v1.5.0"
+            ],
+            [
+              "golang.org/x/sys",
+              "v0.49.0"
+            ]
+          ]
+        }
+      },
+      {
+        "label": "list-tests",
+        "argv": [
+          "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+          "test",
+          "-mod=readonly",
+          "-vet=off",
+          "-list",
+          "^Test",
+          "./internal/managedrun"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 2.958,
+        "stop": "",
+        "failures": [],
+        "logOverflow": false,
+        "passed": true,
+        "inspection": {
+          "actualTopLevelNames": [
+            "TestAdmissionAndOriginalOwner",
+            "TestBusyDoesNotStarveCancel",
+            "TestManagedRunFixtureChild",
+            "TestNativeManagedRun",
+            "TestNilAndUncapturedOwners",
+            "TestObserverEndingAndUncertainSettlementRemainOwned",
+            "TestPersistenceUncertaintyIsSeparateAndSticky",
+            "TestSettleBeforeWaitRefusesNewObservation",
+            "TestWaitCaptureAndExactRealStoreRetry"
+          ]
+        }
+      },
+      {
+        "label": "vet",
+        "argv": [
+          "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+          "vet",
+          "-mod=readonly",
+          "./internal/managedrun"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.652,
+        "stop": "",
+        "failures": [],
+        "logOverflow": false,
+        "passed": true,
+        "inspection": {}
+      },
+      {
+        "label": "race",
+        "argv": [
+          "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+          "test",
+          "-mod=readonly",
+          "-vet=off",
+          "-race",
+          "-count=1",
+          "-json",
+          "-timeout=60s",
+          "-run",
+          "^(TestAdmissionAndOriginalOwner|TestWaitCaptureAndExactRealStoreRetry|TestBusyDoesNotStarveCancel|TestObserverEndingAndUncertainSettlementRemainOwned|TestPersistenceUncertaintyIsSeparateAndSticky|TestNilAndUncapturedOwners|TestSettleBeforeWaitRefusesNewObservation)$",
+          "./internal/managedrun"
+        ],
+        "exitCode": 1,
+        "elapsedSeconds": 7.214,
+        "stop": "",
+        "failures": [],
+        "logOverflow": false,
+        "passed": false
+      }
+    ],
+    "topLevelPasses": 6,
+    "subtestPasses": 16,
+    "aggregateNamedPasses": 22,
+    "topLevelFailures": [
+      "TestWaitCaptureAndExactRealStoreRetry"
+    ],
+    "skips": 0,
+    "raceEnabled": true,
+    "timeoutSeconds": 60,
+    "nativeMethodsExecuted": false,
+    "sourceAndInputsUnchanged": true,
+    "rawCheckOutputs": [
+      {
+        "path": ".cache/host-retained-run-01/check-entry-02/verification-01/compiler.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".cache/host-retained-run-01/check-entry-02/verification-01/compiler.stdout",
+        "sha256": "b37a9ba0d93288420b4b07aa1ab4ac8ed0ef6d39a3f82f230c22fef8f71ca805"
+      },
+      {
+        "path": ".cache/host-retained-run-01/check-entry-02/verification-01/deps.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".cache/host-retained-run-01/check-entry-02/verification-01/deps.stdout",
+        "sha256": "9c81fb53c1370ea657d25e4db9fb4ca292042b7c8dbdd58f5d6f59f2689ab939"
+      },
+      {
+        "path": ".cache/host-retained-run-01/check-entry-02/verification-01/format.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".cache/host-retained-run-01/check-entry-02/verification-01/format.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".cache/host-retained-run-01/check-entry-02/verification-01/list-tests.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".cache/host-retained-run-01/check-entry-02/verification-01/list-tests.stdout",
+        "sha256": "d26d546147bb900230b889cd99fe2df6767ce35f49a4d86b9959cd3d27b2bfe2"
+      },
+      {
+        "path": ".cache/host-retained-run-01/check-entry-02/verification-01/module-verify.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".cache/host-retained-run-01/check-entry-02/verification-01/module-verify.stdout",
+        "sha256": "b4537ed75f533f993f371954de47e42a793b8e5b0587577de7e27fb3e50696bd"
+      },
+      {
+        "path": ".cache/host-retained-run-01/check-entry-02/verification-01/race.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".cache/host-retained-run-01/check-entry-02/verification-01/race.stdout",
+        "sha256": "95ea620264abc335266b4b1bdd76cab32f312efe1d178c5b2cfd213760cf1886"
+      },
+      {
+        "path": ".cache/host-retained-run-01/check-entry-02/verification-01/vet.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".cache/host-retained-run-01/check-entry-02/verification-01/vet.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ]
+  },
+  "repair": {
+    "scope": "One test assertion compares cached latest explicit retry receipt instead of original first receipt; production/native/other methods/helpers unchanged",
+    "sourceFreeze": {
+      "path": ".cache/host-retained-run-01/freeze-03.json",
+      "sha256": "0fbca8ea4a9bdac361c9e7c84b9b2294e3e11237d0044d6bdbbf7c9c262921cc"
+    },
+    "patch": {
+      "path": ".cache/host-retained-run-01/repair-03.patch",
+      "sha256": "fac2ed6867f9ae98b7363ad0962ad2797a5c11b6477ebee3fc1f97e0356d3919"
+    },
+    "focusedChecks": "Actual formatting/package vet and exactone-method race/count1 passed; no native execution",
+    "compositeAcceptance": true,
+    "compositeChecksSatisfied": true
+  },
+  "evidence": [
+    {
+      "path": ".cache/host-retained-run-01/freeze-01.json",
+      "sha256": "c1fa342910df112ebd024dd9cad702c859136af5d1bc5405ff18c0a59f8d5f87"
+    },
+    {
+      "path": ".cache/host-retained-run-01/independent-source-review-01.json",
+      "sha256": "544ec02fc1e55e043ae4c0c3c7ea3b1654c6569aa733aea0c460cb62beb9d2c0"
+    },
+    {
+      "path": ".cache/host-retained-run-01/freeze-02.json",
+      "sha256": "e4db28bc830eff735e5d1cdaa05e900a44bdf80d32fc7146645533f2563a4a81"
+    },
+    {
+      "path": ".cache/host-retained-run-01/repair-02.patch",
+      "sha256": "2d15f8691bdadea881f7d6366ed4c492c02dc91237b1682b36780a19674ca82f"
+    },
+    {
+      "path": ".cache/host-retained-run-01/independent-source-review-02.json",
+      "sha256": "a50966cc84d60e3c51c44458109df3fafb9766de41d3edc293e7f23ab9426dcd"
+    },
+    {
+      "path": ".cache/host-retained-run-01/check-entry-02/freeze.json",
+      "sha256": "d9510e92da5573b1a0bc6a862b733fddec817aeb3b787257cecec122e8b46e21"
+    },
+    {
+      "path": ".cache/host-retained-run-01/check-entry-02/inputs.json",
+      "sha256": "094ec9218cea649cbe88750fe69ae7d23278ae28b91d573b672eb10f7b03939c"
+    },
+    {
+      "path": ".cache/host-retained-run-01/check-entry-03/freeze.json",
+      "sha256": "6e3200006530ed1b8fc8bf84f751fdabef9aa001cd2c6432a5a0555dd4a40410"
+    },
+    {
+      "path": ".cache/host-retained-run-01/check-entry-03/inputs.json",
+      "sha256": "3168b3ce628c467b1ca0c8eb8c14e16a27c8b5e80fa876f2145a93a5bec3b5d2"
+    },
+    {
+      "path": ".cache/host-retained-run-01/independent-source-review-03.json",
+      "sha256": "de8ef2af687fd7e6994ec8dadc6b5eed95c3ee8f04fe694c9387185390e007a1"
+    },
+    {
+      "path": ".cache/host-retained-run-01/freeze-03.json",
+      "sha256": "0fbca8ea4a9bdac361c9e7c84b9b2294e3e11237d0044d6bdbbf7c9c262921cc"
+    },
+    {
+      "path": ".cache/host-retained-run-01/repair-03.patch",
+      "sha256": "fac2ed6867f9ae98b7363ad0962ad2797a5c11b6477ebee3fc1f97e0356d3919"
+    },
+    {
+      "path": ".cache/host-retained-run-01/check-entry-03/run_checks.py",
+      "sha256": "5cdfd2a50dfac4d73046fabc73909dcf8ea20577189a0ffe9183791db6692aa1"
+    },
+    {
+      "path": ".cache/host-retained-run-01/independent-evidence-review-02.json",
+      "sha256": "d2cf7e7d7d89867dede137c961e67cc884a3f7433f457e4da9025924fe8ed704"
+    },
+    {
+      "path": ".cache/host-retained-run-01/independent-evidence-review-02.md",
+      "sha256": "8e5937eb2ce3e662859a50ef8e3a4dce425b7fc7b7f94819571a57a8f4c9edfb"
+    },
+    {
+      "path": ".cache/host-retained-run-01/independent-evidence-review-01.json",
+      "sha256": "7d6e743e1cf2d5ad184a74b7d3cf9139a4929d4ba9cb61317a669c4d16edf3ab"
+    }
+  ],
+  "limits": {
+    "realTemporaryDatabaseOperations": true,
+    "privateStarterObserverAppendSeams": true,
+    "actualBootReaderInTests": true,
+    "managedJobsExecuted": false,
+    "nativeFixtureSourceCompiledInInitialPackage": true,
+    "nativeFixtureMethodsExcludedNotSkipped": true,
+    "actualOSCommitOrCloseFaultInjected": false,
+    "CLIServiceRegistryRemoteAdmissionOrStagePromotion": false,
+    "newHostedCIClaim": false
+  },
+  "review": {
+    "source02ParentAccepted": true,
+    "source02IndependentAccepted": true,
+    "source02IndependentReceiptSha256": "a50966cc84d60e3c51c44458109df3fafb9766de41d3edc293e7f23ab9426dcd",
+    "source03FocusedResultPending": false,
+    "actualResultIndependentReviewPending": false,
+    "source03IndependentAccepted": true,
+    "source03IndependentReceiptSha256": "de8ef2af687fd7e6994ec8dadc6b5eed95c3ee8f04fe694c9387185390e007a1",
+    "actualResultIndependentAccepted": true,
+    "actualResultIndependentReceiptSha256": "d2cf7e7d7d89867dede137c961e67cc884a3f7433f457e4da9025924fe8ed704",
+    "parentAccepted": true
+  },
+  "focusedRun": {
+    "verification": {
+      "path": ".cache/host-retained-run-01/check-entry-03/verification-01/result.json",
+      "sha256": "ba74d1b7e31b0ee1808fd9fba686fec28af1eb4e7ae8acb88d7f404c5a9328cd"
+    },
+    "passed": true,
+    "checks": [
+      {
+        "label": "format",
+        "argv": [
+          "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/gofmt",
+          "-l",
+          "${REPO}/host/core/internal/managedrun/run_linux.go",
+          "${REPO}/host/core/internal/managedrun/run_linux_test.go",
+          "${REPO}/host/core/internal/managedrun/native_linux_test.go"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.051,
+        "stop": "",
+        "failures": [],
+        "logOverflow": false,
+        "passed": true,
+        "inspection": {}
+      },
+      {
+        "label": "vet",
+        "argv": [
+          "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+          "vet",
+          "-mod=readonly",
+          "./internal/managedrun"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.101,
+        "stop": "",
+        "failures": [],
+        "logOverflow": false,
+        "passed": true,
+        "inspection": {}
+      },
+      {
+        "label": "race",
+        "argv": [
+          "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+          "test",
+          "-mod=readonly",
+          "-vet=off",
+          "-race",
+          "-count=1",
+          "-json",
+          "-timeout=60s",
+          "-run",
+          "^TestWaitCaptureAndExactRealStoreRetry$",
+          "./internal/managedrun"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 1.403,
+        "stop": "",
+        "failures": [],
+        "logOverflow": false,
+        "passed": true,
+        "inspection": {
+          "topLevelPasses": 1,
+          "aggregateNamedPasses": 1,
+          "namedSkips": 0,
+          "namedFailures": 0,
+          "passedNames": [
+            "TestWaitCaptureAndExactRealStoreRetry"
+          ],
+          "nativeMethodsExcludedNotExecutedOrCountedAsSkips": [
+            "TestNativeManagedRun",
+            "TestManagedRunFixtureChild"
+          ]
+        }
+      }
+    ],
+    "topLevelPasses": 1,
+    "aggregateNamedPasses": 1,
+    "skips": 0,
+    "failures": 0,
+    "raceEnabled": true,
+    "timeoutSeconds": 60,
+    "sourceAndInputsUnchanged": true,
+    "rawCheckOutputs": [
+      {
+        "path": ".cache/host-retained-run-01/check-entry-03/verification-01/format.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".cache/host-retained-run-01/check-entry-03/verification-01/format.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".cache/host-retained-run-01/check-entry-03/verification-01/race.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".cache/host-retained-run-01/check-entry-03/verification-01/race.stdout",
+        "sha256": "ddc9ba1bd15d7590aa41df9daeb81db625000522fe79bbd2436f35dac0d9e072"
+      },
+      {
+        "path": ".cache/host-retained-run-01/check-entry-03/verification-01/vet.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".cache/host-retained-run-01/check-entry-03/verification-01/vet.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ]
+  },
+  "compositeEvidence": {
+    "distinctTopLevelPasses": 7,
+    "unchangedSubtestPasses": 16,
+    "distinctNamedPassesIncludingSubtests": 23,
+    "retainedSource02TopLevelNames": [
+      "TestAdmissionAndOriginalOwner",
+      "TestBusyDoesNotStarveCancel",
+      "TestObserverEndingAndUncertainSettlementRemainOwned",
+      "TestPersistenceUncertaintyIsSeparateAndSticky",
+      "TestNilAndUncapturedOwners",
+      "TestSettleBeforeWaitRefusesNewObservation"
+    ],
+    "focusedSource03TopLevelNames": [
+      "TestWaitCaptureAndExactRealStoreRetry"
+    ],
+    "freshSevenMethodRun": false,
+    "failedFirstRunRemainsFailed": true,
+    "initialNamedFailureRetained": 1,
+    "unresolvedChangedMethodFailures": 0,
+    "nativeMethodsExecuted": false,
+    "reuseProof": "Exactly one assertion-expression delta; production/native/helpers/other method bytes unchanged",
+    "parentAndIndependentActualResultAcceptancePending": false
+  }
+}
