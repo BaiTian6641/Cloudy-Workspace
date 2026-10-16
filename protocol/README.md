@@ -2,6 +2,8 @@
 
 These self-contained JSON Schemas and synthetic examples support design review and future compatibility fixtures. They do not implement an endpoint, authenticate a caller, or establish an official platform API.
 
+The resource handoff now has an implemented [bounded domain/Android codec](../docs/02-architecture/handoff-runtime-profile.md), with separate runtime limits and scoped tests. The authenticated transport, replay ledger and receiver resource registry remain pending. Its existing numeric version1 is authoritative; no implicit major/minor fields are added.
+
 | Contract | Shape | Example |
 | --- | --- | --- |
 | Resource handoff | [handoff.schema.json](schemas/handoff.schema.json) | [handoff.example.json](examples/handoff.example.json) |

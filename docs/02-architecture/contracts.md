@@ -1,6 +1,6 @@
 # Proposed contracts and state ownership
 
-The [schemas](../../protocol/README.md) are review artifacts. They define an initial serialization vocabulary, not an implemented endpoint or public Google API. Freeze compatibility rules during P1 and add transport-specific authentication tests before using them over a network.
+The [schemas](../../protocol/README.md) define the initial serialization vocabulary. Resource handoff now has a bounded [domain model and Android codec](handoff-runtime-profile.md); no handoff endpoint or caller authentication is implemented by that codec. Other schema artifacts remain proposals. Freeze transport compatibility during P1 and add transport-specific authentication tests before exposure.
 
 ## Resource handoff
 
@@ -35,6 +35,6 @@ An event has event ID, stream ID, monotonically increasing stream sequence, host
 
 ## Compatibility policy
 
-Use explicit major/minor protocol fields. A minor addition must be optional with an understood default. Do not repurpose an enum value or an identifier's meaning. Wire schema validation, semantic validation, and authorization are separate checks. JSON Schemas cannot establish request expiry relative to the current clock, ownership, path scope, authenticity, or replay safety; server/runtime code must enforce those rules.
+Resource handoff v1 uses its existing single numeric `version` field, with no implicit minor version. It rejects unknown members and unsupported versions. A future optional field therefore requires an explicit negotiated compatibility policy or a new supported version; do not silently add major/minor fields to v1. Other protocol families must define their own explicit version policy before implementation. Do not repurpose an enum value or an identifier's meaning. Wire schema validation, semantic validation, and authorization are separate checks. JSON Schemas cannot establish request expiry relative to the current clock, ownership, path scope, authenticity, or replay safety; receiver/runtime code must enforce those rules. The [runtime profile](handoff-runtime-profile.md) adds size, timestamp and lifetime limits without claiming those authority checks are complete.
 
 File publication additionally declares exclusive-create, ordinary/conditional replacement and acknowledgement semantics per backend. An overwrite confirmation is scoped to a file/destination/staged revision and cannot authorize future saves. A timeout after publication is completion-unknown until reconciled; see [the publication contract](file-publication.md).

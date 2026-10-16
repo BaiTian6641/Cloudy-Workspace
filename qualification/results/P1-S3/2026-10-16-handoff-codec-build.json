@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "baseCommit": "88d2c27926f68c7d47479b73b6f4be8657d61c6f",
+  "sourceChangesUncommittedAtBuild": true,
+  "sources": [
+    {
+      "path": "shared/android/domain/src/main/kotlin/io/github/baitian6641/cloudy/domain/HandoffEnvelope.kt",
+      "bytes": 4121,
+      "sha256": "cf11e96b286231cd09cac9256d8dca3e3610f1b181aee9afdd4ea8a1cb8d07e5"
+    },
+    {
+      "path": "shared/android/domain/src/test/kotlin/io/github/baitian6641/cloudy/domain/HandoffEnvelopeTest.kt",
+      "bytes": 5873,
+      "sha256": "3c7591dcb298439f31801fb7b4a72f707bd2710c31e9889f9574b9af9568ded9"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/HandoffJson.kt",
+      "bytes": 7200,
+      "sha256": "fcb0dc8397d21b69e3d5e004c1fb6f2ae0c0b5f731e345173ef762107de777cb"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/HandoffJsonTest.kt",
+      "bytes": 6990,
+      "sha256": "6621c131aa3239d7d37a0497c35e52675486be5e087851eb34912e193605b186"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "apps/console/build/outputs/apk/debug/console-debug.apk",
+      "bytes": 31686048,
+      "sha256": "7c87664b37980d308fbec3a320c1ad4dbd17cd68663879064801533ba98c9f73"
+    },
+    {
+      "path": "apps/desktop/build/outputs/apk/debug/desktop-debug.apk",
+      "bytes": 31686052,
+      "sha256": "3fbd49a425208ccf9cdea9e83f9fba8c7e21e808e140c0fbe7f961138a49e0d2"
+    },
+    {
+      "path": "shared/android/platform/build/outputs/apk/androidTest/debug/platform-debug-androidTest.apk",
+      "bytes": 32323803,
+      "sha256": "f6ff8c2dc5ce1a9fcd11b089b5190373684f3876924a5638dbcbfe1405c1e673"
+    }
+  ],
+  "checks": [
+    {
+      "path": ".cache/handoff-01/build-01/domain-TEST-io.github.baitian6641.cloudy.domain.HandoffEnvelopeTest.xml",
+      "tests": "8",
+      "failures": "0",
+      "errors": "0",
+      "lintIssues": null
+    },
+    {
+      "path": ".cache/handoff-01/build-01/domain-TEST-io.github.baitian6641.cloudy.domain.WindowStateTest.xml",
+      "tests": "5",
+      "failures": "0",
+      "errors": "0",
+      "lintIssues": null
+    },
+    {
+      "path": ".cache/handoff-01/build-01/console-lint-results-debug.xml",
+      "tests": null,
+      "failures": null,
+      "errors": null,
+      "lintIssues": 0
+    },
+    {
+      "path": ".cache/handoff-01/build-01/desktop-lint-results-debug.xml",
+      "tests": null,
+      "failures": null,
+      "errors": null,
+      "lintIssues": 0
+    },
+    {
+      "path": ".cache/handoff-01/build-01/platform-lint-results-debug.xml",
+      "tests": null,
+      "failures": null,
+      "errors": null,
+      "lintIssues": 0
+    }
+  ],
+  "deviceEvidence": "qualification/results/P1-S3/2026-10-16-handoff-codec.md",
+  "scope": "Codec/domain only; product APKs built but not installed; only platform test APK executed; no IPC authorization or resource navigation"
+}

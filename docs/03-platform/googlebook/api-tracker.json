@@ -1603,6 +1603,44 @@
       "experiment": "Two independently installed actual Compose activities pass local name/context and identity-bound bounded draft/selection restoration through ActivityScenario recreation; platform Bundle/Parcel5 and app2+2 cases pass. Actual Desktop New/Close preserves the original task. Activity title/task metadata includes window name, while sampled Googlebook system caption displays app name. Normal geometry only; physical input/IME, process death, scaled/narrow windows and full desktop acceptance remain unqualified.",
       "compileEvidence": "docs/06-validation/2026-10-16-native-foundation-review.md",
       "deviceEvidence": "qualification/results/P1-S1/2026-10-16-native-foundation.md"
+    },
+    {
+      "id": "API49",
+      "feature": "Bounded resource handoff JSON and timestamp validation",
+      "symbols": [
+        "JsonReader.peek",
+        "JsonReader.nextName",
+        "JsonReader.nextString",
+        "JsonReader.setLenient",
+        "JsonWriter.beginObject",
+        "JsonWriter.name",
+        "JsonWriter.value",
+        "JsonWriter.endObject",
+        "OffsetDateTime.parse",
+        "OffsetDateTime.toInstant",
+        "Instant.isBefore"
+      ],
+      "sourceIds": [
+        "G190",
+        "G191",
+        "G192",
+        "G193",
+        "G194",
+        "R264",
+        "R265"
+      ],
+      "minimumApi": 26,
+      "libraryVersion": "Android framework; JSONAPI11/timeAPI26; existing productmin35",
+      "availability": "documented",
+      "qualification": "partial",
+      "checkedOn": "2026-10-16",
+      "owner": "Platform/security developer",
+      "stage": "P1-S3",
+      "fallback": "Reject invalid/unsupported message with fixed code; independently installed apps remain usable; no permissive parsing or invented resource.",
+      "experiment": "Eight domain JVM cases and thirteen actual Android codec cases pass on identified HP API37 build. Bounded JSON/type/UTF8/duplicate/number/string checks and normalization are tested. Actual IPC caller identity, signed counterpart, freshness at effect, replay ledger, clock/restart behavior and real receiver registry remain unimplemented/unqualified.",
+      "researchEvidence": "docs/02-architecture/handoff-runtime-profile.md",
+      "compileEvidence": "qualification/results/P1-S3/2026-10-16-handoff-codec-build.json",
+      "deviceEvidence": "qualification/results/P1-S3/2026-10-16-handoff-codec.md"
     }
   ],
   "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."

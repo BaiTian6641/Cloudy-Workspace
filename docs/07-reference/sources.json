@@ -5644,6 +5644,90 @@
       "sourceUpdatedOn": null,
       "note": "Inspected minSdk23/minCompileSdk34/minAGP8.1.1; fits productmin35/compile37/AGP9.4. Actual strict compile passes; device prompt remains untested.",
       "refresh": "Before changed vault prompt dependency or platform qualification."
+    },
+    {
+      "id": "G190",
+      "title": "Android streaming JSON reader",
+      "url": "https://developer.android.com/reference/android/util/JsonReader",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "PublicAPI11 JsonReader/peek/nextName/nextString/setLenient; accessors coerce numbers/strings, so handoff checks tokens first. P1-S3 API49.",
+      "refresh": "When handoff schema, selected platform/parser or receiver policy changes."
+    },
+    {
+      "id": "G191",
+      "title": "Android streaming JSON writer",
+      "url": "https://developer.android.com/reference/android/util/JsonWriter",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "PublicAPI11 JsonWriter beginObject/name/value/endObject for deterministic bounded handoff output; official page available through indexed reference after direct fetch failed. P1-S3 API49.",
+      "refresh": "When handoff schema, selected platform/parser or receiver policy changes."
+    },
+    {
+      "id": "G192",
+      "title": "Android OffsetDateTime reference",
+      "url": "https://developer.android.com/reference/java/time/OffsetDateTime",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "PublicAPI26 parse/toInstant for strict calendar and numeric offset normalization. Cloudy adds a documented restricted RFC3339 profile; not authorization. P1-S3 API49.",
+      "refresh": "When handoff schema, selected platform/parser or receiver policy changes."
+    },
+    {
+      "id": "G193",
+      "title": "Android Instant reference",
+      "url": "https://developer.android.com/reference/java/time/Instant",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "PublicAPI26 Instant comparison and canonical output; caller-supplied clock requires separate receiver policy. P1-S3 API49.",
+      "refresh": "When handoff schema, selected platform/parser or receiver policy changes."
+    },
+    {
+      "id": "G194",
+      "title": "Pinned AOSP JsonReader string handling",
+      "url": "https://android.googlesource.com/platform/frameworks/base/+/1cdfff555f4a21f71ccc978290e2e212e2f8b168/core/java/android/util/JsonReader.java",
+      "publisher": "Google / AOSP",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Inspected nextString/readEscapeCharacter accept raw string controls and unknown escapes despite strict structure mode. Blob38439ca0b52f6387f0111c8254fd7ac6c455a67b; rawSHA256d0ece396e5ade0d90e513e02b6ab154c8af98e36bf51784d3f5d8b3c2dce6418. Explanatory upstream source, not installed framework identity. Cloudy adds only a narrow string guard, tested through real platform parser. P1-S3.",
+      "refresh": "When handoff schema, selected platform/parser or receiver policy changes."
+    },
+    {
+      "id": "R264",
+      "title": "RFC3339 Internet timestamps",
+      "url": "https://www.rfc-editor.org/rfc/rfc3339",
+      "publisher": "IETF / RFC Editor",
+      "category": "protocol",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Sections4.3/5.6/5.7: unknown local offset, complete timestamp grammar and calendar restrictions. Cloudy documents uppercase, nanosecond, offset and no-leap-second subset separately; lifetime/freshness are project policy. P1-S3.",
+      "refresh": "When handoff schema, selected platform/parser or receiver policy changes."
+    },
+    {
+      "id": "R265",
+      "title": "RFC8259 JSON strings and encoding",
+      "url": "https://www.rfc-editor.org/rfc/rfc8259.txt",
+      "publisher": "IETF / RFC Editor",
+      "category": "protocol",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Sections7/8: string escapes, control characters and UTF8. Supports bounded guard around Android reader, not a new general JSON implementation. P1-S3.",
+      "refresh": "When handoff schema, selected platform/parser or receiver policy changes."
     }
   ]
 }

@@ -74,7 +74,7 @@ Record evidence under `qualification/results/P1-S2/` using the [run template](..
 
 ## P1-S3 — Identity, typed contracts, and lifecycle persistence
 
-**Owner:** Platform/security developer. **Prerequisites:** P1-S1, P0-S2. **Status:** in progress. The [vault source review](../../06-validation/2026-10-16-product-vault-review.md) and [storage tests](../../../qualification/results/P1-S3/2026-10-16-vault-storage-tests.md) leave actual product authentication and all other exits open. The [0.1.2 UI entry](../../../qualification/results/P1-S3/2026-10-16-vault-ui-entry.md) and [built-only manual harness](../../06-validation/2026-10-16-vault-harness-review.md) do not promote those gates.
+**Owner:** Platform/security developer. **Prerequisites:** P1-S1, P0-S2. **Status:** in progress. The [vault source review](../../06-validation/2026-10-16-product-vault-review.md) and [storage tests](../../../qualification/results/P1-S3/2026-10-16-vault-storage-tests.md) leave actual product authentication and all other exits open. The historical [0.1.2 UI entry](../../../qualification/results/P1-S3/2026-10-16-vault-ui-entry.md), [manual-harness build](../../06-validation/2026-10-16-vault-harness-review.md) and subsequent [0.1.3 metadata-only Activity recreation](../../../qualification/results/P1-S3/2026-10-16-vault-metadata-recreation.md) do not promote those gates. Both0.1.3/code4 apps are installed and stopped; one explicit observe case per app passes, while default non-opt-in invocations skip. Save, AES, authentication, credential-key generation, process-death recovery and credential isolation remain unqualified.
 
 **Required supported capabilities:** CAP-FOUNDATION.
 
@@ -85,6 +85,8 @@ Work:
 3. Add persisted session/layout metadata, transfer journals, typed errors, and bounded redacted diagnostics.
 4. Implement the qualified foreground/background strategy, timeout handlers, focus-loss cleanup, and reconnect metadata.
 5. Define X11 broker/SSH/window lifetimes, URI staging grants, per-backend client ownership and USB enrollment restoration without a shared immortal daemon.
+
+The [handoff codec increment](../../../qualification/results/P1-S3/2026-10-16-handoff-codec.md) implements bounded v1 serialization/domain validation, with strict compilation/Lint and scoped actual Android tests. The [runtime profile](../../02-architecture/handoff-runtime-profile.md) records its limits. Work item2 remains incomplete until signed-caller transport, receiver-owned resource resolution and replay/lifecycle admission are implemented and tested.
 
 Deliverables:
 
