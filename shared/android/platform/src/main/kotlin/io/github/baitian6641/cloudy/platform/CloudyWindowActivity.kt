@@ -57,6 +57,7 @@ abstract class CloudyWindowActivity : ComponentActivity() {
                     onNewWindow = ::newWindow,
                     onClose = ::closeWindow,
                     onCredentials = ::openCredentials,
+                    onProfiles = ::openProfiles,
                 )
             }
         }
@@ -124,6 +125,14 @@ abstract class CloudyWindowActivity : ComponentActivity() {
         try {
             // Explicit app-private destination; no profile, secret or authorization extras.
             startActivity(Intent(this, CloudyVaultActivity::class.java))
+        } catch (_: RuntimeException) {
+            notice = getString(R.string.cloudy_window_launch_failed)
+        }
+    }
+
+    private fun openProfiles() {
+        try {
+            startActivity(Intent(this, CloudyProfilesActivity::class.java))
         } catch (_: RuntimeException) {
             notice = getString(R.string.cloudy_window_launch_failed)
         }

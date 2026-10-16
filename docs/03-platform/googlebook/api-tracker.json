@@ -1757,6 +1757,48 @@
       "libraryVersion": "Framework SQLite journal/sync parameters API28; IDN API9; existing productmin35 unchanged",
       "fallback": "Reject stale generation/revision, missing/corrupt established store or invalid owner; uncertain mutations require reload and never auto-retry. No network/trust claim.",
       "experiment": "26 domain and14 identity JVM cases pass;19 actual Android profile cases and two distinct-process phases pass. Default process invocation skips. Native editor, installed-product storage isolation, simultaneous cross-process writers and physical power-cut durability remain unqualified."
+    },
+    {
+      "id": "API53",
+      "feature": "Native app-owned connection profile editor and bounded draft restoration",
+      "symbols": [
+        "Bundle",
+        "Activity.onCreate",
+        "Activity.onResume",
+        "Activity.onPause",
+        "Activity.onSaveInstanceState",
+        "Activity.onDestroy",
+        "androidx.compose.ui.text.input.TextFieldValue",
+        "TextFieldValue.selection",
+        "TextFieldValue.composition",
+        "androidx.compose.material3.OutlinedTextField",
+        "WindowInsets.safeDrawing",
+        "WindowInsets.ime"
+      ],
+      "sourceIds": [
+        "G58",
+        "G162",
+        "G171",
+        "G175",
+        "G177",
+        "G178",
+        "G206",
+        "G207",
+        "G208",
+        "G209"
+      ],
+      "minimumApi": null,
+      "libraryVersion": "Pinned Compose BOM2026.09.00: UI/ui-text/foundation/runtime1.12.1, Material3 1.4.0; Activity/activity-compose1.13.0, lifecycle-runtime2.10.0; existing productmin35 unchanged. Compose library symbols do not define a new framework API minimum.",
+      "availability": "documented",
+      "qualification": "partial",
+      "checkedOn": "2026-10-16",
+      "owner": "Android/platform developer",
+      "stage": "P1-S3",
+      "fallback": "Retain bounded draft and report unavailable/conflict/uncertain completion; no automatic mutation retry, silent overwrite, restored confirmation or invented connection. Unavailable catalog never renders as a successfully empty list.",
+      "experiment": "Strict build02 passes in31seconds with303 tasks/63 executed and zero findings in Console/Desktop/platform Lint. On HP Googlebook Android17/API37 CL3B.260622.276.R2 incremental16560795, ten actual ProfileEditorState cases and eight cases per product (six profile Activity cases plus two window regressions) pass:26 total. Both products0.1.4/code5 are installed/stopped; test APK absence, unchanged boot identity/count and preexisting vault receipt hashes are verified by the parent run. Cross-app catalog isolation, admitted-write/unknown-completion recreation, unknown-store exit UI, actual process-death editor recovery, physical keyboard/IME, themes, scale and pointer/visual qualification remain unrun. No authentication or network operation is qualified; local endpoint editing confers no trust, enrollment or handoff authority.",
+      "researchEvidence": "docs/02-architecture/connection-profiles.md",
+      "compileEvidence": "qualification/results/P1-S3/2026-10-16-profile-editor-build.json",
+      "deviceEvidence": "qualification/results/P1-S3/2026-10-16-profile-editor.md"
     }
   ],
   "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."

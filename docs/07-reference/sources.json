@@ -5872,6 +5872,54 @@
       "sourceUpdatedOn": "2026-08-03",
       "note": "IDN.toASCII(String,int) and USE_STD3_ASCII_RULES are publicAPI9. Existing vault DNS/IDN conversion moves unchanged into EndpointHost; do not broaden syntax or change credential binding during extraction. No DNS lookup or reachability/trust inference. Owner: platform/security; P1-S3 API52.",
       "refresh": "Before changing endpoint normalization, accepted host syntax or credential binding compatibility."
+    },
+    {
+      "id": "G206",
+      "title": "Compose bounded UI state saving",
+      "url": "https://developer.android.com/develop/ui/compose/state-saving",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2026-09-22",
+      "note": "Small transient UI state belongs in the shared saved-instance-state Bundle; retain bounded input/selection/IDs, reload committed profiles from storage, and distinguish Activity recreation from process death. Profile editor uses its own typed owner/generation-bound Bundle envelope, not an experimental SavedStateHandle.saveable adoption. Owner: Android/platform; P1-S3 API53.",
+      "refresh": "Before changing profile editor state, text input, Activity ownership or the pinned Compose integration."
+    },
+    {
+      "id": "G207",
+      "title": "Compose native text field input guidance",
+      "url": "https://developer.android.com/develop/ui/compose/text/user-input",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2026-10-01",
+      "note": "Native TextField/OutlinedTextField input, keyboard options and editing guidance. Current guide emphasizes state-based TextFieldState; it does not establish that Cloudy adopted that API. Cloudy retains the compiled TextFieldValue overload on pinned Compose UI/foundation1.12.1 and Material3 1.4.0; exact selection/composition contract is G209. Keyboard hints are not guaranteed IME behavior or physical-input qualification. Owner: Android/platform; P1-S3 API53.",
+      "refresh": "Before changing profile editor state, text input, Activity ownership or the pinned Compose integration."
+    },
+    {
+      "id": "G208",
+      "title": "Android Activity lifecycle and state restoration",
+      "url": "https://developer.android.com/guide/components/activities/activity-lifecycle",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2026-09-22",
+      "note": "Activity onCreate/onResume/onPause/onSaveInstanceState/onDestroy govern editor presentation and transient state. onDestroy is not a reliable system-process-death callback. Cloudy invalidates visible confirmation on pause and never restores a mutation authorization; queue completion and uncertain writes require explicit reconciliation. Framework callback availability and actual lifecycle tests remain separate. Owner: Android/platform; P1-S3 API53.",
+      "refresh": "Before changing profile editor state, text input, Activity ownership or the pinned Compose integration."
+    },
+    {
+      "id": "G209",
+      "title": "Compose TextFieldValue selection and IME composition",
+      "url": "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/input/TextFieldValue",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Official indexed API content inspected after direct page fetch exceeded tool size. TextFieldValue contains text, selection and composition; passing null composition can apply an ongoing IME composition. Preserve incoming TextFieldValue during live edits, restore only validated bounded text/selection and no live composition. API page common-platform overload annotations are not Android OS minimums; actual selected artifact is ui-text1.12.1. Owner: Android/platform; P1-S3 API53.",
+      "refresh": "Before changing profile editor state, text input, Activity ownership or the pinned Compose integration."
     }
   ]
 }

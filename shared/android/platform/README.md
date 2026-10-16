@@ -22,7 +22,7 @@ The [actual result](../../../qualification/results/P1-S3/2026-10-16-handoff-admi
 
 ## Connection profile storage
 
-`ConnectionProfiles` supplies real app-private SQLite CRUD with immutable catalog generations, revision-checked edits/deletes, bounded capacity and explicit uncertain outcomes. It uses the shared domain endpoint model and contains no credential data or host trust. Read the [profile contract](../../../docs/02-architecture/connection-profiles.md) and [actual storage/process result](../../../qualification/results/P1-S3/2026-10-16-connection-profiles.md). Native editor integration and actual catalog isolation in both installed products remain next; this is not an enrolled-resource registry or a successful remote session.
+`ConnectionProfiles` supplies real app-private SQLite CRUD with immutable catalog generations, revision-checked edits/deletes, bounded capacity and explicit uncertain outcomes. It uses the shared domain endpoint model and contains no credential data or host trust. Read the [profile contract](../../../docs/02-architecture/connection-profiles.md) and [actual storage/process result](../../../qualification/results/P1-S3/2026-10-16-connection-profiles.md). The [native editor increment](../../../qualification/results/P1-S3/2026-10-16-profile-editor.md) adds nonexported `CloudyProfilesActivity`, strict bounded draft state and real per-app CRUD/conflict tests. Actual cross-app catalog isolation, pending-write/process-death and physical-input checks remain open; this is not an enrolled-resource registry or a successful remote session.
 
 ## Local credential-management candidate
 

@@ -46,6 +46,7 @@ fun WindowWorkspaceScreen(
     onNewWindow: () -> Unit,
     onClose: () -> Unit,
     onCredentials: (() -> Unit)? = null,
+    onProfiles: (() -> Unit)? = null,
 ) {
     // Inputs reset live composition, but rememberSaveable does not validate the
     // prior inputs on restoration. The envelope independently binds the accepted ID.
@@ -86,6 +87,13 @@ fun WindowWorkspaceScreen(
             if (onCredentials != null) {
                 OutlinedButton(onClick = onCredentials) {
                     Text(stringResource(R.string.cloudy_saved_credentials))
+                }
+            }
+            if (onProfiles != null) {
+                OutlinedButton(onClick = onProfiles,
+                    shape = RoundedCornerShape(CloudyTokens.Radii.Button.dp),
+                    modifier = Modifier.heightIn(min = CloudyTokens.Density.Comfortable.dp)) {
+                    Text(stringResource(R.string.cloudy_connection_profiles))
                 }
             }
             OutlinedTextField(

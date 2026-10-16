@@ -21,5 +21,8 @@
         <activity android:name="io.github.baitian6641.cloudy.platform.CloudyVaultActivity"
             android:exported="false" android:resizeableActivity="true"
             android:windowSoftInputMode="adjustResize" />
+        <activity android:name="io.github.baitian6641.cloudy.platform.CloudyProfilesActivity"
+            android:exported="false" android:resizeableActivity="true"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 </manifest>

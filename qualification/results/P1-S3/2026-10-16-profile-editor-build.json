@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "baseCommit": "b752548ab10ccc4481289fd036ef3853c6b6fe4c",
+  "sourceChangesUncommittedAtBuild": true,
+  "sources": [
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/ProfileEditorStateTest.kt",
+      "bytes": 11427,
+      "sha256": "c77767b92f67e1bf35698d23b97bee38a4780df3fd00f71f6d25b7e589e6beea"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudyProfilesActivity.kt",
+      "bytes": 18943,
+      "sha256": "931f4d7402bbaadf344eeca10297587d147c5a7af34a3db250597a4b4a7ad631"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudyWindowActivity.kt",
+      "bytes": 5899,
+      "sha256": "231fa972a52bbdd0fcef7b59bc7e84685f17a8a2d0aa17030600077c974cfc24"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/ProfileEditorScreen.kt",
+      "bytes": 14269,
+      "sha256": "c3166bcb88c4ce8899763433d7f52adc1bf34c5b75c913e033b863db3232215c"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/ProfileEditorState.kt",
+      "bytes": 8500,
+      "sha256": "f077970ab72ffcbacff2862b2b7cc637f569b43b671ebdd9e991fecd3b5bed9a"
+    },
+    {
+      "path": "shared/android/platform/src/main/res/values/profile_strings.xml",
+      "bytes": 5899,
+      "sha256": "82a0e7de9888e522faf38445443f4bf5acab641e208ae2c62057bfc83eff9304"
+    },
+    {
+      "path": "shared/design-system/android/src/main/res/values/strings.xml",
+      "bytes": 519,
+      "sha256": "5e99d5f560c4481a30402a22ed02e5388418b16490196aa6d322bb475e410bab"
+    },
+    {
+      "path": "shared/design-system/android/src/main/java/io/github/baitian6641/cloudy/design/CloudyControlMetrics.kt",
+      "bytes": 624,
+      "sha256": "9a81bcf9b979fadfdb6bca86f2852606e28a369b5e1fc5dbe959f973672558d1"
+    },
+    {
+      "path": "shared/design-system/android/src/main/java/io/github/baitian6641/cloudy/design/WindowWorkspaceScreen.kt",
+      "bytes": 7138,
+      "sha256": "50495aa9a8235356476f03736d0bb08029a59cbb4fa2a94a3003543582644c56"
+    },
+    {
+      "path": "apps/console/src/main/AndroidManifest.xml",
+      "bytes": 1775,
+      "sha256": "9f4d3207735b8fe01e69fd7a61061512a62c8fd2dbd746f7179836512eeeb423"
+    },
+    {
+      "path": "apps/console/src/androidTest/kotlin/io/github/baitian6641/cloudy/console/ConsoleProfileActivityTest.kt",
+      "bytes": 366,
+      "sha256": "9fcee18f29dada931fae60e65bdbe8b32083a5c3601878364d3343a76e6a1f57"
+    },
+    {
+      "path": "apps/desktop/src/main/AndroidManifest.xml",
+      "bytes": 1775,
+      "sha256": "9f4d3207735b8fe01e69fd7a61061512a62c8fd2dbd746f7179836512eeeb423"
+    },
+    {
+      "path": "apps/desktop/src/androidTest/kotlin/io/github/baitian6641/cloudy/desktop/DesktopProfileActivityTest.kt",
+      "bytes": 366,
+      "sha256": "a26d1edf94e64c1b46ff8f15c12b75c9050cb6ea258b2dc4ad0101a8fb020f00"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/ProfileActivityContract.kt",
+      "bytes": 13641,
+      "sha256": "0be142c2ac9ee87e45f6edfd1d7ee34fcabc284a9370afe88e4b0792511b9286"
+    },
+    {
+      "path": "apps/console/build.gradle.kts",
+      "bytes": 2264,
+      "sha256": "989ef649551cae3c181cc9727a5703b78038e417f1801137f9c995cf52808f0d"
+    },
+    {
+      "path": "apps/desktop/build.gradle.kts",
+      "bytes": 2264,
+      "sha256": "186849f5adff3b18ca737358d4b108e33802c533b5c5b275abec9553441d4d20"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "apps/console/build/outputs/apk/debug/console-debug.apk",
+      "bytes": 31769740,
+      "sha256": "45dde1154831366be65a5d64941d9ca5d65d3ac320278f5449b72f8700866d16"
+    },
+    {
+      "path": "apps/desktop/build/outputs/apk/debug/desktop-debug.apk",
+      "bytes": 31769744,
+      "sha256": "eb3ed694b38e5a509765ffed6839bacbdb2efa0fc1429bb222922ea1f401c8e4"
+    },
+    {
+      "path": "shared/android/platform/build/outputs/apk/androidTest/debug/platform-debug-androidTest.apk",
+      "bytes": 33042879,
+      "sha256": "00d0804ff27bbafc16878e9d4986dd64d28b5595210c5cf996831c6f6f1df740"
+    },
+    {
+      "path": "apps/console/build/outputs/apk/androidTest/debug/console-debug-androidTest.apk",
+      "bytes": 3206641,
+      "sha256": "2d9fe8563eebf228e6e383ee82a9f4faec6994063013a14fc816cb47b55d4647"
+    },
+    {
+      "path": "apps/desktop/build/outputs/apk/androidTest/debug/desktop-debug-androidTest.apk",
+      "bytes": 3206645,
+      "sha256": "0065e8aa3edfa94f37d9fbe4fbad2e552413cf31f89594cd780ab3009557c4f9"
+    }
+  ],
+  "build": "Strict build02 passed in31s;303 tasks,63 executed; source manifest unchanged during build and device preflight",
+  "checks": [
+    {
+      "path": ".cache/profile-editor-01/build-02/console-lint-results-debug.xml",
+      "lintIssues": 0
+    },
+    {
+      "path": ".cache/profile-editor-01/build-02/desktop-lint-results-debug.xml",
+      "lintIssues": 0
+    },
+    {
+      "path": ".cache/profile-editor-01/build-02/platform-lint-results-debug.xml",
+      "lintIssues": 0
+    }
+  ],
+  "androidTests": {
+    "profileEditorState": 10,
+    "consoleProfileActivity": 6,
+    "desktopProfileActivity": 6,
+    "consoleWindowRegression": 2,
+    "desktopWindowRegression": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "deviceEvidence": "qualification/results/P1-S3/2026-10-16-profile-editor.md",
+  "scope": "Native local profile CRUD and bounded editor-state restoration; app0.1.4/code5 installed without data clear, then stopped. No authentication/network/cross-app isolation/process-death claim."
+}

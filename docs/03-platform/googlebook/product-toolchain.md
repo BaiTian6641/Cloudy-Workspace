@@ -13,7 +13,7 @@ Checked 2026-10-16. The root Gradle graph builds the two actual local-window app
 | Activity | 1.13.0 |
 | Vault prompt host | Biometric1.1.0 / Fragment1.9.1; dedicated FragmentActivity |
 | Tests only | JUnit4.13.2; runner/core1.7.0; extJUnit1.3.0; Compose test1.12.1 v2 rule; Espresso core/idling3.7.0 |
-| Package / version | `io.github.baitian6641.cloudy.console`, `.desktop`; 0.1.3/code4 installed and stopped (P1-S1 qualified0.1.0/code1) |
+| Package / version | `io.github.baitian6641.cloudy.console`, `.desktop`; 0.1.4/code5 installed and stopped (P1-S1 qualified0.1.0/code1) |
 
 Use the root wrapper, never a globally selected Gradle. Its JAR SHA256 is `497c8c2a7e5031f6aa847f88104aa80a93532ec32ee17bdb8d1d2f67a194a9c7`; the distribution SHA256 is `bbaeb2fef8710818cf0e261201dab964c572f92b942812df0c3620d62a529a01`. The version catalog, module lockfiles and verification metadata are committed inputs. Strict lock mode rejects unrecorded selected configurations; checksum verification rejects unreviewed artifact bytes. Generating either record is a deliberate reviewed dependency change, never an ordinary CI step. The verification file can contain metadata/transitively requested versions that are not selected runtime dependencies; use the module lock configuration when determining the resolved graph.
 
@@ -47,3 +47,5 @@ The later [handoff codec build](../../../qualification/results/P1-S3/2026-10-16-
 The subsequent [caller/replay build](../../../qualification/results/P1-S3/2026-10-16-handoff-admission-build.json) also retains the selected toolchain and locked dependency graph. Strict build04 and zero app/platform Lint pass after public-SDK and explicit Kotlin bind-array corrections. Product outputs remain built-only; the actual standalone Android policy/storage/process result is recorded separately.
 
 The [profile build](../../../qualification/results/P1-S3/2026-10-16-connection-profiles-build.json) adds the internal identity→domain source edge for unchanged shared host normalization. External versions, locks and verification metadata remain unchanged. Strict build01, four zero-issue Lint reports and40 domain/identity JVM cases pass. Its product APKs remain built-only under the existing development version; only the standalone profile test APK executes and is removed. Exact hashes distinguish all three artifacts from earlier builds and the installed manual-vault artifacts.
+
+The [0.1.4 profile-editor build](../../../qualification/results/P1-S3/2026-10-16-profile-editor-build.json) keeps all selected external dependencies unchanged and adds the nonexported profile Activity to each product manifest. Both exact build02 APKs are now installed without data clearing and stopped after26 actual Android cases. Their existing manual-vault receipts and device boot identity are unchanged. Earlier built-only0.1.3 artifacts above remain historical; do not reinstall them over this checkpoint merely to repeat closed tests.
