@@ -78,3 +78,10 @@ Historical pairing checkpoint, superseded for current runtime by the [comprehens
 ## 2026-10-16 — Construction admission and retained acceptance risk
 
 [ADR0012](../adr/0012-foundation-construction-and-platform-acceptance.md) separates demonstrated native construction primitives from complete product platform acceptance. P1-S1 is ready after P0-S3 investigation closeout. CAP-PLATFORM remains experimental and is explicitly required at independent R1/R2 and integrated R4 gates, enforced by validator regression tests. This removes no physical input, IME/accessibility, geometry, lifetime, security, distribution or full-feature obligation. New app/toolchain/dependency evidence remains required; existing diagnostic evidence is not product acceptance. No user scope decision was invented.
+
+
+## 2026-10-16 — Native retained files and desktop lifecycle boundaries
+
+The [0.1.10 product result](../../qualification/results/P1-S3/2026-10-16-ssh-files-ui.md) advances R24/R25 through real foreground read-only SFTP without closing full platform/SSH or native UX gates. Actual recreation exposed a stale callback-only focus cache; current Compose WindowInfo plus framework action checks repair the sampled path. A test helper in a separate task did not hide the desktop window; real same-task Stop/return supplies the bounded lifecycle result. Keep framework focus injection, actual Activity transitions, physical desktop actions and process death distinct.
+
+The process-owned cleanup quarantine remains conservative: an unpublished engine TIMED_OUT can include an uncertain retirement wait, so it may reduce availability until process restart. Do not silently replace the factory or equate a timeout with closed resources. Remote preview remains bounded/read-only and is not a snapshot. Saved-vault use, writable/session-linked files, keyboard/IME/accessibility, X11 and complete feature adoption remain explicit work; no dependency, capability or release-scope change follows.

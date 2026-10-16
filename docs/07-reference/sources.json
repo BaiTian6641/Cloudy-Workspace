@@ -6508,6 +6508,102 @@
       "sourceUpdatedOn": null,
       "note": "Public setKeyPairProvider changes the selected session provider; getHostKey loads the effective provider for the negotiated key algorithm. Fixture pairs this with real reExchangeKeys and actual KEX/write/negotiation events, using original or independent replacement key. Same-key success needs continued real SFTP; changed-key rejection needs the client typed cause. No server hook callback alone establishes client verification. P1-S3 qualification owner; host-only maintained fixture.",
       "refresh": "Before retained SSH/SFTP fixture or Apache SSHD upgrades; keep real protocol events and bounded worker retirement evidence."
+    },
+    {
+      "id": "G232",
+      "title": "Android ViewModel ownership and configuration recreation",
+      "url": "https://developer.android.com/topic/libraries/architecture/viewmodel",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "ViewModel retains screen state through configuration recreation; onCleared requests cleanup when its owner is permanently removed, not process death. Native SSH files use an Activity-scoped model with an Application-typed dependency, no Activity/View references or saved credentials/commands. A process-owned factory retains actual cleanup quarantine; Cloudy adds an opaque-owner five-second handoff policy. Official CLI1.0.16625370 docs search/fetch and official guide reviewed. Android/platform and SSH security owner; P1-S3.",
+      "refresh": "Before changing retained native session ownership, configuration handoff or AndroidX lifecycle versions; preserve actual retirement and process-loss boundaries."
+    },
+    {
+      "id": "G233",
+      "title": "AndroidX ViewModelProvider public owner and factory API",
+      "url": "https://developer.android.com/reference/androidx/lifecycle/ViewModelProvider",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "ViewModelProvider(ViewModelStoreOwner, Factory) and get(Class) are AndroidX library APIs added2.0.0 and compiled against selected2.10.0 already in the pinned closure. ComponentActivity supplies the owner; custom factory receives the Application. No new Compose helper, dependency or SavedStateHandle. New process remains disconnected; exact Activity/lifecycle behavior requires product evidence. Android/platform owner; P1-S3.",
+      "refresh": "Before changing retained native session ownership, configuration handoff or AndroidX lifecycle versions; preserve actual retirement and process-loss boundaries."
+    },
+    {
+      "id": "G234",
+      "title": "Android ActivityScenario recreation and lifecycle testing",
+      "url": "https://developer.android.com/guide/components/activities/testing",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "ActivityScenario creates/resumes a real Activity and recreate requests its recreation. Its lifecycle completion does not substitute for the native files screen's real focus/interactive guard, and recreation is not process-death proof. Keep Activity references scoped to onActivity. P1-S3 qualification owner; await actual UI readiness and retain same-model/proof plus subsequent real SFTP evidence.",
+      "refresh": "Before changing native Activity/Compose test synchronization or lifecycle qualification; keep source guidance and actual device evidence distinct."
+    },
+    {
+      "id": "G235",
+      "title": "Compose testing synchronization with external work",
+      "url": "https://developer.android.com/develop/ui/compose/testing/synchronization",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Official guidance recommends waitUntil for conditions depending on external work or Android measure/draw. Native SFTP tests use bounded waits on actual enabled semantics after window recreation, then dispatch one action; they never manufacture focus or bypass product guards. A readiness wait does not establish the cause of an earlier failure. Official CLI1.0.16625370 docs search/fetch reviewed. P1-S3 qualification owner.",
+      "refresh": "Before changing native Activity/Compose test synchronization or lifecycle qualification; keep source guidance and actual device evidence distinct."
+    },
+    {
+      "id": "G236",
+      "title": "Compose WindowInfo actual host-window focus",
+      "url": "https://developer.android.com/reference/kotlin/androidx/compose/ui/platform/WindowInfo",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "WindowInfo.isWindowFocused is a public Compose UI property since1.0.0, describing the window hosting that Compose hierarchy, including multiwindow/dialog focus. Native SSH files use it for enabled presentation after an actual recreation exposed stale Activity callback-only state. The Activity separately rechecks hasWindowFocus at action admission and preserves focus-loss credential cancellation. No requested/manufactured focus or background authority. P1-S3 Android/platform owner; actual recreation regression required.",
+      "refresh": "Before changing native focus/credential admission or Compose UI version; verify actual recreation and focus-loss behavior."
+    },
+    {
+      "id": "G237",
+      "title": "Compose LocalWindowInfo composition-local ownership",
+      "url": "https://developer.android.com/reference/kotlin/androidx/compose/ui/platform/package-summary#LocalWindowInfo()",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "LocalWindowInfo is a public Compose UI CompositionLocal since1.0.0 providing WindowInfo for the current Owner. Selected Compose UI1.12.1 is already locked; no dependency change. Use current hierarchy ownership instead of restoring/caching Activity focus across recreation. Official reference relevant entries inspected through search retrieval after direct reference fetch exceeded service size; no selected-implementation behavior inferred solely from documentation. P1-S3 Android/platform owner.",
+      "refresh": "Before changing native focus/credential admission or Compose UI version; verify actual recreation and focus-loss behavior."
+    },
+    {
+      "id": "G238",
+      "title": "Android same-task Activity back stack and visibility",
+      "url": "https://developer.android.com/guide/components/activities/tasks-and-back-stack",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Default standard Activity launch from an Activity adds a screen to the current task; finishing that screen resumes the preceding Activity. Tasks are managed separately per window in multiwindow mode. Native files hide qualification launches the existing opaque private profiles Activity without task flags and observes actual original Stop/return with exact task/instance checks. This does not qualify physical minimize, process death or arbitrary window occlusion. P1-S3 qualification owner.",
+      "refresh": "Before changing desktop lifecycle test routes or AndroidX Test versions; observe actual target callbacks, never infer hidden state from helper launch."
+    },
+    {
+      "id": "R294",
+      "title": "AndroidX Test Activity invoker new-task Stop helper",
+      "url": "https://raw.githubusercontent.com/android/android-test/main/core/java/androidx/test/core/app/InstrumentationActivityInvoker.java",
+      "publisher": "Google AndroidX Test maintainers",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Inspected current upstream stopActivity/startEmptyActivitySync uses applicationContext with FLAG_ACTIVITY_NEW_TASK; it does not directly invoke target onStop. Narrow bytecode inspection confirms the selected core1.7.0 AAR, SHA256 f4dacd8edceeec48e0c76ecf28339b28f4b4f6b74f8e34e9e59b472c27d9eb81. Googlebook device03 remained resumed during this failed request. Use a genuine same-task opaque cover and observed Stop/return for this case; retain failed helper attempt. Main source is explanatory, not an immutable selected source pin or universal vendor behavior. P1-S3 qualification owner.",
+      "refresh": "Before changing desktop lifecycle test routes or AndroidX Test versions; observe actual target callbacks, never infer hidden state from helper launch."
     }
   ]
 }

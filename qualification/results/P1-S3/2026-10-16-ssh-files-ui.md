@@ -1,0 +1,56 @@
+# Native retained SSH files qualification
+
+**Date/stage:** 2026-10-16, P1-S3 and bounded CAP-SSH experiment. **Outcome:** scoped native product matrix PASS: twelve distinct actual cases across both apps. The [sanitized manifest](2026-10-16-ssh-files-ui.json) binds the six retained attempts, accepted cases, source/artifacts and separate recoveries. Console/Desktop0.1.10/code11 are installed and stopped. This is real foreground read-only SFTP construction, not full Console files, SSH capability adoption or P1/P2 completion. Read the [contract](../../../docs/02-architecture/ssh-native-files.md) and [build binding](2026-10-16-ssh-files-ui-build.json).
+
+## Implemented boundary
+
+Both independently installed products expose **Browse SSH files** through their private native Activity. The screen uses the owning app's actual saved profiles and accepted host keys, transient native username/password entry and the existing retained SSHJ0.41.2 engine. Initial listing, explicit path/parent/directory navigation, refresh and complete bounded regular-file previews operate on the real authenticated connection. No endpoint/credential Intent or automatic connection is accepted.
+
+A configuration-scoped ViewModel owns the foreground session; opaque attachment tokens and a five-second handoff distinguish recreation from ordinary hiding. A process-owned factory retains capacity and cleanup quarantine. Focus loss clears credentials and cancels preparation but preserves an already established visible session. Ordinary Stop, profile/trust invalidation and explicit Disconnect request actual retirement. Remote data is cleared and late completion cannot publish into a retired owner. Full background terminal ownership remains separate.
+
+The UI uses existing Cloudy roles, native text editing, safe drawing/IME insets and fixed Disconnect/Close controls. Listings are capped at128 entries, previews at64KiB; strict UTF8 or a labelled first256-byte hex representation is shown. A remote read is not a consistent snapshot. No upload, local file publication, remote editing or drag/drop is implemented here.
+
+## Build and source review
+
+Build05 passes strict dependency verification, Kotlin/Java compilation, both products and their test APKs. Its production APKs are byte-identical to build04; the last change corrects only the hide-test method. All four owned Lint reports have zero findings. Its171 source inputs remain unchanged during the build. Build05 reports322 Gradle tasks:16 executed and306 up-to-date, completing in27seconds. Build04 previously compiled the actual focus correction in57seconds with53 executed tasks. Existing result reports contain31 SSH passes and20 opt-in host skips,50 domain,2 platform and4 design tests. Those carried-forward reports are not fresh host/device executions.
+
+Direct Codex GPT6.1-Sol coworkers supplied disjoint lifecycle, model/UI, test, fixture-runner and source reviews; the leader inspected the changes and evidence. Review corrections include cancellation of preparation before established-state publication, conservative quarantine of ambiguous unpublished engine timeouts, exact owner fencing, Application-typed model construction, bounded real UI readiness and cleanup independent of functional success. Upstream engines/dependency pins remain unchanged. Compiler/AST, Lint and authored-code checks do not replace the product cases below.
+
+OMP task SSH-FILES-COPY-001 used the configured `zai/glm-5.3-flash` route for a finite strings-only review, with zero tools. The first invocation stopped before a model request on a read-only runtime-directory error; the explicitly selected retry completed in62.072seconds. The leader revised useful wording and rejected unsupported recovery guarantees. No private device evidence, credentials or original design-feedback document was sent. Private assignment/events/disposition remain in the ignored worker directory.
+
+## Actual attempts and discovered focus defect
+
+Target: HP Googlebook14, Android17/API37, arm64-v8a, buildCL3B.260622.276.R2, incremental16560795. Every connection uses an isolated maintained Apache MINA SSHD2.20.0 SFTP fixture and generated credentials provisioned over non-PTY stdin into owning-UID private files. Tests traverse a temporary USB ADB loopback mapping. No personal password, saved-vault grant or screen-lock prompt is used; ordinary LAN/hostname routing is not qualified.
+
+Device01/build02 passes Console basic list/read/reuse/disconnect. Recreation retains the same model and connection but fails before the next read reaches the server. Device02/build03 adds bounded waits and sanitized diagnostics; it preserves the failure and exposes `READ_AFTER_RECREATE_WAIT_READ_ENABLED`: framework window focus true, Activity resumed true, cached Activity focus false, live proof not retired. Waiting10seconds does not resolve it. Each failed recreation has one authentication and two SFTP channels, with no post-recreation read.
+
+Build04 removes the callback-only Activity focus cache. `LocalWindowInfo.current.isWindowFocused` drives enabled presentation; action admission separately checks `Activity.hasWindowFocus()`. Existing focus-loss credential clearing/cancellation remains. Official [WindowInfo](https://developer.android.com/reference/kotlin/androidx/compose/ui/platform/WindowInfo) and [Compose synchronization](https://developer.android.com/develop/ui/compose/testing/synchronization) references support the correction. A narrow inspection of the exact selected UI1.12.1 AAR confirms initial sampling from View.hasWindowFocus, observable state and view-tree focus updates; AAR SHA256 `3f1ae17e237d9dc0a2a0f42cb04b85b8de6e12f67adc5f5c12173fe31e501cb2`. No vendor-specific callback sequence is claimed.
+
+Device03/build04 now passes Console basic, actual recreation with a further read on the same proof and one authentication, and the explicitly injected framework-focus policy case. Its hide case fails because ActivityScenario's requested CREATED transition does not occur; diagnostics still report RESUMED and a live connection. This is an unexercised hidden-state test, not a passed Stop-retirement case. The corrected test launches the existing private opaque profiles Activity in the same task, observes the exact original Activity's real Stop, requires actual proof retirement, then finishes only its owned cover and observes that same original resume without reconnecting. Its waits are bounded at10seconds. The selected AndroidX Test1.7.0 invoker's NEW_TASK helper does not directly call the target's onStop; separate desktop windows need actual visibility/lifecycle evidence.
+
+The original three attempts remain preserved. Device01's recovery02 confirms exact cleanup after separating actual peer closure from the expected successful read count; it does not change the functional failure. Device02/03 cleanup passes directly. Existing profile/trust catalogs and generations, vault receipts, preferences, system display configuration and boot identity remain preserved. Test packages, fixture processes/listeners and owned reverse routes are settled. Raw evidence stays under ignored `qualification/results/private/foundation/2026-10-16-ssh-files-ui-01`, `-02` and `-03`.
+
+## Accepted product cases and final settlement
+
+Device04/build05 passes Console hide/return and real profile invalidation. Its held-read setup stops before a server connection: the old exec-out reader reports a missing-receipt command error as successful stdout, and JSON parsing rejects it. The server records zero sessions/authentication/channels. This is an unexercised case, not a failed SFTP cancellation. Separate recovery01 checks exact unchanged product/data/settings/boot, absent receipt/acknowledgement and the known configuration hash before removing only that configuration and owned test package.
+
+The runner now reads through non-PTY shell protocol with separate stdout/stderr and the remote exit code. Missing files produce no receipt; genuinely malformed nonempty JSON still fails. Device05 then passes Console's real held-read cancellation. Device06 passes all six Desktop cases and final settlement. These are test/runner corrections on identical build04/build05 production APKs; no product change follows the focus repair.
+
+| Case in each product | Accepted requirement |
+| --- | --- |
+| Basic reuse | Actual listing, complete file preview, refresh and another preview over one authentication; explicit disconnect and actual retirement |
+| Established recreation | Same ViewModel and engine proof, clean saved metadata, another real read, no second authentication |
+| Visible focus policy | Explicitly injected framework focus loss/gain preserves the established connection and permits a subsequent read; no physical-input claim |
+| Hidden owner and return | Genuine same-task opaque cover, actual original Stop, retired proof, cover destruction and same original Resume; Idle with no preview/proof/reconnect and cleared input undo history |
+| Changed profile | Real owning catalog mutation invalidates the established connection; proof retires, remote presentation clears and the exact fixture baseline is restored |
+| Held read cancellation | Host acknowledges an actual held SFTP READ before Disconnect; client workers retire, no late preview publishes and peer closes before fixture shutdown |
+
+The twelve distinct accepted cases span device03/04/05/06: three Console cases, two Console cases, one Console case and six Desktop cases respectively. Their four runs contain24 default assumption skips, separate from actual passes. Whole runs03/04 remain failed because of their other cases; only individually passed, settled cases carry forward. The six original run manifests are all preserved, including earlier build02/03 failures and the two separate recoveries. Accepted cases total12 actual authentications and26 SFTP channels, with no authentication replay.
+
+Every accepted case binds its actual client retirement, one closed server session before parent fixture shutdown, final server/subsystem-worker retirement, unchanged synthetic file bytes and exact owning catalog restoration. Final build05 source/APK/fixture bindings match; both products are installed/stopped, all three test packages are absent, reverse mappings are restored, fixture listeners are closed, and recorded app data/settings/boot identity is unchanged. Private final evidence is `qualification/results/private/foundation/2026-10-16-ssh-files-ui-06/`; the public manifest records each contributing run independently.
+
+Keep generated fixture setup and exact baseline restoration distinct from product user workflows. The focus case is labelled callback policy injection. The same-task cover is a genuine platform visibility/lifecycle transition, not physical minimize or arbitrary occlusion qualification. Activity recreation is not process death.
+
+## Remaining acceptance
+
+Physical keyboard/IME, accessibility, narrow/scaled file scenes, LAN/hostname routing, broader servers, protected saved credentials, SSH methods/jumps, terminal/PTY, upload/download publication/edit/drop, separate X11 windows and durable background ownership remain required. Stage dependencies, capability outcomes and independent release scope are unchanged.

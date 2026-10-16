@@ -60,6 +60,7 @@ abstract class CloudyWindowActivity : ComponentActivity() {
                     onSshTrust = ::openSshTrust,
                     onDisplaySettings = ::openDisplaySettings,
                     onSshAuthenticate = ::openSshAuthenticate,
+                    onSshFiles = ::openSshFiles,
                 )
             }
         }
@@ -163,6 +164,16 @@ abstract class CloudyWindowActivity : ComponentActivity() {
             // The private destination loads its owning app's profiles; no credential or trust
             // assertion crosses this navigation Intent, and launch never starts authentication.
             startActivity(Intent(this, CloudySshAuthenticateActivity::class.java))
+        } catch (_: RuntimeException) {
+            notice = getString(R.string.cloudy_window_launch_failed)
+        }
+    }
+
+    private fun openSshFiles() {
+        try {
+            // The private screen selects this package's profile and trust. Navigation carries
+            // no credentials or retained authority and never connects without an explicit action.
+            startActivity(Intent(this, CloudySshFilesActivity::class.java))
         } catch (_: RuntimeException) {
             notice = getString(R.string.cloudy_window_launch_failed)
         }

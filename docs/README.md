@@ -74,3 +74,5 @@ These entries retain chronological checkpoints. Use the current execution state 
 - [Finite SSH password admission](02-architecture/ssh-password-admission.md) and [qualification](../qualification/results/P1-S3/2026-10-16-ssh-authentication.md): real password-only transport, exact profile/trust coordination,52 Android storage cases,10 final host cases, retained failed rekey expectation and pending native entry.
 
 - [Retained SSH ownership/read-only SFTP](02-architecture/ssh-retained-session.md) and [qualification](../qualification/results/P1-S3/2026-10-16-ssh-retained-session.md): strict build,9 real-host cases,61 Android policy/storage cases and3 actual engine-proof consumers; native retained product UI and broader gates remain open.
+
+- [Native retained SSH files contract](02-architecture/ssh-native-files.md) and [actual product qualification](../qualification/results/P1-S3/2026-10-16-ssh-files-ui.md): Console/Desktop0.1.10,12 distinct actual cases, corrected recreation focus, genuine same-task Stop/return, preserved failures and exact final cleanup. Read-only foreground construction; full transfers/terminal/X11 and stage gates remain open.
