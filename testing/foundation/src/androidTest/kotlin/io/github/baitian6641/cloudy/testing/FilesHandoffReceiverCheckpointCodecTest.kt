@@ -2,6 +2,9 @@ package io.github.baitian6641.cloudy.testing
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNull
+import org.junit.Assert.assertSame
 import org.junit.Assert.assertThrows
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -9,6 +12,44 @@ import org.junit.runner.RunWith
 /** Parser fixtures only; no fake product/session result and no private storage or launch. */
 @RunWith(AndroidJUnit4::class)
 class FilesHandoffReceiverCheckpointCodecTest {
+    @Test fun receiverDiagnosticExcludesHostileMessageCauseStageAndFrames() {
+        val secret = "SECRET_SENTINEL:/private/path:select credential"
+        val error = object : RuntimeException(secret, SecurityException(secret)) { }.apply {
+            addSuppressed(IllegalArgumentException(secret))
+            stackTrace = arrayOf(
+                StackTraceElement("untrusted.$secret", "open", "SshFilesFixture.kt", 42),
+                StackTraceElement("io.github.baitian6641.cloudy.testing.SshFilesFixture", "open", secret, 42),
+                StackTraceElement("io.github.baitian6641.cloudy.testing.SshFilesFixture", "open", "SshFilesFixture.kt", -1),
+                StackTraceElement("io.github.baitian6641.cloudy.testing.SshFilesFixture", "open", "SshFilesFixture.kt", 100001))
+        }
+        val failure = HandoffReceiverFailure.capture(secret, error, secret)
+        assertEquals("HANDOFF_RECEIVER_FAILED_PRESERVE_STATE:UNKNOWN:OTHER:OTHER:UNKNOWN:0", failure.message)
+        assertFalse(failure.toString().contains(secret))
+        assertNull(failure.cause)
+        assertEquals(0, failure.suppressed.size)
+    }
+
+    @Test fun receiverDiagnosticUsesFirstExactProjectFrameOnly() {
+        val error = java.io.IOException("SECRET_SENTINEL").apply {
+            stackTrace = arrayOf(
+                StackTraceElement("io.github.baitian6641.cloudy.testing.SshFilesFixturePretender", "open", "SshFilesFixture.kt", 11),
+                StackTraceElement("io.github.baitian6641.cloudy.testing.SshFilesFixture\$Companion", "open", "SshFilesFixture.kt", 73),
+                StackTraceElement("io.github.baitian6641.cloudy.testing.SshFilesActivityContract", "exerciseLocations", "SshFilesActivityContract.kt", 400))
+        }
+        assertEquals("HANDOFF_RECEIVER_FAILED_PRESERVE_STATE:PREPARE:FILES_FIXTURE_OPEN:IO:FILES_FIXTURE:73",
+            HandoffReceiverFailure.capture("FILES_FIXTURE_OPEN", error).message)
+    }
+
+    @Test fun previouslySanitizedPrimarySurvivesOuterCleanupClassification() {
+        val error = SecurityException("SECRET_PRIMARY").apply { stackTrace = emptyArray() }
+        val primary = HandoffReceiverFailure.capture("CHECKPOINT_BEGIN", error)
+        val outer = HandoffReceiverFailure.capture("CLEANUP", primary, "cleanup")
+        assertSame(primary, outer)
+        assertEquals("HANDOFF_RECEIVER_FAILED_PRESERVE_STATE:PREPARE:CHECKPOINT_BEGIN:SECURITY:UNKNOWN:0", outer.message)
+        assertNull(outer.cause)
+        assertEquals(0, outer.suppressed.size)
+    }
+
     @Test fun exactIntegersAndEscapedStringsRemainTyped() {
         val value = RetainedCheckpointJson.decode("""{"schema":2,"text":"a\\b\u0041","rows":[[1,"x"]]}""".toByteArray())
         assertEquals(2L, value["schema"])

@@ -7240,6 +7240,90 @@
       "sourceUpdatedOn": null,
       "note": "Immutable official win32metadata source supplies public JOB_LIST0x2000d and basic-accounting layout absent as named definitions in selected x/sys. WinBase.h SHA2561b8913de810e25f0f6ea8d91f5b736e48888d0e6a2b1003b9ca476f3c2262379; winnt.h SHA256404019933323ca25f5db8ce14437483e1054398ce454d5c75df2e187cec2ae40. amd64 compile-time48-byte/offset40 guards; no copied implementation or dependency update.",
       "refresh": "Before changing Windows jobs ABI, process creation/containment/retirement policy, platform baseline or selected dependency."
+    },
+    {
+      "id": "R334",
+      "title": "Go borrowed raw-connection callback lifetime",
+      "url": "https://pkg.go.dev/syscall@go1.27.2#RawConn",
+      "publisher": "Go project",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "RawConn.Control keeps the descriptor valid only within its callback. HOST-MACOS-PEER01 uses UnixConn.SyscallConn without File, descriptor retention, duplication, closure, I/O or deadline mutation. Exact selected Go/xsys source reviewed; actual Darwin socket semantics remain native qualification.",
+      "refresh": "Before changing this host adapter or native fixture, selected OS/runtime/dependency or claimed authority/retirement boundary."
+    },
+    {
+      "id": "R335",
+      "title": "Apple effective UNIX peer credential reference",
+      "url": "https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man3/getpeereid.3.html",
+      "publisher": "Apple",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Archived Mac OS X manual despite iPhoneOS URL; effective peer credentials are a connection observation, not application/code/login-session identity. HOST-MACOS-PEER01 validates connected UNIX stream and exact caller-owned UID policy. No current minimum macOS release is inferred.",
+      "refresh": "Before changing this host adapter or native fixture, selected OS/runtime/dependency or claimed authority/retirement boundary."
+    },
+    {
+      "id": "R336",
+      "title": "Pinned Apple UNIX peer credential option and version",
+      "url": "https://github.com/apple-oss-distributions/xnu/tree/f6217f891ac0bb64f3d375211650a4c1ff8ca1ea/bsd/sys",
+      "publisher": "Apple OSS Distributions",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Immutable un.h/ucred.h define SOL_LOCAL, LOCAL_PEERCRED and XUCRED_VERSION0. Maintained x/sys supplies ABI/types; only public version constant adopted, no copied implementation. Exact header hashes retained in host-macos-peer result manifest.",
+      "refresh": "Before changing this host adapter or native fixture, selected OS/runtime/dependency or claimed authority/retirement boundary."
+    },
+    {
+      "id": "R337",
+      "title": "Pinned Apple libc peer-credential version check",
+      "url": "https://github.com/apple-oss-distributions/Libc/blob/71bbe350ab79eef58113991d817ccc6165061a64/gen/FreeBSD/getpeereid.c",
+      "publisher": "Apple OSS Distributions",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Official implementation corroborates LOCAL_PEERCRED and external-layout version validation; reference-only, not vendored. SHA25683b55cfe4624e67b7c5dcb44d6c997a2f795a4f9948daad6009612d3492e0d25. No deployment-floor or cross-user native pass inferred.",
+      "refresh": "Before changing this host adapter or native fixture, selected OS/runtime/dependency or claimed authority/retirement boundary."
+    },
+    {
+      "id": "R338",
+      "title": "Microsoft suspended process creation flag",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/procthread/process-creation-flags",
+      "publisher": "Microsoft",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "CREATE_SUSPENDED keeps the primary thread from executing until ResumeThread. Windows native qualification wrapper combines it with creation-time JOB_LIST; suspension is an extra exact-membership gate, not start-then-assign containment. Unicode/extended startup flags retained.",
+      "refresh": "Before changing this host adapter or native fixture, selected OS/runtime/dependency or claimed authority/retirement boundary."
+    },
+    {
+      "id": "R339",
+      "title": "Microsoft primary-thread resume count semantics",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-resumethread",
+      "publisher": "Microsoft",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "ResumeThread returns the previous suspend count. Finite native wrapper requires1 on the exact retained primary-thread handle after owned-job membership and source checks; error/zero/remaining suspension fails and preserves owned cleanup. No guessed thread/PID route.",
+      "refresh": "Before changing this host adapter or native fixture, selected OS/runtime/dependency or claimed authority/retirement boundary."
+    },
+    {
+      "id": "R340",
+      "title": "Microsoft nested Job Object accounting and last-handle retirement",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/procthread/job-objects",
+      "publisher": "Microsoft",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Default CreateProcess descendants remain associated absent permitted breakaway; nested accounting includes child jobs. KILL_ON_JOB_CLOSE on the final handle terminates owned nested processes. Native fixture uses separate outer job, no breakaway and actual terminal/zero-membership/closure checks; cleanup termination cannot turn an inner failure into a pass. This is not a hostile-user sandbox or a guarantee against OS kernel stalls.",
+      "refresh": "Before changing this host adapter or native fixture, selected OS/runtime/dependency or claimed authority/retirement boundary."
     }
   ]
 }

@@ -1,0 +1,269 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "Three test-only receiver diagnostic source changes; strict compile/Lint, exact test APK refresh and three real sanitizer instrumentation methods",
+  "acceptance": "Finite diagnostic privacy/rewrapping methods passed with protected baseline preserved; no handoff or receiver-phase pass",
+  "productVersion": {
+    "name": "0.1.14",
+    "code": 15,
+    "productAPKsChanged": false,
+    "productAPKsInstalledInThisPacket": false,
+    "testAPKReplacementCount": 3
+  },
+  "device": {
+    "model": "HP Googlebook 14",
+    "androidRelease": "17",
+    "api": 37,
+    "build": "CL3B.260622.276.R2",
+    "incremental": "16560795",
+    "abi": "arm64-v8a"
+  },
+  "changedSources": [
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/SshFilesActivityContract.kt",
+      "beforeSha256": "8052f4ad3acfa1179f232bdd2aba644ec7e9c5f0909342786f578ec2ee94ce9b",
+      "sha256": "7038edbc8318f2540865dc03ff790e6290b73a4dd81618615f0a36570888c505"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/FilesHandoffReceiverCheckpoint.kt",
+      "beforeSha256": "fb1f4a7663dfcd929f7daa2ac49df318ef60f4bc6482046dc714b52c59892ce4",
+      "sha256": "cbc92822a3cfde0594f0c694ea8617f9defaf7a00fd1f95de831c52a6917abaf"
+    },
+    {
+      "path": "testing/foundation/src/androidTest/kotlin/io/github/baitian6641/cloudy/testing/FilesHandoffReceiverCheckpointCodecTest.kt",
+      "beforeSha256": "e2d093beeed942264ea329425aa14a0eea74b36bcaafed59480f6fd4e729a28a",
+      "sha256": "517c310832680a1db45e44787a86676d5753bbd18b2ce888b29c20da3ccb7b8e"
+    }
+  ],
+  "boundBuildInputCount": 231,
+  "buildReceipt": {
+    "path": ".cache/files-handoff-02/receiver-diagnostic-01/build-01/result.json",
+    "sha256": "24ba71bcb7de1597a4e16dd17dce77efef8602348af76c92a8c572dd0862394f"
+  },
+  "sourceFreeze": {
+    "path": ".cache/files-handoff-02/receiver-diagnostic-01/freeze-02.json",
+    "sha256": "3c493abe911ce6a269741a0c6f4dcca9f185f52a13db4d248a97d5c937a0dec7"
+  },
+  "sourcePatch": {
+    "path": ".cache/files-handoff-02/receiver-diagnostic-01/source-02.patch",
+    "sha256": "cab9fa6b1f3cbc809de43e6dc6731bb8b9b7ec32bc647e35a87845559b7e0b79"
+  },
+  "sourceUnchangedDuringBuild": true,
+  "build": {
+    "exitCode": 0,
+    "status": "BUILD_CHECKS_PASSED",
+    "rawGradleResult": "BUILD SUCCESSFUL in 29s",
+    "command": [
+      "./gradlew",
+      ":console:assembleDebug",
+      ":desktop:assembleDebug",
+      ":console:assembleDebugAndroidTest",
+      ":desktop:assembleDebugAndroidTest",
+      ":platform:assembleDebugAndroidTest",
+      ":console:lintDebug",
+      ":desktop:lintDebug",
+      ":platform:lintDebug",
+      ":design-system:lintDebug",
+      "--dependency-verification=strict",
+      "--no-daemon",
+      "--console=plain",
+      "--max-workers=4"
+    ],
+    "newOwningTestConsumersCompiled": [
+      "console",
+      "desktop"
+    ],
+    "platformTestCompile": "UP-TO-DATE; unchanged artifact",
+    "newDiagnosticTestsExecutedByBuild": false,
+    "releaseOrJVMRerun": false
+  },
+  "artifacts": [
+    {
+      "name": "console-debug-androidTest.apk",
+      "bytes": 4593117,
+      "sha256": "c2e64fdf93fd96dc247ceb20eab4cbd078d97a4ae6aa41cc67c0275087ef5971",
+      "installedBytesChecked": true
+    },
+    {
+      "name": "console-debug.apk",
+      "bytes": 41382877,
+      "sha256": "3127c84f789577c0d5d0fff1dc9e2169a9ce9bd29eec883d0d0ff76094fc1e0c",
+      "installedBytesChecked": true
+    },
+    {
+      "name": "desktop-debug-androidTest.apk",
+      "bytes": 4593113,
+      "sha256": "b9f0a17916a232f7633e2551e5cbd267743dd28a6d9560d47e09dfd6108b9b24",
+      "installedBytesChecked": true
+    },
+    {
+      "name": "desktop-debug.apk",
+      "bytes": 41382885,
+      "sha256": "af4eb3702ead629f0a23945d2571b22b656fecfa7a96a5ca3ee2957f3c76c452",
+      "installedBytesChecked": true
+    },
+    {
+      "name": "platform-debug-androidTest.apk",
+      "bytes": 45059272,
+      "sha256": "b881382fb7bd840dca38018b78084b9083ed20103051ec73fc3fcf8c85fc217b",
+      "installedBytesChecked": true
+    }
+  ],
+  "productDebugAPKsUnchangedFromObserverBuild02": true,
+  "platformTestAPKUnchangedFromObserverBuild02": true,
+  "priorBuildReceiptSHA256": "4104610f526ec872dbafb9ce8123af11a53abf6cccb4882a664d2f6912ff1fb9",
+  "lint": [
+    {
+      "target": "console",
+      "issues": 0,
+      "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f"
+    },
+    {
+      "target": "desktop",
+      "issues": 0,
+      "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f"
+    },
+    {
+      "target": "platform",
+      "issues": 0,
+      "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f"
+    },
+    {
+      "target": "design-system",
+      "issues": 0,
+      "sha256": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f"
+    }
+  ],
+  "reviews": {
+    "source": {
+      "path": ".cache/files-handoff-02/receiver-diagnostic-01/review-01.json",
+      "sha256": "21e7464bdd60104c53b378d80c8a74727f66bb69c3881d97ffc7a2683677051e"
+    },
+    "refreshHelpers": {
+      "path": ".cache/files-handoff-02/receiver-diagnostic-01/refresh-review-01.json",
+      "sha256": "069428e860089904a66d8bf4bd20fa77a7cc1b545e0bf2df59b3860bd2da2aa1"
+    },
+    "refreshFinding": "R1/P2 closed in refresh02 by exact installer hash before import; actual refresh03 changes output directory only"
+  },
+  "helpers": [
+    {
+      "path": ".cache/files-handoff-02/receiver-diagnostic-01/run_build_01.py",
+      "sha256": "09f93050b3ea5a768accc2e9929f09420e0fe56a2b8d508c6bea50c7797b25a4"
+    },
+    {
+      "path": ".cache/files-handoff-02/positive-device-03/run_positive_07.py",
+      "sha256": "23c4e01cbcaa52d4fd1e99a6ed24def025c8254a3352f32db7980afb9b455892"
+    },
+    {
+      "path": ".cache/files-handoff-02/positive-bootstrap-01/install_05.py",
+      "sha256": "7cef7dced22dcf42495c41fca39870096a54bcdc0e3ddac52d9c1c3eb76b2c6d"
+    },
+    {
+      "path": ".cache/files-handoff-02/positive-bootstrap-01/bootstrap_03.py",
+      "sha256": "aa93fb6afe17058d9e5a53f7115837e3990b8e1e00cc5b3c76b638bda4577d70"
+    },
+    {
+      "path": ".cache/files-handoff-02/positive-bootstrap-01/refresh_test_artifacts_03.py",
+      "sha256": "f663fffaa756c549f02aa233ca47013ffa4057e0c2f7f9b44ed3b329e00ad66e"
+    },
+    {
+      "path": ".cache/files-handoff-02/receiver-diagnostic-01/run_privacy_cases_01.py",
+      "sha256": "8c296a65142804ae49790f3fce0c7e66289452004bbdb64553544c7ae27d6e0a"
+    }
+  ],
+  "runtimeRefresh": {
+    "setupPassed": true,
+    "overallHandoffPassed": false,
+    "phase": "TEST_ARTIFACT_REFRESH_PRESERVED",
+    "mutations": "Exactly three fixed test-package replacements; no product install, Activity, auth or host operation",
+    "beforeEqualsAfterEqualsAcceptedSetup": true,
+    "zeroMutationPrecedingRefusal": {
+      "failureCode": "PACKAGE_USER_STOPPED",
+      "mutations": 0,
+      "failedReceiptPreserved": true
+    },
+    "desktopStoppedFlagRestoration": {
+      "exactOwningPackageOnly": true,
+      "processesAlreadyAbsent": true,
+      "privateAndSystemBaselineUnchanged": true,
+      "appDataReset": false,
+      "retirementProof": false
+    }
+  },
+  "actualTests": {
+    "class": "io.github.baitian6641.cloudy.testing.FilesHandoffReceiverCheckpointCodecTest",
+    "owningTarget": "Console",
+    "methods": [
+      "receiverDiagnosticExcludesHostileMessageCauseStageAndFrames",
+      "receiverDiagnosticUsesFirstExactProjectFrameOnly",
+      "previouslySanitizedPrimarySurvivesOuterCleanupClassification"
+    ],
+    "starts": 3,
+    "passes": 3,
+    "skips": 0,
+    "failures": 0,
+    "instrumentationFinalCode": -1,
+    "stderrBytes": 0,
+    "resultPhase": "THREE_PRIVACY_TESTS_PASSED_BASELINE_PRESERVED",
+    "finalBaselineEqualsSetup": true,
+    "consoleStoppedFlagRestoredAfterTerminalAndAbsentProcess": true,
+    "stoppedFlagIsRetirementProof": false
+  },
+  "preservation": {
+    "bothAppsPrivateHashes": true,
+    "allThreeStoreRowsMetadataAndGenerations": true,
+    "typedPreferences": true,
+    "UIDs": true,
+    "replayState": true,
+    "bootAndSystemSettingsAndReverses": true,
+    "installedProductAndTestHashes": true,
+    "finalNoProductPIDsOrActiveInstrumentationOrServicesOrAppFocus": true
+  },
+  "privateEvidenceDigests": [
+    {
+      "label": "privacy-terminal",
+      "sha256": "2c49fd691c60839af19047fadab01f84d1f4f14e8779d43d68a02be6b10383bd"
+    },
+    {
+      "label": "privacy-instrumentation-stdout",
+      "sha256": "212b4ca3229c504013fdfa4b5dd09b237b12f8ef03df10041480aa26d2128e08"
+    },
+    {
+      "label": "privacy-instrumentation-stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "privacy-before-snapshot",
+      "sha256": "d902706fa418cbee323ab22325e90a622638d65350f4a3104b6dca82040c00ab"
+    },
+    {
+      "label": "privacy-after-tests-snapshot",
+      "sha256": "d902706fa418cbee323ab22325e90a622638d65350f4a3104b6dca82040c00ab"
+    },
+    {
+      "label": "privacy-final-snapshot",
+      "sha256": "d902706fa418cbee323ab22325e90a622638d65350f4a3104b6dca82040c00ab"
+    },
+    {
+      "label": "test-refresh-terminal",
+      "sha256": "fd18d9ecc8d0f204f95dfe7020626522826659455f40bbe0bb321773afbd355a"
+    },
+    {
+      "label": "zero-mutation-refresh-refusal-terminal",
+      "sha256": "3c0ce0e7ce9da8af48ccc05282c702a5d477035589c5f1f7d2457fcce0340601"
+    },
+    {
+      "label": "desktop-stopped-flag-restoration-terminal",
+      "sha256": "71ab9fc5c4e70b796be0cc24e51ec587494beab219af8b0f9df1607f69ef2eaf"
+    }
+  ],
+  "limits": [
+    "Actual methods test the sanitizer with synthetic hostile inputs; no credentials or private data are printed",
+    "First-failure test verifies safe object identity across outer classification, not actual SQLite release-failure execution",
+    "No new PREPARE/VERIFY/CLEANUP, normal Open, host authentication/list/read, observer continuity or operation retirement is included",
+    "Earlier actual PREPARE failure remains failed with cause not established by these three methods",
+    "Stopped package flags are metadata restoration, not transport/call/engine retirement evidence",
+    "No screenshots, physical speech/render, credential prompt, future operation or capability/stage pass is inferred"
+  ],
+  "capabilityOrStagePromotion": false
+}

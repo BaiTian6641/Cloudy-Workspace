@@ -26,6 +26,44 @@ import java.util.concurrent.locks.ReentrantLock
 import org.json.JSONArray
 import org.json.JSONObject
 
+/** A bounded diagnostic only: never retain a cause, message, arbitrary class or path. */
+internal class HandoffReceiverFailure private constructor(val diagnostic: String) : AssertionError(diagnostic) {
+    companion object {
+        fun capture(stage: String, error: Throwable, phase: String = "prepare"): HandoffReceiverFailure {
+            if (error is HandoffReceiverFailure) return error
+            val allowedStages = setOf("PHASE_ARGUMENTS", "CHECKPOINT_BEGIN", "CHECKPOINT_RESUME", "VERIFY", "CLEANUP",
+                "INITIALIZE", "FILES_FIXTURE_OPEN", "FILES_FIXTURE_SEED", "LOCATIONS_FIXTURE_OPEN",
+                "CONNECT_AND_LIST", "CANCEL_PROPOSAL", "FOCUS_INVALIDATES_PROPOSAL", "REGISTER_ACTUAL_LISTING",
+                "RETIRE_PREPARATION_CONNECTION", "SHARE_ACTUAL_REGISTERED_LOCATION", "ORDINARY_RESOURCE_INDEPENDENCE",
+                "SECOND_REAL_REGISTRATION", "MANAGER_REAL_SHARE_REVOKE", "RETIRE_BEFORE_REGISTERED_OPEN",
+                "MANAGER_TICKET_OPEN", "FRESH_REGISTERED_AUTHENTICATION", "LIVE_REGISTERED_RESOURCE_REVOKE",
+                "CLOSE_OWNED_WINDOWS", "CLOSE_SCENARIOS", "CLOSE_OBSERVER", "RESTORE_PRESERVE_FIXTURE", "CLOSE_CALLBACKS")
+            val category = when (error) {
+                is SecurityException -> "SECURITY"
+                is android.database.sqlite.SQLiteException -> "SQLITE"
+                is java.io.IOException -> "IO"
+                is ReflectiveOperationException -> "REFLECTION"
+                is IllegalArgumentException -> "ARGUMENT"
+                is IllegalStateException -> "STATE"
+                is AssertionError -> "ASSERTION"
+                else -> "OTHER"
+            }
+            val sources = mapOf("FilesHandoffReceiverCheckpoint" to "CHECKPOINT", "SshFilesActivityContract" to "CONTRACT",
+                "SshFilesFixture" to "FILES_FIXTURE", "FilesLocationsFixture" to "LOCATIONS_FIXTURE",
+                "SshObserveTrustFixture" to "TRUST_FIXTURE")
+            val frame = error.stackTrace.firstOrNull { frame -> sources.keys.any { name ->
+                (frame.className == "io.github.baitian6641.cloudy.testing.$name" ||
+                    frame.className.startsWith("io.github.baitian6641.cloudy.testing.$name\$")) &&
+                    frame.fileName == "$name.kt" && frame.lineNumber in 1..100_000
+            } }
+            val source = sources.entries.firstOrNull { frame?.fileName == "${it.key}.kt" }?.value ?: "UNKNOWN"
+            val safePhase = when (phase) { "prepare" -> "PREPARE"; "verify" -> "VERIFY"; "cleanup" -> "CLEANUP"; else -> "UNKNOWN" }
+            return HandoffReceiverFailure("HANDOFF_RECEIVER_FAILED_PRESERVE_STATE:" +
+                "$safePhase:${stage.takeIf { it in allowedStages } ?: "OTHER"}:$category:$source:${frame?.lineNumber ?: 0}")
+        }
+    }
+}
+
 /** Test-only retained ownership. It never imports current rows as the original baseline. */
 internal class FilesHandoffReceiverCheckpoint private constructor(
     private val context: Context, private val owner: WindowOwner, private val run: String,
@@ -180,6 +218,7 @@ internal class FilesHandoffReceiverCheckpoint private constructor(
         val channels = mutableListOf<FileChannel>()
         val locks = mutableListOf<java.nio.channels.FileLock>()
         val databases = mutableListOf<SQLiteDatabase>()
+        var primaryFailure: Throwable? = null
         try {
             for (index in TABLES.indices) {
                 val monitor = Class.forName("io.github.baitian6641.cloudy.platform.${CLASSES[index]}")
@@ -221,9 +260,14 @@ internal class FilesHandoffReceiverCheckpoint private constructor(
                 check(marker.readText(Charsets.US_ASCII) == read(index, databases[index]).generation)
             }
             return result
+        } catch (error: Throwable) {
+            primaryFailure = error
+            throw error
         } finally {
             // Attempt every release even if a preceding close fails; no lock survives a
             // local exception merely because an unrelated SQLite close was unsuccessful.
+            // Preserve the primary failure for safe source-line diagnosis; release errors
+            // still fail an otherwise successful operation and never authorize cleanup.
             var cleanupFailure: Throwable? = null
             fun release(action: () -> Unit) { try { action() } catch (error: Throwable) { if (cleanupFailure == null) cleanupFailure = error } }
             databases.asReversed().forEach { release { it.close() } }
@@ -231,7 +275,7 @@ internal class FilesHandoffReceiverCheckpoint private constructor(
             channels.asReversed().forEach { release { it.close() } }
             monitors.asReversed().forEach { release { it.unlock() } }
             release { coordination.unlock() }
-            cleanupFailure?.let { throw it }
+            if (primaryFailure == null) cleanupFailure?.let { throw it }
         }
     }
 

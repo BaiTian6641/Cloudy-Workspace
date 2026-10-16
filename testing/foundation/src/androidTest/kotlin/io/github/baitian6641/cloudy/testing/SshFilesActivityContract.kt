@@ -63,6 +63,7 @@ abstract class SshFilesActivityContract(private val expectedOwner: WindowOwner) 
         val args = InstrumentationRegistry.getArguments()
         val phase = args.getString("cloudyFilesHandoffReceiverPhase")
         assumeTrue("Explicit retained receiver phase only", phase != null)
+        var stage = "PHASE_ARGUMENTS"
         try {
             val run = checkNotNull(args.getString("cloudySshFilesRun"))
             val direction = checkNotNull(args.getString("cloudyFilesHandoffDirection"))
@@ -70,21 +71,24 @@ abstract class SshFilesActivityContract(private val expectedOwner: WindowOwner) 
             when (phase) {
                 "prepare" -> {
                     check(args.getString("cloudyFilesHandoffCheckpointSha256") == null)
+                    stage = "INITIALIZE"
                     exerciseLocations("handoff-receiver")
                 }
                 "verify", "cleanup" -> {
                     // This is parent authorization to start inspection, never proof that the
                     // previous ordinary process/host actually retired. Parent records that outside.
                     check(args.getString("cloudyFilesHandoffExternalRetirement") == "parent-verified")
+                    stage = "CHECKPOINT_RESUME"
                     val checkpoint = FilesHandoffReceiverCheckpoint.resume(
                         InstrumentationRegistry.getInstrumentation().targetContext, expectedOwner, run, direction,
                         checkNotNull(args.getString("cloudyFilesHandoffCheckpointSha256")))
+                    stage = if (phase == "verify") "VERIFY" else "CLEANUP"
                     if (phase == "verify") checkpoint.verify() else checkpoint.cleanup()
                 }
                 else -> error("UNSUPPORTED_RECEIVER_PHASE")
             }
-        } catch (_: Throwable) {
-            throw AssertionError("HANDOFF_RECEIVER_PHASE_FAILED_PRESERVE_STATE")
+        } catch (error: Throwable) {
+            throw HandoffReceiverFailure.capture(stage, error, phase ?: "unknown")
         }
     }
 
@@ -300,20 +304,27 @@ abstract class SshFilesActivityContract(private val expectedOwner: WindowOwner) 
         var saves: CredentialStateObserver? = null
         var failed = false
         var stage = "INITIALIZE"
+        var firstFailure: HandoffReceiverFailure? = null
         fun failure(error: Throwable, at: String) {
             failed = true
-            val name = error.javaClass.simpleName.takeIf { Regex("[A-Za-z0-9_$]{1,128}").matches(it) } ?: "OTHER"
+            if (case == "handoff-receiver" && firstFailure == null) firstFailure = HandoffReceiverFailure.capture(at, error)
+            val name = if (case == "handoff-receiver") "HANDOFF_FAILURE" else
+                error.javaClass.simpleName.takeIf { Regex("[A-Za-z0-9_$]{1,128}").matches(it) } ?: "OTHER"
             try { fixture?.recordFailure(at, name) } catch (_: Throwable) { }
         }
         app.registerActivityLifecycleCallbacks(windows)
         try {
             if (case == "handoff-receiver") {
+                stage = "CHECKPOINT_BEGIN"
                 checkpoint = FilesHandoffReceiverCheckpoint.begin(context, expectedOwner, run,
                     checkNotNull(InstrumentationRegistry.getArguments().getString("cloudyFilesHandoffDirection")))
             }
+            if (case == "handoff-receiver") stage = "FILES_FIXTURE_OPEN"
             val owned = SshFilesFixture.open(context, expectedOwner, run, case)
             fixture = owned
+            if (case == "handoff-receiver") stage = "FILES_FIXTURE_SEED"
             owned.seed()
+            if (case == "handoff-receiver") stage = "LOCATIONS_FIXTURE_OPEN"
             val resource = FilesLocationsFixture(context, expectedOwner, run, case)
             locations = resource
             saves = CredentialStateObserver(owned.username, owned.password)
@@ -472,7 +483,11 @@ abstract class SshFilesActivityContract(private val expectedOwner: WindowOwner) 
                     destroyed.get()
                 }
             } catch (error: Throwable) { closed = false; failure(error, "CLOSE_SCENARIOS") }
-            saves?.let { observer -> app.unregisterActivityLifecycleCallbacks(observer); observer.dispose() }
+            try { saves?.let { observer -> app.unregisterActivityLifecycleCallbacks(observer); observer.dispose() } }
+            catch (error: Throwable) {
+                if (case != "handoff-receiver") throw error
+                failure(error, "CLOSE_OBSERVER")
+            }
             try {
                 check(closed)
                 if (case == "handoff-receiver") {
@@ -491,9 +506,13 @@ abstract class SshFilesActivityContract(private val expectedOwner: WindowOwner) 
                     fixture?.restore(!failed)
                 }
             } catch (error: Throwable) { failure(error, "RESTORE_PRESERVE_FIXTURE") }
-            app.unregisterActivityLifecycleCallbacks(windows)
-            windows.dispose()
+            try { app.unregisterActivityLifecycleCallbacks(windows); windows.dispose() }
+            catch (error: Throwable) {
+                if (case != "handoff-receiver") throw error
+                failure(error, "CLOSE_CALLBACKS")
+            }
         }
+        firstFailure?.let { throw it }
         if (failed) throw AssertionError("SSH_FILES_LOCATIONS_QUALIFICATION_FAILED_SEE_PRIVATE_RECEIPT")
     }
 

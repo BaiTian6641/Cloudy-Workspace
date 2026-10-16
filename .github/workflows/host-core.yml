@@ -62,6 +62,43 @@ jobs:
           # Print per-case skips so an unsupported platform operation is visible.
           go test -v -mod=readonly ./...
           go build -mod=readonly -trimpath -buildvcs=false ./cmd/cloudy-host
+      - name: Run finite Windows native jobs fixture
+        if: runner.os == 'Windows'
+        shell: pwsh
+        timeout-minutes: 2
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $work = Join-Path $env:RUNNER_TEMP ('cloudy-windows-native-' + [Guid]::NewGuid().ToString('N'))
+          New-Item -ItemType Directory -Path $work | Out-Null
+          "CLOUDY_NATIVE_EVIDENCE_ROOT=$work" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          $sources = @{}
+          Get-ChildItem internal/jobs -File | ForEach-Object {
+            $sources['internal/jobs/' + $_.Name] = (Get-FileHash -Algorithm SHA256 $_.FullName).Hash.ToLowerInvariant()
+          }
+          foreach ($name in @('go.mod', 'go.sum')) {
+            $sources[$name] = (Get-FileHash -Algorithm SHA256 $name).Hash.ToLowerInvariant()
+          }
+          $manifest = Join-Path $work 'source-manifest.json'
+          $sources | ConvertTo-Json | Set-Content -Encoding utf8NoBOM $manifest
+          $test = Join-Path $work 'jobs-native.test.exe'
+          $supervisor = Join-Path $work 'native-supervisor.exe'
+          $env:CGO_ENABLED = '0'
+          go test -c -mod=readonly -trimpath -buildvcs=false -o $test ./internal/jobs
+          if ($LASTEXITCODE -ne 0) { throw 'Native test compilation failed' }
+          go build -mod=readonly -trimpath -buildvcs=false -o $supervisor ./tools/windows-jobs-native
+          if ($LASTEXITCODE -ne 0) { throw 'Safety supervisor compilation failed' }
+          $testHash = (Get-FileHash -Algorithm SHA256 $test).Hash.ToLowerInvariant()
+          $supervisorHash = (Get-FileHash -Algorithm SHA256 $supervisor).Hash.ToLowerInvariant()
+          & $supervisor --test-binary $test --test-sha256 $testHash --wrapper-sha256 $supervisorHash --source-commit $env:GITHUB_SHA --source-manifest $manifest --out-dir (Join-Path $work 'evidence')
+          if ($LASTEXITCODE -ne 0) { throw 'Native jobs failed or retirement was uncertain; preserve evidence' }
+      - name: Preserve Windows native jobs evidence
+        if: always() && runner.os == 'Windows' && env.CLOUDY_NATIVE_EVIDENCE_ROOT != ''
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4, already selected by Android workflows
+        with:
+          name: host-windows-native-jobs-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ env.CLOUDY_NATIVE_EVIDENCE_ROOT }}
+          if-no-files-found: error
+          retention-days: 7
       - name: Race checks on Linux
         if: runner.os == 'Linux'
         run: go test -race -mod=readonly ./...

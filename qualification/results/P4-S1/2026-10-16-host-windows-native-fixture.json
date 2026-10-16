@@ -1,0 +1,226 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "HOST-JOBS-WINDOWS-NATIVE-FIXTURE01 independent finite qualification supervisor/workflow integration; construction only",
+  "acceptance": "Reviewed fixture integrated; local parser/compiler checks passed; native Windows/hosted runtime unrun",
+  "hostExecutableVersionUnchanged": "0.1.2",
+  "sources": [
+    {
+      "path": "host/core/tools/windows-jobs-native/common.go",
+      "sha256": "0fd719e55fb1b031205a8643623e46d093836d07f7bbbc7679ac656009ea75c5"
+    },
+    {
+      "path": "host/core/tools/windows-jobs-native/common_test.go",
+      "sha256": "9c1341f4527f37c09545e474f30ca95c7fb2004d50d766558420cc80fbdfe69c"
+    },
+    {
+      "path": "host/core/tools/windows-jobs-native/main_windows_amd64.go",
+      "sha256": "9d552678268029685da83677fa59d2f7c9e78f3b3ba9de959c329acf24408ce9"
+    },
+    {
+      "path": ".github/workflows/host-core.yml",
+      "sha256": "ac2be3b6807f5d67fa2d8ebc4b457d78d479d60dd8aaded1d486b71761f9f5fe"
+    }
+  ],
+  "moduleBindings": {
+    "host/core/go.mod": "8895e55963e4447a05abb84709092a640834f471dcb2ea6515c6d8dfac6613eb",
+    "host/core/go.sum": "cde7b21c6627bd3cfc042453150e8eaf8b6c80aa2df25d96f48b038050945f03"
+  },
+  "unchangedProductJobsBindings": {
+    "host/core/internal/jobs/backend_linux.go": "3cfae7cdb0bc3162bd11aa953bd56be22b23a5fe7c2e7262b7a5c5b48ae24491",
+    "host/core/internal/jobs/backend_linux_test.go": "b63cfd30d67347bf6fc793e14cb28d7b191a8800a37016973a25157a02f12382",
+    "host/core/internal/jobs/backend_windows_amd64.go": "1365ac6de9ba97b981e1afd78be1d280214dedec1aabcbb3dc9d5e9a8ff5fabc",
+    "host/core/internal/jobs/backend_windows_amd64_test.go": "bd5b72428a68bfc415810e1b48db66e805902e7152a3c43c9a9d33ac63cc383e",
+    "host/core/internal/jobs/native_linux_test.go": "492b1dc494251bcbbde72144fd902328860734cac70e18c86ae88377d20ea3fd",
+    "host/core/internal/jobs/native_windows_amd64_test.go": "d5ec836c2340b69c897fa84de119920b4090fa6ac36c1d68c051eab14035416f",
+    "host/core/internal/jobs/types.go": "1abe1a972cb31f2939487dfa0861159a4592b278c53f0e9febb66311789e8b7e",
+    "host/core/internal/jobs/types_test.go": "43d8fcb834d152f6faf8463e5722a922340879976a276d139203e6a1cd0a459c"
+  },
+  "verification": {
+    "path": ".cache/native-proposal/integration01/result.json",
+    "sha256": "257f0330c42ed49fe8e7c15f37bbd017027c37798a8002af92536d0114547213"
+  },
+  "sourceUnchangedDuringVerification": true,
+  "moduleUnchanged": true,
+  "productJobsUnchanged": true,
+  "checks": [
+    {
+      "label": "compiler",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "env",
+        "GOVERSION"
+      ],
+      "environmentOverride": {},
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "format",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/gofmt",
+        "-l",
+        "${REPO}/host/core/tools/windows-jobs-native"
+      ],
+      "environmentOverride": {},
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "portable-parser-race",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "test",
+        "-race",
+        "-count=1",
+        "-json",
+        "${REPO}/host/core/tools/windows-jobs-native/common.go",
+        "${REPO}/host/core/tools/windows-jobs-native/common_test.go"
+      ],
+      "environmentOverride": {},
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "vet-windows",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "vet",
+        "-mod=readonly",
+        "./tools/windows-jobs-native"
+      ],
+      "environmentOverride": {
+        "GOOS": "windows",
+        "GOARCH": "amd64",
+        "CGO_ENABLED": "0"
+      },
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "build-windows",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "build",
+        "-mod=readonly",
+        "-trimpath",
+        "-buildvcs=false",
+        "-o",
+        "${REPO}/.cache/native-proposal/integration01/native-supervisor.exe",
+        "./tools/windows-jobs-native"
+      ],
+      "environmentOverride": {
+        "GOOS": "windows",
+        "GOARCH": "amd64",
+        "CGO_ENABLED": "0"
+      },
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "compile-windows-parser-tests",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "test",
+        "-c",
+        "-mod=readonly",
+        "-trimpath",
+        "-buildvcs=false",
+        "-o",
+        "${REPO}/.cache/native-proposal/integration01/native-supervisor.test.exe",
+        "./tools/windows-jobs-native"
+      ],
+      "environmentOverride": {
+        "GOOS": "windows",
+        "GOARCH": "amd64",
+        "CGO_ENABLED": "0"
+      },
+      "exitCode": 0,
+      "passed": true
+    }
+  ],
+  "portableParserRaceCounts": {
+    "pass": 3,
+    "skip": 0,
+    "fail": 0
+  },
+  "artifacts": [
+    {
+      "path": ".cache/native-proposal/integration01/native-supervisor.test.exe",
+      "sha256": "4763bff1a579eb1ea28eb13c23e3d1cab06b1bf314ba67000c52d817000c447b",
+      "execution": "Windows cross-compiled only; unrun"
+    },
+    {
+      "path": ".cache/native-proposal/integration01/native-supervisor.exe",
+      "sha256": "f96ea9f939548e3f4b5c472a3a9fa8bbc8a0a9833aa3ae8bb1c6b7e40141b02a",
+      "execution": "Windows cross-compiled only; unrun"
+    }
+  ],
+  "reviewedProposal": {
+    "index": {
+      "path": ".cache/host-jobs-windows-01/native-proposal/proposal.json",
+      "sha256": "13a978de81823f68cb26c3bd4d178d15dd25657d0e14332776dc34cac65a8f52"
+    },
+    "independentReview": {
+      "path": ".cache/host-jobs-windows-01/native-proposal/independent-review-01.json",
+      "sha256": "64eab82e2069d328f89ad349fd204f03a1b28397886b2f046da1b4d8a2a6a7c3"
+    },
+    "independentReviewText": {
+      "path": ".cache/host-jobs-windows-01/native-proposal/independent-review-01.md",
+      "sha256": "17272fea1f7e5935f987c203c406079d4996702b20ced9fa90ab0dca26b38d34"
+    },
+    "validation": {
+      "path": ".cache/host-jobs-windows-01/native-proposal/validation04/result.json",
+      "sha256": "56103cc73676d74c08e6a95d1f63a3322edf6c11c478d57785625995b86a0f8d"
+    },
+    "finalCodeDifference": "Only leading main Go comment identifies actual qualification fixture; two common files byte-identical",
+    "workflowExactlyMatchesProposed": true
+  },
+  "runtimePolicy": {
+    "creation": "fresh unnamed outer job; KILL_ON_JOB_CLOSE; JOB_LIST and CREATE_SUSPENDED together; specific-job query/creation time before ResumeThread count1 gate",
+    "productBackendUsedForOuterSafety": false,
+    "nativeRunBudgetSeconds": 45,
+    "testTimeoutSeconds": 35,
+    "cleanupObservationSeconds": 5,
+    "hostedStepTimeoutMinutes": 2,
+    "hostedMatrixTimeoutMinutes": 15,
+    "observedLogThresholdBytes": 1048576,
+    "passBoundary": "Exact process exit0,7expected subtest passes+top/overall pass,no failures/skips/unattributed terminals,empty stderr,ActiveProcesses0 before safety cleanup,actual owned closes,supervisor exit0 and hosted step success",
+    "outerSafetyTerminationCannotBecomePass": true,
+    "jobManifestScope": "Exactly eight jobs Go source files and go.mod/go.sum; tool provenance via trusted checkout commit plus supervisor executable hash"
+  },
+  "execution": {
+    "portableParserTests": "3 actual Linux named race passes; no OS process/job/socket created by parser cases",
+    "windowsSupervisor": "cross-compiled/vetted only; unrun",
+    "windowsParserTests": "test binary cross-compiled only; unrun on Windows",
+    "sevenProductNativeCases": "not executed by this increment",
+    "hostedWorkflow": "not dispatched or executed by this author",
+    "yamlSyntax": "parsed; PowerShell/GitHub runtime unrun"
+  },
+  "nativeGates": {
+    "existingCases": [
+      "exact-job-membership-and-cancel",
+      "unicode-argv-exact-environment-input",
+      "explicit-empty-environment",
+      "exit259-is-real-exit",
+      "parent-exit-retires-pipe-holding-descendant",
+      "bounded-output-blocked-input-timeout",
+      "unlisted-inheritable-handle-excluded"
+    ],
+    "outstandingAdditionalCases": [
+      "Restrictive nested-job refusal without child marker",
+      "Native post-create/query/termination/close-error injection retaining actual ownership"
+    ],
+    "requiredEvidence": "Parent-reviewed exact-commit hosted receipt,raw stdout/stderr,compiled hashes,supervisor exit and hosted step outcome"
+  },
+  "limits": [
+    "No actual Windows/native support or timing pass",
+    "No hard log writer quota; threshold is polled against trusted finite suite",
+    "Trusted checkout and temporary-directory ancestors; not hostile same-user path confinement",
+    "Kernel calls can outlive userspace budgets; hosted termination alone is not passing retirement evidence",
+    "Attribute Delete wrapper exposes no LocalFree result",
+    "Sentinel numeric alias can conservatively fail; descendant marker proves creation/held handles,not necessarily READY",
+    "No new dependency/module/version,product entry,CLI,service,interactive session or capability/stage promotion"
+  ],
+  "capabilityOrStagePromotion": false
+}

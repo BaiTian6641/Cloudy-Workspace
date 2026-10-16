@@ -1,0 +1,262 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "HOST-MACOS-PEER01 internal Darwin connected UNIX-stream peer UID check; no complete IPC authorization or jobs backend",
+  "acceptance": "Parent and independent source02 review accepted construction; native runtime acceptance remains pending",
+  "hostExecutableVersionUnchanged": "0.1.2",
+  "sources": [
+    {
+      "path": "host/core/internal/localpeer/peer_darwin.go",
+      "sha256": "8fc49a4691b4752f4548748947f29a575e682d7bda6a3706b0a3ebe61704d711"
+    },
+    {
+      "path": "host/core/internal/localpeer/peer_darwin_test.go",
+      "sha256": "26f95dae319bd1fdd2fa8b6cc957feeedc6992b5b9c4a5f63ea2aa4646d29d1d"
+    }
+  ],
+  "modules": [
+    {
+      "path": "host/core/go.mod",
+      "sha256": "8895e55963e4447a05abb84709092a640834f471dcb2ea6515c6d8dfac6613eb"
+    },
+    {
+      "path": "host/core/go.sum",
+      "sha256": "cde7b21c6627bd3cfc042453150e8eaf8b6c80aa2df25d96f48b038050945f03"
+    }
+  ],
+  "verification": {
+    "path": ".cache/host-jobs-macos-01/implementation/verification02/result.json",
+    "sha256": "83295e427c7c29265968dc86aa4e59ebdd60221c656d5ff8bba16c51a3515c44"
+  },
+  "verificationSourceUnchanged": true,
+  "verificationModuleUnchanged": true,
+  "checks": [
+    {
+      "label": "format",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/gofmt",
+        "-l",
+        "${REPO}/host/core/internal/localpeer"
+      ],
+      "environmentOverride": {},
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "vet-darwin-amd64",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "vet",
+        "-mod=readonly",
+        "./internal/localpeer"
+      ],
+      "environmentOverride": {
+        "GOOS": "darwin",
+        "GOARCH": "amd64",
+        "CGO_ENABLED": "0"
+      },
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "compile-darwin-amd64",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "test",
+        "-c",
+        "-mod=readonly",
+        "-o",
+        "${REPO}/.cache/host-jobs-macos-01/implementation/verification02/localpeer-darwin-amd64.test",
+        "./internal/localpeer"
+      ],
+      "environmentOverride": {
+        "GOOS": "darwin",
+        "GOARCH": "amd64",
+        "CGO_ENABLED": "0"
+      },
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "vet-darwin-arm64",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "vet",
+        "-mod=readonly",
+        "./internal/localpeer"
+      ],
+      "environmentOverride": {
+        "GOOS": "darwin",
+        "GOARCH": "arm64",
+        "CGO_ENABLED": "0"
+      },
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "label": "compile-darwin-arm64",
+      "command": [
+        "${REPO}/.cache/host-01/toolchain/go1.27.2/go/bin/go",
+        "test",
+        "-c",
+        "-mod=readonly",
+        "-o",
+        "${REPO}/.cache/host-jobs-macos-01/implementation/verification02/localpeer-darwin-arm64.test",
+        "./internal/localpeer"
+      ],
+      "environmentOverride": {
+        "GOOS": "darwin",
+        "GOARCH": "arm64",
+        "CGO_ENABLED": "0"
+      },
+      "exitCode": 0,
+      "passed": true
+    }
+  ],
+  "artifacts": [
+    {
+      "path": ".cache/host-jobs-macos-01/implementation/verification02/localpeer-darwin-amd64.test",
+      "sha256": "dbabccd17ef27588b1b7d77add97d8eb1c5e84a3ff8ee8442207c1b54617115a",
+      "kind": "Darwin test executable cross-compiled on Linux; not executed"
+    },
+    {
+      "path": ".cache/host-jobs-macos-01/implementation/verification02/localpeer-darwin-arm64.test",
+      "sha256": "a8fc10511ab264150fa85bc60f56fede535aedc6f1bc2c794ea808a28910229f",
+      "kind": "Darwin test executable cross-compiled on Linux; not executed"
+    }
+  ],
+  "execution": {
+    "testsExecuted": 0,
+    "nativeMacOSExecuted": false,
+    "testsCrossCompiledOnly": true,
+    "darwin/amd64": "vet and test cross-compilation only",
+    "darwin/arm64": "vet and test cross-compilation only",
+    "nativePassesClaimed": 0
+  },
+  "compiledTests": [
+    "TestRequireUIDKernelObservationAndBorrowedOwnership",
+    "TestRequireUIDRejectsDatagram",
+    "TestRequireUIDRejectsUnconnectedStream",
+    "TestRequireUIDRejectsNilAndClosedConnection",
+    "TestCredentialPolicyVersionAndExactUID",
+    "TestFailureKeepsPrivateCause"
+  ],
+  "compiledPolicySubcases": [
+    "missing",
+    "wrong-version",
+    "wrong-uid",
+    "exact-uid"
+  ],
+  "evidenceHelper": {
+    "path": ".cache/host-jobs-macos-01/implementation/verify-02.py",
+    "sha256": "277fcdbdfac5aab9d6360165536571b9f245210a7c4a25d28392776f438db7d7",
+    "AST": "passed",
+    "Ruff": "passed with explicit --no-force-exclude; no native test implication"
+  },
+  "sourceFreeze": {
+    "path": ".cache/host-jobs-macos-01/implementation/freeze-02.json",
+    "sha256": "17658fbe214ecb0a6162ecdaad009ea45ac14b387ac11e7c0a0736dd448a76b2"
+  },
+  "sourcePatch": {
+    "path": ".cache/host-jobs-macos-01/implementation/source02.patch",
+    "sha256": "deba7b0270d24594e121fa20d12b5fd5266ed3779acdf6e96087338958f9e5a7"
+  },
+  "apiProvenance": {
+    "path": ".cache/host-jobs-macos-01/implementation/api-provenance.json",
+    "sha256": "1d88c52bafded3983861417cafe2a8818cbf06566bc4e394173a77e7806f3ed2"
+  },
+  "officialReferences": {
+    "publisher": "Apple OSS Distributions",
+    "checkedDate": "2026-10-16",
+    "purpose": "reference-only XUCRED_VERSION public ABI; no implementation vendoring",
+    "repositories": {
+      "xnu": {
+        "commit": "f6217f891ac0bb64f3d375211650a4c1ff8ca1ea",
+        "apiURL": "https://api.github.com/repos/apple-oss-distributions/xnu/commits/main",
+        "files": [
+          {
+            "path": "bsd/sys/un.h",
+            "url": "https://raw.githubusercontent.com/apple-oss-distributions/xnu/f6217f891ac0bb64f3d375211650a4c1ff8ca1ea/bsd/sys/un.h",
+            "sha256": "3a45612e83bd6182ffe78fe7ab40a346bd5ad773cc11590de00b2b7f467b9838",
+            "bytes": 5528
+          },
+          {
+            "path": "bsd/sys/ucred.h",
+            "url": "https://raw.githubusercontent.com/apple-oss-distributions/xnu/f6217f891ac0bb64f3d375211650a4c1ff8ca1ea/bsd/sys/ucred.h",
+            "sha256": "25b62ef73d2cc2c58c5081e4fea84906d4bffeff428d60f9111ed67c280a6f0b",
+            "bytes": 8407
+          }
+        ]
+      },
+      "Libc": {
+        "commit": "71bbe350ab79eef58113991d817ccc6165061a64",
+        "apiURL": "https://api.github.com/repos/apple-oss-distributions/Libc/commits/main",
+        "files": [
+          {
+            "path": "gen/FreeBSD/getpeereid.c",
+            "url": "https://raw.githubusercontent.com/apple-oss-distributions/Libc/71bbe350ab79eef58113991d817ccc6165061a64/gen/FreeBSD/getpeereid.c",
+            "sha256": "83b55cfe4624e67b7c5dcb44d6c997a2f795a4f9948daad6009612d3492e0d25",
+            "bytes": 1953
+          }
+        ]
+      }
+    }
+  },
+  "dependency": {
+    "go": "1.27.2",
+    "xSys": "v0.49.0",
+    "newModuleOrUpgrade": false,
+    "license": "BSD-3-Clause; existing tracked notices unchanged"
+  },
+  "review": {
+    "parentSourceReview": "Source02 construction accepted; narrow test-only cleanup repair inspected; native runtime pending",
+    "independentSourceReviewAccepted": true,
+    "nativeRuntimeAccepted": false,
+    "independentSourceReview": "Source02 scoped acceptance with no unresolved actionable finding; original P2-unconnected-duplicate-close preserved and closed at source level only",
+    "independentSourceReviewReceipt": {
+      "path": ".cache/host-jobs-macos-01/independent-review-02.json",
+      "sha256": "cdf8a38f2d422e3d6bfc961aba78e2bd0425b34981b6cb48444f72a5da27ee53"
+    },
+    "independentSourceReviewNote": {
+      "path": ".cache/host-jobs-macos-01/independent-review-02.md",
+      "sha256": "cc37e18055d7480d7798f2670a7e5ea203207bf85459406e708db9eccf3e0b5f"
+    },
+    "originalFindingReceipt": {
+      "path": ".cache/host-jobs-macos-01/independent-review-01.json",
+      "sha256": "6e8c0e6dd4373b05175339a41fe4204aab972cad088c2b48d6df204eebc0a77d"
+    }
+  },
+  "limits": [
+    "Expected UID is trusted caller policy, not a peer-supplied authorization claim",
+    "UID does not identify same-user program, code signature, consent, GUI/login session or remote paired identity",
+    "No GID/group/PID inventory exposed",
+    "No independent returned-socklen validation claim from maintained Xucred wrapper",
+    "No minimum supported macOS release invented",
+    "Actual socketpair credentials/address behavior, unconnected FileConn conversion and endpoint ownership remain runtime gates",
+    "No cross-user account, filesystem socket deployment, descriptor transfer, launchd or GUI/TCC qualification",
+    "No service/listener/IPC protocol, jobs backend or host executable/diagnostic change"
+  ],
+  "capabilityOrStagePromotion": false,
+  "repairPatch": {
+    "path": ".cache/host-jobs-macos-01/implementation/repair-02.patch",
+    "sha256": "781b1a407c2464f368ad9c511cd122c994b7f0a04cbeb22da0cbdac6bdf23d56"
+  },
+  "historicalVerification01": {
+    "receipt": {
+      "path": ".cache/host-jobs-macos-01/implementation/verification01/result.json",
+      "sha256": "a90021508e910a628d461fff2e86bac7f6fe7e76ac99a968036eb48f41af8a4d"
+    },
+    "scope": "Original compiler identity/module verify/format/vet/crosscompile; unchanged compiler/module reused, not repeated",
+    "sourceFreeze": {
+      "path": ".cache/host-jobs-macos-01/implementation/freeze.json",
+      "sha256": "89eb735a86a39c9884cd14a9fd5ec7cc403dc58b927bcd9679d6199d29d85a96"
+    }
+  },
+  "repair": {
+    "scope": "Test-only checked t.Cleanup close for unconnected FileConn duplicate; production RequireUID unchanged",
+    "productionSourceUnchangedFrom01": true,
+    "finding": "Independent review found ignored deferred close error could hide failed test fixture retirement",
+    "nativeEvidence": "none; zero tests executed in either verification",
+    "independentRepairClosure": "Accepted at source02 level: checked single Close via t.Cleanup/t.Error; no native fault injection or runtime claim"
+  }
+}
