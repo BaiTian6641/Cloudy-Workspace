@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "HOST-DARWIN-BOOT01 internal real fixed-kernel-node boot UUID observation",
+  "acceptance": "Parent and independent source/compilation/actual raw native/archive/cleanup review accept scoped Darwin boot observation; no stage/capability promotion",
+  "sources": [
+    {
+      "path": "host/core/internal/bootidentity/boot_darwin.go",
+      "sha256": "6ff5f925196720cffc82abdfe5f6531d9653c3d9b181fdd3c34f332d33dbeaca"
+    },
+    {
+      "path": "host/core/internal/bootidentity/boot_darwin_test.go",
+      "sha256": "79172d126ac10587aa8bb796a7c1f69ea7baca611dd5f0436aaaab27fb0c2a4a"
+    }
+  ],
+  "modules": [
+    {
+      "path": "host/core/go.mod",
+      "sha256": "216f549ff9871fea87351318ca6420efdfefeeaf1c0afa6a944ec41d2de70b4c"
+    },
+    {
+      "path": "host/core/go.sum",
+      "sha256": "4e77c00cd0a32a85bd48f74790fc4f5fdb35d5e8e715d4b1fb131bcf7ce2d60a"
+    }
+  ],
+  "sourceFreeze": {
+    "path": ".cache/host-darwin-boot-01/freeze-01.json",
+    "sha256": "15b06dc1b321fbb6ed8ebbd2c2d30195b7c77e731e35bfb6a1ba6fc72ae2eced"
+  },
+  "independentSourceReview": {
+    "path": ".cache/host-darwin-boot-01/independent-source-review-01.json",
+    "sha256": "95ef15f5ed990ca884ffd0a3018b39d1629b1ff8eff4e6d0352802ab5eb48754"
+  },
+  "referenceMetadata": {
+    "path": ".cache/host-darwin-boot-01/reference-metadata.json",
+    "sha256": "92d125750ed304edda4d02840f05bb1b65e68accb208d3d3e0a58f57b4c02ab3"
+  },
+  "officialSourceIds": [
+    "R362",
+    "R363",
+    "R364",
+    "R365"
+  ],
+  "compiler": {
+    "selected": "Go1.27.2",
+    "target": "darwin/arm64",
+    "receipt": {
+      "path": ".cache/host-darwin-boot-01/build-entry-01/verification-01/result.json",
+      "sha256": "02c8be50986880be5a23734748240e9f29a16b14bf418b08314c229313109c1e"
+    },
+    "independentReview": {
+      "path": ".cache/host-darwin-boot-01/compile-review-01.json",
+      "sha256": "6f9f50dea2e95605a9b1e54b9858ee10c0e226ef34f1bcd822208d8d7b1d5168"
+    },
+    "allFourCommandsExitZero": true,
+    "testsExecuted": false,
+    "artifact": {
+      "sha256": "569f3e71681fa418f0299bff8f14cc3bc7e067053aae5f016ba4fe03f8b442f0",
+      "bytes": 4489378,
+      "format": "Mach-O64 arm64"
+    }
+  },
+  "nativePacket": {
+    "freeze": {
+      "path": ".cache/host-darwin-boot-01/native-entry-01/freeze-01.json",
+      "sha256": "109526cacda636dc5e3b0d72377a7387d2a651bcbae1c7071611193cc09786a0"
+    },
+    "manifest": {
+      "path": ".cache/host-darwin-boot-01/native-entry-01/packet-01/manifest.json",
+      "sha256": "520101a35d716a4df46e320693b862d325b0dece04a36276dcb18c089c9381b2"
+    },
+    "independentRecipeReview": {
+      "path": ".cache/host-darwin-boot-01/native-entry-01/independent-recipe-review-01.json",
+      "sha256": "05f60599053d5c0aa5a61e4c24c8748b303b0bc2224f50938a452854a847b2cb"
+    },
+    "transferFreeze": {
+      "path": ".cache/host-darwin-boot-01/native-entry-01/execute-freeze-01.json",
+      "sha256": "41070d1dbba2a7934a9e3c078b505c483dd0a97ab106a76f84531e54ec8d5b4c"
+    },
+    "transferResult": {
+      "path": "qualification/results/private/host-macos/2026-10-16-boot-native-01/receipt.json",
+      "sha256": "44781f1f9efe52ad81b613e970727059f5455ebcddc6ed2d11698c48bae1a2eb"
+    },
+    "terminal": {
+      "path": "qualification/results/private/host-macos/2026-10-16-boot-native-01/retrieve-terminal.stdout",
+      "sha256": "11fd6d37b79c85be94eaedeea4ba05aaa8b16f08d3b74811c6071eb142914133"
+    },
+    "runtime": {
+      "os": "macOS",
+      "version": "26.6.2",
+      "build": "25G83",
+      "arch": "arm64"
+    },
+    "counts": {
+      "topLevelPasses": 6,
+      "namedSubcasePasses": 18,
+      "aggregateNamedPasses": 24,
+      "skips": 0,
+      "failures": 0
+    },
+    "raceEnabled": false,
+    "testTimeoutSeconds": 20,
+    "directOwnerSeconds": 25,
+    "outerConnectionSeconds": 60,
+    "directChildrenReaped": true,
+    "ownedTempEmpty": true,
+    "identifierEmitted": false,
+    "realOperation": "One method queries actual fixed kernel node twice, requires valid equal canonical IDs; no reboot/login/installation change",
+    "otherCases": "Five pure top-level methods and18 malformed synthetic subcases; private query/error fixtures, not kernel fault injection"
+  },
+  "parserPreparation": {
+    "path": ".cache/host-darwin-boot-01/native-entry-01/parser-controls-parent-result-01.json",
+    "sha256": "219dbf4cc00febb90908913ad946c6337991e7cf563d145a58e1cec49b743584"
+  },
+  "ompCoworkers": {
+    "summary": {
+      "path": ".cache/host-darwin-boot-01/omp-public/summary.json",
+      "sha256": "2d82bcdad4411cb153e9fcefe12611d7abb505326ec15d34d63f5500b8a30d01"
+    },
+    "inputScope": "New public-only generic requirements and official references; no existing project source/private machine data",
+    "assignments": [
+      {
+        "model": "kimi-code/k3",
+        "elapsedSeconds": 137.747,
+        "exitCode": 0,
+        "stopReason": "stop",
+        "toolEvents": 0
+      },
+      {
+        "model": "zai/glm-5.3-flash",
+        "elapsedSeconds": 37.438,
+        "exitCode": 0,
+        "stopReason": "stop",
+        "toolEvents": 0
+      }
+    ],
+    "modelCodeAdopted": false,
+    "sourceAuthor": "Direct Codex GPT-6.1-Sol",
+    "disposition": "Kimi generic reader uncompiled/unadopted; Flash tests rejected for invented field/valid-variant error/unused import/native skip; parent source review governs adoption"
+  },
+  "unchanged": [
+    "Go1.27.2/xsys0.49.0 module sums and dependency choices",
+    "Linux boot implementation/tests and existing Linux CLI context",
+    "Host0.1.3, Darwin context remains honestly unsupported",
+    "Googlebook installed Console/Desktop0.1.15/code16"
+  ],
+  "limits": [
+    "Named node source-supported; no stable SDK/minimum macOS/sandbox/entitlement/distribution promise",
+    "Trust kernel view; upstream allocation follows kernel size and no hard call deadline is claimed",
+    "No cache/generation/substitution/persistence/fallback; query errors remain honest",
+    "No UUID output or authenticated/unique/installation/login/reboot-transition identity claim",
+    "No macOS jobs/event backend/service/listener/pairing/remote admission/stage capability promotion",
+    "No unchanged upstream or Linux test battery rerun"
+  ],
+  "archiveCleanup": {
+    "receipt": {
+      "path": "qualification/results/private/host-macos/2026-10-16-boot-native-01/archive-cleanup-receipt-01.json",
+      "sha256": "6c8e52193bd39a0defd12e41bb26f56b2af2a7e9699a3e3526de19e76deda1f8"
+    },
+    "archiveFiles": 11,
+    "exactSetAndAllHashesVerified": true,
+    "exactOwnedRootAbsent": true,
+    "separateAfterSuccessfulRunAndLocalArchive": true,
+    "rawTestsStdout": {
+      "path": "qualification/results/private/host-macos/2026-10-16-boot-native-01/archive-01/tests-bootidentity.stdout",
+      "sha256": "71a3ef91afe23d24ee8c2f33763001a938a3b0e3cfa3c371dbda1bb1a70055c8"
+    },
+    "rawTestsStderr": {
+      "path": "qualification/results/private/host-macos/2026-10-16-boot-native-01/archive-01/tests-bootidentity.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cleanupFreeze": {
+      "path": ".cache/host-darwin-boot-01/native-entry-01/archive-freeze-01.json",
+      "sha256": "2913d091440cf23cd7378befbef421e2b90006c0e6d13a68b17dae3b64baeca5"
+    }
+  },
+  "independentActualReview": {
+    "path": ".cache/host-darwin-boot-01/independent-actual-review-01.json",
+    "sha256": "ffefd9327628050a29acd8e841141a1aa3b4091df4ef274b36e73df2acf9f958"
+  }
+}

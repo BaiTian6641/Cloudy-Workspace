@@ -816,3 +816,13 @@ G24 was rechecked for fullscreen eligibility, pre-configuration callback orderin
 | --- | --- | --- | --- |
 | R360 | [Gradle dependency cache and offline mode](https://docs.gradle.org/current/userguide/dependency_caching.html) | reviewed | A missing required cached artifact fails offline resolution; distinguish it from a native-engine defect and preserve the failed build. |
 | R361 | [DependencyVerificationMode](https://docs.gradle.org/current/kotlin-dsl/gradle/org.gradle.api.artifacts.verification/-dependency-verification-mode/index.html) | reviewed | STRICT verification remains required; no checksum regeneration or lenient/off mode follows from a cache failure. Enum available since6.2; current9.8.1 docs inspected. |
+
+
+## macOS boot observation prerequisite
+
+| ID | Official reference | Review status | Development use |
+| --- | --- | --- | --- |
+| R362 | [Pinned Apple XNU boot-session sysctl declaration](https://github.com/apple-oss-distributions/xnu/blob/f6217f891ac0bb64f3d375211650a4c1ff8ca1ea/bsd/kern/kern_sysctl.c) | reviewed | kern.bootsessionuuid exports read-only uuid_string_t in inspected kern_sysctl.c2921–2923. Public sysctl transport does not make this named node a stable SDK/minimum-version guarantee; missing/restricted node fails, no fallback. Caller trusts its kernel view. Owner host core, P4-S1. |
+| R363 | [Pinned Apple XNU boot-session initialization](https://github.com/apple-oss-distributions/xnu/blob/f6217f891ac0bb64f3d375211650a4c1ff8ca1ea/iokit/Kernel/IOPMrootDomain.cpp) | reviewed | IOPMrootDomain::initializeBootSessionUUID4165–4175 calls uuid_generate/uuid_unparse_upper; source-backed boot initialization context, not authentication/uniqueness or a claim that the actual Mac runs this exact XNU commit. Owner host core, P4-S1. |
+| R364 | [Pinned Apple XNU UUID generation and formatting](https://github.com/apple-oss-distributions/xnu/blob/f6217f891ac0bb64f3d375211650a4c1ff8ca1ea/libkern/uuid/uuid.c) | reviewed | uuid_generate_random/uuid_generate set random-v4/RFC variant bits and uuid_unparse_upper formats uppercase. Cloudy accepts 36 ASCII UUIDv4 characters and canonicalizes only validated hexadecimal. No generated replacement, cross-reboot or login/installation identity claim. Owner host core, P4-S1. |
+| R365 | [Pinned x/sys BSD Sysctl wrapper](https://github.com/golang/sys/blob/b6b8557e8e2974925aec7a136ba0e323eedc5f43/unix/syscall_bsd.go#L415-L495) | reviewed | Selected unchanged x/sys v0.49.0 exports unix.Sysctl/SysctlArgs/SysctlRaw. Two-phase kernel-reported allocation and one trailing-NUL removal inspected; there is no caller-hard allocation cap, owned FD/Close or cancellation deadline. Named-node availability remains actual-platform scoped. Owner host core, P4-S1. |

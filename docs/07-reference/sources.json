@@ -7600,6 +7600,54 @@
       "sourceUpdatedOn": null,
       "note": "Official Gradle9.8.1 API enum DependencyVerificationMode, available since6.2, inspected: STRICT fails verification, LENIENT only logs errors and OFF disables checking. Cloudy retains --dependency-verification=strict through any scoped cache/recipe repair; no lenient/off mode or metadata regeneration. API documentation is separate from exact harness compiler and device results. Owner Android/build leader, P1-S4.",
       "refresh": "Before changing dependency resolution, verification policy or affected build recipe; preserve failed attempts and check only changed boundaries."
+    },
+    {
+      "id": "R362",
+      "title": "Pinned Apple XNU boot-session sysctl declaration",
+      "url": "https://github.com/apple-oss-distributions/xnu/blob/f6217f891ac0bb64f3d375211650a4c1ff8ca1ea/bsd/kern/kern_sysctl.c",
+      "publisher": "Apple Open Source",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2025-10-16",
+      "note": "kern.bootsessionuuid exports read-only uuid_string_t in inspected kern_sysctl.c2921–2923. Public sysctl transport does not make this named node a stable SDK/minimum-version guarantee; missing/restricted node fails, no fallback. Caller trusts its kernel view. Owner host core, P4-S1.",
+      "refresh": "Before changing the affected host reader, selected x/sys/kernel source assumptions or qualification claim; reuse unchanged evidence and preserve honest node-unavailable behavior."
+    },
+    {
+      "id": "R363",
+      "title": "Pinned Apple XNU boot-session initialization",
+      "url": "https://github.com/apple-oss-distributions/xnu/blob/f6217f891ac0bb64f3d375211650a4c1ff8ca1ea/iokit/Kernel/IOPMrootDomain.cpp",
+      "publisher": "Apple Open Source",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2025-10-16",
+      "note": "IOPMrootDomain::initializeBootSessionUUID4165–4175 calls uuid_generate/uuid_unparse_upper; source-backed boot initialization context, not authentication/uniqueness or a claim that the actual Mac runs this exact XNU commit. Owner host core, P4-S1.",
+      "refresh": "Before changing the affected host reader, selected x/sys/kernel source assumptions or qualification claim; reuse unchanged evidence and preserve honest node-unavailable behavior."
+    },
+    {
+      "id": "R364",
+      "title": "Pinned Apple XNU UUID generation and formatting",
+      "url": "https://github.com/apple-oss-distributions/xnu/blob/f6217f891ac0bb64f3d375211650a4c1ff8ca1ea/libkern/uuid/uuid.c",
+      "publisher": "Apple Open Source",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2025-10-16",
+      "note": "uuid_generate_random/uuid_generate set random-v4/RFC variant bits and uuid_unparse_upper formats uppercase. Cloudy accepts 36 ASCII UUIDv4 characters and canonicalizes only validated hexadecimal. No generated replacement, cross-reboot or login/installation identity claim. Owner host core, P4-S1.",
+      "refresh": "Before changing the affected host reader, selected x/sys/kernel source assumptions or qualification claim; reuse unchanged evidence and preserve honest node-unavailable behavior."
+    },
+    {
+      "id": "R365",
+      "title": "Pinned x/sys BSD Sysctl wrapper",
+      "url": "https://github.com/golang/sys/blob/b6b8557e8e2974925aec7a136ba0e323eedc5f43/unix/syscall_bsd.go#L415-L495",
+      "publisher": "The Go Authors",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Selected unchanged x/sys v0.49.0 exports unix.Sysctl/SysctlArgs/SysctlRaw. Two-phase kernel-reported allocation and one trailing-NUL removal inspected; there is no caller-hard allocation cap, owned FD/Close or cancellation deadline. Named-node availability remains actual-platform scoped. Owner host core, P4-S1.",
+      "refresh": "Before changing the affected host reader, selected x/sys/kernel source assumptions or qualification claim; reuse unchanged evidence and preserve honest node-unavailable behavior."
     }
   ]
 }
