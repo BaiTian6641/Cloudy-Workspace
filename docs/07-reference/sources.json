@@ -1402,7 +1402,7 @@
       "publisher": "Google",
       "category": "platform",
       "reviewStatus": "reviewed",
-      "checkedOn": "2026-10-15",
+      "checkedOn": "2026-10-16",
       "sourceUpdatedOn": null,
       "note": "Small Activity saved state versus process memory, persistence and dismissal; recreation and process-death evidence are separate.",
       "refresh": "Before changing task launch, saved state or process-restoration behavior."
@@ -3672,7 +3672,7 @@
       "publisher": "Google",
       "category": "security",
       "reviewStatus": "reviewed",
-      "checkedOn": "2026-10-15",
+      "checkedOn": "2026-10-16",
       "sourceUpdatedOn": null,
       "note": "API21; use credential-encrypted context, not device-protected context. Directory excluded from automatic remote backup; actual route needs verification. Owner: Android/security; API15, P1-S3/P3-S7.",
       "refresh": "Before changing the affected adapter, security policy or compatibility claim."
@@ -5774,7 +5774,7 @@
       "reviewStatus": "reviewed",
       "checkedOn": "2026-10-16",
       "sourceUpdatedOn": null,
-      "note": "Transactions commit only at successful endTransaction; existing ledger opens READWRITE without CREATE_IF_NECESSARY. Custom corruption handler denies rather than recreating replay state; page maximum bounds main database, not total filesystem overhead. Owner: platform/security; P1-S3 API50/API51.",
+      "note": "Transactions commit only at successful endTransaction; existing ledger opens READWRITE without CREATE_IF_NECESSARY. Custom corruption handler denies rather than recreating replay state; page maximum bounds main database, not total filesystem overhead. Owner: platform/security; P1-S3 API50/API51. Also supplies bound insert/update/delete and transaction-scoped catalog revision comparison; API52.",
       "refresh": "Before changing handoff caller, storage, replay or compatibility policy."
     },
     {
@@ -5860,6 +5860,18 @@
       "sourceUpdatedOn": null,
       "note": "EXTRA adds directory sync after DELETE journal unlink; FULL rollback mode can lose latest transaction after power loss. Cloudy selects EXTRA but makes no physical power-cut qualification claim. Owner: platform/security; P1-S3 API50/API51.",
       "refresh": "Before changing handoff caller, storage, replay or compatibility policy."
+    },
+    {
+      "id": "G205",
+      "title": "Android IDN ASCII canonicalization",
+      "url": "https://developer.android.com/reference/java/net/IDN",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2026-08-03",
+      "note": "IDN.toASCII(String,int) and USE_STD3_ASCII_RULES are publicAPI9. Existing vault DNS/IDN conversion moves unchanged into EndpointHost; do not broaden syntax or change credential binding during extraction. No DNS lookup or reachability/trust inference. Owner: platform/security; P1-S3 API52.",
+      "refresh": "Before changing endpoint normalization, accepted host syntax or credential binding compatibility."
     }
   ]
 }

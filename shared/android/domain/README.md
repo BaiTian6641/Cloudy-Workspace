@@ -1,6 +1,8 @@
-# Local window domain
+# Window, handoff and connection-profile domain
 
 Pure Kotlin/JVM source for P1-S1 local logical window identity, shared by independently packaged Console and Desktop. Package: `io.github.baitian6641.cloudy.domain`. It has no Android, UI, network, persistence, credential, process or live-operation state.
+
+The later `HandoffEnvelope` supplies the validated [v1 resource-envelope model](../../../docs/02-architecture/handoff-runtime-profile.md). `ConnectionProfileDraft`/`ConnectionProfile` now supply immutable app-owned endpoint configuration, with strict label/protocol/host/port, identity and revision validation. `EndpointHost` contains the existing vault canonicalization unchanged; identity delegates to it so credential binding and profile normalization agree. The [profile result](../../../qualification/results/P1-S3/2026-10-16-connection-profiles.md) executes all26 current domain and14 identity JVM cases. These models do not establish trust, resource enrollment, a network connection or a working editor.
 
 `WindowState.create` allocates a fresh UUID. Immutable rename preserves owner and logical ID. Schema1 `WindowSnapshot` restores only for the expected app owner and an exact lowercase canonical UUID; rejected snapshots return a typed reason. This is validation of local metadata, not an authenticated cross-app handoff.
 

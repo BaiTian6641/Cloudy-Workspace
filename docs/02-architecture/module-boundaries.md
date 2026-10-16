@@ -29,6 +29,8 @@ The implemented vertical slice is local window naming, fresh document creation, 
 
 App UI depends on shared models and services. Shared modules never depend on either app. Protocol schemas describe serialization without importing platform UI types. Host adapters depend on host-core interfaces; host core does not import OS-specific APIs directly. Design tokens have no product-state dependency.
 
+The [connection-profile increment](../../qualification/results/P1-S3/2026-10-16-connection-profiles.md) adds `:identity → :domain` so vault bindings and local endpoint profiles use the same unchanged `EndpointHost` normalization. Domain remains pure Kotlin/JVM with no reverse identity/platform dependency. `:platform` owns each app's actual profile SQLite store; the domain model owns no persistence, credential or trust authority. The native profile editor and registered-resource integration remain pending.
+
 SSH/SFTP engine adapters must be replaceable without redesigning navigation. Stream launch and integrated stream adapters expose different capability levels rather than pretending external-client lifecycle is controllable. USB ownership state is shared domain logic with backend-confirmed facts, not a boolean derived from a button.
 
 Console and Desktop reuse file/transfer source while owning credentials and journals separately. Console alone supplies its session browser and drop export staging; Desktop's later remote DocumentsProvider is not a dependency. X11 broker surfaces do not use the terminal renderer. Native RDP/VNC are separate modules from external stream launch and do not require the custom host agent.

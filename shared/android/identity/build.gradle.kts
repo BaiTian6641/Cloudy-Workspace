@@ -26,6 +26,8 @@ kotlin {
     }
 }
 dependencies {
+    // Credential and connection metadata must canonicalize logical endpoints identically.
+    implementation(project(":domain"))
     implementation(libs.biometric)
     // The public prompt host uses the current stable FragmentActivity API.
     api(libs.fragment)

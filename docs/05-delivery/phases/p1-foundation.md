@@ -90,6 +90,8 @@ The [handoff codec increment](../../../qualification/results/P1-S3/2026-10-16-ha
 
 The subsequent [caller/replay increment](../../../qualification/results/P1-S3/2026-10-16-handoff-admission.md) implements exact counterpart policy and a real app-private SQLite request ledger. Nineteen Android cases and two distinct-process phases pass; caller tests establish local denial only. Endpoint permissions/transport, real resource registration, signed sibling acceptance/denial and effect/lifecycle integration remain open. A local profile or generic window must not substitute for the requested terminal, desktop or file destination.
 
+The [connection-profile increment](../../../qualification/results/P1-S3/2026-10-16-connection-profiles.md) now provides the owning-app endpoint domain/store, with shared unchanged host normalization and transaction-checked edit tokens. Forty JVM cases,19 Android storage cases and two distinct-process phases pass. Native CRUD/editor restoration, actual product catalog isolation and credential/trust/resource integration remain required; full host profiles, SSH transport and P2/P3 prerequisites are not promoted by this storage result.
+
 Deliverables:
 
 - Identity/IPC/lifecycle library and schema fixtures

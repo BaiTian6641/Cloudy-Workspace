@@ -20,6 +20,10 @@ This qualifies only the tested local-window metadata/editor/restoration boundary
 
 The [actual result](../../../qualification/results/P1-S3/2026-10-16-handoff-admission.md) passes19 caller/storage cases and two separate-process phases. Caller acceptance from another app remains untested; no endpoint is exposed. Only the standalone test APK is installed/removed; new product APKs remain built-only. Generic local window and vault metadata are not an enrolled-resource registry.
 
+## Connection profile storage
+
+`ConnectionProfiles` supplies real app-private SQLite CRUD with immutable catalog generations, revision-checked edits/deletes, bounded capacity and explicit uncertain outcomes. It uses the shared domain endpoint model and contains no credential data or host trust. Read the [profile contract](../../../docs/02-architecture/connection-profiles.md) and [actual storage/process result](../../../qualification/results/P1-S3/2026-10-16-connection-profiles.md). Native editor integration and actual catalog isolation in both installed products remain next; this is not an enrolled-resource registry or a successful remote session.
+
 ## Local credential-management candidate
 
 `CloudyVaultActivity` is a real shared FragmentActivity/Compose implementation, instantiated within each owning APK. It provides explicit Save on this device, Check saved credential, confirmed local deletion, Refresh, Cancel authorization and Finish local cleanup. Check performs actual scoped vault decryption/decoding without displaying secrets or pretending to connect. A selected profile/binding is immutable before authorization; deletion identifies the opaque local record, with endpoint metadata explicitly described as context rather than proof.

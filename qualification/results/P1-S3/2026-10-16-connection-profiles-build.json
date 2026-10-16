@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "baseCommit": "b5a28b2b4f6c176bc4f379f51411737d945b93a6",
+  "sourceChangesUncommittedAtBuild": true,
+  "sources": [
+    {
+      "path": "shared/android/domain/src/main/kotlin/io/github/baitian6641/cloudy/domain/EndpointHost.kt",
+      "bytes": 3631,
+      "sha256": "37ca1e5cef343128f68dd27dbf595c76c49b768d739870cea8809a927f49e89a"
+    },
+    {
+      "path": "shared/android/domain/src/main/kotlin/io/github/baitian6641/cloudy/domain/ConnectionProfile.kt",
+      "bytes": 3412,
+      "sha256": "7d8dfabcfee886439afe6e0332418d1eb5cb5e10e64b7e158eb9cc1c5bd35ba7"
+    },
+    {
+      "path": "shared/android/domain/src/test/kotlin/io/github/baitian6641/cloudy/domain/EndpointHostTest.kt",
+      "bytes": 3533,
+      "sha256": "3d940493196c2cbdfdc6bab3fa6643534b138d312e882da9e530d8c7e59eec6d"
+    },
+    {
+      "path": "shared/android/domain/src/test/kotlin/io/github/baitian6641/cloudy/domain/ConnectionProfileTest.kt",
+      "bytes": 6245,
+      "sha256": "3d299dc53c8627d0ac4b924eb6212cc671012a00d04523775ffeb5b76b7c28e1"
+    },
+    {
+      "path": "shared/android/identity/src/main/kotlin/io/github/baitian6641/cloudy/identity/VaultValues.kt",
+      "bytes": 4894,
+      "sha256": "be21d6e5fc679159962ea319a2f6cc38a08285158445bcbe3e4fb03fc87942f2"
+    },
+    {
+      "path": "shared/android/identity/build.gradle.kts",
+      "bytes": 1336,
+      "sha256": "6f84ca5ab8ffc990b482cfd57b0eb7eb7b9cbbba49734a781caba68243fe4661"
+    },
+    {
+      "path": "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/ConnectionProfiles.kt",
+      "bytes": 17472,
+      "sha256": "2d54d0bc4dd7741ec6f5936874b1b6c6c509e7514d6edbcdc7225d2f0041f4f4"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/ConnectionProfilesTest.kt",
+      "bytes": 15106,
+      "sha256": "6920cbc8bb43a408a017ba38fbdc552acc5a0b2b44bde571b4a79a142395fd2e"
+    },
+    {
+      "path": "shared/android/platform/src/androidTest/kotlin/io/github/baitian6641/cloudy/platform/ConnectionProfilesProcessTest.kt",
+      "bytes": 4239,
+      "sha256": "1545fc5e314daaa786b73db607afaa574ba35f3316c05ffdead171df99aa40d3"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "apps/console/build/outputs/apk/debug/console-debug.apk",
+      "bytes": 31754472,
+      "sha256": "02bef80d8752a2855be6a2990ebf1fc9c2841537ad5901a3ffd592e4fb5eaab5"
+    },
+    {
+      "path": "apps/desktop/build/outputs/apk/debug/desktop-debug.apk",
+      "bytes": 31754476,
+      "sha256": "2ecae805a3f13f5d47dabab9382af7a5f0a9feb39ed348e3ffda55a99122c0e0"
+    },
+    {
+      "path": "shared/android/platform/build/outputs/apk/androidTest/debug/platform-debug-androidTest.apk",
+      "bytes": 32445283,
+      "sha256": "a74f88a4523c3989ce29a97ca2743560859f1de41dd1f0efee65a2e0a6c521bb"
+    }
+  ],
+  "build": "Strict build01 passed in44s; 253 tasks,72 executed; source hashes unchanged during build",
+  "checks": [
+    {
+      "path": ".cache/connection-profiles-01/build-01/console-lint-results-debug.xml",
+      "lintIssues": 0
+    },
+    {
+      "path": ".cache/connection-profiles-01/build-01/desktop-lint-results-debug.xml",
+      "lintIssues": 0
+    },
+    {
+      "path": ".cache/connection-profiles-01/build-01/platform-lint-results-debug.xml",
+      "lintIssues": 0
+    },
+    {
+      "path": ".cache/connection-profiles-01/build-01/identity-lint-results-debug.xml",
+      "lintIssues": 0
+    }
+  ],
+  "jvmTests": {
+    "domain": 26,
+    "identity": 14,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "androidTests": {
+    "profiles": 19,
+    "processSeed": 1,
+    "processVerify": 1,
+    "defaultProcessAssumptionSkip": 1
+  },
+  "deviceEvidence": "qualification/results/P1-S3/2026-10-16-connection-profiles.md",
+  "scope": "Local profile storage/domain; only standalone test APK installed and removed. Native editor, product catalog isolation, credentials/trust/network and handoff resource resolution pending."
+}
