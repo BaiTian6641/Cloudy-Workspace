@@ -1,13 +1,15 @@
 /* Each fresh iframe runs the real bundles and unmodified authored bridge. The only
  * substitute is the native endpoint: it captures INPUT payloads and admits credits.
  * Events are deliberately synthetic; no UA override or private xterm API is used.
+ * Probe keeps its historical schedules. Product boots the four-part /0 hash and checks
+ * only committed insertText, preedit cancellation, control bytes and close refusal.
  */
 "use strict";
 const cases = [];
 let activeCase = null;
 let smoke = null;
 (async () => {
-  const schedules = [
+  const schedules = surface === "probe" ? [
     ["startup-fit-output", "smoke"],
     ["rapid-stty", "rapid", "stty", rapidExpectation === "fixed" ? "stty" : "sttyttytyy", "stty"],
     ["paced-stty", "paced", "stty", "stty", "stty"],
@@ -21,6 +23,13 @@ let smoke = null;
     ["composition-cancel", "cancel", "中", "", ""],
     ["composition-enter", "enter", "中", "中\r", "中\r"],
     ["key-controls", "controls", "", "\x03\x7f\r", "\x03\x7f\r"],
+  ] : [
+    // No keydown is synthesized for insertText: the committed textarea event is the only input.
+    ["insert-text-no-keydown", "insert", "ab", "ab"],
+    ["unicode-combining-emoji", "insert-once", "e\u0301\u6f22👍", "e\u0301\u6f22👍"],
+    ["canceled-preedit-then-commit", "cancel-then-commit", "中", "中"],
+    ["enter-then-ctrl-c", "controls", "", "\r\x03"],
+    ["closed-attachment-no-replay", "closed", "a", "a"],
   ];
   function childTest(config) {
     const wait = () => new Promise(resolve => setTimeout(resolve, 20));
@@ -28,6 +37,7 @@ let smoke = null;
     const acknowledgments = [], resizes = [];
     const chunks = [], errors = [];
     const progress = phase => parent.postMessage({ kind: "progress", name: config[0], phase, chunks: chunks.map(chunk => [...chunk]), errors: [...errors], readyGeometry, acknowledgments: [...acknowledgments], resizes: [...resizes] }, "*");
+    let firstAnimationFrame = false;
     progress("fixture-started");
     window.addEventListener("error", event => errors.push(event.message));
     window.cloudyTerminal = {
@@ -50,8 +60,15 @@ let smoke = null;
       }
     };
     window.runInputCase = async () => {
+      // Virtual timers may advance before an iframe's first compositor frame. Start the
+      // readiness allowance only after the actual frame, without changing input schedules.
+      await new Promise(resolve => requestAnimationFrame(() => { firstAnimationFrame = true; resolve(); }));
       for (let n = 0; n < 100 && !ready; n++) await wait();
-      if (!ready) throw Error("real terminal did not become ready: " + document.getElementById("status").textContent);
+      if (!ready) throw Error("real terminal did not become ready: " + JSON.stringify({
+        status: document.getElementById("status").textContent,
+        firstAnimationFrame, visibility: document.visibilityState, fonts: document.fonts.status,
+        width: document.getElementById("terminal").clientWidth, height: document.getElementById("terminal").clientHeight
+      }));
       if (config[1] === "smoke") {
         const validGeometry = size => size && size.columns >= 2 && size.columns <= 512 && size.rows >= 1 && size.rows <= 256;
         if (!validGeometry(readyGeometry)) throw Error("READY geometry outside authored bridge bounds");
@@ -80,6 +97,57 @@ let smoke = null;
         textarea.dispatchEvent(new InputEvent("input", { bubbles: true, inputType, data }));
       };
       const composition = (type, data) => textarea.dispatchEvent(new CompositionEvent(type, { bubbles: true, data }));
+      if (surface === "product") {
+        const insertOnce = (value, data) => {
+          textarea.value = value;
+          textarea.setSelectionRange(value.length, value.length);
+          textarea.dispatchEvent(new InputEvent("input", { bubbles: true, cancelable: true, inputType: "insertText", data }));
+        };
+        const [name, mode, text] = config;
+        let stages = null;
+        if (mode === "insert") {
+          // Committed insertText only: no keydown is dispatched before the input event.
+          let value = "";
+          for (const char of text) { value += char; insertOnce(value, char); }
+        } else if (mode === "insert-once") {
+          insertOnce(text, text);
+        } else if (mode === "cancel-then-commit") {
+          composition("compositionstart", "");
+          textarea.value = text; composition("compositionupdate", text);
+          await wait();
+          textarea.value = "";
+          composition("compositionend", "");
+          await wait();
+          const cancelBytes = chunks.flat();
+          composition("compositionstart", "");
+          textarea.value = text; composition("compositionupdate", text);
+          await wait();
+          composition("compositionend", text);
+          await wait();
+          stages = { cancelBytes, commitBytes: chunks.flat() };
+        } else if (mode === "controls") {
+          key(13, "Enter");
+          key(67, "c", { ctrlKey: true });
+        } else if (mode === "closed") {
+          insertOnce(text, text);
+          await wait();
+          const beforeCloseBytes = chunks.flat();
+          const close = new Uint8Array(readyHeader);
+          const closeView = new DataView(close.buffer);
+          closeView.setUint8(5, 8); closeView.setUint16(6, 0);
+          closeView.setUint32(40, ++nativeSequence); closeView.setUint32(44, 0);
+          window.cloudyTerminal.onmessage({ data: close.buffer });
+          await wait(); await wait();
+          // Replay and new input after CLOSED must neither resend nor queue bytes.
+          insertOnce(text + "b", "b");
+          key(13, "Enter");
+          await wait(); await wait();
+          stages = { beforeCloseBytes, afterCloseBytes: chunks.flat() };
+        } else throw Error("unknown product case " + mode);
+        await wait(); await wait();
+        parent.postMessage({ name, bytes: chunks.flat(), chunks, errors, stages }, "*");
+        return;
+      }
       const [name, mode, text] = config;
       if (mode === "rapid" || mode === "paced") {
         let value = "";
@@ -104,6 +172,20 @@ let smoke = null;
     };
   }
   function script(source) { return "<script>" + source.replaceAll("</script", "<\\/script") + "</script>"; }
+  function productMatched(observed, config, expectedBytes) {
+    const stages = observed.stages || {};
+    if (observed.errors.length !== 0) return false;
+    if (JSON.stringify(observed.bytes) !== JSON.stringify(expectedBytes)) return false;
+    if (config[1] === "cancel-then-commit") {
+      return Array.isArray(stages.cancelBytes) && stages.cancelBytes.length === 0 &&
+        JSON.stringify(stages.commitBytes) === JSON.stringify(expectedBytes);
+    }
+    if (config[1] === "closed") {
+      return JSON.stringify(stages.beforeCloseBytes) === JSON.stringify(expectedBytes) &&
+        JSON.stringify(stages.afterCloseBytes) === JSON.stringify(stages.beforeCloseBytes);
+    }
+    return ["insert", "insert-once", "controls"].includes(config[1]);
+  }
   for (const config of schedules) {
     const frame = document.createElement("iframe");
     frame.style.cssText = "position:fixed;left:0;top:0;width:1000px;height:700px;border:0";
@@ -123,7 +205,7 @@ let smoke = null;
       window.addEventListener("message", listener);
     });
     frame.srcdoc = `<!doctype html><meta charset="utf-8"><style>${bundle.css} ${bundle.authoredCss}</style><div id="feedback"><span id="status"></span><button id="dismiss"></button></div><div id="terminal"></div>` +
-      script(`document.body.style.width="800px";document.body.style.height="500px";location.hash="00112233-4455-6677-8899-aabbccddeeff/ffeeddcc-bbaa-9988-7766-554433221100/1";(${childTest.toString()})(${JSON.stringify(config)});`) +
+      script(`const surface=${JSON.stringify(surface)};document.body.style.width="800px";document.body.style.height="500px";location.hash=${JSON.stringify(bootHash)};(${childTest.toString()})(${JSON.stringify(config)});`) +
       script(bundle.core) + script(bundle.fit) + script(bundle.bridge) + script("runInputCase().catch(error => parent.postMessage({error:String(error)}, '*'));");
     document.body.appendChild(frame);
     let observed;
@@ -131,11 +213,19 @@ let smoke = null;
     if (observed.error) throw Error(observed.error);
     if (config[1] === "smoke") { smoke = observed; continue; }
     const expectedBytes = Array.from(new TextEncoder().encode(config[3]));
-    const desiredBytes = Array.from(new TextEncoder().encode(config[4]));
-    cases.push({ ...observed, expectedBytes, desiredBytes,
-      regressionMatched: observed.errors.length === 0 && JSON.stringify(observed.bytes) === JSON.stringify(expectedBytes),
-      inputIntegrity: observed.errors.length === 0 && JSON.stringify(observed.bytes) === JSON.stringify(desiredBytes) });
+    const desiredBytes = Array.from(new TextEncoder().encode(config[4] === undefined ? config[3] : config[4]));
+    if (surface === "product") {
+      const matched = productMatched(observed, config, expectedBytes);
+      cases.push({ ...observed, expectedBytes, desiredBytes, regressionMatched: matched, inputIntegrity: matched });
+    } else {
+      cases.push({ ...observed, expectedBytes, desiredBytes,
+        regressionMatched: observed.errors.length === 0 && JSON.stringify(observed.bytes) === JSON.stringify(expectedBytes),
+        inputIntegrity: observed.errors.length === 0 && JSON.stringify(observed.bytes) === JSON.stringify(desiredBytes) });
+    }
   }
   activeCase = null;
-  document.getElementById("result").textContent = JSON.stringify({ smoke, cases, allInputIntegrity: cases.every(item => item.inputIntegrity) });
-})().catch(error => { document.getElementById("result").textContent = JSON.stringify({ error: String(error), smoke, cases, activeCase, allInputIntegrity: false }); });
+  const result = surface === "product"
+    ? { surface, bootHash, cases, allInputIntegrity: cases.length > 0 && cases.every(item => item.regressionMatched) }
+    : { smoke, cases, allInputIntegrity: cases.every(item => item.inputIntegrity) };
+  document.getElementById("result").textContent = JSON.stringify(result);
+})().catch(error => { document.getElementById("result").textContent = JSON.stringify({ ...(surface === "product" ? { surface, bootHash } : {}), error: String(error), smoke, cases, activeCase, allInputIntegrity: false }); });
