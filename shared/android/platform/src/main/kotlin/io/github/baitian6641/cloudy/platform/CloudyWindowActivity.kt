@@ -9,7 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import io.github.baitian6641.cloudy.design.WindowWorkspaceScreen
+import io.github.baitian6641.cloudy.domain.ConnectionProtocol
 import io.github.baitian6641.cloudy.domain.WindowNameProblem
 import io.github.baitian6641.cloudy.domain.WindowOwner
 import io.github.baitian6641.cloudy.domain.WindowRestore
@@ -28,6 +28,7 @@ abstract class CloudyWindowActivity : ComponentActivity() {
     private var state by mutableStateOf<WindowState?>(null)
     private var notice by mutableStateOf<String?>(null)
     private var systemNotice by mutableStateOf<String?>(null)
+    private lateinit var home: WorkspaceHomeController
 
     /** Ephemeral owner identity: a recreated Activity never inherits a live callback generation. */
     val activityGeneration: String = UUID.randomUUID().toString()
@@ -46,32 +47,48 @@ abstract class CloudyWindowActivity : ComponentActivity() {
             else -> WindowState.create(windowOwner, getString(defaultWindowNameResource))
         }
         if (restored is WindowRestore.Rejected) notice = getString(R.string.cloudy_restore_rejected)
+        home = WorkspaceHomeController(applicationContext, windowOwner)
         updateSystemLabel()
         setContent {
             CloudyAppTheme {
                 val current = windowContext
-                WindowWorkspaceScreen(
+                val homeState by home.state
+                WorkspaceHomeScreen(
                     appName = getString(appNameResource),
+                    owner = windowOwner,
                     windowId = current.windowId,
                     currentName = current.name,
                     notice = listOfNotNull(notice, systemNotice).joinToString("\n").ifEmpty { null },
-                    onRename = ::renameWindow,
-                    onNewWindow = ::newWindow,
-                    onClose = ::closeWindow,
-                    onCredentials = ::openCredentials,
-                    onProfiles = ::openProfiles,
-                    onSshTrust = ::openSshTrust,
-                    onDisplaySettings = ::openDisplaySettings,
-                    onSshAuthenticate = ::openSshAuthenticate,
-                    onSshFiles = ::openSshFiles,
-                    onFilesLocations = ::openFilesLocations,
-                    isDesktop = windowOwner == WindowOwner.DESKTOP,
-                    onVnc = remoteDesktopActivity?.let { destination ->
-                        { openRemoteDesktop(destination) }
-                    },
+                    state = homeState,
+                    actions = WorkspaceHomeActions(
+                        onConnect = ::connectHost,
+                        onRetry = home::refresh,
+                        onBrowseFiles = ::openSshFiles,
+                        onAddHost = ::openProfiles,
+                        onNewWindow = ::newWindow,
+                        onClose = ::closeWindow,
+                        onRename = ::renameWindow,
+                        onProfiles = ::openProfiles,
+                        onSshTrust = ::openSshTrust,
+                        onSshAuthenticate = ::openSshAuthenticate,
+                        onFilesLocations = ::openFilesLocations,
+                        onCredentials = ::openCredentials,
+                        onDisplaySettings = ::openDisplaySettings,
+                    ),
                 )
             }
         }
+    }
+
+    final override fun onStart() {
+        super.onStart()
+        // Foregrounding re-reads the stores; an in-flight read never replays a mutation.
+        home.refresh()
+    }
+
+    final override fun onStop() {
+        home.leave()
+        super.onStop()
     }
 
     final override fun onNewIntent(intent: Intent) {
@@ -83,6 +100,33 @@ abstract class CloudyWindowActivity : ComponentActivity() {
         WindowBundles.save(outState, windowContext)
         // Compose's saveable editor draft and the framework hierarchy have their own state.
         super.onSaveInstanceState(outState)
+    }
+
+    /** Connect routes only to a qualified operation; anything else is an honest typed state. */
+    private fun connectHost(row: HomeRow) {
+        when (row.profile.protocol) {
+            ConnectionProtocol.SSH -> {
+                if (windowOwner == WindowOwner.DESKTOP) {
+                    // The qualified SSH surface today is the session-linked file browser.
+                    home.report(null)
+                    openSshFiles()
+                } else {
+                    home.report(HomeMessage.TERMINAL_NOT_INTEGRATED)
+                }
+            }
+            ConnectionProtocol.VNC -> {
+                val destination = remoteDesktopActivity
+                if (destination != null) {
+                    home.report(null)
+                    home.recordUse(row, System.currentTimeMillis() / 1000)
+                    openRemoteDesktop(destination)
+                } else {
+                    home.report(HomeMessage.ROUTE_UNAVAILABLE)
+                }
+            }
+            ConnectionProtocol.RDP -> home.report(HomeMessage.RDP_NOT_INTEGRATED)
+            ConnectionProtocol.STREAM -> home.report(HomeMessage.STREAM_NOT_INTEGRATED)
+        }
     }
 
     private fun renameWindow(name: String): String? {

@@ -17,6 +17,9 @@ import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
 import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasSetTextAction
+import androidx.compose.ui.test.onAllNodesWithTag
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.v2.createEmptyComposeRule
 import androidx.compose.ui.test.onNodeWithText
@@ -137,6 +140,7 @@ abstract class WindowGeometryContract<A : CloudyWindowActivity>(
             compose.waitForIdle()
             val draft = "Geometry draft Ω unsaved"
             val selection = TextRange(2, 10)
+            expandAdvancedToNameEditor()
             compose.onNode(hasSetTextAction()).performScrollTo().performTextReplacement(draft)
             compose.onNode(hasSetTextAction()).performTextInputSelection(selection)
             fun assertPreserved() {
@@ -303,4 +307,21 @@ abstract class WindowGeometryContract<A : CloudyWindowActivity>(
     private fun rect(value: Rect) = JSONArray(listOf(value.left, value.top, value.right, value.bottom))
     private fun rect(value: androidx.compose.ui.geometry.Rect) =
         JSONArray(listOf(value.left, value.top, value.right, value.bottom))
+
+    /** The workspace home keeps the name editor under Advanced; expand it before editing. */
+    private fun expandAdvancedToNameEditor() {
+        compose.waitUntil(10_000) {
+            compose.onAllNodesWithTag("home_advanced").fetchSemanticsNodes().size == 1
+        }
+        compose.onNodeWithTag("home_advanced").performScrollTo().performClick()
+        compose.waitForIdle()
+        compose.waitUntil(10_000) {
+            try {
+                compose.onNode(hasSetTextAction()).fetchSemanticsNode()
+                true
+            } catch (_: AssertionError) {
+                false
+            }
+        }
+    }
 }

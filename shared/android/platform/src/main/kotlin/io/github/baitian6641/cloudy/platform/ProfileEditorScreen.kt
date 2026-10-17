@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,9 +17,11 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -26,6 +29,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -36,6 +40,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
@@ -198,6 +203,21 @@ private fun ProfileDraftEditor(
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 textStyle = MaterialTheme.typography.bodyLarge, shape = RoundedCornerShape(CloudyControlMetrics.fieldRadius),
                 modifier = Modifier.fillMaxWidth().testTag("profile_port"))
+            OutlinedTextField(value = draft.tags, onValueChange = { onDraftChange(draft.copy(tags = it)) },
+                label = { Text(stringResource(R.string.profile_tags)) }, enabled = editable, singleLine = true,
+                supportingText = { Text(stringResource(R.string.profile_tags_hint)) },
+                textStyle = MaterialTheme.typography.bodyLarge, shape = RoundedCornerShape(CloudyControlMetrics.fieldRadius),
+                modifier = Modifier.fillMaxWidth().testTag("profile_tags"))
+            Row(Modifier.fillMaxWidth().heightIn(min = CloudyControlMetrics.controlMinHeight)
+                .selectable(selected = draft.favorite, enabled = editable, role = Role.Checkbox,
+                    onClick = { onDraftChange(draft.copy(favorite = !draft.favorite)) })
+                .testTag("profile_favorite")
+                .padding(horizontal = CloudyControlMetrics.spaceSmall),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                Checkbox(checked = draft.favorite, onCheckedChange = null, enabled = editable)
+                Text(stringResource(R.string.profile_favorite), modifier = Modifier.weight(1f))
+            }
             ProfileActions {
                 ProfileButton(R.string.profile_save, "profile_save", editable, onSave, primary = true)
                 ProfileButton(R.string.profile_close_editor, "profile_close_editor", !busy, onCloseEditor)
@@ -243,6 +263,14 @@ private fun SavedProfileRow(profile: ConnectionProfile, busy: Boolean, onEdit: (
 @Composable
 private fun ProfileDetails(profile: ConnectionProfile) {
     Text(profile.label, style = MaterialTheme.typography.bodyLarge)
+    if (profile.favorite) {
+        Text(stringResource(R.string.profile_favorite_saved), style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant)
+    }
+    if (profile.tags.isNotEmpty()) {
+        Text(profile.tags.joinToString(" · "), style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant)
+    }
     val host = if (':' in profile.host && !profile.host.startsWith('[')) "[${profile.host}]" else profile.host
     Text(stringResource(R.string.profile_endpoint, protocolLabel(profile.protocol), host, profile.port),
         style = MaterialTheme.typography.bodyMedium)

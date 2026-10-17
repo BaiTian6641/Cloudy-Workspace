@@ -72,8 +72,30 @@ abstract class WindowActivityContract<A : CloudyWindowActivity>(
         ).performScrollTo().assertIsDisplayed()
     }
 
+    /** The workspace home keeps window/name tools under Advanced; expand before editing. */
+    private fun expandAdvanced() {
+        compose.waitUntil(10_000) {
+            compose.onAllNodesWithTag("home_advanced").fetchSemanticsNodes().size == 1
+        }
+        compose.onNodeWithTag("home_advanced").performScrollTo().performClick()
+        compose.waitForIdle()
+        waitForNameEditor()
+    }
+
+    private fun waitForNameEditor() {
+        compose.waitUntil(10_000) {
+            try {
+                compose.onNode(hasSetTextAction()).fetchSemanticsNode()
+                true
+            } catch (_: AssertionError) {
+                false
+            }
+        }
+    }
+
     @Test fun committedContextAndUnsavedDraftSurviveActivityRecreation() {
         val initial = observe()
+        expandAdvanced()
         assertEquals(expectedOwner.wireId, initial.snapshot.owner)
         assertEquals(string(defaultNameResource), initial.snapshot.name)
         assertTrue(initial.taskRoot)
@@ -96,6 +118,8 @@ abstract class WindowActivityContract<A : CloudyWindowActivity>(
         assertCommittedHeading(committedName)
         compose.activityRule.scenario.recreate()
         compose.waitForIdle()
+        // Advanced expansion is saveable; the editor returns once the home finishes reloading.
+        waitForNameEditor()
 
         val restored = observe()
         assertEquals(committed.snapshot, restored.snapshot)
@@ -113,6 +137,7 @@ abstract class WindowActivityContract<A : CloudyWindowActivity>(
 
     @Test fun invalidNameLeavesCommittedIdentityAndSystemLabelsUnchanged() {
         val before = observe()
+        expandAdvanced()
         compose.onNode(hasSetTextAction()).performTextReplacement("   ")
         applyName()
         compose.onNodeWithText(string(
@@ -124,6 +149,7 @@ abstract class WindowActivityContract<A : CloudyWindowActivity>(
 
     @Test fun hostKeyManagerOpensFromTheWorkspaceAndReturnsToTheSameWindow() {
         val before = observe()
+        expandAdvanced()
         compose.onNodeWithText(string(
             io.github.baitian6641.cloudy.design.R.string.cloudy_ssh_host_keys,
         )).performScrollTo().performClick()

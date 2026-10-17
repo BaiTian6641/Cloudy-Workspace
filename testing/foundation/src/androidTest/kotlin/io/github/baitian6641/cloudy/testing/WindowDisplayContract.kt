@@ -13,7 +13,10 @@ import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
+import androidx.compose.ui.test.onAllNodesWithTag
+import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTextInputSelection
@@ -61,6 +64,7 @@ abstract class WindowDisplayContract<A : CloudyWindowActivity>(
             val initial = observe()
             assertEquals(expectedOwner.wireId, initial.snapshot.owner)
             assertTrue(initial.taskRoot)
+            expandAdvancedToNameEditor()
             val text = "Unapplied display draft Ω"
             val selection = TextRange(2, 9)
             compose.onNode(hasSetTextAction()).performScrollTo().performTextReplacement(text)
@@ -103,6 +107,24 @@ abstract class WindowDisplayContract<A : CloudyWindowActivity>(
         } finally {
             try { baseline?.let { owner.restore(it, "workspace") } }
             finally { compose.activityRule.scenario.close() }
+        }
+    }
+
+
+    /** The workspace home keeps the name editor under Advanced; expand it before editing. */
+    private fun expandAdvancedToNameEditor() {
+        compose.waitUntil(10_000) {
+            compose.onAllNodesWithTag("home_advanced").fetchSemanticsNodes().size == 1
+        }
+        compose.onNodeWithTag("home_advanced").performScrollTo().performClick()
+        compose.waitForIdle()
+        compose.waitUntil(10_000) {
+            try {
+                compose.onNode(hasSetTextAction()).fetchSemanticsNode()
+                true
+            } catch (_: AssertionError) {
+                false
+            }
         }
     }
 

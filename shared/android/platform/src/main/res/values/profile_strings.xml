@@ -62,4 +62,9 @@
     <string name="profile_reapply_title">Reapply your draft?</string>
     <string name="profile_reapply_body">Replace the saved version you just reviewed with your draft. If it changes elsewhere first, review it again before saving.</string>
     <string name="profile_reapply_confirm">Reapply and save</string>
+    <string name="profile_tags">Tags (optional)</string>
+    <string name="profile_tags_hint">Comma-separated; they group this host on the workspace home.</string>
+    <string name="profile_favorite">Favorite host</string>
+    <string name="profile_favorite_saved">★ Favorite</string>
+    <string name="profile_invalid_tags">Tags use up to 16 comma-separated entries of 48 characters each, without control characters.</string>
 </resources>

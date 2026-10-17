@@ -1,14 +1,15 @@
 package io.github.baitian6641.cloudy.design
 
 /** Durable editing metadata is accepted only for the parent's validated window. */
-internal data class WindowDraft(
+data class WindowDraft(
     val text: String,
     val selectionStart: Int,
     val selectionEnd: Int,
     val tooLong: Boolean = false,
 )
 
-internal object WindowDraftCodec {
+/** Window-name draft persistence; shared by the platform workspace home shell. */
+object WindowDraftCodec {
     private const val Schema = 1
     const val MaximumUnits = 512
 

@@ -141,7 +141,7 @@ class ProfileEditorStateTest {
     @Test fun wrongOwnerSchemaAndOuterRecordTypesAreRejectedAllOrNothing() {
         assertEquals(ProfileEditorRestore.Rejected, ProfileEditorState.restore(saved(), WindowOwner.DESKTOP))
         val changes: List<(Bundle) -> Unit> = listOf(
-            { it.putString("schema", "1") }, { it.putLong("schema", 1) }, { it.putInt("schema", 2) },
+            { it.putString("schema", "2") }, { it.putLong("schema", 2) }, { it.putInt("schema", 3) },
             { it.putInt("pending", 1) }, { it.remove("pending") }, { it.putString("owner", "CONSOLE") },
             { it.putString("unexpected", "ignored?") }, { it.putString("draft", "not a record") },
         )
@@ -186,6 +186,43 @@ class ProfileEditorStateTest {
             change(fields(state))
             assertEquals(ProfileEditorRestore.Rejected, ProfileEditorState.restore(parcelRoundTrip(state), owner))
         }
+    }
+
+    @Test fun tagsAndFavoriteRoundTripAndLegacySchemaRestoresWithDefaults() {
+        val organized = fresh().copy(label = TextFieldValue("Workstation"),
+            tags = TextFieldValue("work, rack", TextRange(4)), favorite = true)
+        val result = checkNotNull(restored(parcelRoundTrip(saved(organized))).draft)
+        assertEquals(organized, result)
+        assertEquals("work, rack", result.tags.text)
+        assertEquals(TextRange(4), result.tags.selection)
+        assertTrue(result.favorite)
+
+        // A schema-1 in-progress edit from before organization fields restores with defaults.
+        val legacy = Bundle().apply {
+            putBundle(key, Bundle().apply {
+            putInt("schema", 1)
+            putString("owner", owner.wireId)
+            putBoolean("pending", false)
+            putBundle("draft", Bundle().apply {
+                putString("editor", UUID.randomUUID().toString())
+                putString("generation", generation)
+                putString("protocol", ConnectionProtocol.SSH.wireId)
+                putBoolean("version", false)
+                putString("label", "Legacy edit"); putInt("labelStart", 3); putInt("labelEnd", 3)
+                putString("host", "legacy.example"); putInt("hostStart", 0); putInt("hostEnd", 0)
+                putString("port", "22"); putInt("portStart", 2); putInt("portEnd", 2)
+            })
+            })
+        }
+        val legacyResult = checkNotNull(restored(parcelRoundTrip(legacy)).draft)
+        assertEquals("Legacy edit", legacyResult.label.text)
+        assertEquals("", legacyResult.tags.text)
+        assertFalse(legacyResult.favorite)
+        assertNull(legacyResult.version)
+
+        // A schema-1 record carrying organization keys is foreign and rejects rather than guesses.
+        val foreign = Bundle(legacy).apply { fields(this).putBoolean("favorite", true) }
+        assertEquals(ProfileEditorRestore.Rejected, ProfileEditorState.restore(parcelRoundTrip(foreign), owner))
     }
 
     @Test fun desktopProtocolsRestoreButConsoleCannotAdoptThemAndTextRemainsRedacted() {

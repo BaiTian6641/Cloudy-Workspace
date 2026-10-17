@@ -185,12 +185,15 @@ class ConnectionProfilesTest {
 
     @Test fun malformedMetadataAndNewerSchemaFailClosed() {
         insert()
-        changeDatabase("UPDATE metadata SET version=2")
-        denied(ConnectionProfilesCode.STORE_UNAVAILABLE, store().load())
+        // Metadata below the schema's own version marker is a tampered or partial state.
         changeDatabase("UPDATE metadata SET version=1")
-        changeDatabase("PRAGMA user_version=2")
         denied(ConnectionProfilesCode.STORE_UNAVAILABLE, store().load())
-        changeDatabase("PRAGMA user_version=1")
+        changeDatabase("UPDATE metadata SET version=2")
+        // A newer user_version refuses without a migration attempt; the v1 case migrated
+        // successfully is covered by ConnectionProfilesMigrationTest with a full fixture.
+        changeDatabase("PRAGMA user_version=3")
+        denied(ConnectionProfilesCode.STORE_UNAVAILABLE, store().load())
+        changeDatabase("PRAGMA user_version=2")
         changeDatabase("UPDATE metadata SET capacity='invalid'")
         denied(ConnectionProfilesCode.STORE_UNAVAILABLE, store().load())
     }

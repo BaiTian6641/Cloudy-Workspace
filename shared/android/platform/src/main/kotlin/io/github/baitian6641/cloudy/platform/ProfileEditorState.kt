@@ -17,6 +17,8 @@ internal data class ProfileEditorDraft(
     val label: TextFieldValue,
     val host: TextFieldValue,
     val port: TextFieldValue,
+    val tags: TextFieldValue = TextFieldValue(""),
+    val favorite: Boolean = false,
 ) {
     override fun toString(): String = "ProfileEditorDraft(redacted)"
 }
@@ -32,21 +34,24 @@ internal object ProfileEditorState {
     private const val KEY = "io.github.baitian6641.cloudy.profile-editor.v1"
     private val uuid = Regex("[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}")
     private val recordKeys = setOf("schema", "owner", "pending", "draft")
-    private val draftKeys = setOf("editor", "generation", "protocol", "version", "label", "labelStart", "labelEnd",
+    private val draftKeysV1 = setOf("editor", "generation", "protocol", "version", "label", "labelStart", "labelEnd",
         "host", "hostStart", "hostEnd", "port", "portStart", "portEnd")
+    private val draftKeysV2 = draftKeysV1 + setOf("tags", "tagsStart", "tagsEnd", "favorite")
+    private val draftKeys = draftKeysV2
     private val versionKeys = setOf("versionGeneration", "versionId", "versionRevision")
 
     fun newDraft(owner: WindowOwner, generation: String): ProfileEditorDraft {
         requireState(uuid.matches(generation))
         return ProfileEditorDraft(UUID.randomUUID().toString(), owner, generation, null,
-            ConnectionProtocol.SSH, field(""), field(""), field("22"))
+            ConnectionProtocol.SSH, field(""), field(""), field("22"), field(""), false)
     }
 
     fun editDraft(owner: WindowOwner, generation: String, profile: ConnectionProfile): ProfileEditorDraft {
         requireState(owner == profile.owner && uuid.matches(generation))
         return ProfileEditorDraft(UUID.randomUUID().toString(), owner, generation,
             ConnectionProfileVersion.create(generation, profile.id, profile.revision), profile.protocol,
-            field(profile.label), field(profile.host), field(profile.port.toString()))
+            field(profile.label), field(profile.host), field(profile.port.toString()),
+            field(profile.tags.joinToString(", ")), profile.favorite)
     }
 
     /** Structural checks preserve accepted composition; semantic endpoint checks belong at Save. */
@@ -68,7 +73,7 @@ internal object ProfileEditorState {
         draft?.let { validate(it, owner) }
         // Build the complete private record before replacing its destination key.
         val record = Bundle().apply {
-            putInt("schema", 1)
+            putInt("schema", 2)
             putString("owner", owner.wireId)
             putBoolean("pending", pendingMutation)
             putBundle("draft", draft?.let { value ->
@@ -85,6 +90,8 @@ internal object ProfileEditorState {
                     writeField(this, "label", value.label)
                     writeField(this, "host", value.host)
                     writeField(this, "port", value.port)
+                    writeField(this, "tags", value.tags)
+                    putBoolean("favorite", value.favorite)
                 }
             })
         }
@@ -97,12 +104,14 @@ internal object ProfileEditorState {
             if (!source.containsKey(KEY)) return ProfileEditorRestore.Missing
             val record = raw(source, KEY) as? Bundle ?: return ProfileEditorRestore.Rejected
             requireState(record.keySet() == recordKeys)
-            requireState(exact<Int>(record, "schema") == 1 && exact<String>(record, "owner") == owner.wireId)
+            val schema = exact<Int>(record, "schema")
+            // Schema 1 predates tags/favorite; its in-progress edits restore with empty defaults.
+            requireState((schema == 1 || schema == 2) && exact<String>(record, "owner") == owner.wireId)
             val pending = exact<Boolean>(record, "pending")
             val encodedDraft = raw(record, "draft")
             val draft = if (encodedDraft == null) null else {
                 requireState(encodedDraft is Bundle)
-                readDraft(encodedDraft as Bundle, owner)
+                readDraft(encodedDraft as Bundle, owner, schema)
             }
             ProfileEditorRestore.Restored(draft, pending)
         } catch (_: RuntimeException) {
@@ -110,9 +119,10 @@ internal object ProfileEditorState {
         }
     }
 
-    private fun readDraft(record: Bundle, owner: WindowOwner): ProfileEditorDraft {
+    private fun readDraft(record: Bundle, owner: WindowOwner, schema: Int): ProfileEditorDraft {
         val hasVersion = exact<Boolean>(record, "version")
-        requireState(record.keySet() == if (hasVersion) draftKeys + versionKeys else draftKeys)
+        val baseKeys = if (schema == 1) draftKeysV1 else draftKeysV2
+        requireState(record.keySet() == if (hasVersion) baseKeys + versionKeys else baseKeys)
         val generation = exact<String>(record, "generation")
         val version = if (hasVersion) ConnectionProfileVersion.create(
             exact<String>(record, "versionGeneration"), exact<String>(record, "versionId"),
@@ -120,9 +130,11 @@ internal object ProfileEditorState {
         ) else null
         val protocol = ConnectionProtocol.entries.firstOrNull { it.wireId == exact<String>(record, "protocol") }
         requireState(protocol != null)
+        val tags = if (schema == 1) field("") else readField(record, "tags", 1024)
+        val favorite = schema == 2 && exact<Boolean>(record, "favorite")
         return ProfileEditorDraft(exact<String>(record, "editor"), owner, generation, version,
             checkNotNull(protocol), readField(record, "label", 160), readField(record, "host", 1024),
-            readField(record, "port", 5)).also { validate(it, owner) }
+            readField(record, "port", 5), tags, favorite).also { validate(it, owner) }
     }
 
     private fun validate(draft: ProfileEditorDraft, owner: WindowOwner) {
@@ -135,6 +147,7 @@ internal object ProfileEditorState {
         validateField(draft.label, 160)
         validateField(draft.host, 1024)
         validateField(draft.port, 5)
+        validateField(draft.tags, 1024)
     }
 
     private fun validateField(value: TextFieldValue, limit: Int) {

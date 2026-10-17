@@ -210,7 +210,7 @@ class CloudyProfilesActivity : ComponentActivity() {
         if (!canInteract() || pendingMutation || next.editorId != old.editorId || next.owner != old.owner ||
             next.generation != old.generation || next.version !== old.version) return
         if (!ProfileEditorState.acceptsField(next.label, 160) || !ProfileEditorState.acceptsField(next.host, 1024) ||
-            !ProfileEditorState.acceptsField(next.port, 5)) {
+            !ProfileEditorState.acceptsField(next.port, 5) || !ProfileEditorState.acceptsField(next.tags, 1024)) {
             message = getString(R.string.profile_invalid_field)
             return
         }
@@ -222,14 +222,20 @@ class CloudyProfilesActivity : ComponentActivity() {
     private fun validate(value: ProfileEditorDraft): ConnectionProfileDraft? {
         val port = value.port.text.takeIf { it.isNotEmpty() && it.all { char -> char in '0'..'9' } }?.toIntOrNull()
         if (port == null) { message = getString(R.string.profile_invalid_port); return null }
+        // Comma-separated tags are user organization metadata; empty entries drop, domain
+        // validation rejects what remains malformed, and dedupe keeps the first spelling.
+        val tags = value.tags.text.split(',').map { it.trim() }.filter { it.isNotEmpty() }
+            .toCollection(java.util.LinkedHashSet())
         return try {
-            ConnectionProfileDraft.create(owner, value.label.text, value.protocol, value.host.text, port)
+            ConnectionProfileDraft.create(owner, value.label.text, value.protocol, value.host.text, port,
+                tags, value.favorite)
         } catch (error: ConnectionProfileValidationException) {
             message = getString(when (error.code) {
                 ConnectionProfileValidationCode.INVALID_LABEL -> R.string.profile_invalid_label
                 ConnectionProfileValidationCode.INVALID_PROTOCOL -> R.string.profile_invalid_protocol
                 ConnectionProfileValidationCode.INVALID_HOST -> R.string.profile_invalid_host
                 ConnectionProfileValidationCode.INVALID_PORT -> R.string.profile_invalid_port
+                ConnectionProfileValidationCode.INVALID_TAGS -> R.string.profile_invalid_tags
                 else -> R.string.profile_invalid_input
             })
             null
