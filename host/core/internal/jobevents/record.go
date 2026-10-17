@@ -1,4 +1,4 @@
-//go:build linux
+//go:build linux || darwin
 
 // Package jobevents stores bounded local job observations. Persisted status is
 // neither current process truth nor authority to execute or resume an operation.

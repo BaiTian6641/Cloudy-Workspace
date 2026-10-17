@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "status": "independently accepted scoped native evidence; parent source publication pending",
+  "scope": "Darwin local job-event storage only",
+  "runtime": {
+    "os": "macOS",
+    "version": "26.6.2",
+    "build": "25G83",
+    "arch": "arm64"
+  },
+  "sources": {
+    "host/core/internal/jobevents/cursor.go": "340aa3c8edd17c63ac1bd653d3fbe706c76642e073f76e0b10b9dec1eff78452",
+    "host/core/internal/jobevents/process_linux_test.go": "5950a2ea3df2dd14780fbadc53558da061c499fb817759c13e4fec22a8e354a3",
+    "host/core/internal/jobevents/record.go": "8154ae0bca13d872f25901b9f0840bc6f0ebdbb171dc556ac3032ae5b18e2e7f",
+    "host/core/internal/jobevents/store_darwin_test.go": "691b1ed3f6ed988ee720abc91424164aaf032d871811381dc8c84c5ae51bbbce",
+    "host/core/internal/jobevents/store_supported.go": "98c36b3974fe934e8bf10a926632ec8551a3d7d7bc044b79275bea6ab614c9b4",
+    "host/core/internal/jobevents/store_supported_test.go": "2ce3f1f3310f748ee7dc0b1010764eb4eafa79545b5e903f63b6d64a92366977"
+  },
+  "protectedInputs": {
+    "host/core/internal/bootidentity/boot_linux_test.go": "7a5365d5daef1c59cbcafde8ce7892867e291a462f8c3cb5074fcbd1a1f0fcfc",
+    "host/core/internal/bootidentity/boot_linux.go": "63e317107b0e42781456b7756326463366f81a7faf21315b5cbbf003ffd20698",
+    "host/core/internal/bootidentity/boot_darwin.go": "6ff5f925196720cffc82abdfe5f6531d9653c3d9b181fdd3c34f332d33dbeaca",
+    "host/core/internal/bootidentity/boot_darwin_test.go": "79172d126ac10587aa8bb796a7c1f69ea7baca611dd5f0436aaaab27fb0c2a4a",
+    "host/core/internal/jobs/types.go": "1abe1a972cb31f2939487dfa0861159a4592b278c53f0e9febb66311789e8b7e",
+    "host/core/go.mod": "216f549ff9871fea87351318ca6420efdfefeeaf1c0afa6a944ec41d2de70b4c",
+    "host/core/go.sum": "4e77c00cd0a32a85bd48f74790fc4f5fdb35d5e8e715d4b1fb131bcf7ce2d60a"
+  },
+  "compiler": {
+    "commands": 5,
+    "passed": true,
+    "inputsUnchanged": true,
+    "testExecution": false
+  },
+  "native": {
+    "passed": true,
+    "counts": {
+      "topLevelPasses": 5,
+      "namedSubcasePasses": 5,
+      "aggregateNamedPasses": 10,
+      "skips": 0,
+      "failures": 0
+    },
+    "testMethods": [
+      "TestDarwinReopenCursorAndRefusalPreservation",
+      "TestDarwinCompetingWriterLockTimeout",
+      "TestOpenRefusalAndReadOnlyPreflight",
+      "TestPermanentClaimAndCorruptionNoRepair",
+      "TestUnknownCommitReconcileAndStickyClose"
+    ],
+    "subcases": [
+      "missing",
+      "empty",
+      "oversize",
+      "symlink",
+      "fifo"
+    ],
+    "directCommands": 3,
+    "directChildrenReaped": true,
+    "ownedTempEmpty": true,
+    "raceEnabled": false,
+    "observations": "Actual boot reader; synthetic job statuses and injected uncertainty hooks."
+  },
+  "archive": {
+    "files": 11,
+    "hashes": {
+      "claimed.json": "7edc2296d43772ca3bfcb491d853435c462a880508ce708744de607e2621dde2",
+      "jobevents-darwin-arm64.test": "7b46a19c4ec3fe1b4fbd93d9f9d878336c5ce56208542c9d226f7915ab957d59",
+      "manifest.json": "4508951e09f6b8f556b452f5d35f87dbe7eedecaf6eb9965c8e3a71f8a89f1a6",
+      "os-build.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "os-build.stdout": "4a43dfdca7171a0b39600b7972ced1e826e3695061e1c85aa9ae6de43bffcd23",
+      "os-version.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "os-version.stdout": "3db9dd54f6160f2744d2428cda5edfb5b4bf1247b140a1673d82a65f456314ee",
+      "run_packet.py": "6c1bc0f70a372bf0935af9f51fff8d2031a9a3a07b0ecca2d1be8b39eed4958f",
+      "tests-jobevents.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tests-jobevents.stdout": "8ae66813973436e942cac07104f918c5ff2cb437cdd7f837e22267cb47152088",
+      "result.json": "8cc2095d55bf1164d552175ef3be45e95a6d37a38a1df1013cba806d97a1b560"
+    },
+    "explicitArchiveAck": true,
+    "commandsExitZero": 3,
+    "exactOwnedRootAbsent": true,
+    "automaticRetry": false,
+    "recursiveRemoval": false
+  },
+  "independentReview": {
+    "checks": 102,
+    "allMatch": true,
+    "findings": []
+  },
+  "evidence": {
+    "nativeReceipt": {
+      "path": "qualification/results/private/host-macos/2026-10-16-events-native-01/receipt.json",
+      "sha256": "994cd39f72420b9003ec8f2157a579fe7592a514d5c4a03009c878bbb2ad88c0"
+    },
+    "nativeTerminal": {
+      "path": "qualification/results/private/host-macos/2026-10-16-events-native-01/retrieve-terminal.stdout",
+      "sha256": "8cc2095d55bf1164d552175ef3be45e95a6d37a38a1df1013cba806d97a1b560"
+    },
+    "archiveCleanupReceipt": {
+      "path": "qualification/results/private/host-macos/2026-10-16-events-native-01/archive-cleanup-receipt-01.json",
+      "sha256": "c3f399ad87ae98aa2e69ac2be61c6cb6781409279886b6e5dfcaf8fa95c5abe8"
+    },
+    "sourceFreeze": {
+      "path": ".cache/host-darwin-events-01/source-01/freeze-01.json",
+      "sha256": "f9757aca5da66ecb94a24bc390ff8af201fba0138430504511adc0f445e9ae91"
+    },
+    "compiler": {
+      "path": ".cache/host-darwin-events-01/source-01/verification-01/result.json",
+      "sha256": "cd1daab20e536e4ec728618063feb367590800d503767482fb1c037de259a7d8"
+    },
+    "nativePacketFreeze": {
+      "path": ".cache/host-darwin-events-01/native-entry-01/freeze-01.json",
+      "sha256": "a317bd41340595f9bcd07f62d9dfdfc8bc6495b64baca882f61b3a44f882658f"
+    },
+    "actualSummary": {
+      "path": ".cache/host-darwin-events-01/native-entry-01/actual-summary-01.json",
+      "sha256": "8d88e18f3ccae4e5dcc4a3e39223588040b2079e42ed49cacd8886a78d78c1ca"
+    },
+    "independentActualReview": {
+      "path": ".cache/host-darwin-events-01/publication-proposal01/independent-actual-review01.json",
+      "sha256": "661e276e15ba451d12691a6bda1cab03e62ede1b801942333c15fa85c70f1197"
+    }
+  },
+  "limits": [
+    "No managed macOS job, CLI, recorder, service, pairing, remote admission, wire or P4 support promotion.",
+    "Native binary has no race instrumentation.",
+    "Injected commit/close failures qualify uncertainty glue, not real disk faults.",
+    "Successful sync is not reboot or power-loss durability.",
+    "Go t.TempDir performs normal fixture cleanup; in-test preservation assertions do not establish archival retention of every database.",
+    "Exact remote paths, connection/account data and root identities remain in ignored private records.",
+    "Historical Linux evidence retains its original source and scope."
+  ]
+}
