@@ -22,6 +22,11 @@ import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicInteger
 
+/** Creates an SSHJ client with the reviewed narrow algorithm policy and no quiet-channel timeout. */
+object SshX11ClientFactory {
+    @JvmStatic fun create(): SSHClient = SSHClient(SshObservationPolicy.create(SshReaderRetirement(), idleReadTimeoutMillis = 0))
+}
+
 /** Bidirectional blocking streams to the local X server, with one explicit close. */
 class SshX11Duplex(
     val input: InputStream,
@@ -91,6 +96,7 @@ class SshX11Forwarding private constructor(
     private val watchdog: ScheduledExecutorService,
     private val maxChannels: Int,
     private val handshakeTimeoutMillis: Long,
+    private val onError: (SshX11Code, String?) -> Unit,
 ) {
     /** Issued per owner, sent to the server, replaced on return; never valid anywhere else. */
     val fakeCookie: ByteArray = SshX11Cookie.generate()
@@ -134,7 +140,8 @@ class SshX11Forwarding private constructor(
         val serve: () -> Unit = serve@{
             try {
                 if (admitted) serveChannel(channel) else closeUnwanted(channel)
-            } catch (_: Throwable) {
+            } catch (error: Throwable) {
+                runCatching { onError(if (error is SshX11Exception) error.code else SshX11Code.CHANNEL_FAILED, error.message) }
                 // Every failure closes the channel without reaching the local server.
             } finally {
                 if (admitted) active.decrementAndGet()
@@ -202,8 +209,9 @@ class SshX11Forwarding private constructor(
         try {
             local.output.write(rewritten)
             local.output.flush()
-            val uplink = Thread.ofPlatform().daemon(true).name("cloudy-x11-up").start {
-                pump(local.input, remoteOut)
+            val uplink = Thread({ pump(local.input, remoteOut) }, "cloudy-x11-up").apply {
+                isDaemon = true
+                start()
             }
             try {
                 pump(remoteIn, local.output)
@@ -264,6 +272,7 @@ class SshX11Forwarding private constructor(
             authority: SshX11AuthorityProvider,
             maxChannels: Int = 16,
             handshakeTimeoutMillis: Long = 10_000,
+            onError: (SshX11Code, String?) -> Unit = { _, _ -> },
         ): SshX11Forwarding {
             if (maxChannels !in 1..64) throw SshX11Exception(SshX11Code.INVALID_INPUT, "channels")
             if (handshakeTimeoutMillis !in 1_000..30_000) {
@@ -280,7 +289,7 @@ class SshX11Forwarding private constructor(
                 owner.listener.gotConnect(channel)
             })
             owner = SshX11Forwarding(forwarder, endpoint, authority, workers, watchdog,
-                maxChannels, handshakeTimeoutMillis)
+                maxChannels, handshakeTimeoutMillis, onError)
             return owner
         }
     }

@@ -80,16 +80,20 @@ class SshX11ForwardingFixtureTest {
                 authorityProvider(target.xauthorityLocal, target.display, target.hostname))
             try {
                 val (exit, output, errors) = execXdpyinfo(client, forwarding)
-                // Diagnostic binding: the cookie the server stored must be this owner's fake cookie.
+                // sshd allocates 10, 11, … per concurrent session; bind the check to the display
+                // the server actually published rather than assuming the first offset.
+                val negotiated = Regex("localhost:(1[0-9]+)\\.0").find(output)
+                val display = negotiated?.groupValues?.get(1)?.toIntOrNull() ?: 10
                 val stored = Files.readAllBytes(Paths.get(target.xauthorityRemote))
                 val storedCookie = SshXauthorityCodec.findCookie(
-                    SshXauthorityCodec.parse(stored), 10, target.hostname)
+                    SshXauthorityCodec.parse(stored), display, target.hostname)
                 val cookieBound = storedCookie != null &&
                     java.security.MessageDigest.isEqual(storedCookie, forwarding.fakeCookie)
                 assertEquals("exit=$exit stdout=[$output] stderr=[$errors] " +
                     "fakeCookieBoundToRemote=$cookieBound", 0, exit)
-                assertTrue(output.contains("name of display:") && output.contains("localhost:10.0"))
+                assertTrue(output.contains("name of display:") && negotiated != null)
                 assertTrue(output.contains("version number:") && output.contains("11.0"))
+                assertTrue("fakeCookieBoundToRemote=$cookieBound", cookieBound)
             } finally {
                 forwarding.stop()
             }
