@@ -11,12 +11,16 @@
     <string name="display_density_standard">Standard pointer</string>
     <string name="display_density_compact">Compact pointer</string>
     <string name="display_density_accessibility">Controls retain their native minimum interactive targets and may grow for scaled text.</string>
+    <string name="display_terminal_heading">Terminal pointer</string>
+    <string name="display_terminal_scope">Terminal sessions follow the MobaXterm-style defaults: selection copies immediately, Shift+Insert pastes, and Ctrl+wheel adjusts font size. The interactive terminal is not integrated yet; this right-click choice is saved now and applies when it is.</string>
+    <string name="display_terminal_paste">Right-click pastes (default)</string>
+    <string name="display_terminal_menu">Right-click opens the context menu</string>
     <string name="display_refresh">Refresh current preferences</string>
     <string name="display_close">Close appearance settings</string>
     <string name="display_loading">Loading app preferences…</string>
     <string name="display_saving">Saving this choice…</string>
     <string name="display_saved">The choice was saved for this app.</string>
-    <string name="display_recovered">Some saved choices are invalid. Appearance uses System and density uses Comfortable where needed. Select a choice to replace its invalid saved value. Your other choices are kept.</string>
+    <string name="display_recovered">Some saved choices are invalid. Appearance uses System, density uses Comfortable and terminal right-click uses Paste where needed. Select a choice to replace its invalid saved value. Your other choices are kept.</string>
     <string name="display_write_unconfirmed">Your current choices are shown, but saving could not be confirmed. Refresh cannot confirm that they were saved. Select a choice again to retry saving.</string>
     <string name="display_unavailable">App preferences are unavailable. Current choices remain in use. Select Refresh to try again.</string>
     <string name="display_busy">This choice could not be submitted right now. Select it again to retry.</string>

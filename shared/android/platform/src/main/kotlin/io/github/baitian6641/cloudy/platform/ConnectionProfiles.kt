@@ -119,6 +119,22 @@ class ConnectionProfiles private constructor(private val configuration: Configur
         ConnectionProfilesResult.Success(Unit)
     }
 
+    /** A connect attempt records only the marker mutation; endpoint/trust data is untouched. */
+    fun recordUse(version: ConnectionProfileVersion, atEpochSeconds: Long): ConnectionProfilesResult<ConnectionProfileEntry> {
+        if (atEpochSeconds < 1) return failure(ConnectionProfilesCode.INVALID_INPUT)
+        return operate { db, catalog, attempting ->
+            versionFailure(catalog, version)?.let { return@operate it }
+            val old = catalog.profiles.single { it.id == version.id }
+            if (old.revision == Long.MAX_VALUE) return@operate failure(ConnectionProfilesCode.REVISION_EXHAUSTED)
+            val marked = old.recordedUse(atEpochSeconds)
+            attempting()
+            val changed = db.update("profiles", values(marked), "id=? AND revision=?",
+                arrayOf(version.id, version.revision.toString()))
+            check(changed == 1)
+            ConnectionProfilesResult.Success(entry(catalog.generation, marked))
+        }
+    }
+
     private fun versionFailure(catalog: ConnectionProfileCatalog, version: ConnectionProfileVersion): ConnectionProfilesResult.Failure? {
         if (catalog.generation != version.generation) return failure(ConnectionProfilesCode.STALE_GENERATION)
         val profile = catalog.profiles.singleOrNull { it.id == version.id }
@@ -167,6 +183,7 @@ class ConnectionProfiles private constructor(private val configuration: Configur
                     open(create = false).use { db ->
                         db.beginTransaction()
                         try {
+                            migrateIfNeeded(db)
                             val catalog = readCatalog(db, generation)
                             val result = operation(db, catalog) { mutationAttempted = true }
                             if (result is ConnectionProfilesResult.Success) db.setTransactionSuccessful()
@@ -198,10 +215,11 @@ class ConnectionProfiles private constructor(private val configuration: Configur
                     "version INTEGER NOT NULL, generation TEXT NOT NULL, owner TEXT NOT NULL, " +
                     "owner_package TEXT NOT NULL, capacity INTEGER NOT NULL)")
                 db.execSQL("CREATE TABLE profiles (id TEXT PRIMARY KEY NOT NULL, revision INTEGER NOT NULL, " +
-                    "owner TEXT NOT NULL, label TEXT NOT NULL, protocol TEXT NOT NULL, host TEXT NOT NULL, port INTEGER NOT NULL)")
-                db.execSQL("INSERT INTO metadata VALUES (1, 1, ?, ?, ?, ?)",
+                    "owner TEXT NOT NULL, label TEXT NOT NULL, protocol TEXT NOT NULL, host TEXT NOT NULL, " +
+                    "port INTEGER NOT NULL, tags TEXT NOT NULL, favorite INTEGER NOT NULL, last_used INTEGER NOT NULL)")
+                db.execSQL("INSERT INTO metadata VALUES (1, 2, ?, ?, ?, ?)",
                     arrayOf<Any>(generation, owner.wireId, configuration.ownerPackage, configuration.capacity))
-                db.execSQL("PRAGMA user_version=1")
+                db.execSQL("PRAGMA user_version=2")
                 db.setTransactionSuccessful()
             } finally { db.endTransaction() }
         }
@@ -222,33 +240,64 @@ class ConnectionProfiles private constructor(private val configuration: Configur
         } catch (error: Exception) { db.close(); throw error }
     }
 
+    /**
+     * Schema v1 -> v2 adds organization metadata (tags, favorite, last_used) with defaults that
+     * preserve every existing row's identity and revision. SQLite DDL is transactional here, so a
+     * failed migration rolls back with the caller's operation and the v1 store stays intact.
+     */
+    private fun migrateIfNeeded(db: SQLiteDatabase) {
+        val version = db.rawQuery("PRAGMA user_version", null).use {
+            check(it.moveToFirst()); it.getLong(0)
+        }
+        when (version) {
+            2L -> return
+            1L -> {
+                db.execSQL("ALTER TABLE profiles ADD COLUMN tags TEXT NOT NULL DEFAULT ''")
+                db.execSQL("ALTER TABLE profiles ADD COLUMN favorite INTEGER NOT NULL DEFAULT 0")
+                db.execSQL("ALTER TABLE profiles ADD COLUMN last_used INTEGER NOT NULL DEFAULT 0")
+                db.execSQL("UPDATE metadata SET version=2")
+                db.execSQL("PRAGMA user_version=2")
+            }
+            else -> throw SQLiteDatabaseCorruptException("STORE_UNAVAILABLE")
+        }
+    }
+
     private fun readCatalog(db: SQLiteDatabase, generation: String): ConnectionProfileCatalog {
         check(db.rawQuery("PRAGMA quick_check(1)", null).use { it.moveToFirst() && it.getString(0) == "ok" })
-        check(db.rawQuery("PRAGMA user_version", null).use { it.moveToFirst() && it.getLong(0) == 1L })
+        check(db.rawQuery("PRAGMA user_version", null).use { it.moveToFirst() && it.getLong(0) == 2L })
         db.rawQuery("SELECT singleton,version,generation,owner,owner_package,capacity FROM metadata", null).use { cursor ->
             check(cursor.count == 1 && cursor.moveToFirst())
             check(listOf(0, 1, 5).all { cursor.getType(it) == Cursor.FIELD_TYPE_INTEGER })
             check(listOf(2, 3, 4).all { cursor.getType(it) == Cursor.FIELD_TYPE_STRING })
-            check(cursor.getLong(0) == 1L && cursor.getLong(1) == 1L)
+            check(cursor.getLong(0) == 1L && cursor.getLong(1) == 2L)
             check(cursor.getString(2) == generation && cursor.getString(3) == owner.wireId)
             check(cursor.getString(4) == configuration.ownerPackage && cursor.getLong(5) == configuration.capacity.toLong())
         }
         val profiles = mutableListOf<ConnectionProfile>()
         val ids = mutableSetOf<String>()
-        db.rawQuery("SELECT id,revision,owner,label,protocol,host,port FROM profiles ORDER BY id", null).use { cursor ->
+        db.rawQuery("SELECT id,revision,owner,label,protocol,host,port,tags,favorite,last_used FROM profiles ORDER BY id", null).use { cursor ->
             check(cursor.count <= configuration.capacity)
             while (cursor.moveToNext()) {
-                check(listOf(0, 2, 3, 4, 5).all { cursor.getType(it) == Cursor.FIELD_TYPE_STRING })
-                check(listOf(1, 6).all { cursor.getType(it) == Cursor.FIELD_TYPE_INTEGER })
+                check(listOf(0, 2, 3, 4, 5, 7).all { cursor.getType(it) == Cursor.FIELD_TYPE_STRING })
+                check(listOf(1, 6, 8, 9).all { cursor.getType(it) == Cursor.FIELD_TYPE_INTEGER })
                 val id = cursor.getString(0)
                 check(canonicalUuid(id) && ids.add(id))
                 check(cursor.getString(2) == owner.wireId)
                 val protocol = ConnectionProtocol.entries.single { it.wireId == cursor.getString(4) }
                 val port = cursor.getLong(6)
                 check(port in 1L..65535L)
-                val draft = ConnectionProfileDraft.create(owner, cursor.getString(3), protocol, cursor.getString(5), port.toInt())
+                val encodedTags = cursor.getString(7)
+                val tags = if (encodedTags.isEmpty()) emptySet() else encodedTags.split('\n').toSet()
+                val favorite = cursor.getLong(8)
+                check(favorite == 0L || favorite == 1L)
+                val lastUsed = cursor.getLong(9)
+                check(lastUsed >= 0L)
+                val draft = ConnectionProfileDraft.create(owner, cursor.getString(3), protocol,
+                    cursor.getString(5), port.toInt(), tags, favorite == 1L)
                 check(draft.label == cursor.getString(3) && draft.host == cursor.getString(5))
-                profiles += ConnectionProfile.restore(id, cursor.getLong(1), draft)
+                // The stored encoding must round-trip through domain normalization exactly.
+                check(draft.tags == tags)
+                profiles += ConnectionProfile.restore(id, cursor.getLong(1), draft, lastUsed)
             }
         }
         return ConnectionProfileCatalog(generation, profiles)
@@ -257,6 +306,9 @@ class ConnectionProfiles private constructor(private val configuration: Configur
     private fun values(profile: ConnectionProfile): ContentValues = ContentValues().apply {
         put("id", profile.id); put("revision", profile.revision); put("owner", profile.owner.wireId)
         put("label", profile.label); put("protocol", profile.protocol.wireId); put("host", profile.host); put("port", profile.port)
+        // Domain validation guarantees tags contain no line separators; the join is reversible.
+        put("tags", profile.tags.joinToString("\n"))
+        put("favorite", if (profile.favorite) 1L else 0L); put("last_used", profile.lastUsedAt)
     }
 
     private fun entry(generation: String, profile: ConnectionProfile): ConnectionProfileEntry =

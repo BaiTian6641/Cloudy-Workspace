@@ -11,6 +11,7 @@ import androidx.compose.runtime.mutableStateOf
 import io.github.baitian6641.cloudy.design.CloudyAppearance
 import io.github.baitian6641.cloudy.design.CloudyDensity
 import io.github.baitian6641.cloudy.design.CloudyDisplayPreferences
+import io.github.baitian6641.cloudy.domain.TerminalRightClick
 import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.RejectedExecutionException
 import java.util.concurrent.ThreadPoolExecutor
@@ -21,6 +22,7 @@ enum class CloudyDisplayNotice { SAVED, RECOVERED_VALUES, WRITE_UNCONFIRMED, UNA
 @Immutable
 data class CloudyDisplayState(
     val preferences: CloudyDisplayPreferences = CloudyDisplayPreferences(),
+    val terminalRightClick: TerminalRightClick = TerminalRightClick.PASTE,
     val loading: Boolean = true,
     val saving: Boolean = false,
     val ready: Boolean = false,
@@ -31,7 +33,8 @@ data class CloudyDisplayState(
 
 internal enum class DisplayStorageCode { WRONG_OWNER, WRONG_THREAD, WRONG_STORAGE, UNAVAILABLE, WRITE_UNCONFIRMED }
 internal sealed interface DisplayStorageResult {
-    data class Success(val preferences: CloudyDisplayPreferences, val recovered: Boolean) : DisplayStorageResult
+    data class Success(val preferences: CloudyDisplayPreferences, val terminalRightClick: TerminalRightClick,
+                       val recovered: Boolean) : DisplayStorageResult
     data class Failure(val code: DisplayStorageCode, val runtimePreferences: CloudyDisplayPreferences? = null,
                        val recovered: Boolean = false) : DisplayStorageResult
 }
@@ -52,6 +55,8 @@ internal class CloudyDisplayPreferencesStorage(context: Context, preferencesName
     fun load(): DisplayStorageResult = guarded { readCurrent() }
     fun setAppearance(value: CloudyAppearance): DisplayStorageResult = write("appearance", value.name)
     fun setDensity(value: CloudyDensity): DisplayStorageResult = write("density", value.name)
+    fun setTerminalRightClick(value: TerminalRightClick): DisplayStorageResult =
+        write("terminalRightClick", value.name)
 
     private fun write(key: String, value: String): DisplayStorageResult = guarded {
         var attempted = false
@@ -75,14 +80,17 @@ internal class CloudyDisplayPreferencesStorage(context: Context, preferencesName
         val values = preferences.all
         val appearanceValue = values["appearance"]
         val densityValue = values["density"]
+        val rightClickValue = values["terminalRightClick"]
         val appearance = CloudyAppearance.entries.firstOrNull { it.name == appearanceValue }
         val density = CloudyDensity.entries.firstOrNull { it.name == densityValue }
+        val rightClick = TerminalRightClick.entries.firstOrNull { it.name == rightClickValue }
         val recovered = (values.containsKey("appearance") && appearance == null) ||
-            (values.containsKey("density") && density == null)
+            (values.containsKey("density") && density == null) ||
+            (values.containsKey("terminalRightClick") && rightClick == null)
         // Invalid known values remain on disk until that particular user choice is saved.
         // Unrelated/unknown keys are never deleted or interpreted as another kind of state.
         return DisplayStorageResult.Success(CloudyDisplayPreferences(appearance ?: CloudyAppearance.SYSTEM,
-            density ?: CloudyDensity.COMFORTABLE), recovered)
+            density ?: CloudyDensity.COMFORTABLE), rightClick ?: TerminalRightClick.PASTE, recovered)
     }
 
     private fun guarded(action: () -> DisplayStorageResult): DisplayStorageResult {
@@ -119,6 +127,11 @@ class CloudyDisplaySettings private constructor(context: Context) {
         submit(mutation = true) { storage.setDensity(value) }
     }
 
+    fun setTerminalRightClick(value: TerminalRightClick) = onMain {
+        if (!mutable.value.ready || mutable.value.loading || mutable.value.saving) return@onMain
+        submit(mutation = true) { storage.setTerminalRightClick(value) }
+    }
+
     private fun submit(mutation: Boolean, operation: () -> DisplayStorageResult) {
         val old = mutable.value
         operationPending = true
@@ -136,7 +149,8 @@ class CloudyDisplaySettings private constructor(context: Context) {
                             // A cached SharedPreferences read cannot resolve a prior failed disk
                             // commit. Only a later explicit successful commit clears uncertainty.
                             val uncertain = previous.persistenceUncertain && !mutation
-                            CloudyDisplayState(result.preferences, loading = false, saving = false, ready = true,
+                            CloudyDisplayState(result.preferences, result.terminalRightClick,
+                                loading = false, saving = false, ready = true,
                                 notice = when {
                                     uncertain -> CloudyDisplayNotice.WRITE_UNCONFIRMED
                                     result.recovered -> CloudyDisplayNotice.RECOVERED_VALUES

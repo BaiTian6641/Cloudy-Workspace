@@ -22,7 +22,8 @@ class CloudyDisplaySettingsActivity : ComponentActivity() {
             CloudyAppTheme {
                 val state by settings.state
                 DisplaySettingsScreen(state = state, onAppearance = settings::setAppearance,
-                    onDensity = settings::setDensity, onRefresh = settings::refresh, onClose = ::finish)
+                    onDensity = settings::setDensity, onTerminalRightClick = settings::setTerminalRightClick,
+                    onRefresh = settings::refresh, onClose = ::finish)
             }
         }
     }

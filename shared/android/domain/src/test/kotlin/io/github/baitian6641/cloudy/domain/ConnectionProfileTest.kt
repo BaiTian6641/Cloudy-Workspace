@@ -14,7 +14,8 @@ class ConnectionProfileTest {
         owner: WindowOwner = WindowOwner.CONSOLE,
         label: String = "  Local endpoint  ", protocol: ConnectionProtocol = ConnectionProtocol.SSH,
         host: String = "EXAMPLE.org.", port: Int = 22,
-    ) = ConnectionProfileDraft.create(owner, label, protocol, host, port)
+        tags: Set<String> = emptySet(), favorite: Boolean = false,
+    ) = ConnectionProfileDraft.create(owner, label, protocol, host, port, tags, favorite)
 
     private fun rejected(code: ConnectionProfileValidationCode, block: () -> Unit) {
         val error = assertThrows(ConnectionProfileValidationException::class.java, block)
@@ -114,14 +115,63 @@ class ConnectionProfileTest {
         assertEquals(Long.MAX_VALUE, penultimate.revised(draft()).revision)
     }
 
+    @Test fun tagsNormalizeDedupeAndValidate() {
+        val tagged = draft(tags = linkedSetOf("  Work ", "work", "Lab ", "lab", "🧪"))
+        assertEquals(linkedSetOf("Work", "Lab", "🧪"), tagged.tags)
+        assertEquals(linkedSetOf("Work", "Lab", "🧪").toList(), tagged.tags.toList())
+        val sixteen = (1..16).map { "t$it" }.toSet()
+        assertEquals(16, draft(tags = sixteen).tags.size)
+        rejected(ConnectionProfileValidationCode.INVALID_TAGS) {
+            draft(tags = (1..17).map { "t$it" }.toSet())
+        }
+        for (tags in listOf(setOf(" "), setOf("ok", "  "), setOf("a".repeat(49)),
+                setOf("x\ny"), setOf("x\u2028y"), setOf("x\u2029y"), setOf("\uD800"), setOf("\uDC00"))) {
+            rejected(ConnectionProfileValidationCode.INVALID_TAGS) { draft(tags = tags) }
+        }
+        assertEquals("a".repeat(48), draft(tags = setOf("a".repeat(48))).tags.single())
+        assertEquals(emptySet<String>(), draft().tags)
+        assertEquals(false, draft().favorite)
+        assertEquals(true, draft(favorite = true).favorite)
+    }
+
+    @Test fun lastUsedMarkerStartsNeverAndRecordsUseWithoutEditingEndpoint() {
+        val profile = ConnectionProfile.create(draft(tags = setOf("work"), favorite = true))
+        assertEquals(0L, profile.lastUsedAt)
+        val used = profile.recordedUse(1_782_200_000L)
+        assertEquals(profile.id, used.id)
+        assertEquals(2L, used.revision)
+        assertEquals(1_782_200_000L, used.lastUsedAt)
+        assertEquals(profile.draft.label, used.label)
+        assertEquals(setOf("work"), used.tags)
+        assertEquals(true, used.favorite)
+        // Editing endpoint fields keeps the runtime marker; recording use keeps edited fields.
+        val renamed = used.revised(draft(label = "Renamed", tags = emptySet(), favorite = false))
+        assertEquals(1_782_200_000L, renamed.lastUsedAt)
+        assertEquals(3L, renamed.revision)
+        assertEquals(emptySet<String>(), renamed.tags)
+        assertEquals(false, renamed.favorite)
+        // A newer recording replaces the marker; the previous value is not retained.
+        assertEquals(1_782_200_100L, renamed.recordedUse(1_782_200_100L).lastUsedAt)
+        rejected(ConnectionProfileValidationCode.INVALID_LAST_USED) { profile.recordedUse(0L) }
+        rejected(ConnectionProfileValidationCode.INVALID_LAST_USED) { profile.recordedUse(-5L) }
+        rejected(ConnectionProfileValidationCode.INVALID_LAST_USED) {
+            ConnectionProfile.restore(profile.id, 1, profile.draft, -1L)
+        }
+        val last = ConnectionProfile.restore(profile.id, Long.MAX_VALUE, profile.draft, 9L)
+        rejected(ConnectionProfileValidationCode.INVALID_REVISION) { last.recordedUse(10L) }
+        assertEquals(9L, last.lastUsedAt)
+    }
+
     @Test fun stringRepresentationsDoNotRevealEndpointOrLocalIdentifiers() {
-        val value = ConnectionProfile.create(draft(label = "Private label", host = "private.example"))
+        val value = ConnectionProfile.create(draft(label = "Private label", host = "private.example",
+            tags = setOf("secret-team")))
         assertEquals("ConnectionProfile(redacted)", value.toString())
         assertEquals("ConnectionProfileDraft(redacted)", value.draft.toString())
         for (text in listOf(value.toString(), value.draft.toString())) {
             assertFalse(text.contains(value.id))
             assertFalse(text.contains(value.label))
             assertFalse(text.contains(value.host))
+            assertFalse(text.contains("secret-team"))
         }
     }
 }

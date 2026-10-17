@@ -35,12 +35,14 @@ import androidx.compose.ui.semantics.semantics
 import io.github.baitian6641.cloudy.design.CloudyAppearance
 import io.github.baitian6641.cloudy.design.CloudyControlMetrics
 import io.github.baitian6641.cloudy.design.CloudyDensity
+import io.github.baitian6641.cloudy.domain.TerminalRightClick
 
 @Composable
 internal fun DisplaySettingsScreen(
     state: CloudyDisplayState,
     onAppearance: (CloudyAppearance) -> Unit,
     onDensity: (CloudyDensity) -> Unit,
+    onTerminalRightClick: (TerminalRightClick) -> Unit,
     onRefresh: () -> Unit,
     onClose: () -> Unit,
 ) {
@@ -99,6 +101,19 @@ internal fun DisplaySettingsScreen(
                     }
                     DisplayChoice(stringResource(label), state.preferences.density == density, enabled,
                         "display_density_${density.name}") { onDensity(density) }
+                }
+            }
+            Text(stringResource(R.string.display_terminal_heading), style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier.semantics { heading() })
+            Text(stringResource(R.string.display_terminal_scope))
+            Column(Modifier.selectableGroup()) {
+                TerminalRightClick.entries.forEach { action ->
+                    val label = when (action) {
+                        TerminalRightClick.PASTE -> R.string.display_terminal_paste
+                        TerminalRightClick.CONTEXT_MENU -> R.string.display_terminal_menu
+                    }
+                    DisplayChoice(stringResource(label), state.terminalRightClick == action, enabled,
+                        "display_terminal_${action.name}") { onTerminalRightClick(action) }
                 }
             }
             Button(onClick = onRefresh, enabled = !state.loading && !state.saving,
