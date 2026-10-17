@@ -1,0 +1,247 @@
+{
+  "schemaVersion": 1,
+  "recordedDate": "2026-10-16",
+  "status": "actual native execution, verified archive and exact-owned cleanup passed",
+  "scope": "HOST-EVENTS-READ01 finite macOS local read-only diagnostic qualification",
+  "target": {
+    "model": "Mac Studio",
+    "modelAttribution": "Existing user-designated test target; no private host identity published.",
+    "runtime": {
+      "os": "macOS",
+      "version": "26.6.2",
+      "build": "25G83",
+      "arch": "arm64"
+    },
+    "toolchain": "Go 1.27.2"
+  },
+  "agentVersion": "0.1.5",
+  "localEventsVersion": 1,
+  "sources": {
+    "host/core/internal/jobevents/store_supported.go": "bbf2125eabb6c2f7422178cfdc98b7695980196798bb7458eab15d675193a056",
+    "host/core/internal/jobevents/readonly_supported_test.go": "8261b6edf9aa826b699d03553ed9f23b617cf7f6be0d12a4c72af4b328d504f2",
+    "host/core/internal/diagnostic/diagnostic.go": "8180919ff1ef9ca230f79e4b212fe5343195141282841eb4820a8c69f47ee993",
+    "host/core/internal/diagnostic/diagnostic_test.go": "483acddae68635b9cb753d901752384893e85f9a8f5c1c279182240545659772",
+    "host/core/internal/diagnostic/events_supported.go": "3892b8c0d69e6fa55e92411f396c46ad8bdfeed0246365ae4f7a4ad59b00d16a",
+    "host/core/internal/diagnostic/events_supported_test.go": "55fac5e309a04dc2df6ed5a59dd6ceced67fd1f80fa6336e8a7e42e7341ddb12",
+    "host/core/internal/diagnostic/events_other.go": "6d5f9cc3789ea1a8dbb383cd9af6d4b80845d5489e3ac6303c3a404ffe47e131",
+    "host/core/internal/diagnostic/events_other_test.go": "cbcacf4752ff5a5737268f524f98131eb5b0e8febb90bcc1dc2fca199300ee6d"
+  },
+  "artifacts": {
+    "diagnostic-darwin-arm64.test": {
+      "sha256": "44df808d48e22277ae47f81896fbb699ef170c79a44d571891974e91112484bb",
+      "bytes": 6361986
+    },
+    "jobevents-darwin-arm64.test": {
+      "sha256": "25c82ffe76a17eac07778fcb5139a328beb5b449c3e138ab3314d57156702e6e",
+      "bytes": 6236434
+    },
+    "cloudy-host-darwin-arm64": {
+      "sha256": "53845de37c7d53c970a07fe992e380f3447b5a1670a7f5589696677c09f91419",
+      "bytes": 5099970
+    }
+  },
+  "nativeTests": {
+    "diagnostic": {
+      "topLevelPasses": 6,
+      "namedSubcasePasses": 43,
+      "aggregateNamedPasses": 49,
+      "skips": 0,
+      "failures": 0
+    },
+    "readonlyStore": {
+      "topLevelPasses": 4,
+      "namedSubcasePasses": 7,
+      "aggregateNamedPasses": 11,
+      "skips": 0,
+      "failures": 0
+    },
+    "totalTopLevelMethods": 10,
+    "totalNamedSubcases": 50,
+    "totalAggregateNamedPasses": 60,
+    "skips": 0,
+    "failures": 0,
+    "raceEnabled": false,
+    "positiveDiagnosticRunValidated": true,
+    "standalonePositiveEventsReadExecuted": false,
+    "meaning": "Actual installation/boot readers and temporary database composition; known full Event/payload output verified. Synthetic persisted statuses and controlled faults do not establish managed jobs or OS fault behavior."
+  },
+  "cli": {
+    "casesPassed": 11,
+    "directCommandsIncludingTestsAndOsQueries": 15,
+    "cases": [
+      {
+        "label": "cli-version",
+        "exitCode": 0
+      },
+      {
+        "label": "cli-inspect",
+        "exitCode": 0
+      },
+      {
+        "label": "cli-events-badargs",
+        "exitCode": 2
+      },
+      {
+        "label": "cli-events-empty",
+        "exitCode": 1
+      },
+      {
+        "label": "cli-identity-init-missing",
+        "exitCode": 0
+      },
+      {
+        "label": "cli-events-missing",
+        "exitCode": 1
+      },
+      {
+        "label": "cli-identity-init-incomplete",
+        "exitCode": 0
+      },
+      {
+        "label": "cli-events-incomplete",
+        "exitCode": 1
+      },
+      {
+        "label": "cli-identity-init-corrupt",
+        "exitCode": 0
+      },
+      {
+        "label": "cli-events-corrupt",
+        "exitCode": 1
+      },
+      {
+        "label": "cli-identity-read-missing",
+        "exitCode": 0
+      }
+    ],
+    "statePreservation": true,
+    "scope": "Real standalone version/inspect/identity and expected events refusals; no successful standalone journal fixture/read."
+  },
+  "processAndEnvelope": {
+    "directChildrenReaped": true,
+    "ownedTempEmpty": true,
+    "runnerBudgetSeconds": 120,
+    "outerBudgetSeconds": 150,
+    "logCapPerStreamBytes": 262144,
+    "overflowObserved": false,
+    "automaticRetry": false
+  },
+  "archive": {
+    "status": "parent-reviewed exact archive; exact-owned cleanup passed",
+    "regularFiles": 41,
+    "directories": 10,
+    "hashes": {
+      "claimed.json": "81c8c6b2dfe8511a5fc6a62ab6876a0da44853510c128b6c9940c0b03a9d983b",
+      "cli-events-badargs.stderr": "6252ca1d9d59f660772b7a3890754733d4c97f00054ea09d9440ed6d3fdd3db0",
+      "cli-events-badargs.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cli-events-corrupt.stderr": "47c9cffee803ec4674f963defcc397bf534b5aa19386d267fac7658b6e9c8a6b",
+      "cli-events-corrupt.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cli-events-empty.stderr": "f320b38da7c60ce98723fbbb252702f6c5788c1f42814517ba444cddfecdd6e5",
+      "cli-events-empty.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cli-events-incomplete.stderr": "47c9cffee803ec4674f963defcc397bf534b5aa19386d267fac7658b6e9c8a6b",
+      "cli-events-incomplete.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cli-events-missing.stderr": "47c9cffee803ec4674f963defcc397bf534b5aa19386d267fac7658b6e9c8a6b",
+      "cli-events-missing.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cli-identity-init-corrupt.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cli-identity-init-corrupt.stdout": "3956d4d8aee0d7ce798cbb9e5fe11e04c9945b450c0c73216c8c6316bad53654",
+      "cli-identity-init-incomplete.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cli-identity-init-incomplete.stdout": "921b3c2c0cc7c0514c2fbea8a5a76df5decb74124791991918c59044044f4895",
+      "cli-identity-init-missing.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cli-identity-init-missing.stdout": "a107566dd9dd9bd5c2f4091c68f0136656867ba5d2ecf2f9b0d3bf5e43e7b7af",
+      "cli-identity-read-missing.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cli-identity-read-missing.stdout": "303b9adf263a0b90a98971c9fc61c43033d13b3a6e2ad86f92831cfc06121e00",
+      "cli-inspect.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cli-inspect.stdout": "d49400586403c17ecf9ccf20763d4bdcdb13f290fa4e22ba633910bd0b64fda5",
+      "cli-version.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cli-version.stdout": "800cf1c0392b24de7c0a1c6ea6778ecb433dec71c49a150bce96a98477527b2f",
+      "cloudy-host-darwin-arm64": "53845de37c7d53c970a07fe992e380f3447b5a1670a7f5589696677c09f91419",
+      "diagnostic-darwin-arm64.test": "44df808d48e22277ae47f81896fbb699ef170c79a44d571891974e91112484bb",
+      "jobevents-darwin-arm64.test": "25c82ffe76a17eac07778fcb5139a328beb5b449c3e138ab3314d57156702e6e",
+      "manifest.json": "7ee4145bd89da0cd6447bc87c329501272c4fd38ffb71c7d0ff86b8b3529b48d",
+      "os-build.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "os-build.stdout": "4a43dfdca7171a0b39600b7972ced1e826e3695061e1c85aa9ae6de43bffcd23",
+      "os-version.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "os-version.stdout": "3db9dd54f6160f2744d2428cda5edfb5b4bf1247b140a1673d82a65f456314ee",
+      "run_packet.py": "36f540032cfdfe875111597d5357e7f74118212c00c8926c86f3114562f93e3f",
+      "state-corrupt/installation-identity-v1/installation-identity.json": "ee07f9dac29bffeaafd4e63a58cc389864cd7eefa35b523736b2bd7d5cd63c89",
+      "state-corrupt/job-events-v1/events.db": "28fca28ef02d08bd61931c03999b7a5b822392132867682e88b2db492ee9f087",
+      "state-incomplete/installation-identity-v1/installation-identity.json": "dddae694a071b836de28426aab9aa0dc0de20051d1e515fce7f66a2b6a308c36",
+      "state-missing/installation-identity-v1/installation-identity.json": "d24070012676b28bdcaf6d6ae29676c1453ebefa69bd80c52da608774d483bf4",
+      "tests-diagnostic.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tests-diagnostic.stdout": "8e68df5d68692f3d0b4057198719afb5b8cdfe59220c840c9a11e87ad4c8f4a1",
+      "tests-readonly-store.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tests-readonly-store.stdout": "a90e133df5f19d1b07c00a53bb201b5f7583aed63ae3e44748b0ad628f363ee9",
+      "result.json": "ed64118b3efa342a605e19e994395e271d1e1019d230a7be63ffb5278e464c5c"
+    },
+    "identifiers": "Actual identity/output/root metadata remain private; only file hashes are reproduced."
+  },
+  "cleanup": {
+    "status": "PASS",
+    "archiveAcknowledgement": "Separate parent-controlled archive acknowledgement completed with exit code 0 before exact-owned cleanup.",
+    "exactOwnedRootAbsent": true,
+    "archivedFiles": 41,
+    "directoriesRemoved": 10,
+    "automaticRetry": false,
+    "postCleanupAbsenceCheckPassed": true,
+    "cleanupEvidence": "cleanupReceipt, cleanupOutput and postCleanupAbsence in evidence",
+    "rule": "Removal followed unchanged root identity and exact tree/file hash checks, then enumerated file unlink and empty-directory removal."
+  },
+  "evidence": {
+    "sourceFreeze": {
+      "path": ".cache/host-next-composition-01/implementation-01/freeze-03.json",
+      "sha256": "b26c4248947b3a7ab802df661fd6e1e7223e65427447bfe3b928e06898526201"
+    },
+    "sourceAndLocalResult": {
+      "path": "qualification/results/P4-S1/2026-10-16-host-events-read.json",
+      "sha256": "37524cb7964ac9a30ff20a4ac85d1c1090303069c04da2a37998d4c510f06e52"
+    },
+    "freshDiagnosticCompile": {
+      "path": ".cache/host-next-composition-01/native-mac-01/compile-01/result.json",
+      "sha256": "7cad0750647ebd4e84e903d1cba47c2726bdedf5ec6095ca93c56532e30a556f"
+    },
+    "reusedProductAndStoreCompile": {
+      "path": ".cache/host-next-composition-01/implementation-01/verification-02/result.json",
+      "sha256": "4032425778270e4f221af50c0e46130e37d7c4906df5bbe2f0c89cf749df3e5e"
+    },
+    "packetFreeze": {
+      "path": ".cache/host-next-composition-01/native-mac-01/freeze-01.json",
+      "sha256": "b6c760d448fcd3926deb2605ae7e51eca7f24f89f8a1961bf6e54ce67d4e1ac8"
+    },
+    "packetEntryReview": {
+      "path": ".cache/host-next-composition-01/native-mac-01/review-01/review.json",
+      "sha256": "2d0e4772fb8fc740a0191214efe532dbe97130134300bed3e2eeb97d6027db2d"
+    },
+    "nativeReceipt": {
+      "path": "qualification/results/private/host-macos/2026-10-16-eventsread-native-01/receipt.json",
+      "sha256": "d8affdf4241f364258868f8bb949e4196e89beb2c632f616fc0a3840d6230a8e"
+    },
+    "nativeTerminal": {
+      "path": "qualification/results/private/host-macos/2026-10-16-eventsread-native-01/retrieve-terminal.stdout",
+      "sha256": "ed64118b3efa342a605e19e994395e271d1e1019d230a7be63ffb5278e464c5c"
+    },
+    "parentArchiveReview": {
+      "path": "qualification/results/private/host-macos/2026-10-16-eventsread-native-01/parent-archive-review-01.json",
+      "sha256": "fbc0b4c9197765c9279f02d4f6b38447d02077a2113e41c9546725fabdb53b9b"
+    },
+    "cleanupReceipt": {
+      "path": "qualification/results/private/host-macos/2026-10-16-eventsread-native-01/cleanup-receipt-01.json",
+      "sha256": "f66281b2417ae264b6336124ec585edb5920a66cd29450a50b8a8173aa4b3cfb"
+    },
+    "cleanupOutput": {
+      "path": "qualification/results/private/host-macos/2026-10-16-eventsread-native-01/cleanup-runner-01.stdout",
+      "sha256": "497c44ce1c1f71e8f76ce3fd0c4029f940291966874a9b307d6efa3a72537fc7"
+    },
+    "postCleanupAbsence": {
+      "path": "qualification/results/private/host-macos/2026-10-16-eventsread-native-01/post-cleanup-absence.json",
+      "sha256": "a65dc259cc55ba87d7263b3981a5e036a4cab525166c485c51a6eda6c6f239ab"
+    }
+  },
+  "limits": [
+    "No native race instrumentation. Linux local-check counts remain separately attributed and are not added to this native result.",
+    "Positive events read is the real exported diagnostic.Run path inside a native test; standalone CLI cases exercise identity and refusals, not a successful stored-history invocation.",
+    "No live database access, exporter, managed-job execution, service, pairing, authenticated remote admission, wire delivery, Windows support or P4 stage promotion.",
+    "Go removes its test fixture directories normally; remaining packet/log/archive retention is not archival preservation of every temporary test database.",
+    "Successful file/directory sync and in-test preservation do not qualify reboot or power-loss durability.",
+    "Connection/account details, identifiers and raw private transcripts are excluded."
+  ]
+}

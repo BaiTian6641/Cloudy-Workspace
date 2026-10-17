@@ -7,14 +7,16 @@ import (
 	"fmt"
 	"io"
 	"runtime"
+	"strconv"
+	"strings"
 	"time"
 
 	"github.com/BaiTian6641/Cloudy-Workspace/host/core/internal/installation"
 )
 
-const AgentVersion = "0.1.4"
+const AgentVersion = "0.1.5"
 
-const usage = "usage: cloudy-host inspect | version | identity init|read --state-dir <existing-directory> | context read --state-dir <existing-directory>\n"
+const usage = "usage: cloudy-host inspect | version | identity init|read --state-dir <existing-directory> | context read --state-dir <existing-directory> | events read --state-dir <existing-directory> --after <reset|stream:sequence> --limit <1..64>\n"
 
 type Runtime struct {
 	OS        string `json:"os"`
@@ -75,6 +77,16 @@ func snapshot(now time.Time, facts Runtime) Snapshot {
 // deterministic tests; the executable supplies actual clock/runtime readers.
 // Writer errors are never displayed because their text may contain private data.
 func Run(args []string, out, errOut io.Writer, now func() time.Time, facts func() Runtime) int {
+	if len(args) > 0 && args[0] == "events" {
+		request, ok := parseEvents(args)
+		if !ok {
+			if errOut != nil {
+				_, _ = io.WriteString(errOut, usage)
+			}
+			return 2
+		}
+		return runEventsRead(request, out, errOut, now, facts)
+	}
 	if len(args) > 0 && args[0] == "context" {
 		// Reject the complete syntax before either platform or state access.
 		if len(args) != 4 || args[1] != "read" || args[2] != "--state-dir" || args[3] == "" {
@@ -155,4 +167,64 @@ func runIdentity(args []string, out, errOut io.Writer) int {
 		return 1
 	}
 	return 0
+}
+
+// Cursor grammar belongs to the local command, not the wire protocol. Keep it
+// platform-neutral so unsupported platforms still reject bad syntax before I/O.
+const eventsMaxSequence = uint64(1<<53 - 1)
+const eventsMaxBatch = 64
+
+type eventsRequest struct {
+	dir, stream string
+	after       uint64
+	limit       int
+}
+
+func eventsDecimal(value string, maximum uint64) (uint64, bool) {
+	if value == "" || len(value) > 16 || (len(value) > 1 && value[0] == '0') {
+		return 0, false
+	}
+	for _, ch := range value {
+		if ch < '0' || ch > '9' {
+			return 0, false
+		}
+	}
+	n, err := strconv.ParseUint(value, 10, 64)
+	return n, err == nil && n <= maximum
+}
+func eventsStream(value string) bool {
+	if len(value) != 36 {
+		return false
+	}
+	for i, ch := range []byte(value) {
+		if i == 8 || i == 13 || i == 18 || i == 23 {
+			if ch != '-' {
+				return false
+			}
+		} else if !((ch >= '0' && ch <= '9') || (ch >= 'a' && ch <= 'f')) {
+			return false
+		}
+	}
+	return value[14] == '4' && strings.ContainsRune("89ab", rune(value[19]))
+}
+func parseEvents(args []string) (eventsRequest, bool) {
+	if len(args) != 8 || args[0] != "events" || args[1] != "read" || args[2] != "--state-dir" || args[3] == "" ||
+		args[4] != "--after" || args[6] != "--limit" || len(args[5]) > 53 {
+		return eventsRequest{}, false
+	}
+	limit, ok := eventsDecimal(args[7], eventsMaxBatch)
+	if !ok || limit == 0 {
+		return eventsRequest{}, false
+	}
+	request := eventsRequest{dir: args[3], limit: int(limit)}
+	if args[5] == "reset" {
+		return request, true
+	}
+	stream, sequence, found := strings.Cut(args[5], ":")
+	after, ok := eventsDecimal(sequence, eventsMaxSequence)
+	if !found || !eventsStream(stream) || !ok {
+		return eventsRequest{}, false
+	}
+	request.stream, request.after = stream, after
+	return request, true
 }

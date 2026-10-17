@@ -44,6 +44,7 @@ type Store struct {
 	db                      *bolt.DB
 	engineCloseAttempted    bool
 	closed, ready, poisoned bool
+	readOnly                bool
 	closeErr                error
 	claimed                 bool
 	writableAttempt         bool
@@ -116,15 +117,28 @@ func directorySync(root *os.Root) error {
 
 // Init exclusively claims its permanent child. Every later failure retains that
 // claim; an existing child is never initialized, repaired or removed.
-func Init(dir, installationID string) (*Store, error) { return openStore(dir, installationID, true) }
+func Init(dir, installationID string) (*Store, error) {
+	return openStore(dir, installationID, true, false)
+}
 
 // Open requires existing state. It first validates using a read-only engine,
 // closes it, then reacquires writable ownership and validates again. A writable
 // engine Open may update its freelist before the second application validation;
 // rejection therefore is not a universal physically-read-only promise.
-func Open(dir, installationID string) (*Store, error) { return openStore(dir, installationID, false) }
+func Open(dir, installationID string) (*Store, error) {
+	return openStore(dir, installationID, false, false)
+}
 
-func openStore(dir, installationID string, create bool) (*Store, error) {
+// OpenReadOnly validates established state while retaining a read-only bbolt
+// engine for its entire lifetime. It never initializes state or performs the
+// writable freelist conversion used by Open. Filesystem read metadata such as
+// access times is outside this no-database-write claim. Every nonnil Store,
+// including one returned with an error, remains caller-owned and requires Close.
+func OpenReadOnly(dir, installationID string) (*Store, error) {
+	return openStore(dir, installationID, false, true)
+}
+
+func openStore(dir, installationID string, create, readOnly bool) (*Store, error) {
 	if !validUUID(installationID) {
 		return nil, &Failure{Code: "invalid-input"}
 	}
@@ -136,7 +150,7 @@ func openStore(dir, installationID string, create bool) (*Store, error) {
 	if err != nil {
 		return nil, &Failure{Code: "state-directory", cause: err}
 	}
-	s := &Store{parent: root, installation: installationID}
+	s := &Store{parent: root, installation: installationID, readOnly: readOnly}
 	fail := func(code string, cause error) (*Store, error) {
 		s.poisoned = true
 		return s, &Failure{Code: code, Claimed: s.claimed, CompletionUnknown: s.claimed || s.writableAttempt || code == "close-uncertain", cause: cause}
@@ -204,6 +218,10 @@ func openStore(dir, installationID string, create bool) (*Store, error) {
 			return fail("metadata", err)
 		}
 		s.stream = checked.meta.StreamID
+		if readOnly {
+			s.ready = true
+			return s, nil
+		}
 		err = s.db.Close()
 		s.engineCloseAttempted = true
 		if err != nil {
@@ -378,6 +396,9 @@ func (s *Store) AppendJobStatus(input StatusInput) (Receipt, error) {
 	defer s.mu.Unlock()
 	if s.closed || !s.ready {
 		return Receipt{}, &Failure{Code: "closed-or-unready"}
+	}
+	if s.readOnly {
+		return Receipt{}, &Failure{Code: "read-only"}
 	}
 	if s.poisoned {
 		return Receipt{}, &Failure{Code: "mutation-poisoned", CompletionUnknown: true}

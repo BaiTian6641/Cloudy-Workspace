@@ -1,0 +1,317 @@
+{
+  "schemaVersion": 1,
+  "recordedDate": "2026-10-16",
+  "status": "source and local affected-check evidence accepted; actual Mac qualification recorded separately",
+  "scope": "HOST-EVENTS-READ01 local read-only persisted job-event diagnostic",
+  "agentVersion": "0.1.5",
+  "localEventsVersion": 1,
+  "command": {
+    "syntax": "cloudy-host events read --state-dir <existing-trusted-directory> --after <reset|stream-uuid:sequence> --limit <1..64>",
+    "argumentCount": 8,
+    "cursor": "reset or canonical lowercase UUIDv4 plus colon and canonical ASCII decimal sequence 0..9007199254740991",
+    "limit": "Canonical ASCII decimal 1..64",
+    "sourceOrder": [
+      "Complete syntax validation",
+      "Read existing installation identity",
+      "Open existing store with lifetime ReadOnly engine",
+      "ReadAfter returns detached batch",
+      "Check Close",
+      "Capture UTC observation/runtime and encode bounded local record"
+    ],
+    "maximumOutputBytes": 1048576,
+    "successExit": 0,
+    "syntaxExit": 2,
+    "sourceOrOutputFailureExit": 1,
+    "platforms": {
+      "linux": "Implemented; affected race tests executed on actual Linux temporary state.",
+      "darwin": "Implemented; vet/cross-compilation completed here; subsequent actual native result recorded in the separate companion.",
+      "windows": "Valid syntax returns unsupported before state/time access; no event-store implementation or native execution claim."
+    }
+  },
+  "sources": {
+    "host/core/internal/jobevents/store_supported.go": "bbf2125eabb6c2f7422178cfdc98b7695980196798bb7458eab15d675193a056",
+    "host/core/internal/jobevents/readonly_supported_test.go": "8261b6edf9aa826b699d03553ed9f23b617cf7f6be0d12a4c72af4b328d504f2",
+    "host/core/internal/diagnostic/diagnostic.go": "8180919ff1ef9ca230f79e4b212fe5343195141282841eb4820a8c69f47ee993",
+    "host/core/internal/diagnostic/diagnostic_test.go": "483acddae68635b9cb753d901752384893e85f9a8f5c1c279182240545659772",
+    "host/core/internal/diagnostic/events_supported.go": "3892b8c0d69e6fa55e92411f396c46ad8bdfeed0246365ae4f7a4ad59b00d16a",
+    "host/core/internal/diagnostic/events_supported_test.go": "55fac5e309a04dc2df6ed5a59dd6ceced67fd1f80fa6336e8a7e42e7341ddb12",
+    "host/core/internal/diagnostic/events_other.go": "6d5f9cc3789ea1a8dbb383cd9af6d4b80845d5489e3ac6303c3a404ffe47e131",
+    "host/core/internal/diagnostic/events_other_test.go": "cbcacf4752ff5a5737268f524f98131eb5b0e8febb90bcc1dc2fca199300ee6d"
+  },
+  "protectedInputs": {
+    "host/core/cmd/cloudy-host/main.go": "f1275665c1caf81851c199fea669ffd675156d0f67e80080c98885028d0c5b54",
+    "host/core/internal/bootidentity/boot_darwin.go": "6ff5f925196720cffc82abdfe5f6531d9653c3d9b181fdd3c34f332d33dbeaca",
+    "host/core/internal/bootidentity/boot_darwin_test.go": "79172d126ac10587aa8bb796a7c1f69ea7baca611dd5f0436aaaab27fb0c2a4a",
+    "host/core/internal/bootidentity/boot_linux.go": "63e317107b0e42781456b7756326463366f81a7faf21315b5cbbf003ffd20698",
+    "host/core/internal/bootidentity/boot_linux_test.go": "7a5365d5daef1c59cbcafde8ce7892867e291a462f8c3cb5074fcbd1a1f0fcfc",
+    "host/core/internal/diagnostic/context_other.go": "b3fb8f3050316d59e2c93b4fd8813689f4c6774465eec8e98a8dfec9631a8957",
+    "host/core/internal/diagnostic/context_other_test.go": "048f33edfce65e4d48dfa42d52f5803d2d3ad45d471c547cef167f76f29b14b1",
+    "host/core/internal/diagnostic/context_supported.go": "bf3c3e60bae93b50303b07108368a7c0cdc6585e1ffd509c0f74a1fdb3d35252",
+    "host/core/internal/diagnostic/context_supported_test.go": "05e2aec05afe8d1471d6515df20466c7c19e994d4ee97d61459e81da4beef09d",
+    "host/core/internal/installation/profile_other.go": "e11b2c0924241c088178f1bff11efdc518b47adb79254433c54fec68d2c7035c",
+    "host/core/internal/installation/profile_windows.go": "46a938b39cfe99aaaf26914e9fb2baac6b905a8ff8fd9c8041fe0e954e602e65",
+    "host/core/internal/installation/profile_windows_test.go": "04c2e38c60bb3fbab7bf822daa080e6fc035957d5d47087044a3fe9dfbd3403a",
+    "host/core/internal/installation/store.go": "d061f32a7d10ab89cae77a2d8fb41c685f600a686bb37c5c8d7e2a89c1b5bd94",
+    "host/core/internal/installation/store_test.go": "4b3ddb3669e6c4c4c9c80fcbd6176407e6a65f74686ef7a73aca4ed909d49510",
+    "host/core/internal/installation/sync_other_test.go": "5f7844f64e5e7064c55dd9d5c71eedc7e4812839d9fdec32723a8e20de9af0d5",
+    "host/core/internal/installation/sync_windows_test.go": "a0818fbf173d2107f9b21db24cd430bab9ec97e973338f546cbb2d884b48ab96",
+    "host/core/internal/installation/windows_record.go": "fddede14adfb842694be4c623271a2c65953cd89bc3408bde8f17dff446ab1a0",
+    "host/core/internal/installation/windows_record_test.go": "4b9470ccc904b3269e609afe013a5f32a8c51555f3828b72e0de4ab87e3a4bf0",
+    "host/core/internal/jobevents/cursor.go": "340aa3c8edd17c63ac1bd653d3fbe706c76642e073f76e0b10b9dec1eff78452",
+    "host/core/internal/jobevents/process_linux_test.go": "5950a2ea3df2dd14780fbadc53558da061c499fb817759c13e4fec22a8e354a3",
+    "host/core/internal/jobevents/record.go": "8154ae0bca13d872f25901b9f0840bc6f0ebdbb171dc556ac3032ae5b18e2e7f",
+    "host/core/internal/jobevents/store_darwin_test.go": "691b1ed3f6ed988ee720abc91424164aaf032d871811381dc8c84c5ae51bbbce",
+    "host/core/internal/jobevents/store_supported_test.go": "2ce3f1f3310f748ee7dc0b1010764eb4eafa79545b5e903f63b6d64a92366977",
+    "host/core/internal/jobrecorder/capture_settle_native_linux_test.go": "26cdb908a0c9319b3c32682d8e8b5ff9c3f087ca2ca0b5af96fdf28e16e1b3ec",
+    "host/core/internal/jobrecorder/capture_wait_native_linux_test.go": "cf1e861d3873a1c246da1a9b33211fc8f89147944d43c3650bf5508018e53f17",
+    "host/core/internal/jobrecorder/native_linux_test.go": "0a24d8a3cd8ef695df29e1039602166082c9f5067ba40dadefd3ed7d77971d3d",
+    "host/core/internal/jobrecorder/recorder_linux.go": "e78fbc3f2a2fdea13263dc46016fa1824c7eceb54787f010389ca19365402c0f",
+    "host/core/internal/jobrecorder/recorder_linux_test.go": "4bf7037f89f6f87a73ad3b826a8ee3e8fb5ad6fb8028acf71199e21811bd4715",
+    "host/core/internal/jobs/backend_linux.go": "3cfae7cdb0bc3162bd11aa953bd56be22b23a5fe7c2e7262b7a5c5b48ae24491",
+    "host/core/internal/jobs/backend_linux_test.go": "b63cfd30d67347bf6fc793e14cb28d7b191a8800a37016973a25157a02f12382",
+    "host/core/internal/jobs/backend_windows_amd64.go": "1365ac6de9ba97b981e1afd78be1d280214dedec1aabcbb3dc9d5e9a8ff5fabc",
+    "host/core/internal/jobs/backend_windows_amd64_test.go": "bd5b72428a68bfc415810e1b48db66e805902e7152a3c43c9a9d33ac63cc383e",
+    "host/core/internal/jobs/native_linux_test.go": "492b1dc494251bcbbde72144fd902328860734cac70e18c86ae88377d20ea3fd",
+    "host/core/internal/jobs/native_windows_amd64_test.go": "d5ec836c2340b69c897fa84de119920b4090fa6ac36c1d68c051eab14035416f",
+    "host/core/internal/jobs/types.go": "1abe1a972cb31f2939487dfa0861159a4592b278c53f0e9febb66311789e8b7e",
+    "host/core/internal/jobs/types_test.go": "43d8fcb834d152f6faf8463e5722a922340879976a276d139203e6a1cd0a459c",
+    "host/core/internal/localpeer/peer_darwin.go": "8fc49a4691b4752f4548748947f29a575e682d7bda6a3706b0a3ebe61704d711",
+    "host/core/internal/localpeer/peer_darwin_test.go": "26f95dae319bd1fdd2fa8b6cc957feeedc6992b5b9c4a5f63ea2aa4646d29d1d",
+    "host/core/internal/localpeer/peer_linux.go": "54e490a636034f58766d02d244f6778b2acb970ac301d642c51afed302deb3fc",
+    "host/core/internal/localpeer/peer_linux_test.go": "649221d1e2fbae848ae9dd380ef770103de35a2a89b8a12fea3ab657ebeafd61",
+    "host/core/internal/managedrun/native_linux_test.go": "2396d3a5abb01dd6d7281ae2a78412149a428ae21b78c49ead5998b50ca5356e",
+    "host/core/internal/managedrun/run_linux.go": "03f970d8763e981a3d76f731279aa2f706348cdbbc51b3bf7601a2e9e9bb607d",
+    "host/core/internal/managedrun/run_linux_test.go": "1cc86fd89123781daac35cf6a9145a6452eb6b2afb08067c445561c6e07ab03c",
+    "host/core/tools/windows-jobs-native/common.go": "0fd719e55fb1b031205a8643623e46d093836d07f7bbbc7679ac656009ea75c5",
+    "host/core/tools/windows-jobs-native/common_test.go": "9c1341f4527f37c09545e474f30ca95c7fb2004d50d766558420cc80fbdfe69c",
+    "host/core/tools/windows-jobs-native/main_windows_amd64.go": "9d552678268029685da83677fa59d2f7c9e78f3b3ba9de959c329acf24408ce9",
+    "host/core/go.mod": "216f549ff9871fea87351318ca6420efdfefeeaf1c0afa6a944ec41d2de70b4c",
+    "host/core/go.sum": "4e77c00cd0a32a85bd48f74790fc4f5fdb35d5e8e715d4b1fb131bcf7ce2d60a"
+  },
+  "sourceProgression": {
+    "source01": "Preserved failed vet: malformed Runtime struct tag accidentally included import text.",
+    "source02": "Narrow struct-tag repair; actual twelve-command affected checks passed.",
+    "source03": "Only the actual-command fixture/expected full Event assertion changed; production byte-identical to source02."
+  },
+  "verification": {
+    "source02": {
+      "commandCount": 12,
+      "checks": [
+        {
+          "label": "format",
+          "target": "linux",
+          "exitCode": 0,
+          "passed": true
+        },
+        {
+          "label": "linux-vet",
+          "target": "linux",
+          "exitCode": 0,
+          "passed": true
+        },
+        {
+          "label": "jobevents-race",
+          "target": "linux",
+          "exitCode": 0,
+          "passed": true
+        },
+        {
+          "label": "diagnostic-race",
+          "target": "linux",
+          "exitCode": 0,
+          "passed": true
+        },
+        {
+          "label": "darwin-vet",
+          "target": "darwin",
+          "exitCode": 0,
+          "passed": true
+        },
+        {
+          "label": "darwin-jobevents-compile",
+          "target": "darwin",
+          "exitCode": 0,
+          "passed": true
+        },
+        {
+          "label": "darwin-diagnostic-compile",
+          "target": "darwin",
+          "exitCode": 0,
+          "passed": true
+        },
+        {
+          "label": "windows-vet",
+          "target": "windows",
+          "exitCode": 0,
+          "passed": true
+        },
+        {
+          "label": "windows-diagnostic-compile",
+          "target": "windows",
+          "exitCode": 0,
+          "passed": true
+        },
+        {
+          "label": "linux-product",
+          "target": "linux",
+          "exitCode": 0,
+          "passed": true
+        },
+        {
+          "label": "darwin-product",
+          "target": "darwin",
+          "exitCode": 0,
+          "passed": true
+        },
+        {
+          "label": "windows-product",
+          "target": "windows",
+          "exitCode": 0,
+          "passed": true
+        }
+      ],
+      "jobeventsRace": {
+        "topLevelMethods": 6,
+        "aggregateNamedPasses": 18,
+        "subcasePasses": 12,
+        "skips": 0,
+        "failures": 0
+      },
+      "diagnosticRace": {
+        "topLevelMethods": 9,
+        "aggregateNamedPasses": 59,
+        "subcasePasses": 50,
+        "skips": 0,
+        "failures": 0
+      },
+      "inputsUnchanged": true
+    },
+    "source03": {
+      "commandCount": 3,
+      "checks": [
+        {
+          "label": "format",
+          "target": "linux",
+          "exitCode": 0,
+          "passed": true
+        },
+        {
+          "label": "linux-vet",
+          "target": "linux",
+          "exitCode": 0,
+          "passed": true
+        },
+        {
+          "label": "diagnostic-race",
+          "target": "linux",
+          "exitCode": 0,
+          "passed": true
+        }
+      ],
+      "changedMethod": "TestEventsActualReadAndStatePreservation",
+      "topLevelMethods": 1,
+      "aggregateNamedPasses": 1,
+      "subcasePasses": 0,
+      "skips": 0,
+      "failures": 0,
+      "inputsUnchanged": true
+    },
+    "currentComposite": {
+      "distinctTopLevelMethods": 15,
+      "aggregateNamedPasses": 77,
+      "subcasePasses": 62,
+      "skips": 0,
+      "failures": 0,
+      "attribution": "source02 full affected run covers14 unchanged methods plus their62subcases; source03 exact changed method passes separately. Not a fresh15-method rerun."
+    },
+    "compilerIdentity": "Pinned Go 1.27.2 identity passed in preserved source01 run and was reused; later tag repair did not change toolchain.",
+    "platformExecution": "Linux package tests only; Darwin/Windows artifacts were cross-compiled, not executed.",
+    "testSeams": "Synthetic persisted job statuses and controlled reader/close/writer faults; actual temporary databases and boot reader used where specified."
+  },
+  "compiledArtifactsFromSource02": {
+    ".cache/host-next-composition-01/implementation-01/verification-02/darwin-jobevents.test": {
+      "sha256": "25c82ffe76a17eac07778fcb5139a328beb5b449c3e138ab3314d57156702e6e",
+      "bytes": 6236434
+    },
+    ".cache/host-next-composition-01/implementation-01/verification-02/darwin-diagnostic.test": {
+      "sha256": "a1ad784292c756d953b64ed1ecf172c2caa43c275b92afe837e281917c3efe9b",
+      "bytes": 6361938
+    },
+    ".cache/host-next-composition-01/implementation-01/verification-02/windows-diagnostic.test.exe": {
+      "sha256": "61a4db824793fc1036a378c4fb8fe3a81a6f4d493370b1d34b4a8036308e3def",
+      "bytes": 6504448
+    },
+    ".cache/host-next-composition-01/implementation-01/verification-02/cloudy-host-linux": {
+      "sha256": "f841409a8a02092d4a0f08eb07e7f007b5c8858035c0152b323241fb5592296c",
+      "bytes": 5372848
+    },
+    ".cache/host-next-composition-01/implementation-01/verification-02/cloudy-host-darwin": {
+      "sha256": "53845de37c7d53c970a07fe992e380f3447b5a1670a7f5589696677c09f91419",
+      "bytes": 5099970
+    },
+    ".cache/host-next-composition-01/implementation-01/verification-02/cloudy-host-windows.exe": {
+      "sha256": "43966bd4efa79087666a80dc98a3e9e7f12f8570a7d51f1d8024783f209fc497",
+      "bytes": 5319168
+    }
+  },
+  "artifactAttribution": {
+    "production": "Unchanged source03 production retains source02 product-build evidence.",
+    "darwinDiagnosticTest": "Historical source02 binary lacks source03 expected-payload assertion; the separate native Mac companion binds the fresh source03 compile used for its actual run.",
+    "darwinJobeventsTest": "Source unchanged after source02.",
+    "byteReproducibility": "Not claimed."
+  },
+  "contract": {
+    "readOnly": "bbolt ReadOnly for entire owner lifetime, rooted O_RDONLY/no-create callback; no writable reopen, init, repair, cursor persistence or automatic paging. Filesystem read metadata/access times are outside database-byte preservation claim.",
+    "installationBinding": "Store header must match the actual existing local installation identity. Historical record BootID is retained; command never substitutes current boot.",
+    "closeBeforeSuccess": "All nonnil owners, including partial-open failures, require checked Close. Read/close failure produces no successful batch.",
+    "output": "Lower-camel local record with bounded events/reset snapshot/cursor; no live process inventory or wire schema. Partial stdout is possible on writer failure; consumers require exit0 and complete JSON.",
+    "privacy": "Fixed stage-safe error text; no raw OS/bbolt/path causes or job stdout/stderr/argv/environment data exposed."
+  },
+  "evidence": {
+    "sourceFreeze": {
+      "path": ".cache/host-next-composition-01/implementation-01/freeze-03.json",
+      "sha256": "b26c4248947b3a7ab802df661fd6e1e7223e65427447bfe3b928e06898526201"
+    },
+    "originalPatch": {
+      "path": ".cache/host-next-composition-01/implementation-01/source-01.patch",
+      "sha256": "18c0634f8fd0ccbbb829264fb932db2ea0816dfcfda7c2002ca0c858b7cebc3d"
+    },
+    "tagRepair": {
+      "path": ".cache/host-next-composition-01/implementation-01/repair-02.patch",
+      "sha256": "c32adce95e78289bcb7b1bde183316408269e5f374d4239c6a0697324057018b"
+    },
+    "payloadAssertionRepair": {
+      "path": ".cache/host-next-composition-01/implementation-01/repair-03.patch",
+      "sha256": "d2277e798f8c0241952bd5c9783de67ab86bbec07fb8d0443140f24476d59e62"
+    },
+    "preservedFailedSource01": {
+      "path": ".cache/host-next-composition-01/implementation-01/verification-01/result.json",
+      "sha256": "77e52c74cd0dad35310c8536fe82555772deeda177966b5da39543d9f1eab719"
+    },
+    "source02Checks": {
+      "path": ".cache/host-next-composition-01/implementation-01/verification-02/result.json",
+      "sha256": "4032425778270e4f221af50c0e46130e37d7c4906df5bbe2f0c89cf749df3e5e"
+    },
+    "source03Checks": {
+      "path": ".cache/host-next-composition-01/implementation-01/verification-03/result.json",
+      "sha256": "bae47bcd68f9d5068354b8580f6e3cd06d1edc6d31b8fa80d0ae3a90c93fa70a"
+    },
+    "handoff": {
+      "path": ".cache/host-next-composition-01/implementation-01/handoff-03.json",
+      "sha256": "3edb7896924b242377d5b432791967a368ae687d7c7970877ce7682d8dbb0c94"
+    },
+    "independentReview": {
+      "path": ".cache/host-next-composition-01/implementation-01/independent-source-review-03/review.json",
+      "sha256": "8058ea4258afbc56d75b0278576518a58ec2d160be305aa63e4300b0a00faa51"
+    }
+  },
+  "limits": [
+    "This construction report covers local Linux execution and cross-builds; actual Mac execution is accepted separately. Windows execution and Windows store support are not established.",
+    "No live job collector, process execution, service, pairing, remote admission, consumer acknowledgements or wire delivery.",
+    "Read transactions observe retained history; they are not current job truth, an atomic installation/boot snapshot or execution authority.",
+    "Synthetic uncertainty hooks do not qualify actual disk faults, reboot or power-loss durability.",
+    "No formal P4 stage, supported capability or release gate promotion.",
+    "Historical source01 failure and source02 artifact identities remain immutable."
+  ],
+  "nativeCompanion": "qualification/results/P4-S1/2026-10-16-host-events-read-macos.json"
+}
