@@ -1330,3 +1330,23 @@ Both affected JVM tasks execute:16engine methods including four new deterministi
 Desktop0.1.20/code21 remains built-only; installedDesktop0.1.19/Console0.1.16 and finalerror-settlement01 authority remain unchanged. Public construction and independent artifact review keep those boundaries explicit. Full P0–P6 continues with a concrete Console PTY/renderer/session-linked-files entry and disjoint host consumer-checkpoint construction, without stage/capability promotion or delivery estimates.
 
 Parent publication gates pass documentation/schema validation, Python AST34, Ruff, design JavaScript syntax and diff whitespace. Ten immediate construction evidence bindings and all263 compiled inputs match; independent artifact review is accepted. Host and unrelated streaming drafts remain outside this client checkpoint.
+
+
+## 2026-10-16 — Explicit host consumer checkpoint construction
+
+Desktop0.1.20 construction is published in12da056baf6e834380fea6727b31e8cdb663ee44 with exact remote equality verified; installedDesktop0.1.19 and Console0.1.16 remain untouched. The parent continues client and host work in parallel through direct GPT-6.1 Sol workers; this turn reused established external guidance and did not dispatch another OMP request.
+
+The [consumer checkpoint result](../../qualification/results/P4-S1/2026-10-16-host-consumer-checkpoint.md) adds a real consumer-private Linux/Darwin bbolt owner with explicit Init/Open/Read/Advance/Close. Generation compare-and-swap, explicit first/cross-stream reset acknowledgement, same-stream nonregression, namespace validation and commit uncertainty are implemented without a CLI, automatic consumer, job replay or remote acknowledgement. Trusted-directory and writable-reopen limitations remain explicit. Existing dependencies and all prior implementation sources are unchanged; the core README gains the new construction boundary.
+
+Independent source01 review finds a failed Read dropping earlier commit uncertainty. Source02 propagates the sticky flag and adds a real database corruption/read-failure regression following injected commit uncertainty. Initial full Linux race evidence is8methods/24subcases; the affected source02 run is1method/3subcases. Distinct composite coverage is8methods/25subcases/33aggregate, not a fresh full rerun. Formatting, affected vet and Darwin test cross-compilation pass; native Mac and Windows support are not claimed for this package. Parent reviews the complete source, repair, two receipts and exact evidence before acceptance. All failed/rejected evidence remains preserved.
+
+Console's next backend entry now has a complete cache-only PTY proposal over the existing retained authenticated SSHJ transport, leaving the short SFTP operation lane independent. It is uncompiled/unrun and requires independent source review and a real POSIX shell fixture; the existing MINA fixture disables shell creation. No source/capability or stage acceptance is inferred from that proposal. Full P0–P6, parent Git/shared-resource ownership and no delivery estimates remain in force.
+
+
+## 2026-10-16 — User-requested wrap-up and pause
+
+The user requests handoff, updated documentation, Git tracking and pause to conserve weekly usage. Parent stops assigning implementation and prepares the [paused handoff](../05-delivery/handoff-2026-10-16-paused.md) plus exact manifest. The full P0–P6 scope is preserved; no completion, new P1 stop or delivery estimate is implied. AGENTS, README and the single current-state record now require an explicit later resume request.
+
+All direct workers report completed. Parent build/push handles are terminal, and no OMP request or new device/host fixture is launched during wrap-up. The installed0.1.19/Console0.1.16 baseline remains unchanged;0.1.20 is built-only. All seven8c19627 hosted workflows pass;12da056 has Repository success and six running Android workflows at the latest snapshot. Normal hosted checks may finish independently; no scheduled agent continuation is created.
+
+The already reviewed host source02 and report are prepared for this final publication. Three pre-existing streaming-input source drafts are preserved untouched and untracked, excluded from accepted implementation; the handoff manifest binds their exact paths/hashes and byte-identical ignored local backups. The Console PTY proposal has independent entry review but remains cache-only, uncompiled/unrun and subject to parent adoption after resume. Private device evidence and secrets stay outside Git.

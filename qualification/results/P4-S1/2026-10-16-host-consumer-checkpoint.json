@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "recordedDate": "2026-10-16",
+  "status": "SOURCE_AND_LOCAL_CHECKS_ACCEPTED",
+  "scope": "Internal Linux/Darwin consumer checkpoint storage construction; no new CLI/version or service",
+  "sources": {
+    "host/core/internal/eventcheckpoint/checkpoint_supported_test.go": "0c5c86fb46eabec55fcc55c8f8604f8d4703d287b1db0bdcd4679b5a6006c584",
+    "host/core/internal/eventcheckpoint/checkpoint_supported.go": "fa5aefcab1f6cf9558db9aa4bb04956716bc7960cfe5f42942f28954c1184aab"
+  },
+  "contract": {
+    "api": [
+      "Init(existingDir, installationUUID, consumerUUID)",
+      "Open(existingDir, installationUUID, consumerUUID)",
+      "Read()",
+      "Advance(expectedGeneration, processedCursor, resetAcknowledged)",
+      "Close()"
+    ],
+    "layout": "consumer-checkpoint-v1/checkpoint.db",
+    "recordBytesMax": 1024,
+    "databaseBytesMax": 1048576,
+    "consumerPerDirectory": 1,
+    "firstAndCrossStreamRequireResetAcknowledgement": true,
+    "sameStreamRegressionRejected": true,
+    "equalCursorIncrementsGeneration": true,
+    "generationCASAtomic": true,
+    "permanentExclusiveInitClaim": true,
+    "openCreatesState": false,
+    "openUniversallyPhysicalReadOnly": false,
+    "commitUnknownPoisonsMutation": true,
+    "readFailureRetainsPriorUncertainty": true,
+    "closeErrorSticky": true,
+    "errorTextFixedNoUnwrap": true
+  },
+  "verification": {
+    "source01FullLinuxRace": {
+      "topLevel": 8,
+      "subcases": 24,
+      "aggregate": 32
+    },
+    "source02AffectedLinuxRace": {
+      "topLevel": 1,
+      "subcases": 3,
+      "aggregate": 4
+    },
+    "compositeDistinct": {
+      "topLevel": 8,
+      "subcases": 25,
+      "aggregate": 33
+    },
+    "freshFullSource02Run": false
+  },
+  "checks": {
+    "source01": [
+      "format",
+      "Linux vet",
+      "Linux race package",
+      "Darwin vet",
+      "Darwin test crosscompile"
+    ],
+    "source02": [
+      "format",
+      "vet-linux",
+      "race-linux",
+      "compile-darwin"
+    ],
+    "allRecordedExitCodesZero": true,
+    "darwinNativeExecuted": false,
+    "reviewerReranChecks": false
+  },
+  "toolchain": "Pinned Go1.27.2; existing bbolt1.5.0 and x/sys0.49.0; readonly/offline dependencies",
+  "repairHistory": "Source01 read-failed omitted CompletionUnknown after prior unknown commit; independent finding retained. Source02 propagates sticky flag and adds real failed-load regression.",
+  "evidence": {
+    "task": {
+      "path": ".cache/host-consumer-checkpoint-01/task.md",
+      "sha256": "dd65ad6cb472126bd32446ad9e1db6c43aae7dade48adb15200c8192e9fa99d1"
+    },
+    "source01Freeze": {
+      "path": ".cache/host-consumer-checkpoint-01/freeze-01.json",
+      "sha256": "e33352c26cbc9025ab37aed80dbcb153eb74d5bb2acdd35160c4b425791f2b50"
+    },
+    "source02Freeze": {
+      "path": ".cache/host-consumer-checkpoint-01/freeze-02.json",
+      "sha256": "c7de9f2158c3d5985af5b8d602450a1f0b843c9939801b2bea9f7134f5fcfea6"
+    },
+    "source02Patch": {
+      "path": ".cache/host-consumer-checkpoint-01/source-02.patch",
+      "sha256": "2c9955a4a6613d0635312e460961d39c8a81a60ecbbcc3acc9968f1df1c43bd2"
+    },
+    "repair02": {
+      "path": ".cache/host-consumer-checkpoint-01/repair-02.patch",
+      "sha256": "5ea4587eebe01343642d5e33b5f8083eb87c8813680b70e73dd06892621e754a"
+    },
+    "verification01": {
+      "path": ".cache/host-consumer-checkpoint-01/verification-01/result.json",
+      "sha256": "ef9da5389a3ce7b14fc9bde271f7f2fd8b48141a9a8c48ff16fb1184d89e91ac"
+    },
+    "verification02": {
+      "path": ".cache/host-consumer-checkpoint-01/verification-02/result.json",
+      "sha256": "37e21e0c0f2cd52a46bfb8e6fc63e0b2b288b381f7108d2d73ff3015b5131d6a"
+    },
+    "review01": {
+      "path": ".cache/host-consumer-checkpoint-01/independent-review-01/review.json",
+      "sha256": "af6f7664fe1eed712c5c52fc53e25404af72d9ff42634dcf4161ad1b9f38c5cd"
+    },
+    "acceptedReview02": {
+      "path": ".cache/host-consumer-checkpoint-01/independent-review-02/review.json",
+      "sha256": "d0c5db25483ff58eeb63cd3f63d9d09cf6f52b2923ffe9163c166e50ba7ad08e"
+    }
+  },
+  "limits": [
+    "Local internal storage API only; no CLI/version/service/consumer authorization/journal acknowledgement/replay.",
+    "Open no-create does not promise no bbolt physical writes after readonly validation.",
+    "Trusted caller-selected directory required; os.Root does not establish ACL/privacy.",
+    "Unknown commit/close seams are injected after real operations, not power-loss evidence.",
+    "Caller still authorizes processed cursor/reset acknowledgement; storage does not prove processing, journal retention or acknowledgement eligibility.",
+    "Reopen observes state, not proof whether earlier uncertain operation completed; recovery policy remains caller work.",
+    "No actual Mac, Windows, host backend, paired service, authentication or P4/capability promotion."
+  ]
+}

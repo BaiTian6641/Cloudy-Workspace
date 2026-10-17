@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "recordedDate": "2026-10-16",
+  "pauseReason": "Explicit user request: wrap up and pause for weekly usage",
+  "fullGoalScope": "P0-P6 unchanged; not complete",
+  "branch": "codex/p0-transfer-lifecycle",
+  "lastVerifiedClientCommit": "12da056baf6e834380fea6727b31e8cdb663ee44",
+  "installed": {
+    "desktop": "0.1.19 / code20",
+    "console": "0.1.16 / code17"
+  },
+  "builtNotInstalled": {
+    "desktop": "0.1.20 / code21",
+    "debugApkSha256": "08157c99fa65eed42872355a87b83a56cf6dce22ae80e3ef097d52606cd6affb"
+  },
+  "hostCliVersion": "0.1.5; new checkpoint is internal library only",
+  "stageSnapshot": {
+    "P0": {
+      "P0-S1": "done",
+      "P0-S2": "done",
+      "P0-S3": "done",
+      "P0-S4": "in-progress",
+      "P0-S5": "in-progress",
+      "P0-S7": "planned",
+      "P0-S6": "planned"
+    },
+    "P1": {
+      "P1-S1": "done",
+      "P1-S2": "in-progress",
+      "P1-S3": "in-progress",
+      "P1-S5": "planned",
+      "P1-S4": "planned"
+    },
+    "P2": {
+      "P2-S1": "planned",
+      "P2-S8": "planned",
+      "P2-S2": "planned",
+      "P2-S3": "planned",
+      "P2-S4": "planned",
+      "P2-S6": "planned",
+      "P2-S7": "planned",
+      "P2-S5": "planned"
+    },
+    "P3": {
+      "P3-S1": "planned",
+      "P3-S2": "planned",
+      "P3-S3": "planned",
+      "P3-S4": "planned",
+      "P3-S6": "planned",
+      "P3-S7": "planned",
+      "P3-S8": "planned",
+      "P3-S5": "planned",
+      "P3-S9": "planned"
+    },
+    "P4": {
+      "P4-S1": "planned",
+      "P4-S2": "planned",
+      "P4-S3": "planned",
+      "P4-S4": "planned"
+    },
+    "P5": {
+      "P5-S2": "planned",
+      "P5-S3": "planned",
+      "P5-S4": "planned"
+    },
+    "P6": {
+      "P6-S1": "planned",
+      "P6-S2": "planned",
+      "P6-S3": "planned",
+      "P6-S4": "planned"
+    }
+  },
+  "untrackedDrafts": [
+    {
+      "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/input/StreamInputController.java",
+      "sha256": "116b18b7b1110754adfbbd43b2cbd9e7f096fc022d42e5a2c5714489a8ab6ed2",
+      "status": "pre-existing untracked, unreviewed draft; preserved without integration",
+      "localBackup": ".cache/handoff-2026-10-16-paused/untracked/qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/input/StreamInputController.java"
+    },
+    {
+      "path": "qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/input/StreamKeyMap.java",
+      "sha256": "8636110fa3cc09c99fb89f1d9bc6225e9c729366bcfd883b42e9325e6fff4e51",
+      "status": "pre-existing untracked, unreviewed draft; preserved without integration",
+      "localBackup": ".cache/handoff-2026-10-16-paused/untracked/qualification/probes/native-stream/android/app/src/main/java/dev/cloudy/qualification/stream/input/StreamKeyMap.java"
+    },
+    {
+      "path": "qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/input/StreamInputControllerTest.java",
+      "sha256": "57079d80766dca0c5a0f0a889b80438e3268a0b0fa04557afada427a5598a034",
+      "status": "pre-existing untracked, unreviewed draft; preserved without integration",
+      "localBackup": ".cache/handoff-2026-10-16-paused/untracked/qualification/probes/native-stream/android/app/src/test/java/dev/cloudy/qualification/stream/input/StreamInputControllerTest.java"
+    }
+  ],
+  "localOnlyProposal": {
+    "freezePath": ".cache/console-terminal-entry-01/pty-proposal-01/freeze-01.json",
+    "freezeSha256": "3663fc988a6400f13190d22676f23284fc57d2f7c0cd2a16654631dcc06f1c26",
+    "reviewPath": ".cache/console-terminal-entry-01/pty-review-01/review.json",
+    "reviewSha256": "a40e656c06ef56244c6d620822a57197ab00a64700eaaea45aea94af619d3dbc",
+    "status": "independent source entry accepted; parent adoption/compiler/tests unrun"
+  },
+  "ownedOperations": "All delegated agents completed; parent build/push handles terminal; no new device/host/OMP operation during wrap-up",
+  "resumeRequiresUserRequest": true
+}
