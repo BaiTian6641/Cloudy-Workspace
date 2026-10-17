@@ -409,7 +409,7 @@
       "id": "P0-S7",
       "phase": "P0",
       "title": "X11 forwarding and native application-window feasibility",
-      "status": "planned",
+      "status": "in-progress",
       "effortDays": {
         "low": 3,
         "high": 6
@@ -574,7 +574,7 @@
         "Apply the shared ready-time fullscreen and recoverable local-overlay contract; qualify input isolation, escape, viewport mapping, platform denial and honest retirement without inferring engine support."
       ],
       "deliverables": [
-        "Native desktop component catalog and S01\u2013S17 interaction review",
+        "Native desktop component catalog and S01–S17 interaction review",
         "Rule 0 and applicable official desktop-quality evidence ledger",
         "Native workspace review record with accepted geometry/focus decisions and explicit provisional components"
       ],
@@ -2029,7 +2029,7 @@
       ],
       "exitCriteria": [
         "No unresolved release-blocking data-loss/trust/replay/ownership/input defect.",
-        "At least ten working days observed; the 3\u20135 day estimate is active QA effort, not the observation duration."
+        "At least ten working days observed; the 3–5 day estimate is active QA effort, not the observation duration."
       ],
       "sourceIds": [
         "G02",
@@ -2154,9 +2154,11 @@
       ],
       "ownerRole": "X11/Android developer",
       "supportedScope": null,
-      "evidencePaths": [],
-      "nextExperiment": null,
-      "decisionNote": null
+      "evidencePaths": [
+        "qualification/results/P0-S7/2026-10-17-x11-forwarding-host.md"
+      ],
+      "nextExperiment": "Bounded broker proof: two XIDs from one display into two native windows per docs/03-platform/googlebook/p0-s7-x11-broker-experiment.md",
+      "decisionNote": "SSH x11-req/channel/cookie-substitution leg qualified on the primary host with a real OpenSSH+Xvfb fixture (2026-10-17). The Android X server, per-XID window broker, input mapping and device run remain unproven; outcome stays pending."
     },
     {
       "id": "CAP-USB",

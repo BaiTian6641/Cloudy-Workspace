@@ -22,4 +22,4 @@ Record under `qualification/results/P0-S7/` per the [run template](../../06-vali
 
 ## Current boundary
 
-No engine archive, diagnostic build or device run exists yet for this packet. The next executable step on resume is staging the exact Termux:X11 engine archives and patches in ignored storage and compiling the private diagnostic, before any two-window claim is attempted.
+**2026-10-17 progress:** the SSH protocol leg is implemented in `shared/android/ssh` and host-qualified ([run record](../../../qualification/results/P0-S7/2026-10-17-x11-forwarding-host.md)); the pinned engine tree is staged in ignored storage and `libXlorie.so` compiles for arm64 (details in the [investigation report](x11-forwarding-investigation-2026-10-17.md)). Remaining: the two-XID broker proof (steps 2–4), Android endpoint wiring, device run, and SECURITY-mode qualification. No per-window or product claim follows from the compile alone.

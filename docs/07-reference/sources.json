@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "snapshotDate": "2026-10-16",
+  "snapshotDate": "2026-10-17",
   "timezone": "America/Chicago",
   "sources": [
     {
@@ -7732,6 +7732,54 @@
       "sourceUpdatedOn": null,
       "note": "Exact symbol pthread_create: inspected public bionic main allocation and clone failure returns, which can return an error without starting the requested thread. Official TEXT source decoded SHA256 2f96c237ab82c5ff7d086fd8aca842d286f0333392e01b468eda6ad8ea8afa85. This mutable public-main source explains Android implementation context; it is not pinned to the installed Googlebook bionic build and establishes no minimum API availability or actual OS failure. The selected Cloudy native adapter separately records THREAD_ERROR on unsuccessful pthread_create; Java must retain meaningful status or a fixed generic startup error before normal cleanup. POSIX pages returned403 and are not claimed reviewed. Owner P1-S4 / P3 VNC adapter.",
       "refresh": "Before changing native thread startup/error propagation or attributing behavior to an actual Android build; do not infer device failure qualification from source."
+    },
+    {
+      "id": "R370",
+      "title": "SSHJ pinned registerX11Forwarder client API",
+      "url": "https://github.com/hierynomus/sshj/blob/6fad160fe36605a68847ac8a527750c615b4bd04/src/main/java/net/schmizz/sshj/SSHClient.java",
+      "publisher": "Hierynomus (sshj)",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-17",
+      "sourceUpdatedOn": null,
+      "note": "Single X11 listener per connection; registration returns the forwarder and attaches it to the connection layer.",
+      "refresh": "On engine upgrade."
+    },
+    {
+      "id": "R371",
+      "title": "SSHJ forwarded-channel confirm() ordering",
+      "url": "https://github.com/hierynomus/sshj/blob/6fad160fe36605a68847ac8a527750c615b4bd04/src/main/java/net/schmizz/sshj/connection/channel/forwarded/AbstractForwardedChannel.java",
+      "publisher": "Hierynomus (sshj)",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-17",
+      "sourceUpdatedOn": null,
+      "note": "Forwarded channels deliver no bytes until the listener calls confirm(); confirmation attaches before data can arrive.",
+      "refresh": "On engine upgrade."
+    },
+    {
+      "id": "R372",
+      "title": "SSHJ connect-then-confirm forwarding pattern",
+      "url": "https://github.com/hierynomus/sshj/blob/6fad160fe36605a68847ac8a527750c615b4bd04/src/main/java/net/schmizz/sshj/connection/channel/forwarded/SocketForwardingConnectListener.java",
+      "publisher": "Hierynomus (sshj)",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-17",
+      "sourceUpdatedOn": null,
+      "note": "Reference listener connects the local endpoint first, then confirms the channel, then spawns both copy directions.",
+      "refresh": "On engine upgrade."
+    },
+    {
+      "id": "R373",
+      "title": "SSHJ 0.41.2 CHANNEL_OPEN_FAILURE omits the language field",
+      "url": "https://github.com/hierynomus/sshj/blob/6fad160fe36605a68847ac8a527750c615b4bd04/src/main/java/net/schmizz/sshj/connection/ConnectionImpl.java",
+      "publisher": "Hierynomus (sshj)",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-17",
+      "sourceUpdatedOn": null,
+      "note": "sendOpenFailure writes recipient/reason/message but not the RFC 4254 §5.1 language string; OpenSSH 10.2 disconnects the transport on the malformed packet. Cloudy confirms-then-closes instead of rejecting. Upstream report candidate.",
+      "refresh": "On engine upgrade; recheck whether rejection becomes safe."
     }
   ]
 }
