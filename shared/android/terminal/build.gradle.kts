@@ -33,6 +33,9 @@ dependencies {
     // Align WebKit's transitive Core floor with the app graph (platform/activity also select 1.18.0).
     implementation(libs.core)
     testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.androidx.test.core)
+    androidTestImplementation(libs.androidx.test.junit)
     constraints {
         // WebKit/Core resolve through lifecycle 2.6.2 offline; the app graph selects 1.4.0.
         implementation(libs.profileinstaller)

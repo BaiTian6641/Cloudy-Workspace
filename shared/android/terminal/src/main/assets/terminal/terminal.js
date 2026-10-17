@@ -155,7 +155,7 @@
   }
   try {
     const parts = root.location.hash.slice(1).split("/");
-    if (parts.length !== 3) throw Error("configuration");
+    if (parts.length !== 4 || !/^[01]$/.test(parts[3])) throw Error("configuration");
     identity = { sessionId: parts[0], attachmentId: parts[1] }; identityBytes(identity);
     const scale = Number(parts[2]);
     if (!Number.isFinite(scale) || scale <= 0 || scale > 10) throw Error("font-scale");
@@ -164,11 +164,18 @@
     root.cloudyTerminal.onmessage = receive;
     terminal = new root.Terminal({
       fontFamily: '"IBM Plex Mono", ui-monospace, monospace', fontSize: 14 * scale, lineHeight: 1.5,
-      screenReaderMode: true, scrollback: 2000, allowProposedApi: false, convertEol: false, logLevel: "off",
+      screenReaderMode: parts[3] === "1", scrollback: 2000, allowProposedApi: false, convertEol: false, logLevel: "off",
       linkHandler: { activate: () => notice("Terminal links are disabled in this qualification surface.", true) },
       theme: { background: "#0C1519", foreground: "#DCE9ED", cursor: "#DCE9ED", selectionBackground: "#33515F",
         black: "#7E939C", red: "#FF8A85", green: "#8ED6A8", yellow: "#EBC577", blue: "#8DB4FF", magenta: "#D6A1EE", cyan: "#80D7DE", white: "#DCE8EC",
         brightBlack: "#9AB0B8", brightRed: "#FFB0A8", brightGreen: "#B2EDC4", brightYellow: "#F7DEA1", brightBlue: "#B8CEFF", brightMagenta: "#E8C1FA", brightCyan: "#ADF0F2", brightWhite: "#FFFFFF" }
+    });
+    // Native controls use only public xterm APIs; input remains owned by xterm's single path.
+    root.cloudyTerminalUi = Object.freeze({
+      focus() { if (!stopped) terminal.focus(); },
+      screenReaderMode(enabled) {
+        if (!stopped && typeof enabled === "boolean") terminal.options.screenReaderMode = enabled;
+      }
     });
     const fit = new root.FitAddon.FitAddon(); terminal.loadAddon(fit);
     // Consume remote clipboard and hyperlink controls locally, without Android/browser clipboard access.

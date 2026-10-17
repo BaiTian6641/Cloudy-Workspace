@@ -1,6 +1,7 @@
 package io.github.baitian6641.cloudy.terminal
 
 import android.annotation.SuppressLint
+import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.Context
 import android.net.Uri
 import android.os.Handler
@@ -8,6 +9,7 @@ import android.os.Looper
 import android.os.Message
 import android.os.SystemClock
 import android.view.ViewGroup
+import android.view.accessibility.AccessibilityManager
 import android.webkit.ConsoleMessage
 import android.webkit.GeolocationPermissions
 import android.webkit.JsResult
@@ -51,6 +53,12 @@ class TerminalWebViewBridge(
     private val drainPosted = AtomicBoolean(false)
     private val flow = TerminalFlow { SystemClock.elapsedRealtime() }
     private val fontScale = context.resources.configuration.fontScale
+    private val accessibility = context.getSystemService(AccessibilityManager::class.java)
+    private val accessibilityChanged = AccessibilityManager.AccessibilityServicesStateChangeListener {
+        if (ready && !closed.get()) {
+            view.evaluateJavascript("window.cloudyTerminalUi?.screenReaderMode(${screenReaderRequired()})", null)
+        }
+    }
     val view: WebView = WebView(context)
     val providerSummary: String
     val qualificationDetails: Map<String, String>
@@ -76,6 +84,7 @@ class TerminalWebViewBridge(
 
     init {
         checkMain()
+        accessibility?.addAccessibilityServicesStateChangeListener(accessibilityChanged)
         val provider = WebViewCompat.getCurrentWebViewPackage(context)
         val messageFeature = WebViewFeature.isFeatureSupported(WebViewFeature.WEB_MESSAGE_LISTENER)
         val binaryFeature = WebViewFeature.isFeatureSupported(WebViewFeature.WEB_MESSAGE_ARRAY_BUFFER)
@@ -156,6 +165,14 @@ class TerminalWebViewBridge(
         }
     }
 
+    /** Keep native focus and the renderer's supported focus API in agreement. */
+    fun focusRenderer() {
+        checkMain()
+        if (closed.get()) return
+        view.requestFocus()
+        view.evaluateJavascript("window.cloudyTerminalUi?.focus()", null)
+    }
+
     fun start() {
         checkMain()
         if (started || closed.get()) return
@@ -164,7 +181,8 @@ class TerminalWebViewBridge(
         if (!fontScale.isFinite() || fontScale <= 0f) { fail("renderer-font-scale-invalid"); return }
         startedAt = SystemClock.elapsedRealtime()
         main.postDelayed(deadline, 250)
-        view.loadUrl("$ORIGIN${PREFIX}index.html#${identity.sessionId}/${identity.attachmentId}/$fontScale")
+        val screenReader = if (screenReaderRequired()) 1 else 0
+        view.loadUrl("$ORIGIN${PREFIX}index.html#${identity.sessionId}/${identity.attachmentId}/$fontScale/$screenReader")
     }
 
     /** Transport workers may block here; no network, blocking wait or byte decoding occurs on the UI thread. */
@@ -212,11 +230,18 @@ class TerminalWebViewBridge(
         if (wasOpen) notifyClosed()
     }
 
+    // xterm's screenReaderMode changes its input dispatch; forcing it on drops Android insertText.
+    // Enable it for an actual spoken-feedback/touch-exploration service, never disable system a11y.
+    private fun screenReaderRequired(): Boolean =
+        accessibility?.isTouchExplorationEnabled == true ||
+            accessibility?.getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_SPOKEN)?.isNotEmpty() == true
+
     fun dispose() {
         checkMain()
         close()
         if (disposed) return
         disposed = true
+        accessibility?.removeAccessibilityServicesStateChangeListener(accessibilityChanged)
         proxy = null
         if (WebViewFeature.isFeatureSupported(WebViewFeature.WEB_MESSAGE_LISTENER)) {
             WebViewCompat.removeWebMessageListener(view, BRIDGE)
@@ -245,6 +270,7 @@ class TerminalWebViewBridge(
                 proxy = reply
                 ready = true
                 listener.onReady(size)
+                focusRenderer()
                 return
             }
             when (frame.type) {

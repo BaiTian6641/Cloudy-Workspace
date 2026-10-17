@@ -7780,6 +7780,30 @@
       "sourceUpdatedOn": null,
       "note": "sendOpenFailure writes recipient/reason/message but not the RFC 4254 §5.1 language string; OpenSSH 10.2 disconnects the transport on the malformed packet. Cloudy confirms-then-closes instead of rejecting. Upstream report candidate.",
       "refresh": "On engine upgrade; recheck whether rejection becomes safe."
+    },
+    {
+      "id": "G258",
+      "title": "Android accessibility service state and feedback query",
+      "url": "https://developer.android.com/reference/android/view/accessibility/AccessibilityManager",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-17",
+      "sourceUpdatedOn": null,
+      "note": "getEnabledAccessibilityServiceList(feedbackTypeFlags) and isTouchExplorationEnabled query actual enabled services; add/removeAccessibilityServicesStateChangeListener are API33 and dispatch on main by default. Cloudy min35 selects xterm screenReaderMode for spoken feedback or touch exploration, without disabling system accessibility. TalkBack input remains unqualified.",
+      "refresh": "Before changing terminal accessibility mode or supported SDK."
+    },
+    {
+      "id": "R374",
+      "title": "Pinned xterm Android input and screenReaderMode interaction",
+      "url": "https://github.com/xtermjs/xterm.js/blob/991857a1b1cacf06f9531ba74a6e927a7a6398bb/src/browser/CoreBrowserTerminal.ts",
+      "publisher": "xterm.js",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-17",
+      "sourceUpdatedOn": null,
+      "note": "Inspected the exact 6.1.0-beta.315 archive: _inputEvent gates insertText on !screenReaderMode. Unconditionally enabling it in Cloudy's adapter lost Android committed input. Device regression changes mode from actual Android accessibility state; no upstream patch or secondary text-forwarding path. CR is normalized to LF by the WebView textarea; Enter control input is tested separately.",
+      "refresh": "On xterm upgrade or a concrete Android input/accessibility defect."
     }
   ]
 }

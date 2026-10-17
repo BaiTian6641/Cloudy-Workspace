@@ -2480,6 +2480,28 @@
       "runtimeGuard": "VncFrameView calls super.performClick and requests local focus only for the current input-enabled attachment/attempt. It never synthesizes remote coordinates. The mouse-UP route calls performClick after handled input.",
       "fallback": "Unavailable input/attachment returns false; use visible local controls. No fake remote click or complete remote accessibility claim.",
       "experiment": "Qualify actual accessibility activation, focus/refusal, pointer-UP behavior and duplicate-input prevention on exact build; assistive speech and physical input remain pending. Compiler/Lint results alone cannot pass these cases."
+    },
+    {
+      "id": "API71",
+      "feature": "Terminal renderer mode follows Android accessibility services",
+      "symbols": [
+        "AccessibilityManager.getEnabledAccessibilityServiceList",
+        "AccessibilityManager.isTouchExplorationEnabled",
+        "AccessibilityManager.addAccessibilityServicesStateChangeListener",
+        "AccessibilityManager.removeAccessibilityServicesStateChangeListener"
+      ],
+      "sourceIds": ["G258", "R374"],
+      "minimumApi": 33,
+      "libraryVersion": "Android public API, product min35; xterm 6.1.0-beta.315 unchanged.",
+      "availability": "documented",
+      "qualification": "partial",
+      "checkedOn": "2026-10-17",
+      "owner": "Terminal/Android developer",
+      "stage": "P2-S2",
+      "runtimeGuard": "Select screenReaderMode from enabled spoken-feedback services or touch exploration; update the local renderer on service changes and unregister at renderer disposal. Never disable an Android accessibility service.",
+      "fallback": "Preserve native accessible controls; spoken-screen-reader terminal input and speech remain separate acceptance gates. No second native character-forwarding path.",
+      "experiment": "Three real Googlebook WebView tests exercise ASCII, Unicode/LF commit after canceled preedit, stale attachment refusal, Enter and Ctrl+C. No hardware-keyboard, actual system-IME or TalkBack qualification.",
+      "deviceEvidence": "qualification/results/P2-S2/2026-10-17-terminal-input-repair.md"
     }
   ],
   "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."
