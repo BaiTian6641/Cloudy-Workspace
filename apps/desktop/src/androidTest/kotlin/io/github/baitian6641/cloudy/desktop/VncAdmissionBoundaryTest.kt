@@ -14,7 +14,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 /** Real model/main-looper refusal boundaries. No catalog read, native allocation or network fixture.
- * These proposed tests are unrun and cannot qualify an accepted connection or lifecycle retirement.
+ * These cases qualify refusal/wiping only, never an accepted connection or native retirement.
  */
 @RunWith(AndroidJUnit4::class)
 class VncAdmissionBoundaryTest {

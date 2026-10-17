@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "recordedDate": "2026-10-16",
+  "status": "SCOPED_MODEL_RUNTIME_AND_UI_STATE_ACCEPTED",
+  "device": {
+    "model": "HP Googlebook 14",
+    "release": "17",
+    "api": "37",
+    "build": "CL3B.260622.276.R2",
+    "incremental": "16560795",
+    "abi": "arm64-v8a"
+  },
+  "desktop": {
+    "version": "0.1.19",
+    "code": 20,
+    "debugApkSha256": "d55cb18cb2ddecc9bb82a9665b30eab264ebcaccedf089375e178468564a9488"
+  },
+  "console": {
+    "version": "0.1.16",
+    "code": 17,
+    "unchanged": true
+  },
+  "actualInstrumentation": {
+    "methodsPassed": 1,
+    "skips": 0,
+    "failures": 0,
+    "testApkSha256": "fa0378de8ed603abc3ac7cafdc74fc604eb363fdcc27451ef315e9b2909a4746",
+    "beforeAfterBaselineEqual": true,
+    "testPackageRemoved": true,
+    "originalNativeTerminalBeforeForceStop": true,
+    "scope": "Actual main-looper/model/JNI and two zero-payload localhost sockets; original failure survives foreign reap and active replacement. No RFB/TLS/auth payload."
+  },
+  "ordinaryUiNegative": {
+    "endpoint": "owned unused IPv4 loopback port",
+    "port": 44128,
+    "connectionRefusedBeforeTlsOrAuthentication": true,
+    "safeFailureAndRetiredTextPresent": true,
+    "pinUsernamePasswordFieldsEmptyAfterSubmit": true,
+    "pinComparisonUncheckedAfterSubmit": true,
+    "fullscreenEntered": false,
+    "certificateMeaning": "Real owned ephemeral certificate independently checked using OpenSSL/DER; used only as form pin input. No server certificate exchange or verification occurred.",
+    "pixelVisualAcceptance": false,
+    "screenshotMeaning": "FLAG_SECURE protects app content; inspected screenshot is black. Accessibility hierarchy supports actual state/text only.",
+    "flagSecurePreserved": true,
+    "closedViaUi": true,
+    "ownedProfileDeletedViaConfirmation": true
+  },
+  "settlement": {
+    "rawExactEquality": false,
+    "acceptedFileHashChanges": [
+      "Desktop profiles.db after exact UI create/delete",
+      "AndroidX profileInstalled after upgrade/launch"
+    ],
+    "originalLogicalRowsMetadataTrustReplayPreferencesFullUidsSystemBootPreserved": true,
+    "localNetworkPermissionRetained": true,
+    "bothProductsStopped": true,
+    "testPackagesAbsent": true,
+    "uiInspectorStopped": true,
+    "noHostListenerOrReverseCreated": true,
+    "noActiveQuestion": true
+  },
+  "preservedFailures": [
+    {
+      "attempt": "01",
+      "version": "0.1.18",
+      "result": "actual method failed with broad safe assertion"
+    },
+    {
+      "attempt": "02",
+      "result": "preflight stopped-flag refusal; instrumentation not executed"
+    },
+    {
+      "attempt": "03",
+      "result": "actual method failed at ASSERT_ORIGINAL_FAILURE"
+    }
+  ],
+  "evidence": {
+    "construction": {
+      "path": "qualification/results/P1-S4/2026-10-16-vnc-error-retention-construction.json",
+      "sha256": "b607de9e571251cbac4cf8c5f8473d6eed77b496446f62def9591c2bdfad6e4a"
+    },
+    "build03": {
+      "path": ".cache/vnc-product-session-policy-01/error-visibility-build-03/result.json",
+      "sha256": "0f663ce3269c700e1e1e120ba9c95989858696407e0519f959cd376955d1eac2"
+    },
+    "buildReview03": {
+      "path": ".cache/vnc-product-session-policy-01/error-visibility-build-review-03/result.json",
+      "sha256": "4946f8c0546a8cc0afd304c0ccc52b86f8e43b2dc2086943dfdc06c1d8b96f0e"
+    },
+    "runtimeReview": {
+      "path": ".cache/vnc-product-session-policy-01/error-visibility-runtime-review-01/result.json",
+      "sha256": "c6e3acde10108066e9262861c0fb2847da2bb0a98853125d4c4430fa04c68b46"
+    },
+    "finalSourceReview": {
+      "path": ".cache/vnc-product-session-policy-01/error-visibility-final-review-01/result.json",
+      "sha256": "d499e40f9b7f8062b4063042a95e1c5ca2e3e5320f0d42a6f252a4a8ee51d914"
+    },
+    "upgrade019": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-error-019-upgrade-01/result.json",
+      "sha256": "e9241da97c5972ca182b9d08a4ba41f2bdd880ce2dd9e23ec98eb9c1cf9ca1bb"
+    },
+    "actualTest04": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-error-test-04/result.json",
+      "sha256": "c703426e0d76309c7075db65e72d3712392c406d03fd4adbd26ecdbf7aa837d5"
+    },
+    "actualTest04Output": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-error-test-04/run-io/negative-test.stdout",
+      "sha256": "a81ac6eebeced1e9625589700aa218eaa4b5d1132a57a79835daf49075f6b20d"
+    },
+    "failedTest01": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-error-test-01/result.json",
+      "sha256": "533b3f849bbac28864e8cc75aaf36911cf88e0d2353ec47188aade662084ba1f"
+    },
+    "failedTest03": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-error-test-03/result.json",
+      "sha256": "e43b848208dbf03dec855680908206ed9ad59a13ab4ca65a2a72a01c1cc6a81c"
+    },
+    "uiNegative": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-error-ui-01/negative-result019.json",
+      "sha256": "6e37d604462038ac6031201be863dfd38836964c93cf5292971e14ce95fa51ce"
+    },
+    "uiPostscreen": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-error-ui-01/negative-postscreen019.json",
+      "sha256": "5a61c74e9586c9d09a91585cf66ba6f1fa7f2a9ff1523292d6c7db94846606ab"
+    },
+    "protectedScreenshot": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-error-ui-01/negative-visible019.png",
+      "sha256": "5d97289426576f9966d9cf2faf15a7efd5efa7a8703184195b061578a2d0e5de"
+    },
+    "profileDeleteConfirmation": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-error-ui-01/cleanup-confirm019.json",
+      "sha256": "d157d4bde3009c038e3559fdbdac9165e4caaefe96d1fd1d3e2baf1281d6fc9f"
+    },
+    "profilesEmpty": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-error-ui-01/cleanup-empty019.json",
+      "sha256": "454f2d99e2269020e2eaf5001568f8ef23ed31d00f6aa3c595fa8629e4c83f9b"
+    },
+    "settlementSnapshot": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-error-settlement-01/result.json",
+      "sha256": "c4d359b1d53a88ef67d369b606f1dfb6f5abcdc80c1f2f019aa802d9559fcc8d"
+    },
+    "settlementAcceptance": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-error-settlement-01/acceptance-01.json",
+      "sha256": "bf150fc4cd0c7967b7a61b76fe750c840feb50923538e977e6ae5066fb49518c"
+    }
+  },
+  "limitations": [
+    "No pixel layout/visual pass from protected screenshot.",
+    "No successful TLS/authentication/certificate/frame/physical input evidence from either negative case.",
+    "No wrong-password diagnosis. Synthetic test secrets are not account credentials.",
+    "One actual method is distinct from27JVM methods and two Lint reports; counts are not combined.",
+    "Earlier failed attempts remain failed; no full lifecycle/server matrix/sustained-use/accessibility/release or stage/capability promotion."
+  ]
+}

@@ -69,4 +69,8 @@
     <string name="vnc_enable_input">Enable absolute pointer and physical keyboard</string>
     <string name="vnc_input_enabled">Absolute pointer and physical keys enabled for this attempt. Ctrl+Alt+Shift+R releases input locally. IME composition, clipboard and relative capture are not enabled.</string>
     <string name="vnc_remote_surface">Remote VNC desktop. Enable input in local controls first. Ctrl+Alt+Shift+R releases input.</string>
+    <string name="vnc_operation_failed">The VNC connection failed. Review the endpoint and connection settings before trying again.</string>
+    <string name="vnc_operation_timed_out">The VNC connection timed out. Review the endpoint and connection settings before trying again.</string>
+    <string name="vnc_operation_certificate_rejected">Server certificate verification was rejected. Check the independently verified fingerprint and certificate validity before trying again.</string>
+    <string name="vnc_operation_security_rejected">The connection or authentication was rejected. Check the endpoint, independently verified fingerprint and credentials before trying again.</string>
 </resources>

@@ -43,6 +43,7 @@ internal data class VncUiState(
     val presented: Boolean = false,
     val canRetryAbandonedCleanup: Boolean = false,
     val inputEnabled: Boolean = false,
+    val operationFailure: VncOperationFailure? = null,
 ) {
     override fun toString() = "VncUiState(redacted)"
 }
@@ -52,7 +53,8 @@ internal data class VncUiState(
  * There is no service, automatic retry, reconnect or permanently scheduled registry poller.
  */
 private object DesktopVncOwner {
-    class Record(val window: Any, val attempt: VncAttempt, val engine: VncEngine) {
+    class Record(val window: Any, val attempt: VncAttempt, val engine: VncEngine,
+        val operationOutcome: VncOperationOutcome) {
         var stopped = false
         var abandoned = false
         val presentation = VncPresentationReceipt()
@@ -61,7 +63,14 @@ private object DesktopVncOwner {
     fun reap() {
         val old = record ?: return
         // Public FAILED is emitted by finishWithoutHandle; native cleanup uncertainty has its own state.
-        if (old.engine.snapshot().state in setOf(VncEngine.State.RETIRED, VncEngine.State.FAILED)) record = null
+        val snapshot = old.engine.snapshot()
+        if (snapshot.state in setOf(VncEngine.State.RETIRED, VncEngine.State.FAILED)) {
+            // Any window may reap, but only the original model owns this retained result holder.
+            // Capture before unlinking: its next poll may otherwise see only an empty registry.
+            old.operationOutcome.observe(old.attempt, snapshot.nativeError,
+                snapshot.state == VncEngine.State.FAILED)
+            record = null
+        }
     }
 }
 
@@ -83,6 +92,7 @@ internal class VncSessionModel(private val app: Application) : ViewModel() {
     private var pending: VncAdmissionBuffers? = null
     private var retainedFrame: VncPresentedFrame? = null
     private var inputAttempt: VncAttempt? = null
+    private val operationOutcome = VncOperationOutcome()
     private val worker = ThreadPoolExecutor(1, 1, 1, TimeUnit.SECONDS,
         ArrayBlockingQueue(1), { task -> Thread(task, "CloudyVncProfileRead").apply { isDaemon = true } },
         ThreadPoolExecutor.AbortPolicy()).apply { allowCoreThreadTimeOut(true) }
@@ -190,6 +200,7 @@ internal class VncSessionModel(private val app: Application) : ViewModel() {
         }
         val admission = VncAdmissionBuffers(pin, username, password)
         if (!allowed(token)) { admission.cancel(); return }
+        captureOperationFailure()
         DesktopVncOwner.reap()
         if (DesktopVncOwner.record != null || pending != null) {
             admission.cancel(); state = state.copy(issue = VncIssue.BUSY); return
@@ -242,20 +253,25 @@ internal class VncSessionModel(private val app: Application) : ViewModel() {
                         val config = if (userEnded) VncEngine.Config.userEnded(exact.id, exact.host, exact.port, admission.pin)
                         else VncEngine.Config(exact.id, exact.host, exact.port, admission.pin, finiteSeconds)
                         val engine = VncEngine(app)
-                        val record = DesktopVncOwner.Record(window, VncAttempt(), engine)
+                        val record = DesktopVncOwner.Record(window, VncAttempt(), engine, operationOutcome)
                         retainedFrame = null
                         DesktopVncOwner.record = record
+                        operationOutcome.admit(record.attempt)
+                        state = state.copy(operationFailure = null)
                         // Config cloned the pin. Relinquish both secret arrays immediately before
                         // entering the public asynchronous owner; even rejection belongs to engine.
                         val credentials = admission.transferToEngine()
                         if (!engine.connect(config, credentials.username, credentials.password)) {
+                            captureOperationFailure(forceFailure = true)
                             state = state.copy(issue = VncIssue.CONNECT_REJECTED)
                         }
                         updateSnapshot()
                     } catch (_: RuntimeException) {
+                        captureOperationFailure(forceFailure = true)
                         stopOriginal()
                         state = state.copy(issue = VncIssue.CONNECT_REJECTED)
                     } catch (_: LinkageError) {
+                        captureOperationFailure(forceFailure = true)
                         stopOriginal()
                         state = state.copy(issue = VncIssue.CONNECT_REJECTED)
                     } finally {
@@ -394,6 +410,16 @@ internal class VncSessionModel(private val app: Application) : ViewModel() {
         val record = DesktopVncOwner.record ?: return false
         return currentAttempt(token) === attempt && !record.presentation.presented
     }
+    /** Cleanup success answers ownership, not whether the original connection succeeded.
+     * Capture before reaping as well as while polling, without borrowing another window's outcome.
+     */
+    private fun captureOperationFailure(forceFailure: Boolean = false) {
+        val record = DesktopVncOwner.record ?: return
+        if (record.window !== window) return
+        val snapshot = record.engine.snapshot()
+        state = state.copy(operationFailure = operationOutcome.observe(record.attempt,
+            snapshot.nativeError, forceFailure || snapshot.state == VncEngine.State.FAILED))
+    }
     private fun updateSnapshot() {
         mainThread()
         val selected = inputAttempt
@@ -408,10 +434,12 @@ internal class VncSessionModel(private val app: Application) : ViewModel() {
         if (record == null) {
             retainedFrame = null
             state = state.copy(engineState = null, releaseOutcome = null, attempt = null,
+                operationFailure = operationOutcome.failure,
                 presented = false, canRetryAbandonedCleanup = false,
                 issue = if (state.engineState != null) VncIssue.NONE else state.issue)
             return
         }
+        captureOperationFailure()
         val snapshot = record.engine.snapshot()
         val own = record.window === window
         if (!own || record.stopped || snapshot.state in setOf(VncEngine.State.RETIRED, VncEngine.State.FAILED)) {
@@ -424,6 +452,7 @@ internal class VncSessionModel(private val app: Application) : ViewModel() {
             else -> if (own) VncIssue.NONE else VncIssue.BUSY
         }
         state = state.copy(engineState = snapshot.state, releaseOutcome = snapshot.releaseOutcome,
+            operationFailure = operationOutcome.failure,
             attempt = if (own) record.attempt else null, presented = own && record.presentation.presented &&
                 snapshot.state == VncEngine.State.FIRST_FRAME && !record.stopped,
             issue = issue, canRetryAbandonedCleanup = record.abandoned &&

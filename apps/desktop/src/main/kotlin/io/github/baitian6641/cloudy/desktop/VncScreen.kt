@@ -319,6 +319,14 @@ private fun Status(state: VncUiState, notice: String?) {
             VncIssue.CLEANUP_UNCERTAIN -> R.string.vnc_state_uncertain
             VncIssue.INTERRUPTED -> R.string.vnc_interrupted
         }))
+        state.operationFailure?.let { failure ->
+            Text(stringResource(when (failure) {
+                VncOperationFailure.CONNECTION -> R.string.vnc_operation_failed
+                VncOperationFailure.TIMEOUT -> R.string.vnc_operation_timed_out
+                VncOperationFailure.CERTIFICATE -> R.string.vnc_operation_certificate_rejected
+                VncOperationFailure.SECURITY_OR_AUTHENTICATION -> R.string.vnc_operation_security_rejected
+            }))
+        }
         if (notice != null) Text(notice)
     }
 }

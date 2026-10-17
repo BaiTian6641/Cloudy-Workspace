@@ -1,0 +1,238 @@
+{
+  "schemaVersion": 1,
+  "recordedDate": "2026-10-16",
+  "status": "SCOPED_CONSTRUCTION_ACCEPTED",
+  "scope": "Desktop safe operation-failure retention; source/compiler/JVM/Lint/packaged artifacts only",
+  "version": {
+    "desktopName": "0.1.19",
+    "desktopCode": 20,
+    "consoleName": "0.1.16",
+    "consoleCode": 17,
+    "consoleUnchanged": true,
+    "minSdk": 35,
+    "targetSdk": 37
+  },
+  "behavior": {
+    "firstFailureBoundToOriginalAttempt": true,
+    "resetOnlyOnNewAdmittedAttempt": true,
+    "centralReapCapturesBeforeUnlink": true,
+    "ownHolderProjectedWithForeignActiveOwner": true,
+    "safeCategories": [
+      "connection",
+      "timeout",
+      "certificate",
+      "security or authentication"
+    ],
+    "rawPeerOrExceptionTextPublished": false,
+    "wrongPasswordFinding": false,
+    "engineProtocolCleanupChanged": false,
+    "initialNativeErrorSentinelIgnoredUnlessOwnerFailed": true
+  },
+  "currentSourceBindings": {
+    "apps/desktop/src/main/kotlin/io/github/baitian6641/cloudy/desktop/VncSessionModel.kt": "504077b6680059d4722f27f81152cecde76a2522feef4423daa2daadf80930dc",
+    "apps/desktop/src/main/kotlin/io/github/baitian6641/cloudy/desktop/VncScreen.kt": "2f7e0f0d584cfe3192c8c2b23ee5dd75e62cd803b7d6bcae3b5a941275b5501f",
+    "apps/desktop/src/main/res/values/strings.xml": "24c023e4c46ab6590909adfea5c2fda94c875360051609625e09e251bbc41413",
+    "apps/desktop/src/main/kotlin/io/github/baitian6641/cloudy/desktop/VncOperationFailure.kt": "b33be0767c6860a68a102b73502aae50c8d7f41c832f6b847d8baf20755aa355",
+    "apps/desktop/src/test/kotlin/io/github/baitian6641/cloudy/desktop/VncOperationFailureTest.kt": "df646a4d719375e785a71d4e4800a256b6ceaa08c14d2dfe5933d87ed8c00f32",
+    "apps/desktop/build.gradle.kts": "3ba901e048bd554994f7756118b0f1e8bc9d961a7cde31961699e089b25b5801",
+    "apps/desktop/src/androidTest/kotlin/io/github/baitian6641/cloudy/desktop/VncOperationFailureAndroidTest.kt": "6f3fd2c1f997b43105438786ddb7f0242a86729c32c64ab7463faf47d0c374e8",
+    "apps/desktop/src/androidTest/kotlin/io/github/baitian6641/cloudy/desktop/VncAdmissionBoundaryTest.kt": "ed8cc96a3855f8f666afc4ca5987fc8567ef4c24825c98572cd6e39d70c80b69",
+    "adapters/desktop/vnc/android/src/main/java/io/github/baitian6641/cloudy/desktop/vnc/VncEngine.java": "fcc23343e071678ead1529d1d0a810bce69b767ecee757c730c2e5029dc83f27",
+    "adapters/desktop/vnc/android/src/main/java/io/github/baitian6641/cloudy/desktop/vnc/VncBridge.java": "b2e41b838e932a100158a850e22acd376bf8457786c6c92ffc55bfb50367099b",
+    "tools/prepare_desktop_vnc.py": "a18a21dae69ccc51e1c3b94a3c2c75ecfa10d78f1c89bb9b2f656f2a8b89c19f"
+  },
+  "reviewProgression": [
+    {
+      "candidate": "01",
+      "status": "repair required",
+      "finding": "Foreign window could reap terminal record before original model observed error."
+    },
+    {
+      "candidate": "02",
+      "status": "repair required",
+      "finding": "Shared holder retained error, but active foreign replacement could prevent original UI state projection."
+    },
+    {
+      "candidate": "03",
+      "status": "source entry accepted",
+      "resolution": "Shared original holder captured by central reap; final snapshot always projects that models own retained outcome."
+    },
+    {
+      "candidate": "post-device sentinel repair",
+      "status": "0.1.19 construction accepted; runtime recorded separately",
+      "finding": "Java initial nativeError=-1 was incorrectly mapped as connection failure.",
+      "resolution": "-1 and0 require explicit failed owner state; seventh pure regression added."
+    }
+  ],
+  "verification": {
+    "recordedInputBindings": 263,
+    "inputDrift": [],
+    "artifactBindings": 13,
+    "productJVMMethodsPassed": 27,
+    "newOutcomeMethodsPassed": 7,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "libraryJVMRerun": false,
+    "lintReportsZero": 2,
+    "gradleTasks": {
+      "total": 428,
+      "executed": 45,
+      "upToDate": 383
+    },
+    "offline": true,
+    "strictDependencyVerification": true,
+    "instrumentationCompiled": true,
+    "instrumentationExecuted": false,
+    "nativeBuildOrUpstreamTestRerun": false
+  },
+  "artifacts": {
+    "apps/desktop/build/outputs/apk/release/desktop-release-unsigned.apk": "0854691511503348bc47e8c3ef3213c3174c952b4bc6fa5aa00bc573738c89de",
+    "apps/desktop/build/outputs/apk/release/output-metadata.json": "8bcc92eb0b4111200c314c528e757e712242ba7b313010b77b47e53286f6b0b5",
+    "apps/desktop/build/outputs/apk/debug/output-metadata.json": "48991e8cc09311c7b088344596307c25ba90b3fea93ff740336f5f4e661dce37",
+    "apps/desktop/build/outputs/apk/debug/desktop-debug.apk": "d55cb18cb2ddecc9bb82a9665b30eab264ebcaccedf089375e178468564a9488",
+    "apps/desktop/build/outputs/apk/androidTest/debug/output-metadata.json": "d2e58e3f472d259bbe9f61022eb4e0e15c7e6eb6cf52cb24f2478e92ff363f5b",
+    "apps/desktop/build/outputs/apk/androidTest/debug/desktop-debug-androidTest.apk": "fa0378de8ed603abc3ac7cafdc74fc604eb363fdcc27451ef315e9b2909a4746",
+    "apps/desktop/build/reports/lint-results-debug.xml": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f",
+    "apps/desktop/build/reports/lint-results-release.xml": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f",
+    "apps/desktop/build/test-results/testDebugUnitTest/TEST-io.github.baitian6641.cloudy.desktop.VncOwnershipRegressionTest.xml": "344355d3df49ca0a83cb358f594234ee1a893fedec68923223a37a362395de88",
+    "apps/desktop/build/test-results/testDebugUnitTest/TEST-io.github.baitian6641.cloudy.desktop.VncFramePixelsTest.xml": "3e3920c791cb66233040ad4a8abc9342b1f25006440e984669daa20df3b9491f",
+    "apps/desktop/build/test-results/testDebugUnitTest/TEST-io.github.baitian6641.cloudy.desktop.VncUiInputsTest.xml": "973e52af2d1d33364a3a4d2d66eff0c982a9c1a5e0b6064f8fc13d49c064e8d5",
+    "apps/desktop/build/test-results/testDebugUnitTest/TEST-io.github.baitian6641.cloudy.desktop.VncOperationFailureTest.xml": "8560d2852f84ac8a01e11cc52c7a2154ae5448035c9d18c5f5eec53de79618c1",
+    "apps/desktop/build/test-results/testDebugUnitTest/TEST-io.github.baitian6641.cloudy.desktop.VncInputPolicyTest.xml": "e486c623287a21dc77aedd7453765af827b596bfa2abe8086c527ec128b993e4"
+  },
+  "frozenArtifactsRoot": ".cache/vnc-product-session-policy-01/error-visibility-build-03/artifacts",
+  "inputManifest": "Complete 263 path/hash bindings are in the bound build result sources map; inputs-before and post-build changedInputs=[] retain pre/post authority.",
+  "packaging": {
+    "debug": {
+      "sha256": "d55cb18cb2ddecc9bb82a9665b30eab264ebcaccedf089375e178468564a9488",
+      "versionName": "0.1.19",
+      "versionCode": 20,
+      "privateVncActivity": true,
+      "nativeAndNoticeClosureUnchanged": true
+    },
+    "release": {
+      "sha256": "0854691511503348bc47e8c3ef3213c3174c952b4bc6fa5aa00bc573738c89de",
+      "versionName": "0.1.19",
+      "versionCode": 20,
+      "privateVncActivity": true,
+      "nativeAndNoticeClosureUnchanged": true
+    }
+  },
+  "evidence": {
+    "candidate01Freeze": {
+      "path": ".cache/vnc-product-session-policy-01/error-visibility-proposal-01/freeze-01.json",
+      "sha256": "9962fa520da2a39366d7bcb8d5d9934c9f913d6ee2427652688db50e92fc3e71"
+    },
+    "candidate02Freeze": {
+      "path": ".cache/vnc-product-session-policy-01/error-visibility-proposal-01/freeze-02.json",
+      "sha256": "9337c1b609d2f484130c5fdf43b0c44fe8ffb098f83924a191d9a1d8344a06ee"
+    },
+    "candidate03Freeze": {
+      "path": ".cache/vnc-product-session-policy-01/error-visibility-proposal-01/freeze-03.json",
+      "sha256": "ea7ed8c5ae5b2c78507de018ef2ba8390319a7fbcf62998e4e8b703bf491916e"
+    },
+    "candidate03Patch": {
+      "path": ".cache/vnc-product-session-policy-01/error-visibility-proposal-01/source-03.patch",
+      "sha256": "89880b2a89d5d6d51a11531481fa14f2efd56cdb32ab545d61c009e665c731f2"
+    },
+    "review01": {
+      "path": ".cache/vnc-product-session-policy-01/error-visibility-review-01/review.json",
+      "sha256": "eb131eb6ef67ddff9952fc27e4451a17889984c841469b8cde85715ab205e3f3"
+    },
+    "review02": {
+      "path": ".cache/vnc-product-session-policy-01/error-visibility-review-02/review.json",
+      "sha256": "cec7e37b988f09b456a222dcffb20676e91907f75b55660a1cf45750a0fcecc1"
+    },
+    "acceptedSourceReview": {
+      "path": ".cache/vnc-product-session-policy-01/error-visibility-review-03/review.json",
+      "sha256": "3b4ea4803bb5a245c2bf8d7a4d13b241f1e2cca1ffe9db3d123177c200349649"
+    },
+    "build": {
+      "path": ".cache/vnc-product-session-policy-01/error-visibility-build-03/result.json",
+      "sha256": "0f663ce3269c700e1e1e120ba9c95989858696407e0519f959cd376955d1eac2"
+    },
+    "buildInputsBefore": {
+      "path": ".cache/vnc-product-session-policy-01/error-visibility-build-03/inputs-before.json",
+      "sha256": "b19a278c6e593d96dc63318ba047cd3a2baff71558d1d834831dc919db7d6d8c"
+    },
+    "gradleLog": {
+      "path": ".cache/vnc-product-session-policy-01/error-visibility-build-03/gradle.log",
+      "sha256": "8660d4ae9b4bf3d7337d9b94320497ca77457e7fc8fd42a1897ea81be5a19625"
+    },
+    "gradleResult": {
+      "path": ".cache/vnc-product-session-policy-01/error-visibility-build-03/gradle.json",
+      "sha256": "85c05619f56bd0fb981a7f6de410c99a8bd07b0b4d41c1bd23e8c7ad3ded0d43"
+    },
+    "independentBuildReview": {
+      "path": ".cache/vnc-product-session-policy-01/error-visibility-build-review-03/result.json",
+      "sha256": "4946f8c0546a8cc0afd304c0ccc52b86f8e43b2dc2086943dfdc06c1d8b96f0e"
+    },
+    "deviceSourceEntryReview": {
+      "path": ".cache/vnc-product-session-policy-01/error-visibility-device-review-01/review.json",
+      "sha256": "e40e810cc7d311b8cd16e261323b8b94085367bb7332429b033b79a79f19fae0"
+    },
+    "reusedNativeReceipt": {
+      "path": ".cache/vnc-product-engine-01/user-ended-01/receipt.json",
+      "sha256": "96ed1ef25c0c1194c5c347f4989ef55b3c82cf56b608d41b89fb9513a7ecebc7"
+    },
+    "historical18Build": {
+      "path": ".cache/vnc-product-session-policy-01/error-visibility-build-01/result.json",
+      "sha256": "faf52c336b4f596a5956238b08c510c0df457742cc81c2cd9e7711865af4f248"
+    },
+    "historical18BuildInputsBefore": {
+      "path": ".cache/vnc-product-session-policy-01/error-visibility-build-01/inputs-before.json",
+      "sha256": "0fe6a00c1e803b58437e914c817687a102cc62b6193fcf7c12a39d829242820c"
+    },
+    "historical18GradleLog": {
+      "path": ".cache/vnc-product-session-policy-01/error-visibility-build-01/gradle.log",
+      "sha256": "8282679ac92cf376979afb151559847a9dff81131b8fb1d78fcb149cdec7f356"
+    },
+    "historical18GradleResult": {
+      "path": ".cache/vnc-product-session-policy-01/error-visibility-build-01/gradle.json",
+      "sha256": "da700ea2f0a79e9b64bf94db1e5e7639ae2ccdcbac0343e9d9304fb01103619d"
+    },
+    "historical18BuildReview": {
+      "path": ".cache/vnc-product-session-policy-01/error-visibility-build-review-01/result.json",
+      "sha256": "fb57fa36584d0a6471eb7c09cb421b7f2c660d7ca0fc9de566d47ed611ee3d00"
+    },
+    "instrumentationTest01": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-error-test-01/result.json",
+      "sha256": "533b3f849bbac28864e8cc75aaf36911cf88e0d2353ec47188aade662084ba1f"
+    },
+    "instrumentationTest03": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-error-test-03/result.json",
+      "sha256": "e43b848208dbf03dec855680908206ed9ad59a13ab4ca65a2a72a01c1cc6a81c"
+    },
+    "diagnosticTestBuild02": {
+      "path": ".cache/vnc-product-session-policy-01/error-visibility-test-build-02/result.json",
+      "sha256": "546c0cf870f2679a32736c63faa38464af27c758529c334e500beb91069055f1"
+    },
+    "deviceSource03Freeze": {
+      "path": ".cache/vnc-product-session-policy-01/error-visibility-device-entry-03/freeze-01.json",
+      "sha256": "b622a3b9edeaf9e7a630fa17f792f61536dada62d687a299a3d6699c7aa1f810"
+    }
+  },
+  "limits": [
+    "No install, actual device, UI rendering, authentication, frame, physical input or retirement acceptance in this construction report.",
+    "One actual model/JNI/socket Android method compiled by this construction; subsequent execution is recorded in the separate device report.",
+    "Native libraries and notice/source assets match accepted 0.1.17 frozen APKs; unchanged engine/native/upstream tests were not replayed.",
+    "Application-generated release dexopt baseline profile differs and is outside the unchanged native/notice comparison.",
+    "Debug APK signature cryptography was not independently reverified; release APK unsigned.",
+    "No stage/capability or release/distribution promotion."
+  ],
+  "preservedActualAttempts": [
+    {
+      "attempt": "01",
+      "result": "actual instrumented method failed with broad safe assertion"
+    },
+    {
+      "attempt": "02",
+      "result": "preflight stopped-flag refusal; instrumentation not executed"
+    },
+    {
+      "attempt": "03",
+      "result": "actual diagnostic method failed at ASSERT_ORIGINAL_FAILURE, which covered four assertions; current source names them separately"
+    }
+  ]
+}
