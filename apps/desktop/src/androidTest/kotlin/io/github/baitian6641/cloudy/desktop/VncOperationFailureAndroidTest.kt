@@ -126,7 +126,7 @@ class VncOperationFailureAndroidTest {
             check(app.packageName == "io.github.baitian6641.cloudy.desktop" && Process.myUid() == expectedUid)
             stage = Stage.VERSION
             val info = app.packageManager.getPackageInfo(app.packageName, 0)
-            check(info.versionName == "0.1.19" && info.longVersionCode == 20L)
+            check(info.versionName == "0.1.20" && info.longVersionCode == 21L)
             stage = Stage.PERMISSION
             check(Build.VERSION.SDK_INT < 37 || app.checkSelfPermission(Manifest.permission.ACCESS_LOCAL_NETWORK) == PackageManager.PERMISSION_GRANTED)
             stage = Stage.CATALOG_READ

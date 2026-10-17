@@ -7708,6 +7708,30 @@
       "sourceUpdatedOn": "2026-05-04",
       "note": "Custom clicks use performClick with super called for standard accessibility/listener behavior. Cloudy uses it for local focus only; no arbitrary remote click. API1 availability is corroborated by selected public Android37.0 SDK api-versions.xml (View since1, performClick()Z inherits1). Full View reference fetch exceeded tool size; guide inspected. Owner Android/accessibility, P3-S8; assistive/physical tests pending.",
       "refresh": "Before changing framebuffer click/focus semantics; a superclass call does not establish accessible remote content."
+    },
+    {
+      "id": "R368",
+      "title": "ScheduledThreadPoolExecutor scheduling and execution contract",
+      "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/ScheduledThreadPoolExecutor.html",
+      "publisher": "Oracle",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Exact symbols ScheduledThreadPoolExecutor.scheduleAtFixedRate and scheduleWithFixedDelay: periodic executions do not overlap, and delayed eligibility is not a real-time execution guarantee. Java21 reference inspected; Cloudy compiles the selected adapter against Java17, so this is explanatory executor-contract context, not adoption of Java21-only APIs or an Android runtime implementation guarantee. Existing backend/executor APIs remain selected. A native start failure before scheduling cannot rely on later periodic polling to retain its error. Preserve a fixed generic startup error when no meaningful native status is available and use normal owner cleanup; no OS failure was induced or qualified. Owner P1-S4 / P3 VNC adapter.",
+      "refresh": "Before changing startup scheduling, executor ownership or the selected Java/Android implementation; source review does not replace changed-boundary compiler and lifecycle tests."
+    },
+    {
+      "id": "R369",
+      "title": "Android bionic pthread_create implementation context",
+      "url": "https://android.googlesource.com/platform/bionic/+/refs/heads/main/libc/bionic/pthread_create.cpp",
+      "publisher": "Android Open Source Project",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Exact symbol pthread_create: inspected public bionic main allocation and clone failure returns, which can return an error without starting the requested thread. Official TEXT source decoded SHA256 2f96c237ab82c5ff7d086fd8aca842d286f0333392e01b468eda6ad8ea8afa85. This mutable public-main source explains Android implementation context; it is not pinned to the installed Googlebook bionic build and establishes no minimum API availability or actual OS failure. The selected Cloudy native adapter separately records THREAD_ERROR on unsuccessful pthread_create; Java must retain meaningful status or a fixed generic startup error before normal cleanup. POSIX pages returned403 and are not claimed reviewed. Owner P1-S4 / P3 VNC adapter.",
+      "refresh": "Before changing native thread startup/error propagation or attributing behavior to an actual Android build; do not infer device failure qualification from source."
     }
   ]
 }

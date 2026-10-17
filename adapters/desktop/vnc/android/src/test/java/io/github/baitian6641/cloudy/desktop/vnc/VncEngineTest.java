@@ -76,6 +76,76 @@ public final class VncEngineTest {
         assertEquals(state, engine.snapshot().state);
     }
     private static byte[] secret() { return new byte[]{97}; }
+    @Test public void nativeStartRejectionRetainsThreadErrorAfterSuccessfulRetirement() throws Exception {
+        Backend backend = new Backend(false) {
+            @Override public boolean start(long handle) { return false; }
+            @Override public long[] status(long handle) { return new long[]{4,9,0,0,0,0,0,0}; }
+        };
+        VncEngine engine = new VncEngine(null, backend);
+        byte[] username = secret(), password = secret();
+        assertTrue(engine.connect(config(), username, password));
+        await(engine, VncEngine.State.RETIRED);
+        assertEquals(9, engine.snapshot().nativeError);
+        assertEquals(0, username[0]);
+        assertEquals(0, password[0]);
+        assertEquals(Arrays.asList("cancel", "join", "free"), backend.operations);
+    }
+
+    @Test public void startupExceptionAndUnreadableStatusRetainGenericReasonThroughUncertainRetry() throws Exception {
+        Backend backend = new Backend(false) {
+            @Override public boolean start(long handle) { throw new IllegalStateException("TEST_ONLY_START"); }
+            @Override public long[] status(long handle) { throw new IllegalStateException("TEST_ONLY_STATUS"); }
+        };
+        backend.joined = false;
+        VncEngine engine = new VncEngine(null, backend);
+        assertTrue(engine.connect(config(), secret(), secret()));
+        await(engine, VncEngine.State.CLEANUP_UNCERTAIN);
+        assertEquals(11, engine.snapshot().nativeError);
+        VncEngine other = new VncEngine(null, new Backend(false));
+        assertFalse(other.connect(config(), secret(), secret()));
+        backend.joined = true;
+        engine.retryCleanup();
+        await(engine, VncEngine.State.RETIRED);
+        assertEquals(11, engine.snapshot().nativeError);
+        assertEquals(Arrays.asList("cancel", "join", "cancel", "join", "free"), backend.operations);
+    }
+
+    @Test public void explicitStopDuringStartRejectionDoesNotManufactureFailure() throws Exception {
+        CountDownLatch entered = new CountDownLatch(1), proceed = new CountDownLatch(1);
+        Backend backend = new Backend(false) {
+            @Override public boolean start(long handle) {
+                entered.countDown();
+                latch(proceed);
+                return false;
+            }
+            @Override public long[] status(long handle) { return new long[]{4,9,0,0,0,0,0,0}; }
+        };
+        VncEngine engine = new VncEngine(null, backend);
+        try {
+            assertTrue(engine.connect(config(), secret(), secret()));
+            latch(entered);
+            engine.stop();
+            proceed.countDown();
+            await(engine, VncEngine.State.RETIRED);
+            assertTrue(engine.snapshot().nativeError <= 1);
+            assertEquals(Arrays.asList("cancel", "join", "free"), backend.operations);
+        } finally { proceed.countDown(); }
+    }
+
+    @Test public void earlierMeaningfulCallbackErrorWinsOverLaterStartupStatus() throws Exception {
+        Backend backend = new Backend(false) {
+            @Override public boolean start(long handle) {
+                sink.onState(handle, 4, 4);
+                return false;
+            }
+            @Override public long[] status(long handle) { return new long[]{4,9,0,0,0,0,0,0}; }
+        };
+        VncEngine engine = new VncEngine(null, backend);
+        assertTrue(engine.connect(config(), secret(), secret()));
+        await(engine, VncEngine.State.RETIRED);
+        assertEquals(4, engine.snapshot().nativeError);
+    }
+
     @Test public void stopDuringCreateRetainsThenJoinsAndWipesCredentials() throws Exception {
         Backend b = new Backend(true); VncEngine e = new VncEngine(null, b);
         byte[] user = secret(), password = secret();

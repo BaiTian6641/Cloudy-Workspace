@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "recordedDate": "2026-10-16",
+  "status": "SCOPED_CONSTRUCTION_ACCEPTED",
+  "version": {
+    "desktop": "0.1.20",
+    "code": 21,
+    "installed": false,
+    "currentDeviceDesktop": "0.1.19",
+    "currentDeviceConsole": "0.1.16"
+  },
+  "scope": "Java post-allocation startup failure retention; no actual OS failure or device result",
+  "sourceBindings": {
+    "adapters/desktop/vnc/android/src/main/java/io/github/baitian6641/cloudy/desktop/vnc/VncEngine.java": "71413e4b765387d952d811db4615c7c1aa0008125a9cf204fed4b000871ef204",
+    "adapters/desktop/vnc/android/src/test/java/io/github/baitian6641/cloudy/desktop/vnc/VncEngineTest.java": "2be45c74c5386b66ffe4266cf78282beda107db29ab33f0b2d256dcc75f5a12b"
+  },
+  "versionAndInstrumentationBindings": {
+    "apps/desktop/build.gradle.kts": "d31431c367106051fd0e4e151ea4cf4de5a1211b4bb75bfc5472abbb3cdb3894",
+    "apps/desktop/src/androidTest/kotlin/io/github/baitian6641/cloudy/desktop/VncOperationFailureAndroidTest.kt": "dffd08143383d8ceb3ccf945d8373e870fc1ea8446a70b6daf25e94e928c2246"
+  },
+  "behavior": {
+    "fixedJavaStartupReason": 11,
+    "selectedNativeReasonIfAvailable": true,
+    "explicitStopWinsIfAlreadyClassified": true,
+    "earlierMeaningfulCallbackErrorRetained": true,
+    "cleanupAuthorizationUnchanged": true,
+    "nativeAndJniUnchanged": true
+  },
+  "verification": {
+    "schemaVersion": 1,
+    "result": "ACCEPT_SCOPED_CONSTRUCTION",
+    "buildResultSha256": "867defa2981d15ce8405d81d87debc01883b960414c146b06c8a83b55d8032af",
+    "inputsVerified": 263,
+    "artifactsVerifiedCurrentAndFrozen": 18,
+    "proposalExactTwoFilesAdopted": true,
+    "nativeReuseDeclarationSha256": "75d123f3ed6294081ed2049477348c6cb99373342c64e01934f7248a8d97c8ed",
+    "nativeReceiptSha256": "96ed1ef25c0c1194c5c347f4989ef55b3c82cf56b608d41b89fb9513a7ecebc7",
+    "APK": {
+      "debug": {
+        "sha256": "08157c99fa65eed42872355a87b83a56cf6dce22ae80e3ef097d52606cd6affb",
+        "versionName": "0.1.20",
+        "versionCode": 21,
+        "minSdk": 35,
+        "targetSdk": 37,
+        "privateVncActivity": true,
+        "nativeAndNoticesIdenticalTo19": true
+      },
+      "release": {
+        "sha256": "55b24c0652f4d5ae94ac0e26c7fd18c5988ac180324922d5411134306dc48850",
+        "versionName": "0.1.20",
+        "versionCode": 21,
+        "minSdk": 35,
+        "targetSdk": 37,
+        "privateVncActivity": true,
+        "nativeAndNoticesIdenticalTo19": true
+      }
+    },
+    "AAR": {
+      "debug": {
+        "sha256": "0d0282a8464e610ae52fd95c7b0ad26a09ec596c9a0f46ef8100c14b55862fe5",
+        "nativeAndAssetsUnchanged": true
+      },
+      "release": {
+        "sha256": "9577926a220be38cb326461b4ae32a3f166388c9671684c942b4d0693bb77916",
+        "nativeAndAssetsUnchanged": true
+      }
+    },
+    "JVM": {
+      "io.github.baitian6641.cloudy.desktop.VncOwnershipRegressionTest": 4,
+      "io.github.baitian6641.cloudy.desktop.VncFramePixelsTest": 3,
+      "io.github.baitian6641.cloudy.desktop.VncUiInputsTest": 2,
+      "io.github.baitian6641.cloudy.desktop.VncOperationFailureTest": 7,
+      "io.github.baitian6641.cloudy.desktop.VncInputPolicyTest": 11,
+      "io.github.baitian6641.cloudy.desktop.vnc.VncEngineTest": 16
+    },
+    "engineMethods": 16,
+    "newEngineMethods": 4,
+    "productMethods": 27,
+    "bothJVMTasksExecuted": true,
+    "lintZeroReports": 4,
+    "tasks": {
+      "total": 446,
+      "executed": 75,
+      "upToDate": 371
+    },
+    "gradleLogSha256": "5e3bfce7a65979f1666d609c000a52d37c47dfdc31e44a2f63a03d9ed6349741",
+    "findings": [],
+    "limits": [
+      "Construction only; not installed. Device authority remains Desktop19/Console16.",
+      "Backend tests execute real Java owner logic with test-only native seams; no actual OS startup-resource failure.",
+      "Native C/JNI/dependency closure unchanged and reused; no upstream/native rebuild or fresh runtime.",
+      "No broad stop/start race closure, elapsed status bound or exact-cause guarantee.",
+      "Signature cryptography not independently reverified; release unsigned."
+    ],
+    "operations": "Local read/hash/ZIP/XML/manifest inspection only; no build/device/host/Git."
+  },
+  "artifactBindings": {
+    "apps/desktop/build/outputs/apk/release/desktop-release-unsigned.apk": "55b24c0652f4d5ae94ac0e26c7fd18c5988ac180324922d5411134306dc48850",
+    "apps/desktop/build/outputs/apk/release/output-metadata.json": "06d9ae65a34108bc145a52e5763c4e70e0d96f64945a37a0a292846f5946e29b",
+    "apps/desktop/build/outputs/apk/debug/output-metadata.json": "cdd8e80b07e0657e3c1bbc1b20575123279e0f2735f020e2074b9c4e024c7de7",
+    "apps/desktop/build/outputs/apk/debug/desktop-debug.apk": "08157c99fa65eed42872355a87b83a56cf6dce22ae80e3ef097d52606cd6affb",
+    "apps/desktop/build/outputs/apk/androidTest/debug/output-metadata.json": "d2e58e3f472d259bbe9f61022eb4e0e15c7e6eb6cf52cb24f2478e92ff363f5b",
+    "apps/desktop/build/outputs/apk/androidTest/debug/desktop-debug-androidTest.apk": "a70be2bb12df8594d8596afdb293677c59a6005a3dcc970832d7b95ae7d32e92",
+    "apps/desktop/build/reports/lint-results-debug.xml": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f",
+    "apps/desktop/build/reports/lint-results-release.xml": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f",
+    "apps/desktop/build/test-results/testDebugUnitTest/TEST-io.github.baitian6641.cloudy.desktop.VncOwnershipRegressionTest.xml": "8e4ac46159e2aa88451ae0860d078048d00ac48003c5fb4d08d59f8de0f81ab8",
+    "apps/desktop/build/test-results/testDebugUnitTest/TEST-io.github.baitian6641.cloudy.desktop.VncFramePixelsTest.xml": "9eb4e585062e74084ccd8fa9bb90a5f137f4a2c37c2e313416a2b558cf155cbd",
+    "apps/desktop/build/test-results/testDebugUnitTest/TEST-io.github.baitian6641.cloudy.desktop.VncUiInputsTest.xml": "24cd37a9e132c080563eef35bff73494ce2b50bdb50685e10b06e1963d048778",
+    "apps/desktop/build/test-results/testDebugUnitTest/TEST-io.github.baitian6641.cloudy.desktop.VncOperationFailureTest.xml": "ecd281896c52d12020a03c9f6f3a34e880ca6f01527ec167b2a45609ae368fbe",
+    "apps/desktop/build/test-results/testDebugUnitTest/TEST-io.github.baitian6641.cloudy.desktop.VncInputPolicyTest.xml": "a943ce137ad3f3e435688f8ebf2385db5db4f293981790003a90abf3606ede4d",
+    "adapters/desktop/vnc/android/build/outputs/aar/vnc-release.aar": "9577926a220be38cb326461b4ae32a3f166388c9671684c942b4d0693bb77916",
+    "adapters/desktop/vnc/android/build/outputs/aar/vnc-debug.aar": "0d0282a8464e610ae52fd95c7b0ad26a09ec596c9a0f46ef8100c14b55862fe5",
+    "adapters/desktop/vnc/android/build/reports/lint-results-debug.xml": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f",
+    "adapters/desktop/vnc/android/build/reports/lint-results-release.xml": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f",
+    "adapters/desktop/vnc/android/build/test-results/testDebugUnitTest/TEST-io.github.baitian6641.cloudy.desktop.vnc.VncEngineTest.xml": "fbe53614dfa1fca29766bd77474e38949005f6e571571ae1e290aa125e5f6ce5"
+  },
+  "completeInputBindings": "263 path/hash entries in bound build result sources; unchangedInputs=[] and bound pre-build manifest retain pre/post authority.",
+  "evidence": {
+    "build": {
+      "path": ".cache/vnc-product-session-policy-01/startup-error-build-01/result.json",
+      "sha256": "867defa2981d15ce8405d81d87debc01883b960414c146b06c8a83b55d8032af"
+    },
+    "inputManifest": {
+      "path": ".cache/vnc-product-session-policy-01/startup-error-build-01/inputs-before.json",
+      "sha256": "fc5514c5678d9bc98412d1857edbe5eee0b557bf98aafaab7541e79729f36ee6"
+    },
+    "gradleLog": {
+      "path": ".cache/vnc-product-session-policy-01/startup-error-build-01/gradle.log",
+      "sha256": "5e3bfce7a65979f1666d609c000a52d37c47dfdc31e44a2f63a03d9ed6349741"
+    },
+    "independentBuildReview": {
+      "path": ".cache/vnc-product-session-policy-01/startup-error-build-review-01/result.json",
+      "sha256": "a7b61c7c5f838440e98b54c60aba95dc650800f98c01ccc8235e4d3b4d159b8b"
+    },
+    "sourceFreeze": {
+      "path": ".cache/vnc-product-session-policy-01/engine-startup-error-proposal-01/freeze-01.json",
+      "sha256": "deb31074986538181355c885b48e110548bdec0ea9f4ea0c902696bc14b8a3f2"
+    },
+    "sourcePatch": {
+      "path": ".cache/vnc-product-session-policy-01/engine-startup-error-proposal-01/source-01.patch",
+      "sha256": "075536b89a3a927798630101ea9015eea32ca35dfd2a350e9192122547f45185"
+    },
+    "sourceEntryReview": {
+      "path": ".cache/vnc-product-session-policy-01/engine-startup-error-review-01/review.json",
+      "sha256": "cf3aca6a5ba50c43708eb7088c219ff0b04e11e05e1b2397922c027e9da70c15"
+    },
+    "authorRationale": {
+      "path": ".cache/vnc-product-session-policy-01/engine-startup-error-proposal-01/rationale-01.json",
+      "sha256": "f4ec70f143b388a2eb1e5c38326a522f2914e424bd7d26a03611a6c4a6f455df"
+    },
+    "nativeReuseDeclaration": {
+      "path": ".cache/vnc-product-engine-01/startup-error-reuse-01.json",
+      "sha256": "75d123f3ed6294081ed2049477348c6cb99373342c64e01934f7248a8d97c8ed"
+    },
+    "nativeReceipt": {
+      "path": ".cache/vnc-product-engine-01/user-ended-01/receipt.json",
+      "sha256": "96ed1ef25c0c1194c5c347f4989ef55b3c82cf56b608d41b89fb9513a7ecebc7"
+    }
+  },
+  "officialRationaleReferences": [
+    "R368",
+    "R369"
+  ],
+  "limits": [
+    "Construction only; not installed. Device authority remains Desktop19/Console16.",
+    "Backend tests execute real Java owner logic with test-only native seams; no actual OS startup-resource failure.",
+    "Native C/JNI/dependency closure unchanged and reused; no upstream/native rebuild or fresh runtime.",
+    "No broad stop/start race closure, elapsed status bound or exact-cause guarantee.",
+    "Signature cryptography not independently reverified; release unsigned."
+  ]
+}

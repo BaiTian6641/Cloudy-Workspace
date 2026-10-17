@@ -845,3 +845,13 @@ Checked 2026-10-16. Availability is documented; physical input and assistive beh
 | G255 | [Window.Callback.dispatchKeyEvent](https://developer.android.com/reference/android/view/Window.Callback#dispatchKeyEvent(android.view.KeyEvent)) | reviewed | API1 standard processing/consumed result. Cloudy delegates non-release keys to its original AndroidX callback; this application choice requires actual routing tests. P3-S8. |
 | G256 | [Window callback access](https://developer.android.com/reference/android/view/Window) | reviewed | API1 getCallback/setCallback. Retain original delegate; avoid bypassing normal processing through custom-window superDispatchKeyEvent. P3-S8. |
 | G257 | [Custom View accessibility](https://developer.android.com/guide/topics/ui/accessibility/views/custom-views) | reviewed | performClick with super preserves standard click accessibility. Framebuffer activation focuses locally and never invents a remote click. API1 corroborated by selected public SDK; View reference fetch oversized. P3-S8. |
+
+
+## VNC native startup and error retention
+
+Checked 2026-10-16. These references explain the proposed adapter boundary; no native OS startup failure was executed. No new Android capability or API-tracker entry is introduced.
+
+| ID | Official reference | Review status | Development use |
+| --- | --- | --- | --- |
+| R368 | [ScheduledThreadPoolExecutor contract](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/ScheduledThreadPoolExecutor.html) | reviewed | scheduleAtFixedRate/scheduleWithFixedDelay periodic executions do not overlap; eligibility does not guarantee real-time execution. Java21 documentation is explanatory; selected compilation remains Java17 and existing Android/backend executor APIs. Capture meaningful native startup error, or fixed generic fallback, before normal cleanup when polling was never scheduled. Owner P1-S4 / P3 VNC adapter. |
+| R369 | [Android bionic pthread_create source](https://android.googlesource.com/platform/bionic/+/refs/heads/main/libc/bionic/pthread_create.cpp) | reviewed | Allocation/clone failure can return without a new thread. Public main inspected, not installed-build attribution or minimum-API evidence. Selected adapter THREAD_ERROR and Java fallback/normal owner cleanup require their own changed-boundary checks; no induced OS failure or successful qualification claimed. POSIX403 pages were not reviewed. Owner P1-S4 / P3 VNC adapter. |

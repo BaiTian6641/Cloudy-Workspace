@@ -1317,3 +1317,16 @@ Parent deletes the sole owned temporary profile through the normal confirmation 
 The current recovery documents now bind this setup. The full P0–P6 goal remains active with parent integration leadership, direct Codex GPT-6.1 Sol workers and authorized OMP Kimi/GLM routes. A separate source-backed engine startup-error propagation gap has a cache-only proposal accepted by separate independent source review but pending compiler/tests; it is not an implemented repair or a proven cause of prior authentication failures. Continue that bounded repair and ready host/client assembly without delivery estimates.
 
 Parent final gates pass197 JSON/403 Markdown/3072 links, three schemas/examples with six invalid controls, Python AST34, Ruff, design JavaScript syntax and diff whitespace. Forty public evidence bindings and eleven source bindings match; stage/capability counts remain unchanged.
+
+
+## 2026-10-16 — Desktop 0.1.20 startup failures and continued parallel construction
+
+Client8c19627be020ba0e888a02ae073cb5b7e819fe8e is committed/pushed with exact remote equality. Its first hosted snapshot has four successful and three running workflows; no all-workflows pass is inferred. The previous turn was concrete progress: published0.1.19 repair, accepted actual device evidence and complete settlement.
+
+The [0.1.20 construction](../../qualification/results/P1-S4/2026-10-16-vnc-startup-failure-construction.md) implements the independently reviewed post-allocation startup-error repair. An unrequested start rejection or exception before polling now retains a selected native error or fixed Java reason11. Explicit stop wins classification when already recorded; a prior meaningful callback reason is retained. Cleanup authorization and uncertain-handle/lease behavior are unchanged. No new claim is made about exact cause, all stop/start races or elapsed status-call bounds.
+
+Both affected JVM tasks execute:16engine methods including four new deterministic cases, plus27product methods, all pass without failure/skip. Strict offline debug/release/test construction passes four Lint0 reports,263 unchanged source bindings and18 artifacts. Native/notice assets match prior accepted artifacts through a current exact Java-only reuse declaration. No native or upstream battery is rerun. Official executor/bionic explanation is recorded as R368/R369, explicitly distinguishing Java21 reference from Java17 compilation and public-main bionic from the installed build.
+
+Desktop0.1.20/code21 remains built-only; installedDesktop0.1.19/Console0.1.16 and finalerror-settlement01 authority remain unchanged. Public construction and independent artifact review keep those boundaries explicit. Full P0–P6 continues with a concrete Console PTY/renderer/session-linked-files entry and disjoint host consumer-checkpoint construction, without stage/capability promotion or delivery estimates.
+
+Parent publication gates pass documentation/schema validation, Python AST34, Ruff, design JavaScript syntax and diff whitespace. Ten immediate construction evidence bindings and all263 compiled inputs match; independent artifact review is accepted. Host and unrelated streaming drafts remain outside this client checkpoint.

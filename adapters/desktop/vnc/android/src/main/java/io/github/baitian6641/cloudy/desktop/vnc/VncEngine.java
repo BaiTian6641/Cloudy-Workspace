@@ -29,6 +29,7 @@ public final class VncEngine {
         WRITE_FAILED, TERMINAL_BEFORE_RESULT, TIMED_OUT, FAILED }
     public static final class Snapshot {
         public final State state;
+        /** Selected native code, -1 before observation, or11 for fixed Java startup failure. */
         public final int nativeError;
         public final long completedInputSequence, failedInputSequence;
         public final ReleaseOutcome releaseOutcome;
@@ -119,6 +120,8 @@ public final class VncEngine {
     private final AtomicInteger queuedInputs = new AtomicInteger();
     private final Object callbacks = new Object();
     private final Object attempt = new Object();
+    // Selected native errors are0..10. This fixed Java-only reason means post-allocation startup failed.
+    private static final int STARTUP_ERROR = 11;
     private volatile Snapshot snapshot = new Snapshot(State.NEW, -1, 0, 0, ReleaseOutcome.NOT_REQUESTED);
     private volatile long handle;
     private Frame pending;
@@ -170,17 +173,45 @@ public final class VncEngine {
                     finally { wipe(username); wipe(password); }
                     synchronized (callbacks) { handle = allocated; }
                     if (allocated == 0) { finishWithoutHandle(username, password); return; }
-                    if (stop.get() || !backend.start(allocated)) { stop.set(true); cleanup(1); return; }
+                    if (stop.get()) { cleanup(1); return; }
+                    if (!backend.start(allocated)) { failStartupAndCleanup(allocated); return; }
                     synchronized (callbacks) { if (!stop.get() && !initialized) publish(State.AUTHENTICATING); }
                     poll = owner.scheduleWithFixedDelay(this::pollNative, 100, 100, TimeUnit.MILLISECONDS);
                 } catch (RuntimeException | LinkageError error) {
-                    if (handle == 0) finishWithoutHandle(username, password); else { stop.set(true); cleanup(1); }
+                    if (handle == 0) finishWithoutHandle(username, password); else failStartupAndCleanup(handle);
                 } finally { wipe(username); wipe(password); }
             });
             return true;
         } catch (RejectedExecutionException error) {
             wipe(username); wipe(password); finishWithoutHandle(username, password); return false;
         }
+    }
+    /** Owner-thread failure before the normal poll exists. Cleanup success must not erase it.
+     * A caller's explicit stop wins classification under the same lock as stop publication;
+     * it still uses the original single automatic cleanup authorization.
+     */
+    private void failStartupAndCleanup(long h) {
+        int observed = STARTUP_ERROR;
+        if (!stop.get()) {
+            try {
+                long[] status = backend.status(h);
+                if (status != null && status.length == 8 && status[0] >= 0 && status[0] <= 4 &&
+                        status[1] >= 2 && status[1] <= 10) {
+                    observed = (int) status[1];
+                }
+            } catch (RuntimeException | LinkageError ignored) {
+                // A status failure cannot supply a peer/exception message or hide the startup failure.
+            }
+        }
+        synchronized (callbacks) {
+            if (!stop.get()) {
+                // Preserve an earlier meaningful callback error; -1/0 are not errors and1 is cancel.
+                int reason = snapshot.nativeError > 1 ? snapshot.nativeError : observed;
+                snapshot = new Snapshot(snapshot.state, reason, completed, failed, releaseOutcome);
+                stop.set(true);
+            }
+        }
+        cleanup(1);
     }
     private VncBridge.Sink sink(Object token) {
         return new VncBridge.Sink() {
