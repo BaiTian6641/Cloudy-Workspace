@@ -1,6 +1,6 @@
 # Desktop terminal interaction contract
 
-**Authority:** [Rule 0](../00-project/platform-rule-zero.md), the user's desktop interaction requirement, [Console C04/C05/C08/C18/C19](../01-product/console.md), and the existing [interaction rules](interaction.md). **State:** planned product acceptance contract; checked against official references on **2026-10-15**. It does not qualify a renderer or introduce a phone/tablet workstream. The P0 diagnostic is a qualification surface, not the completed Console application.
+**Authority:** [Rule 0](../00-project/platform-rule-zero.md), the user's desktop interaction requirement, [Console C04/C05/C08/C18/C19](../01-product/console.md), and the existing [interaction rules](interaction.md). **State:** planned product acceptance contract; checked against official references on **2026-10-15** and amended **2026-10-16** by the [workspace home revision](2026-10-16-workspace-home-revision.md), which adopts the MobaXterm default terminal pointer model defined below. It does not qualify a renderer or introduce a phone/tablet workstream. The P0 diagnostic is a qualification surface, not the completed Console application.
 
 Cloudy must provide ordinary desktop keyboard, mouse and trackpad workflows independently of the reused terminal engine. A library's default gesture or application shell does not define Cloudy's product interaction. Prefer adapting supported APIs over replacing a mature engine solely because its sample UI favors touch. Keep native IME, Android permissions, accessibility, user font scaling and lifecycle behavior intact.
 
@@ -28,11 +28,25 @@ Native profile/search/path/composer fields use ordinary editable-field semantics
 
 ## Pointer, menus and remote routing
 
-Text supports direct mouse/trackpad drag selection, word/line selection and visible selection feedback. Right-click opens a local context menu in the default terminal policy. Keyboard Menu/Shift+F10 or a visible menu action provides equivalent access where qualified. Copy, Paste, Select all, Find and focus actions remain reachable without a long press. Touch long-press may supplement these routes on a touchscreen Googlebook; it cannot be their prerequisite.
+Text supports direct mouse/trackpad drag selection, word/line selection and visible selection feedback. Under the default MobaXterm-style policy adopted on 2026-10-16, completing a pointer selection copies it immediately with visible feedback (copy-on-select never alters terminal content), and right-click performs the single explicit paste action. A persisted per-app setting switches right-click back to opening the local context menu; the menu keeps a Keyboard Menu/Shift+F10 or visible-menu-button route in both modes where qualified. Copy, Paste, Select all, Find and focus actions remain reachable without a long press. Touch long-press may supplement these routes on a touchscreen Googlebook; it cannot be their prerequisite.
 
-While a remote terminal application requests mouse reports, show the active routing state and preserve a local selection override, initially Shift+drag as specified in [interaction.md](interaction.md). A remote-mouse policy may forward secondary-button reports, but must provide an explicit local-menu override and visible menu button. Each pointer event has one owner: opening a local menu must not also click remotely. Do not silently turn right-click into paste. Optional right-click paste requires explicit configuration and the same paste safeguards.
+While a remote terminal application requests mouse reports, show the active routing state and preserve a local selection override, initially Shift+drag as specified in [interaction.md](interaction.md). A remote-mouse policy may forward secondary-button reports, but must provide an explicit local-menu override and visible menu button. Each pointer event has one owner: opening a local menu must not also click remotely. Every paste route — right-click, Shift+Insert, Ctrl+Shift+V, Edit menu or context menu — performs the same single explicit action with the same paste safeguards; no route appends Enter, and a tab switch, disconnect or changed target invalidates pending delivery. The right-click setting never changes remote-mouse routing: while a remote application owns mouse reports, secondary clicks stay remote and the local override stays visible. Ctrl+wheel adjusts terminal font size within the readable type policy; it never shrinks text to fit a pane.
 
 RDP/VNC and separate X11 windows normally deliver right-click to the remote application while their surface owns input. Their local session controls and capture-release action stay independently reachable; a remote context menu must not trigger a local terminal paste. Release held remote buttons/modifiers on focus loss, disconnect and capture release. A remote GUI clipboard or file-drop feature needs its own protocol capability and permission policy; ordinary terminal copy support does not qualify it.
+
+### Default pointer model (amended 2026-10-16)
+
+The [workspace home revision](2026-10-16-workspace-home-revision.md) adopts [MobaXterm's terminal behavior](https://mobaxterm.mobatek.net/documentation.html) (R03, rechecked 2026-10-16) as the input-default reference:
+
+| Behavior | Default | Configuration |
+| --- | --- | --- |
+| Copy-on-select | On; immediate visible selection feedback; never modifies terminal content | Fixed contract default |
+| Right-click | Explicit paste | Persisted per-app setting switches to local context menu |
+| Shift+Insert paste | On | Fixed contract default |
+| Ctrl+Shift+C / Ctrl+Shift+V | Copy selection / explicit paste | Unchanged |
+| Ctrl+wheel font zoom | On, within the readable type policy | Fixed contract default |
+
+The toggle changes only the local right-click meaning. Paste safeguards, remote-mouse routing, IME composition, OS-reserved chords and one-recipient focus ownership are unchanged. The setting is per-app and non-secret; it carries no session, trust or credential authority.
 
 ## Clipboard and paste lifecycle
 
@@ -49,7 +63,8 @@ All rows below are **planned; no new device qualification is claimed**. Use repr
 | Case | Required observed behavior | Owner / stage |
 | --- | --- | --- |
 | Terminal interrupt and copy | With and without local selection, Ctrl+C reaches remote PTY once; Ctrl+Shift+C copies exact selected text and sends no remote input. No selection gives an honest disabled/no-selection state. | Terminal adapter / P0-S3, P2-S2 |
-| Terminal paste | Shortcut, Edit menu and context menu perform the same single explicit action; bracketed mode on/off, Unicode, multiline and trailing newline preserve declared bytes and review policy. Cancel sends nothing. | Terminal + native clipboard / P0-S3, P2-S2 |
+| Copy-on-select | Completing a drag selection copies the exact selected text with visible feedback and sends no remote input; replacing or clearing the selection never alters terminal content. | Terminal adapter / P0-S3, P2-S2 |
+| Terminal paste | Shortcut, right-click (default), Shift+Insert, Edit menu and — when right-click is toggled to menu — the context menu perform the same single explicit action; bracketed mode on/off, Unicode, multiline and trailing newline preserve declared bytes and review policy. Cancel sends nothing. | Terminal + native clipboard / P0-S3, P2-S2 |
 | Native editing | Search, profile, path and composer fields support selection, Ctrl+C/X/V/A/Z as applicable and native context menus; terminal shortcuts never steal their focus. Secret restrictions are visible. | Native shell / P1-S2, P2-S2, P2-S5 |
 | Selection and mouse reports | Mouse and trackpad select/copy directly; Shift+drag selects locally while remote reporting is active; remote app receives only events assigned to it. Word/line boundaries and scrollback selection are predictable. | Terminal adapter / P0-S3, P2-S2 |
 | Menus and right-click | Default terminal right-click opens local menu without paste or remote click; keyboard/visible menu alternatives work. Explicit remote-mouse mode and RDP/VNC/X11 route secondary clicks to the selected remote owner, with accessible local override. | Terminal / P2-S2; remote surfaces / P2-S6, P3 |
@@ -76,4 +91,4 @@ Checked **2026-10-15**. These APIs are documented integration candidates; source
 
 ## Integration and evidence boundary
 
-The [interaction rules](interaction.md), [Console requirements](../01-product/console.md), [desktop platform contract](../03-platform/googlebook/desktop-application-contract.md), [test cases](../06-validation/test-cases.md) and canonical [backlog](../05-delivery/backlog.json) carry this requirement. Official references are tracked in [sources.json](../07-reference/sources.json); API07 and API42 in [api-tracker.json](../03-platform/googlebook/api-tracker.json) retain unqualified shortcut/clipboard behavior. D14 records the user direction and the Termius product-reference correction. Dependencies and supported-capability gates are unchanged. This contract applies equally to an adapted Termux component, xterm or another approved renderer; it does not select Termux, license its code for Cloudy, or promote CAP-TERMINAL.
+The [interaction rules](interaction.md), [Console requirements](../01-product/console.md), [desktop platform contract](../03-platform/googlebook/desktop-application-contract.md), [test cases](../06-validation/test-cases.md) and canonical [backlog](../05-delivery/backlog.json) carry this requirement. Official references are tracked in [sources.json](../07-reference/sources.json); API07 and API42 in [api-tracker.json](../03-platform/googlebook/api-tracker.json) retain unqualified shortcut/clipboard behavior. D14 records the user direction and the Termius product-reference correction. The 2026-10-16 revision adopts MobaXterm input defaults; it does not change renderer, dependency or capability decisions. Dependencies and supported-capability gates are unchanged. This contract applies equally to an adapted Termux component, xterm or another approved renderer; it does not select Termux, license its code for Cloudy, or promote CAP-TERMINAL.

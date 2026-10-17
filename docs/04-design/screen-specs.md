@@ -1,12 +1,16 @@
 # Screen-by-screen design specifications
 
-Screen IDs are stable references for design review and implementation tickets. The [specimen](preview.html) illustrates the initial S02 and S06 subset plus selected states; it has not been expanded to implement the revised X11/SFTP/RDP/VNC/USB flows. S13–S17 and revisions below are specifications for native Googlebook desktop UI under [Rule 0](../00-project/platform-rule-zero.md), not completed mockups.
+Screen IDs are stable references for design review and implementation tickets. The [specimen](preview.html) illustrates the initial S02 and S06 subset plus selected states; it has not been expanded to implement the revised X11/SFTP/RDP/VNC/USB flows. S13–S17 and revisions below are specifications for native Googlebook desktop UI under [Rule 0](../00-project/platform-rule-zero.md), not completed mockups. The [2026-10-16 workspace home revision](2026-10-16-workspace-home-revision.md) refines S01, S06 and S15 into the native Termius-style host home and records the MobaXterm input-default amendment to the [terminal interaction contract](desktop-terminal-interaction-contract.md).
 
-## S01 — Console hosts and first connection
+## S01 — Console hosts home and first connection
 
-**Goal:** find/create the right environment and establish trust. Navigation groups favorites/recent workspaces/hosts. Main table shows name, environment, tags, last used, and observed status. A compact detail pane shows endpoint, key fingerprint when enrolled, credential reference, and persistence choice. Primary action is Connect; Add host is available when no selection exists.
+**Goal:** find/create the right environment and establish trust. This is the Console default window content (the Termius-style personal workspace home), replacing the development launcher; the diagnostic tools move under an Advanced section unchanged.
 
-First trust uses a focused dialog with host/address/port, algorithm/fingerprint, comparison guidance, and explicit save/cancel. A changed key displays old/new fingerprints and stops connection; do not bury it in a transient toast. Empty state provides Add host and optional non-secret SSH-config import. Import preview lists unsupported directives and never executes config commands.
+Navigation lists Favorites, Recents, All hosts, and groups derived from tags. The main table shows one row per host: label, protocol (SSH in Console), host:port, tags, favorite marker, and last-used time (`Never used` when no connect was recorded). Sorting follows the section: recents order by actual last-used, not by edit time. A compact detail pane for the selected host shows endpoint, protocol, key fingerprint state when enrolled, the matching credential reference from this app's vault (or `No saved credential`), and persistence choice. One primary action per selection: Connect. Add host is available with or without a selection.
+
+Connect routes only to a qualified operation. Before the interactive terminal lands (P2-S2/P2-S3), SSH Connect shows the honest `Terminal is not integrated in this build` state beside the affected host and offers the real available follow-ups (manage trust, edit profile, browse files). No fabricated session, spinner or fake transcript is shown. First trust uses a focused dialog with host/address/port, algorithm/fingerprint, comparison guidance, and explicit save/cancel. A changed key displays old/new fingerprints and stops connection; do not bury it in a transient toast. Empty state provides Add host and optional non-secret SSH-config import. Import preview lists unsupported directives and never executes config commands.
+
+The window header keeps the native window identity (name, New window, Close) and system caption controls. Advanced exposes the existing native tools: connection profiles, SSH files, files locations, host keys, authentication, saved credentials (vault keychain), and display settings. Rows remain operable at narrow tiled widths and 100–200% text scale; long host values wrap in details while Copy path/Copy host preserve exact values.
 
 ## S02 — Console active workspace
 
@@ -30,11 +34,13 @@ Columns: label, local bind/port, remote destination, owner session, state, actio
 
 Keep prior output readable and the target visible. Show route/host/authentication progress with a cancel action. Mark a local buffer unsent. Once trust and identity are checked, attach to the recorded durable session. If missing, offer a new session as an explicit action; do not reconstruct it by replaying commands. A reboot creates a distinct explanation from ordinary network loss.
 
-## S06 — Desktop workspace overview
+## S06 — Desktop hosts home and workspace overview
 
-**Goal:** open the right visual context and inspect supporting resources. Navigation selects workspace/host. Header shows project/host/environment and a Connect/Open desktop action. In R2 the main region hosts the native RDP/VNC surface or an honest external high-performance-stream launch state, according to the selected protocol. The specimen uses a labeled illustrative desktop scene. Supporting panes show selected files and device ownership.
+**Goal:** open the right visual context and inspect supporting resources. This is the Desktop default window content, sharing the Termius-style home anatomy with S01: Favorites/Recents/All hosts navigation, one row per host with protocol (RDP, VNC, or Stream), host:port, tags, favorite marker and last-used time, and a compact detail pane with endpoint, credential reference state from this app's vault, and protocol profile summary.
 
-Distinguish installed backend, paired backend, available host session, and stream state. If the stream opens externally, label the destination and return affordance. Do not show live-looking metrics or thumbnails unless actually measured/current. The specimen's numbers are explicitly synthetic.
+The primary action is Connect for the selected protocol. Connect routes only to the qualified operation: a VNC profile opens the native VNC session path; RDP and Stream profiles show their honest not-yet-integrated state until P3-S7/P5-S2 land — no fabricated session, metrics or thumbnails. In R2 the main region hosts the native RDP/VNC surface or an honest external high-performance-stream launch state, according to the selected protocol. The specimen uses a labeled illustrative desktop scene. Supporting panes show selected files and device ownership.
+
+Distinguish installed backend, paired backend, available host session, and stream state. If the stream opens externally, label the destination and return affordance. Do not show live-looking metrics or thumbnails unless actually measured/current. The specimen's numbers are explicitly synthetic. The window header and Advanced tools match S01; USB enrollment (S16) and performance diagnostics (S17) remain their own focused surfaces, not permanent home content.
 
 ## S07 — Embedded desktop session
 
@@ -88,7 +94,7 @@ Connection loss keeps an honest ended/unknown GUI state and explains that tmux d
 
 ## S15 — Desktop protocol profiles and native session
 
-Choose High-performance stream, RDP or VNC in a labeled protocol control. Each profile exposes relevant endpoint/trust/session/input/display settings and collapses unsupported options with an explanation. First trust/authentication uses native prompts. An existing compatible profile opens directly; switching protocol never masquerades as continuation of the old session.
+Choose High-performance stream, RDP or VNC in a labeled protocol control; the same protocol identity is shown on the S06 home row, and switching protocol never masquerades as continuation of the old session. Each profile exposes relevant endpoint/trust/session/input/display settings and collapses unsupported options with an explanation. First trust/authentication uses native prompts. An existing compatible profile opens directly.
 
 The native surface has a compact context/release toolbar, backend-specific resize/clipboard controls and expandable observed diagnostics. Distinguish external stream launch from an integrated RDP/VNC surface. Certificate/security mismatch, missing server, unsupported encoding and expired session appear as layer-specific errors. **Stages/cases:** P3-S7/S8/P5-S2, Q-D07/D08/Q-N02/N03.
 

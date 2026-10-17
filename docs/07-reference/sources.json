@@ -478,9 +478,9 @@
       "publisher": "Mobatek",
       "category": "product",
       "reviewStatus": "reviewed",
-      "checkedOn": "2026-10-14",
+      "checkedOn": "2026-10-16",
       "sourceUpdatedOn": null,
-      "note": "Adjacent SSH/SFTP browser with bidirectional drag/drop; multiwindow X server interaction reference, distinct from one windowed X desktop.",
+      "note": "Adjacent SSH/SFTP browser with bidirectional drag/drop; multiwindow X server interaction reference, distinct from one windowed X desktop. Terminal input defaults (copy-on-select, right-click paste, Shift+Insert paste) adopted as the Cloudy terminal pointer reference on 2026-10-16.",
       "refresh": "Before implementation against this surface; weekly during active platform qualification."
     },
     {
