@@ -32,17 +32,17 @@ This is a local diagnostic construction checkpoint. Returned identities are corr
 
 ## Evidence bindings
 
-- `sourceFreeze`: [.cache/host-darwin-context-01/source-01/freeze-01.json](../../../.cache/host-darwin-context-01/source-01/freeze-01.json) — SHA-256 `d957b6a77d27c486661b75f4917760f1767e23f2007842880d34bc27cf5f8384`.
-- `sourcePatch`: [.cache/host-darwin-context-01/source-01/source-01.patch](../../../.cache/host-darwin-context-01/source-01/source-01.patch) — SHA-256 `54e8bc5697d804e3a661537e462f3a328abdf6e42593e29ce0ef79c360a4c608`.
-- `compiler`: [.cache/host-darwin-context-01/source-01/verification-02/result.json](../../../.cache/host-darwin-context-01/source-01/verification-02/result.json) — SHA-256 `a8c9b5aafdbf2c237864341bb2f852893df43ad0ad1e586783e822cc2a110c4e`.
-- `compilerReview`: [.cache/host-darwin-context-01/source-01/independent-compiler-review-02.json](../../../.cache/host-darwin-context-01/source-01/independent-compiler-review-02.json) — SHA-256 `414e83b19d10fe4676b78e8dd9f6ce7419be8c2d0925752f2a23e73e36a650d3`.
-- `packet`: [.cache/host-darwin-context-01/native-entry-01/freeze-02.json](../../../.cache/host-darwin-context-01/native-entry-01/freeze-02.json) — SHA-256 `c394c99e89f61a229a7e0f2d3d8b8cf1d5789159bacf521d5789c2b1956bc40d`.
-- `transfer`: [.cache/host-darwin-context-01/native-entry-01/execute-freeze-02.json](../../../.cache/host-darwin-context-01/native-entry-01/execute-freeze-02.json) — SHA-256 `6c12467b99d6dd1d8a9a5730d71a4d75796ded6853c2a78971b6187c02561d6f`.
-- `nativeReceipt`: [qualification/results/private/host-macos/2026-10-16-context-native-01/receipt.json](../../../qualification/results/private/host-macos/2026-10-16-context-native-01/receipt.json) — SHA-256 `dd14f3eb1a7653d74643facc7d5377409b62d7308aee93f6919a525d270661df`.
-- `nativeTerminal`: [qualification/results/private/host-macos/2026-10-16-context-native-01/retrieve-terminal.stdout](../../../qualification/results/private/host-macos/2026-10-16-context-native-01/retrieve-terminal.stdout) — SHA-256 `87116e30379cade8618e36d953cb1f57ad29c560df52813c62865741bb348ce6`.
-- `archiveCleanup`: [qualification/results/private/host-macos/2026-10-16-context-native-01/archive-cleanup-receipt-01.json](../../../qualification/results/private/host-macos/2026-10-16-context-native-01/archive-cleanup-receipt-01.json) — SHA-256 `686495b2cd9d6ea7192615bf0f104cf46040c0824665e54a625049ea3d735aa8`.
-- `archiveRecipe`: [.cache/host-darwin-context-01/native-entry-01/archive-freeze-01.json](../../../.cache/host-darwin-context-01/native-entry-01/archive-freeze-01.json) — SHA-256 `9de0e9dad3664842cf27b7d1e7bc0094eb610caab12eab6174b358be45cc5875`.
-- `independentActualReview`: [.cache/host-darwin-context-01/native-entry-01/independent-actual-review-01.json](../../../.cache/host-darwin-context-01/native-entry-01/independent-actual-review-01.json) — SHA-256 `05e5c1c920547367ab9292162feda8e2018031f066243e42c559a83d67c75554`.
-- `preparationControls`: [.cache/host-darwin-context-01/native-entry-01/parent-controls-result-02.json](../../../.cache/host-darwin-context-01/native-entry-01/parent-controls-result-02.json) — SHA-256 `af09b264552216f1c631958be93b535c13ac6d9d3e833009ba0dd8138aea3e28`.
+- `sourceFreeze`: `.cache/host-darwin-context-01/source-01/freeze-01.json` — SHA-256 `d957b6a77d27c486661b75f4917760f1767e23f2007842880d34bc27cf5f8384`.
+- `sourcePatch`: `.cache/host-darwin-context-01/source-01/source-01.patch` — SHA-256 `54e8bc5697d804e3a661537e462f3a328abdf6e42593e29ce0ef79c360a4c608`.
+- `compiler`: `.cache/host-darwin-context-01/source-01/verification-02/result.json` — SHA-256 `a8c9b5aafdbf2c237864341bb2f852893df43ad0ad1e586783e822cc2a110c4e`.
+- `compilerReview`: `.cache/host-darwin-context-01/source-01/independent-compiler-review-02.json` — SHA-256 `414e83b19d10fe4676b78e8dd9f6ce7419be8c2d0925752f2a23e73e36a650d3`.
+- `packet`: `.cache/host-darwin-context-01/native-entry-01/freeze-02.json` — SHA-256 `c394c99e89f61a229a7e0f2d3d8b8cf1d5789159bacf521d5789c2b1956bc40d`.
+- `transfer`: `.cache/host-darwin-context-01/native-entry-01/execute-freeze-02.json` — SHA-256 `6c12467b99d6dd1d8a9a5730d71a4d75796ded6853c2a78971b6187c02561d6f`.
+- `nativeReceipt`: `qualification/results/private/host-macos/2026-10-16-context-native-01/receipt.json` — SHA-256 `dd14f3eb1a7653d74643facc7d5377409b62d7308aee93f6919a525d270661df`.
+- `nativeTerminal`: `qualification/results/private/host-macos/2026-10-16-context-native-01/retrieve-terminal.stdout` — SHA-256 `87116e30379cade8618e36d953cb1f57ad29c560df52813c62865741bb348ce6`.
+- `archiveCleanup`: `qualification/results/private/host-macos/2026-10-16-context-native-01/archive-cleanup-receipt-01.json` — SHA-256 `686495b2cd9d6ea7192615bf0f104cf46040c0824665e54a625049ea3d735aa8`.
+- `archiveRecipe`: `.cache/host-darwin-context-01/native-entry-01/archive-freeze-01.json` — SHA-256 `9de0e9dad3664842cf27b7d1e7bc0094eb610caab12eab6174b358be45cc5875`.
+- `independentActualReview`: `.cache/host-darwin-context-01/native-entry-01/independent-actual-review-01.json` — SHA-256 `05e5c1c920547367ab9292162feda8e2018031f066243e42c559a83d67c75554`.
+- `preparationControls`: `.cache/host-darwin-context-01/native-entry-01/parent-controls-result-02.json` — SHA-256 `af09b264552216f1c631958be93b535c13ac6d9d3e833009ba0dd8138aea3e28`.
 
 See [the machine-readable result](2026-10-16-host-macos-context.json) for exact source hashes, compiler artifacts, test selection and bounded-envelope metadata. Private evidence paths identify retained local evidence; their contents are intentionally excluded from this public report.
