@@ -25,6 +25,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- Private view-only VNC; credentials and endpoint authority never enter Intent extras. -->
+        <activity android:name=".VncActivity" android:exported="false"
+            android:resizeableActivity="true" android:windowSoftInputMode="adjustResize" />
         <activity android:name="io.github.baitian6641.cloudy.platform.CloudyVaultActivity"
             android:exported="false" android:resizeableActivity="true"
             android:windowSoftInputMode="adjustResize" />

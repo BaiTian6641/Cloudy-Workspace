@@ -14,7 +14,7 @@ The canonical [P1 stage plan](phases/p1-foundation.md) and [backlog](backlog.jso
 | P1-S2 | Native Cloudy token/component implementation and desktop interaction review, with actual geometry/input/font/focus findings. Engine-dependent components remain explicitly provisional until their feature evidence exists. |
 | P1-S3 | Real per-app protected identity/storage, validated typed handoff, bounded metadata/journal/error contracts and lifecycle ownership. Meaningful denial/revocation/recreation/no-replay checks and actual Android boundary evidence. |
 | P1-S5 | Early native-stream adoption/distribution decision following its P0-S4 prerequisite, exact selected dependency/source/notices/build obligations and explicit CAP-STREAM outcome. An experimental/blocked outcome remains distinct from supported implementation. |
-| P1-S4 | Actual product build/lint/unit/instrumentation CI and contract checks; independent install/uninstall and version/missing-recipient/permission behavior; scoped engine decisions, foundation evidence bundle and updated estimates. |
+| P1-S4 | Actual product build/lint/unit/instrumentation CI and contract checks; independent install/uninstall and version/missing-recipient/permission behavior; scoped engine decisions, foundation evidence bundle and remaining readiness/acceptance gates. |
 
 Carry accepted probes and upstream evidence forward under [D12](library-reuse-policy.md). Reopen a case for changed inputs, a concrete failure or an unmet consequential requirement. Missing USB hardware, Windows/macOS hosts or a composition IME remains explicit and does not become fabricated support. Feature-specific blocked adoption can coexist with an independently useful foundation where the original stage rules allow it.
 

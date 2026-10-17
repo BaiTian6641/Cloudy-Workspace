@@ -12,7 +12,7 @@ The execution-reviewed plan has seven phases and 40 stages under [Rule 0](../00-
 | P5 | 3 | [Integrated desktop and document access](phases/p5-integrated-desktop.md) |
 | P6 | 4 | [Hardening and release](phases/p6-release.md) |
 
-Read [roadmap.md](roadmap.md) for dependencies, estimates, release gates, and the first ten working days. [backlog.json](backlog.json) is the canonical stage data; phase documents expand the same tasks and exit criteria into reviewable work packages. No remote issues or project boards are created by this planning foundation.
+Read [roadmap.md](roadmap.md) for dependencies, remaining investigation work and release gates; use [execution-state.md](execution-state.md) for current priorities and evidence. [backlog.json](backlog.json) is the canonical stage data; phase documents expand the same tasks and exit criteria into reviewable work packages. No remote issues or project boards are created by this planning foundation.
 
 The [capability outcome protocol](feasibility-gates.md) controls when implementation becomes ready. [Independent release gates](release-gates.md) distinguish Console, Desktop, the combined journey and full-suite qualification. The former P5-S1 adoption decision is now P1-S5.
 

@@ -8,7 +8,7 @@ Cloudy is a Googlebook desktop/laptop suite using Android packages and platform 
 
 Full Console scope includes SSH-forwarded X11 applications in separate native desktop windows and an adjacent session-linked SFTP browser with bidirectional transfers and Android drag/drop. Full Desktop companion scope includes native integrated RDP and VNC clients, enrolled USB plug-and-play, files and high-performance streaming handoff. Native integrated high-performance streaming remains a separately qualified later stage, with measured latency/stability goals and a distribution decision before embedding.
 
-Established external backends still provide early evidence and a useful stream milestone. External launch alone does not complete the native RDP/VNC requirements. A single X desktop is not a substitute for separate X11 app windows. Any change to those requirements must be explicit and re-estimated; do not silently label a fallback feature-complete.
+Established external backends still provide early evidence and a useful stream milestone. External launch alone does not complete the native RDP/VNC requirements. A single X desktop is not a substitute for separate X11 app windows. Any change to those requirements must be explicit and record remaining work and affected acceptance gates; do not silently label a fallback feature-complete.
 
 Consequences: dedicated X11 feasibility/broker and file-integration stages in P2; RDP/VNC and USB auto-attach stages in P3; earlier license/engine review; broader physical input/window/security/performance cases. USB auto-attach is allowed for enrolled devices with confirmed idle ownership and an approved destination. Unknown/protected ownership still prevents reassignment or flash replay.
 

@@ -1,14 +1,14 @@
 # P5 — Integrated desktop and document access
 
-**Status:** planned. **Active effort:** 16–27 person-days before contingency. **Purpose:** Integrate native performance streaming, document access and contention policy using their actual dependencies; the adoption decision now belongs to P1-S5.
+**Status:** planned. **Purpose:** Integrate native performance streaming, document access and contention policy using their actual dependencies; the adoption decision now belongs to P1-S5.
 
-The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-project/platform-rule-zero.md) defines desktop scope. Follow [capability outcomes](../feasibility-gates.md) and [independent release gates](../release-gates.md). Estimates are active effort, not elapsed time; re-estimate after physical evidence. Revision 02 moved the former P5-S1 decision to P1-S5; other stage IDs retain their identity.
+The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-project/platform-rule-zero.md) defines desktop scope. Follow [capability outcomes](../feasibility-gates.md) and [independent release gates](../release-gates.md). Progress is measured by verified functionality, linked evidence and completed acceptance gates; delivery estimates are withdrawn. Revision 02 moved the former P5-S1 decision to P1-S5; other stage IDs retain their identity.
 
-| Stage | Outcome | Effort, person-days | Prerequisites |
-| --- | --- | ---: | --- |
-| P5-S2 | Native high-performance stream and latency/stability qualification | 8–14 | P1-S5, P0-S4, P1-S4, P3-S1 |
-| P5-S3 | DocumentsProvider and cached editing | 5–8 | P1-S3, P3-S3 |
-| P5-S4 | Metered policy, accounting, and integrated desktop gate | 3–5 | P5-S2, P5-S3, P0-S6, P3-S4, P3-S6 |
+| Stage | Outcome | Prerequisites |
+| --- | --- | --- |
+| P5-S2 | Native high-performance stream and latency/stability qualification | P1-S5, P0-S4, P1-S4, P3-S1 |
+| P5-S3 | DocumentsProvider and cached editing | P1-S3, P3-S3 |
+| P5-S4 | Metered policy, accounting, and integrated desktop gate | P5-S2, P5-S3, P0-S6, P3-S4, P3-S6 |
 
 ## P5-S2 — Native high-performance stream and latency/stability qualification
 

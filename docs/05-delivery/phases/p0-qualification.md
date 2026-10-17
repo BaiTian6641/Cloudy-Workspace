@@ -1,20 +1,20 @@
 # P0 — Qualification and decisions
 
-**Status:** P0-S1 complete; P0-S2 investigation complete with CAP-PLATFORM `experiment`; P0-S3 investigation complete with separate transport/renderer experiments; P0-S4 and P0-S5 investigations in progress. CAP-FOUNDATION supports scoped P1 construction. **Active effort:** 15–28 person-days before contingency. **Purpose:** Resolve Googlebook desktop API/input/engine/window/protocol/device boundaries using scoped capability outcomes. Independent branches do not inherit an X11 phase-wide blocker.
+**Status:** P0-S1 complete; P0-S2 investigation complete with CAP-PLATFORM `experiment`; P0-S3 investigation complete with separate transport/renderer experiments; P0-S4 and P0-S5 investigations in progress. CAP-FOUNDATION supports scoped P1 construction. **Purpose:** Resolve Googlebook desktop API/input/engine/window/protocol/device boundaries using scoped capability outcomes. Independent branches do not inherit an X11 phase-wide blocker.
 
-The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-project/platform-rule-zero.md) defines desktop scope. Follow [capability outcomes](../feasibility-gates.md) and [independent release gates](../release-gates.md). Estimates are active effort, not elapsed time; re-estimate after physical evidence. Revision 02 moved the former P5-S1 decision to P1-S5; other stage IDs retain their identity.
+The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-project/platform-rule-zero.md) defines desktop scope. Follow [capability outcomes](../feasibility-gates.md) and [independent release gates](../release-gates.md). Progress is measured by verified functionality, linked evidence and completed acceptance gates; delivery estimates are withdrawn. Revision 02 moved the former P5-S1 decision to P1-S5; other stage IDs retain their identity.
 
 Apply [D12: established libraries and proportionate verification](../library-reuse-policy.md) to every engine/provider investigation. Review adoption once, reuse upstream coverage, and test the actual Cloudy boundary with representative success/failure cases. Carry forward accepted evidence, expand only on a concrete trigger, and close each investigation with a scoped decision. Existing task prerequisites and physical-device exit criteria remain in force; terminal remediation does not prevent P0-S4/P0-S5 investigation on their own prerequisites.
 
-| Stage | Outcome | Effort, person-days | Prerequisites |
-| --- | --- | ---: | --- |
-| P0-S1 | Inventory and reproducible qualification setup | 1–2 | None |
-| P0-S2 | Platform API, lifecycle, and capability probes | 1–2 | P0-S1 |
-| P0-S3 | SSH engine and terminal renderer qualification | 2–4 | P0-S2 |
-| P0-S4 | Streaming, RDP/VNC, physical input and decoder qualification | 4–6 | P0-S2 |
-| P0-S5 | USB provider and real programming workflow | 2–4 | P0-S1 |
-| P0-S7 | X11 forwarding and native application-window feasibility | 3–6 | P0-S2, P0-S3 |
-| P0-S6 | Network measurements and scoped system decisions | 2–4 | P0-S3, P0-S4, P0-S5 |
+| Stage | Outcome | Prerequisites |
+| --- | --- | --- |
+| P0-S1 | Inventory and reproducible qualification setup | None |
+| P0-S2 | Platform API, lifecycle, and capability probes | P0-S1 |
+| P0-S3 | SSH engine and terminal renderer qualification | P0-S2 |
+| P0-S4 | Streaming, RDP/VNC, physical input and decoder qualification | P0-S2 |
+| P0-S5 | USB provider and real programming workflow | P0-S1 |
+| P0-S7 | X11 forwarding and native application-window feasibility | P0-S2, P0-S3 |
+| P0-S6 | Network measurements and scoped system decisions | P0-S3, P0-S4, P0-S5 |
 
 ## P0-S1 — Inventory and reproducible qualification setup
 
@@ -186,7 +186,7 @@ Work:
 Deliverables:
 
 - X11 engine/window-broker feasibility ADR and prototype evidence
-- Per-application window support/failure matrix and re-estimate
+- Per-application window support/failure matrix and remaining acceptance gates
 - CAP-X11 outcome and any bounded follow-up experiment
 
 Exit evidence:
@@ -205,8 +205,8 @@ Work:
 1. Measure direct/relay routing for available stream/RDP/VNC/files and reverse USB branches; add X11 evidence from P0-S7 when available without blocking unrelated lanes.
 2. Record independent payload/wire counters plus repeatable Moonlight/Parsec comparisons where supported; label GeForce NOW contextual.
 3. Run controlled latency/jitter/loss/route/outage profiles outside protected programming and measure adaptation/recovery/input integrity.
-4. Ratify or revise per-lane desktop budgets and estimates; record explicit blockers, tested fallbacks and support exclusions for each branch.
-5. Reconcile capability outcomes and stage readiness; publish scoped go/experiment/blocked decisions and re-estimate after evidence without treating completed research as feature support.
+4. Ratify or revise per-lane desktop responsiveness and traffic budgets; record explicit blockers, tested fallbacks and support exclusions for each branch.
+5. Reconcile capability outcomes and stage readiness; publish scoped go/experiment/blocked decisions from actual evidence without treating completed research as feature support.
 
 Deliverables:
 
@@ -222,7 +222,7 @@ Record evidence under `qualification/results/P0-S6/` using the [run template](..
 
 ## Gate and failure route
 
-An investigation may complete with a blocked capability record. Only a scoped supported outcome activates its dependent product work. Full Console still needs X11; Desktop can qualify independently. Re-estimate after evidence. Every done stage links actual evidence; a documentation check does not qualify a device.
+An investigation may complete with a blocked capability record. Only a scoped supported outcome activates its dependent product work. Full Console still needs X11; Desktop can qualify independently. Update readiness and remaining gates from actual evidence. Every done stage links actual evidence; a documentation check does not qualify a device.
 
 ## D15 RDP input and host clarification
 

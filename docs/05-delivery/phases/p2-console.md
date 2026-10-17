@@ -1,21 +1,21 @@
 # P2 — Console daily-use release
 
-**Status:** planned. **Active effort:** 33–59 person-days before contingency. **Purpose:** Qualify reusable SSH/SFTP transport and transfer source, then deliver the full Console workflow and its independent functional, packaging and sustained-use release gate.
+**Status:** planned. **Purpose:** Qualify reusable SSH/SFTP transport and transfer source, then deliver the full Console workflow and its independent functional, packaging and sustained-use release gate.
 
-The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-project/platform-rule-zero.md) defines desktop scope. Follow [capability outcomes](../feasibility-gates.md) and [independent release gates](../release-gates.md). Estimates are active effort, not elapsed time; re-estimate after physical evidence. Revision 02 moved the former P5-S1 decision to P1-S5; other stage IDs retain their identity.
+The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-project/platform-rule-zero.md) defines desktop scope. Follow [capability outcomes](../feasibility-gates.md) and [independent release gates](../release-gates.md). Progress is measured by verified functionality, linked evidence and completed acceptance gates; delivery estimates are withdrawn. Revision 02 moved the former P5-S1 decision to P1-S5; other stage IDs retain their identity.
 
-P2-S1 and P2-S8 are reusable source stages for both apps, with no terminal renderer or Console UI prerequisite. P2-S8's 3–5 days move 2–3 days from P2-S7 and 1–2 from P3-S3; the project total is unchanged. Console retains all attachment, pane/drop, X11 and release requirements and repeats its integration-specific checks.
+P2-S1 and P2-S8 are reusable source stages for both apps, with no terminal renderer or Console UI prerequisite. Console retains all attachment, pane/drop, X11 and release requirements and repeats its integration-specific checks.
 
-| Stage | Outcome | Effort, person-days | Prerequisites |
-| --- | --- | ---: | --- |
-| P2-S1 | Shared SSH transport, authentication, and jumps | 3–5 | P1-S4 |
-| P2-S8 | Shared SFTP transfer, staging, and publication core | 3–5 | P2-S1, P1-S3 |
-| P2-S2 | Interactive terminal correctness and bounded data path | 3–5 | P2-S1 |
-| P2-S3 | Tabs, panes, windows, search, and durable sessions | 3–5 | P2-S2 |
-| P2-S4 | SFTP attachments and local browser forwards | 3–5 | P2-S3, P2-S8 |
-| P2-S6 | SSH X11 forwarding and separate native app windows | 10–20 | P0-S7, P1-S4, P2-S3 |
-| P2-S7 | Session-linked SFTP pane and bidirectional drag-and-drop | 3–6 | P2-S4, P1-S3, P2-S8 |
-| P2-S5 | Agent workflows, profile import and independent Console release gate | 5–8 | P2-S4, P2-S6, P2-S7 |
+| Stage | Outcome | Prerequisites |
+| --- | --- | --- |
+| P2-S1 | Shared SSH transport, authentication, and jumps | P1-S4 |
+| P2-S8 | Shared SFTP transfer, staging, and publication core | P2-S1, P1-S3 |
+| P2-S2 | Interactive terminal correctness and bounded data path | P2-S1 |
+| P2-S3 | Tabs, panes, windows, search, and durable sessions | P2-S2 |
+| P2-S4 | SFTP attachments and local browser forwards | P2-S3, P2-S8 |
+| P2-S6 | SSH X11 forwarding and separate native app windows | P0-S7, P1-S4, P2-S3 |
+| P2-S7 | Session-linked SFTP pane and bidirectional drag-and-drop | P2-S4, P1-S3, P2-S8 |
+| P2-S5 | Agent workflows, profile import and independent Console release gate | P2-S4, P2-S6, P2-S7 |
 
 ## P2-S1 — Shared SSH transport, authentication, and jumps
 

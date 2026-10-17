@@ -1,0 +1,33 @@
+<resources>
+    <string name="cloudy_workspace_tools">Workspace tools</string>
+    <string name="cloudy_workspace_tools_scope">Profiles, files, trust and settings open in their own native tools.</string>
+    <string name="cloudy_workspace_overview">Workspace</string>
+    <string name="cloudy_desktop_scope">Open VNC or browse SSH files. Choose the connection in each tool.</string>
+    <string name="cloudy_console_scope">Browse SSH files and manage your connections. The interactive terminal is not available yet.</string>
+    <string name="cloudy_workspace_local_state">Local window · choose a connection in a tool</string>
+    <string name="cloudy_workspace_reserved">Coming next</string>
+    <string name="cloudy_workspace_window">Window settings</string>
+    <string name="cloudy_workspace_status">Development build · tools show their own connection status</string>
+    <string name="cloudy_open_vnc">Open VNC connection</string>
+    <string name="cloudy_vnc_entry_scope">Choose a server in the VNC connection form.</string>
+    <string name="cloudy_not_integrated">Not available in this build</string>
+    <string name="cloudy_gap_terminal">Interactive terminal</string>
+    <string name="cloudy_gap_terminal_detail">SSH commands with keyboard, pointer selection and native text input.</string>
+    <string name="cloudy_gap_sessions">Sessions, tabs and panes</string>
+    <string name="cloudy_gap_sessions_detail">Tabs, split panes, search and saved session layouts.</string>
+    <string name="cloudy_gap_x11">Separate X11 application windows</string>
+    <string name="cloudy_gap_x11_detail">Remote graphical applications in separate native windows.</string>
+    <string name="cloudy_gap_vnc">Native VNC session</string>
+    <string name="cloudy_gap_vnc_detail">Connect to a remote desktop through VNC.</string>
+    <string name="cloudy_gap_rdp">Native RDP session</string>
+    <string name="cloudy_gap_rdp_detail">RDP connections with secure sign-in, desktop input and recovery.</string>
+    <string name="cloudy_gap_stream">High-performance streaming</string>
+    <string name="cloudy_gap_stream_detail">High-performance remote video with local session controls.</string>
+    <string name="cloudy_gap_usb">USB devices and ownership</string>
+    <string name="cloudy_gap_usb_detail">Device enrollment, ownership and protected programming.</string>
+    <string name="cloudy_gap_transfers">File transfers, editing and drop</string>
+    <string name="cloudy_gap_transfers_detail">SSH files can be read now. Uploads, downloads, remote editing and drag-and-drop are not available yet.</string>
+    <string name="cloudy_show_upcoming">Show unavailable features</string>
+    <string name="cloudy_hide_upcoming">Hide unavailable features</string>
+    <string name="cloudy_desktop_files_scope">Browse SSH files and manage your connections. Remote desktop connections are not available yet.</string>
+</resources>

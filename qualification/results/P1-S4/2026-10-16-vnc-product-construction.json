@@ -1,0 +1,197 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "Formal product construction/compiler/JVM/Lint/APK metadata; no device or visual acceptance",
+  "acceptance": "Scoped local construction accepted; separate parent device/runtime evidence required.",
+  "version": {
+    "name": "0.1.16",
+    "code": 17,
+    "minSdk": 35,
+    "targetSdk": 37
+  },
+  "sources": {
+    "apps/console/build.gradle.kts": "62de4587f29099c7f9adc23f7f57039ebe4d06f674b02bb309de4a4b01d03f7e",
+    "apps/desktop/gradle.lockfile": "9299acb65645b129387e81ca6c563300a0af726f9fc5ccc19f781abfa21ce68f",
+    "apps/desktop/build.gradle.kts": "b44bad572cd8277817744c3c966f640e39f7d43969645bb21cd95d45a93555a3",
+    "apps/desktop/src/main/AndroidManifest.xml": "ae18a107591aa5160ce54d341cef33ae93e568c5ca4013967d8fb5e18b998a4d",
+    "apps/desktop/src/androidTest/kotlin/io/github/baitian6641/cloudy/desktop/VncAdmissionBoundaryTest.kt": "3f673ddcf4d8fe6d42fad94663031fcaa6440a2120da1ac466de963ff1993d5f",
+    "apps/desktop/src/test/kotlin/io/github/baitian6641/cloudy/desktop/VncInputPolicyTest.kt": "0bd00e044de934faf4bafdb0ebfb601337e7deb1b3fd6d441f507a49341020ba",
+    "apps/desktop/src/test/kotlin/io/github/baitian6641/cloudy/desktop/VncUiInputsTest.kt": "9513ce343e1ba7748e66dca27d8b5daf808eb2e227b2444ac9d960c6d7459202",
+    "apps/desktop/src/test/kotlin/io/github/baitian6641/cloudy/desktop/VncOwnershipRegressionTest.kt": "9073089f71c47ecda9df235a2cd2eaa871299136b0c195d181c7f2cf665af0cf",
+    "apps/desktop/src/test/kotlin/io/github/baitian6641/cloudy/desktop/VncFramePixelsTest.kt": "1c15d8d65330f3598e018dff74926dd5869a7efdbf8e420e006ae6e0a1ebd2c7",
+    "apps/desktop/src/main/kotlin/io/github/baitian6641/cloudy/desktop/VncInputPolicy.kt": "9e119db21dc83622abe52be6fe43b3249fccd3cc122afdff862cc8e569f14014",
+    "apps/desktop/src/main/kotlin/io/github/baitian6641/cloudy/desktop/VncSessionModel.kt": "b1e22d9290b0077869d6dda306c2d4eda7a36c2bfa2ddb2a31ed9a997b9dc61d",
+    "apps/desktop/src/main/kotlin/io/github/baitian6641/cloudy/desktop/VncActivity.kt": "8a2cf158b5407df554ed78728e9d0838f327551c09fea656ec491d6b89d50b6c",
+    "apps/desktop/src/main/kotlin/io/github/baitian6641/cloudy/desktop/VncUiInputs.kt": "7a4235b9e76af00169350cc19c4a2e2cc6512e8432f1ad694161112fcee7697c",
+    "apps/desktop/src/main/kotlin/io/github/baitian6641/cloudy/desktop/VncScreen.kt": "e57c73ca6148784a91e50aab7ebb881928975e8a5c38bfd4919e131356266a48",
+    "apps/desktop/src/main/kotlin/io/github/baitian6641/cloudy/desktop/VncFrameView.kt": "de27a461ec5456fdffffdb6610efb44fa83a4d33da03973abb84fc6f89c8bfe2",
+    "apps/desktop/src/main/res/values/strings.xml": "47a455e7f6006f35fcc158884b14ab3928593f8574d6e52c105f483160209000",
+    "apps/desktop/src/main/java/io/github/baitian6641/cloudy/desktop/VncKeyMap.java": "47b5757e0aa3c03e60fede83f90b79a49f50ee38a5e3d82f1fb9f9b234f5280c",
+    "shared/android/platform/src/main/kotlin/io/github/baitian6641/cloudy/platform/CloudyWindowActivity.kt": "c1f4d00bd74da368c651f538e1ef7052fdc1ae1faba870ff30edf1af1edb013e",
+    "shared/design-system/android/src/main/java/io/github/baitian6641/cloudy/design/WindowWorkspaceScreen.kt": "80af7d34ecd497510386638f62e7bbc099b96f57f7432d2c07f9ba824218946f",
+    "adapters/desktop/vnc/android/src/test/java/io/github/baitian6641/cloudy/desktop/vnc/VncEngineTest.java": "31332a2c5c4f459e033ac9cb8e1be7c17abdf224c921e1ca0a4e83b7e0052a8d",
+    "adapters/desktop/vnc/android/src/main/java/io/github/baitian6641/cloudy/desktop/vnc/VncEngine.java": "335d7e76d8ad182c04d9316c6870aa1f1ef8a0dafe9596f5bf5dbcf2f4703390",
+    "adapters/desktop/vnc/android/src/main/java/io/github/baitian6641/cloudy/desktop/vnc/VncBridge.java": "1dde20fa8cbc644e7eb29e1bfe5e6770087abc5a372e8c7da886243e85976142"
+  },
+  "evidence": [
+    {
+      "path": ".cache/vnc-product-app-01/build-04/result.json",
+      "sha256": "fa9d564c566d8e90c5d88e40593d45e6aa678926372fb9ddf6d3f59a908a95e4"
+    },
+    {
+      "path": ".cache/vnc-product-app-01/build-05/result.json",
+      "sha256": "274faf59e53aef7b08d2d5f097b184ce35afdbf8adbf0075619c3d0e05b1edf7"
+    },
+    {
+      "path": ".cache/vnc-product-app-01/independent-review-01/result.json",
+      "sha256": "e8ce801342d43519fba6a220e264b84a11f6c172e1c354e09ec255ad39ab519f"
+    },
+    {
+      "path": ".cache/vnc-product-input-01/omp-policy-review-01/candidate-03/status.json",
+      "sha256": "931c80862a3eab368fe652135ddfc61534994aaf3e3ebf884535842baed209fb"
+    },
+    {
+      "path": ".cache/vnc-product-input-01/omp-policy-review-01/review.md",
+      "sha256": "5ede082f04a9ec27edc068a81f3cc6d2ca57af77b2a4db7c4ba69266437c89a4"
+    }
+  ],
+  "preservedFailures": [
+    {
+      "path": ".cache/vnc-product-app-01/build-01/result.json",
+      "sha256": "1a7c2769654b3de654ada6915db1e9a678771200b59cb017084807aed85ef645",
+      "scope": "Kotlin compilation failed; preserved"
+    },
+    {
+      "path": ".cache/vnc-product-app-01/build-02/result.json",
+      "sha256": "bc9e63d715627d3aa927d92c3bfb272d76c4dadd7655a1be3737cd900b6a7404",
+      "scope": "Missing strict lock state; preserved"
+    },
+    {
+      "path": ".cache/vnc-product-app-01/build-03/result.json",
+      "sha256": "3f2971e22724efbaf16468bef6f4adf6a5813baf4439755ad523452f41032382",
+      "scope": "Android Lint failed; preserved"
+    }
+  ],
+  "build04": {
+    "passed": true,
+    "tasks": 522,
+    "executed": 54,
+    "upToDate": 468,
+    "artifactRecords": 20,
+    "onlyChangedInput": "apps/desktop/gradle.lockfile",
+    "artifacts": {
+      "apps/console/build/outputs/apk/release/console-release-unsigned.apk": "5f2d6bd21c85209b441c886d286568d24c140a5db81ed1354d905e5911e8566f",
+      "apps/console/build/outputs/apk/release/output-metadata.json": "cec5b81cde1a52a9c36cf89ae4e82922c2f51aa56f61bfb0c3433104da6260be",
+      "apps/console/build/outputs/apk/debug/console-debug.apk": "35e3db12726de328957b05dd9a37e129a457f06c4ec2cba5183f9aaf9e43e988",
+      "apps/console/build/outputs/apk/debug/output-metadata.json": "07fa51af018729bc8d8fb100327e5be98696cad1986a16aa1ce2e983f1f9dec9",
+      "apps/console/build/outputs/apk/androidTest/debug/output-metadata.json": "892a35fccbb1356755a3835dddd2bc52b5e2aea5f17bea71ae4b1f1accb1a15e",
+      "apps/console/build/outputs/apk/androidTest/debug/console-debug-androidTest.apk": "c2e64fdf93fd96dc247ceb20eab4cbd078d97a4ae6aa41cc67c0275087ef5971",
+      "apps/console/build/reports/lint-results-debug.xml": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f",
+      "apps/console/build/reports/lint-results-release.xml": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f",
+      "apps/desktop/build/outputs/apk/release/desktop-release-unsigned.apk": "83b9006d18c7c4c0c692068640fc6182461edd2c48da58be4f4fd1deee3c1490",
+      "apps/desktop/build/outputs/apk/release/output-metadata.json": "b4b73d8a77190646a234221c990ae2aa35b9310ed71285d529fc7a8ea27381a2",
+      "apps/desktop/build/outputs/apk/debug/output-metadata.json": "f1bfc5bec86756bbd33b83cf6f2f21264b6b045234250e45c1c50cff5297e95e",
+      "apps/desktop/build/outputs/apk/debug/desktop-debug.apk": "78d42f22f114b4071da949adcb3b55868783a31b6ec396599c8aa47abbacd2d9",
+      "apps/desktop/build/outputs/apk/androidTest/debug/output-metadata.json": "d2e58e3f472d259bbe9f61022eb4e0e15c7e6eb6cf52cb24f2478e92ff363f5b",
+      "apps/desktop/build/outputs/apk/androidTest/debug/desktop-debug-androidTest.apk": "24c2a66f792e04b3191dba881fc794ab2fd457de728fbaa11e99f7bf2f319e4d",
+      "apps/desktop/build/reports/lint-results-debug.xml": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f",
+      "apps/desktop/build/reports/lint-results-release.xml": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f",
+      "apps/desktop/build/test-results/testDebugUnitTest/TEST-io.github.baitian6641.cloudy.desktop.VncOwnershipRegressionTest.xml": "74949e9a7bc5235fe39f804d66aad5f5c8ba8af403d5a4db63be17992f72297c",
+      "apps/desktop/build/test-results/testDebugUnitTest/TEST-io.github.baitian6641.cloudy.desktop.VncFramePixelsTest.xml": "37b0147b971c269a97abd2b6288630abf9c6f12843b94e4232cc95867d344612",
+      "apps/desktop/build/test-results/testDebugUnitTest/TEST-io.github.baitian6641.cloudy.desktop.VncUiInputsTest.xml": "989a5e61851bb820bb6df59bd60c0b81fbb4ec5de99821f60a02402a9bbf4f98",
+      "apps/desktop/build/test-results/testDebugUnitTest/TEST-io.github.baitian6641.cloudy.desktop.VncInputPolicyTest.xml": "f0fdc1bcbb9534b7451ab17e353a79a63bec9388b48769f69b418e7dfef81ef9"
+    }
+  },
+  "build05": {
+    "passed": true,
+    "strictOfflineNoWriteLocks": true,
+    "changedInputs": [],
+    "tasks": 522,
+    "executed": 115,
+    "upToDate": 407,
+    "artifactRecords": 20,
+    "artifacts": {
+      "apps/console/build/outputs/apk/release/console-release-unsigned.apk": "5f2d6bd21c85209b441c886d286568d24c140a5db81ed1354d905e5911e8566f",
+      "apps/console/build/outputs/apk/release/output-metadata.json": "cec5b81cde1a52a9c36cf89ae4e82922c2f51aa56f61bfb0c3433104da6260be",
+      "apps/console/build/outputs/apk/debug/console-debug.apk": "35e3db12726de328957b05dd9a37e129a457f06c4ec2cba5183f9aaf9e43e988",
+      "apps/console/build/outputs/apk/debug/output-metadata.json": "07fa51af018729bc8d8fb100327e5be98696cad1986a16aa1ce2e983f1f9dec9",
+      "apps/console/build/outputs/apk/androidTest/debug/output-metadata.json": "892a35fccbb1356755a3835dddd2bc52b5e2aea5f17bea71ae4b1f1accb1a15e",
+      "apps/console/build/outputs/apk/androidTest/debug/console-debug-androidTest.apk": "c2e64fdf93fd96dc247ceb20eab4cbd078d97a4ae6aa41cc67c0275087ef5971",
+      "apps/console/build/reports/lint-results-debug.xml": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f",
+      "apps/console/build/reports/lint-results-release.xml": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f",
+      "apps/desktop/build/outputs/apk/release/desktop-release-unsigned.apk": "cb3d8028fa6e00b8e579a6dfa4322f7892ef5d696cef1da855654d21d477bb0b",
+      "apps/desktop/build/outputs/apk/release/output-metadata.json": "b4b73d8a77190646a234221c990ae2aa35b9310ed71285d529fc7a8ea27381a2",
+      "apps/desktop/build/outputs/apk/debug/output-metadata.json": "f1bfc5bec86756bbd33b83cf6f2f21264b6b045234250e45c1c50cff5297e95e",
+      "apps/desktop/build/outputs/apk/debug/desktop-debug.apk": "881dc384683791ba399a2489c0d14fe060729f019307d5c859571e642fc75d5f",
+      "apps/desktop/build/outputs/apk/androidTest/debug/output-metadata.json": "d2e58e3f472d259bbe9f61022eb4e0e15c7e6eb6cf52cb24f2478e92ff363f5b",
+      "apps/desktop/build/outputs/apk/androidTest/debug/desktop-debug-androidTest.apk": "24c2a66f792e04b3191dba881fc794ab2fd457de728fbaa11e99f7bf2f319e4d",
+      "apps/desktop/build/reports/lint-results-debug.xml": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f",
+      "apps/desktop/build/reports/lint-results-release.xml": "1b6e6f54270cf3298b1e965e53ea942f8dcb9f55dcd8f9c34744266238ed457f",
+      "apps/desktop/build/test-results/testDebugUnitTest/TEST-io.github.baitian6641.cloudy.desktop.VncOwnershipRegressionTest.xml": "c6864c11205549d037e7b2364bb25b62cc9c134c97d26d45a2821d8afc39cfc8",
+      "apps/desktop/build/test-results/testDebugUnitTest/TEST-io.github.baitian6641.cloudy.desktop.VncFramePixelsTest.xml": "ba47c61435c23eaf72f21e228a97d7767413319b53a3f3141485600a1db3659a",
+      "apps/desktop/build/test-results/testDebugUnitTest/TEST-io.github.baitian6641.cloudy.desktop.VncUiInputsTest.xml": "876479af13ae2abe563f48c91c1d774a7c17c4c51924d18272b882ab424b3a52",
+      "apps/desktop/build/test-results/testDebugUnitTest/TEST-io.github.baitian6641.cloudy.desktop.VncInputPolicyTest.xml": "06c44fc2a8c56623a004284f1a89af5eb8594f57f91e75ea672044c197f59e6c"
+    }
+  },
+  "jvm": {
+    "distinctMethods": 20,
+    "classes": {
+      "io.github.baitian6641.cloudy.desktop.VncOwnershipRegressionTest": 4,
+      "io.github.baitian6641.cloudy.desktop.VncFramePixelsTest": 3,
+      "io.github.baitian6641.cloudy.desktop.VncUiInputsTest": 2,
+      "io.github.baitian6641.cloudy.desktop.VncInputPolicyTest": 11
+    },
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "notSummedAcrossConfirmation": true
+  },
+  "lint": {
+    "variants": [
+      "Console debug",
+      "Console release",
+      "Desktop debug",
+      "Desktop release"
+    ],
+    "issues": 0
+  },
+  "lockReview": {
+    "newProjectCoordinateVersions": 0,
+    "addedToDesktop": [
+      "androidx.collection:collection:1.5.0",
+      "androidx.collection:collection-jvm:1.5.0",
+      "org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable:2.2.10"
+    ],
+    "removedFromDesktop": [
+      "androidx.collection:collection:1.4.2",
+      "androidx.collection:collection-jvm:1.4.2",
+      "androidx.compose.runtime:runtime-annotation:1.9.0",
+      "androidx.compose.runtime:runtime-annotation-android:1.9.0"
+    ],
+    "allOtherLocksUnchanged": true
+  },
+  "metadataInspection": {
+    "candidate": "Frozen build04 debug APKs",
+    "sameDebugSigner": true,
+    "privateVncActivityBothVariants": true,
+    "DesktopThreeCanonicalJniExact": true,
+    "ConsoleVncAbsent": true,
+    "releaseUnsigned": true,
+    "selectedPrototypeDexMarkersAbsent": true,
+    "limitation": "Selected marker check is scoped, not exhaustive semantic proof."
+  },
+  "repairs": [
+    "Reconcile prior held buttons against current physical mask before new press.",
+    "Release shared RFB keysym only when final physical device/key owner releases.",
+    "Use delegated public Window.Callback for local release chord while preserving AndroidX event dispatch.",
+    "Native View accessibility click only focuses already enabled session; no fabricated remote click.",
+    "Plural duration resources preserve exact bounded session setting."
+  ],
+  "limitations": [
+    "No install/authentication/server/frame/physical input/rendered/fullscreen acceptance in this report.",
+    "No release-license/source closure or formal stage completion.",
+    "Two refusal instrumentation methods compiled only here.",
+    "Build04 and05 Desktop APK hashes differ; do not substitute confirmation artifacts for separately bound installed candidate.",
+    "Unchanged existing10engine owner JVM evidence carried separately; not part of20Desktopmethods."
+  ]
+}

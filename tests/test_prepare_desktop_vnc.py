@@ -294,5 +294,57 @@ class PreparationTests(unittest.TestCase):
 
 
 
+    def test_portable_selection_requires_exact_maintained_chain(self):
+        import build_vnc_ci as ci
+        import prepare_vnc_adapter as adapter
+        with tempfile.TemporaryDirectory(prefix='cloudy-product-ci-policy-') as temporary:
+            root = Path(temporary)
+            chain, selected = root / 'ci', root / 'adapter/ci-ci'
+            chain.mkdir()
+            selected.mkdir(parents=True)
+            (chain / 'receipt.json').write_bytes(b'chain')
+            (selected / 'receipt.json').write_bytes(b'adapter')
+            with patch.object(ci, 'CACHE', root), patch.object(adapter, 'CACHE', root / 'adapter'), patch.object(
+                    ci, 'check_chain') as checked, patch.object(adapter, 'check', return_value={
+                        'mode': ci.MODE, 'qualification': ci.SCOPE}) as admitted:
+                path, _, selection = module.portable_selected('ci')
+                self.assertEqual(path, selected)
+                self.assertEqual(selection['adapterReceiptSha256'], module.sha(b'adapter'))
+                checked.assert_called_once_with(chain)
+                admitted.assert_called_once_with(selected)
+                with self.assertRaises(ValueError):
+                    module.portable_selected('../ci')
+                checked.side_effect = ValueError('unaccepted-chain')
+                admitted.reset_mock()
+                with self.assertRaisesRegex(ValueError, 'unaccepted-chain'):
+                    module.portable_selected('ci')
+                admitted.assert_not_called()
+                checked.side_effect = None
+                admitted.return_value = {'mode': 'historical', 'qualification': ci.SCOPE}
+                with self.assertRaisesRegex(ValueError, 'PORTABLE_SELECTED_MODE'):
+                    module.portable_selected('ci')
+
+    def test_portable_receipt_drift_and_import_drift_still_refuse(self):
+        selection = {'mode': 'portable-source-build', 'chainRun': 'ci',
+                     'chainReceiptSha256': 'chain-sha', 'adapterReceiptSha256': 'adapter-sha'}
+        with tempfile.TemporaryDirectory(prefix='cloudy-product-ci-check-') as temporary:
+            root = Path(temporary)
+            output = root / 'prepared'
+            output.mkdir()
+            record = {'status': 'NATIVE_NAMESPACE_PORT_COMPILED', 'nativeBuildExecuted': True,
+                      'selectedReceiptSha256': 'adapter-sha', 'sources': {}, 'imports': {},
+                      'portableSelection': selection}
+            (output / 'receipt.json').write_text(json.dumps(record))
+            with patch.object(module, 'CACHE', root), patch.object(module, 'module_inputs', return_value={}), patch.object(
+                    module, 'portable_selected', return_value=(root, {}, dict(selection, chainReceiptSha256='changed'))):
+                with self.assertRaisesRegex(ValueError, 'PORTABLE_SELECTION_DRIFT'):
+                    module.check(output)
+            with patch.object(module, 'CACHE', root), patch.object(module, 'module_inputs', return_value={}), patch.object(
+                    module, 'portable_selected', return_value=(root, {}, selection)), patch.object(
+                    module, 'toolchain'), patch.object(module, 'selected_inputs', return_value=({}, {'input': b'drift'})):
+                with self.assertRaisesRegex(ValueError, 'SELECTED_IMPORT_BINDING'):
+                    module.check(output)
+
+
 if __name__ == '__main__':
     unittest.main()

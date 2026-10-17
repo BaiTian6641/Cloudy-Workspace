@@ -21,8 +21,8 @@ The canonical `capabilityGates` records in [backlog.json](backlog.json) connect 
 2. Mark an investigation stage done only when its stated investigation deliverables and decision record are complete. A blocked decision can finish an investigation without satisfying the dependent feature.
 3. A product stage can enter `ready`, `in-progress`, `review` or `done` only when its required capability records are supported and its stage prerequisites have completed. Bounded prototype work belongs to its investigation record, not to a prematurely activated product stage.
 4. A blocker applies to the named capability and dependent stages. Preserve progress in unrelated Console/Desktop branches. Do not turn optional host adapters into mandatory dependencies through a broad phase-complete flag.
-5. Before changing requested scope, record the user-visible requirement that would remain unmet, the tested alternative, the decision authority, and the new estimate. A proposed fallback alone does not authorize reduced scope.
-6. Re-estimate implementation after P0 evidence and the foundation's engine/distribution review. Keep the published effort range a budgeting hypothesis until those decisions exist.
+5. Before changing requested scope, record the user-visible requirement that would remain unmet, the tested alternative, the decision authority, remaining work and the affected acceptance gates. A proposed fallback alone does not authorize reduced scope.
+6. Update remaining work, dependencies and readiness after P0 evidence and the foundation's engine/distribution review. Delivery estimates are withdrawn; progress requires verified functionality and linked acceptance evidence.
 
 The repository checker validates the structure, references and supported-outcome requirement for activated dependent stages. It also checks complete dependency paths against the selected app/stream independence constraints. It cannot establish the truth of physical evidence or approve a scope change.
 

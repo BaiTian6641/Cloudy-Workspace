@@ -1,15 +1,15 @@
 # P6 — Hardening and supported release
 
-**Status:** planned. **Active effort:** 10–18 person-days before contingency. **Purpose:** Qualify the complete suite, reusing applicable standalone evidence and validating combined failure, migration, distribution and sustained-use behavior.
+**Status:** planned. **Purpose:** Qualify the complete suite, reusing applicable standalone evidence and validating combined failure, migration, distribution and sustained-use behavior.
 
-The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-project/platform-rule-zero.md) defines desktop scope. Follow [capability outcomes](../feasibility-gates.md) and [independent release gates](../release-gates.md). Estimates are active effort, not elapsed time; re-estimate after physical evidence. Revision 02 moved the former P5-S1 decision to P1-S5; other stage IDs retain their identity.
+The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-project/platform-rule-zero.md) defines desktop scope. Follow [capability outcomes](../feasibility-gates.md) and [independent release gates](../release-gates.md). Progress is measured by verified functionality, linked evidence and completed acceptance gates; delivery estimates are withdrawn. Revision 02 moved the former P5-S1 decision to P1-S5; other stage IDs retain their identity.
 
-| Stage | Outcome | Effort, person-days | Prerequisites |
-| --- | --- | ---: | --- |
-| P6-S1 | Failure injection, long sessions, and power transitions | 3–5 | P5-S4, P4-S4, P3-S9 |
-| P6-S2 | Protocol skew, data migrations, updates, and rollback | 2–4 | P6-S1 |
-| P6-S3 | Distribution requirements and user documentation | 2–4 | P6-S2 |
-| P6-S4 | Ten-working-day dogfood and release decision | 3–5 | P6-S3 |
+| Stage | Outcome | Prerequisites |
+| --- | --- | --- |
+| P6-S1 | Failure injection, long sessions, and power transitions | P5-S4, P4-S4, P3-S9 |
+| P6-S2 | Protocol skew, data migrations, updates, and rollback | P6-S1 |
+| P6-S3 | Distribution requirements and user documentation | P6-S2 |
+| P6-S4 | Ten-working-day dogfood and release decision | P6-S3 |
 
 ## P6-S1 — Failure injection, long sessions, and power transitions
 
@@ -90,7 +90,7 @@ Record evidence under `qualification/results/P6-S3/` using the [run template](..
 Work:
 
 1. Use the candidate for at least ten working days across real Console, visual, files, and hardware workflows.
-2. Track defects by severity, recurrence, topology/version, data impact, and recovery cost; reserve effort for fixes.
+2. Track defects by severity, recurrence, topology/version, data impact, and recovery cost; resolve release-blocking defects.
 3. Re-run only affected gates after changes and recheck critical complete journeys before promotion.
 4. Approve release with evidence/support matrix or retain candidate status with explicit unresolved defects.
 5. Dogfood the complete revised desktop ecosystem workflows, collect applicable official desktop-quality evidence, and label every unsupported backend/device capability.
@@ -104,7 +104,7 @@ Deliverables:
 Exit evidence:
 
 - No unresolved release-blocking data-loss/trust/replay/ownership/input defect.
-- At least ten working days observed; the 3–5 day estimate is active QA effort, not the observation duration.
+- At least ten working days observed; this required observation period is an acceptance criterion, not a delivery forecast.
 
 Record evidence under `qualification/results/P6-S4/` using the [run template](../../06-validation/templates/run.md). Acceptance cases: Q-R01, Q-A01. Official/upstream source IDs: G02, D09; resolve them in the [source register](../../07-reference/source-register.md).
 

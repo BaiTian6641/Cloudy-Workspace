@@ -7672,6 +7672,42 @@
       "sourceUpdatedOn": null,
       "note": "Pinned parse_hh_mm_ss_ff permits fractional seconds only at three or six digits. Target Python3.9.6 read-only synthetic control corroborates this limit; Go RFC3339Nano may emit other precision. The finite Mac supervisor instead validates strict UTC syntax and constructs calendar fields, normalizing only comparison to microseconds while preserving raw output. No host output/API or latency precision claim changes. Owner host qualification leader, P4-S1.",
       "refresh": "Before changing the finite supervisor parser or target Python version; unchanged native host tests are not repeated for this reference record."
+    },
+    {
+      "id": "G255",
+      "title": "Window.Callback key dispatch contract",
+      "url": "https://developer.android.com/reference/android/view/Window.Callback#dispatchKeyEvent(android.view.KeyEvent)",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2026-08-03",
+      "note": "Public API1 dispatchKeyEvent(KeyEvent) returns whether consumed and requires standard key processing. Cloudy wraps the original Window.Callback for its local release chord and delegates other events to the original AndroidX callback; that delegation is the application design, not an AndroidX guarantee from this page. Owner Android/input, P3-S8. The separate 0.1.16 user case samples the release chord; broader physical routing remains unqualified.",
+      "refresh": "Before changing callback ownership, local release chord or native-field/Compose dispatch."
+    },
+    {
+      "id": "G256",
+      "title": "Window callback access and replacement",
+      "url": "https://developer.android.com/reference/android/view/Window",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2026-08-28",
+      "note": "Public API1 getCallback/setCallback expose and replace the window callback. Cloudy retains the original delegate instead of bypassing its framework processing. Public superDispatchKeyEvent is a custom-window path; the reference says application developers should not need to call it. Owner Android/input, P3-S8; no physical acceptance follows.",
+      "refresh": "Before changing the VNC Activity callback or AndroidX/window lifecycle ownership."
+    },
+    {
+      "id": "G257",
+      "title": "Custom View accessible click handling",
+      "url": "https://developer.android.com/guide/topics/ui/accessibility/views/custom-views",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": "2026-05-04",
+      "note": "Custom clicks use performClick with super called for standard accessibility/listener behavior. Cloudy uses it for local focus only; no arbitrary remote click. API1 availability is corroborated by selected public Android37.0 SDK api-versions.xml (View since1, performClick()Z inherits1). Full View reference fetch exceeded tool size; guide inspected. Owner Android/accessibility, P3-S8; assistive/physical tests pending.",
+      "refresh": "Before changing framebuffer click/focus semantics; a superclass call does not establish accessible remote content."
     }
   ]
 }

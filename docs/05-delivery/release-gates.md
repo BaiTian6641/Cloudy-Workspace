@@ -28,7 +28,7 @@ Each R1/R2 gate includes Q-R02 and the applicable Q-R01 checks before a standalo
 5. Observe at least ten working days on the candidate's supported workflow and exact build, with no unresolved release-blocking data-loss, trust, input/replay or ownership defect. Record active QA effort separately from elapsed observation.
 6. Publish the app-specific evidence/support decision. An unrelated feature blocker in the other app is not a release dependency.
 
-P1 provides reusable build and validation infrastructure. P2-S5 and P3-S5 apply this checklist separately; the added 4–6 active person-day allowance covers the two release reviews. Re-estimate from actual build/migration and sustained-use results. P6 retains full-suite checks and newly introduced R3/R4 behavior; it is not permission to skip standalone release hygiene.
+P1 provides reusable build and validation infrastructure. P2-S5 and P3-S5 apply this checklist separately. Update each candidate's readiness, unresolved defects and remaining acceptance evidence from actual build/migration and sustained-use results. P6 retains full-suite checks and newly introduced R3/R4 behavior; it is not permission to skip standalone release hygiene.
 
 ## Integration failure and evidence reuse
 

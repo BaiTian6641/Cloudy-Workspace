@@ -22,6 +22,9 @@ abstract class CloudyWindowActivity : ComponentActivity() {
     protected abstract val appNameResource: Int
     protected abstract val defaultWindowNameResource: Int
 
+    /** A concrete app-owned destination; absence keeps the workspace entry unavailable. */
+    protected open val remoteDesktopActivity: Class<out ComponentActivity>? = null
+
     private var state by mutableStateOf<WindowState?>(null)
     private var notice by mutableStateOf<String?>(null)
     private var systemNotice by mutableStateOf<String?>(null)
@@ -62,6 +65,10 @@ abstract class CloudyWindowActivity : ComponentActivity() {
                     onSshAuthenticate = ::openSshAuthenticate,
                     onSshFiles = ::openSshFiles,
                     onFilesLocations = ::openFilesLocations,
+                    isDesktop = windowOwner == WindowOwner.DESKTOP,
+                    onVnc = remoteDesktopActivity?.let { destination ->
+                        { openRemoteDesktop(destination) }
+                    },
                 )
             }
         }
@@ -123,6 +130,15 @@ abstract class CloudyWindowActivity : ComponentActivity() {
     private fun closeWindow() {
         // Task removal is scoped to an owned root, never an unexpected caller task.
         if (isTaskRoot) finishAndRemoveTask() else finish()
+    }
+
+    private fun openRemoteDesktop(destination: Class<out ComponentActivity>) {
+        try {
+            // Explicit local Activity only; no secret/profile/authorization extras.
+            startActivity(Intent(this, destination))
+        } catch (_: RuntimeException) {
+            notice = getString(R.string.cloudy_window_launch_failed)
+        }
     }
 
     private fun openCredentials() {

@@ -75,17 +75,38 @@ def module_inputs():
             if p.is_file() and 'build' not in p.relative_to(ROOT).parts}
 
 
-def selected_inputs():
-    raw = read(SELECTED / 'receipt.json')
-    if sha(raw) != RECEIPT_SHA:
-        raise ValueError('SELECTED_RECEIPT')
-    receipt = json.loads(raw)
+def portable_selected(run):
+    # An explicit fresh maintained CI chain, never a workstation receipt fallback.
+    import build_vnc_ci as ci
+    import prepare_vnc_adapter as adapter
+    name = ci.run_name(run)
+    chain = ci.CACHE / name
+    ci.check_chain(chain)
+    selected = adapter.CACHE / ('ci-' + name)
+    receipt = adapter.check(selected)
+    if receipt.get('mode') != ci.MODE or receipt.get('qualification') != ci.SCOPE:
+        raise ValueError('PORTABLE_SELECTED_MODE')
+    selection = {'mode': ci.MODE, 'chainRun': name,
+                 'chainReceiptSha256': sha(read(chain / 'receipt.json')),
+                 'adapterReceiptSha256': sha(read(selected / 'receipt.json'))}
+    return selected, receipt, selection
+
+
+def selected_inputs(portable_run=None):
+    if portable_run is None:
+        selected = SELECTED
+        raw = read(selected / 'receipt.json')
+        if sha(raw) != RECEIPT_SHA:
+            raise ValueError('SELECTED_RECEIPT')
+        receipt = json.loads(raw)
+    else:
+        selected, receipt, _ = portable_selected(portable_run)
     if receipt['exitCode'] != 0:
         raise ValueError('SELECTED_FAILED')
     for name, pin in PINS.items():
         if sha(read(ORIGINAL / name)) != pin:
             raise ValueError('SELECTED_AUTHORED_INPUT')
-    prepared = SELECTED / 'prepared'
+    prepared = selected / 'prepared'
     manifest = receipt['prepared']
     # Only inputs consumed by this port: no unchanged upstream conformance/rebuild.
     names = {name for name in manifest if name.startswith('nativeIncludes/rfb/') or
@@ -128,10 +149,10 @@ def save(root, name, raw):
         stream.write(raw)
 
 
-def stage(output):
+def stage(output, portable_run=None):
     destination(output)
     sources = module_inputs()
-    receipt, imports = selected_inputs()
+    receipt, imports = selected_inputs(portable_run)
     output.mkdir(parents=True, exist_ok=False)
     save(output, 'input/adapter.c', namespace_port(read(ORIGINAL / 'adapter.c')))
     for name in ('policy.c', 'policy.h'):
@@ -158,6 +179,10 @@ def stage(output):
               'sources': sources, 'imports': {n: sha(b) for n, b in imports.items()},
               'toolchain': receipt['baseToolchain'], 'nativeBuildExecuted': False,
               'jniNamespaceOnly': True, 'releaseClosureApproved': False}
+    if portable_run is not None:
+        _, _, selection = portable_selected(portable_run)
+        record['portableSelection'] = selection
+        record['selectedReceiptSha256'] = selection['adapterReceiptSha256']
     record['staged'] = {str(p.relative_to(output)): sha(read(p)) for p in sorted(output.rglob('*')) if p.is_file()}
     save(output, 'stage.json', (json.dumps(record, indent=2) + '\n').encode())
     return record
@@ -202,9 +227,9 @@ def ndk_clang_digest(path, ndk, maximum_bytes=256 * 1024 * 1024):
         os.close(descriptor)
 
 
-def toolchain(record):
+def toolchain(record, sdk=None):
     # Existing selected SDK tools only; no acquisition or shell lookup fallback.
-    sdk = ROOT / '.cache/android-sdk'
+    sdk = ROOT / '.cache/android-sdk' if sdk is None else sdk.absolute()
     ndk = sdk / 'ndk/29.0.14206865'
     cmake = sdk / 'cmake/4.1.2/bin/cmake'
     ninja = sdk / 'cmake/4.1.2/bin/ninja'
@@ -276,10 +301,10 @@ def verify_staged(output, record):
         raise ValueError('GENERATED_PORT_CHANGED')
 
 
-def build(output):
-    record = stage(output)
+def build(output, portable_run=None, sdk=None):
+    record = stage(output, portable_run)
     verify_staged(output, record)
-    ndk, cmake, ninja = toolchain(record)
+    ndk, cmake, ninja = toolchain(record, sdk)
     commands = [[str(cmake), '-S', str(MODULE / 'src/main/cpp'), '-B', str(output / 'native-build'),
                  '-G', 'Ninja', '-DCMAKE_MAKE_PROGRAM=' + str(ninja),
                  '-DCMAKE_TOOLCHAIN_FILE=' + str(ndk / 'build/cmake/android.toolchain.cmake'),
@@ -296,6 +321,12 @@ def build(output):
     verify_staged(output, record)
     if module_inputs() != record['sources']:
         raise ValueError('SOURCE_DRIFT')
+    if portable_run is not None:
+        _, current_imports = selected_inputs(portable_run)
+        if {n: sha(b) for n, b in current_imports.items()} != record['imports'] or portable_selected(
+                portable_run)[2] != record['portableSelection']:
+            raise ValueError('PORTABLE_SELECTION_CHANGED_DURING_BUILD')
+        toolchain(record, sdk)
     for name, raw in payload.items():
         save(output, 'jniLibs/arm64-v8a/' + name, raw)
     record.update(status='NATIVE_NAMESPACE_PORT_COMPILED', nativeBuildExecuted=True,
@@ -306,7 +337,7 @@ def build(output):
     save(output, 'receipt.json', (json.dumps(record, indent=2) + '\n').encode())
 
 
-def verify_reuse_sources(record, receipt_sha256, declaration, declaration_sha256):
+def verify_reuse_sources(record, receipt_sha256, declaration, declaration_sha256, sdk=None):
     # Explicit caller-pinned metadata; this is not a new compilation or a historical receipt edit.
     raw = read(declaration)
     if declaration.absolute().parent != CACHE.absolute() or len(raw) > 64 * 1024 or sha(raw) != declaration_sha256:
@@ -336,13 +367,13 @@ def verify_reuse_sources(record, receipt_sha256, declaration, declaration_sha256
     if not set(changes) <= allowed:
         raise ValueError('REUSE_NATIVE_OR_UNREVIEWED_SOURCE_DRIFT')
     # Toolchain is checked without invoking it. All original import/staged/library checks still follow.
-    toolchain(record)
+    toolchain(record, sdk)
     return {'schema': 1, 'scope': 'OWNER_JAVA_ONLY_NATIVE_REUSE', 'originalReceiptSha256': receipt_sha256,
             'declarationSha256': declaration_sha256, 'currentSources': current, 'sourceChanges': changes,
             'nativeRebuilt': False, 'wholeModuleUnchanged': False, 'releaseClosureApproved': False}
 
 
-def check(output, reuse=None):
+def check(output, reuse=None, sdk=None):
     destination(output)
     receipt_raw = read(output / 'receipt.json')
     record = json.loads(receipt_raw)
@@ -351,11 +382,24 @@ def check(output, reuse=None):
         receipt_sha256, declaration, declaration_sha256 = reuse
         if sha(receipt_raw) != receipt_sha256:
             raise ValueError('REUSE_ORIGINAL_RECEIPT_BINDING')
-        scope = verify_reuse_sources(record, receipt_sha256, declaration, declaration_sha256)
+        scope = verify_reuse_sources(record, receipt_sha256, declaration, declaration_sha256, sdk)
+    portable = record.get('portableSelection')
+    portable_run = None
+    selected_sha = RECEIPT_SHA
+    if portable is not None:
+        if (type(portable) is not dict or set(portable) != {'mode', 'chainRun', 'chainReceiptSha256', 'adapterReceiptSha256'}
+                or portable['mode'] != 'portable-source-build'):
+            raise ValueError('PORTABLE_SELECTION_SCHEMA')
+        portable_run = portable['chainRun']
+        _, _, actual = portable_selected(portable_run)
+        if portable != actual:
+            raise ValueError('PORTABLE_SELECTION_DRIFT')
+        selected_sha = actual['adapterReceiptSha256']
+        toolchain(record, sdk)
     if record['status'] != 'NATIVE_NAMESPACE_PORT_COMPILED' or record['nativeBuildExecuted'] is not True or record[
-            'selectedReceiptSha256'] != RECEIPT_SHA or (reuse is None and record['sources'] != module_inputs()):
+            'selectedReceiptSha256'] != selected_sha or (reuse is None and record['sources'] != module_inputs()):
         raise ValueError('UNACCEPTED_PRODUCT_NATIVE')
-    _, imports = selected_inputs()
+    _, imports = selected_inputs(portable_run)
     if {n: sha(b) for n, b in imports.items()} != record['imports']:
         raise ValueError('SELECTED_IMPORT_BINDING')
     verify_staged(output, record)
@@ -395,21 +439,25 @@ def main():
     parser.add_argument('--receipt-sha256')
     parser.add_argument('--reuse-declaration', type=Path)
     parser.add_argument('--reuse-sha256')
+    parser.add_argument('--portable-run', help='Explicit fresh build_vnc_ci chain; stage/prepare only')
+    parser.add_argument('--sdk', type=Path, default=Path(os.environ.get('ANDROID_HOME', str(ROOT / '.cache/android-sdk'))))
     parser.add_argument('--output', type=Path, default=CACHE / 'prepared')
     args = parser.parse_args()
     output = args.output.absolute()
+    if args.portable_run is not None and (args.check or args.check_native_reuse):
+        parser.error('check validates the issued selection; --portable-run is stage/prepare only')
     if args.check_native_reuse:
         if not (args.receipt_sha256 and args.reuse_declaration and args.reuse_sha256):
             parser.error('native reuse requires exact receipt/declaration SHA256 and declaration path')
-        print(json.dumps(check(output, (args.receipt_sha256, args.reuse_declaration, args.reuse_sha256)), sort_keys=True))
+        print(json.dumps(check(output, (args.receipt_sha256, args.reuse_declaration, args.reuse_sha256), args.sdk), sort_keys=True))
     elif args.receipt_sha256 or args.reuse_declaration or args.reuse_sha256:
         parser.error('reuse metadata is valid only with explicit native reuse mode')
     elif args.check:
-        check(output)
+        check(output, sdk=args.sdk)
     elif args.prepare:
-        build(output)
+        build(output, args.portable_run, args.sdk)
     else:
-        stage(output)
+        stage(output, args.portable_run)
 
 
 if __name__ == '__main__':

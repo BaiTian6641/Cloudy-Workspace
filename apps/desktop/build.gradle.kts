@@ -1,4 +1,7 @@
-plugins { id("com.android.application") }
+plugins {
+    id("com.android.application")
+    id("org.jetbrains.kotlin.plugin.compose")
+}
 android {
     namespace = "io.github.baitian6641.cloudy.desktop"
     compileSdk { version = release(37) { minorApiLevel = 0 } }
@@ -21,16 +24,19 @@ android {
         kotlin.directories.add(rootProject.file("testing/foundation/src/debug/kotlin").absolutePath)
         manifest.srcFile(rootProject.file("testing/foundation/src/debug/AndroidManifest.xml"))
     }
+    buildFeatures { compose = true }
     packaging.resources.merges += setOf("META-INF/LICENSE.md", "META-INF/LICENSE.txt")
     defaultConfig {
         applicationId = "io.github.baitian6641.cloudy.desktop"
         minSdk = 35
         targetSdk = 37
-        versionCode = 16
-        versionName = "0.1.15"
+        versionCode = 17
+        versionName = "0.1.16"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 }
+// Requires parent-owned :vnc root registration and reviewed clean-host native preparation.
+// Local retained-native properties are explicit invocation inputs, never workstation pins here.
 // AGP supplies Android Kotlin; never also apply kotlin.android.
 kotlin {
     compilerOptions {
@@ -41,7 +47,16 @@ kotlin {
 dependencies {
     implementation(project(":domain"))
     implementation(project(":platform"))
+    implementation(project(":vnc"))
+    implementation(project(":design-system"))
+    implementation(platform(libs.compose.bom))
+    implementation(libs.activity.compose)
+    implementation(libs.compose.runtime)
+    implementation(libs.compose.ui)
+    implementation(libs.compose.foundation)
+    implementation(libs.compose.material3)
     debugImplementation(project(":identity"))
+    testImplementation(libs.junit)
 }
 
 // Tests exercise real Android boundaries; these artifacts are not app runtime dependencies.

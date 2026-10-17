@@ -19,10 +19,14 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 60
     steps:
       - name: Check out source
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - name: Install existing native build prerequisites
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends ninja-build pkg-config
       - name: Select Java 21
         uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5
         with:
@@ -42,7 +46,7 @@ jobs:
           unzip -q "$cloudy_tools/tools.zip" -d "$cloudy_tools"
           # Use the hosted runner's accepted SDK license records; do not pipe yes
           # to new licenses or invoke the bundled CLI's automatic update path.
-          "$cloudy_tools/cmdline-tools/bin/sdkmanager" --sdk_root="$ANDROID_HOME" 'platforms;android-37.0' 'build-tools;36.0.0'
+          "$cloudy_tools/cmdline-tools/bin/sdkmanager" --sdk_root="$ANDROID_HOME" 'platforms;android-37.0' 'build-tools;36.0.0' 'ndk;29.0.14206865' 'cmake;4.1.2'
       - name: Reject unreviewed SDK revision drift
         run: |
           python3 - <<'PY'
@@ -55,15 +59,30 @@ jobs:
                   'AndroidVersion.ExtensionLevel': '22', 'AndroidVersion.IsBaseSdk': 'true',
               },
               'build-tools/36.0.0/source.properties': {'Pkg.Revision': '36.0.0'},
+              'ndk/29.0.14206865/source.properties': {'Pkg.Revision': '29.0.14206865'},
+              'cmake/4.1.2/source.properties': {'Pkg.Revision': '4.1.2'},
           }
           for relative, pins in expected.items():
-              observed = dict(line.split('=', 1) for line in (sdk / relative).read_text().splitlines()
+              observed = dict(tuple(part.strip() for part in line.split('=', 1)) for line in (sdk / relative).read_text().splitlines()
                               if '=' in line and not line.startswith('#'))
               for key, value in pins.items():
                   if observed.get(key) != value:
                       raise SystemExit(f'SDK drift in {relative}: {key} must be {value}')
           print('SDK platform/build-tool revision pins verified')
           PY
+      - name: Cache verified VNC source downloads only
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: |
+            .cache/native-rdp/downloads
+            .cache/native-vnc/downloads
+          key: native-vnc-downloads-${{ runner.os }}-${{ hashFiles('qualification/probes/native-rdp/source-lock.json', 'qualification/probes/native-vnc/sources.lock.json') }}
+      - name: Prepare source-bound product VNC closure
+        run: |
+          python3 tools/build_vnc_ci.py --build --run product-ci --sdk "$ANDROID_HOME" --rdp-stage "$RUNNER_TEMP/cloudy-product-vnc-openssl"
+          python3 tools/build_vnc_ci.py --check --run product-ci
+          python3 tools/prepare_desktop_vnc.py --prepare --portable-run product-ci --sdk "$ANDROID_HOME"
+          python3 tools/prepare_desktop_vnc.py --check --sdk "$ANDROID_HOME"
       - name: Verify generated Compose design tokens are current
         run: python3 tools/generate_android_tokens.py --check
       - name: Compile, lint, and test all foundation modules
@@ -74,8 +93,10 @@ jobs:
           mkdir -p "$GRADLE_USER_HOME" "$ANDROID_USER_HOME"
           set +e
           ./gradlew :console:assembleDebug :desktop:assembleDebug \
+            :vnc:assembleDebug :vnc:assembleRelease :vnc:lintDebug :vnc:lintRelease \
             :console:lintDebug :desktop:lintDebug \
             :domain:test :ssh:test :platform:testDebugUnitTest :design-system:testDebugUnitTest \
+            :desktop:testDebugUnitTest :vnc:testDebugUnitTest \
             :identity:testDebugUnitTest :identity:lintDebug :identity:assembleDebugAndroidTest \
             :platform:assembleDebugAndroidTest :console:assembleDebugAndroidTest :desktop:assembleDebugAndroidTest \
             --dependency-verification=strict --no-daemon --console=plain --max-workers=4 \

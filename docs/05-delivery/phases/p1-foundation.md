@@ -1,16 +1,16 @@
 # P1 — Shared foundation and design
 
-**Status:** P1-S1 complete; P1-S2 native context/controls and P1-S3 protected identity in progress; other stages planned. **Active effort:** 15–24 person-days before contingency. **Purpose:** Establish two independent Android desktop packages, shared design/lifecycle contracts and early engine/distribution decisions, including native streaming at P1-S5.
+**Status:** P1-S1 complete; P1-S2 native context/controls and P1-S3 protected identity in progress; other stages planned. **Purpose:** Establish two independent Android desktop packages, shared design/lifecycle contracts and early engine/distribution decisions, including native streaming at P1-S5.
 
-The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-project/platform-rule-zero.md) defines desktop scope. Follow [capability outcomes](../feasibility-gates.md) and [independent release gates](../release-gates.md). Estimates are active effort, not elapsed time; re-estimate after physical evidence. Revision 02 moved the former P5-S1 decision to P1-S5; other stage IDs retain their identity.
+The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-project/platform-rule-zero.md) defines desktop scope. Follow [capability outcomes](../feasibility-gates.md) and [independent release gates](../release-gates.md). Progress is measured by verified functionality, linked evidence and completed acceptance gates; delivery estimates are withdrawn. Revision 02 moved the former P5-S1 decision to P1-S5; other stage IDs retain their identity.
 
-| Stage | Outcome | Effort, person-days | Prerequisites |
-| --- | --- | ---: | --- |
-| P1-S1 | Native app targets and shared-module build foundation | 3–4 | P0-S3 |
-| P1-S2 | Cloudy design system and native shell | 5–8 | P1-S1 |
-| P1-S3 | Identity, typed contracts, and lifecycle persistence | 3–5 | P1-S1, P0-S2 |
-| P1-S5 | Early native-stream adoption and distribution decision | 2–3 | P0-S4, P1-S1 |
-| P1-S4 | CI, dependency decision, and foundation gate | 2–4 | P1-S2, P1-S3 |
+| Stage | Outcome | Prerequisites |
+| --- | --- | --- |
+| P1-S1 | Native app targets and shared-module build foundation | P0-S3 |
+| P1-S2 | Cloudy design system and native shell | P1-S1 |
+| P1-S3 | Identity, typed contracts, and lifecycle persistence | P1-S1, P0-S2 |
+| P1-S5 | Early native-stream adoption and distribution decision | P0-S4, P1-S1 |
+| P1-S4 | CI, dependency decision, and foundation gate | P1-S2, P1-S3 |
 
 The [ADR0012 refinement](../../adr/0012-foundation-construction-and-platform-acceptance.md) supports construction on demonstrated native primitives. It leaves CAP-PLATFORM experimental and required at product acceptance; every P1 work item and exit below remains required. Product dependencies and actual shell/input/security checks still need their own evidence.
 
@@ -128,14 +128,14 @@ Work:
 
 1. Review the P0 native-engine feasibility probe and exact upstream/dependency obligations during the foundation phase, before committing the streaming implementation.
 2. Apply [ADR0010](../../adr/0010-desktop-open-source-distribution.md): compatible open-source Desktop is selected. Finalize the exact license expression, actual dependency graph/SBOM, corresponding source/notices/build materials, engine ownership and reproducible build route; Console terms remain independent.
-3. Record native surface/input/decoder and backend-version boundaries; estimate remaining integration from the actual probe.
+3. Record native surface/input/decoder and backend-version boundaries; identify remaining integration work and acceptance gates from the actual probe.
 4. Record CAP-STREAM as supported, bounded experiment or blocked. A blocker does not prevent ordinary SSH, RDP or VNC work; an external-only alternative needs an explicit user-visible scope decision.
 5. Keep the early external stream lane available while native integration proceeds on its own prerequisites, independently of optional host adapters and event integrations.
 
 Deliverables:
 
 - Early implementation/distribution ADR with selected engine and obligations
-- Pinned maintenance/build plan, CAP-STREAM outcome and revised estimate
+- Pinned maintenance/build plan, CAP-STREAM outcome and remaining acceptance gates
 
 Exit evidence:
 
@@ -155,7 +155,7 @@ Work:
 1. Add real Android build/lint/unit/instrumentation checks and contract fixture validation; retain documentation checks.
 2. Record dependency versions/licenses/update owners and actual artifact closure. Apply the selected open-source Desktop direction in ADR0010 while retaining independent Console terms; finalize compatible exact terms and source/notices/build materials before release.
 3. Exercise mismatched app/protocol versions, missing recipient, unavailable permissions, and independent install/uninstall.
-4. Publish the P1 evidence bundle and refine remaining stage estimates using actual implementation results.
+4. Publish the P1 evidence bundle and update remaining stage readiness and acceptance evidence using actual implementation results.
 5. Resolve X server, FreeRDP, VNC engine and transitive native codec/license/security/build obligations before P2/P3 embedding; P5 stream review does not substitute for this gate.
 6. Finalize each engine capability outcome after its own feasibility and distribution/build review, including separate CAP-SSH transport and CAP-TERMINAL renderer adoption. A blocked renderer, X11, VNC or USB choice leaves that feature blocked without holding the independently usable foundation or unrelated app lanes.
 
@@ -184,13 +184,13 @@ P1-S3 implements the [RDP authentication/vault contract](../../02-architecture/r
 
 The [0.1.6 result](../../../qualification/results/P1-S2/2026-10-16-native-display-settings.md) adds real independent appearance/density settings, live theme/spacing updates and canonical vault-dialog presentation. Strict build/four Lint reports and12 actual Android cases pass. Six current Console viewport captures at font scale1.0 were inspected across both themes/all three densities. The [display contract](../../04-design/native-display-settings.md) records nominal versus observed geometry, system-owned chrome and effective preference restoration.
 
-This increment advances existing P1-S2 work without changing dependencies, efforts or required exits. Full component catalog, HTML specimen states/density, scaled/narrow/short native windows, physical input/focus/accessibility and engine-backed layout remain open; P1-S2 is not complete. The P1-S3 protected-vault and real SSH enrollment/authentication prerequisites remain separate.
+This increment advances existing P1-S2 work without changing dependencies or required exits. Full component catalog, HTML specimen states/density, scaled/narrow/short native windows, physical input/focus/accessibility and engine-backed layout remain open; P1-S2 is not complete. The P1-S3 protected-vault and real SSH enrollment/authentication prerequisites remain separate.
 
 ## P1-S2 measured geometry and specimen checkpoint — 2026-10-16
 
 The [actual native geometry result](../../../qualification/results/P1-S2/2026-10-16-native-window-geometry.md) passes eight local-workspace cases on unchanged0.1.6 products: narrow/short windows at font scales1.3/2.0, all three density tiers across the chosen configurations, seven individually reachable labels and preserved draft/window identity. Sixteen Light captures are inspected; exact system/app restoration is verified. The [HTML follow-through](../../06-validation/2026-10-16-specimen-density.md) separately passes16layouts/10states with existing canonical typography and all three densities.
 
-This supersedes the earlier wholly unrun HTML/narrow/scaled statements only for the recorded cases. ScaledDark, physical input/focus, accessibility, profile/trust/vault geometry, caption/hit-target overlap, full component catalog and remote scene remain required. Source-identified profile dialog/editor reveal risks need actual probes. Dependencies, effort and P1-S2 exit criteria remain unchanged; P1-S2/P1-S3 and the full implementation goal stay in progress.
+This supersedes the earlier wholly unrun HTML/narrow/scaled statements only for the recorded cases. ScaledDark, physical input/focus, accessibility, profile/trust/vault geometry, caption/hit-target overlap, full component catalog and remote scene remain required. Source-identified profile dialog/editor reveal risks need actual probes. Dependencies and P1-S2 exit criteria remain unchanged; P1-S2/P1-S3 and the full implementation goal stay in progress.
 
 
 ## Current P1-S3 observation follow-through

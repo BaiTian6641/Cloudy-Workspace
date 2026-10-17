@@ -1,20 +1,20 @@
 # P3 — Desktop companion release
 
-**Status:** planned. **Active effort:** 28–47 person-days before contingency. **Purpose:** Deliver independently releasable Desktop R2, then test the complete Console/Desktop journey as a separate suite milestone.
+**Status:** planned. **Purpose:** Deliver independently releasable Desktop R2, then test the complete Console/Desktop journey as a separate suite milestone.
 
-The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-project/platform-rule-zero.md) defines desktop scope. Follow [capability outcomes](../feasibility-gates.md) and [independent release gates](../release-gates.md). Estimates are active effort, not elapsed time; re-estimate after physical evidence. Revision 02 moved the former P5-S1 decision to P1-S5; other stage IDs retain their identity.
+The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-project/platform-rule-zero.md) defines desktop scope. Follow [capability outcomes](../feasibility-gates.md) and [independent release gates](../release-gates.md). Progress is measured by verified functionality, linked evidence and completed acceptance gates; delivery estimates are withdrawn. Revision 02 moved the former P5-S1 decision to P1-S5; other stage IDs retain their identity.
 
-| Stage | Outcome | Effort, person-days | Prerequisites |
-| --- | --- | ---: | --- |
-| P3-S1 | Desktop hosts, workspaces, and capability presentation | 2–3 | P1-S4 |
-| P3-S2 | External desktop handoff and backend setup | 2–4 | P3-S1, P0-S4 |
-| P3-S3 | File browser, transfer journal, and conflict-safe writes | 3–4 | P3-S1, P2-S8 |
-| P3-S4 | USB ownership and protected operation orchestration | 3–5 | P3-S1, P0-S5 |
-| P3-S6 | Enrolled USB plug-and-play and reenumeration recovery | 3–6 | P3-S4, P0-S5, P1-S3 |
-| P3-S7 | Native integrated RDP client | 6–10 | P3-S1, P0-S4, P1-S4 |
-| P3-S8 | Native integrated VNC client | 5–9 | P3-S1, P0-S4, P1-S4 |
-| P3-S5 | Independent Desktop companion release gate | 3–5 | P3-S2, P3-S3, P3-S4, P3-S6, P3-S7, P3-S8, P0-S6 |
-| P3-S9 | Console/Desktop suite integration milestone | 1 | P2-S5, P3-S5 |
+| Stage | Outcome | Prerequisites |
+| --- | --- | --- |
+| P3-S1 | Desktop hosts, workspaces, and capability presentation | P1-S4 |
+| P3-S2 | External desktop handoff and backend setup | P3-S1, P0-S4 |
+| P3-S3 | File browser, transfer journal, and conflict-safe writes | P3-S1, P2-S8 |
+| P3-S4 | USB ownership and protected operation orchestration | P3-S1, P0-S5 |
+| P3-S6 | Enrolled USB plug-and-play and reenumeration recovery | P3-S4, P0-S5, P1-S3 |
+| P3-S7 | Native integrated RDP client | P3-S1, P0-S4, P1-S4 |
+| P3-S8 | Native integrated VNC client | P3-S1, P0-S4, P1-S4 |
+| P3-S5 | Independent Desktop companion release gate | P3-S2, P3-S3, P3-S4, P3-S6, P3-S7, P3-S8, P0-S6 |
+| P3-S9 | Console/Desktop suite integration milestone | P2-S5, P3-S5 |
 
 ## P3-S1 — Desktop hosts, workspaces, and capability presentation
 
@@ -249,7 +249,7 @@ P3-S7 follows the [desktop RDP interaction contract](../../04-design/desktop-rdp
 Add Q-D09 for actual physical capture, negotiated relative deltas,3D behavior and local/focus-loss release; an absolute fallback does not pass it. Add Q-S02 for the P1-S3 vault, local authorization, trust/backup/invalidation and native secret lifetime. Ordinary direct pointer/keyboard/IME must follow desktop interaction with no touch-only prerequisite. P3-S7's existing foundation dependency supplies P1-S3; no new Console/host-agent dependency is introduced. Publish capability limits, including unqualified hardware/host rows. Native RDP and vault gates are still unmet.
 
 
-The existing effort range remains a provisional planning hypothesis. Re-estimate the relative-input adapter, vault and additional server rows after P0/P1 evidence; no new host or security promise is represented as completed within that range.
+The relative-input adapter, vault and additional server rows require their own P0/P1 evidence and acceptance gates; no host or security promise is complete without that evidence.
 
 ## Shared fullscreen and overlay acceptance
 

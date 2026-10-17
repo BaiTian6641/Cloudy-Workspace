@@ -834,3 +834,14 @@ G24 was rechecked for fullscreen eligibility, pre-configuration callback orderin
 | --- | --- | --- | --- |
 | R366 | [Gradle9.6 dependency locking](https://docs.gradle.org/9.6.0/userguide/dependency_locking.html#generating_and_updating_dependency_locks) | reviewed | STRICT requires lock state; explicit project-scoped resolution with --write-locks creates reviewed configuration entries. Keep offline/strict verification and existing locks/checksums; no dependency-policy relaxation. Owner Android/build, P1-S4. |
 | R367 | [CPython3.9.6 ISO time parser](https://github.com/python/cpython/blob/v3.9.6/Modules/_datetimemodule.c) | reviewed | parse_hh_mm_ss_ff accepts fractional seconds at3or6digits. The Mac supervisor uses strict UTC validation/calendar construction for Go RFC3339Nano; comparison precision is explicitly microseconds, with original output retained privately. Owner host qualification, P4-S1. |
+
+
+## Native VNC key delegation and accessible local activation
+
+Checked 2026-10-16. Availability is documented; physical input and assistive behavior remain unqualified.
+
+| ID | Official reference | Review status | Development use |
+| --- | --- | --- | --- |
+| G255 | [Window.Callback.dispatchKeyEvent](https://developer.android.com/reference/android/view/Window.Callback#dispatchKeyEvent(android.view.KeyEvent)) | reviewed | API1 standard processing/consumed result. Cloudy delegates non-release keys to its original AndroidX callback; this application choice requires actual routing tests. P3-S8. |
+| G256 | [Window callback access](https://developer.android.com/reference/android/view/Window) | reviewed | API1 getCallback/setCallback. Retain original delegate; avoid bypassing normal processing through custom-window superDispatchKeyEvent. P3-S8. |
+| G257 | [Custom View accessibility](https://developer.android.com/guide/topics/ui/accessibility/views/custom-views) | reviewed | performClick with super preserves standard click accessibility. Framebuffer activation focuses locally and never invents a remote click. API1 corroborated by selected public SDK; View reference fetch oversized. P3-S8. |

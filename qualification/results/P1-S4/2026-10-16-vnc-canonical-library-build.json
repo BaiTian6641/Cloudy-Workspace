@@ -1,0 +1,68 @@
+{
+  "title": "Canonical VNC library construction and clean-CI preparation admission",
+  "status": "LOCAL_CANONICAL_LIBRARY_BUILD_PASSED",
+  "evidence": {
+    ".cache/vnc-product-ci-entry-01/canonical-build-04/build-06/result.json": "5e428b5f6d41de055307760576220902eac413b01ec8726703ffb8fb5ca23899",
+    ".cache/vnc-product-ci-entry-01/canonical-build-04/independent-evidence-review-01.json": "145bbe985bfc1bf1e3839c1df86b29ec6a8198e12c4fe64facd0da762d22de4c",
+    ".cache/vnc-product-ci-entry-01/native-entry-03/verification-04/result.json": "63bee6d9ae6550c110f5fc6f54b79e0b84945497b684b981cabc0d25a9a7e1be",
+    ".cache/vnc-product-engine-01/canonical-adoption-03/receipt.json": "82847f886a9cdf975add868a54887c81b071ce97d9764e115206fcf09ff101f4",
+    ".cache/vnc-product-ci-entry-01/locking-entry-02/verification-01/result.json": "fd171f2afef667a49ba6ea55be4a322ab842149b5fcebe9728541abe631b6073",
+    ".cache/vnc-product-ci-entry-01/canonical-build-03/build-05/result.json": "b2d285674599df87c54ad03b8382b52dc8a1dab456e45d28e7bb16bf0ed39681"
+  },
+  "artifacts": {
+    "vnc-debug.aar": {
+      "sha256": "a8fe7010b74cc37332ca3562b4edef96c2ae53741ad82d2476acb5a3c4e2f405",
+      "JNI": 3,
+      "assets": 17,
+      "nativeExact": true,
+      "assetGzipInflationsExact": [
+        "assets/cloudy-vnc-notices/libvncserver-98aaee0560baa0332339b2ef464ea96ed9b9b28c.tar",
+        "assets/cloudy-vnc-notices/openssl-4.0.1.tar",
+        "assets/cloudy-vnc-notices/libjpeg-turbo-3.2.0.tar"
+      ],
+      "otherAssetsExact": 14
+    },
+    "vnc-release.aar": {
+      "sha256": "481185f9d38c6462ffb829296af93b252791ce64f36c02091d440eedbc3bef7e",
+      "JNI": 3,
+      "assets": 17,
+      "nativeExact": true,
+      "assetGzipInflationsExact": [
+        "assets/cloudy-vnc-notices/libvncserver-98aaee0560baa0332339b2ef464ea96ed9b9b28c.tar",
+        "assets/cloudy-vnc-notices/openssl-4.0.1.tar",
+        "assets/cloudy-vnc-notices/libjpeg-turbo-3.2.0.tar"
+      ],
+      "otherAssetsExact": 14
+    }
+  },
+  "actualChecks": {
+    "canonicalGradleTasks": 4,
+    "actionableTasks": 68,
+    "executedTasks": 67,
+    "upToDateTasks": 1,
+    "lintVariants": 2,
+    "lintIssues": 0,
+    "newJvmMethods": 0,
+    "JNIExports": 9,
+    "moduleReceiptInputs": 13,
+    "lockCoordinates": 96,
+    "lockConfigurations": 47,
+    "newCoordinateVersions": 0
+  },
+  "failuresPreserved": [
+    "Canonical build02: missing debugRuntimeClasspath lock state before compilation.",
+    "Lock01: artifact selection ambiguity resolving AGP self dependency; no lock written.",
+    "Canonical build04: lazy androidApis missing lock state.",
+    "Canonical build05: generated androidApis empty state persisted before verifyNative; stale full-source native receipt correctly refused."
+  ],
+  "limits": [
+    "Local root library build; hosted clean-CI pipeline not executed by this result.",
+    "No Desktop app/UI build or device acceptance from this result.",
+    "Existing10JVM owner results carried; not rerun or counted as fresh.",
+    "JNI wrapper namespace rebuild only; no upstream dependency rebuild/test.",
+    "No release licensing/source obligation closure or stage promotion."
+  ],
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "proposalOnly": false
+}

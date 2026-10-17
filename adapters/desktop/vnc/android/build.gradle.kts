@@ -1,7 +1,12 @@
 plugins { id("com.android.library") }
 
 val repositoryRoot = projectDir.resolve("../../../..").canonicalFile
-val nativeRoot = repositoryRoot.resolve(".cache/vnc-product-engine-01/prepared")
+// Fresh local preparation can coexist with immutable historical receipts. The
+// helper still restricts this path and verifies its complete compiled closure.
+val nativeRoot = repositoryRoot.resolve(
+    providers.gradleProperty("cloudy.vnc.preparedDirectory")
+        .orElse(".cache/vnc-product-engine-01/prepared").get(),
+).canonicalFile
 val verifyNative = tasks.register<Exec>("verifyNative") {
     workingDir(repositoryRoot)
     val receipt = providers.gradleProperty("cloudy.vnc.reuseReceiptSha").orNull

@@ -2436,6 +2436,50 @@
       "researchEvidence": "qualification/results/P1-S3/2026-10-16-handoff-controller-freshness.md",
       "compileEvidence": "qualification/results/P1-S3/2026-10-16-handoff-controller-freshness.json",
       "deviceEvidence": "qualification/results/P1-S3/2026-10-16-handoff-positive-desktop-console.md"
+    },
+    {
+      "id": "API69",
+      "feature": "VNC local release chord with original window key delegation",
+      "symbols": [
+        "android.view.Window.getCallback()",
+        "android.view.Window.setCallback(android.view.Window.Callback)",
+        "android.view.Window.Callback.dispatchKeyEvent(android.view.KeyEvent)"
+      ],
+      "sourceIds": [
+        "G255",
+        "G256"
+      ],
+      "minimumApi": 1,
+      "libraryVersion": "Public Android SDK; product min35/target37. Original AndroidX callback preserved; no new dependency.",
+      "availability": "documented",
+      "qualification": "partial",
+      "checkedOn": "2026-10-16",
+      "owner": "Android/input developer and integration leader",
+      "stage": "P3-S8",
+      "runtimeGuard": "VncActivity stores the original callback, wraps only dispatchKeyEvent and consumes its local Ctrl+Alt+Shift+R release chord. Unrelated events go to the original callback; no recursive redispatch. Compile/Lint evidence is separate from runtime acceptance.",
+      "fallback": "Retain ordinary framework dispatch and visible local Release input control; never bypass native field/Compose input or claim physical escape from compilation.",
+      "experiment": "The correlated 0.1.16 user case confirms the release chord, with real host F8 press/release independently recorded. Chord repeat/up details, broader modifiers/native-field/Compose routing, focus/recreation and IME remain pending; one observation does not qualify every dispatch boundary.",
+      "deviceEvidence": "qualification/results/P1-S4/2026-10-16-vnc-product-device.md"
+    },
+    {
+      "id": "API70",
+      "feature": "Native framebuffer accessible local focus activation",
+      "symbols": [
+        "android.view.View.performClick()"
+      ],
+      "sourceIds": [
+        "G257"
+      ],
+      "minimumApi": 1,
+      "libraryVersion": "Public Android SDK; selected Android37.0 API metadata confirms since1; no new dependency.",
+      "availability": "documented",
+      "qualification": "untested",
+      "checkedOn": "2026-10-16",
+      "owner": "Android/accessibility developer and integration leader",
+      "stage": "P3-S8",
+      "runtimeGuard": "VncFrameView calls super.performClick and requests local focus only for the current input-enabled attachment/attempt. It never synthesizes remote coordinates. The mouse-UP route calls performClick after handled input.",
+      "fallback": "Unavailable input/attachment returns false; use visible local controls. No fake remote click or complete remote accessibility claim.",
+      "experiment": "Qualify actual accessibility activation, focus/refusal, pointer-UP behavior and duplicate-input prevention on exact build; assistive speech and physical input remain pending. Compiler/Lint results alone cannot pass these cases."
     }
   ],
   "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."

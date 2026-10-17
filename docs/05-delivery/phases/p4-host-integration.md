@@ -1,15 +1,15 @@
 # P4 — Host adapters and activity
 
-**Status:** planned. **Active effort:** 12–20 person-days before contingency. **Purpose:** Deliver optional host adapters and attributed activity. These features do not gate native streaming or standalone app releases.
+**Status:** planned. **Purpose:** Deliver optional host adapters and attributed activity. These features do not gate native streaming or standalone app releases.
 
-The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-project/platform-rule-zero.md) defines desktop scope. Follow [capability outcomes](../feasibility-gates.md) and [independent release gates](../release-gates.md). Estimates are active effort, not elapsed time; re-estimate after physical evidence. Revision 02 moved the former P5-S1 decision to P1-S5; other stage IDs retain their identity.
+The canonical stage data is [backlog.json](../backlog.json). [Rule 0](../../00-project/platform-rule-zero.md) defines desktop scope. Follow [capability outcomes](../feasibility-gates.md) and [independent release gates](../release-gates.md). Progress is measured by verified functionality, linked evidence and completed acceptance gates; delivery estimates are withdrawn. Revision 02 moved the former P5-S1 decision to P1-S5; other stage IDs retain their identity.
 
-| Stage | Outcome | Effort, person-days | Prerequisites |
-| --- | --- | ---: | --- |
-| P4-S1 | Host agent pairing, capabilities, jobs, and resumable events | 4–6 | P1-S4, P3-S1 |
-| P4-S2 | Windows user-session notification adapter | 3–5 | P4-S1 |
-| P4-S3 | Linux and macOS scoped event adapters | 3–5 | P4-S1 |
-| P4-S4 | Agent hooks, event deduplication, and R3 gate | 2–4 | P4-S2, P4-S3, P3-S9 |
+| Stage | Outcome | Prerequisites |
+| --- | --- | --- |
+| P4-S1 | Host agent pairing, capabilities, jobs, and resumable events | P1-S4, P3-S1 |
+| P4-S2 | Windows user-session notification adapter | P4-S1 |
+| P4-S3 | Linux and macOS scoped event adapters | P4-S1 |
+| P4-S4 | Agent hooks, event deduplication, and R3 gate | P4-S2, P4-S3, P3-S9 |
 
 ## P4-S1 — Host agent pairing, capabilities, jobs, and resumable events
 
