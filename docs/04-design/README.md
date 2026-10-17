@@ -26,6 +26,8 @@ The final-review refinement adds a [native workspace prototype review](native-wo
 
 The [16 October external feedback review](2026-10-16-external-feedback-review.md) checks the supplied Gemini design assessment against current source and official guidance. It records useful P1-S2 candidates, corrected contrast/scope claims and the distinction between proposals and approved requirements; it does not adopt the document's EDA/IDE product or change tokens.
 
+The [16 October workspace home revision](2026-10-16-workspace-home-revision.md) adopts the Termius-style host home as the default window content in both apps and the MobaXterm terminal pointer defaults, and refines S01/S06/S15. Native construction is in progress under P1-S2; device-rendered acceptance remains separate.
+
 ## Concrete visual decisions
 
 | Decision | Rule |
