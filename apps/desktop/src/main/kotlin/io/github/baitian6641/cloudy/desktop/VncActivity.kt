@@ -255,7 +255,7 @@ class VncActivity : ComponentActivity() {
         readyAttempt = null
         // From this call the real model owns the arrays, and later transfers them to the real Engine.
         // Caller never wipes them after handoff: engine consumption is asynchronous.
-        try { model.connect(attachment, selected.id, selected.revision, pin, user, secret, PRIVATE_SECONDS) }
+        try { model.connectUserEnded(attachment, selected.id, selected.revision, pin, user, secret) }
         finally { clearFields() }
     }
     private fun tryReadyFullscreen() {
@@ -376,7 +376,6 @@ class VncActivity : ComponentActivity() {
         return false
     }
     companion object {
-        internal const val PRIVATE_SECONDS = 60
         private const val STATE_PROFILE = "vnc.local.profile"
         private const val STATE_REVISION = "vnc.local.revision"
         private const val STATE_PREFERENCE = "vnc.local.fullscreenPreference"

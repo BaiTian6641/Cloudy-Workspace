@@ -174,7 +174,16 @@ internal class VncSessionModel(private val app: Application) : ViewModel() {
      * No raw field, secret, pin or connection authority is restored by this model.
      */
     fun connect(token: Any, profileId: String, revision: Long, pin: ByteArray,
-        username: ByteArray, password: ByteArray, finiteSeconds: Int) {
+        username: ByteArray, password: ByteArray, finiteSeconds: Int) =
+        connectWithPolicy(token, profileId, revision, pin, username, password, finiteSeconds, false)
+
+    /** Ordinary foreground-owned session: no overall run limit, never background/reconnect authority. */
+    fun connectUserEnded(token: Any, profileId: String, revision: Long, pin: ByteArray,
+        username: ByteArray, password: ByteArray) =
+        connectWithPolicy(token, profileId, revision, pin, username, password, 0, true)
+
+    private fun connectWithPolicy(token: Any, profileId: String, revision: Long, pin: ByteArray,
+        username: ByteArray, password: ByteArray, finiteSeconds: Int, userEnded: Boolean) {
         if (Looper.myLooper() != Looper.getMainLooper()) {
             pin.fill(0); username.fill(0); password.fill(0)
             throw IllegalStateException("VNC_MAIN_THREAD")
@@ -194,7 +203,7 @@ internal class VncSessionModel(private val app: Application) : ViewModel() {
         if (app.packageName != "io.github.baitian6641.cloudy.desktop") {
             admission.cancel(); state = state.copy(issue = VncIssue.WRONG_APP); return
         }
-        if (pin.size != 32 || finiteSeconds !in 10..600) {
+        if (pin.size != 32 || (if (userEnded) finiteSeconds != 0 else finiteSeconds !in 10..600)) {
             admission.cancel(); state = state.copy(issue = VncIssue.INVALID_PIN_OR_DURATION); return
         }
         try { InetAddresses.parseNumericAddress(selected.host); require(!selected.host.contains('%')) }
@@ -230,7 +239,8 @@ internal class VncSessionModel(private val app: Application) : ViewModel() {
                         if (!permissionGranted()) { state = state.copy(issue = VncIssue.PERMISSION_REQUIRED); return@post }
                         DesktopVncOwner.reap()
                         if (DesktopVncOwner.record != null) { state = state.copy(issue = VncIssue.BUSY); return@post }
-                        val config = VncEngine.Config(exact.id, exact.host, exact.port, admission.pin, finiteSeconds)
+                        val config = if (userEnded) VncEngine.Config.userEnded(exact.id, exact.host, exact.port, admission.pin)
+                        else VncEngine.Config(exact.id, exact.host, exact.port, admission.pin, finiteSeconds)
                         val engine = VncEngine(app)
                         val record = DesktopVncOwner.Record(window, VncAttempt(), engine)
                         retainedFrame = null

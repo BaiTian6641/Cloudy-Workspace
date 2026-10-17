@@ -54,6 +54,25 @@ class VncAdmissionBoundaryTest {
             assertNull(model.state.engineState)
         } finally { store.clear() }
     }
+    @Test fun userEndedMissingCatalogStillRefusesAndWipesTransferredBuffers() = onMain {
+        val store = ViewModelStore()
+        try {
+            val model = model(store)
+            val attachment = Any()
+            assertTrue(model.attach(attachment))
+            model.foreground(attachment, true)
+            val pin = ByteArray(32) { 7 }
+            val username = byteArrayOf(117)
+            val password = byteArrayOf(112)
+            model.connectUserEnded(attachment, "3da56dc6-255f-4cdd-801b-5d7722d782ce", 1,
+                pin, username, password)
+            assertTrue(pin.all { it == 0.toByte() })
+            assertTrue(username.all { it == 0.toByte() })
+            assertTrue(password.all { it == 0.toByte() })
+            assertEquals(VncIssue.STALE_PROFILE, model.state.issue)
+            assertNull(model.state.engineState)
+        } finally { store.clear() }
+    }
     @Test fun retiredAttachmentCannotSubmitIntoReplacement() = onMain {
         val store = ViewModelStore()
         try {

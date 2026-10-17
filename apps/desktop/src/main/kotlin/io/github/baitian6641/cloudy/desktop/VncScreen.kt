@@ -25,7 +25,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
@@ -83,7 +82,7 @@ internal fun VncScreen(
                 item {
                     Text(stringResource(R.string.vnc_heading), style = MaterialTheme.typography.headlineSmall,
                         modifier = Modifier.semantics { heading() })
-                    Text(pluralStringResource(R.plurals.vnc_private_scope, VncActivity.PRIVATE_SECONDS, VncActivity.PRIVATE_SECONDS))
+                    Text(stringResource(R.string.vnc_session_scope))
                     Status(state, notice)
                     Text(fullscreenLabel)
                     if (fullscreenPending) Text(stringResource(R.string.vnc_window_pending))
@@ -284,7 +283,7 @@ private fun BoxScope.SessionOverlay(
             text = { Column(Modifier.verticalScroll(rememberScrollState()),
                 verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
                 Text(stringResource(R.string.vnc_security_policy))
-                Text(pluralStringResource(R.plurals.vnc_settings_scope, VncActivity.PRIVATE_SECONDS, VncActivity.PRIVATE_SECONDS))
+                Text(stringResource(R.string.vnc_settings_scope))
             } },
             confirmButton = { TextButton(onClick = { settings = false; activityEpoch++ }) { Text(stringResource(R.string.vnc_done)) } })
     }

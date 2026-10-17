@@ -12,6 +12,25 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 /** Test-only backend and numeric-check seam. No JNI/library/server/Android permission evidence. */
 public final class VncEngineTest {
+    @Test public void finiteConfigStillRejectsUnboundedAndOutOfRangeDuration() {
+        for (int seconds : new int[]{-1, 0, 9, 601}) {
+            assertThrows(IllegalArgumentException.class, () ->
+                new VncEngine.Config("test", "127.0.0.1", 5901, new byte[32], seconds, address -> {}));
+        }
+        assertNotNull(new VncEngine.Config("test", "127.0.0.1", 5901, new byte[32], 10, address -> {}));
+        assertNotNull(new VncEngine.Config("test", "127.0.0.1", 5901, new byte[32], 600, address -> {}));
+    }
+    @Test public void explicitUserEndedConfigKeepsNumericEndpointAndPinValidation() {
+        assertNotNull(VncEngine.Config.userEnded("test", "127.0.0.1", 5901, new byte[32], address -> {}));
+        assertThrows(IllegalArgumentException.class, () ->
+            VncEngine.Config.userEnded("test", "invalid", 5901, new byte[32], address -> {
+                throw new IllegalArgumentException();
+            }));
+        assertThrows(IllegalArgumentException.class, () ->
+            VncEngine.Config.userEnded("test", "127.0.0.1", 5901, new byte[31], address -> {}));
+        assertThrows(IllegalArgumentException.class, () ->
+            VncEngine.Config.userEnded("test", "127.0.0.1", 0, new byte[32], address -> {}));
+    }
     private static VncEngine.Config config() {
         return new VncEngine.Config("test", "127.0.0.1", 5901, new byte[32], 10,
             address -> { if (!address.equals("127.0.0.1")) throw new IllegalArgumentException(); });

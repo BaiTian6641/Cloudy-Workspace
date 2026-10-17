@@ -65,6 +65,24 @@ def namespace_port(raw):
     return raw.replace(old, PREFIX.encode())
 
 
+def product_adapter_port(raw):
+    # Product lifetime policy only: the selected diagnostic source remains finite and immutable.
+    # Refuse changed/multiple anchors rather than silently changing an unrelated C expression.
+    changes = (
+        (b'duration >= 10 && duration <= 600 && copy_string(env, profile, s->profile, sizeof(s->profile))',
+         b'(duration == 0 || (duration >= 10 && duration <= 600)) && copy_string(env, profile, s->profile, sizeof(s->profile))'),
+        (b's->deadline = now_millis() + (uint64_t)s->duration * 1000u;',
+         b's->deadline = s->duration == 0 ? UINT64_MAX : now_millis() + (uint64_t)s->duration * 1000u;'),
+    )
+    result = namespace_port(raw)
+    for old, new in changes:
+        if result.count(old) != 1 or new in result:
+            raise ValueError('PRODUCT_LIFETIME_SOURCE')
+        result = result.replace(old, new)
+    # UINT64_MAX keeps the existing bounded authentication clamp meaningful; zero would expire it.
+    return result
+
+
 def module_inputs():
     paths = [Path(__file__).resolve(), ROOT / 'tools/prepare_rdp_native.py',
              ROOT / 'tools/prepare_vnc_native.py', ROOT / 'tools/build_rdp_native.py',
@@ -154,7 +172,7 @@ def stage(output, portable_run=None):
     sources = module_inputs()
     receipt, imports = selected_inputs(portable_run)
     output.mkdir(parents=True, exist_ok=False)
-    save(output, 'input/adapter.c', namespace_port(read(ORIGINAL / 'adapter.c')))
+    save(output, 'input/adapter.c', product_adapter_port(read(ORIGINAL / 'adapter.c')))
     for name in ('policy.c', 'policy.h'):
         save(output, 'input/' + name, read(ORIGINAL / name))
     for name, raw in imports.items():
@@ -297,7 +315,7 @@ def verify_staged(output, record):
     for name, digest in record['staged'].items():
         if sha(read(output / relative(name))) != digest:
             raise ValueError('STAGED_IMPORT_CHANGED')
-    if read(output / 'input/adapter.c') != namespace_port(read(ORIGINAL / 'adapter.c')):
+    if read(output / 'input/adapter.c') != product_adapter_port(read(ORIGINAL / 'adapter.c')):
         raise ValueError('GENERATED_PORT_CHANGED')
 
 

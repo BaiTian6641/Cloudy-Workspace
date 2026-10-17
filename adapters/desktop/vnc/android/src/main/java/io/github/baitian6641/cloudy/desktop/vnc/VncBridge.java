@@ -24,7 +24,8 @@ final class VncBridge {
      * separately bounded platform operation before this ABI. profileId is a stable
      * nonsecret identifier for the immutable (numeric address, port, leaf pin)
      * profile. Pass canonical UTF-8 username/password bytes, then wipe caller-owned
-     * password bytes. durationSeconds is 10..600. Credentials are memory-only.
+     * password bytes. durationSeconds is 10..600 for finite runs, or0 for explicit product user-ended policy.
+     * Authentication/read-idle and cancel/join policies are retained; explicit cancellation still interrupts I/O. Credentials are memory-only.
      */
     public static native long create(String profileId, String numericAddress, int port,
         byte[] leafSha256, byte[] usernameUtf8, byte[] passwordUtf8, int durationSeconds, Sink sink);

@@ -23,6 +23,32 @@ class PreparationTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'JNI_NAMESPACE_SOURCE'):
                 module.namespace_port(invalid)
 
+    def test_product_lifetime_changes_only_exact_selected_source_fragments(self):
+        original = (module.ORIGINAL / 'adapter.c').read_bytes()
+        expected = module.namespace_port(original).replace(
+            b'duration >= 10 && duration <= 600 && copy_string(env, profile, s->profile, sizeof(s->profile))',
+            b'(duration == 0 || (duration >= 10 && duration <= 600)) && copy_string(env, profile, s->profile, sizeof(s->profile))'
+        ).replace(b's->deadline = now_millis() + (uint64_t)s->duration * 1000u;',
+                  b's->deadline = s->duration == 0 ? UINT64_MAX : now_millis() + (uint64_t)s->duration * 1000u;')
+        self.assertEqual(module.product_adapter_port(original), expected)
+        # Overall sentinel must not remove the independently bounded authentication phase.
+        self.assertIn(b'cloudy_phase_deadline(now_millis(), s->deadline, CLOUDY_AUTH_PHASE_MILLIS)', expected)
+        self.assertEqual((module.ORIGINAL / 'adapter.c').read_bytes(), original)
+
+    def test_product_lifetime_refuses_missing_or_duplicated_validation_anchor(self):
+        original = (module.ORIGINAL / 'adapter.c').read_bytes()
+        anchor = b'duration >= 10 && duration <= 600 && copy_string(env, profile, s->profile, sizeof(s->profile))'
+        for invalid in (original.replace(anchor, b'changed'), original + anchor):
+            with self.assertRaisesRegex(ValueError, 'PRODUCT_LIFETIME_SOURCE'):
+                module.product_adapter_port(invalid)
+
+    def test_product_lifetime_refuses_missing_or_duplicated_start_anchor(self):
+        original = (module.ORIGINAL / 'adapter.c').read_bytes()
+        anchor = b's->deadline = now_millis() + (uint64_t)s->duration * 1000u;'
+        for invalid in (original.replace(anchor, b'changed'), original + anchor):
+            with self.assertRaisesRegex(ValueError, 'PRODUCT_LIFETIME_SOURCE'):
+                module.product_adapter_port(invalid)
+
     def test_relative_path_and_symlink_refusal(self):
         for path in ('', '../outside', '/absolute', 'a/../b', 'a//b'):
             with self.assertRaises(ValueError):
@@ -53,7 +79,7 @@ class PreparationTests(unittest.TestCase):
             original.mkdir()
             for name in module.PINS:
                 (original / name).write_bytes(b'fixture')
-            (original / 'adapter.c').write_bytes(b'Java_dev_cloudy_qualification_vnc_VncBridge_')
+            (original / 'adapter.c').write_bytes((module.ORIGINAL / 'adapter.c').read_bytes())
             payload = {'nativeLibraries/arm64-v8a/libcloudy-vnc-jni.so': b'old JNI',
                        'nativeLibraries/arm64-v8a/libssl.so': b'ssl',
                        'nativeIncludes/rfb/rfbclient.h': b'exact header'}
@@ -105,9 +131,9 @@ class PreparationTests(unittest.TestCase):
             root = Path(temporary)
             (root / 'input').mkdir()
             (root / 'original').mkdir()
-            original = b'Java_dev_cloudy_qualification_vnc_VncBridge_'
+            original = (module.ORIGINAL / 'adapter.c').read_bytes()
             (root / 'original/adapter.c').write_bytes(original)
-            expected = module.namespace_port(original)
+            expected = module.product_adapter_port(original)
             (root / 'input/adapter.c').write_bytes(expected)
             record = {'staged': {'input/adapter.c': module.sha(expected)}}
             with patch.object(module, 'ORIGINAL', root / 'original'):

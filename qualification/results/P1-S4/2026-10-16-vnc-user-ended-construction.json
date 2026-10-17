@@ -1,0 +1,195 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "Desktop user-ended VNC construction; compiler, authored policy, JVM, Lint and packaged artifact evidence only",
+  "acceptance": "Construction accepted within reviewed scope; no device/runtime/visual qualification in this report",
+  "version": {
+    "desktopName": "0.1.17",
+    "desktopCode": 18,
+    "consoleName": "0.1.16",
+    "consoleUnchanged": true,
+    "minSdk": 35,
+    "targetSdk": 37
+  },
+  "source02": {
+    "tools/prepare_desktop_vnc.py": "a18a21dae69ccc51e1c3b94a3c2c75ecfa10d78f1c89bb9b2f656f2a8b89c19f",
+    "tests/test_prepare_desktop_vnc.py": "9cb4d4a4b38a24b993ed78c0ddfa80137ed3b3f57a9105bc0f1fdbf1070fe901",
+    "tests/test_prepare_vnc_adapter.py": "e88b0527228c051314ba8cde47265ee4a309b9a8219d05316956aad419a8ca89",
+    "apps/desktop/src/androidTest/kotlin/io/github/baitian6641/cloudy/desktop/VncAdmissionBoundaryTest.kt": "7c152f55e47e13128193d81a3c809e742fbba01d7033746b0cc05bf30849452d",
+    "apps/desktop/src/main/kotlin/io/github/baitian6641/cloudy/desktop/VncSessionModel.kt": "01f7e08a3da8d9a3b33976e25edc3458cd546c6d35c24905212e64ca6e100a66",
+    "apps/desktop/src/main/kotlin/io/github/baitian6641/cloudy/desktop/VncActivity.kt": "57544135f6ceac363d4881908b926791a7c47cbe15bd7c9f953eedea08c2cdbf",
+    "apps/desktop/src/main/kotlin/io/github/baitian6641/cloudy/desktop/VncScreen.kt": "9c21c9d84efe8bf3b10596c4bac7dd10f91f3d9e445c4b25ddea8aeca0cae348",
+    "apps/desktop/src/main/res/values/strings.xml": "de1ba4aa67bac2fad5c3a9165853e1eda8dd536855a349ef3a0b7e108f3f2bbf",
+    "adapters/desktop/vnc/android/src/test/java/io/github/baitian6641/cloudy/desktop/vnc/VncEngineTest.java": "19d50da25cd1f4535c57a707fe7f7eac124f8eb338d8766536ac157a3ffa5b68",
+    "adapters/desktop/vnc/android/src/main/java/io/github/baitian6641/cloudy/desktop/vnc/VncEngine.java": "fcc23343e071678ead1529d1d0a810bce69b767ecee757c730c2e5029dc83f27",
+    "adapters/desktop/vnc/android/src/main/java/io/github/baitian6641/cloudy/desktop/vnc/VncBridge.java": "b2e41b838e932a100158a850e22acd376bf8457786c6c92ffc55bfb50367099b"
+  },
+  "currentSourcesAtReport": {
+    "tools/prepare_desktop_vnc.py": "a18a21dae69ccc51e1c3b94a3c2c75ecfa10d78f1c89bb9b2f656f2a8b89c19f",
+    "tests/test_prepare_desktop_vnc.py": "9cb4d4a4b38a24b993ed78c0ddfa80137ed3b3f57a9105bc0f1fdbf1070fe901",
+    "tests/test_prepare_vnc_adapter.py": "64dd002a4a259ddb5a18a748acbba8d6865b3c4fccff82fde9c53ba0d40cd83a",
+    "apps/desktop/src/androidTest/kotlin/io/github/baitian6641/cloudy/desktop/VncAdmissionBoundaryTest.kt": "7c152f55e47e13128193d81a3c809e742fbba01d7033746b0cc05bf30849452d",
+    "apps/desktop/src/main/kotlin/io/github/baitian6641/cloudy/desktop/VncSessionModel.kt": "01f7e08a3da8d9a3b33976e25edc3458cd546c6d35c24905212e64ca6e100a66",
+    "apps/desktop/src/main/kotlin/io/github/baitian6641/cloudy/desktop/VncActivity.kt": "57544135f6ceac363d4881908b926791a7c47cbe15bd7c9f953eedea08c2cdbf",
+    "apps/desktop/src/main/kotlin/io/github/baitian6641/cloudy/desktop/VncScreen.kt": "9c21c9d84efe8bf3b10596c4bac7dd10f91f3d9e445c4b25ddea8aeca0cae348",
+    "apps/desktop/src/main/res/values/strings.xml": "de1ba4aa67bac2fad5c3a9165853e1eda8dd536855a349ef3a0b7e108f3f2bbf",
+    "adapters/desktop/vnc/android/src/test/java/io/github/baitian6641/cloudy/desktop/vnc/VncEngineTest.java": "19d50da25cd1f4535c57a707fe7f7eac124f8eb338d8766536ac157a3ffa5b68",
+    "adapters/desktop/vnc/android/src/main/java/io/github/baitian6641/cloudy/desktop/vnc/VncEngine.java": "fcc23343e071678ead1529d1d0a810bce69b767ecee757c730c2e5029dc83f27",
+    "adapters/desktop/vnc/android/src/main/java/io/github/baitian6641/cloudy/desktop/vnc/VncBridge.java": "b2e41b838e932a100158a850e22acd376bf8457786c6c92ffc55bfb50367099b"
+  },
+  "evidence": [
+    {
+      "path": ".cache/vnc-product-session-policy-01/implementation-01/freeze-01.json",
+      "sha256": "085c8c31a40862efa07b4f231c5b2a0d12901babe8825be9e13951fac827bc62"
+    },
+    {
+      "path": ".cache/vnc-product-session-policy-01/implementation-01/freeze-02.json",
+      "sha256": "426c7f95f5cd80bf2c3ce4e1df641460e86650c7e325e89d0da0d7f3f868e5ef"
+    },
+    {
+      "path": ".cache/vnc-product-session-policy-01/implementation-01/source-02.patch",
+      "sha256": "ad1db563bbdc5f80e4ef2bbe8dc8806bf0537469817bb21533bb7a8aa3bbf16e"
+    },
+    {
+      "path": ".cache/vnc-product-session-policy-01/implementation-01/checks-01.json",
+      "sha256": "46d43303b2caea36e2c72634d8db71e1f1639da7e6f6512b17000ce7964b95ed"
+    },
+    {
+      "path": ".cache/vnc-product-session-policy-01/implementation-01/helper-tests-02.log",
+      "sha256": "05ca96a17a061c121c8df21ff8b133735e5d0abf87f181552cbd9e80f196b480"
+    },
+    {
+      "path": ".cache/vnc-product-session-policy-01/implementation-01/helper-attempt-01.json",
+      "sha256": "381b95630a3dcfbb7ba4bd39e6540f0b7474ca88c7ae5aba4f0fc04f35f8dae0"
+    },
+    {
+      "path": ".cache/vnc-product-session-policy-01/implementation-01/independent-source-review-01/review.json",
+      "sha256": "4cbc56e3e91a48de627b6a582995e98479ac9b1c01134c3e954a5ff6c99fc2ff"
+    },
+    {
+      "path": ".cache/vnc-product-session-policy-01/independent-entry-review-01/review.json",
+      "sha256": "27110f6c65088c4e4a9c0b06c1bc9cea21df04c3df9522adddf9b329c96e9e35"
+    },
+    {
+      "path": ".cache/vnc-product-session-policy-01/c-policy-01/result.json",
+      "sha256": "6576b2e9b2e0f4e1f566d869053377862b2e8950d0bd3fb675da44e0cb9289cd"
+    },
+    {
+      "path": ".cache/vnc-product-session-policy-01/c-policy-02/result.json",
+      "sha256": "1a7a5ecaf0882912046df616feb181f43eb22a62006ea63f6c8ce607f36013e1"
+    },
+    {
+      "path": ".cache/vnc-product-session-policy-01/c-policy-02/stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".cache/vnc-product-session-policy-01/c-policy-02/stderr",
+      "sha256": "8090e03fd5e659c3f792b238706d6ac33cb0a9b074b5de8c2be037e80d1108cf"
+    },
+    {
+      "path": ".cache/vnc-product-session-policy-01/build-01/result.json",
+      "sha256": "ad22e0d169391a57aaf6b3c10833536afdfced8384f4b80cce0942520d04b2ba"
+    },
+    {
+      "path": ".cache/vnc-product-session-policy-01/build-review-01/result.json",
+      "sha256": "a75a47a8c82aa6d36fb6d2db15e0282dfd4ab0095d6df9c75f98fd0b7ee3caaa"
+    },
+    {
+      "path": ".cache/vnc-product-session-policy-01/parent-artifact-review-01/result.json",
+      "sha256": "1e27f5c3f644a882745555376313cf4bbde1f53bf064a6ec1f18df2f0a26fa61"
+    },
+    {
+      "path": ".cache/vnc-product-engine-01/user-ended-01/receipt.json",
+      "sha256": "96ed1ef25c0c1194c5c347f4989ef55b3c82cf56b608d41b89fb9513a7ecebc7"
+    }
+  ],
+  "behavior": {
+    "entry": "VncActivity -> VncSessionModel.connectUserEnded -> VncEngine.Config.userEnded -> product JNI duration 0 -> UINT64_MAX overall deadline",
+    "finiteConstructorSeconds": [
+      10,
+      600
+    ],
+    "authenticationReadIdleCancelJoinRetained": true,
+    "TLSWritesExplicitlyCancellable": true,
+    "TLSWritesIndependentElapsedStallBound": false,
+    "uncertainCleanupRetainsOriginalOwner": true
+  },
+  "checks": {
+    "helperMethods": 19,
+    "policyUnittestMethods": 3,
+    "authoredCAssertions": 39,
+    "policyBackend": "real OpenSSL with ASan/UBSan; authored Cloudy policy, not upstream exhaustive suite",
+    "libraryJVM": 12,
+    "productJVM": 20,
+    "JVMTasksActuallyExecuted": true,
+    "lintReports": 4,
+    "lintIssues": 0,
+    "gradleTasks": {
+      "total": 446,
+      "executed": 114,
+      "upToDate": 332
+    },
+    "strictLockChanges": false,
+    "nativeJNIRecompiled": true,
+    "upstreamAllRebuilt": false,
+    "diagnosticOriginalsUnchanged": true
+  },
+  "artifacts": {
+    "APK": {
+      "debug": {
+        "sha256": "832701fa5a5067a994ef74789d423b1312d18ec9f647989a90a74001131194b2",
+        "versionName": "0.1.17",
+        "versionCode": 18,
+        "minSdk": 35,
+        "targetSdk": 37,
+        "privateVncActivity": true,
+        "native3Exact": true,
+        "unsigned": false
+      },
+      "release": {
+        "sha256": "c76855489121ff8fab3c47cf4d3ab194af091207d9f9852300ac2f2e0a0c71a2",
+        "versionName": "0.1.17",
+        "versionCode": 18,
+        "minSdk": 35,
+        "targetSdk": 37,
+        "privateVncActivity": true,
+        "native3Exact": true,
+        "unsigned": true
+      }
+    },
+    "AAR": {
+      "debug": {
+        "sha256": "dc76cfac11e3a2dd0d888e419a62b03469e6a833c1e4027ecee55c2dcc89d47a",
+        "native3Exact": true,
+        "assets17ExactIncluding3GzipInflations": true
+      },
+      "release": {
+        "sha256": "92fd59c806a6d30048de3cdb34f31f5b9965915910f4e231ae705eaaa8b4330f",
+        "native3Exact": true,
+        "assets17ExactIncluding3GzipInflations": true
+      }
+    },
+    "nativeExports": 9,
+    "vncNativeLibraries": 3,
+    "noticeAssets": 17,
+    "gzipInflations": 3
+  },
+  "preservedFailures": [
+    {
+      "path": ".cache/vnc-product-session-policy-01/implementation-01/helper-attempt-01.json",
+      "reason": "Synthetic stage fixture lacked newly required exact anchors; fixture repaired without relaxing production guards."
+    },
+    {
+      "path": ".cache/vnc-product-session-policy-01/c-policy-01/result.json",
+      "reason": "Actual C harness produced 39 successful assertions; unittest expected 37. Expected count repaired, then three unittest methods and 39 assertions passed in c-policy-02."
+    }
+  ],
+  "limitations": [
+    "No install, authentication, visible frame, input, sustained session or Disconnect device pass is established by this report. The parent-owned user case was still open at report assignment.",
+    "Authentication and in-progress read-idle policies remain; idle polling is not a two-second inactivity disconnect. Authenticated TLS writes are cancellable but have no standalone elapsed write-stall deadline in user-ended mode.",
+    "New Android admission refusal method compiled but was not instrumented by this build. JVM backend seams are not JNI/server/device evidence.",
+    "Proposed error-visibility fix is not implemented in this version.",
+    "Release APK is unsigned; this artifact review adds no fresh cryptographic signature verification.",
+    "Seventeen packaged assets and native closure are construction evidence, not completed GPL/source/notices release closure. No capability or stage promotion."
+  ]
+}

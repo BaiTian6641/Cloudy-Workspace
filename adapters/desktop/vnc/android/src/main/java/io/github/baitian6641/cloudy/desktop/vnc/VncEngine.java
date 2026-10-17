@@ -48,9 +48,22 @@ public final class VncEngine {
         // Package-only platform seam for JVM ownership tests, never used by the public constructor.
         Config(String profile, String address, int port, byte[] pin, int durationSeconds,
                 java.util.function.Consumer<String> numericCheck) {
+            this(profile, address, port, pin, durationSeconds, numericCheck, false);
+        }
+        /** No overall deadline; foreground lifecycle, failures and explicit Stop still retire this owner. */
+        public static Config userEnded(String profile, String address, int port, byte[] pin) {
+            return userEnded(profile, address, port, pin, InetAddresses::parseNumericAddress);
+        }
+        static Config userEnded(String profile, String address, int port, byte[] pin,
+                java.util.function.Consumer<String> numericCheck) {
+            return new Config(profile, address, port, pin, 0, numericCheck, true);
+        }
+        private Config(String profile, String address, int port, byte[] pin, int durationSeconds,
+                java.util.function.Consumer<String> numericCheck, boolean userEnded) {
             if (profile == null || !profile.matches("[A-Za-z0-9_-]{1,64}") || address == null ||
                     address.length() > 63 || address.contains("%") || port < 1 || port > 65535 ||
-                    pin == null || pin.length != 32 || durationSeconds < 10 || durationSeconds > 600) {
+                    pin == null || pin.length != 32 ||
+                    (userEnded ? durationSeconds != 0 : durationSeconds < 10 || durationSeconds > 600)) {
                 throw new IllegalArgumentException("VNC_CONFIG");
             }
             try { numericCheck.accept(address); }

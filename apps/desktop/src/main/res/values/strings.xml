@@ -3,10 +3,7 @@
     <string name="app_name">Cloudy Desktop</string>
     <string name="default_window_name">Desktop workspace</string>
     <string name="vnc_heading">VNC · protected connection</string>
-    <plurals name="vnc_private_scope">
-        <item quantity="one">Development build: connect using a numeric address and a verified server fingerprint. Input starts disabled. This test session ends after %1$d second.</item>
-        <item quantity="other">Development build: connect using a numeric address and a verified server fingerprint. Input starts disabled. This test session ends after %1$d seconds.</item>
-    </plurals>
+    <string name="vnc_session_scope">Connect using a numeric address and a verified server fingerprint. Input starts disabled. Disconnect or Close ends the session. Focus loss releases input; background sessions are not supported.</string>
     <string name="vnc_refresh">Refresh profiles</string>
     <string name="vnc_permission">Allow local network</string>
     <string name="vnc_retry_cleanup">Retry original cleanup</string>
@@ -34,10 +31,7 @@
     <string name="vnc_pin_controls">Keep controls open</string>
     <string name="vnc_move_controls">Move controls to other side</string>
     <string name="vnc_collapse">Collapse controls</string>
-    <plurals name="vnc_settings_scope">
-        <item quantity="one">Scale: fit complete framebuffer with letterboxing. Remote resize, monitor switching, clipboard, audio, relative input, IME composition and reconnect are unavailable. Private attempt limit: %1$d second. No measured latency, FPS or bandwidth is available. Settings never reconnect or change remote security.</item>
-        <item quantity="other">Scale: fit complete framebuffer with letterboxing. Remote resize, monitor switching, clipboard, audio, relative input, IME composition and reconnect are unavailable. Private attempt limit: %1$d seconds. No measured latency, FPS or bandwidth is available. Settings never reconnect or change remote security.</item>
-    </plurals>
+    <string name="vnc_settings_scope">Scale: fit complete framebuffer with letterboxing. Remote resize, monitor switching, clipboard, audio, relative input, IME composition and reconnect are unavailable. Disconnect or Close ends the session. Focus loss releases input; background sessions are not supported. No measured latency, FPS or bandwidth is available. Settings never reconnect or change remote security.</string>
     <string name="vnc_done">Done</string>
     <string name="vnc_loading">Reading current profiles…</string>
     <string name="vnc_state_new">Preparing local owner</string>

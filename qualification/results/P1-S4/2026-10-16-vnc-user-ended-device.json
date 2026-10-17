@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "recordedDate": "2026-10-16",
+  "status": "SCOPED_USER_ENDED_SESSION_ACCEPTED",
+  "device": {
+    "model": "HP Googlebook 14",
+    "os": "Android 17",
+    "api": 37,
+    "abi": "arm64-v8a",
+    "build": "CL3B.260622.276.R2",
+    "incremental": "16560795"
+  },
+  "desktop": {
+    "version": "0.1.17",
+    "code": 18,
+    "debugApkSha256": "832701fa5a5067a994ef74789d423b1312d18ec9f647989a90a74001131194b2"
+  },
+  "console": {
+    "version": "0.1.16",
+    "code": 17,
+    "unchanged": true
+  },
+  "server": {
+    "os": "Ubuntu 26.04",
+    "engine": "TigerVNC 1.15.0+dfsg-2build1",
+    "canvas": "reviewed Qt6.9.2 Xcb input canvas03",
+    "framebuffer": [
+      1280,
+      720
+    ],
+    "transport": "Exact temporary USB loopback reverse",
+    "security": "VeNCrypt X509Plain/PAM and independently compared ephemeral leaf pin"
+  },
+  "observation": {
+    "failedSandboxAttempts": 2,
+    "pamAccessDenials": 8,
+    "normalHostAttempts": 1,
+    "visibleUserReply": "Moving canvas appears; leaving connected",
+    "hostMonotonicObservationSeconds": 94.52953409595648,
+    "finalUserReply": "Still moving; Disconnect returned to the form",
+    "serverFramebufferUpdates": 846,
+    "nativeRetiredBeforeAppStop": true,
+    "fullscreenGeometry": [
+      0,
+      0,
+      2880,
+      1800
+    ],
+    "explicitExitGeometry": [
+      0,
+      59,
+      2880,
+      1709
+    ],
+    "automaticCloseWindowRestoreQualified": false,
+    "orderlyTlsCloseNotifyQualified": false
+  },
+  "admission": {
+    "actualDeviceMethods": 3,
+    "failures": 0,
+    "skips": 0,
+    "beforeAfterBaselineEqual": true,
+    "testPackageRemoved": true,
+    "scope": "Refusal/wiping/current-attachment boundaries only"
+  },
+  "settlement": {
+    "originalLogicalAndSystemStatePreserved": true,
+    "acceptedFileHashChanges": [
+      "Desktop profiles.db after UI create/delete",
+      "AndroidX profileInstalled after upgrade launch"
+    ],
+    "localNetworkPermissionRetained": true,
+    "bothAppsStopped": true,
+    "originalOwnerRetired": true,
+    "fixtureResourcesAbsent": true,
+    "temporaryProfileDeleted": true,
+    "temporaryReverseRemoved": true,
+    "uiInspectionStopped": true
+  },
+  "limitations": [
+    "Two sandboxed authentication failures retained; not a wrong-password finding",
+    "Error visibility after cleanup remains a source-confirmed defect in this version",
+    "No sustained-use, latency, audio, IME, relative-input, clipboard, accessibility, server-matrix or release acceptance",
+    "Explicit fullscreen exit verified separately; automatic restore on Close not claimed",
+    "No physical-input rerun or stage/capability promotion"
+  ],
+  "evidence": {
+    "construction": {
+      "path": ".cache/vnc-product-session-policy-01/build-01/result.json",
+      "sha256": "ad22e0d169391a57aaf6b3c10833536afdfced8384f4b80cce0942520d04b2ba"
+    },
+    "independentBuildReview": {
+      "path": ".cache/vnc-product-session-policy-01/build-review-01/result.json",
+      "sha256": "a75a47a8c82aa6d36fb6d2db15e0282dfd4ab0095d6df9c75f98fd0b7ee3caaa"
+    },
+    "preflight": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-user-ended-preflight-01/result.json",
+      "sha256": "f0edb9a0c18c0b58785e4e7c018c1a06a5fd84013be930735b86481fdb8a144c"
+    },
+    "upgrade": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-user-ended-upgrade-01/result.json",
+      "sha256": "05449a89ac398e853f1d54076360d9824f3691faf64adaefbff9bd90056d6761"
+    },
+    "sandboxFixtureRetirement": {
+      "path": ".cache/native-vnc-host/product-session01-d56f2747a136452794c36430fe422576/result.json",
+      "sha256": "d6c0efeb0a69f3e39cf2797189b6de39149aed1df8ce913d3f86b294c9609148"
+    },
+    "sandboxServerLog": {
+      "path": ".cache/native-vnc-host/product-session01-d56f2747a136452794c36430fe422576/server.log",
+      "sha256": "790516118e5d0a36e535acf15477d5eca74293041f166c59b6de8300aef71c4c"
+    },
+    "sandboxFirstUi": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-user-ended-ui-01/failed-attempt01.json",
+      "sha256": "3631b0aef99cfddabfb1a97d78d5ed1e9235e917ae88fa9967acbb6c4399e608"
+    },
+    "sandboxSecondUi": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-user-ended-ui-01/failed-attempt02.json",
+      "sha256": "50f70dd75e187d1753009070afa197e9ac2d1090bc63a0ac57dc28b986abcb60"
+    },
+    "pamDenials": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-user-ended-ui-01/host-pam-denials-01.log",
+      "sha256": "0a060da4c9e248196ccb0c74a3630446ca0d224b3ff8dcadc23512d9cb4cdf26"
+    },
+    "durationStart": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-user-ended-ui-01/duration-start01.json",
+      "sha256": "5fe53e92548450bd34483d915747581dcbf36edc53691bb1e72e6f6019d8cedf"
+    },
+    "durationObservation": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-user-ended-ui-01/duration-observation01.json",
+      "sha256": "211db30e1f9b4e1a3303a9f7c0cd15d5704ded2567ff4c1a2f607935f8ea009a"
+    },
+    "connectedUi": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-user-ended-ui-01/connected-duration02.json",
+      "sha256": "616238ec6d4ac45de606c63b3b7eae627371c460c1945cbc0a02a3fa7e34af5c"
+    },
+    "userObservation": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-user-ended-ui-01/user-duration-confirmation01.json",
+      "sha256": "760a3de79785ef679b41c6cc714a2cbde87ff3fa42d61f24812f4755b6f2026c"
+    },
+    "nativeRetiredUi": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-user-ended-ui-01/after-user-disconnect01.json",
+      "sha256": "8dbaf105b773da956800d089566037e28479832de5c51b83efa62f12b43356dc"
+    },
+    "explicitFullscreenExit": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-user-ended-ui-01/exit-fullscreen01.json",
+      "sha256": "09d592ca8c1ecb917b7c48d94f62a889d466944f6aafa35c7c08eeb2e8b81d06"
+    },
+    "deletedProfile": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-user-ended-ui-01/profile-deleted01.json",
+      "sha256": "ca5dccedbf146793b62a9f90afdb9cc02e9d16c452f20d7577d4049efd5fe879"
+    },
+    "reverseRemoval": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-user-ended-ui-01/reverse-retirement01.json",
+      "sha256": "7c162999fd1f529f011f24f0223c4c133b4393ce597d7603e1dc5c5f56311e95"
+    },
+    "normalHostRetirement": {
+      "path": ".cache/native-vnc-host/product-session01-efb9de18974d467991f5672d047cb5e0/result.json",
+      "sha256": "d0e5f6ac9f62d9c2433e2d91073b0f55e150439cbd65748add959b97df56c820"
+    },
+    "normalHostServerLog": {
+      "path": ".cache/native-vnc-host/product-session01-efb9de18974d467991f5672d047cb5e0/server.log",
+      "sha256": "b792b457a6e75022203408c55ea5ba9c5b49201a82e1e8c2d52f83867902918e"
+    },
+    "admissionTests": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-user-ended-admission-01/result.json",
+      "sha256": "f1ee5001159241405df9c3a19a4c2ce8dc4a46c1d372fa78cb91492e1a8b33e9"
+    },
+    "admissionRawOutput": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-user-ended-admission-01/io/admission-tests.stdout",
+      "sha256": "c51f8514b0da73b72cad65be1253a8173a8eabe003bb5a5095af1f0ef82d9bb9"
+    },
+    "settlementSnapshot": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-user-ended-settlement-01/result.json",
+      "sha256": "7b56893d6b92a3be2fffc5a08e90203d3902dc99df3f902c6a985c2336f50122"
+    },
+    "settlementAcceptance": {
+      "path": "qualification/results/private/foundation/2026-10-16-vnc-user-ended-settlement-01/acceptance-01.json",
+      "sha256": "8f24120df6673d9dbda2e6d90b5f5a655eeaf76277e96a8a60e6045dafb5ef2a"
+    }
+  }
+}
