@@ -38,9 +38,11 @@ Run record: [2026-10-17-x11-forwarding-host.md](../../../qualification/results/P
 
 Two environment traps are documented for the next runner: stale `/tmp/.XNN-lock`/socket files make Xvfb silently fail to take a display (the bring-up script now guards this), and detached background Xvfb processes die with their shell session (the fixture owns its children's lifetime).
 
-## 5. Android display/broker side — current evidence (unchanged risk)
+## 5. Android display/broker side — device proof (2026-10-17)
 
-The [engine entry](native-x11-engine-entry.md) stands. This turn staged the pinned Termux:X11 tree (`fa3a8b430e…`, X.Org submodule `65d790bd2…` = xorg-server-21.1.24) with all submodules in ignored storage (`.cache/x11-engine-01/`, not tracked). Its build system is self-contained CMake recipes per dependency (pixman, xorgproto, libxkbfile, libxfont, libepoxy, xkbcomp, bzip2, libtirpc, libxau/libxdmcp, libxcvt…) targeting `libXlorie.so`, needing NDK + CMake + Ninja + Python + Bison. The missing per-XID surface bridge and the hidden-API shell startup exclusion remain exactly as recorded there, and the GPLv3 license constraint (R242) still blocks Console distribution decisions — a private feasibility build precedes that question, as the entry specifies.
+The [engine entry](native-x11-engine-entry.md) stands. The pinned Termux:X11 tree (`fa3a8b430e…`, X.Org submodule `65d790bd2…` = xorg-server-21.1.24) is staged with all submodules in ignored storage (`.cache/x11-engine-01/`, not tracked). Its build system is self-contained CMake recipes per dependency (pixman, xorgproto, libxkbfile, libxfont, libepoxy, xkbcomp, bzip2, libtirpc, libxau/libxdmcp, libxcvt…) targeting `libXlorie.so`, needing NDK + CMake + Ninja + Python + Bison. The GPLv3 license constraint (R242) still blocks Console distribution decisions — a private feasibility build precedes that question, as the entry specifies.
+
+The [M2 device run](../../../qualification/results/P0-S7/2026-10-17-x11-broker-device.md) now establishes the previously missing bridge in a diagnostic probe: public-API in-process engine start, Composite-redirected per-XID pixmaps into two independent native tasks, an owned transient dialog, real pointer/keyboard mapping, `WM_DELETE_WINDOW`, and two real OpenSSH-forwarded xterm windows with remote key execution on the identified Googlebook. The probe is not product code; override-redirect popups, IME commit, two-host Android isolation, SECURITY mode, forced recreation and owner→window retirement remain open for P2-S6. The hidden-API shell loader is not used.
 
 ### 5.1 Engine build attempt (this turn, real)
 
@@ -57,10 +59,10 @@ Two build notes, both about our tree rather than the engine: the recipe's `patch
 
 ## 7. Next bounded steps (packet order)
 
-1. Timeboxed `libXlorie.so` NDK build attempt from the staged pins, recording the exact toolchain/ABI/errors (no product integration from a compile alone).
-2. The two-XID broker proof against Composite-redirected pixmaps into two native surfaces (packet steps 2–4).
-3. SSH-leg reuse on the Googlebook with the Android endpoint, once the terminal PTY lane (handoff item 2) lands.
-4. SECURITY/restricted-mode qualification or an honest unavailable state; clipboard/XDND stay separate capabilities.
+1. ~~Timeboxed `libXlorie.so` NDK build attempt~~ — done: arm64 build recorded in §5.1.
+2. ~~Two-XID broker proof against Composite-redirected pixmaps into two native surfaces~~ — done for the bounded M2 scope in the [device run](../../../qualification/results/P0-S7/2026-10-17-x11-broker-device.md); popup/IME/two-host/recreation and owner retirement remain.
+3. ~~SSH-leg reuse on the Googlebook with the Android endpoint~~ — done in the M2 probe (two forwarded xterms, remote key input); product console integration still requires the formal terminal/session owner.
+4. SECURITY/restricted-mode qualification or an honest unavailable state; clipboard/XDND stay separate capabilities. Product broker lifecycle/override-redirect/IME work is P2-S6.
 
 ## 8. Register additions
 

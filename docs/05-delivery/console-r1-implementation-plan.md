@@ -48,12 +48,12 @@ Therefore an earlier SSH/PTY/UI increment is a partial construction milestone. I
 - **Checks:** Kotlin compiler, seven pure bounds tests, existing SSH regression suite, then an owned real POSIX OpenSSH PTY+SFTP fixture exercising remote `stty` resize and one-credential/one-transport ownership.
 - **Exit:** real PTY bytes/resize and concurrent read-only SFTP pass, or a concrete defect is retained for repair. This is not renderer, IME, layout, or P2-S2 acceptance. **Result:** achieved and recorded in [the PTY backend run](../../qualification/results/P2-S1/2026-10-17-ssh-pty-backend.md), including the disclosed fixture privilege boundary and remaining stress/device cases.
 
-### M2 — P0-S7 two-XID native-window architecture proof
+### M2 — P0-S7 two-XID native-window architecture proof (completed bounded proof 2026-10-17)
 
 - **Stages/dependencies:** P0-S7, Q-C07/Q-C08; independent of formal Console UI.
 - **Changes:** APK-owned public-API engine startup; per-display cookie isolation; Composite-redirected per-XID presentation into two native surfaces; top-level/transient/popup metadata; `WM_DELETE_WINDOW`; focused input mapping and surface recreation. Exclude the hidden-API shell loader and disable clipboard/XDND initially.
 - **Checks:** small real X clients with two top-level windows, owned modal and popup; wrong cookie, two trust contexts, SSH loss and surface/process lifecycle; then the existing real OpenSSH/Xvfb forwarding leg.
-- **Exit:** recorded two-XID/two-native-window result with exact engine/build/ABI evidence, or a specific engine/broker blocker. A compile, two displays, or one full X desktop is only partial evidence.
+- **Exit:** recorded two-XID/two-native-window result with exact engine/build/ABI evidence, or a specific engine/broker blocker. A compile, two displays, or one full X desktop is only partial evidence. **Result:** two real XIDs presented in two independent native tasks, an owned transient dialog, real pointer/keyboard input, and two real OpenSSH-forwarded xterm windows with remote key input on the identified Googlebook; recorded in [the device run](../../qualification/results/P0-S7/2026-10-17-x11-broker-device.md). Override-redirect popup, IME commit, two-host isolation on Android, security mode, forced recreation and owner→window retirement remain open for P2-S6; the probe is diagnostic and no product/capability promotion follows.
 
 ### M3 — Formal terminal and desktop input
 

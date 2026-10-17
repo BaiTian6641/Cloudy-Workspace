@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cloudy X11 broker probe</string>
+    <string name="status_stopped">Server stopped</string>
+    <string name="status_running">Server running</string>
+    <string name="status_preparing">Preparing private X server…</string>
+    <string name="status_start_failed">Start failed: %1$s</string>
+    <string name="status_demo_failed">Demo failed: %1$s</string>
+    <string name="status_demo_admitted">Demo launch admitted; waiting for real X11 windows</string>
+    <string name="status_demo_running">Demo already running</string>
+    <string name="window_record">XID %1$d • %2$d×%3$d @ %4$d,%5$d • %6$s</string>
+    <string name="window_top_level">top-level</string>
+    <string name="window_transient">transient for %1$d</string>
+    <string name="window_override">override redirect</string>
+    <string name="window_identity">Local probe / display :0 / XID %1$d</string>
+    <string name="wm_close">WM close</string>
+</resources>
