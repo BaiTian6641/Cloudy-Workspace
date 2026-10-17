@@ -168,6 +168,8 @@ class SshAuthenticatedTransportFactory {
 class SshAuthenticatedTransport internal constructor(private val state: SshRetainedState,
     val ownership: SshAuthenticatedOwnership) {
     val files = SshReadOnlyFiles(this)
+    /** Worker-only setup. One PTY per transport; closing it closes linked files too. */
+    fun openPty(size: SshPtySize): SshPtyOpenResult = state.openPty(size)
     fun requestClose() { state.stop(SshTransportCode.CLOSED) }
     fun awaitClosed(timeoutMillis: Long = 3_000): SshTransportCloseResult = state.awaitClosed(timeoutMillis)
     internal fun <T> withFiles(timeoutMillis: Int, action: (SFTPClient) -> T): SshFilesResult<T> =
@@ -190,6 +192,17 @@ internal class SshRetainedState(
     private val wake = Semaphore(0)
     private var deadline = System.nanoTime() + TimeUnit.MILLISECONDS.toNanos(timeoutMillis.toLong())
     private var operation: CountDownLatch? = null
+    private var pty: SshOwnedPty? = null
+
+    fun openPty(size: SshPtySize): SshPtyOpenResult {
+        val owned = synchronized(gate) {
+            if (!active()) return SshPtyOpenResult.Failure(reason())
+            if (proof == null || pty != null) return SshPtyOpenResult.Failure(SshTransportCode.BUSY)
+            // Publish ownership before the first channel-open request can block or fail.
+            SshOwnedPty(checkNotNull(client), size, ::active, ::reason, ::stop).also { pty = it }
+        }
+        return owned.open()
+    }
     private val terminal = CountDownLatch(1)
     private val stopped = AtomicReference<SshTransportCode?>(null)
     private val socket = AtomicReference<Socket?>(null)
@@ -342,11 +355,15 @@ internal class SshRetainedState(
         finally {
             cleanupStarted.countDown()
             val end = System.nanoTime() + TimeUnit.SECONDS.toNanos(2)
+            synchronized(gate) { pty }?.stopQueues()
             try { socket.get()?.close() } catch (_: Exception) { closeFailed.set(true) }
             val closed = AtomicBoolean(false)
             val helper = Thread({
                 try {
-                    try { client?.close() } finally { sftpChannel.get()?.close() }
+                    try { client?.close() } finally {
+                        try { sftpChannel.get()?.close() }
+                        finally { synchronized(gate) { pty }?.closeChannel() }
+                    }
                     closed.set(true)
                 } catch (_: Exception) { closeFailed.set(true) }
             }, "cloudy-ssh-retained-close").apply { isDaemon = true }
@@ -365,7 +382,8 @@ internal class SshRetainedState(
                 val sftpDone = packetReader?.isAlive != true && sftpChannel.get()?.isClosed() != false
                 left = end - System.nanoTime()
                 if (left > 0) TimeUnit.NANOSECONDS.timedJoin(helper, left)
-                cleanupCertain = setupDone && readerDone && operationDone && sftpDone && !helper.isAlive && closed.get() &&
+                val ptyDone = synchronized(gate) { pty }?.awaitResources(end) ?: true
+                cleanupCertain = ptyDone && setupDone && readerDone && operationDone && sftpDone && !helper.isAlive && closed.get() &&
                     socket.get()?.isClosed != false && !closeFailed.get()
             } catch (_: Exception) { cleanupCertain = false }
             finally {

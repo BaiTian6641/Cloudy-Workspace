@@ -34,19 +34,19 @@ Therefore an earlier SSH/PTY/UI increment is a partial construction milestone. I
 
 ## Execution milestones
 
-### M0 — Review, requirements, and reproducible baseline
+### M0 — Review, requirements, and reproducible baseline (completed 2026-10-17)
 
 - **Stages/dependencies:** P2 planning; current P0-S7 and P1 foundation evidence.
 - **Changes:** maintain the C01–C20 matrix; reconcile gate language; record current source, device, build, and untracked-draft boundaries.
 - **Checks:** `python3 tools/validate_project.py`; strict Gradle compile/test/Lint baseline; exact Git/remote comparison.
 - **Exit:** reviewed plan and reproducible baseline with failures preserved. No product capability promotion.
 
-### M1 — Real retained PTY and same-owner SFTP boundary
+### M1 — Real retained PTY and same-owner SFTP boundary (completed bounded milestone 2026-10-17)
 
 - **Stages/dependencies:** bounded P2-S1/P2-S2 construction over the existing authenticated SSHJ owner.
 - **Changes:** independently review/adopt the frozen `SshOwnedPty` proposal; bounded copied input, coalesced resize, backpressured stdout/stderr, close/cancellation, and full worker retirement; keep the existing short SFTP lane on the same authenticated transport.
 - **Checks:** Kotlin compiler, seven pure bounds tests, existing SSH regression suite, then an owned real POSIX OpenSSH PTY+SFTP fixture exercising remote `stty` resize and one-credential/one-transport ownership.
-- **Exit:** real PTY bytes/resize and concurrent read-only SFTP pass, or a concrete defect is retained for repair. This is not renderer, IME, layout, or P2-S2 acceptance.
+- **Exit:** real PTY bytes/resize and concurrent read-only SFTP pass, or a concrete defect is retained for repair. This is not renderer, IME, layout, or P2-S2 acceptance. **Result:** achieved and recorded in [the PTY backend run](../../qualification/results/P2-S1/2026-10-17-ssh-pty-backend.md), including the disclosed fixture privilege boundary and remaining stress/device cases.
 
 ### M2 — P0-S7 two-XID native-window architecture proof
 

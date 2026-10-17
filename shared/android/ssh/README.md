@@ -1,21 +1,22 @@
-# SSH and SFTP boundary
+# SSH, PTY, SFTP and X11 boundary
 
-**State:** finite credential-free SSH host-key observation is implemented with the retained SSHJ0.41.2 candidate. Authentication, sessions, PTYs, SFTP and forwarding remain future work. **Delivery stages:** P0-S3, P1-S3/S4, P2-S1/S2/S4.
+**State:** retained SSHJ 0.41.2 candidate with real bounded implementations; adoption remains experimental and CAP-SSH is not promoted. **Delivery stages:** P0-S3/S7, P1-S3/S4, P2-S1/S2/S4/S6/S8.
 
 ## Responsibility
 
-Engine adapters for trusted connections, authentication, jump channels, PTYs, resize, SFTP, and local forwarding.
+Own trusted SSH engine adapters, authentication, retained connection identity, bounded PTY/SFTP channels and forwarding. Keep raw SSHJ objects, credentials, cookies and terminal/file bytes out of general UI bridges. I/O stays off the UI thread with explicit ownership, cancellation and retirement. Each consuming app owns its profiles, credentials, jobs and lifecycle; there is no global credential store or permanently shared daemon.
 
-## Boundary
+## Implemented boundaries
 
-Own crypto through an established maintained engine; keep I/O off the UI thread and use bounded backpressure.
+- `SshHostKeyObserver` verifies a finite server-key observation through SSHJ and retires its actual socket/readers without authenticating. A saved pin still requires fresh exact verification before authentication.
+- `SshAuthenticatedTransport` implements strict password admission and retained ownership. `SshReadOnlyFiles` provides bounded read-only SFTP list/read operations; writable transfer/publication, key and keyboard-interactive authentication, jumps and managed TCP forwards remain separate work.
+- `openPty` allocates one real `xterm-256color` shell per retained transport. `SshOwnedPty` provides bounded copied input, coalesced resize and backpressured stdout/stderr. PTY close conservatively retires the whole transport and linked SFTP; local queue admission/write/resize is not remote consumption or acknowledgment. See the [real PTY host run](../../../qualification/results/P2-S1/2026-10-17-ssh-pty-backend.md).
+- `SshX11Forwarding` implements standard `x11-req`/incoming channels, per-owner fake cookies, strict Xauthority lookup, setup-block substitution, bounded channels and retirement. The [OpenSSH/Xvfb host run](../../../qualification/results/P0-S7/2026-10-17-x11-forwarding-host.md) covers this protocol leg only; Android rendering, per-XID native windows and restricted SECURITY mode remain unqualified.
 
-## Implemented observation boundary
+The public APIs return typed results and redacted representations. A connected transport does not prove that a remote process survived reconnect, and EOF does not prove command success. Queue ownership and stale-attachment fencing remain mandatory for renderer consumers.
 
-`SshHostKeyObserver` accepts a validated logical peer and an independently resolved numeric address. It verifies the server's key-exchange signature through SSHJ, records the key in an always-rejecting verifier, and returns an observation only after retiring its actual socket, Reader and helper threads. It never authenticates or opens a session. Cancellation and deadlines close owned transport; uncertain cleanup quarantines the observer instance. The selected algorithm policy is deliberately narrow and does not imply support for every key format accepted by the domain model.
+## Verification
 
-Android DNS, foreground presentation, permission prompts and app-private trust persistence belong to `:platform`; credential access does not belong to this observer. A saved pin requires a fresh, independently verified future connection before authentication. Full engine adoption, rekey/revocation consequences, jump chains, PTY/SFTP/forwarding and broader algorithm interoperability retain their planned gates.
-
-`:ssh:test` exercises domain integration, canonical fingerprint serialization and real bounded TCP cancellation/deadline boundaries. The OpenSSH success case is opt-in with an owned listener and independent public fingerprint; default CI skips that fixture-dependent case. Device transport and product UI results must be recorded separately.
+Default JVM tests exercise domain integration, codecs, bounds and finite real TCP behavior. Opt-in fixtures require an owned real server and are skipped without explicit configuration; a skip is never a pass. Run the real PTY fixture through [qualification/fixtures/ssh-pty](../../../qualification/fixtures/ssh-pty/README.md). Device transport, renderer input/IME, physical Googlebook behavior and product UI need their own evidence.
 
 Read the [module map](../../../docs/02-architecture/module-boundaries.md), [phase plan](../../../docs/05-delivery/README.md), and [validation strategy](../../../docs/06-validation/strategy.md). Record exact implementation versions and evidence before promoting a capability.
