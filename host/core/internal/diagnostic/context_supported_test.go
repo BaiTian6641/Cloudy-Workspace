@@ -1,4 +1,4 @@
-//go:build linux
+//go:build linux || darwin
 
 package diagnostic
 
@@ -69,7 +69,7 @@ func TestContextActualReadAndOutputPreservation(t *testing.T) {
 		if err := json.Unmarshal(out.Bytes(), &observed); err != nil {
 			t.Fatal("context output not JSON")
 		}
-		want := contextObservation{1, "0.1.3", "2026-10-16T16:00:00.000000123Z", CurrentRuntime(), initialized.Record.InstallationID, boot.String(), prior.Durability, "sequential-not-atomic"}
+		want := contextObservation{1, AgentVersion, "2026-10-16T16:00:00.000000123Z", CurrentRuntime(), initialized.Record.InstallationID, boot.String(), prior.Durability, "sequential-not-atomic"}
 		if observed != want {
 			t.Fatal("actual context contract mismatch")
 		}
@@ -177,5 +177,24 @@ func TestContextTimestampAfterReadersAndDurabilityPassthrough(t *testing.T) {
 	var observed contextObservation
 	if err := json.Unmarshal(out.Bytes(), &observed); err != nil || observed.IdentityDurability != "test-only-durability" {
 		t.Fatal("reader durability not passed through")
+	}
+}
+
+// The command is an observation: invalid established state must remain invalid
+// for explicit recovery, rather than being repaired or implicitly initialized.
+func TestContextCorruptRecordNeverRepair(t *testing.T) {
+	dir, _, _ := contextFixture(t)
+	corrupt := []byte("{}\n")
+	path := filepath.Join(dir, installation.AnchorName, installation.RecordName)
+	if err := os.WriteFile(path, corrupt, 0600); err != nil {
+		t.Fatal("owned corrupt fixture write failed")
+	}
+	for i := 0; i < 2; i++ {
+		var out, errOut bytes.Buffer
+		code := Run([]string{"context", "read", "--state-dir", dir}, &out, &errOut, forbiddenClock, forbiddenRuntime)
+		if code != 1 || out.Len() != 0 || errOut.String() != "cloudy-host: context installation read failed\n" {
+			t.Fatal("corrupt state did not refuse safely")
+		}
+		assertContextPreserved(t, dir, corrupt)
 	}
 }

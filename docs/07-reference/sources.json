@@ -7648,6 +7648,30 @@
       "sourceUpdatedOn": null,
       "note": "Selected unchanged x/sys v0.49.0 exports unix.Sysctl/SysctlArgs/SysctlRaw. Two-phase kernel-reported allocation and one trailing-NUL removal inspected; there is no caller-hard allocation cap, owned FD/Close or cancellation deadline. Named-node availability remains actual-platform scoped. Owner host core, P4-S1.",
       "refresh": "Before changing the affected host reader, selected x/sys/kernel source assumptions or qualification claim; reuse unchanged evidence and preserve honest node-unavailable behavior."
+    },
+    {
+      "id": "R366",
+      "title": "Pinned Gradle 9.6 dependency locking",
+      "url": "https://docs.gradle.org/9.6.0/userguide/dependency_locking.html#generating_and_updating_dependency_locks",
+      "publisher": "Gradle, Inc.",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Gradle9.6 STRICT locking refuses resolved configurations lacking lock state. Official resolveAndLockAll sample uses explicit --write-locks and direct configuration resolution; only successfully resolved enabled configurations gain project-root gradle.lockfile entries, including empty state. Scoped :vnc admission keeps offline/strict verification and all existing locks/checksums fixed. No dependency version relaxation or verification metadata rewrite. Owner Android/build leader, P1-S4.",
+      "refresh": "Before changing lock generation, root module admission or selected Gradle; preserve the failed pre-compilation run and review newly resolved coordinates."
+    },
+    {
+      "id": "R367",
+      "title": "CPython 3.9.6 ISO time fraction parser",
+      "url": "https://github.com/python/cpython/blob/v3.9.6/Modules/_datetimemodule.c",
+      "publisher": "Python Software Foundation",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-16",
+      "sourceUpdatedOn": null,
+      "note": "Pinned parse_hh_mm_ss_ff permits fractional seconds only at three or six digits. Target Python3.9.6 read-only synthetic control corroborates this limit; Go RFC3339Nano may emit other precision. The finite Mac supervisor instead validates strict UTC syntax and constructs calendar fields, normalizing only comparison to microseconds while preserving raw output. No host output/API or latency precision claim changes. Owner host qualification leader, P4-S1.",
+      "refresh": "Before changing the finite supervisor parser or target Python version; unchanged native host tests are not repeated for this reference record."
     }
   ]
 }

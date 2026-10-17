@@ -1,0 +1,354 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "scope": "HOST-CONTEXT-DARWIN: local sequential installation and boot observation",
+  "status": "accepted-scoped-native-evidence; source publication pending parent checkpoint",
+  "hostExecutableVersion": "0.1.4",
+  "localContextVersion": 1,
+  "runtime": {
+    "os": "macOS",
+    "version": "26.6.2",
+    "build": "25G83",
+    "architecture": "arm64",
+    "goVersion": "go1.27.2"
+  },
+  "sources": {
+    "host/core/internal/diagnostic/context_supported.go": "bf3c3e60bae93b50303b07108368a7c0cdc6585e1ffd509c0f74a1fdb3d35252",
+    "host/core/internal/diagnostic/context_supported_test.go": "05e2aec05afe8d1471d6515df20466c7c19e994d4ee97d61459e81da4beef09d",
+    "host/core/internal/diagnostic/context_other.go": "b3fb8f3050316d59e2c93b4fd8813689f4c6774465eec8e98a8dfec9631a8957",
+    "host/core/internal/diagnostic/context_other_test.go": "048f33edfce65e4d48dfa42d52f5803d2d3ad45d471c547cef167f76f29b14b1",
+    "host/core/internal/diagnostic/diagnostic.go": "571010bff16645bb11f1d47258c3786ea91edf764694de890813b8b2d79dc253",
+    "host/core/internal/diagnostic/diagnostic_test.go": "efc4d6bebb3ae441685c7406d2c424dbbe683e484eda9cecc898271b059c10f4"
+  },
+  "protectedInputBindings": {
+    "host/core/internal/bootidentity/boot_darwin.go": "6ff5f925196720cffc82abdfe5f6531d9653c3d9b181fdd3c34f332d33dbeaca",
+    "host/core/internal/bootidentity/boot_darwin_test.go": "79172d126ac10587aa8bb796a7c1f69ea7baca611dd5f0436aaaab27fb0c2a4a",
+    "host/core/internal/bootidentity/boot_linux.go": "63e317107b0e42781456b7756326463366f81a7faf21315b5cbbf003ffd20698",
+    "host/core/internal/bootidentity/boot_linux_test.go": "7a5365d5daef1c59cbcafde8ce7892867e291a462f8c3cb5074fcbd1a1f0fcfc",
+    "host/core/internal/installation/profile_other.go": "e11b2c0924241c088178f1bff11efdc518b47adb79254433c54fec68d2c7035c",
+    "host/core/internal/installation/profile_windows.go": "46a938b39cfe99aaaf26914e9fb2baac6b905a8ff8fd9c8041fe0e954e602e65",
+    "host/core/internal/installation/profile_windows_test.go": "04c2e38c60bb3fbab7bf822daa080e6fc035957d5d47087044a3fe9dfbd3403a",
+    "host/core/internal/installation/store.go": "d061f32a7d10ab89cae77a2d8fb41c685f600a686bb37c5c8d7e2a89c1b5bd94",
+    "host/core/internal/installation/store_test.go": "4b3ddb3669e6c4c4c9c80fcbd6176407e6a65f74686ef7a73aca4ed909d49510",
+    "host/core/internal/installation/sync_other_test.go": "5f7844f64e5e7064c55dd9d5c71eedc7e4812839d9fdec32723a8e20de9af0d5",
+    "host/core/internal/installation/sync_windows_test.go": "a0818fbf173d2107f9b21db24cd430bab9ec97e973338f546cbb2d884b48ab96",
+    "host/core/internal/installation/windows_record.go": "fddede14adfb842694be4c623271a2c65953cd89bc3408bde8f17dff446ab1a0",
+    "host/core/internal/installation/windows_record_test.go": "4b9470ccc904b3269e609afe013a5f32a8c51555f3828b72e0de4ab87e3a4bf0",
+    "host/core/cmd/cloudy-host/main.go": "f1275665c1caf81851c199fea669ffd675156d0f67e80080c98885028d0c5b54",
+    "host/core/go.mod": "216f549ff9871fea87351318ca6420efdfefeeaf1c0afa6a944ec41d2de70b4c",
+    "host/core/go.sum": "4e77c00cd0a32a85bd48f74790fc4f5fdb35d5e8e715d4b1fb131bcf7ce2d60a"
+  },
+  "sourceChanges": {
+    "composition": "Existing Linux implementation body unchanged; supported build tags now linux || darwin. Windows remains explicitly unsupported.",
+    "version": "0.1.4",
+    "newCase": "Corrupt installation record is refused without repair or replacement."
+  },
+  "compiler": {
+    "passed": true,
+    "inputsUnchanged": true,
+    "commandCount": 9,
+    "commands": [
+      {
+        "label": "compiler",
+        "exitCode": 0,
+        "passed": true,
+        "logOverflow": false
+      },
+      {
+        "label": "format",
+        "exitCode": 0,
+        "passed": true,
+        "logOverflow": false
+      },
+      {
+        "label": "linux-vet",
+        "exitCode": 0,
+        "passed": true,
+        "logOverflow": false
+      },
+      {
+        "label": "linux-affected-race",
+        "exitCode": 0,
+        "passed": true,
+        "logOverflow": false
+      },
+      {
+        "label": "darwin-vet",
+        "exitCode": 0,
+        "passed": true,
+        "logOverflow": false
+      },
+      {
+        "label": "darwin-test-compile",
+        "exitCode": 0,
+        "passed": true,
+        "logOverflow": false
+      },
+      {
+        "label": "darwin-product-build",
+        "exitCode": 0,
+        "passed": true,
+        "logOverflow": false
+      },
+      {
+        "label": "windows-vet",
+        "exitCode": 0,
+        "passed": true,
+        "logOverflow": false
+      },
+      {
+        "label": "windows-test-compile",
+        "exitCode": 0,
+        "passed": true,
+        "logOverflow": false
+      }
+    ],
+    "linuxAffectedRace": {
+      "topLevelPasses": 5,
+      "aggregateNamedPasses": 5,
+      "skips": 0,
+      "failures": 0
+    },
+    "artifacts": {
+      "diagnostic-darwin-arm64.test": {
+        "sha256": "cc92888e9d78dc33d6201732d3efa481da3dad9ac99b6ad1f816cc9484e9421d",
+        "bytes": 5773218
+      },
+      "cloudy-host-darwin-arm64": {
+        "sha256": "ac3ea4f5cdc4eb33dfa0632ec2f1e02076e25c926e903c4cd7408c561bc15297",
+        "bytes": 4568130
+      },
+      "diagnostic-windows-amd64.test.exe": {
+        "sha256": "9f9290853e05c95d4044c75823780d596d89c7a1a389fd1f470ae84279be6122",
+        "bytes": 6498816
+      }
+    },
+    "rawOutputBindings": {
+      "linux-affected-race.stdout": "a6cf52e079b2ed9f0b881ab03a22e9514aa7a1d54327ec8295f8fb9ca26be821",
+      "darwin-test-compile.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "format.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "windows-vet.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "windows-vet.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "darwin-vet.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "linux-vet.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "linux-affected-race.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "format.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "windows-test-compile.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "darwin-product-build.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compiler.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "windows-test-compile.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "darwin-product-build.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "linux-vet.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compiler.stdout": "b37a9ba0d93288420b4b07aa1ab4ac8ed0ef6d39a3f82f230c22fef8f71ca805",
+      "darwin-vet.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "darwin-test-compile.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "darwinExecution": false,
+    "windowsExecution": false
+  },
+  "native": {
+    "passed": true,
+    "topLevelMethods": 9,
+    "namedSubcases": 2,
+    "aggregateNamedPasses": 11,
+    "skips": 0,
+    "failures": 0,
+    "CLIcases": 9,
+    "archiveFiles": 32,
+    "archiveDirectories": 8,
+    "archiveAckCleanupCommandsExitZero": 5,
+    "testMethods": [
+      "TestContextActualReadAndOutputPreservation",
+      "TestContextMissingAndIncompleteNeverInitialize",
+      "TestContextFailureOrderAndPrivacy",
+      "TestContextTimestampAfterReadersAndDurabilityPassthrough",
+      "TestContextCorruptRecordNeverRepair",
+      "TestContextRejectsArgumentsBeforeIO",
+      "TestInspectContract",
+      "TestVersionDoesNotInspectRuntime",
+      "TestIdentityReadOutputAndFailureRetainState"
+    ],
+    "subcases": [
+      "TestContextFailureOrderAndPrivacy/installation",
+      "TestContextFailureOrderAndPrivacy/boot"
+    ],
+    "cliCases": [
+      {
+        "case": "version",
+        "exitCode": 0
+      },
+      {
+        "case": "inspect",
+        "exitCode": 0
+      },
+      {
+        "case": "context-empty",
+        "exitCode": 1
+      },
+      {
+        "case": "context-badargs",
+        "exitCode": 2
+      },
+      {
+        "case": "identity-init",
+        "exitCode": 0
+      },
+      {
+        "case": "context-first",
+        "exitCode": 0
+      },
+      {
+        "case": "context-second",
+        "exitCode": 0
+      },
+      {
+        "case": "context-incomplete",
+        "exitCode": 1
+      },
+      {
+        "case": "context-corrupt",
+        "exitCode": 1
+      }
+    ],
+    "directChildrenReaped": true,
+    "logOverflow": false,
+    "temporaryDirectoryEmpty": true,
+    "statePreservation": true,
+    "contextIdentityEquality": true,
+    "identifierOutputs": "Private only; no identifiers reproduced in this report."
+  },
+  "observationContract": {
+    "readOrder": [
+      "installation identity",
+      "boot identity",
+      "UTC observed-at and runtime"
+    ],
+    "consistency": "sequential-not-atomic",
+    "identityDurability": "Passed through from identity.Read; not-assessed on read.",
+    "state": "Explicit caller-owned fixtures only; missing, incomplete and corrupt state never initialized or repaired by context read.",
+    "privacy": "Returned identities are local correlatable diagnostic values, not authentication credentials."
+  },
+  "envelope": {
+    "initialFiles": 4,
+    "selectedTestTimeoutSeconds": 25,
+    "directChildDeadlineSeconds": 30,
+    "cliDeadlineSeconds": 5,
+    "perStreamLogLimitBytes": 262144,
+    "fixtureStateRoots": [
+      "valid",
+      "empty",
+      "incomplete",
+      "corrupt"
+    ],
+    "archiveFilesIncludingResult": 32,
+    "archiveDirectories": 8,
+    "cleanup": "All archive sets and hashes verified before exclusive acknowledgement; original owned tree identity and contents checked before enumerated unlink and empty-directory removal.",
+    "exactOwnedRootAbsent": true,
+    "recursiveRemoval": false,
+    "automaticRetry": false
+  },
+  "preservedPreparationFindings": [
+    {
+      "stage": "Compiler driver 01",
+      "executed": false,
+      "finding": "Fast exit could evade alive-loop output cap. Driver 02 checks overflow after drain joins.",
+      "evidence": {
+        "path": ".cache/host-darwin-context-01/source-01/check-freeze-01.json",
+        "sha256": "3fe2c578a35c3923f9cbf3aebc72e527d9209d080ac9ab37b67dfea47cc400af"
+      }
+    },
+    {
+      "stage": "Native packet 01",
+      "executed": false,
+      "finding": "Target CPython 3.9.6 rejects some Go RFC3339Nano fractions. Packet 02 uses strict UTC parsing and explicit microsecond normalization for interval comparison only. Original nanosecond strings remain private.",
+      "evidence": {
+        "path": ".cache/host-darwin-context-01/native-entry-01/freeze-01.json",
+        "sha256": "a5fe3b043a75da4261684999ea582b0ad333a00b15e1b91efb5944ad617fe6da"
+      }
+    },
+    {
+      "stage": "Transfer driver 01",
+      "executed": false,
+      "finding": "Fast exit could evade output size cap. Driver 02 checks final sizes before terminal acceptance.",
+      "evidence": {
+        "path": ".cache/host-darwin-context-01/native-entry-01/execute-freeze-01.json",
+        "sha256": "fc840e1fc2371eefd45ff3541fadf7e61110bbba36a3dff627a7eac0985cb339"
+      }
+    }
+  ],
+  "preparationControls": {
+    "utc": 31,
+    "utcBreakdown": {
+      "fractionPrecisions": 10,
+      "validLeapDay": 1,
+      "invalidInputs": 20
+    },
+    "verboseOutputParser": 15,
+    "scope": "Pure controls, not native test passes; target Python synthetic compatibility check was read-only."
+  },
+  "independentReview": {
+    "checks": 54,
+    "allMatch": true,
+    "findings": [],
+    "sha256": "05e5c1c920547367ab9292162feda8e2018031f066243e42c559a83d67c75554"
+  },
+  "evidence": {
+    "sourceFreeze": {
+      "path": ".cache/host-darwin-context-01/source-01/freeze-01.json",
+      "sha256": "d957b6a77d27c486661b75f4917760f1767e23f2007842880d34bc27cf5f8384"
+    },
+    "sourcePatch": {
+      "path": ".cache/host-darwin-context-01/source-01/source-01.patch",
+      "sha256": "54e8bc5697d804e3a661537e462f3a328abdf6e42593e29ce0ef79c360a4c608"
+    },
+    "compiler": {
+      "path": ".cache/host-darwin-context-01/source-01/verification-02/result.json",
+      "sha256": "a8c9b5aafdbf2c237864341bb2f852893df43ad0ad1e586783e822cc2a110c4e"
+    },
+    "compilerReview": {
+      "path": ".cache/host-darwin-context-01/source-01/independent-compiler-review-02.json",
+      "sha256": "414e83b19d10fe4676b78e8dd9f6ce7419be8c2d0925752f2a23e73e36a650d3"
+    },
+    "packet": {
+      "path": ".cache/host-darwin-context-01/native-entry-01/freeze-02.json",
+      "sha256": "c394c99e89f61a229a7e0f2d3d8b8cf1d5789159bacf521d5789c2b1956bc40d"
+    },
+    "transfer": {
+      "path": ".cache/host-darwin-context-01/native-entry-01/execute-freeze-02.json",
+      "sha256": "6c12467b99d6dd1d8a9a5730d71a4d75796ded6853c2a78971b6187c02561d6f"
+    },
+    "nativeReceipt": {
+      "path": "qualification/results/private/host-macos/2026-10-16-context-native-01/receipt.json",
+      "sha256": "dd14f3eb1a7653d74643facc7d5377409b62d7308aee93f6919a525d270661df"
+    },
+    "nativeTerminal": {
+      "path": "qualification/results/private/host-macos/2026-10-16-context-native-01/retrieve-terminal.stdout",
+      "sha256": "87116e30379cade8618e36d953cb1f57ad29c560df52813c62865741bb348ce6"
+    },
+    "archiveCleanup": {
+      "path": "qualification/results/private/host-macos/2026-10-16-context-native-01/archive-cleanup-receipt-01.json",
+      "sha256": "686495b2cd9d6ea7192615bf0f104cf46040c0824665e54a625049ea3d735aa8"
+    },
+    "archiveRecipe": {
+      "path": ".cache/host-darwin-context-01/native-entry-01/archive-freeze-01.json",
+      "sha256": "9de0e9dad3664842cf27b7d1e7bc0094eb610caab12eab6174b358be45cc5875"
+    },
+    "independentActualReview": {
+      "path": ".cache/host-darwin-context-01/native-entry-01/independent-actual-review-01.json",
+      "sha256": "05e5c1c920547367ab9292162feda8e2018031f066243e42c559a83d67c75554"
+    },
+    "preparationControls": {
+      "path": ".cache/host-darwin-context-01/native-entry-01/parent-controls-result-02.json",
+      "sha256": "af09b264552216f1c631958be93b535c13ac6d9d3e833009ba0dd8138aea3e28"
+    }
+  },
+  "limits": [
+    "No atomic snapshot, authentication or remote identity authority.",
+    "No service, daemon, pairing, registry, admission, managed-job or wire integration.",
+    "No reboot or power-loss qualification; initialization sync completion is not a power-loss promise.",
+    "No Windows native context support or macOS managed-job support.",
+    "No P4 integration or supported-platform promotion.",
+    "Earlier source versions and rejected unrun recipes remain historical evidence; this report does not rewrite them.",
+    "Publication and shared-state integration remain parent-owned; no new hosted CI pass is claimed."
+  ]
+}

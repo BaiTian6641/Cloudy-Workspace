@@ -12,7 +12,7 @@ import (
 	"github.com/BaiTian6641/Cloudy-Workspace/host/core/internal/installation"
 )
 
-const AgentVersion = "0.1.3"
+const AgentVersion = "0.1.4"
 
 const usage = "usage: cloudy-host inspect | version | identity init|read --state-dir <existing-directory> | context read --state-dir <existing-directory>\n"
 
