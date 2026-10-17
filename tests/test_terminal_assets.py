@@ -297,6 +297,19 @@ class TerminalAssetTests(unittest.TestCase):
         with self.assertRaisesRegex(ASSETS.AssetError, "Symlink"):
             ASSETS.cli_path(allowed / "redirect" / "child", allowed)
 
+    def test_product_mode_selects_the_terminal_module_root_and_rejects_others(self):
+        captured = {}
+
+        def fake_prepare(manifest, cache, output, **options):
+            captured["output"] = output
+            return {}
+
+        with patch.object(ASSETS, "prepare_assets", side_effect=fake_prepare):
+            self.assertEqual(0, ASSETS.main(["--product", "--offline"]))
+        self.assertEqual(ASSETS.PRODUCT_OUTPUT_ROOT, captured["output"])
+        with patch.object(ASSETS, "prepare_assets", side_effect=AssertionError("must not prepare")):
+            self.assertEqual(1, ASSETS.main(["--product", "--output", str(self.root / "outside"), "--offline"]))
+
     def test_supplementary_notice_is_integrity_checked_before_generation(self):
         asset = "third_party_notices/terminal/test-MIT.txt"
         relative = "qualification/probes/device-baseline/app/src/main/assets/" + asset

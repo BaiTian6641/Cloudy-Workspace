@@ -1,0 +1,611 @@
+{
+  "schemaVersion": 1,
+  "checkedDate": "2026-10-15",
+  "scope": "Additional AndroidX source/license collection for the local terminal renderer diagnostic; does not replace the historical 0.3.0 inventory.",
+  "components": [
+    {
+      "component": "androidx.webkit:webkit:1.17.1",
+      "selectedScope": "runtime-and-compile",
+      "artifacts": [
+        {
+          "file": "webkit-1.17.1.aar",
+          "url": "https://dl.google.com/dl/android/maven2/androidx/webkit/webkit/1.17.1/webkit-1.17.1.aar",
+          "sizeBytes": 292669,
+          "sha256": "29dc7a9a32614828c97cf85951eb43c9e455157ab411e5e77d2ca4e72da28a36",
+          "role": "binary",
+          "gradleVerification": "matches-recorded-sha256"
+        },
+        {
+          "file": "webkit-1.17.1.module",
+          "url": "https://dl.google.com/dl/android/maven2/androidx/webkit/webkit/1.17.1/webkit-1.17.1.module",
+          "sizeBytes": 4797,
+          "sha256": "fee069430a913a43fa694ad466682f132d21251b62cd03655142ddafe15b52eb",
+          "role": "Gradle module metadata",
+          "gradleVerification": "matches-recorded-sha256"
+        },
+        {
+          "file": "webkit-1.17.1.pom",
+          "url": "https://dl.google.com/dl/android/maven2/androidx/webkit/webkit/1.17.1/webkit-1.17.1.pom",
+          "sizeBytes": 2534,
+          "sha256": "b5294d03f04cf806e975afe48a67e70180e6a1e74086e7e62a1fe64c4a636bae",
+          "role": "publisher licensing/dependency metadata",
+          "gradleVerification": "audit-only-not-requested-in-recorded-graph"
+        },
+        {
+          "file": "webkit-1.17.1-sources.jar",
+          "url": "https://dl.google.com/dl/android/maven2/androidx/webkit/webkit/1.17.1/webkit-1.17.1-sources.jar",
+          "sizeBytes": 297508,
+          "sha256": "1fc3abdfcc179717f0a1b0b8634175afe4d84ba5938eba1df75128397663ebea",
+          "role": "source header inspection only; not bundled implementation",
+          "gradleVerification": "audit-only-not-requested-in-recorded-graph"
+        }
+      ],
+      "sourceInspection": {
+        "sourceFileCount": 172,
+        "apacheHeaderFileCount": 119,
+        "bsdHeaderFileCount": 53,
+        "copyrightLines": [
+          {
+            "text": "Copyright (C) 2018 The Android Open Source Project",
+            "sourceFiles": [
+              "androidx/webkit/internal/package-info.java"
+            ]
+          },
+          {
+            "text": "Copyright 2018 The Android Open Source Project",
+            "sourceFiles": [
+              "androidx/webkit/ProxyConfig.java",
+              "androidx/webkit/ProxyController.java",
+              "androidx/webkit/SafeBrowsingResponseCompat.java",
+              "androidx/webkit/ServiceWorkerClientCompat.java",
+              "androidx/webkit/ServiceWorkerControllerCompat.java",
+              "androidx/webkit/ServiceWorkerWebSettingsCompat.java",
+              "androidx/webkit/TracingConfig.java",
+              "androidx/webkit/TracingController.java",
+              "androidx/webkit/WebMessageCompat.java",
+              "androidx/webkit/WebMessagePortCompat.java",
+              "androidx/webkit/WebResourceErrorCompat.java",
+              "androidx/webkit/WebResourceRequestCompat.java",
+              "androidx/webkit/WebSettingsCompat.java",
+              "androidx/webkit/WebViewClientCompat.java",
+              "androidx/webkit/WebViewCompat.java",
+              "androidx/webkit/WebViewFeature.java",
+              "androidx/webkit/WebViewRenderProcess.java",
+              "androidx/webkit/WebViewRenderProcessClient.java",
+              "androidx/webkit/internal/FrameworkServiceWorkerClient.java",
+              "androidx/webkit/internal/IncompatibleApkWebViewProviderFactory.java",
+              "androidx/webkit/internal/ProxyControllerImpl.java",
+              "androidx/webkit/internal/SafeBrowsingResponseImpl.java",
+              "androidx/webkit/internal/ServiceWorkerClientAdapter.java",
+              "androidx/webkit/internal/ServiceWorkerControllerImpl.java",
+              "androidx/webkit/internal/ServiceWorkerWebSettingsImpl.java",
+              "androidx/webkit/internal/TracingControllerImpl.java",
+              "androidx/webkit/internal/VisualStateCallbackAdapter.java",
+              "androidx/webkit/internal/WebMessageAdapter.java",
+              "androidx/webkit/internal/WebMessageCallbackAdapter.java",
+              "androidx/webkit/internal/WebMessagePortImpl.java",
+              "androidx/webkit/internal/WebResourceErrorImpl.java",
+              "androidx/webkit/internal/WebResourceRequestAdapter.java",
+              "androidx/webkit/internal/WebSettingsAdapter.java",
+              "androidx/webkit/internal/WebViewFeatureInternal.java",
+              "androidx/webkit/internal/WebViewGlueCommunicator.java",
+              "androidx/webkit/internal/WebViewProviderAdapter.java",
+              "androidx/webkit/internal/WebViewProviderFactory.java",
+              "androidx/webkit/internal/WebViewProviderFactoryAdapter.java",
+              "androidx/webkit/internal/WebViewRenderProcessImpl.java",
+              "androidx/webkit/internal/WebkitToCompatConverter.java"
+            ]
+          },
+          {
+            "text": "Copyright 2018 The Chromium Authors",
+            "sourceFiles": [
+              "org/chromium/support_lib_boundary/FeatureFlagHolderBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/IsomorphicObjectBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/ProxyControllerBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/SafeBrowsingResponseBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/ServiceWorkerClientBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/ServiceWorkerControllerBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/ServiceWorkerWebSettingsBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/StaticsBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/TracingControllerBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/VisualStateCallbackBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/WebMessageBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/WebMessageCallbackBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/WebMessagePortBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/WebResourceErrorBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/WebResourceRequestBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/WebSettingsBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/WebViewClientBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/WebViewCookieManagerBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/WebViewProviderBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/WebViewProviderFactoryBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/WebViewRendererBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/WebViewRendererClientBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/WebkitToCompatConverterBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/package-info.java",
+              "org/chromium/support_lib_boundary/util/BoundaryInterfaceReflectionUtil.java",
+              "org/chromium/support_lib_boundary/util/Features.java"
+            ]
+          },
+          {
+            "text": "Copyright 2019 The Android Open Source Project",
+            "sourceFiles": [
+              "androidx/webkit/JavaScriptReplyProxy.java",
+              "androidx/webkit/WebViewAssetLoader.java",
+              "androidx/webkit/internal/AssetHelper.java",
+              "androidx/webkit/internal/JavaScriptReplyProxyImpl.java",
+              "androidx/webkit/internal/WebMessageListenerAdapter.java",
+              "androidx/webkit/internal/WebViewRenderProcessClientAdapter.java",
+              "androidx/webkit/internal/WebViewRenderProcessClientFrameworkAdapter.java",
+              "androidx/webkit/package-info.java"
+            ]
+          },
+          {
+            "text": "Copyright 2019 The Chromium Authors",
+            "sourceFiles": [
+              "org/chromium/support_lib_boundary/JsReplyProxyBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/WebMessageListenerBoundaryInterface.java"
+            ]
+          },
+          {
+            "text": "Copyright 2020 The Android Open Source Project",
+            "sourceFiles": [
+              "androidx/webkit/ScriptHandler.java",
+              "androidx/webkit/internal/ConditionallySupportedFeature.java",
+              "androidx/webkit/internal/ScriptHandlerImpl.java"
+            ]
+          },
+          {
+            "text": "Copyright 2020 The Chromium Authors",
+            "sourceFiles": [
+              "org/chromium/support_lib_boundary/ScriptHandlerBoundaryInterface.java"
+            ]
+          },
+          {
+            "text": "Copyright 2022 The Android Open Source Project",
+            "sourceFiles": [
+              "androidx/webkit/CookieManagerCompat.java",
+              "androidx/webkit/DropDataContentProvider.java",
+              "androidx/webkit/ProcessGlobalConfig.java",
+              "androidx/webkit/internal/ApiFeature.java",
+              "androidx/webkit/internal/ApiHelperForN.java",
+              "androidx/webkit/internal/ApiHelperForO.java",
+              "androidx/webkit/internal/ApiHelperForOMR1.java",
+              "androidx/webkit/internal/ApiHelperForP.java",
+              "androidx/webkit/internal/ApiHelperForQ.java",
+              "androidx/webkit/internal/ApiHelperForTiramisu.java",
+              "androidx/webkit/internal/CookieManagerAdapter.java",
+              "androidx/webkit/internal/StartupApiFeature.java",
+              "androidx/webkit/internal/StartupFeatures.java",
+              "androidx/webkit/internal/WebMessagePayloadAdapter.java"
+            ]
+          },
+          {
+            "text": "Copyright 2022 The Chromium Authors",
+            "sourceFiles": [
+              "org/chromium/support_lib_boundary/DropDataContentProviderBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/ProcessGlobalConfigConstants.java",
+              "org/chromium/support_lib_boundary/WebMessagePayloadBoundaryInterface.java"
+            ]
+          },
+          {
+            "text": "Copyright 2023 The Android Open Source Project",
+            "sourceFiles": [
+              "androidx/webkit/Profile.java",
+              "androidx/webkit/ProfileStore.java",
+              "androidx/webkit/URLUtilCompat.java",
+              "androidx/webkit/UserAgentMetadata.java",
+              "androidx/webkit/WebViewMediaIntegrityApiStatusConfig.java",
+              "androidx/webkit/internal/MimeUtil.java",
+              "androidx/webkit/internal/ProfileImpl.java",
+              "androidx/webkit/internal/ProfileStoreImpl.java",
+              "androidx/webkit/internal/UserAgentMetadataInternal.java"
+            ]
+          },
+          {
+            "text": "Copyright 2023 The Chromium Authors",
+            "sourceFiles": [
+              "org/chromium/support_lib_boundary/ProfileBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/ProfileStoreBoundaryInterface.java"
+            ]
+          },
+          {
+            "text": "Copyright 2024 The Android Open Source Project",
+            "sourceFiles": [
+              "androidx/webkit/NoVarySearchHeader.java",
+              "androidx/webkit/OutcomeReceiverCompat.java",
+              "androidx/webkit/PrefetchException.java",
+              "androidx/webkit/PrefetchNetworkException.java",
+              "androidx/webkit/PrerenderException.java",
+              "androidx/webkit/PrerenderOperationCallback.java",
+              "androidx/webkit/SpeculativeLoadingParameters.java",
+              "androidx/webkit/StartUpLocation.java",
+              "androidx/webkit/WebStorageCompat.java",
+              "androidx/webkit/WebViewStartUpConfig.java",
+              "androidx/webkit/WebViewStartUpResult.java",
+              "androidx/webkit/WebViewStartupException.java",
+              "androidx/webkit/internal/NoVarySearchHeaderAdapter.java",
+              "androidx/webkit/internal/PrefetchOperationCallbackAdapter.java",
+              "androidx/webkit/internal/SpeculativeLoadingParametersAdapter.java",
+              "androidx/webkit/internal/WebSettingsNoOpAdapter.java",
+              "androidx/webkit/internal/WebStorageAdapter.java",
+              "androidx/webkit/internal/WebViewStartUpCallbackAdapter.java",
+              "androidx/webkit/internal/WebViewStartUpConfigAdapter.java"
+            ]
+          },
+          {
+            "text": "Copyright 2024 The Chromium Authors",
+            "sourceFiles": [
+              "org/chromium/support_lib_boundary/NoVarySearchDataBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/PrefetchOperationCallbackBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/SpeculativeLoadingParametersBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/WebStorageBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/WebViewStartUpCallbackBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/WebViewStartUpConfigBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/WebViewStartUpResultBoundaryInterface.java"
+            ]
+          },
+          {
+            "text": "Copyright 2025 The Android Open Source Project",
+            "sourceFiles": [
+              "androidx/webkit/BackForwardCacheSettings.java",
+              "androidx/webkit/CustomHeader.java",
+              "androidx/webkit/Navigation.java",
+              "androidx/webkit/NavigationListener.java",
+              "androidx/webkit/Page.java",
+              "androidx/webkit/RestrictionAllowlist.java",
+              "androidx/webkit/SpeculativeLoadingConfig.java",
+              "androidx/webkit/WebResourceResponseCompat.java",
+              "androidx/webkit/WebViewBuilder.java",
+              "androidx/webkit/WebViewBuilderException.java",
+              "androidx/webkit/internal/NavigationListenerAdapter.java",
+              "androidx/webkit/internal/SpeculativeLoadingConfigAdapter.java",
+              "androidx/webkit/internal/WebViewStartupExceptionBuilder.java",
+              "androidx/webkit/internal/WebViewStartupResultImpl.java"
+            ]
+          },
+          {
+            "text": "Copyright 2025 The Chromium Authors",
+            "sourceFiles": [
+              "org/chromium/support_lib_boundary/OriginMatchedHeaderBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/SpeculativeLoadingConfigBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/WebViewBackForwardCacheSettingsBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/WebViewBuilderBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/WebViewNavigationBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/WebViewNavigationClientBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/WebViewNavigationListenerBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/WebViewPageBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/util/Contract.java"
+            ]
+          },
+          {
+            "text": "Copyright 2026 The Android Open Source Project",
+            "sourceFiles": [
+              "androidx/webkit/HttpCache.java",
+              "androidx/webkit/JavaScriptExecutionException.java",
+              "androidx/webkit/JavaScriptExecutionWorld.java",
+              "androidx/webkit/NavigationParameters.java",
+              "androidx/webkit/PrefetchCache.java",
+              "androidx/webkit/PrefetchParameters.java",
+              "androidx/webkit/PrefetchResult.java",
+              "androidx/webkit/PrerenderParameters.java",
+              "androidx/webkit/WebViewOutcomeReceiver.java",
+              "androidx/webkit/internal/NavigationParametersAdapter.java",
+              "androidx/webkit/internal/PrefetchOperationCallbackWithResultAdapter.java"
+            ]
+          },
+          {
+            "text": "Copyright 2026 The Chromium Authors",
+            "sourceFiles": [
+              "org/chromium/support_lib_boundary/ExecuteJavaScriptCallbackBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/HttpCacheBoundaryInterface.java",
+              "org/chromium/support_lib_boundary/NavigationParametersBoundaryInterface.java"
+            ]
+          }
+        ],
+        "noticeFiles": []
+      }
+    },
+    {
+      "component": "androidx.annotation:annotation-experimental:1.3.0",
+      "selectedScope": "runtime-and-compile",
+      "artifacts": [
+        {
+          "file": "annotation-experimental-1.3.0.aar",
+          "url": "https://dl.google.com/dl/android/maven2/androidx/annotation/annotation-experimental/1.3.0/annotation-experimental-1.3.0.aar",
+          "sizeBytes": 36019,
+          "sha256": "abfd29c8556e5bd0325a9f769ab9e9d154ff4a5515c476cdd5a2a8285b1b19dc",
+          "role": "binary",
+          "gradleVerification": "matches-recorded-sha256"
+        },
+        {
+          "file": "annotation-experimental-1.3.0.module",
+          "url": "https://dl.google.com/dl/android/maven2/androidx/annotation/annotation-experimental/1.3.0/annotation-experimental-1.3.0.module",
+          "sizeBytes": 3143,
+          "sha256": "5eebeaff01d042e06dcf292abf8964ad391e4b0159f0090f16253d6045d38da0",
+          "role": "Gradle module metadata",
+          "gradleVerification": "matches-recorded-sha256"
+        },
+        {
+          "file": "annotation-experimental-1.3.0.pom",
+          "url": "https://dl.google.com/dl/android/maven2/androidx/annotation/annotation-experimental/1.3.0/annotation-experimental-1.3.0.pom",
+          "sizeBytes": 1947,
+          "sha256": "ba2fe46f74f68851e234246193ab896c0c01fa094cd372c1051b6bf04d79b0bb",
+          "role": "publisher licensing/dependency metadata",
+          "gradleVerification": "audit-only-not-requested-in-recorded-graph"
+        },
+        {
+          "file": "annotation-experimental-1.3.0-sources.jar",
+          "url": "https://dl.google.com/dl/android/maven2/androidx/annotation/annotation-experimental/1.3.0/annotation-experimental-1.3.0-sources.jar",
+          "sizeBytes": 5545,
+          "sha256": "90ea2761129cfe76516171e6b26f7c016178b97828ddc85cdfdd5f6e83e40d35",
+          "role": "source header inspection only; not bundled implementation",
+          "gradleVerification": "audit-only-not-requested-in-recorded-graph"
+        }
+      ],
+      "sourceInspection": {
+        "sourceFileCount": 4,
+        "apacheHeaderFileCount": 4,
+        "bsdHeaderFileCount": 0,
+        "copyrightLines": [
+          {
+            "text": "Copyright 2019 The Android Open Source Project",
+            "sourceFiles": [
+              "androidx/annotation/OptIn.kt",
+              "androidx/annotation/experimental/Experimental.kt",
+              "androidx/annotation/experimental/UseExperimental.kt"
+            ]
+          },
+          {
+            "text": "Copyright 2020 The Android Open Source Project",
+            "sourceFiles": [
+              "androidx/annotation/RequiresOptIn.kt"
+            ]
+          }
+        ],
+        "noticeFiles": []
+      }
+    },
+    {
+      "component": "androidx.annotation:annotation-jvm:1.8.1",
+      "selectedScope": "compile-only-in-selected-app-graph",
+      "artifacts": [
+        {
+          "file": "annotation-jvm-1.8.1.jar",
+          "url": "https://dl.google.com/dl/android/maven2/androidx/annotation/annotation-jvm/1.8.1/annotation-jvm-1.8.1.jar",
+          "sizeBytes": 56126,
+          "sha256": "9aab326d9492800991854360ac248f493ce7f7c3183519309b78ace9e240f6f6",
+          "role": "binary",
+          "gradleVerification": "matches-recorded-sha256"
+        },
+        {
+          "file": "annotation-jvm-1.8.1.module",
+          "url": "https://dl.google.com/dl/android/maven2/androidx/annotation/annotation-jvm/1.8.1/annotation-jvm-1.8.1.module",
+          "sizeBytes": 3225,
+          "sha256": "c959e3b0cdc75c15efe01605fa56aa79f033e39238e150638b8fabde6aa121a0",
+          "role": "Gradle module metadata",
+          "gradleVerification": "matches-recorded-sha256"
+        },
+        {
+          "file": "annotation-jvm-1.8.1.pom",
+          "url": "https://dl.google.com/dl/android/maven2/androidx/annotation/annotation-jvm/1.8.1/annotation-jvm-1.8.1.pom",
+          "sizeBytes": 1826,
+          "sha256": "d49203733aa6fae046c3a3de4e796eed347595755486a64273989844759750b4",
+          "role": "publisher licensing/dependency metadata",
+          "gradleVerification": "audit-only-not-requested-in-recorded-graph"
+        },
+        {
+          "file": "annotation-jvm-1.8.1-sources.jar",
+          "url": "https://dl.google.com/dl/android/maven2/androidx/annotation/annotation-jvm/1.8.1/annotation-jvm-1.8.1-sources.jar",
+          "sizeBytes": 67324,
+          "sha256": "5add69d7bb907ade52823bf4b15730a1a32cfce6657bfbe7eb865b00107a6369",
+          "role": "source header inspection only; not bundled implementation",
+          "gradleVerification": "audit-only-not-requested-in-recorded-graph"
+        }
+      ],
+      "sourceInspection": {
+        "sourceFileCount": 70,
+        "apacheHeaderFileCount": 70,
+        "bsdHeaderFileCount": 0,
+        "copyrightLines": [
+          {
+            "text": "Copyright (C) 2013 The Android Open Source Project",
+            "sourceFiles": [
+              "jvmMain/androidx/annotation/NonNull.jvm.kt",
+              "jvmMain/androidx/annotation/Nullable.jvm.kt"
+            ]
+          },
+          {
+            "text": "Copyright (C) 2014 The Android Open Source Project",
+            "sourceFiles": [
+              "commonMain/androidx/annotation/IntDef.kt",
+              "commonMain/androidx/annotation/StringDef.kt",
+              "jvmMain/androidx/annotation/AnimRes.jvm.kt",
+              "jvmMain/androidx/annotation/AnimatorRes.jvm.kt",
+              "jvmMain/androidx/annotation/AnyRes.jvm.kt",
+              "jvmMain/androidx/annotation/ArrayRes.jvm.kt",
+              "jvmMain/androidx/annotation/AttrRes.jvm.kt",
+              "jvmMain/androidx/annotation/BoolRes.jvm.kt",
+              "jvmMain/androidx/annotation/ColorRes.jvm.kt",
+              "jvmMain/androidx/annotation/DimenRes.jvm.kt",
+              "jvmMain/androidx/annotation/DrawableRes.jvm.kt",
+              "jvmMain/androidx/annotation/FractionRes.jvm.kt",
+              "jvmMain/androidx/annotation/IdRes.jvm.kt",
+              "jvmMain/androidx/annotation/IntegerRes.jvm.kt",
+              "jvmMain/androidx/annotation/InterpolatorRes.jvm.kt",
+              "jvmMain/androidx/annotation/LayoutRes.jvm.kt",
+              "jvmMain/androidx/annotation/MenuRes.jvm.kt",
+              "jvmMain/androidx/annotation/PluralsRes.jvm.kt",
+              "jvmMain/androidx/annotation/RawRes.jvm.kt",
+              "jvmMain/androidx/annotation/StringRes.jvm.kt",
+              "jvmMain/androidx/annotation/StyleRes.jvm.kt",
+              "jvmMain/androidx/annotation/StyleableRes.jvm.kt",
+              "jvmMain/androidx/annotation/XmlRes.jvm.kt"
+            ]
+          },
+          {
+            "text": "Copyright (C) 2015 The Android Open Source Project",
+            "sourceFiles": [
+              "commonMain/androidx/annotation/CallSuper.kt",
+              "commonMain/androidx/annotation/CheckResult.kt",
+              "commonMain/androidx/annotation/ColorInt.kt",
+              "commonMain/androidx/annotation/FloatRange.kt",
+              "commonMain/androidx/annotation/IntRange.kt",
+              "commonMain/androidx/annotation/MainThread.kt",
+              "commonMain/androidx/annotation/Size.kt",
+              "commonMain/androidx/annotation/UiThread.kt",
+              "commonMain/androidx/annotation/VisibleForTesting.kt",
+              "jvmMain/androidx/annotation/BinderThread.jvm.kt",
+              "jvmMain/androidx/annotation/Keep.jvm.kt",
+              "jvmMain/androidx/annotation/RequiresPermission.jvm.kt",
+              "jvmMain/androidx/annotation/TransitionRes.jvm.kt",
+              "jvmMain/androidx/annotation/WorkerThread.jvm.kt"
+            ]
+          },
+          {
+            "text": "Copyright (C) 2016 The Android Open Source Project",
+            "sourceFiles": [
+              "commonMain/androidx/annotation/AnyThread.kt",
+              "commonMain/androidx/annotation/ProductionVisibility.kt",
+              "commonMain/androidx/annotation/RestrictTo.kt",
+              "jvmMain/androidx/annotation/Dimension.jvm.kt",
+              "jvmMain/androidx/annotation/DimensionUnit.jvm.kt",
+              "jvmMain/androidx/annotation/HalfFloat.jvm.kt",
+              "jvmMain/androidx/annotation/Px.jvm.kt",
+              "jvmMain/androidx/annotation/RequiresApi.jvm.kt",
+              "jvmMain/androidx/annotation/RestrictTo.jvm.kt"
+            ]
+          },
+          {
+            "text": "Copyright (C) 2017 The Android Open Source Project",
+            "sourceFiles": [
+              "commonMain/androidx/annotation/ColorLong.kt",
+              "commonMain/androidx/annotation/GuardedBy.kt",
+              "commonMain/androidx/annotation/LongDef.kt",
+              "jvmMain/androidx/annotation/FontRes.jvm.kt",
+              "jvmMain/androidx/annotation/NavigationRes.jvm.kt"
+            ]
+          },
+          {
+            "text": "Copyright (C) 2020 The Android Open Source Project",
+            "sourceFiles": [
+              "jvmMain/androidx/annotation/ChecksSdkIntAtLeast.jvm.kt",
+              "jvmMain/androidx/annotation/DoNotInline.jvm.kt"
+            ]
+          },
+          {
+            "text": "Copyright (C) 2021 The Android Open Source Project",
+            "sourceFiles": [
+              "commonMain/androidx/annotation/Discouraged.kt"
+            ]
+          },
+          {
+            "text": "Copyright (C) 2022 The Android Open Source Project",
+            "sourceFiles": [
+              "commonMain/androidx/annotation/EmptySuper.kt",
+              "commonMain/androidx/annotation/OpenForTesting.kt",
+              "commonMain/androidx/annotation/ReturnThis.kt",
+              "jvmMain/androidx/annotation/DeprecatedSinceApi.jvm.kt",
+              "jvmMain/androidx/annotation/RequiresExtension.jvm.kt"
+            ]
+          },
+          {
+            "text": "Copyright 2018 The Android Open Source Project",
+            "sourceFiles": [
+              "commonMain/androidx/annotation/RequiresFeature.kt"
+            ]
+          },
+          {
+            "text": "Copyright 2019 The Android Open Source Project",
+            "sourceFiles": [
+              "jvmMain/androidx/annotation/ContentView.jvm.kt",
+              "jvmMain/androidx/annotation/InspectableProperty.jvm.kt"
+            ]
+          },
+          {
+            "text": "Copyright 2021 The Android Open Source Project",
+            "sourceFiles": [
+              "jvmMain/androidx/annotation/DisplayContext.jvm.kt",
+              "jvmMain/androidx/annotation/GravityInt.jvm.kt",
+              "jvmMain/androidx/annotation/NonUiContext.jvm.kt",
+              "jvmMain/androidx/annotation/UiContext.jvm.kt"
+            ]
+          },
+          {
+            "text": "Copyright 2023 The Android Open Source Project",
+            "sourceFiles": [
+              "commonMain/androidx/annotation/RequiresApi.kt"
+            ]
+          },
+          {
+            "text": "Copyright 2024 The Android Open Source Project",
+            "sourceFiles": [
+              "jvmMain/androidx/annotation/ReplaceWith.jvm.kt"
+            ]
+          }
+        ],
+        "noticeFiles": []
+      }
+    }
+  ],
+  "constraints": {
+    "webkit-1.17.1": {
+      "minSdk": 24,
+      "minCompileSdk": 33,
+      "minAndroidGradlePluginVersion": "7.2.0",
+      "runtimeClassMajorVersion": 55,
+      "buildOnlyLintClassMajorVersion": 61,
+      "manifestPermissions": [],
+      "manifestComponents": [],
+      "chromiumRuntimeClassCount": 72,
+      "featureAvailability": "Installed WebView provider feature checks remain required; artifact inspection does not qualify device behavior."
+    },
+    "annotation-experimental-1.3.0": {
+      "minSdk": 14,
+      "minCompileSdk": 33,
+      "runtimeClassMajorVersion": 52,
+      "buildOnlyLintClassMajorVersion": 55,
+      "manifestPermissions": [],
+      "manifestComponents": []
+    },
+    "annotation-jvm-1.8.1": {
+      "runtimeClassMajorVersion": 52,
+      "selectedAppGraph": "Compile classpaths only. Runtime remains annotation-jvm:1.9.1; core:1.8.0 is unchanged."
+    }
+  },
+  "licenseEvidence": {
+    "apache": {
+      "sourceArchiveEntry": "META-INF/androidx/webkit/webkit/LICENSE.txt",
+      "binaryArchiveEntry": "META-INF/androidx/webkit/webkit/LICENSE.txt",
+      "bundledFile": "upstream/androidx-LICENSE.txt",
+      "sizeBytes": 10175,
+      "sha256": "809fa1ed21450f59827d1e9aec720bbc4b687434fa22283c6cb5dd82a47ab9c0",
+      "comparison": "Byte-identical between WebKit1.17.1 AAR, sources JAR and existing bundled AndroidX license."
+    },
+    "chromium": {
+      "url": "https://chromium.googlesource.com/chromium/src/+/42cba809c4a5e6eaaea5414a329803a3ff84307c/LICENSE",
+      "fetchUrl": "https://chromium.googlesource.com/chromium/src/+/42cba809c4a5e6eaaea5414a329803a3ff84307c/LICENSE?format=TEXT",
+      "upstreamCommit": "42cba809c4a5e6eaaea5414a329803a3ff84307c",
+      "upstreamBlob": "2249a28657f86c645f8978b75babc1bd52aca318",
+      "bundledFile": "terminal/chromium-LICENSE.txt",
+      "sizeBytes": 1536,
+      "sha256": "368cca1106be99d39ecd32a38d8305585d802a475effb66380b91ffc9bcf709b",
+      "license": "BSD-3-Clause",
+      "pinMeaning": "Pin of the exact upstream license text retrieved, not an assertion of the WebKit artifact build revision.",
+      "originExplanation": "https://android.googlesource.com/platform/external/webview_support_interfaces/+/850291e70a3b8a93bf174db05456da49f2f8ceaf/README.md"
+    },
+    "sourceCopyrights": {
+      "bundledFile": "terminal/androidx-copyrights.txt",
+      "sha256": "cd575043f01285dc9a5c266cc7a29b80a91ed752b3778a5f07dd14c49d4d47af",
+      "transformation": "Copyright lines from source headers with comment delimiters removed; duplicate lines collapsed within component. Per-file mappings retained in sourceInspection."
+    },
+    "noticeInspection": "No separate NOTICE/COPYING file found in the two new runtime AARs, nested classes.jar files or their sources archives. WebKit contains the Apache LICENSE entry. annotation-experimental contains no named license text; its four source headers and POM declare Apache-2.0."
+  },
+  "verificationBoundary": "Canonical fetched bytes matched all six artifact digests already present in Gradle verification metadata (three binaries and three modules). POM/source archives were additionally fetched for this audit and were not requested artifacts in that recorded graph. This collection does not record an APK hash or claim build/device acceptance; final APK packaging and byte equality are checked externally after assets freeze.",
+  "exclusions": [
+    "No upstream implementation source is copied into these assets.",
+    "The compile-only annotation-jvm:1.8.1 source copyright inventory is audit evidence, not an assertion that its runtime is bundled.",
+    "AAR lint.jar files are build tooling and excluded from runtime notices.",
+    "The installed Android System WebView implementation is not bundled by the AndroidX client dependency."
+  ]
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- The renderer is hosted by an app-owned Activity/View; it declares no component or permission. -->
+</manifest>

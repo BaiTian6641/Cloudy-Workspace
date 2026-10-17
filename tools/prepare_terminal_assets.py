@@ -29,6 +29,7 @@ ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "qualification/probes/device-baseline/terminal-assets.json"
 CACHE_ROOT = ROOT / ".cache/terminal-assets"
 OUTPUT_ROOT = ROOT / "qualification/probes/device-baseline/app/build/generated/terminalAssets"
+PRODUCT_OUTPUT_ROOT = ROOT / "shared/android/terminal/build/generated/terminalAssets"
 PROVENANCE_PATH = "terminal/notices/provenance.json"
 MAX_ARCHIVE_BYTES = 8 * 1024 * 1024
 MAX_EXPANDED_BYTES = 32 * 1024 * 1024
@@ -353,14 +354,18 @@ def prepare_assets(manifest, cache, output, *, repository=ROOT, check=False, off
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output", type=Path, default=OUTPUT_ROOT)
+    parser.add_argument("--output", type=Path, default=None,
+                        help="Explicit output under the selected approved root")
+    parser.add_argument("--product", action="store_true",
+                        help="Prepare the product terminal module assets instead of the diagnostic probe")
     parser.add_argument("--cache", type=Path, default=CACHE_ROOT)
     modes = parser.add_mutually_exclusive_group()
     modes.add_argument("--check", action="store_true", help="Offline read-only verification; fail if any input/output is missing")
     modes.add_argument("--offline", action="store_true", help="Prepare from the pinned cache without downloading")
     args = parser.parse_args(argv)
     try:
-        output = cli_path(args.output, OUTPUT_ROOT)
+        permitted = PRODUCT_OUTPUT_ROOT if args.product else OUTPUT_ROOT
+        output = cli_path(args.output if args.output is not None else permitted, permitted)
         cache = cli_path(args.cache, CACHE_ROOT)
         manifest = validate_manifest(parse_json(read_regular(MANIFEST, MANIFEST_LIMIT)))
         result = prepare_assets(manifest, cache, output, check=args.check, offline=args.offline)
