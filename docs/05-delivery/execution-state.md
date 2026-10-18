@@ -6,7 +6,7 @@
 
 ## 2026-10-18 — Files engine and action UI handoff
 
-**Branch:** `codex/console-r1-implementation`, pushed at `a6eb8e0e766b057e57579c7abd7ee6e2458891ed` (origin equality observed). Four reviewed commits advance C18/M4; C18 and full R1 remain partial.
+**Branch:** `codex/console-r1-implementation`, pushed at `a6eb8e0e766b057e57579c7abd7ee6e2458891ed` (origin equality observed). Reviewed commits advance C18/M4; C18 and full R1 remain partial.
 
 - `c39b4a1` — `SshFiles` writable engine: bounded stat, exclusive create, 1 MiB chunked write, explicit-overwrite rename, file/empty-directory removal and typed recoverable failures; the tracked MINA fixture serves a real `sshd-sftp` subsystem from a private virtual root. [Host evidence](../../qualification/results/P1-S3/2026-10-18-sftp-writable-engine.md) records 2/2 real-server methods, the preserved host-root construction failure and the corrected virtual-root run.
 - `5cc180d` — inherited Android Lint `UseKtx` repair for the persisted key reference; `:platform:lintDebug` and `:console:lintDebug` pass with zero findings.
