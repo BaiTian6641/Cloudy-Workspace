@@ -64,6 +64,7 @@ internal fun ProfileEditorScreen(
     reviewed: ConnectionProfileEntry?,
     onRefresh: () -> Unit,
     onNew: () -> Unit,
+    onImport: () -> Unit,
     onEdit: (ConnectionProfile) -> Unit,
     onDraftChange: (ProfileEditorDraft) -> Unit,
     onSave: () -> Unit,
@@ -127,6 +128,10 @@ internal fun ProfileEditorScreen(
                 ProfileActions {
                     ProfileButton(R.string.profile_refresh, "profile_refresh", !busy, onRefresh)
                     ProfileButton(R.string.profile_new, "profile_new", !busy && !outcomeUnknown && catalog != null, onNew)
+                    if (owner == WindowOwner.CONSOLE) {
+                        ProfileButton(R.string.profile_import, "profile_import",
+                            !busy && !outcomeUnknown && catalog != null && draft == null, onImport)
+                    }
                     ProfileButton(R.string.profile_finish, "profile_finish", !busy, onFinish)
                 }
             }

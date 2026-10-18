@@ -113,6 +113,9 @@ Therefore an earlier SSH/PTY/UI increment is a partial construction milestone. I
 
 ### M7 — Final R1 candidate and independent release evidence
 
+- **C15 follow-up result so far:** a declared non-secret SSH-config parser and real app-private import batch are implemented and tested (parser 6/6, Android SQLite import 2/2); the complete import-screen click-through remains. User/key paths and unsupported directives are deliberately not guessed.
+
+
 - **Stages/dependencies:** P2-S5 only after P2-S4/S6/S7; CAP-PLATFORM required.
 - **Changes:** qualified agent CLI matrix, optional composer/newline policy, previewed non-secret SSH-config import (C15 follow-up), setup/support/notices and recovery documentation.
 - **Checks:** Q-C01 through Q-C10, Q-C06 full coding day, Q-R01/Q-R02 signed install/update/migration/recovery, and ten working days on the exact candidate.

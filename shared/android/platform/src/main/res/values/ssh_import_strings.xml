@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ssh_import_heading">Import SSH config</string>
+    <string name="ssh_import_scope">Preview a declared non-secret subset and create ordinary SSH profiles. Nothing is connected, executed or saved as a credential.</string>
+    <string name="ssh_import_subset">Supported: Host aliases, HostName and Port. User, IdentityFile, ProxyJump, forwards, Match, Include and other directives are reported as unsupported and are never imported.</string>
+    <string name="ssh_import_open_file">Open config file</string>
+    <string name="ssh_import_text">Paste SSH config</string>
+    <string name="ssh_import_preview_action">Preview</string>
+    <string name="ssh_import_apply">Import profiles</string>
+    <string name="ssh_import_close">Close</string>
+    <string name="ssh_import_entries">Profiles to import: %1$d</string>
+    <string name="ssh_import_entry">%1$s → %2$s:%3$d</string>
+    <string name="ssh_import_issues">Unsupported or skipped lines: %1$d</string>
+    <string name="ssh_import_issue">Line %1$d · %2$s · %3$s</string>
+    <string name="ssh_import_truncated">Input exceeded the 64 KiB or 64-profile import bound; the preview is truncated.</string>
+    <string name="ssh_import_done">Import completed. Profiles created: %1$d</string>
+    <string name="ssh_import_stopped">Import stopped: %2$s. Profiles created before stopping: %1$d. Existing profiles were preserved.</string>
+</resources>

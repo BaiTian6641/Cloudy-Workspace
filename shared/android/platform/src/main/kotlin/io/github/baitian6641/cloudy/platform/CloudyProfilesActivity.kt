@@ -48,6 +48,7 @@ class CloudyProfilesActivity : ComponentActivity() {
     private var confirmation by mutableStateOf<Confirmation?>(null)
     private var interactive = false
     private var disposed = false
+    private var importRefresh = false
 
     private class Confirmation(
         val title: Int, val body: Int, val accept: Int,
@@ -83,6 +84,12 @@ class CloudyProfilesActivity : ComponentActivity() {
                     catalog = catalog, draft = draft, busy = busy, message = message,
                     outcomeUnknown = pendingMutation && !busy, reviewed = reviewed,
                     onRefresh = { if (canInteract()) refresh() }, onNew = ::newProfile,
+                    onImport = {
+                        if (canInteract() && draft == null && owner == WindowOwner.CONSOLE) {
+                            importRefresh = true
+                            startActivity(android.content.Intent(this, CloudySshConfigImportActivity::class.java))
+                        }
+                    },
                     onEdit = ::editProfile, onDraftChange = ::changeDraft, onSave = ::save,
                     onCloseEditor = { leaveEditor {} }, onDelete = ::delete,
                     onReview = ::reviewCurrent, onReapply = ::reapply,
@@ -141,7 +148,14 @@ class CloudyProfilesActivity : ComponentActivity() {
         refresh(preserveMessage = true)
     }
 
-    override fun onResume() { super.onResume(); interactive = true }
+    override fun onResume() {
+        super.onResume()
+        interactive = true
+        if (importRefresh) {
+            importRefresh = false
+            if (draft == null) refresh(preserveMessage = true)
+        }
+    }
     override fun onPause() {
         interactive = false
         confirmation = null // Approval is tied to this visible presentation, never restored.
