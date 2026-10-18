@@ -4,6 +4,20 @@
 
 **Updated:** 2026-10-18, America/Chicago. **Current status: active Console implementation after explicit resume.** The user requires full **Cloudy Console R1**, emulator-first functionality/UX, Termius-inspired desktop organization with Cloudy tokens, detailed **`deepseek/deepseek-flash`** cooperation and parent review. Continue `codex/console-r1-implementation` without discarding inherited work. The [plan](console-r1-implementation-plan.md), [C01–C20 matrix](console-r1-requirements.md), P2-S6/P2-S7 before final P2-S5 and app-scoped acceptance remain unchanged. M1/M2 are bounded completed milestones; M3 and full R1 remain incomplete. Parent owns integration, shared resources, acceptance and reviewed Git publication.
 
+## 2026-10-18 — Files engine and action UI handoff
+
+**Branch:** `codex/console-r1-implementation`, pushed at `ad4f84ce34f86a31f5619ed51733d9348c5ac6ff` (origin equality observed). Three reviewed commits advance C18/M4; C18 and full R1 remain partial.
+
+- `c39b4a1` — `SshFiles` writable engine: bounded stat, exclusive create, 1 MiB chunked write, explicit-overwrite rename, file/empty-directory removal and typed recoverable failures; the tracked MINA fixture serves a real `sshd-sftp` subsystem from a private virtual root. [Host evidence](../../qualification/results/P1-S3/2026-10-18-sftp-writable-engine.md) records 2/2 real-server methods, the preserved host-root construction failure and the corrected virtual-root run.
+- `5cc180d` — inherited Android Lint `UseKtx` repair for the persisted key reference; `:platform:lintDebug` and `:console:lintDebug` pass with zero findings.
+- `ad4f84c` — Files screen new-folder, inline rename, consent-gated delete and collision→explicit-replace consent through the engine. [Emulator evidence](../../qualification/results/P2-S7/2026-10-18-console-files-actions-emulator.md) covers the actual workflow and exact replaced content; APK `ce3c3339…` was installed on the API 37 emulator.
+
+**Checks run:** `python3 tools/check_ast.py`, `.venv/bin/ruff check .`, `python3 tools/validate_project.py`; `:ssh:test` (97 tests, 0 failures, 38 opt-in skips); `:platform:testDebugUnitTest`; `:platform:lintDebug`; `:console:lintDebug`; `:console:assembleDebug`. The writable host test was rerun with the explicit fixture root and passed 2/2.
+
+**Working tree:** only inherited untracked probes under `qualification/probes/native-stream/.../input` and `qualification/probes/ssh-pty-host/` remain; no task-related source is unstaged. The earlier modified `SshX11Forwarding.kt` is no longer present as a working-tree change; no commit in this session included it.
+
+**Next task:** implement the persistent transfer journal and staged-edit/upload/download path for C18/Q-C09 (D05/D06/D09): define the app-owned journal states and crash rules, add a URI-grant-aware local↔remote copy with bounded chunks and explicit overwrite/directory decisions, then drive it through the Files UI and real fixture. Start from `shared/android/ssh/.../SshFiles.kt`, `shared/android/platform/.../SshFilesSessionModel.kt`, `SshFilesScreen.kt`, and the evidence boundaries above. Do not claim Q-C09 from the current host/emulator slices.
+
 ## 2026-10-17 — Console R1 implementation (resumed after review pause)
 
 **Branch:** `codex/console-r1-implementation`. **Review/plan:** all requested references exist; no missing-document waiver. [The plan](console-r1-implementation-plan.md) reconciles P2-S5 as the final gate with P2-S6/S7 prerequisites and maps every C01–C20 row to source/evidence/status in [the requirements matrix](console-r1-requirements.md). The stale right-click acceptance row was corrected to the already adopted paste default.
