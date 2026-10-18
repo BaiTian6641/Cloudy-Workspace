@@ -27,7 +27,7 @@ that step, so the screen's complete click-through remains open.
 | --- | --- |
 | `SshConfigImporterTest` (JVM) | **6/6**: Host/HostName/Port/quotes/comments, defaults, wildcard/existing/duplicates, unsupported directives without value leakage, malformed entries, bounds |
 | `SshConfigImportStoreTest` (Android instrumentation, real SQLite) | **2/2**: two profiles created from parser output with expected labels/hosts/ports/tags and no key/jump reference; existing label skipped and existing profile preserved |
-| UI | Import screen, file picker, loaded config text, entry/unsupported preview rendering and action enablement compile and were observed up to the preview. The final Import button tap was not observed because the emulator foregrounded an unrelated app; the same batch logic is the instrumented path above. |
+| UI | Import screen, file picker and loaded config text were observed; action enablement compiles. The Preview/Import click-through was interrupted when the emulator foregrounded an unrelated app, so preview rendering and the final import tap were not visually observed. The same batch logic is the instrumented path above. |
 | Build/Lint | Console debug assembly and platform/Console Lint pass with zero findings |
 
 ## Remaining
