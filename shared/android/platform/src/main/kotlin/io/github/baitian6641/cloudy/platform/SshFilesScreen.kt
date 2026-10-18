@@ -19,6 +19,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.TextFieldValue
 import io.github.baitian6641.cloudy.design.CloudyControlMetrics
 import io.github.baitian6641.cloudy.domain.ConnectionProfile
@@ -38,6 +39,10 @@ internal fun SshFilesScreen(
     onList: (String) -> Unit, onRead: (SshFileEntry) -> Unit,
     onCreateDirectory: (String) -> Unit, onRename: (SshFileEntry, String) -> Unit,
     onRequestDelete: (SshFileEntry) -> Unit, onConfirmMutation: () -> Unit, onCancelMutation: () -> Unit,
+    onEdit: (SshFileEntry) -> Unit, onEditorText: (String) -> Unit, onRequestSave: () -> Unit,
+    onCancelSave: () -> Unit, onConfirmSave: () -> Unit, onConfirmConflict: () -> Unit,
+    onDiscardStaged: () -> Unit, onRequestCloseEditor: () -> Unit, onCancelCloseEditor: () -> Unit,
+    onConfirmCloseEditor: () -> Unit,
     onDisconnect: () -> Unit, onClose: () -> Unit,
     onLocations: () -> Unit, onRegister: (FilesListingCandidate, String) -> Unit,
     onCancelRegistration: (FilesListingCandidate) -> Unit,
@@ -45,7 +50,8 @@ internal fun SshFilesScreen(
 ) {
     val canConnect = interactive && !state.registrationPending && state.phase in setOf(SshFilesPhase.IDLE, SshFilesPhase.FAILED)
     val canBrowse = interactive && !state.registrationPending && state.phase == SshFilesPhase.CONNECTED
-    val canMutate = canBrowse && state.mutationConsent == null
+    val canNavigate = canBrowse && state.editor == null
+    val canMutate = canNavigate && state.mutationConsent == null
     // This proposal belongs to one completed listing only. No rememberSaveable, Intent or
     // restored field can resurrect its authority after focus/lifecycle invalidation.
     var confirming by remember(state.registrationCandidate, interactive) { mutableStateOf(false) }
@@ -67,7 +73,8 @@ internal fun SshFilesScreen(
     val pathIndex = 2 + (if (state.selected != null) 1 else 0) + (if (hasForm) 3 else 0) + (if (hasPermission) 1 else 0)
     val previewIndex = pathIndex + if (hasBrowser) 5 + state.entries.size +
         (if (state.entries.isEmpty() && state.phase == SshFilesPhase.CONNECTED) 1 else 0) +
-        (if (state.mutationConsent != null) 1 else 0) else 0
+        (if (state.mutationConsent != null) 1 else 0) + (if (state.editor != null) 1 else 0) +
+        (if (state.transfers.isNotEmpty()) 1 else 0) else 0
     // Reveal completed navigation/preview once; never move focus/scroll on a field keystroke.
     LaunchedEffect(state.path, hasBrowser, state.preview) {
         if (state.preview != null) scroll.scrollToItem(previewIndex)
@@ -202,9 +209,94 @@ internal fun SshFilesScreen(
                     item(key = "browse-actions") {
                         FlowRow(horizontalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall),
                             verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
-                            FilesButton(R.string.ssh_files_list_path, "ssh_files_list_path", canBrowse && pathDraft.text.isNotEmpty()) { onList(pathDraft.text) }
-                            FilesButton(R.string.ssh_files_refresh, "ssh_files_refresh", canBrowse) { onList(state.path) }
-                            FilesButton(R.string.ssh_files_parent, "ssh_files_parent", canBrowse && state.path != "/") { onList(remoteParent(state.path)) }
+                            FilesButton(R.string.ssh_files_list_path, "ssh_files_list_path", canNavigate && pathDraft.text.isNotEmpty()) { onList(pathDraft.text) }
+                            FilesButton(R.string.ssh_files_refresh, "ssh_files_refresh", canNavigate) { onList(state.path) }
+                            FilesButton(R.string.ssh_files_parent, "ssh_files_parent", canNavigate && state.path != "/") { onList(remoteParent(state.path)) }
+                        }
+                    }
+                    state.editor?.let { view -> item(key = "editor") {
+                        Surface(Modifier.fillMaxWidth().testTag("ssh_files_editor"),
+                            color = MaterialTheme.colorScheme.surfaceContainer,
+                            shape = RoundedCornerShape(CloudyControlMetrics.dialogRadius)) {
+                            Column(Modifier.padding(CloudyControlMetrics.spaceLarge),
+                                verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                                Text(stringResource(R.string.ssh_files_editor_heading), style = MaterialTheme.typography.titleLarge,
+                                    modifier = Modifier.semantics { heading() })
+                                SelectionContainer { Text(view.path) }
+                                OutlinedTextField(view.text, onEditorText,
+                                    enabled = !view.busy && !view.saveConsent && !view.discardConsent && !view.conflict,
+                                    textStyle = MaterialTheme.typography.bodyMedium.copy(fontFamily = FontFamily.Monospace),
+                                    minLines = 8, maxLines = 20,
+                                    shape = RoundedCornerShape(CloudyControlMetrics.fieldRadius),
+                                    modifier = Modifier.fillMaxWidth().testTag("ssh_files_editor_text"))
+                                if (view.dirty) Text(stringResource(R.string.ssh_files_editor_unsaved),
+                                    modifier = Modifier.testTag("ssh_files_editor_dirty"))
+                                view.code?.let { Text(stringResource(R.string.ssh_files_code, it),
+                                    modifier = Modifier.testTag("ssh_files_editor_code").semantics { liveRegion = LiveRegionMode.Polite }) }
+                                FlowRow(horizontalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall),
+                                    verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                                    FilesButton(R.string.ssh_files_editor_save, "ssh_files_editor_save",
+                                        view.dirty && !view.busy && !view.saveConsent && !view.discardConsent && !view.conflict) { onRequestSave() }
+                                    FilesButton(R.string.ssh_files_editor_close, "ssh_files_editor_close", !view.busy) { onRequestCloseEditor() }
+                                }
+                                if (view.saveConsent) Surface(Modifier.fillMaxWidth().testTag("ssh_files_save_confirmation"),
+                                    color = MaterialTheme.colorScheme.surface,
+                                    shape = RoundedCornerShape(CloudyControlMetrics.dialogRadius)) {
+                                    Column(Modifier.padding(CloudyControlMetrics.spaceLarge),
+                                        verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceMedium)) {
+                                        Text(stringResource(R.string.ssh_files_save_confirm_heading), style = MaterialTheme.typography.titleLarge,
+                                            modifier = Modifier.semantics { heading() })
+                                        Text(stringResource(R.string.ssh_files_save_confirm_body, view.path))
+                                        FlowRow(horizontalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall),
+                                            verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                                            FilesButton(R.string.ssh_files_editor_replace, "ssh_files_save_confirm", !view.busy) { onConfirmSave() }
+                                            FilesButton(R.string.ssh_files_cancel, "ssh_files_save_cancel", true) { onCancelSave() }
+                                        }
+                                    }
+                                }
+                                if (view.conflict) Surface(Modifier.fillMaxWidth().testTag("ssh_files_conflict"),
+                                    color = MaterialTheme.colorScheme.surface,
+                                    shape = RoundedCornerShape(CloudyControlMetrics.dialogRadius)) {
+                                    Column(Modifier.padding(CloudyControlMetrics.spaceLarge),
+                                        verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceMedium)) {
+                                        Text(stringResource(R.string.ssh_files_conflict_heading), style = MaterialTheme.typography.titleLarge,
+                                            modifier = Modifier.semantics { heading() })
+                                        Text(stringResource(R.string.ssh_files_conflict_body))
+                                        FlowRow(horizontalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall),
+                                            verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                                            FilesButton(R.string.ssh_files_editor_replace, "ssh_files_conflict_replace", !view.busy) { onConfirmConflict() }
+                                            FilesButton(R.string.ssh_files_editor_discard_staged, "ssh_files_conflict_discard", !view.busy) { onDiscardStaged() }
+                                        }
+                                    }
+                                }
+                                if (view.discardConsent) Surface(Modifier.fillMaxWidth().testTag("ssh_files_discard_confirmation"),
+                                    color = MaterialTheme.colorScheme.surface,
+                                    shape = RoundedCornerShape(CloudyControlMetrics.dialogRadius)) {
+                                    Column(Modifier.padding(CloudyControlMetrics.spaceLarge),
+                                        verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceMedium)) {
+                                        Text(stringResource(R.string.ssh_files_editor_discard_heading), style = MaterialTheme.typography.titleLarge,
+                                            modifier = Modifier.semantics { heading() })
+                                        Text(stringResource(R.string.ssh_files_editor_discard_body))
+                                        FlowRow(horizontalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall),
+                                            verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                                            FilesButton(R.string.ssh_files_editor_discard, "ssh_files_discard_confirm", !view.busy) { onConfirmCloseEditor() }
+                                            FilesButton(R.string.ssh_files_cancel, "ssh_files_discard_cancel", true) { onCancelCloseEditor() }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } }
+                    if (state.transfers.isNotEmpty()) item(key = "transfers") {
+                        Column(Modifier.fillMaxWidth().testTag("ssh_files_transfers"),
+                            verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                            Text(stringResource(R.string.ssh_files_transfers_heading), style = MaterialTheme.typography.titleLarge,
+                                modifier = Modifier.semantics { heading() })
+                            Text(stringResource(R.string.ssh_files_transfers_scope))
+                            state.transfers.forEach { record ->
+                                Text(stringResource(transferLabel(record.state), record.path),
+                                    modifier = Modifier.testTag("ssh_files_transfer_${record.id}"))
+                            }
                         }
                     }
                     item(key = "registration") {
@@ -281,7 +373,10 @@ internal fun SshFilesScreen(
                                         SshFileKind.DIRECTORY -> FilesButton(R.string.ssh_files_open, "ssh_files_open_$index", canBrowse) {
                                             onList(remoteChild(state.path, entry.name))
                                         }
-                                        SshFileKind.REGULAR -> FilesButton(R.string.ssh_files_read, "ssh_files_read_$index", canBrowse) { onRead(entry) }
+                                        SshFileKind.REGULAR -> {
+                                            FilesButton(R.string.ssh_files_read, "ssh_files_read_$index", canBrowse && state.editor == null) { onRead(entry) }
+                                            FilesButton(R.string.ssh_files_edit, "ssh_files_edit_$index", canMutate) { onEdit(entry) }
+                                        }
                                         SshFileKind.OTHER -> Text(stringResource(R.string.ssh_files_other_unsupported))
                                     }
                                     FilesButton(R.string.ssh_files_rename, "ssh_files_rename_$index", canMutate) {
@@ -401,6 +496,14 @@ private fun phaseLabel(phase: SshFilesPhase): Int = when (phase) {
     SshFilesPhase.MUTATING -> R.string.ssh_files_mutating
     SshFilesPhase.RETIRING -> R.string.ssh_files_retiring
     SshFilesPhase.FAILED -> R.string.ssh_files_failed
+}
+private fun transferLabel(state: FilesTransferState): Int = when (state) {
+    FilesTransferState.STAGED -> R.string.ssh_files_transfer_staged
+    FilesTransferState.COMMITTING -> R.string.ssh_files_transfer_committing
+    FilesTransferState.COMMITTED -> R.string.ssh_files_transfer_committed
+    FilesTransferState.CONFLICT -> R.string.ssh_files_transfer_conflict
+    FilesTransferState.FAILED -> R.string.ssh_files_transfer_failed
+    FilesTransferState.UNCERTAIN -> R.string.ssh_files_transfer_uncertain
 }
 private fun kindLabel(kind: SshFileKind): Int = when (kind) {
     SshFileKind.REGULAR -> R.string.ssh_files_regular

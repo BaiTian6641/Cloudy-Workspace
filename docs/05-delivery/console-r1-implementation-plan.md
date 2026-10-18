@@ -93,8 +93,8 @@ Therefore an earlier SSH/PTY/UI increment is a partial construction milestone. I
 - **Result so far:** public-key, single-prompt keyboard-interactive and one-hop jump admission are qualified; the
   [writable SFTP engine host slice](../../qualification/results/P1-S3/2026-10-18-sftp-writable-engine.md) adds exclusive
   create/bounded write/rename/removal with recoverable typed failures, and the Files screen's create/rename/delete/replace-consent
-  actions pass an emulator workflow. Transfer journal, integrity, staged edit, upload/download, physical input and Q-C09 remain;
-  M4 is in progress.
+  actions pass an emulator workflow. Two-phase staged edit with conflict/explicit-replace approval and a bounded persistent journal are host/emulator-qualified;
+  upload/download, integrity, physical input and Q-C09 remain. M4 is in progress.
 
 ### M5 — Layouts, durable sessions, attachments, and forwards
 

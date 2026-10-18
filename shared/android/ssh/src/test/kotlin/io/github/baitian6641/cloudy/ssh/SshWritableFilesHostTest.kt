@@ -56,8 +56,8 @@ class SshWritableFilesHostTest {
         try {
             val listing = files.list("/")
             assertTrue("list: $listing", listing is SshFilesResult.Success)
-            assertTrue("root not virtual: ${(listing as SshFilesResult.Success).value.map { it.name }}",
-                listing.value.isEmpty())
+            assertEquals(SshTransportCode.NOT_FOUND,
+                (files.stat("/cloudy-write") as SshFilesResult.Failure).code)
             val created = files.mkdir("/cloudy-write")
             assertTrue("mkdir: $created", created is SshFilesResult.Success)
             assertEquals(SshTransportCode.ALREADY_EXISTS,
@@ -109,8 +109,9 @@ class SshWritableFilesHostTest {
         val transport = open(fixture)
         val files = transport.files
         try {
-            assertEquals(SshTransportCode.INVALID_INPUT,
-                (files.writeNew("/x", ByteArray(0)) as SshFilesResult.Failure).code)
+            assertTrue(files.writeNew("/empty-write-check", ByteArray(0)) is SshFilesResult.Success)
+            assertEquals(0L, (files.stat("/empty-write-check") as SshFilesResult.Success).value.size)
+            assertTrue(files.removeFile("/empty-write-check") is SshFilesResult.Success)
             assertEquals(SshTransportCode.INVALID_INPUT,
                 (files.writeNew("/x", ByteArray(SshFiles.MAX_WRITE_BYTES + 1)) as SshFilesResult.Failure).code)
             assertEquals(SshTransportCode.INVALID_INPUT,

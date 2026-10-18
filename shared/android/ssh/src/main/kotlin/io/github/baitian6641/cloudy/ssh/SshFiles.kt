@@ -18,6 +18,8 @@ sealed interface SshFilesResult<out T> {
 }
 enum class SshFileKind { REGULAR, DIRECTORY, OTHER }
 class SshFileEntry internal constructor(val name: String, val kind: SshFileKind, val size: Long?) {
+    /** Verified post-save size update for the same remote leaf; identity/name/kind are unchanged. */
+    fun withSize(size: Long?): SshFileEntry = SshFileEntry(name, kind, size)
     override fun toString() = "SshFileEntry(redacted)"
 }
 class SshFileBytes internal constructor(bytes: ByteArray) {
@@ -124,7 +126,7 @@ class SshFiles internal constructor(private val transport: SshAuthenticatedTrans
 
     /** Exclusive create of a bounded regular file; never overwrites an existing path. */
     fun writeNew(path: String, bytes: ByteArray, timeoutMillis: Int = 5_000): SshFilesResult<Unit> {
-        if (!SshFileLimits.path(path) || bytes.size !in 1..MAX_WRITE_BYTES) {
+        if (!SshFileLimits.path(path) || bytes.size !in 0..MAX_WRITE_BYTES) {
             return SshFilesResult.Failure(SshTransportCode.INVALID_INPUT)
         }
         val owned = bytes.copyOf()

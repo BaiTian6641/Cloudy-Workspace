@@ -25,6 +25,7 @@ import io.github.baitian6641.cloudy.ssh.SshFileEntry
 import io.github.baitian6641.cloudy.ssh.SshFileKind
 import io.github.baitian6641.cloudy.ssh.SshFilesResult
 import io.github.baitian6641.cloudy.ssh.SshFiles
+import io.github.baitian6641.cloudy.ssh.SshFileEditor
 import io.github.baitian6641.cloudy.ssh.SshPasswordCredentials
 import io.github.baitian6641.cloudy.ssh.SshTransportCloseResult
 import io.github.baitian6641.cloudy.ssh.SshTransportCode
@@ -57,6 +58,18 @@ internal class FilesListingCandidate internal constructor(
 
 internal enum class SshFilesMutationKind { DELETE_FILE, DELETE_DIRECTORY, OVERWRITE_RENAME }
 
+/** Presentation copy only; the original bytes/version stay in the model-owned editor context. */
+internal class SshEditorView internal constructor(
+    val name: String, val path: String, val text: String, val dirty: Boolean, val busy: Boolean,
+    val conflict: Boolean, val saveConsent: Boolean, val discardConsent: Boolean, val code: String?,
+) {
+    internal fun next(text: String = this.text, dirty: Boolean = this.dirty, busy: Boolean = this.busy,
+                      conflict: Boolean = this.conflict, saveConsent: Boolean = this.saveConsent,
+                      discardConsent: Boolean = this.discardConsent, code: String? = this.code) =
+        SshEditorView(name, path, text, dirty, busy, conflict, saveConsent, discardConsent, code)
+    override fun toString() = "SshEditorView(redacted)"
+}
+
 /** Exact model-issued consent for one destructive/overwrite action on the current listing. */
 internal class SshFilesMutationConsent internal constructor(
     val kind: SshFilesMutationKind, val parentPath: String, val entry: SshFileEntry,
@@ -80,6 +93,8 @@ internal data class SshFilesSessionState(
     val registrationCode: String? = null,
     val registrationSaved: FilesResourceRegistration? = null,
     val mutationConsent: SshFilesMutationConsent? = null,
+    val editor: SshEditorView? = null,
+    val transfers: List<FilesTransferRecord> = emptyList(),
 ) {
     override fun toString() = "SshFilesSessionState(${phase.name},redacted)"
 }
@@ -107,6 +122,14 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
     private class ListingContext(val candidate: FilesListingCandidate, val session: FilesSession,
         val proof: SshAuthenticatedOwnership, val handle: SshAuthenticationHandle,
         val owner: Any, val epoch: Long, val storeGeneration: String)
+    private class EditorContext(
+        val profileId: String, val profileRevision: Int, val parentPath: String,
+        val document: SshFileEditor.Document, val originalText: String,
+    ) {
+        var staged: SshFileEditor.Staged? = null
+        var recordId: String? = null
+    }
+    private var editorContext: EditorContext? = null
 
 
     fun onOwnerStarted(token: Any) {
@@ -201,6 +224,7 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
         state = state.copy(location = null, selected = SshObservationProfile.create(catalog.generation, exact),
             path = ".", entries = emptyList(), preview = null, code = null, fingerprint = null,
             permissionNeeded = false, phase = SshFilesPhase.IDLE)
+        loadTransfers()
     }
 
     /** Restored metadata is uncertainty only, never approval, a candidate or a replayable write. */
@@ -225,9 +249,12 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
                 FilesRuntime.main.post {
                     if (!cleared && generation == version && session == null) {
                         state = when {
-                            selected is FilesResourceResult.Success && catalog is ConnectionProfilesResult.Success ->
-                                state.copy(catalog = catalog.value, selected = selected.value.profile,
+                            selected is FilesResourceResult.Success && catalog is ConnectionProfilesResult.Success -> {
+                                state = state.copy(catalog = catalog.value, selected = selected.value.profile,
                                     location = selected.value, path = selected.value.navigationRoot, phase = SshFilesPhase.IDLE)
+                                loadTransfers()
+                                state
+                            }
                             selected is FilesResourceResult.Failure -> state.copy(phase = SshFilesPhase.FAILED, code = selected.code.name)
                             else -> state.copy(phase = SshFilesPhase.FAILED, code = "STORE_UNAVAILABLE")
                         }
@@ -480,7 +507,8 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
     fun list(path: String) {
         main()
         val token = session ?: return
-        if (ownerToken == null || state.phase != SshFilesPhase.CONNECTED || token.cancelled.get() || state.registrationPending) return
+        if (ownerToken == null || state.phase != SshFilesPhase.CONNECTED || token.cancelled.get() ||
+            state.registrationPending || state.editor != null) return
         invalidateListing()
         val version = generation
         val listing = synchronized(registrationGate) { listingEpoch }
@@ -497,13 +525,15 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
             is SshFilesResult.Success -> {
                 // Listing is genuine, but metadata-store availability is separate from browsing.
                 val catalog = FilesResourceStore(app).load()
+                val transfers = journalRecords(token.profile.profile.id)
                 publish(token, version) {
                     val context = if (catalog is FilesResourceResult.Success)
                         listingContext(token, path, catalog.value.generation, expectedListingEpoch) else null
                     it.copy(phase = SshFilesPhase.CONNECTED, path = path, entries = result.value,
                         preview = null, code = null, registrationCandidate = context?.candidate,
                         registrationCode = if (it.registrationUncertain) it.registrationCode
-                            else (catalog as? FilesResourceResult.Failure)?.code?.name)
+                            else (catalog as? FilesResourceResult.Failure)?.code?.name,
+                        transfers = transfers)
                 }
             }
             is SshFilesResult.Failure -> token.stop(result.code.name)
@@ -513,8 +543,9 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
     fun read(entry: SshFileEntry) {
         main()
         val token = session ?: return
-        if (ownerToken == null || state.phase != SshFilesPhase.CONNECTED || token.cancelled.get() || state.registrationPending ||
-            state.entries.none { it === entry } || entry.kind != SshFileKind.REGULAR) return
+        if (ownerToken == null || state.phase != SshFilesPhase.CONNECTED || token.cancelled.get() ||
+            state.registrationPending || state.editor != null || state.entries.none { it === entry } ||
+            entry.kind != SshFileKind.REGULAR) return
         if ((entry.size ?: 0) > PREVIEW_LIMIT) { state = state.copy(code = "PREVIEW_LIMIT"); return }
         val path = if (state.path.endsWith('/')) state.path + entry.name else state.path + "/" + entry.name
         invalidateListing()
@@ -536,7 +567,7 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
 
     private fun mutationReady(token: FilesSession) = ownerToken != null &&
         state.phase == SshFilesPhase.CONNECTED && !token.cancelled.get() && !state.registrationPending &&
-        state.mutationConsent == null
+        state.mutationConsent == null && state.editor == null
 
     private fun invalidLeafName(name: String): Boolean = name.isEmpty() ||
         name.length > SshFiles.MAX_NAME_UNITS || name == "." || name == ".." ||
@@ -678,6 +709,292 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
         }
     }
 
+    private fun fileActionReady(token: FilesSession) = ownerToken != null &&
+        state.phase == SshFilesPhase.CONNECTED && !token.cancelled.get() && !state.registrationPending &&
+        state.mutationConsent == null && state.editor == null && state.editor == null
+
+    private fun journalRecords(profileId: String): List<FilesTransferRecord> {
+        val loaded = FilesTransferJournal(FilesTransferJournal.appRoot(app)).load()
+        return (loaded as? FilesJournalResult.Success)?.value
+            ?.filter { it.profileId == profileId }?.takeLast(TRANSFER_ROWS)?.reversed().orEmpty()
+    }
+
+    /** Loads persisted status only; no record is replayed or resumed. */
+    fun loadTransfers() {
+        main()
+        val profile = state.selected?.profile ?: return
+        val id = profile.id
+        val version = generation
+        FilesRuntime.work {
+            val records = journalRecords(id)
+            FilesRuntime.main.post {
+                if (!cleared && generation == version && state.selected?.profile?.id == id)
+                    state = state.copy(transfers = records)
+            }
+        }
+    }
+
+    private fun decodeEditorText(bytes: ByteArray): String? {
+        val decoded = try {
+            Charsets.UTF_8.newDecoder().onMalformedInput(CodingErrorAction.REPORT)
+                .onUnmappableCharacter(CodingErrorAction.REPORT).decode(ByteBuffer.wrap(bytes)).toString()
+        } catch (_: CharacterCodingException) { return null }
+        return decoded.takeUnless { text -> text.any { it == '\u0000' || (it < ' ' && it != '\n' && it != '\r' && it != '\t') } }
+    }
+
+    fun edit(entry: SshFileEntry) {
+        main()
+        val token = session ?: return
+        if (!fileActionReady(token) || state.entries.none { it === entry } || entry.kind != SshFileKind.REGULAR) return
+        if ((entry.size ?: 0) > SshFileEditor.MAX_EDIT_BYTES) {
+            state = state.copy(code = "EDIT_LIMIT")
+            return
+        }
+        val profile = state.selected?.profile ?: return
+        val path = remoteChildPath(state.path, entry.name)
+        invalidateListing()
+        val version = generation
+        state = state.copy(phase = SshFilesPhase.READING, code = null)
+        if (!FilesRuntime.work {
+                val transport = token.transport.get()
+                if (transport == null) {
+                    publish(token, version) { it.copy(phase = SshFilesPhase.CONNECTED, code = "UNAVAILABLE") }
+                    return@work
+                }
+                when (val opened = SshFileEditor(transport.files).open(path, SshFileEditor.MAX_EDIT_BYTES, 3_000)) {
+                    is SshFilesResult.Failure -> publish(token, version) {
+                        it.copy(phase = SshFilesPhase.CONNECTED, code = opened.code.name)
+                    }
+                    is SshFilesResult.Success -> {
+                        val bytes = opened.value.bytes.copyBytes()
+                        val text = try { decodeEditorText(bytes) } finally { bytes.fill(0) }
+                        if (text == null) {
+                            publish(token, version) { it.copy(phase = SshFilesPhase.CONNECTED, code = "NOT_TEXT") }
+                        } else {
+                            publish(token, version) {
+                                editorContext = EditorContext(profile.id, profile.revision.toInt(), it.path, opened.value, text)
+                                it.copy(phase = SshFilesPhase.CONNECTED, code = null,
+                                    editor = SshEditorView(entry.name, path, text, false, false, false, false, false, null))
+                            }
+                        }
+                    }
+                }
+            }) state = state.copy(phase = SshFilesPhase.CONNECTED, code = "BUSY")
+    }
+
+    fun updateEditor(text: String) {
+        main()
+        val view = state.editor ?: return
+        val context = editorContext ?: return
+        if (view.busy || view.saveConsent || view.discardConsent || view.conflict) return
+        if (text.toByteArray(Charsets.UTF_8).size > SshFileEditor.MAX_EDIT_BYTES) {
+            state = state.copy(editor = view.next(code = "EDIT_LIMIT"))
+            return
+        }
+        state = state.copy(editor = view.next(text = text, dirty = text != context.originalText, code = null))
+    }
+
+    fun requestSave() {
+        main()
+        val view = state.editor ?: return
+        if (!view.dirty || view.busy || view.conflict) return
+        state = state.copy(editor = view.next(saveConsent = true, code = null))
+    }
+
+    fun cancelSaveConsent() {
+        main()
+        state = state.copy(editor = state.editor?.next(saveConsent = false))
+    }
+
+    /** Every save is an explicit remote replace; conflict approval is a second, separate decision. */
+    fun confirmSave() {
+        main()
+        val token = session ?: return
+        val view = state.editor ?: return
+        val context = editorContext ?: return
+        if (!view.saveConsent || view.busy || token.cancelled.get() || state.registrationPending) return
+        val text = view.text
+        state = state.copy(editor = view.next(saveConsent = false, busy = true, code = null))
+        if (!FilesRuntime.work {
+                saveWorker(token, context, text)
+            }) state = state.copy(editor = state.editor?.next(busy = false, code = "BUSY"))
+    }
+
+    private fun saveWorker(token: FilesSession, context: EditorContext, text: String) {
+        val version = generation
+        val bytes = text.toByteArray(Charsets.UTF_8)
+        if (bytes.size > SshFileEditor.MAX_EDIT_BYTES) {
+            publish(token, version) { it.copy(editor = it.editor?.next(busy = false, code = "EDIT_LIMIT")) }
+            return
+        }
+        val transport = token.transport.get()
+        if (transport == null) {
+            publish(token, version) { it.copy(editor = it.editor?.next(busy = false, code = "UNAVAILABLE")) }
+            return
+        }
+        val editor = SshFileEditor(transport.files)
+        val staged = when (val result = editor.stage(context.document, bytes)) {
+            is SshFilesResult.Failure -> {
+                publish(token, version) { it.copy(editor = it.editor?.next(busy = false, code = result.code.name)) }
+                return
+            }
+            is SshFilesResult.Success -> result.value
+        }
+        val journal = FilesTransferJournal(FilesTransferJournal.appRoot(app))
+        val begun = journal.begin(context.profileId, context.profileRevision, context.document.path,
+            staged.tempPath, staged.byteCount)
+        if (begun is FilesJournalResult.Failure) {
+            val removed = editor.discard(staged)
+            val uncertain = removed is SshFilesResult.Failure && removed.code != SshTransportCode.NOT_FOUND
+            publish(token, version) { it.copy(editor = it.editor?.next(busy = false,
+                code = if (uncertain) "CLEANUP_UNCERTAIN" else "JOURNAL_${begun.code.name}")) }
+            return
+        }
+        commitStaged(token, context, editor, staged, (begun as FilesJournalResult.Success).value.id, false, journal)
+    }
+
+    fun confirmConflict() {
+        main()
+        val token = session ?: return
+        val view = state.editor ?: return
+        val context = editorContext ?: return
+        val staged = context.staged ?: return
+        val recordId = context.recordId ?: return
+        if (view.busy) return
+        state = state.copy(editor = view.next(busy = true, conflict = false, saveConsent = false, code = null))
+        if (!FilesRuntime.work {
+                val transport = token.transport.get()
+                if (transport == null) {
+                    publish(token, generation) { it.copy(editor = it.editor?.next(busy = false, code = "UNAVAILABLE")) }
+                    return@work
+                }
+                commitStaged(token, context, SshFileEditor(transport.files), staged, recordId, true,
+                    FilesTransferJournal(FilesTransferJournal.appRoot(app)))
+            }) state = state.copy(editor = state.editor?.next(busy = false, code = "BUSY"))
+    }
+
+    private fun commitStaged(token: FilesSession, context: EditorContext, editor: SshFileEditor,
+                             staged: SshFileEditor.Staged, recordId: String, replaceChanged: Boolean,
+                             journal: FilesTransferJournal) {
+        val version = generation
+        val pending = journal.transition(recordId, FilesTransferState.COMMITTING, replaceChanged)
+        if (pending is FilesJournalResult.Failure) {
+            val removed = editor.discard(staged)
+            val uncertain = removed is SshFilesResult.Failure && removed.code != SshTransportCode.NOT_FOUND
+            publish(token, version) { it.copy(editor = it.editor?.next(busy = false, conflict = false,
+                code = if (uncertain) "CLEANUP_UNCERTAIN" else "JOURNAL_${pending.code.name}")) }
+            return
+        }
+        when (val result = editor.commit(staged, replaceChanged, 3_000)) {
+            is SshFileEditor.CommitResult.Committed -> {
+                val logged = journal.transition(recordId, FilesTransferState.COMMITTED, replaceChanged)
+                val editedName = context.document.path.substringAfterLast('/')
+                val committedSize = result.version?.size
+                val records = journalRecords(context.profileId)
+                publish(token, version) {
+                    editorContext = null
+                    it.copy(phase = SshFilesPhase.CONNECTED, path = context.parentPath, editor = null,
+                        entries = it.entries.map { entry ->
+                            if (entry.name == editedName && entry.kind == SshFileKind.REGULAR)
+                                entry.withSize(committedSize ?: entry.size) else entry
+                        },
+                        preview = null, code = if (logged is FilesJournalResult.Failure) "JOURNAL_UNAVAILABLE" else null,
+                        transfers = records)
+                }
+            }
+            is SshFileEditor.CommitResult.Conflict -> {
+                journal.transition(recordId, FilesTransferState.CONFLICT, replaceChanged)
+                val records = journalRecords(context.profileId)
+                publish(token, version) {
+                    editorContext?.apply { this.staged = staged; this.recordId = recordId }
+                    it.copy(editor = it.editor?.next(busy = false, conflict = true, saveConsent = false, code = "CONFLICT"),
+                        transfers = records)
+                }
+            }
+            is SshFileEditor.CommitResult.Failure -> {
+                journal.transition(recordId, FilesTransferState.FAILED, replaceChanged)
+                val removed = editor.discard(staged)
+                val uncertain = removed is SshFilesResult.Failure && removed.code != SshTransportCode.NOT_FOUND
+                if (uncertain) journal.transition(recordId, FilesTransferState.UNCERTAIN, replaceChanged)
+                val records = journalRecords(context.profileId)
+                publish(token, version) {
+                    editorContext?.apply { this.staged = null; this.recordId = null }
+                    it.copy(editor = it.editor?.next(busy = false, conflict = false,
+                        code = if (uncertain) "CLEANUP_UNCERTAIN" else result.code.name), transfers = records)
+                }
+            }
+        }
+    }
+
+    /** Cancels a conflict overwrite; the edited text stays available for another save. */
+    fun discardStaged() {
+        main()
+        val token = session ?: return
+        val view = state.editor ?: return
+        val context = editorContext ?: return
+        val staged = context.staged ?: return
+        val recordId = context.recordId
+        if (view.busy) return
+        state = state.copy(editor = view.next(busy = true, conflict = false, code = null))
+        if (!FilesRuntime.work {
+                val transport = token.transport.get()
+                val journal = FilesTransferJournal(FilesTransferJournal.appRoot(app))
+                if (recordId != null) journal.transition(recordId, FilesTransferState.FAILED, false)
+                val removed = transport?.files?.let { SshFileEditor(it).discard(staged) }
+                val uncertain = removed == null || (removed is SshFilesResult.Failure && removed.code != SshTransportCode.NOT_FOUND)
+                if (uncertain && recordId != null) journal.transition(recordId, FilesTransferState.UNCERTAIN, false)
+                val records = journalRecords(context.profileId)
+                publish(token, generation) {
+                    editorContext?.apply { this.staged = null; this.recordId = null }
+                    it.copy(editor = it.editor?.next(busy = false, conflict = false,
+                        code = if (uncertain) "CLEANUP_UNCERTAIN" else null), transfers = records)
+                }
+            }) state = state.copy(editor = state.editor?.next(busy = false, code = "BUSY"))
+    }
+
+    fun requestCloseEditor() {
+        main()
+        val view = state.editor ?: return
+        val context = editorContext ?: return
+        if (view.busy) return
+        if (view.dirty || context.staged != null) {
+            state = state.copy(editor = view.next(discardConsent = true, saveConsent = false, conflict = false))
+        } else closeEditorNow()
+    }
+
+    fun cancelCloseEditor() {
+        main()
+        state = state.copy(editor = state.editor?.next(discardConsent = false))
+    }
+
+    fun confirmCloseEditor() {
+        main()
+        val token = session ?: return
+        val view = state.editor ?: return
+        val context = editorContext ?: return
+        if (!view.discardConsent) return
+        val staged = context.staged
+        if (staged == null) { closeEditorNow(); return }
+        state = state.copy(editor = view.next(discardConsent = false, busy = true, code = null))
+        if (!FilesRuntime.work {
+                val journal = FilesTransferJournal(FilesTransferJournal.appRoot(app))
+                context.recordId?.let { journal.transition(it, FilesTransferState.FAILED, false) }
+                val removed = token.transport.get()?.files?.let { SshFileEditor(it).discard(staged) }
+                val uncertain = removed == null || (removed is SshFilesResult.Failure && removed.code != SshTransportCode.NOT_FOUND)
+                if (uncertain) context.recordId?.let { journal.transition(it, FilesTransferState.UNCERTAIN, false) }
+                val records = journalRecords(context.profileId)
+                publish(token, generation) {
+                    editorContext = null
+                    it.copy(editor = null, code = if (uncertain) "CLEANUP_UNCERTAIN" else null, transfers = records)
+                }
+            }) state = state.copy(editor = state.editor?.next(busy = false, code = "BUSY"))
+    }
+
+    private fun closeEditorNow() {
+        editorContext = null
+        state = state.copy(editor = null)
+    }
+
     private fun publish(token: FilesSession, version: Long, change: (SshFilesSessionState) -> SshFilesSessionState) {
         FilesRuntime.main.post {
             if (!cleared && session === token && generation == version && !token.cancelled.get() &&
@@ -689,8 +1006,10 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
     fun disconnect() {
         main()
         invalidateListing()
+        editorContext = null
         val token = session ?: return
-        state = state.copy(phase = SshFilesPhase.RETIRING, entries = emptyList(), preview = null, code = null)
+        state = state.copy(phase = SshFilesPhase.RETIRING, entries = emptyList(), preview = null, code = null,
+            editor = null)
         token.intentional.set(true)
         token.stop(null)
     }
@@ -728,6 +1047,7 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
         private const val CONFIGURATION_HANDOFF_MILLIS = 5_000L
         private const val REGISTRATION_LIFETIME_MILLIS = 30_000L
         private const val PREVIEW_LIMIT = 65_536
+        private const val TRANSFER_ROWS = 8
         private fun preview(name: String, bytes: ByteArray): SshFilesPreview {
             val decoded = try {
                 Charsets.UTF_8.newDecoder().onMalformedInput(CodingErrorAction.REPORT)

@@ -139,6 +139,16 @@ class CloudySshFilesActivity : ComponentActivity() {
                         }
                     },
                     onCancelMutation = model::cancelMutation,
+                    onEdit = { entry -> if (interactive && hasWindowFocus()) { notice = null; model.edit(entry) } },
+                    onEditorText = { text -> if (interactive && hasWindowFocus()) model.updateEditor(text) },
+                    onRequestSave = { if (interactive && hasWindowFocus()) model.requestSave() },
+                    onCancelSave = model::cancelSaveConsent,
+                    onConfirmSave = { if (interactive && hasWindowFocus()) model.confirmSave() },
+                    onConfirmConflict = { if (interactive && hasWindowFocus()) model.confirmConflict() },
+                    onDiscardStaged = { if (interactive && hasWindowFocus()) model.discardStaged() },
+                    onRequestCloseEditor = model::requestCloseEditor,
+                    onCancelCloseEditor = model::cancelCloseEditor,
+                    onConfirmCloseEditor = { if (interactive && hasWindowFocus()) model.confirmCloseEditor() },
                     onDisconnect = { clearFields(); notice = null; model.disconnect() },
                     onClose = { clearFields(); model.disconnect(); finish() },
                     onLocations = {
