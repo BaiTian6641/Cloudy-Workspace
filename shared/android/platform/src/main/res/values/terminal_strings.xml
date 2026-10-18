@@ -72,6 +72,9 @@
     <string name="terminal_auth_method">Authentication method</string>
     <string name="terminal_auth_password">Password</string>
     <string name="terminal_auth_private_key">Private key</string>
+    <string name="terminal_auth_keyboard_interactive">Keyboard-interactive</string>
+    <string name="terminal_interactive_response">Response</string>
+    <string name="terminal_interactive_scope">One server prompt is supported per attempt. A multi-prompt challenge is refused instead of answered by guessing.</string>
     <string name="terminal_key_choose">Choose private key…</string>
     <string name="terminal_key_replace">Replace private key…</string>
     <string name="terminal_key_selected">Private key selected for this attempt</string>

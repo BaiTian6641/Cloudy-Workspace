@@ -44,7 +44,7 @@ Unit coverage: `SshKeyCredentialsTest` exercises copy/one-transfer/wipe, closed-
 
 - The Android coordinator test adds `keyGateRequiresCurrentTrustAndTransfersKeyMaterialOnce`: exact current profile/trust is required, a revoke after preparation cancels the handle and key material is never admitted. On the owned API37 emulator (`platform-debug-androidTest.apk`), `SshAuthenticationCoordinatorTest` ran **22/22 passed** in 0.892 s (`OK (22 tests)`), including the new key case. This is a device test of the app-owned store/coordination boundary, not a real network authentication.
 - Product regression `37b61b0b-a795-4d03-8db8-c4a45d50c737` (Console debug `17a60422…`, test APK `5484cde1…`) reaches the real Home→Connect→SSH journey, asserts the Password/Private-key selector is visible, asserts Connect stays disabled before any key is chosen, switches back to password and still passes the host-observed command, 20,000-byte paste, exact restoration and cleanup. The final key-specific journey still requires selecting a key document in the system picker and typing its passphrase; that interactive step was not automated. No placeholder or hidden test key was added to product code.
-- Still open for C03: keyboard-interactive prompts, per-hop jump trust/authentication, persisted app-owned key references/vault policy, multiple key format interoperability across supported servers, and physical Googlebook qualification.
+- Still open for C03: dynamic multi-prompt keyboard-interactive UI (the single-prompt slice is recorded separately), per-hop jump trust/authentication, persisted app-owned key references/vault policy, multiple key format interoperability across supported servers, and physical Googlebook qualification.
 
 ## Verification limits
 

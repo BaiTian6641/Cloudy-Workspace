@@ -1,9 +1,9 @@
 # Local password/key SSH terminal fixture
 
 **Scope:** construction fixture for the Console terminal adapter. It is a real Apache MINA SSHD
-2.20.0 loopback server with password authentication, one accepted generated EC client key and a
-real local interactive shell, used to exercise the product's retained transport, channel,
-renderer output and explicit close on a device. It is **not** an OpenSSH interoperability,
+2.20.0 loopback server with password authentication, one accepted generated EC client key, one
+single-prompt keyboard-interactive response and a real local interactive shell, used to exercise
+the product's retained transport, channel, renderer output and explicit close on a device. It is **not** an OpenSSH interoperability,
 PTY/resize, privilege-isolation or product acceptance result.
 
 The MINA process factory starts util-linux `script --return --quiet --flush --command
@@ -75,8 +75,9 @@ publish or reuse them as a real credential.
   invoking user name plus that password, compared in constant time. The public-key authenticator
   accepts only the exact generated public key; there is no other key, password fallback on the
   keyed client path, or agent path. `client_key` (private) and `client_key.pub` are created inside
-  the 0700 run directory only after its emptiness check. No host account, system service,
-  configuration file or namespace is created.
+  the 0700 run directory only after its emptiness check. The keyboard-interactive authenticator
+  issues exactly one `Response: ` prompt and accepts only that same generated password. No host
+  account, system service, configuration file or namespace is created.
 - The shell factory is the maintained `InteractiveProcessShellFactory` with an explicit
   `/usr/bin/script` argv, wrapping the real `/bin/sh -i` child. It uses a real kernel PTY for
   input line discipline, not fake shell responses. MINA does not propagate SSH geometry into it.

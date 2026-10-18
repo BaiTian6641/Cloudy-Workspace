@@ -4,6 +4,7 @@ import io.github.baitian6641.cloudy.domain.SshHostKeyIdentity
 import io.github.baitian6641.cloudy.domain.SshPeerIdentity
 import net.schmizz.sshj.SSHClient
 import net.schmizz.sshj.transport.verification.HostKeyVerifier
+import net.schmizz.sshj.userauth.method.AuthKeyboardInteractive
 import net.schmizz.sshj.userauth.method.AuthPublickey
 import java.io.IOException
 import java.net.InetAddress
@@ -148,6 +149,19 @@ class SshAuthenticationCheck {
                                     } finally {
                                         owned.passphrase?.fill('\u0000')
                                     }
+                                }
+                            }
+                            is SshKeyboardInteractiveCredentials.Material -> {
+                                val responder = SshOneReleaseKeyboardInteractiveResponder(
+                                    owned, cancellation, releaseActive)
+                                try {
+                                    ssh.auth(String(owned.username), AuthKeyboardInteractive(responder))
+                                } finally {
+                                    responder.eraseResponse()
+                                }
+                                if (responder.unsupported.get()) {
+                                    rejected.compareAndSet(null,
+                                        SshAuthenticationCode.KEYBOARD_INTERACTIVE_UNSUPPORTED)
                                 }
                             }
                             else -> rejected.compareAndSet(null, SshAuthenticationCode.CREDENTIALS_UNAVAILABLE)

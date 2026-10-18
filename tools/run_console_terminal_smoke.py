@@ -102,6 +102,8 @@ def main():
                         help="Also verify local menu/cancel/find and real >16KiB clipboard input")
     parser.add_argument("--allow-device-ime-change", action="store_true",
                         help="Explicitly authorize the Android fixture to change/restore a physical device IME")
+    parser.add_argument("--auth", choices=("password", "keyboard-interactive"), default="password",
+                        help="Product authentication method exercised by the fixture journey")
     args = parser.parse_args()
     if not 1024 <= args.device_port <= 65535:
         parser.error("--device-port must be an unprivileged TCP port")
@@ -210,6 +212,7 @@ def main():
                    cleanupConfirmed=False, cleanupErrors=[], artifacts={},
                    controllerSha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest())
     receipt["interactionsRequested"] = args.interactions
+    receipt["authMethod"] = args.auth
     receipt.update(inputMethodRestored=False, imeCleanupConfirmed=False, imeCleanupErrors=[])
     ime_before = None
     interaction_published = False
@@ -253,6 +256,7 @@ def main():
                 "-e", "cloudyTerminalRun", run,
                 "-e", "cloudyTerminalProofPath", shlex.quote(str(proof)),
                 "-e", "cloudyTerminalInteractions", str(args.interactions).lower(),
+                "-e", "cloudyTerminalAuth", args.auth,
                 "-e", "cloudyAllowDeviceImeChange", str(args.allow_device_ime_change).lower(),
                 PACKAGE + ".test/androidx.test.runner.AndroidJUnitRunner",
             ], stdout=log, stderr=subprocess.STDOUT)

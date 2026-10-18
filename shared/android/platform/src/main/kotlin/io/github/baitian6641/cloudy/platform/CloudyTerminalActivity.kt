@@ -87,6 +87,7 @@ import io.github.baitian6641.cloudy.domain.ConnectionProtocol
 import io.github.baitian6641.cloudy.domain.SshObservationProfile
 import io.github.baitian6641.cloudy.domain.TerminalRightClick
 import io.github.baitian6641.cloudy.ssh.SshKeyCredentials
+import io.github.baitian6641.cloudy.ssh.SshKeyboardInteractiveCredentials
 import io.github.baitian6641.cloudy.ssh.SshPasswordCredentials
 import io.github.baitian6641.cloudy.terminal.TerminalAdmission
 import io.github.baitian6641.cloudy.terminal.TerminalIdentity
@@ -108,7 +109,7 @@ import java.util.concurrent.atomic.AtomicReference
  */
 class CloudyTerminalActivity : ComponentActivity() {
     private enum class Phase { AUTH, CONNECTING, TERMINAL, RETIRING, BLOCKED }
-    private enum class AuthMethod { PASSWORD, PRIVATE_KEY }
+    private enum class AuthMethod { PASSWORD, PRIVATE_KEY, KEYBOARD_INTERACTIVE }
     private class Attempt {
         val renderer = AtomicReference<TerminalWebViewBridge?>()
         lateinit var session: TerminalSession
@@ -129,6 +130,7 @@ class CloudyTerminalActivity : ComponentActivity() {
     private var authMethod by mutableStateOf(AuthMethod.PASSWORD)
     private var key by mutableStateOf<ByteArray?>(null)
     private var keyPassphrase by mutableStateOf(TextFieldValue())
+    private var interactiveResponse by mutableStateOf(TextFieldValue())
     private var keyBusy by mutableStateOf(false)
     private var keyRead = 0L
     private var phase by mutableStateOf(Phase.AUTH)
@@ -341,6 +343,19 @@ class CloudyTerminalActivity : ComponentActivity() {
                     return
                 } finally {
                     user.fill('\u0000'); passphrase.fill('\u0000')
+                }
+            }
+            AuthMethod.KEYBOARD_INTERACTIVE -> {
+                if (interactiveResponse.text.isEmpty()) return
+                val user = username.text.toCharArray()
+                val response = interactiveResponse.text.toCharArray()
+                try {
+                    SshKeyboardInteractiveCredentials.create(user, response)
+                } catch (_: IllegalArgumentException) {
+                    message = getString(R.string.terminal_auth_invalid)
+                    return
+                } finally {
+                    user.fill('\u0000'); response.fill('\u0000')
                 }
             }
         }
@@ -822,6 +837,7 @@ class CloudyTerminalActivity : ComponentActivity() {
         username = TextFieldValue()
         password = TextFieldValue()
         keyPassphrase = TextFieldValue()
+        interactiveResponse = TextFieldValue()
     }
 
     private fun hasLocalPermission() = Build.VERSION.SDK_INT < 37 ||
@@ -862,7 +878,9 @@ class CloudyTerminalActivity : ComponentActivity() {
                     Button(::connect, enabled = !busy && !keyBusy && chosen != null &&
                         username.text.isNotEmpty() &&
                         ((authMethod == AuthMethod.PASSWORD && password.text.isNotEmpty()) ||
-                            (authMethod == AuthMethod.PRIVATE_KEY && key != null)),
+                            (authMethod == AuthMethod.PRIVATE_KEY && key != null) ||
+                            (authMethod == AuthMethod.KEYBOARD_INTERACTIVE &&
+                                interactiveResponse.text.isNotEmpty())),
                         modifier = Modifier.testTag("terminal_connect_button")) { Text(stringResource(R.string.terminal_connect)) }
                     TextButton(::openTrust, enabled = !busy) { Text(stringResource(R.string.terminal_trust)) }
                     TextButton(::refresh, enabled = !busy, modifier = Modifier.testTag("terminal_refresh")) {
@@ -903,6 +921,10 @@ class CloudyTerminalActivity : ComponentActivity() {
                                 { if (!busy && !keyBusy) authMethod = AuthMethod.PRIVATE_KEY },
                                 label = { Text(stringResource(R.string.terminal_auth_private_key)) },
                                 modifier = Modifier.testTag("terminal_auth_key_method"))
+                            FilterChip(authMethod == AuthMethod.KEYBOARD_INTERACTIVE,
+                                { if (!busy && !keyBusy) authMethod = AuthMethod.KEYBOARD_INTERACTIVE },
+                                label = { Text(stringResource(R.string.terminal_auth_keyboard_interactive)) },
+                                modifier = Modifier.testTag("terminal_auth_interactive_method"))
                         }
                     }
                 }
@@ -914,6 +936,22 @@ class CloudyTerminalActivity : ComponentActivity() {
                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password,
                                 capitalization = KeyboardCapitalization.None, autoCorrectEnabled = false),
                             modifier = Modifier.fillMaxWidth().testTag("terminal_password"))
+                    }
+                }
+                if (authMethod == AuthMethod.KEYBOARD_INTERACTIVE) item("interactive_response") {
+                    key(credentialEpoch) {
+                        Column(verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                            OutlinedTextField(interactiveResponse,
+                                { if (!busy && it.text.length <= SshKeyboardInteractiveCredentials.MAX_RESPONSE_UNITS) interactiveResponse = it },
+                                enabled = !busy,
+                                label = { Text(stringResource(R.string.terminal_interactive_response)) },
+                                singleLine = true, visualTransformation = PasswordVisualTransformation(),
+                                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password,
+                                    capitalization = KeyboardCapitalization.None, autoCorrectEnabled = false),
+                                modifier = Modifier.fillMaxWidth().testTag("terminal_interactive_response"))
+                            Text(stringResource(R.string.terminal_interactive_scope),
+                                style = MaterialTheme.typography.bodySmall)
+                        }
                     }
                 }
                 if (authMethod == AuthMethod.PRIVATE_KEY) {

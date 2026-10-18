@@ -11,6 +11,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import io.github.baitian6641.cloudy.domain.*
 import io.github.baitian6641.cloudy.ssh.SshKeyCredentials
+import io.github.baitian6641.cloudy.ssh.SshKeyboardInteractiveCredentials
 import io.github.baitian6641.cloudy.ssh.SshPasswordCredentials
 import io.github.baitian6641.cloudy.ssh.SshSessionCredentials
 import io.github.baitian6641.cloudy.ssh.SshAuthenticatedOwnership
@@ -118,6 +119,19 @@ class SshAuthenticationCoordinatorTest {
         assertNull(handle.admit(profile.peer, key))
         assertNull(handle.admit(profile.peer, key))
         material.fill(0)
+    }
+
+    @Test fun keyboardInteractiveGateUsesTheSameCurrentTrust() {
+        val profile = seed()
+        val credentials = SshKeyboardInteractiveCredentials.create(
+            "fixture-user".toCharArray(), "fixture-response".toCharArray())
+        val prepared = coordinator.beginKeyboardInteractive(profile, credentials)
+        assertTrue("Interactive preparation requires exact current profile/trust",
+            prepared is SshAuthenticationPreparation.Ready)
+        val handle = (prepared as SshAuthenticationPreparation.Ready).handle.also { handles.add(it) }
+        revoke(profile)
+        assertTrue(handle.cancellation.isCancelled)
+        assertNull(handle.admit(profile.peer, key))
     }
 
     @Test fun unrelatedProfileAndPeerMutationDoesNotCancel() {

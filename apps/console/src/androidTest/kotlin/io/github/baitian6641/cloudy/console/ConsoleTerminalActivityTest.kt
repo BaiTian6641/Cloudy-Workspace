@@ -96,6 +96,9 @@ class ConsoleTerminalActivityTest {
             stage = "HOME_SEARCH"
             // The real Termius-style home is the entry point; the host is found only through its search.
             revealHome("home_search")
+            // The first catalog publication composes the list asynchronously; entering a query
+            // before that publication can be cleared by the same reflow. Wait for real rows.
+            waitFor(15_000) { nodes("home_row").isNotEmpty() }
             setText("home_search", owned.profileLabel)
             waitFor(20_000) {
                 val rows = nodes("home_row")
@@ -165,8 +168,13 @@ class ConsoleTerminalActivityTest {
             commit(launched, "exit")
             instrumentation.sendKeyDownUpSync(KeyEvent.KEYCODE_ENTER)
             waitFor(20_000) { node("terminal_username")?.isEnabled == true }
-            check(node("terminal_live_status") == null && reveal("terminal_password").isEnabled)
-            for (tag in listOf("terminal_username", "terminal_password")) check(empty(reveal(tag)))
+            val credentialTag = if (authMethod() == "keyboard-interactive") {
+                "terminal_interactive_response"
+            } else {
+                "terminal_password"
+            }
+            check(node("terminal_live_status") == null && reveal(credentialTag).isEnabled)
+            for (tag in listOf("terminal_username", credentialTag)) check(empty(reveal(tag)))
             secure(launched)
             owned.phase("TERMINAL_OWNER_RETIRED")
             File(context.noBackupFilesDir, "ssh-authenticate-qualification/$run-terminal-final-state.json")
@@ -425,8 +433,21 @@ class ConsoleTerminalActivityTest {
         check(restoredClipboard) { "CLIPBOARD_RESTORE_UNCONFIRMED" }
     }
 
+    private fun authMethod(): String =
+        InstrumentationRegistry.getArguments().getString("cloudyTerminalAuth") ?: "password"
+
     private fun credentials(fixture: SshAuthenticateFixture) {
         setText("terminal_username", fixture.username)
+        if (authMethod() == "keyboard-interactive") {
+            click("terminal_auth_interactive_method")
+            waitFor(10_000) { node("terminal_interactive_response") != null }
+            check(node("terminal_connect_button")?.isEnabled == false) {
+                "TERMINAL_INTERACTIVE_CONNECT_WITHOUT_RESPONSE"
+            }
+            setText("terminal_interactive_response", fixture.password)
+            waitFor(10_000) { node("terminal_connect_button")?.isEnabled == true }
+            return
+        }
         // Exercise the product method selector without selecting a key document: the key surface
         // must be reachable and must not enable Connect until a key is actually chosen.
         click("terminal_auth_key_method")

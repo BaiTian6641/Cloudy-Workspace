@@ -12,6 +12,7 @@ import io.github.baitian6641.cloudy.domain.SshPeerIdentity
 import io.github.baitian6641.cloudy.ssh.SshAuthenticatedTransport
 import io.github.baitian6641.cloudy.ssh.SshAuthenticatedTransportFactory
 import io.github.baitian6641.cloudy.ssh.SshKeyCredentials
+import io.github.baitian6641.cloudy.ssh.SshKeyboardInteractiveCredentials
 import io.github.baitian6641.cloudy.ssh.SshOwnedPty
 import io.github.baitian6641.cloudy.ssh.SshPasswordCredentials
 import io.github.baitian6641.cloudy.ssh.SshSessionCredentials
@@ -65,8 +66,8 @@ internal class TerminalSession(context: Context, private val listener: Listener)
             credentials.close()
             return
         }
-        val keyCredential = credentials as? SshKeyCredentials
-        if (keyCredential == null && credentials !is SshPasswordCredentials) {
+        if (credentials !is SshPasswordCredentials && credentials !is SshKeyCredentials &&
+            credentials !is SshKeyboardInteractiveCredentials) {
             credentials.close()
             main.post { listener.onEnded("INVALID_CREDENTIALS", false, true) }
             return
@@ -78,10 +79,12 @@ internal class TerminalSession(context: Context, private val listener: Listener)
             try {
                 if (!active()) return@Thread
                 val coordinator = SshAuthenticationCoordinator(application)
-                val prepared = if (keyCredential != null) {
-                    coordinator.beginKey(profile, keyCredential)
-                } else {
-                    coordinator.begin(profile, checkNotNull(credentials as? SshPasswordCredentials))
+                val prepared = when (val credential = credentials) {
+                    is SshPasswordCredentials -> coordinator.begin(profile, credential)
+                    is SshKeyCredentials -> coordinator.beginKey(profile, credential)
+                    is SshKeyboardInteractiveCredentials ->
+                        coordinator.beginKeyboardInteractive(profile, credential)
+                    else -> { code = "INVALID_CREDENTIALS"; return@Thread }
                 }
                 when (prepared) {
                     is SshAuthenticationPreparation.Failed -> { code = prepared.code.name; return@Thread }
@@ -96,19 +99,28 @@ internal class TerminalSession(context: Context, private val listener: Listener)
                 }
                 if (!active()) return@Thread
                 val factory = SshAuthenticatedTransportFactory()
-                val opened = if (keyCredential != null) {
-                    factory.connectPublicKey(profile.peer, address, authority.expectedKey,
-                        authority.cancellation, { peer: SshPeerIdentity, key: SshHostKeyIdentity ->
-                            val admitted = authority.admit(peer, key)
-                            if (admitted is SshKeyCredentials) admitted else { admitted?.close(); null }
-                        }, authority::establishSession, authority::releaseSession)
-                } else {
-                    factory.connectPassword(profile.peer, address, authority.expectedKey,
-                        authority.cancellation, { peer: SshPeerIdentity, key: SshHostKeyIdentity ->
+                val opened = when (val credential = credentials) {
+                    is SshPasswordCredentials -> factory.connectPassword(profile.peer, address,
+                        authority.expectedKey, authority.cancellation,
+                        { peer: SshPeerIdentity, key: SshHostKeyIdentity ->
                             val admitted = authority.admit(peer, key)
                             if (admitted is SshPasswordCredentials) admitted else { admitted?.close(); null }
                         }, authority::establishSession, authority::releaseSession)
-                }
+                    is SshKeyCredentials -> factory.connectPublicKey(profile.peer, address,
+                        authority.expectedKey, authority.cancellation,
+                        { peer: SshPeerIdentity, key: SshHostKeyIdentity ->
+                            val admitted = authority.admit(peer, key)
+                            if (admitted is SshKeyCredentials) admitted else { admitted?.close(); null }
+                        }, authority::establishSession, authority::releaseSession)
+                    is SshKeyboardInteractiveCredentials -> factory.connectKeyboardInteractive(
+                        profile.peer, address, authority.expectedKey, authority.cancellation,
+                        { peer: SshPeerIdentity, key: SshHostKeyIdentity ->
+                            val admitted = authority.admit(peer, key)
+                            if (admitted is SshKeyboardInteractiveCredentials) admitted
+                            else { admitted?.close(); null }
+                        }, authority::establishSession, authority::releaseSession)
+                    else -> null
+                } ?: run { code = "INVALID_CREDENTIALS"; return@Thread }
                 if (opened is SshTransportOpenResult.Failure) {
                     code = opened.code.name
                     cleanupCertain = when (opened.code) {

@@ -27,7 +27,10 @@ import org.apache.sshd.common.config.keys.PublicKeyEntryResolver;
 import org.apache.sshd.common.digest.BuiltinDigests;
 import org.apache.sshd.common.keyprovider.KeyPairProvider;
 import org.apache.sshd.server.SshServer;
+import org.apache.sshd.server.auth.keyboard.InteractiveChallenge;
+import org.apache.sshd.server.auth.keyboard.KeyboardInteractiveAuthenticator;
 import org.apache.sshd.server.forward.RejectAllForwardingFilter;
+import org.apache.sshd.server.session.ServerSession;
 import org.apache.sshd.server.shell.InteractiveProcessShellFactory;
 
 /**
@@ -102,6 +105,24 @@ public final class CloudySshTerminalFixture {
                 user.equals(username) && constantTimeEquals(expectedPassword, presented));
             server.setPublickeyAuthenticator((username, key, session) ->
                 user.equals(username) && key.equals(acceptedClientKey));
+            server.setKeyboardInteractiveAuthenticator(new KeyboardInteractiveAuthenticator() {
+                @Override
+                public InteractiveChallenge generateChallenge(ServerSession session, String language,
+                                                              String subMethods, String username) {
+                    InteractiveChallenge challenge = new InteractiveChallenge();
+                    challenge.setInteractionName("Cloudy keyboard-interactive fixture");
+                    challenge.setInteractionInstruction("Answer the single fixture prompt");
+                    challenge.addPrompt("Response: ", false);
+                    return challenge;
+                }
+
+                @Override
+                public boolean authenticate(ServerSession session, String username,
+                                            List<String> responses) {
+                    return user.equals(username) && responses != null && responses.size() == 1 &&
+                        constantTimeEquals(expectedPassword, responses.get(0));
+                }
+            });
             // script owns a real kernel PTY. MINA's process pipes alone have no CR/Enter line discipline.
             InteractiveProcessShellFactory shell = new InteractiveProcessShellFactory();
             shell.setCommand("script --return --quiet --flush --command '/bin/sh -i' /dev/null",

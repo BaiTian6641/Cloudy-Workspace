@@ -8,6 +8,7 @@ import android.os.SystemClock
 import io.github.baitian6641.cloudy.domain.*
 import io.github.baitian6641.cloudy.ssh.SshAuthenticatedOwnership
 import io.github.baitian6641.cloudy.ssh.SshKeyCredentials
+import io.github.baitian6641.cloudy.ssh.SshKeyboardInteractiveCredentials
 import io.github.baitian6641.cloudy.ssh.SshObservationCancellation
 import io.github.baitian6641.cloudy.ssh.SshPasswordCredentials
 import io.github.baitian6641.cloudy.ssh.SshSessionCredentials
@@ -99,6 +100,11 @@ class SshAuthenticationCoordinator private constructor(
 
     /** One public-key attempt under the same profile/trust/ownership gate; no method fallback. */
     fun beginKey(profile: SshObservationProfile, credentials: SshKeyCredentials): SshAuthenticationPreparation =
+        beginBound(profile, credentials, null)
+
+    /** One single-prompt keyboard-interactive attempt under the same exact gate. */
+    fun beginKeyboardInteractive(profile: SshObservationProfile,
+        credentials: SshKeyboardInteractiveCredentials): SshAuthenticationPreparation =
         beginBound(profile, credentials, null)
 
     /** Caller metadata is never sufficient: resolve the exact current registration before preparing. */

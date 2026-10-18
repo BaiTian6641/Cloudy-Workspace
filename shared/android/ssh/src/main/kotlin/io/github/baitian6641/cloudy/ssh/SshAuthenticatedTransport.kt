@@ -4,6 +4,7 @@ import io.github.baitian6641.cloudy.domain.SshHostKeyIdentity
 import io.github.baitian6641.cloudy.domain.SshPeerIdentity
 import net.schmizz.sshj.SSHClient
 import net.schmizz.sshj.sftp.SFTPClient
+import net.schmizz.sshj.userauth.method.AuthKeyboardInteractive
 import net.schmizz.sshj.userauth.method.AuthPublickey
 import net.schmizz.sshj.transport.verification.HostKeyVerifier
 import java.io.IOException
@@ -21,6 +22,7 @@ enum class SshTransportCode {
     INVALID_INPUT, BUSY, QUARANTINED, CANCELLED, TIMED_OUT, CONNECT_FAILED,
     ALGORITHM_REJECTED, KEY_REJECTED, ADMISSION_DENIED, CREDENTIALS_UNAVAILABLE,
     PASSWORD_CHANGE_REFUSED, KEY_UNREADABLE, KEY_FORMAT_UNSUPPORTED, KEY_PASSPHRASE_REQUIRED,
+    KEYBOARD_INTERACTIVE_UNSUPPORTED,
     AUTHENTICATION_FAILED, OWNERSHIP_REJECTED, CLOSED,
     OPERATION_FAILED, LIMIT_EXCEEDED, INVALID_REMOTE_DATA, CLEANUP_UNCERTAIN,
 }
@@ -69,6 +71,15 @@ class SshAuthenticatedTransportFactory {
         timeoutMillis: Int = 10_000): SshTransportOpenResult = connect(
         peer, address, expectedKey, cancellation, { p, k -> admit(p, k) }, establish, retired, timeoutMillis)
 
+    /** One single-prompt keyboard-interactive attempt; no password/key/agent fallback. */
+    fun connectKeyboardInteractive(peer: SshPeerIdentity, address: InetAddress, expectedKey: SshHostKeyIdentity,
+        cancellation: SshObservationCancellation,
+        admit: (SshPeerIdentity, SshHostKeyIdentity) -> SshKeyboardInteractiveCredentials?,
+        establish: (SshAuthenticatedOwnership) -> Boolean,
+        retired: (SshAuthenticatedOwnership) -> Unit,
+        timeoutMillis: Int = 10_000): SshTransportOpenResult = connect(
+        peer, address, expectedKey, cancellation, { p, k -> admit(p, k) }, establish, retired, timeoutMillis)
+
     private fun connect(peer: SshPeerIdentity, address: InetAddress, expectedKey: SshHostKeyIdentity,
         cancellation: SshObservationCancellation,
         admit: (SshPeerIdentity, SshHostKeyIdentity) -> SshSessionCredentials?,
@@ -97,7 +108,7 @@ class SshAuthenticatedTransportFactory {
         var credentials: SshSessionCredentials? = null
         var material: SshCredentialMaterial? = null
         var method: SshStrictPasswordMethod? = null
-        var keyFailure: SshTransportCode? = null
+        var credentialFailure: SshTransportCode? = null
         var result: SshTransportOpenResult? = null
         try {
             state.start()
@@ -163,7 +174,7 @@ class SshAuthenticatedTransportFactory {
                             val provider = try {
                                 SshKeyAuthentication.provider(owned, cancellation, state::active)
                             } catch (failure: SshKeyException) {
-                                keyFailure = when (failure.failure) {
+                                credentialFailure = when (failure.failure) {
                                     SshKeyFailure.UNSUPPORTED_FORMAT -> SshTransportCode.KEY_FORMAT_UNSUPPORTED
                                     SshKeyFailure.PASSPHRASE_REQUIRED -> SshTransportCode.KEY_PASSPHRASE_REQUIRED
                                     SshKeyFailure.UNREADABLE -> SshTransportCode.KEY_UNREADABLE
@@ -177,6 +188,18 @@ class SshAuthenticatedTransportFactory {
                                 } finally {
                                     owned.passphrase?.fill('\u0000')
                                 }
+                            }
+                        }
+                        is SshKeyboardInteractiveCredentials.Material -> {
+                            val responder = SshOneReleaseKeyboardInteractiveResponder(
+                                owned, cancellation, state::active)
+                            try {
+                                client.auth(String(owned.username), AuthKeyboardInteractive(responder))
+                            } finally {
+                                responder.eraseResponse()
+                            }
+                            if (responder.unsupported.get()) {
+                                credentialFailure = SshTransportCode.KEYBOARD_INTERACTIVE_UNSUPPORTED
                             }
                         }
                         else -> state.stop(SshTransportCode.CREDENTIALS_UNAVAILABLE)
@@ -201,7 +224,7 @@ class SshAuthenticatedTransportFactory {
             if (Thread.currentThread().isInterrupted) cancellation.cancel()
             if (result == null) {
                 if (method?.passwordChangeRefused?.get() == true) state.stop(SshTransportCode.PASSWORD_CHANGE_REFUSED)
-                keyFailure?.let { state.stop(it) }
+                credentialFailure?.let { state.stop(it) }
                 if (!state.active()) state.expireIfNeeded()
                 state.stop(if (state.keyObserved.get()) SshTransportCode.AUTHENTICATION_FAILED else SshTransportCode.CONNECT_FAILED)
             }
