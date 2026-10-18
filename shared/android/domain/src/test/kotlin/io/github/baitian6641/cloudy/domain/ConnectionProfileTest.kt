@@ -43,10 +43,10 @@ class ConnectionProfileTest {
     }
 
     @Test fun protocolPolicyIsExplicitForEachAppAndWireIdsStayDistinct() {
-        assertEquals(listOf("ssh", "rdp", "vnc", "stream"), ConnectionProtocol.entries.map { it.wireId })
+        assertEquals(listOf("ssh", "telnet", "rdp", "vnc", "stream"), ConnectionProtocol.entries.map { it.wireId })
         for (protocol in ConnectionProtocol.entries) {
             assertEquals(protocol, draft(owner = WindowOwner.DESKTOP, protocol = protocol).protocol)
-            if (protocol != ConnectionProtocol.SSH) {
+            if (protocol !in setOf(ConnectionProtocol.SSH, ConnectionProtocol.TELNET)) {
                 rejected(ConnectionProfileValidationCode.INVALID_PROTOCOL) { draft(protocol = protocol) }
             }
         }

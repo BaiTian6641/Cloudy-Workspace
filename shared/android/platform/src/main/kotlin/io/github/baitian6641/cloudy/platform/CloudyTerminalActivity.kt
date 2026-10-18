@@ -90,6 +90,7 @@ import io.github.baitian6641.cloudy.domain.ConnectionProfile
 import io.github.baitian6641.cloudy.domain.ConnectionProfileDraft
 import io.github.baitian6641.cloudy.domain.ConnectionProtocol
 import io.github.baitian6641.cloudy.domain.SshObservationProfile
+import io.github.baitian6641.cloudy.domain.SshPeerIdentity
 import io.github.baitian6641.cloudy.domain.TerminalRightClick
 import io.github.baitian6641.cloudy.ssh.SshInteractivePromptHandler
 import io.github.baitian6641.cloudy.ssh.SshKeyCredentials
@@ -134,7 +135,7 @@ class CloudyTerminalActivity : ComponentActivity() {
     )
 
     private var catalog by mutableStateOf<ConnectionProfileCatalog?>(null)
-    private var selected by mutableStateOf<SshObservationProfile?>(null)
+    private var selected by mutableStateOf<ConnectionProfile?>(null)
     private var username by mutableStateOf(TextFieldValue())
     private var password by mutableStateOf(TextFieldValue())
     private var authMethod by mutableStateOf(AuthMethod.PASSWORD)
@@ -306,13 +307,19 @@ class CloudyTerminalActivity : ComponentActivity() {
                 when (loaded) {
                     is ConnectionProfilesResult.Success -> {
                         catalog = loaded.value
-                        val id = selected?.profile?.id ?: preselectId
+                        val id = selected?.id ?: preselectId
                         selected = loaded.value.profiles.singleOrNull {
-                            it.id == id && it.protocol == ConnectionProtocol.SSH
-                        }?.let { SshObservationProfile.create(loaded.value.generation, it) }
+                            it.id == id && (it.protocol == ConnectionProtocol.SSH || it.protocol == ConnectionProtocol.TELNET)
+                        }
                         preselectId = null
-                        message = getString(if (selected == null) R.string.terminal_choose else R.string.terminal_credentials_ready)
-                        if (!keyPersistBusy) applyPersistedKey(selected?.profile?.keyUri)
+                        message = getString(when (selected?.protocol) {
+                            null -> R.string.terminal_choose
+                            ConnectionProtocol.TELNET -> R.string.terminal_telnet_ready
+                            else -> R.string.terminal_credentials_ready
+                        })
+                        if (selected?.protocol == ConnectionProtocol.SSH) {
+                            if (!keyPersistBusy) applyPersistedKey(selected?.keyUri)
+                        } else { keyUri = null; key = null; rememberKey = false }
                     }
                     is ConnectionProfilesResult.Failure -> {
                         catalog = null
@@ -329,11 +336,13 @@ class CloudyTerminalActivity : ComponentActivity() {
         if (!interactive || busy) return
         val loaded = catalog ?: return
         val exact = loaded.profiles.singleOrNull { it.id == profile.id && it.revision == profile.revision } ?: return
-        if (exact.protocol != ConnectionProtocol.SSH) return
+        if (exact.protocol != ConnectionProtocol.SSH && exact.protocol != ConnectionProtocol.TELNET) return
         clearSecretFields()
-        selected = SshObservationProfile.create(loaded.generation, exact)
-        message = getString(R.string.terminal_credentials_ready)
-        applyPersistedKey(exact.keyUri)
+        selected = exact
+        message = getString(if (exact.protocol == ConnectionProtocol.TELNET) R.string.terminal_telnet_ready
+        else R.string.terminal_credentials_ready)
+        if (exact.protocol == ConnectionProtocol.SSH) applyPersistedKey(exact.keyUri)
+        else { keyUri = null; key = null; rememberKey = false }
     }
 
     /** A saved reference is only a document URI; the key is re-read and never copied to storage. */
@@ -366,7 +375,8 @@ class CloudyTerminalActivity : ComponentActivity() {
     /** Connect is fenced while this mutates the profile; updates invalidate live auth attempts. */
     private fun persistKeyReference(value: String?) {
         val loaded = catalog ?: return
-        val current = selected?.profile ?: return
+        val current = selected ?: return
+        if (current.protocol != ConnectionProtocol.SSH) return
         val exact = loaded.profiles.singleOrNull { it.id == current.id } ?: return
         if (exact.keyUri == value) {
             keyUri = value
@@ -384,7 +394,7 @@ class CloudyTerminalActivity : ComponentActivity() {
                 when (result) {
                     is ConnectionProfilesResult.Success -> {
                         val updated = result.value.profile
-                        selected = SshObservationProfile.create(loaded.generation, updated)
+                        selected = updated
                         catalog = ConnectionProfileCatalog(loaded.generation,
                             loaded.profiles.map { if (it.id == updated.id) updated else it })
                         keyUri = value
@@ -402,8 +412,28 @@ class CloudyTerminalActivity : ComponentActivity() {
 
     private fun connect() {
         if (!interactive || busy || disposed) return
-        val profile = selected ?: return
+        val chosen = selected ?: return
         val loaded = catalog
+        if (chosen.protocol == ConnectionProtocol.TELNET) {
+            if (keyBusy || keyPersistBusy) return
+            val peer = SshPeerIdentity.create(chosen.host, chosen.port)
+            if (SshLocalNetworkPolicy.shouldRequestPermission(applicationContext, peer) && !hasLocalPermission()) {
+                requestLocalPermission()
+                return
+            }
+            clearSecretFields()
+            profileRead++
+            phase = Phase.CONNECTING
+            message = getString(R.string.terminal_status_telnet_connecting)
+            val current = Attempt()
+            current.session = TerminalSession(applicationContext, sessionListener(current, chosen))
+            attempt = current
+            current.session.connectTelnet(chosen)
+            return
+        }
+        if (chosen.protocol != ConnectionProtocol.SSH) return
+        val generation = loaded?.generation ?: return
+        val profile = SshObservationProfile.create(generation, chosen)
         val jump = profile.profile.jumpProfileId?.let { id ->
             loaded?.profiles?.singleOrNull {
                 it.id == id && it.protocol == ConnectionProtocol.SSH && it.jumpProfileId == null
@@ -467,7 +497,7 @@ class CloudyTerminalActivity : ComponentActivity() {
         phase = Phase.CONNECTING
         message = getString(R.string.terminal_status_connecting)
         val current = Attempt()
-        current.session = TerminalSession(applicationContext, sessionListener(current, profile))
+        current.session = TerminalSession(applicationContext, sessionListener(current, profile.profile))
         attempt = current
         val bridge = if (authMethod == AuthMethod.KEYBOARD_INTERACTIVE) PromptBridge().also { promptBridge = it } else null
         current.session.connect(profile, pair.first, jump, pair.second, bridge)
@@ -513,7 +543,7 @@ class CloudyTerminalActivity : ComponentActivity() {
         }, "cloudy-terminal-key").apply { isDaemon = true }.start()
     }
 
-    private fun sessionListener(current: Attempt, profile: SshObservationProfile) = object : TerminalSession.Listener {
+    private fun sessionListener(current: Attempt, profile: ConnectionProfile) = object : TerminalSession.Listener {
         override fun onAuthenticated(host: String) {
             if (disposed || !interactive || attempt !== current || phase != Phase.CONNECTING) {
                 current.session.close("OWNER_UNAVAILABLE")
@@ -525,9 +555,9 @@ class CloudyTerminalActivity : ComponentActivity() {
             current.renderer.set(created)
             renderer = created
             phase = Phase.TERMINAL
-            message = getString(R.string.terminal_status_authenticated)
-            title = getString(R.string.terminal_selected, profile.profile.label,
-                "${profile.profile.host}:${profile.profile.port}")
+            message = getString(if (profile.protocol == ConnectionProtocol.TELNET)
+                R.string.terminal_status_telnet_connected else R.string.terminal_status_authenticated)
+            title = getString(R.string.terminal_selected, profile.label, "${profile.host}:${profile.port}")
         }
 
         override fun onSessionOpened(size: TerminalSize) {
@@ -1097,13 +1127,16 @@ class CloudyTerminalActivity : ComponentActivity() {
             }
             item("actions") {
                 FlowRow(horizontalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                    val telnetSelected = chosen?.protocol == ConnectionProtocol.TELNET
                     Button(::connect, enabled = !busy && !keyBusy && !keyPersistBusy && chosen != null &&
-                        username.text.isNotEmpty() &&
-                        ((authMethod == AuthMethod.PASSWORD && password.text.isNotEmpty()) ||
-                            (authMethod == AuthMethod.PRIVATE_KEY && key != null) ||
-                            authMethod == AuthMethod.KEYBOARD_INTERACTIVE),
+                        (telnetSelected || (username.text.isNotEmpty() &&
+                            ((authMethod == AuthMethod.PASSWORD && password.text.isNotEmpty()) ||
+                                (authMethod == AuthMethod.PRIVATE_KEY && key != null) ||
+                                authMethod == AuthMethod.KEYBOARD_INTERACTIVE))),
                         modifier = Modifier.testTag("terminal_connect_button")) { Text(stringResource(R.string.terminal_connect)) }
-                    TextButton(::openTrust, enabled = !busy) { Text(stringResource(R.string.terminal_trust)) }
+                    if (chosen?.protocol != ConnectionProtocol.TELNET) {
+                        TextButton(::openTrust, enabled = !busy) { Text(stringResource(R.string.terminal_trust)) }
+                    }
                     TextButton(::refresh, enabled = !busy, modifier = Modifier.testTag("terminal_refresh")) {
                         Text(stringResource(R.string.terminal_refresh))
                     }
@@ -1118,11 +1151,21 @@ class CloudyTerminalActivity : ComponentActivity() {
             }
             chosen?.let { binding ->
                 item("selected") {
-                    Text(stringResource(R.string.terminal_selected, binding.profile.label,
-                        "${binding.profile.host}:${binding.profile.port}"), modifier = Modifier.testTag("terminal_selected"))
+                    Text(stringResource(R.string.terminal_selected, binding.label,
+                        "${binding.host}:${binding.port}"), modifier = Modifier.testTag("terminal_selected"))
                 }
-                if (binding.profile.jumpProfileId != null) {
-                    val hop = loaded?.profiles?.singleOrNull { it.id == binding.profile.jumpProfileId }
+                if (binding.protocol == ConnectionProtocol.TELNET) item("telnet_scope") {
+                    Surface(color = MaterialTheme.colorScheme.errorContainer, modifier = Modifier.fillMaxWidth()
+                        .testTag("terminal_telnet_scope")) {
+                        Column(Modifier.padding(CloudyControlMetrics.spaceMedium),
+                            verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                            Text(stringResource(R.string.terminal_telnet_heading), style = MaterialTheme.typography.titleSmall)
+                            Text(stringResource(R.string.terminal_telnet_scope), style = MaterialTheme.typography.bodySmall)
+                        }
+                    }
+                }
+                if (binding.protocol == ConnectionProtocol.SSH && binding.jumpProfileId != null) {
+                    val hop = loaded?.profiles?.singleOrNull { it.id == binding.jumpProfileId }
                     item("jump") {
                         Text(stringResource(R.string.terminal_jump,
                             hop?.label ?: getString(R.string.terminal_jump_missing),
@@ -1131,7 +1174,7 @@ class CloudyTerminalActivity : ComponentActivity() {
                         Text(stringResource(R.string.terminal_jump_scope), style = MaterialTheme.typography.bodySmall)
                     }
                 }
-                item("username") {
+                if (binding.protocol == ConnectionProtocol.SSH) item("username") {
                     key(credentialEpoch) {
                         OutlinedTextField(username, { if (!busy && it.text.length <= SshPasswordCredentials.MAX_USERNAME_UNITS) username = it },
                             enabled = !busy, label = { Text(stringResource(R.string.terminal_username)) }, singleLine = true,
@@ -1140,7 +1183,7 @@ class CloudyTerminalActivity : ComponentActivity() {
                             modifier = Modifier.fillMaxWidth().testTag("terminal_username"))
                     }
                 }
-                item("auth_method") {
+                if (binding.protocol == ConnectionProtocol.SSH) item("auth_method") {
                     Column(verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
                         Text(stringResource(R.string.terminal_auth_method), style = MaterialTheme.typography.labelLarge)
                         FlowRow(horizontalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
@@ -1159,7 +1202,7 @@ class CloudyTerminalActivity : ComponentActivity() {
                         }
                     }
                 }
-                if (authMethod == AuthMethod.PASSWORD) item("password") {
+                if (binding.protocol == ConnectionProtocol.SSH && authMethod == AuthMethod.PASSWORD) item("password") {
                     key(credentialEpoch) {
                         OutlinedTextField(password, { if (!busy && it.text.length <= SshPasswordCredentials.MAX_PASSWORD_UNITS) password = it },
                             enabled = !busy, label = { Text(stringResource(R.string.terminal_password)) }, singleLine = true,
@@ -1169,10 +1212,10 @@ class CloudyTerminalActivity : ComponentActivity() {
                             modifier = Modifier.fillMaxWidth().testTag("terminal_password"))
                     }
                 }
-                if (authMethod == AuthMethod.KEYBOARD_INTERACTIVE) item("interactive_note") {
+                if (binding.protocol == ConnectionProtocol.SSH && authMethod == AuthMethod.KEYBOARD_INTERACTIVE) item("interactive_note") {
                     Text(stringResource(R.string.terminal_interactive_scope), style = MaterialTheme.typography.bodySmall)
                 }
-                if (authMethod == AuthMethod.PRIVATE_KEY) {
+                if (binding.protocol == ConnectionProtocol.SSH && authMethod == AuthMethod.PRIVATE_KEY) {
                     item("key_choose") {
                         Column(verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
                             FlowRow(horizontalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
@@ -1229,10 +1272,14 @@ class CloudyTerminalActivity : ComponentActivity() {
                     }
                 }
             }
-            if (loaded?.profiles?.none { it.protocol == ConnectionProtocol.SSH } == true) {
+            if (loaded?.profiles?.none {
+                    it.protocol == ConnectionProtocol.SSH || it.protocol == ConnectionProtocol.TELNET
+                } == true) {
                 item("empty") { Text(stringResource(R.string.terminal_no_profiles)) }
             }
-            items(loaded?.profiles?.filter { it.protocol == ConnectionProtocol.SSH } ?: emptyList(), key = { it.id }) { profile ->
+            items(loaded?.profiles?.filter {
+                it.protocol == ConnectionProtocol.SSH || it.protocol == ConnectionProtocol.TELNET
+            } ?: emptyList(), key = { it.id }) { profile ->
                 TextButton({ select(profile) }, enabled = !busy, modifier = Modifier.fillMaxWidth()
                     .testTag("terminal_profile_${profile.id}")) { Text("${profile.label} · ${profile.host}:${profile.port}") }
             }

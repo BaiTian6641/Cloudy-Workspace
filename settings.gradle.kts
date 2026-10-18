@@ -6,12 +6,13 @@ dependencyResolutionManagement {
     repositories { google(); mavenCentral() }
 }
 rootProject.name = "CloudyWorkspace"
-include(":console", ":desktop", ":domain", ":platform", ":design-system", ":identity", ":ssh", ":terminal", ":vnc")
+include(":console", ":desktop", ":domain", ":platform", ":design-system", ":identity", ":ssh", ":telnet", ":terminal", ":vnc")
 include(":qualification-ime")
 project(":console").projectDir = file("apps/console")
 project(":desktop").projectDir = file("apps/desktop")
 project(":domain").projectDir = file("shared/android/domain")
 project(":ssh").projectDir = file("shared/android/ssh")
+project(":telnet").projectDir = file("shared/android/telnet")
 project(":terminal").projectDir = file("shared/android/terminal")
 project(":platform").projectDir = file("shared/android/platform")
 project(":design-system").projectDir = file("shared/design-system/android")

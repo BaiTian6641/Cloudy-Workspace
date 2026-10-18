@@ -34,6 +34,14 @@ Do not merge host, environment, workspace, and session into one overloaded name.
 | C18 | Integrated SFTP browser | Session-linked list/breadcrumbs, browse/mkdir/rename/download/upload/staged edit, selection and persistent transfer status | R1 / P2-S7 |
 | C19 | File drag-and-drop | Local app→remote upload, remote→local/downloaded URI export, multi-file/directory handling and terminal reference insertion after commit | R1 / P2-S7 |
 | C20 | Directory context | Explicit project/path default and pin/follow-session state; optional verified shell-directory signal, no prompt scraping | R1 / P2-S7 |
+| C21 | Telnet | Plaintext Telnet terminal with NVT negotiation, bounded input/backpressure, explicit warning and no stored credentials; SFTP/X11 remain SSH-only | R1 / P2-S1-S2 extension |
+
+## Telnet boundary
+
+Telnet is an explicit Console terminal protocol for legacy trusted-network equipment. It is
+unencrypted: the UI warns before use, login is typed at the remote prompt, and Cloudy stores no
+Telnet credential. Telnet does not provide SSH trust pins, SFTP, jumps or X11 forwarding; those
+remain SSH features. Console must never present Telnet as equivalent security.
 
 ## Session states
 

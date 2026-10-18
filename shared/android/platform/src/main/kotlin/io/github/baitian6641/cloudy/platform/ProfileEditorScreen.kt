@@ -45,6 +45,7 @@ import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.TextFieldValue
 import io.github.baitian6641.cloudy.design.CloudyControlMetrics
 import io.github.baitian6641.cloudy.domain.ConnectionProfile
 import io.github.baitian6641.cloudy.domain.ConnectionProtocol
@@ -185,16 +186,24 @@ private fun ProfileDraftEditor(
                 modifier = Modifier.fillMaxWidth().testTag("profile_label"))
             Text(stringResource(R.string.profile_protocol), style = MaterialTheme.typography.labelLarge)
             ProfileActions {
-                val protocols = if (owner == WindowOwner.CONSOLE) listOf(ConnectionProtocol.SSH) else ConnectionProtocol.entries
+                val protocols = if (owner == WindowOwner.CONSOLE)
+                    listOf(ConnectionProtocol.SSH, ConnectionProtocol.TELNET) else ConnectionProtocol.entries
                 for (protocol in protocols) {
                     FilterChip(selected = draft.protocol == protocol, enabled = editable,
-                        onClick = { onDraftChange(draft.copy(protocol = protocol)) },
+                        onClick = {
+                            val port = when {
+                                protocol == ConnectionProtocol.TELNET && draft.port.text == "22" -> TextFieldValue("23")
+                                protocol == ConnectionProtocol.SSH && draft.port.text == "23" -> TextFieldValue("22")
+                                else -> draft.port
+                            }
+                            onDraftChange(draft.copy(protocol = protocol, port = port, jumpProfileId = null))
+                        },
                         label = { Text(protocolLabel(protocol)) },
                         shape = RoundedCornerShape(CloudyControlMetrics.chipRadius),
                         modifier = Modifier.heightIn(min = CloudyControlMetrics.controlMinHeight).testTag("profile_protocol_${protocol.wireId}"))
                 }
             }
-            if (owner == WindowOwner.CONSOLE) {
+            if (owner == WindowOwner.CONSOLE && draft.protocol == ConnectionProtocol.SSH) {
                 val hops = catalog?.profiles?.filter {
                     it.protocol == ConnectionProtocol.SSH && it.jumpProfileId == null && it.id != draft.version?.id
                 } ?: emptyList()
@@ -305,6 +314,7 @@ private fun ProfileDetails(profile: ConnectionProfile) {
 @Composable
 private fun protocolLabel(protocol: ConnectionProtocol): String = stringResource(when (protocol) {
     ConnectionProtocol.SSH -> R.string.profile_protocol_ssh
+    ConnectionProtocol.TELNET -> R.string.profile_protocol_telnet
     ConnectionProtocol.RDP -> R.string.profile_protocol_rdp
     ConnectionProtocol.VNC -> R.string.profile_protocol_vnc
     ConnectionProtocol.STREAM -> R.string.profile_protocol_stream

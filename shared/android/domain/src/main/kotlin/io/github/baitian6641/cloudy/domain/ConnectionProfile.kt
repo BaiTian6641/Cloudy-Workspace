@@ -3,7 +3,7 @@ package io.github.baitian6641.cloudy.domain
 import java.util.UUID
 
 enum class ConnectionProtocol(val wireId: String) {
-    SSH("ssh"), RDP("rdp"), VNC("vnc"), STREAM("stream"),
+    SSH("ssh"), TELNET("telnet"), RDP("rdp"), VNC("vnc"), STREAM("stream"),
 }
 
 enum class ConnectionProfileValidationCode {
@@ -47,8 +47,13 @@ class ConnectionProfileDraft private constructor(
             }
             // Endpoint labels intentionally share the existing native-window Unicode/name policy.
             if (WindowState.nameProblem(label) != null) reject(ConnectionProfileValidationCode.INVALID_LABEL)
-            if (owner == WindowOwner.CONSOLE && protocol != ConnectionProtocol.SSH) {
+            if (owner == WindowOwner.CONSOLE &&
+                protocol !in setOf(ConnectionProtocol.SSH, ConnectionProtocol.TELNET)) {
                 reject(ConnectionProfileValidationCode.INVALID_PROTOCOL)
+            }
+            if (protocol != ConnectionProtocol.SSH && (jumpProfileId != null || keyUri != null)) {
+                reject(if (jumpProfileId != null) ConnectionProfileValidationCode.INVALID_JUMP
+                else ConnectionProfileValidationCode.INVALID_KEY_REFERENCE)
             }
             if (port !in 1..65535) reject(ConnectionProfileValidationCode.INVALID_PORT)
             val canonicalHost = try {

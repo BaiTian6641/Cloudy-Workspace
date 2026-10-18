@@ -11,6 +11,7 @@
     <string name="profile_port">Port</string>
     <string name="profile_protocol">Protocol</string>
     <string name="profile_protocol_ssh">SSH</string>
+    <string name="profile_protocol_telnet">Telnet</string>
     <string name="profile_protocol_rdp">RDP</string>
     <string name="profile_protocol_vnc">VNC</string>
     <string name="profile_protocol_stream">Streaming</string>

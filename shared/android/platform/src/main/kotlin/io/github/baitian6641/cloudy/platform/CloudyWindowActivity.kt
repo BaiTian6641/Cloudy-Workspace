@@ -109,7 +109,7 @@ abstract class CloudyWindowActivity : ComponentActivity() {
     /** Connect routes only to a qualified operation; anything else is an honest typed state. */
     private fun connectHost(row: HomeRow) {
         when (row.profile.protocol) {
-            ConnectionProtocol.SSH -> {
+            ConnectionProtocol.SSH, ConnectionProtocol.TELNET -> {
                 val terminal = sshTerminalActivity
                 if (terminal != null) {
                     home.report(null)
@@ -123,8 +123,8 @@ abstract class CloudyWindowActivity : ComponentActivity() {
                             notice = getString(R.string.cloudy_window_launch_failed)
                         }
                     }
-                } else if (windowOwner == WindowOwner.DESKTOP) {
-                    // The qualified SSH surface today is the session-linked file browser.
+                } else if (windowOwner == WindowOwner.DESKTOP && row.profile.protocol == ConnectionProtocol.SSH) {
+                    // The qualified Desktop SSH surface today is the session-linked file browser.
                     home.report(null)
                     openSshFiles()
                 } else {

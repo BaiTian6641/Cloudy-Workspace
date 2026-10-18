@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
+import io.github.baitian6641.cloudy.domain.ConnectionProfile
 import io.github.baitian6641.cloudy.domain.SshHostKeyIdentity
 import io.github.baitian6641.cloudy.domain.SshObservationProfile
 import io.github.baitian6641.cloudy.domain.SshPeerIdentity
@@ -26,6 +27,10 @@ import io.github.baitian6641.cloudy.ssh.SshPtySize
 import io.github.baitian6641.cloudy.ssh.SshTransportCode
 import io.github.baitian6641.cloudy.ssh.SshTransportCloseResult
 import io.github.baitian6641.cloudy.ssh.SshTransportOpenResult
+import io.github.baitian6641.cloudy.telnet.TelnetAdmission
+import io.github.baitian6641.cloudy.telnet.TelnetOpenResult
+import io.github.baitian6641.cloudy.telnet.TelnetSession
+import io.github.baitian6641.cloudy.telnet.TelnetSize
 import io.github.baitian6641.cloudy.terminal.TerminalAdmission
 import io.github.baitian6641.cloudy.terminal.TerminalSize
 import java.net.InetAddress
@@ -63,6 +68,7 @@ internal class TerminalSession(context: Context, private val listener: Listener)
     @Volatile private var jumpHandle: SshAuthenticationHandle? = null
     @Volatile private var jumpTransport: SshAuthenticatedTransport? = null
     @Volatile private var pty: SshOwnedPty? = null
+    @Volatile private var telnet: TelnetSession? = null
     @Volatile private var worker: Thread? = null
 
     /** Caller transfers both credentials; every rejection path disposes them. */
@@ -270,13 +276,85 @@ internal class TerminalSession(context: Context, private val listener: Listener)
         else -> true
     }
 
+    /** Plaintext Telnet has no authentication handshake or stored credentials; login is in-band. */
+    fun connectTelnet(profile: ConnectionProfile) {
+        if (!started.compareAndSet(false, true) || stopped.get() != null) return
+        val owner = Thread({
+            var endCode = "CLOSED"
+            var connected = false
+            var cleanupCertain = true
+            val ended = CountDownLatch(1)
+            try {
+                if (!active()) return@Thread
+                val address = resolve(profile.host, profile.port) ?: run { endCode = "NO_ADDRESSES"; return@Thread }
+                if (SshLocalNetworkPolicy.shouldRequestPermission(application, address) && !localPermission()) {
+                    endCode = "LOCAL_NETWORK_REQUIRED"
+                    return@Thread
+                }
+                main.post { if (active()) listener.onAuthenticated(profile.host) }
+                if (!rendererReady.await(10, TimeUnit.SECONDS)) {
+                    endCode = "RENDERER_READY_TIMEOUT"
+                    return@Thread
+                }
+                if (!active()) return@Thread
+                val initial = checkNotNull(size.get())
+                val opened = TelnetSession.open(address, profile.port,
+                    TelnetSize(initial.columns, initial.rows), object : TelnetSession.Listener {
+                        override fun onOutput(bytes: ByteArray) {
+                            if (connected) listener.onOutput(bytes, false)
+                        }
+                        override fun onEnded(code: String) {
+                            endCode = code
+                            ended.countDown()
+                        }
+                    })
+                if (opened is TelnetOpenResult.Failure) { endCode = opened.code; return@Thread }
+                val session = (opened as TelnetOpenResult.Opened).session
+                telnet = session
+                if (!active()) { session.requestClose(); return@Thread }
+                connected = true
+                session.start()
+                main.post { if (active()) listener.onSessionOpened(initial) }
+                ended.await()
+            } catch (_: InterruptedException) {
+                endCode = stopped.get() ?: "CANCELLED"
+                Thread.interrupted()
+            } catch (_: Exception) {
+                endCode = stopped.get() ?: "TELNET_FAILED"
+            } finally {
+                stopped.compareAndSet(null, endCode)
+                val owned = telnet
+                telnet = null
+                if (owned != null) {
+                    owned.requestClose()
+                    if (!owned.awaitClosed(5_000)) cleanupCertain = false
+                }
+                if (connected) {
+                    runCatching { listener.onOutputEnded() }
+                    main.post { listener.onEnded(stopped.get() ?: endCode, true, cleanupCertain) }
+                } else {
+                    main.post { listener.onEnded(stopped.get() ?: endCode, false, cleanupCertain) }
+                }
+            }
+        }, "cloudy-telnet-owner").apply { isDaemon = true }
+        worker = owner
+        try { owner.start() } catch (_: RuntimeException) {
+            close("OWNER_START_FAILED")
+            val current = stopped.get() ?: "OWNER_START_FAILED"
+            main.post { listener.onEnded(current, false, true) }
+        }
+    }
+
     fun openPty(initial: TerminalSize) {
         if (active() && size.compareAndSet(null, initial)) rendererReady.countDown()
     }
 
     /** Admission is bounded local queueing, not a server acknowledgement. */
-    fun offerInput(bytes: ByteArray): TerminalAdmission =
-        if (!active()) TerminalAdmission.STOPPED else admission(pty?.offerInput(bytes))
+    fun offerInput(bytes: ByteArray): TerminalAdmission {
+        if (!active()) return TerminalAdmission.STOPPED
+        telnet?.let { return telnetAdmission(it.offerInput(bytes)) }
+        return admission(pty?.offerInput(bytes))
+    }
 
     fun offerResize(value: TerminalSize): TerminalAdmission = synchronized(geometryLock) {
         if (!active()) return@synchronized TerminalAdmission.STOPPED
@@ -292,6 +370,7 @@ internal class TerminalSession(context: Context, private val listener: Listener)
         resolution.getAndSet(null)?.cancel()
         handle?.close()
         pty?.requestClose()
+        telnet?.requestClose()
         transport?.requestClose()
         worker?.interrupt()
     }
@@ -301,6 +380,12 @@ internal class TerminalSession(context: Context, private val listener: Listener)
     private fun localPermission() = Build.VERSION.SDK_INT < 37 ||
         application.checkSelfPermission(Manifest.permission.ACCESS_LOCAL_NETWORK) == PackageManager.PERMISSION_GRANTED
 
+    private fun telnetAdmission(value: TelnetAdmission): TerminalAdmission = when (value) {
+        TelnetAdmission.ACCEPTED -> TerminalAdmission.ACCEPTED
+        TelnetAdmission.FULL -> TerminalAdmission.FULL
+        TelnetAdmission.STALE -> TerminalAdmission.STALE
+    }
+
     private fun admission(value: SshPtyAdmission?): TerminalAdmission = when (value) {
         SshPtyAdmission.ACCEPTED -> TerminalAdmission.ACCEPTED
         SshPtyAdmission.FULL -> TerminalAdmission.FULL
@@ -308,12 +393,16 @@ internal class TerminalSession(context: Context, private val listener: Listener)
         SshPtyAdmission.INVALID_INPUT, null -> TerminalAdmission.STALE
     }
 
-    private fun resolve(profile: SshObservationProfile): InetAddress? {
+    private fun resolve(profile: SshObservationProfile): InetAddress? =
+        resolve(profile.profile.host, profile.profile.port)
+
+    private fun resolve(host: String, port: Int): InetAddress? {
         val resolver = SshAddressResolver(application)
         val answer = AtomicReference<SshAddressResult?>()
         val completed = CountDownLatch(1)
         try {
-            val request = resolver.resolve(profile.peer, 5_000) { result -> answer.set(result); completed.countDown() }
+            val peer = SshPeerIdentity.create(host, port)
+            val request = resolver.resolve(peer, 5_000) { result -> answer.set(result); completed.countDown() }
             resolution.set(request)
             if (!active()) request.cancel()
             completed.await(5, TimeUnit.SECONDS)

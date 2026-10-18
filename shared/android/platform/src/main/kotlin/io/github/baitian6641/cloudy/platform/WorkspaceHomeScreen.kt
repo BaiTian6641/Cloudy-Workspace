@@ -1066,6 +1066,7 @@ private fun filterRows(rows: List<HomeRow>, search: String): List<HomeRow> {
 
 private fun protocolLabel(protocol: ConnectionProtocol): String = when (protocol) {
     ConnectionProtocol.SSH -> "SSH"
+    ConnectionProtocol.TELNET -> "Telnet"
     ConnectionProtocol.RDP -> "RDP"
     ConnectionProtocol.VNC -> "VNC"
     ConnectionProtocol.STREAM -> "Stream"

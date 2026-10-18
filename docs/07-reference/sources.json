@@ -7936,6 +7936,78 @@
       "sourceUpdatedOn": null,
       "note": "Historical reference source, decoded from Gitiles: REGULAR_CLICK_LENGTH is100ms between touchDown and touchUp. Used only to define the qualification driver's finite injected press instead of same-timestamp events. It is not a production readiness sleep, a current-platform support claim, or permission to copy the historical hidden InputManager APIs. Actual current SDK UiAutomation/public MotionEvent APIs remain the test route.",
       "refresh": "When changing qualification gesture timing or its input-injection API."
+    },
+    {
+      "id": "R381",
+      "title": "RFC 854 Telnet protocol specification",
+      "url": "https://www.rfc-editor.org/rfc/rfc854.html",
+      "publisher": "RFC Editor / IETF",
+      "category": "protocol",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-18",
+      "sourceUpdatedOn": null,
+      "note": "Base NVT commands, IAC escaping and CR/LF conventions.",
+      "refresh": "Before changing the Telnet option set or qualifying a new server family."
+    },
+    {
+      "id": "R382",
+      "title": "RFC 855 Telnet option specifications",
+      "url": "https://www.rfc-editor.org/rfc/rfc855.html",
+      "publisher": "RFC Editor / IETF",
+      "category": "protocol",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-18",
+      "sourceUpdatedOn": null,
+      "note": "DO/DONT/WILL/WONT option negotiation states.",
+      "refresh": "Before changing the Telnet option set or qualifying a new server family."
+    },
+    {
+      "id": "R383",
+      "title": "RFC 857 Telnet echo option",
+      "url": "https://www.rfc-editor.org/rfc/rfc857.html",
+      "publisher": "RFC Editor / IETF",
+      "category": "protocol",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-18",
+      "sourceUpdatedOn": null,
+      "note": "Server echo option; Cloudy never locally echoes Telnet input.",
+      "refresh": "Before changing the Telnet option set or qualifying a new server family."
+    },
+    {
+      "id": "R384",
+      "title": "RFC 858 Telnet suppress go-ahead option",
+      "url": "https://www.rfc-editor.org/rfc/rfc858.html",
+      "publisher": "RFC Editor / IETF",
+      "category": "protocol",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-18",
+      "sourceUpdatedOn": null,
+      "note": "Character-at-a-time SGA negotiation.",
+      "refresh": "Before changing the Telnet option set or qualifying a new server family."
+    },
+    {
+      "id": "R385",
+      "title": "RFC 1073 Telnet window size option",
+      "url": "https://www.rfc-editor.org/rfc/rfc1073.html",
+      "publisher": "RFC Editor / IETF",
+      "category": "protocol",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-18",
+      "sourceUpdatedOn": null,
+      "note": "NAWS width/height subnegotiation.",
+      "refresh": "Before changing the Telnet option set or qualifying a new server family."
+    },
+    {
+      "id": "R386",
+      "title": "RFC 1091 Telnet terminal-type option",
+      "url": "https://www.rfc-editor.org/rfc/rfc1091.html",
+      "publisher": "RFC Editor / IETF",
+      "category": "protocol",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-18",
+      "sourceUpdatedOn": null,
+      "note": "TTYPE SEND/IS negotiation for xterm-256color.",
+      "refresh": "Before changing the Telnet option set or qualifying a new server family."
     }
   ]
 }
