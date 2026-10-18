@@ -1462,3 +1462,36 @@ full SSH suite passes48 methods with26 explicitly skipped opt-in cases. A real n
 SSHJ → MINA/kernel-PTY workflow independently captures exactly20,000 clipboard bytes and no cancelled
 preview/menu bytes. The source-bound record preserves fixture/backend/emulator limits; surrounding
 UI selection/focus validation is separate and does not become complete through this backend commit.
+
+## 2026-10-18 — Bounded Console controller review; publication pending
+
+The parent isolated the reviewed host controller and real PTY exercise from the still-unaccepted
+terminal/OS-served-IME integration. Controller source SHA-256
+`d513ab55956c8f361b6003e9bf49bb33371f8183d0aa98818ddb4936c737b148` is the exact source recorded by
+the retained success, failure and cancellation runs below. Private evidence is never staged.
+
+- Host proof is an exclusive0600 file in the run's private0700 directory, retained for review.
+  Reads validate the opened regular inode, owner, mode and bound; symlinks, FIFOs, excess bytes
+  and partial/non-JSON/non-PNG artifacts cannot become success evidence.
+- The maintained real kernel-PTY exercise independently captures the whole20,000-byte paste.
+  Generated ANSI/TUI content is not classified as input or physical-keyboard proof.
+- SIGTERM/timeout requests Android cancellation and awaits its terminal result before removing
+  inputs. Reverse release verifies the exact owned destination; uncertainty preserves dependencies.
+- Five exact-snapshot file-boundary regressions and explicit snapshot Ruff checks pass. The first
+  Ruff invocation excluded the ignored snapshot directory and checked no files; the corrected
+  `--no-force-exclude` invocation performed the check. The repository's Python AST39/Ruff checks
+  also passed at their recorded source boundary.
+
+Reusable real-run evidence under `qualification/results/private/console-terminal-resume/`:
+`d61a95df-4571-4f95-ac3e-89b500237899` observed real SSH effect and confirmed cleanup, but its
+initial ASCII keyboard diagnostic does **not** qualify the required original IME-first workflow.
+`eebd1ab1-3065-4279-96ca-40a928033ad9` correctly retained failed input/absent remote effect while
+confirming cleanup. Correlated cancellation `a23edd56-1fa3-4d28-bf14-fa823844d43d` retained failure,
+retired instrumentation and restored/released its owned state. All three receipts bind the same
+controller hash above; these unchanged observations were inspected, not replayed.
+
+This controller/fixture review is not M3, Q-C02, Googlebook input or R1 completion. The selected
+snapshot cannot be published alone: new proof/capture arguments require the corresponding
+Console instrumentation caller cutover. Its proposed index patch remains unapplied in ignored
+local evidence. Current renderer, clipboard/selection, OS-served-IME work and the fresh IME
+audit remain separately uncommitted and under validation.
