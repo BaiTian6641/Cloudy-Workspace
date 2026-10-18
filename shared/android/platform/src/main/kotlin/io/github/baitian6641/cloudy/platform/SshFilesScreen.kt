@@ -42,7 +42,9 @@ internal fun SshFilesScreen(
     onEdit: (SshFileEntry) -> Unit, onEditorText: (String) -> Unit, onRequestSave: () -> Unit,
     onCancelSave: () -> Unit, onConfirmSave: () -> Unit, onConfirmConflict: () -> Unit,
     onDiscardStaged: () -> Unit, onRequestCloseEditor: () -> Unit, onCancelCloseEditor: () -> Unit,
-    onConfirmCloseEditor: () -> Unit,
+    onConfirmCloseEditor: () -> Unit, onUpload: () -> Unit, onDownload: (SshFileEntry) -> Unit,
+    onCancelTransfer: () -> Unit, onConfirmUploadOverwrite: () -> Unit, onConfirmUploadCopy: () -> Unit,
+    onCancelUploadConsent: () -> Unit,
     onDisconnect: () -> Unit, onClose: () -> Unit,
     onLocations: () -> Unit, onRegister: (FilesListingCandidate, String) -> Unit,
     onCancelRegistration: (FilesListingCandidate) -> Unit,
@@ -50,7 +52,8 @@ internal fun SshFilesScreen(
 ) {
     val canConnect = interactive && !state.registrationPending && state.phase in setOf(SshFilesPhase.IDLE, SshFilesPhase.FAILED)
     val canBrowse = interactive && !state.registrationPending && state.phase == SshFilesPhase.CONNECTED
-    val canNavigate = canBrowse && state.editor == null
+    val transferIdle = state.transfer?.busy != true && state.transfer?.consent == null
+    val canNavigate = canBrowse && state.editor == null && transferIdle
     val canMutate = canNavigate && state.mutationConsent == null
     // This proposal belongs to one completed listing only. No rememberSaveable, Intent or
     // restored field can resurrect its authority after focus/lifecycle invalidation.
@@ -74,7 +77,7 @@ internal fun SshFilesScreen(
     val previewIndex = pathIndex + if (hasBrowser) 5 + state.entries.size +
         (if (state.entries.isEmpty() && state.phase == SshFilesPhase.CONNECTED) 1 else 0) +
         (if (state.mutationConsent != null) 1 else 0) + (if (state.editor != null) 1 else 0) +
-        (if (state.transfers.isNotEmpty()) 1 else 0) else 0
+        (if (state.transfer != null) 1 else 0) + (if (state.transfers.isNotEmpty()) 1 else 0) else 0
     // Reveal completed navigation/preview once; never move focus/scroll on a field keystroke.
     LaunchedEffect(state.path, hasBrowser, state.preview) {
         if (state.preview != null) scroll.scrollToItem(previewIndex)
@@ -212,8 +215,61 @@ internal fun SshFilesScreen(
                             FilesButton(R.string.ssh_files_list_path, "ssh_files_list_path", canNavigate && pathDraft.text.isNotEmpty()) { onList(pathDraft.text) }
                             FilesButton(R.string.ssh_files_refresh, "ssh_files_refresh", canNavigate) { onList(state.path) }
                             FilesButton(R.string.ssh_files_parent, "ssh_files_parent", canNavigate && state.path != "/") { onList(remoteParent(state.path)) }
+                            FilesButton(R.string.ssh_files_upload, "ssh_files_upload", canNavigate) { onUpload() }
                         }
                     }
+                    state.transfer?.let { transfer -> item(key = "transfer") {
+                        Surface(Modifier.fillMaxWidth().testTag("ssh_files_transfer"),
+                            color = MaterialTheme.colorScheme.surfaceContainer,
+                            shape = RoundedCornerShape(CloudyControlMetrics.dialogRadius)) {
+                            Column(Modifier.padding(CloudyControlMetrics.spaceLarge),
+                                verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                                Text(stringResource(if (transfer.kind == SshTransferKind.UPLOAD)
+                                    R.string.ssh_files_upload_heading else R.string.ssh_files_download_heading),
+                                    style = MaterialTheme.typography.titleLarge, modifier = Modifier.semantics { heading() })
+                                SelectionContainer { Text(transfer.name) }
+                                if (transfer.busy) {
+                                    Text(stringResource(R.string.ssh_files_transfer_busy),
+                                        modifier = Modifier.testTag("ssh_files_transfer_busy").semantics { liveRegion = LiveRegionMode.Polite })
+                                    FilesButton(R.string.ssh_files_transfer_cancel, "ssh_files_transfer_cancel",
+                                        interactive && transfer.canCancel) { onCancelTransfer() }
+                                }
+                                transfer.code?.let { Text(stringResource(R.string.ssh_files_code, it),
+                                    modifier = Modifier.testTag("ssh_files_transfer_code").semantics { liveRegion = LiveRegionMode.Polite }) }
+                                if (!transfer.busy && transfer.code == null) transfer.bytes?.let { bytes ->
+                                    Text(stringResource(R.string.ssh_files_transfer_bytes, bytes),
+                                        modifier = Modifier.testTag("ssh_files_transfer_bytes"))
+                                    transfer.sha256?.let { hash ->
+                                        Text(stringResource(R.string.ssh_files_transfer_hash, hash),
+                                            modifier = Modifier.testTag("ssh_files_transfer_hash"))
+                                    }
+                                }
+                                transfer.consent?.let { consent ->
+                                    Surface(Modifier.fillMaxWidth().testTag("ssh_files_upload_consent"),
+                                        color = MaterialTheme.colorScheme.surface,
+                                        shape = RoundedCornerShape(CloudyControlMetrics.dialogRadius)) {
+                                        Column(Modifier.padding(CloudyControlMetrics.spaceLarge),
+                                            verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceMedium)) {
+                                            Text(stringResource(R.string.ssh_files_upload_exists), style = MaterialTheme.typography.titleLarge,
+                                                modifier = Modifier.semantics { heading() })
+                                            SelectionContainer { Text(consent.targetPath) }
+                                            Text(stringResource(R.string.ssh_files_transfer_bytes, consent.byteCount))
+                                            Text(stringResource(R.string.ssh_files_transfer_hash, consent.sha256))
+                                            FlowRow(horizontalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall),
+                                                verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                                                FilesButton(R.string.ssh_files_upload_overwrite, "ssh_files_upload_overwrite",
+                                                    canBrowse) { onConfirmUploadOverwrite() }
+                                                FilesButton(R.string.ssh_files_upload_copy, "ssh_files_upload_copy",
+                                                    canBrowse) { onConfirmUploadCopy() }
+                                                FilesButton(R.string.ssh_files_cancel, "ssh_files_upload_cancel",
+                                                    true) { onCancelUploadConsent() }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } }
                     state.editor?.let { view -> item(key = "editor") {
                         Surface(Modifier.fillMaxWidth().testTag("ssh_files_editor"),
                             color = MaterialTheme.colorScheme.surfaceContainer,
@@ -374,8 +430,11 @@ internal fun SshFilesScreen(
                                             onList(remoteChild(state.path, entry.name))
                                         }
                                         SshFileKind.REGULAR -> {
-                                            FilesButton(R.string.ssh_files_read, "ssh_files_read_$index", canBrowse && state.editor == null) { onRead(entry) }
+                                            FilesButton(R.string.ssh_files_read, "ssh_files_read_$index",
+                                                canBrowse && state.editor == null && transferIdle) { onRead(entry) }
                                             FilesButton(R.string.ssh_files_edit, "ssh_files_edit_$index", canMutate) { onEdit(entry) }
+                                            FilesButton(R.string.ssh_files_download, "ssh_files_download_$index",
+                                                canBrowse && state.editor == null && transferIdle) { onDownload(entry) }
                                         }
                                         SshFileKind.OTHER -> Text(stringResource(R.string.ssh_files_other_unsupported))
                                     }

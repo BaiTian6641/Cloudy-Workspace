@@ -21,6 +21,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import io.github.baitian6641.cloudy.domain.WindowOwner
+import io.github.baitian6641.cloudy.ssh.SshFileEntry
 import io.github.baitian6641.cloudy.ssh.SshPasswordCredentials
 
 /** Owning-app read-only remote files. Credential fields are transient and never enter saved state. */
@@ -35,12 +36,32 @@ class CloudySshFilesActivity : ComponentActivity() {
     private var password by mutableStateOf(TextFieldValue())
     private var credentialEpoch by mutableLongStateOf(0L)
     private var notice by mutableStateOf<String?>(null)
+    private var pendingDownload: SshFileEntry? = null
+    private var pickerInFlight = false
 
     private val permission = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
         if (::model.isInitialized && !isDestroyed) {
             clearFields()
             model.permissionResult()
             notice = getString(R.string.ssh_files_permission_return)
+        }
+    }
+    private val uploadPicker = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        pickerInFlight = false
+        if (uri != null && ::model.isInitialized && !isDestroyed && !isFinishing) {
+            // The result can arrive before onStart reattaches the stopped owner.
+            model.onOwnerStarted(attachment)
+            model.upload(uri.toString())
+        }
+    }
+    private val downloadPicker = registerForActivityResult(
+        ActivityResultContracts.CreateDocument("application/octet-stream")) { uri ->
+        pickerInFlight = false
+        val entry = pendingDownload
+        pendingDownload = null
+        if (uri != null && entry != null && ::model.isInitialized && !isDestroyed && !isFinishing) {
+            model.onOwnerStarted(attachment)
+            model.download(entry, uri.toString())
         }
     }
 
@@ -149,8 +170,27 @@ class CloudySshFilesActivity : ComponentActivity() {
                     onRequestCloseEditor = model::requestCloseEditor,
                     onCancelCloseEditor = model::cancelCloseEditor,
                     onConfirmCloseEditor = { if (interactive && hasWindowFocus()) model.confirmCloseEditor() },
+                    onUpload = {
+                        if (interactive && hasWindowFocus()) {
+                            notice = null
+                            pickerInFlight = true
+                            uploadPicker.launch(arrayOf("*/*"))
+                        }
+                    },
+                    onDownload = { entry ->
+                        if (interactive && hasWindowFocus()) {
+                            notice = null
+                            pendingDownload = entry
+                            pickerInFlight = true
+                            downloadPicker.launch(entry.name)
+                        }
+                    },
+                    onCancelTransfer = { if (interactive && hasWindowFocus()) model.cancelTransfer() },
+                    onConfirmUploadOverwrite = { if (interactive && hasWindowFocus()) model.confirmUploadOverwrite() },
+                    onConfirmUploadCopy = { if (interactive && hasWindowFocus()) model.confirmUploadCopy() },
+                    onCancelUploadConsent = { if (interactive && hasWindowFocus()) model.cancelUploadConsent() },
                     onDisconnect = { clearFields(); notice = null; model.disconnect() },
-                    onClose = { clearFields(); model.disconnect(); finish() },
+                    onClose = { pendingDownload = null; clearFields(); model.disconnect(); finish() },
                     onLocations = {
                         if (canEdit() && !model.state.registrationPending) {
                             clearFields()
@@ -186,6 +226,7 @@ class CloudySshFilesActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         interactive = true
+        pickerInFlight = false
         if (::model.isInitialized) model.onOwnerForeground(attachment, hasWindowFocus())
     }
     override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -208,7 +249,7 @@ class CloudySshFilesActivity : ComponentActivity() {
     override fun onStop() {
         // Model-owned configuration handoff has a bounded lease and token fencing. The model
         // retains no old Activity and an absent replacement cannot keep the session indefinitely.
-        if (::model.isInitialized) model.onOwnerStopped(attachment, isChangingConfigurations)
+        if (::model.isInitialized) model.onOwnerStopped(attachment, isChangingConfigurations, pickerInFlight)
         super.onStop()
     }
     override fun onSaveInstanceState(outState: Bundle) {

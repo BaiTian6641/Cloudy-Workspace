@@ -27,7 +27,8 @@ internal class FilesTransferRecord internal constructor(
     val tempPath: String, val byteCount: Int, val state: FilesTransferState, val replaceConsent: Boolean,
     val createdAtMillis: Long, val updatedAtMillis: Long,
 ) {
-    internal fun next(state: FilesTransferState, replaceConsent: Boolean, updatedAtMillis: Long) =
+    internal fun next(state: FilesTransferState, replaceConsent: Boolean, updatedAtMillis: Long,
+                      byteCount: Int = this.byteCount, path: String = this.path) =
         FilesTransferRecord(id, profileId, profileRevision, path, tempPath, byteCount, state, replaceConsent,
             createdAtMillis, updatedAtMillis)
     override fun toString() = "FilesTransferRecord(${state.name},redacted)"
@@ -84,13 +85,17 @@ internal class FilesTransferJournal(
         FilesJournalResult.Success(record)
     }
 
-    fun transition(id: String, state: FilesTransferState, replaceConsent: Boolean):
-        FilesJournalResult<FilesTransferRecord> = guarded {
-        if (id.isEmpty() || id.length > 128) return@guarded FilesJournalResult.Failure(FilesJournalCode.INVALID_INPUT)
+    fun transition(id: String, state: FilesTransferState, replaceConsent: Boolean,
+                   byteCount: Int? = null, path: String? = null): FilesJournalResult<FilesTransferRecord> = guarded {
+        if (id.isEmpty() || id.length > 128 || (byteCount != null && byteCount !in 0..MAX_BYTES) ||
+            (path != null && (path.isEmpty() || path.length > MAX_PATH_UNITS || path.any { it == '\u0000' }))) {
+            return@guarded FilesJournalResult.Failure(FilesJournalCode.INVALID_INPUT)
+        }
         val records = read().toMutableList()
         val index = records.indexOfFirst { it.id == id }
         if (index < 0) return@guarded FilesJournalResult.Failure(FilesJournalCode.INVALID_INPUT)
-        val updated = records[index].next(state, replaceConsent, now())
+        val updated = records[index].next(state, replaceConsent, now(),
+            byteCount ?: records[index].byteCount, path ?: records[index].path)
         records[index] = updated
         write(records)
         FilesJournalResult.Success(updated)
@@ -158,7 +163,7 @@ internal class FilesTransferJournal(
     companion object {
         const val MAX_RECORDS = 64
         const val MAX_PATH_UNITS = 4096
-        const val MAX_BYTES = 65_536
+        const val MAX_BYTES = 67_108_864
         private const val MAX_JOURNAL_BYTES = 1L shl 20
         private const val HEADER = "cloudy-transfers\t1"
         private val TERMINAL = setOf(FilesTransferState.COMMITTED, FilesTransferState.CONFLICT, FilesTransferState.FAILED)

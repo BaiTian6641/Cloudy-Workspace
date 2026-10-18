@@ -5,8 +5,12 @@ import net.schmizz.sshj.sftp.RenameFlags
 import net.schmizz.sshj.sftp.FileAttributes
 import net.schmizz.sshj.sftp.FileMode
 import net.schmizz.sshj.sftp.OpenMode
+import java.io.InputStream
+import java.io.OutputStream
+import java.security.MessageDigest
 import java.util.Collections
 import java.util.EnumSet
+import java.util.concurrent.atomic.AtomicBoolean
 
 sealed interface SshFilesResult<out T> {
     class Success<T>(val value: T) : SshFilesResult<T> {
@@ -20,6 +24,10 @@ enum class SshFileKind { REGULAR, DIRECTORY, OTHER }
 class SshFileEntry internal constructor(val name: String, val kind: SshFileKind, val size: Long?) {
     /** Verified post-save size update for the same remote leaf; identity/name/kind are unchanged. */
     fun withSize(size: Long?): SshFileEntry = SshFileEntry(name, kind, size)
+    companion object {
+        /** Verified post-upload leaf; callers must pass a server-derived name and stat size. */
+        fun regular(name: String, size: Long?): SshFileEntry = SshFileEntry(name, SshFileKind.REGULAR, size)
+    }
     override fun toString() = "SshFileEntry(redacted)"
 }
 class SshFileBytes internal constructor(bytes: ByteArray) {
@@ -29,6 +37,20 @@ class SshFileBytes internal constructor(bytes: ByteArray) {
     override fun toString() = "SshFileBytes(redacted)"
 }
 internal class SshFileBoundException(val code: SshTransportCode) : RuntimeException(code.name)
+
+/** Caller-owned cancellation checked between transfer chunks; never retries or replays. */
+class SshTransferCancellation {
+    private val cancelled = AtomicBoolean(false)
+    fun cancel() { cancelled.set(true) }
+    fun isCancelled(): Boolean = cancelled.get()
+    override fun toString() = "SshTransferCancellation(cancelled=${isCancelled()})"
+}
+
+/** SHA-256 of bytes actually streamed from the remote; not a server-side integrity claim. */
+class SshFileDigest internal constructor(val byteCount: Long, private val digest: ByteArray) {
+    fun sha256Hex(): String = digest.joinToString("") { "%02x".format(it.toInt() and 255) }
+    override fun toString() = "SshFileDigest(${byteCount} bytes,redacted)"
+}
 
 /** Bounded read/write SFTP operations on one retained transport. Remote names stay leaf values. */
 class SshFiles internal constructor(private val transport: SshAuthenticatedTransport) {
@@ -92,6 +114,111 @@ class SshFiles internal constructor(private val transport: SshAuthenticatedTrans
                     }
                 }
                 SshFileBytes(buffer.copyOf(used))
+            } finally { buffer.fill(0) }
+        }
+    }
+
+    /** Streams one complete bounded regular file to a caller-owned sink. Recoverable on failure. */
+    fun readTo(path: String, output: OutputStream, maxBytes: Long = MAX_STREAM_BYTES,
+               cancellation: SshTransferCancellation? = null, timeoutMillis: Int = 30_000): SshFilesResult<Long> {
+        if (!SshFileLimits.path(path) || maxBytes !in 1..MAX_STREAM_BYTES) {
+            return SshFilesResult.Failure(SshTransportCode.INVALID_INPUT)
+        }
+        return transport.withFilesRecoverable(timeoutMillis) { sftp ->
+            val attributes = sftp.lstat(path)
+            if (attributes.type != FileMode.Type.REGULAR) throw SshFileBoundException(SshTransportCode.INVALID_REMOTE_DATA)
+            val expected = if (attributes.has(FileAttributes.Flag.SIZE)) attributes.size else null
+            if (expected != null && (expected < 0 || expected > maxBytes)) {
+                throw SshFileBoundException(SshTransportCode.LIMIT_EXCEEDED)
+            }
+            val buffer = ByteArray(CHUNK_BYTES)
+            var used = 0L
+            try {
+                sftp.open(path, EnumSet.of(OpenMode.READ)).use { file ->
+                    while (true) {
+                        cancellation?.let { if (it.isCancelled()) throw SshFileBoundException(SshTransportCode.CANCELLED) }
+                        val count = file.read(used, buffer, 0, buffer.size)
+                        if (count == -1) break
+                        if (count <= 0) throw SshFileBoundException(SshTransportCode.INVALID_REMOTE_DATA)
+                        used += count
+                        if (used > maxBytes) throw SshFileBoundException(SshTransportCode.LIMIT_EXCEEDED)
+                        output.write(buffer, 0, count)
+                    }
+                }
+                if (expected != null && expected >= 0 && used != expected) {
+                    throw SshFileBoundException(SshTransportCode.INVALID_REMOTE_DATA)
+                }
+                used
+            } finally { buffer.fill(0) }
+        }
+    }
+
+    /** Streams a caller-owned source into one exclusive remote file; failed partials are removed. */
+    fun writeFrom(path: String, input: InputStream, maxBytes: Long = MAX_STREAM_BYTES,
+                  cancellation: SshTransferCancellation? = null, timeoutMillis: Int = 30_000): SshFilesResult<Long> {
+        if (!SshFileLimits.path(path) || maxBytes !in 1..MAX_STREAM_BYTES) {
+            return SshFilesResult.Failure(SshTransportCode.INVALID_INPUT)
+        }
+        return transport.withFilesRecoverable(timeoutMillis) { sftp ->
+            if (sftp.statExistence(path) != null) throw SshFileBoundException(SshTransportCode.ALREADY_EXISTS)
+            val buffer = ByteArray(CHUNK_BYTES)
+            var created = false
+            var used = 0L
+            try {
+                sftp.open(path, EnumSet.of(OpenMode.CREAT, OpenMode.WRITE, OpenMode.EXCL)).use { file ->
+                    created = true
+                    while (true) {
+                        cancellation?.let { if (it.isCancelled()) throw SshFileBoundException(SshTransportCode.CANCELLED) }
+                        val count = input.read(buffer)
+                        if (count == -1) break
+                        if (count <= 0) throw SshFileBoundException(SshTransportCode.OPERATION_FAILED)
+                        used += count
+                        if (used > maxBytes) throw SshFileBoundException(SshTransportCode.LIMIT_EXCEEDED)
+                        file.write(used - count, buffer, 0, count)
+                    }
+                }
+                used
+            } catch (failure: Exception) {
+                if (created && runCatching { sftp.rm(path) }.isFailure) {
+                    throw SshFileBoundException(SshTransportCode.CLEANUP_UNCERTAIN)
+                }
+                throw failure
+            } finally { buffer.fill(0) }
+        }
+    }
+
+    /** Streams the remote file through SHA-256 without returning content; counts must match stat. */
+    fun digest(path: String, maxBytes: Long = MAX_STREAM_BYTES,
+               cancellation: SshTransferCancellation? = null, timeoutMillis: Int = 30_000): SshFilesResult<SshFileDigest> {
+        if (!SshFileLimits.path(path) || maxBytes !in 1..MAX_STREAM_BYTES) {
+            return SshFilesResult.Failure(SshTransportCode.INVALID_INPUT)
+        }
+        return transport.withFilesRecoverable(timeoutMillis) { sftp ->
+            val attributes = sftp.lstat(path)
+            if (attributes.type != FileMode.Type.REGULAR) throw SshFileBoundException(SshTransportCode.INVALID_REMOTE_DATA)
+            val expected = if (attributes.has(FileAttributes.Flag.SIZE)) attributes.size else null
+            if (expected != null && (expected < 0 || expected > maxBytes)) {
+                throw SshFileBoundException(SshTransportCode.LIMIT_EXCEEDED)
+            }
+            val digest = MessageDigest.getInstance("SHA-256")
+            val buffer = ByteArray(CHUNK_BYTES)
+            var used = 0L
+            try {
+                sftp.open(path, EnumSet.of(OpenMode.READ)).use { file ->
+                    while (true) {
+                        cancellation?.let { if (it.isCancelled()) throw SshFileBoundException(SshTransportCode.CANCELLED) }
+                        val count = file.read(used, buffer, 0, buffer.size)
+                        if (count == -1) break
+                        if (count <= 0) throw SshFileBoundException(SshTransportCode.INVALID_REMOTE_DATA)
+                        used += count
+                        if (used > maxBytes) throw SshFileBoundException(SshTransportCode.LIMIT_EXCEEDED)
+                        digest.update(buffer, 0, count)
+                    }
+                }
+                if (expected != null && expected >= 0 && used != expected) {
+                    throw SshFileBoundException(SshTransportCode.INVALID_REMOTE_DATA)
+                }
+                SshFileDigest(used, digest.digest())
             } finally { buffer.fill(0) }
         }
     }
@@ -187,6 +314,8 @@ class SshFiles internal constructor(private val transport: SshAuthenticatedTrans
     companion object {
         const val MAX_ENTRIES = 512
         const val MAX_WRITE_BYTES = 1_048_576
+        const val MAX_STREAM_BYTES = 67_108_864L
+        const val CHUNK_BYTES = 32_768
         const val MAX_BYTES = 1_048_576
         const val MAX_PATH_UNITS = 4096
         const val MAX_NAME_UNITS = 1024

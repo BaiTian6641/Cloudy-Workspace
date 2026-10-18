@@ -4,13 +4,16 @@ import android.Manifest
 import android.app.Application
 import android.content.Context
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
+import android.provider.OpenableColumns
 import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
 import io.github.baitian6641.cloudy.domain.ConnectionProfile
 import io.github.baitian6641.cloudy.domain.ConnectionProtocol
@@ -24,15 +27,23 @@ import io.github.baitian6641.cloudy.ssh.SshAuthenticatedTransportFactory
 import io.github.baitian6641.cloudy.ssh.SshFileEntry
 import io.github.baitian6641.cloudy.ssh.SshFileKind
 import io.github.baitian6641.cloudy.ssh.SshFilesResult
+import io.github.baitian6641.cloudy.ssh.SshFileDigest
+import io.github.baitian6641.cloudy.ssh.SshTransferCancellation
 import io.github.baitian6641.cloudy.ssh.SshFiles
 import io.github.baitian6641.cloudy.ssh.SshFileEditor
 import io.github.baitian6641.cloudy.ssh.SshPasswordCredentials
 import io.github.baitian6641.cloudy.ssh.SshTransportCloseResult
 import io.github.baitian6641.cloudy.ssh.SshTransportCode
 import io.github.baitian6641.cloudy.ssh.SshTransportOpenResult
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.io.InputStream
 import java.nio.ByteBuffer
 import java.nio.charset.CharacterCodingException
 import java.nio.charset.CodingErrorAction
+import java.security.DigestInputStream
+import java.security.MessageDigest
 import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.RejectedExecutionException
@@ -41,6 +52,7 @@ import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicReference
+import java.util.UUID
 
 internal enum class SshFilesPhase { IDLE, LOADING, CONNECTING, CONNECTED, READING, MUTATING, RETIRING, FAILED }
 
@@ -76,6 +88,24 @@ internal class SshFilesMutationConsent internal constructor(
     val newName: String?, val targetPath: String?, val epoch: Long,
 ) { override fun toString() = "SshFilesMutationConsent(redacted)" }
 
+internal enum class SshTransferKind { UPLOAD, DOWNLOAD }
+
+/** Pending upload of an already-verified private remote temp to an existing target. */
+internal class SshUploadConsent internal constructor(
+    val targetPath: String, val tempPath: String, val recordId: String, val byteCount: Long, val sha256: String,
+) { override fun toString() = "SshUploadConsent(redacted)" }
+
+internal class SshTransferView internal constructor(
+    val kind: SshTransferKind, val name: String, val busy: Boolean, val canCancel: Boolean,
+    val bytes: Long?, val sha256: String?, val code: String?, val consent: SshUploadConsent?,
+) {
+    internal fun next(name: String = this.name, busy: Boolean = this.busy, canCancel: Boolean = this.canCancel,
+                      bytes: Long? = this.bytes, sha256: String? = this.sha256, code: String? = this.code,
+                      consent: SshUploadConsent? = this.consent) =
+        SshTransferView(kind, name, busy, canCancel, bytes, sha256, code, consent)
+    override fun toString() = "SshTransferView(${kind.name},redacted)"
+}
+
 internal data class SshFilesSessionState(
     val catalog: ConnectionProfileCatalog? = null,
     val selected: SshObservationProfile? = null,
@@ -95,6 +125,7 @@ internal data class SshFilesSessionState(
     val mutationConsent: SshFilesMutationConsent? = null,
     val editor: SshEditorView? = null,
     val transfers: List<FilesTransferRecord> = emptyList(),
+    val transfer: SshTransferView? = null,
 ) {
     override fun toString() = "SshFilesSessionState(${phase.name},redacted)"
 }
@@ -130,6 +161,8 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
         var recordId: String? = null
     }
     private var editorContext: EditorContext? = null
+    @Volatile private var transferCancellation: SshTransferCancellation? = null
+    @Volatile private var transferProfileId: String = ""
 
 
     fun onOwnerStarted(token: Any) {
@@ -155,19 +188,25 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
         if (!foreground) invalidateListing()
     }
 
-    fun onOwnerStopped(token: Any, changingConfigurations: Boolean) {
+    fun onOwnerStopped(token: Any, changingConfigurations: Boolean, pickerInFlight: Boolean = false) {
         main()
         if (cleared || ownerToken !== token) return
         ownerToken = null
         synchronized(registrationGate) { registrationOwner = null; registrationForeground = false }
         invalidateListing()
         clearHandoff()
-        if (!changingConfigurations || state.phase !in setOf(SshFilesPhase.CONNECTED, SshFilesPhase.READING)) {
+        // A document picker launches another Activity and stops this owner. That bounded,
+        // explicit handoff may preserve the live session until the result (or timeout);
+        // every other stop keeps the existing disconnect-on-stop ownership policy.
+        val preserve = (changingConfigurations || pickerInFlight) &&
+            state.phase in setOf(SshFilesPhase.CONNECTED, SshFilesPhase.READING)
+        if (!preserve) {
             disconnect()
             return
         }
+        val timeoutMillis = if (pickerInFlight) PICKER_HANDOFF_MILLIS else CONFIGURATION_HANDOFF_MILLIS
         val epoch = attachmentEpoch
-        handoffDeadline = SystemClock.elapsedRealtime() + CONFIGURATION_HANDOFF_MILLIS
+        handoffDeadline = SystemClock.elapsedRealtime() + timeoutMillis
         val timeout = Runnable {
             if (!cleared && ownerToken == null && attachmentEpoch == epoch) {
                 clearHandoff()
@@ -175,7 +214,7 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
             }
         }
         handoffTimeout = timeout
-        FilesRuntime.main.postDelayed(timeout, CONFIGURATION_HANDOFF_MILLIS)
+        FilesRuntime.main.postDelayed(timeout, timeoutMillis)
     }
 
     private fun clearHandoff() {
@@ -508,7 +547,7 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
         main()
         val token = session ?: return
         if (ownerToken == null || state.phase != SshFilesPhase.CONNECTED || token.cancelled.get() ||
-            state.registrationPending || state.editor != null) return
+            state.registrationPending || state.editor != null || state.transfer?.busy == true) return
         invalidateListing()
         val version = generation
         val listing = synchronized(registrationGate) { listingEpoch }
@@ -544,8 +583,8 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
         main()
         val token = session ?: return
         if (ownerToken == null || state.phase != SshFilesPhase.CONNECTED || token.cancelled.get() ||
-            state.registrationPending || state.editor != null || state.entries.none { it === entry } ||
-            entry.kind != SshFileKind.REGULAR) return
+            state.registrationPending || state.editor != null || state.transfer?.busy == true ||
+            state.entries.none { it === entry } || entry.kind != SshFileKind.REGULAR) return
         if ((entry.size ?: 0) > PREVIEW_LIMIT) { state = state.copy(code = "PREVIEW_LIMIT"); return }
         val path = if (state.path.endsWith('/')) state.path + entry.name else state.path + "/" + entry.name
         invalidateListing()
@@ -567,7 +606,7 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
 
     private fun mutationReady(token: FilesSession) = ownerToken != null &&
         state.phase == SshFilesPhase.CONNECTED && !token.cancelled.get() && !state.registrationPending &&
-        state.mutationConsent == null && state.editor == null
+        state.mutationConsent == null && state.editor == null && state.transfer?.busy != true
 
     private fun invalidLeafName(name: String): Boolean = name.isEmpty() ||
         name.length > SshFiles.MAX_NAME_UNITS || name == "." || name == ".." ||
@@ -711,7 +750,7 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
 
     private fun fileActionReady(token: FilesSession) = ownerToken != null &&
         state.phase == SshFilesPhase.CONNECTED && !token.cancelled.get() && !state.registrationPending &&
-        state.mutationConsent == null && state.editor == null && state.editor == null
+        state.mutationConsent == null && state.editor == null && state.transfer?.busy != true && state.transfer?.busy != true && state.editor == null
 
     private fun journalRecords(profileId: String): List<FilesTransferRecord> {
         val loaded = FilesTransferJournal(FilesTransferJournal.appRoot(app)).load()
@@ -995,6 +1034,457 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
         state = state.copy(editor = null)
     }
 
+    private fun transferReady(token: FilesSession) = fileActionReady(token) &&
+        state.transfer?.busy != true && state.transfer?.consent == null
+
+    private fun transferLeaf(raw: String?): String {
+        val candidate = raw?.substringAfterLast('/')?.substringAfterLast('\\')?.trim().orEmpty()
+        return if (candidate.isEmpty() || candidate.length > SshFiles.MAX_NAME_UNITS ||
+            candidate == "." || candidate == ".." || candidate.any { it == '/' || it == '\\' || Character.isISOControl(it) })
+            "upload.bin" else candidate
+    }
+
+    private fun digestFile(file: File): String {
+        val digest = MessageDigest.getInstance("SHA-256")
+        val buffer = ByteArray(32_768)
+        try {
+            FileInputStream(file).use { input ->
+                while (true) {
+                    val count = input.read(buffer)
+                    if (count == -1) break
+                    if (count <= 0) throw IllegalStateException()
+                    digest.update(buffer, 0, count)
+                }
+            }
+            return digest.digest().joinToString("") { "%02x".format(it.toInt() and 255) }
+        } finally { buffer.fill(0) }
+    }
+
+    private fun discardTemp(transport: SshAuthenticatedTransport, path: String): Boolean {
+        val result = transport.files.removeFile(path, 3_000)
+        return result is SshFilesResult.Success || (result is SshFilesResult.Failure && result.code == SshTransportCode.NOT_FOUND)
+    }
+
+    fun upload(sourceUri: String) {
+        main()
+        val token = session ?: return
+        if (!transferReady(token)) return
+        val uri = runCatching { sourceUri.toUri() }.getOrNull()
+        if (uri == null || uri.scheme != "content") {
+            state = state.copy(transfer = SshTransferView(SshTransferKind.UPLOAD, "upload",
+                false, false, null, null, "INVALID_INPUT", null))
+            return
+        }
+        val profile = state.selected?.profile ?: return
+        val parent = state.path
+        val cancellation = SshTransferCancellation()
+        transferCancellation = cancellation
+        transferProfileId = profile.id
+        state = state.copy(transfer = SshTransferView(SshTransferKind.UPLOAD, "upload", true, true, null, null, null, null))
+        if (!FilesRuntime.work {
+                try { uploadWorker(token, profile.id, profile.revision.toInt(), parent, uri, cancellation) }
+                catch (_: Exception) { finishTransfer(token, generation, "UNAVAILABLE") }
+            }) {
+            transferCancellation = null
+            state = state.copy(transfer = state.transfer?.next(busy = false, canCancel = false, code = "BUSY"))
+        }
+    }
+
+    private fun contentLeaf(uri: Uri): String {
+        val fromProvider = runCatching {
+            app.contentResolver.query(uri, arrayOf(OpenableColumns.DISPLAY_NAME), null, null, null)?.use { cursor ->
+                if (cursor.moveToFirst()) cursor.getString(0) else null
+            }
+        }.getOrNull()
+        return transferLeaf(fromProvider ?: uri.lastPathSegment)
+    }
+
+    private fun uploadWorker(token: FilesSession, profileId: String, revision: Int, parent: String,
+                             uri: Uri, cancellation: SshTransferCancellation) {
+        val version = generation
+        val transport = token.transport.get()
+        if (transport == null) {
+            finishTransfer(token, version, "UNAVAILABLE")
+            return
+        }
+        val name = contentLeaf(uri)
+        val target = remoteChildPath(parent, name)
+        val temp = remoteChildPath(parent, ".cloudy-upload-${UUID.randomUUID().toString().replace("-", "").take(16)}")
+        publish(token, version) { it.copy(transfer = it.transfer?.next(name = name)) }
+        val journal = FilesTransferJournal(FilesTransferJournal.appRoot(app))
+        // Journal intent before bytes leave the source; 0 means the byte count is not known yet.
+        val begun = journal.begin(profileId, revision, target, temp, 0)
+        if (begun is FilesJournalResult.Failure) {
+            finishTransfer(token, version, "JOURNAL_${begun.code.name}")
+            return
+        }
+        val recordId = (begun as FilesJournalResult.Success).value.id
+        val input = try { app.contentResolver.openInputStream(uri) } catch (_: Exception) { null }
+        if (input == null) {
+            journal.transition(recordId, FilesTransferState.FAILED, false)
+            finishTransfer(token, version, "SOURCE_UNAVAILABLE")
+            return
+        }
+        val digest = MessageDigest.getInstance("SHA-256")
+        val counted = DigestInputStream(input, digest)
+        val written = try {
+            when (val result = transport.files.writeFrom(temp, counted, SshFiles.MAX_STREAM_BYTES,
+                cancellation, 30_000)) {
+                is SshFilesResult.Failure -> {
+                    journal.transition(recordId, FilesTransferState.FAILED, false)
+                    finishTransfer(token, version, result.code.name)
+                    return
+                }
+                is SshFilesResult.Success -> result.value
+            }
+        } finally { counted.close() }
+        val localHash = digest.digest().joinToString("") { "%02x".format(it.toInt() and 255) }
+        val remoteDigest = when (val result = transport.files.digest(temp, SshFiles.MAX_STREAM_BYTES,
+            cancellation, 30_000)) {
+            is SshFilesResult.Failure -> {
+                discardTemp(transport, temp)
+                journal.transition(recordId, FilesTransferState.FAILED, false)
+                finishTransfer(token, version, result.code.name)
+                return
+            }
+            is SshFilesResult.Success -> result.value
+        }
+        if (remoteDigest.byteCount != written || remoteDigest.sha256Hex() != localHash) {
+            discardTemp(transport, temp)
+            journal.transition(recordId, FilesTransferState.FAILED, false)
+            finishTransfer(token, version, "INTEGRITY_MISMATCH")
+            return
+        }
+        if (cancellation.isCancelled()) {
+            discardTemp(transport, temp)
+            journal.transition(recordId, FilesTransferState.FAILED, false)
+            finishTransfer(token, version, "CANCELLED")
+            return
+        }
+        journal.transition(recordId, FilesTransferState.STAGED, false, byteCount = written.toInt())
+        when (val existing = transport.files.stat(target, 3_000)) {
+            is SshFilesResult.Failure -> {
+                if (existing.code == SshTransportCode.NOT_FOUND) {
+                    commitUpload(token, profileId, parent, name, target, temp, recordId, written, localHash,
+                        overwrite = false, copy = false)
+                } else {
+                    discardTemp(transport, temp)
+                    journal.transition(recordId, FilesTransferState.FAILED, false)
+                    finishTransfer(token, version, existing.code.name)
+                }
+            }
+            is SshFilesResult.Success -> {
+                transferCancellation = null
+                val records = journalRecords(profileId)
+                publish(token, version) {
+                    it.copy(transfer = SshTransferView(SshTransferKind.UPLOAD, name, false, false, written, localHash,
+                        null, SshUploadConsent(target, temp, recordId, written, localHash)),
+                        transfers = records)
+                }
+            }
+        }
+    }
+
+    fun confirmUploadOverwrite() {
+        main()
+        val token = session ?: return
+        val view = state.transfer ?: return
+        val consent = view.consent ?: return
+        if (view.busy) return
+        val profileId = state.selected?.profile?.id ?: return
+        val parent = state.path
+        state = state.copy(transfer = view.next(busy = true, canCancel = false, consent = null))
+        if (!FilesRuntime.work {
+                try {
+                    commitUpload(token, profileId, parent, transferLeaf(consent.targetPath),
+                        consent.targetPath, consent.tempPath, consent.recordId, consent.byteCount, consent.sha256,
+                        overwrite = true, copy = false)
+                } catch (_: Exception) { finishTransfer(token, generation, "UNAVAILABLE") }
+            }) state = state.copy(transfer = state.transfer?.next(busy = false, code = "BUSY"))
+    }
+
+    fun confirmUploadCopy() {
+        main()
+        val token = session ?: return
+        val view = state.transfer ?: return
+        val consent = view.consent ?: return
+        if (view.busy) return
+        val profileId = state.selected?.profile?.id ?: return
+        val parent = state.path
+        state = state.copy(transfer = view.next(busy = true, canCancel = false, consent = null))
+        if (!FilesRuntime.work {
+                try {
+                    commitUpload(token, profileId, parent, transferLeaf(consent.targetPath),
+                        consent.targetPath, consent.tempPath, consent.recordId, consent.byteCount, consent.sha256,
+                        overwrite = false, copy = true)
+                } catch (_: Exception) { finishTransfer(token, generation, "UNAVAILABLE") }
+            }) state = state.copy(transfer = state.transfer?.next(busy = false, code = "BUSY"))
+    }
+
+    fun cancelUploadConsent() {
+        main()
+        val token = session ?: return
+        val view = state.transfer ?: return
+        val consent = view.consent ?: return
+        if (view.busy) return
+        state = state.copy(transfer = view.next(busy = true, canCancel = false, consent = null))
+        if (!FilesRuntime.work {
+              try {
+                val transport = token.transport.get()
+                val journal = FilesTransferJournal(FilesTransferJournal.appRoot(app))
+                val removed = transport?.let { discardTemp(it, consent.tempPath) }
+                val uncertain = removed != true
+                journal.transition(consent.recordId,
+                    if (uncertain) FilesTransferState.UNCERTAIN else FilesTransferState.FAILED, false)
+                val records = journalRecords(transferProfileId)
+                publish(token, generation) {
+                    it.copy(transfer = it.transfer?.next(busy = false, consent = null,
+                        code = if (uncertain) "CLEANUP_UNCERTAIN" else "CANCELLED"), transfers = records)
+                }
+              } catch (_: Exception) { finishTransfer(token, generation, "UNAVAILABLE") }
+            }) state = state.copy(transfer = state.transfer?.next(busy = false, code = "BUSY"))
+    }
+
+    private fun commitUpload(token: FilesSession, profileId: String, parent: String, name: String,
+                             target: String, temp: String, recordId: String, bytes: Long, sha256: String,
+                             overwrite: Boolean, copy: Boolean) {
+        val version = generation
+        val transport = token.transport.get()
+        if (transport == null) {
+            finishTransfer(token, version, "UNAVAILABLE")
+            return
+        }
+        var finalName = name
+        var finalPath = target
+        if (copy) {
+            var found = false
+            for (index in 1..8) {
+                val candidate = copyName(name, index)
+                val candidatePath = remoteChildPath(parent, candidate)
+                when (val stat = transport.files.stat(candidatePath, 3_000)) {
+                    is SshFilesResult.Failure -> if (stat.code == SshTransportCode.NOT_FOUND) {
+                        finalName = candidate; finalPath = candidatePath; found = true
+                        break
+                    }
+                    is SshFilesResult.Success -> {}
+                }
+            }
+            if (!found) {
+                discardTemp(transport, temp)
+                FilesTransferJournal(FilesTransferJournal.appRoot(app))
+                    .transition(recordId, FilesTransferState.FAILED, false)
+                finishTransfer(token, version, "COPY_NAME_UNAVAILABLE")
+                return
+            }
+        }
+        val journal = FilesTransferJournal(FilesTransferJournal.appRoot(app))
+        if (transferCancellation?.isCancelled() == true) {
+            discardTemp(transport, temp)
+            journal.transition(recordId, FilesTransferState.FAILED, overwrite, path = finalPath)
+            finishTransfer(token, version, "CANCELLED")
+            return
+        }
+        val pending = journal.transition(recordId, FilesTransferState.COMMITTING, overwrite,
+            byteCount = bytes.toInt(), path = finalPath)
+        if (pending is FilesJournalResult.Failure) {
+            discardTemp(transport, temp)
+            finishTransfer(token, version, "JOURNAL_${pending.code.name}")
+            return
+        }
+        when (val renamed = transport.files.rename(temp, finalPath, overwrite = overwrite && !copy, timeoutMillis = 30_000)) {
+            is SshFilesResult.Success -> {
+                journal.transition(recordId, FilesTransferState.COMMITTED, overwrite, byteCount = bytes.toInt(), path = finalPath)
+                val listed = transport.files.list(parent, 3_000)
+                val committed = (transport.files.stat(finalPath, 3_000) as? SshFilesResult.Success)?.value
+                val records = journalRecords(profileId)
+                publish(token, version) {
+                    var entries = (listed as? SshFilesResult.Success)?.value ?: it.entries
+                    if (committed != null && committed.kind == SshFileKind.REGULAR) {
+                        entries = if (entries.any { entry -> entry.name == finalName && entry.kind == SshFileKind.REGULAR })
+                            entries.map { entry ->
+                                if (entry.name == finalName && entry.kind == SshFileKind.REGULAR)
+                                    entry.withSize(committed.size) else entry
+                            }
+                        else entries + SshFileEntry.regular(finalName, committed.size)
+                    }
+                    it.copy(entries = entries,
+                        transfer = SshTransferView(SshTransferKind.UPLOAD, finalName, false, false, bytes, sha256,
+                            null, null), preview = null, transfers = records, code = null)
+                }
+                transferCancellation = null
+            }
+            is SshFilesResult.Failure -> {
+                if (!overwrite && !copy && renamed.code == SshTransportCode.ALREADY_EXISTS) {
+                    journal.transition(recordId, FilesTransferState.STAGED, false,
+                        byteCount = bytes.toInt(), path = target)
+                    transferCancellation = null
+                    publish(token, version) {
+                        it.copy(transfer = SshTransferView(SshTransferKind.UPLOAD, name, false, false, bytes, sha256,
+                            null, SshUploadConsent(target, temp, recordId, bytes, sha256)),
+                            transfers = journalRecords(profileId))
+                    }
+                    return
+                }
+                journal.transition(recordId, FilesTransferState.FAILED, overwrite, path = finalPath)
+                val cleaned = discardTemp(transport, temp)
+                finishTransfer(token, version, if (!cleaned) "CLEANUP_UNCERTAIN" else renamed.code.name)
+            }
+        }
+    }
+
+    private fun copyName(name: String, index: Int): String {
+        val dot = name.lastIndexOf('.')
+        val base = if (dot > 0) name.substring(0, dot) else name
+        val extension = if (dot > 0) name.substring(dot) else ""
+        return "$base (copy${if (index == 1) "" else " $index"})$extension"
+    }
+
+    fun download(entry: SshFileEntry, targetUri: String) {
+        main()
+        val token = session ?: return
+        if (!transferReady(token) || state.entries.none { it === entry } || entry.kind != SshFileKind.REGULAR) return
+        if ((entry.size ?: 0) > SshFiles.MAX_STREAM_BYTES) {
+            state = state.copy(transfer = SshTransferView(SshTransferKind.DOWNLOAD, entry.name, false, false,
+                null, null, "LIMIT_EXCEEDED", null))
+            return
+        }
+        val uri = runCatching { targetUri.toUri() }.getOrNull()
+        if (uri == null || uri.scheme != "content") {
+            state = state.copy(transfer = SshTransferView(SshTransferKind.DOWNLOAD, entry.name, false, false,
+                null, null, "INVALID_INPUT", null))
+            return
+        }
+        val profile = state.selected?.profile ?: return
+        val remote = remoteChildPath(state.path, entry.name)
+        val cancellation = SshTransferCancellation()
+        transferCancellation = cancellation
+        transferProfileId = profile.id
+        state = state.copy(transfer = SshTransferView(SshTransferKind.DOWNLOAD, entry.name, true, true, null, null, null, null))
+        if (!FilesRuntime.work {
+                try { downloadWorker(token, profile.id, profile.revision.toInt(), entry.name, remote, uri, cancellation) }
+                catch (_: Exception) { finishTransfer(token, generation, "UNAVAILABLE") }
+            }) {
+            transferCancellation = null
+            state = state.copy(transfer = state.transfer?.next(busy = false, canCancel = false, code = "BUSY"))
+        }
+    }
+
+    private fun downloadWorker(token: FilesSession, profileId: String, revision: Int, name: String,
+                               remote: String, uri: Uri, cancellation: SshTransferCancellation) {
+        val version = generation
+        val transport = token.transport.get()
+        if (transport == null) { finishTransfer(token, version, "UNAVAILABLE"); return }
+        val stat = when (val result = transport.files.stat(remote, 3_000)) {
+            is SshFilesResult.Failure -> { finishTransfer(token, version, result.code.name); return }
+            is SshFilesResult.Success -> result.value
+        }
+        if (stat.kind != SshFileKind.REGULAR) { finishTransfer(token, version, "INVALID_REMOTE_DATA"); return }
+        val expectedSize = stat.size
+        if (expectedSize != null && (expectedSize < 0 || expectedSize > SshFiles.MAX_STREAM_BYTES)) {
+            finishTransfer(token, version, "LIMIT_EXCEEDED"); return
+        }
+        val directory = File(app.cacheDir, "cloudy-transfers")
+        val stage = File(directory, "${UUID.randomUUID()}.part")
+        val journal = FilesTransferJournal(FilesTransferJournal.appRoot(app))
+        val begun = journal.begin(profileId, revision, remote, stage.absolutePath,
+            (expectedSize ?: 0L).toInt())
+        if (begun is FilesJournalResult.Failure) { finishTransfer(token, version, "JOURNAL_${begun.code.name}"); return }
+        val recordId = (begun as FilesJournalResult.Success).value.id
+        try {
+            if (!directory.exists() && !directory.mkdirs()) {
+                journal.transition(recordId, FilesTransferState.FAILED, false)
+                finishTransfer(token, version, "STAGING_UNAVAILABLE"); return
+            }
+            val remoteDigest = when (val result = transport.files.digest(remote, SshFiles.MAX_STREAM_BYTES,
+                cancellation, 30_000)) {
+                is SshFilesResult.Failure -> {
+                    journal.transition(recordId, FilesTransferState.FAILED, false)
+                    finishTransfer(token, version, result.code.name); return
+                }
+                is SshFilesResult.Success -> result.value
+            }
+            val copied = try {
+                FileOutputStream(stage).use { output ->
+                    val result = transport.files.readTo(remote, output, SshFiles.MAX_STREAM_BYTES, cancellation, 30_000)
+                    if (result is SshFilesResult.Failure) {
+                        journal.transition(recordId, FilesTransferState.FAILED, false)
+                        finishTransfer(token, version, result.code.name); return
+                    }
+                    output.fd.sync()
+                    (result as SshFilesResult.Success).value
+                }
+            } catch (_: Exception) {
+                journal.transition(recordId, FilesTransferState.FAILED, false)
+                finishTransfer(token, version, "STAGING_FAILED"); return
+            }
+            if (copied != remoteDigest.byteCount || digestFile(stage) != remoteDigest.sha256Hex()) {
+                stage.delete()
+                journal.transition(recordId, FilesTransferState.FAILED, false)
+                finishTransfer(token, version, "INTEGRITY_MISMATCH"); return
+            }
+            journal.transition(recordId, FilesTransferState.COMMITTING, false)
+            val output = try { app.contentResolver.openOutputStream(uri, "wt") } catch (_: Exception) {
+                try { app.contentResolver.openOutputStream(uri) } catch (_: Exception) { null }
+            }
+            if (output == null) {
+                stage.delete(); journal.transition(recordId, FilesTransferState.FAILED, false)
+                finishTransfer(token, version, "DESTINATION_UNAVAILABLE"); return
+            }
+            val written = try {
+                output.use { sink ->
+                    FileInputStream(stage).use { input ->
+                        val buffer = ByteArray(32_768)
+                        var total = 0L
+                        while (true) {
+                            if (cancellation.isCancelled()) throw java.io.IOException("TRANSFER_CANCELLED")
+                            val count = input.read(buffer)
+                            if (count == -1) break
+                            if (count <= 0) throw java.io.IOException("TRANSFER_SOURCE")
+                            total += count
+                            if (total > SshFiles.MAX_STREAM_BYTES) throw java.io.IOException("TRANSFER_LIMIT")
+                            sink.write(buffer, 0, count)
+                        }
+                        total
+                    }
+                }
+            } catch (_: Exception) {
+                stage.delete()
+                journal.transition(recordId, FilesTransferState.FAILED, false)
+                finishTransfer(token, version,
+                    if (cancellation.isCancelled()) "CANCELLED" else "DESTINATION_WRITE_FAILED")
+                return
+            }
+            if (written != copied) {
+                stage.delete(); journal.transition(recordId, FilesTransferState.FAILED, false)
+                finishTransfer(token, version, "DESTINATION_WRITE_FAILED"); return
+            }
+            journal.transition(recordId, FilesTransferState.COMMITTED, false)
+            stage.delete()
+            publish(token, version) {
+                it.copy(transfer = SshTransferView(SshTransferKind.DOWNLOAD, name, false, false, copied,
+                    remoteDigest.sha256Hex(), null, null), transfers = journalRecords(profileId),
+                    code = null)
+            }
+            transferCancellation = null
+        } finally {
+            if (stage.exists()) stage.delete()
+        }
+    }
+
+    fun cancelTransfer() {
+        main()
+        transferCancellation?.cancel()
+        state = state.copy(transfer = state.transfer?.next(canCancel = false, code = "CANCELLING"))
+    }
+
+    private fun finishTransfer(token: FilesSession, version: Long, code: String?) {
+        transferCancellation = null
+        val records = journalRecords(transferProfileId)
+        publish(token, version) {
+            it.copy(transfer = it.transfer?.next(busy = false, canCancel = false, code = code), transfers = records)
+        }
+    }
+
     private fun publish(token: FilesSession, version: Long, change: (SshFilesSessionState) -> SshFilesSessionState) {
         FilesRuntime.main.post {
             if (!cleared && session === token && generation == version && !token.cancelled.get() &&
@@ -1007,9 +1497,11 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
         main()
         invalidateListing()
         editorContext = null
+        transferCancellation?.cancel()
+        transferCancellation = null
         val token = session ?: return
         state = state.copy(phase = SshFilesPhase.RETIRING, entries = emptyList(), preview = null, code = null,
-            editor = null)
+            editor = null, transfer = null)
         token.intentional.set(true)
         token.stop(null)
     }
@@ -1045,6 +1537,7 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
 
     companion object {
         private const val CONFIGURATION_HANDOFF_MILLIS = 5_000L
+        private const val PICKER_HANDOFF_MILLIS = 120_000L
         private const val REGISTRATION_LIFETIME_MILLIS = 30_000L
         private const val PREVIEW_LIMIT = 65_536
         private const val TRANSFER_ROWS = 8

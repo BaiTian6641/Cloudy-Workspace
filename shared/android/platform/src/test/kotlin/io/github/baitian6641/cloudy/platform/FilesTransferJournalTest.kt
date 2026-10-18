@@ -26,6 +26,19 @@ class FilesTransferJournalTest {
         assertEquals(3, reloaded.value.single().profileRevision)
     }
 
+    @Test fun transitionCanReviseVerifiedPathAndByteCount() {
+        val root = root()
+        val record = (journal(root).begin("p", 1, "/intended", "/intended/.stage", 0) as
+            FilesJournalResult.Success).value
+        journal(root).transition(record.id, FilesTransferState.COMMITTING, false,
+            byteCount = 123, path = "/final (copy).txt")
+        val loaded = (journal(root).load() as FilesJournalResult.Success).value.single()
+        assertEquals(FilesTransferState.UNCERTAIN, loaded.state)
+        assertEquals(123, loaded.byteCount)
+        assertEquals("/final (copy).txt", loaded.path)
+        assertEquals("/intended/.stage", loaded.tempPath)
+    }
+
     @Test fun committingAfterProcessDeathBecomesUncertainAndIsPersisted() {
         val root = root()
         val record = (journal(root).begin("profile-1", 1, "/a", "/a/.stage", 1) as

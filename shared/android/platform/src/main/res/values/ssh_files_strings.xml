@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="ssh_files_heading">Remote files over SSH</string>
-    <string name="ssh_files_scope">SSH file browsing with bounded previews and explicit new-folder, rename and delete actions. Uploads, downloads, staged editing and local export are not available here.</string>
+    <string name="ssh_files_scope">SSH file browsing with bounded previews, explicit create/rename/delete, staged text editing and upload/download through Android document grants. Downloads write to the document destination you choose.</string>
     <string name="ssh_files_disconnect">Disconnect</string>
     <string name="ssh_files_close">Close</string>
     <string name="ssh_files_ready">Choose a saved SSH profile and enter credentials for this session only.</string>
@@ -45,6 +45,17 @@
     <string name="ssh_files_replace_action">Replace</string>
     <string name="ssh_files_delete_action">Delete</string>
     <string name="ssh_files_edit">Edit text</string>
+    <string name="ssh_files_upload">Upload file</string>
+    <string name="ssh_files_download">Download</string>
+    <string name="ssh_files_upload_heading">Upload to remote files</string>
+    <string name="ssh_files_download_heading">Download remote file</string>
+    <string name="ssh_files_transfer_busy">Transfer in progress. Bytes are streamed in bounded chunks; Cancel requests cleanup.</string>
+    <string name="ssh_files_transfer_cancel">Cancel transfer</string>
+    <string name="ssh_files_transfer_bytes">Bytes verified: %1$d</string>
+    <string name="ssh_files_transfer_hash">SHA-256 of verified bytes: %1$s</string>
+    <string name="ssh_files_upload_exists">A remote file already exists at this target</string>
+    <string name="ssh_files_upload_overwrite">Overwrite this file</string>
+    <string name="ssh_files_upload_copy">Save a copy</string>
     <string name="ssh_files_editor_heading">Edit remote file</string>
     <string name="ssh_files_editor_unsaved">Unsaved changes</string>
     <string name="ssh_files_editor_save">Save changes</string>
