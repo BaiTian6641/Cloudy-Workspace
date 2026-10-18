@@ -29,7 +29,10 @@ import org.apache.sshd.common.keyprovider.KeyPairProvider;
 import org.apache.sshd.server.SshServer;
 import org.apache.sshd.server.auth.keyboard.InteractiveChallenge;
 import org.apache.sshd.server.auth.keyboard.KeyboardInteractiveAuthenticator;
-import org.apache.sshd.server.forward.RejectAllForwardingFilter;
+import org.apache.sshd.common.session.Session;
+import org.apache.sshd.common.util.net.SshdSocketAddress;
+import org.apache.sshd.server.forward.ForwardingFilter;
+import org.apache.sshd.server.forward.TcpForwardingFilter;
 import org.apache.sshd.server.session.ServerSession;
 import org.apache.sshd.server.shell.InteractiveProcessShellFactory;
 
@@ -42,7 +45,8 @@ import org.apache.sshd.server.shell.InteractiveProcessShellFactory;
  *
  * <p>One fresh random password and one fresh in-memory EC P-256 host key are generated per run.
  * The output directory must already exist as an empty real 0700 directory. The server binds
- * loopback port 0, serves one password account, and closes the real server after at most
+ * loopback port 0, serves one password account, one accepted client key, one keyboard-interactive
+ * prompt and one loopback direct-tcpip jump channel, and closes the real server after at most
  * {@value #MAX_SECONDS} seconds, when the owned {@code stop} file appears, on normal failure, or
  * from a JVM shutdown hook. Credentials are never printed.</p>
  */
@@ -129,7 +133,17 @@ public final class CloudySshTerminalFixture {
                 "/usr/bin/script", "--return", "--quiet", "--flush", "--command", "/bin/sh -i", "/dev/null");
             server.setShellFactory(shell);
             server.setCommandFactory(null);
-            server.setForwardingFilter(RejectAllForwardingFilter.INSTANCE);
+            // The two-hop qualification needs one direct-tcpip channel back to loopback. Agent,
+            // X11, remote-listen and non-loopback targets remain refused; the listener is loopback.
+            server.setForwardingFilter(new ForwardingFilter() {
+                @Override public boolean canForwardAgent(Session session, String requestType) { return false; }
+                @Override public boolean canForwardX11(Session session, String requestType) { return false; }
+                @Override public boolean canListen(SshdSocketAddress address, Session session) { return false; }
+                @Override public boolean canConnect(TcpForwardingFilter.Type type, SshdSocketAddress address,
+                                                    Session session) {
+                    return type == TcpForwardingFilter.Type.Direct && "127.0.0.1".equals(address.getHostName());
+                }
+            });
             server.setSubsystemFactories(Collections.emptyList());
             server.start();
             requireLoopbackBinding(server);

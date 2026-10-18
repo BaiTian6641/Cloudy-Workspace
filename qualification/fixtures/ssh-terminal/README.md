@@ -81,7 +81,8 @@ publish or reuse them as a real credential.
 - The shell factory is the maintained `InteractiveProcessShellFactory` with an explicit
   `/usr/bin/script` argv, wrapping the real `/bin/sh -i` child. It uses a real kernel PTY for
   input line discipline, not fake shell responses. MINA does not propagate SSH geometry into it.
-- `RejectAllForwardingFilter` rejects forwarding, subsystem factories are empty, and no exec
+- Only a loopback `direct-tcpip` channel is allowed for the two-hop jump qualification; agent,
+  X11, remote-listen and non-loopback targets remain refused. Subsystem factories are empty, and no exec
   command factory is configured. The shell channel is the only interactive service.
 - The fixture waits at most 600 seconds after starting. It also polls for a file named `stop`
   inside the run directory every 200 ms. On deadline, stop file, main-thread interruption or JVM
@@ -167,7 +168,7 @@ finite timeout. Those are helper checks, not SSH, Android or physical-input qual
 
 ## Boundary
 
-The fixture has no SFTP subsystem, no forwarding, no exec command and no virtual filesystem. It
+The fixture has no SFTP subsystem, no general forwarding (only loopback direct-tcpip for the jump qualification), no exec command and no virtual filesystem. It
 is not an OpenSSH compatibility, sandbox, resize or remote-privilege test, and it does not verify
 Android physical input, IME or TalkBack behavior. See the terminal construction result for what
 was actually exercised on a device.
