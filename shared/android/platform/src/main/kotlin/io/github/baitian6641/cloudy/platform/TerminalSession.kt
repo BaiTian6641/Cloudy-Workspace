@@ -17,6 +17,8 @@ import io.github.baitian6641.cloudy.ssh.SshInteractivePromptHandler
 import io.github.baitian6641.cloudy.ssh.SshJumpChannel
 import io.github.baitian6641.cloudy.ssh.SshKeyCredentials
 import io.github.baitian6641.cloudy.ssh.SshKeyboardInteractiveCredentials
+import io.github.baitian6641.cloudy.ssh.SshLocalForward
+import io.github.baitian6641.cloudy.ssh.SshLocalForwardStartResult
 import io.github.baitian6641.cloudy.ssh.SshOwnedPty
 import io.github.baitian6641.cloudy.ssh.SshPasswordCredentials
 import io.github.baitian6641.cloudy.ssh.SshSessionCredentials
@@ -34,6 +36,7 @@ import io.github.baitian6641.cloudy.telnet.TelnetSize
 import io.github.baitian6641.cloudy.terminal.TerminalAdmission
 import io.github.baitian6641.cloudy.terminal.TerminalSize
 import java.net.InetAddress
+import java.util.concurrent.CopyOnWriteArrayList
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicBoolean
@@ -69,6 +72,7 @@ internal class TerminalSession(context: Context, private val listener: Listener)
     @Volatile private var jumpTransport: SshAuthenticatedTransport? = null
     @Volatile private var pty: SshOwnedPty? = null
     @Volatile private var telnet: TelnetSession? = null
+    private val forwards = CopyOnWriteArrayList<SshLocalForward>()
     @Volatile private var worker: Thread? = null
 
     /** Caller transfers both credentials; every rejection path disposes them. */
@@ -199,6 +203,9 @@ internal class TerminalSession(context: Context, private val listener: Listener)
                 pty?.requestClose()
                 transport?.requestClose()
                 if (transport?.awaitClosed(5_000) is SshTransportCloseResult.Failure) cleanupCertain = false
+                // The engine closes forward channels before this local listener cleanup; closing
+                // them earlier raced the retained transport and produced CLEANUP_UNCERTAIN.
+                closeForwards()
                 handle?.close()
                 jumpTransport?.requestClose()
                 if (jumpTransport?.awaitClosed(5_000) is SshTransportCloseResult.Failure) cleanupCertain = false
@@ -323,6 +330,7 @@ internal class TerminalSession(context: Context, private val listener: Listener)
                 endCode = stopped.get() ?: "TELNET_FAILED"
             } finally {
                 stopped.compareAndSet(null, endCode)
+                closeForwards()
                 val owned = telnet
                 telnet = null
                 if (owned != null) {
@@ -364,6 +372,34 @@ internal class TerminalSession(context: Context, private val listener: Listener)
     }
 
     /** Cancellation closes the real authority now, never queued behind connect or blocked output. */
+    /** Starts a managed loopback forward only on the retained SSH transport; callback runs on main. */
+    fun startForward(localPort: Int, destinationHost: String, destinationPort: Int,
+                     listener: SshLocalForward.Listener,
+                     result: (SshLocalForwardStartResult) -> Unit): Boolean {
+        if (!active()) return false
+        val transport = transport ?: return false
+        Thread({
+            val started = SshLocalForward.start(transport, localPort, destinationHost, destinationPort, listener)
+            if (started is SshLocalForwardStartResult.Started) {
+                if (active()) forwards.add(started.forward) else started.forward.close()
+            }
+            main.post { result(started) }
+        }, "cloudy-forward-start").apply { isDaemon = true }.start()
+        return true
+    }
+
+    fun closeForward(forward: SshLocalForward) {
+        forwards.remove(forward)
+        forward.close()
+    }
+
+    fun forwardSnapshots(): List<SshLocalForward.Snapshot> = forwards.map { it.snapshot() }
+
+    private fun closeForwards() {
+        for (forward in forwards.toList()) forward.close()
+        forwards.clear()
+    }
+
     fun close(reason: String = "CLOSED") {
         if (!stopped.compareAndSet(null, reason)) return
         rendererReady.countDown()

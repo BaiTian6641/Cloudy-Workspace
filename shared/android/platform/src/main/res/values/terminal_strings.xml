@@ -27,6 +27,24 @@
     <string name="terminal_status_local_permission">Local network access is required for this host.</string>
     <string name="terminal_selected">%1$s · %2$s</string>
     <string name="terminal_edit">Edit</string>
+    <string name="terminal_forwards">Forwards</string>
+    <string name="terminal_forwards_heading">SSH local forwards</string>
+    <string name="terminal_forwards_scope">Each forward listens only on 127.0.0.1 and reaches its destination through this SSH session. Local port 0 chooses a free port. The forward closes when this session retires.</string>
+    <string name="terminal_forward_local_port">Local port (0 = automatic)</string>
+    <string name="terminal_forward_dest_host">Destination host through the SSH server</string>
+    <string name="terminal_forward_dest_port">Destination port</string>
+    <string name="terminal_forward_start">Start forward</string>
+    <string name="terminal_forward_close_panel">Close forwards</string>
+    <string name="terminal_forward_invalid">Enter a local port 0–65535, a destination host and a destination port 1–65535.</string>
+    <string name="terminal_forward_started">Local forward listening on 127.0.0.1:%1$d</string>
+    <string name="terminal_forward_closed">Forward closed</string>
+    <string name="terminal_forward_none">No active forwards.</string>
+    <string name="terminal_forward_row">127.0.0.1:%1$d → %2$s:%3$d</string>
+    <string name="terminal_forward_active">Active connections: %1$d</string>
+    <string name="terminal_forward_browser">Open localhost in browser</string>
+    <string name="terminal_forward_browser_unavailable">No external browser is available for this forward.</string>
+    <string name="terminal_forward_stop">Stop forward</string>
+    <string name="terminal_forward_last_error">Last connection error: %1$s</string>
     <string name="terminal_edit_menu">Terminal actions</string>
     <string name="terminal_overlay_focus_failed">This local terminal panel could not take keyboard focus. Close it and try again.</string>
     <string name="terminal_shortcut_copy">Copy · Ctrl+Shift+C</string>

@@ -102,6 +102,7 @@ Therefore an earlier SSH/PTY/UI increment is a partial construction milestone. I
 - **Changes:** tabs/split tree/focus/zoom/saved layouts/independent tasks; bounded search; configured named tmux attachment; attachment path insertion only after verified commit; loopback-only local forwards and external browser previews.
 - **Checks:** Q-C03/Q-C04/Q-C05/Q-P02, disconnect/eviction/host reboot, no unsent-input or command replay, collisions and callback timeout.
 - **Exit:** recoverable multi-pane workflows and explicit session/forward ownership.
+- **Result so far:** managed loopback SSH local forwards are engine- and emulator-qualified (4/4 host cases plus the product start/echo/status/stop/session-lifetime flow). Tabs/splits/layouts, tmux attachment and real HTTP browser preview remain; M5 is in progress.
 
 ### M6 — Product X11 and complete session-linked files
 

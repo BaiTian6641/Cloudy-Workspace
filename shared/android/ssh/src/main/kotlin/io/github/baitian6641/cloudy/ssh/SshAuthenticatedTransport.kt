@@ -9,9 +9,13 @@ import net.schmizz.sshj.userauth.method.AuthKeyboardInteractive
 import net.schmizz.sshj.userauth.method.AuthPublickey
 import net.schmizz.sshj.transport.verification.HostKeyVerifier
 import java.io.IOException
+import java.io.InputStream
+import java.io.OutputStream
 import java.net.InetAddress
 import java.net.Socket
 import java.security.PublicKey
+import java.util.Collections
+import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.Semaphore
 import java.util.concurrent.TimeUnit
@@ -30,6 +34,27 @@ enum class SshTransportCode {
 class SshJumpChannel internal constructor(internal val connection: DirectConnection) : AutoCloseable {
     override fun close() { runCatching { connection.close() } }
     override fun toString(): String = "SshJumpChannel(redacted)"
+}
+
+/** One owned direct-tcpip stream pair used by a managed loopback forward. */
+class SshForwardChannel internal constructor(
+    private val state: SshRetainedState,
+    private val owned: DirectConnection,
+) : AutoCloseable {
+    val input: InputStream get() = owned.inputStream
+    val output: OutputStream get() = owned.outputStream
+    override fun close() {
+        state.releaseForward(owned)
+        runCatching { owned.close() }
+    }
+    override fun toString(): String = "SshForwardChannel(redacted)"
+}
+
+sealed interface SshForwardOpenResult {
+    class Opened(val channel: SshForwardChannel) : SshForwardOpenResult
+    class Failure(val code: SshTransportCode) : SshForwardOpenResult {
+        override fun toString() = "SshForwardOpenResult.Failure(${code.name})"
+    }
 }
 
 sealed interface SshDirectResult {
@@ -269,9 +294,13 @@ class SshAuthenticatedTransport internal constructor(private val state: SshRetai
     /** Opens one direct-tcpip channel for a dependent transport; the jump retains closing ownership. */
     fun openDirect(host: String, port: Int, timeoutMillis: Int = 5_000): SshDirectResult =
         state.openDirect(host, port, timeoutMillis)
+
+    /** Opens one concurrent stream pair for a managed local forward. Failure does not stop retention. */
+    fun openForward(host: String, port: Int): SshForwardOpenResult = state.openForward(host, port)
     /** Worker-only setup. One PTY per transport; closing it closes linked files too. */
     fun openPty(size: SshPtySize): SshPtyOpenResult = state.openPty(size)
     fun requestClose() { state.stop(SshTransportCode.CLOSED) }
+    fun isActive(): Boolean = state.active()
     fun awaitClosed(timeoutMillis: Long = 3_000): SshTransportCloseResult = state.awaitClosed(timeoutMillis)
     internal fun <T> withFiles(timeoutMillis: Int, action: (SFTPClient) -> T): SshFilesResult<T> =
         state.withFiles(timeoutMillis, false, action)
@@ -300,6 +329,9 @@ internal class SshRetainedState(
     private var pty: SshOwnedPty? = null
     private var direct: DirectConnection? = null
     private var external: DirectConnection? = null
+    private val forwards: MutableSet<DirectConnection> =
+        Collections.newSetFromMap(ConcurrentHashMap<DirectConnection, Boolean>())
+    private val MAX_FORWARDS = 32
 
     fun retainDirect(connection: DirectConnection) { external = connection }
 
@@ -342,6 +374,37 @@ internal class SshRetainedState(
             wake.release()
         }
     }
+
+    fun openForward(host: String, port: Int): SshForwardOpenResult {
+        if (host.isEmpty() || host.length > 255 || host.any { Character.isISOControl(it) } || port !in 1..65535) {
+            return SshForwardOpenResult.Failure(SshTransportCode.INVALID_INPUT)
+        }
+        val client = synchronized(gate) {
+            if (!active()) {
+                expireIfNeeded()
+                return SshForwardOpenResult.Failure(reason())
+            }
+            if (forwards.size >= MAX_FORWARDS) return SshForwardOpenResult.Failure(SshTransportCode.BUSY)
+            checkNotNull(client)
+        }
+        return try {
+            val connection = client.newDirectConnection(host, port)
+            synchronized(gate) {
+                if (!active() || forwards.size >= MAX_FORWARDS) {
+                    runCatching { connection.close() }
+                    SshForwardOpenResult.Failure(if (!active()) reason() else SshTransportCode.BUSY)
+                } else {
+                    forwards.add(connection)
+                    SshForwardOpenResult.Opened(SshForwardChannel(this, connection))
+                }
+            }
+        } catch (_: Exception) {
+            if (Thread.currentThread().isInterrupted) cancellation.cancel()
+            SshForwardOpenResult.Failure(if (!active()) reason() else SshTransportCode.OPERATION_FAILED)
+        }
+    }
+
+    fun releaseForward(connection: DirectConnection) { forwards.remove(connection) }
 
     fun openPty(size: SshPtySize): SshPtyOpenResult {
         val owned = synchronized(gate) {
@@ -508,6 +571,10 @@ internal class SshRetainedState(
             // A dependent target transport loses its channel with the jump owner.
             try { external?.close() } catch (_: Exception) { closeFailed.set(true) }
             try { direct?.close() } catch (_: Exception) { closeFailed.set(true) }
+            for (connection in forwards.toList()) {
+                try { connection.close() } catch (_: Exception) { closeFailed.set(true) }
+            }
+            forwards.clear()
             try { socket.get()?.close() } catch (_: Exception) { closeFailed.set(true) }
             val closed = AtomicBoolean(false)
             val helper = Thread({

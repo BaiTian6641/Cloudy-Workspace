@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.ClipboardManager
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.KeyEvent
@@ -57,6 +58,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableLongStateOf
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -95,6 +97,8 @@ import io.github.baitian6641.cloudy.domain.TerminalRightClick
 import io.github.baitian6641.cloudy.ssh.SshInteractivePromptHandler
 import io.github.baitian6641.cloudy.ssh.SshKeyCredentials
 import io.github.baitian6641.cloudy.ssh.SshKeyboardInteractiveCredentials
+import io.github.baitian6641.cloudy.ssh.SshLocalForward
+import io.github.baitian6641.cloudy.ssh.SshLocalForwardStartResult
 import io.github.baitian6641.cloudy.ssh.SshPasswordCredentials
 import io.github.baitian6641.cloudy.terminal.TerminalAdmission
 import io.github.baitian6641.cloudy.terminal.TerminalIdentity
@@ -162,6 +166,14 @@ class CloudyTerminalActivity : ComponentActivity() {
     private var preselectId: String? = null
     private var menuOpen by mutableStateOf(false)
     private var searchOpen by mutableStateOf(false)
+    private var telnetMode = false
+    private var forwardsOpen by mutableStateOf(false)
+    private var forwardLocalPort by mutableStateOf(TextFieldValue("8080"))
+    private var forwardHost by mutableStateOf(TextFieldValue("127.0.0.1"))
+    private var forwardDestinationPort by mutableStateOf(TextFieldValue("80"))
+    private var forwardMessage by mutableStateOf<String?>(null)
+    private val forwardItems = mutableStateListOf<SshLocalForward>()
+    private var forwardSnapshots by mutableStateOf<List<SshLocalForward.Snapshot>>(emptyList())
     private var searchQuery by mutableStateOf(TextFieldValue())
     private var searchStatus by mutableStateOf<String?>(null)
     private var searchCommand by mutableIntStateOf(0)
@@ -423,6 +435,7 @@ class CloudyTerminalActivity : ComponentActivity() {
             }
             clearSecretFields()
             profileRead++
+            telnetMode = true
             phase = Phase.CONNECTING
             message = getString(R.string.terminal_status_telnet_connecting)
             val current = Attempt()
@@ -494,6 +507,7 @@ class CloudyTerminalActivity : ComponentActivity() {
         }
         clearSecretFields()
         profileRead++
+        telnetMode = false
         phase = Phase.CONNECTING
         message = getString(R.string.terminal_status_connecting)
         val current = Attempt()
@@ -579,6 +593,9 @@ class CloudyTerminalActivity : ComponentActivity() {
             if (disposed || attempt !== current) return
             // Past the attempt/disposed fence this callback may clear the shared local UI state.
             clearInteractionState()
+            forwardItems.clear()
+            forwardSnapshots = emptyList()
+            telnetMode = false
             renderer = null
             if (cleanupCertain) {
                 attempt = null
@@ -835,6 +852,8 @@ class CloudyTerminalActivity : ComponentActivity() {
         }
         val closedMenu = menuOpen
         menuOpen = false
+        val closedForwards = forwardsOpen
+        forwardsOpen = false
         val closedSearch = searchOpen
         if (closedSearch) {
             searchOpen = false
@@ -843,9 +862,68 @@ class CloudyTerminalActivity : ComponentActivity() {
             searchCommand = 0
             sendSearchClear()
         }
-        val closed = closedPaste || closedMenu || closedSearch
+        val closed = closedPaste || closedMenu || closedSearch || closedForwards
         if (returnFocus && closed) focusRendererIfAvailable()
         return closed
+    }
+
+    private fun openForwards() {
+        if (!canHostLocalSurface() || telnetMode) return
+        dismissLocalSurface(returnFocus = false)
+        interactionNotice = null
+        forwardMessage = null
+        forwardSnapshots = attempt?.session?.forwardSnapshots() ?: emptyList()
+        forwardsOpen = true
+        clearRendererFocus()
+    }
+
+    private fun startForward() {
+        val current = attempt ?: return
+        if (phase != Phase.TERMINAL || telnetMode) return
+        val localPort = forwardLocalPort.text.toIntOrNull()
+        val destinationPort = forwardDestinationPort.text.toIntOrNull()
+        val host = forwardHost.text.trim()
+        if (localPort == null || localPort !in 0..65535 || destinationPort == null ||
+            destinationPort !in 1..65535 || host.isEmpty()) {
+            forwardMessage = getString(R.string.terminal_forward_invalid)
+            return
+        }
+        forwardMessage = null
+        val accepted = current.session.startForward(localPort, host, destinationPort,
+            object : SshLocalForward.Listener {
+                override fun onChanged(snapshot: SshLocalForward.Snapshot) {
+                    runOnUiThread {
+                        if (attempt === current && phase == Phase.TERMINAL)
+                            forwardSnapshots = current.session.forwardSnapshots()
+                    }
+                }
+            }) { result ->
+                if (attempt !== current || phase != Phase.TERMINAL) return@startForward
+                when (result) {
+                    is SshLocalForwardStartResult.Started -> {
+                        forwardItems.add(result.forward)
+                        forwardSnapshots = current.session.forwardSnapshots()
+                        forwardMessage = getString(R.string.terminal_forward_started, result.forward.localPort)
+                    }
+                    is SshLocalForwardStartResult.Failure ->
+                        forwardMessage = getString(R.string.terminal_status_failed, result.code)
+                }
+            }
+        if (!accepted) forwardMessage = getString(R.string.terminal_status_failed, "UNAVAILABLE")
+    }
+
+    private fun closeForward(forward: SshLocalForward) {
+        val current = attempt ?: return
+        current.session.closeForward(forward)
+        forwardItems.remove(forward)
+        forwardSnapshots = current.session.forwardSnapshots()
+        forwardMessage = getString(R.string.terminal_forward_closed)
+    }
+
+    private fun openForwardInBrowser(forward: SshLocalForward) {
+        val url = "http://127.0.0.1:${forward.localPort}/"
+        try { startActivity(Intent(Intent.ACTION_VIEW, url.toUri())) }
+        catch (_: RuntimeException) { forwardMessage = getString(R.string.terminal_forward_browser_unavailable) }
     }
 
     private fun canHostLocalSurface() = !disposed && attempt != null && phase == Phase.TERMINAL
@@ -1009,6 +1087,7 @@ class CloudyTerminalActivity : ComponentActivity() {
         approvedPaste = null
         menuOpen = false
         searchOpen = false
+        forwardsOpen = false
         searchQuery = TextFieldValue()
         searchStatus = null
         searchCommand = 0
@@ -1018,7 +1097,7 @@ class CloudyTerminalActivity : ComponentActivity() {
     }
 
     private val localOverlayActive: Boolean
-        get() = menuOpen || searchOpen || pendingPaste != null
+        get() = menuOpen || searchOpen || forwardsOpen || pendingPaste != null
 
     private fun acceptsInput(current: Attempt) = !disposed && interactive && hasWindowFocus() &&
         !localOverlayActive && approvedPaste == null && attempt === current && phase == Phase.TERMINAL &&
@@ -1294,6 +1373,13 @@ class CloudyTerminalActivity : ComponentActivity() {
                 TextButton({
                     if (menuOpen) dismissLocalSurface(returnFocus = true) else openMenu()
                 }, modifier = Modifier.testTag("terminal_edit")) { Text(stringResource(R.string.terminal_edit)) }
+                if (!telnetMode) {
+                    TextButton({
+                        if (forwardsOpen) dismissLocalSurface(returnFocus = true) else openForwards()
+                    }, modifier = Modifier.testTag("terminal_forwards")) {
+                        Text(stringResource(R.string.terminal_forwards))
+                    }
+                }
                 TextButton({ retire("USER_DISCONNECTED") }, modifier = Modifier.testTag("terminal_disconnect")) {
                     Text(stringResource(R.string.terminal_disconnect))
                 }
@@ -1337,6 +1423,7 @@ class CloudyTerminalActivity : ComponentActivity() {
                                 })
                         }
                         if (menuOpen) EditMenuOverlay()
+                        if (forwardsOpen) ForwardOverlay()
                         pendingPaste?.let { pending -> PastePreviewOverlay(pending) }
                     }
                 }
@@ -1358,6 +1445,71 @@ class CloudyTerminalActivity : ComponentActivity() {
      * One local surface owns the pointer, keys and focus above the renderer. Escape or Back closes
      * it before the SSH window; a failed focus request is reported rather than hidden.
      */
+    @Composable private fun BoxScope.ForwardOverlay() {
+        val focus = remember { FocusRequester() }
+        LocalOverlayPanel("terminal_forwards_overlay", focus, Alignment.TopCenter) {
+            Text(stringResource(R.string.terminal_forwards_heading), style = MaterialTheme.typography.titleSmall)
+            Text(stringResource(R.string.terminal_forwards_scope), style = MaterialTheme.typography.bodySmall)
+            OutlinedTextField(forwardLocalPort,
+                { value -> if (value.text.length <= 5 && value.text.all(Char::isDigit)) forwardLocalPort = value },
+                label = { Text(stringResource(R.string.terminal_forward_local_port)) }, singleLine = true,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                modifier = Modifier.fillMaxWidth().focusRequester(focus)
+                    .focusProperties { canFocus = true }.testTag("terminal_forward_local_port"))
+            OutlinedTextField(forwardHost,
+                { value -> if (value.text.length <= 255) forwardHost = value },
+                label = { Text(stringResource(R.string.terminal_forward_dest_host)) }, singleLine = true,
+                keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.None, autoCorrectEnabled = false),
+                modifier = Modifier.fillMaxWidth().testTag("terminal_forward_dest_host"))
+            OutlinedTextField(forwardDestinationPort,
+                { value -> if (value.text.length <= 5 && value.text.all(Char::isDigit)) forwardDestinationPort = value },
+                label = { Text(stringResource(R.string.terminal_forward_dest_port)) }, singleLine = true,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                modifier = Modifier.fillMaxWidth().testTag("terminal_forward_dest_port"))
+            forwardMessage?.let { Text(it, modifier = Modifier.testTag("terminal_forward_message")
+                .semantics { liveRegion = LiveRegionMode.Polite }) }
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                Button(::startForward, modifier = Modifier.testTag("terminal_forward_start")) {
+                    Text(stringResource(R.string.terminal_forward_start))
+                }
+                TextButton({ dismissLocalSurface(returnFocus = true) }, modifier = Modifier.testTag("terminal_forward_close_panel")) {
+                    Text(stringResource(R.string.terminal_forward_close_panel))
+                }
+            }
+            if (forwardItems.isEmpty()) {
+                Text(stringResource(R.string.terminal_forward_none), style = MaterialTheme.typography.bodySmall)
+            }
+            for (forward in forwardItems.toList()) {
+                val snapshot = forwardSnapshots.firstOrNull { it.localPort == forward.localPort }
+                Surface(color = MaterialTheme.colorScheme.surfaceContainer,
+                    modifier = Modifier.fillMaxWidth().testTag("terminal_forward_${forward.localPort}")) {
+                    Column(Modifier.padding(CloudyControlMetrics.spaceSmall),
+                        verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                        Text(stringResource(R.string.terminal_forward_row,
+                            forward.localPort, forward.destinationHost, forward.destinationPort))
+                        Text(stringResource(R.string.terminal_forward_active, snapshot?.activeConnections ?: 0),
+                            style = MaterialTheme.typography.bodySmall)
+                        snapshot?.lastError?.let { error ->
+                            Text(stringResource(R.string.terminal_forward_last_error, error),
+                                style = MaterialTheme.typography.bodySmall,
+                                modifier = Modifier.testTag("terminal_forward_error_${forward.localPort}"))
+                        }
+                        FlowRow(horizontalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                            TextButton({ openForwardInBrowser(forward) },
+                                modifier = Modifier.testTag("terminal_forward_browser_${forward.localPort}")) {
+                                Text(stringResource(R.string.terminal_forward_browser))
+                            }
+                            TextButton({ closeForward(forward) },
+                                modifier = Modifier.testTag("terminal_forward_stop_${forward.localPort}")) {
+                                Text(stringResource(R.string.terminal_forward_stop))
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     @Composable private fun BoxScope.LocalOverlayPanel(
         tag: String,
         focus: FocusRequester,
