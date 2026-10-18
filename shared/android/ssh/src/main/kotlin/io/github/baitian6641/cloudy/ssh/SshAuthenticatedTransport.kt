@@ -23,7 +23,7 @@ enum class SshTransportCode {
     INVALID_INPUT, BUSY, QUARANTINED, CANCELLED, TIMED_OUT, CONNECT_FAILED,
     ALGORITHM_REJECTED, KEY_REJECTED, ADMISSION_DENIED, CREDENTIALS_UNAVAILABLE,
     PASSWORD_CHANGE_REFUSED, KEY_UNREADABLE, KEY_FORMAT_UNSUPPORTED, KEY_PASSPHRASE_REQUIRED,
-    KEYBOARD_INTERACTIVE_UNSUPPORTED,
+    KEYBOARD_INTERACTIVE_UNSUPPORTED, ALREADY_EXISTS, NOT_FOUND,
     AUTHENTICATION_FAILED, OWNERSHIP_REJECTED, CLOSED,
     OPERATION_FAILED, LIMIT_EXCEEDED, INVALID_REMOTE_DATA, CLEANUP_UNCERTAIN,
 }
@@ -262,10 +262,10 @@ class SshAuthenticatedTransportFactory {
     }
 }
 
-/** Raw SSHJ objects remain private. Public operations are bounded, read-only and synchronous-worker APIs. */
+/** Raw SSHJ objects remain private. Public operations are bounded, typed and synchronous-worker APIs. */
 class SshAuthenticatedTransport internal constructor(private val state: SshRetainedState,
     val ownership: SshAuthenticatedOwnership) {
-    val files = SshReadOnlyFiles(this)
+    val files = SshFiles(this)
     /** Opens one direct-tcpip channel for a dependent transport; the jump retains closing ownership. */
     fun openDirect(host: String, port: Int, timeoutMillis: Int = 5_000): SshDirectResult =
         state.openDirect(host, port, timeoutMillis)
@@ -274,7 +274,11 @@ class SshAuthenticatedTransport internal constructor(private val state: SshRetai
     fun requestClose() { state.stop(SshTransportCode.CLOSED) }
     fun awaitClosed(timeoutMillis: Long = 3_000): SshTransportCloseResult = state.awaitClosed(timeoutMillis)
     internal fun <T> withFiles(timeoutMillis: Int, action: (SFTPClient) -> T): SshFilesResult<T> =
-        state.withFiles(timeoutMillis, action)
+        state.withFiles(timeoutMillis, false, action)
+
+    /** Expected write failures must not tear down the retained SSH transport. */
+    internal fun <T> withFilesRecoverable(timeoutMillis: Int, action: (SFTPClient) -> T): SshFilesResult<T> =
+        state.withFiles(timeoutMillis, true, action)
     override fun toString() = "SshAuthenticatedTransport(redacted)"
 }
 
@@ -408,7 +412,7 @@ internal class SshRetainedState(
         if (!active()) false else { deadline = 0; wake.release(); true }
     }
 
-    fun <T> withFiles(timeoutMillis: Int, action: (SFTPClient) -> T): SshFilesResult<T> {
+    fun <T> withFiles(timeoutMillis: Int, recoverable: Boolean, action: (SFTPClient) -> T): SshFilesResult<T> {
         if (timeoutMillis !in 1..45_000) return SshFilesResult.Failure(SshTransportCode.INVALID_INPUT)
         val done = CountDownLatch(1)
         val admitted = synchronized(gate) {
@@ -458,13 +462,13 @@ internal class SshRetainedState(
                 }
             }
         } catch (bounded: SshFileBoundException) {
-            stop(bounded.code)
+            if (!recoverable) stop(bounded.code)
             SshFilesResult.Failure(bounded.code)
         } catch (_: Exception) {
             if (Thread.currentThread().isInterrupted) cancellation.cancel()
             if (!active() && stopped.get() == null && !cancellation.isCancelled) stop(SshTransportCode.TIMED_OUT)
-            stop(SshTransportCode.OPERATION_FAILED)
-            SshFilesResult.Failure(reason())
+            if (!recoverable) stop(SshTransportCode.OPERATION_FAILED)
+            SshFilesResult.Failure(if (recoverable) SshTransportCode.OPERATION_FAILED else reason())
         } finally {
             synchronized(gate) { operation = null; deadline = 0 }
             done.countDown()

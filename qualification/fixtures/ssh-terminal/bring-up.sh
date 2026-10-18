@@ -36,6 +36,7 @@ dependencies, jars_dir = sys.argv[1], sys.argv[2]
 selected = (
     "sshd-core-2.20.0.jar",
     "sshd-common-2.20.0.jar",
+    "sshd-sftp-2.20.0.jar",
     "slf4j-api-2.0.20.jar",
     "slf4j-nop-2.0.20.jar",
 )
@@ -88,7 +89,7 @@ chmod 700 "$BUILD" "$RUN"
 # The Java fixture generates one fresh client key after it has validated that this run directory
 # is empty, so the key can never mask an unclean or pre-populated evidence root.
 
-CP="$JARS/sshd-core-2.20.0.jar:$JARS/sshd-common-2.20.0.jar:$JARS/slf4j-api-2.0.20.jar:$JARS/slf4j-nop-2.0.20.jar"
+CP="$JARS/sshd-core-2.20.0.jar:$JARS/sshd-common-2.20.0.jar:$JARS/sshd-sftp-2.20.0.jar:$JARS/slf4j-api-2.0.20.jar:$JARS/slf4j-nop-2.0.20.jar"
 
 javac -Xlint:all -Werror -cp "$CP" -d "$BUILD" "$SOURCE"
 

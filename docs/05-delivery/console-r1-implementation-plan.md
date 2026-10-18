@@ -90,6 +90,10 @@ Therefore an earlier SSH/PTY/UI increment is a partial construction milestone. I
 - **Changes:** profile environment/account/credential references; supported key and keyboard-interactive prompts; verified jump chains; writable SFTP actions, bounded staging/journal, integrity, exclusive-copy and typed per-save publication decisions.
 - **Checks:** Q-C01/Q-S01/Q-F02 against real servers; Q-F01 concurrency, collisions, revoked URIs, lost acknowledgement and process death. No renderer dependency.
 - **Exit:** reusable real transport/transfer source with independent app-owned state and honest unsupported capabilities.
+- **Result so far:** public-key, single-prompt keyboard-interactive and one-hop jump admission are qualified; the
+  [writable SFTP engine host slice](../../qualification/results/P1-S3/2026-10-18-sftp-writable-engine.md) adds exclusive
+  create/bounded write/rename/removal with recoverable typed failures. Transfer journal, integrity, staged edit,
+  product file actions and Q-C09 remain; M4 is in progress.
 
 ### M5 — Layouts, durable sessions, attachments, and forwards
 

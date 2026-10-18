@@ -30,9 +30,9 @@ class SshRetainedBoundsTest {
     @Test fun remoteNamesRemainBoundedUntrustedLeaves() {
         assertTrue(SshFileLimits.name("normal name Ω.txt"))
         assertTrue(SshFileLimits.name("emoji-\ud83d\ude00"))
-        assertTrue(SshFileLimits.name("x".repeat(SshReadOnlyFiles.MAX_NAME_UNITS)))
+        assertTrue(SshFileLimits.name("x".repeat(SshFiles.MAX_NAME_UNITS)))
         for (name in listOf("", ".", "..", "a/b", "a\\b", "\u001b[31m", "x\u0000", "x\n",
-            "\ud800", "\udc00", "\u2028", "x".repeat(SshReadOnlyFiles.MAX_NAME_UNITS + 1))) {
+            "\ud800", "\udc00", "\u2028", "x".repeat(SshFiles.MAX_NAME_UNITS + 1))) {
             assertFalse("Invalid remote leaf accepted", SshFileLimits.name(name))
         }
     }
@@ -40,9 +40,9 @@ class SshRetainedBoundsTest {
     @Test fun remotePathsAreLengthBoundedWithoutNormalizationOrLocalPathClaims() {
         assertTrue(SshFileLimits.path("/remote path/../file"))
         assertTrue(SshFileLimits.path("relative/Ω"))
-        assertTrue(SshFileLimits.path("x".repeat(SshReadOnlyFiles.MAX_PATH_UNITS)))
+        assertTrue(SshFileLimits.path("x".repeat(SshFiles.MAX_PATH_UNITS)))
         assertFalse(SshFileLimits.path(""))
-        assertFalse(SshFileLimits.path("x".repeat(SshReadOnlyFiles.MAX_PATH_UNITS + 1)))
+        assertFalse(SshFileLimits.path("x".repeat(SshFiles.MAX_PATH_UNITS + 1)))
         assertFalse(SshFileLimits.path("remote\u0000tail"))
         assertFalse(SshFileLimits.path("remote\ud800"))
     }

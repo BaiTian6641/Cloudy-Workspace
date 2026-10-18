@@ -26,7 +26,7 @@ import io.github.baitian6641.cloudy.domain.ConnectionProtocol
 import io.github.baitian6641.cloudy.domain.WindowState
 import io.github.baitian6641.cloudy.ssh.SshFileEntry
 import io.github.baitian6641.cloudy.ssh.SshFileKind
-import io.github.baitian6641.cloudy.ssh.SshReadOnlyFiles
+import io.github.baitian6641.cloudy.ssh.SshFiles
 
 /** Native presentation only. The model owns real remote operations; no remembered credential state. */
 @Composable
@@ -160,7 +160,7 @@ internal fun SshFilesScreen(
                 if (hasBrowser) {
                     item(key = "path") {
                         OutlinedTextField(pathDraft, {
-                            pathTooLong = it.text.length > SshReadOnlyFiles.MAX_PATH_UNITS
+                            pathTooLong = it.text.length > SshFiles.MAX_PATH_UNITS
                             if (!pathTooLong) pathDraft = it
                         },
                             enabled = canBrowse, singleLine = true, label = { Text(stringResource(R.string.ssh_files_path)) },

@@ -2,9 +2,11 @@
 
 **Scope:** construction fixture for the Console terminal adapter. It is a real Apache MINA SSHD
 2.20.0 loopback server with password authentication, one accepted generated EC client key, one
-single-prompt keyboard-interactive response and a real local interactive shell, used to exercise
-the product's retained transport, channel, renderer output and explicit close on a device. It is **not** an OpenSSH interoperability,
-PTY/resize, privilege-isolation or product acceptance result.
+single-prompt keyboard-interactive response, a real local interactive shell and a real SFTP
+subsystem rooted at a private run-directory filesystem, used to exercise the product's retained
+transport, channel, renderer output, writable file operations and explicit close on a device. It
+is **not** an OpenSSH interoperability, PTY/resize, transfer-journal/publication,
+privilege-isolation or product acceptance result.
 
 The MINA process factory starts util-linux `script --return --quiet --flush --command
 '/bin/sh -i' /dev/null`. `script` supplies a **real kernel PTY** and its CR/Enter line discipline;
@@ -21,9 +23,9 @@ The shell runs as the invoking host user; this is not a sandbox.
 - `/usr/bin/script` from util-linux and `/bin/sh`; parent observed util-linux 2.41.3. No shell
   transcript file is created (`/dev/null`); the utility's [upstream implementation](https://github.com/util-linux/util-linux/blob/v2.41.3/term-utils/script.c)
   owns the real PTY and command lifetime.
-- The four reviewed MINA/SLF4J jars in `.cache/research-sshd-2.20.0/`: `sshd-core-2.20.0.jar`,
-  `sshd-common-2.20.0.jar`, `slf4j-api-2.0.20.jar`, `slf4j-nop-2.0.20.jar`, with sizes and
-  SHA-256 values pinned by the existing
+- The five reviewed MINA/SLF4J jars in `.cache/research-sshd-2.20.0/`: `sshd-core-2.20.0.jar`,
+  `sshd-common-2.20.0.jar`, `sshd-sftp-2.20.0.jar`, `slf4j-api-2.0.20.jar`,
+  `slf4j-nop-2.0.20.jar`, with sizes and SHA-256 values pinned by the existing
   [session fixture dependency record](../ssh-session/dependencies.json). The launcher never
   downloads or substitutes a jar.
 
@@ -35,7 +37,7 @@ qualification/fixtures/ssh-terminal/bring-up.sh
 
 The launcher:
 
-1. Verifies each of the four selected jars is a regular (non-symlink) file whose exact byte size
+1. Verifies each of the five selected jars is a regular (non-symlink) file whose exact byte size
    and SHA-256 match `dependencies.json`, before compiling or launching anything. A missing
    record, absent jar, non-regular file, size mismatch or hash mismatch aborts with a fixed
    basename-only error. No credential is printed.
@@ -59,10 +61,10 @@ READY port=NNNNN fingerprint=SHA256:...
 The path is printed rather than assumed because the workspace path may contain spaces; use the
 remaining text after the `=` prefix. `fixture.properties` contains generated keys `schema`, `host`,
 `port`, `user`, `password` and `fingerprint`; it never contains a private key. After the emptiness
-check the fixture also creates `client_key`/`client_key.pub` (the one accepted EC key) and
-`wrong_key`/`wrong_key.pub` (deliberately unregistered) with mode 0600. The password and private
-keys are never printed. Treat the properties file and key files as private test material and never
-publish or reuse them as a real credential.
+check the fixture also creates `sftp-root/` (the SFTP virtual root), `client_key`/`client_key.pub`
+(the one accepted EC key) and `wrong_key`/`wrong_key.pub` (deliberately unregistered) with mode
+0600. The password and private keys are never printed. Treat the properties file and key files as
+private test material and never publish or reuse them as a real credential.
 
 ## Real operation and bounds
 
@@ -70,6 +72,12 @@ publish or reuse them as a real credential.
   binds `127.0.0.1` with port 0 (kernel-assigned random loopback port). After `start()` it checks
   that every bound address is a loopback address and that the bound port is nonzero; otherwise it
   fails before printing `READY`. It never binds a public address.
+- The SFTP subsystem is the real Apache MINA `SftpSubsystemFactory` from the pinned
+  `sshd-sftp-2.20.0.jar`. Its `VirtualFileSystemFactory` root is the run directory's `sftp-root/`,
+  so SFTP `/` maps inside that private directory; the fixture never serves the host filesystem
+  over SFTP. The shell and command paths remain host processes, as described above. Tests may
+  create, rename and remove files only inside the private virtual root; no product transfer
+  journal, publication consent or integrity claim follows.
 - Each run generates a fresh in-memory EC P-256 host key, a fresh 24-byte random Base64url
   password and one fresh EC P-256 client key. The password authenticator accepts only the current
   invoking user name plus that password, compared in constant time. The public-key authenticator

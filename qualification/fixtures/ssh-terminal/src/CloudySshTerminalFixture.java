@@ -25,6 +25,7 @@ import org.apache.sshd.common.config.keys.AuthorizedKeyEntry;
 import org.apache.sshd.common.config.keys.KeyUtils;
 import org.apache.sshd.common.config.keys.PublicKeyEntryResolver;
 import org.apache.sshd.common.digest.BuiltinDigests;
+import org.apache.sshd.common.file.virtualfs.VirtualFileSystemFactory;
 import org.apache.sshd.common.keyprovider.KeyPairProvider;
 import org.apache.sshd.server.SshServer;
 import org.apache.sshd.server.auth.keyboard.InteractiveChallenge;
@@ -35,6 +36,7 @@ import org.apache.sshd.server.forward.ForwardingFilter;
 import org.apache.sshd.server.forward.TcpForwardingFilter;
 import org.apache.sshd.server.session.ServerSession;
 import org.apache.sshd.server.shell.InteractiveProcessShellFactory;
+import org.apache.sshd.sftp.server.SftpSubsystemFactory;
 
 /**
  * Bounded loopback SSH terminal fixture: real maintained password authentication and a real local
@@ -133,6 +135,11 @@ public final class CloudySshTerminalFixture {
                 "/usr/bin/script", "--return", "--quiet", "--flush", "--command", "/bin/sh -i", "/dev/null");
             server.setShellFactory(shell);
             server.setCommandFactory(null);
+            // SFTP is served from a private run-directory root, never the host filesystem. The
+            // virtual root is created per run and removed with the private evidence directory.
+            Path sftpRoot = output.resolve("sftp-root");
+            Files.createDirectory(sftpRoot);
+            server.setFileSystemFactory(new VirtualFileSystemFactory(sftpRoot));
             // The two-hop qualification needs one direct-tcpip channel back to loopback. Agent,
             // X11, remote-listen and non-loopback targets remain refused; the listener is loopback.
             server.setForwardingFilter(new ForwardingFilter() {
@@ -144,7 +151,8 @@ public final class CloudySshTerminalFixture {
                     return type == TcpForwardingFilter.Type.Direct && "127.0.0.1".equals(address.getHostName());
                 }
             });
-            server.setSubsystemFactories(Collections.emptyList());
+            SftpSubsystemFactory sftp = new SftpSubsystemFactory.Builder().build();
+            server.setSubsystemFactories(Collections.singletonList(sftp));
             server.start();
             requireLoopbackBinding(server);
 
