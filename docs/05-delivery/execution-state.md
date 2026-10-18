@@ -6,7 +6,7 @@
 
 ## 2026-10-18 — Files engine and action UI handoff
 
-**Branch:** `codex/console-r1-implementation`, pushed at `488e2eaba7e1c0675f64bcd01b7e016aacd8836e` (origin equality observed). Reviewed commits advance C09/C18/C19/C21/M4/M5; C09, C18, C19, C21 and full R1 remain partial. The older M3-INPUT-BOUNDARY-01 handoff premise is superseded by the newest 2026-10-18 real-IME 11/11 boundary pass and product workflow above; physical keyboard/IME and full M3 acceptance remain open.
+**Branch:** `codex/console-r1-implementation`, pushed at `0fd2f68183a500b8f25b40fe50ee989552693bcb` (origin equality observed). Reviewed commits advance C09/C15/C18/C19/C21/M4/M5; C09, C15, C18, C19, C21 and full R1 remain partial. The older M3-INPUT-BOUNDARY-01 handoff premise is superseded by the newest 2026-10-18 real-IME 11/11 boundary pass and product workflow above; physical keyboard/IME and full M3 acceptance remain open.
 
 - `c39b4a1` — `SshFiles` writable engine: bounded stat, exclusive create, 1 MiB chunked write, explicit-overwrite rename, file/empty-directory removal and typed recoverable failures; the tracked MINA fixture serves a real `sshd-sftp` subsystem from a private virtual root. [Host evidence](../../qualification/results/P1-S3/2026-10-18-sftp-writable-engine.md) records 2/2 real-server methods, the preserved host-root construction failure and the corrected virtual-root run.
 - `5cc180d` — inherited Android Lint `UseKtx` repair for the persisted key reference; `:platform:lintDebug` and `:console:lintDebug` pass with zero findings.
