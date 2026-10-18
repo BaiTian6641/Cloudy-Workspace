@@ -34,6 +34,7 @@ dependencies {
     implementation(project(":design-system"))
     implementation(project(":identity"))
     implementation(project(":ssh"))
+    implementation(libs.core.ktx)
     implementation(project(":terminal"))
     api(libs.fragment)
     implementation(libs.activity.compose)

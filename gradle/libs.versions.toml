@@ -34,6 +34,7 @@ biometric = { module = "androidx.biometric:biometric", version.ref = "biometric"
 fragment = { module = "androidx.fragment:fragment", version.ref = "fragment" }
 webkit = { module = "androidx.webkit:webkit", version.ref = "webkit" }
 core = { module = "androidx.core:core", version.ref = "core" }
+core-ktx = { module = "androidx.core:core-ktx", version.ref = "core" }
 profileinstaller = { module = "androidx.profileinstaller:profileinstaller", version.ref = "profileinstaller" }
 sshj = { module = "com.hierynomus:sshj", version.ref = "sshj" }
 bcprov = { module = "org.bouncycastle:bcprov-jdk18on", version.ref = "bouncycastle" }

@@ -17,6 +17,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.net.toUri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -343,7 +344,7 @@ class CloudyTerminalActivity : ComponentActivity() {
         if (saved != null) {
             authMethod = AuthMethod.PRIVATE_KEY
             key = null
-            val uri = runCatching { android.net.Uri.parse(saved) }.getOrNull()
+            val uri = runCatching { saved.toUri() }.getOrNull()
             if (uri != null) readKey(uri) else message = getString(R.string.terminal_key_unreadable)
         }
     }
@@ -1196,7 +1197,7 @@ class CloudyTerminalActivity : ComponentActivity() {
                                         rememberKey = checked
                                         if (checked) {
                                             val uri = pickedKeyUri ?: keyUri?.let {
-                                                runCatching { android.net.Uri.parse(it) }.getOrNull()
+                                                runCatching { it.toUri() }.getOrNull()
                                             }
                                             if (uri != null) rememberPickedKey(uri)
                                             else message = getString(R.string.terminal_key_choose_first)
