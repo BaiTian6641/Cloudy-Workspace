@@ -13,8 +13,8 @@ rename first tries a non-overwriting rename: a real remote `ALREADY_EXISTS` prod
 consent, which then calls the explicit-overwrite rename. The screen's scope text was corrected to
 say uploads, downloads, staged editing and local export are unavailable.
 
-- Branch `codex/console-r1-implementation`; parent commit `5cc180d` plus the uncommitted UI files
-  recorded below. The screenshot/run used debug APK SHA-256
+- Branch `codex/console-r1-implementation`; source commit `ad4f84c` (the APK was built from that
+  UI source before this evidence file was committed). The screenshot/run used debug APK SHA-256
   `ce3c3339832ac6383596a28026aa454d0c4ab27903b72fadd59c5593fe339bcb`.
 - Emulator: API 37 Google APIs x86_64, 2880×1800 at 240 dpi; package
   `io.github.baitian6641.cloudy.console` (debug), installed with `adb install -r`.
