@@ -12,6 +12,7 @@ import io.github.baitian6641.cloudy.domain.SshPeerIdentity
 import io.github.baitian6641.cloudy.ssh.SshAuthenticatedTransport
 import io.github.baitian6641.cloudy.ssh.SshAuthenticatedTransportFactory
 import io.github.baitian6641.cloudy.ssh.SshDirectResult
+import io.github.baitian6641.cloudy.ssh.SshInteractivePromptHandler
 import io.github.baitian6641.cloudy.ssh.SshJumpChannel
 import io.github.baitian6641.cloudy.ssh.SshKeyCredentials
 import io.github.baitian6641.cloudy.ssh.SshKeyboardInteractiveCredentials
@@ -67,7 +68,8 @@ internal class TerminalSession(context: Context, private val listener: Listener)
     /** Caller transfers both credentials; every rejection path disposes them. */
     fun connect(profile: SshObservationProfile, credentials: SshSessionCredentials,
                 jumpProfile: SshObservationProfile? = null,
-                jumpCredentials: SshSessionCredentials? = null) {
+                jumpCredentials: SshSessionCredentials? = null,
+                prompts: SshInteractivePromptHandler? = null) {
         if (!started.compareAndSet(false, true) || stopped.get() != null) {
             credentials.close(); jumpCredentials?.close()
             return
@@ -100,7 +102,7 @@ internal class TerminalSession(context: Context, private val listener: Listener)
                         code = "LOCAL_NETWORK_REQUIRED"
                         return@Thread
                     }
-                    val opened = opens(jumpProfile, address, jumpAuthority, jumpCredential, null)
+                    val opened = opens(jumpProfile, address, jumpAuthority, jumpCredential, null, prompts)
                     if (opened is SshTransportOpenResult.Failure) {
                         code = opened.code.name
                         cleanupCertain = transportFailureCertain(opened.code)
@@ -137,7 +139,7 @@ internal class TerminalSession(context: Context, private val listener: Listener)
                     return@Thread
                 }
                 if (!active()) return@Thread
-                val opened = opens(profile, address, authority, credentials, direct)
+                val opened = opens(profile, address, authority, credentials, direct, prompts)
                 if (opened is SshTransportOpenResult.Failure) {
                     code = opened.code.name
                     cleanupCertain = transportFailureCertain(opened.code)
@@ -235,7 +237,7 @@ internal class TerminalSession(context: Context, private val listener: Listener)
 
     private fun opens(profile: SshObservationProfile, address: InetAddress,
                       authority: SshAuthenticationHandle, credential: SshSessionCredentials,
-                      direct: SshJumpChannel?): SshTransportOpenResult {
+                      direct: SshJumpChannel?, prompts: SshInteractivePromptHandler?): SshTransportOpenResult {
         val factory = SshAuthenticatedTransportFactory()
         return when (credential) {
             is SshPasswordCredentials -> factory.connectPassword(profile.peer, address,
@@ -256,7 +258,8 @@ internal class TerminalSession(context: Context, private val listener: Listener)
                     val admitted = authority.admit(peer, key)
                     if (admitted is SshKeyboardInteractiveCredentials) admitted
                     else { admitted?.close(); null }
-                }, authority::establishSession, authority::releaseSession, direct = direct)
+                }, authority::establishSession, authority::releaseSession, direct = direct, prompts = prompts,
+                timeoutMillis = 40_000)
             else -> SshTransportOpenResult.Failure(SshTransportCode.CREDENTIALS_UNAVAILABLE)
         }
     }

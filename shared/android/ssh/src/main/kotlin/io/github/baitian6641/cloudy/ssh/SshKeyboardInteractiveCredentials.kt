@@ -1,9 +1,9 @@
 package io.github.baitian6641.cloudy.ssh
 
 /**
- * One supported keyboard-interactive response for exactly one attempt. The single response is
- * returned only for the first server prompt; a multi-prompt or repeated challenge is refused
- * rather than answered by guessing. No serialization, logging or persistence.
+ * One keyboard-interactive identity for exactly one attempt. A fixed response answers a single
+ * prompt; prompted credentials leave each answer to the supplied UI prompt handler. No
+ * serialization, logging or persistence.
  */
 class SshKeyboardInteractiveCredentials private constructor(
     private var material: Material?,
@@ -18,11 +18,11 @@ class SshKeyboardInteractiveCredentials private constructor(
 
     internal class Material(
         override val username: CharArray,
-        val response: CharArray,
+        val response: CharArray?,
     ) : SshCredentialMaterial {
         override fun close() {
             username.fill('\u0000')
-            response.fill('\u0000')
+            response?.fill('\u0000')
         }
         override fun toString(): String = "SshKeyboardInteractiveMaterial(redacted)"
     }
@@ -39,6 +39,14 @@ class SshKeyboardInteractiveCredentials private constructor(
                 user.fill('\u0000'); secret.fill('\u0000'); invalid()
             }
             return SshKeyboardInteractiveCredentials(Material(user, secret))
+        }
+
+        /** Dynamic prompts supply each answer through [SshInteractivePromptHandler]. */
+        fun createPrompted(username: CharArray): SshKeyboardInteractiveCredentials {
+            if (username.size !in 1..MAX_USERNAME_UNITS) invalid()
+            val user = username.copyOf()
+            if (!valid(user)) { user.fill('\u0000'); invalid() }
+            return SshKeyboardInteractiveCredentials(Material(user, null))
         }
 
         private fun valid(value: CharArray): Boolean {

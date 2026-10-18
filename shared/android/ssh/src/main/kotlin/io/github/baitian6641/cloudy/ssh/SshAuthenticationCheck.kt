@@ -30,21 +30,23 @@ class SshAuthenticationCheck {
     fun authenticate(peer: SshPeerIdentity, address: InetAddress, expectedKey: SshHostKeyIdentity,
                      cancellation: SshObservationCancellation,
                      admit: (SshPeerIdentity, SshHostKeyIdentity) -> SshSessionCredentials?,
-                     timeoutMillis: Int = 10_000): SshAuthenticationResult {
-        if (timeoutMillis !in 1..10_000) return failure(SshAuthenticationCode.INVALID_TIMEOUT)
+                     timeoutMillis: Int = 10_000,
+                     prompts: SshInteractivePromptHandler? = null): SshAuthenticationResult {
+        if (timeoutMillis !in 1..45_000) return failure(SshAuthenticationCode.INVALID_TIMEOUT)
         if (quarantined.get()) return failure(SshAuthenticationCode.QUARANTINED)
         if (!busy.compareAndSet(false, true)) return failure(SshAuthenticationCode.BUSY)
         try {
             if (quarantined.get()) return failure(SshAuthenticationCode.QUARANTINED)
             if (Thread.currentThread().isInterrupted) cancellation.cancel()
             if (cancellation.isCancelled) return failure(SshAuthenticationCode.CANCELLED)
-            return perform(peer, address, expectedKey, cancellation, admit, timeoutMillis)
+            return perform(peer, address, expectedKey, cancellation, admit, timeoutMillis, prompts)
         } finally { busy.set(false) }
     }
 
     private fun perform(peer: SshPeerIdentity, address: InetAddress, expectedKey: SshHostKeyIdentity,
                         cancellation: SshObservationCancellation,
-                        admit: (SshPeerIdentity, SshHostKeyIdentity) -> SshSessionCredentials?, timeoutMillis: Int): SshAuthenticationResult {
+                        admit: (SshPeerIdentity, SshHostKeyIdentity) -> SshSessionCredentials?,
+                        timeoutMillis: Int, prompts: SshInteractivePromptHandler?): SshAuthenticationResult {
         val attempt = Attempt(cancellation, timeoutMillis)
         if (!cancellation.attach { attempt.wake.countDown() }) return failure(SshAuthenticationCode.BUSY)
         val retirement = SshReaderRetirement()
@@ -153,7 +155,7 @@ class SshAuthenticationCheck {
                             }
                             is SshKeyboardInteractiveCredentials.Material -> {
                                 val responder = SshOneReleaseKeyboardInteractiveResponder(
-                                    owned, cancellation, releaseActive)
+                                    owned, cancellation, releaseActive, prompts)
                                 try {
                                     ssh.auth(String(owned.username), AuthKeyboardInteractive(responder))
                                 } finally {

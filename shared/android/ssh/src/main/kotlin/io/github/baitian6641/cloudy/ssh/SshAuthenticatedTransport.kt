@@ -89,17 +89,20 @@ class SshAuthenticatedTransportFactory {
         admit: (SshPeerIdentity, SshHostKeyIdentity) -> SshKeyboardInteractiveCredentials?,
         establish: (SshAuthenticatedOwnership) -> Boolean,
         retired: (SshAuthenticatedOwnership) -> Unit,
-        timeoutMillis: Int = 10_000, direct: SshJumpChannel? = null): SshTransportOpenResult = connect(
-        peer, address, expectedKey, cancellation, { p, k -> admit(p, k) }, establish, retired, timeoutMillis, direct)
+        timeoutMillis: Int = 10_000, direct: SshJumpChannel? = null,
+        prompts: SshInteractivePromptHandler? = null): SshTransportOpenResult = connect(
+        peer, address, expectedKey, cancellation, { p, k -> admit(p, k) }, establish, retired,
+        timeoutMillis, direct, prompts)
 
     private fun connect(peer: SshPeerIdentity, address: InetAddress, expectedKey: SshHostKeyIdentity,
         cancellation: SshObservationCancellation,
         admit: (SshPeerIdentity, SshHostKeyIdentity) -> SshSessionCredentials?,
         establish: (SshAuthenticatedOwnership) -> Boolean,
         retired: (SshAuthenticatedOwnership) -> Unit,
-        timeoutMillis: Int, direct: SshJumpChannel?): SshTransportOpenResult {
+        timeoutMillis: Int, direct: SshJumpChannel?,
+        prompts: SshInteractivePromptHandler? = null): SshTransportOpenResult {
         fun failed(code: SshTransportCode) = SshTransportOpenResult.Failure(code)
-        if (timeoutMillis !in 1..10_000) return failed(SshTransportCode.INVALID_INPUT)
+        if (timeoutMillis !in 1..45_000) return failed(SshTransportCode.INVALID_INPUT)
         val denied = synchronized(admission) {
             // Retirement notification itself must exit before this factory is reused.
             if (previous?.fullyRetired() == true) { previous = null; busy.set(false) }
@@ -212,7 +215,7 @@ class SshAuthenticatedTransportFactory {
                         }
                         is SshKeyboardInteractiveCredentials.Material -> {
                             val responder = SshOneReleaseKeyboardInteractiveResponder(
-                                owned, cancellation, state::active)
+                                owned, cancellation, state::active, prompts)
                             try {
                                 client.auth(String(owned.username), AuthKeyboardInteractive(responder))
                             } finally {
@@ -297,7 +300,7 @@ internal class SshRetainedState(
     fun retainDirect(connection: DirectConnection) { external = connection }
 
     fun openDirect(host: String, port: Int, timeoutMillis: Int): SshDirectResult {
-        if (host.isEmpty() || host.length > 255 || port !in 1..65535 || timeoutMillis !in 1..10_000) {
+        if (host.isEmpty() || host.length > 255 || port !in 1..65535 || timeoutMillis !in 1..45_000) {
             return SshDirectResult.Failure(SshTransportCode.INVALID_INPUT)
         }
         val done = CountDownLatch(1)
@@ -406,7 +409,7 @@ internal class SshRetainedState(
     }
 
     fun <T> withFiles(timeoutMillis: Int, action: (SFTPClient) -> T): SshFilesResult<T> {
-        if (timeoutMillis !in 1..10_000) return SshFilesResult.Failure(SshTransportCode.INVALID_INPUT)
+        if (timeoutMillis !in 1..45_000) return SshFilesResult.Failure(SshTransportCode.INVALID_INPUT)
         val done = CountDownLatch(1)
         val admitted = synchronized(gate) {
             if (!active()) {
@@ -470,7 +473,7 @@ internal class SshRetainedState(
     }
 
     fun awaitClosed(timeoutMillis: Long): SshTransportCloseResult {
-        if (timeoutMillis !in 1..10_000) return SshTransportCloseResult.Failure(SshTransportCode.INVALID_INPUT)
+        if (timeoutMillis !in 1..45_000) return SshTransportCloseResult.Failure(SshTransportCode.INVALID_INPUT)
         val deadline = System.nanoTime() + TimeUnit.MILLISECONDS.toNanos(timeoutMillis)
         try {
             if (!terminal.await(timeoutMillis, TimeUnit.MILLISECONDS)) return SshTransportCloseResult.Failure(SshTransportCode.TIMED_OUT)

@@ -14,13 +14,13 @@ class SshKeyboardInteractiveCredentialsTest {
         user.fill('x'); response.fill('x')
         val material = checkNotNull(credentials.take())
         assertArrayEquals(expectedUser, material.username)
-        assertArrayEquals(expectedResponse, material.response)
+        assertArrayEquals(expectedResponse, checkNotNull(material.response))
         assertTrue(credentials.isClosed)
         assertNull(credentials.take())
         credentials.close(); credentials.close()
         material.close(); material.close()
         assertTrue(material.username.all { it == '\u0000' })
-        assertTrue(material.response.all { it == '\u0000' })
+        assertTrue(checkNotNull(material.response).all { it == '\u0000' })
         assertEquals("SshKeyboardInteractiveCredentials(redacted)", credentials.toString())
         expectedUser.fill('\u0000'); expectedResponse.fill('\u0000')
     }
@@ -50,7 +50,7 @@ class SshKeyboardInteractiveCredentialsTest {
         val credentials = SshKeyboardInteractiveCredentials.create("user".toCharArray(), "secret".toCharArray())
         val material = checkNotNull(credentials.take())
         val responder = SshOneReleaseKeyboardInteractiveResponder(
-            material, SshObservationCancellation()) { true }
+            material, SshObservationCancellation(), active = { true })
         try {
             val resource = AccountResource("unused", "unused.invalid")
             responder.init(resource, "name", "instruction")
@@ -62,7 +62,40 @@ class SshKeyboardInteractiveCredentialsTest {
             assertTrue(responder.unsupported.get())
             assertFalse(responder.shouldRetry())
             responder.eraseResponse()
-            assertTrue(material.response.all { it == '\u0000' })
+            assertTrue(checkNotNull(material.response).all { it == '\u0000' })
+        } finally { material.close(); credentials.close() }
+    }
+
+    @Test fun promptedResponderAsksForEveryServerPromptAndHasNoFixedSecret() {
+        val credentials = SshKeyboardInteractiveCredentials.createPrompted("user".toCharArray())
+        val material = checkNotNull(credentials.take())
+        assertNull(material.response)
+        var calls = 0
+        val handler = SshInteractivePromptHandler { prompt, _ ->
+            calls++
+            if (prompt == "First: ") "one".toCharArray() else "two".toCharArray()
+        }
+        val responder = SshOneReleaseKeyboardInteractiveResponder(
+            material, SshObservationCancellation(), { true }, handler)
+        try {
+            assertArrayEquals("one".toCharArray(), responder.getResponse("First: ", false))
+            assertArrayEquals("two".toCharArray(), responder.getResponse("Second: ", true))
+            assertEquals(2, calls)
+            assertFalse(responder.unsupported.get())
+            responder.eraseResponse()
+        } finally { material.close(); credentials.close() }
+    }
+
+    @Test fun promptedCredentialWithoutAHandlerFailsClosed() {
+        val credentials = SshKeyboardInteractiveCredentials.createPrompted("user".toCharArray())
+        val material = checkNotNull(credentials.take())
+        val responder = SshOneReleaseKeyboardInteractiveResponder(
+            material, SshObservationCancellation(), { true }, null)
+        try {
+            assertThrows(net.schmizz.sshj.userauth.UserAuthException::class.java) {
+                responder.getResponse("Response: ", false)
+            }
+            assertTrue(responder.unsupported.get())
         } finally { material.close(); credentials.close() }
     }
 
@@ -70,12 +103,13 @@ class SshKeyboardInteractiveCredentialsTest {
         val credentials = SshKeyboardInteractiveCredentials.create("user".toCharArray(), "secret".toCharArray())
         val material = checkNotNull(credentials.take())
         val cancellation = SshObservationCancellation().apply { cancel() }
-        val responder = SshOneReleaseKeyboardInteractiveResponder(material, cancellation) { false }
+        val responder = SshOneReleaseKeyboardInteractiveResponder(
+            material, cancellation, active = { false })
         try {
             assertThrows(net.schmizz.sshj.userauth.UserAuthException::class.java) {
                 responder.getResponse("Response: ", false)
             }
-            assertArrayEquals("secret".toCharArray(), material.response)
+            assertArrayEquals("secret".toCharArray(), checkNotNull(material.response))
         } finally { material.close(); credentials.close() }
     }
 }

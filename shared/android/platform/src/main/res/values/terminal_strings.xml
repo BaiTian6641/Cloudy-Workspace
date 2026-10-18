@@ -73,8 +73,12 @@
     <string name="terminal_auth_password">Password</string>
     <string name="terminal_auth_private_key">Private key</string>
     <string name="terminal_auth_keyboard_interactive">Keyboard-interactive</string>
-    <string name="terminal_interactive_response">Response</string>
-    <string name="terminal_interactive_scope">One server prompt is supported per attempt. A multi-prompt challenge is refused instead of answered by guessing.</string>
+    <string name="terminal_interactive_scope">The server asks for each response after Connect. Prompt text is displayed as plain, bounded server data.</string>
+    <string name="terminal_interactive_prompt_heading">Server prompt</string>
+    <string name="terminal_interactive_answer">Response</string>
+    <string name="terminal_interactive_submit">Submit</string>
+    <string name="terminal_interactive_cancel">Cancel</string>
+    <string name="terminal_interactive_cancelled">Authentication cancelled.</string>
     <string name="terminal_jump">Via jump host: %1$s (%2$s)</string>
     <string name="terminal_jump_missing">unavailable</string>
     <string name="terminal_jump_scope">The same transient credentials are used for both hops; each hop requires its own trusted key.</string>

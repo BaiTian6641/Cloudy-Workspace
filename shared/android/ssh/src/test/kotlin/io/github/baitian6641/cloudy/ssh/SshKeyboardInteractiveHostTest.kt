@@ -28,6 +28,9 @@ class SshKeyboardInteractiveHostTest {
             SshKeyboardInteractiveCredentials.create(username.copyOf(), response.copyOf())
         fun wrongCredentials(): SshKeyboardInteractiveCredentials =
             SshKeyboardInteractiveCredentials.create(username.copyOf(), "wrong-response".toCharArray())
+        fun promptedCredentials(): SshKeyboardInteractiveCredentials =
+            SshKeyboardInteractiveCredentials.createPrompted(username.copyOf())
+        fun promptedResponse(): CharArray = response.copyOf()
         fun wipe() { username.fill('\u0000'); response.fill('\u0000') }
     }
 
@@ -38,12 +41,13 @@ class SshKeyboardInteractiveHostTest {
     }
 
     private fun authenticate(fixture: Fixture, credentials: SshKeyboardInteractiveCredentials,
-                             cancellation: SshObservationCancellation = SshObservationCancellation()) =
+                             cancellation: SshObservationCancellation = SshObservationCancellation(),
+                             prompts: SshInteractivePromptHandler? = null) =
         SshAuthenticationCheck().authenticate(fixture.peer, fixture.address, fixture.key, cancellation,
             admit = { peer, key ->
                 assertTrue("Exact fresh route/key required", peer == fixture.peer && key == fixture.key)
                 credentials
-            }, timeoutMillis = 4_000)
+            }, timeoutMillis = 4_000, prompts = prompts)
 
     @Test fun acceptedResponseAuthenticatesAndRetainsThenRetires() {
         val fixture = fixture()
@@ -88,6 +92,23 @@ class SshKeyboardInteractiveHostTest {
             assertEquals(SshAuthenticationCode.AUTHENTICATION_FAILED,
                 (result as SshAuthenticationResult.Failure).code)
             assertTrue("Admitted response must be disposed", credential.isClosed)
+        } finally { credential.close(); fixture.wipe() }
+    }
+
+    @Test fun promptedCredentialAnswersTheRealServerPrompt() {
+        val fixture = fixture()
+        val credential = fixture.promptedCredentials()
+        var asked = false
+        try {
+            val result = authenticate(fixture, credential, prompts = SshInteractivePromptHandler { prompt, echo ->
+                asked = true
+                assertTrue("Server prompt text required", prompt.isNotEmpty())
+                assertFalse("The fixture password prompt is not echoed", echo)
+                fixture.promptedResponse()
+            })
+            assertTrue("Prompted authentication must succeed: $result", result is SshAuthenticationResult.Success)
+            assertTrue("The server prompt must be delivered", asked)
+            assertTrue("Prompted credentials must retire after auth", credential.isClosed)
         } finally { credential.close(); fixture.wipe() }
     }
 

@@ -81,6 +81,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.viewinterop.AndroidView
 import io.github.baitian6641.cloudy.design.CloudyControlMetrics
@@ -89,6 +90,7 @@ import io.github.baitian6641.cloudy.domain.ConnectionProfileDraft
 import io.github.baitian6641.cloudy.domain.ConnectionProtocol
 import io.github.baitian6641.cloudy.domain.SshObservationProfile
 import io.github.baitian6641.cloudy.domain.TerminalRightClick
+import io.github.baitian6641.cloudy.ssh.SshInteractivePromptHandler
 import io.github.baitian6641.cloudy.ssh.SshKeyCredentials
 import io.github.baitian6641.cloudy.ssh.SshKeyboardInteractiveCredentials
 import io.github.baitian6641.cloudy.ssh.SshPasswordCredentials
@@ -105,6 +107,8 @@ import io.github.baitian6641.cloudy.terminal.TerminalUiRequest
 import io.github.baitian6641.cloudy.terminal.TerminalUiRequestAction
 import io.github.baitian6641.cloudy.terminal.TerminalWebViewBridge
 import java.util.UUID
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicReference
 
 /** Foreground terminal construction, not background persistence or full desktop-input acceptance.
@@ -118,6 +122,8 @@ class CloudyTerminalActivity : ComponentActivity() {
         lateinit var session: TerminalSession
     }
     /** Preview identity is the actual attempt plus renderer; focus/close/supersession drops it. */
+    private class PromptRequest(val id: Long, val text: String, val echo: Boolean)
+
     private class PendingPaste(
         val attempt: Attempt,
         val renderer: TerminalWebViewBridge,
@@ -133,7 +139,9 @@ class CloudyTerminalActivity : ComponentActivity() {
     private var authMethod by mutableStateOf(AuthMethod.PASSWORD)
     private var key by mutableStateOf<ByteArray?>(null)
     private var keyPassphrase by mutableStateOf(TextFieldValue())
-    private var interactiveResponse by mutableStateOf(TextFieldValue())
+    private var interactivePrompt by mutableStateOf<PromptRequest?>(null)
+    private var promptAnswer by mutableStateOf(TextFieldValue())
+    private var promptBridge: PromptBridge? = null
     private var keyBusy by mutableStateOf(false)
     private var keyRead = 0L
     /** Persisted content-URI reference for the selected profile; never key bytes. */
@@ -441,17 +449,15 @@ class CloudyTerminalActivity : ComponentActivity() {
                 }
             }
             AuthMethod.KEYBOARD_INTERACTIVE -> {
-                if (interactiveResponse.text.isEmpty()) return
                 val user = username.text.toCharArray()
-                val response = interactiveResponse.text.toCharArray()
                 try {
-                    SshKeyboardInteractiveCredentials.create(user, response) to
-                        (if (jump != null) SshKeyboardInteractiveCredentials.create(user, response) else null)
+                    SshKeyboardInteractiveCredentials.createPrompted(user) to
+                        (if (jump != null) SshKeyboardInteractiveCredentials.createPrompted(user) else null)
                 } catch (_: IllegalArgumentException) {
                     message = getString(R.string.terminal_auth_invalid)
                     return
                 } finally {
-                    user.fill('\u0000'); response.fill('\u0000')
+                    user.fill('\u0000')
                 }
             }
         }
@@ -462,7 +468,8 @@ class CloudyTerminalActivity : ComponentActivity() {
         val current = Attempt()
         current.session = TerminalSession(applicationContext, sessionListener(current, profile))
         attempt = current
-        current.session.connect(profile, pair.first, jump, pair.second)
+        val bridge = if (authMethod == AuthMethod.KEYBOARD_INTERACTIVE) PromptBridge().also { promptBridge = it } else null
+        current.session.connect(profile, pair.first, jump, pair.second, bridge)
     }
 
     /** One bounded session-only read; supersession and lifecycle changes wipe the bytes. */
@@ -887,6 +894,84 @@ class CloudyTerminalActivity : ComponentActivity() {
         }
     }
 
+    private class PendingPrompt(val id: Long, val text: String, val echo: Boolean) {
+        val latch = CountDownLatch(1)
+        @Volatile var answer: CharArray? = null
+        @Volatile var cancelled = false
+    }
+
+    /** Blocks the auth worker while the main thread renders one bounded server prompt. */
+    private inner class PromptBridge : SshInteractivePromptHandler {
+        private val lock = Any()
+        private var pending: PendingPrompt? = null
+        private var cancelled = false
+        private var nextId = 1L
+
+        override fun request(prompt: String, echo: Boolean): CharArray? {
+            val item = PendingPrompt(nextId++, prompt.take(1024), echo)
+            synchronized(lock) {
+                if (cancelled) return null
+                pending = item
+            }
+            runOnUiThread {
+                if (!disposed && !item.cancelled && synchronized(lock) { pending === item }) {
+                    promptAnswer = TextFieldValue()
+                    interactivePrompt = PromptRequest(item.id, item.text, item.echo)
+                }
+            }
+            try {
+                item.latch.await(45, TimeUnit.SECONDS)
+            } catch (_: InterruptedException) {
+                Thread.currentThread().interrupt()
+                item.cancelled = true
+            }
+            synchronized(lock) { if (pending === item) pending = null }
+            return if (item.cancelled) null else item.answer
+        }
+
+        fun submit(id: Long, value: CharArray) {
+            val item = synchronized(lock) { pending?.takeIf { it.id == id } }
+            if (item == null) {
+                value.fill('\u0000')
+                return
+            }
+            item.answer = value
+            item.latch.countDown()
+        }
+
+        fun cancel() {
+            val item = synchronized(lock) {
+                cancelled = true
+                pending.also { pending = null }
+            }
+            item?.let {
+                it.cancelled = true
+                it.answer = null
+                it.latch.countDown()
+            }
+            runOnUiThread {
+                interactivePrompt = null
+                promptAnswer = TextFieldValue()
+            }
+        }
+    }
+
+    private fun submitPrompt(prompt: PromptRequest) {
+        val answer = promptAnswer.text.toCharArray()
+        promptAnswer = TextFieldValue()
+        interactivePrompt = null
+        val bridge = promptBridge
+        if (bridge == null) answer.fill('\u0000') else bridge.submit(prompt.id, answer)
+    }
+
+    private fun cancelPrompt() {
+        promptBridge?.cancel()
+        promptBridge = null
+        interactivePrompt = null
+        promptAnswer = TextFieldValue()
+        message = getString(R.string.terminal_interactive_cancelled)
+    }
+
     private fun clearInteractionState() {
         pasteEpoch++
         pendingPaste = null
@@ -909,6 +994,10 @@ class CloudyTerminalActivity : ComponentActivity() {
         current.renderer.get()?.view?.hasFocus() == true
 
     private fun retire(reason: String) {
+        promptBridge?.cancel()
+        promptBridge = null
+        interactivePrompt = null
+        promptAnswer = TextFieldValue()
         clearInteractionState()
         val current = attempt ?: return
         current.renderer.getAndSet(null)?.dispose()
@@ -936,7 +1025,6 @@ class CloudyTerminalActivity : ComponentActivity() {
         username = TextFieldValue()
         password = TextFieldValue()
         keyPassphrase = TextFieldValue()
-        interactiveResponse = TextFieldValue()
     }
 
     private fun hasLocalPermission() = Build.VERSION.SDK_INT < 37 ||
@@ -972,14 +1060,47 @@ class CloudyTerminalActivity : ComponentActivity() {
                 Text(message ?: stringResource(R.string.terminal_choose), modifier = Modifier.testTag("terminal_status")
                     .semantics { liveRegion = LiveRegionMode.Polite })
             }
+            interactivePrompt?.let { prompt ->
+                item(key = "interactive_prompt_${prompt.id}") {
+                    Surface(color = MaterialTheme.colorScheme.surfaceVariant, modifier = Modifier.fillMaxWidth()
+                        .testTag("terminal_interactive_prompt")) {
+                        Column(Modifier.padding(CloudyControlMetrics.spaceMedium),
+                            verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                            Text(stringResource(R.string.terminal_interactive_prompt_heading),
+                                style = MaterialTheme.typography.titleSmall)
+                            Text(prompt.text, style = MaterialTheme.typography.bodyMedium,
+                                modifier = Modifier.testTag("terminal_interactive_prompt_text"))
+                            val answerFocus = remember { androidx.compose.ui.focus.FocusRequester() }
+                            OutlinedTextField(promptAnswer,
+                                { if (it.text.length <= SshKeyboardInteractiveCredentials.MAX_RESPONSE_UNITS) promptAnswer = it },
+                                label = { Text(stringResource(R.string.terminal_interactive_answer)) }, singleLine = true,
+                                visualTransformation = if (prompt.echo) VisualTransformation.None
+                                else PasswordVisualTransformation(),
+                                keyboardOptions = KeyboardOptions(
+                                    keyboardType = if (prompt.echo) KeyboardType.Text else KeyboardType.Password,
+                                    capitalization = KeyboardCapitalization.None, autoCorrectEnabled = false),
+                                modifier = Modifier.fillMaxWidth().focusRequester(answerFocus)
+                                    .testTag("terminal_interactive_answer"))
+                            LaunchedEffect(prompt.id) { answerFocus.requestFocus() }
+                            FlowRow(horizontalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                                Button({ submitPrompt(prompt) }, modifier = Modifier.testTag("terminal_interactive_submit")) {
+                                    Text(stringResource(R.string.terminal_interactive_submit))
+                                }
+                                TextButton({ cancelPrompt() }, modifier = Modifier.testTag("terminal_interactive_cancel")) {
+                                    Text(stringResource(R.string.terminal_interactive_cancel))
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             item("actions") {
                 FlowRow(horizontalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
                     Button(::connect, enabled = !busy && !keyBusy && !keyPersistBusy && chosen != null &&
                         username.text.isNotEmpty() &&
                         ((authMethod == AuthMethod.PASSWORD && password.text.isNotEmpty()) ||
                             (authMethod == AuthMethod.PRIVATE_KEY && key != null) ||
-                            (authMethod == AuthMethod.KEYBOARD_INTERACTIVE &&
-                                interactiveResponse.text.isNotEmpty())),
+                            authMethod == AuthMethod.KEYBOARD_INTERACTIVE),
                         modifier = Modifier.testTag("terminal_connect_button")) { Text(stringResource(R.string.terminal_connect)) }
                     TextButton(::openTrust, enabled = !busy) { Text(stringResource(R.string.terminal_trust)) }
                     TextButton(::refresh, enabled = !busy, modifier = Modifier.testTag("terminal_refresh")) {
@@ -1047,21 +1168,8 @@ class CloudyTerminalActivity : ComponentActivity() {
                             modifier = Modifier.fillMaxWidth().testTag("terminal_password"))
                     }
                 }
-                if (authMethod == AuthMethod.KEYBOARD_INTERACTIVE) item("interactive_response") {
-                    key(credentialEpoch) {
-                        Column(verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
-                            OutlinedTextField(interactiveResponse,
-                                { if (!busy && it.text.length <= SshKeyboardInteractiveCredentials.MAX_RESPONSE_UNITS) interactiveResponse = it },
-                                enabled = !busy,
-                                label = { Text(stringResource(R.string.terminal_interactive_response)) },
-                                singleLine = true, visualTransformation = PasswordVisualTransformation(),
-                                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password,
-                                    capitalization = KeyboardCapitalization.None, autoCorrectEnabled = false),
-                                modifier = Modifier.fillMaxWidth().testTag("terminal_interactive_response"))
-                            Text(stringResource(R.string.terminal_interactive_scope),
-                                style = MaterialTheme.typography.bodySmall)
-                        }
-                    }
+                if (authMethod == AuthMethod.KEYBOARD_INTERACTIVE) item("interactive_note") {
+                    Text(stringResource(R.string.terminal_interactive_scope), style = MaterialTheme.typography.bodySmall)
                 }
                 if (authMethod == AuthMethod.PRIVATE_KEY) {
                     item("key_choose") {

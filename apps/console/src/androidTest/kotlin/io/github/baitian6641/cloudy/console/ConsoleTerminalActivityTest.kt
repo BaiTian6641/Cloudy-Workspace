@@ -137,6 +137,13 @@ class ConsoleTerminalActivityTest {
             credentials(owned)
             stage = "AUTHENTICATING"
             click("terminal_connect_button")
+            if (authMethod() == "keyboard-interactive") {
+                val prompt = reveal("terminal_interactive_prompt")
+                waitFor(20_000) { node("terminal_interactive_prompt") != null }
+                check("Response" in textOf(prompt)) { "TERMINAL_INTERACTIVE_PROMPT_MISSING" }
+                setText("terminal_interactive_answer", fixture.password)
+                click("terminal_interactive_submit")
+            }
             waitFor(20_000) { node("terminal_live_status")?.text?.toString() ==
                 context.getString(platformR.string.terminal_status_ready) }
             owned.phase("TERMINAL_PTY_OPEN")
@@ -175,7 +182,10 @@ class ConsoleTerminalActivityTest {
                 else -> "terminal_password"
             }
             check(node("terminal_live_status") == null)
-            if (authMethod() == "private-key") {
+            if (authMethod() == "keyboard-interactive") {
+                check(node("terminal_interactive_prompt") == null)
+                check(empty(reveal("terminal_username")))
+            } else if (authMethod() == "private-key") {
                 check(node(credentialTag)?.text?.toString() ==
                     context.getString(platformR.string.terminal_key_none))
                 check(empty(reveal("terminal_username")))
@@ -503,11 +513,6 @@ class ConsoleTerminalActivityTest {
         setText("terminal_username", fixture.username)
         if (authMethod() == "keyboard-interactive") {
             click("terminal_auth_interactive_method")
-            waitFor(10_000) { node("terminal_interactive_response") != null }
-            check(node("terminal_connect_button")?.isEnabled == false) {
-                "TERMINAL_INTERACTIVE_CONNECT_WITHOUT_RESPONSE"
-            }
-            setText("terminal_interactive_response", fixture.password)
             waitFor(10_000) { node("terminal_connect_button")?.isEnabled == true }
             return
         }

@@ -23,7 +23,7 @@ class SshAuthenticationCheckTest {
         val calls = AtomicInteger()
         val token = SshObservationCancellation()
         val admit = { _: SshPeerIdentity, _: SshHostKeyIdentity -> calls.incrementAndGet(); null }
-        for (timeout in listOf(Int.MIN_VALUE, 0, 10_001, Int.MAX_VALUE)) {
+        for (timeout in listOf(Int.MIN_VALUE, 0, 45_001, Int.MAX_VALUE)) {
             assertEquals(SshAuthenticationCode.INVALID_TIMEOUT,
                 (engine.authenticate(peer, address, key, token, admit, timeout) as SshAuthenticationResult.Failure).code)
         }

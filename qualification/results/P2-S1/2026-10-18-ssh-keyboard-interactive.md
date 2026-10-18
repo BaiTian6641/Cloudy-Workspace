@@ -51,3 +51,10 @@ Three earlier attempts are preserved as driver observations, not product passes:
 - Physical Googlebook qualification.
 
 A single-prompt result does not establish general keyboard-interactive interoperability or full C03.
+
+## Dynamic multi-prompt UI (2026-10-18)
+
+- **Engine:** `SshInteractivePromptHandler` supplies one response per server prompt from the authentication worker. `SshKeyboardInteractiveCredentials.createPrompted(username)` carries no fixed secret; the responder asks the handler for every prompt, accepts null as cancellation, wipes collected answers after auth, and still refuses retries. A prompted credential without a handler fails closed (`KEYBOARD_INTERACTIVE_PROMPT_UNAVAILABLE`); a fixed credential keeps the single-answer rule.
+- **UI:** the session passes a bridge to the transport. The worker posts each bounded prompt text (≤1024) to the main thread; the Connect surface shows a server-prompt panel with an echo-aware answer field (≤4096), Submit and Cancel, and focus. Submit transfers the char array and wipes the field; Cancel, pause/retire, session close or a 45 s bridge limit releases the worker. The transport auth deadline is 40 s. Prompt text is rendered as plain, bounded server data and is never logged.
+- **Qualification:** host `SshKeyboardInteractiveHostTest` ran **4/4**, including `promptedCredentialAnswersTheRealServerPrompt`. Unit tests cover two sequential prompted answers and the missing-handler refusal. Product run `62ecaeb9-cf36-4291-93e5-5212e26daa2e` (`authMethod=keyboard-interactive`, Console `c79a17f5…`, test `5ee42ad5…`) shows the real server prompt, submits the fixture password, then passes host-witnessed command, 20,000-byte host-matched paste, exit/CLOSED and exact restore.
+- **Limits:** the real fixture issues one prompt; the two-prompt sequence is proven at engine/unit level only. OTP/duo-style flows, per-prompt history/labels and a two-prompt real-server product case remain. The `SshHostKeyObserver` timeout bound retains its separate 10 s policy.
