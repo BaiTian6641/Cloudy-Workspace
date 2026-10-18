@@ -146,7 +146,7 @@ internal sealed interface SshPtyWrite {
     class Resize(val size: SshPtySize) : SshPtyWrite
 }
 
-/** Fixed capacity includes the actual writer's in-flight bytes; overflow never partially admits. */
+/** One whole input action may use the 64 KiB capacity, including in-flight bytes; never split admission. */
 internal class SshPtyMailbox {
     private val monitor = Object()
     private val queue = ArrayDeque<SshPtyWrite.Bytes>()
@@ -157,7 +157,7 @@ internal class SshPtyMailbox {
     private var lastResize = false
     fun offer(bytes: ByteArray): SshPtyAdmission = synchronized(monitor) {
         if (stopped) return@synchronized SshPtyAdmission.STOPPED
-        if (bytes.isEmpty() || bytes.size > 16 * 1024) return@synchronized SshPtyAdmission.INVALID_INPUT
+        if (bytes.isEmpty() || bytes.size > 64 * 1024) return@synchronized SshPtyAdmission.INVALID_INPUT
         if (charged + bytes.size > 64 * 1024 || queue.size >= 64) return@synchronized SshPtyAdmission.FULL
         queue.add(SshPtyWrite.Bytes(bytes.copyOf())); charged += bytes.size
         monitor.notifyAll()

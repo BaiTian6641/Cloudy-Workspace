@@ -1449,3 +1449,16 @@ The parent inspected post-close pixels and removed only its confirmed temporary 
 The injected label stimulus lost two trailing characters before the next field; that observation
 is preserved without a cause or full-input pass. The unrelated terminal-interaction wave remains
 under validation and is not qualified by this profile commit.
+
+## 2026-10-17 — Whole-action PTY input without partial admission
+
+The parent isolated the [PTY admission repair](../../qualification/results/P2-S1/2026-10-17-pty-whole-input.md)
+from the ongoing native interaction wave. One input action may use the existing 64 KiB byte budget;
+queued and in-flight bytes still share that budget, and the queued-entry cap remains64. No paste
+splitting, capacity expansion, new dependency or replay path was introduced.
+
+The large-action regression fails before and all eight bounds methods pass after. The subsequent
+full SSH suite passes48 methods with26 explicitly skipped opt-in cases. A real native Console →
+SSHJ → MINA/kernel-PTY workflow independently captures exactly20,000 clipboard bytes and no cancelled
+preview/menu bytes. The source-bound record preserves fixture/backend/emulator limits; surrounding
+UI selection/focus validation is separate and does not become complete through this backend commit.

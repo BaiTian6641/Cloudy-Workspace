@@ -22,12 +22,35 @@ class SshPtyBoundsTest {
     @Test fun invalidInputNeverPartiallyQueues() {
         val mailbox = SshPtyMailbox()
         assertEquals(SshPtyAdmission.INVALID_INPUT, mailbox.offer(ByteArray(0)))
-        assertEquals(SshPtyAdmission.INVALID_INPUT, mailbox.offer(ByteArray(16 * 1024 + 1)))
+        assertEquals(SshPtyAdmission.INVALID_INPUT, mailbox.offer(ByteArray(64 * 1024 + 1)))
         assertEquals(SshPtyAdmission.ACCEPTED, mailbox.offer(byteArrayOf(3)))
         val actual = mailbox.take() as SshPtyWrite.Bytes
         assertArrayEquals(byteArrayOf(3), actual.value)
         mailbox.completed(actual)
         mailbox.close()
+    }
+    @Test fun wholeLargeActionsShareTheExistingCapacityWithoutPartialAdmission() {
+        val mailbox = SshPtyMailbox()
+        try {
+            assertEquals(SshPtyAdmission.ACCEPTED, mailbox.offer(ByteArray(16 * 1024)))
+            assertEquals(SshPtyAdmission.FULL, mailbox.offer(ByteArray(60 * 1024)))
+            assertEquals(SshPtyAdmission.ACCEPTED, mailbox.offer(byteArrayOf(42)))
+            val first = mailbox.take() as SshPtyWrite.Bytes
+            assertEquals(16 * 1024, first.value.size)
+            mailbox.completed(first)
+            val next = mailbox.take() as SshPtyWrite.Bytes
+            assertArrayEquals(byteArrayOf(42), next.value)
+            mailbox.completed(next)
+
+            assertEquals(SshPtyAdmission.ACCEPTED, mailbox.offer(ByteArray(64 * 1024)))
+            val entire = mailbox.take() as SshPtyWrite.Bytes
+            assertEquals(64 * 1024, entire.value.size)
+            assertEquals(SshPtyAdmission.FULL, mailbox.offer(byteArrayOf(1)))
+            mailbox.completed(entire)
+            assertEquals(SshPtyAdmission.ACCEPTED, mailbox.offer(byteArrayOf(1)))
+        } finally {
+            mailbox.close()
+        }
     }
     @Test fun resizeCoalescesWithoutStarvingQueuedInput() {
         val mailbox = SshPtyMailbox()

@@ -15,6 +15,14 @@ Own trusted SSH engine adapters, authentication, retained connection identity, b
 
 The public APIs return typed results and redacted representations. A connected transport does not prove that a remote process survived reconnect, and EOF does not prove command success. Queue ownership and stale-attachment fencing remain mandatory for renderer consumers.
 
+PTY admission accepts one whole input action up to 64 KiB. The total queued plus in-flight byte
+capacity remains 64 KiB, and the queued-entry limit remains 64. A full/invalid action is rejected
+without partial admission; callers must not split a paste into independently admitted chunks.
+The [whole-input result](../../../qualification/results/P2-S1/2026-10-17-pty-whole-input.md) records
+eight passing boundary cases (including failing-before evidence) and an exact 20,000-byte native
+clipboard action independently observed on a real SSH/kernel PTY. Sustained-load, physical-input,
+reconnect and full clipboard UX qualification remain separate.
+
 ## Verification
 
 Default JVM tests exercise domain integration, codecs, bounds and finite real TCP behavior. Opt-in fixtures require an owned real server and are skipped without explicit configuration; a skip is never a pass. Run the real PTY fixture through [qualification/fixtures/ssh-pty](../../../qualification/fixtures/ssh-pty/README.md). Device transport, renderer input/IME, physical Googlebook behavior and product UI need their own evidence.
