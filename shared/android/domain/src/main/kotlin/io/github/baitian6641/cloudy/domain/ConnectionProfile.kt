@@ -8,7 +8,7 @@ enum class ConnectionProtocol(val wireId: String) {
 
 enum class ConnectionProfileValidationCode {
     INVALID_LABEL, INVALID_PROTOCOL, INVALID_HOST, INVALID_PORT,
-    INVALID_ID, INVALID_REVISION, WRONG_OWNER, INVALID_TAGS, INVALID_LAST_USED, INVALID_JUMP,
+    INVALID_ID, INVALID_REVISION, WRONG_OWNER, INVALID_TAGS, INVALID_LAST_USED, INVALID_JUMP, INVALID_KEY_REFERENCE,
 }
 
 class ConnectionProfileValidationException(val code: ConnectionProfileValidationCode) :
@@ -25,6 +25,8 @@ class ConnectionProfileDraft private constructor(
     val favorite: Boolean,
     /** One-hop jump host reference; resolved and validated against the current catalog by the store. */
     val jumpProfileId: String?,
+    /** Optional content-URI reference to an app-granted key document; never key bytes. */
+    val keyUri: String?,
 ) {
     override fun toString(): String = "ConnectionProfileDraft(redacted)"
 
@@ -35,9 +37,13 @@ class ConnectionProfileDraft private constructor(
         fun create(
             owner: WindowOwner, label: String, protocol: ConnectionProtocol, host: String, port: Int,
             tags: Set<String> = emptySet(), favorite: Boolean = false, jumpProfileId: String? = null,
+            keyUri: String? = null,
         ): ConnectionProfileDraft {
             if (jumpProfileId != null && !canonicalId(jumpProfileId)) {
                 reject(ConnectionProfileValidationCode.INVALID_JUMP)
+            }
+            if (keyUri != null && !canonicalKeyUri(keyUri)) {
+                reject(ConnectionProfileValidationCode.INVALID_KEY_REFERENCE)
             }
             // Endpoint labels intentionally share the existing native-window Unicode/name policy.
             if (WindowState.nameProblem(label) != null) reject(ConnectionProfileValidationCode.INVALID_LABEL)
@@ -51,7 +57,7 @@ class ConnectionProfileDraft private constructor(
                 reject(ConnectionProfileValidationCode.INVALID_HOST)
             }
             return ConnectionProfileDraft(owner, label.trim(), protocol, canonicalHost, port,
-                normalizeTags(tags), favorite, jumpProfileId)
+                normalizeTags(tags), favorite, jumpProfileId, keyUri)
         }
 
         /**
@@ -100,6 +106,7 @@ class ConnectionProfile private constructor(
     val tags: Set<String> get() = draft.tags
     val favorite: Boolean get() = draft.favorite
     val jumpProfileId: String? get() = draft.jumpProfileId
+    val keyUri: String? get() = draft.keyUri
 
     /** Editable-field replacement keeps runtime metadata such as the last-used marker. */
     fun revised(draft: ConnectionProfileDraft): ConnectionProfile {
@@ -136,6 +143,14 @@ class ConnectionProfile private constructor(
 private val profileIdentifier = Regex("[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}")
 
 private fun canonicalId(value: String): Boolean = profileIdentifier.matches(value)
+
+private fun canonicalKeyUri(value: String): Boolean {
+    if (value.length !in 8..2048 || !value.startsWith("content://")) return false
+    for (char in value) {
+        if (Character.isISOControl(char) || char == '\u2028' || char == '\u2029') return false
+    }
+    return true
+}
 
 private fun reject(code: ConnectionProfileValidationCode): Nothing =
     throw ConnectionProfileValidationException(code)

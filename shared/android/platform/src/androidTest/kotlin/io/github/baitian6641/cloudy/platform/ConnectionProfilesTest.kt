@@ -22,6 +22,7 @@ import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotEquals
+import org.junit.Assert.assertThrows
 import org.junit.Assert.assertTrue
 import org.junit.Assert.fail
 import org.junit.Test
@@ -62,6 +63,25 @@ class ConnectionProfilesTest {
     }
 
     @After fun cleanup() { check(root.deleteRecursively()) }
+
+    @Test fun keyReferenceRoundTripsAndRejectsNonContentUris() {
+        val store = store()
+        val catalog = success(store.load())
+        val uri = "content://cloudy.test/key/1"
+        val created = success(store.create(catalog.generation, ConnectionProfileDraft.create(
+            WindowOwner.CONSOLE, "Keyed", ConnectionProtocol.SSH, "keyed.test", 22, keyUri = uri)))
+        assertEquals(uri, created.profile.keyUri)
+        assertEquals(uri, success(store.load()).profiles.single().keyUri)
+        val edited = success(store.update(created.version, ConnectionProfileDraft.create(
+            WindowOwner.CONSOLE, "Keyed renamed", ConnectionProtocol.SSH, "keyed.test", 22,
+            favorite = true, keyUri = uri)))
+        assertEquals(uri, edited.profile.keyUri)
+        assertEquals(uri, success(store.load()).profiles.single().keyUri)
+        assertThrows(IllegalArgumentException::class.java) {
+            ConnectionProfileDraft.create(WindowOwner.CONSOLE, "Bad", ConnectionProtocol.SSH,
+                "keyed.test", 22, keyUri = "file:///etc/passwd")
+        }
+    }
 
     @Test fun jumpReferenceRequiresAnEligibleSameStoreHopAndBlocksDelete() {
         val store = store()

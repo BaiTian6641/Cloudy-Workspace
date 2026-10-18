@@ -107,6 +107,8 @@ def main():
                         help="Product authentication method exercised by the fixture journey")
     parser.add_argument("--jump", action="store_true",
                         help="Seed one same-peer jump profile and target reference for the journey")
+    parser.add_argument("--remember-key", action="store_true",
+                        help="Persist the picked key's document reference and verify the reload path")
     args = parser.parse_args()
     if not 1024 <= args.device_port <= 65535:
         parser.error("--device-port must be an unprivileged TCP port")
@@ -218,6 +220,7 @@ def main():
     receipt["interactionsRequested"] = args.interactions
     receipt["authMethod"] = args.auth
     receipt["jumpRequested"] = args.jump
+    receipt["rememberKeyRequested"] = args.remember_key
     receipt["keyFileRemoved"] = True
     key_name = f"cloudy-key-{run}"
     receipt.update(inputMethodRestored=False, imeCleanupConfirmed=False, imeCleanupErrors=[])
@@ -275,6 +278,7 @@ def main():
                 "-e", "cloudyTerminalInteractions", str(args.interactions).lower(),
                 "-e", "cloudyTerminalAuth", args.auth,
                 "-e", "cloudyTerminalJump", str(args.jump).lower(),
+                "-e", "cloudyTerminalRememberKey", str(args.remember_key).lower(),
                 "-e", "cloudyTerminalKeyName", key_name,
                 "-e", "cloudyAllowDeviceImeChange", str(args.allow_device_ime_change).lower(),
                 PACKAGE + ".test/androidx.test.runner.AndroidJUnitRunner",

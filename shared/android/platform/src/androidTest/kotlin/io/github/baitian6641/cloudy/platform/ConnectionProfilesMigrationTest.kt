@@ -75,9 +75,33 @@ class ConnectionProfilesMigrationTest {
         }
     }
 
+    /** v3 adds the jump reference but not the v4 key reference. */
+    private fun writeV3Store() {
+        writeV2Store()
+        SQLiteDatabase.openDatabase(database.path, null, SQLiteDatabase.OPEN_READWRITE).use { db ->
+            db.execSQL("ALTER TABLE profiles ADD COLUMN jump_profile_id TEXT NOT NULL DEFAULT ''")
+            db.execSQL("UPDATE metadata SET version=3")
+            db.execSQL("PRAGMA user_version=3")
+        }
+    }
+
     @After fun cleanup() { check(root.deleteRecursively()) }
 
-    @Test fun v2RowsSurviveV3MigrationWithNoJumpReference() {
+    @Test fun v3RowsSurviveV4MigrationWithNoKeyReference() {
+        writeV3Store()
+        val migrated = success(store().load()).profiles.single()
+        assertEquals(linkedSetOf("work"), migrated.tags)
+        assertEquals(true, migrated.favorite)
+        assertEquals(1_782_200_000L, migrated.lastUsedAt)
+        assertEquals(null, migrated.jumpProfileId)
+        assertEquals(null, migrated.keyUri)
+        SQLiteDatabase.openDatabase(database.path, null, SQLiteDatabase.OPEN_READWRITE).use { db ->
+            db.rawQuery("PRAGMA user_version", null).use { check(it.moveToFirst()); assertEquals(4L, it.getLong(0)) }
+            db.rawQuery("SELECT version FROM metadata", null).use { check(it.moveToFirst()); assertEquals(4L, it.getLong(0)) }
+        }
+    }
+
+    @Test fun v2RowsSurviveLaterMigrationsWithNoJumpOrKeyReference() {
         writeV2Store()
         val migrated = success(store().load()).profiles.single()
         assertEquals(linkedSetOf("work"), migrated.tags)
@@ -85,8 +109,8 @@ class ConnectionProfilesMigrationTest {
         assertEquals(1_782_200_000L, migrated.lastUsedAt)
         assertEquals(null, migrated.jumpProfileId)
         SQLiteDatabase.openDatabase(database.path, null, SQLiteDatabase.OPEN_READWRITE).use { db ->
-            db.rawQuery("PRAGMA user_version", null).use { check(it.moveToFirst()); assertEquals(3L, it.getLong(0)) }
-            db.rawQuery("SELECT version FROM metadata", null).use { check(it.moveToFirst()); assertEquals(3L, it.getLong(0)) }
+            db.rawQuery("PRAGMA user_version", null).use { check(it.moveToFirst()); assertEquals(4L, it.getLong(0)) }
+            db.rawQuery("SELECT version FROM metadata", null).use { check(it.moveToFirst()); assertEquals(4L, it.getLong(0)) }
         }
     }
 
@@ -104,9 +128,9 @@ class ConnectionProfilesMigrationTest {
         assertEquals(0L, migrated.lastUsedAt)
         // The migration is durable and the header/markers are untouched.
         SQLiteDatabase.openDatabase(database.path, null, SQLiteDatabase.OPEN_READWRITE).use { db ->
-            db.rawQuery("PRAGMA user_version", null).use { check(it.moveToFirst()); assertEquals(3L, it.getLong(0)) }
+            db.rawQuery("PRAGMA user_version", null).use { check(it.moveToFirst()); assertEquals(4L, it.getLong(0)) }
             db.rawQuery("SELECT version FROM metadata", null).use {
-                check(it.moveToFirst()); assertEquals(3L, it.getLong(0))
+                check(it.moveToFirst()); assertEquals(4L, it.getLong(0))
             }
         }
         assertEquals(generation, success(store().load()).generation)

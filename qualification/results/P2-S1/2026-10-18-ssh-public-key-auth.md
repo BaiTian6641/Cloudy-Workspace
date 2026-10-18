@@ -51,3 +51,10 @@ Unit coverage: `SshKeyCredentialsTest` exercises copy/one-transfer/wipe, closed-
 ## Verification limits
 
 The MINA fixture is a real SSH server but not OpenSSH interoperability, PTY/resize, privilege isolation or a Googlebook result. The engine tests prove authentication/ownership/retirement, not terminal input, X11, files or release readiness. The earlier password and interaction evidence retains its own boundaries.
+
+## Persisted key reference (profile schema v4)
+
+- The profile stores only an optional `content://` document URI (`keyUri`), never key bytes. The terminal takes a persistable read grant when the user enables **Remember key reference for this host**, saves the reference through `ConnectionProfiles.update` with Connect fenced while the mutation is in flight, and preserves jump/tags/favorite/other fields. The editor and favorite toggle preserve the reference. Schema v4 migrates v1/v2/v3 rows without changing identity or revision.
+- On profile selection (including activity recreation), the app switches to the private-key method, re-reads the document, and shows the selected state without opening the picker. A revoked/missing document shows the unreadable refusal; the reference can be forgotten (toggle off) and the key remains session-only.
+- **Product journey:** `0dd1a46c-d19e-41c0-87e9-be69b8293fe6` (`rememberKeyRequested=true`, Console `1130e5a6…`, test `fbd2305e…`) passes pick→remember→SSH→host-witnessed command→20,000-byte host-matched paste→exit/CLOSED→activity recreation→profile selection→key re-read without a picker→exact baseline restoration (including the seeded key reference). Platform profile/migration/editor/coordinator tests: **60/60**.
+- **Limits:** this is an OS-granted document **reference**, not vault-stored key material; the key file remains external and the grant is revocable. The product test proves activity recreation, not a full process kill (the persistable grant and app-private row are designed for that boundary but were not exercised). Vault-enrolled key/passphrase storage under the existing user-auth policy remains open, as do distinct-host jump credentials and dynamic multi-prompt interaction.

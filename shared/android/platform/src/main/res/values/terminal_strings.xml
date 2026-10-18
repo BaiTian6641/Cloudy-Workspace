@@ -79,6 +79,11 @@
     <string name="terminal_jump_missing">unavailable</string>
     <string name="terminal_jump_scope">The same transient credentials are used for both hops; each hop requires its own trusted key.</string>
     <string name="terminal_key_choose">Choose private key…</string>
+    <string name="terminal_key_remember">Remember key reference for this host</string>
+    <string name="terminal_key_remembered">Key reference saved for this host.</string>
+    <string name="terminal_key_forgotten">Key reference forgotten.</string>
+    <string name="terminal_key_persist_failed">This key cannot be remembered; it will be used for this attempt only.</string>
+    <string name="terminal_key_choose_first">Choose a key before enabling remembering.</string>
     <string name="terminal_key_replace">Replace private key…</string>
     <string name="terminal_key_selected">Private key selected for this attempt</string>
     <string name="terminal_key_none">No private key selected.</string>

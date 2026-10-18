@@ -226,10 +226,10 @@ class ConnectionProfiles private constructor(private val configuration: Configur
                 db.execSQL("CREATE TABLE profiles (id TEXT PRIMARY KEY NOT NULL, revision INTEGER NOT NULL, " +
                     "owner TEXT NOT NULL, label TEXT NOT NULL, protocol TEXT NOT NULL, host TEXT NOT NULL, " +
                     "port INTEGER NOT NULL, tags TEXT NOT NULL, favorite INTEGER NOT NULL, last_used INTEGER NOT NULL, " +
-                    "jump_profile_id TEXT NOT NULL DEFAULT '')")
-                db.execSQL("INSERT INTO metadata VALUES (1, 3, ?, ?, ?, ?)",
+                    "jump_profile_id TEXT NOT NULL DEFAULT '', key_uri TEXT NOT NULL DEFAULT '')")
+                db.execSQL("INSERT INTO metadata VALUES (1, 4, ?, ?, ?, ?)",
                     arrayOf<Any>(generation, owner.wireId, configuration.ownerPackage, configuration.capacity))
-                db.execSQL("PRAGMA user_version=3")
+                db.execSQL("PRAGMA user_version=4")
                 db.setTransactionSuccessful()
             } finally { db.endTransaction() }
         }
@@ -260,15 +260,16 @@ class ConnectionProfiles private constructor(private val configuration: Configur
             check(it.moveToFirst()); it.getLong(0)
         }
         when (version) {
-            3L -> return
-            2L -> migrateV2ToV3(db)
+            4L -> return
+            3L -> migrateV3ToV4(db)
+            2L -> { migrateV2ToV3(db); migrateV3ToV4(db) }
             1L -> {
                 db.execSQL("ALTER TABLE profiles ADD COLUMN tags TEXT NOT NULL DEFAULT ''")
                 db.execSQL("ALTER TABLE profiles ADD COLUMN favorite INTEGER NOT NULL DEFAULT 0")
                 db.execSQL("ALTER TABLE profiles ADD COLUMN last_used INTEGER NOT NULL DEFAULT 0")
                 db.execSQL("UPDATE metadata SET version=2")
                 db.execSQL("PRAGMA user_version=2")
-                migrateV2ToV3(db)
+                migrateV2ToV3(db); migrateV3ToV4(db)
             }
             else -> throw SQLiteDatabaseCorruptException("STORE_UNAVAILABLE")
         }
@@ -281,25 +282,33 @@ class ConnectionProfiles private constructor(private val configuration: Configur
         db.execSQL("PRAGMA user_version=3")
     }
 
+    /** v4 adds an optional content-URI key reference; it never contains key material. */
+    private fun migrateV3ToV4(db: SQLiteDatabase) {
+        db.execSQL("ALTER TABLE profiles ADD COLUMN key_uri TEXT NOT NULL DEFAULT ''")
+        db.execSQL("UPDATE metadata SET version=4")
+        db.execSQL("PRAGMA user_version=4")
+    }
+
     private fun readCatalog(db: SQLiteDatabase, generation: String): ConnectionProfileCatalog {
         check(db.rawQuery("PRAGMA quick_check(1)", null).use { it.moveToFirst() && it.getString(0) == "ok" })
-        check(db.rawQuery("PRAGMA user_version", null).use { it.moveToFirst() && it.getLong(0) == 3L })
+        check(db.rawQuery("PRAGMA user_version", null).use { it.moveToFirst() && it.getLong(0) == 4L })
         db.rawQuery("SELECT singleton,version,generation,owner,owner_package,capacity FROM metadata", null).use { cursor ->
             check(cursor.count == 1 && cursor.moveToFirst())
             check(listOf(0, 1, 5).all { cursor.getType(it) == Cursor.FIELD_TYPE_INTEGER })
             check(listOf(2, 3, 4).all { cursor.getType(it) == Cursor.FIELD_TYPE_STRING })
-            check(cursor.getLong(0) == 1L && cursor.getLong(1) == 3L)
+            check(cursor.getLong(0) == 1L && cursor.getLong(1) == 4L)
             check(cursor.getString(2) == generation && cursor.getString(3) == owner.wireId)
             check(cursor.getString(4) == configuration.ownerPackage && cursor.getLong(5) == configuration.capacity.toLong())
         }
         val profiles = mutableListOf<ConnectionProfile>()
         val ids = mutableSetOf<String>()
-        db.rawQuery("SELECT id,revision,owner,label,protocol,host,port,tags,favorite,last_used,jump_profile_id FROM profiles ORDER BY id", null).use { cursor ->
+        db.rawQuery("SELECT id,revision,owner,label,protocol,host,port,tags,favorite,last_used,jump_profile_id,key_uri FROM profiles ORDER BY id", null).use { cursor ->
             check(cursor.count <= configuration.capacity)
             while (cursor.moveToNext()) {
                 check(listOf(0, 2, 3, 4, 5, 7).all { cursor.getType(it) == Cursor.FIELD_TYPE_STRING })
                 check(listOf(1, 6, 8, 9).all { cursor.getType(it) == Cursor.FIELD_TYPE_INTEGER })
                 check(cursor.getType(10) == Cursor.FIELD_TYPE_STRING)
+                check(cursor.getType(11) == Cursor.FIELD_TYPE_STRING)
                 val id = cursor.getString(0)
                 check(canonicalUuid(id) && ids.add(id))
                 check(cursor.getString(2) == owner.wireId)
@@ -314,8 +323,9 @@ class ConnectionProfiles private constructor(private val configuration: Configur
                 check(lastUsed >= 0L)
                 val jumpId = cursor.getString(10).takeIf { it.isNotEmpty() }
                 check(jumpId == null || canonicalUuid(jumpId))
+                val keyUri = cursor.getString(11).takeIf { it.isNotEmpty() }
                 val draft = ConnectionProfileDraft.create(owner, cursor.getString(3), protocol,
-                    cursor.getString(5), port.toInt(), tags, favorite == 1L, jumpId)
+                    cursor.getString(5), port.toInt(), tags, favorite == 1L, jumpId, keyUri)
                 check(draft.label == cursor.getString(3) && draft.host == cursor.getString(5))
                 // The stored encoding must round-trip through domain normalization exactly.
                 check(draft.tags == tags)
@@ -339,6 +349,7 @@ class ConnectionProfiles private constructor(private val configuration: Configur
         put("tags", profile.tags.joinToString("\n"))
         put("favorite", if (profile.favorite) 1L else 0L); put("last_used", profile.lastUsedAt)
         put("jump_profile_id", profile.jumpProfileId ?: "")
+        put("key_uri", profile.keyUri ?: "")
     }
 
     private fun jumpAllowed(profiles: List<ConnectionProfile>, candidate: ConnectionProfile): Boolean {

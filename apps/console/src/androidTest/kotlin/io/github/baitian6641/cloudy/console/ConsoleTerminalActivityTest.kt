@@ -184,20 +184,31 @@ class ConsoleTerminalActivityTest {
                 for (tag in listOf("terminal_username", credentialTag)) check(empty(reveal(tag)))
             }
             secure(launched)
+            if (rememberKey()) owned.acceptKeyReference()
             owned.phase("TERMINAL_OWNER_RETIRED")
             File(context.noBackupFilesDir, "ssh-authenticate-qualification/$run-terminal-final-state.json")
                 .writeText(JSONObject().put("schema", 1).put("run", run)
                     .put("status", node("terminal_status")?.text?.toString()).toString(2))
             stage = "CREDENTIAL_DRAFT_RECREATE"
             // Only now: type a draft and recreate, proving it is neither restored nor auto-connected.
-            credentials(owned)
+            if (rememberKey()) setText("terminal_username", owned.username) else credentials(owned)
             val recreated = recreateTerminal(launched, owned.profileId)
             terminal = recreated
             secure(recreated)
             waitFor(30_000) { node("terminal_profile_${owned.profileId}")?.isVisibleToUser == true }
             click("terminal_profile_${owned.profileId}")
             waitFor(10_000) { node("terminal_selected")?.let { owned.profileLabel in textOf(it) } == true }
-            for (tag in listOf("terminal_username", "terminal_password")) check(empty(reveal(tag)))
+            if (rememberKey()) {
+                waitFor(20_000) {
+                    node("terminal_key_status")?.text?.toString() ==
+                        context.getString(platformR.string.terminal_key_selected) &&
+                        node("terminal_key_reference") != null
+                }
+                check(empty(reveal("terminal_username")))
+                check(node("terminal_password") == null)
+            } else {
+                for (tag in listOf("terminal_username", "terminal_password")) check(empty(reveal(tag)))
+            }
             check(reveal("terminal_connect_button").isEnabled == false) { "TERMINAL_AUTO_CONNECT_BUTTON" }
             check(node("terminal_live_status") == null) { "TERMINAL_AUTO_CONNECTED" }
             owned.phase("TERMINAL_DRAFT_NOT_RESTORED")
@@ -459,6 +470,10 @@ class ConsoleTerminalActivityTest {
     private fun authMethod(): String =
         InstrumentationRegistry.getArguments().getString("cloudyTerminalAuth") ?: "password"
 
+    private fun rememberKey(): Boolean =
+        InstrumentationRegistry.getArguments().getString("cloudyTerminalRememberKey")
+            ?.toBooleanStrictOrNull() == true
+
     private fun credentials(fixture: SshAuthenticateFixture) {
         if (InstrumentationRegistry.getArguments().getString("cloudyTerminalJump")?.toBooleanStrictOrNull() == true) {
             waitFor(15_000) { node("terminal_jump") != null }
@@ -473,6 +488,10 @@ class ConsoleTerminalActivityTest {
             // The document picker pauses the activity and the product deliberately clears native
             // credential fields; the user enters the account after returning with the key.
             setText("terminal_username", fixture.username)
+            if (rememberKey()) {
+                click("terminal_key_remember")
+                waitFor(15_000) { node("terminal_key_reference") != null }
+            }
             waitFor(15_000) {
                 node("terminal_connect_button")?.isEnabled == true &&
                     node("terminal_key_status")?.text?.toString() ==

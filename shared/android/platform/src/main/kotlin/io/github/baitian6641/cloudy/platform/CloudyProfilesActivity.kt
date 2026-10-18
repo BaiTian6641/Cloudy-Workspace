@@ -242,8 +242,11 @@ class CloudyProfilesActivity : ComponentActivity() {
         val tags = value.tags.text.split(',').map { it.trim() }.filter { it.isNotEmpty() }
             .toCollection(java.util.LinkedHashSet())
         return try {
+            val keyUri = value.version?.let { version ->
+                catalog?.profiles?.singleOrNull { it.id == version.id }?.keyUri
+            }
             ConnectionProfileDraft.create(owner, value.label.text, value.protocol, value.host.text, port,
-                tags, value.favorite, value.jumpProfileId)
+                tags, value.favorite, value.jumpProfileId, keyUri)
         } catch (error: ConnectionProfileValidationException) {
             message = getString(when (error.code) {
                 ConnectionProfileValidationCode.INVALID_LABEL -> R.string.profile_invalid_label

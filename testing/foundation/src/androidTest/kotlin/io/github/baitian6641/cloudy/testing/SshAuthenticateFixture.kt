@@ -222,6 +222,22 @@ internal class SshAuthenticateFixture private constructor(
         phase("HOME_OPEN_MARKER_ACCEPTED")
     }
 
+    /** Adopts exactly the terminal's persisted key-URI mutation after the home marker. */
+    fun acceptKeyReference() {
+        val seeded = ownedProfile ?: return
+        val row = profile { profiles.load() }.profiles.singleOrNull { it.id == seeded.id }
+            ?: error("KEY_REFERENCE_ROW_MISSING")
+        check(row.revision > seeded.revision && !row.keyUri.isNullOrEmpty()) { "KEY_REFERENCE_NOT_SAVED" }
+        check(row.owner == seeded.owner && row.label == seeded.label && row.protocol == seeded.protocol &&
+            row.host == seeded.host && row.port == seeded.port && row.tags == seeded.tags &&
+            row.favorite == seeded.favorite && row.jumpProfileId == seeded.jumpProfileId &&
+            row.lastUsedAt == seeded.lastUsedAt) { "KEY_REFERENCE_METADATA_CHANGED" }
+        ownedProfile = row
+        receipt.put("ownedProfile", profileJson(profileBaseline.generation, listOf(row)))
+            .put("keyReferencePresent", true)
+        phase("KEY_REFERENCE_ACCEPTED")
+    }
+
     /** Caller first closes every Activity; fences cover the real process runtime, not a fake queue. */
     fun restore(passed: Boolean) {
         settle()

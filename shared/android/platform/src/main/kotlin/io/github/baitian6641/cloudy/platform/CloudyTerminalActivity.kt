@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -41,6 +42,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -83,6 +85,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.viewinterop.AndroidView
 import io.github.baitian6641.cloudy.design.CloudyControlMetrics
 import io.github.baitian6641.cloudy.domain.ConnectionProfile
+import io.github.baitian6641.cloudy.domain.ConnectionProfileDraft
 import io.github.baitian6641.cloudy.domain.ConnectionProtocol
 import io.github.baitian6641.cloudy.domain.SshObservationProfile
 import io.github.baitian6641.cloudy.domain.TerminalRightClick
@@ -133,6 +136,11 @@ class CloudyTerminalActivity : ComponentActivity() {
     private var interactiveResponse by mutableStateOf(TextFieldValue())
     private var keyBusy by mutableStateOf(false)
     private var keyRead = 0L
+    /** Persisted content-URI reference for the selected profile; never key bytes. */
+    private var keyUri by mutableStateOf<String?>(null)
+    private var rememberKey by mutableStateOf(false)
+    private var pickedKeyUri by mutableStateOf<android.net.Uri?>(null)
+    private var keyPersistBusy by mutableStateOf(false)
     private var phase by mutableStateOf(Phase.AUTH)
     private var message by mutableStateOf<String?>(null)
     private var renderer by mutableStateOf<TerminalWebViewBridge?>(null)
@@ -167,7 +175,11 @@ class CloudyTerminalActivity : ComponentActivity() {
         // Activity results arrive between onStart and onResume, when onPause has already set
         // interactive=false. A granted document is still a valid response for this foreground
         // window; gate on actual destruction/retirement rather than the transient flag.
-        if (uri != null && !disposed && !busy && !isFinishing && !isDestroyed) readKey(uri)
+        if (uri != null && !disposed && !busy && !isFinishing && !isDestroyed) {
+            pickedKeyUri = uri
+            if (rememberKey) rememberPickedKey(uri)
+            readKey(uri)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -291,6 +303,7 @@ class CloudyTerminalActivity : ComponentActivity() {
                         }?.let { SshObservationProfile.create(loaded.value.generation, it) }
                         preselectId = null
                         message = getString(if (selected == null) R.string.terminal_choose else R.string.terminal_credentials_ready)
+                        if (!keyPersistBusy) applyPersistedKey(selected?.profile?.keyUri)
                     }
                     is ConnectionProfilesResult.Failure -> {
                         catalog = null
@@ -311,6 +324,71 @@ class CloudyTerminalActivity : ComponentActivity() {
         clearSecretFields()
         selected = SshObservationProfile.create(loaded.generation, exact)
         message = getString(R.string.terminal_credentials_ready)
+        applyPersistedKey(exact.keyUri)
+    }
+
+    /** A saved reference is only a document URI; the key is re-read and never copied to storage. */
+    private fun applyPersistedKey(saved: String?) {
+        if (keyPersistBusy) return
+        keyUri = saved
+        rememberKey = saved != null
+        if (saved != null) {
+            authMethod = AuthMethod.PRIVATE_KEY
+            key = null
+            val uri = runCatching { android.net.Uri.parse(saved) }.getOrNull()
+            if (uri != null) readKey(uri) else message = getString(R.string.terminal_key_unreadable)
+        }
+    }
+
+    private fun rememberPickedKey(uri: android.net.Uri): Boolean {
+        val taken = runCatching {
+            contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            true
+        }.getOrDefault(false)
+        if (!taken) {
+            rememberKey = false
+            message = getString(R.string.terminal_key_persist_failed)
+            return false
+        }
+        persistKeyReference(uri.toString())
+        return true
+    }
+
+    /** Connect is fenced while this mutates the profile; updates invalidate live auth attempts. */
+    private fun persistKeyReference(value: String?) {
+        val loaded = catalog ?: return
+        val current = selected?.profile ?: return
+        val exact = loaded.profiles.singleOrNull { it.id == current.id } ?: return
+        if (exact.keyUri == value) {
+            keyUri = value
+            return
+        }
+        keyPersistBusy = true
+        val version = ConnectionProfileVersion.create(loaded.generation, exact.id, exact.revision)
+        val draft = ConnectionProfileDraft.create(exact.owner, exact.label, exact.protocol, exact.host, exact.port,
+            exact.tags, exact.favorite, exact.jumpProfileId, value)
+        Thread({
+            val result = runCatching { ConnectionProfiles(applicationContext).update(version, draft) }.getOrNull()
+            runOnUiThread {
+                keyPersistBusy = false
+                if (disposed) return@runOnUiThread
+                when (result) {
+                    is ConnectionProfilesResult.Success -> {
+                        val updated = result.value.profile
+                        selected = SshObservationProfile.create(loaded.generation, updated)
+                        catalog = ConnectionProfileCatalog(loaded.generation,
+                            loaded.profiles.map { if (it.id == updated.id) updated else it })
+                        keyUri = value
+                        rememberKey = value != null
+                        message = getString(if (value != null) R.string.terminal_key_remembered
+                        else R.string.terminal_key_forgotten)
+                    }
+                    is ConnectionProfilesResult.Failure ->
+                        message = getString(R.string.terminal_status_failed, result.code.name)
+                    null -> message = getString(R.string.terminal_status_failed, "STORE_UNAVAILABLE")
+                }
+            }
+        }, "cloudy-terminal-key-reference").apply { isDaemon = true }.start()
     }
 
     private fun connect() {
@@ -332,7 +410,7 @@ class CloudyTerminalActivity : ComponentActivity() {
             requestLocalPermission()
             return
         }
-        if (username.text.isEmpty() || keyBusy) return
+        if (username.text.isEmpty() || keyBusy || keyPersistBusy) return
         val pair = when (authMethod) {
             AuthMethod.PASSWORD -> {
                 if (password.text.isEmpty()) return
@@ -852,6 +930,9 @@ class CloudyTerminalActivity : ComponentActivity() {
         keyBusy = false
         key?.fill(0)
         key = null
+        keyUri = null
+        rememberKey = false
+        pickedKeyUri = null
         username = TextFieldValue()
         password = TextFieldValue()
         keyPassphrase = TextFieldValue()
@@ -893,7 +974,7 @@ class CloudyTerminalActivity : ComponentActivity() {
             }
             item("actions") {
                 FlowRow(horizontalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
-                    Button(::connect, enabled = !busy && !keyBusy && chosen != null &&
+                    Button(::connect, enabled = !busy && !keyBusy && !keyPersistBusy && chosen != null &&
                         username.text.isNotEmpty() &&
                         ((authMethod == AuthMethod.PASSWORD && password.text.isNotEmpty()) ||
                             (authMethod == AuthMethod.PRIVATE_KEY && key != null) ||
@@ -998,6 +1079,32 @@ class CloudyTerminalActivity : ComponentActivity() {
                                 modifier = Modifier.testTag("terminal_key_status")
                                     .semantics { liveRegion = LiveRegionMode.Polite })
                             Text(stringResource(R.string.terminal_key_scope), style = MaterialTheme.typography.bodySmall)
+                            Row(Modifier.fillMaxWidth().heightIn(min = CloudyControlMetrics.controlMinHeight)
+                                .padding(horizontal = CloudyControlMetrics.spaceSmall),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                                Checkbox(checked = rememberKey, onCheckedChange = { checked ->
+                                    if (!busy && !keyBusy && !keyPersistBusy) {
+                                        rememberKey = checked
+                                        if (checked) {
+                                            val uri = pickedKeyUri ?: keyUri?.let {
+                                                runCatching { android.net.Uri.parse(it) }.getOrNull()
+                                            }
+                                            if (uri != null) rememberPickedKey(uri)
+                                            else message = getString(R.string.terminal_key_choose_first)
+                                        } else {
+                                            persistKeyReference(null)
+                                        }
+                                    }
+                                }, enabled = !busy && !keyBusy && !keyPersistBusy,
+                                    modifier = Modifier.testTag("terminal_key_remember"))
+                                Text(stringResource(R.string.terminal_key_remember), modifier = Modifier.weight(1f))
+                            }
+                            if (keyUri != null) {
+                                Text(stringResource(R.string.terminal_key_remembered),
+                                    style = MaterialTheme.typography.bodySmall,
+                                    modifier = Modifier.testTag("terminal_key_reference"))
+                            }
                         }
                     }
                     item("key_passphrase") {
