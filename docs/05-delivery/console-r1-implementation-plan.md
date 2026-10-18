@@ -4,17 +4,38 @@
 
 This is an executable engineering record, not a completion claim or delivery-date forecast. It preserves Rule 0, independent Console/Desktop packages, ordinary SSH without the custom host agent, per-save overwrite consent, bounded real I/O, and the prohibition on placeholder product actions.
 
+## Current execution goal — emulator-first product development
+
+The user's resumed instruction is to fully develop Console functionality and UX first using an
+emulator where practical, with Termius-inspired organization and Cloudy's desktop design language.
+The parent manages detailed disjoint `deepseek/deepseek-flash` packets, reviews all proposals and
+owns integration, shared runtimes, evidence and Git. This changes the development sequence, not R1 scope.
+
+1. Resolve the reproduced renderer/real-SSH input failures with fail-before/pass-after evidence;
+   retain native trust/credentials, bounded output and no command/input replay.
+2. Build and run the actual app in an owned API37 desktop-sized/freeform emulator; qualify native
+   home navigation, host/profile actions, terminal operation, themes, density, resizing and failure states.
+3. Continue M3–M6 in dependency order: desktop input/clipboard, authentication/jumps and transfer core,
+   layouts/durable sessions/forwards, then integrated X11 and session-linked file/edit/drop journeys.
+4. Run the unchanged Q-C01–Q-C10 and app-scoped release gates at their actual boundaries. Emulator,
+   host-process and physical Googlebook results remain separately attributed.
+
+The current official Android CLI `medium_desktop` profile resolves to an API34 image, below
+Cloudy's minimum35. Do not lower that minimum for a test. Use an isolated API37 configuration for
+implementation and label its window-system limitations; actual Googlebook acceptance remains required.
+
+
 ## Review result and current baseline
 
 All documents named by the implementation request exist and were read from their actual locations: `docs/01-product/console.md`, `docs/00-project/platform-rule-zero.md`, `docs/04-design/desktop-terminal-interaction-contract.md`, `docs/02-architecture/x11-windows.md`, `docs/02-architecture/console-files.md`, `docs/02-architecture/file-publication.md`, `docs/05-delivery/release-gates.md`, and `docs/06-validation/test-cases.md`. No referenced-document waiver or provisional substitute is needed.
 
-The repository is not an empty scaffold. Console 0.1.17/code 18 has an independently installable native Compose/document-task shell, organized SSH profiles, app-owned trust and finite password authentication, independent window metadata, and a finite read-only SFTP surface. The shared SSHJ module also has retained transport/SFTP ownership and a host-qualified X11 request/channel/cookie leg. Existing evidence is scoped: it does not establish a complete terminal, full authentication/jump coverage, writable transfers, X11 native windows, or R1.
+The repository is not an empty scaffold. The independently installable native shell, organized profiles, app-owned trust/password admission and read-only SFTP are maintained. M1 adds a retained PTY on that transport; M2 demonstrates two native X11 windows in an isolated diagnostic; `3f9ce70` adopts the renderer module and `625796e` repairs Android committed-input delivery. These are scoped construction results, not full terminal/authentication, writable files, integrated product X11 or R1 acceptance.
 
 The principal implementation gaps are real product boundaries, not documentation gaps:
 
-1. The retained authenticated transport has no maintained PTY owner. A frozen cache-only proposal has passed source entry review but remains uncompiled and unrun.
-2. The repaired xterm candidate exists only in the diagnostic probe. Formal Console needs a generation-fenced native terminal adapter, bounded queues, desktop input/IME/menu policy, and actual renderer acceptance.
-3. The X11 engine compiles for arm64, but the per-XID Composite/window broker and public-API Android owner are missing. Two displays, one root desktop, VNC/RDP, and a browser editor cannot substitute for C17.
+1. The maintained PTY/resize/same-owner SFTP backend is host-qualified (M1). The repaired product now executes a real SSH command with visible output and exact teardown on the API37 emulator; sustained backpressure, actual remote resize and lifecycle breadth remain open.
+2. The pinned xterm source build and binary bridge are maintained in `shared/android/terminal`. Reviewed repairs address spoken-feedback configuration, the embedded viewport and fast Android committed text preceding Enter/Ctrl+C. Native clipboard/menus/selection, physical input/system IME and accessibility remain incomplete.
+3. The public-API X11 diagnostic presents per-XID native tasks and real forwarded xterms (M2). Product integration, popups, owner retirement, isolation breadth and remote VS Code remain unaccepted; one desktop or browser editor is not a substitute.
 4. Full key/keyboard-interactive authentication, verified jumps, layouts/tmux, managed forwards, writable/journaled SFTP publication, drops, and release evidence remain open.
 5. CAP-FOUNDATION supports construction only. CAP-SSH/CAP-TERMINAL remain experimental, CAP-X11 is pending, and CAP-PLATFORM is required at the final R1 gate.
 6. Termux:X11's GPLv3 and constituent license/source obligations remain a Console distribution decision. A private feasibility build does not settle release licensing.
@@ -55,12 +76,13 @@ Therefore an earlier SSH/PTY/UI increment is a partial construction milestone. I
 - **Checks:** small real X clients with two top-level windows, owned modal and popup; wrong cookie, two trust contexts, SSH loss and surface/process lifecycle; then the existing real OpenSSH/Xvfb forwarding leg.
 - **Exit:** recorded two-XID/two-native-window result with exact engine/build/ABI evidence, or a specific engine/broker blocker. A compile, two displays, or one full X desktop is only partial evidence. **Result:** two real XIDs presented in two independent native tasks, an owned transient dialog, real pointer/keyboard input, and two real OpenSSH-forwarded xterm windows with remote key input on the identified Googlebook; recorded in [the device run](../../qualification/results/P0-S7/2026-10-17-x11-broker-device.md). Override-redirect popup, IME commit, two-host isolation on Android, security mode, forced recreation and owner→window retirement remain open for P2-S6; the probe is diagnostic and no product/capability promotion follows.
 
-### M3 — Formal terminal and desktop input
+### M3 — Formal terminal and desktop input (in progress, partial construction)
 
 - **Stages/dependencies:** P2-S1/P2-S2 after M1; renderer adoption still requires its capability review.
 - **Changes:** product session coordinator, pinned local xterm assets, exact-origin/binary bridge, renderer-generation fencing, native clipboard/paste review, pointer selection/context/Edit menus, physical shortcuts, IME commit, resize and bounded scrollback/output.
 - **Checks:** Q-C02/Q-A01 byte comparisons for multiline/CJK/combining/emoji, alternate-screen and agent TUI, rapid/long output, focus loss, narrow tiling and physical Googlebook keyboard/trackpad/available IMEs.
 - **Exit:** sustained exact-byte terminal behavior without silent loss/replay; unresolved renderer/accessibility items remain explicit.
+- **Result so far:** renderer adoption (`3f9ce70`), [committed-input repair](../../qualification/results/P2-S2/2026-10-17-terminal-input-repair.md) (`625796e`), [viewport repair](../../qualification/results/P2-S2/2026-10-17-terminal-viewport-repair.md) and the reviewed source-built xterm fix have separate evidence. The [emulator workflow](../../qualification/results/P2-S2/2026-10-17-console-terminal-emulator.md) binds seven real-Chrome cases, 40 build-policy tests, strict Android construction and actual SSH command/output/retirement. Historical failures are preserved. The current integration extends that check through the real home search/selection/Connect route and preserves local window drafts across responsive reflow. M3 remains in progress; clipboard/menus/copy-on-select, physical input/system IME/TalkBack and complete Q-C02 remain required.
 
 ### M4 — Complete SSH trust/auth/jumps and shared transfer core
 

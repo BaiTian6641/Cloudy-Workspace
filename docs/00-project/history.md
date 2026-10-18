@@ -1376,3 +1376,62 @@ M1 of the [Console R1 plan](../05-delivery/console-r1-implementation-plan.md) is
 The M2 architecture gate is complete in its bounded scope. The maintained diagnostic probe under `qualification/probes/x11-broker` starts the pinned `libXlorie.so` through public APIs with a private cookie/Xauthority, redirects the isolated display, and presents each managed top-level XID as an independent native Android task through Composite pixmaps; transient dialogs become owned `Dialog` windows. On the identified HP Googlebook (API 37), two XIDs appeared side by side, pointer input changed the correct client's state, and a real ordinary-SSH session forwarded two remote xterm windows over `adb reverse`; remote keyboard input executed `CLOUDYOK` in the remote shell. The installed APK matched the build byte-for-byte.
 
 The result is recorded in [the device run](../../qualification/results/P0-S7/2026-10-17-x11-broker-device.md) with private screenshots, hashes and explicit limits. `shared/android/ssh` gained the narrow client factory and channel-error callback used by the probe, plus Android-safe thread construction; no product UI or capability is added. `SshX11ForwardingFixtureTest` now binds its fake-cookie assertion to the sshd-assigned display and asserts the binding (5/5). Full `:ssh:test` is 73 recorded / 47 executed / 26 skipped, Console build and Lint pass, and Desktop Kotlin compiles with the unrelated pre-existing `:vnc:verifyNative` gate excluded. Override-redirect popup, IME/accessibility, two-host Android isolation, security mode, forced recreation and owner→window retirement remain P2-S6 work; M3 formal terminal adapter is next. No delivery estimate or R1 completion is implied.
+
+## 2026-10-17 — Console terminal renderer and retained password session
+
+The M3 lane now has a maintained `shared/android/terminal` module (binary frame protocol, bounded credit/ACK flow, attachment identities, origin-fenced WebView bridge, pinned xterm 6.1.0-beta.315/fit assets and notices) and a Console terminal construction: saved-host selection, current trust, transient password, one retained SSHJ transport and PTY, bounded output to the renderer, bounded input/resize admission and explicit close. The Console SSH Connect route opens it; Desktop retains its files route. Fifteen renderer tests, strict Console build and Lint pass. A real MINA loopback password fixture authenticated and displayed its shell output on the HP Googlebook; keyboard input was not verified because ADB-injected keys arrived as Android IME `code=229`/empty data. Physical keyboard/trackpad/IME acceptance, resize, files linkage, tabs and the release gate remain open. [Construction run](../../qualification/results/P2-S2/2026-10-17-console-terminal-construction.md).
+
+## 2026-10-17 — Input repair publication and user review pause
+
+Reviewed commits `625796e` (actual WebView committed-input repair) and `cfe8b4b` (real Chrome product input regression) were committed and pushed on `codex/console-r1-implementation`; origin matched `cfe8b4bc8bb36f411e73d11f6a5ea1d4247bb9db`. The original zero-input construction was not solely a physical/ADB limitation: the pinned xterm input guard plus forced screen-reader mode identified an adapter defect, repaired without disabling system accessibility or adding native byte forwarding.
+
+The user's requested exact DeepSeek Flash route supplied five bounded, parent-reviewed implementation/review/research assignments. Accepted corrections and explicit failed experiments remain in the working tree and local evidence; no model success message substitutes for acceptance. Secure component input and host-browser slices pass, but the formal product kernel-PTY workflow still lacks DOM Enter and its remote-effect witness. M3 and full R1 remain incomplete.
+
+The user then explicitly suspended implementation to perform a review. The parent stopped its last owned fixture, preserved staged/unstaged/untracked work and recorded the [review snapshot](../05-delivery/execution-state.md#preserved-review-pause-snapshot-and-settlement). That pause required an explicit resume before more implementation, workers, builds or device/host tests. No new implementation commit or push was made during pause settlement.
+
+
+## 2026-10-17 — Explicit resume and reviewed terminal fixture
+
+The user resumed full Console resolution/build after the review pause, explicitly retained guided
+`deepseek/deepseek-flash` assistance, and reaffirmed Termius-inspired desktop usability with the
+Cloudy Design Language. The parent preserved the complete index/worktree and assigned disjoint
+renderer research and native home refinement; device/build/Git acceptance remains parent-owned.
+
+Fixture commit `31ac4a4dce09e16a78737d0373b1bdead31f36e9` was reviewed, committed and pushed with
+matching origin SHA. The [fixture record](../../qualification/fixtures/ssh-terminal/README.md)
+binds pin verification, real password SSH, kernel-PTY/CR operation, wrong-password refusal and
+bounded owned shutdown. It does not qualify SSH window changes, an OpenSSH server or full Console.
+
+## 2026-10-17 — Real Console home-to-terminal workflow and desktop UX
+
+The parent integrated the retained password/PTy session, explicit WebView viewport sizing and
+reviewed source-built xterm committed-input repair. The [emulator result](../../qualification/results/P2-S2/2026-10-17-console-terminal-emulator.md)
+records seven real-Chrome cases, 40 build-policy tests, strict Android construction and a complete
+native Home → search/select → Connect → real SSH command/output → exit journey. First authentication
+does not refresh away the selected snapshot. Home now publishes its last-attempt revision before
+navigation; current-profile/trust checks and foreground ownership were not relaxed.
+
+Eleven exact DeepSeek Flash assignments have received parent review. The latest review rejected
+cleanup that could close unrelated Activities and hoisted the window-name draft above responsive
+branches. The [native UX record](../../qualification/results/P1-S2/2026-10-17-console-home-emulator.md)
+binds real profile/favorite/search actions, three window-state cases, six inspected light/dark
+density scenes and actual width/200%-font reflow. User work and unrelated drafts remain preserved.
+
+Operation `b6f93a4d-6c12-4586-a964-b8772f9ad61f` passed independently observed host effect, protected
+pixel inspection, CLOSED/empty-field retirement, draft recreation and exact logical fixture restore.
+The preceding witness failure and Android hard-link denial remain failed records; atomic private
+rename publication fixed the controller boundary without bypassing Android security. The owned
+host fixture exited0; native reflow closed its own window and restored font scale1.0.
+
+M3/R1 remain incomplete. Clipboard/menus, broader auth/jumps, layouts/tmux, transfers/edit/drop,
+integrated X11/remote VS Code, physical input/accessibility and release/sustained-use gates remain.
+The observed unchanged-profile discard prompt is a concrete next UX repair, not silently accepted.
+
+Final scoped gates pass Python AST37, Ruff, planning/schema validation (202 JSON,427 Markdown,
+three schemas/examples and six rejected invalid controls), source-built asset verification and
+JavaScript syntax. Shared consumers compile: Console build/Lint and21 platform JVM cases pass;
+the15 unchanged renderer JVM cases retain their recorded pass. Desktop app/test build and Lint
+also pass with explicit verified native reuse and updated generated dependency-lock scopes, not
+a disabled native gate or a new VNC runtime claim. The exact patch-context whitespace follows
+the repository's existing narrow `.gitattributes` convention; added TypeScript lines were checked
+separately and have no trailing whitespace.

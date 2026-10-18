@@ -59,7 +59,11 @@ class TerminalWebViewBridge(
             view.evaluateJavascript("window.cloudyTerminalUi?.screenReaderMode(${screenReaderRequired()})", null)
         }
     }
-    val view: WebView = WebView(context)
+    val view: WebView = WebView(context).apply {
+        // WebView forces its CSS layout viewport height to zero for WRAP_CONTENT, even
+        // with an exact native measure. AndroidView's default child params would select it.
+        layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+    }
     val providerSummary: String
     val qualificationDetails: Map<String, String>
     private val featuresSupported: Boolean

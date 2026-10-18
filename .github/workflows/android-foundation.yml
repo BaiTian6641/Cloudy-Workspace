@@ -83,6 +83,12 @@ jobs:
           python3 tools/build_vnc_ci.py --check --run product-ci
           python3 tools/prepare_desktop_vnc.py --prepare --portable-run product-ci --sdk "$ANDROID_HOME"
           python3 tools/prepare_desktop_vnc.py --check --sdk "$ANDROID_HOME"
+      - name: Prepare reviewed terminal source build
+        run: |
+          python3 tools/prepare_terminal_assets.py
+          python3 tools/build_terminal_renderer.py --fetch-compiler
+          python3 tools/prepare_terminal_assets.py --product --offline
+          python3 tools/prepare_terminal_assets.py --product --check
       - name: Verify generated Compose design tokens are current
         run: python3 tools/generate_android_tokens.py --check
       - name: Compile, lint, and test all foundation modules
@@ -97,6 +103,7 @@ jobs:
             :console:lintDebug :desktop:lintDebug \
             :domain:test :ssh:test :platform:testDebugUnitTest :design-system:testDebugUnitTest \
             :desktop:testDebugUnitTest :vnc:testDebugUnitTest \
+            :terminal:testDebugUnitTest :terminal:lintDebug \
             :identity:testDebugUnitTest :identity:lintDebug :identity:assembleDebugAndroidTest \
             :platform:assembleDebugAndroidTest :console:assembleDebugAndroidTest :desktop:assembleDebugAndroidTest \
             --dependency-verification=strict --no-daemon --console=plain --max-workers=4 \

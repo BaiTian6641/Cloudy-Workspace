@@ -7804,6 +7804,78 @@
       "sourceUpdatedOn": null,
       "note": "Inspected the exact 6.1.0-beta.315 archive: _inputEvent gates insertText on !screenReaderMode. Unconditionally enabling it in Cloudy's adapter lost Android committed input. Device regression changes mode from actual Android accessibility state; no upstream patch or secondary text-forwarding path. CR is normalized to LF by the WebView textarea; Enter control input is tested separately.",
       "refresh": "On xterm upgrade or a concrete Android input/accessibility defect."
+    },
+    {
+      "id": "G259",
+      "title": "Android WebView layout sizing best practice",
+      "url": "https://developer.android.com/develop/ui/views/layout/webapps/best-practices",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-17",
+      "sourceUpdatedOn": "2026-09-18",
+      "note": "The layout sizing section requires WebView width/height match_parent and discourages wrap_content because it gives incorrect sizing. Applied only to the native renderer viewport; this mobile-oriented guide does not replace Cloudy's desktop Rule0 or typography/IME contract. Parent observed actual product body height0 despite a nonzero native view.",
+      "refresh": "Before changing the terminal native host or supported WebView provider."
+    },
+    {
+      "id": "R375",
+      "title": "Chromium149 WebView wrap-content forces zero CSS layout height",
+      "url": "https://github.com/chromium/chromium/blob/149.0.7827.5/android_webview/java/src/org/chromium/android_webview/AwLayoutSizer.java",
+      "publisher": "Chromium",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-17",
+      "sourceUpdatedOn": null,
+      "note": "Exact installed provider tag: updateLayoutSettings calls setForceZeroLayoutHeight(isLayoutParamsHeightWrapContent), including onSizeChanged/onLayoutParamsChange. AwContents delegates the check to the actual WebView LayoutParams. An exact nonzero native measure alone therefore does not establish a usable CSS viewport. Explicit MATCH_PARENT is the supported adapter correction, not a key-forwarding shim.",
+      "refresh": "On WebView provider/host changes or a concrete viewport/input regression."
+    },
+    {
+      "id": "G260",
+      "title": "Selected Compose1.12.1 AndroidView holder source",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-android/1.12.1/ui-android-1.12.1-sources.jar",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-17",
+      "sourceUpdatedOn": null,
+      "note": "AndroidViewHolder init addView(view) gives an unconfigured child ViewGroup default layout params; getLayoutParams returns the child's params. Its measurement may be EXACTLY while WebView still sees WRAP_CONTENT. Source also confirms ordinary focused-child key forwarding. Parent retains AndroidView and gives the terminal WebView explicit MATCH_PARENT params; no Compose or dependency replacement.",
+      "refresh": "On selected Compose upgrades or changes to the native terminal embedding."
+    },
+    {
+      "id": "R376",
+      "title": "Pinned xterm deferred Android committed-input ownership",
+      "url": "https://github.com/xtermjs/xterm.js/blob/991857a1b1cacf06f9531ba74a6e927a7a6398bb/src/browser/input/CompositionHelper.ts",
+      "publisher": "xterm.js",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-17",
+      "sourceUpdatedOn": null,
+      "note": "Exact beta315 source schedules the key229 non-composing textarea fallback with a timer. Fast Enter/Ctrl+C clears the textarea before that timer and loses committed text; parent reproduced both failures in real Chrome and the Android product. The reviewed authored patch flushes only a pending non-composing/non-finalizing fallback before the next non229 key, retires its timer, and clears the retained baseline. Composition-start/finalization policy is unchanged; no native character or private runtime monkeypatch path.",
+      "refresh": "On xterm upgrade or a changed consequential IME event sequence; retain fail-before/pass-after evidence."
+    },
+    {
+      "id": "R377",
+      "title": "esbuild0.28.0 Linux x86_64 compiler publication",
+      "url": "https://registry.npmjs.org/@esbuild/linux-x64/0.28.0",
+      "publisher": "esbuild",
+      "category": "development-tooling",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-17",
+      "sourceUpdatedOn": null,
+      "note": "Build-only MIT compiler matching the selected xterm dev-tool generation. Parent verified official archive SHA512, exact size/SHA256 and native binary SHA256 before execution. Source, patch, compiler and final browser bundle are pinned in shared/android/terminal/renderer-build.json. No npm/package scripts, runtime downloads or compiler executable in the Android APK.",
+      "refresh": "Before changing the reviewed source-build toolchain or host architecture."
+    },
+    {
+      "id": "G261",
+      "title": "AOSP desktop windowing modes and validation",
+      "url": "https://source.android.com/docs/core/display/desktop-windowing",
+      "publisher": "Android Open Source Project",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-17",
+      "sourceUpdatedOn": "2026-10-09",
+      "note": "Distinguishes desktop-first/touch-first per-display state, keyboard+pointer triggers and Android17 per-display eligibility. OEM resource overlays and hidden system eligibility are test-fixture/system configuration, not app APIs. The API37 emulator's measured freeform settings and actual window bounds do not establish real Googlebook window-system parity.",
+      "refresh": "Before changing emulator desktop configuration or making a native windowing support claim."
     }
   ]
 }

@@ -8,9 +8,9 @@ import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assert
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.test.hasClickAction
-import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
@@ -67,8 +67,8 @@ abstract class WindowDisplayContract<A : CloudyWindowActivity>(
             expandAdvancedToNameEditor()
             val text = "Unapplied display draft Ω"
             val selection = TextRange(2, 9)
-            compose.onNode(hasSetTextAction()).performScrollTo().performTextReplacement(text)
-            compose.onNode(hasSetTextAction()).performTextInputSelection(selection)
+            compose.onNodeWithTag("home_window_name").performScrollTo().performTextReplacement(text)
+            compose.onNodeWithTag("home_window_name").performTextInputSelection(selection)
             for (appearance in listOf(CloudyAppearance.LIGHT, CloudyAppearance.DARK)) {
                 owner.appearance(appearance)
                 for (density in CloudyDensity.entries) {
@@ -81,9 +81,11 @@ abstract class WindowDisplayContract<A : CloudyWindowActivity>(
                     assertEquals(density, preferences.density)
                     if (evidence != null) {
                         check(evidence.isDirectory || evidence.mkdirs())
-                        // Capture the actual viewport at the top of the workspace. Offscreen controls
-                        // are not claimed visible; metrics below report their clipped root bounds.
-                        compose.onNodeWithText(initial.snapshot.name).performScrollTo()
+                        // The committed heading is a fixed toolbar label, not scrolled content:
+                        // assert it stays visible while the workspace reflows and the viewport
+                        // is captured. Offscreen controls are not claimed visible; metrics below
+                        // report their clipped root bounds for the current viewport.
+                        compose.onNodeWithText(initial.snapshot.name).assertIsDisplayed()
                         compose.waitForIdle()
                         val frame = capture(context, evidence, preferences)
                         observations.put(frame)
@@ -92,7 +94,7 @@ abstract class WindowDisplayContract<A : CloudyWindowActivity>(
                             put("scope", "Actual workspace viewport; synthetic local draft only; no physical-input or full-layout acceptance")
                             put("frames", observations)
                         }.toString(2))
-                        // Scrolling for capture does not itself replace the native field state.
+                        // Capturing the viewport must not replace the native field state.
                         assertDraft(text, selection)
                     }
                 }
@@ -120,7 +122,7 @@ abstract class WindowDisplayContract<A : CloudyWindowActivity>(
         compose.waitForIdle()
         compose.waitUntil(10_000) {
             try {
-                compose.onNode(hasSetTextAction()).fetchSemanticsNode()
+                compose.onNodeWithTag("home_window_name").fetchSemanticsNode()
                 true
             } catch (_: AssertionError) {
                 false
@@ -140,7 +142,7 @@ abstract class WindowDisplayContract<A : CloudyWindowActivity>(
     }
 
     private fun assertDraft(text: String, selection: TextRange) {
-        compose.onNode(hasSetTextAction()).assert(SemanticsMatcher.expectValue(
+        compose.onNodeWithTag("home_window_name").assert(SemanticsMatcher.expectValue(
             SemanticsProperties.EditableText, AnnotatedString(text))).assert(SemanticsMatcher.expectValue(
             SemanticsProperties.TextSelectionRange, selection))
     }
@@ -176,7 +178,7 @@ abstract class WindowDisplayContract<A : CloudyWindowActivity>(
         return JSONObject().apply {
             put("appearance", preferences.appearance.name); put("densityPreference", preferences.density.name)
             put("screenshot", screenshot.name); put("widthPx", image.width); put("heightPx", image.height)
-            put("scrollPosition", "Committed window heading scrolled into view; viewport only")
+            put("scrollPosition", "Committed window heading visible in fixed toolbar; viewport only")
             put("fontScale", configuration.fontScale.toDouble()); put("densityDpi", configuration.densityDpi)
             put("displayDensity", pixels.density.toDouble()); put("screenWidthDp", configuration.screenWidthDp)
             put("screenHeightDp", configuration.screenHeightDp); put("uiMode", configuration.uiMode)

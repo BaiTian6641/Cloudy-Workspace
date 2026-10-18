@@ -2,6 +2,7 @@ package io.github.baitian6641.cloudy.terminal
 
 import android.app.Activity
 import android.os.Bundle
+import android.view.WindowManager
 import java.util.UUID
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.LinkedBlockingQueue
@@ -16,6 +17,7 @@ class TerminalRendererTestActivity : Activity() {
 
     override fun onCreate(state: Bundle?) {
         super.onCreate(state)
+        window.addFlags(WindowManager.LayoutParams.FLAG_SECURE)
         renderer = TerminalWebViewBridge(this,
             TerminalIdentity(UUID.randomUUID().toString(), UUID.randomUUID().toString()),
             object : TerminalWebViewBridge.Listener {

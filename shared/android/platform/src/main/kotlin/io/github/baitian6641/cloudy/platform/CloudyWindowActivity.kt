@@ -25,6 +25,9 @@ abstract class CloudyWindowActivity : ComponentActivity() {
     /** A concrete app-owned destination; absence keeps the workspace entry unavailable. */
     protected open val remoteDesktopActivity: Class<out ComponentActivity>? = null
 
+    /** Console's retained terminal destination; Desktop keeps the session-linked files route. */
+    protected open val sshTerminalActivity: Class<out ComponentActivity>? = null
+
     private var state by mutableStateOf<WindowState?>(null)
     private var notice by mutableStateOf<String?>(null)
     private var systemNotice by mutableStateOf<String?>(null)
@@ -61,6 +64,7 @@ abstract class CloudyWindowActivity : ComponentActivity() {
                     notice = listOfNotNull(notice, systemNotice).joinToString("\n").ifEmpty { null },
                     state = homeState,
                     actions = WorkspaceHomeActions(
+                        onToggleFavorite = home::toggleFavorite,
                         onConnect = ::connectHost,
                         onRetry = home::refresh,
                         onBrowseFiles = ::openSshFiles,
@@ -106,7 +110,20 @@ abstract class CloudyWindowActivity : ComponentActivity() {
     private fun connectHost(row: HomeRow) {
         when (row.profile.protocol) {
             ConnectionProtocol.SSH -> {
-                if (windowOwner == WindowOwner.DESKTOP) {
+                val terminal = sshTerminalActivity
+                if (terminal != null) {
+                    home.report(null)
+                    home.recordUse(row, System.currentTimeMillis() / 1000) {
+                        // A stopped/background window never replays a deferred navigation request.
+                        if (isFinishing || isDestroyed || !hasWindowFocus()) return@recordUse
+                        try {
+                            startActivity(Intent(this, terminal).putExtra(
+                                CloudyTerminalActivity.EXTRA_PROFILE_ID, row.profile.id))
+                        } catch (_: RuntimeException) {
+                            notice = getString(R.string.cloudy_window_launch_failed)
+                        }
+                    }
+                } else if (windowOwner == WindowOwner.DESKTOP) {
                     // The qualified SSH surface today is the session-linked file browser.
                     home.report(null)
                     openSshFiles()
@@ -118,8 +135,9 @@ abstract class CloudyWindowActivity : ComponentActivity() {
                 val destination = remoteDesktopActivity
                 if (destination != null) {
                     home.report(null)
-                    home.recordUse(row, System.currentTimeMillis() / 1000)
-                    openRemoteDesktop(destination)
+                    home.recordUse(row, System.currentTimeMillis() / 1000) {
+                        if (!isFinishing && !isDestroyed && hasWindowFocus()) openRemoteDesktop(destination)
+                    }
                 } else {
                     home.report(HomeMessage.ROUTE_UNAVAILABLE)
                 }

@@ -26,3 +26,23 @@
 - Parsec/TeamViewer-style references apply only to connected sessions; pre-connection navigation is Cloudy's own design.
 - This revision does not qualify vault save/use, terminal rendering, RDP/streaming, X11 or USB behavior; each keeps its own stage gate and device evidence requirements.
 - The user paused the full P0–P6 goal on 2026-10-16 and later resumed this UX lane explicitly; progress is reported as verified gates, never calendar estimates.
+
+## 2026-10-17 — Console desktop visual refinement
+
+The user reaffirmed that Cloudy Console should look and feel similar to **Termius**, adapted to
+a **desktop experience and the Cloudy Design Language**. This refines visual hierarchy, not the
+platform, dependency, authentication or release contracts.
+
+The parent inspected the [current official overview](https://termius.com/) and its
+[desktop workspace image](https://framerusercontent.com/images/5adSItOENNTFRDEwDBUq6GIETU.jpg?width=3081&height=1827):
+stable side navigation, compact top actions, organized host groups and clear primary/secondary
+host information. Adopt those organizational patterns with Cloudy's semantic colors, typography,
+density, native captions and keyboard/pointer/IME behavior. Do not copy branding/assets, invent
+OS identities or add nonfunctional session tabs, team avatars or controls.
+
+The bounded home refinement keeps real Favorites/Recents/All/tag navigation, current host/trust
+and credential-reference state, prominent Connect, real secondary actions and Advanced tools.
+Narrow tiled windows and large text reflow rather than shrinking into a phone or clipping actions.
+The connected terminal/files/X11 journeys retain their own implementation and acceptance gates.
+Source changes must pass actual native wide/narrow, long/empty/error and interaction review before
+visual acceptance; an attractive source proposal is not a rendered or completed application.

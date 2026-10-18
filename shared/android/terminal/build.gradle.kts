@@ -43,16 +43,21 @@ dependencies {
 }
 
 val generatedAssets = layout.buildDirectory.dir("generated/terminalAssets")
-// Vendor assets are produced from the pinned archives and verified by the preparation script.
-// The ordinary build is offline: a missing pinned archive fails instead of fetching at build time.
+// The product core is rebuilt from pinned source plus the reviewed IME repair.
+// The build verifies its exact output pin and never fetches archives or executes package scripts.
 val prepareTerminalAssets = tasks.register<Exec>("prepareTerminalAssets") {
     val repository = rootProject.layout.projectDirectory
     workingDir(repository)
     commandLine("python3", repository.file("tools/prepare_terminal_assets.py").asFile.absolutePath,
         "--product", "--offline")
-    inputs.file(repository.file("tools/prepare_terminal_assets.py"))
-    inputs.file(repository.file("qualification/probes/device-baseline/terminal-assets.json"))
-    inputs.dir(repository.dir(".cache/terminal-assets"))
+    inputs.files(repository.file("tools/prepare_terminal_assets.py"),
+        repository.file("tools/build_terminal_renderer.py"), repository.file("tools/prepare_rdp_native.py"),
+        repository.file("qualification/probes/device-baseline/terminal-assets.json"),
+        repository.file("shared/android/terminal/renderer-build.json"),
+        repository.file("tools/patches/xterm-6.1.0-beta.315-flush-committed-input.patch"),
+        repository.file(".cache/terminal-assets/xterm-6.1.0-beta.315.tgz"),
+        repository.file(".cache/terminal-assets/addon-fit-0.12.0-beta.311.tgz"),
+        repository.file(".cache/terminal-assets/source-build/linux-x64-0.28.0.tgz"))
     outputs.dir(generatedAssets)
 }
 androidComponents.onVariants { variant ->

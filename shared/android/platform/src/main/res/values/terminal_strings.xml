@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="terminal_heading">Terminal</string>
+    <string name="terminal_scope">Choose a saved SSH host, enter a transient username and password, then use the remote shell. Closing or hiding this window ends the session and renderer; commands and input are never replayed.</string>
+    <string name="terminal_choose">Choose a saved SSH host.</string>
+    <string name="terminal_credentials_ready">Enter credentials for this host. The current trusted key is checked before authentication.</string>
+    <string name="terminal_retiring">Disconnecting. Waiting for the terminal and transport owners to retire…</string>
+    <string name="terminal_permission_return">Permission request finished. Use Open terminal explicitly to connect.</string>
+    <string name="terminal_no_profiles">No SSH hosts are saved. Add one from the workspace home first.</string>
+    <string name="terminal_username">Username</string>
+    <string name="terminal_password">Password</string>
+    <string name="terminal_connect">Open terminal</string>
+    <string name="terminal_disconnect">Disconnect</string>
+    <string name="terminal_close">Close window</string>
+    <string name="terminal_trust">Review host trust</string>
+    <string name="terminal_refresh">Refresh hosts</string>
+    <string name="terminal_status_connecting">Connecting and authenticating…</string>
+    <string name="terminal_status_authenticated">Authenticated. Starting the local renderer…</string>
+    <string name="terminal_status_ready">Shell open. Input is sent only to this connection.</string>
+    <string name="terminal_status_failed">Connection failed: %1$s</string>
+    <string name="terminal_status_ended">Session ended: %1$s</string>
+    <string name="terminal_status_local_permission">Local network access is required for this host.</string>
+    <string name="terminal_selected">%1$s · %2$s</string>
+</resources>

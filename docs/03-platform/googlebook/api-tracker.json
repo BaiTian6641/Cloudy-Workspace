@@ -2502,6 +2502,27 @@
       "fallback": "Preserve native accessible controls; spoken-screen-reader terminal input and speech remain separate acceptance gates. No second native character-forwarding path.",
       "experiment": "Three real Googlebook WebView tests exercise ASCII, Unicode/LF commit after canceled preedit, stale attachment refusal, Enter and Ctrl+C. No hardware-keyboard, actual system-IME or TalkBack qualification.",
       "deviceEvidence": "qualification/results/P2-S2/2026-10-17-terminal-input-repair.md"
+    },
+    {
+      "id": "API72",
+      "feature": "Nonzero embedded terminal WebView layout viewport",
+      "symbols": [
+        "android.view.View.setLayoutParams",
+        "android.view.ViewGroup.LayoutParams.MATCH_PARENT",
+        "androidx.compose.ui.viewinterop.AndroidView"
+      ],
+      "sourceIds": ["G259", "G260", "R375"],
+      "minimumApi": 8,
+      "libraryVersion": "Public Android LayoutParams; product min35/target37; selected Compose1.12.1/WebView149.0.7827.5 unchanged.",
+      "availability": "documented",
+      "qualification": "partial",
+      "checkedOn": "2026-10-17",
+      "owner": "Terminal/Android developer and integration leader",
+      "stage": "P2-S2",
+      "runtimeGuard": "Give each renderer WebView explicit MATCH_PARENT width/height before embedding; native exact measurement is not proof of a nonzero CSS layout viewport. Keep original origin/identity/focus/credential and bounded-output gates.",
+      "fallback": "Do not accept a blank/zero-height surface or route native characters around the renderer. Preserve the failed attempt and actual provider/source attribution.",
+      "experiment": "Before fix: real product DOM body/xterm height0 despite native2073x1104. After MATCH_PARENT: actual Googlebook body679/xterm642 CSS pixels and visible remote shell; the separate committed-text race still failed at that snapshot. A subsequent source-patched renderer passes the bounded API37 emulator real-SSH workflow. Neither DevTools observer effects nor emulator output qualify physical input/window-system parity.",
+      "deviceEvidence": "qualification/results/P2-S2/2026-10-17-terminal-viewport-repair.md"
     }
   ],
   "targetScope": "Googlebook desktop/laptop; reference-only phone continuity is outside release gates."

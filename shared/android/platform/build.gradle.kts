@@ -34,6 +34,7 @@ dependencies {
     implementation(project(":design-system"))
     implementation(project(":identity"))
     implementation(project(":ssh"))
+    implementation(project(":terminal"))
     api(libs.fragment)
     implementation(libs.activity.compose)
     // ComponentActivity is part of the public base Activity's inherited API.

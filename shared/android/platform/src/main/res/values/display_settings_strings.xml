@@ -12,7 +12,7 @@
     <string name="display_density_compact">Compact pointer</string>
     <string name="display_density_accessibility">Controls retain their native minimum interactive targets and may grow for scaled text.</string>
     <string name="display_terminal_heading">Terminal pointer</string>
-    <string name="display_terminal_scope">Terminal sessions follow the MobaXterm-style defaults: selection copies immediately, Shift+Insert pastes, and Ctrl+wheel adjusts font size. The interactive terminal is not integrated yet; this right-click choice is saved now and applies when it is.</string>
+    <string name="display_terminal_scope">The saved desktop pointer policy uses copy-on-select, Shift+Insert paste and Ctrl+wheel zoom, with the right-click choice below. The terminal construction is available, but this pointer-policy integration is not complete yet; saving this choice does not claim those actions work in the current terminal.</string>
     <string name="display_terminal_paste">Right-click pastes (default)</string>
     <string name="display_terminal_menu">Right-click opens the context menu</string>
     <string name="display_refresh">Refresh current preferences</string>

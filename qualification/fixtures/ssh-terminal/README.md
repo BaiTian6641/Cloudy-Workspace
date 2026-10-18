@@ -100,6 +100,34 @@ directory. Delete a particular private run directory only as a deliberate parent
 review. The sibling `ssh-session` and `ssh-pty` fixtures, shared caches and unrelated results are
 not touched.
 
+## Reproduce the real Console workflow
+
+Build the Console debug and instrumentation APKs, start the fixture above, then use its printed
+private properties path with an explicitly owned target:
+
+```bash
+python3 tools/run_console_terminal_smoke.py \
+  --fixture qualification/results/private/ssh-terminal-01/RUN/fixture.properties \
+  --serial emulator-5580
+```
+
+Replace `RUN` with the actual freshly created run directory; no credential belongs in the command.
+The controller installs the actual APKs, refuses an occupied reverse port, provisions only private
+test configuration, runs the opt-in product test and independently checks the real host proof file.
+Only then does it atomically publish the app-private witness. The test starts at the real workspace
+home, searches/selects the owned profile, uses Connect and authenticates without a test refresh.
+It verifies real command execution, a protected pixel capture, explicit shell exit and credential-draft
+recreation without replay. The helper accounts for only the owned row's exact last-attempt mutation
+and restores the complete profile/trust baseline; unrelated Activities and data are not cleanup targets.
+
+Receipts, images and hashes stay under `qualification/results/private/console-terminal-resume/`.
+The controller removes only its reverse mapping, private configuration/witness and exact owned
+proof file. It never stops a foreign listener, resets app data or fabricates remote success.
+A controller timeout does not prove Android-side retirement; keep its failed receipt and inspect
+the baseline before any further fixture mutation. Stop the owned host fixture separately with
+its run-local `stop` file. Emulator, physical input and actual Googlebook results remain distinct.
+
+
 ## Boundary
 
 The fixture has no SFTP subsystem, no forwarding, no exec command and no virtual filesystem. It

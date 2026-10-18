@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "name": "@xterm/xterm",
+    "version": "6.1.0-beta.315",
+    "upstreamCommit": "991857a1b1cacf06f9531ba74a6e927a7a6398bb",
+    "license": "MIT",
+    "cacheFile": "xterm-6.1.0-beta.315.tgz",
+    "archiveUrl": "https://registry.npmjs.org/@xterm/xterm/-/xterm-6.1.0-beta.315.tgz",
+    "archiveBytes": 1115072,
+    "archiveSha256": "342dfd1e9a5642081b83debd12ef5338b87b59dd9f1a61cb2aad1fba2be1c08e",
+    "integrity": "sha512-w7MeKxi6vbxE3IOFRiwgugkM6FZonE9gF9KyJ0OiE5HbYZOm38bz+CTGZg3+wqA6porJnHfjzX1KaihInP+iWg==",
+    "packageJsonSha256": "a5b4dfd07ee3162e80bb8c0c39b224c0145081ae9c2ed02916cc8d9d52c889e3",
+    "licensePath": "package/LICENSE",
+    "licenseOutputPath": "terminal/notices/xterm-LICENSE.txt",
+    "licenseBytes": 1261,
+    "licenseSha256": "b569f629d00f2626a8100df2a1798210535621e42164dfd426a6fe5aac7b0ccd"
+  },
+  "patch": {
+    "file": "tools/patches/xterm-6.1.0-beta.315-flush-committed-input.patch",
+    "sha256": "50b12b541ddff267ba11d901c554caffc2889c8d670e1ad3f09a9ac82982e124",
+    "files": ["package/src/browser/input/CompositionHelper.ts"]
+  },
+  "compiler": {
+    "name": "@esbuild/linux-x64",
+    "version": "0.28.0",
+    "cacheFile": "source-build/linux-x64-0.28.0.tgz",
+    "archiveUrl": "https://registry.npmjs.org/@esbuild/linux-x64/-/linux-x64-0.28.0.tgz",
+    "archiveBytes": 4717499,
+    "archiveSha256": "e94bf1c7f44197b22cf6a787578eca9af805aa9624104488252de2a765c6a4f0",
+    "integrity": "sha512-us0dSb9iFxIi8srnpl931Nvs65it/Jd2a2K3qs7fz2WfGPHqzfzZTfec7oxZJRNPXPnNYZtanmRc4AL/JwVzHQ==",
+    "binaryMember": "package/bin/esbuild",
+    "binaryBytes": 11366512,
+    "binarySha256": "aafacdf135322bf47c882a4ea4db33d0375583f5b9c3fd2d4e12258e470568be"
+  },
+  "build": {
+    "entry": "import { Terminal } from './src/browser/public/Terminal';\n(globalThis as any).Terminal = Terminal;\n",
+    "entrySha256": "9cbe7cc83383d4912fc3b0e69a2af09b18b5e83f4f007d2446a01e70b6528a02",
+    "target": "es2020",
+    "format": "iife",
+    "platform": "browser"
+  },
+  "output": {
+    "path": "terminal/vendor/xterm.js",
+    "bytes": 355781,
+    "sha256": "e40abf9c26cd201221a1783eb7be1f7c944f57cc5525b67f2ba53ca105b35119"
+  }
+}

@@ -1,0 +1,107 @@
+--- a/package/src/browser/input/CompositionHelper.ts
++++ b/package/src/browser/input/CompositionHelper.ts
+@@ -52,6 +52,12 @@
+    */
+   private _textareaChangeTimer?: number;
+ 
++  /**
++   * The textarea value before the pending change, used to compute the change when it is flushed
++   * before the deferred timer runs.
++   */
++  private _textareaChangeStartValue: string;
++
+   constructor(
+     private readonly _textarea: HTMLTextAreaElement,
+     private readonly _compositionView: HTMLElement,
+@@ -65,6 +71,7 @@
+     this._compositionPosition = { start: 0, end: 0 };
+     this._compositionSuffix = '';
+     this._dataAlreadySent = '';
++    this._textareaChangeStartValue = '';
+   }
+ 
+   /**
+@@ -113,6 +120,14 @@
+    * @returns Whether the Terminal should continue processing the keydown event.
+    */
+   public keydown(ev: KeyboardEvent): boolean {
++    if (ev.keyCode !== 229 && !this._isComposing && !this._isSendingComposition) {
++      // A fast normal/control key can arrive before the deferred 229 fallback timer runs and then
++      // clear the textarea (Enter/Ctrl+C), losing the committed input. Flush it first. A 229
++      // keydown leaves the timer pending so coalesced textarea changes stay a single emission,
++      // and composition start/end behavior is left untouched.
++      this._flushTextareaChanges();
++    }
++
+     if (this._isComposing || this._isSendingComposition) {
+       if (ev.keyCode === 20 || ev.keyCode === 229) {
+         // 20 is CapsLock, 229 is Enter
+@@ -210,30 +225,52 @@
+    * IME is active.
+    */
+   private _handleAnyTextareaChanges(): void {
+-    if (this._textareaChangeTimer) {
++    if (this._textareaChangeTimer !== undefined) {
+       return;
+     }
+-    const oldValue = this._textarea.value;
++    this._textareaChangeStartValue = this._textarea.value;
+     this._textareaChangeTimer = window.setTimeout(() => {
+       this._textareaChangeTimer = undefined;
+-      // Ignore if a composition has started since the timeout
+-      if (!this._isComposing) {
+-        const newValue = this._textarea.value;
++      this._sendTextareaChanges();
++    }, 0);
++  }
+ 
+-        const diff = newValue.replace(oldValue, '');
++  /**
++   * Send the pending textarea change immediately and retire its timer, if one is pending.
++   */
++  private _flushTextareaChanges(): void {
++    if (this._textareaChangeTimer === undefined) {
++      return;
++    }
++    window.clearTimeout(this._textareaChangeTimer);
++    this._textareaChangeTimer = undefined;
++    this._sendTextareaChanges();
++  }
+ 
+-        this._dataAlreadySent = diff;
++  /**
++   * Send the difference between the current textarea value and the value it had before the
++   * pending change.
++   */
++  private _sendTextareaChanges(): void {
++    const oldValue = this._textareaChangeStartValue;
++    this._textareaChangeStartValue = '';
++    // Ignore if a composition has started since the change was recorded
++    if (this._isComposing) {
++      return;
++    }
++    const newValue = this._textarea.value;
++
++    const diff = newValue.replace(oldValue, '');
+ 
+-        if (newValue.length > oldValue.length) {
+-          this._coreService.triggerDataEvent(diff, true);
+-        } else if (newValue.length < oldValue.length) {
+-          this._coreService.triggerDataEvent(`${C0.DEL}`, true);
+-        } else if ((newValue.length === oldValue.length) && (newValue !== oldValue)) {
+-          this._coreService.triggerDataEvent(newValue, true);
+-        }
++    this._dataAlreadySent = diff;
+ 
+-      }
+-    }, 0);
++    if (newValue.length > oldValue.length) {
++      this._coreService.triggerDataEvent(diff, true);
++    } else if (newValue.length < oldValue.length) {
++      this._coreService.triggerDataEvent(`${C0.DEL}`, true);
++    } else if ((newValue.length === oldValue.length) && (newValue !== oldValue)) {
++      this._coreService.triggerDataEvent(newValue, true);
++    }
+   }
+ 
+   /**

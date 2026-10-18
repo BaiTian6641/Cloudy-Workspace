@@ -28,6 +28,8 @@ let smoke = null;
     ["insert-text-no-keydown", "insert", "ab", "ab"],
     ["unicode-combining-emoji", "insert-once", "e\u0301\u6f22👍", "e\u0301\u6f22👍"],
     ["canceled-preedit-then-commit", "cancel-then-commit", "中", "中"],
+    ["android-commit-then-enter", "android-enter", "ab", "ab\r"],
+    ["android-commit-then-interrupt", "android-interrupt", "中", "中\x03"],
     ["enter-then-ctrl-c", "controls", "", "\r\x03"],
     ["closed-attachment-no-replay", "closed", "a", "a"],
   ];
@@ -111,6 +113,19 @@ let smoke = null;
           for (const char of text) { value += char; insertOnce(value, char); }
         } else if (mode === "insert-once") {
           insertOnce(text, text);
+        } else if (mode === "android-enter" || mode === "android-interrupt") {
+          key(229, "Unidentified");
+          textarea.value = text;
+          textarea.setSelectionRange(text.length, text.length);
+          textarea.dispatchEvent(new InputEvent("input", {
+            bubbles: true, composed: true, inputType: "insertText", data: text
+          }));
+          textarea.dispatchEvent(new KeyboardEvent("keyup", {
+            bubbles: true, keyCode: 229, which: 229, key: "Unidentified"
+          }));
+          // Android may deliver the next key before xterm's deferred 229 fallback runs.
+          if (mode === "android-enter") key(13, "Enter");
+          else key(67, "c", { ctrlKey: true });
         } else if (mode === "cancel-then-commit") {
           composition("compositionstart", "");
           textarea.value = text; composition("compositionupdate", text);
@@ -184,7 +199,7 @@ let smoke = null;
       return JSON.stringify(stages.beforeCloseBytes) === JSON.stringify(expectedBytes) &&
         JSON.stringify(stages.afterCloseBytes) === JSON.stringify(stages.beforeCloseBytes);
     }
-    return ["insert", "insert-once", "controls"].includes(config[1]);
+    return ["insert", "insert-once", "controls", "android-enter", "android-interrupt"].includes(config[1]);
   }
   for (const config of schedules) {
     const frame = document.createElement("iframe");

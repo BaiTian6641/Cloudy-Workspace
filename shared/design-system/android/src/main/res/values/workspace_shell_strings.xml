@@ -1,7 +1,7 @@
 <resources>
     <string name="cloudy_workspace_window">Window settings</string>
-    <string name="cloudy_gap_terminal">Interactive terminal</string>
-    <string name="cloudy_gap_terminal_detail">SSH commands with keyboard, pointer selection and native text input.</string>
+    <string name="cloudy_gap_terminal">Complete desktop terminal controls</string>
+    <string name="cloudy_gap_terminal_detail">Clipboard menus, pointer selection and complete native input qualification remain unfinished.</string>
     <string name="cloudy_gap_sessions">Sessions, tabs and panes</string>
     <string name="cloudy_gap_sessions_detail">Tabs, split panes, search and saved session layouts.</string>
     <string name="cloudy_gap_x11">Separate X11 application windows</string>

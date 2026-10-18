@@ -9,6 +9,7 @@ import io
 import json
 import os
 from pathlib import Path
+import sys
 import tarfile
 import tempfile
 import unittest
@@ -18,6 +19,8 @@ from unittest.mock import patch
 ROOT = Path(__file__).resolve().parents[1]
 SPEC = importlib.util.spec_from_file_location("prepare_terminal_assets", ROOT / "tools/prepare_terminal_assets.py")
 ASSETS = importlib.util.module_from_spec(SPEC)
+# The renderer build module imports these reviewed helpers by module name.
+sys.modules["prepare_terminal_assets"] = ASSETS
 SPEC.loader.exec_module(ASSETS)
 
 
@@ -104,6 +107,62 @@ class TerminalAssetTests(unittest.TestCase):
 
     def prepare(self, **options):
         return ASSETS.prepare_assets(self.manifest, self.cache, self.output, repository=self.root, **options)
+
+    def renderer_build(self):
+        return ASSETS._renderer_build()
+
+    def renderer_manifest(self, bundle=b"reviewed source-built bundle\n"):
+        zero = "0" * 64
+        empty_integrity = "sha512-" + base64.b64encode(bytes(64)).decode()
+        build = self.renderer_build()
+        return {
+            "schemaVersion": 1,
+            "source": {
+                "name": "@xterm/xterm",
+                "version": build.SOURCE_VERSION,
+                "upstreamCommit": build.SOURCE_COMMIT,
+                "license": "MIT",
+                "cacheFile": "xterm-6.1.0-beta.315.tgz",
+                "archiveUrl": "https://registry.npmjs.org/@xterm/xterm/-/xterm-6.1.0-beta.315.tgz",
+                "archiveBytes": 1,
+                "archiveSha256": zero,
+                "integrity": empty_integrity,
+                "packageJsonSha256": zero,
+                "licensePath": "package/LICENSE",
+                "licenseOutputPath": "terminal/notices/xterm-LICENSE.txt",
+                "licenseBytes": 1,
+                "licenseSha256": zero,
+            },
+            "patch": {
+                "file": "tools/patches/test.patch",
+                "sha256": zero,
+                "files": ["package/src/browser/input/CompositionHelper.ts"],
+            },
+            "compiler": {
+                "name": "@esbuild/linux-x64",
+                "version": "0.28.0",
+                "cacheFile": "source-build/linux-x64-0.28.0.tgz",
+                "archiveUrl": "https://registry.npmjs.org/@esbuild/linux-x64/-/linux-x64-0.28.0.tgz",
+                "archiveBytes": 1,
+                "archiveSha256": zero,
+                "integrity": empty_integrity,
+                "binaryMember": "package/bin/esbuild",
+                "binaryBytes": 1,
+                "binarySha256": zero,
+            },
+            "build": {
+                "entry": build.ENTRY_SOURCE,
+                "entrySha256": build.ENTRY_SHA256,
+                "target": "es2020",
+                "format": "iife",
+                "platform": "browser",
+            },
+            "output": {
+                "path": "terminal/vendor/xterm.js",
+                "bytes": len(bundle),
+                "sha256": digest(bundle),
+            },
+        }
 
     def test_exact_bytes_and_only_allowlisted_members_are_generated(self):
         with patch.object(ASSETS, "fetch_archive", side_effect=AssertionError("network forbidden")):
@@ -297,18 +356,45 @@ class TerminalAssetTests(unittest.TestCase):
         with self.assertRaisesRegex(ASSETS.AssetError, "Symlink"):
             ASSETS.cli_path(allowed / "redirect" / "child", allowed)
 
-    def test_product_mode_selects_the_terminal_module_root_and_rejects_others(self):
-        captured = {}
+    def test_product_check_does_not_compile_or_write(self):
+        bundle = b"reviewed source-built bundle\n"
+        renderer = self.renderer_manifest(bundle)
+        renderer_build = self.renderer_build()
+        with patch.object(renderer_build, "build_bundle", return_value=bundle):
+            self.prepare(offline=True, product=True, renderer_manifest=renderer)
+        before = {path: (path.read_bytes(), path.stat().st_mtime_ns)
+                  for path in self.root.rglob("*") if path.is_file()}
+        with patch.object(renderer_build, "build_bundle",
+                          side_effect=AssertionError("compile forbidden")), \
+                patch.object(renderer_build, "verify_inputs"), \
+                patch.object(ASSETS, "atomic_write", side_effect=AssertionError("write forbidden")):
+            self.prepare(check=True, product=True, renderer_manifest=renderer)
+        self.assertEqual(before, {path: (path.read_bytes(), path.stat().st_mtime_ns)
+                                  for path in self.root.rglob("*") if path.is_file()})
 
-        def fake_prepare(manifest, cache, output, **options):
-            captured["output"] = output
-            return {}
+    def test_product_check_rejects_missing_or_wrong_generated_bundle(self):
+        bundle = b"reviewed source-built bundle\n"
+        renderer = self.renderer_manifest(bundle)
+        renderer_build = self.renderer_build()
+        with patch.object(renderer_build, "verify_inputs"), \
+                self.assertRaises(FileNotFoundError):
+            self.prepare(check=True, product=True, renderer_manifest=renderer)
+        selected = self.output / "terminal/vendor/xterm.js"
+        selected.parent.mkdir(parents=True)
+        selected.write_bytes(b"wrong bundle\n")
+        with patch.object(renderer_build, "verify_inputs"), \
+                self.assertRaisesRegex(renderer_build.BuildError, "Byte/hash mismatch"):
+            self.prepare(check=True, product=True, renderer_manifest=renderer)
+        self.assertEqual(selected.read_bytes(), b"wrong bundle\n")
 
-        with patch.object(ASSETS, "prepare_assets", side_effect=fake_prepare):
-            self.assertEqual(0, ASSETS.main(["--product", "--offline"]))
-        self.assertEqual(ASSETS.PRODUCT_OUTPUT_ROOT, captured["output"])
-        with patch.object(ASSETS, "prepare_assets", side_effect=AssertionError("must not prepare")):
-            self.assertEqual(1, ASSETS.main(["--product", "--output", str(self.root / "outside"), "--offline"]))
+    def test_product_mode_never_fetches_a_missing_archive(self):
+        (self.cache / self.package("addon-fit")["cacheFile"]).unlink()
+        renderer = self.renderer_manifest()
+        with patch.object(self.renderer_build(), "build_bundle", return_value=b"bundle\n"), \
+                patch.object(ASSETS, "fetch_archive", side_effect=AssertionError("network forbidden")), \
+                self.assertRaisesRegex(ASSETS.AssetError, "missing"):
+            self.prepare(product=True, renderer_manifest=renderer)
+        self.assertFalse(self.output.exists())
 
     def test_supplementary_notice_is_integrity_checked_before_generation(self):
         asset = "third_party_notices/terminal/test-MIT.txt"

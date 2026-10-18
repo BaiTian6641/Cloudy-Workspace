@@ -35,3 +35,6 @@ qualification/probes/native-stream/pairing/finite-pairing.patch whitespace=-spac
 # Playback composition preserves the exact reviewed upstream context too.
 # The 159 added source lines were independently checked without exclusions.
 qualification/probes/native-stream/playback/finite-playback.patch whitespace=-space-before-tab,-blank-at-eol
+# The reviewed terminal diff also requires single-space blank context lines.
+# Its added TypeScript lines were separately checked for trailing whitespace.
+tools/patches/xterm-6.1.0-beta.315-flush-committed-input.patch whitespace=-blank-at-eol

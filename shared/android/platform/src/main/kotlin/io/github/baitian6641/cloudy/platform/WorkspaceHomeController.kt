@@ -60,12 +60,12 @@ internal class WorkspaceHomeController(context: Context, private val owner: Wind
         val current = row.profile
         val draft = ConnectionProfileDraft.create(owner, current.label, current.protocol,
             current.host, current.port, current.tags, !current.favorite)
-        mutate(row, silent = false) { profiles.update(row.version, draft) }
+        mutate { profiles.update(row.version, draft) }
     }
 
-    /** Bookkeeping for a connect action that was routed; a failure resyncs without alarming. */
-    fun recordUse(row: HomeRow, atEpochSeconds: Long) {
-        mutate(row, silent = true) { profiles.recordUse(row.version, atEpochSeconds) }
+    /** Publish the marker's new revision before a destination reads its authentication snapshot. */
+    fun recordUse(row: HomeRow, atEpochSeconds: Long, complete: () -> Unit) {
+        mutate(complete = complete) { profiles.recordUse(row.version, atEpochSeconds) }
     }
 
     fun report(message: HomeMessage?) {
@@ -80,21 +80,28 @@ internal class WorkspaceHomeController(context: Context, private val owner: Wind
     }
 
     private fun mutate(
-        row: HomeRow,
-        silent: Boolean,
+        complete: (() -> Unit)? = null,
         operation: () -> ConnectionProfilesResult<ConnectionProfileEntry>,
     ) {
         val token = generation
         execute {
-            val failure = when (val result = operation()) {
+            val result = operation()
+            val failure = when (result) {
                 is ConnectionProfilesResult.Success -> null
                 is ConnectionProfilesResult.Failure -> result.code
             }
             val reloaded = loadRows()
             main.post {
                 if (token != generation) return@post
+                val canComplete = complete != null && result is ConnectionProfilesResult.Success &&
+                    reloaded is LoadResult.Loaded && reloaded.rows.any {
+                        it.version.generation == result.value.version.generation &&
+                            it.version.id == result.value.version.id &&
+                            it.version.revision == result.value.version.revision
+                    }
                 val message = when (failure) {
-                    null -> null
+                    null -> if (complete != null && reloaded is LoadResult.Loaded && !canComplete)
+                        HomeMessage.CONFLICT_REFRESHED else null
                     ConnectionProfilesCode.BUSY -> HomeMessage.BUSY
                     ConnectionProfilesCode.CONFLICT, ConnectionProfilesCode.STALE_GENERATION,
                     ConnectionProfilesCode.NOT_FOUND -> HomeMessage.CONFLICT_REFRESHED
@@ -103,11 +110,12 @@ internal class WorkspaceHomeController(context: Context, private val owner: Wind
                 val current = mutable.value
                 mutable.value = when (reloaded) {
                     is LoadResult.Loaded -> current.copy(loading = false, rows = reloaded.rows,
-                        storeUnavailable = false, message = if (silent) current.message else message)
-                    LoadResult.Busy -> current.copy(message = if (silent) current.message else HomeMessage.BUSY)
+                        storeUnavailable = false, message = message)
+                    LoadResult.Busy -> current.copy(message = HomeMessage.BUSY)
                     LoadResult.Unavailable -> current.copy(storeUnavailable = true,
-                        message = if (silent) current.message else HomeMessage.STORE_UNAVAILABLE)
+                        message = HomeMessage.STORE_UNAVAILABLE)
                 }
+                if (canComplete) complete?.invoke()
             }
         }
     }

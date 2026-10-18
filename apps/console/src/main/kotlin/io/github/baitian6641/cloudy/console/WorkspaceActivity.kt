@@ -8,4 +8,5 @@ class WorkspaceActivity : CloudyWindowActivity() {
     override val windowOwner = WindowOwner.CONSOLE
     override val appNameResource = R.string.app_name
     override val defaultWindowNameResource = R.string.default_window_name
+    override val sshTerminalActivity = io.github.baitian6641.cloudy.platform.CloudyTerminalActivity::class.java
 }

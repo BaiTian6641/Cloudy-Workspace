@@ -8,15 +8,16 @@ import android.os.Bundle
 import android.view.WindowInsets
 import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.semantics.SemanticsActions
+import androidx.compose.ui.semantics.SemanticsNode
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
 import androidx.compose.ui.test.hasClickAction
-import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
@@ -141,10 +142,10 @@ abstract class WindowGeometryContract<A : CloudyWindowActivity>(
             val draft = "Geometry draft Ω unsaved"
             val selection = TextRange(2, 10)
             expandAdvancedToNameEditor()
-            compose.onNode(hasSetTextAction()).performScrollTo().performTextReplacement(draft)
-            compose.onNode(hasSetTextAction()).performTextInputSelection(selection)
+            compose.onNodeWithTag("home_window_name").performScrollTo().performTextReplacement(draft)
+            compose.onNodeWithTag("home_window_name").performTextInputSelection(selection)
             fun assertPreserved() {
-                compose.onNode(hasSetTextAction()).assert(SemanticsMatcher.expectValue(
+                compose.onNodeWithTag("home_window_name").assert(SemanticsMatcher.expectValue(
                     SemanticsProperties.EditableText, AnnotatedString(draft))).assert(SemanticsMatcher.expectValue(
                     SemanticsProperties.TextSelectionRange, selection))
                 running.onActivity {
@@ -162,7 +163,10 @@ abstract class WindowGeometryContract<A : CloudyWindowActivity>(
                 }
                 report.put("${name}RootWidthPx", image.width).put("${name}RootHeightPx", image.height)
             }
-            compose.onNodeWithText(committedName).performScrollTo().assertIsDisplayed()
+            // The committed heading is in the fixed toolbar; it is visible without scrolling.
+            val heading = compose.onNodeWithText(committedName)
+            if (heading.closestScrollableAncestor() != null) heading.performScrollTo()
+            heading.assertIsDisplayed()
             capture("top")
             val controls = JSONArray()
             report.put("controlsAtIndividualScrollPositions", controls)
@@ -177,7 +181,9 @@ abstract class WindowGeometryContract<A : CloudyWindowActivity>(
             )) {
                 val label = context.getString(resource)
                 val action = compose.onNode(hasText(label) and hasClickAction())
-                action.performScrollTo().assertIsDisplayed().assertIsEnabled()
+                val scrollable = action.closestScrollableAncestor() != null
+                if (scrollable) action.performScrollTo()
+                action.assertIsDisplayed().assertIsEnabled()
                 val labelInteraction = compose.onNodeWithText(label, useUnmergedTree = true)
                 val labelNode = labelInteraction.fetchSemanticsNode()
                 val unclippedDp = labelInteraction.getUnclippedBoundsInRoot()
@@ -276,6 +282,7 @@ abstract class WindowGeometryContract<A : CloudyWindowActivity>(
                 }
                 controls.put(JSONObject().apply {
                     put("label", label)
+                    put("fixedToolbarAction", !scrollable)
                     put("buttonClippedBoundsPx", rect(action.fetchSemanticsNode().boundsInRoot))
                     put("labelClippedBoundsPx", rect(clipped))
                     put("labelUnclippedBoundsPx", rect(unclipped))
@@ -304,6 +311,20 @@ abstract class WindowGeometryContract<A : CloudyWindowActivity>(
         }
     }
 
+    /**
+     * Fixed toolbar actions sit outside the workspace scroller, so `performScrollTo` would fail
+     * on them even though they are already on screen. Find the real scrolling ancestor and scroll
+     * only when there is one; visibility/enabled/bounds assertions stay unchanged.
+     */
+    private fun SemanticsNodeInteraction.closestScrollableAncestor(): SemanticsNode? {
+        var ancestor = fetchSemanticsNode().parent
+        while (ancestor != null) {
+            if (ancestor.config.contains(SemanticsActions.ScrollBy)) return ancestor
+            ancestor = ancestor.parent
+        }
+        return null
+    }
+
     private fun rect(value: Rect) = JSONArray(listOf(value.left, value.top, value.right, value.bottom))
     private fun rect(value: androidx.compose.ui.geometry.Rect) =
         JSONArray(listOf(value.left, value.top, value.right, value.bottom))
@@ -317,7 +338,7 @@ abstract class WindowGeometryContract<A : CloudyWindowActivity>(
         compose.waitForIdle()
         compose.waitUntil(10_000) {
             try {
-                compose.onNode(hasSetTextAction()).fetchSemanticsNode()
+                compose.onNodeWithTag("home_window_name").fetchSemanticsNode()
                 true
             } catch (_: AssertionError) {
                 false

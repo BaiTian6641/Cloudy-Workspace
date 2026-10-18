@@ -69,13 +69,19 @@ internal class SshAuthenticateFixture private constructor(
     private val plannedPin = SshTrustSnapshot.create(owner, trustBaseline.generation, peer, 1, SshTrustStatus.accepted(key))
     private val directory = File(context.noBackupFilesDir, "ssh-authenticate-qualification")
     private val receiptFile = File(directory, "$run-${owner.wireId}-$case.json")
+    /** Wall-clock start of this attempt; a home open marker must fall in [start, observation]. */
+    private val attemptStartedEpochSeconds = System.currentTimeMillis() / 1000
     private val journal = JSONArray()
     private val receipt = JSONObject().put("schema", 1).put("run", run).put("owner", owner.wireId).put("case", case)
         .put("package", context.packageName).put("uid", Process.myUid()).put("caseOutcome", "STARTED")
         .put("profileBaseline", profileJson(profileBaseline)).put("trustBaseline", trustJson(trustBaseline))
         .put("trustMetadata", JSONArray(trustFixture.baselineMetadata())).put("phases", journal)
     private var ownedProfile: ConnectionProfile? = null
+    private var homeOpenAccepted = false
     val profileId: String get() = checkNotNull(ownedProfile).id
+
+    /** Exact owned label; callers must never reconstruct it from a guessed format. */
+    val profileLabel: String get() = checkNotNull(ownedProfile).label
 
     init {
         check(trustBaseline.snapshots.none { it.peer == peer }) { "AUTH_FIXTURE_PEER_NOT_ABSENT" }
@@ -155,6 +161,46 @@ internal class SshAuthenticateFixture private constructor(
         check(trustJson(trust { trust.load() }) == trustJson(trustBaseline, trustBaseline.snapshots + plannedPin)) {
             "AUTH_TRUST_CHANGED"
         }
+    }
+
+    /**
+     * Adopts exactly one home Connect marker on the owned row. The store must differ from the
+     * seeded ledger only by one revision bump and an in-attempt last-used timestamp; every other
+     * owned field and every foreign row keeps its byte-identical metadata. Any other difference
+     * fails here instead of being folded into a broader restore.
+     */
+    fun acceptHomeOpenMarker() {
+        check(!homeOpenAccepted) { "AUTH_HOME_OPEN_ALREADY_ACCEPTED" }
+        val seeded = checkNotNull(ownedProfile)
+        val deadline = SystemClock.elapsedRealtime() + 15_000
+        var adopted: ConnectionProfile? = null
+        while (adopted == null) {
+            val catalog = profile { profiles.load() }
+            check(catalog.generation == profileBaseline.generation) { "AUTH_PROFILE_GENERATION_CHANGED" }
+            check(rowsJson(catalog.profiles.filter { it.id != seeded.id }).toString() ==
+                rowsJson(profileBaseline.profiles).toString()) { "AUTH_FOREIGN_PROFILE_CHANGED" }
+            val row = catalog.profiles.singleOrNull { it.id == seeded.id } ?: error("AUTH_HOME_OPEN_ROW_MISSING")
+            if (row.revision != seeded.revision) {
+                adopted = row
+            } else {
+                check(SystemClock.elapsedRealtime() < deadline) { "AUTH_HOME_OPEN_MARKER_UNCONFIRMED" }
+                SystemClock.sleep(20)
+            }
+        }
+        val row = checkNotNull(adopted)
+        check(row.revision == seeded.revision + 1) { "AUTH_HOME_OPEN_UNEXPECTED_REVISION" }
+        check(row.owner == seeded.owner && row.label == seeded.label && row.protocol == seeded.protocol &&
+            row.host == seeded.host && row.port == seeded.port && row.tags == seeded.tags &&
+            row.favorite == seeded.favorite) { "AUTH_HOME_OPEN_METADATA_CHANGED" }
+        check(row.lastUsedAt in attemptStartedEpochSeconds..(System.currentTimeMillis() / 1000)) {
+            "AUTH_HOME_OPEN_TIME_UNEXPECTED"
+        }
+        ownedProfile = row
+        homeOpenAccepted = true
+        receipt.put("ownedProfile", profileJson(profileBaseline.generation, listOf(row)))
+            .put("homeOpenMarker", JSONObject().put("revision", row.revision).put("lastUsedAt", row.lastUsedAt)
+                .put("windowStartEpochSeconds", attemptStartedEpochSeconds))
+        phase("HOME_OPEN_MARKER_ACCEPTED")
     }
 
     /** Caller first closes every Activity; fences cover the real process runtime, not a fake queue. */
@@ -276,10 +322,14 @@ internal class SshAuthenticateFixture private constructor(
         }
         private fun profileJson(catalog: ConnectionProfileCatalog) = profileJson(catalog.generation, catalog.profiles)
         private fun profileJson(generation: String, rows: List<ConnectionProfile>): String = JSONObject()
-            .put("generation", generation).put("rows", JSONArray(rows.sortedBy { it.id }.map {
+            .put("generation", generation).put("rows", rowsJson(rows)).toString()
+        /** Full non-secret row metadata, so a baseline comparison never ignores tags/favorite/last-use. */
+        private fun rowsJson(rows: List<ConnectionProfile>): JSONArray =
+            JSONArray(rows.sortedBy { it.id }.map {
                 JSONObject().put("id", it.id).put("revision", it.revision).put("owner", it.owner.wireId)
                     .put("label", it.label).put("protocol", it.protocol.wireId).put("host", it.host).put("port", it.port)
-            })).toString()
+                    .put("tags", JSONArray(it.tags.toList())).put("favorite", it.favorite).put("lastUsedAt", it.lastUsedAt)
+            })
         private fun trustJson(catalog: SshTrustCatalog, rows: List<SshTrustSnapshot> = catalog.snapshots): String = JSONObject()
             .put("owner", catalog.owner.wireId).put("generation", catalog.generation).put("rows", JSONArray(rows.sortedBy {
                 "${it.peer.host}/${it.peer.port}/${it.peer.route.wireId}"

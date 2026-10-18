@@ -1,18 +1,19 @@
 package io.github.baitian6641.cloudy.testing
 
 import android.app.ActivityManager
+import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.hasText
-import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
+import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performTextInputSelection
 import androidx.compose.ui.test.performTextReplacement
 import androidx.compose.ui.text.AnnotatedString
@@ -60,16 +61,18 @@ abstract class WindowActivityContract<A : CloudyWindowActivity>(
     private fun string(resource: Int): String = compose.activity.getString(resource)
 
     private fun applyName() {
-        compose.onNodeWithText(string(
-            io.github.baitian6641.cloudy.design.R.string.cloudy_save_name,
-        )).performScrollTo().performClick()
+        // This contract checks state/identity through the public accessibility action.
+        // Pointer geometry and physical keyboard delivery have separate qualification cases.
+        compose.onNodeWithText(string(io.github.baitian6641.cloudy.design.R.string.cloudy_save_name))
+            .performScrollTo()
+            .performSemanticsAction(SemanticsActions.OnClick) { click -> check(click()) }
         compose.waitForIdle()
     }
 
     private fun assertCommittedHeading(name: String) {
         compose.onNode(
             hasText(name) and SemanticsMatcher.expectValue(SemanticsProperties.Heading, Unit),
-        ).performScrollTo().assertIsDisplayed()
+        ).assertIsDisplayed()
     }
 
     /** The workspace home keeps window/name tools under Advanced; expand before editing. */
@@ -85,7 +88,7 @@ abstract class WindowActivityContract<A : CloudyWindowActivity>(
     private fun waitForNameEditor() {
         compose.waitUntil(10_000) {
             try {
-                compose.onNode(hasSetTextAction()).fetchSemanticsNode()
+                compose.onNodeWithTag("home_window_name").fetchSemanticsNode()
                 true
             } catch (_: AssertionError) {
                 false
@@ -101,7 +104,9 @@ abstract class WindowActivityContract<A : CloudyWindowActivity>(
         assertTrue(initial.taskRoot)
 
         val committedName = "Committed 日本語"
-        compose.onNode(hasSetTextAction()).performTextReplacement(committedName)
+        compose.onNodeWithTag("home_window_name").performTextReplacement(committedName)
+        compose.onNodeWithTag("home_window_name").assert(
+            SemanticsMatcher.expectValue(SemanticsProperties.EditableText, AnnotatedString(committedName)))
         applyName()
         val committed = observe()
         val expectedTitle = "$committedName · ${string(appNameResource)}"
@@ -113,8 +118,8 @@ abstract class WindowActivityContract<A : CloudyWindowActivity>(
 
         val draft = "Unapplied draft Ω"
         val selection = TextRange(2, 8)
-        compose.onNode(hasSetTextAction()).performTextReplacement(draft)
-        compose.onNode(hasSetTextAction()).performTextInputSelection(selection)
+        compose.onNodeWithTag("home_window_name").performTextReplacement(draft)
+        compose.onNodeWithTag("home_window_name").performTextInputSelection(selection)
         assertCommittedHeading(committedName)
         compose.activityRule.scenario.recreate()
         compose.waitForIdle()
@@ -130,7 +135,7 @@ abstract class WindowActivityContract<A : CloudyWindowActivity>(
         assertEquals(expectedTitle, restored.title)
         assertEquals(expectedTitle, restored.taskLabel)
         assertCommittedHeading(committedName)
-        compose.onNode(hasSetTextAction()).assert(
+        compose.onNodeWithTag("home_window_name").assert(
             SemanticsMatcher.expectValue(SemanticsProperties.EditableText, AnnotatedString(draft)),
         ).assert(SemanticsMatcher.expectValue(SemanticsProperties.TextSelectionRange, selection))
     }
@@ -138,7 +143,7 @@ abstract class WindowActivityContract<A : CloudyWindowActivity>(
     @Test fun invalidNameLeavesCommittedIdentityAndSystemLabelsUnchanged() {
         val before = observe()
         expandAdvanced()
-        compose.onNode(hasSetTextAction()).performTextReplacement("   ")
+        compose.onNodeWithTag("home_window_name").performTextReplacement("   ")
         applyName()
         compose.onNodeWithText(string(
             io.github.baitian6641.cloudy.platform.R.string.cloudy_name_blank,

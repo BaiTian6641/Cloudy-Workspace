@@ -96,6 +96,28 @@ The harness executes the actual selected core/fit bundles, authored bridge and s
 
 The [candidate review](../docs/06-validation/2026-10-15-terminal-upstream-review.md) records the exact executed pair, failure limits and retained earlier harness runs. To compare an older retained bundle directory, select its documented `--expect-rapid duplicated` characterization; never label its expected defect as input correctness.
 
+### Product renderer source build
+
+The product uses the same pinned xterm source with a bounded committed-input scheduling repair;
+the diagnostic pin above remains unchanged. On the selected Linux x86_64 build host:
+
+```bash
+python3 tools/prepare_terminal_assets.py
+python3 tools/build_terminal_renderer.py --fetch-compiler
+python3 tools/prepare_terminal_assets.py --product --offline
+python3 tools/prepare_terminal_assets.py --product --check
+node tests/test_terminal_input_browser.cjs --surface product \
+  --assets "$PWD/shared/android/terminal/build/generated/terminalAssets/terminal"
+```
+
+Only the explicit setup command fetches the reviewed compiler; corrupt caches are not silently
+replaced. Build/check never install packages, execute package scripts or fetch dependencies.
+The source, authored patch, compiler and output are pinned in
+[`renderer-build.json`](../shared/android/terminal/renderer-build.json). The source build reuses
+the existing bounded archive helpers and strict patch replay. `--candidate --offline` generates
+an ignored candidate for review; it cannot substitute an unreviewed product bundle.
+
+
 ## Real native RDP packaging and offline check
 
 [prepare_rdp_native.py](prepare_rdp_native.py) prepares the separate [native RDP diagnostic](../qualification/probes/native-rdp/README.md). It uses Python's standard library, performs no downloads/builds, and requires the actual completed FreeRDP 3.32.2 arm64 build, pristine pinned archive, all six reviewed patches, canonical MPL text and matching receipt. Use the exact import command in that diagnostic README, including current `--receipt .cache/native-rdp/cursor-native-receipt.json`; preserve the existing SDK/toolchain and dependency caches rather than rebuilding unchanged inputs.

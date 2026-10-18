@@ -26,8 +26,15 @@
     <string name="home_credential_saved">Saved credential on record in this app’s vault</string>
     <string name="home_credential_none">No saved credential for this host</string>
     <string name="home_credential_unknown">Credential state could not be read</string>
-    <string name="home_last_used">Last connect: %1$s</string>
-    <string name="home_last_used_never">Never connected</string>
+    <string name="home_last_used">Last connection attempt: %1$s</string>
+    <string name="home_last_used_never">No connection attempts yet</string>
+    <string name="home_search_label">Search hosts</string>
+    <string name="home_search_hint">Name, host, tag or protocol</string>
+    <string name="home_search_clear">Clear search</string>
+    <string name="home_search_results">Showing %1$d of %2$d</string>
+    <string name="home_search_empty">No hosts match “%1$s”.</string>
+    <string name="home_detail_heading">Selected host</string>
+    <string name="home_detail_empty">Select a host to see its connection details.</string>
     <string name="home_msg_terminal_pending">The interactive terminal is not integrated in this build yet. Trust, files and credentials for this host are available in the tools below.</string>
     <string name="home_msg_rdp_pending">Native RDP is not integrated in this build yet. This profile is saved; VNC is the qualified remote-desktop route today.</string>
     <string name="home_msg_stream_pending">High-performance streaming is not integrated in this build yet.</string>
@@ -36,4 +43,8 @@
     <string name="home_msg_conflict">This host changed while you worked; the latest saved state is shown.</string>
     <string name="home_msg_route_unavailable">This connection route is not available in this build. The profile stays saved for a build that supports it.</string>
     <string name="home_status">Connections open the actual qualified tool for each protocol; unavailable routes say so instead of simulating a session.</string>
+    <plurals name="home_host_count">
+        <item quantity="one">%1$d host</item>
+        <item quantity="other">%1$d hosts</item>
+    </plurals>
 </resources>
