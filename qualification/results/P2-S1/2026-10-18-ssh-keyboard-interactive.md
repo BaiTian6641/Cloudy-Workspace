@@ -47,7 +47,7 @@ Three earlier attempts are preserved as driver observations, not product passes:
 ## Still open
 
 - Dynamic multi-prompt interaction (server-provided prompt sequence in the UI), OTP/duo-style flows and per-prompt validation.
-- Per-hop jump trust/authentication, persisted app-owned key/credential references under the approved vault policy, and the product key-document picker journey.
+- Per-hop jump trust/authentication and persisted app-owned key/credential references under the approved vault policy. The product key-document picker journey is recorded separately in the public-key evidence.
 - Physical Googlebook qualification.
 
 A single-prompt result does not establish general keyboard-interactive interoperability or full C03.

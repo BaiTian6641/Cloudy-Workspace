@@ -100,6 +100,7 @@ class ConsoleTerminalActivityTest {
             // before that publication can be cleared by the same reflow. Wait for real rows.
             waitFor(15_000) { nodes("home_row").isNotEmpty() }
             setText("home_search", owned.profileLabel)
+            automation.waitForIdle(250, 5_000)
             waitFor(20_000) {
                 val rows = nodes("home_row")
                 rows.size == 1 && owned.profileLabel in textOf(rows.single())
@@ -168,13 +169,20 @@ class ConsoleTerminalActivityTest {
             commit(launched, "exit")
             instrumentation.sendKeyDownUpSync(KeyEvent.KEYCODE_ENTER)
             waitFor(20_000) { node("terminal_username")?.isEnabled == true }
-            val credentialTag = if (authMethod() == "keyboard-interactive") {
-                "terminal_interactive_response"
-            } else {
-                "terminal_password"
+            val credentialTag = when (authMethod()) {
+                "keyboard-interactive" -> "terminal_interactive_response"
+                "private-key" -> "terminal_key_status"
+                else -> "terminal_password"
             }
-            check(node("terminal_live_status") == null && reveal(credentialTag).isEnabled)
-            for (tag in listOf("terminal_username", credentialTag)) check(empty(reveal(tag)))
+            check(node("terminal_live_status") == null)
+            if (authMethod() == "private-key") {
+                check(node(credentialTag)?.text?.toString() ==
+                    context.getString(platformR.string.terminal_key_none))
+                check(empty(reveal("terminal_username")))
+            } else {
+                check(reveal(credentialTag).isEnabled)
+                for (tag in listOf("terminal_username", credentialTag)) check(empty(reveal(tag)))
+            }
             secure(launched)
             owned.phase("TERMINAL_OWNER_RETIRED")
             File(context.noBackupFilesDir, "ssh-authenticate-qualification/$run-terminal-final-state.json")
@@ -223,6 +231,21 @@ class ConsoleTerminalActivityTest {
                     report.put("failurePixelCopy", captureWindow(active, File(context.noBackupFilesDir,
                         "ssh-authenticate-qualification/$run-terminal-interaction-failure.png")))
                 }.onFailure { report.put("rendererObservationFailure", it.javaClass.simpleName) }
+                runCatching {
+                    val root = automation.rootInActiveWindow
+                    report.put("activePackage", root?.packageName?.toString())
+                    if (root != null) {
+                        val text = StringBuilder()
+                        fun collect(node: AccessibilityNodeInfo, depth: Int) {
+                            if (depth > 10 || text.length > 2000) return
+                            node.text?.let { text.append(it).append('|') }
+                            node.contentDescription?.let { text.append(it).append('|') }
+                            for (index in 0 until node.childCount) node.getChild(index)?.let { collect(it, depth + 1) }
+                        }
+                        collect(root, 0)
+                        report.put("activeText", text.toString())
+                    }
+                }.onFailure { report.put("activeRootFailure", it.javaClass.simpleName) }
                 File(context.noBackupFilesDir, "ssh-authenticate-qualification/$run-terminal-failure.json")
                     .writeText(report.toString(2))
             }
@@ -437,6 +460,23 @@ class ConsoleTerminalActivityTest {
         InstrumentationRegistry.getArguments().getString("cloudyTerminalAuth") ?: "password"
 
     private fun credentials(fixture: SshAuthenticateFixture) {
+        if (authMethod() == "private-key") {
+            val keyName = checkNotNull(InstrumentationRegistry.getArguments()
+                .getString("cloudyTerminalKeyName")) { "TERMINAL_KEY_NAME_MISSING" }
+            click("terminal_auth_key_method")
+            click("terminal_key_choose")
+            pickDocument(keyName)
+            // The document picker pauses the activity and the product deliberately clears native
+            // credential fields; the user enters the account after returning with the key.
+            setText("terminal_username", fixture.username)
+            waitFor(15_000) {
+                node("terminal_connect_button")?.isEnabled == true &&
+                    node("terminal_key_status")?.text?.toString() ==
+                    instrumentation.targetContext.getString(
+                        platformR.string.terminal_key_selected)
+            }
+            return
+        }
         setText("terminal_username", fixture.username)
         if (authMethod() == "keyboard-interactive") {
             click("terminal_auth_interactive_method")
@@ -524,6 +564,7 @@ class ConsoleTerminalActivityTest {
     private fun textOf(node: AccessibilityNodeInfo): String {
         val text = StringBuilder()
         fun visit(current: AccessibilityNodeInfo) {
+            current.refresh()
             current.text?.let { text.append(it).append('\n') }
             current.contentDescription?.let { text.append(it).append('\n') }
             for (index in 0 until current.childCount) current.getChild(index)?.let { visit(it) }
@@ -537,6 +578,7 @@ class ConsoleTerminalActivityTest {
         if (root.packageName?.toString() != PACKAGE) return null
         val tagKey = TAG_KEY
         fun find(current: AccessibilityNodeInfo): AccessibilityNodeInfo? {
+            current.refresh()
             // Compose1.12 exposes test tags as requested extra data, not eager extras.
             if (tagKey in current.availableExtraData) current.refreshWithExtraData(tagKey, Bundle())
             if (current.extras.getCharSequence(tagKey)?.toString() == tag) return current
@@ -553,12 +595,70 @@ class ConsoleTerminalActivityTest {
         if (root.packageName?.toString() != PACKAGE) return emptyList()
         val found = mutableListOf<AccessibilityNodeInfo>()
         fun collect(current: AccessibilityNodeInfo) {
+            current.refresh()
             if (TAG_KEY in current.availableExtraData) current.refreshWithExtraData(TAG_KEY, Bundle())
             if (current.extras.getCharSequence(TAG_KEY)?.toString() == tag) found += current
             for (index in 0 until current.childCount) current.getChild(index)?.let { collect(it) }
         }
         collect(root)
         return found
+    }
+
+    /**
+     * Real system document picker: open the roots drawer, choose Downloads, then the pushed key.
+     * This exercises the same user-visible ACTION_OPEN_DOCUMENT path as a person; no product
+     * debug entry point or hidden key reference is used.
+     */
+    private fun pickDocument(expected: String) {
+        val deadline = SystemClock.uptimeMillis() + 40_000
+        var openedDrawer = false
+        while (SystemClock.uptimeMillis() < deadline) {
+            val root = automation.rootInActiveWindow
+            val picker = root?.packageName?.toString()
+            if (root != null && picker != null &&
+                (picker == "com.google.android.documentsui" || picker == "com.android.documentsui")
+            ) {
+                findForeign(root) { it.text?.toString() == expected }?.let { clickForeign(it); return }
+                if (!openedDrawer) {
+                    val roots = findForeign(root) {
+                        it.contentDescription?.toString() == "Show roots" ||
+                            it.contentDescription?.toString() == "Open from"
+                    }
+                    if (roots != null) {
+                        clickForeign(roots)
+                        openedDrawer = true
+                        SystemClock.sleep(300)
+                        continue
+                    }
+                }
+                val downloads = findForeign(root) { it.text?.toString() == "Downloads" }
+                if (openedDrawer && downloads != null) {
+                    clickForeign(downloads)
+                    SystemClock.sleep(500)
+                }
+            }
+            SystemClock.sleep(150)
+        }
+        error("KEY_PICKER_TIMEOUT")
+    }
+
+    private fun findForeign(root: AccessibilityNodeInfo,
+                            predicate: (AccessibilityNodeInfo) -> Boolean): AccessibilityNodeInfo? {
+        if (predicate(root)) return root
+        for (index in 0 until root.childCount) {
+            root.getChild(index)?.let { child -> findForeign(child, predicate)?.let { return it } }
+        }
+        return null
+    }
+
+    private fun clickForeign(node: AccessibilityNodeInfo) {
+        var current: AccessibilityNodeInfo? = node
+        while (current != null) {
+            if (current.isClickable && current.performAction(AccessibilityNodeInfo.ACTION_CLICK)) return
+            current = current.parent
+        }
+        // Some list rows handle clicks through their RecyclerView parent's touch handling.
+        clickNode(node)
     }
 
     private fun reveal(tag: String): AccessibilityNodeInfo {

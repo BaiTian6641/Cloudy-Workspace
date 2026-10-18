@@ -102,7 +102,8 @@ def main():
                         help="Also verify local menu/cancel/find and real >16KiB clipboard input")
     parser.add_argument("--allow-device-ime-change", action="store_true",
                         help="Explicitly authorize the Android fixture to change/restore a physical device IME")
-    parser.add_argument("--auth", choices=("password", "keyboard-interactive"), default="password",
+    parser.add_argument("--auth", choices=("password", "keyboard-interactive", "private-key"),
+                        default="password",
                         help="Product authentication method exercised by the fixture journey")
     args = parser.parse_args()
     if not 1024 <= args.device_port <= 65535:
@@ -213,6 +214,8 @@ def main():
                    controllerSha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest())
     receipt["interactionsRequested"] = args.interactions
     receipt["authMethod"] = args.auth
+    receipt["keyFileRemoved"] = True
+    key_name = f"cloudy-key-{run}"
     receipt.update(inputMethodRestored=False, imeCleanupConfirmed=False, imeCleanupErrors=[])
     ime_before = None
     interaction_published = False
@@ -246,6 +249,16 @@ def main():
         put_private(f"{PRIVATE}/{run}.json", json.dumps(config).encode())
         if interaction_config is not None:
             put_private(f"{PRIVATE}/{run}-interactions.json", json.dumps(interaction_config).encode())
+        if args.auth == "private-key":
+            # The tracked fixture generates this key inside its private run directory; publish a
+            # copy only to the emulator's Downloads for the real document-picker journey.
+            key_source = source.parent / "client_key"
+            info = os.lstat(key_source)
+            if (not stat.S_ISREG(info.st_mode) or info.st_size > 65536 or
+                    stat.S_IMODE(info.st_mode) != 0o600):
+                raise ValueError("KEY_FIXTURE_INVALID")
+            adb("push", str(key_source), f"/sdcard/Download/{key_name}", timeout=30)
+            receipt["keyFileName"] = key_name
         adb("reverse", "--no-rebind", mapping, f"tcp:{port}")
         reverse_owned = True
         with (output / "instrumentation.txt").open("wb") as log:
@@ -257,6 +270,7 @@ def main():
                 "-e", "cloudyTerminalProofPath", shlex.quote(str(proof)),
                 "-e", "cloudyTerminalInteractions", str(args.interactions).lower(),
                 "-e", "cloudyTerminalAuth", args.auth,
+                "-e", "cloudyTerminalKeyName", key_name,
                 "-e", "cloudyAllowDeviceImeChange", str(args.allow_device_ime_change).lower(),
                 PACKAGE + ".test/androidx.test.runner.AndroidJUnitRunner",
             ], stdout=log, stderr=subprocess.STDOUT)
@@ -425,6 +439,18 @@ def main():
                         receipt["ownedReverseReleased"] = True
                     except (OSError, ValueError, RuntimeError, subprocess.SubprocessError) as failure:
                         receipt["cleanupErrors"].append(f"reverse:{type(failure).__name__}")
+                if args.auth == "private-key":
+                    try:
+                        adb("shell", "rm", "-f", f"/sdcard/Download/{key_name}", timeout=5)
+                        present = subprocess.run(
+                            ["adb", "-s", args.serial, "shell", "test", "-e",
+                             f"/sdcard/Download/{key_name}"], capture_output=True, timeout=5)
+                        receipt["keyFileRemoved"] = present.returncode != 0
+                        if not receipt["keyFileRemoved"]:
+                            receipt["cleanupErrors"].append("KEY_FILE_NOT_REMOVED")
+                    except (OSError, subprocess.SubprocessError) as failure:
+                        receipt["keyFileRemoved"] = False
+                        receipt["cleanupErrors"].append(f"key-file:{type(failure).__name__}")
                 private_files = sorted(published | temporaries)
                 if private_files:
                     try:
@@ -444,6 +470,7 @@ def main():
             receipt["cleanupConfirmed"] = (receipt["instrumentationRetired"] and
                 receipt["ownedReverseReleased"] and receipt["ownedPrivateFilesRemoved"] and
                 receipt["inputMethodRestored"] and receipt["imeCleanupConfirmed"] and
+                receipt["keyFileRemoved"] and
                 not receipt["imeCleanupErrors"] and not receipt["cleanupErrors"] and not uncertain_publications)
         finally:
             signal.signal(signal.SIGTERM, previous_sigterm)

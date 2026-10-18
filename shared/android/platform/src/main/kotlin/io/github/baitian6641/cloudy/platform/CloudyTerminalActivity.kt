@@ -164,7 +164,10 @@ class CloudyTerminalActivity : ComponentActivity() {
     }
     /** Session-only key choice: the returned read grant is consumed immediately, never persisted. */
     private val keyPicker = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
-        if (uri != null && !disposed && interactive && !busy) readKey(uri)
+        // Activity results arrive between onStart and onResume, when onPause has already set
+        // interactive=false. A granted document is still a valid response for this foreground
+        // window; gate on actual destruction/retirement rather than the transient flag.
+        if (uri != null && !disposed && !busy && !isFinishing && !isDestroyed) readKey(uri)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
