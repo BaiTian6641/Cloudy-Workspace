@@ -18,8 +18,12 @@
   },
   "patch": {
     "file": "tools/patches/xterm-6.1.0-beta.315-flush-committed-input.patch",
-    "sha256": "50b12b541ddff267ba11d901c554caffc2889c8d670e1ad3f09a9ac82982e124",
-    "files": ["package/src/browser/input/CompositionHelper.ts"]
+    "sha256": "66dcb2142ca4fddc6113e51d331b05b6c50acdbc6b8ec1bae9b7ebf334fe1da8",
+    "files": [
+      "package/src/browser/input/CompositionHelper.ts",
+      "package/src/browser/CoreBrowserTerminal.ts",
+      "package/src/browser/Types.ts"
+    ]
   },
   "compiler": {
     "name": "@esbuild/linux-x64",
@@ -42,7 +46,7 @@
   },
   "output": {
     "path": "terminal/vendor/xterm.js",
-    "bytes": 355781,
-    "sha256": "e40abf9c26cd201221a1783eb7be1f7c944f57cc5525b67f2ba53ca105b35119"
+    "bytes": 358361,
+    "sha256": "317cd17dbe34417e960bf84b89f4278366ca310be37051ef399ce0fd2868f27d"
   }
 }

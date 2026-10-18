@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Debug/test-only, headless OS-served IME fixture. It has no product input UI or
+         product control, and is never part of the Console release or Desktop. -->
+    <application>
+        <service
+            android:name="io.github.baitian6641.cloudy.testing.ime.QualificationImeService"
+            android:process=":qualificationIme"
+            android:exported="true"
+            android:label="@string/qualification_ime_label"
+            android:permission="android.permission.BIND_INPUT_METHOD">
+            <intent-filter>
+                <action android:name="android.view.InputMethod" />
+            </intent-filter>
+            <meta-data
+                android:name="android.view.im"
+                android:resource="@xml/qualification_ime" />
+        </service>
+        <receiver
+            android:name="io.github.baitian6641.cloudy.testing.ime.QualificationImeReceiver"
+            android:process=":qualificationIme"
+            android:exported="true"
+            android:permission="android.permission.DUMP" />
+    </application>
+</manifest>

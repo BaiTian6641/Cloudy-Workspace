@@ -3,6 +3,7 @@
 html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; }
 body { display: flex; flex-direction: column; font: calc(14px * var(--font-scale))/1.5 system-ui, sans-serif; }
 #feedback { display: flex; align-items: center; gap: 8px; flex: none; padding: 4px 8px; background: #17262b; color: #aec3c9; }
+#feedback[hidden] { display: none; }
 #feedback[data-warning="true"] { color: #ffb4ac; }
 #status { flex: 1; min-width: 0; }
 button { font: inherit; color: #b1f2de; background: #164c43; border: 1px solid #79959e; border-radius: 6px; padding: 4px 8px; }

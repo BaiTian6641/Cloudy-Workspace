@@ -1,42 +1,156 @@
 --- a/package/src/browser/input/CompositionHelper.ts
 +++ b/package/src/browser/input/CompositionHelper.ts
-@@ -52,6 +52,12 @@
+@@ -51,6 +51,12 @@
+    * The pending textarea change timer, if any.
     */
    private _textareaChangeTimer?: number;
- 
-+  /**
-+   * The textarea value before the pending change, used to compute the change when it is flushed
-+   * before the deferred timer runs.
-+   */
-+  private _textareaChangeStartValue: string;
 +
++  /** Baseline owned by a non-composing 229 change, including one whose timer ran before input. */
++  private _textareaChangeStartValue?: string;
++  private _pendingInputEvent?: InputEvent;
++  private _inputBatch?: { data: string; offset: number; value: string };
++  private _inputEventTimer?: number;
+ 
    constructor(
      private readonly _textarea: HTMLTextAreaElement,
-     private readonly _compositionView: HTMLElement,
-@@ -65,6 +71,7 @@
-     this._compositionPosition = { start: 0, end: 0 };
-     this._compositionSuffix = '';
-     this._dataAlreadySent = '';
-+    this._textareaChangeStartValue = '';
+@@ -71,6 +77,7 @@
+    * Handles the compositionstart event, activating the composition view.
+    */
+   public compositionstart(): void {
++    this.cancelPendingInput();
+     this._isComposing = true;
+     // It's important to use the selection here instead of textarea length to avoid conflicts with
+     // screen reader mode
+@@ -107,12 +114,117 @@
+     this._finalizeComposition(true);
    }
  
++  /** Blink may split one committed multiline edit into text/null/text input notifications. */
++  public beforeinput(ev: InputEvent): void {
++    this._clearInputEvents();
++    if (ev.defaultPrevented || ev.isComposing || this._isComposing ||
++        ev.inputType !== 'insertText' || !ev.data) {
++      return;
++    }
++    // Finish the previous composition before this edit changes the textarea; never absorb
++    // fresh committed text into a cancelled composition's delayed finalizer.
++    if (this._isSendingComposition) {
++      this._finalizeComposition(false);
++    }
++    this._pendingInputEvent = ev;
++    // beforeinput is intent, not delivery. It must not authorize an unrelated later edit.
++    this._inputEventTimer = window.setTimeout(() => this._clearInputEvents(), 0);
++  }
++
++  /** Consume an owned committed input once; composition/preedit remains on its existing path. */
++  public input(ev: InputEvent, alreadyHandled: boolean): boolean {
++    if (this._isComposing || this._isSendingComposition || ev.isComposing) {
++      return false;
++    }
++    const batch = this._inputBatch;
++    if (batch) {
++      const offset = ev.inputType === 'insertText' && this._textarea.value === batch.value
++        ? this._advanceInputData(batch.data, batch.offset, ev.data) : undefined;
++      if (offset !== undefined) {
++        batch.offset = offset;
++        if (offset === batch.data.length) {
++          this._clearInputEvents();
++        }
++        return true;
++      }
++      this._clearInputEvents();
++    }
++    const pending = this._pendingInputEvent;
++    this._pendingInputEvent = undefined;
++    const pendingOffset = pending && ev.inputType === 'insertText'
++      ? this._advanceInputData(pending.data!, 0, ev.data) : undefined;
++    if (pending && !pending.defaultPrevented && pendingOffset !== undefined) {
++      const data = pending.data!;
++      this.cancelPendingInput();
++      this._dataAlreadySent = data;
++      if (!alreadyHandled) {
++        this._coreService.triggerDataEvent(data, true);
++      }
++      if (pendingOffset < data.length) {
++        this._inputBatch = { data, offset: pendingOffset, value: this._textarea.value };
++        // Only matching notifications from this committed edit may be suppressed.
++        this._inputEventTimer = window.setTimeout(() => this._clearInputEvents(), 0);
++      }
++      return true;
++    }
++    if (this._textareaChangeStartValue === undefined) {
++      return false;
++    }
++    if (ev.inputType === 'insertText' && ev.data) {
++      // The committed event is authoritative. A textarea replacement can contain the old
++      // value (including a newline), or equal it, without being an already-sent append.
++      this.cancelPendingInput();
++      this._dataAlreadySent = ev.data;
++      if (!alreadyHandled) {
++        this._coreService.triggerDataEvent(ev.data, true);
++      }
++    } else {
++      this.flushPendingInput();
++    }
++    return true;
++  }
++
++  /** Focus loss and composition takeover retire an unsent non-composing change, never replay it. */
++  public cancelPendingInput(): void {
++    this._clearInputEvents();
++    if (this._textareaChangeTimer !== undefined) {
++      window.clearTimeout(this._textareaChangeTimer);
++      this._textareaChangeTimer = undefined;
++    }
++    this._textareaChangeStartValue = undefined;
++  }
++
++  private _advanceInputData(data: string, offset: number, part: string | null): number | undefined {
++    if (part === null) {
++      if (data[offset] === '\n') return offset + 1;
++      if (data[offset] === '\r' && data[offset + 1] === '\n') return offset + 2;
++      return undefined;
++    }
++    if (data.startsWith(part, offset)) return offset + part.length;
++    return undefined;
++  }
++
++  private _clearInputEvents(): void {
++    this._pendingInputEvent = undefined;
++    this._inputBatch = undefined;
++    if (this._inputEventTimer !== undefined) {
++      window.clearTimeout(this._inputEventTimer);
++      this._inputEventTimer = undefined;
++    }
++  }
++
    /**
-@@ -113,6 +120,14 @@
+    * Handles the keydown event, routing any necessary events to the CompositionHelper functions.
+    * @param ev The keydown event.
     * @returns Whether the Terminal should continue processing the keydown event.
     */
    public keydown(ev: KeyboardEvent): boolean {
++    if (ev.keyCode === 229) this._clearInputEvents();
 +    if (ev.keyCode !== 229 && !this._isComposing && !this._isSendingComposition) {
-+      // A fast normal/control key can arrive before the deferred 229 fallback timer runs and then
-+      // clear the textarea (Enter/Ctrl+C), losing the committed input. Flush it first. A 229
-+      // keydown leaves the timer pending so coalesced textarea changes stay a single emission,
-+      // and composition start/end behavior is left untouched.
-+      this._flushTextareaChanges();
++      // Enter/Ctrl+C must not clear committed text before the deferred fallback consumes it.
++      this.flushPendingInput();
 +    }
 +
      if (this._isComposing || this._isSendingComposition) {
        if (ev.keyCode === 20 || ev.keyCode === 229) {
          // 20 is CapsLock, 229 is Enter
-@@ -210,30 +225,52 @@
+@@ -154,7 +266,9 @@
+       // Cancel any delayed composition send requests and send the input immediately.
+       this._isSendingComposition = false;
+       const input = this._textarea.value.substring(this._compositionPosition.start, this._compositionPosition.end);
+-      this._coreService.triggerDataEvent(input, true);
++      if (input.length > 0) {
++        this._coreService.triggerDataEvent(input, true);
++      }
+     } else {
+       // Make a deep copy of the composition position here as a new compositionstart event may
+       // fire before the setTimeout executes.
+@@ -210,30 +324,51 @@
     * IME is active.
     */
    private _handleAnyTextareaChanges(): void {
@@ -45,45 +159,18 @@
        return;
      }
 -    const oldValue = this._textarea.value;
++    this.flushPendingInput();
 +    this._textareaChangeStartValue = this._textarea.value;
      this._textareaChangeTimer = window.setTimeout(() => {
        this._textareaChangeTimer = undefined;
 -      // Ignore if a composition has started since the timeout
 -      if (!this._isComposing) {
 -        const newValue = this._textarea.value;
-+      this._sendTextareaChanges();
-+    }, 0);
-+  }
- 
+-
 -        const diff = newValue.replace(oldValue, '');
-+  /**
-+   * Send the pending textarea change immediately and retire its timer, if one is pending.
-+   */
-+  private _flushTextareaChanges(): void {
-+    if (this._textareaChangeTimer === undefined) {
-+      return;
-+    }
-+    window.clearTimeout(this._textareaChangeTimer);
-+    this._textareaChangeTimer = undefined;
-+    this._sendTextareaChanges();
-+  }
- 
+-
 -        this._dataAlreadySent = diff;
-+  /**
-+   * Send the difference between the current textarea value and the value it had before the
-+   * pending change.
-+   */
-+  private _sendTextareaChanges(): void {
-+    const oldValue = this._textareaChangeStartValue;
-+    this._textareaChangeStartValue = '';
-+    // Ignore if a composition has started since the change was recorded
-+    if (this._isComposing) {
-+      return;
-+    }
-+    const newValue = this._textarea.value;
-+
-+    const diff = newValue.replace(oldValue, '');
- 
+-
 -        if (newValue.length > oldValue.length) {
 -          this._coreService.triggerDataEvent(diff, true);
 -        } else if (newValue.length < oldValue.length) {
@@ -91,17 +178,141 @@
 -        } else if ((newValue.length === oldValue.length) && (newValue !== oldValue)) {
 -          this._coreService.triggerDataEvent(newValue, true);
 -        }
+-
++      // Native key and input events can arrive in separate tasks. An empty early timer does
++      // not end ownership: the input event or next non-229 key will consume the actual change.
++      if (this._isComposing || this._isSendingComposition ||
++          this._textarea.value !== this._textareaChangeStartValue) {
++        this._sendTextareaChanges();
+       }
+     }, 0);
++  }
++
++  /** Consume an owned change before a control key or public paste rewrites the textarea. */
++  public flushPendingInput(): void {
++    this._clearInputEvents();
++    if (this._textareaChangeStartValue === undefined) {
++      return;
++    }
++    if (this._textareaChangeTimer !== undefined) {
++      window.clearTimeout(this._textareaChangeTimer);
++      this._textareaChangeTimer = undefined;
++    }
++    this._sendTextareaChanges();
++  }
++
++  private _sendTextareaChanges(): void {
++    const oldValue = this._textareaChangeStartValue;
++    this._textareaChangeStartValue = undefined;
++    if (oldValue === undefined || this._isComposing || this._isSendingComposition) {
++      return;
++    }
++    const newValue = this._textarea.value;
++    const diff = newValue.replace(oldValue, '');
 +    this._dataAlreadySent = diff;
- 
--      }
--    }, 0);
 +    if (newValue.length > oldValue.length) {
 +      this._coreService.triggerDataEvent(diff, true);
 +    } else if (newValue.length < oldValue.length) {
 +      this._coreService.triggerDataEvent(`${C0.DEL}`, true);
-+    } else if ((newValue.length === oldValue.length) && (newValue !== oldValue)) {
++    } else if (newValue !== oldValue) {
 +      this._coreService.triggerDataEvent(newValue, true);
 +    }
    }
  
    /**
+--- a/package/src/browser/CoreBrowserTerminal.ts
++++ b/package/src/browser/CoreBrowserTerminal.ts
+@@ -323,6 +323,7 @@
+    * Binds the desired blur behavior on a given terminal object.
+    */
+   private _handleTextAreaBlur(): void {
++    this._compositionHelper?.cancelPendingInput();
+     // Text can safely be removed on blur. Doing it earlier could interfere with
+     // screen readers reading it out.
+     this.textarea!.value = '';
+@@ -375,7 +376,10 @@
+       }
+       copyHandler(event, this._selectionService!);
+     }));
+-    const pasteHandlerWrapper = (event: ClipboardEvent): void => handlePasteEvent(event, this.textarea!, this.coreService, this.optionsService);
++    const pasteHandlerWrapper = (event: ClipboardEvent): void => {
++      this._compositionHelper!.flushPendingInput();
++      handlePasteEvent(event, this.textarea!, this.coreService, this.optionsService);
++    };
+     this._register(addDisposableListener(this.textarea!, 'paste', pasteHandlerWrapper));
+     this._register(addDisposableListener(this.element!, 'paste', pasteHandlerWrapper));
+ 
+@@ -384,11 +388,13 @@
+       // Firefox doesn't appear to fire the contextmenu event on right click
+       this._register(addDisposableListener(this.element!, 'mousedown', (event: MouseEvent) => {
+         if (event.button === 2) {
++          this._compositionHelper!.flushPendingInput();
+           rightClickHandler(event, this.textarea!, this.screenElement!, this._selectionService!, this.options.rightClickSelectsWord);
+         }
+       }));
+     } else {
+       this._register(addDisposableListener(this.element!, 'contextmenu', (event: MouseEvent) => {
++        this._compositionHelper!.flushPendingInput();
+         rightClickHandler(event, this.textarea!, this.screenElement!, this._selectionService!, this.options.rightClickSelectsWord);
+       }));
+     }
+@@ -426,6 +432,7 @@
+     }));
+     this._register(addDisposableListener(this.textarea!, 'compositionupdate', (e: CompositionEvent) => this._compositionHelper!.compositionupdate(e)));
+     this._register(addDisposableListener(this.textarea!, 'compositionend', () => this._compositionHelper!.compositionend()));
++    this._register(addDisposableListener(this.textarea!, 'beforeinput', (ev: InputEvent) => this._compositionHelper!.beforeinput(ev), true));
+     this._register(addDisposableListener(this.textarea!, 'input', (ev: InputEvent) => this._inputEvent(ev), true));
+     this._register(this.onRender(() => this._compositionHelper!.updateCompositionElements()));
+   }
+@@ -603,6 +610,7 @@
+       // If there's a new selection, put it into the textarea, focus and select it
+       // in order to register it as a selection on the OS. This event is fired
+       // only on Linux to enable middle click to paste selection.
++      this._compositionHelper!.flushPendingInput();
+       this.textarea!.value = text;
+       this.textarea!.focus();
+       this.textarea!.select();
+@@ -733,6 +741,7 @@
+   }
+ 
+   public paste(data: string): void {
++    this._compositionHelper?.flushPendingInput();
+     paste(data, this.textarea!, this.coreService, this.optionsService);
+   }
+ 
+@@ -853,6 +862,10 @@
+ 
+     // Ignore composing with Alt key on Mac when macOptionIsMeta is enabled
+     const shouldIgnoreComposition = this.browser.isMac && this.options.macOptionIsMeta && event.altKey;
++    if (!shouldIgnoreComposition && event.keyCode === 229) {
++      // A new IME key owns its own keypress/input pair, not a prior still-held key's press.
++      this._keyPressHandled = false;
++    }
+ 
+     if (!shouldIgnoreComposition && !this._compositionHelper!.keydown(event)) {
+       if (this.options.scrollOnUserInput && this.buffer.ybase !== this.buffer.ydisp) {
+@@ -1027,6 +1040,11 @@
+    * @param ev The input event to be handled.
+    */
+   protected _inputEvent(ev: InputEvent): boolean {
++    if (this._compositionHelper!.input(ev, this._keyPressHandled)) {
++      // A consumed committed edit resolves the dead key just like the upstream input path.
++      this._unprocessedDeadKey = false;
++      return true;
++    }
+     // Only support emoji IMEs when screen reader mode is disabled as the event must bubble up to
+     // support reading out character input which can doubling up input characters
+     // Based on these event traces: https://github.com/xtermjs/xterm.js/issues/3679
+--- a/package/src/browser/Types.ts
++++ b/package/src/browser/Types.ts
+@@ -44,6 +44,10 @@
+   compositionend(): void;
+   updateCompositionElements(dontRecurse?: boolean): void;
+   keydown(ev: KeyboardEvent): boolean;
++  beforeinput(ev: InputEvent): void;
++  input(ev: InputEvent, alreadyHandled: boolean): boolean;
++  cancelPendingInput(): void;
++  flushPendingInput(): void;
+ }
+ 
+ export interface IBrowser {

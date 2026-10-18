@@ -32,6 +32,7 @@ const authoredRoot = surface === "product"
 const files = {
   core: path.join(assets, "vendor/xterm.js"), fit: path.join(assets, "vendor/addon-fit.js"),
   css: path.join(assets, "vendor/xterm.css"),
+  ...(surface === "product" ? { search: path.join(assets, "vendor/addon-search.js") } : {}),
   authoredCss: path.join(authoredRoot, "terminal.css"),
   bridge: path.join(authoredRoot, "terminal.js"),
 };
@@ -113,7 +114,7 @@ async function runChrome(entry) {
   const entry = path.join(temp, "test.html"); fs.writeFileSync(entry, html);
   const report = await runChrome(entry);
   const scope = surface === "product"
-    ? "Synthetic DOM -> generated vendor xterm + fit -> authored product bridge (shared/android/terminal/src/main/assets/terminal) booted with four-part hash ending /0 (screenReaderMode off) -> test native endpoint; exact insertText/preedit/control/closed-attachment bytes only; no physical IME/WebView/SSH/TalkBack qualification"
+    ? "Synthetic DOM -> generated vendor xterm + fit + search -> authored product bridge (shared/android/terminal/src/main/assets/terminal) booted with four-part hash ending /0 (screenReaderMode off) -> test native endpoint; committed bytes, local requests, paste normalization and real addon-search counts only; no physical IME/WebView/clipboard/SSH/TalkBack/pixel qualification"
     : "Synthetic DOM -> actual xterm + fit -> authored Cloudy bridge -> test native endpoint; no physical IME/WebView/SSH qualification";
   console.log(JSON.stringify({ ...(surface === "product" ? { surface } : {}), scope, chrome: spawnSync(option("--chrome", "/usr/bin/google-chrome"), ["--version"], { encoding: "utf8" }).stdout.trim(), hashes, ...report }, null, 2));
   if (surface === "product") {

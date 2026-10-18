@@ -7,6 +7,7 @@ dependencyResolutionManagement {
 }
 rootProject.name = "CloudyWorkspace"
 include(":console", ":desktop", ":domain", ":platform", ":design-system", ":identity", ":ssh", ":terminal", ":vnc")
+include(":qualification-ime")
 project(":console").projectDir = file("apps/console")
 project(":desktop").projectDir = file("apps/desktop")
 project(":domain").projectDir = file("shared/android/domain")
@@ -16,3 +17,4 @@ project(":platform").projectDir = file("shared/android/platform")
 project(":design-system").projectDir = file("shared/design-system/android")
 project(":identity").projectDir = file("shared/android/identity")
 project(":vnc").projectDir = file("adapters/desktop/vnc/android")
+project(":qualification-ime").projectDir = file("qualification/fixtures/system-ime/android")

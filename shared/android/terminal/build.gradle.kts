@@ -36,6 +36,7 @@ dependencies {
     androidTestImplementation(libs.androidx.test.runner)
     androidTestImplementation(libs.androidx.test.core)
     androidTestImplementation(libs.androidx.test.junit)
+    androidTestImplementation(project(":qualification-ime"))
     constraints {
         // WebKit/Core resolve through lifecycle 2.6.2 offline; the app graph selects 1.4.0.
         implementation(libs.profileinstaller)
@@ -54,9 +55,11 @@ val prepareTerminalAssets = tasks.register<Exec>("prepareTerminalAssets") {
         repository.file("tools/build_terminal_renderer.py"), repository.file("tools/prepare_rdp_native.py"),
         repository.file("qualification/probes/device-baseline/terminal-assets.json"),
         repository.file("shared/android/terminal/renderer-build.json"),
+        repository.file("shared/android/terminal/interaction-assets.json"),
         repository.file("tools/patches/xterm-6.1.0-beta.315-flush-committed-input.patch"),
         repository.file(".cache/terminal-assets/xterm-6.1.0-beta.315.tgz"),
         repository.file(".cache/terminal-assets/addon-fit-0.12.0-beta.311.tgz"),
+        repository.file(".cache/terminal-assets/addon-search-0.17.0-beta.310.tgz"),
         repository.file(".cache/terminal-assets/source-build/linux-x64-0.28.0.tgz"))
     outputs.dir(generatedAssets)
 }

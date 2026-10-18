@@ -26,8 +26,8 @@ android {
         applicationId = "io.github.baitian6641.cloudy.console"
         minSdk = 35
         targetSdk = 37
-        versionCode = 19
-        versionName = "0.1.18"
+        versionCode = 21
+        versionName = "0.1.20"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 }
@@ -42,6 +42,7 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":platform"))
     debugImplementation(project(":identity"))
+    debugImplementation(project(":qualification-ime"))
 }
 
 // Tests exercise real Android boundaries; these artifacts are not app runtime dependencies.

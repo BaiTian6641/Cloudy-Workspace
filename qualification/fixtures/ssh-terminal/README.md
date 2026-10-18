@@ -112,20 +112,49 @@ python3 tools/run_console_terminal_smoke.py \
 ```
 
 Replace `RUN` with the actual freshly created run directory; no credential belongs in the command.
-The controller installs the actual APKs, refuses an occupied reverse port, provisions only private
-test configuration, runs the opt-in product test and independently checks the real host proof file.
-Only then does it atomically publish the app-private witness. The test starts at the real workspace
-home, searches/selects the owned profile, uses Connect and authenticates without a test refresh.
-It verifies real command execution, a protected pixel capture, explicit shell exit and credential-draft
-recreation without replay. The helper accounts for only the owned row's exact last-attempt mutation
-and restores the complete profile/trust baseline; unrelated Activities and data are not cleanup targets.
+The controller installs the actual APKs and reserves its reverse port with `--no-rebind`, refusing
+an existing mapping. Each workflow gets a fresh0700 host evidence directory; its remote shell writes
+the0600 `remote-effect.proof` there with `umask 077` and noclobber, not in a world-writable temporary
+directory. The path is POSIX-quoted and is not a credential. The collector opens owned regular files
+with no symlink following and bounded reads; oversized/public-mode/symlink/FIFO evidence is refused.
+Only an independent exact-byte host proof authorizes atomic publication of the app-private witness.
+The test starts at real Home search/selection/Connect and authenticates without a test refresh. It
+requires real command effect, protected pixels, explicit exit and credential-draft recreation without
+replay. Restoration accounts only for the owned row's exact marker mutation and restores the complete
+logical profile/trust baseline; unrelated Activities and data are not cleanup targets.
 
-Receipts, images and hashes stay under `qualification/results/private/console-terminal-resume/`.
-The controller removes only its reverse mapping, private configuration/witness and exact owned
-proof file. It never stops a foreign listener, resets app data or fabricates remote success.
-A controller timeout does not prove Android-side retirement; keep its failed receipt and inspect
-the baseline before any further fixture mutation. Stop the owned host fixture separately with
-its run-local `stop` file. Emulator, physical input and actual Googlebook results remain distinct.
+Receipts, host proofs, captures, images and hashes remain under
+`qualification/results/private/console-terminal-resume/`. SIGINT/SIGTERM or the120s observation
+deadline requests Android-side cancellation and gives it45s to unwind; terminating the adb client alone
+never proves Android retirement. The controller checks the instrumentation terminal result before
+removing inputs. It verifies the exact owned reverse destination before release, verifies app-private
+input/witness removal, and records `cleanupErrors`, `uncertainPublications` and `cleanupConfirmed`.
+Unconfirmed Android retirement preserves its dependencies and cannot pass. SIGKILL cannot run cleanup.
+Artifact exports are bounded and validated as PNG/JSON before a local evidence flag is set.
+The controller never stops a host listener or resets app data. Stop the owned fixture separately with
+its run-local `stop` file. A failed receipt requires inspection, not blind replay. Emulator, host-only,
+injected-pointer/key, particular system-IME and actual Googlebook results retain distinct scopes.
+
+### Extended interaction check
+
+Add `--interactions` to the controller command to exercise the actual local menu keyboard path,
+rich-clip plain-text preview/Cancel, a20,000-byte paste, real Find/count and Copy. It creates a fresh
+private host capture directory and correlated UUID, runs the maintained `exercise.py` through the
+real terminal, and publishes a witness only after independently comparing actual captured bytes.
+The expected capture contains only the large paste: menu keys and Cancel must contribute no bytes.
+This is an opt-in qualification procedure, not an assertion that every current candidate passes.
+
+`exercise.py` was adopted from the preserved real P0 terminal exercise, not a new fake server.
+It uses actual POSIX termios/curses/stdin, requires all three descriptors to be the same PTY and
+an existing owned0700 output directory, and emits exclusive0600 bounded JSON. Capture allows
+at most64KiB; its262KiB record bound accommodates hexadecimal evidence. A supplied `--run` must
+be a canonical UUID4 and appears in the readiness marker, preventing an older visible marker
+from qualifying a new attempt. Use only synthetic input; raw captured bytes stay private.
+The input-only flush and terminal restoration do not claim to prevent later bytes becoming shell input.
+
+Parent helper checks used a real local kernel PTY:65536 bytes reached the byte limit with exact
+content/hash and restoration; a separate UUID-correlated17,007-byte UTF-8 sample matched at its
+finite timeout. Those are helper checks, not SSH, Android or physical-input qualification.
 
 
 ## Boundary

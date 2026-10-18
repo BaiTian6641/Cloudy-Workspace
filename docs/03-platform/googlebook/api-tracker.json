@@ -1307,23 +1307,27 @@
         "ClipboardManager.setPrimaryClip",
         "ClipboardManager.hasPrimaryClip",
         "ClipboardManager.clearPrimaryClip",
-        "ClipDescription.EXTRA_IS_SENSITIVE"
+        "ClipDescription.EXTRA_IS_SENSITIVE",
+        "ClipDescription.MIMETYPE_TEXT_HTML",
+        "ClipData.newHtmlText",
+        "ClipData.Item.getText"
       ],
       "sourceIds": [
         "G123",
         "G124",
-        "G125"
+        "G125",
+        "G262"
       ],
       "minimumApi": 11,
       "libraryVersion": null,
-      "availability": "documented-not-implemented",
-      "qualification": "untested",
-      "checkedOn": "2026-10-15",
+      "availability": "documented",
+      "qualification": "partial",
+      "checkedOn": "2026-10-18",
       "owner": "Native shell/terminal developer",
       "stage": "P2-S2",
       "fallback": "Visible unavailable/no-selection/unsupported-type state; native picker or composer as applicable. Never background-poll, replay or fabricate clipboard input.",
-      "experiment": "D14: explicit shortcuts and Edit/context actions, native field editing, exact selected text and paste bytes, focused recipient/attachment invalidation, clipboard unavailable/MIME/lifecycle behavior and no content logging.",
-      "versionNotes": "Core clipboard methods API11; clearPrimaryClip API28; EXTRA_IS_SENSITIVE API33. Runtime guards if below these levels. Clipboard sensitivity does not imply secrecy or erasure.",
+      "experiment": "Console0.1.19 on the owned API37 emulator exercises native menu focus, standard HTML clip plain-text alternative, cancelled multiline preview, exact20,000-byte paste independently captured on real SSH/kernel PTY, visible literal Find and actual sensitive clipboard Copy with exact baseline restoration. Browser/WebView and JVM checks retain separate scopes. Physical keyboard/IME/TalkBack, unrelated-app clipboard interoperability and broader lifecycle/large-text gates remain explicit; no full C05 or Googlebook support claim.",
+      "versionNotes": "Core clipboard methods API11; newHtmlText API16; clearPrimaryClip API28; EXTRA_IS_SENSITIVE API33. Productmin35 covers these symbols. newHtmlText advertises text/html while requiring a plain-text alternative: consume supplied item.text only, never HTML parsing or URI/Intent coercion. Clipboard sensitivity does not imply secrecy or erasure.",
       "researchEvidence": "docs/04-design/desktop-terminal-interaction-contract.md"
     },
     {

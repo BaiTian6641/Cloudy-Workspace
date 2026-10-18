@@ -7876,6 +7876,66 @@
       "sourceUpdatedOn": "2026-10-09",
       "note": "Distinguishes desktop-first/touch-first per-display state, keyboard+pointer triggers and Android17 per-display eligibility. OEM resource overlays and hidden system eligibility are test-fixture/system configuration, not app APIs. The API37 emulator's measured freeform settings and actual window bounds do not establish real Googlebook window-system parity.",
       "refresh": "Before changing emulator desktop configuration or making a native windowing support claim."
+    },
+    {
+      "id": "R378",
+      "title": "Pinned xterm search addon0.17.0-beta.310",
+      "url": "https://registry.npmjs.org/@xterm/addon-search/0.17.0-beta.310",
+      "publisher": "xterm.js",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-18",
+      "sourceUpdatedOn": null,
+      "note": "MIT addon from the same 991857a1b1cacf06f9531ba74a6e927a7a6398bb commit as core6.1.0-beta.315; the peer range matches. Archive SHA512/size/SHA256 and exact JS/license members are verified in shared/android/terminal/interaction-assets.json. Public findNext/findPrevious and onDidChangeResults require decoration options for counts; allowProposedApi remains false. Exact SearchAddon.ts shows clearDecorations leaves an armed200ms refresh alive: the P2-S2 adapter disposes listeners/addon on clear and lazily recreates it for the next explicit Find. No private timeout access or independent search engine. Acquisition is setup-only; normal product preparation is offline. Browser/WebView evidence is not physical-input qualification.",
+      "refresh": "On core/search upgrade or changed search lifecycle, result-count or selection behavior."
+    },
+    {
+      "id": "G262",
+      "title": "Android ClipData HTML clips require a plain-text alternative",
+      "url": "https://developer.android.com/reference/android/content/ClipData#newHtmlText(java.lang.CharSequence,%20java.lang.CharSequence,%20java.lang.String)",
+      "publisher": "Google",
+      "category": "platform",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-17",
+      "sourceUpdatedOn": null,
+      "note": "Public newHtmlText, available since API16, advertises MIMETYPE_TEXT_HTML and requires its text argument as the plain-text alternative. A text/plain-only admission rule incorrectly rejects this standard Android clip. Console accepts text/plain or text/html metadata but reads only the supplied item.text after single-item and URI/Intent refusal; it never parses HTML or invokes coerceToText/provider access. The actual emulator workflow preserved this false-refusal failure before the adapter repair.",
+      "refresh": "On clipboard representation/admission changes or a concrete Android interoperability defect."
+    },
+    {
+      "id": "R379",
+      "title": "Pinned xterm vertical-resize selection retirement",
+      "url": "https://github.com/xtermjs/xterm.js/blob/991857a1b1cacf06f9531ba74a6e927a7a6398bb/src/browser/services/SelectionService.ts",
+      "publisher": "xterm.js",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-18",
+      "sourceUpdatedOn": null,
+      "note": "The exact6.1.0-beta.315 archive source clears selection on every rowsChanged event, citing upstream#5300. A real Console trace confirms Select all succeeds before a native27-to28-row resize clears it. The P2-S2 adapter uses public getSelectionPosition/getSelection/registerMarker/select APIs for height-only changes, restores only bounded identical text, and visibly clears an unrestorable selection instead of caching a copy fallback. Normal/alternate/pointer and removed-selection regressions exercise actual selected bytes; no private engine mutation, proposed API or timing delay.",
+      "refresh": "On xterm upgrades, selection/fit changes or a concrete trim/reflow correctness defect."
+    },
+    {
+      "id": "R380",
+      "title": "Pinned xterm committed-input ownership across browser tasks",
+      "url": "https://github.com/xtermjs/xterm.js/blob/991857a1b1cacf06f9531ba74a6e927a7a6398bb/src/browser/CoreBrowserTerminal.ts",
+      "publisher": "xterm.js",
+      "category": "backend",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-18",
+      "sourceUpdatedOn": null,
+      "note": "Exact6.1.0-beta.315 input handling suppresses composed insertText while keydown is outstanding; an empty earlier CompositionHelper timer can therefore lose later committed text. Parent reproduced CR-only output in real Chrome. The authored three-file patch retains that non-composing owner until input/next-key consumption, cancels on blur/composition takeover, and flushes before every internal paste/selection textarea rewrite. Independent review found a first-candidate DEL/selection-replay regression; failing-before cases reject that candidate, and the corrected bundle1e806cc8...ec3fe passes36 cases. Preedit/finalization remain upstream; physical/system-IME qualification is separate.",
+      "refresh": "On core/input-patch changes or a concrete native event-ordering regression."
+    },
+    {
+      "id": "G263",
+      "title": "AOSP UiAutomator regular pointer-press duration reference",
+      "url": "https://android.googlesource.com/platform/frameworks/testing/+/android-sdk-support_r11/uiautomator/library/src/com/android/uiautomator/core/InteractionController.java",
+      "publisher": "Android Open Source Project",
+      "category": "development-tooling",
+      "reviewStatus": "reviewed",
+      "checkedOn": "2026-10-18",
+      "sourceUpdatedOn": null,
+      "note": "Historical reference source, decoded from Gitiles: REGULAR_CLICK_LENGTH is100ms between touchDown and touchUp. Used only to define the qualification driver's finite injected press instead of same-timestamp events. It is not a production readiness sleep, a current-platform support claim, or permission to copy the historical hidden InputManager APIs. Actual current SDK UiAutomation/public MotionEvent APIs remain the test route.",
+      "refresh": "When changing qualification gesture timing or its input-injection API."
     }
   ]
 }

@@ -104,14 +104,16 @@ the diagnostic pin above remains unchanged. On the selected Linux x86_64 build h
 ```bash
 python3 tools/prepare_terminal_assets.py
 python3 tools/build_terminal_renderer.py --fetch-compiler
+python3 tools/prepare_terminal_assets.py --fetch-search
 python3 tools/prepare_terminal_assets.py --product --offline
 python3 tools/prepare_terminal_assets.py --product --check
 node tests/test_terminal_input_browser.cjs --surface product \
   --assets "$PWD/shared/android/terminal/build/generated/terminalAssets/terminal"
 ```
 
-Only the explicit setup command fetches the reviewed compiler; corrupt caches are not silently
-replaced. Build/check never install packages, execute package scripts or fetch dependencies.
+The explicit setup commands acquire the reviewed compiler and same-commit search addon; corrupt
+caches are not silently replaced. `--fetch-search` cannot be combined with `--offline` or `--check`.
+Normal product preparation/check never install packages, execute package scripts or fetch dependencies.
 The source, authored patch, compiler and output are pinned in
 [`renderer-build.json`](../shared/android/terminal/renderer-build.json). The source build reuses
 the existing bounded archive helpers and strict patch replay. `--candidate --offline` generates

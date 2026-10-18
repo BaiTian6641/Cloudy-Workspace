@@ -8,6 +8,7 @@ import android.os.Handler
 import android.os.Looper
 import android.os.Message
 import android.os.SystemClock
+import android.view.View
 import android.view.ViewGroup
 import android.view.accessibility.AccessibilityManager
 import android.webkit.ConsoleMessage
@@ -45,6 +46,8 @@ class TerminalWebViewBridge(
         fun onReady(size: TerminalSize)
         fun onInput(bytes: ByteArray): TerminalAdmission
         fun onResize(size: TerminalSize): TerminalAdmission
+        /** One explicit local action at a time; never remote bytes and never a clipboard read on its own. */
+        fun onUiRequest(request: TerminalUiRequest)
         fun onFailure(reason: String)
     }
 
@@ -60,6 +63,9 @@ class TerminalWebViewBridge(
         }
     }
     val view: WebView = WebView(context).apply {
+        // Give each native editor an identity before attachment/IME binding, never by restarting
+        // a focused connection later. Different terminal attachments must not share field IDs.
+        id = View.generateViewId()
         // WebView forces its CSS layout viewport height to zero for WRAP_CONTENT, even
         // with an exact native measure. AndroidView's default child params would select it.
         layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
@@ -177,6 +183,29 @@ class TerminalWebViewBridge(
         view.evaluateJavascript("window.cloudyTerminalUi?.focus()", null)
     }
 
+    /**
+     * Sends one local edit/search command to the current ready renderer. Returns the outbound
+     * sequence that the renderer echoes for results, or 0 when the attachment refuses the command;
+     * callers must not replay a refused command on a later target.
+     */
+    fun sendUiCommand(command: TerminalUiCommand): Int {
+        checkMain()
+        if (closed.get() || !ready) return 0
+        val payload = try {
+            TerminalUiProtocol.encodeCommand(command)
+        } catch (_: IllegalArgumentException) {
+            return 0
+        }
+        return try {
+            val sequence = nextSequence()
+            send(TerminalFrame(TerminalFrame.UI_COMMAND, sequence, payload))
+            sequence
+        } catch (_: Exception) {
+            fail("renderer-interaction-delivery-failure")
+            0
+        }
+    }
+
     fun start() {
         checkMain()
         if (started || closed.get()) return
@@ -284,6 +313,8 @@ class TerminalWebViewBridge(
                     val payload = ByteBuffer.wrap(frame.payload).order(ByteOrder.BIG_ENDIAN)
                     flow.acknowledge(payload.int, payload.int)
                 }
+                TerminalFrame.UI_REQUEST ->
+                    listener.onUiRequest(TerminalUiProtocol.decodeRequest(frame.sequence, frame.payload))
                 TerminalFrame.ERROR -> fail("renderer-script-failure")
                 else -> fail("renderer-operation-rejected")
             }
@@ -381,7 +412,8 @@ class TerminalWebViewBridge(
         private const val BRIDGE = "cloudyTerminal"
         private val ASSETS = mapOf("index.html" to "text/html", "terminal.js" to "text/javascript",
             "terminal.css" to "text/css", "vendor/xterm.js" to "text/javascript",
-            "vendor/xterm.css" to "text/css", "vendor/addon-fit.js" to "text/javascript")
+            "vendor/xterm.css" to "text/css", "vendor/addon-fit.js" to "text/javascript",
+            "vendor/addon-search.js" to "text/javascript")
         private val RESPONSE_HEADERS = mapOf("Cache-Control" to "no-store", "X-Content-Type-Options" to "nosniff",
             "Content-Security-Policy" to "default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; " +
                 "img-src 'none'; font-src 'none'; connect-src 'none'; frame-src 'none'; object-src 'none'; " +

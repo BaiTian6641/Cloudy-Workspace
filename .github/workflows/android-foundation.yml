@@ -87,6 +87,7 @@ jobs:
         run: |
           python3 tools/prepare_terminal_assets.py
           python3 tools/build_terminal_renderer.py --fetch-compiler
+          python3 tools/prepare_terminal_assets.py --fetch-search
           python3 tools/prepare_terminal_assets.py --product --offline
           python3 tools/prepare_terminal_assets.py --product --check
       - name: Verify generated Compose design tokens are current

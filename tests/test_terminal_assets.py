@@ -52,6 +52,7 @@ class TerminalAssetTests(unittest.TestCase):
         self.output = self.root / "generated"
         self.cache.mkdir()
         self.manifest = {"schemaVersion": 1, "packages": [], "additionalNotices": []}
+        self.interaction = {"schemaVersion": 1, "packages": [], "additionalNotices": []}
         self.entries = {}
         self.expected = {
             "terminal/vendor/xterm.js": b"window.Terminal = 'fixture';\n\x00\xff",
@@ -91,9 +92,39 @@ class TerminalAssetTests(unittest.TestCase):
             self.manifest["packages"].append(package)
             self.entries[name] = entries
             self.replace_archive(name, entries)
+        self.interaction_expected = {
+            "terminal/vendor/addon-search.js": b"window.SearchAddon = 'fixture';\n",
+            "terminal/notices/addon-search-LICENSE.txt": b"Search test license\n",
+        }
+        search_metadata = json.dumps({
+            "name": "@xterm/addon-search", "version": "0.17.0-beta.310", "license": "MIT",
+            "peerDependencies": {"@xterm/xterm": "^6.1.0-beta.315"},
+        }).encode()
+        search_entries = [("package/package.json", search_metadata, tarfile.REGTYPE)]
+        search_package = {
+            "name": "@xterm/addon-search", "version": "0.17.0-beta.310", "license": "MIT",
+            "cacheFile": "addon-search-0.17.0-beta.310.tgz",
+            "archiveUrl": "https://registry.npmjs.org/@xterm/addon-search/-/"
+                         "addon-search-0.17.0-beta.310.tgz",
+            "packageJsonSha256": digest(search_metadata), "files": [],
+        }
+        for source, destination in (
+            ("package/lib/addon-search.js", "terminal/vendor/addon-search.js"),
+            ("package/LICENSE", "terminal/notices/addon-search-LICENSE.txt"),
+        ):
+            body = self.interaction_expected[destination]
+            search_entries.append((source, body, tarfile.REGTYPE))
+            search_package["files"].append({"archivePath": source, "outputPath": destination,
+                                            "bytes": len(body), "sha256": digest(body)})
+        search_entries.append(("package/src/not-selected.ts", b"throw 'never execute';", tarfile.REGTYPE))
+        self.interaction["packages"].append(search_package)
+        self.replace_interaction_archive(search_entries)
 
     def package(self, name="xterm"):
         return next(p for p in self.manifest["packages"] if p["name"] == f"@xterm/{name}")
+
+    def interaction_package(self):
+        return self.interaction["packages"][0]
 
     def replace_archive(self, name, entries):
         package = self.package(name)
@@ -105,7 +136,19 @@ class TerminalAssetTests(unittest.TestCase):
         })
         (self.cache / package["cacheFile"]).write_bytes(archive)
 
+    def replace_interaction_archive(self, entries):
+        package = self.interaction_package()
+        archive = make_archive(entries)
+        package.update({
+            "archiveBytes": len(archive), "archiveSha256": digest(archive),
+            "integrity": "sha512-" + base64.b64encode(hashlib.sha512(archive).digest()).decode(),
+            "archiveMemberCount": len(entries), "archiveFileBytes": sum(len(body) for _, body, _ in entries),
+        })
+        (self.cache / package["cacheFile"]).write_bytes(archive)
+
     def prepare(self, **options):
+        if options.get("product") and "interaction_manifest" not in options:
+            options["interaction_manifest"] = self.interaction
         return ASSETS.prepare_assets(self.manifest, self.cache, self.output, repository=self.root, **options)
 
     def renderer_build(self):
@@ -395,6 +438,61 @@ class TerminalAssetTests(unittest.TestCase):
                 self.assertRaisesRegex(ASSETS.AssetError, "missing"):
             self.prepare(product=True, renderer_manifest=renderer)
         self.assertFalse(self.output.exists())
+
+    def test_product_search_without_explicit_fetch_is_refused_and_writes_nothing(self):
+        (self.cache / self.interaction_package()["cacheFile"]).unlink()
+        renderer = self.renderer_manifest()
+        with patch.object(self.renderer_build(), "build_bundle", return_value=b"bundle\n"), \
+                patch.object(ASSETS, "fetch_archive", side_effect=AssertionError("network forbidden")), \
+                self.assertRaisesRegex(ASSETS.AssetError, "missing"):
+            self.prepare(product=True, renderer_manifest=renderer)
+        self.assertFalse(self.output.exists())
+
+    def test_search_setup_refuses_corrupt_cache_without_network_or_replacement(self):
+        path = self.cache / self.interaction_package()["cacheFile"]
+        path.write_bytes(b"corrupt")
+        with patch.object(ASSETS, "fetch_archive", side_effect=AssertionError("network forbidden")), \
+                self.assertRaises(ASSETS.AssetError):
+            ASSETS.fetch_search(self.interaction, self.cache)
+        self.assertEqual(path.read_bytes(), b"corrupt")
+        self.assertFalse(self.output.exists())
+
+    def test_search_setup_never_caches_an_unverified_download(self):
+        path = self.cache / self.interaction_package()["cacheFile"]
+        path.unlink()
+        with patch.object(ASSETS, "fetch_archive", return_value=b"untrusted response"), \
+                self.assertRaises(ASSETS.AssetError):
+            ASSETS.fetch_search(self.interaction, self.cache)
+        self.assertFalse(path.exists())
+        self.assertFalse(self.output.exists())
+
+    def test_offline_and_check_reject_search_acquisition_before_io(self):
+        with patch.object(ASSETS, "fetch_archive", side_effect=AssertionError("network forbidden")), \
+                patch.object(ASSETS, "read_regular", side_effect=AssertionError("read forbidden")), \
+                patch.object(ASSETS, "atomic_write", side_effect=AssertionError("write forbidden")):
+            for mode in ("--offline", "--check"):
+                with self.subTest(mode=mode), self.assertRaises(SystemExit) as failure:
+                    ASSETS.main([mode, "--fetch-search"])
+                self.assertEqual(failure.exception.code, 2)
+
+    def test_interaction_manifest_rejects_other_pins_and_assets(self):
+        for mutate in (
+            lambda manifest: manifest["packages"][0].update({"version": "unreviewed"}),
+            lambda manifest: manifest["packages"][0].update({"name": "@xterm/addon-search-extra"}),
+            lambda manifest: manifest["packages"][0]["files"][0].update(
+                {"outputPath": "terminal/vendor/other.js"}),
+            lambda manifest: manifest["packages"][0].update({"archiveUrl": "https://example.invalid/x.tgz"}),
+        ):
+            manifest = copy.deepcopy(self.interaction)
+            mutate(manifest)
+            with self.subTest(manifest=manifest), self.assertRaises(ASSETS.AssetError):
+                ASSETS.validate_manifest(manifest, ASSETS.EXPECTED_INTERACTION)
+
+    def test_non_product_mode_ignores_the_search_manifest(self):
+        self.prepare(offline=True, interaction_manifest=self.interaction)
+        paths = {path.relative_to(self.output).as_posix() for path in self.output.rglob("*") if path.is_file()}
+        self.assertFalse(any("addon-search" in path for path in paths))
+        self.assertEqual(self.manifest, json.loads((self.output / "terminal/notices/provenance.json").read_bytes()))
 
     def test_supplementary_notice_is_integrity_checked_before_generation(self):
         asset = "third_party_notices/terminal/test-MIT.txt"

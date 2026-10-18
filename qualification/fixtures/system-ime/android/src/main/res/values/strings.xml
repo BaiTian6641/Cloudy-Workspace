@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="qualification_ime_label">Cloudy IME qualification (debug only)</string>
+    <string name="qualification_ime_subtype">Cloudy qualification keyboard</string>
+</resources>

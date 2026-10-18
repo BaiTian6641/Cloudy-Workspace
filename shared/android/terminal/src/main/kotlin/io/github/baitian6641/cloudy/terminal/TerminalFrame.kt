@@ -39,6 +39,7 @@ internal data class TerminalFrame(
             OUTPUT -> payload.size in 1..TerminalLimits.OUTPUT_CHUNK_BYTES
             ERROR -> payload.size == 1 && payload[0] == 1.toByte()
             CLOSED -> payload.isEmpty()
+            UI_REQUEST, UI_COMMAND -> payload.size in 1..1 + TerminalUiLimits.TEXT_BYTES
             else -> false
         }
         require(validLength) { "terminal-frame-length-or-type" }
@@ -62,6 +63,8 @@ internal data class TerminalFrame(
         const val ADMISSION = 6
         const val ERROR = 7
         const val CLOSED = 8
+        const val UI_REQUEST = 9
+        const val UI_COMMAND = 10
 
         fun decode(bytes: ByteArray, expected: TerminalIdentity): TerminalFrame {
             require(bytes.size in HEADER_BYTES..HEADER_BYTES + TerminalLimits.INPUT_QUEUE_BYTES) {

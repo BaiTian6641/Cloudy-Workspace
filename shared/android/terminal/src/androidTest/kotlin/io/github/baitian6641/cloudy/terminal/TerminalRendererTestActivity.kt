@@ -11,6 +11,7 @@ import java.util.concurrent.LinkedBlockingQueue
 class TerminalRendererTestActivity : Activity() {
     val ready = CountDownLatch(1)
     val inputs = LinkedBlockingQueue<ByteArray>()
+    val uiRequests = LinkedBlockingQueue<TerminalUiRequest>()
     val failures = LinkedBlockingQueue<String>()
     lateinit var renderer: TerminalWebViewBridge
         private set
@@ -27,6 +28,7 @@ class TerminalRendererTestActivity : Activity() {
                     return TerminalAdmission.ACCEPTED
                 }
                 override fun onResize(size: TerminalSize) = TerminalAdmission.ACCEPTED
+                override fun onUiRequest(request: TerminalUiRequest) { uiRequests.add(request) }
                 override fun onFailure(reason: String) { failures.add(reason) }
             })
         setContentView(renderer.view)

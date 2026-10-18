@@ -3,12 +3,17 @@ package io.github.baitian6641.cloudy.console
 import android.app.Activity
 import android.app.Instrumentation
 import android.app.UiAutomation
+import android.content.ClipData
+import android.content.ClipDescription
+import android.content.ClipboardManager
 import android.graphics.Bitmap
 import android.graphics.Rect
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
+import android.system.Os
+import android.system.OsConstants
 import android.view.InputDevice
 import android.view.KeyEvent
 import android.view.MotionEvent
@@ -17,8 +22,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.accessibility.AccessibilityNodeInfo
-import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputConnection
 import android.webkit.WebView
 import androidx.test.core.app.ActivityScenario
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -29,11 +32,11 @@ import io.github.baitian6641.cloudy.domain.WindowOwner
 import io.github.baitian6641.cloudy.platform.CloudyTerminalActivity
 import io.github.baitian6641.cloudy.platform.R as platformR
 import io.github.baitian6641.cloudy.testing.SshAuthenticateFixture
+import io.github.baitian6641.cloudy.testing.ime.ImeQualificationSession
 import java.io.File
 import java.nio.file.Files
 import java.security.MessageDigest
 import java.util.concurrent.CountDownLatch
-import java.util.concurrent.FutureTask
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 import java.util.concurrent.atomic.AtomicReference
@@ -51,7 +54,11 @@ import org.junit.runner.RunWith
 class ConsoleTerminalActivityTest {
     private lateinit var automation: UiAutomation
     private lateinit var instrumentation: Instrumentation
+    private var ime: ImeQualificationSession? = null
     private var control = "none"
+    private var lastPointer: JSONObject? = null
+    private var cancellation: File? = null
+    private var settling = false
 
     @Test fun explicitSessionExecutesInputAndRetiresWithoutRestoringCredentials() {
         instrumentation = InstrumentationRegistry.getInstrumentation()
@@ -71,10 +78,19 @@ class ConsoleTerminalActivityTest {
         try {
             val owned = SshAuthenticateFixture.open(context, WindowOwner.CONSOLE, checkNotNull(run), "success")
             fixture = owned
+            val cancel = File(context.noBackupFilesDir, "ssh-authenticate-fixture/$run-cancel")
+            cancellation = cancel
+            check(!cancel.exists() && !Files.isSymbolicLink(cancel.toPath()))
             owned.seed()
             ownedProfileId = owned.profileId
             val witness = File(context.noBackupFilesDir, "ssh-authenticate-fixture/$run-terminal-proof.json")
             check(!witness.exists() && !Files.isSymbolicLink(witness.toPath()))
+            stage = "IME_SETUP"
+            val allowDeviceChange = InstrumentationRegistry.getArguments()
+                .getString("cloudyAllowDeviceImeChange")?.toBooleanStrictOrNull() == true
+            ime = ImeQualificationSession.open(instrumentation, automation, checkNotNull(run),
+                allowDeviceChange = allowDeviceChange,
+                cancellation = { cancellation?.exists() == true })
             stage = "HOME_LAUNCH"
             workspace = ActivityScenario.launch(WorkspaceActivity::class.java)
             stage = "HOME_SEARCH"
@@ -89,6 +105,7 @@ class ConsoleTerminalActivityTest {
             val row = revealHome("home_row")
             check(owned.profileLabel in textOf(row)) { "HOME_SEARCH_NOT_OWNED" }
             clickHome("home_row")
+            revealHome("home_connect")
             waitFor(15_000) { node("home_connect")?.isEnabled == true }
             check(owned.profileLabel in textOf(revealHome("home_detail"))) { "HOME_SELECTION_NOT_OWNED" }
             check(resumedTerminals().isEmpty()) { "TERMINAL_PREEXISTING" }
@@ -121,8 +138,11 @@ class ConsoleTerminalActivityTest {
             owned.phase("TERMINAL_PTY_OPEN")
             secure(launched)
             stage = "COMMAND"
-            val connection = inputConnection(launched)
-            commit(launched, connection, "printf '%s' 'CLOUDY_TERMINAL_$run' > /tmp/cloudy-terminal-$run.proof; " +
+            val proofPath = checkNotNull(InstrumentationRegistry.getArguments().getString("cloudyTerminalProofPath"))
+            check(proofPath.startsWith("/") && proofPath.length <= 4096 &&
+                '\u0000' !in proofPath && '\n' !in proofPath && '\r' !in proofPath)
+            val quotedProof = "'" + proofPath.replace("'", "'\"'\"'") + "'"
+            commit(launched, "(umask 077; set -C; printf '%s' 'CLOUDY_TERMINAL_$run' > $quotedProof) && " +
                 "printf 'CLOUDY_TERMINAL_ROUNDTRIP\\n'")
             instrumentation.sendKeyDownUpSync(KeyEvent.KEYCODE_ENTER)
             owned.phase("TERMINAL_COMMAND_COMMITTED")
@@ -138,8 +158,11 @@ class ConsoleTerminalActivityTest {
             stage = "SURFACE"
             check(captureWindow(launched, File(context.noBackupFilesDir,
                 "ssh-authenticate-qualification/$run-terminal-surface.png")) == PixelCopy.SUCCESS)
+            if (InstrumentationRegistry.getArguments().getString("cloudyTerminalInteractions") == "true") {
+                qualifyInteractions(launched, owned, checkNotNull(run)) { stage = it }
+            }
             stage = "REMOTE_EXIT"
-            commit(launched, connection, "exit")
+            commit(launched, "exit")
             instrumentation.sendKeyDownUpSync(KeyEvent.KEYCODE_ENTER)
             waitFor(20_000) { node("terminal_username")?.isEnabled == true }
             check(node("terminal_live_status") == null && reveal("terminal_password").isEnabled)
@@ -165,31 +188,241 @@ class ConsoleTerminalActivityTest {
             passed = true
         } catch (failure: Throwable) {
             // Neither an accessibility tree nor exception messages may publish password text.
-            File(context.noBackupFilesDir, "ssh-authenticate-qualification/$run-terminal-failure.json")
-                .writeText(JSONObject().put("stage", stage).put("type", failure.javaClass.simpleName)
-                    .put("control", control).toString(2))
+            runCatching {
+                val live = node("terminal_live_status")?.text?.toString()
+                val report = JSONObject().put("stage", stage).put("type", failure.javaClass.simpleName)
+                    .put("control", control).put("lastPointer", lastPointer)
+                    .put("status", node("terminal_status")?.text?.toString())
+                    .put("liveStatus", live)
+                    .put("connectEnabled", node("terminal_connect_button")?.isEnabled)
+                val active = terminal
+                if (live != null && active != null) runCatching {
+                    // Public state only, after authentication fields have left the surface.
+                    report.put("rendererState", JSONObject(javascript(active, """
+                        (() => {
+                          const textarea = document.querySelector('.xterm-helper-textarea');
+                          return {screenReaderFlag:location.hash.split('/').pop(),
+                            documentFocused:document.hasFocus(), textareaFocused:document.activeElement === textarea,
+                            readOnly:textarea?.readOnly, valueLength:textarea?.value.length,
+                            warning:document.getElementById('feedback')?.dataset.warning,
+                            status:document.getElementById('status')?.textContent};
+                        })()
+                    """.trimIndent())))
+                    instrumentation.runOnMainSync {
+                        report.put("nativeWindowFocused", active.hasWindowFocus())
+                            .put("nativeRendererFocused", webView(active.window.decorView)?.hasFocus())
+                    }
+                    report.put("failurePixelCopy", captureWindow(active, File(context.noBackupFilesDir,
+                        "ssh-authenticate-qualification/$run-terminal-interaction-failure.png")))
+                }.onFailure { report.put("rendererObservationFailure", it.javaClass.simpleName) }
+                File(context.noBackupFilesDir, "ssh-authenticate-qualification/$run-terminal-failure.json")
+                    .writeText(report.toString(2))
+            }
+            runCatching {
+                instrumentation.sendStatus(0, Bundle().apply {
+                    putString("cloudyTerminalFailureStage", stage)
+                    putString("cloudyTerminalFailureType", failure.javaClass.simpleName)
+                })
+            }
+            if (stage.startsWith("HOME_") || stage == "TERMINAL_LAUNCH") runCatching {
+                // This owned Home has no credential fields; capture layout, never an auth tree.
+                var home: Activity? = null
+                workspace?.onActivity { home = it }
+                home?.let { captureWindow(it, File(context.noBackupFilesDir,
+                    "ssh-authenticate-qualification/$run-terminal-interaction-failure.png")) }
+            }
             runCatching { fixture?.phase("FAILED") }
         } finally {
+            settling = true // Controller cancellation must not interrupt owned restoration.
             var activitiesClosed = false
             try {
                 closeTerminal(ownedProfileId, terminal)
                 workspace?.close()
                 activitiesClosed = true
             } finally {
-                val owned = fixture
-                if (owned != null) {
-                    if (activitiesClosed) {
-                        // A failed journey after Connect still cleans up only when the sole mutation
-                        // is the exact expected marker; otherwise restore's guard preserves the store.
-                        if (homeConnectActivated && !markerAccepted) runCatching { owned.acceptHomeOpenMarker() }
-                        owned.restore(passed)
-                    } else {
-                        runCatching { owned.phase("ACTIVITY_CLOSE_UNCONFIRMED_PRESERVE") }
+                try {
+                    val owned = fixture
+                    if (owned != null) {
+                        if (activitiesClosed) {
+                            // Restore only the exact expected marker; uncertain stores remain untouched.
+                            if (homeConnectActivated && !markerAccepted) runCatching { owned.acceptHomeOpenMarker() }
+                            owned.restore(passed)
+                        } else {
+                            runCatching { owned.phase("ACTIVITY_CLOSE_UNCONFIRMED_PRESERVE") }
+                        }
                     }
+                } finally {
+                    // The client refuses restoration while its owned editor remains active.
+                    // IME cleanup must never prevent the profile/trust restoration above.
+                    ime?.close()
                 }
             }
         }
         check(passed) { "TERMINAL_QUALIFICATION_FAILED_SEE_PRIVATE_PHASE_RECEIPT" }
+        check(ime?.cleanupConfirmed == true) {
+            "TERMINAL_IME_CLEANUP_UNCONFIRMED_${ime?.closeReason?.name ?: "NONE"}"
+        }
+    }
+
+    /** Real native controls and Android clipboard, with independently captured host bytes. */
+    private fun qualifyInteractions(activity: Activity, fixture: SshAuthenticateFixture, run: String,
+                                    setStage: (String) -> Unit) {
+        val context = instrumentation.targetContext
+        val root = File(context.noBackupFilesDir, "ssh-authenticate-fixture")
+        val configFile = File(root, "$run-interactions.json")
+        val info = Os.lstat(configFile.path)
+        check(OsConstants.S_ISREG(info.st_mode) && info.st_uid == android.os.Process.myUid() &&
+            info.st_mode and 511 == 384 && info.st_size in 1..65536)
+        val config = JSONObject(configFile.readText())
+        check(config.keys().asSequence().toSet() == setOf("schema", "run", "captureRun", "captureCommand", "pasteText"))
+        check(config.getInt("schema") == 1 && config.getString("run") == run)
+        val captureRun = config.getString("captureRun")
+        check(java.util.UUID.fromString(captureRun).let { it.version() == 4 && it.toString() == captureRun })
+        val command = config.getString("captureCommand")
+        check(command.length in 1..4096 && command.none { Character.isISOControl(it) } &&
+            command.startsWith("python3 -I ") && command.endsWith("--run $captureRun"))
+        val paste = config.getString("pasteText")
+        check(paste.length == 20_000 && paste.all { it == 'B' })
+        val readyMarker = "CLOUDY_CAPTURE_READY_$captureRun"
+        val label = "Cloudy qualification $run"
+        lateinit var clipboard: ClipboardManager
+        var previousClip: ClipData? = null
+        var ownedClipboard = false
+        var restoredClipboard = false
+        val localResult = JSONObject().put("schema", 1).put("run", run)
+        fun seedClip(value: String, richText: Boolean = false) {
+            instrumentation.runOnMainSync {
+                check(activity.hasWindowFocus())
+                clipboard.setPrimaryClip(if (richText) ClipData.newHtmlText(label, value, "<b>HTML must not be pasted</b>")
+                    else ClipData.newPlainText(label, value))
+            }
+            ownedClipboard = true
+        }
+        try {
+            instrumentation.runOnMainSync {
+                check(activity.hasWindowFocus())
+                clipboard = checkNotNull(activity.getSystemService(ClipboardManager::class.java))
+                previousClip = clipboard.primaryClip
+            }
+            setStage("INTERACTION_CAPTURE_START")
+            commit(activity, command)
+            instrumentation.sendKeyDownUpSync(KeyEvent.KEYCODE_ENTER)
+            waitFor(10_000) {
+                javascript(activity, "document.querySelector('.xterm-rows')?.textContent.includes(" +
+                    JSONObject.quote(readyMarker) + ")===true") == "true"
+            }
+            fixture.phase("TERMINAL_CAPTURE_READY")
+
+            setStage("INTERACTION_MENU_KEYS")
+            val now = SystemClock.uptimeMillis()
+            instrumentation.sendKeySync(KeyEvent(now, now, KeyEvent.ACTION_DOWN,
+                KeyEvent.KEYCODE_F10, 0, KeyEvent.META_SHIFT_ON))
+            instrumentation.sendKeySync(KeyEvent(now, SystemClock.uptimeMillis(), KeyEvent.ACTION_UP,
+                KeyEvent.KEYCODE_F10, 0, KeyEvent.META_SHIFT_ON))
+            val menuTags = listOf("terminal_copy", "terminal_paste", "terminal_select_all",
+                "terminal_find", "terminal_menu_focus", "terminal_menu_close")
+            waitFor(10_000) { menuTags.any { node(it)?.isFocused == true } }
+            // These must remain local: the host capture later excludes both bytes.
+            instrumentation.sendKeyDownUpSync(KeyEvent.KEYCODE_A)
+            instrumentation.sendKeyDownUpSync(KeyEvent.KEYCODE_ESCAPE)
+            waitFor(10_000) { node("terminal_copy") == null }
+            check(node("terminal_live_status") != null)
+            fixture.phase("TERMINAL_MENU_KEYS_LOCAL")
+
+            setStage("INTERACTION_PREVIEW_CANCEL")
+            seedClip("cancel\nnot-sent", richText = true)
+            click("terminal_edit")
+            waitFor(10_000) { node("terminal_copy")?.isFocused == true }
+            click("terminal_paste")
+            waitFor(10_000) { node("terminal_paste_insert")?.isFocused == true }
+            val previewText = textOf(reveal("terminal_paste_preview"))
+            check("cancel" in previewText && "not-sent" in previewText && "HTML must not be pasted" !in previewText)
+            check(captureWindow(activity, File(context.noBackupFilesDir,
+                "ssh-authenticate-qualification/$run-terminal-paste-preview.png")) == PixelCopy.SUCCESS)
+            click("terminal_paste_cancel")
+            waitFor(10_000) { node("terminal_paste_preview") == null }
+            fixture.phase("TERMINAL_PASTE_CANCELLED")
+
+            setStage("INTERACTION_LARGE_PASTE")
+            seedClip(paste)
+            click("terminal_edit")
+            click("terminal_paste")
+            check(node("terminal_paste_preview") == null)
+            fixture.phase("TERMINAL_LARGE_PASTE_REQUESTED")
+            val witness = File(root, "$run-interaction-proof.json")
+            waitFor(25_000) { witness.exists() }
+            check(witness.isFile && !Files.isSymbolicLink(witness.toPath()) && witness.length() in 1..4096)
+            val proof = JSONObject(witness.readText())
+            val expectedHash = MessageDigest.getInstance("SHA-256").digest(paste.toByteArray())
+                .joinToString("") { "%02x".format(it.toInt() and 255) }
+            check(proof.getInt("schema") == 1 && proof.getString("run") == run &&
+                proof.getString("captureRun") == captureRun && proof.getBoolean("matched") &&
+                proof.getInt("bytes") == 20_000 && proof.getString("sha256") == expectedHash)
+            localResult.put("menuAndCancelSentNoBytes", true).put("largePasteBytes", 20_000)
+            fixture.phase("TERMINAL_INTERACTION_BYTES_WITNESSED")
+
+            setStage("INTERACTION_FIND")
+            click("terminal_edit")
+            click("terminal_find")
+            setText("terminal_find_query", readyMarker)
+            click("terminal_find_next")
+            reveal("terminal_find_count")
+            waitFor(10_000) { node("terminal_find_count")?.text?.toString() ==
+                context.getString(platformR.string.terminal_search_result, 1, 1) }
+            check(captureWindow(activity, File(context.noBackupFilesDir,
+                "ssh-authenticate-qualification/$run-terminal-search.png")) == PixelCopy.SUCCESS)
+            click("terminal_find_close")
+            waitFor(10_000) { node("terminal_find_query") == null }
+            localResult.put("actualFindCount", 1)
+
+            setStage("INTERACTION_COPY")
+            click("terminal_edit")
+            click("terminal_select_all")
+            click("terminal_edit")
+            click("terminal_copy")
+            waitFor(10_000) { node("terminal_local_notice")?.text?.toString() ==
+                context.getString(platformR.string.terminal_copied) }
+            instrumentation.runOnMainSync {
+                check(activity.hasWindowFocus())
+                val copied = checkNotNull(clipboard.primaryClip)
+                check(copied.itemCount == 1 && copied.getItemAt(0).text?.contains(readyMarker) == true)
+                check(copied.description.extras?.getBoolean(ClipDescription.EXTRA_IS_SENSITIVE) == true)
+            }
+            localResult.put("copiedActualRemoteMarker", true).put("sensitiveHint", true)
+            fixture.phase("TERMINAL_CLIPBOARD_AND_FIND_OBSERVED")
+        } catch (failure: Throwable) {
+            // This opt-in lane has only synthetic clipboard content. Capture its actual local
+            // surface before cleanup changes focus; never dump credential fields or a full tree.
+            runCatching {
+                localResult.put("failureControl", control)
+                    .put("sourceLine", failure.stackTrace.firstOrNull { it.className.startsWith(javaClass.name) }?.lineNumber)
+                    .put("lastPointer", lastPointer)
+                    .put("menuVisible", node("terminal_menu_overlay")?.isVisibleToUser == true)
+                    .put("previewExists", node("terminal_paste_preview") != null)
+                    .put("previewVisible", node("terminal_paste_preview")?.isVisibleToUser == true)
+                    .put("localNotice", node("terminal_local_notice")?.text?.toString())
+                    .put("failurePixelCopy", captureWindow(activity, File(context.noBackupFilesDir,
+                        "ssh-authenticate-qualification/$run-terminal-interaction-failure.png")))
+            }
+            throw failure
+        } finally {
+            if (ownedClipboard) instrumentation.runOnMainSync {
+                if (activity.hasWindowFocus()) {
+                    val current = clipboard.primaryClip
+                    val ours = current?.description?.label?.toString() == label ||
+                        (current?.description?.label?.toString() == "Cloudy terminal text" &&
+                            current.itemCount == 1 && current.getItemAt(0).text?.contains(readyMarker) == true)
+                    if (ours) {
+                        if (previousClip == null) clipboard.clearPrimaryClip() else clipboard.setPrimaryClip(previousClip!!)
+                        restoredClipboard = true
+                    }
+                }
+            }
+            localResult.put("ownedClipboardRestored", restoredClipboard)
+            File(context.noBackupFilesDir, "ssh-authenticate-qualification/$run-terminal-interactions.json")
+                .writeText(localResult.toString(2))
+        }
+        check(restoredClipboard) { "CLIPBOARD_RESTORE_UNCONFIRMED" }
     }
 
     private fun credentials(fixture: SshAuthenticateFixture) {
@@ -209,26 +442,51 @@ class ConsoleTerminalActivityTest {
     private fun click(tag: String) {
         control = tag
         reveal(tag)
-        waitFor(10_000) { node(tag)?.isEnabled == true }
-        clickNode(checkNotNull(node(tag)))
+        clickVisibleEnabled(tag)
     }
 
     private fun clickHome(tag: String) {
         control = tag
         revealHome(tag)
-        waitFor(10_000) { node(tag)?.isEnabled == true }
-        clickNode(checkNotNull(node(tag)))
+        clickVisibleEnabled(tag)
+    }
+
+    private fun clickVisibleEnabled(tag: String) {
+        // A down event during an active scroll can stop the animation instead of clicking.
+        // Use the platform's event-idle barrier, then acquire the current visible bounds.
+        automation.waitForIdle(250, 5_000)
+        var target: AccessibilityNodeInfo? = null
+        waitFor(10_000) {
+            target = node(tag)?.takeIf { candidate ->
+                val bounds = Rect()
+                candidate.getBoundsInScreen(bounds)
+                candidate.isEnabled && candidate.isVisibleToUser && !bounds.isEmpty
+            }
+            target != null
+        }
+        // Keep the node that actually satisfied readiness. A second root lookup can race
+        // a transient system clipboard window and return null before any pointer is injected.
+        clickNode(checkNotNull(target))
     }
 
     private fun clickNode(target: AccessibilityNodeInfo) {
         val bounds = Rect()
         target.getBoundsInScreen(bounds)
+        lastPointer = JSONObject().put("control", control).put("left", bounds.left).put("top", bounds.top)
+            .put("right", bounds.right).put("bottom", bounds.bottom)
         check(!bounds.isEmpty)
         val now = SystemClock.uptimeMillis()
         for (action in listOf(MotionEvent.ACTION_DOWN, MotionEvent.ACTION_UP)) {
+            // AOSP UiAutomator uses a 100ms regular press, not same-timestamp down/up.
+            // This is the injected gesture duration, not a product readiness delay.
+            if (action == MotionEvent.ACTION_UP) SystemClock.sleep(100)
             val event = MotionEvent.obtain(now, SystemClock.uptimeMillis(), action,
                 bounds.exactCenterX(), bounds.exactCenterY(), 0).apply { source = InputDevice.SOURCE_TOUCHSCREEN }
-            try { check(automation.injectInputEvent(event, true)) } finally { event.recycle() }
+            try {
+                val accepted = automation.injectInputEvent(event, true)
+                lastPointer?.put(if (action == MotionEvent.ACTION_DOWN) "downAccepted" else "upAccepted", accepted)
+                check(accepted)
+            } finally { event.recycle() }
         }
     }
 
@@ -283,7 +541,9 @@ class ConsoleTerminalActivityTest {
         var found: AccessibilityNodeInfo? = null
         waitFor(10_000) {
             found = node(tag)?.takeIf { it.isVisibleToUser }
-            if (found == null) node("terminal_connect")?.performAction(AccessibilityNodeInfo.ACTION_SCROLL_FORWARD)
+            if (found == null) showOnScreen(node(tag),
+                node("terminal_search_overlay") ?: node("terminal_paste_overlay") ?:
+                    node("terminal_menu_overlay") ?: node("terminal_connect"))
             found != null
         }
         return checkNotNull(found)
@@ -295,27 +555,29 @@ class ConsoleTerminalActivityTest {
         var found: AccessibilityNodeInfo? = null
         waitFor(15_000) {
             found = node(tag)?.takeIf { it.isVisibleToUser }
-            if (found == null) {
-                // Compose composes every home row (no lazy list), so climb from the target itself
-                // when it is off-screen, falling back to the detail pane's scroll container.
-                var scroller: AccessibilityNodeInfo? = node(tag) ?: node("home_detail")
-                while (scroller != null) {
-                    val current = scroller
-                    if (current.actionList.any { it.id == AccessibilityNodeInfo.ACTION_SCROLL_FORWARD }) {
-                        current.performAction(AccessibilityNodeInfo.ACTION_SCROLL_FORWARD)
-                        break
-                    }
-                    scroller = current.parent
-                }
-            }
+            if (found == null) showOnScreen(node(tag), node("home_detail"))
             found != null
         }
         return checkNotNull(found)
     }
 
+    private fun showOnScreen(target: AccessibilityNodeInfo?, fallback: AccessibilityNodeInfo?) {
+        if (target?.performAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_SHOW_ON_SCREEN.id) == true) return
+        // Skip exhausted nodes; an advertised but refused action must not hide a usable ancestor.
+        var scroller = target ?: fallback
+        while (scroller != null) {
+            val current = scroller
+            if (current.actionList.any { it.id == AccessibilityNodeInfo.ACTION_SCROLL_FORWARD } &&
+                current.performAction(AccessibilityNodeInfo.ACTION_SCROLL_FORWARD)) return
+            scroller = current.parent
+        }
+    }
+
     private fun waitFor(timeout: Long, predicate: () -> Boolean) {
         val deadline = SystemClock.uptimeMillis() + timeout
-        while (!predicate()) {
+        while (true) {
+            if (!settling) check(cancellation?.exists() != true) { "CONTROLLER_CANCELLED" }
+            if (predicate()) return
             check(SystemClock.uptimeMillis() < deadline)
             SystemClock.sleep(20)
         }
@@ -393,26 +655,41 @@ class ConsoleTerminalActivityTest {
         waitFor(30_000) { ownedActivities().isEmpty() && closing.all { it.isDestroyed } }
     }
 
-    private fun inputConnection(activity: Activity): InputConnection {
-        var connection: InputConnection? = null
-        waitFor(5_000) {
-            instrumentation.runOnMainSync {
-                val web = checkNotNull(webView(activity.window.decorView))
-                web.requestFocus()
-                connection = web.onCreateInputConnection(EditorInfo())
-            }
-            connection != null
+    /** Focuses the actual renderer; the fixture owns the OS-served connection. */
+    private fun focusTerminal(activity: Activity): WebView {
+        var web: WebView? = null
+        instrumentation.runOnMainSync {
+            val candidate = checkNotNull(webView(activity.window.decorView))
+            candidate.requestFocus()
+            web = candidate
         }
-        return checkNotNull(connection)
+        val editor = checkNotNull(web)
+        waitFor(5_000) {
+            javascript(activity,
+                "document.hasFocus() && document.activeElement?.classList?.contains('xterm-helper-textarea') === true") == "true"
+        }
+        instrumentation.runOnMainSync {
+            check(editor.hasWindowFocus() && editor.hasFocus()) { "TERMINAL_EDITOR_NOT_FOCUSED" }
+        }
+        return editor
     }
 
-    private fun commit(activity: Activity, connection: InputConnection, command: String) {
-        javascript(activity, "window.cloudyQualificationCommit=false;" +
-            "document.addEventListener('input',()=>{window.cloudyQualificationCommit=true;},{once:true});")
-        // Chromium's boolean is fire-and-forget. Observe DOM input, then the actual remote effect.
-        val submitted = FutureTask { connection.commitText(command, 1); Unit }
-        check(checkNotNull(connection.handler).post(submitted))
-        submitted.get(5, TimeUnit.SECONDS)
+    private fun commit(activity: Activity, command: String) {
+        javascript(activity, """
+            (() => {
+              const expected = ${JSONObject.quote(command)};
+              window.cloudyQualificationCommit = false;
+              function observe(event) {
+                if (event.data !== expected && event.target?.value !== expected) return;
+                window.cloudyQualificationCommit = true;
+                document.removeEventListener("input", observe, true);
+              }
+              document.addEventListener("input", observe, true);
+            })()
+        """.trimIndent())
+        // Submission is not delivery: preserve the exact edit witness before native Enter.
+        val result = checkNotNull(ime).commit(focusTerminal(activity), command)
+        check(result.submitted) { "IME_NOT_SUBMITTED_${result.reason?.name ?: "UNKNOWN"}" }
         waitFor(5_000) { javascript(activity, "window.cloudyQualificationCommit===true") == "true" }
     }
 
