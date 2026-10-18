@@ -24,6 +24,7 @@ import io.github.baitian6641.cloudy.ssh.SshAuthenticatedTransportFactory
 import io.github.baitian6641.cloudy.ssh.SshFileEntry
 import io.github.baitian6641.cloudy.ssh.SshFileKind
 import io.github.baitian6641.cloudy.ssh.SshFilesResult
+import io.github.baitian6641.cloudy.ssh.SshFiles
 import io.github.baitian6641.cloudy.ssh.SshPasswordCredentials
 import io.github.baitian6641.cloudy.ssh.SshTransportCloseResult
 import io.github.baitian6641.cloudy.ssh.SshTransportCode
@@ -40,7 +41,7 @@ import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicReference
 
-internal enum class SshFilesPhase { IDLE, LOADING, CONNECTING, CONNECTED, READING, RETIRING, FAILED }
+internal enum class SshFilesPhase { IDLE, LOADING, CONNECTING, CONNECTED, READING, MUTATING, RETIRING, FAILED }
 
 internal data class SshFilesPreview(val name: String, val byteCount: Int, val text: String, val binary: Boolean) {
     override fun toString() = "SshFilesPreview(redacted)"
@@ -53,6 +54,14 @@ internal class FilesListingCandidate internal constructor(
 ) {
     override fun toString() = "FilesListingCandidate(redacted)"
 }
+
+internal enum class SshFilesMutationKind { DELETE_FILE, DELETE_DIRECTORY, OVERWRITE_RENAME }
+
+/** Exact model-issued consent for one destructive/overwrite action on the current listing. */
+internal class SshFilesMutationConsent internal constructor(
+    val kind: SshFilesMutationKind, val parentPath: String, val entry: SshFileEntry,
+    val newName: String?, val targetPath: String?, val epoch: Long,
+) { override fun toString() = "SshFilesMutationConsent(redacted)" }
 
 internal data class SshFilesSessionState(
     val catalog: ConnectionProfileCatalog? = null,
@@ -70,6 +79,7 @@ internal data class SshFilesSessionState(
     val registrationUncertain: Boolean = false,
     val registrationCode: String? = null,
     val registrationSaved: FilesResourceRegistration? = null,
+    val mutationConsent: SshFilesMutationConsent? = null,
 ) {
     override fun toString() = "SshFilesSessionState(${phase.name},redacted)"
 }
@@ -300,7 +310,7 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
         synchronized(registrationGate) { listingEpoch++; listingCandidate = null }
         candidateExpiry?.let { FilesRuntime.main.removeCallbacks(it) }
         candidateExpiry = null
-        state = state.copy(registrationCandidate = null)
+        state = state.copy(registrationCandidate = null, mutationConsent = null)
     }
 
     /** Called only by genuine successful listing publication on main, never by UI supplied data. */
@@ -522,6 +532,150 @@ internal class SshFilesSessionModel(private val app: Application) : ViewModel() 
                     }
                 } catch (_: Exception) { token.stop("UNAVAILABLE") }
             }) state = state.copy(phase = SshFilesPhase.CONNECTED, code = "BUSY")
+    }
+
+    private fun mutationReady(token: FilesSession) = ownerToken != null &&
+        state.phase == SshFilesPhase.CONNECTED && !token.cancelled.get() && !state.registrationPending &&
+        state.mutationConsent == null
+
+    private fun invalidLeafName(name: String): Boolean = name.isEmpty() ||
+        name.length > SshFiles.MAX_NAME_UNITS || name == "." || name == ".." ||
+        name.any { it == '/' || it == '\\' || Character.isISOControl(it) }
+
+    // Remote protocol path only; never a local File or destination normalization.
+    private fun remoteChildPath(parent: String, name: String) = when {
+        parent == "/" -> "/$name"
+        parent.endsWith('/') -> parent + name
+        else -> "$parent/$name"
+    }
+
+    /** Explicit new directory; no overwrite or implicit destination exists. */
+    fun createDirectory(name: String) {
+        main()
+        val token = session ?: return
+        if (!mutationReady(token)) return
+        if (invalidLeafName(name)) { state = state.copy(code = "INVALID_INPUT"); return }
+        val path = state.path
+        startMutation(token, path) { transport ->
+            transport.files.mkdir(remoteChildPath(path, name), timeoutMillis = 3_000)
+        }
+    }
+
+    /** Consent is always required before deletion; directory removal never recurses. */
+    fun requestDelete(entry: SshFileEntry) {
+        main()
+        val token = session ?: return
+        if (!mutationReady(token) || state.entries.none { it === entry }) return
+        state = state.copy(mutationConsent = SshFilesMutationConsent(
+            if (entry.kind == SshFileKind.DIRECTORY) SshFilesMutationKind.DELETE_DIRECTORY
+            else SshFilesMutationKind.DELETE_FILE,
+            state.path, entry, null, null, synchronized(registrationGate) { listingEpoch }), code = null)
+    }
+
+    /**
+     * Attempts the non-overwriting rename first. A real ALREADY_EXISTS preserves the exact entry
+     * and target in an explicit replace consent; no destination is replaced implicitly.
+     */
+    fun rename(entry: SshFileEntry, newName: String) {
+        main()
+        val token = session ?: return
+        if (!mutationReady(token) || state.entries.none { it === entry } || invalidLeafName(newName)) {
+            state = state.copy(code = "INVALID_INPUT")
+            return
+        }
+        invalidateListing()
+        val version = generation
+        val parentPath = state.path
+        val epoch = synchronized(registrationGate) { listingEpoch }
+        val from = remoteChildPath(parentPath, entry.name)
+        val to = remoteChildPath(parentPath, newName)
+        state = state.copy(phase = SshFilesPhase.MUTATING, code = null)
+        if (!FilesRuntime.work {
+                val transport = token.transport.get()
+                if (transport == null) {
+                    publish(token, version) { it.copy(phase = SshFilesPhase.CONNECTED, code = "UNAVAILABLE") }
+                    return@work
+                }
+                when (val result = transport.files.rename(from, to, overwrite = false, timeoutMillis = 3_000)) {
+                    is SshFilesResult.Success -> refreshAfterMutation(token, version, parentPath, transport)
+                    is SshFilesResult.Failure -> publish(token, version) {
+                        if (result.code == SshTransportCode.ALREADY_EXISTS) it.copy(phase = SshFilesPhase.CONNECTED,
+                            code = null, mutationConsent = if (synchronized(registrationGate) { listingEpoch } == epoch)
+                                SshFilesMutationConsent(SshFilesMutationKind.OVERWRITE_RENAME,
+                                    parentPath, entry, newName, to, epoch) else null)
+                        else it.copy(phase = SshFilesPhase.CONNECTED, code = result.code.name)
+                    }
+                }
+            }) state = state.copy(phase = SshFilesPhase.CONNECTED, code = "BUSY")
+    }
+
+    fun confirmMutation() {
+        main()
+        val consent = state.mutationConsent ?: return
+        state = state.copy(mutationConsent = null)
+        val token = session ?: return
+        val currentEpoch = synchronized(registrationGate) { listingEpoch }
+        if (!mutationReady(token) || consent.epoch != currentEpoch || state.path != consent.parentPath ||
+            state.entries.none { it === consent.entry }) {
+            state = state.copy(code = "INVALID_STATE")
+            return
+        }
+        val parentPath = consent.parentPath
+        val source = remoteChildPath(parentPath, consent.entry.name)
+        when (consent.kind) {
+            SshFilesMutationKind.DELETE_FILE -> startMutation(token, parentPath) { transport ->
+                transport.files.removeFile(source, timeoutMillis = 3_000)
+            }
+            SshFilesMutationKind.DELETE_DIRECTORY -> startMutation(token, parentPath) { transport ->
+                transport.files.removeEmptyDirectory(source, timeoutMillis = 3_000)
+            }
+            SshFilesMutationKind.OVERWRITE_RENAME -> {
+                val target = consent.targetPath ?: return
+                startMutation(token, parentPath) { transport ->
+                    transport.files.rename(source, target, overwrite = true, timeoutMillis = 3_000)
+                }
+            }
+        }
+    }
+
+    fun cancelMutation() {
+        main()
+        state = state.copy(mutationConsent = null)
+    }
+
+    private fun startMutation(token: FilesSession, path: String,
+                              action: (SshAuthenticatedTransport) -> SshFilesResult<Unit>) {
+        invalidateListing()
+        val version = generation
+        state = state.copy(phase = SshFilesPhase.MUTATING, code = null)
+        if (!FilesRuntime.work {
+                val transport = token.transport.get()
+                if (transport == null) {
+                    publish(token, version) { it.copy(phase = SshFilesPhase.CONNECTED, code = "UNAVAILABLE") }
+                    return@work
+                }
+                when (val result = action(transport)) {
+                    is SshFilesResult.Success -> refreshAfterMutation(token, version, path, transport)
+                    is SshFilesResult.Failure -> publish(token, version) {
+                        it.copy(phase = SshFilesPhase.CONNECTED, code = result.code.name)
+                    }
+                }
+            }) state = state.copy(phase = SshFilesPhase.CONNECTED, code = "BUSY")
+    }
+
+    /** Re-lists the same directory after a committed mutation. A listing failure is visible but
+     * does not invent a mutation result or retire a transport that the engine still retains. */
+    private fun refreshAfterMutation(token: FilesSession, version: Long, path: String,
+                                     transport: SshAuthenticatedTransport) {
+        when (val listed = transport.files.list(path, timeoutMillis = 3_000)) {
+            is SshFilesResult.Success -> publish(token, version) {
+                it.copy(phase = SshFilesPhase.CONNECTED, path = path, entries = listed.value,
+                    preview = null, code = null, registrationCandidate = null, mutationConsent = null)
+            }
+            is SshFilesResult.Failure -> publish(token, version) {
+                it.copy(phase = SshFilesPhase.CONNECTED, code = listed.code.name)
+            }
+        }
     }
 
     private fun publish(token: FilesSession, version: Long, change: (SshFilesSessionState) -> SshFilesSessionState) {

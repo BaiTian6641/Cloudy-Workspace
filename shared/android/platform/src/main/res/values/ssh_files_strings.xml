@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="ssh_files_heading">Remote files over SSH</string>
-    <string name="ssh_files_scope">Read-only SSH file browsing. Browse directories and preview files up to 64 KiB. Local file export, uploads and remote changes are not available here.</string>
+    <string name="ssh_files_scope">SSH file browsing with bounded previews and explicit new-folder, rename and delete actions. Uploads, downloads, staged editing and local export are not available here.</string>
     <string name="ssh_files_disconnect">Disconnect</string>
     <string name="ssh_files_close">Close</string>
     <string name="ssh_files_ready">Choose a saved SSH profile and enter credentials for this session only.</string>
@@ -28,6 +28,22 @@
     <string name="ssh_files_open">Open directory</string>
     <string name="ssh_files_read">Read preview</string>
     <string name="ssh_files_other_unsupported">This entry type cannot be previewed here.</string>
+    <string name="ssh_files_folder_name">New folder name</string>
+    <string name="ssh_files_create_folder">Create folder</string>
+    <string name="ssh_files_name_invalid">Use one remote name without slash, backslash, dot entries or control characters.</string>
+    <string name="ssh_files_rename">Rename</string>
+    <string name="ssh_files_new_name">New name</string>
+    <string name="ssh_files_rename_confirm">Rename</string>
+    <string name="ssh_files_delete">Delete</string>
+    <string name="ssh_files_cancel">Cancel</string>
+    <string name="ssh_files_confirmation_heading">Confirm remote change</string>
+    <string name="ssh_files_overwrite_confirm">Replace the existing %2$s with %1$s?</string>
+    <string name="ssh_files_overwrite_note">The rename uses an explicit overwrite only after this confirmation. The prior destination is not recoverable here.</string>
+    <string name="ssh_files_delete_file_confirm">Delete %1$s? This cannot be undone.</string>
+    <string name="ssh_files_delete_directory_confirm">Delete the empty directory %1$s?</string>
+    <string name="ssh_files_delete_directory_note">Only empty directories can be removed. Non-empty directories are refused; no recursive delete is performed.</string>
+    <string name="ssh_files_replace_action">Replace</string>
+    <string name="ssh_files_delete_action">Delete</string>
     <string name="ssh_files_preview_heading">File preview</string>
     <string name="ssh_files_preview_bound">Read size (bytes): %1$d. Files larger than 64 KiB cannot be previewed.</string>
     <string name="ssh_files_hex">Up to the first 256 bytes are shown as hexadecimal. The total bytes read are shown above.</string>
@@ -41,6 +57,7 @@
     <string name="ssh_files_connecting">Connecting and checking authentication</string>
     <string name="ssh_files_connected">Connected to remote files</string>
     <string name="ssh_files_reading">Reading remote files</string>
+    <string name="ssh_files_mutating">Changing remote files</string>
     <string name="ssh_files_retiring">Disconnecting and closing the connection</string>
     <string name="ssh_files_failed">Operation unavailable or failed</string>
     <string name="ssh_files_regular">Regular file</string>

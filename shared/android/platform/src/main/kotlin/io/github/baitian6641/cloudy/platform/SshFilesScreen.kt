@@ -36,6 +36,8 @@ internal fun SshFilesScreen(
     onUsername: (TextFieldValue) -> Unit, onPassword: (TextFieldValue) -> Unit,
     onSelect: (ConnectionProfile) -> Unit, onConnect: () -> Unit, onRefreshProfiles: () -> Unit,
     onList: (String) -> Unit, onRead: (SshFileEntry) -> Unit,
+    onCreateDirectory: (String) -> Unit, onRename: (SshFileEntry, String) -> Unit,
+    onRequestDelete: (SshFileEntry) -> Unit, onConfirmMutation: () -> Unit, onCancelMutation: () -> Unit,
     onDisconnect: () -> Unit, onClose: () -> Unit,
     onLocations: () -> Unit, onRegister: (FilesListingCandidate, String) -> Unit,
     onCancelRegistration: (FilesListingCandidate) -> Unit,
@@ -43,6 +45,7 @@ internal fun SshFilesScreen(
 ) {
     val canConnect = interactive && !state.registrationPending && state.phase in setOf(SshFilesPhase.IDLE, SshFilesPhase.FAILED)
     val canBrowse = interactive && !state.registrationPending && state.phase == SshFilesPhase.CONNECTED
+    val canMutate = canBrowse && state.mutationConsent == null
     // This proposal belongs to one completed listing only. No rememberSaveable, Intent or
     // restored field can resurrect its authority after focus/lifecycle invalidation.
     var confirming by remember(state.registrationCandidate, interactive) { mutableStateOf(false) }
@@ -50,14 +53,21 @@ internal fun SshFilesScreen(
     var locationLabelRejected by remember(state.registrationCandidate, interactive) { mutableStateOf(false) }
     var pathDraft by remember(state.path) { mutableStateOf(TextFieldValue(state.path)) }
     var pathTooLong by remember(state.path) { mutableStateOf(false) }
+    var folderDraft by remember(state.path) { mutableStateOf(TextFieldValue()) }
+    var folderInvalid by remember(state.path) { mutableStateOf(false) }
+    var renamingName by remember(state.path) { mutableStateOf<String?>(null) }
+    var renameDraft by remember(state.path) { mutableStateOf(TextFieldValue()) }
+    var renameInvalid by remember(state.path) { mutableStateOf(false) }
+    LaunchedEffect(state.path) { renamingName = null }
     val scroll = rememberLazyListState()
     LaunchedEffect(state.selected) { if (state.selected != null) scroll.scrollToItem(0) }
     val hasForm = state.selected != null && state.phase in setOf(SshFilesPhase.IDLE, SshFilesPhase.FAILED, SshFilesPhase.CONNECTING)
     val hasPermission = state.permissionNeeded || (offerLocalPermission && canConnect)
-    val hasBrowser = state.phase in setOf(SshFilesPhase.CONNECTED, SshFilesPhase.READING)
+    val hasBrowser = state.phase in setOf(SshFilesPhase.CONNECTED, SshFilesPhase.READING, SshFilesPhase.MUTATING)
     val pathIndex = 2 + (if (state.selected != null) 1 else 0) + (if (hasForm) 3 else 0) + (if (hasPermission) 1 else 0)
-    val previewIndex = pathIndex + if (hasBrowser) 4 + state.entries.size +
-        (if (state.entries.isEmpty() && state.phase == SshFilesPhase.CONNECTED) 1 else 0) else 0
+    val previewIndex = pathIndex + if (hasBrowser) 5 + state.entries.size +
+        (if (state.entries.isEmpty() && state.phase == SshFilesPhase.CONNECTED) 1 else 0) +
+        (if (state.mutationConsent != null) 1 else 0) else 0
     // Reveal completed navigation/preview once; never move focus/scroll on a field keystroke.
     LaunchedEffect(state.path, hasBrowser, state.preview) {
         if (state.preview != null) scroll.scrollToItem(previewIndex)
@@ -170,6 +180,25 @@ internal fun SshFilesScreen(
                             shape = RoundedCornerShape(CloudyControlMetrics.fieldRadius),
                             modifier = Modifier.fillMaxWidth().testTag("ssh_files_path"))
                     }
+                    item(key = "folder") {
+                        Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                            OutlinedTextField(folderDraft, { value ->
+                                folderInvalid = value.text.isEmpty() || value.text.length > SshFiles.MAX_NAME_UNITS ||
+                                    '/' in value.text || '\\' in value.text || value.text == "." || value.text == ".."
+                                if (value.text.length <= SshFiles.MAX_NAME_UNITS) folderDraft = value
+                            }, enabled = canMutate, singleLine = true, isError = folderInvalid,
+                                label = { Text(stringResource(R.string.ssh_files_folder_name)) },
+                                supportingText = { if (folderInvalid) Text(stringResource(R.string.ssh_files_name_invalid)) },
+                                keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.None, autoCorrectEnabled = false),
+                                shape = RoundedCornerShape(CloudyControlMetrics.fieldRadius),
+                                modifier = Modifier.fillMaxWidth().testTag("ssh_files_folder_name"))
+                            FilesButton(R.string.ssh_files_create_folder, "ssh_files_create_folder",
+                                canMutate && folderDraft.text.isNotEmpty() && !folderInvalid) {
+                                onCreateDirectory(folderDraft.text)
+                                folderDraft = TextFieldValue()
+                            }
+                        }
+                    }
                     item(key = "browse-actions") {
                         FlowRow(horizontalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall),
                             verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
@@ -246,17 +275,81 @@ internal fun SshFilesScreen(
                                 SelectionContainer { Text(entry.name, style = MaterialTheme.typography.titleMedium) }
                                 Text(stringResource(kindLabel(entry.kind)))
                                 entry.size?.let { Text(stringResource(R.string.ssh_files_size, it)) }
-                                when (entry.kind) {
-                                    SshFileKind.DIRECTORY -> FilesButton(R.string.ssh_files_open, "ssh_files_open_$index", canBrowse) {
-                                        onList(remoteChild(state.path, entry.name))
+                                FlowRow(horizontalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall),
+                                    verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                                    when (entry.kind) {
+                                        SshFileKind.DIRECTORY -> FilesButton(R.string.ssh_files_open, "ssh_files_open_$index", canBrowse) {
+                                            onList(remoteChild(state.path, entry.name))
+                                        }
+                                        SshFileKind.REGULAR -> FilesButton(R.string.ssh_files_read, "ssh_files_read_$index", canBrowse) { onRead(entry) }
+                                        SshFileKind.OTHER -> Text(stringResource(R.string.ssh_files_other_unsupported))
                                     }
-                                    SshFileKind.REGULAR -> FilesButton(R.string.ssh_files_read, "ssh_files_read_$index", canBrowse) { onRead(entry) }
-                                    SshFileKind.OTHER -> Text(stringResource(R.string.ssh_files_other_unsupported))
+                                    FilesButton(R.string.ssh_files_rename, "ssh_files_rename_$index", canMutate) {
+                                        renamingName = entry.name
+                                        renameDraft = TextFieldValue(entry.name)
+                                        renameInvalid = false
+                                    }
+                                    FilesButton(R.string.ssh_files_delete, "ssh_files_delete_$index", canMutate) { onRequestDelete(entry) }
+                                }
+                                if (renamingName == entry.name) {
+                                    OutlinedTextField(renameDraft, { value ->
+                                        renameInvalid = value.text.isEmpty() || value.text.length > SshFiles.MAX_NAME_UNITS ||
+                                            '/' in value.text || '\\' in value.text || value.text == "." || value.text == ".."
+                                        if (value.text.length <= SshFiles.MAX_NAME_UNITS) renameDraft = value
+                                    }, enabled = canMutate, singleLine = true, isError = renameInvalid,
+                                        label = { Text(stringResource(R.string.ssh_files_new_name)) },
+                                        supportingText = { if (renameInvalid) Text(stringResource(R.string.ssh_files_name_invalid)) },
+                                        keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.None, autoCorrectEnabled = false),
+                                        shape = RoundedCornerShape(CloudyControlMetrics.fieldRadius),
+                                        modifier = Modifier.fillMaxWidth().testTag("ssh_files_rename_name_$index"))
+                                    FlowRow(horizontalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall),
+                                        verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                                        FilesButton(R.string.ssh_files_rename_confirm, "ssh_files_rename_confirm_$index",
+                                            canMutate && renameDraft.text.isNotEmpty() && !renameInvalid) {
+                                            renamingName = null
+                                            onRename(entry, renameDraft.text)
+                                        }
+                                        FilesButton(R.string.ssh_files_cancel, "ssh_files_rename_cancel_$index", true) {
+                                            renamingName = null
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
                 }
+                state.mutationConsent?.let { consent -> item(key = "mutation-consent") {
+                    Surface(Modifier.fillMaxWidth().testTag("ssh_files_mutation_confirmation"),
+                        color = MaterialTheme.colorScheme.surfaceContainer,
+                        shape = RoundedCornerShape(CloudyControlMetrics.dialogRadius)) {
+                        Column(Modifier.padding(CloudyControlMetrics.spaceLarge),
+                            verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceMedium)) {
+                            Text(stringResource(R.string.ssh_files_confirmation_heading), style = MaterialTheme.typography.titleLarge,
+                                modifier = Modifier.semantics { heading() })
+                            SelectionContainer { Text(consent.entry.name) }
+                            when (consent.kind) {
+                                SshFilesMutationKind.OVERWRITE_RENAME -> {
+                                    Text(stringResource(R.string.ssh_files_overwrite_confirm,
+                                        consent.entry.name, consent.newName.orEmpty()))
+                                    Text(stringResource(R.string.ssh_files_overwrite_note))
+                                }
+                                SshFilesMutationKind.DELETE_FILE -> Text(stringResource(R.string.ssh_files_delete_file_confirm,
+                                    consent.entry.name))
+                                SshFilesMutationKind.DELETE_DIRECTORY -> {
+                                    Text(stringResource(R.string.ssh_files_delete_directory_confirm, consent.entry.name))
+                                    Text(stringResource(R.string.ssh_files_delete_directory_note))
+                                }
+                            }
+                            FlowRow(horizontalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall),
+                                verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                                FilesButton(if (consent.kind == SshFilesMutationKind.OVERWRITE_RENAME)
+                                    R.string.ssh_files_replace_action else R.string.ssh_files_delete_action,
+                                    "ssh_files_mutation_confirm", canBrowse) { onConfirmMutation() }
+                                FilesButton(R.string.ssh_files_cancel, "ssh_files_mutation_cancel", true) { onCancelMutation() }
+                            }
+                        }
+                    }
+                } }
                 state.preview?.let { preview -> item(key = "preview") {
                     Column(Modifier.fillMaxWidth().testTag("ssh_files_preview"),
                         verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
@@ -305,6 +398,7 @@ private fun phaseLabel(phase: SshFilesPhase): Int = when (phase) {
     SshFilesPhase.CONNECTING -> R.string.ssh_files_connecting
     SshFilesPhase.CONNECTED -> R.string.ssh_files_connected
     SshFilesPhase.READING -> R.string.ssh_files_reading
+    SshFilesPhase.MUTATING -> R.string.ssh_files_mutating
     SshFilesPhase.RETIRING -> R.string.ssh_files_retiring
     SshFilesPhase.FAILED -> R.string.ssh_files_failed
 }

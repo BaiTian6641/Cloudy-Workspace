@@ -123,6 +123,22 @@ class CloudySshFilesActivity : ComponentActivity() {
                     onRefreshProfiles = { if (canEdit()) { clearFields(); notice = null; model.refreshProfiles() } },
                     onList = { path -> if (interactive && hasWindowFocus()) { notice = null; model.list(path) } },
                     onRead = { entry -> if (interactive && hasWindowFocus()) { notice = null; model.read(entry) } },
+                    onCreateDirectory = { name -> if (interactive && hasWindowFocus()) { notice = null; model.createDirectory(name) } },
+                    onRename = { entry, name ->
+                        if (interactive && hasWindowFocus()) { notice = null; model.rename(entry, name) }
+                    },
+                    onRequestDelete = { entry ->
+                        if (interactive && hasWindowFocus()) { notice = null; model.requestDelete(entry) }
+                    },
+                    onConfirmMutation = {
+                        if (interactive && hasWindowFocus()) {
+                            // Recheck the opaque owner's foreground state before consuming consent.
+                            model.onOwnerForeground(attachment, interactive && hasWindowFocus() && !isFinishing)
+                            notice = null
+                            model.confirmMutation()
+                        }
+                    },
+                    onCancelMutation = model::cancelMutation,
                     onDisconnect = { clearFields(); notice = null; model.disconnect() },
                     onClose = { clearFields(); model.disconnect(); finish() },
                     onLocations = {
