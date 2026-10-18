@@ -427,6 +427,14 @@ class ConsoleTerminalActivityTest {
 
     private fun credentials(fixture: SshAuthenticateFixture) {
         setText("terminal_username", fixture.username)
+        // Exercise the product method selector without selecting a key document: the key surface
+        // must be reachable and must not enable Connect until a key is actually chosen.
+        click("terminal_auth_key_method")
+        waitFor(10_000) {
+            node("terminal_key_choose")?.isVisibleToUser == true && node("terminal_key_passphrase") != null
+        }
+        check(node("terminal_connect_button")?.isEnabled == false) { "TERMINAL_KEY_CONNECT_WITHOUT_KEY" }
+        click("terminal_auth_password_method")
         setText("terminal_password", fixture.password)
         waitFor(10_000) { node("terminal_connect_button")?.isEnabled == true }
     }

@@ -11,15 +11,19 @@ import java.nio.file.attribute.PosixFilePermissions;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.MessageDigest;
+import java.security.PublicKey;
 import java.security.SecureRandom;
 import java.security.spec.ECGenParameterSpec;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Collections;
+import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.sshd.common.config.keys.AuthorizedKeyEntry;
 import org.apache.sshd.common.config.keys.KeyUtils;
+import org.apache.sshd.common.config.keys.PublicKeyEntryResolver;
 import org.apache.sshd.common.digest.BuiltinDigests;
 import org.apache.sshd.common.keyprovider.KeyPairProvider;
 import org.apache.sshd.server.SshServer;
@@ -80,6 +84,15 @@ public final class CloudySshTerminalFixture {
             if (fingerprint == null || !fingerprint.startsWith("SHA256:")) {
                 throw new IllegalStateException("FIXTURE_KEY");
             }
+            generateClientKey(output.resolve("client_key"));
+            // A second, deliberately unregistered key lets a consumer prove explicit refusal.
+            generateClientKey(output.resolve("wrong_key"));
+            List<AuthorizedKeyEntry> entries =
+                AuthorizedKeyEntry.readAuthorizedKeys(output.resolve("client_key.pub"));
+            if (entries.size() != 1) {
+                throw new IllegalStateException("FIXTURE_KEY");
+            }
+            PublicKey acceptedClientKey = entries.get(0).resolvePublicKey(null, PublicKeyEntryResolver.FAILING);
 
             server = SshServer.setUpDefaultServer();
             server.setHost("127.0.0.1");
@@ -87,6 +100,8 @@ public final class CloudySshTerminalFixture {
             server.setKeyPairProvider(KeyPairProvider.wrap(hostKey));
             server.setPasswordAuthenticator((username, presented, session) ->
                 user.equals(username) && constantTimeEquals(expectedPassword, presented));
+            server.setPublickeyAuthenticator((username, key, session) ->
+                user.equals(username) && key.equals(acceptedClientKey));
             // script owns a real kernel PTY. MINA's process pipes alone have no CR/Enter line discipline.
             InteractiveProcessShellFactory shell = new InteractiveProcessShellFactory();
             shell.setCommand("script --return --quiet --flush --command '/bin/sh -i' /dev/null",
@@ -168,6 +183,25 @@ public final class CloudySshTerminalFixture {
                 throw new IOException("output directory must be empty");
             }
         }
+    }
+
+    /** One fresh OpenSSH EC key in the already-validated private run directory. */
+    private static void generateClientKey(Path privateKey) throws IOException, InterruptedException {
+        Process keygen = new ProcessBuilder("ssh-keygen", "-q", "-t", "ecdsa", "-b", "256",
+            "-N", "", "-f", privateKey.toString(), "-C", "cloudy-key-fixture")
+            .redirectErrorStream(true).start();
+        boolean generated;
+        try {
+            generated = keygen.waitFor(10, TimeUnit.SECONDS) && keygen.exitValue() == 0;
+        } finally {
+            keygen.destroyForcibly();
+        }
+        if (!generated) {
+            throw new IllegalStateException("FIXTURE_KEY");
+        }
+        Files.setPosixFilePermissions(privateKey, PosixFilePermissions.fromString(PRIVATE_FILE));
+        Files.setPosixFilePermissions(privateKey.resolveSibling(privateKey.getFileName() + ".pub"),
+            PosixFilePermissions.fromString(PRIVATE_FILE));
     }
 
     private static void writeProperties(Path path, int port, String user, String password, String fingerprint)

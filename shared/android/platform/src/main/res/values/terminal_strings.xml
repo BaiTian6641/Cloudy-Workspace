@@ -69,4 +69,17 @@
     <string name="terminal_search_result">%1$d of %2$d</string>
     <string name="terminal_search_result_threshold">%1$d of %2$d (1000-highlight limit reached)</string>
     <string name="terminal_search_pending">Searching…</string>
+    <string name="terminal_auth_method">Authentication method</string>
+    <string name="terminal_auth_password">Password</string>
+    <string name="terminal_auth_private_key">Private key</string>
+    <string name="terminal_key_choose">Choose private key…</string>
+    <string name="terminal_key_replace">Replace private key…</string>
+    <string name="terminal_key_selected">Private key selected for this attempt</string>
+    <string name="terminal_key_none">No private key selected.</string>
+    <string name="terminal_key_passphrase">Key passphrase (leave empty for an unencrypted key)</string>
+    <string name="terminal_key_reading">Reading the selected key…</string>
+    <string name="terminal_key_unreadable">The selected file could not be read as a bounded key file.</string>
+    <string name="terminal_key_loaded">Private key loaded for this attempt.</string>
+    <string name="terminal_key_scope">Supported formats: OpenSSH private keys (including encrypted), legacy OpenSSH PEM and RSA PKCS#8. The file is read once and its bytes are not saved or logged.</string>
+    <string name="terminal_auth_invalid">The supplied credentials are not valid for this attempt.</string>
 </resources>

@@ -41,6 +41,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
@@ -85,6 +86,7 @@ import io.github.baitian6641.cloudy.domain.ConnectionProfile
 import io.github.baitian6641.cloudy.domain.ConnectionProtocol
 import io.github.baitian6641.cloudy.domain.SshObservationProfile
 import io.github.baitian6641.cloudy.domain.TerminalRightClick
+import io.github.baitian6641.cloudy.ssh.SshKeyCredentials
 import io.github.baitian6641.cloudy.ssh.SshPasswordCredentials
 import io.github.baitian6641.cloudy.terminal.TerminalAdmission
 import io.github.baitian6641.cloudy.terminal.TerminalIdentity
@@ -106,6 +108,7 @@ import java.util.concurrent.atomic.AtomicReference
  */
 class CloudyTerminalActivity : ComponentActivity() {
     private enum class Phase { AUTH, CONNECTING, TERMINAL, RETIRING, BLOCKED }
+    private enum class AuthMethod { PASSWORD, PRIVATE_KEY }
     private class Attempt {
         val renderer = AtomicReference<TerminalWebViewBridge?>()
         lateinit var session: TerminalSession
@@ -123,6 +126,11 @@ class CloudyTerminalActivity : ComponentActivity() {
     private var selected by mutableStateOf<SshObservationProfile?>(null)
     private var username by mutableStateOf(TextFieldValue())
     private var password by mutableStateOf(TextFieldValue())
+    private var authMethod by mutableStateOf(AuthMethod.PASSWORD)
+    private var key by mutableStateOf<ByteArray?>(null)
+    private var keyPassphrase by mutableStateOf(TextFieldValue())
+    private var keyBusy by mutableStateOf(false)
+    private var keyRead = 0L
     private var phase by mutableStateOf(Phase.AUTH)
     private var message by mutableStateOf<String?>(null)
     private var renderer by mutableStateOf<TerminalWebViewBridge?>(null)
@@ -151,6 +159,10 @@ class CloudyTerminalActivity : ComponentActivity() {
     private val permission = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
         if (!disposed) message = getString(R.string.terminal_permission_return)
         // Grant return never replays authentication or sends any input.
+    }
+    /** Session-only key choice: the returned read grant is consumed immediately, never persisted. */
+    private val keyPicker = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        if (uri != null && !disposed && interactive && !busy) readKey(uri)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -303,9 +315,35 @@ class CloudyTerminalActivity : ComponentActivity() {
             requestLocalPermission()
             return
         }
-        if (username.text.isEmpty() || password.text.isEmpty()) return
-        val user = username.text.toCharArray()
-        val secret = password.text.toCharArray()
+        if (username.text.isEmpty() || keyBusy) return
+        val credentials = when (authMethod) {
+            AuthMethod.PASSWORD -> {
+                if (password.text.isEmpty()) return
+                val user = username.text.toCharArray()
+                val secret = password.text.toCharArray()
+                try {
+                    SshPasswordCredentials.create(user, secret)
+                } catch (_: IllegalArgumentException) {
+                    message = getString(R.string.terminal_auth_invalid)
+                    return
+                } finally {
+                    user.fill('\u0000'); secret.fill('\u0000')
+                }
+            }
+            AuthMethod.PRIVATE_KEY -> {
+                val material = key ?: return
+                val user = username.text.toCharArray()
+                val passphrase = keyPassphrase.text.toCharArray()
+                try {
+                    SshKeyCredentials.create(user, material, passphrase)
+                } catch (_: IllegalArgumentException) {
+                    message = getString(R.string.terminal_auth_invalid)
+                    return
+                } finally {
+                    user.fill('\u0000'); passphrase.fill('\u0000')
+                }
+            }
+        }
         clearSecretFields()
         profileRead++
         phase = Phase.CONNECTING
@@ -313,7 +351,47 @@ class CloudyTerminalActivity : ComponentActivity() {
         val current = Attempt()
         current.session = TerminalSession(applicationContext, sessionListener(current, profile))
         attempt = current
-        current.session.connect(profile, user, secret)
+        current.session.connect(profile, credentials)
+    }
+
+    /** One bounded session-only read; supersession and lifecycle changes wipe the bytes. */
+    private fun readKey(uri: android.net.Uri) {
+        val token = ++keyRead
+        keyBusy = true
+        message = getString(R.string.terminal_key_reading)
+        Thread({
+            var loaded: ByteArray? = null
+            try {
+                contentResolver.openInputStream(uri)?.use { input ->
+                    val buffer = ByteArray(SshKeyCredentials.MAX_KEY_BYTES + 1)
+                    var size = 0
+                    while (size < buffer.size) {
+                        val read = input.read(buffer, size, buffer.size - size)
+                        if (read <= 0) break
+                        size += read
+                    }
+                    if (size in 1..SshKeyCredentials.MAX_KEY_BYTES) loaded = buffer.copyOf(size)
+                    buffer.fill(0)
+                }
+            } catch (_: Exception) {
+                // A failed read is a typed local refusal; no path or provider text is exposed.
+            }
+            runOnUiThread {
+                if (disposed || token != keyRead) {
+                    loaded?.fill(0)
+                    return@runOnUiThread
+                }
+                keyBusy = false
+                val body = loaded
+                if (body == null) {
+                    message = getString(R.string.terminal_key_unreadable)
+                } else {
+                    key?.fill(0)
+                    key = body
+                    message = getString(R.string.terminal_key_loaded)
+                }
+            }
+        }, "cloudy-terminal-key").apply { isDaemon = true }.start()
     }
 
     private fun sessionListener(current: Attempt, profile: SshObservationProfile) = object : TerminalSession.Listener {
@@ -737,8 +815,13 @@ class CloudyTerminalActivity : ComponentActivity() {
 
     private fun clearSecretFields() {
         credentialEpoch++
+        keyRead++
+        keyBusy = false
+        key?.fill(0)
+        key = null
         username = TextFieldValue()
         password = TextFieldValue()
+        keyPassphrase = TextFieldValue()
     }
 
     private fun hasLocalPermission() = Build.VERSION.SDK_INT < 37 ||
@@ -776,7 +859,10 @@ class CloudyTerminalActivity : ComponentActivity() {
             }
             item("actions") {
                 FlowRow(horizontalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
-                    Button(::connect, enabled = !busy && chosen != null && username.text.isNotEmpty() && password.text.isNotEmpty(),
+                    Button(::connect, enabled = !busy && !keyBusy && chosen != null &&
+                        username.text.isNotEmpty() &&
+                        ((authMethod == AuthMethod.PASSWORD && password.text.isNotEmpty()) ||
+                            (authMethod == AuthMethod.PRIVATE_KEY && key != null)),
                         modifier = Modifier.testTag("terminal_connect_button")) { Text(stringResource(R.string.terminal_connect)) }
                     TextButton(::openTrust, enabled = !busy) { Text(stringResource(R.string.terminal_trust)) }
                     TextButton(::refresh, enabled = !busy, modifier = Modifier.testTag("terminal_refresh")) {
@@ -805,7 +891,22 @@ class CloudyTerminalActivity : ComponentActivity() {
                             modifier = Modifier.fillMaxWidth().testTag("terminal_username"))
                     }
                 }
-                item("password") {
+                item("auth_method") {
+                    Column(verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                        Text(stringResource(R.string.terminal_auth_method), style = MaterialTheme.typography.labelLarge)
+                        FlowRow(horizontalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                            FilterChip(authMethod == AuthMethod.PASSWORD,
+                                { if (!busy && !keyBusy) authMethod = AuthMethod.PASSWORD },
+                                label = { Text(stringResource(R.string.terminal_auth_password)) },
+                                modifier = Modifier.testTag("terminal_auth_password_method"))
+                            FilterChip(authMethod == AuthMethod.PRIVATE_KEY,
+                                { if (!busy && !keyBusy) authMethod = AuthMethod.PRIVATE_KEY },
+                                label = { Text(stringResource(R.string.terminal_auth_private_key)) },
+                                modifier = Modifier.testTag("terminal_auth_key_method"))
+                        }
+                    }
+                }
+                if (authMethod == AuthMethod.PASSWORD) item("password") {
                     key(credentialEpoch) {
                         OutlinedTextField(password, { if (!busy && it.text.length <= SshPasswordCredentials.MAX_PASSWORD_UNITS) password = it },
                             enabled = !busy, label = { Text(stringResource(R.string.terminal_password)) }, singleLine = true,
@@ -813,6 +914,36 @@ class CloudyTerminalActivity : ComponentActivity() {
                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password,
                                 capitalization = KeyboardCapitalization.None, autoCorrectEnabled = false),
                             modifier = Modifier.fillMaxWidth().testTag("terminal_password"))
+                    }
+                }
+                if (authMethod == AuthMethod.PRIVATE_KEY) {
+                    item("key_choose") {
+                        Column(verticalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                            FlowRow(horizontalArrangement = Arrangement.spacedBy(CloudyControlMetrics.spaceSmall)) {
+                                Button({ keyPicker.launch(arrayOf("*/*")) }, enabled = !busy && !keyBusy,
+                                    modifier = Modifier.testTag("terminal_key_choose")) {
+                                    Text(stringResource(if (key == null) R.string.terminal_key_choose
+                                    else R.string.terminal_key_replace))
+                                }
+                            }
+                            Text(stringResource(if (key == null) R.string.terminal_key_none
+                            else R.string.terminal_key_selected),
+                                style = MaterialTheme.typography.bodySmall,
+                                modifier = Modifier.testTag("terminal_key_status")
+                                    .semantics { liveRegion = LiveRegionMode.Polite })
+                            Text(stringResource(R.string.terminal_key_scope), style = MaterialTheme.typography.bodySmall)
+                        }
+                    }
+                    item("key_passphrase") {
+                        key(credentialEpoch) {
+                            OutlinedTextField(keyPassphrase,
+                                { if (!busy && it.text.length <= SshKeyCredentials.MAX_PASSPHRASE_UNITS) keyPassphrase = it },
+                                enabled = !busy, label = { Text(stringResource(R.string.terminal_key_passphrase)) },
+                                singleLine = true, visualTransformation = PasswordVisualTransformation(),
+                                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password,
+                                    capitalization = KeyboardCapitalization.None, autoCorrectEnabled = false),
+                                modifier = Modifier.fillMaxWidth().testTag("terminal_key_passphrase"))
+                        }
                     }
                 }
             }

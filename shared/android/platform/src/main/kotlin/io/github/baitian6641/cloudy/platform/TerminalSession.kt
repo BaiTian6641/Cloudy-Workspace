@@ -6,11 +6,15 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
+import io.github.baitian6641.cloudy.domain.SshHostKeyIdentity
 import io.github.baitian6641.cloudy.domain.SshObservationProfile
+import io.github.baitian6641.cloudy.domain.SshPeerIdentity
 import io.github.baitian6641.cloudy.ssh.SshAuthenticatedTransport
 import io.github.baitian6641.cloudy.ssh.SshAuthenticatedTransportFactory
+import io.github.baitian6641.cloudy.ssh.SshKeyCredentials
 import io.github.baitian6641.cloudy.ssh.SshOwnedPty
 import io.github.baitian6641.cloudy.ssh.SshPasswordCredentials
+import io.github.baitian6641.cloudy.ssh.SshSessionCredentials
 import io.github.baitian6641.cloudy.ssh.SshPtyAdmission
 import io.github.baitian6641.cloudy.ssh.SshPtyOpenResult
 import io.github.baitian6641.cloudy.ssh.SshPtyReadResult
@@ -55,16 +59,17 @@ internal class TerminalSession(context: Context, private val listener: Listener)
     @Volatile private var pty: SshOwnedPty? = null
     @Volatile private var worker: Thread? = null
 
-    fun connect(profile: SshObservationProfile, username: CharArray, password: CharArray) {
-        val credentials = try {
-            if (!started.compareAndSet(false, true) || stopped.get() != null) return
-            SshPasswordCredentials.create(username, password)
-        } catch (_: IllegalArgumentException) {
+    /** Caller transfers exactly one credential; every rejection path disposes it. */
+    fun connect(profile: SshObservationProfile, credentials: SshSessionCredentials) {
+        if (!started.compareAndSet(false, true) || stopped.get() != null) {
+            credentials.close()
+            return
+        }
+        val keyCredential = credentials as? SshKeyCredentials
+        if (keyCredential == null && credentials !is SshPasswordCredentials) {
+            credentials.close()
             main.post { listener.onEnded("INVALID_CREDENTIALS", false, true) }
             return
-        } finally {
-            username.fill('\u0000')
-            password.fill('\u0000')
         }
         var code = "CLOSED"
         var authenticated = false
@@ -72,7 +77,13 @@ internal class TerminalSession(context: Context, private val listener: Listener)
         val owner = Thread({
             try {
                 if (!active()) return@Thread
-                when (val prepared = SshAuthenticationCoordinator(application).begin(profile, credentials)) {
+                val coordinator = SshAuthenticationCoordinator(application)
+                val prepared = if (keyCredential != null) {
+                    coordinator.beginKey(profile, keyCredential)
+                } else {
+                    coordinator.begin(profile, checkNotNull(credentials as? SshPasswordCredentials))
+                }
+                when (prepared) {
                     is SshAuthenticationPreparation.Failed -> { code = prepared.code.name; return@Thread }
                     is SshAuthenticationPreparation.Ready -> handle = prepared.handle
                 }
@@ -84,9 +95,20 @@ internal class TerminalSession(context: Context, private val listener: Listener)
                     return@Thread
                 }
                 if (!active()) return@Thread
-                val opened = SshAuthenticatedTransportFactory().connectPassword(profile.peer, address,
-                    authority.expectedKey, authority.cancellation, authority::admit,
-                    authority::establishSession, authority::releaseSession)
+                val factory = SshAuthenticatedTransportFactory()
+                val opened = if (keyCredential != null) {
+                    factory.connectPublicKey(profile.peer, address, authority.expectedKey,
+                        authority.cancellation, { peer: SshPeerIdentity, key: SshHostKeyIdentity ->
+                            val admitted = authority.admit(peer, key)
+                            if (admitted is SshKeyCredentials) admitted else { admitted?.close(); null }
+                        }, authority::establishSession, authority::releaseSession)
+                } else {
+                    factory.connectPassword(profile.peer, address, authority.expectedKey,
+                        authority.cancellation, { peer: SshPeerIdentity, key: SshHostKeyIdentity ->
+                            val admitted = authority.admit(peer, key)
+                            if (admitted is SshPasswordCredentials) admitted else { admitted?.close(); null }
+                        }, authority::establishSession, authority::releaseSession)
+                }
                 if (opened is SshTransportOpenResult.Failure) {
                     code = opened.code.name
                     cleanupCertain = when (opened.code) {

@@ -1,10 +1,10 @@
-# Local password SSH terminal fixture
+# Local password/key SSH terminal fixture
 
 **Scope:** construction fixture for the Console terminal adapter. It is a real Apache MINA SSHD
-2.20.0 loopback server with password authentication and a real local interactive shell, used to
-exercise the product's retained transport, channel, renderer output and explicit close on a
-device. It is **not** an OpenSSH interoperability, PTY/resize, privilege-isolation or product
-acceptance result.
+2.20.0 loopback server with password authentication, one accepted generated EC client key and a
+real local interactive shell, used to exercise the product's retained transport, channel,
+renderer output and explicit close on a device. It is **not** an OpenSSH interoperability,
+PTY/resize, privilege-isolation or product acceptance result.
 
 The MINA process factory starts util-linux `script --return --quiet --flush --command
 '/bin/sh -i' /dev/null`. `script` supplies a **real kernel PTY** and its CR/Enter line discipline;
@@ -15,7 +15,9 @@ The shell runs as the invoking host user; this is not a sandbox.
 
 ## Prerequisites
 
-- Linux host with JDK 21 (`javac`, `java`) and `python3` for the standard-library pin check.
+- Linux host with JDK 21 (`javac`, `java`), OpenSSH `ssh-keygen` and `python3` for the
+  standard-library pin check. `ssh-keygen` generates the one accepted client key inside the
+  already-validated private run directory; it is not used for the host key.
 - `/usr/bin/script` from util-linux and `/bin/sh`; parent observed util-linux 2.41.3. No shell
   transcript file is created (`/dev/null`); the utility's [upstream implementation](https://github.com/util-linux/util-linux/blob/v2.41.3/term-utils/script.c)
   owns the real PTY and command lifetime.
@@ -56,9 +58,11 @@ READY port=NNNNN fingerprint=SHA256:...
 
 The path is printed rather than assumed because the workspace path may contain spaces; use the
 remaining text after the `=` prefix. `fixture.properties` contains generated keys `schema`, `host`,
-`port`, `user`, `password` and `fingerprint`; it never contains the host private key. The password
-and private key are never printed. Treat the properties file as private test material and never
-publish or reuse it as a real credential.
+`port`, `user`, `password` and `fingerprint`; it never contains a private key. After the emptiness
+check the fixture also creates `client_key`/`client_key.pub` (the one accepted EC key) and
+`wrong_key`/`wrong_key.pub` (deliberately unregistered) with mode 0600. The password and private
+keys are never printed. Treat the properties file and key files as private test material and never
+publish or reuse them as a real credential.
 
 ## Real operation and bounds
 
@@ -66,10 +70,13 @@ publish or reuse it as a real credential.
   binds `127.0.0.1` with port 0 (kernel-assigned random loopback port). After `start()` it checks
   that every bound address is a loopback address and that the bound port is nonzero; otherwise it
   fails before printing `READY`. It never binds a public address.
-- Each run generates a fresh in-memory EC P-256 host key and a fresh 24-byte random Base64url
-  password. The password authenticator accepts only the current invoking user name plus that
-  password, compared in constant time. No host account, system service, configuration file,
-  namespace or private key file is created.
+- Each run generates a fresh in-memory EC P-256 host key, a fresh 24-byte random Base64url
+  password and one fresh EC P-256 client key. The password authenticator accepts only the current
+  invoking user name plus that password, compared in constant time. The public-key authenticator
+  accepts only the exact generated public key; there is no other key, password fallback on the
+  keyed client path, or agent path. `client_key` (private) and `client_key.pub` are created inside
+  the 0700 run directory only after its emptiness check. No host account, system service,
+  configuration file or namespace is created.
 - The shell factory is the maintained `InteractiveProcessShellFactory` with an explicit
   `/usr/bin/script` argv, wrapping the real `/bin/sh -i` child. It uses a real kernel PTY for
   input line discipline, not fake shell responses. MINA does not propagate SSH geometry into it.

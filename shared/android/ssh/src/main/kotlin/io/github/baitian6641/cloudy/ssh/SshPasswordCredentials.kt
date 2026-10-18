@@ -1,18 +1,21 @@
 package io.github.baitian6641.cloudy.ssh
 
 /** Mutable, single-transfer per-session credentials. No serialization or diagnostic plaintext. */
-class SshPasswordCredentials private constructor(private var material: Material?) : AutoCloseable {
-    val isClosed: Boolean @Synchronized get() = material == null
+class SshPasswordCredentials private constructor(private var material: Material?) : SshSessionCredentials() {
+    override val isClosed: Boolean @Synchronized get() = material == null
 
     /** Exact account metadata from the still-owned copy; never a password or authentication proof. */
-    @Synchronized fun accountName(): String? = material?.username?.concatToString()
+    @Synchronized override fun accountName(): String? = material?.username?.concatToString()
 
     /** Transfers owned arrays once; the engine must close the returned material on every path. */
-    @Synchronized internal fun take(): Material? = material.also { material = null }
+    @Synchronized override fun take(): Material? = material.also { material = null }
     @Synchronized override fun close() { material?.close(); material = null }
     override fun toString(): String = "SshPasswordCredentials(redacted)"
 
-    internal class Material(val username: CharArray, val password: CharArray) : AutoCloseable {
+    internal class Material(
+        override val username: CharArray,
+        val password: CharArray,
+    ) : SshCredentialMaterial {
         override fun close() { username.fill('\u0000'); password.fill('\u0000') }
         override fun toString(): String = "SshPasswordMaterial(redacted)"
     }

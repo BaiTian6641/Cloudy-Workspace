@@ -16,7 +16,7 @@ fail() {
     exit 1
 }
 
-for tool in javac java python3; do
+for tool in javac java python3 ssh-keygen; do
     command -v "$tool" >/dev/null 2>&1 || fail "missing required tool: $tool"
 done
 [ -x /usr/bin/script ] && [ -x /bin/sh ] || fail "missing util-linux script or /bin/sh"
@@ -85,6 +85,8 @@ chmod 700 "$BUILD_PARENT" "$PRIVATE_PARENT"
 BUILD=$(mktemp -d "$BUILD_PARENT/build-XXXXXX")
 RUN=$(mktemp -d "$PRIVATE_PARENT/run-XXXXXX")
 chmod 700 "$BUILD" "$RUN"
+# The Java fixture generates one fresh client key after it has validated that this run directory
+# is empty, so the key can never mask an unclean or pre-populated evidence root.
 
 CP="$JARS/sshd-core-2.20.0.jar:$JARS/sshd-common-2.20.0.jar:$JARS/slf4j-api-2.0.20.jar:$JARS/slf4j-nop-2.0.20.jar"
 

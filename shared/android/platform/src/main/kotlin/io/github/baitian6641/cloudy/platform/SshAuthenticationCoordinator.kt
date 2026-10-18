@@ -7,8 +7,10 @@ import android.os.Process
 import android.os.SystemClock
 import io.github.baitian6641.cloudy.domain.*
 import io.github.baitian6641.cloudy.ssh.SshAuthenticatedOwnership
+import io.github.baitian6641.cloudy.ssh.SshKeyCredentials
 import io.github.baitian6641.cloudy.ssh.SshObservationCancellation
 import io.github.baitian6641.cloudy.ssh.SshPasswordCredentials
+import io.github.baitian6641.cloudy.ssh.SshSessionCredentials
 import java.io.File
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.ScheduledFuture
@@ -95,12 +97,16 @@ class SshAuthenticationCoordinator private constructor(
     fun begin(profile: SshObservationProfile, credentials: SshPasswordCredentials): SshAuthenticationPreparation =
         beginBound(profile, credentials, null)
 
+    /** One public-key attempt under the same profile/trust/ownership gate; no method fallback. */
+    fun beginKey(profile: SshObservationProfile, credentials: SshKeyCredentials): SshAuthenticationPreparation =
+        beginBound(profile, credentials, null)
+
     /** Caller metadata is never sufficient: resolve the exact current registration before preparing. */
     internal fun beginRegistered(registration: FilesResourceRegistration,
-                                 credentials: SshPasswordCredentials): SshAuthenticationPreparation =
+                                 credentials: SshSessionCredentials): SshAuthenticationPreparation =
         beginBound(registration.profile, credentials, registration)
 
-    private fun beginBound(profile: SshObservationProfile, credentials: SshPasswordCredentials,
+    private fun beginBound(profile: SshObservationProfile, credentials: SshSessionCredentials,
                            registration: FilesResourceRegistration?): SshAuthenticationPreparation {
         fun failed(code: SshAuthenticationCode): SshAuthenticationPreparation {
             credentials.close()
@@ -167,7 +173,7 @@ class SshAuthenticationHandle internal constructor(
     val profile: SshObservationProfile,
     private val expected: SshTrustSnapshot,
     val expiresAtMillis: Long,
-    credentials: SshPasswordCredentials,
+    credentials: SshSessionCredentials,
     private val profiles: ConnectionProfiles,
     private val trust: SshHostTrustStore,
     private val onMain: () -> Boolean,
@@ -181,7 +187,7 @@ class SshAuthenticationHandle internal constructor(
     val expectedKey: SshHostKeyIdentity = (expected.status as SshTrustStatus.Accepted).key
     val cancellation = SshObservationCancellation()
     private val ownership = Any()
-    private var pending: SshPasswordCredentials? = credentials
+    private var pending: SshSessionCredentials? = credentials
     private var expiryTask: ScheduledFuture<*>? = null
     private enum class Phase { PREPARED, ADMITTED, ESTABLISHED, RETIRED }
     @Volatile private var phase = Phase.PREPARED
@@ -203,7 +209,7 @@ class SshAuthenticationHandle internal constructor(
 
     /** A cancellation winning the signal monitor prevents transfer. After transfer it can only
      * stop transport; bytes already admitted cannot be retracted. No retry authority is returned. */
-    fun admit(peer: SshPeerIdentity, key: SshHostKeyIdentity): SshPasswordCredentials? {
+    fun admit(peer: SshPeerIdentity, key: SshHostKeyIdentity): SshSessionCredentials? {
         if (onMain()) { close(); return null }
         if (!SshAuthenticationRegistry.lock.tryLock()) { close(); return null }
         try {

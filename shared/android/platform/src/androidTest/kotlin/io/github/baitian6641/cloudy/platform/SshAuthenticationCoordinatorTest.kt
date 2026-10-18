@@ -10,7 +10,9 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import io.github.baitian6641.cloudy.domain.*
+import io.github.baitian6641.cloudy.ssh.SshKeyCredentials
 import io.github.baitian6641.cloudy.ssh.SshPasswordCredentials
+import io.github.baitian6641.cloudy.ssh.SshSessionCredentials
 import io.github.baitian6641.cloudy.ssh.SshAuthenticatedOwnership
 import io.github.baitian6641.cloudy.ssh.SshObservationCancellation
 import java.util.concurrent.atomic.AtomicBoolean
@@ -104,6 +106,20 @@ class SshAuthenticationCoordinatorTest {
         transferred!!.close()
     }
 
+    @Test fun keyGateRequiresCurrentTrustAndTransfersKeyMaterialOnce() {
+        val profile = seed()
+        val material = "-----BEGIN PRIVATE KEY-----\nAAAA\n-----END PRIVATE KEY-----\n".toByteArray()
+        val credentials = SshKeyCredentials.create("fixture-user".toCharArray(), material, null)
+        val prepared = coordinator.beginKey(profile, credentials)
+        assertTrue("Key preparation requires exact current profile/trust", prepared is SshAuthenticationPreparation.Ready)
+        val handle = (prepared as SshAuthenticationPreparation.Ready).handle.also { handles.add(it) }
+        revoke(profile)
+        assertTrue(handle.cancellation.isCancelled)
+        assertNull(handle.admit(profile.peer, key))
+        assertNull(handle.admit(profile.peer, key))
+        material.fill(0)
+    }
+
     @Test fun unrelatedProfileAndPeerMutationDoesNotCancel() {
         val first = seed()
         val second = seed("other.invalid")
@@ -159,7 +175,7 @@ class SshAuthenticationCoordinatorTest {
             repeat(8) {
                 val handle = begin(profile)
                 val start = CountDownLatch(1)
-                val gate = pool.submit<SshPasswordCredentials?> { check(start.await(2, TimeUnit.SECONDS)); handle.admit(profile.peer, key) }
+                val gate = pool.submit<SshSessionCredentials?> { check(start.await(2, TimeUnit.SECONDS)); handle.admit(profile.peer, key) }
                 val cancel = pool.submit { check(start.await(2, TimeUnit.SECONDS)); handle.cancellation.cancel() }
                 start.countDown()
                 val released = gate.get(5, TimeUnit.SECONDS)

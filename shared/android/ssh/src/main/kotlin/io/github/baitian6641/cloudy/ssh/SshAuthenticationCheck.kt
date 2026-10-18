@@ -4,6 +4,7 @@ import io.github.baitian6641.cloudy.domain.SshHostKeyIdentity
 import io.github.baitian6641.cloudy.domain.SshPeerIdentity
 import net.schmizz.sshj.SSHClient
 import net.schmizz.sshj.transport.verification.HostKeyVerifier
+import net.schmizz.sshj.userauth.method.AuthPublickey
 import java.io.IOException
 import java.net.InetAddress
 import java.net.Socket
@@ -27,7 +28,7 @@ class SshAuthenticationCheck {
 
     fun authenticate(peer: SshPeerIdentity, address: InetAddress, expectedKey: SshHostKeyIdentity,
                      cancellation: SshObservationCancellation,
-                     admit: (SshPeerIdentity, SshHostKeyIdentity) -> SshPasswordCredentials?,
+                     admit: (SshPeerIdentity, SshHostKeyIdentity) -> SshSessionCredentials?,
                      timeoutMillis: Int = 10_000): SshAuthenticationResult {
         if (timeoutMillis !in 1..10_000) return failure(SshAuthenticationCode.INVALID_TIMEOUT)
         if (quarantined.get()) return failure(SshAuthenticationCode.QUARANTINED)
@@ -42,15 +43,15 @@ class SshAuthenticationCheck {
 
     private fun perform(peer: SshPeerIdentity, address: InetAddress, expectedKey: SshHostKeyIdentity,
                         cancellation: SshObservationCancellation,
-                        admit: (SshPeerIdentity, SshHostKeyIdentity) -> SshPasswordCredentials?, timeoutMillis: Int): SshAuthenticationResult {
+                        admit: (SshPeerIdentity, SshHostKeyIdentity) -> SshSessionCredentials?, timeoutMillis: Int): SshAuthenticationResult {
         val attempt = Attempt(cancellation, timeoutMillis)
         if (!cancellation.attach { attempt.wake.countDown() }) return failure(SshAuthenticationCode.BUSY)
         val retirement = SshReaderRetirement()
         val observed = AtomicReference<SshHostKeyIdentity?>(null)
         val rejected = AtomicReference<SshAuthenticationCode?>(null)
         var client: SSHClient? = null
-        var credentials: SshPasswordCredentials? = null
-        var material: SshPasswordCredentials.Material? = null
+        var credentials: SshSessionCredentials? = null
+        var material: SshCredentialMaterial? = null
         var method: SshStrictPasswordMethod? = null
         var authenticated = false
         var keyCallbacks = 0
@@ -121,12 +122,36 @@ class SshAuthenticationCheck {
                     if (owned == null) rejected.compareAndSet(null, SshAuthenticationCode.CREDENTIALS_UNAVAILABLE)
                     else if (attempt.active() && rejected.get() == null) {
                         val releaseActive = { attempt.active() && rejected.get() == null }
-                        val finder = SshOneReleasePasswordFinder(owned, cancellation, releaseActive)
-                        val strict = SshStrictPasswordMethod(finder, releaseActive)
-                        method = strict
-                        // SSHJ requires an immutable username String. No value is normalized or
-                        // logged; password bytes are released only once and wiped after encoding.
-                        ssh.auth(String(owned.username), strict)
+                        when (owned) {
+                            is SshPasswordCredentials.Material -> {
+                                val finder = SshOneReleasePasswordFinder(owned, cancellation, releaseActive)
+                                val strict = SshStrictPasswordMethod(finder, releaseActive)
+                                method = strict
+                                // SSHJ requires an immutable username String. No value is
+                                // normalized or logged; password bytes are released once.
+                                ssh.auth(String(owned.username), strict)
+                            }
+                            is SshKeyCredentials.Material -> {
+                                val provider = try {
+                                    SshKeyAuthentication.provider(owned, cancellation, releaseActive)
+                                } catch (failure: SshKeyException) {
+                                    rejected.compareAndSet(null, when (failure.failure) {
+                                        SshKeyFailure.UNSUPPORTED_FORMAT -> SshAuthenticationCode.KEY_FORMAT_UNSUPPORTED
+                                        SshKeyFailure.PASSPHRASE_REQUIRED -> SshAuthenticationCode.KEY_PASSPHRASE_REQUIRED
+                                        SshKeyFailure.UNREADABLE -> SshAuthenticationCode.KEY_UNREADABLE
+                                    })
+                                    null
+                                }
+                                if (provider != null && releaseActive()) {
+                                    try {
+                                        ssh.auth(String(owned.username), AuthPublickey(provider))
+                                    } finally {
+                                        owned.passphrase?.fill('\u0000')
+                                    }
+                                }
+                            }
+                            else -> rejected.compareAndSet(null, SshAuthenticationCode.CREDENTIALS_UNAVAILABLE)
+                        }
                         authenticated = ssh.isAuthenticated
                     }
                 }

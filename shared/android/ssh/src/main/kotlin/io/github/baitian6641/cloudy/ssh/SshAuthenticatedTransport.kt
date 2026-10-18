@@ -4,6 +4,7 @@ import io.github.baitian6641.cloudy.domain.SshHostKeyIdentity
 import io.github.baitian6641.cloudy.domain.SshPeerIdentity
 import net.schmizz.sshj.SSHClient
 import net.schmizz.sshj.sftp.SFTPClient
+import net.schmizz.sshj.userauth.method.AuthPublickey
 import net.schmizz.sshj.transport.verification.HostKeyVerifier
 import java.io.IOException
 import java.net.InetAddress
@@ -19,7 +20,8 @@ import javax.net.SocketFactory
 enum class SshTransportCode {
     INVALID_INPUT, BUSY, QUARANTINED, CANCELLED, TIMED_OUT, CONNECT_FAILED,
     ALGORITHM_REJECTED, KEY_REJECTED, ADMISSION_DENIED, CREDENTIALS_UNAVAILABLE,
-    PASSWORD_CHANGE_REFUSED, AUTHENTICATION_FAILED, OWNERSHIP_REJECTED, CLOSED,
+    PASSWORD_CHANGE_REFUSED, KEY_UNREADABLE, KEY_FORMAT_UNSUPPORTED, KEY_PASSPHRASE_REQUIRED,
+    AUTHENTICATION_FAILED, OWNERSHIP_REJECTED, CLOSED,
     OPERATION_FAILED, LIMIT_EXCEEDED, INVALID_REMOTE_DATA, CLEANUP_UNCERTAIN,
 }
 sealed interface SshTransportOpenResult {
@@ -46,10 +48,33 @@ class SshAuthenticatedTransportFactory {
 
     fun connectPassword(peer: SshPeerIdentity, address: InetAddress, expectedKey: SshHostKeyIdentity,
         cancellation: SshObservationCancellation,
-        admit: (SshPeerIdentity, SshHostKeyIdentity) -> SshPasswordCredentials?,
+        admit: (SshPeerIdentity, SshHostKeyIdentity) -> SshSessionCredentials?,
         establish: (SshAuthenticatedOwnership) -> Boolean,
         retired: (SshAuthenticatedOwnership) -> Unit,
-        timeoutMillis: Int = 10_000): SshTransportOpenResult {
+        timeoutMillis: Int = 10_000): SshTransportOpenResult = connect(
+        peer, address, expectedKey, cancellation,
+        { p, k ->
+            // A password route never authenticates key material even if a caller supplies it.
+            val admitted = admit(p, k)
+            if (admitted is SshPasswordCredentials) admitted else { admitted?.close(); null }
+        },
+        establish, retired, timeoutMillis)
+
+    /** One public-key attempt. No password, keyboard-interactive or agent fallback is offered. */
+    fun connectPublicKey(peer: SshPeerIdentity, address: InetAddress, expectedKey: SshHostKeyIdentity,
+        cancellation: SshObservationCancellation,
+        admit: (SshPeerIdentity, SshHostKeyIdentity) -> SshKeyCredentials?,
+        establish: (SshAuthenticatedOwnership) -> Boolean,
+        retired: (SshAuthenticatedOwnership) -> Unit,
+        timeoutMillis: Int = 10_000): SshTransportOpenResult = connect(
+        peer, address, expectedKey, cancellation, { p, k -> admit(p, k) }, establish, retired, timeoutMillis)
+
+    private fun connect(peer: SshPeerIdentity, address: InetAddress, expectedKey: SshHostKeyIdentity,
+        cancellation: SshObservationCancellation,
+        admit: (SshPeerIdentity, SshHostKeyIdentity) -> SshSessionCredentials?,
+        establish: (SshAuthenticatedOwnership) -> Boolean,
+        retired: (SshAuthenticatedOwnership) -> Unit,
+        timeoutMillis: Int): SshTransportOpenResult {
         fun failed(code: SshTransportCode) = SshTransportOpenResult.Failure(code)
         if (timeoutMillis !in 1..10_000) return failed(SshTransportCode.INVALID_INPUT)
         val denied = synchronized(admission) {
@@ -69,9 +94,10 @@ class SshAuthenticatedTransportFactory {
         }
         synchronized(admission) { previous = state }
         if (!state.attach()) { busy.set(false); return failed(SshTransportCode.BUSY) }
-        var credentials: SshPasswordCredentials? = null
-        var material: SshPasswordCredentials.Material? = null
+        var credentials: SshSessionCredentials? = null
+        var material: SshCredentialMaterial? = null
         var method: SshStrictPasswordMethod? = null
+        var keyFailure: SshTransportCode? = null
         var result: SshTransportOpenResult? = null
         try {
             state.start()
@@ -126,10 +152,35 @@ class SshAuthenticatedTransportFactory {
                 if (credentials == null) state.stop(SshTransportCode.ADMISSION_DENIED)
                 else if (owned == null) state.stop(SshTransportCode.CREDENTIALS_UNAVAILABLE)
                 else if (state.active()) {
-                    val finder = SshOneReleasePasswordFinder(owned, cancellation, state::active)
-                    val strict = SshStrictPasswordMethod(finder, state::active)
-                    method = strict
-                    try { client.auth(String(owned.username), strict) } finally { owned.close() }
+                    when (owned) {
+                        is SshPasswordCredentials.Material -> {
+                            val finder = SshOneReleasePasswordFinder(owned, cancellation, state::active)
+                            val strict = SshStrictPasswordMethod(finder, state::active)
+                            method = strict
+                            try { client.auth(String(owned.username), strict) } finally { owned.close() }
+                        }
+                        is SshKeyCredentials.Material -> {
+                            val provider = try {
+                                SshKeyAuthentication.provider(owned, cancellation, state::active)
+                            } catch (failure: SshKeyException) {
+                                keyFailure = when (failure.failure) {
+                                    SshKeyFailure.UNSUPPORTED_FORMAT -> SshTransportCode.KEY_FORMAT_UNSUPPORTED
+                                    SshKeyFailure.PASSPHRASE_REQUIRED -> SshTransportCode.KEY_PASSPHRASE_REQUIRED
+                                    SshKeyFailure.UNREADABLE -> SshTransportCode.KEY_UNREADABLE
+                                }
+                                null
+                            }
+                            if (provider != null && state.active()) {
+                                // The passphrase is released only for this parse and wiped here.
+                                try {
+                                    client.auth(String(owned.username), AuthPublickey(provider))
+                                } finally {
+                                    owned.passphrase?.fill('\u0000')
+                                }
+                            }
+                        }
+                        else -> state.stop(SshTransportCode.CREDENTIALS_UNAVAILABLE)
+                    }
                     if (client.isAuthenticated && state.active()) {
                         state.prepareRetainedReads()
                         val proof = SshAuthenticatedOwnership(peer, expectedKey, cancellation)
@@ -150,6 +201,7 @@ class SshAuthenticatedTransportFactory {
             if (Thread.currentThread().isInterrupted) cancellation.cancel()
             if (result == null) {
                 if (method?.passwordChangeRefused?.get() == true) state.stop(SshTransportCode.PASSWORD_CHANGE_REFUSED)
+                keyFailure?.let { state.stop(it) }
                 if (!state.active()) state.expireIfNeeded()
                 state.stop(if (state.keyObserved.get()) SshTransportCode.AUTHENTICATION_FAILED else SshTransportCode.CONNECT_FAILED)
             }
