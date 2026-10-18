@@ -11,6 +11,8 @@ import io.github.baitian6641.cloudy.domain.SshObservationProfile
 import io.github.baitian6641.cloudy.domain.SshPeerIdentity
 import io.github.baitian6641.cloudy.ssh.SshAuthenticatedTransport
 import io.github.baitian6641.cloudy.ssh.SshAuthenticatedTransportFactory
+import io.github.baitian6641.cloudy.ssh.SshDirectResult
+import io.github.baitian6641.cloudy.ssh.SshJumpChannel
 import io.github.baitian6641.cloudy.ssh.SshKeyCredentials
 import io.github.baitian6641.cloudy.ssh.SshKeyboardInteractiveCredentials
 import io.github.baitian6641.cloudy.ssh.SshOwnedPty
@@ -57,18 +59,22 @@ internal class TerminalSession(context: Context, private val listener: Listener)
     private val resolution = AtomicReference<SshResolutionHandle?>()
     @Volatile private var handle: SshAuthenticationHandle? = null
     @Volatile private var transport: SshAuthenticatedTransport? = null
+    @Volatile private var jumpHandle: SshAuthenticationHandle? = null
+    @Volatile private var jumpTransport: SshAuthenticatedTransport? = null
     @Volatile private var pty: SshOwnedPty? = null
     @Volatile private var worker: Thread? = null
 
-    /** Caller transfers exactly one credential; every rejection path disposes it. */
-    fun connect(profile: SshObservationProfile, credentials: SshSessionCredentials) {
+    /** Caller transfers both credentials; every rejection path disposes them. */
+    fun connect(profile: SshObservationProfile, credentials: SshSessionCredentials,
+                jumpProfile: SshObservationProfile? = null,
+                jumpCredentials: SshSessionCredentials? = null) {
         if (!started.compareAndSet(false, true) || stopped.get() != null) {
-            credentials.close()
+            credentials.close(); jumpCredentials?.close()
             return
         }
-        if (credentials !is SshPasswordCredentials && credentials !is SshKeyCredentials &&
-            credentials !is SshKeyboardInteractiveCredentials) {
-            credentials.close()
+        if (!supported(credentials) || (jumpProfile == null) != (jumpCredentials == null) ||
+            (jumpCredentials != null && !supported(jumpCredentials))) {
+            credentials.close(); jumpCredentials?.close()
             main.post { listener.onEnded("INVALID_CREDENTIALS", false, true) }
             return
         }
@@ -76,58 +82,65 @@ internal class TerminalSession(context: Context, private val listener: Listener)
         var authenticated = false
         var cleanupCertain = true
         val owner = Thread({
+            var direct: SshJumpChannel? = null
             try {
                 if (!active()) return@Thread
                 val coordinator = SshAuthenticationCoordinator(application)
-                val prepared = when (val credential = credentials) {
-                    is SshPasswordCredentials -> coordinator.begin(profile, credential)
-                    is SshKeyCredentials -> coordinator.beginKey(profile, credential)
-                    is SshKeyboardInteractiveCredentials ->
-                        coordinator.beginKeyboardInteractive(profile, credential)
-                    else -> { code = "INVALID_CREDENTIALS"; return@Thread }
+                var jumpAddress: InetAddress? = null
+                if (jumpProfile != null) {
+                    val jumpCredential = checkNotNull(jumpCredentials)
+                    when (val prepared = begins(coordinator, jumpProfile, jumpCredential)) {
+                        is SshAuthenticationPreparation.Failed -> { code = prepared.code.name; return@Thread }
+                        is SshAuthenticationPreparation.Ready -> jumpHandle = prepared.handle
+                    }
+                    val jumpAuthority = checkNotNull(jumpHandle)
+                    if (!active()) return@Thread
+                    val address = resolve(jumpProfile) ?: run { code = "NO_ADDRESSES"; return@Thread }
+                    if (SshLocalNetworkPolicy.shouldRequestPermission(application, address) && !localPermission()) {
+                        code = "LOCAL_NETWORK_REQUIRED"
+                        return@Thread
+                    }
+                    val opened = opens(jumpProfile, address, jumpAuthority, jumpCredential, null)
+                    if (opened is SshTransportOpenResult.Failure) {
+                        code = opened.code.name
+                        cleanupCertain = transportFailureCertain(opened.code)
+                        return@Thread
+                    }
+                    jumpTransport = (opened as SshTransportOpenResult.Connected).transport
+                    jumpAddress = address
+                    if (!active()) return@Thread
+                    when (val openedDirect = jumpTransport!!.openDirect(
+                        profile.profile.host, profile.profile.port, 5_000)) {
+                        is SshDirectResult.Failure -> {
+                            code = openedDirect.code.name
+                            cleanupCertain = transportFailureCertain(openedDirect.code)
+                            return@Thread
+                        }
+                        is SshDirectResult.Opened -> direct = openedDirect.channel
+                    }
+                    if (!active()) return@Thread
                 }
-                when (prepared) {
+                when (val prepared = begins(coordinator, profile, credentials)) {
                     is SshAuthenticationPreparation.Failed -> { code = prepared.code.name; return@Thread }
                     is SshAuthenticationPreparation.Ready -> handle = prepared.handle
                 }
                 val authority = checkNotNull(handle)
                 if (!active()) return@Thread
-                val address = resolve(profile) ?: run { code = "NO_ADDRESSES"; return@Thread }
-                if (SshLocalNetworkPolicy.shouldRequestPermission(application, address) && !localPermission()) {
+                val address = if (direct != null) {
+                    checkNotNull(jumpAddress)
+                } else {
+                    resolve(profile) ?: run { code = "NO_ADDRESSES"; return@Thread }
+                }
+                if (direct == null && SshLocalNetworkPolicy.shouldRequestPermission(application, address) &&
+                    !localPermission()) {
                     code = "LOCAL_NETWORK_REQUIRED"
                     return@Thread
                 }
                 if (!active()) return@Thread
-                val factory = SshAuthenticatedTransportFactory()
-                val opened = when (val credential = credentials) {
-                    is SshPasswordCredentials -> factory.connectPassword(profile.peer, address,
-                        authority.expectedKey, authority.cancellation,
-                        { peer: SshPeerIdentity, key: SshHostKeyIdentity ->
-                            val admitted = authority.admit(peer, key)
-                            if (admitted is SshPasswordCredentials) admitted else { admitted?.close(); null }
-                        }, authority::establishSession, authority::releaseSession)
-                    is SshKeyCredentials -> factory.connectPublicKey(profile.peer, address,
-                        authority.expectedKey, authority.cancellation,
-                        { peer: SshPeerIdentity, key: SshHostKeyIdentity ->
-                            val admitted = authority.admit(peer, key)
-                            if (admitted is SshKeyCredentials) admitted else { admitted?.close(); null }
-                        }, authority::establishSession, authority::releaseSession)
-                    is SshKeyboardInteractiveCredentials -> factory.connectKeyboardInteractive(
-                        profile.peer, address, authority.expectedKey, authority.cancellation,
-                        { peer: SshPeerIdentity, key: SshHostKeyIdentity ->
-                            val admitted = authority.admit(peer, key)
-                            if (admitted is SshKeyboardInteractiveCredentials) admitted
-                            else { admitted?.close(); null }
-                        }, authority::establishSession, authority::releaseSession)
-                    else -> null
-                } ?: run { code = "INVALID_CREDENTIALS"; return@Thread }
+                val opened = opens(profile, address, authority, credentials, direct)
                 if (opened is SshTransportOpenResult.Failure) {
                     code = opened.code.name
-                    cleanupCertain = when (opened.code) {
-                        SshTransportCode.CLEANUP_UNCERTAIN, SshTransportCode.QUARANTINED,
-                        SshTransportCode.TIMED_OUT, SshTransportCode.CANCELLED -> false
-                        else -> true
-                    }
+                    cleanupCertain = transportFailureCertain(opened.code)
                     return@Thread
                 }
                 transport = (opened as SshTransportOpenResult.Connected).transport
@@ -173,15 +186,22 @@ internal class TerminalSession(context: Context, private val listener: Listener)
             } finally {
                 stopped.compareAndSet(null, code)
                 Thread.interrupted()
-                credentials.close()
+                credentials.close(); jumpCredentials?.close()
                 resolution.getAndSet(null)?.cancel()
                 pty?.requestClose()
                 transport?.requestClose()
                 if (transport?.awaitClosed(5_000) is SshTransportCloseResult.Failure) cleanupCertain = false
                 handle?.close()
+                jumpTransport?.requestClose()
+                if (jumpTransport?.awaitClosed(5_000) is SshTransportCloseResult.Failure) cleanupCertain = false
+                jumpHandle?.close()
+                // Closing the target closes the external channel; closing the jump is independent.
+                runCatching { direct?.close() }
                 pty = null
                 transport = null
                 handle = null
+                jumpTransport = null
+                jumpHandle = null
             }
         }, "cloudy-terminal-owner").apply { isDaemon = true }
         worker = owner
@@ -194,10 +214,57 @@ internal class TerminalSession(context: Context, private val listener: Listener)
             owner.start()
             notifier.start()
         } catch (_: RuntimeException) {
-            credentials.close()
+            credentials.close(); jumpCredentials?.close()
             close("OWNER_START_FAILED")
             if (!owner.isAlive) main.post { listener.onEnded("OWNER_START_FAILED", false, true) }
         }
+    }
+
+    private fun supported(credential: SshSessionCredentials): Boolean =
+        credential is SshPasswordCredentials || credential is SshKeyCredentials ||
+            credential is SshKeyboardInteractiveCredentials
+
+    private fun begins(coordinator: SshAuthenticationCoordinator, profile: SshObservationProfile,
+                       credential: SshSessionCredentials): SshAuthenticationPreparation =
+        when (credential) {
+            is SshPasswordCredentials -> coordinator.begin(profile, credential)
+            is SshKeyCredentials -> coordinator.beginKey(profile, credential)
+            is SshKeyboardInteractiveCredentials -> coordinator.beginKeyboardInteractive(profile, credential)
+            else -> SshAuthenticationPreparation.Failed(SshAuthenticationCode.CREDENTIALS_UNAVAILABLE)
+        }
+
+    private fun opens(profile: SshObservationProfile, address: InetAddress,
+                      authority: SshAuthenticationHandle, credential: SshSessionCredentials,
+                      direct: SshJumpChannel?): SshTransportOpenResult {
+        val factory = SshAuthenticatedTransportFactory()
+        return when (credential) {
+            is SshPasswordCredentials -> factory.connectPassword(profile.peer, address,
+                authority.expectedKey, authority.cancellation,
+                { peer: SshPeerIdentity, key: SshHostKeyIdentity ->
+                    val admitted = authority.admit(peer, key)
+                    if (admitted is SshPasswordCredentials) admitted else { admitted?.close(); null }
+                }, authority::establishSession, authority::releaseSession, direct = direct)
+            is SshKeyCredentials -> factory.connectPublicKey(profile.peer, address,
+                authority.expectedKey, authority.cancellation,
+                { peer: SshPeerIdentity, key: SshHostKeyIdentity ->
+                    val admitted = authority.admit(peer, key)
+                    if (admitted is SshKeyCredentials) admitted else { admitted?.close(); null }
+                }, authority::establishSession, authority::releaseSession, direct = direct)
+            is SshKeyboardInteractiveCredentials -> factory.connectKeyboardInteractive(profile.peer, address,
+                authority.expectedKey, authority.cancellation,
+                { peer: SshPeerIdentity, key: SshHostKeyIdentity ->
+                    val admitted = authority.admit(peer, key)
+                    if (admitted is SshKeyboardInteractiveCredentials) admitted
+                    else { admitted?.close(); null }
+                }, authority::establishSession, authority::releaseSession, direct = direct)
+            else -> SshTransportOpenResult.Failure(SshTransportCode.CREDENTIALS_UNAVAILABLE)
+        }
+    }
+
+    private fun transportFailureCertain(code: SshTransportCode): Boolean = when (code) {
+        SshTransportCode.CLEANUP_UNCERTAIN, SshTransportCode.QUARANTINED,
+        SshTransportCode.TIMED_OUT, SshTransportCode.CANCELLED -> false
+        else -> true
     }
 
     fun openPty(initial: TerminalSize) {

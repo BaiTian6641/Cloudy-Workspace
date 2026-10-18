@@ -16,7 +16,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 /**
- * Schema v1 to v2 migration against a hand-built v1 store. Runs on a real Android SQLite stack;
+ * Schema v1/v2 to v3 migration against hand-built stores. Runs on a real Android SQLite stack;
  * hosted CI compiles this without a device. Fixture roots never confer product identity.
  */
 @RunWith(AndroidJUnit4::class)
@@ -62,7 +62,33 @@ class ConnectionProfilesMigrationTest {
         }
     }
 
+    /** Rebuilds the exact v2 layout (organization metadata, no jump reference). */
+    private fun writeV2Store() {
+        writeV1Store()
+        SQLiteDatabase.openDatabase(database.path, null, SQLiteDatabase.OPEN_READWRITE).use { db ->
+            db.execSQL("ALTER TABLE profiles ADD COLUMN tags TEXT NOT NULL DEFAULT ''")
+            db.execSQL("ALTER TABLE profiles ADD COLUMN favorite INTEGER NOT NULL DEFAULT 0")
+            db.execSQL("ALTER TABLE profiles ADD COLUMN last_used INTEGER NOT NULL DEFAULT 0")
+            db.execSQL("UPDATE profiles SET tags='work', favorite=1, last_used=1782200000")
+            db.execSQL("UPDATE metadata SET version=2")
+            db.execSQL("PRAGMA user_version=2")
+        }
+    }
+
     @After fun cleanup() { check(root.deleteRecursively()) }
+
+    @Test fun v2RowsSurviveV3MigrationWithNoJumpReference() {
+        writeV2Store()
+        val migrated = success(store().load()).profiles.single()
+        assertEquals(linkedSetOf("work"), migrated.tags)
+        assertEquals(true, migrated.favorite)
+        assertEquals(1_782_200_000L, migrated.lastUsedAt)
+        assertEquals(null, migrated.jumpProfileId)
+        SQLiteDatabase.openDatabase(database.path, null, SQLiteDatabase.OPEN_READWRITE).use { db ->
+            db.rawQuery("PRAGMA user_version", null).use { check(it.moveToFirst()); assertEquals(3L, it.getLong(0)) }
+            db.rawQuery("SELECT version FROM metadata", null).use { check(it.moveToFirst()); assertEquals(3L, it.getLong(0)) }
+        }
+    }
 
     @Test fun v1RowsSurviveMigrationWithDefaultMetadataAndStoreKeepsWorking() {
         writeV1Store()
@@ -78,9 +104,9 @@ class ConnectionProfilesMigrationTest {
         assertEquals(0L, migrated.lastUsedAt)
         // The migration is durable and the header/markers are untouched.
         SQLiteDatabase.openDatabase(database.path, null, SQLiteDatabase.OPEN_READWRITE).use { db ->
-            db.rawQuery("PRAGMA user_version", null).use { check(it.moveToFirst()); assertEquals(2L, it.getLong(0)) }
+            db.rawQuery("PRAGMA user_version", null).use { check(it.moveToFirst()); assertEquals(3L, it.getLong(0)) }
             db.rawQuery("SELECT version FROM metadata", null).use {
-                check(it.moveToFirst()); assertEquals(2L, it.getLong(0))
+                check(it.moveToFirst()); assertEquals(3L, it.getLong(0))
             }
         }
         assertEquals(generation, success(store().load()).generation)

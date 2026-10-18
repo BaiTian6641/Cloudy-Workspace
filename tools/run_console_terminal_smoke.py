@@ -105,6 +105,8 @@ def main():
     parser.add_argument("--auth", choices=("password", "keyboard-interactive", "private-key"),
                         default="password",
                         help="Product authentication method exercised by the fixture journey")
+    parser.add_argument("--jump", action="store_true",
+                        help="Seed one same-peer jump profile and target reference for the journey")
     args = parser.parse_args()
     if not 1024 <= args.device_port <= 65535:
         parser.error("--device-port must be an unprivileged TCP port")
@@ -160,7 +162,8 @@ def main():
     expected = f"CLOUDY_TERMINAL_{run}".encode()
     expected_hash = hashlib.sha256(expected).hexdigest()
     config = dict(schema=1, run=run, owner="console", host="127.0.0.1", port=args.device_port,
-                  keyFormat="ecdsa-sha2-nistp256", fingerprint=properties["fingerprint"],
+                  keyFormat="ecdsa-sha2-nistp256", fingerprint=properties["fingerprint"], jump=args.jump,
+                  targetPort=int(properties["port"]) if args.jump else args.device_port,
                   password=properties["password"], usernameAccept=properties["user"],
                   usernameDeny=properties["user"], usernameChange=properties["user"],
                   usernameWait=properties["user"])
@@ -214,6 +217,7 @@ def main():
                    controllerSha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest())
     receipt["interactionsRequested"] = args.interactions
     receipt["authMethod"] = args.auth
+    receipt["jumpRequested"] = args.jump
     receipt["keyFileRemoved"] = True
     key_name = f"cloudy-key-{run}"
     receipt.update(inputMethodRestored=False, imeCleanupConfirmed=False, imeCleanupErrors=[])
@@ -270,6 +274,7 @@ def main():
                 "-e", "cloudyTerminalProofPath", shlex.quote(str(proof)),
                 "-e", "cloudyTerminalInteractions", str(args.interactions).lower(),
                 "-e", "cloudyTerminalAuth", args.auth,
+                "-e", "cloudyTerminalJump", str(args.jump).lower(),
                 "-e", "cloudyTerminalKeyName", key_name,
                 "-e", "cloudyAllowDeviceImeChange", str(args.allow_device_ime_change).lower(),
                 PACKAGE + ".test/androidx.test.runner.AndroidJUnitRunner",

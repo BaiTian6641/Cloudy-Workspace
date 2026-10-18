@@ -66,5 +66,8 @@
     <string name="profile_tags_hint">Comma-separated; they group this host on the workspace home.</string>
     <string name="profile_favorite">Favorite host</string>
     <string name="profile_favorite_saved">★ Favorite</string>
+    <string name="profile_jump">Jump host (optional)</string>
+    <string name="profile_jump_direct">Direct</string>
+    <string name="profile_jump_hint">One SSH hop. The jump host and the target each require their own trusted key; dialing uses the same transient credentials for both hops in this slice.</string>
     <string name="profile_invalid_tags">Tags use up to 16 comma-separated entries of 48 characters each, without control characters.</string>
 </resources>

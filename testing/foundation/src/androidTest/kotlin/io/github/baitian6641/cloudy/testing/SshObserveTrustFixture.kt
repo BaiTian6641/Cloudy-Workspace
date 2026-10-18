@@ -32,21 +32,25 @@ internal class SshObserveTrustFixture(
 
     fun baselineMetadata(): List<Any> = metadata.toList()
 
-    fun removeOnlyExpected(expected: SshTrustSnapshot?) {
-        check(expected == null || (expected.owner == expectedOwner && expected.generation == baseline.generation &&
-            baseline.snapshots.none { it.peer == expected.peer }))
+    fun removeOnlyExpected(expected: SshTrustSnapshot?) = removeOnlyExpected(listOfNotNull(expected))
+
+    /** Removes an exact set of this fixture's accepted pins (one or two peers), all-or-nothing. */
+    fun removeOnlyExpected(expected: Collection<SshTrustSnapshot>) {
+        check(expected.all { it.owner == expectedOwner && it.generation == baseline.generation &&
+            baseline.snapshots.none { existing -> existing.peer == it.peer } })
         lockedDatabase { db ->
             db.beginTransaction()
             try {
                 check(readMetadata(db) == metadata)
                 val before = readSnapshots(db)
                 if (before != baseline.snapshots) {
-                    val planned = checkNotNull(expected) { "Unexpected trust mutation; preserve fixture" }
-                    val complete = baseline.snapshots + planned
+                    val complete = baseline.snapshots + expected
                     check(before.size == complete.size && before.toSet() == complete.toSet()) {
                         "Unexpected trust row; preserve fixture and receipt"
                     }
-                    check(db.delete("pins", EXACT_ROW, rowArguments(planned)) == 1)
+                    for (planned in expected) {
+                        check(db.delete("pins", EXACT_ROW, rowArguments(planned)) == 1)
+                    }
                 }
                 check(readSnapshots(db) == baseline.snapshots && readMetadata(db) == metadata)
                 db.setTransactionSuccessful()

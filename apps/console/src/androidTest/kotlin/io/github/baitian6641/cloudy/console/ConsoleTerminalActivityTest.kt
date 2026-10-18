@@ -460,6 +460,10 @@ class ConsoleTerminalActivityTest {
         InstrumentationRegistry.getArguments().getString("cloudyTerminalAuth") ?: "password"
 
     private fun credentials(fixture: SshAuthenticateFixture) {
+        if (InstrumentationRegistry.getArguments().getString("cloudyTerminalJump")?.toBooleanStrictOrNull() == true) {
+            waitFor(15_000) { node("terminal_jump") != null }
+            check("Via jump host" in textOf(reveal("terminal_jump"))) { "TERMINAL_JUMP_NOT_SHOWN" }
+        }
         if (authMethod() == "private-key") {
             val keyName = checkNotNull(InstrumentationRegistry.getArguments()
                 .getString("cloudyTerminalKeyName")) { "TERMINAL_KEY_NAME_MISSING" }

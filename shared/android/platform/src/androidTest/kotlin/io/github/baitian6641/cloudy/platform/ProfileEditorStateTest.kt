@@ -126,7 +126,13 @@ class ProfileEditorStateTest {
             original.copy(label = TextFieldValue("x\n")), original.copy(editorId = "1-1-1-1-1"),
             original.copy(generation = "12345678-1234-4234-8234-123456789ABC"), original.copy(owner = WindowOwner.DESKTOP),
             original.copy(protocol = ConnectionProtocol.RDP), original.copy(version =
-                ConnectionProfileVersion.create(UUID.randomUUID().toString(), UUID.randomUUID().toString(), 1)))
+                ConnectionProfileVersion.create(UUID.randomUUID().toString(), UUID.randomUUID().toString(), 1)),
+            original.copy(jumpProfileId = "not-a-uuid"),
+            original.copy(
+                version = ConnectionProfileVersion.create(generation, UUID.randomUUID().toString(), 1),
+                jumpProfileId = "11111111-1111-4111-8111-111111111111").let { candidate ->
+                    candidate.copy(jumpProfileId = candidate.version!!.id)
+                })
         for (invalid in invalids) {
             val error = assertThrows(IllegalArgumentException::class.java) {
                 ProfileEditorState.save(destination, owner, invalid, false)
@@ -141,7 +147,7 @@ class ProfileEditorStateTest {
     @Test fun wrongOwnerSchemaAndOuterRecordTypesAreRejectedAllOrNothing() {
         assertEquals(ProfileEditorRestore.Rejected, ProfileEditorState.restore(saved(), WindowOwner.DESKTOP))
         val changes: List<(Bundle) -> Unit> = listOf(
-            { it.putString("schema", "2") }, { it.putLong("schema", 2) }, { it.putInt("schema", 3) },
+            { it.putString("schema", "2") }, { it.putLong("schema", 2) }, { it.putInt("schema", 4) },
             { it.putInt("pending", 1) }, { it.remove("pending") }, { it.putString("owner", "CONSOLE") },
             { it.putString("unexpected", "ignored?") }, { it.putString("draft", "not a record") },
         )
@@ -164,6 +170,7 @@ class ProfileEditorStateTest {
             { it.putString("port", "123456") }, { it.putBoolean("version", true) },
             { it.putString("versionId", UUID.randomUUID().toString()) },
             { it.putString("generation", "1-1-1-1-1") }, { it.putString("editor", "not-a-uuid") },
+            { it.putString("jump", "not-a-uuid") }, { it.putInt("jump", 1) },
         )
         for (change in changes) {
             val state = saved()
@@ -223,6 +230,21 @@ class ProfileEditorStateTest {
         // A schema-1 record carrying organization keys is foreign and rejects rather than guesses.
         val foreign = Bundle(legacy).apply { fields(this).putBoolean("favorite", true) }
         assertEquals(ProfileEditorRestore.Rejected, ProfileEditorState.restore(parcelRoundTrip(foreign), owner))
+    }
+
+    @Test fun jumpReferenceRoundTripsAndSchema2RestoresWithNullJump() {
+        val hop = UUID.randomUUID().toString()
+        val withJump = fresh().copy(label = TextFieldValue("Target"), jumpProfileId = hop)
+        val result = checkNotNull(restored(parcelRoundTrip(saved(withJump))).draft)
+        assertEquals(hop, result.jumpProfileId)
+        assertEquals(withJump, result)
+
+        // A schema-2 in-progress edit predates the jump reference and restores it as null.
+        val state = saved(fresh())
+        record(state).putInt("schema", 2)
+        fields(state).remove("jump")
+        val legacy = checkNotNull(restored(parcelRoundTrip(state)).draft)
+        assertNull(legacy.jumpProfileId)
     }
 
     @Test fun desktopProtocolsRestoreButConsoleCannotAdoptThemAndTextRemainsRedacted() {

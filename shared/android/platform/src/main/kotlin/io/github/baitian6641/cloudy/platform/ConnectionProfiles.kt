@@ -89,6 +89,7 @@ class ConnectionProfiles private constructor(private val configuration: Configur
             if (catalog.generation != expectedGeneration) return@operate failure(ConnectionProfilesCode.STALE_GENERATION)
             if (catalog.profiles.size >= configuration.capacity) return@operate failure(ConnectionProfilesCode.CAPACITY)
             val profile = ConnectionProfile.create(draft)
+            if (!jumpAllowed(catalog.profiles, profile)) return@operate failure(ConnectionProfilesCode.INVALID_INPUT)
             attempting()
             db.insertOrThrow("profiles", null, values(profile))
             ConnectionProfilesResult.Success(entry(catalog.generation, profile))
@@ -101,7 +102,14 @@ class ConnectionProfiles private constructor(private val configuration: Configur
             versionFailure(catalog, version)?.let { return@operate it }
             val old = catalog.profiles.single { it.id == version.id }
             if (old.revision == Long.MAX_VALUE) return@operate failure(ConnectionProfilesCode.REVISION_EXHAUSTED)
+            if (draft.jumpProfileId == version.id) return@operate failure(ConnectionProfilesCode.INVALID_INPUT)
             val revised = old.revised(draft)
+            if (!jumpAllowed(catalog.profiles, revised)) return@operate failure(ConnectionProfilesCode.INVALID_INPUT)
+            if (draft.protocol != ConnectionProtocol.SSH || draft.jumpProfileId != null) {
+                if (catalog.profiles.any { it.jumpProfileId == version.id }) {
+                    return@operate failure(ConnectionProfilesCode.CONFLICT)
+                }
+            }
             SshAuthenticationRegistry.invalidateProfile(root, owner, version.id)
             attempting()
             val changed = db.update("profiles", values(revised), "id=? AND revision=?",
@@ -113,6 +121,7 @@ class ConnectionProfiles private constructor(private val configuration: Configur
 
     fun delete(version: ConnectionProfileVersion): ConnectionProfilesResult<Unit> = operate { db, catalog, attempting ->
         versionFailure(catalog, version)?.let { return@operate it }
+        if (catalog.profiles.any { it.jumpProfileId == version.id }) return@operate failure(ConnectionProfilesCode.CONFLICT)
         SshAuthenticationRegistry.invalidateProfile(root, owner, version.id)
         attempting()
         check(db.delete("profiles", "id=? AND revision=?", arrayOf(version.id, version.revision.toString())) == 1)
@@ -216,10 +225,11 @@ class ConnectionProfiles private constructor(private val configuration: Configur
                     "owner_package TEXT NOT NULL, capacity INTEGER NOT NULL)")
                 db.execSQL("CREATE TABLE profiles (id TEXT PRIMARY KEY NOT NULL, revision INTEGER NOT NULL, " +
                     "owner TEXT NOT NULL, label TEXT NOT NULL, protocol TEXT NOT NULL, host TEXT NOT NULL, " +
-                    "port INTEGER NOT NULL, tags TEXT NOT NULL, favorite INTEGER NOT NULL, last_used INTEGER NOT NULL)")
-                db.execSQL("INSERT INTO metadata VALUES (1, 2, ?, ?, ?, ?)",
+                    "port INTEGER NOT NULL, tags TEXT NOT NULL, favorite INTEGER NOT NULL, last_used INTEGER NOT NULL, " +
+                    "jump_profile_id TEXT NOT NULL DEFAULT '')")
+                db.execSQL("INSERT INTO metadata VALUES (1, 3, ?, ?, ?, ?)",
                     arrayOf<Any>(generation, owner.wireId, configuration.ownerPackage, configuration.capacity))
-                db.execSQL("PRAGMA user_version=2")
+                db.execSQL("PRAGMA user_version=3")
                 db.setTransactionSuccessful()
             } finally { db.endTransaction() }
         }
@@ -250,36 +260,46 @@ class ConnectionProfiles private constructor(private val configuration: Configur
             check(it.moveToFirst()); it.getLong(0)
         }
         when (version) {
-            2L -> return
+            3L -> return
+            2L -> migrateV2ToV3(db)
             1L -> {
                 db.execSQL("ALTER TABLE profiles ADD COLUMN tags TEXT NOT NULL DEFAULT ''")
                 db.execSQL("ALTER TABLE profiles ADD COLUMN favorite INTEGER NOT NULL DEFAULT 0")
                 db.execSQL("ALTER TABLE profiles ADD COLUMN last_used INTEGER NOT NULL DEFAULT 0")
                 db.execSQL("UPDATE metadata SET version=2")
                 db.execSQL("PRAGMA user_version=2")
+                migrateV2ToV3(db)
             }
             else -> throw SQLiteDatabaseCorruptException("STORE_UNAVAILABLE")
         }
     }
 
+    /** v3 adds a nullable one-hop jump reference; existing rows keep their identity and revision. */
+    private fun migrateV2ToV3(db: SQLiteDatabase) {
+        db.execSQL("ALTER TABLE profiles ADD COLUMN jump_profile_id TEXT NOT NULL DEFAULT ''")
+        db.execSQL("UPDATE metadata SET version=3")
+        db.execSQL("PRAGMA user_version=3")
+    }
+
     private fun readCatalog(db: SQLiteDatabase, generation: String): ConnectionProfileCatalog {
         check(db.rawQuery("PRAGMA quick_check(1)", null).use { it.moveToFirst() && it.getString(0) == "ok" })
-        check(db.rawQuery("PRAGMA user_version", null).use { it.moveToFirst() && it.getLong(0) == 2L })
+        check(db.rawQuery("PRAGMA user_version", null).use { it.moveToFirst() && it.getLong(0) == 3L })
         db.rawQuery("SELECT singleton,version,generation,owner,owner_package,capacity FROM metadata", null).use { cursor ->
             check(cursor.count == 1 && cursor.moveToFirst())
             check(listOf(0, 1, 5).all { cursor.getType(it) == Cursor.FIELD_TYPE_INTEGER })
             check(listOf(2, 3, 4).all { cursor.getType(it) == Cursor.FIELD_TYPE_STRING })
-            check(cursor.getLong(0) == 1L && cursor.getLong(1) == 2L)
+            check(cursor.getLong(0) == 1L && cursor.getLong(1) == 3L)
             check(cursor.getString(2) == generation && cursor.getString(3) == owner.wireId)
             check(cursor.getString(4) == configuration.ownerPackage && cursor.getLong(5) == configuration.capacity.toLong())
         }
         val profiles = mutableListOf<ConnectionProfile>()
         val ids = mutableSetOf<String>()
-        db.rawQuery("SELECT id,revision,owner,label,protocol,host,port,tags,favorite,last_used FROM profiles ORDER BY id", null).use { cursor ->
+        db.rawQuery("SELECT id,revision,owner,label,protocol,host,port,tags,favorite,last_used,jump_profile_id FROM profiles ORDER BY id", null).use { cursor ->
             check(cursor.count <= configuration.capacity)
             while (cursor.moveToNext()) {
                 check(listOf(0, 2, 3, 4, 5, 7).all { cursor.getType(it) == Cursor.FIELD_TYPE_STRING })
                 check(listOf(1, 6, 8, 9).all { cursor.getType(it) == Cursor.FIELD_TYPE_INTEGER })
+                check(cursor.getType(10) == Cursor.FIELD_TYPE_STRING)
                 val id = cursor.getString(0)
                 check(canonicalUuid(id) && ids.add(id))
                 check(cursor.getString(2) == owner.wireId)
@@ -292,13 +312,22 @@ class ConnectionProfiles private constructor(private val configuration: Configur
                 check(favorite == 0L || favorite == 1L)
                 val lastUsed = cursor.getLong(9)
                 check(lastUsed >= 0L)
+                val jumpId = cursor.getString(10).takeIf { it.isNotEmpty() }
+                check(jumpId == null || canonicalUuid(jumpId))
                 val draft = ConnectionProfileDraft.create(owner, cursor.getString(3), protocol,
-                    cursor.getString(5), port.toInt(), tags, favorite == 1L)
+                    cursor.getString(5), port.toInt(), tags, favorite == 1L, jumpId)
                 check(draft.label == cursor.getString(3) && draft.host == cursor.getString(5))
                 // The stored encoding must round-trip through domain normalization exactly.
                 check(draft.tags == tags)
                 profiles += ConnectionProfile.restore(id, cursor.getLong(1), draft, lastUsed)
             }
+        }
+        val byId = profiles.associateBy { it.id }
+        for (profile in profiles) {
+            val jump = profile.jumpProfileId ?: continue
+            check(jump != profile.id)
+            val hop = byId[jump] ?: throw SQLiteDatabaseCorruptException("STORE_UNAVAILABLE")
+            check(hop.protocol == ConnectionProtocol.SSH && hop.jumpProfileId == null)
         }
         return ConnectionProfileCatalog(generation, profiles)
     }
@@ -309,6 +338,14 @@ class ConnectionProfiles private constructor(private val configuration: Configur
         // Domain validation guarantees tags contain no line separators; the join is reversible.
         put("tags", profile.tags.joinToString("\n"))
         put("favorite", if (profile.favorite) 1L else 0L); put("last_used", profile.lastUsedAt)
+        put("jump_profile_id", profile.jumpProfileId ?: "")
+    }
+
+    private fun jumpAllowed(profiles: List<ConnectionProfile>, candidate: ConnectionProfile): Boolean {
+        val jump = candidate.jumpProfileId ?: return true
+        if (jump == candidate.id) return false
+        val hop = profiles.singleOrNull { it.id == jump } ?: return false
+        return hop.protocol == ConnectionProtocol.SSH && hop.jumpProfileId == null
     }
 
     private fun entry(generation: String, profile: ConnectionProfile): ConnectionProfileEntry =

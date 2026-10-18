@@ -19,6 +19,7 @@ internal data class ProfileEditorDraft(
     val port: TextFieldValue,
     val tags: TextFieldValue = TextFieldValue(""),
     val favorite: Boolean = false,
+    val jumpProfileId: String? = null,
 ) {
     override fun toString(): String = "ProfileEditorDraft(redacted)"
 }
@@ -37,13 +38,14 @@ internal object ProfileEditorState {
     private val draftKeysV1 = setOf("editor", "generation", "protocol", "version", "label", "labelStart", "labelEnd",
         "host", "hostStart", "hostEnd", "port", "portStart", "portEnd")
     private val draftKeysV2 = draftKeysV1 + setOf("tags", "tagsStart", "tagsEnd", "favorite")
-    private val draftKeys = draftKeysV2
+    private val draftKeysV3 = draftKeysV2 + "jump"
+    private val draftKeys = draftKeysV3
     private val versionKeys = setOf("versionGeneration", "versionId", "versionRevision")
 
     fun newDraft(owner: WindowOwner, generation: String): ProfileEditorDraft {
         requireState(uuid.matches(generation))
         return ProfileEditorDraft(UUID.randomUUID().toString(), owner, generation, null,
-            ConnectionProtocol.SSH, field(""), field(""), field("22"), field(""), false)
+            ConnectionProtocol.SSH, field(""), field(""), field("22"), field(""), false, null)
     }
 
     fun editDraft(owner: WindowOwner, generation: String, profile: ConnectionProfile): ProfileEditorDraft {
@@ -51,7 +53,7 @@ internal object ProfileEditorState {
         return ProfileEditorDraft(UUID.randomUUID().toString(), owner, generation,
             ConnectionProfileVersion.create(generation, profile.id, profile.revision), profile.protocol,
             field(profile.label), field(profile.host), field(profile.port.toString()),
-            field(profile.tags.joinToString(", ")), profile.favorite)
+            field(profile.tags.joinToString(", ")), profile.favorite, profile.jumpProfileId)
     }
 
     /**
@@ -72,7 +74,8 @@ internal object ProfileEditorState {
             draft.host.text == profile.host &&
             draft.port.text == profile.port.toString() &&
             draft.tags.text == profile.tags.joinToString(", ") &&
-            draft.favorite == profile.favorite
+            draft.favorite == profile.favorite &&
+            draft.jumpProfileId == profile.jumpProfileId
     }
 
     /** Structural checks preserve accepted composition; semantic endpoint checks belong at Save. */
@@ -94,7 +97,7 @@ internal object ProfileEditorState {
         draft?.let { validate(it, owner) }
         // Build the complete private record before replacing its destination key.
         val record = Bundle().apply {
-            putInt("schema", 2)
+            putInt("schema", 3)
             putString("owner", owner.wireId)
             putBoolean("pending", pendingMutation)
             putBundle("draft", draft?.let { value ->
@@ -113,6 +116,7 @@ internal object ProfileEditorState {
                     writeField(this, "port", value.port)
                     writeField(this, "tags", value.tags)
                     putBoolean("favorite", value.favorite)
+                    putString("jump", value.jumpProfileId ?: "")
                 }
             })
         }
@@ -126,8 +130,9 @@ internal object ProfileEditorState {
             val record = raw(source, KEY) as? Bundle ?: return ProfileEditorRestore.Rejected
             requireState(record.keySet() == recordKeys)
             val schema = exact<Int>(record, "schema")
-            // Schema 1 predates tags/favorite; its in-progress edits restore with empty defaults.
-            requireState((schema == 1 || schema == 2) && exact<String>(record, "owner") == owner.wireId)
+            // Schema 1 predates tags/favorite; schema 3 adds the optional one-hop jump reference.
+            requireState((schema == 1 || schema == 2 || schema == 3) &&
+                exact<String>(record, "owner") == owner.wireId)
             val pending = exact<Boolean>(record, "pending")
             val encodedDraft = raw(record, "draft")
             val draft = if (encodedDraft == null) null else {
@@ -142,7 +147,11 @@ internal object ProfileEditorState {
 
     private fun readDraft(record: Bundle, owner: WindowOwner, schema: Int): ProfileEditorDraft {
         val hasVersion = exact<Boolean>(record, "version")
-        val baseKeys = if (schema == 1) draftKeysV1 else draftKeysV2
+        val baseKeys = when (schema) {
+            1 -> draftKeysV1
+            2 -> draftKeysV2
+            else -> draftKeysV3
+        }
         requireState(record.keySet() == if (hasVersion) baseKeys + versionKeys else baseKeys)
         val generation = exact<String>(record, "generation")
         val version = if (hasVersion) ConnectionProfileVersion.create(
@@ -152,10 +161,11 @@ internal object ProfileEditorState {
         val protocol = ConnectionProtocol.entries.firstOrNull { it.wireId == exact<String>(record, "protocol") }
         requireState(protocol != null)
         val tags = if (schema == 1) field("") else readField(record, "tags", 1024)
-        val favorite = schema == 2 && exact<Boolean>(record, "favorite")
+        val favorite = schema >= 2 && exact<Boolean>(record, "favorite")
+        val jump = if (schema >= 3) exact<String>(record, "jump").takeIf { it.isNotEmpty() } else null
         return ProfileEditorDraft(exact<String>(record, "editor"), owner, generation, version,
             checkNotNull(protocol), readField(record, "label", 160), readField(record, "host", 1024),
-            readField(record, "port", 5), tags, favorite).also { validate(it, owner) }
+            readField(record, "port", 5), tags, favorite, jump).also { validate(it, owner) }
     }
 
     private fun validate(draft: ProfileEditorDraft, owner: WindowOwner) {
@@ -169,6 +179,9 @@ internal object ProfileEditorState {
         validateField(draft.host, 1024)
         validateField(draft.port, 5)
         validateField(draft.tags, 1024)
+        draft.jumpProfileId?.let { jump ->
+            requireState(uuid.matches(jump) && jump != draft.version?.id)
+        }
     }
 
     private fun validateField(value: TextFieldValue, limit: Int) {

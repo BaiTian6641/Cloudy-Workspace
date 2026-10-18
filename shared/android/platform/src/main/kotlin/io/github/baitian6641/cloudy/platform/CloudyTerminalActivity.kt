@@ -316,18 +316,31 @@ class CloudyTerminalActivity : ComponentActivity() {
     private fun connect() {
         if (!interactive || busy || disposed) return
         val profile = selected ?: return
-        if (SshLocalNetworkPolicy.shouldRequestPermission(applicationContext, profile.peer) && !hasLocalPermission()) {
+        val loaded = catalog
+        val jump = profile.profile.jumpProfileId?.let { id ->
+            loaded?.profiles?.singleOrNull {
+                it.id == id && it.protocol == ConnectionProtocol.SSH && it.jumpProfileId == null
+            }?.let { SshObservationProfile.create(loaded.generation, it) }
+        }
+        if (profile.profile.jumpProfileId != null && jump == null) {
+            message = getString(R.string.terminal_status_failed, "JUMP_UNAVAILABLE")
+            return
+        }
+        // A jump target is contacted only through the jump; the session checks the actual host.
+        if (jump == null && SshLocalNetworkPolicy.shouldRequestPermission(applicationContext, profile.peer) &&
+            !hasLocalPermission()) {
             requestLocalPermission()
             return
         }
         if (username.text.isEmpty() || keyBusy) return
-        val credentials = when (authMethod) {
+        val pair = when (authMethod) {
             AuthMethod.PASSWORD -> {
                 if (password.text.isEmpty()) return
                 val user = username.text.toCharArray()
                 val secret = password.text.toCharArray()
                 try {
-                    SshPasswordCredentials.create(user, secret)
+                    SshPasswordCredentials.create(user, secret) to
+                        (if (jump != null) SshPasswordCredentials.create(user, secret) else null)
                 } catch (_: IllegalArgumentException) {
                     message = getString(R.string.terminal_auth_invalid)
                     return
@@ -340,7 +353,8 @@ class CloudyTerminalActivity : ComponentActivity() {
                 val user = username.text.toCharArray()
                 val passphrase = keyPassphrase.text.toCharArray()
                 try {
-                    SshKeyCredentials.create(user, material, passphrase)
+                    SshKeyCredentials.create(user, material, passphrase) to
+                        (if (jump != null) SshKeyCredentials.create(user, material, passphrase) else null)
                 } catch (_: IllegalArgumentException) {
                     message = getString(R.string.terminal_auth_invalid)
                     return
@@ -353,7 +367,8 @@ class CloudyTerminalActivity : ComponentActivity() {
                 val user = username.text.toCharArray()
                 val response = interactiveResponse.text.toCharArray()
                 try {
-                    SshKeyboardInteractiveCredentials.create(user, response)
+                    SshKeyboardInteractiveCredentials.create(user, response) to
+                        (if (jump != null) SshKeyboardInteractiveCredentials.create(user, response) else null)
                 } catch (_: IllegalArgumentException) {
                     message = getString(R.string.terminal_auth_invalid)
                     return
@@ -369,7 +384,7 @@ class CloudyTerminalActivity : ComponentActivity() {
         val current = Attempt()
         current.session = TerminalSession(applicationContext, sessionListener(current, profile))
         attempt = current
-        current.session.connect(profile, credentials)
+        current.session.connect(profile, pair.first, jump, pair.second)
     }
 
     /** One bounded session-only read; supersession and lifecycle changes wipe the bytes. */
@@ -902,6 +917,16 @@ class CloudyTerminalActivity : ComponentActivity() {
                 item("selected") {
                     Text(stringResource(R.string.terminal_selected, binding.profile.label,
                         "${binding.profile.host}:${binding.profile.port}"), modifier = Modifier.testTag("terminal_selected"))
+                }
+                if (binding.profile.jumpProfileId != null) {
+                    val hop = loaded?.profiles?.singleOrNull { it.id == binding.profile.jumpProfileId }
+                    item("jump") {
+                        Text(stringResource(R.string.terminal_jump,
+                            hop?.label ?: getString(R.string.terminal_jump_missing),
+                            hop?.let { "${it.host}:${it.port}" } ?: ""),
+                            modifier = Modifier.testTag("terminal_jump"))
+                        Text(stringResource(R.string.terminal_jump_scope), style = MaterialTheme.typography.bodySmall)
+                    }
                 }
                 item("username") {
                     key(credentialEpoch) {

@@ -8,7 +8,7 @@ enum class ConnectionProtocol(val wireId: String) {
 
 enum class ConnectionProfileValidationCode {
     INVALID_LABEL, INVALID_PROTOCOL, INVALID_HOST, INVALID_PORT,
-    INVALID_ID, INVALID_REVISION, WRONG_OWNER, INVALID_TAGS, INVALID_LAST_USED,
+    INVALID_ID, INVALID_REVISION, WRONG_OWNER, INVALID_TAGS, INVALID_LAST_USED, INVALID_JUMP,
 }
 
 class ConnectionProfileValidationException(val code: ConnectionProfileValidationCode) :
@@ -23,6 +23,8 @@ class ConnectionProfileDraft private constructor(
     val port: Int,
     val tags: Set<String>,
     val favorite: Boolean,
+    /** One-hop jump host reference; resolved and validated against the current catalog by the store. */
+    val jumpProfileId: String?,
 ) {
     override fun toString(): String = "ConnectionProfileDraft(redacted)"
 
@@ -32,8 +34,11 @@ class ConnectionProfileDraft private constructor(
 
         fun create(
             owner: WindowOwner, label: String, protocol: ConnectionProtocol, host: String, port: Int,
-            tags: Set<String> = emptySet(), favorite: Boolean = false,
+            tags: Set<String> = emptySet(), favorite: Boolean = false, jumpProfileId: String? = null,
         ): ConnectionProfileDraft {
+            if (jumpProfileId != null && !canonicalId(jumpProfileId)) {
+                reject(ConnectionProfileValidationCode.INVALID_JUMP)
+            }
             // Endpoint labels intentionally share the existing native-window Unicode/name policy.
             if (WindowState.nameProblem(label) != null) reject(ConnectionProfileValidationCode.INVALID_LABEL)
             if (owner == WindowOwner.CONSOLE && protocol != ConnectionProtocol.SSH) {
@@ -46,7 +51,7 @@ class ConnectionProfileDraft private constructor(
                 reject(ConnectionProfileValidationCode.INVALID_HOST)
             }
             return ConnectionProfileDraft(owner, label.trim(), protocol, canonicalHost, port,
-                normalizeTags(tags), favorite)
+                normalizeTags(tags), favorite, jumpProfileId)
         }
 
         /**
@@ -94,10 +99,12 @@ class ConnectionProfile private constructor(
     val port: Int get() = draft.port
     val tags: Set<String> get() = draft.tags
     val favorite: Boolean get() = draft.favorite
+    val jumpProfileId: String? get() = draft.jumpProfileId
 
     /** Editable-field replacement keeps runtime metadata such as the last-used marker. */
     fun revised(draft: ConnectionProfileDraft): ConnectionProfile {
         if (draft.owner != owner) reject(ConnectionProfileValidationCode.WRONG_OWNER)
+        if (draft.jumpProfileId == id) reject(ConnectionProfileValidationCode.INVALID_JUMP)
         if (revision == Long.MAX_VALUE) reject(ConnectionProfileValidationCode.INVALID_REVISION)
         return ConnectionProfile(id, revision + 1, draft, lastUsedAt)
     }
@@ -125,6 +132,10 @@ class ConnectionProfile private constructor(
         }
     }
 }
+
+private val profileIdentifier = Regex("[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}")
+
+private fun canonicalId(value: String): Boolean = profileIdentifier.matches(value)
 
 private fun reject(code: ConnectionProfileValidationCode): Nothing =
     throw ConnectionProfileValidationException(code)

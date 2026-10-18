@@ -243,7 +243,7 @@ class CloudyProfilesActivity : ComponentActivity() {
             .toCollection(java.util.LinkedHashSet())
         return try {
             ConnectionProfileDraft.create(owner, value.label.text, value.protocol, value.host.text, port,
-                tags, value.favorite)
+                tags, value.favorite, value.jumpProfileId)
         } catch (error: ConnectionProfileValidationException) {
             message = getString(when (error.code) {
                 ConnectionProfileValidationCode.INVALID_LABEL -> R.string.profile_invalid_label

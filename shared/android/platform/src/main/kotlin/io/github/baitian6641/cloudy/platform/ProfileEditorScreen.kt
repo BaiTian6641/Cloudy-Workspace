@@ -131,7 +131,7 @@ internal fun ProfileEditorScreen(
             }
             if (draft != null) {
                 item(key = "editor-${draft.editorId}") {
-                    ProfileDraftEditor(owner, draft, busy, outcomeUnknown, reviewed, onDraftChange,
+                    ProfileDraftEditor(catalog, owner, draft, busy, outcomeUnknown, reviewed, onDraftChange,
                         onSave, onCloseEditor, onDelete, onReview, onReapply, onReload)
                 }
             }
@@ -158,6 +158,7 @@ internal fun ProfileEditorScreen(
 
 @Composable
 private fun ProfileDraftEditor(
+    catalog: ConnectionProfileCatalog?,
     owner: WindowOwner,
     draft: ProfileEditorDraft,
     busy: Boolean,
@@ -192,6 +193,29 @@ private fun ProfileDraftEditor(
                         shape = RoundedCornerShape(CloudyControlMetrics.chipRadius),
                         modifier = Modifier.heightIn(min = CloudyControlMetrics.controlMinHeight).testTag("profile_protocol_${protocol.wireId}"))
                 }
+            }
+            if (owner == WindowOwner.CONSOLE) {
+                val hops = catalog?.profiles?.filter {
+                    it.protocol == ConnectionProtocol.SSH && it.jumpProfileId == null && it.id != draft.version?.id
+                } ?: emptyList()
+                Text(stringResource(R.string.profile_jump), style = MaterialTheme.typography.labelLarge)
+                ProfileActions {
+                    FilterChip(selected = draft.jumpProfileId == null, enabled = editable,
+                        onClick = { onDraftChange(draft.copy(jumpProfileId = null)) },
+                        label = { Text(stringResource(R.string.profile_jump_direct)) },
+                        shape = RoundedCornerShape(CloudyControlMetrics.chipRadius),
+                        modifier = Modifier.heightIn(min = CloudyControlMetrics.controlMinHeight)
+                            .testTag("profile_jump_none"))
+                    for (hop in hops) {
+                        FilterChip(selected = draft.jumpProfileId == hop.id, enabled = editable,
+                            onClick = { onDraftChange(draft.copy(jumpProfileId = hop.id)) },
+                            label = { Text(hop.label) },
+                            shape = RoundedCornerShape(CloudyControlMetrics.chipRadius),
+                            modifier = Modifier.heightIn(min = CloudyControlMetrics.controlMinHeight)
+                                .testTag("profile_jump_${hop.id}"))
+                    }
+                }
+                Text(stringResource(R.string.profile_jump_hint), style = MaterialTheme.typography.bodySmall)
             }
             OutlinedTextField(value = draft.host, onValueChange = { onDraftChange(draft.copy(host = it)) },
                 label = { Text(stringResource(R.string.profile_host)) }, enabled = editable, singleLine = true,

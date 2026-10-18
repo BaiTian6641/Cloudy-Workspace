@@ -59,7 +59,7 @@ internal class WorkspaceHomeController(context: Context, private val owner: Wind
     fun toggleFavorite(row: HomeRow) {
         val current = row.profile
         val draft = ConnectionProfileDraft.create(owner, current.label, current.protocol,
-            current.host, current.port, current.tags, !current.favorite)
+            current.host, current.port, current.tags, !current.favorite, current.jumpProfileId)
         mutate { profiles.update(row.version, draft) }
     }
 

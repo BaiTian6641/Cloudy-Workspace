@@ -75,6 +75,9 @@
     <string name="terminal_auth_keyboard_interactive">Keyboard-interactive</string>
     <string name="terminal_interactive_response">Response</string>
     <string name="terminal_interactive_scope">One server prompt is supported per attempt. A multi-prompt challenge is refused instead of answered by guessing.</string>
+    <string name="terminal_jump">Via jump host: %1$s (%2$s)</string>
+    <string name="terminal_jump_missing">unavailable</string>
+    <string name="terminal_jump_scope">The same transient credentials are used for both hops; each hop requires its own trusted key.</string>
     <string name="terminal_key_choose">Choose private key…</string>
     <string name="terminal_key_replace">Replace private key…</string>
     <string name="terminal_key_selected">Private key selected for this attempt</string>

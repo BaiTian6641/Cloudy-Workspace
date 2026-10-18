@@ -64,9 +64,14 @@ internal class SshAuthenticateFixture private constructor(
     private val profileBaseline = profile { profiles.load() }
     private val trustBaseline = trust { trust.load() }
     private val peer = SshPeerIdentity.create("127.0.0.1", configuration.getInt("port"))
+    private val jump = configuration.optBoolean("jump", false)
+    private val targetPeer = SshPeerIdentity.create("127.0.0.1",
+        if (jump) configuration.getInt("targetPort") else configuration.getInt("port"))
     private val key = SshHostKeyIdentity.create(configuration.getString("keyFormat"), configuration.getString("fingerprint"))
     private val trustFixture = SshObserveTrustFixture(context, owner, trustBaseline)
     private val plannedPin = SshTrustSnapshot.create(owner, trustBaseline.generation, peer, 1, SshTrustStatus.accepted(key))
+    private val targetPin = SshTrustSnapshot.create(owner, trustBaseline.generation, targetPeer, 1, SshTrustStatus.accepted(key))
+    private val plannedPins = listOf(plannedPin) + if (jump && targetPeer != peer) listOf(targetPin) else emptyList()
     private val directory = File(context.noBackupFilesDir, "ssh-authenticate-qualification")
     private val receiptFile = File(directory, "$run-${owner.wireId}-$case.json")
     /** Wall-clock start of this attempt; a home open marker must fall in [start, observation]. */
@@ -77,6 +82,7 @@ internal class SshAuthenticateFixture private constructor(
         .put("profileBaseline", profileJson(profileBaseline)).put("trustBaseline", trustJson(trustBaseline))
         .put("trustMetadata", JSONArray(trustFixture.baselineMetadata())).put("phases", journal)
     private var ownedProfile: ConnectionProfile? = null
+    private var ownedJump: ConnectionProfile? = null
     private var homeOpenAccepted = false
     val profileId: String get() = checkNotNull(ownedProfile).id
 
@@ -84,7 +90,7 @@ internal class SshAuthenticateFixture private constructor(
     val profileLabel: String get() = checkNotNull(ownedProfile).label
 
     init {
-        check(trustBaseline.snapshots.none { it.peer == peer }) { "AUTH_FIXTURE_PEER_NOT_ABSENT" }
+        check(trustBaseline.snapshots.none { it.peer == peer || it.peer == targetPeer }) { "AUTH_FIXTURE_PEER_NOT_ABSENT" }
         check(!Files.isSymbolicLink(directory.toPath()) && (directory.isDirectory || directory.mkdir()))
         check(listOf("", ".bak", ".new").none { File(receiptFile.path + it).exists() ||
             Files.isSymbolicLink(File(receiptFile.path + it).toPath()) })
@@ -101,16 +107,25 @@ internal class SshAuthenticateFixture private constructor(
 
     fun seed() {
         val label = "Authentication ${owner.wireId} $run $case"
-        receipt.put("plannedLabel", label).put("plannedHost", peer.host).put("plannedPort", peer.port)
-        receipt.put("plannedTrust", trustJson(trustBaseline, trustBaseline.snapshots + plannedPin))
+        receipt.put("plannedLabel", label).put("plannedHost", targetPeer.host).put("plannedPort", targetPeer.port)
+        receipt.put("plannedTrust", trustJson(trustBaseline, trustBaseline.snapshots + plannedPins))
         phase("PROFILE_CREATE_PLANNED")
+        if (jump) {
+            ownedJump = profile { profiles.create(profileBaseline.generation,
+                ConnectionProfileDraft.create(owner, "Jump ${owner.wireId} $run $case",
+                    ConnectionProtocol.SSH, peer.host, peer.port)) }.profile
+            receipt.put("ownedJump", profileJson(profileBaseline.generation, listOf(checkNotNull(ownedJump))))
+        }
         ownedProfile = profile { profiles.create(profileBaseline.generation,
-            ConnectionProfileDraft.create(owner, label, ConnectionProtocol.SSH, peer.host, peer.port)) }.profile
+            ConnectionProfileDraft.create(owner, label, ConnectionProtocol.SSH, targetPeer.host, targetPeer.port,
+                jumpProfileId = ownedJump?.id)) }.profile
         receipt.put("ownedProfile", profileJson(profileBaseline.generation, listOf(checkNotNull(ownedProfile))))
         phase("TRUST_ACCEPT_PLANNED")
-        val accepted = trust { trust.accept(SshTrustChallenge.create(UUID.randomUUID().toString(),
-            UUID.randomUUID().toString(), trust { trust.evaluate(peer, key) })) }
-        check(accepted == plannedPin) { "AUTH_FIXTURE_ENROLLMENT_CHANGED" }
+        for (pin in plannedPins) {
+            val accepted = trust { trust.accept(SshTrustChallenge.create(UUID.randomUUID().toString(),
+                UUID.randomUUID().toString(), trust { trust.evaluate(pin.peer, key) })) }
+            check(accepted == pin) { "AUTH_FIXTURE_ENROLLMENT_CHANGED" }
+        }
         assertUnchanged()
         phase("READY")
     }
@@ -157,8 +172,10 @@ internal class SshAuthenticateFixture private constructor(
 
     fun assertUnchanged() {
         check(profileJson(profile { profiles.load() }) ==
-            profileJson(profileBaseline.generation, profileBaseline.profiles + listOfNotNull(ownedProfile))) { "AUTH_PROFILE_CHANGED" }
-        check(trustJson(trust { trust.load() }) == trustJson(trustBaseline, trustBaseline.snapshots + plannedPin)) {
+            profileJson(profileBaseline.generation, profileBaseline.profiles + listOfNotNull(ownedJump, ownedProfile))) {
+            "AUTH_PROFILE_CHANGED"
+        }
+        check(trustJson(trust { trust.load() }) == trustJson(trustBaseline, trustBaseline.snapshots + plannedPins)) {
             "AUTH_TRUST_CHANGED"
         }
     }
@@ -177,7 +194,7 @@ internal class SshAuthenticateFixture private constructor(
         while (adopted == null) {
             val catalog = profile { profiles.load() }
             check(catalog.generation == profileBaseline.generation) { "AUTH_PROFILE_GENERATION_CHANGED" }
-            check(rowsJson(catalog.profiles.filter { it.id != seeded.id }).toString() ==
+            check(rowsJson(catalog.profiles.filter { it.id != seeded.id && it.id != ownedJump?.id }).toString() ==
                 rowsJson(profileBaseline.profiles).toString()) { "AUTH_FOREIGN_PROFILE_CHANGED" }
             val row = catalog.profiles.singleOrNull { it.id == seeded.id } ?: error("AUTH_HOME_OPEN_ROW_MISSING")
             if (row.revision != seeded.revision) {
@@ -191,7 +208,9 @@ internal class SshAuthenticateFixture private constructor(
         check(row.revision == seeded.revision + 1) { "AUTH_HOME_OPEN_UNEXPECTED_REVISION" }
         check(row.owner == seeded.owner && row.label == seeded.label && row.protocol == seeded.protocol &&
             row.host == seeded.host && row.port == seeded.port && row.tags == seeded.tags &&
-            row.favorite == seeded.favorite) { "AUTH_HOME_OPEN_METADATA_CHANGED" }
+            row.favorite == seeded.favorite && row.jumpProfileId == seeded.jumpProfileId) {
+            "AUTH_HOME_OPEN_METADATA_CHANGED"
+        }
         check(row.lastUsedAt in attemptStartedEpochSeconds..(System.currentTimeMillis() / 1000)) {
             "AUTH_HOME_OPEN_TIME_UNEXPECTED"
         }
@@ -207,12 +226,14 @@ internal class SshAuthenticateFixture private constructor(
     fun restore(passed: Boolean) {
         settle()
         check(profileJson(profile { profiles.load() }) ==
-            profileJson(profileBaseline.generation, profileBaseline.profiles + listOfNotNull(ownedProfile))) {
+            profileJson(profileBaseline.generation, profileBaseline.profiles + listOfNotNull(ownedJump, ownedProfile))) {
             "AUTH_PROFILE_UNCERTAIN_PRESERVE_FIXTURE"
         }
         phase("RESTORING_EXACT_FIXTURE")
-        trustFixture.removeOnlyExpected(plannedPin)
-        ownedProfile?.let { row ->
+        trustFixture.removeOnlyExpected(plannedPins)
+        // The target references the jump, so retire the dependent row first.
+        for (id in listOfNotNull(ownedProfile?.id, ownedJump?.id)) {
+            val row = profile { profiles.load() }.profiles.singleOrNull { it.id == id } ?: continue
             profile { profiles.delete(ConnectionProfileVersion.create(profileBaseline.generation, row.id, row.revision)) }
         }
         check(profileJson(profile { profiles.load() }) == profileJson(profileBaseline))
@@ -235,10 +256,12 @@ internal class SshAuthenticateFixture private constructor(
                 info.st_uid == Process.myUid() && info.st_mode and 511 == 448)
             val config = parse(privateBytes(File(directory, "$run.json"), 65_536))
             check(config.keys().asSequence().toSet() == setOf("schema", "run", "owner", "host", "port", "keyFormat", "fingerprint",
-                "usernameAccept", "usernameDeny", "usernameChange", "usernameWait", "password"))
+                "usernameAccept", "usernameDeny", "usernameChange", "usernameWait", "password", "jump", "targetPort"))
             check(config.opt("schema") == 1 && config.opt("run") == run && config.opt("owner") == owner.wireId &&
                 config.opt("host") == "127.0.0.1" && config.opt("port") is Int && config.getInt("port") in 1..65535 &&
-                config.opt("keyFormat") == "ecdsa-sha2-nistp256" && config.opt("fingerprint") is String)
+                config.opt("keyFormat") == "ecdsa-sha2-nistp256" && config.opt("fingerprint") is String &&
+                config.opt("jump") is Boolean && config.opt("targetPort") is Int &&
+                config.getInt("targetPort") in 1..65535)
             for (field in listOf("usernameAccept", "usernameDeny", "usernameChange", "usernameWait")) {
                 val value = config.opt(field) as? String ?: error("AUTH_FIXTURE_FIELD_INVALID")
                 check(value.length in 1..256 && value.none { Character.isISOControl(it) || Character.isSurrogate(it) })

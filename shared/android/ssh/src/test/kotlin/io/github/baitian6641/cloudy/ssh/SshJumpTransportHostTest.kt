@@ -65,7 +65,7 @@ class SshJumpTransportHostTest {
                 { _, _ -> targetCredential }, { proof ->
                     proof.peer == fixture.peer && proof.key == fixture.key && !proof.isRetired
                 }, { proof -> assertTrue(proof.isRetired); opened.targetRetired.incrementAndGet() },
-                timeoutMillis = 4_000, direct = (direct as SshDirectResult.Opened).connection)
+                timeoutMillis = 4_000, direct = (direct as SshDirectResult.Opened).channel)
             assertTrue("Target over jump failed: $target", target is SshTransportOpenResult.Connected)
             val targetTransport = (target as SshTransportOpenResult.Connected).transport
             assertTrue("Target credential must retire before publication", targetCredential.isClosed)
@@ -110,7 +110,7 @@ class SshJumpTransportHostTest {
             val wrong = SshPasswordCredentials.create("fixture-user".toCharArray(), "wrong-password".toCharArray())
             val target = SshAuthenticatedTransportFactory().connectPassword(fixture.peer, fixture.address,
                 fixture.key, SshObservationCancellation(), { _, _ -> wrong }, { true }, { },
-                timeoutMillis = 4_000, direct = (direct as SshDirectResult.Opened).connection)
+                timeoutMillis = 4_000, direct = (direct as SshDirectResult.Opened).channel)
             assertTrue("Wrong target credentials must fail: $target", target is SshTransportOpenResult.Failure)
             assertEquals(SshTransportCode.AUTHENTICATION_FAILED,
                 (target as SshTransportOpenResult.Failure).code)

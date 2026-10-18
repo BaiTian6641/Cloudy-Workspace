@@ -63,6 +63,27 @@ class ConnectionProfilesTest {
 
     @After fun cleanup() { check(root.deleteRecursively()) }
 
+    @Test fun jumpReferenceRequiresAnEligibleSameStoreHopAndBlocksDelete() {
+        val store = store()
+        val catalog = success(store.load())
+        val hop = success(store.create(catalog.generation, draft("Jump", "jump.test")))
+        fun targetDraft(jump: String?) = ConnectionProfileDraft.create(WindowOwner.CONSOLE, "Target",
+            ConnectionProtocol.SSH, "target.test", 22, jumpProfileId = jump)
+        val target = success(store.create(catalog.generation, targetDraft(hop.profile.id)))
+        assertEquals(hop.profile.id, target.profile.jumpProfileId)
+        assertEquals(hop.profile.id, success(store.load()).profiles.single { it.id == target.profile.id }.jumpProfileId)
+        denied(ConnectionProfilesCode.CONFLICT, store.delete(hop.version))
+        // A hop cannot be given its own jump while referenced.
+        denied(ConnectionProfilesCode.INVALID_INPUT, store.update(hop.version, targetDraft(target.profile.id)))
+        // Missing and self references fail closed.
+        denied(ConnectionProfilesCode.INVALID_INPUT,
+            store.create(catalog.generation, targetDraft(UUID.randomUUID().toString())))
+        denied(ConnectionProfilesCode.INVALID_INPUT, store.update(target.version, targetDraft(target.profile.id)))
+        // Deleting the unreferenced target leaves the hop deletable.
+        success(store.delete(target.version))
+        success(store.delete(hop.version))
+    }
+
     @Test fun realCrudRetainsGenerationAndReopensIndependentInstances() {
         val catalog = success(store().load())
         assertTrue(catalog.profiles.isEmpty())

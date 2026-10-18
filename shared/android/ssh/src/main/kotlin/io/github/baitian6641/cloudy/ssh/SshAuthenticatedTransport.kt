@@ -27,8 +27,13 @@ enum class SshTransportCode {
     AUTHENTICATION_FAILED, OWNERSHIP_REJECTED, CLOSED,
     OPERATION_FAILED, LIMIT_EXCEEDED, INVALID_REMOTE_DATA, CLEANUP_UNCERTAIN,
 }
+class SshJumpChannel internal constructor(internal val connection: DirectConnection) : AutoCloseable {
+    override fun close() { runCatching { connection.close() } }
+    override fun toString(): String = "SshJumpChannel(redacted)"
+}
+
 sealed interface SshDirectResult {
-    class Opened(val connection: DirectConnection) : SshDirectResult
+    class Opened(val channel: SshJumpChannel) : SshDirectResult
     class Failure(val code: SshTransportCode) : SshDirectResult {
         override fun toString() = "SshDirectResult.Failure(${code.name})"
     }
@@ -60,7 +65,7 @@ class SshAuthenticatedTransportFactory {
         admit: (SshPeerIdentity, SshHostKeyIdentity) -> SshSessionCredentials?,
         establish: (SshAuthenticatedOwnership) -> Boolean,
         retired: (SshAuthenticatedOwnership) -> Unit,
-        timeoutMillis: Int = 10_000, direct: DirectConnection? = null): SshTransportOpenResult = connect(
+        timeoutMillis: Int = 10_000, direct: SshJumpChannel? = null): SshTransportOpenResult = connect(
         peer, address, expectedKey, cancellation,
         { p, k ->
             // A password route never authenticates key material even if a caller supplies it.
@@ -75,7 +80,7 @@ class SshAuthenticatedTransportFactory {
         admit: (SshPeerIdentity, SshHostKeyIdentity) -> SshKeyCredentials?,
         establish: (SshAuthenticatedOwnership) -> Boolean,
         retired: (SshAuthenticatedOwnership) -> Unit,
-        timeoutMillis: Int = 10_000, direct: DirectConnection? = null): SshTransportOpenResult = connect(
+        timeoutMillis: Int = 10_000, direct: SshJumpChannel? = null): SshTransportOpenResult = connect(
         peer, address, expectedKey, cancellation, { p, k -> admit(p, k) }, establish, retired, timeoutMillis, direct)
 
     /** One single-prompt keyboard-interactive attempt; no password/key/agent fallback. */
@@ -84,7 +89,7 @@ class SshAuthenticatedTransportFactory {
         admit: (SshPeerIdentity, SshHostKeyIdentity) -> SshKeyboardInteractiveCredentials?,
         establish: (SshAuthenticatedOwnership) -> Boolean,
         retired: (SshAuthenticatedOwnership) -> Unit,
-        timeoutMillis: Int = 10_000, direct: DirectConnection? = null): SshTransportOpenResult = connect(
+        timeoutMillis: Int = 10_000, direct: SshJumpChannel? = null): SshTransportOpenResult = connect(
         peer, address, expectedKey, cancellation, { p, k -> admit(p, k) }, establish, retired, timeoutMillis, direct)
 
     private fun connect(peer: SshPeerIdentity, address: InetAddress, expectedKey: SshHostKeyIdentity,
@@ -92,7 +97,7 @@ class SshAuthenticatedTransportFactory {
         admit: (SshPeerIdentity, SshHostKeyIdentity) -> SshSessionCredentials?,
         establish: (SshAuthenticatedOwnership) -> Boolean,
         retired: (SshAuthenticatedOwnership) -> Unit,
-        timeoutMillis: Int, direct: DirectConnection?): SshTransportOpenResult {
+        timeoutMillis: Int, direct: SshJumpChannel?): SshTransportOpenResult {
         fun failed(code: SshTransportCode) = SshTransportOpenResult.Failure(code)
         if (timeoutMillis !in 1..10_000) return failed(SshTransportCode.INVALID_INPUT)
         val denied = synchronized(admission) {
@@ -112,7 +117,7 @@ class SshAuthenticatedTransportFactory {
         }
         synchronized(admission) { previous = state }
         if (!state.attach()) { busy.set(false); return failed(SshTransportCode.BUSY) }
-        if (direct != null) state.retainDirect(direct)
+        if (direct != null) state.retainDirect(direct.connection)
         var credentials: SshSessionCredentials? = null
         var material: SshCredentialMaterial? = null
         var method: SshStrictPasswordMethod? = null
@@ -168,7 +173,7 @@ class SshAuthenticatedTransportFactory {
             })
             if (state.active()) {
                 val channel = direct
-                if (channel != null) client.connectVia(channel) else client.connect(numeric, peer.port)
+                if (channel != null) client.connectVia(channel.connection) else client.connect(numeric, peer.port)
             }
             if (state.active() && state.keyObserved.get()) {
                 // Platform coordination is entered outside the cancellation monitor/Reader.
@@ -317,7 +322,7 @@ internal class SshRetainedState(
                 } else {
                     direct = channel
                     deadline = 0
-                    SshDirectResult.Opened(channel)
+                    SshDirectResult.Opened(SshJumpChannel(channel))
                 }
             }
         } catch (_: Exception) {
