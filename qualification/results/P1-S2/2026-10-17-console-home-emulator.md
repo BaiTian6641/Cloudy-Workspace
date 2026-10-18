@@ -46,7 +46,7 @@ The preference test restored exact **DARK / COMFORTABLE** state. The reflow run 
 
 Earlier injected pointer/Tab→Enter attempts did not activate Apply in the state test; their failures remain preserved. The state contract now uses the public semantic click while retaining all committed/draft/selection/identity assertions. A separate native pointer interaction renamed the window; this does not qualify all physical keyboard, focus or IME routes.
 
-The editor still asks to discard an unchanged draft after Save. This is an observed UX defect, not a data-loss or authentication pass; `CloudyProfilesActivity.leaveEditor` currently confirms whenever any draft exists. Repair must distinguish unchanged committed fields from genuinely dirty or uncertain writes without weakening conflict/unknown-outcome guards.
+This run observed an unnecessary discard prompt after saving an unchanged profile. The later [clean-close repair](2026-10-17-profile-clean-close.md) passes its own source-bound Android and native-pointer checks while retaining dirty/stale/uncertain-write guards. The original observation is preserved, not relabeled.
 
 The full opt-in Googlebook geometry matrix, actual hardware keyboard/trackpad, system IME candidate/preedit, TalkBack, long-label/failure breadth and final product visual acceptance remain open. The earlier physical-device results retain their own source boundaries. No stage, capability or release status is promoted by this record.
 

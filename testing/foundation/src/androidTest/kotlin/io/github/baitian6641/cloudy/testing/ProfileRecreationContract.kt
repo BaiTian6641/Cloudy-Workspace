@@ -85,6 +85,14 @@ abstract class ProfileRecreationContract(private val expectedOwner: WindowOwner)
         refreshAndRecreateAgain()
         assertPending(label)
         assertOneOwnedProfile(created.id, 1, label)
+        // A restored uncertain create has no saved version, and matching label/endpoint text
+        // cannot prove which create committed. Close still demands explicit consent; cancelling
+        // keeps the restored draft and never writes again.
+        click("profile_close_editor")
+        compose.onNodeWithTag("profile_dialog").assertIsDisplayed()
+        compose.onNodeWithTag("profile_cancel").performClick()
+        assertPending(label)
+        assertOneOwnedProfile(created.id, 1, label)
     }
 
     @Test fun admittedUpdateAdvancesOnlyOnceAndRestoredDraftDoesNotReapplyItself() {
@@ -104,6 +112,20 @@ abstract class ProfileRecreationContract(private val expectedOwner: WindowOwner)
         assertOneOwnedProfile(original.id, original.revision + 1, label)
         refreshAndRecreateAgain()
         assertPending(label)
+        assertOneOwnedProfile(original.id, original.revision + 1, label)
+        // A restored uncertain update still matches its committed row, but pending uncertainty
+        // must retain explicit consent. Closing must neither replay the write nor erase the draft.
+        click("profile_close_editor")
+        compose.onNodeWithTag("profile_dialog").assertIsDisplayed()
+        assertOneOwnedProfile(original.id, original.revision + 1, label)
+        compose.onNodeWithTag("profile_cancel").performClick()
+        assertPending(label)
+        assertOneOwnedProfile(original.id, original.revision + 1, label)
+        click("profile_close_editor")
+        compose.onNodeWithTag("profile_dialog").assertIsDisplayed()
+        compose.onNodeWithTag("profile_confirm").performClick()
+        compose.onNodeWithTag("profile_dialog").assertDoesNotExist()
+        compose.onNodeWithTag("profile_editor").assertDoesNotExist()
         assertOneOwnedProfile(original.id, original.revision + 1, label)
     }
 

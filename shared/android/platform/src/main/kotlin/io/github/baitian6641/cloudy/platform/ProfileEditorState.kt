@@ -54,6 +54,27 @@ internal object ProfileEditorState {
             field(profile.tags.joinToString(", ")), profile.favorite)
     }
 
+    /**
+     * Side-effect-free close decision for a draft opened from, or just written to, a saved row.
+     * Only the exact catalog row at the draft's captured generation/id/revision qualifies, and
+     * every editable value is compared as it is actually shown: raw field text (not
+     * [TextFieldValue] equality, so cursor/selection movement is not an edit) plus protocol and
+     * favorite. Tags are deliberately not re-normalized here, so changed raw text must still be
+     * confirmed at close instead of being hidden by Save's trimming/deduplication.
+     */
+    fun isUnchangedSavedDraft(draft: ProfileEditorDraft, catalog: ConnectionProfileCatalog): Boolean {
+        val version = draft.version ?: return false
+        if (catalog.generation != version.generation || version.generation != draft.generation) return false
+        val profile = catalog.profiles.singleOrNull { it.id == version.id } ?: return false
+        if (profile.owner != draft.owner || profile.revision != version.revision) return false
+        return draft.protocol == profile.protocol &&
+            draft.label.text == profile.label &&
+            draft.host.text == profile.host &&
+            draft.port.text == profile.port.toString() &&
+            draft.tags.text == profile.tags.joinToString(", ") &&
+            draft.favorite == profile.favorite
+    }
+
     /** Structural checks preserve accepted composition; semantic endpoint checks belong at Save. */
     fun acceptsField(value: TextFieldValue, limit: Int): Boolean {
         if (limit < 0 || value.text.length > limit || value.selection.start !in 0..value.text.length ||

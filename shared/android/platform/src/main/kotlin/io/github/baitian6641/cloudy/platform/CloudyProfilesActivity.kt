@@ -191,18 +191,33 @@ class CloudyProfilesActivity : ComponentActivity() {
 
     private fun leaveEditor(after: () -> Unit) {
         if (!canInteract()) return
-        if (draft == null && !pendingMutation) { after(); return }
+        val value = draft
+        if (value == null && !pendingMutation) { after(); return }
+        val current = catalog
+        // A known saved row still showing every editable value has nothing to discard, so ordinary
+        // close/finish proceeds without a confirmation or a store write. Cursor movement alone is
+        // ignored by the decision. An uncertain mutation, unknown/unavailable catalog or stale
+        // generation/revision keeps the explicit discard path below.
+        if (!pendingMutation && value != null && current != null &&
+            ProfileEditorState.isUnchangedSavedDraft(value, current)) {
+            clearLocalEditor(after)
+            return
+        }
         // Matching endpoint text cannot identify which uncertain create was committed. Leaving
         // must still work if storage is unavailable; this explicit discard never retries a write.
         confirmation = Confirmation(R.string.profile_discard_title,
             if (pendingMutation) R.string.profile_discard_unknown_body else R.string.profile_discard_body,
             R.string.profile_discard_confirm) {
-            draft = null
-            reviewed = null
-            pendingMutation = false
-            message = null
-            after()
+            clearLocalEditor(after)
         }
+    }
+
+    private fun clearLocalEditor(after: () -> Unit) {
+        draft = null
+        reviewed = null
+        pendingMutation = false
+        message = null
+        after()
     }
 
     private fun changeDraft(next: ProfileEditorDraft) {

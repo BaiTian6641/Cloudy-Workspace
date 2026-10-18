@@ -96,6 +96,57 @@ abstract class ProfileActivityContract(private val expectedOwner: WindowOwner) {
         awaitAbsent(first.id)
     }
 
+    @Test fun unchangedSavedDraftClosesWithoutConfirmationOrRevisionMutation() {
+        val protocol = if (expectedOwner == WindowOwner.DESKTOP) ConnectionProtocol.RDP else ConnectionProtocol.SSH
+        val first = createThroughUi("clean-close", protocol)
+        replace("profile_tags", "alpha, beta")
+        click("profile_favorite")
+        click("profile_save")
+        awaitMessage(io.github.baitian6641.cloudy.platform.R.string.profile_updated)
+        val saved = awaitProfile(first.id) { it.revision == 2L }
+        assertEquals(setOf("alpha", "beta"), saved.tags)
+        assertTrue(saved.favorite)
+        assertEquals(protocol, saved.protocol)
+        // Selection movement alone is not an edit of the saved row.
+        scrollTo("profile_label")
+        compose.onNodeWithTag("profile_label").performTextInputSelection(TextRange(2, 5))
+        click("profile_close_editor")
+        dialogAbsent()
+        editorAbsent()
+        val closed = profile(first.id)
+        assertEquals(2L, closed.revision)
+        assertEquals("$prefix-clean-close", closed.label)
+        assertEquals("alpha, beta", closed.tags.joinToString(", "))
+        assertTrue(closed.favorite)
+        assertEquals(protocol, closed.protocol)
+        // Reopen the same saved row so the baseline comes from the catalog rather than the
+        // post-save draft; closing it untouched must also skip confirmation and any write.
+        click("profile_edit_${first.id}")
+        click("profile_close_editor")
+        dialogAbsent()
+        editorAbsent()
+        assertEquals(2L, profile(first.id).revision)
+    }
+
+    @Test fun dirtyRawTagTextCancelKeepsDraftAndSavedRow() {
+        val first = createThroughUi("dirty-cancel")
+        replace("profile_tags", "alpha, beta")
+        click("profile_save")
+        awaitMessage(io.github.baitian6641.cloudy.platform.R.string.profile_updated)
+        val saved = awaitProfile(first.id) { it.revision == 2L }
+        // Same normalized tags, different raw text: dropping only whitespace is still an unsaved
+        // edit and must not be treated as an unchanged saved draft.
+        replace("profile_tags", "alpha,beta")
+        click("profile_close_editor")
+        dialogShown()
+        compose.onNodeWithTag("profile_cancel").performClick()
+        compose.waitForIdle()
+        assertField("profile_tags", "alpha,beta")
+        val retained = profile(first.id)
+        assertEquals(saved.revision, retained.revision)
+        assertEquals("alpha, beta", retained.tags.joinToString(", "))
+    }
+
     @Test fun unsavedDraftAndNativeSelectionSurviveRecreationWithoutSaving() {
         click("profile_new")
         val label = "$prefix-unsaved"
@@ -261,6 +312,8 @@ abstract class ProfileActivityContract(private val expectedOwner: WindowOwner) {
     }
 
     private fun dialogShown() { compose.onNodeWithTag("profile_dialog").assertIsDisplayed() }
+    private fun dialogAbsent() { compose.onNodeWithTag("profile_dialog").assertDoesNotExist() }
+    private fun editorAbsent() { compose.onNodeWithTag("profile_editor").assertDoesNotExist() }
     private fun confirm() { compose.onNodeWithTag("profile_confirm").performClick() }
     private fun catalog(): ConnectionProfileCatalog = successful { store.load() }
     private fun profile(id: String): ConnectionProfile = catalog().profiles.single { it.id == id }

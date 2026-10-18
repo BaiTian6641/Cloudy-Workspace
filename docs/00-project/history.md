@@ -1435,3 +1435,17 @@ also pass with explicit verified native reuse and updated generated dependency-l
 a disabled native gate or a new VNC runtime claim. The exact patch-context whitespace follows
 the repository's existing narrow `.gitattributes` convention; added TypeScript lines were checked
 separately and have no trailing whitespace.
+
+## 2026-10-17 — Saved-profile closure without losing dirty or uncertain work
+
+After publishing `c1d3b983dce3fc09e6f161d5b6cc5c90a6171d54` with exact origin equality, the parent
+reviewed a bounded DeepSeek Flash profile repair. A saved editor whose exact owner/version and
+all raw editable values are unchanged now closes without a redundant discard prompt or store write.
+Dirty text, stale/missing context and restored uncertain mutations still require explicit consent.
+
+The [result](../../qualification/results/P1-S2/2026-10-17-profile-clean-close.md) records10 passing
+actual Console Activity/recreation methods and a separate native-pointer Save → Close workflow.
+The parent inspected post-close pixels and removed only its confirmed temporary profile/window.
+The injected label stimulus lost two trailing characters before the next field; that observation
+is preserved without a cause or full-input pass. The unrelated terminal-interaction wave remains
+under validation and is not qualified by this profile commit.
