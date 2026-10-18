@@ -6,6 +6,8 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.KeyboardShortcutGroup
@@ -168,6 +170,9 @@ class CloudyTerminalActivity : ComponentActivity() {
     private var searchOpen by mutableStateOf(false)
     private var telnetMode = false
     private var forwardsOpen by mutableStateOf(false)
+    private var browserHandoff = false
+    private var browserHandoffTimeout: Runnable? = null
+    private val browserHandler = Handler(Looper.getMainLooper())
     private var forwardLocalPort by mutableStateOf(TextFieldValue("8080"))
     private var forwardHost by mutableStateOf(TextFieldValue("127.0.0.1"))
     private var forwardDestinationPort by mutableStateOf(TextFieldValue("80"))
@@ -271,6 +276,11 @@ class CloudyTerminalActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
+        if (browserHandoff) {
+            browserHandoff = false
+            browserHandoffTimeout?.let { browserHandler.removeCallbacks(it) }
+            browserHandoffTimeout = null
+        }
         interactive = true
         if (!busy) refresh()
     }
@@ -296,7 +306,25 @@ class CloudyTerminalActivity : ComponentActivity() {
     }
 
     override fun onStop() {
-        // No background lifetime is claimed yet. Configuration changes retire, never reconnect.
+        // A browser preview is the only bounded background handoff. The page must be able to
+        // reach the loopback forward while this Activity is stopped; on return, the existing
+        // terminal/session resumes. Every other hide retires immediately.
+        if (browserHandoff && !isChangingConfigurations && !isFinishing) {
+            browserHandoffTimeout?.let { browserHandler.removeCallbacks(it) }
+            val timeout = Runnable {
+                if (browserHandoff && !isFinishing && !isDestroyed) {
+                    browserHandoff = false
+                    retire("BROWSER_PREVIEW_TIMEOUT")
+                }
+            }
+            browserHandoffTimeout = timeout
+            browserHandler.postDelayed(timeout, BROWSER_HANDOFF_MILLIS)
+            super.onStop()
+            return
+        }
+        browserHandoff = false
+        browserHandoffTimeout?.let { browserHandler.removeCallbacks(it) }
+        browserHandoffTimeout = null
         clearInteractionState()
         retire("WINDOW_HIDDEN")
         super.onStop()
@@ -304,6 +332,9 @@ class CloudyTerminalActivity : ComponentActivity() {
 
     override fun onDestroy() {
         disposed = true
+        browserHandoff = false
+        browserHandoffTimeout?.let { browserHandler.removeCallbacks(it) }
+        browserHandoffTimeout = null
         retire("WINDOW_CLOSED")
         super.onDestroy()
     }
@@ -922,8 +953,12 @@ class CloudyTerminalActivity : ComponentActivity() {
 
     private fun openForwardInBrowser(forward: SshLocalForward) {
         val url = "http://127.0.0.1:${forward.localPort}/"
+        browserHandoff = true
         try { startActivity(Intent(Intent.ACTION_VIEW, url.toUri())) }
-        catch (_: RuntimeException) { forwardMessage = getString(R.string.terminal_forward_browser_unavailable) }
+        catch (_: RuntimeException) {
+            browserHandoff = false
+            forwardMessage = getString(R.string.terminal_forward_browser_unavailable)
+        }
     }
 
     private fun canHostLocalSurface() = !disposed && attempt != null && phase == Phase.TERMINAL
@@ -1648,5 +1683,7 @@ class CloudyTerminalActivity : ComponentActivity() {
         /** Navigation only; the destination re-reads exact current profile/trust before admission. */
         const val EXTRA_PROFILE_ID = "io.github.baitian6641.cloudy.terminal.PROFILE_ID"
         private const val PREVIEW_CHARACTERS = 2000
+        private const val BROWSER_HANDOFF_MILLIS = 120_000L
     }
+
 }
