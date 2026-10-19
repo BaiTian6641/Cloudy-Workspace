@@ -120,12 +120,14 @@ not touched.
 ## Reproduce the real Console workflow
 
 Build the Console debug and instrumentation APKs, start the fixture above, then use its printed
-private properties path with an explicitly owned target:
+private properties path with an explicitly owned target. Export the serial of the owned Console AVD;
+it is not permanently 5580 (another emulator may own that port):
 
 ```bash
+export ANDROID_SERIAL=emulator-5582   # current owned Console AVD; verify with adb devices
 python3 tools/run_console_terminal_smoke.py \
   --fixture qualification/results/private/ssh-terminal-01/RUN/fixture.properties \
-  --serial emulator-5580
+  --serial "$ANDROID_SERIAL"
 ```
 
 Replace `RUN` with the actual freshly created run directory; no credential belongs in the command.
